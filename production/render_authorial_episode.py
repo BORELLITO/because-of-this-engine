@@ -73,6 +73,8 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path) -> dict[str, 
     scenes = manifest.get("scenes")
     audio = manifest.get("audio")
     output = manifest.get("output", {})
+    if not isinstance(output, dict):
+        raise RenderError("Manifest output must be an object.")
     if not isinstance(video_id, str) or not video_id.strip():
         raise RenderError("Manifest requires a non-empty video_id.")
     if not isinstance(scenes, list) or not scenes:
