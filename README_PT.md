@@ -166,3 +166,10 @@ python production/build_mars_visual_ai.py
 Esse comando falha se faltar qualquer cena ou sidecar. Só depois de aprovar os
 frames no celular o arquivo deve ser apontado no manifest do episódio como uma
 nova versão visual.
+
+Também existe um workflow manual em GitHub Actions. No celular: abra o
+repositório, entre em **Actions**, escolha **Generate free Mars visuals**, toque
+em **Run workflow** e selecione uma cena. Os arquivos aparecem como artefato
+para download. Antes da primeira execução, cadastre os secrets
+`CLOUDFLARE_ACCOUNT_ID` e `CLOUDFLARE_API_TOKEN` nas configurações do
+repositório; eles nunca são gravados nos arquivos gerados.
