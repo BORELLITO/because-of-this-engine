@@ -112,6 +112,12 @@ O render lê os caminhos do manifest, escreve primeiro em arquivos temporários,
 usa um bed determinístico e o orchestrator registra eventos em
 `production/run-log.jsonl` (arquivo local ignorado pelo Git).
 
+A camada visual atual é a revisão v4 do rascunho editorial: cada cena foi
+reconstruída para corresponder a um beat narrativo específico, sem textos
+decorativos duplicando as captions. O visual continua sendo uma reconstrução
+editorial original, não uma alegação de telemetria ou imagem de arquivo da NASA.
+
 ## Integração futura no motor novo
 
 Este CLI funciona como primeiro teste isolado. Quando o repositório **do novo motor independente** estiver disponível, a função `generate_narration()` pode ser chamada pela etapa de áudio desse motor. Antes disso, precisamos validar uma amostra real, conferir pronúncia/duração e decidir se essa voz será a identidade recorrente do canal.
+
