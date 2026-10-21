@@ -231,6 +231,7 @@ def main() -> int:
         return 1
     payload = json.dumps(report, ensure_ascii=False, indent=2) + "\n"
     if args.report:
+        args.report.parent.mkdir(parents=True, exist_ok=True)
         args.report.write_text(payload, encoding="utf-8")
     print(payload, end="")
     return 0
