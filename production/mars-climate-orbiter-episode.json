@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0",
+  "episode_id": "because-of-this-mars-climate-orbiter-001",
+  "channel": "BECAUSE OF THIS",
+  "title": "The Unit Error That Lost a Mars Spacecraft",
+  "status": "TECH_VALIDATED",
+  "approval_status": "REVIEW_REQUIRED",
+  "protected_targets": [
+    "Capta Pronto",
+    "Corte Fino",
+    "Publisher",
+    "Creator"
+  ],
+  "script": {
+    "path": "../examples/mars_climate_orbiter.txt",
+    "sha256": "87e0c2a3f7c18809362d8f6fed6374d1223fdb25ffa05b189f15fc5caa7e7fbe",
+    "language": "en-US",
+    "facts_status": "SOURCES_ATTACHED",
+    "claims_path": "mars-climate-orbiter-claims.json"
+  },
+  "audio": {
+    "path": "mars-climate-orbiter-charon.wav",
+    "provenance_path": "mars-climate-orbiter-charon.wav.json",
+    "voice": "Charon",
+    "model": "unknown_from_manual_ai_studio_collection",
+    "duration_authority": "audio_file"
+  },
+  "visual": {
+    "source_motion": "mars-climate-orbiter-visual-draft-v2.mp4",
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "scene_count": 6,
+    "style": "editorial reconstruction; no archival or NASA telemetry claim"
+  },
+  "captions": {
+    "path": "mars-climate-orbiter-captions.ass",
+    "sha256": "e856fe8c10bed0be320be0c65d2303aa99628384926ad31893e68bf745dbb3a4",
+    "timing_status": "PHRASE_LEVEL_MANUAL"
+  },
+  "mix": {
+    "music_path": "mars-climate-orbiter-original-ambient.wav",
+    "voice_first": true,
+    "target_loudness_status": "PENDING_PHONE_REVIEW"
+  },
+  "output": {
+    "path": "mars-climate-orbiter-final.mp4",
+    "sha256": "fe6dd616f15c99de5f6250aa0d182f65d819b1ff7dcc836130ac9cebd5f2066b",
+    "approval_hash": null
+  },
+  "scenes": [
+    {
+      "id": "S01",
+      "start": 0.0,
+      "end": 8.0,
+      "purpose": "journey and contact loss"
+    },
+    {
+      "id": "S02",
+      "start": 8.0,
+      "end": 17.0,
+      "purpose": "unit mismatch"
+    },
+    {
+      "id": "S03",
+      "start": 17.0,
+      "end": 28.0,
+      "purpose": "trajectory drift"
+    },
+    {
+      "id": "S04",
+      "start": 28.0,
+      "end": 39.0,
+      "purpose": "too-close approach"
+    },
+    {
+      "id": "S05",
+      "start": 39.0,
+      "end": 49.0,
+      "purpose": "communication and warning signs"
+    },
+    {
+      "id": "S06",
+      "start": 49.0,
+      "end": 58.0,
+      "purpose": "consequence and systems lesson"
+    }
+  ],
+  "gates": {
+    "script_valid": true,
+    "facts_valid": true,
+    "audio_valid": true,
+    "visual_valid": true,
+    "sync_valid": true,
+    "mix_valid": false,
+    "export_valid": true,
+    "editorial_approved": false
+  }
+}
