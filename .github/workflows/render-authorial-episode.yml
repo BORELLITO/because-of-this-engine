@@ -17,6 +17,9 @@ on:
           - preview
           - final
 
+permissions:
+  contents: read
+
 jobs:
   render:
     runs-on: ubuntu-latest
@@ -33,11 +36,20 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Validate manifest
+      - name: Install runtime dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Validate authorial manifest
         run: |
           python production/render_authorial_episode.py \
             --manifest "${{ inputs.manifest }}" \
             --validate-only
+
+      - name: Require preview approval for final
+        if: inputs.mode == 'final'
+        run: |
+          python production/require_preview_approval.py \
+            --manifest "${{ inputs.manifest }}"
 
       - name: Render episode
         run: |
@@ -45,9 +57,20 @@ jobs:
             --manifest "${{ inputs.manifest }}" \
             --mode "${{ inputs.mode }}"
 
-      - name: Upload rendered video
+      - name: Validate rendered release
+        run: |
+          python production/validate_authorial_episode.py \
+            --manifest "${{ inputs.manifest }}" \
+            --mode "${{ inputs.mode }}" \
+            --report "examples/rendered/authorial-validation-${{ inputs.mode }}.json"
+
+      - name: Upload validated package
         uses: actions/upload-artifact@v4
         with:
-          name: because-of-this-${{ inputs.mode }}-video
-          path: "examples/rendered/*.mp4"
+          name: because-of-this-${{ inputs.mode }}-validated-package
+          path: |
+            examples/rendered/*.mp4
+            examples/rendered/*.json
+            ${{ inputs.manifest }}
+            examples/assets/*.json
           if-no-files-found: error
