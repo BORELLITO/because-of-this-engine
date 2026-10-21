@@ -67,6 +67,8 @@ def audio_duration(path: Path) -> float:
 
 
 def validate_manifest(manifest: dict[str, Any], episode_dir: Path) -> dict[str, Any]:
+    if manifest.get("schema_version") != "1.1":
+        raise RenderError("Authorial release manifests must use schema_version 1.1.")
     video_id = manifest.get("video_id")
     scenes = manifest.get("scenes")
     audio = manifest.get("audio")
