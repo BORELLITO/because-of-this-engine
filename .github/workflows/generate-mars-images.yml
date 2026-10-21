@@ -58,5 +58,7 @@ jobs:
             production/mars-climate-orbiter-visual-ai-v1.mp4.json
             production/mars-climate-orbiter-visual-editorial-v1.mp4
             production/mars-climate-orbiter-visual-editorial-v1.mp4.json
+            production/mars-climate-orbiter-visual-editorial-v2.mp4
+            production/mars-climate-orbiter-visual-editorial-v2.mp4.json
           if-no-files-found: error
           retention-days: 7
