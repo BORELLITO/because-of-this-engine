@@ -19,7 +19,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent
 DEFAULT_ASSETS = ROOT / "mars-assets"
-DEFAULT_OUTPUT = ROOT / "mars-climate-orbiter-visual-editorial-v1.mp4"
+DEFAULT_OUTPUT = ROOT / "mars-climate-orbiter-visual-editorial-v2.mp4"
 WIDTH, HEIGHT, FPS = 1080, 1920, 30
 SCENES = [("S01", 8), ("S02", 9), ("S03", 11), ("S04", 11), ("S05", 10), ("S06", 9)]
 
@@ -97,11 +97,14 @@ def make_overlay(scene_id: str, path: Path) -> None:
 def motion_filter(scene_id: str, duration: int) -> str:
     start, end = MOTION_PLAN[scene_id]
     frames = max(2, duration * FPS)
-    progress = f"min(1,max(0,on/{frames - 1}))"
+    # Frame-evaluated scale/crop avoids the micro-jitter that zoompan can
+    # introduce when it reinitializes a still image.
+    progress = f"min(1,max(0,n/{frames - 1}))"
     eased = f"({progress}*{progress}*(3-2*{progress}))"
     zoom = f"{start}+({end-start})*{eased}"
-    return (f"scale={WIDTH}:{HEIGHT}:force_original_aspect_ratio=increase,crop={WIDTH}:{HEIGHT},"
-            f"zoompan=z='{zoom}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={WIDTH}x{HEIGHT}:fps={FPS},format=yuv420p")
+    return (f"scale=w='ceil({WIDTH}*({zoom})/2)*2':h='ceil({HEIGHT}*({zoom})/2)*2':"
+            f"force_original_aspect_ratio=disable:eval=frame,crop={WIDTH}:{HEIGHT}:"
+            f"(iw-{WIDTH})/2:(ih-{HEIGHT})/2,fps={FPS},format=yuv420p")
 
 
 def main() -> int:
@@ -113,7 +116,8 @@ def main() -> int:
     with tempfile.TemporaryDirectory(prefix="mars-editorial-") as temp_dir:
         temp = Path(temp_dir)
         clips = []
-        for scene_id, duration in SCENES:
+        transition = 0.35
+        for index, (scene_id, duration) in enumerate(SCENES):
             source = assets / f"{scene_id.lower()}-background.png"
             sidecar = source.with_suffix(source.suffix + ".json")
             if not source.is_file() or not sidecar.is_file():
@@ -122,22 +126,36 @@ def main() -> int:
             overlay = temp / f"{scene_id.lower()}-overlay.png"
             clip = temp / f"{scene_id.lower()}.mp4"
             make_overlay(scene_id, overlay)
+            clip_duration = duration + (transition if index < len(SCENES) - 1 else 0.0)
             subprocess.run([
                 "ffmpeg", "-y", "-loop", "1", "-i", str(source), "-loop", "1", "-i", str(overlay),
-                "-t", str(duration), "-filter_complex", f"[0:v]{motion_filter(scene_id, duration)}[base];[1:v]format=rgba[ov];[base][ov]overlay=0:0:shortest=1,format=yuv420p[v]",
-                "-map", "[v]", "-frames:v", str(duration * FPS), "-an", "-c:v", "libx264", "-preset", "veryfast", "-pix_fmt", "yuv420p", str(clip),
+                "-t", f"{clip_duration:.3f}", "-filter_complex", f"[0:v]{motion_filter(scene_id, int(clip_duration))}[base];[1:v]format=rgba[ov];[base][ov]overlay=0:0:shortest=1,format=yuv420p[v]",
+                "-map", "[v]", "-frames:v", str(round(clip_duration * FPS)), "-an", "-c:v", "libx264", "-preset", "veryfast", "-pix_fmt", "yuv420p", str(clip),
             ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             clips.append(clip)
-        concat = temp / "concat.txt"
-        concat.write_text("\n".join(f"file '{clip.as_posix()}'" for clip in clips) + "\n", encoding="utf-8")
         output.parent.mkdir(parents=True, exist_ok=True)
-        subprocess.run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat), "-c", "copy", "-movflags", "+faststart", str(output)], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        inputs = []
+        for clip in clips:
+            inputs.extend(["-i", str(clip)])
+        chain = []
+        previous = "[0:v]"
+        cumulative = 0.0
+        for index in range(1, len(clips)):
+            cumulative += SCENES[index - 1][1]
+            result = f"[xf{index}]"
+            chain.append(f"{previous}[{index}:v]xfade=transition=fade:duration={transition}:offset={cumulative:.3f},format=yuv420p{result}")
+            previous = result
+        subprocess.run([
+            "ffmpeg", "-y", *inputs, "-filter_complex", ";".join(chain), "-map", previous,
+            "-an", "-c:v", "libx264", "-preset", "veryfast", "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(output)
+        ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     output.with_suffix(output.suffix + ".json").write_text(json.dumps({
         "schema_version": "1.0", "source": "NASA public stills + independent editorial graphics",
-        "editor_profile": "senior-editor-v2-editorial-clarity", "scene_count": 6,
+        "editor_profile": "senior-editor-v3-smooth-zoom-editorial-clarity", "scene_count": 6,
         "overlays": {"S02": "unit-system comparison", "S03": "calculated-vs-actual path",
                      "S04": "danger corridor", "S05": "warning glow", "S06": "fading signal"},
-        "transitions": "hard cuts; no decorative transitions", "output": str(output)
+        "motion": "smooth progressive zoom only; no shake, jitter or handheld simulation",
+        "transitions": "0.35s cross-dissolve between scenes", "output": str(output)
     }, indent=2) + "\n", encoding="utf-8")
     print(output)
     return 0
