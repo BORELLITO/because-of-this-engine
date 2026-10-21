@@ -121,29 +121,25 @@ editorial original, não uma alegação de telemetria ou imagem de arquivo da NA
 
 Este CLI funciona como primeiro teste isolado. Quando o repositório **do novo motor independente** estiver disponível, a função `generate_narration()` pode ser chamada pela etapa de áudio desse motor. Antes disso, precisamos validar uma amostra real, conferir pronúncia/duração e decidir se essa voz será a identidade recorrente do canal.
 
-## Gerador visual profissional (Nano Banana)
+## Gerador visual gratuito e profissional
 
-O motor independente agora possui um adaptador separado para gerar fundos
-visuais coerentes por cena. Ele não acessa nem altera os motores protegidos.
+O motor independente possui dois adaptadores. O padrão gratuito usa Cloudflare
+Workers AI com Stable Diffusion XL; o Nano Banana continua disponível como
+opção paga, sem fallback automático entre provedores.
 
-- padrão técnico: `gemini-nano-banana-2.1`, mais econômico, mas ainda pago na API;
+- padrão gratuito: `@cf/stabilityai/stable-diffusion-xl-base-1.0`;
 - premium opcional: `gemini-3-pro-image` (Nano Banana Pro), bloqueado por padrão;
-- saída: PNG vertical 9:16, sem texto embutido, com sidecar de proveniência;
-- captions e rótulos factuais continuam na camada de edição, não dentro da imagem;
-- limite local de chamadas e ledger diário impedem geração acidental em loop;
-- por segurança, nenhuma chamada de imagem é permitida sem `GEMINI_ALLOW_IMAGE_BILLING=1`.
+- saída: PNG vertical, sem texto embutido, com sidecar de proveniência;
+- captions e rótulos factuais continuam na camada de edição;
+- limite local de chamadas e ledger diário impedem geração acidental em loop.
 
-Para gerar uma cena de teste via API, depois de instalar as dependências,
-configurar `GEMINI_API_KEY` e confirmar conscientemente a cobrança:
-
-```bash
-python production/generate_mars_images.py --scene S01
-```
-
-Antes desse comando, a variável de desbloqueio precisa estar definida:
+A Cloudflare informa uma alocação gratuita diária de 10.000 neurons. Para usar
+esse caminho, é necessário criar uma conta Cloudflare, habilitar Workers AI e
+gerar um token de execução de modelos. Configure `CLOUDFLARE_ACCOUNT_ID` e
+`CLOUDFLARE_API_TOKEN` fora do GitHub e rode:
 
 ```bash
-export GEMINI_ALLOW_IMAGE_BILLING=1
+python production/generate_mars_images.py --provider cloudflare --scene S01
 ```
 
 Para gerar todas as seis cenas, use `--scene ALL`. O script para se já houver
@@ -152,12 +148,11 @@ novamente sozinho. A geração premium exige a confirmação explícita:
 
 ```bash
 GEMINI_ALLOW_PREMIUM_IMAGE=1 \
-python production/generate_mars_images.py --model gemini-3-pro-image --scene S01 --image-size 2K
+GEMINI_ALLOW_IMAGE_BILLING=1 \
+python production/generate_mars_images.py --provider gemini --model gemini-3-pro-image --scene S01 --image-size 2K
 ```
 
-Esse opt-in não altera a conta, mas autoriza o programa a fazer uma chamada que
-pode ser cobrada. Antes de usar qualquer modelo, confira a cobrança e a cota do
-projeto no AI Studio. A integração não substitui
+Antes de monetizar, confirme a licença do modelo escolhido. A integração não substitui
 automaticamente o visual atual: os assets precisam passar pela revisão humana
 antes de entrarem no MP4 final.
 
