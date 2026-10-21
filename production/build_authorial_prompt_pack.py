@@ -55,7 +55,7 @@ def build_scene_prompt(style: dict[str, Any], scene: dict[str, Any]) -> dict[str
         f"Composition: {style['composition']['subject_rule']}; {style['composition']['depth']}; "
         f"leave clean negative space for captions. "
         f"Use subtle painted texture and atmospheric depth. "
-        "Make the scene legible without captions. Do not add text, labels, logos or watermarks."
+        "Make the scene legible without captions. No text, labels, logos or watermarks."
     )
     return {
         "scene_id": scene_id,
