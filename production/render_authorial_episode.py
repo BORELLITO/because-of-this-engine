@@ -112,6 +112,9 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path) -> dict[str, 
 
     caption_path = None
     captions = manifest.get("captions")
+    require_captions = manifest.get("require_captions", True)
+    if require_captions and not captions:
+        raise RenderError("Release manifests must provide external captions.")
     if captions:
         if not isinstance(captions, dict):
             raise RenderError("captions must be an object when provided.")
