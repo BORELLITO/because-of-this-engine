@@ -8,7 +8,10 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-from require_preview_approval import input_fingerprint, manifest_hash, resolve_inside
+try:
+    from .require_preview_approval import input_fingerprint, manifest_hash, resolve_inside
+except ImportError:
+    from require_preview_approval import input_fingerprint, manifest_hash, resolve_inside
 
 
 def create_approval(manifest_path: Path, reviewer: str, output_path: Path) -> dict:
