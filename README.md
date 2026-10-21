@@ -1,19 +1,38 @@
 # BECAUSE OF THIS — Independent Engine
 
-Motor independente para gerar Shorts narrativos de ciência e suspense, com prioridade em ferramentas gratuitas.
+Independent free-first engine for suspenseful science Shorts. It does not
+modify or depend on Capta Pronto, Corte Fino, Publisher, Creator, or any other
+protected engine.
 
-## Estrutura
+## Current architecture
 
-- narrate.py: geração opcional de narração via Gemini.
-- production/: renderização, validação fail-closed, manifestos e documentação.
-- tests/: testes unitários.
-- .github/workflows/validate.yml: compilação, testes e validação de metadados no GitHub Actions.
+- `narrate.py`: optional Gemini TTS adapter with Charon support and provenance.
+- `examples/`: canonical episode transcript.
+- `production/`: manifest-driven render, validation, reports, and audit docs.
+- `tests/`: unit and regression tests.
+- `.github/workflows/validate.yml`: compile, tests, and JSON checks.
 
-## Execução local
+The current episode uses a local Charon WAV collected from Google AI Studio;
+the API adapter remains available but does not store a key in the repository.
 
-1. Crie um ambiente Python 3.12.
-2. Instale requirements.txt.
-3. Copie .env.example para .env e configure sua chave apenas localmente.
-4. Use python production/run_episode.py --manifest production/mars-climate-orbiter-episode.json.
+## Local run
 
-Arquivos WAV/MP4 e frames gerados não são versionados; o repositório guarda o código, os metadados e a trilha de auditoria.
+```bash
+python -m venv .venv
+python -m pip install -r requirements.txt
+python -m unittest discover -s tests -v
+python production/run_episode.py \
+  --manifest production/mars-climate-orbiter-episode.json \
+  --render
+```
+
+The run is manifest-driven, derives duration from the WAV, binds the canonical
+transcript to captions by hash, measures technical mix, uses a lock, writes
+temporary outputs before atomic promotion, and records a local JSONL run log.
+
+`TECH_VALIDATED` is not `APPROVED`. A human mobile-speaker review and an exact
+approval hash are required before any future delivery or publication step.
+
+Generated WAV/MP4 media and local run logs are intentionally not versioned;
+the repository stores source code, manifests, metadata, tests, and audit
+records.
