@@ -123,15 +123,31 @@ Este CLI funciona como primeiro teste isolado. Quando o repositório **do novo m
 
 ## Gerador visual gratuito e profissional
 
-O motor independente possui dois adaptadores. O padrão gratuito usa Cloudflare
-Workers AI com Stable Diffusion XL; o Nano Banana continua disponível como
-opção paga, sem fallback automático entre provedores.
+O motor independente possui três adaptadores. O padrão gratuito e sem cadastro
+é a NASA Image and Video Library: ele busca uma imagem factual relacionada à
+cena, recorta para 9:16 e grava a origem no sidecar. Cloudflare Workers AI e
+Gemini continuam disponíveis como opções explícitas, sem fallback automático
+entre provedores.
 
-- padrão gratuito: `@cf/stabilityai/stable-diffusion-xl-base-1.0`;
+- padrão gratuito sem chave: `nasa`;
+- alternativa generativa opcional: `@cf/stabilityai/stable-diffusion-xl-base-1.0`;
 - premium opcional: `gemini-3-pro-image` (Nano Banana Pro), bloqueado por padrão;
 - saída: PNG vertical, sem texto embutido, com sidecar de proveniência;
 - captions e rótulos factuais continuam na camada de edição;
 - limite local de chamadas e ledger diário impedem geração acidental em loop.
+
+Para gerar os frames sem criar conta adicional:
+
+```bash
+python production/generate_mars_images.py --provider nasa --scene S01
+```
+
+O provedor usa a busca pública da NASA, sem API key. As cenas S01 e S03 usam
+o identificador do Mars Climate Orbiter quando disponível; as demais usam
+consultas temáticas controladas. Isso reduz imagens sem relação com o roteiro,
+mas cada PNG ainda precisa de aprovação humana. A licença não deve ser inferida
+apenas pelo domínio: confirme créditos, terceiros e restrições do item antes de
+monetizar.
 
 A Cloudflare informa uma alocação gratuita diária de 10.000 neurons. Para usar
 esse caminho, é necessário criar uma conta Cloudflare, habilitar Workers AI e
@@ -169,7 +185,7 @@ nova versão visual.
 
 Também existe um workflow manual em GitHub Actions. No celular: abra o
 repositório, entre em **Actions**, escolha **Generate free Mars visuals**, toque
-em **Run workflow** e selecione uma cena. Os arquivos aparecem como artefato
-para download. Antes da primeira execução, cadastre os secrets
-`CLOUDFLARE_ACCOUNT_ID` e `CLOUDFLARE_API_TOKEN` nas configurações do
-repositório; eles nunca são gravados nos arquivos gerados.
+em **Run workflow** e selecione uma cena. O workflow usa o provedor NASA e não
+exige secrets. Os arquivos aparecem como artefato para download. Cloudflare só
+é necessário se você optar conscientemente por executar o provedor generativo
+alternativo fora desse fluxo padrão.
