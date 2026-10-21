@@ -35,22 +35,22 @@ jobs:
         run: python -m pip install -r requirements.txt
       - name: Generate factual-first assets
         env:
-          CLOUDFLARE_ACCOUNT_ID: \${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CLOUDFLARE_API_TOKEN: \${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           IMAGE_MODEL: "@cf/stabilityai/stable-diffusion-xl-base-1.0"
         run: |
           EXTRA=""
-          if [ "\${{ inputs.allow_generative_fallback }}" = "true" ]; then
+          if [ "${{ inputs.allow_generative_fallback }}" = "true" ]; then
             EXTRA="--allow-generative-fallback"
           fi
           python production/generate_free_first_mars_images.py \
-            --scene "\${{ inputs.scene }}" \
+            --scene "${{ inputs.scene }}" \
             --max-requests 6 \
             $EXTRA
       - name: Upload assets for review
         uses: actions/upload-artifact@v4
         with:
-          name: mars-free-first-assets-\${{ inputs.scene }}
+          name: mars-free-first-assets-${{ inputs.scene }}
           path: production/mars-assets/
           if-no-files-found: error
           retention-days: 7
