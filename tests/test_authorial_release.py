@@ -4,6 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from production.create_preview_approval import create_approval
 from production.require_preview_approval import ApprovalError, require_approval
 from production.validate_authorial_episode import (
     ReleaseValidationError,
@@ -71,6 +72,10 @@ class AuthorialReleaseTests(unittest.TestCase):
             )
             result = require_approval(manifest)
             self.assertEqual(result["reviewer"], "Borelli")
+
+            generated = root / "generated-approval.json"
+            create_approval(manifest, "Borelli", generated)
+            self.assertEqual(require_approval(manifest)["reviewer"], "Borelli")
 
             manifest.write_text(manifest.read_text(encoding="utf-8") + "\n", encoding="utf-8")
             with self.assertRaises(ApprovalError):
