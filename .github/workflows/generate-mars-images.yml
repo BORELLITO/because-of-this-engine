@@ -35,9 +35,12 @@ jobs:
       - name: Install FFmpeg for motion assembly
         if: ${{ inputs.scene == 'ALL' }}
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg
-      - name: Assemble motion source when all scenes are ready
+      - name: Assemble factual motion source when all scenes are ready
         if: ${{ inputs.scene == 'ALL' }}
         run: python production/build_mars_visual_ai.py
+      - name: Assemble editorial clarity motion source
+        if: ${{ inputs.scene == 'ALL' }}
+        run: python production/build_mars_visual_editorial.py
       - name: Upload generated assets for review
         uses: actions/upload-artifact@v4
         with:
@@ -53,5 +56,7 @@ jobs:
           path: |
             production/mars-climate-orbiter-visual-ai-v1.mp4
             production/mars-climate-orbiter-visual-ai-v1.mp4.json
+            production/mars-climate-orbiter-visual-editorial-v1.mp4
+            production/mars-climate-orbiter-visual-editorial-v1.mp4.json
           if-no-files-found: error
           retention-days: 7
