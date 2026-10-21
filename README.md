@@ -45,6 +45,19 @@ python production/run_episode.py \
   --render
 ```
 
+For the new authorial path, validate the contract and render a preview:
+
+```bash
+python production/validate_authorial_manifest_contract.py \
+  --manifest examples/mars-climate-orbiter-render-manifest-v1.json
+python production/render_authorial_episode.py \
+  --manifest examples/mars-climate-orbiter-render-manifest-v1.json \
+  --mode preview
+python production/validate_authorial_episode.py \
+  --manifest examples/mars-climate-orbiter-render-manifest-v1.json \
+  --mode preview
+```
+
 Legacy Mars runs are manifest-driven and remain protected by their historical
 validator. New authorial releases must use the preview, approval, and release
 validation gates described in `production/AUTHORIAL_RENDERING.md`.
