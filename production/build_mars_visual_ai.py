@@ -4,6 +4,10 @@
 This stage intentionally refuses to invent substitute art. Every scene must
 have a generated asset with a provenance sidecar before it can enter the edit.
 Captions are added by the existing independent render stage.
+
+Motion is deliberately sparse and audio-agnostic here: the approved narration
+and captions remain separate inputs. Each scene receives one intentional
+camera move from the senior-editor plan instead of a generic repeated zoom.
 """
 
 from __future__ import annotations
@@ -19,6 +23,36 @@ DEFAULT_ASSETS = ROOT / "mars-assets"
 DEFAULT_OUTPUT = ROOT / "mars-climate-orbiter-visual-ai-v1.mp4"
 WIDTH, HEIGHT, FPS = 1080, 1920, 30
 SCENES = [("S01", 8), ("S02", 9), ("S03", 11), ("S04", 11), ("S05", 10), ("S06", 9)]
+
+# This is the executable subset of the Senior Video Editor prompt. Values are
+# deliberately conservative so the source imagery remains factual and the
+# motion never competes with the narration.
+MOTION_PLAN = {
+    "S01": {"start_zoom": 1.00, "end_zoom": 1.06, "reason": "approach the unresolved arrival"},
+    "S02": {"start_zoom": 1.00, "end_zoom": 1.02, "reason": "let the unit mismatch settle"},
+    "S03": {"start_zoom": 1.00, "end_zoom": 1.05, "reason": "increase pressure as the paths diverge"},
+    "S04": {"start_zoom": 1.02, "end_zoom": 1.09, "reason": "escalate the dangerous approach"},
+    "S05": {"start_zoom": 1.04, "end_zoom": 1.01, "reason": "remove motion as contact disappears"},
+    "S06": {"start_zoom": 1.08, "end_zoom": 1.00, "reason": "pull back to the whole consequence"},
+}
+
+
+def _motion_filter(scene_id: str, duration: int) -> str:
+    plan = MOTION_PLAN[scene_id]
+    frame_count = max(2, duration * FPS)
+    start = float(plan["start_zoom"])
+    delta = float(plan["end_zoom"]) - start
+    # Smoothstep easing: slow at the beginning and end, with no robotic linear
+    # jump. zoompan's `on` is the output-frame index for this input clip.
+    progress = f"min(1,max(0,on/{frame_count - 1}))"
+    eased = f"({progress}*{progress}*(3-2*{progress}))"
+    zoom = f"{start}+({delta})*{eased}"
+    return (
+        f"scale={WIDTH}:{HEIGHT}:force_original_aspect_ratio=increase,"
+        f"crop={WIDTH}:{HEIGHT},"
+        f"zoompan=z='{zoom}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':"
+        f"d=1:s={WIDTH}x{HEIGHT}:fps={FPS},format=yuv420p"
+    )
 
 
 def main() -> int:
@@ -46,15 +80,11 @@ def main() -> int:
         for scene_id, duration in SCENES:
             source = assets / f"{scene_id.lower()}-background.png"
             clip = temp / f"{scene_id.lower()}.mp4"
-            # A restrained push-in creates motion without changing the story.
-            vf = (
-                f"scale={WIDTH}:{HEIGHT}:force_original_aspect_ratio=increase,"
-                f"crop={WIDTH}:{HEIGHT},format=yuv420p"
-            )
+            vf = _motion_filter(scene_id, duration)
             subprocess.run(
                 [
                     "ffmpeg", "-y", "-loop", "1", "-i", str(source), "-t", str(duration),
-                    "-vf", vf, "-r", str(FPS), "-an", "-c:v", "libx264", "-preset", "veryfast",
+                    "-vf", vf, "-frames:v", str(duration * FPS), "-an", "-c:v", "libx264", "-preset", "veryfast",
                     "-pix_fmt", "yuv420p", str(clip),
                 ],
                 check=True,
@@ -67,7 +97,7 @@ def main() -> int:
         concat.write_text("\n".join(f"file '{clip.as_posix()}'" for clip in clips) + "\n", encoding="utf-8")
         output.parent.mkdir(parents=True, exist_ok=True)
         subprocess.run(
-            ["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat), "-c", "copy", str(output)],
+            ["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat), "-c", "copy", "-movflags", "+faststart", str(output)],
             check=True,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
@@ -79,6 +109,9 @@ def main() -> int:
         "assets_dir": str(assets),
         "scene_count": len(SCENES),
         "scenes": [scene_id for scene_id, _duration in SCENES],
+        "editor_profile": "senior-editor-v1",
+        "motion_plan": MOTION_PLAN,
+        "transitions": "hard-cut default; no decorative transition pack",
         "output": str(output),
     }
     output.with_suffix(output.suffix + ".json").write_text(json.dumps(provenance, indent=2) + "\n", encoding="utf-8")
