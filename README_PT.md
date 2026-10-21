@@ -121,3 +121,53 @@ editorial original, não uma alegação de telemetria ou imagem de arquivo da NA
 
 Este CLI funciona como primeiro teste isolado. Quando o repositório **do novo motor independente** estiver disponível, a função `generate_narration()` pode ser chamada pela etapa de áudio desse motor. Antes disso, precisamos validar uma amostra real, conferir pronúncia/duração e decidir se essa voz será a identidade recorrente do canal.
 
+## Gerador visual profissional (Nano Banana)
+
+O motor independente agora possui um adaptador separado para gerar fundos
+visuais coerentes por cena. Ele não acessa nem altera os motores protegidos.
+
+- padrão técnico: `gemini-nano-banana-2.1`, mais econômico, mas ainda pago na API;
+- premium opcional: `gemini-3-pro-image` (Nano Banana Pro), bloqueado por padrão;
+- saída: PNG vertical 9:16, sem texto embutido, com sidecar de proveniência;
+- captions e rótulos factuais continuam na camada de edição, não dentro da imagem;
+- limite local de chamadas e ledger diário impedem geração acidental em loop;
+- por segurança, nenhuma chamada de imagem é permitida sem `GEMINI_ALLOW_IMAGE_BILLING=1`.
+
+Para gerar uma cena de teste via API, depois de instalar as dependências,
+configurar `GEMINI_API_KEY` e confirmar conscientemente a cobrança:
+
+```bash
+python production/generate_mars_images.py --scene S01
+```
+
+Antes desse comando, a variável de desbloqueio precisa estar definida:
+
+```bash
+export GEMINI_ALLOW_IMAGE_BILLING=1
+```
+
+Para gerar todas as seis cenas, use `--scene ALL`. O script para se já houver
+saída, se o limite diário local for atingido ou se a API falhar; ele não tenta
+novamente sozinho. A geração premium exige a confirmação explícita:
+
+```bash
+GEMINI_ALLOW_PREMIUM_IMAGE=1 \
+python production/generate_mars_images.py --model gemini-3-pro-image --scene S01 --image-size 2K
+```
+
+Esse opt-in não altera a conta, mas autoriza o programa a fazer uma chamada que
+pode ser cobrada. Antes de usar qualquer modelo, confira a cobrança e a cota do
+projeto no AI Studio. A integração não substitui
+automaticamente o visual atual: os assets precisam passar pela revisão humana
+antes de entrarem no MP4 final.
+
+Depois da revisão dos seis PNGs, o motion source pode ser montado sem alterar o
+renderizador dos outros motores:
+
+```bash
+python production/build_mars_visual_ai.py
+```
+
+Esse comando falha se faltar qualquer cena ou sidecar. Só depois de aprovar os
+frames no celular o arquivo deve ser apontado no manifest do episódio como uma
+nova versão visual.
