@@ -6,29 +6,33 @@ protected engine.
 
 ## Current architecture
 
+The official path is the generic authorial episode pipeline:
+
 - `narrate.py`: optional Gemini TTS adapter with Charon support and provenance.
-- `examples/`: canonical episode transcript.
-- `production/`: manifest-driven render, validation, reports, and audit docs.
-- `production/nasa_image_provider.py`: free, no-key NASA imagery adapter with
-  vertical crop and provenance sidecars.
+- `production/build_authorial_prompt_pack.py`: reusable visual prompt builder.
+- `production/render_authorial_episode.py`: deterministic FFmpeg assembler.
+- `production/validate_authorial_episode.py`: fail-closed release validator.
+- `production/require_preview_approval.py`: final-render approval gate.
+- `examples/`: episode manifests, scripts, captions, and asset contracts.
 - `tests/`: unit and regression tests.
 - `.github/workflows/validate.yml`: compile, tests, and JSON checks.
+- `.github/workflows/render-authorial-episode.yml`: preview/final workflow.
 
-The current episode uses a local Charon WAV collected from Google AI Studio;
-the API adapter remains available but does not store a key in the repository.
-The current visual draft is v4 and maps the story beats explicitly: journey and
-signal loss, unit mismatch, path divergence, dangerous approach, unresolved
-warnings, and consequence.
+The older Mars renderer and validator remain as legacy compatibility paths while
+the authorial pipeline is migrated. They are not the official path for new
+episodes.
 
-The default visual provider is `nasa`, which uses the public NASA Image and
-Video Library without an API key. Cloudflare and Gemini remain opt-in
-providers; neither is an automatic fallback. Every downloaded asset keeps a
-source URL and a license-review note in its sidecar, and human review remains
-required before monetization.
+A release episode requires a Charon-compatible 24 kHz mono WAV, external ASS
+captions, reviewed 9:16 images, image provenance sidecars, a preview render,
+human approval, and a validated final render.
 
-The motion assembler applies `senior-editor-v1`: conservative per-scene
-camera movement with smooth easing and hard cuts by default. It deliberately
-avoids decorative transition packs, glitch, and repetitive effects.
+NASA, Cloudflare, and Gemini providers are separate adapters. NASA imagery is
+not considered an authorial cartoon asset by itself; a provider must be selected
+explicitly and every visual remains subject to human review.
+
+The motion assembler applies only deterministic smooth zoom and short fade
+crossfades. It does not use shake, glitch, decorative transition packs, or
+image regeneration during assembly.
 
 ## Local run
 
@@ -41,12 +45,12 @@ python production/run_episode.py \
   --render
 ```
 
-The run is manifest-driven, derives duration from the WAV, binds the canonical
-transcript to captions by hash, measures technical mix, uses a lock, writes
-temporary outputs before atomic promotion, and records a local JSONL run log.
+Legacy Mars runs are manifest-driven and remain protected by their historical
+validator. New authorial releases must use the preview, approval, and release
+validation gates described in `production/AUTHORIAL_RENDERING.md`.
 
-`TECH_VALIDATED` is not `APPROVED`. A human mobile-speaker review and an exact
-approval hash are required before any future delivery or publication step.
+`PREVIEW_VALIDATED` is not `APPROVED`. A human mobile-speaker review and an
+exact approval hash are required before any final delivery step.
 
 Generated WAV/MP4 media and local run logs are intentionally not versioned;
 the repository stores source code, manifests, metadata, tests, and audit
