@@ -89,6 +89,21 @@ The release validator checks:
 
 `PREVIEW_VALIDATED` is not `APPROVED`. A human mobile review and an exact approval hash are required before final delivery.
 
+## Creating approval
+
+After reviewing the preview on a phone, create the approval file:
+
+```bash
+python production/create_preview_approval.py \
+  --manifest examples/mars-climate-orbiter-render-manifest-v1.json \
+  --reviewer Borelli \
+  --output approvals/mars-climate-orbiter-001-preview-approved.json \
+  --approved
+```
+
+The command binds approval to the exact manifest, images, audio, captions, and
+preview MP4. Any later input change invalidates the approval.
+
 ## GitHub Actions
 
 Run **Render authorial episode** manually and select `preview` first. The workflow blocks `final` unless the approval file exists and matches the current manifest hash. The validated package is uploaded only after the release validator passes.
