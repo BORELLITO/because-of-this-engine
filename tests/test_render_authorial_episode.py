@@ -20,6 +20,7 @@ class AuthorialRenderTests(unittest.TestCase):
         for name in ("s01.png", "s02.png"):
             (root / name).write_bytes(b"image")
         return {
+            "schema_version": "1.1",
             "video_id": "demo-001",
             "audio": {"path": "voice.wav"},
             "scenes": [
