@@ -44,9 +44,12 @@ player and used for synchronization. The workflow executed was:
 5. validate the full stream duration, codec, dimensions, and peak level;
 6. export the final 1080×1920 MP4.
 
-The visual draft deliberately contains no invented NASA interface or archival
-claims. Its small unit labels are illustrative information graphics, not NASA
-telemetry. It is a timing/structure draft for the narrated facts, not the
+The visual draft v4 deliberately contains no invented NASA interface or archival
+claims. Its unit labels and path labels are illustrative information graphics,
+not NASA telemetry. It now maps each major narration beat to a concrete visual:
+Earth-to-Mars journey and signal loss, unit mismatch, path divergence, dangerous
+approach, unresolved warnings, and mission consequence. It remains a timing/
+structure draft for the narrated facts, not the
 final cinematic asset pass.
 
 ## Upgrade status
@@ -57,3 +60,4 @@ transcript to captions and provenance, records manual AI Studio audio
 provenance, uses deterministic temporary renders, and runs a fail-closed
 technical validator. Human mobile review is still required before `APPROVED`
 or publishing.
+
