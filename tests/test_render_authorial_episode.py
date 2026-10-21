@@ -67,7 +67,8 @@ class AuthorialRenderTests(unittest.TestCase):
                 wav.getnframes.return_value = 24000
                 with self.assertRaises(RenderError):
                     validate_manifest(manifest, root)
-\n    def test_validate_only_requires_real_wav_contract(self):
+
+    def test_validate_only_requires_real_wav_contract(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             manifest = self._manifest(root)
