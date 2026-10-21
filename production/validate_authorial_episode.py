@@ -152,7 +152,10 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
             raise ReleaseValidationError(f"Scene {scene_id} has an invalid duration.")
         scene_report.append({"scene_id": scene_id, "image": str(image), "duration": float(duration), **image_info})
 
-    audio = require_file(episode_dir, manifest.get("audio", {}).get("path"), "Audio")
+    audio_spec = manifest.get("audio")
+    if not isinstance(audio_spec, dict):
+        raise ReleaseValidationError("Manifest requires an audio object.")
+    audio = require_file(episode_dir, audio_spec.get("path"), "Audio")
     audio_seconds = audio_duration(audio)
     transition = manifest.get("transition_duration", 0.33)
     if not isinstance(transition, (int, float)) or transition < 0:
@@ -171,6 +174,8 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
     if events[-1][1] < audio_seconds - 0.8:
         raise ReleaseValidationError("Captions end too early.")
     script = manifest.get("script")
+    if script is not None and not isinstance(script, dict):
+        raise ReleaseValidationError("script must be an object when provided.")
     if script:
         script_file = require_file(episode_dir, script.get("path"), "Script")
         script_words = normalize_words(script_file.read_text(encoding="utf-8"))
