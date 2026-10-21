@@ -14,6 +14,9 @@ protected engine.
 
 The current episode uses a local Charon WAV collected from Google AI Studio;
 the API adapter remains available but does not store a key in the repository.
+The current visual draft is v4 and maps the story beats explicitly: journey and
+signal loss, unit mismatch, path divergence, dangerous approach, unresolved
+warnings, and consequence.
 
 ## Local run
 
@@ -36,3 +39,4 @@ approval hash are required before any future delivery or publication step.
 Generated WAV/MP4 media and local run logs are intentionally not versioned;
 the repository stores source code, manifests, metadata, tests, and audit
 records.
+
