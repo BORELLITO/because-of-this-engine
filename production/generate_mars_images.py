@@ -12,6 +12,7 @@ import os
 from pathlib import Path
 
 from image_provider import GeminiImageProvider, ImageGenerationError, ImageRequest
+from cloudflare_image_provider import CloudflareImageProvider
 
 ROOT = Path(__file__).resolve().parent
 ASSET_DIR = ROOT / "mars-assets"
@@ -59,19 +60,28 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Generate one or more Mars episode image assets safely.")
     parser.add_argument("--scene", choices=["ALL", *SCENE_PROMPTS], default="ALL")
     parser.add_argument("--output-dir", type=Path, default=ASSET_DIR)
-    parser.add_argument("--model", default=os.environ.get("GEMINI_IMAGE_MODEL", "gemini-nano-banana-2.1"))
+    parser.add_argument("--provider", choices=["cloudflare", "gemini"], default=os.environ.get("IMAGE_PROVIDER", "cloudflare"))
+    parser.add_argument("--model", default=os.environ.get("IMAGE_MODEL", ""))
     parser.add_argument("--image-size", choices=["1K", "2K", "4K"], default=os.environ.get("GEMINI_IMAGE_SIZE", "1K"))
     parser.add_argument("--max-requests", type=int, default=int(os.environ.get("GEMINI_IMAGE_MAX_REQUESTS", "6")))
     parser.add_argument("--overwrite", action="store_true")
     args = parser.parse_args()
-    api_key = os.environ.get("GEMINI_API_KEY", "").strip()
     try:
-        provider = GeminiImageProvider(
-            api_key=api_key,
-            model=args.model,
-            quota_ledger=args.output_dir / "usage.json",
-            max_requests_per_day=args.max_requests,
-        )
+        if args.provider == "cloudflare":
+            provider = CloudflareImageProvider(
+                account_id=os.environ.get("CLOUDFLARE_ACCOUNT_ID", "").strip(),
+                api_token=os.environ.get("CLOUDFLARE_API_TOKEN", "").strip(),
+                model=args.model or "@cf/stabilityai/stable-diffusion-xl-base-1.0",
+                quota_ledger=args.output_dir / "usage.json",
+                max_requests_per_day=args.max_requests,
+            )
+        else:
+            provider = GeminiImageProvider(
+                api_key=os.environ.get("GEMINI_API_KEY", "").strip(),
+                model=args.model or "gemini-nano-banana-2.1",
+                quota_ledger=args.output_dir / "usage.json",
+                max_requests_per_day=args.max_requests,
+            )
         scenes = list(SCENE_PROMPTS) if args.scene == "ALL" else [args.scene]
         for scene_id in scenes:
             output = args.output_dir / f"{scene_id.lower()}-background.png"
