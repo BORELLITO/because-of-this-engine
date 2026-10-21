@@ -1,6 +1,6 @@
 {
   "validator_version": "2.0",
-  "validated_at_utc": "2026-10-21T01:57:19.807427+00:00",
+  "validated_at_utc": "2026-10-21T02:14:07.310692+00:00",
   "episode_id": "because-of-this-mars-climate-orbiter-001",
   "status": "TECH_VALIDATED",
   "checks": {
@@ -36,7 +36,7 @@
       "end": 58.34,
       "events": 14
     },
-    "visual_source_motion_sha256": "fcbea551ae3382b1dbedd8b3d10b703b977e8c71d9b1b74b936d9b2f04f29c22",
+    "visual_source_motion_sha256": "6f48e9c1814ef6ae5067c9be46991a45da1f60f52a6e58f046fe71aef9275b38",
     "visual": {
       "width": 1080,
       "height": 1920,
@@ -53,7 +53,7 @@
       "video_codec": "h264",
       "audio_codec": "aac"
     },
-    "output_sha256": "c54fc2bd9db68aa1a6b223a0c29fa3a23384904d872f54ca80fccf45178cfb25",
+    "output_sha256": "46000220bcc18eeee996a85d5a8674deb9f428d66f3d241df30e92acad3c866d",
     "mix": {
       "integrated_lufs": -18.3,
       "true_peak_dbfs": -1.0
