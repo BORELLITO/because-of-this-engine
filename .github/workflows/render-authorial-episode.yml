@@ -1,0 +1,53 @@
+name: Render authorial episode
+
+on:
+  workflow_dispatch:
+    inputs:
+      manifest:
+        description: "Episode render manifest path"
+        required: true
+        default: "examples/mars-climate-orbiter-render-manifest-v1.json"
+        type: string
+      mode:
+        description: "Render size"
+        required: true
+        default: "preview"
+        type: choice
+        options:
+          - preview
+          - final
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate manifest
+        run: |
+          python production/render_authorial_episode.py \
+            --manifest "${{ inputs.manifest }}" \
+            --validate-only
+
+      - name: Render episode
+        run: |
+          python production/render_authorial_episode.py \
+            --manifest "${{ inputs.manifest }}" \
+            --mode "${{ inputs.mode }}"
+
+      - name: Upload rendered video
+        uses: actions/upload-artifact@v4
+        with:
+          name: because-of-this-${{ inputs.mode }}-video
+          path: "examples/rendered/*.mp4"
+          if-no-files-found: error
