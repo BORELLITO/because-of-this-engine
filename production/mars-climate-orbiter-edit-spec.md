@@ -11,7 +11,7 @@ engine.
 | Script | CANONICAL / reconciled | Transcript is also stored in `examples/mars_climate_orbiter.txt` and bound by SHA-256 |
 | Voice | GENERATED | Google AI Studio, Charon |
 | Audio duration | VALIDATED | Local Charon WAV, PCM 24 kHz mono, 58.36s |
-| Visual draft | RENDERED | Controlled-motion 1080×1920 draft, 30 fps |
+| Visual source | RENDERED | NASA-backed 1080×1920 assets plus controlled motion source, 30 fps |
 | Beat map | EXECUTED | Scene timing aligned to the approved script and real duration |
 | Captions | RENDERED / TRANSCRIPT_BOUND | ASS caption layer, phrase-level timing, mobile-safe styling |
 | Final mix | TECHNICALLY_VALIDATED | Voice-first mix; -18.3 LUFS integrated, -1.0 dBFS true peak |
@@ -35,7 +35,9 @@ The approved narrative arc is:
 `journey → invisible mismatch → trajectory divergence → fatal approach → silence → systemic lesson`
 
 The current 58-second length is viable for this script. It is not too short,
-but it has no room for an intro, a logo animation, or a generic CTA.
+but it has no room for an intro, a logo animation, or a generic CTA. The
+senior-editor motion pass is intentionally sparse: each scene receives one
+eased camera move, while hard cuts remain the default transition.
 
 ## 2. Approved narration
 
@@ -110,7 +112,7 @@ rendering.
 | S05 | 37.80–47.30 | Other communication / systems problems | Signal and warning abstraction | Signal arcs collapse; warning markers remain unresolved; motion reduces | L-cut narration across image change | Highlight `ONLY PART`, `WARNING SIGNS` | Radio noise recedes; music drops one layer |
 | S06 | 47.30–58.00 | Consequence and system lesson | Wide consequence image with clean causal hold | Pull back from orbiter to full Mars; hold the final causal frame | Hard cut or restrained dissolve, depending on audio | Highlight `MILLIONS OF MILES`, `THE WHOLE MISSION` | Single low impact, then quiet release |
 
-## 7. Image generation / asset queue
+## 7. Image sourcing / asset queue
 
 Generate in this order only if higher-quality assets are needed:
 
@@ -120,9 +122,11 @@ Generate in this order only if higher-quality assets are needed:
 4. **IMPORTANT:** S05 signal and unresolved warning abstraction.
 5. **SUPPORTING:** S02 unit comparison and S06/S07 consequence graphics.
 
-The current procedural frames are a visual timing draft. They are acceptable
-for editorial validation, but they are not evidence and should not be labeled
-as NASA archival material.
+The default free path now uses the NASA Image and Video Library adapter. It
+downloads a semantically matched source image, converts it to 1080×1920, and
+writes a provenance sidecar. The source is editorially framed; it must not be
+presented as mission telemetry or as proof of the exact event unless the item
+itself supports that claim. The optional generative adapters remain opt-in.
 
 ### Prompt rules for generated art
 
@@ -156,20 +160,22 @@ rendering.
 
 | Asset ID | Scene | Type | Source | Status | License / provenance |
 |---|---|---|---|---|---|
-| A01 | S01 | Procedural editorial frame | Local Python/PIL | GENERATED | Original local asset |
-| A02 | S02 | Procedural cause/effect graphic | Local Python/PIL | GENERATED | Original local asset |
-| A03 | S03 | Procedural trajectory graphic | Local Python/PIL | GENERATED | Original local asset |
-| A04 | S04 | Procedural approach frame | Local Python/PIL | GENERATED | Original local asset |
-| A05 | S05 | Procedural signal frame | Local Python/PIL | GENERATED | Original local asset |
-| A06 | S06 | Procedural consequence frame | Local Python/PIL | GENERATED | Original local asset |
+| A01 | S01 | Mars Climate Orbiter source image | NASA adapter | GENERATED / REVIEW_REQUIRED | Source URL and item metadata in sidecar; verify credits |
+| A02 | S02 | Mission-control source image | NASA adapter | GENERATED / REVIEW_REQUIRED | Source URL and item metadata in sidecar; verify credits |
+| A03 | S03 | Mars Climate Orbiter source image | NASA adapter | GENERATED / REVIEW_REQUIRED | Source URL and item metadata in sidecar; verify credits |
+| A04 | S04 | Mars source image | NASA adapter | GENERATED / REVIEW_REQUIRED | Source URL and item metadata in sidecar; verify credits |
+| A05 | S05 | Mission-control source image | NASA adapter | GENERATED / REVIEW_REQUIRED | Source URL and item metadata in sidecar; verify credits |
+| A06 | S06 | Mars source image | NASA adapter | GENERATED / REVIEW_REQUIRED | Source URL and item metadata in sidecar; verify credits |
 | VO01 | All | Narration | Google AI Studio / Charon | GENERATED / LOCAL | Manual collection; model ID remains unknown |
 | MUS01 | All | Music bed | FFmpeg lavfi procedural | GENERATED / LOCAL | Original deterministic bed; hash in episode manifest |
 | SFX01 | S01/S05 | Radio dropout / signal texture | Not selected | NOT EXECUTED | Must be sourced or generated with permission |
 
 ## 9. Motion and transition plan
 
-Motion is deliberately sparse. S01 and S04 receive the strongest push-in;
-S06 is stable so the lesson can land.
+Motion is deliberately sparse and is now executable in
+`production/build_mars_visual_ai.py` as `senior-editor-v1`. S01 and S04
+receive the strongest push-in; S05 and S06 reduce motion so the loss and lesson
+can land.
 
 | Scene | Start scale | End scale | Position | Easing | Reason |
 |---|---:|---:|---|---|---|
@@ -231,9 +237,9 @@ mobile-speaker watch remains required before publishing.
 1. **Risk:** viewer remembers only “NASA forgot units”.
    **Correction:** keep the communication and systems-engineering sentence in
    S05 and show unresolved warning markers rather than another unit graphic.
-2. **Risk:** procedural visuals look like a generic slideshow.
-   **Correction:** replace only the critical S01/S04 assets first; preserve the
-   restrained graphics and vary scale/motion before adding more effects.
+2. **Risk:** factual source images feel disconnected from the narrative.
+   **Correction:** keep scene-specific NASA queries, preserve provenance, and
+   use restrained motion/reframing rather than decorative effects.
 3. **Risk:** estimated timings drift from the real Charon read.
    **Correction:** attach the WAV and derive word-level timestamps before
    captions or final cuts.
@@ -261,7 +267,7 @@ These are editorial diagnostic scores, not performance predictions:
 | Visual quality | 64 | Clean procedural draft, not final cinematic asset set |
 | Continuity | 82 | Palette and spacecraft language are consistent |
 | Pacing | 76 | 58s works; exact pauses still unmeasured |
-| Motion | 42 | Current draft is mostly static; motion pass pending |
+| Motion | 68 | Senior-editor motion plan is implemented; mobile review remains |
 | Transitions | 70 | Hard-cut structure is appropriate; audio-led validation pending |
 | Captions | 76 | Readable and safe; final word-level polish remains possible |
 | Mix / mobile | 78 | Voice-first mix, peak -1.0 dB; phone-speaker listening still recommended |
@@ -271,6 +277,6 @@ These are editorial diagnostic scores, not performance predictions:
 ## 17. Required next action
 
 The audio was successfully collected from the existing AI Studio player and the
-independent workflow completed the first final render. The next human gate is
-to watch the MP4 once on a phone speaker and approve or request editorial
-changes before publishing.
+independent GitHub workflow has produced the six source assets plus the motion
+source. The next human gate is to inspect the six frames and watch the motion
+source once on a phone speaker before approving a final captioned render.
