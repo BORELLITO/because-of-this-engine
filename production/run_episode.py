@@ -82,8 +82,10 @@ def main() -> int:
                 ], check=True, timeout=1200)
                 output = (manifest_dir / manifest["output"]["path"]).resolve()
                 music = (manifest_dir / manifest["mix"]["music_path"]).resolve()
+                visual = (manifest_dir / manifest["visual"]["source_motion"]).resolve()
                 manifest["output"]["sha256"] = sha256(output)
                 manifest["mix"]["music_sha256"] = sha256(music)
+                manifest["visual"]["source_motion_sha256"] = sha256(visual)
                 manifest["status"] = "RENDERED"
                 manifest["gates"]["export_valid"] = False
                 write_json_atomic(manifest_path, manifest)
