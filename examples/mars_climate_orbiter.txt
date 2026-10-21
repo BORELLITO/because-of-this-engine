@@ -1,13 +1,13 @@
-NASA’s Mars orbiter came in about 170 kilometers lower than planned.
+NASA’s Mars Climate Orbiter traveled for nine months to reach Mars. Then, during its arrival, contact disappeared.
 
-A software file helped send it there.
+The cause sounds almost impossible: two parts of the mission were using different units.
 
-The Mars Climate Orbiter lost contact during its attempt to enter orbit in 1999.
+Ground software reported thruster forces in pound-seconds. Navigation expected metric units: newton-seconds. So the force data was interpreted incorrectly, and the spacecraft’s calculated path drifted from its real one.
 
-The investigation found a units mismatch in a ground-software file—not aboard the spacecraft. The file reported thruster impulses in pound-force seconds. The navigation system expected newton-seconds.
+When the orbiter reached Mars on September 23, 1999, it passed too close to the planet. NASA later concluded it likely burned up in the Martian atmosphere.
 
-That mismatch made the navigation model underestimate how much the thrusters changed the spacecraft’s path.
+But the unit mismatch was only part of the failure. Investigators also found communication and systems-engineering problems that kept warning signs from being resolved in time.
 
-The investigation also found that correction maneuver number five was not performed, along with gaps in communication and software checks.
+A spacecraft crossed millions of miles, and a mismatch between pounds and newtons helped decide its fate.
 
-The failure wasn’t just the wrong units. It was a system that failed to catch them before the spacecraft was lost.
+Because of this, the lesson was bigger than “check your units.” Every team had to understand how its data affected the whole mission.
