@@ -1,0 +1,13 @@
+NASA’s Mars orbiter came in about 170 kilometers lower than planned.
+
+A software file helped send it there.
+
+The Mars Climate Orbiter lost contact during its attempt to enter orbit in 1999.
+
+The investigation found a units mismatch in a ground-software file—not aboard the spacecraft. The file reported thruster impulses in pound-force seconds. The navigation system expected newton-seconds.
+
+That mismatch made the navigation model underestimate how much the thrusters changed the spacecraft’s path.
+
+The investigation also found that correction maneuver number five was not performed, along with gaps in communication and software checks.
+
+The failure wasn’t just the wrong units. It was a system that failed to catch them before the spacecraft was lost.
