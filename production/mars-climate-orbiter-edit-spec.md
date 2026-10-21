@@ -8,14 +8,14 @@ engine.
 
 | Item | Status | Evidence / next gate |
 |---|---|---|
-| Script | GENERATED / approved | The approved 58-second English narration below |
+| Script | CANONICAL / reconciled | Transcript is also stored in `examples/mars_climate_orbiter.txt` and bound by SHA-256 |
 | Voice | GENERATED | Google AI Studio, Charon |
 | Audio duration | VALIDATED | Local Charon WAV, PCM 24 kHz mono, 58.36s |
 | Visual draft | RENDERED | Controlled-motion 1080×1920 draft, 30 fps |
 | Beat map | EXECUTED | Scene timing aligned to the approved script and real duration |
-| Captions | RENDERED | ASS caption layer, mobile-safe styling |
-| Final mix | RENDERED | Voice-first mix with original restrained ambient bed |
-| Final export | RENDERED / QC | H.264 + AAC, 1080×1920, 58.37s |
+| Captions | RENDERED / TRANSCRIPT_BOUND | ASS caption layer, phrase-level timing, mobile-safe styling |
+| Final mix | TECHNICALLY_VALIDATED | Voice-first mix; -18.3 LUFS integrated, -1.0 dBFS true peak |
+| Final export | TECH_VALIDATED / REVIEW_REQUIRED | H.264 + AAC, 1080×1920, 58.37s |
 
 The final MP4 is now rendered. Caption timing is sentence/phrase-level rather
 than an independently generated word-level ASR transcript; this remains the
@@ -43,7 +43,7 @@ but it has no room for an intro, a logo animation, or a generic CTA.
 >
 > The cause sounds almost impossible: two parts of the mission were using different units.
 >
-> Ground software reported thruster forces in pound-seconds. The navigation software expected metric units: newton-seconds. So the force data was interpreted incorrectly, and the spacecraft’s calculated path drifted from its real one.
+> Ground software reported thruster forces in pound-seconds. Navigation expected metric units: newton-seconds. So the force data was interpreted incorrectly, and the spacecraft’s calculated path drifted from its real one.
 >
 > When the orbiter reached Mars on September 23, 1999, it passed too close to the planet. NASA later concluded it likely burned up in the Martian atmosphere.
 >
@@ -108,8 +108,7 @@ rendering.
 | S03 | 15.00–27.50 | Pound-seconds vs newton-seconds; path drifts | Technical diagram / map | Slow pan along two trajectories; 4–6% push-in | Match cut from unit split to path split | Highlight `POUND-SECONDS`, `NEWTON-SECONDS`, `DRIFTED` | Subtle pulse rising; no glitch |
 | S04 | 27.50–37.80 | Too-close pass; likely burn-up | Editorial reconstruction | Mars grows; approach corridor tightens; slight downward reframe | Hard cut on `September 23, 1999` | Highlight date and `TOO CLOSE` | Low boom under reveal; brief micro-silence before “burned up” |
 | S05 | 37.80–47.30 | Other communication / systems problems | Signal and warning abstraction | Signal arcs collapse; warning markers remain unresolved; motion reduces | L-cut narration across image change | Highlight `ONLY PART`, `WARNING SIGNS` | Radio noise recedes; music drops one layer |
-| S06 | 47.30–52.40 | Millions of miles; pounds/newtons decide fate | Wide consequence image | Pull back from orbiter to full Mars; hold longer | Slow dissolve only if audio supports; otherwise hard cut | Highlight `MILLIONS OF MILES`, `DECIDE ITS FATE` | Single low impact, then restraint |
-| S07 | 52.40–58.00 | System lesson / cause→event→consequence | Clean causal graphic | Stable frame; three nodes connect, then hold | Cut on `Because of this` | Highlight `THE WHOLE MISSION` only | Music resolves quietly; no CTA |
+| S06 | 47.30–58.00 | Consequence and system lesson | Wide consequence image with clean causal hold | Pull back from orbiter to full Mars; hold the final causal frame | Hard cut or restrained dissolve, depending on audio | Highlight `MILLIONS OF MILES`, `THE WHOLE MISSION` | Single low impact, then quiet release |
 
 ## 7. Image generation / asset queue
 
@@ -162,15 +161,15 @@ rendering.
 | A03 | S03 | Procedural trajectory graphic | Local Python/PIL | GENERATED | Original local asset |
 | A04 | S04 | Procedural approach frame | Local Python/PIL | GENERATED | Original local asset |
 | A05 | S05 | Procedural signal frame | Local Python/PIL | GENERATED | Original local asset |
-| A06 | S06/S07 | Procedural consequence frame | Local Python/PIL | GENERATED | Original local asset |
-| VO01 | All | Narration | Google AI Studio / Charon | GENERATED, NOT LOCAL | User must attach downloaded WAV |
-| MUS01 | All | Music bed | Not selected | NOT EXECUTED | Must be licensed/approved before final mix |
+| A06 | S06 | Procedural consequence frame | Local Python/PIL | GENERATED | Original local asset |
+| VO01 | All | Narration | Google AI Studio / Charon | GENERATED / LOCAL | Manual collection; model ID remains unknown |
+| MUS01 | All | Music bed | FFmpeg lavfi procedural | GENERATED / LOCAL | Original deterministic bed; hash in episode manifest |
 | SFX01 | S01/S05 | Radio dropout / signal texture | Not selected | NOT EXECUTED | Must be sourced or generated with permission |
 
 ## 9. Motion and transition plan
 
 Motion is deliberately sparse. S01 and S04 receive the strongest push-in;
-S07 is stable so the lesson can land.
+S06 is stable so the lesson can land.
 
 | Scene | Start scale | End scale | Position | Easing | Reason |
 |---|---:|---:|---|---|---|
@@ -180,7 +179,7 @@ S07 is stable so the lesson can land.
 | S04 | 1.02 | 1.09 | center → lower Mars limb | ease-in | Escalate approach danger |
 | S05 | 1.04 | 1.01 | signal center → empty space | ease-out | Remove motion as contact vanishes |
 | S06 | 1.08 | 1.00 | pull back to whole Mars | ease-in-out | Restore scale and consequence |
-| S07 | 1.00 | 1.00 | locked | none | Give the final insight room |
+| S06 | 1.00 | 1.00 | locked | none | Give the final insight room |
 
 Default transition is a hard cut. The only candidate dissolve is S05→S06,
 and it should remain a hard cut if the narration has a strong consonant or
@@ -223,9 +222,9 @@ Additional gates: `IMAGE_QUALITY_OK`, `CONTINUITY_OK`, `MOTION_OK`,
 `TRANSITIONS_OK`, `MUSIC_OK`, `SFX_OK`, `BRAND_OK`, `SAFE_ZONES_OK`,
 `FACTUAL_VISUAL_OK`, `RETENTION_OK`.
 
-`AUDIO_SYNC_OK`, `CAPTIONS_OK`, `MIX_OK`, and `EXPORT_OK` are now passed for the
-rendered draft. A final human mobile-speaker watch remains recommended before
-publishing.
+`TRANSCRIPT_IDENTITY_OK`, `CAPTIONS_OK`, `MIX_OK`, and `EXPORT_OK` are passed for
+the rendered draft. Word-level ASR is not implemented. A final human
+mobile-speaker watch remains required before publishing.
 
 ## 14. Red-team findings and corrections
 
