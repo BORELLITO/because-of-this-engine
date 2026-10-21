@@ -25,6 +25,7 @@ Escopo: somente o motor independente e o episódio Mars Climate Orbiter 001.
 9. Removida a escrita redundante do concat no gerador visual.
 10. Documentação de produção atualizada para seis cenas, estado real do áudio/mix e revisão humana pendente.
 11. Adicionados testes unitários de normalização de transcript, overlap de captions e bloqueio de path externo.
+12. Revisada a camada visual após inspeção frame a frame: Terra→nave→Marte no hook, conflito explícito entre pound-seconds/newton-seconds, divergência entre caminho esperado/real, aproximação perigosa, comunicação interrompida e consequência final. Removidos textos decorativos que duplicavam ou colidiam com as captions. A aproximação recebeu movimento estável para evitar falha do `zoompan`.
 
 ## Verificação executada
 
@@ -38,7 +39,8 @@ Escopo: somente o motor independente e o episódio Mars Climate Orbiter 001.
 - Visual: 1080×1920.
 - MP4: H.264/AAC, 1080×1920, 30 fps, 58,367 s.
 - Mix: -18,3 LUFS integrado; true peak -1,0 dBFS.
-- Hash output atual: `c54fc2bd9db68aa1a6b223a0c29fa3a23384904d872f54ca80fccf45178cfb25`.
+- Visual atualizado: `mars-climate-orbiter-visual-draft-v4.mp4`, 1080×1920, com hash registrado no manifest.
+- Hash output atual: `46000220bcc18eeee996a85d5a8674deb9f428d66f3d241df30e92acad3c866d`.
 
 ## O que continua deliberadamente pendente
 
@@ -55,3 +57,4 @@ Esses itens não foram mascarados como concluídos. O episódio continua `REVIEW
 
 Para este episódio: **TECHNICALLY VALIDATED / EDITORIAL REVIEW REQUIRED**.  
 Para o motor: **OPERATIONAL BUT FRAGILE**, agora com o P0 de identidade textual corrigido e com uma base mais segura para o próximo episódio. Ainda não é robusto nem pronto para escala.
+
