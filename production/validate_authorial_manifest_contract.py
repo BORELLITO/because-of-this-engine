@@ -19,15 +19,18 @@ def validate(path: Path) -> dict:
         raise ContractError("schema_version must be 1.1")
     if not isinstance(data.get("video_id"), str) or not data["video_id"].strip():
         raise ContractError("video_id is required")
-    if not isinstance(data.get("script", {}).get("path"), str):
+    for section in ("script", "audio", "captions", "approval", "output"):
+        if not isinstance(data.get(section), dict):
+            raise ContractError(f"{section} must be an object")
+    if not isinstance(data["script"].get("path"), str):
         raise ContractError("script.path is required")
-    if not isinstance(data.get("audio", {}).get("path"), str):
+    if not isinstance(data["audio"].get("path"), str):
         raise ContractError("audio.path is required")
-    if not isinstance(data.get("captions", {}).get("path"), str):
+    if not isinstance(data["captions"].get("path"), str):
         raise ContractError("captions.path is required")
-    if not isinstance(data.get("approval", {}).get("path"), str):
+    if not isinstance(data["approval"].get("path"), str):
         raise ContractError("approval.path is required")
-    output = data.get("output", {}).get("path")
+    output = data["output"].get("path")
     if not isinstance(output, str) or "{mode}" not in output:
         raise ContractError("output.path must contain {mode}")
     scenes = data.get("scenes")
