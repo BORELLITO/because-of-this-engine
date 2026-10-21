@@ -12,8 +12,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 FRAMES = ROOT / "frames"
-SEGMENTS = ROOT / "motion_segments"
-OUT = ROOT / "mars-climate-orbiter-visual-draft-v2.mp4"
+SEGMENTS = ROOT / "motion_segments_v4"
+OUT = ROOT / "mars-climate-orbiter-visual-draft-v4.mp4"
 WIDTH, HEIGHT, FPS = 1080, 1920, 30
 
 # Scene duration, zoom expression, and crop direction. The expressions are
@@ -39,16 +39,28 @@ def main() -> None:
         source = FRAMES / filename
         segment = SEGMENTS / f"segment-{index:02d}.mp4"
         frames = seconds * FPS
-        vf = (
-            f"zoompan=z='{zoom}':x='{x}':y='{y}':d={frames}:"
-            f"s={WIDTH}x{HEIGHT}:fps={FPS},format=yuv420p"
-        )
-        run([
-            "ffmpeg", "-y", "-loop", "1", "-i", str(source),
-            "-vf", vf, "-frames:v", str(frames), "-an",
-            "-c:v", "libx264", "-preset", "medium", "-crf", "20",
-            "-pix_fmt", "yuv420p", str(segment),
-        ])
+        if index == 4:
+            # Keep the high-detail approach frame stable. This avoids an
+            # FFmpeg zoompan parser failure on the dense Mars atmosphere
+            # frame while preserving the intended visual beat.
+            vf = f"scale={WIDTH}:{HEIGHT},format=yuv420p"
+            run([
+                "ffmpeg", "-y", "-loop", "1", "-i", str(source),
+                "-vf", vf, "-t", str(seconds), "-r", str(FPS), "-an",
+                "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
+                "-pix_fmt", "yuv420p", str(segment),
+            ])
+        else:
+            vf = (
+                f"zoompan=z='{zoom}':x='{x}':y='{y}':d={frames}:"
+                f"s={WIDTH}x{HEIGHT}:fps={FPS},format=yuv420p"
+            )
+            run([
+                "ffmpeg", "-y", "-loop", "1", "-i", str(source),
+                "-vf", vf, "-frames:v", str(frames), "-an",
+                "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
+                "-pix_fmt", "yuv420p", str(segment),
+            ])
         segment_paths.append(segment)
 
     concat = SEGMENTS / "concat.txt"
@@ -62,3 +74,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
