@@ -8,3 +8,6 @@ output/
 production/frames/
 production/motion_segments/
 !production/*.wav.json
+production/*.jsonl
+production/*.lock
+production/.*.part.*
