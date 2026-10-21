@@ -26,6 +26,10 @@ providers; neither is an automatic fallback. Every downloaded asset keeps a
 source URL and a license-review note in its sidecar, and human review remains
 required before monetization.
 
+The motion assembler applies `senior-editor-v1`: conservative per-scene
+camera movement with smooth easing and hard cuts by default. It deliberately
+avoids decorative transition packs, glitch, and repetitive effects.
+
 ## Local run
 
 ```bash
