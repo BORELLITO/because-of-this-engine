@@ -13,6 +13,7 @@ from pathlib import Path
 
 from image_provider import GeminiImageProvider, ImageGenerationError, ImageRequest
 from cloudflare_image_provider import CloudflareImageProvider
+from nasa_image_provider import NASAImageProvider
 
 ROOT = Path(__file__).resolve().parent
 ASSET_DIR = ROOT / "mars-assets"
@@ -55,19 +56,35 @@ SCENE_PROMPTS = {
     ),
 }
 
+NASA_SCENE_QUERIES = {
+    # Exact NASA IDs are used where possible so search ranking cannot silently
+    # swap a spacecraft photo for an unrelated Mars landscape.
+    "S01": "KSC-98pc1079",
+    "S02": "mission control room",
+    "S03": "KSC-98pc1079",
+    "S04": "Mars planet",
+    "S05": "mission control room",
+    "S06": "Mars planet",
+}
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Generate one or more Mars episode image assets safely.")
     parser.add_argument("--scene", choices=["ALL", *SCENE_PROMPTS], default="ALL")
     parser.add_argument("--output-dir", type=Path, default=ASSET_DIR)
-    parser.add_argument("--provider", choices=["cloudflare", "gemini"], default=os.environ.get("IMAGE_PROVIDER", "cloudflare"))
+    parser.add_argument("--provider", choices=["nasa", "cloudflare", "gemini"], default=os.environ.get("IMAGE_PROVIDER", "nasa"))
     parser.add_argument("--model", default=os.environ.get("IMAGE_MODEL", ""))
     parser.add_argument("--image-size", choices=["1K", "2K", "4K"], default=os.environ.get("GEMINI_IMAGE_SIZE", "1K"))
     parser.add_argument("--max-requests", type=int, default=int(os.environ.get("GEMINI_IMAGE_MAX_REQUESTS", "6")))
     parser.add_argument("--overwrite", action="store_true")
     args = parser.parse_args()
     try:
-        if args.provider == "cloudflare":
+        if args.provider == "nasa":
+            provider = NASAImageProvider(
+                quota_ledger=args.output_dir / "usage.json",
+                max_requests_per_day=args.max_requests,
+            )
+        elif args.provider == "cloudflare":
             provider = CloudflareImageProvider(
                 account_id=os.environ.get("CLOUDFLARE_ACCOUNT_ID", "").strip(),
                 api_token=os.environ.get("CLOUDFLARE_API_TOKEN", "").strip(),
@@ -85,16 +102,18 @@ def main() -> int:
         scenes = list(SCENE_PROMPTS) if args.scene == "ALL" else [args.scene]
         for scene_id in scenes:
             output = args.output_dir / f"{scene_id.lower()}-background.png"
-            result = provider.generate(
-                ImageRequest(
-                    scene_id=scene_id,
-                    prompt=SCENE_PROMPTS[scene_id],
-                    output_path=output,
-                    aspect_ratio="9:16",
-                    image_size=args.image_size,
-                    overwrite=args.overwrite,
-                )
+            image_request = ImageRequest(
+                scene_id=scene_id,
+                prompt=SCENE_PROMPTS[scene_id],
+                output_path=output,
+                aspect_ratio="9:16",
+                image_size=args.image_size,
+                overwrite=args.overwrite,
             )
+            if args.provider == "nasa":
+                result = provider.generate(image_request, query=NASA_SCENE_QUERIES[scene_id])
+            else:
+                result = provider.generate(image_request)
             print(f"{scene_id}: {output} ({result['width']}x{result['height']}, {result['model']})")
     except ImageGenerationError as exc:
         print(f"Error: {exc}")
