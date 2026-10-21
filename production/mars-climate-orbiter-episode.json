@@ -13,7 +13,8 @@
   ],
   "script": {
     "path": "../examples/mars_climate_orbiter.txt",
-    "sha256": "87e0c2a3f7c18809362d8f6fed6374d1223fdb25ffa05b189f15fc5caa7e7fbe",
+    "sha256": "def113ab4132fad9fcd4acb05296c2a4972b81e7a67e40add01e2bd33e1700ca",
+    "transcript_sha256": "def113ab4132fad9fcd4acb05296c2a4972b81e7a67e40add01e2bd33e1700ca",
     "language": "en-US",
     "facts_status": "SOURCES_ATTACHED",
     "claims_path": "mars-climate-orbiter-claims.json"
@@ -27,6 +28,7 @@
   },
   "visual": {
     "source_motion": "mars-climate-orbiter-visual-draft-v2.mp4",
+    "source_motion_sha256": "fcbea551ae3382b1dbedd8b3d10b703b977e8c71d9b1b74b936d9b2f04f29c22",
     "width": 1080,
     "height": 1920,
     "fps": 30,
@@ -36,16 +38,20 @@
   "captions": {
     "path": "mars-climate-orbiter-captions.ass",
     "sha256": "e856fe8c10bed0be320be0c65d2303aa99628384926ad31893e68bf745dbb3a4",
+    "source_transcript_sha256": "def113ab4132fad9fcd4acb05296c2a4972b81e7a67e40add01e2bd33e1700ca",
     "timing_status": "PHRASE_LEVEL_MANUAL"
   },
   "mix": {
     "music_path": "mars-climate-orbiter-original-ambient.wav",
+    "music_sha256": "69cdaa19f27736c850bbf6ab1edd588109e726defd94dd65113bfd5043545124",
     "voice_first": true,
-    "target_loudness_status": "PENDING_PHONE_REVIEW"
+    "target_loudness_status": "MEASURED_LOCAL_PHONE_REVIEW_PENDING",
+    "integrated_lufs": -18.3,
+    "true_peak_dbfs": -1.0
   },
   "output": {
     "path": "mars-climate-orbiter-final.mp4",
-    "sha256": "fe6dd616f15c99de5f6250aa0d182f65d819b1ff7dcc836130ac9cebd5f2066b",
+    "sha256": "c54fc2bd9db68aa1a6b223a0c29fa3a23384904d872f54ca80fccf45178cfb25",
     "approval_hash": null
   },
   "scenes": [
