@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Assemble approved Nano Banana stills into a silent vertical motion source.
+"""Assemble approved scene stills into a silent vertical motion source.
 
 This stage intentionally refuses to invent substitute art. Every scene must
 have a generated asset with a provenance sidecar before it can enter the edit.
@@ -75,7 +75,7 @@ def main() -> int:
 
     provenance = {
         "schema_version": "1.0",
-        "source": "approved Gemini Nano Banana scene assets",
+        "source": "approved independent-engine scene assets",
         "assets_dir": str(assets),
         "scene_count": len(SCENES),
         "scenes": [scene_id for scene_id, _duration in SCENES],
