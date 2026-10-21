@@ -49,6 +49,24 @@ Each image must have a sidecar JSON containing provider/model/prompt/style and g
 
 All referenced files must remain inside the episode directory. Missing files, invalid audio, missing captions, unsafe zoom values, path escapes, duplicate scene IDs, or invalid durations stop the render before FFmpeg starts.
 
+## Authorial image generation
+
+For a generated episode, use the authorial prompt pack with an explicitly
+selected provider:
+
+```bash
+python production/generate_authorial_assets.py \
+  --prompt-pack examples/mars-climate-orbiter-authorial-prompt-pack-v1.json \
+  --output-dir examples/assets \
+  --provider cloudflare
+```
+
+The command never calls NASA and never silently falls back to a different
+provider. Gemini image generation remains billing-gated by the provider adapter;
+Cloudflare credentials and model availability must be checked before use.
+
+For a manually generated image, use the provenance-safe ingest command below.
+
 ## Asset ingestion
 
 For images generated outside GitHub, use the provenance-safe ingest command:
