@@ -154,6 +154,12 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
 
     audio = require_file(episode_dir, manifest.get("audio", {}).get("path"), "Audio")
     audio_seconds = audio_duration(audio)
+    transition = manifest.get("transition_duration", 0.33)
+    if not isinstance(transition, (int, float)) or transition < 0:
+        raise ReleaseValidationError("transition_duration must be non-negative.")
+    scene_seconds = sum(float(scene["duration"]) for scene in scenes) - float(transition) * (len(scenes) - 1)
+    if scene_seconds <= 0 or abs(scene_seconds - audio_seconds) > 0.75:
+        raise ReleaseValidationError("Scene timeline does not match narration duration.")
 
     captions = manifest.get("captions")
     if not isinstance(captions, dict):
@@ -198,6 +204,7 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
         "mode": mode,
         "scene_count": len(scene_report),
         "audio_duration_seconds": round(audio_seconds, 3),
+        "scene_timeline_seconds": round(scene_seconds, 3),
         "caption_events": len(events),
         "output": str(output),
         "output_duration_seconds": round(sound_seconds, 3),
