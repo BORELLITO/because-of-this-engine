@@ -13,6 +13,9 @@
 - Episode manifest: `mars-climate-orbiter-episode.json`
 - Claims/source register: `mars-climate-orbiter-claims.json`
 - Technical validation: `mars-climate-orbiter-validation.json`, status `TECH_VALIDATED`
+- Canonical transcript: `../examples/mars_climate_orbiter.txt`, hash-bound to the captions and audio provenance
+- Mix measurement: approximately -18.3 LUFS integrated, -1.0 dBFS true peak
+- Human state: `REVIEW_REQUIRED`; no publication is authorized yet
 
 The detailed editorial specification, beat map, storyboard, asset manifest,
 motion plan, quality gates, and red-team review are in
@@ -49,6 +52,8 @@ final cinematic asset pass.
 ## Upgrade status
 
 The independent engine now uses an episode manifest as its operational source
-of truth, derives render duration from the narration WAV, records manual AI
-Studio audio provenance, and runs a fail-closed technical validator. Human
-mobile review is still required before `APPROVED` or publishing.
+of truth, derives render duration from the narration WAV, binds the canonical
+transcript to captions and provenance, records manual AI Studio audio
+provenance, uses deterministic temporary renders, and runs a fail-closed
+technical validator. Human mobile review is still required before `APPROVED`
+or publishing.
