@@ -10,6 +10,8 @@ The official path is the generic authorial episode pipeline:
 
 - `narrate.py`: optional Gemini TTS adapter with Charon support and provenance.
 - `production/build_authorial_prompt_pack.py`: reusable visual prompt builder.
+- `production/generate_authorial_assets.py`: explicit authorial provider adapter.
+- `production/ingest_authorial_asset.py`: provenance-safe manual asset ingestion.
 - `production/render_authorial_episode.py`: deterministic FFmpeg assembler.
 - `production/validate_authorial_episode.py`: fail-closed release validator.
 - `production/require_preview_approval.py`: final-render approval gate.
