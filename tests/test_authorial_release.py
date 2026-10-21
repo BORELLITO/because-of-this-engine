@@ -62,7 +62,7 @@ class AuthorialReleaseTests(unittest.TestCase):
                     "approved": True,
                     "video_id": "demo",
                     "preview_manifest_sha256": hashlib.sha256(manifest.read_bytes()).hexdigest(),
-                    "preview_assets_sha256": asset_digest.hexdigest(),
+                    "preview_inputs_sha256": asset_digest.hexdigest(),
                     "preview_output_sha256": hashlib.sha256(preview.read_bytes()).hexdigest(),
                     "reviewer": "Borelli",
                     "approved_at": "2026-10-21T12:00:00-03:00",
