@@ -27,6 +27,7 @@ class AuthorialRenderTests(unittest.TestCase):
                 {"scene_id": "S02", "image": "s02.png", "duration": 4.6, "zoom_end": 1.07},
             ],
             "transition_duration": 0.33,
+            "require_captions": False,
         }
 
     def test_preview_and_final_sizes_are_explicit(self):
@@ -52,7 +53,21 @@ class AuthorialRenderTests(unittest.TestCase):
             with self.assertRaises(RenderError):
                 validate_manifest(manifest, root)
 
-    def test_validate_only_requires_real_wav_contract(self):
+
+    def test_release_defaults_to_external_captions(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            manifest = self._manifest(root)
+            manifest.pop("require_captions")
+            with patch("production.render_authorial_episode.wave.open") as opener:
+                wav = opener.return_value.__enter__.return_value
+                wav.getnchannels.return_value = 1
+                wav.getsampwidth.return_value = 2
+                wav.getframerate.return_value = 24000
+                wav.getnframes.return_value = 24000
+                with self.assertRaises(RenderError):
+                    validate_manifest(manifest, root)
+\n    def test_validate_only_requires_real_wav_contract(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             manifest = self._manifest(root)
