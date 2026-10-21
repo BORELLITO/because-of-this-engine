@@ -82,14 +82,16 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path) -> dict[str, 
         raise RenderError(f"Narration file not found: {audio_path}")
 
     normalized: list[dict[str, Any]] = []
+    scene_ids: set[str] = set()
     for index, scene in enumerate(scenes, start=1):
         if not isinstance(scene, dict):
             raise RenderError(f"Scene {index} must be an object.")
         scene_id = scene.get("scene_id", f"S{index:02d}")
         image_path = resolve_inside(episode_dir, scene.get("image"))
         duration = scene.get("duration")
-        if not isinstance(scene_id, str) or not scene_id.strip():
-            raise RenderError(f"Scene {index} has an invalid scene_id.")
+        if not isinstance(scene_id, str) or not scene_id.strip() or scene_id in scene_ids:
+            raise RenderError(f"Scene {index} has an invalid or duplicate scene_id.")
+        scene_ids.add(scene_id)
         if not image_path.is_file():
             raise RenderError(f"Scene image not found: {image_path}")
         if not isinstance(duration, (int, float)) or duration <= 0:
@@ -161,7 +163,7 @@ def render_scene(scene: dict[str, Any], width: int, height: int, output: Path) -
 
 def xfade_filter(count: int, durations: list[float], transition: float) -> str:
     if count == 1:
-        return "[0:v]copy[v]"
+        return "[0:v]null[v]"
     parts: list[str] = []
     accumulated = durations[0]
     previous = "0:v"
@@ -216,7 +218,10 @@ def render(manifest_path: Path, mode: str, output_override: Path | None) -> Path
     episode_dir = manifest_path.parent.resolve()
     spec = validate_manifest(read_json(manifest_path), episode_dir)
     width, height = SIZES[mode]
-    output_value = output_override or episode_dir / spec["output_template"].format(mode=mode)
+    if output_override:
+        output_value = output_override if output_override.is_absolute() else episode_dir / output_override
+    else:
+        output_value = episode_dir / spec["output_template"].format(mode=mode)
     output = output_value.resolve()
     if episode_dir not in output.parents and output != episode_dir:
         raise RenderError("Output path must remain inside the episode directory.")
