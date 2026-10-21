@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "S06",
+  "provider": "openai_imagegen",
+  "model": "unknown_from_imagegen_tool",
+  "prompt": "S06 authorial abstract reveal of diverging measurement paths and rulers around Mars mission geometry, cinematic 3D-cartoon suspense illustration, vertical 9:16, no readable text, no logos",
+  "prompt_sha256": "cf494afd4343347174cbfd68cbace761ed6668c405d8e9a6894e0571f027943b",
+  "visual_style_id": "authorial-mars-cartoon-suspense-v1",
+  "source_path": "ChatGPT ImageGen output generated for this project",
+  "source_sha256": "ec49c1f6cf849529b067e0e951a711904c239aeb7cde363f79a83abff86b8027",
+  "sha256": "ec49c1f6cf849529b067e0e951a711904c239aeb7cde363f79a83abff86b8027",
+  "width": 768,
+  "height": 1365,
+  "format": "PNG",
+  "generated_at_utc": "2026-10-21T21:32:12Z",
+  "human_review_required": true,
+  "review_status": "REVIEW_REQUIRED",
+  "note": "Authorial generated visual; no archival or NASA telemetry claim. The model identifier is not exposed by the generation tool."
+}

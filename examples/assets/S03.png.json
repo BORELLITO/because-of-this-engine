@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "S03",
+  "provider": "openai_imagegen",
+  "model": "unknown_from_imagegen_tool",
+  "prompt": "S03 authorial mission control showing two incompatible measurement systems as blue and amber visual panels, cinematic 3D-cartoon suspense illustration, vertical 9:16, no readable text, no logos",
+  "prompt_sha256": "edab8f0a206fa4629c2b77297743e6255199c01a43bf59312d6f10289e19acd9",
+  "visual_style_id": "authorial-mars-cartoon-suspense-v1",
+  "source_path": "ChatGPT ImageGen output generated for this project",
+  "source_sha256": "082b8f8913db3cbf7ba854f60a9e08b344740e60f093cc995d58a32e2cf0763d",
+  "sha256": "082b8f8913db3cbf7ba854f60a9e08b344740e60f093cc995d58a32e2cf0763d",
+  "width": 768,
+  "height": 1365,
+  "format": "PNG",
+  "generated_at_utc": "2026-10-21T21:32:12Z",
+  "human_review_required": true,
+  "review_status": "REVIEW_REQUIRED",
+  "note": "Authorial generated visual; no archival or NASA telemetry claim. The model identifier is not exposed by the generation tool."
+}

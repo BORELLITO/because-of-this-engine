@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "S02",
+  "provider": "openai_imagegen",
+  "model": "unknown_from_imagegen_tool",
+  "prompt": "S02 authorial Mars Climate Orbiter spacecraft crossing deep space toward Mars with a clear trajectory arc, cinematic 3D-cartoon suspense illustration, vertical 9:16, no text, no logos",
+  "prompt_sha256": "3696bdb65312d0a7b8f0b294626ec664a7d26a7f1cdde68ade0d056bf284cbf9",
+  "visual_style_id": "authorial-mars-cartoon-suspense-v1",
+  "source_path": "ChatGPT ImageGen output generated for this project",
+  "source_sha256": "622b7840530f31a69a0448553f39f51f7258fa1e6ee3c79e88e130e37551d31b",
+  "sha256": "622b7840530f31a69a0448553f39f51f7258fa1e6ee3c79e88e130e37551d31b",
+  "width": 768,
+  "height": 1365,
+  "format": "PNG",
+  "generated_at_utc": "2026-10-21T21:32:12Z",
+  "human_review_required": true,
+  "review_status": "REVIEW_REQUIRED",
+  "note": "Authorial generated visual; no archival or NASA telemetry claim. The model identifier is not exposed by the generation tool."
+}

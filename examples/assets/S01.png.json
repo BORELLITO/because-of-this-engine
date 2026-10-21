@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "S01",
+  "provider": "openai_imagegen",
+  "model": "unknown_from_imagegen_tool",
+  "prompt": "S01 aerospace hangar with the authorial Mars Climate Orbiter spacecraft and engineers, cinematic 3D-cartoon suspense illustration, vertical 9:16, no text, no logos",
+  "prompt_sha256": "6c70b22c7b3e3985e802499a692efdf48dee1545c0c5bea1ede06c554dd66ed8",
+  "visual_style_id": "authorial-mars-cartoon-suspense-v1",
+  "source_path": "ChatGPT ImageGen output generated for this project",
+  "source_sha256": "4eb71ceb379b88fedea126e764a20036091ed8825a0805580d711138407b77a6",
+  "sha256": "4eb71ceb379b88fedea126e764a20036091ed8825a0805580d711138407b77a6",
+  "width": 768,
+  "height": 1365,
+  "format": "PNG",
+  "generated_at_utc": "2026-10-21T21:32:12Z",
+  "human_review_required": true,
+  "review_status": "REVIEW_REQUIRED",
+  "note": "Authorial generated visual; no archival or NASA telemetry claim. The model identifier is not exposed by the generation tool."
+}
