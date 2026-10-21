@@ -49,7 +49,7 @@ def parse_ass_time(value: str) -> float:
 
 
 def normalize_words(value: str) -> list[str]:
-    value = re.sub(r"\\{[^}]*\\}", "", value)
+    value = re.sub(r"\{[^}]*\}", "", value)
     value = value.replace(r"\N", " ").replace(r"\n", " ")
     value = value.lower().replace("’", "'").replace("–", "-").replace("—", "-")
     return re.findall(r"[a-z0-9]+(?:'[a-z0-9]+)?", value)
