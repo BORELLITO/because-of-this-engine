@@ -7,7 +7,7 @@
   "prompt_sha256": "4becb84364d211bb05a5738bbd1f44a0fb155351a4b5b7d7a37fb0bf088dfdc9",
   "visual_style_id": "authorial-mars-cartoon-suspense-v1",
   "source_path": "ChatGPT ImageGen output generated for this project",
-  "source_sha256": "f431b805b56ba389bbf915a5cb3859d9a2353396a06a2f61c349475199a52bbf",
+  "source_sha256": "2d5afaf8afca2d1a324bce28ad79716779f68dd4c17424ebd3ce88f80b5810db",
   "sha256": "f431b805b56ba389bbf915a5cb3859d9a2353396a06a2f61c349475199a52bbf",
   "width": 768,
   "height": 1365,
@@ -15,5 +15,6 @@
   "generated_at_utc": "2026-10-21T21:32:12Z",
   "human_review_required": true,
   "review_status": "REVIEW_REQUIRED",
+  "processing": "Resized and palette-optimized for repository transport; final sha256 identifies the committed PNG.",
   "note": "Authorial generated visual; no archival or NASA telemetry claim. The model identifier is not exposed by the generation tool."
 }
