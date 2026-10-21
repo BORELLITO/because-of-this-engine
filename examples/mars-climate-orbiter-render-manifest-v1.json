@@ -1,5 +1,9 @@
 {
+  "schema_version": "1.1",
   "video_id": "mars-climate-orbiter-001",
+  "script": {
+    "path": "mars_climate_orbiter.txt"
+  },
   "audio": {
     "path": "assets/mars-climate-orbiter-charon.wav"
   },
@@ -12,5 +16,15 @@
     {"scene_id": "S06", "image": "assets/S06.png", "duration": 4.6, "zoom_end": 1.06}
   ],
   "transition_duration": 0.33,
-  "output": {"path": "rendered/mars-climate-orbiter-001-{mode}.mp4"}
+  "require_captions": true,
+  "require_provenance": true,
+  "captions": {
+    "path": "assets/mars-climate-orbiter-captions.ass"
+  },
+  "approval": {
+    "path": "approvals/mars-climate-orbiter-001-preview-approved.json"
+  },
+  "output": {
+    "path": "rendered/mars-climate-orbiter-001-{mode}.mp4"
+  }
 }
