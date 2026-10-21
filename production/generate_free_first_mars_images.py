@@ -33,16 +33,22 @@ def main() -> int:
         )
         generative = None
         if args.allow_generative_fallback:
-            generative = CloudflareImageProvider(
-                account_id=os.environ.get("CLOUDFLARE_ACCOUNT_ID", "").strip(),
-                api_token=os.environ.get("CLOUDFLARE_API_TOKEN", "").strip(),
-                model=os.environ.get(
-                    "IMAGE_MODEL",
-                    "@cf/stabilityai/stable-diffusion-xl-base-1.0",
-                ),
-                quota_ledger=args.output_dir / "usage.json",
-                max_requests_per_day=args.max_requests,
-            )
+            account_id = os.environ.get("CLOUDFLARE_ACCOUNT_ID", "").strip()
+            api_token = os.environ.get("CLOUDFLARE_API_TOKEN", "").strip()
+            # Do not block the free factual path because optional fallback
+            # credentials are absent. If NASA fails, the policy will fail
+            # closed with an explicit message.
+            if account_id and api_token:
+                generative = CloudflareImageProvider(
+                    account_id=account_id,
+                    api_token=api_token,
+                    model=os.environ.get(
+                        "IMAGE_MODEL",
+                        "@cf/stabilityai/stable-diffusion-xl-base-1.0",
+                    ),
+                    quota_ledger=args.output_dir / "usage.json",
+                    max_requests_per_day=args.max_requests,
+                )
 
         provider = FreeFirstImageProvider(
             factual_provider=factual,
