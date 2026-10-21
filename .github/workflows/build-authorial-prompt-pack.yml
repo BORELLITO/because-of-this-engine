@@ -1,0 +1,35 @@
+name: Build authorial prompt pack
+
+on:
+  workflow_dispatch:
+    inputs:
+      manifest:
+        description: "Manifest path"
+        required: true
+        default: "examples/mars-climate-orbiter-authorial-manifest-v1.json"
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build prompt pack
+        run: |
+          python production/build_authorial_prompt_pack.py \
+            --manifest "${{ inputs.manifest }}" \
+            --output production/authorial-prompt-pack.json
+
+      - name: Upload prompt pack
+        uses: actions/upload-artifact@v4
+        with:
+          name: authorial-prompt-pack
+          path: production/authorial-prompt-pack.json
+          if-no-files-found: error
