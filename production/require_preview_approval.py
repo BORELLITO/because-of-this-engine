@@ -19,12 +19,18 @@ def manifest_hash(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def asset_fingerprint(manifest: dict, episode_dir: Path) -> str:
+def input_fingerprint(manifest: dict, episode_dir: Path) -> str:
     digest = hashlib.sha256()
     for scene in manifest.get("scenes", []):
         image = resolve_inside(episode_dir, scene.get("image"))
         digest.update(str(scene.get("scene_id")).encode("utf-8"))
         digest.update(hashlib.sha256(image.read_bytes()).digest())
+    for section, key in (("audio", "path"), ("captions", "path")):
+        spec = manifest.get(section)
+        if isinstance(spec, dict) and spec.get(key):
+            path = resolve_inside(episode_dir, spec[key])
+            digest.update(section.encode("utf-8"))
+            digest.update(hashlib.sha256(path.read_bytes()).digest())
     return digest.hexdigest()
 
 
@@ -54,9 +60,9 @@ def require_approval(manifest_path: Path) -> dict:
         raise ApprovalError("Approval video_id does not match the manifest.")
     if data.get("preview_manifest_sha256") != manifest_hash(manifest_path):
         raise ApprovalError("Approval was created for a different manifest version.")
-    expected_assets = asset_fingerprint(manifest, episode_dir)
-    if data.get("preview_assets_sha256") != expected_assets:
-        raise ApprovalError("Approval was created for different image assets.")
+    expected_inputs = input_fingerprint(manifest, episode_dir)
+    if data.get("preview_inputs_sha256") != expected_inputs:
+        raise ApprovalError("Approval was created for different episode inputs.")
     output_spec = manifest.get("output")
     if not isinstance(output_spec, dict) or not output_spec.get("path"):
         raise ApprovalError("Manifest output.path is required for approval.")
