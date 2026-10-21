@@ -32,6 +32,9 @@ jobs:
         env:
           IMAGE_PROVIDER: nasa
         run: python production/generate_mars_images.py --provider nasa --scene "${{ inputs.scene }}" --max-requests 6
+      - name: Install FFmpeg for motion assembly
+        if: ${{ inputs.scene == 'ALL' }}
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg
       - name: Assemble motion source when all scenes are ready
         if: ${{ inputs.scene == 'ALL' }}
         run: python production/build_mars_visual_ai.py
