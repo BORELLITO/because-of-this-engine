@@ -41,18 +41,29 @@ class AuthorialReleaseTests(unittest.TestCase):
             root = Path(temp)
             manifest = root / "manifest.json"
             approval = root / "approval.json"
+            image = root / "S01.png"
+            image.write_bytes(b"image")
+            preview = root / "preview.mp4"
+            preview.write_bytes(b"preview")
             manifest.write_text(
                 json.dumps({
                     "video_id": "demo",
+                    "scenes": [{"scene_id": "S01", "image": "S01.png"}],
+                    "output": {"path": "{mode}.mp4"},
                     "approval": {"path": "approval.json"},
                 }),
                 encoding="utf-8",
             )
+            asset_digest = hashlib.sha256()
+            asset_digest.update(b"S01")
+            asset_digest.update(hashlib.sha256(image.read_bytes()).digest())
             approval.write_text(
                 json.dumps({
                     "approved": True,
                     "video_id": "demo",
                     "preview_manifest_sha256": hashlib.sha256(manifest.read_bytes()).hexdigest(),
+                    "preview_assets_sha256": asset_digest.hexdigest(),
+                    "preview_output_sha256": hashlib.sha256(preview.read_bytes()).hexdigest(),
                     "reviewer": "Borelli",
                     "approved_at": "2026-10-21T12:00:00-03:00",
                 }),
