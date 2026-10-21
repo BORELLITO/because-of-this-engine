@@ -14,13 +14,15 @@ import random
 import subprocess
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 ROOT = Path(__file__).resolve().parent
 FRAMES = ROOT / "frames"
 OUT = ROOT / "mars-climate-orbiter-visual-draft.mp4"
 WIDTH, HEIGHT = 1080, 1920
 FPS = 30
+FONT_BOLD_PATH = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+FONT_REGULAR_PATH = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 
 SCENES = [
     ("01-trajectory", 8, "trajectory"),
@@ -87,59 +89,120 @@ def spacecraft(draw: ImageDraw.ImageDraw, center: tuple[int, int], scale: float 
     draw.rectangle((cx + int(130 * scale), cy - int(55 * scale), cx + int(190 * scale), cy - int(5 * scale)), fill=(28, 65, 100), outline=(130, 170, 200), width=max(1, int(2 * scale)))
 
 
+def font(size: int, bold: bool = True) -> ImageFont.FreeTypeFont:
+    return ImageFont.truetype(FONT_BOLD_PATH if bold else FONT_REGULAR_PATH, size)
+
+
+def text_center(draw: ImageDraw.ImageDraw, xy: tuple[int, int], value: str, size: int, fill: tuple[int, int, int], bold: bool = True) -> None:
+    draw.text(xy, value, font=font(size, bold), fill=fill, anchor="mm")
+
+
+def arrow(draw: ImageDraw.ImageDraw, start: tuple[int, int], end: tuple[int, int], fill: tuple[int, int, int], width: int = 7) -> None:
+    draw.line((*start, *end), fill=fill, width=width)
+    dx, dy = end[0] - start[0], end[1] - start[1]
+    length = max(1.0, math.hypot(dx, dy))
+    ux, uy = dx / length, dy / length
+    px, py = -uy, ux
+    size = 24
+    tip = end
+    left = (int(end[0] - ux * size + px * size * 0.55), int(end[1] - uy * size + py * size * 0.55))
+    right = (int(end[0] - ux * size - px * size * 0.55), int(end[1] - uy * size - py * size * 0.55))
+    draw.polygon([tip, left, right], fill=fill)
+
+
+def mars(draw: ImageDraw.ImageDraw, center: tuple[int, int], radius: int, glow: bool = True) -> None:
+    if glow:
+        # The glow is intentionally restrained: it reads as atmosphere, not an explosion.
+        pass
+    cx, cy = center
+    draw.ellipse((cx - radius, cy - radius, cx + radius, cy + radius), fill=(178, 56, 28), outline=(230, 130, 60), width=5)
+    draw.arc((cx - radius + 22, cy - radius + 12, cx + radius - 22, cy + radius - 12), 205, 330, fill=(228, 142, 74), width=5)
+
+
+def earth(draw: ImageDraw.ImageDraw, center: tuple[int, int], radius: int) -> None:
+    cx, cy = center
+    draw.ellipse((cx - radius, cy - radius, cx + radius, cy + radius), fill=(46, 113, 177), outline=(135, 207, 240), width=5)
+    draw.arc((cx - radius + 12, cy - radius + 20, cx + radius - 12, cy + radius - 10), 20, 175, fill=(116, 188, 127), width=12)
+
+
+def antenna(draw: ImageDraw.ImageDraw, center: tuple[int, int], scale: float = 1.0) -> None:
+    cx, cy = center
+    draw.arc((cx - int(75 * scale), cy - int(75 * scale), cx + int(75 * scale), cy + int(75 * scale)), 200, 340, fill=(178, 188, 202), width=max(3, int(6 * scale)))
+    draw.line((cx, cy + int(15 * scale), cx, cy + int(105 * scale)), fill=(178, 188, 202), width=max(3, int(6 * scale)))
+    draw.line((cx - int(44 * scale), cy + int(105 * scale), cx + int(44 * scale), cy + int(105 * scale)), fill=(178, 188, 202), width=max(3, int(6 * scale)))
+
+
 def render_scene(kind: str, seed: int) -> Image.Image:
     image = base_frame(seed)
     draw = ImageDraw.Draw(image)
 
     if kind == "trajectory":
-        glow_circle(image, (220, 620), 100, (75, 145, 224), 160)
-        glow_circle(image, (850, 1160), 260, (176, 56, 28), 180)
-        draw = ImageDraw.Draw(image)
-        draw.arc((120, 560, 960, 1380), 205, 335, fill=(220, 138, 62), width=5)
-        spacecraft(draw, (500, 850), 0.9)
-        draw.line((300, 745, 710, 1060), fill=(242, 187, 75), width=3)
+        # The hook must show the actual relationship: Earth -> spacecraft -> Mars.
+        glow_circle(image, (155, 610), 125, (45, 110, 190), 130)
+        glow_circle(image, (850, 1180), 285, (176, 56, 28), 155)
+        earth(draw, (155, 610), 105)
+        mars(draw, (850, 1180), 285)
+        spacecraft(draw, (495, 850), 0.78)
+        arrow(draw, (265, 680), (420, 810), (242, 187, 75), 6)
+        # Communication line disappears at the hook's payoff.
+        draw.line((265, 570, 410, 650), fill=(90, 192, 234), width=5)
+        draw.line((410, 650, 540, 730), fill=(90, 192, 234), width=5)
+        draw.line((540, 730, 650, 800), fill=(90, 192, 234), width=5)
+        draw.line((650, 800, 735, 875), fill=(90, 192, 234), width=5)
+        draw.line((735, 875, 705, 850), fill=(224, 70, 54), width=8)
+        draw.line((705, 820, 735, 850), fill=(224, 70, 54), width=8)
+        draw.line((735, 820, 705, 850), fill=(224, 70, 54), width=8)
     elif kind == "units":
-        draw.rounded_rectangle((100, 550, 980, 920), radius=30, fill=(14, 24, 42), outline=(224, 132, 54), width=5)
-        draw.rounded_rectangle((100, 1000, 980, 1370), radius=30, fill=(14, 24, 42), outline=(80, 150, 220), width=5)
-        draw.line((540, 920, 540, 1000), fill=(235, 174, 70), width=8)
-        draw.line((520, 950, 560, 950), fill=(235, 174, 70), width=8)
-        # abstract unit symbols, not factual UI
-        draw.text((250, 680), "lb·s", fill=(245, 195, 105), anchor="mm")
-        draw.text((810, 680), "GROUND", fill=(178, 188, 202), anchor="mm")
-        draw.text((250, 1130), "N·s", fill=(105, 184, 240), anchor="mm")
-        draw.text((810, 1130), "NAVIGATION", fill=(178, 188, 202), anchor="mm")
+        # Make the mismatch legible without pretending to show a NASA screen.
+        draw.rounded_rectangle((80, 420, 1000, 840), radius=34, fill=(28, 22, 24), outline=(224, 132, 54), width=6)
+        draw.rounded_rectangle((80, 1040, 1000, 1460), radius=34, fill=(15, 27, 45), outline=(80, 150, 220), width=6)
+        text_center(draw, (540, 535), "GROUND SOFTWARE", 42, (245, 195, 105))
+        text_center(draw, (540, 675), "POUND-SECONDS", 58, (250, 220, 160))
+        text_center(draw, (540, 1155), "NAVIGATION", 42, (125, 201, 245))
+        text_center(draw, (540, 1295), "NEWTON-SECONDS", 58, (160, 220, 250))
+        draw.line((540, 840, 540, 1040), fill=(235, 174, 70), width=8)
+        draw.line((500, 930, 580, 930), fill=(235, 174, 70), width=8)
+        draw.line((540, 910, 540, 950), fill=(235, 174, 70), width=8)
     elif kind == "navigation":
-        draw.rounded_rectangle((80, 390, 1000, 1460), radius=30, fill=(8, 15, 30), outline=(50, 88, 128), width=4)
+        draw.rounded_rectangle((70, 330, 1010, 1470), radius=34, fill=(8, 15, 30), outline=(50, 88, 128), width=4)
         for x in range(150, 980, 110):
-            draw.line((x, 500, x, 1360), fill=(20, 45, 70), width=2)
-        for y in range(520, 1400, 110):
+            draw.line((x, 470, x, 1350), fill=(20, 45, 70), width=2)
+        for y in range(500, 1400, 110):
             draw.line((120, y, 960, y), fill=(20, 45, 70), width=2)
-        points = [(140, 1250), (300, 1170), (420, 1120), (560, 990), (700, 850), (850, 710), (940, 550)]
-        draw.line(points, fill=(90, 192, 234), width=8)
-        draw.line([(140, 1250), (300, 1190), (420, 1205), (560, 1140), (700, 980), (850, 890), (940, 1020)], fill=(224, 132, 54), width=7)
-        draw.ellipse((810, 820, 870, 880), fill=(224, 70, 54))
+        start = (150, 1270)
+        intended = [(150, 1270), (310, 1190), (455, 1120), (600, 950), (750, 760), (910, 535)]
+        actual = [(150, 1270), (310, 1210), (455, 1230), (600, 1180), (750, 1040), (900, 1145)]
+        draw.line(intended, fill=(90, 192, 234), width=8)
+        draw.line(actual, fill=(224, 132, 54), width=8)
+        draw.ellipse((870, 1115, 930, 1175), fill=(224, 70, 54))
+        text_center(draw, (350, 420), "EXPECTED PATH", 30, (120, 205, 245))
+        text_center(draw, (730, 1335), "REAL PATH", 30, (245, 170, 95))
     elif kind == "approach":
-        glow_circle(image, (540, 1150), 430, (165, 48, 24), 210)
-        draw = ImageDraw.Draw(image)
-        draw.arc((30, 640, 1050, 1680), 190, 350, fill=(234, 151, 66), width=7)
-        spacecraft(draw, (560, 590), 0.65)
-        draw.line((560, 680, 540, 820), fill=(234, 151, 66), width=5)
+        glow_circle(image, (540, 1250), 430, (165, 48, 24), 190)
+        mars(draw, (540, 1250), 430)
+        # A narrow, visibly dangerous corridor makes "too close" concrete.
+        draw.arc((55, 780, 1025, 1740), 205, 335, fill=(234, 151, 66), width=8)
+        draw.arc((160, 850, 920, 1610), 205, 335, fill=(224, 70, 54), width=6)
+        spacecraft(draw, (540, 580), 0.62)
+        arrow(draw, (540, 690), (540, 875), (234, 151, 66), 7)
     elif kind == "signal":
-        spacecraft(draw, (540, 710), 0.55)
-        for i in range(4):
-            draw.arc((260 - i * 18, 430 - i * 18, 820 + i * 36, 990 + i * 36), 210, 330, fill=(90, 192, 234), width=5)
-        draw.line((140, 1330, 940, 1330), fill=(80, 100, 130), width=5)
-        for x in (250, 440, 630, 820):
-            draw.line((x, 1310, x, 1350), fill=(80, 100, 130), width=5)
-        draw.line((140, 1330, 580, 1330), fill=(224, 132, 54), width=7)
+        antenna(draw, (190, 1080), 1.0)
+        spacecraft(draw, (800, 650), 0.52)
+        # Broken link + unresolved warning markers, rather than a generic radio arc.
+        draw.line((300, 980, 510, 850), fill=(90, 192, 234), width=6)
+        draw.line((510, 850, 620, 790), fill=(224, 70, 54), width=6)
+        draw.line((620, 790, 680, 755), fill=(224, 70, 54), width=6)
+        for x, y in ((380, 720), (505, 640), (635, 560)):
+            draw.ellipse((x - 22, y - 22, x + 22, y + 22), outline=(238, 175, 75), width=6)
+            draw.line((x - 12, y - 12, x + 12, y + 12), fill=(238, 175, 75), width=5)
+            draw.line((x + 12, y - 12, x - 12, y + 12), fill=(238, 175, 75), width=5)
     elif kind == "consequence":
-        glow_circle(image, (540, 920), 300, (178, 56, 28), 180)
-        draw = ImageDraw.Draw(image)
-        draw.arc((150, 520, 930, 1320), 190, 350, fill=(230, 160, 70), width=6)
-        spacecraft(draw, (540, 460), 0.45)
-        draw.line((540, 560, 540, 760), fill=(224, 132, 54), width=7)
-        # Keep the consequence frame clean. The causal lesson is carried by
-        # the narration and caption layer; an empty card would add noise.
+        glow_circle(image, (540, 1100), 315, (178, 56, 28), 170)
+        mars(draw, (540, 1100), 315)
+        spacecraft(draw, (540, 520), 0.45)
+        draw.line((540, 600, 540, 820), fill=(224, 132, 54), width=7)
+        draw.line((510, 760, 570, 820), fill=(224, 70, 54), width=7)
+        draw.line((570, 760, 510, 820), fill=(224, 70, 54), width=7)
     return image.convert("RGB")
 
 
@@ -149,15 +212,8 @@ def main() -> None:
         frame_path = FRAMES / f"scene-{index:02d}.png"
         render_scene(kind, 100 + index).save(frame_path, quality=95)
 
-    # Build a silent edit with gentle crossfades. The voice is added later.
+    # Build a single canonical concat file; the voice and captions are added later.
     concat = FRAMES / "concat.txt"
-    with concat.open("w", encoding="utf-8") as handle:
-        for name, duration, _kind in SCENES:
-            handle.write(f"file '{(FRAMES / ('scene-' + name[:2] + '.png')).as_posix()}'\n")
-            handle.write(f"duration {duration}\n")
-        handle.write(f"file '{(FRAMES / 'scene-06.png').as_posix()}'\n")
-
-    # Correct concat paths (scene names above are semantic labels).
     concat_lines = []
     for index, (_name, duration, _kind) in enumerate(SCENES, start=1):
         concat_lines.extend([f"file '{(FRAMES / f'scene-{index:02d}.png').as_posix()}'", f"duration {duration}"])
@@ -174,3 +230,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
