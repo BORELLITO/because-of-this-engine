@@ -10,6 +10,8 @@ The file must contain:
   "approved": true,
   "video_id": "episode-id",
   "preview_manifest_sha256": "sha256-of-the-exact-manifest",
+  "preview_assets_sha256": "sha256-of-the-reviewed-assets",
+  "preview_output_sha256": "sha256-of-the-reviewed-preview-mp4",
   "reviewer": "name",
   "approved_at": "2026-10-21T12:00:00-03:00"
 }
@@ -17,3 +19,6 @@ The file must contain:
 
 Do not create this file before a human reviews the preview on a mobile screen.
 The approval is bound to the exact manifest hash; any change invalidates it.
+
+The asset and preview hashes prevent a later image replacement from silently
+invalidating the approval.
