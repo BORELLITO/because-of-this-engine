@@ -109,6 +109,8 @@ def main() -> int:
         if result.returncode == 0:
             manifest["status"] = "TECH_VALIDATED"
             manifest["gates"]["export_valid"] = True
+            manifest["gates"]["mix_valid"] = True
+            manifest["gates"]["sync_valid"] = True
             log_event(log_path, episode_id=episode_id, stage="VALIDATE", status="TECH_VALIDATED", report=str(report_path))
         else:
             manifest["status"] = "FAILED"
@@ -126,3 +128,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
