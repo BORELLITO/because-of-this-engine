@@ -49,6 +49,23 @@ Each image must have a sidecar JSON containing provider/model/prompt/style and g
 
 All referenced files must remain inside the episode directory. Missing files, invalid audio, missing captions, unsafe zoom values, path escapes, duplicate scene IDs, or invalid durations stop the render before FFmpeg starts.
 
+## Asset ingestion
+
+For images generated outside GitHub, use the provenance-safe ingest command:
+
+```bash
+python production/ingest_authorial_asset.py \
+  --source /path/to/generated.png \
+  --output examples/assets/S01.png \
+  --scene-id S01 \
+  --provider manual-approved-imagegen \
+  --model unknown \
+  --prompt-pack examples/mars-climate-orbiter-authorial-prompt-pack-v1.json
+```
+
+The command copies the existing image and creates the required JSON sidecar. It
+does not generate, improve, or silently replace visual content.
+
 ## Validation
 
 The renderer checks the input contract. After FFmpeg completes, run:
