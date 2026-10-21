@@ -75,7 +75,7 @@ class CloudflareImageProvider:
             raise ImageGenerationError(f"Output already exists: {output_path}. Use --overwrite deliberately.")
         day, request_number = self._reserve_request()
         endpoint = "https://api.cloudflare.com/client/v4/accounts/{}/ai/run/{}".format(
-            urllib.parse.quote(self.account_id, safe=""), urllib.parse.quote(self.model, safe="")
+            urllib.parse.quote(self.account_id, safe=""), urllib.parse.quote(self.model, safe="@/")
         )
         body = json.dumps({
             "prompt": request.prompt,
