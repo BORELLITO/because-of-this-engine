@@ -19,6 +19,15 @@ def manifest_hash(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def asset_fingerprint(manifest: dict, episode_dir: Path) -> str:
+    digest = hashlib.sha256()
+    for scene in manifest.get("scenes", []):
+        image = resolve_inside(episode_dir, scene.get("image"))
+        digest.update(str(scene.get("scene_id")).encode("utf-8"))
+        digest.update(hashlib.sha256(image.read_bytes()).digest())
+    return digest.hexdigest()
+
+
 def resolve_inside(base: Path, relative: str) -> Path:
     if not isinstance(relative, str) or not relative.strip():
         raise ApprovalError("Approval path must be a non-empty string.")
@@ -45,6 +54,17 @@ def require_approval(manifest_path: Path) -> dict:
         raise ApprovalError("Approval video_id does not match the manifest.")
     if data.get("preview_manifest_sha256") != manifest_hash(manifest_path):
         raise ApprovalError("Approval was created for a different manifest version.")
+    expected_assets = asset_fingerprint(manifest, episode_dir)
+    if data.get("preview_assets_sha256") != expected_assets:
+        raise ApprovalError("Approval was created for different image assets.")
+    output_spec = manifest.get("output")
+    if not isinstance(output_spec, dict) or not output_spec.get("path"):
+        raise ApprovalError("Manifest output.path is required for approval.")
+    preview_output = resolve_inside(episode_dir, str(output_spec["path"]).format(mode="preview"))
+    if not preview_output.is_file():
+        raise ApprovalError("The approved preview output is missing.")
+    if data.get("preview_output_sha256") != manifest_hash(preview_output):
+        raise ApprovalError("Approval was created for a different preview output.")
     reviewer = data.get("reviewer")
     approved_at = data.get("approved_at")
     if not isinstance(reviewer, str) or not reviewer.strip():
