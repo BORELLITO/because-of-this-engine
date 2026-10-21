@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "profile": "reference_adapted_v1",
+  "purpose": "Adapt the reference video's clarity and card hierarchy to BECAUSE OF THIS without copying surface elements.",
+  "core_rules": [
+    {
+      "when": "new_story_beat",
+      "trigger": "semantic change in narration",
+      "action": "start a new visual card",
+      "default_transition": "hard_cut",
+      "why": "reset attention without decorative effects"
+    },
+    {
+      "when": "visual_must_fit_vertical_frame",
+      "trigger": "source aspect ratio or quality requires it",
+      "action": "use a controlled background treatment or full-screen crop",
+      "why": "preserve the source while filling 9:16"
+    },
+    {
+      "when": "viewer_needs_context",
+      "trigger": "place, object, or story phase is introduced",
+      "action": "use one short top story card",
+      "why": "provide a fast editorial locator without duplicating captions"
+    },
+    {
+      "when": "fact_or_evidence_requires_reading",
+      "trigger": "document, number, or technical explanation",
+      "action": "keep motion static",
+      "why": "protect legibility and credibility"
+    },
+    {
+      "when": "tension_or_detail_increases",
+      "trigger": "narration explicitly escalates or reveals",
+      "action": "allow a smooth low-intensity push-in",
+      "why": "make motion serve the story"
+    }
+  ],
+  "defaults": {
+    "motion": "static",
+    "zoom_range": [1.0, 1.04],
+    "transition": "hard_cut",
+    "caption_position": "lower_safe_zone",
+    "caption_lines": 2,
+    "caption_language": "en-US",
+    "caption_highlights": ["names", "numbers", "consequences", "reveals"],
+    "audio_priority": "voice_first"
+  },
+  "hard_locks": {
+    "originality": true,
+    "do_not_copy_reference_text": true,
+    "do_not_copy_reference_assets": true,
+    "do_not_modify_other_engines": ["Capta Pronto", "Corte Fino", "Publisher", "Creator"]
+  }
+}
+
