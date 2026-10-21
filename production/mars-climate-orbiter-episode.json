@@ -16,7 +16,7 @@
     "sha256": "def113ab4132fad9fcd4acb05296c2a4972b81e7a67e40add01e2bd33e1700ca",
     "transcript_sha256": "def113ab4132fad9fcd4acb05296c2a4972b81e7a67e40add01e2bd33e1700ca",
     "language": "en-US",
-    "facts_status": "SOURCES_ATTACHED",
+    "facts_status": "VERIFIED_REGISTERED",
     "claims_path": "mars-climate-orbiter-claims.json"
   },
   "audio": {
@@ -98,8 +98,9 @@
     "audio_valid": true,
     "visual_valid": true,
     "sync_valid": true,
-    "mix_valid": false,
+    "mix_valid": true,
     "export_valid": true,
     "editorial_approved": false
   }
 }
+
