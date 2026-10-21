@@ -27,8 +27,8 @@
     "duration_authority": "audio_file"
   },
   "visual": {
-    "source_motion": "mars-climate-orbiter-visual-draft-v2.mp4",
-    "source_motion_sha256": "fcbea551ae3382b1dbedd8b3d10b703b977e8c71d9b1b74b936d9b2f04f29c22",
+    "source_motion": "mars-climate-orbiter-visual-draft-v4.mp4",
+    "source_motion_sha256": "6f48e9c1814ef6ae5067c9be46991a45da1f60f52a6e58f046fe71aef9275b38",
     "width": 1080,
     "height": 1920,
     "fps": 30,
@@ -51,7 +51,7 @@
   },
   "output": {
     "path": "mars-climate-orbiter-final.mp4",
-    "sha256": "c54fc2bd9db68aa1a6b223a0c29fa3a23384904d872f54ca80fccf45178cfb25",
+    "sha256": "46000220bcc18eeee996a85d5a8674deb9f428d66f3d241df30e92acad3c866d",
     "approval_hash": null
   },
   "scenes": [
