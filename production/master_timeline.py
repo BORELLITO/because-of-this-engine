@@ -70,25 +70,75 @@ def _resolve_inside(base: Path, relative: str) -> Path:
     return path
 
 
+def _optional_file_record(base: Path, relative: str | None) -> dict[str, Any] | None:
+    """Return a hash record only when an optional source exists inside the episode."""
+    if not isinstance(relative, str) or not relative.strip():
+        return None
+    candidate = (base / relative).resolve()
+    if candidate != base and base not in candidate.parents:
+        raise MasterTimelineError(f"Optional path escapes episode directory: {relative}")
+    if not candidate.is_file():
+        return None
+    return {"path": relative, "sha256": sha256_file(candidate)}
+
+
 def source_fingerprint(manifest_path: Path, manifest: dict[str, Any]) -> dict[str, Any]:
+    """Hash every render input plus the engine code that produced the contract.
+
+    Including the engine files prevents a contract created by an older renderer
+    from being reused after a rendering or validation rule changes.
+    """
     episode_dir = manifest_path.parent.resolve()
-    audio_path = _resolve_inside(episode_dir, manifest["audio"]["path"])
-    caption_path = _resolve_inside(episode_dir, manifest["captions"]["path"])
+    audio_relative = manifest["audio"]["path"]
+    captions_relative = manifest["captions"]["path"]
+    audio_path = _resolve_inside(episode_dir, audio_relative)
+    caption_path = _resolve_inside(episode_dir, captions_relative)
     images = []
+    provenance = []
     for scene in manifest["scenes"]:
-        image_path = _resolve_inside(episode_dir, scene["image"])
+        image_relative = scene["image"]
+        image_path = _resolve_inside(episode_dir, image_relative)
         images.append({
             "scene_id": scene["scene_id"],
-            "path": scene["image"],
+            "path": image_relative,
             "sha256": sha256_file(image_path),
         })
+        sidecar = _optional_file_record(episode_dir, f"{image_relative}.json")
+        if sidecar:
+            sidecar["scene_id"] = scene["scene_id"]
+            sidecar["kind"] = "image_provenance"
+            provenance.append(sidecar)
+    audio_sidecar = _optional_file_record(episode_dir, f"{audio_relative}.json")
+    if audio_sidecar:
+        audio_sidecar["kind"] = "audio_provenance"
+        provenance.append(audio_sidecar)
+    script = _optional_file_record(
+        episode_dir,
+        (manifest.get("script") or {}).get("path"),
+    )
+    repository_root = manifest_path.parent.parent.resolve()
+    engine = []
+    for relative in (
+        "production/master_timeline.py",
+        "production/render_authorial_episode.py",
+        "production/motion_engine.py",
+        "production/validate_authorial_episode.py",
+    ):
+        candidate = (repository_root / relative).resolve()
+        if candidate.is_file() and repository_root in candidate.parents:
+            engine.append({"path": relative, "sha256": sha256_file(candidate)})
     sources = {
         "manifest_sha256": sha256_file(manifest_path),
         "audio_sha256": sha256_file(audio_path),
         "captions_sha256": sha256_file(caption_path),
         "images": images,
+        "provenance": provenance,
+        "script": script,
+        "engine": engine,
     }
-    canonical = json.dumps(sources, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
+    canonical = json.dumps(
+        sources, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+    ).encode()
     sources["source_fingerprint"] = hashlib.sha256(canonical).hexdigest()
     return sources
 
