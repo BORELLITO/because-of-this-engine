@@ -1,13 +1,10 @@
 #!/usr/bin/env python3
-"""Release validator for the generic authorial episode pipeline.
-
-This validator is intentionally independent from the legacy Mars validator.
-It proves that a rendered output is complete, not merely that FFmpeg exited 0.
-"""
+"""Fail-closed release validator for the independent authorial pipeline."""
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import subprocess
@@ -15,6 +12,11 @@ import sys
 import wave
 from pathlib import Path
 from typing import Any
+
+try:  # works both as `python -m` and as the documented script path
+    from production.motion_engine import normalize_motion, normalize_transition, validate_motion_sequence
+except ModuleNotFoundError:  # pragma: no cover - script execution fallback
+    from motion_engine import normalize_motion, normalize_transition, validate_motion_sequence
 
 SIZES = {"preview": (1080, 1920), "final": (2160, 3840)}
 
@@ -64,8 +66,7 @@ def caption_events(path: Path) -> list[tuple[float, float, str]]:
         fields = line.split(",", 9)
         if len(fields) < 10:
             raise ReleaseValidationError(f"Malformed ASS Dialogue line: {raw}")
-        start = parse_ass_time(fields[1])
-        end = parse_ass_time(fields[2])
+        start, end = parse_ass_time(fields[1]), parse_ass_time(fields[2])
         if end <= start:
             raise ReleaseValidationError(f"Caption interval is not positive: {raw}")
         events.append((start, end, fields[9]))
@@ -123,18 +124,21 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         raise ReleaseValidationError("Could not read render manifest.") from exc
-
     if manifest.get("schema_version") != "1.1":
         raise ReleaseValidationError("Authorial release manifests must use schema_version 1.1.")
     video_id = manifest.get("video_id")
     if not isinstance(video_id, str) or not video_id.strip():
         raise ReleaseValidationError("Manifest requires video_id.")
-
     scenes = manifest.get("scenes")
     if not isinstance(scenes, list) or not scenes:
         raise ReleaseValidationError("Manifest requires at least one scene.")
     scene_ids: set[str] = set()
     scene_report: list[dict[str, Any]] = []
+    normalized_scene_contract: list[dict[str, Any]] = []
+    previous_motion: str | None = None
+    default_transition = manifest.get("transition_duration", 0.33)
+    if not isinstance(default_transition, (int, float)) or default_transition < 0:
+        raise ReleaseValidationError("transition_duration must be non-negative.")
     for index, scene in enumerate(scenes, start=1):
         if not isinstance(scene, dict):
             raise ReleaseValidationError(f"Scene {index} is not an object.")
@@ -150,19 +154,54 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
         duration = scene.get("duration")
         if not isinstance(duration, (int, float)) or duration <= 0:
             raise ReleaseValidationError(f"Scene {scene_id} has an invalid duration.")
-        scene_report.append({"scene_id": scene_id, "image": str(image), "duration": float(duration), **image_info})
+        try:
+            motion = normalize_motion(scene, index - 1, previous_motion)
+            transition_spec = normalize_transition(scene, float(default_transition), index - 1)
+        except ValueError as exc:
+            raise ReleaseValidationError(str(exc)) from exc
+        if index == 1:
+            transition_spec = {"type": "hard_cut", "duration": 0.0}
+        elif not isinstance(scene.get("transition"), dict):
+            transition_spec = {"type": "crossfade", "duration": float(default_transition)}
+        previous_motion = motion["type"]
+        normalized_scene_contract.append({"scene_id": scene_id, "motion": motion, "transition": transition_spec})
+        scene_report.append({
+            "scene_id": scene_id,
+            "image": str(image),
+            "duration": float(duration),
+            "motion": motion,
+            "transition": transition_spec,
+            **image_info,
+        })
 
     audio_spec = manifest.get("audio")
     if not isinstance(audio_spec, dict):
         raise ReleaseValidationError("Manifest requires an audio object.")
     audio = require_file(episode_dir, audio_spec.get("path"), "Audio")
     audio_seconds = audio_duration(audio)
-    transition = manifest.get("transition_duration", 0.33)
-    if not isinstance(transition, (int, float)) or transition < 0:
-        raise ReleaseValidationError("transition_duration must be non-negative.")
-    scene_seconds = sum(float(scene["duration"]) for scene in scenes) - float(transition) * (len(scenes) - 1)
+    transition_durations = [item["transition"]["duration"] for item in normalized_scene_contract[1:]]
+    scene_seconds = sum(float(scene["duration"]) for scene in scenes) - sum(transition_durations)
     if scene_seconds <= 0 or abs(scene_seconds - audio_seconds) > 0.75:
         raise ReleaseValidationError("Scene timeline does not match narration duration.")
+    motion_warnings = validate_motion_sequence(normalized_scene_contract)
+    if motion_warnings:
+        raise ReleaseValidationError("Motion variety gate failed: " + "; ".join(motion_warnings))
+
+    if manifest.get("require_visual_plan", False):
+        required_plan_fields = ("story_beat", "visual_intent", "image_type", "emotion")
+        for scene in scenes:
+            missing = [field for field in required_plan_fields if not str(scene.get(field, "")).strip()]
+            if missing:
+                raise ReleaseValidationError(f"Scene {scene.get('scene_id', '?')} is missing visual plan fields: {', '.join(missing)}")
+
+    if manifest.get("require_music", False):
+        music = manifest.get("music")
+        if not isinstance(music, dict):
+            raise ReleaseValidationError("Music is required but no music contract was provided.")
+        if not music.get("path") or not music.get("license") or music.get("commercial_use") is not True:
+            raise ReleaseValidationError("Music requires path, license and explicit commercial_use=true.")
+        if music.get("license") == "creative_commons" and not music.get("attribution"):
+            raise ReleaseValidationError("Creative Commons music requires attribution text.")
 
     captions = manifest.get("captions")
     if not isinstance(captions, dict):
@@ -186,8 +225,7 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
     output_spec = manifest.get("output")
     if not isinstance(output_spec, dict) or not output_spec.get("path"):
         raise ReleaseValidationError("Manifest requires output.path.")
-    output_relative = str(output_spec["path"]).format(mode=mode)
-    output = require_file(episode_dir, output_relative, "Rendered output")
+    output = require_file(episode_dir, str(output_spec["path"]).format(mode=mode), "Rendered output")
     metadata = ffprobe(output)
     streams = metadata.get("streams", [])
     video = next((stream for stream in streams if stream.get("codec_type") == "video"), None)
@@ -199,8 +237,7 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
         raise ReleaseValidationError(f"Output must be {expected_width}x{expected_height}.")
     if video.get("codec_name") != "h264" or sound.get("codec_name") != "aac":
         raise ReleaseValidationError("Output codecs must be H.264 video and AAC audio.")
-    video_seconds = float(video.get("duration") or 0)
-    sound_seconds = float(sound.get("duration") or 0)
+    video_seconds, sound_seconds = float(video.get("duration") or 0), float(sound.get("duration") or 0)
     if video_seconds <= 0 or sound_seconds <= 0 or abs(sound_seconds - audio_seconds) > 0.6 or abs(video_seconds - sound_seconds) > 0.6:
         raise ReleaseValidationError("Rendered duration does not match narration.")
     return {
@@ -211,6 +248,7 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
         "audio_duration_seconds": round(audio_seconds, 3),
         "scene_timeline_seconds": round(scene_seconds, 3),
         "caption_events": len(events),
+        "motion_warnings": motion_warnings,
         "output": str(output),
         "output_duration_seconds": round(sound_seconds, 3),
         "resolution": [expected_width, expected_height],
