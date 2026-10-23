@@ -28,13 +28,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install FFmpeg with retries
-        env:
-          DEBIAN_FRONTEND: noninteractive
+      - name: Install static FFmpeg with retries
         run: |
-          sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=60 update
-          sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=60 install -y --no-install-recommends ffmpeg
-          ffmpeg -version | head -n 1
+          set -euo pipefail
+          mkdir -p "${RUNNER_TEMP}/ffmpeg"
+          curl --fail --location --retry 5 --retry-all-errors \
+            --connect-timeout 20 --max-time 240 \
+            "https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz" \
+            --output "${RUNNER_TEMP}/ffmpeg.tar.xz"
+          tar -xJf "${RUNNER_TEMP}/ffmpeg.tar.xz" -C "${RUNNER_TEMP}/ffmpeg"
+          FFMPEG_DIR="$(find "${RUNNER_TEMP}/ffmpeg" -maxdepth 1 -mindepth 1 -type d -name 'ffmpeg-*static' -print -quit)"
+          test -n "${FFMPEG_DIR}"
+          echo "${FFMPEG_DIR}" >> "${GITHUB_PATH}"
+          "${FFMPEG_DIR}/ffmpeg" -version | head -n 1
 
       - name: Setup Python
         uses: actions/setup-python@v5
