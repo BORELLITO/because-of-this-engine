@@ -84,6 +84,18 @@ def main() -> int:
             "ALIGNMENT_OK": timeline["alignment_mode"] in {
                 "forced_alignment", "hybrid_alignment", "phrase_level_manual_reviewed"
             },
+            "ALIGNMENT_DECLARED_HONESTLY": (
+                timeline["alignment_mode"] != "phrase_level_manual_reviewed"
+                or (
+                    timeline["word_level_available"] is False
+                    and bool(timeline.get("alignment_source"))
+                    and timeline.get("alignment_confidence") == "reviewed_phrase_level"
+                )
+            ),
+            "SCENE_TIMELINE_OK": abs(
+                timeline["scene_timeline_duration_seconds"]
+                - timeline["audio_duration_seconds"]
+            ) <= 0.10,
             "CAPTION_SYNC_OK": timeline["caption_end_gap_seconds"] <= float(
                 manifest["captions"].get("end_tolerance_seconds", 0.10)
             ),
@@ -120,6 +132,8 @@ def main() -> int:
             "alignment_mode": timeline["alignment_mode"],
             "post_render_sync": media["post_render_sync"],
             "stale_artifact_check": report["stale_artifact_check"],
+            "scene_timeline": "PASS" if gates["SCENE_TIMELINE_OK"] else "FAIL",
+            "alignment_honesty": "PASS" if gates["ALIGNMENT_DECLARED_HONESTLY"] else "FAIL",
             "report": str(report_path),
         }, ensure_ascii=False, indent=2))
         return 0
