@@ -86,7 +86,7 @@ def main() -> int:
     try:
         preflight = run_stage(
             "PREFLIGHT",
-            [sys.executable, str(ROOT / "preflight_authorial_episode.py"), "--manifest", str(manifest_path)],
+            [sys.executable, str(ROOT / "preflight_authorial_episode.py"), "--manifest", str(manifest_path), "--mode", args.mode],
             log_path,
         )
         if preflight != 0:
