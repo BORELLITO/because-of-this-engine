@@ -96,7 +96,11 @@ jobs:
             --mode "${{ inputs.mode }}" \
             --report "examples/rendered/master-timeline-${{ inputs.mode }}.json"
 
-      - name: Upload validated package
+      - name: Upload validated package (best effort)
+        # GitHub artifact storage can be temporarily quota-blocked even after all
+        # quality gates pass. Delivery availability must not rewrite a valid render
+        # as a content/synchronization failure.
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: because-of-this-${{ inputs.mode }}-validated-package
@@ -106,3 +110,4 @@ jobs:
             ${{ inputs.manifest }}
             examples/assets/*.json
           if-no-files-found: error
+          retention-days: 1
