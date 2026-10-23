@@ -41,10 +41,12 @@ the validator reports that limitation instead of claiming false precision.
 The hard-lock implementation is committed and the integrated GitHub Actions
 preview run completed successfully through all content gates:
 
-- run: https://github.com/BORELLITO/because-of-this-engine/actions/runs/40002494516
+- run: https://github.com/BORELLITO/because-of-this-engine/actions/runs/40003795996
 - result: `MASTER_TIMELINE_VALIDATED`
 - post-render sync: `PASS`
 - stale-artifact check: `PASS`
+- scene timeline: `PASS`
+- alignment honesty: `PASS`
 - caption events: 18
 - narration duration: 58.36 s
 
