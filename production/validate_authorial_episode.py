@@ -221,14 +221,20 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
             if missing:
                 raise ReleaseValidationError(f"Scene {scene.get('scene_id', '?')} is missing visual plan fields: {', '.join(missing)}")
 
-    if manifest.get("require_music", False):
-        music = manifest.get("music")
+    music = manifest.get("music")
+    if manifest.get("require_music", False) is True and mode == "final" and not isinstance(music, dict):
+        raise ReleaseValidationError("Music is required but no music contract was provided.")
+    if music is not None:
         if not isinstance(music, dict):
-            raise ReleaseValidationError("Music is required but no music contract was provided.")
+            raise ReleaseValidationError("Music contract must be an object.")
         if not music.get("path") or not music.get("license") or music.get("commercial_use") is not True:
             raise ReleaseValidationError("Music requires path, license and explicit commercial_use=true.")
         if music.get("license") == "creative_commons" and not music.get("attribution"):
             raise ReleaseValidationError("Creative Commons music requires attribution text.")
+        require_file(episode_dir, music.get("path"), "Licensed music")
+        volume = music.get("volume", 0.08)
+        if isinstance(volume, bool) or not isinstance(volume, (int, float)) or not 0 <= volume <= 0.25:
+            raise ReleaseValidationError("Music volume must be between 0 and 0.25.")
 
     captions = manifest.get("captions")
     if not isinstance(captions, dict):
