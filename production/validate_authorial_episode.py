@@ -231,6 +231,8 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
             raise ReleaseValidationError("Music requires path, license and explicit commercial_use=true.")
         if music.get("license") == "creative_commons" and not music.get("attribution"):
             raise ReleaseValidationError("Creative Commons music requires attribution text.")
+        if music.get("attribution_required") is True and not music.get("attribution"):
+            raise ReleaseValidationError("This music license requires attribution text.")
         require_file(episode_dir, music.get("path"), "Licensed music")
         volume = music.get("volume", 0.08)
         if isinstance(volume, bool) or not isinstance(volume, (int, float)) or not 0 <= volume <= 0.25:
