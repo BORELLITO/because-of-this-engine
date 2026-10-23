@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "episode_id": "mars-climate-orbiter-001",
+  "status": "attached",
+  "policy": "Track downloaded from the official YouTube Studio Audio Library. Verify the selected license and attribution state in Studio before publication.",
+  "tracks": [
+    {
+      "role": "suspense_bed",
+      "path": "assets/music/youtube-audio-library.mp3",
+      "title": "Ancient Civilisations",
+      "artist": "Alex Jones / Xander Jones",
+      "source_url": "https://support.google.com/youtube/answer/3376882",
+      "license": "youtube_audio_library",
+      "commercial_use": true,
+      "usage_scope": "YouTube videos",
+      "attribution_required": false,
+      "attribution_text": "",
+      "content_id_risk": "downloaded_from_official_audio_library",
+      "duration_seconds": 202.475102,
+      "sha256": "625ac2ac24cebd13ba628a8bfc05bd8237313c72d64b3be905596e260c5dc2f1",
+      "downloaded_at_utc": "2026-10-23T19:02:00Z"
+    }
+  ]
+}
