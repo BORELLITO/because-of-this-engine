@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "S03",
+  "provider": "built-in image generation",
+  "model": "unknown",
+  "asset_role": "authorial editorial reconstruction",
+  "prompt": "Premium 2D/2.5D painted editorial cartoon of a late-1990s mission-control reconstruction for the Mars Climate Orbiter unit-mismatch reveal; dark blue, burnt orange, clean lower-third negative space; no text, logos or fake evidence.",
+  "style": "because-of-this-cinematic-cartoon-v1",
+  "source_asset_sha256": "cef7edddf2e74c4d25deb9497f7a6fe4bb34205999e320b4f0ae919e99097e6e",
+  "dimensions": [512, 912],
+  "generated_at_utc": "2026-10-23T00:00:00Z",
+  "disclosure": "AI-assisted illustration/reconstruction; not documentary evidence",
+  "notes": "Stylized v2 replacement for the corrupt S03.png; captions remain in the edit layer."
+}
