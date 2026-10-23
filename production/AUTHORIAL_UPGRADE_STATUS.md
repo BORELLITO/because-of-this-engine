@@ -24,9 +24,10 @@ provenance sidecars under `examples/assets/`.
 
 ## Honest release status
 
-The engine upgrade is implemented and unit-tested. A new episode is **not**
-declared final until the asset-complete preview passes the validator, is watched
-on a phone, and receives a fresh hash-bound approval file.
+The engine upgrade is implemented and unit-tested. The corrupt Mars S03 asset
+was replaced by a provenance-recorded authorial reconstruction. A new episode is
+**not** declared final until the asset-complete preview passes the validator, is
+watched on a phone, and receives a fresh hash-bound approval file.
 
 See `production/DOCUMENTARY_ENGINE_AUDIT_2026-10-23.md` for the complete audit,
 priority matrix, residual risks and operational checklist.
