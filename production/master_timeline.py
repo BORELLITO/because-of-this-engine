@@ -256,9 +256,15 @@ def build_timeline(
                 transition = float(manifest.get("transition_duration", 0.0))
         input_start = scene_cursor
         input_end = input_start + scene_duration
-        output_end = input_end
+        transition_out = 0.0
         if index < len(scenes) - 1:
-            output_end -= transition
+            next_scene = scenes[index + 1]
+            next_transition_spec = next_scene.get("transition")
+            if isinstance(next_transition_spec, dict):
+                transition_out = float(next_transition_spec.get("duration", 0.0))
+            else:
+                transition_out = float(manifest.get("transition_duration", 0.0))
+        output_end = input_end - transition_out
         scene_report.append({
             "scene_id": scene.get("scene_id", f"S{index + 1:02d}"),
             "input_start_seconds": round(input_start, 6),
@@ -268,6 +274,7 @@ def build_timeline(
             "end_frame": _frame_index(output_end, fps),
             "duration_seconds": round(scene_duration, 6),
             "transition_in_seconds": round(transition, 6),
+            "transition_out_seconds": round(transition_out, 6),
             "motion_type": (scene.get("motion") or {}).get("type"),
             "visual_function": scene.get("visual_function"),
             "visual_match": scene.get("visual_match"),
