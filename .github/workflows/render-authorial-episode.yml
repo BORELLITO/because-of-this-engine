@@ -48,6 +48,11 @@ jobs:
             --manifest "${{ inputs.manifest }}" \
             --validate-only
 
+      - name: Run non-destructive asset preflight
+        run: |
+          python production/preflight_authorial_episode.py \
+            --manifest "${{ inputs.manifest }}"
+
       - name: Require preview approval for final
         if: inputs.mode == 'final'
         run: |
