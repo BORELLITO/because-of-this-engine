@@ -1,6 +1,6 @@
-# Narrador independente para Shorts — Gemini TTS
+# BECAUSE OF THIS — Motor independente de documentários verticais
 
-Este é um módulo independente de geração de narração para o novo projeto faceless Shorts. Ele não acessa, modifica nem depende dos motores do CaptaPronto, Corte Fino, Publisher ou Creator.
+Este repositório reúne o motor faceless independente para documentários verticais do canal. Ele mantém o fluxo isolado de roteiro, narração, visuais autorais, montagem, captions, controle de licença e validação; não depende dos motores CaptaPronto, Corte Fino, Publisher ou Creator.
 
 ## Escolha inicial
 
@@ -77,49 +77,47 @@ python -m unittest discover -s tests -v
 
 Os testes usam uma resposta simulada apenas para verificar formato WAV, registro de proveniência, proteção contra sobrescrita e rejeição de saídas inválidas. Eles não comprovam a qualidade da voz nem consomem créditos.
 
-## Estado deste pacote
+## Pipeline oficial do episódio — schema 1.1
 
-O adaptador CLI está implementado e validado com testes simulados. A primeira
-narração real do episódio Mars Climate Orbiter foi coletada no AI Studio e está
-em `production/mars-climate-orbiter-charon.wav`, com provenance sidecar. O CLI
-de API continua separado: ele exige uma chave própria e não foi usado para
-inventar ou substituir o áudio já aprovado.
+A narração Charon aprovada do episódio Mars Climate Orbiter está em
+`examples/assets/mars-climate-orbiter-charon.wav`. O fluxo oficial é
+`run_episode.py`: preflight, render, validação e registro de execução.
 
-Para validar o episódio completo localmente:
+Rodar a suíte sem chave de API:
 
 ```bash
-python production/validate_episode.py \
-  --manifest production/mars-climate-orbiter-episode.json \
-  --report production/mars-climate-orbiter-validation.json
+python -m unittest discover -s tests -v
 ```
 
-O validator é fail-closed: verifica hash do roteiro, vínculo do transcript com
-as captions, claims, provenance do WAV 24 kHz mono, áudio não silencioso,
-streams, resolução, codecs, duração, loudness, true peak e hash do MP4.
-`TECH_VALIDATED` não significa `APPROVED`; a aprovação humana no celular ainda
-é um estado separado.
-
-Para renderizar e validar com lock, atualização de hashes e relatório de
-execução:
+Gerar e validar o preview:
 
 ```bash
 python production/run_episode.py \
-  --manifest production/mars-climate-orbiter-episode.json \
-  --render
+  --manifest examples/mars-climate-orbiter-render-manifest-v1.json \
+  --mode preview --render
 ```
 
-O render lê os caminhos do manifest, escreve primeiro em arquivos temporários,
-usa um bed determinístico e o orchestrator registra eventos em
-`production/run-log.jsonl` (arquivo local ignorado pelo Git).
+Depois de assistir ao preview no celular e criar a aprovação vinculada aos
+hashes exatos de entrada e saída, o final pode ser solicitado com
+`--mode final --render`. Sem aprovação válida, o render final é bloqueado.
 
-A camada visual atual é a revisão v4 do rascunho editorial: cada cena foi
-reconstruída para corresponder a um beat narrativo específico, sem textos
-decorativos duplicando as captions. O visual continua sendo uma reconstrução
-editorial original, não uma alegação de telemetria ou imagem de arquivo da NASA.
+### Música e licença
 
-## Integração futura no motor novo
+O renderer aceita uma faixa licenciada declarada no manifest. A voz permanece
+em primeiro plano; a trilha recebe ganho baixo, ducking automático durante a
+narração e limitação de pico. O ganho configurável é limitado a 0,25 e o padrão
+é 0,08.
 
-Este CLI funciona como primeiro teste isolado. Quando o repositório **do novo motor independente** estiver disponível, a função `generate_narration()` pode ser chamada pela etapa de áudio desse motor. Antes disso, precisamos validar uma amostra real, conferir pronúncia/duração e decidir se essa voz será a identidade recorrente do canal.
+O manifest de exemplo já exige música no final (`require_music: true`), mas
+não inclui uma faixa. Por isso, o preview pode ser renderizado sem trilha e o
+final permanece bloqueado até uma faixa ser selecionada e documentada. Registre
+arquivo, fonte, licença, permissão comercial, atribuição quando exigida e risco
+de Content ID em `examples/music-license-register.template.json`. Não presuma
+que uma faixa é segura só por ser chamada de royalty-free.
+
+O pipeline verifica codec, resolução, duração, sincronismo de captions,
+proveniência e movimento. A aprovação perceptual no celular continua sendo
+necessária; validação técnica não garante qualidade editorial nem monetização.
 
 ## Gerador visual gratuito e profissional
 
@@ -185,7 +183,7 @@ nova versão visual.
 
 O renderer autoral aplica movimento individual por cena, easing suave, zoom
 conservador e transições discretas. Ele não usa shake, glitch ou randomização
-não auditável. Narração, captions e mix continuam sendo validados na etapa final.
+não auditável. Quando a faixa licenciada é declarada, a mixagem voice-first e os gates de licença são aplicados no release final.
 
 Também existe um workflow manual em GitHub Actions. No celular: abra o
 repositório, entre em **Actions**, escolha **Generate free Mars visuals**, toque
