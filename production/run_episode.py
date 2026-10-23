@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Run and validate one independent episode with a lock and JSONL audit log."""
+"""Single orchestrator for the independent authorial episode pipeline.
+
+The previous version routed episodes through the legacy Mars renderer. This
+orchestrator now points only to the generic authorial renderer/validator so the
+repository has one operational path and one set of gates.
+"""
 
 from __future__ import annotations
 
@@ -13,9 +18,9 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parent
-DEFAULT_MANIFEST = ROOT / "mars-climate-orbiter-episode.json"
+REPOSITORY = ROOT.parent
+DEFAULT_MANIFEST = REPOSITORY / "examples/mars-climate-orbiter-render-manifest-v1.json"
 
 
 def sha256(path: Path) -> str:
@@ -24,12 +29,6 @@ def sha256(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
-
-
-def write_json_atomic(path: Path, value: dict) -> None:
-    temp = path.with_name(f".{path.name}.part")
-    temp.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    os.replace(temp, path)
 
 
 def log_event(path: Path, **event: object) -> None:
@@ -47,87 +46,86 @@ def acquire_lock(path: Path) -> None:
         handle.write(json.dumps({"pid": os.getpid(), "created_at_utc": datetime.now(timezone.utc).isoformat()}))
 
 
+def run_stage(stage: str, command: list[str], log_path: Path) -> int:
+    log_event(log_path, stage=stage, status="STARTED", command=command)
+    result = subprocess.run(command, check=False, timeout=1800)
+    log_event(log_path, stage=stage, status="COMPLETED" if result.returncode == 0 else "FAILED", returncode=result.returncode)
+    return result.returncode
+
+
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Run and validate one independent BECAUSE OF THIS episode.")
+    parser = argparse.ArgumentParser(description="Run one independent authorial episode.")
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
-    parser.add_argument("--render", action="store_true", help="Run the local FFmpeg render before validation.")
+    parser.add_argument("--mode", choices=("preview", "final"), default="preview")
+    parser.add_argument("--render", action="store_true", help="Render after preflight; without this flag only preflight runs.")
     args = parser.parse_args()
 
     manifest_path = args.manifest.resolve()
-    manifest_dir = manifest_path.parent
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    episode_id = manifest["episode_id"]
-    lock_path = manifest_path.with_suffix(".lock")
-    log_path = manifest_dir / "run-log.jsonl"
-    started = time.monotonic()
+    if not manifest_path.is_file():
+        print(f"Manifest not found: {manifest_path}", file=sys.stderr)
+        return 2
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        print(f"Could not read manifest: {exc}", file=sys.stderr)
+        return 2
+    if manifest.get("schema_version") != "1.1":
+        print("Legacy manifest rejected: use the independent authorial schema 1.1 path.", file=sys.stderr)
+        return 2
 
+    episode_dir = manifest_path.parent
+    lock_path = manifest_path.with_suffix(".run.lock")
+    log_path = episode_dir / "authorial-run-log.jsonl"
+    started = time.monotonic()
     try:
         acquire_lock(lock_path)
     except RuntimeError as exc:
         print(str(exc), file=sys.stderr)
         return 2
-    log_event(log_path, run_id=f"{episode_id}-{int(time.time())}", episode_id=episode_id, stage="RUN", status="STARTED", render=args.render)
+    log_event(log_path, stage="RUN", status="STARTED", manifest=str(manifest_path), mode=args.mode, render=args.render)
     try:
-        if args.render:
-            if manifest.get("approval_status") == "APPROVED":
-                log_event(log_path, episode_id=episode_id, stage="RENDER", status="BLOCKED", reason="approved_episode")
-                print("Refusing to overwrite an APPROVED episode. Create a new version.", file=sys.stderr)
-                return 2
-            try:
-                subprocess.run([
-                    sys.executable,
-                    str(ROOT / "render_mars_final.py"),
-                    "--manifest",
-                    str(manifest_path),
-                ], check=True, timeout=1200)
-                output = (manifest_dir / manifest["output"]["path"]).resolve()
-                music = (manifest_dir / manifest["mix"]["music_path"]).resolve()
-                visual = (manifest_dir / manifest["visual"]["source_motion"]).resolve()
-                manifest["output"]["sha256"] = sha256(output)
-                manifest["mix"]["music_sha256"] = sha256(music)
-                manifest["visual"]["source_motion_sha256"] = sha256(visual)
-                manifest["status"] = "RENDERED"
-                manifest["gates"]["export_valid"] = False
-                write_json_atomic(manifest_path, manifest)
-                log_event(log_path, episode_id=episode_id, stage="RENDER", status="COMPLETED", output_sha256=manifest["output"]["sha256"])
-            except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired) as exc:
-                manifest["status"] = "FAILED"
-                manifest["gates"]["export_valid"] = False
-                write_json_atomic(manifest_path, manifest)
-                log_event(log_path, episode_id=episode_id, stage="RENDER", status="FAILED", error_class=type(exc).__name__, reason=str(exc))
-                print(f"Render failed: {exc}", file=sys.stderr)
-                return 1
-
-        report_path = manifest_dir / f"{episode_id}-validation.json"
-        result = subprocess.run([
-            sys.executable,
-            str(ROOT / "validate_episode.py"),
-            "--manifest",
-            str(manifest_path),
-            "--report",
-            str(report_path),
-        ], check=False, timeout=600)
-        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-        if result.returncode == 0:
-            manifest["status"] = "TECH_VALIDATED"
-            manifest["gates"]["export_valid"] = True
-            manifest["gates"]["mix_valid"] = True
-            manifest["gates"]["sync_valid"] = True
-            log_event(log_path, episode_id=episode_id, stage="VALIDATE", status="TECH_VALIDATED", report=str(report_path))
-        else:
-            manifest["status"] = "FAILED"
-            manifest["gates"]["export_valid"] = False
-            log_event(log_path, episode_id=episode_id, stage="VALIDATE", status="FAILED", report=str(report_path))
-        write_json_atomic(manifest_path, manifest)
-        return result.returncode
+        preflight = run_stage(
+            "PREFLIGHT",
+            [sys.executable, str(ROOT / "preflight_authorial_episode.py"), "--manifest", str(manifest_path)],
+            log_path,
+        )
+        if preflight != 0:
+            return preflight
+        if not args.render:
+            print("PREFLIGHT_READY")
+            return 0
+        if args.mode == "final":
+            approval = run_stage(
+                "APPROVAL",
+                [sys.executable, str(ROOT / "require_preview_approval.py"), "--manifest", str(manifest_path)],
+                log_path,
+            )
+            if approval != 0:
+                return approval
+        rendered = run_stage(
+            "RENDER",
+            [sys.executable, str(ROOT / "render_authorial_episode.py"), "--manifest", str(manifest_path), "--mode", args.mode],
+            log_path,
+        )
+        if rendered != 0:
+            return rendered
+        report_path = episode_dir / f"authorial-validation-{args.mode}.json"
+        validated = run_stage(
+            "VALIDATE",
+            [sys.executable, str(ROOT / "validate_authorial_episode.py"), "--manifest", str(manifest_path), "--mode", args.mode, "--report", str(report_path)],
+            log_path,
+        )
+        if validated == 0:
+            output = episode_dir / str(manifest["output"]["path"]).format(mode=args.mode)
+            log_event(log_path, stage="PACKAGE", status="VALIDATED", output=str(output), output_sha256=sha256(output))
+        return validated
     finally:
         try:
             lock_path.unlink()
         except FileNotFoundError:
             pass
-        log_event(log_path, episode_id=episode_id, stage="RUN", status="FINISHED", duration_ms=round((time.monotonic() - started) * 1000, 1))
+        log_event(log_path, stage="RUN", status="FINISHED", duration_ms=round((time.monotonic() - started) * 1000, 1))
 
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
