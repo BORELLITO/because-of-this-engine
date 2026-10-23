@@ -37,11 +37,17 @@ class MasterTimelineTests(unittest.TestCase):
                 "path": "assets/captions.ass",
                 "sync_policy": "narration_locked",
                 "alignment_mode": "phrase_level_manual_reviewed",
+                "alignment_source": "test_reviewed_phrase_alignment",
                 "word_level_available": False,
                 "sync_tolerance_frames": 3,
                 "end_tolerance_seconds": 0.1,
             },
-            "scenes": [{"scene_id": "S01", "image": "assets/scene.bin"}],
+            "transition_duration": 0.0,
+            "scenes": [{
+                "scene_id": "S01",
+                "image": "assets/scene.bin",
+                "duration": 1.0,
+            }],
         }
         manifest_path = root / "manifest.json"
         manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
