@@ -8,16 +8,84 @@
     "path": "assets/mars-climate-orbiter-charon.wav"
   },
   "scenes": [
-    {"scene_id": "S01", "image": "assets/S01.png", "duration": 4.6, "zoom_end": 1.08},
-    {"scene_id": "S02", "image": "assets/S02.png", "duration": 4.6, "zoom_end": 1.07},
-    {"scene_id": "S03", "image": "assets/S03.png", "duration": 4.6, "zoom_end": 1.08},
-    {"scene_id": "S04", "image": "assets/S04.png", "duration": 4.6, "zoom_end": 1.07},
-    {"scene_id": "S05", "image": "assets/S05.png", "duration": 4.6, "zoom_end": 1.07},
-    {"scene_id": "S06", "image": "assets/S06.png", "duration": 4.6, "zoom_end": 1.06}
+    {
+      "scene_id": "S01",
+      "image": "assets/S01.png",
+      "duration": 12.0,
+      "zoom_end": 1.06,
+      "story_beat": "establish the mission and the long journey to Mars",
+      "visual_intent": "give scale and orientation before the failure is revealed",
+      "image_type": "establishing mission illustration",
+      "emotion": "curiosity with restrained tension",
+      "motion": {"type": "slow_pull_out", "easing": "smoothstep", "intensity": 1.0, "focus": {"x": 0.50, "y": 0.48}}
+    },
+    {
+      "scene_id": "S02",
+      "image": "assets/S02.png",
+      "duration": 11.8,
+      "zoom_end": 1.05,
+      "story_beat": "the spacecraft travels toward Mars while two teams work with different units",
+      "visual_intent": "make the hidden systems mismatch legible without inventing a document",
+      "image_type": "editorial reconstruction of spacecraft and trajectory",
+      "emotion": "unease",
+      "motion": {"type": "pan_right", "easing": "smoothstep", "intensity": 0.8, "focus": {"x": 0.50, "y": 0.50}}
+    },
+    {
+      "scene_id": "S03",
+      "image": "assets/S03.png",
+      "duration": 8.0,
+      "zoom_end": 1.05,
+      "story_beat": "one team used metric units and another used imperial units",
+      "visual_intent": "direct attention to the human process where the mismatch could have been caught",
+      "image_type": "stylized mission-control reconstruction",
+      "emotion": "quiet dread",
+      "motion": {"type": "focus_reframe", "easing": "smoothstep", "intensity": 0.9, "focus": {"x": 0.52, "y": 0.46}}
+    },
+    {
+      "scene_id": "S04",
+      "image": "assets/S04.png",
+      "duration": 9.4,
+      "zoom_end": 1.08,
+      "story_beat": "a tiny conversion mistake sends the spacecraft toward the wrong trajectory",
+      "visual_intent": "turn the abstract unit error into a visible point of no return",
+      "image_type": "editorial trajectory reconstruction",
+      "emotion": "danger and acceleration",
+      "motion": {"type": "slow_push_in", "easing": "ease_in_out", "intensity": 1.0, "focus": {"x": 0.55, "y": 0.50}}
+    },
+    {
+      "scene_id": "S05",
+      "image": "assets/S05.png",
+      "duration": 9.2,
+      "zoom_end": 1.04,
+      "story_beat": "the team does not catch the problem before the spacecraft reaches Mars",
+      "visual_intent": "hold on the silence and absence of an alarm",
+      "image_type": "aftermath reconstruction",
+      "emotion": "isolation and dread",
+      "motion": {"type": "static_hold", "easing": "smoothstep", "intensity": 0.6, "focus": {"x": 0.50, "y": 0.50}}
+    },
+    {
+      "scene_id": "S06",
+      "image": "assets/S06.png",
+      "duration": 9.61,
+      "zoom_end": 1.06,
+      "story_beat": "the Mars Climate Orbiter vanishes before entering orbit",
+      "visual_intent": "deliver the consequence and leave a clean final image for the payoff",
+      "image_type": "consequence illustration",
+      "emotion": "finality",
+      "motion": {"type": "slow_pull_out", "easing": "smoothstep", "intensity": 0.8, "focus": {"x": 0.48, "y": 0.50}}
+    }
   ],
   "transition_duration": 0.33,
+  "transition_policy": "crossfade by default; future episodes may set a contextual transition per scene",
   "require_captions": true,
   "require_provenance": true,
+  "require_visual_plan": true,
+  "require_music": false,
+  "disclosure": {
+    "visuals": "AI-assisted editorial illustrations/reconstructions; no generated frame is presented as documentary evidence",
+    "realistic_synthetic_media_review_required": true,
+    "youtube_ai_use_field": "review at upload"
+  },
   "captions": {
     "path": "assets/mars-climate-orbiter-captions.ass"
   },
