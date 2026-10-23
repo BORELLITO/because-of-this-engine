@@ -41,7 +41,7 @@ the validator reports that limitation instead of claiming false precision.
 The hard-lock implementation is committed and the integrated GitHub Actions
 preview run completed successfully through all content gates:
 
-- run: https://github.com/BORELLITO/because-of-this-engine/actions/runs/40003795996
+- run: https://github.com/BORELLITO/because-of-this-engine/actions/runs/40004775549
 - result: `MASTER_TIMELINE_VALIDATED`
 - post-render sync: `PASS`
 - stale-artifact check: `PASS`
@@ -51,7 +51,8 @@ preview run completed successfully through all content gates:
 - narration duration: 58.36 s
 
 The run's artifact upload was best-effort and was externally blocked by GitHub
-Actions storage quota; this does not invalidate the render or its gates. A fresh
+Actions storage quota; this does not invalidate the render or its gates. The same
+run now publishes a validation receipt in the GitHub job summary, and a fresh
 artifact can be uploaded automatically after quota recalculation.
 
 A new episode is **not** declared final until the asset-complete preview passes
