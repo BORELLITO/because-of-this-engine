@@ -178,5 +178,18 @@
   },
   "output": {
     "path": "rendered/mars-climate-orbiter-001-{mode}.mp4"
+  },
+  "music": {
+    "path": "assets/music/youtube-audio-library.mp3",
+    "title": "Ancient Civilisations",
+    "artist": "Alex Jones / Xander Jones",
+    "source_url": "https://support.google.com/youtube/answer/3376882",
+    "license": "youtube_audio_library",
+    "commercial_use": true,
+    "usage_scope": "YouTube videos",
+    "attribution_required": false,
+    "attribution": "",
+    "volume": 0.08,
+    "duration_seconds": 202.475102
   }
 }
