@@ -1,6 +1,24 @@
 {
   "schema_version": "1.1",
   "video_id": "mars-climate-orbiter-001",
+  "timeline_version": "1.0",
+  "fps": 25,
+  "timebase": "1/25",
+  "audio_sample_rate": 24000,
+  "content": {
+    "content_type": "science_documentary",
+    "story_type": "mission_failure_investigation",
+    "emotional_tone": "restrained_suspense",
+    "factuality_level": "real_event_with_editorial_reconstruction",
+    "visual_style": "cinematic_authorial_editorial",
+    "pacing_profile": "measured_escalation"
+  },
+  "style_profile": {
+    "color_profile": "midnight-charcoal-with-rust-and-muted-cyan",
+    "motion_profile": "progressive_push_in_and_focus_reframe",
+    "transition_profile": "short_crossfade",
+    "caption_style": "symmetric_lower_third"
+  },
   "script": {
     "path": "mars_climate_orbiter.txt"
   },
@@ -15,6 +33,8 @@
       "zoom_end": 1.12,
       "story_beat": "establish the mission and the long journey to Mars",
       "visual_intent": "give scale and orientation before the failure is revealed",
+      "visual_function": "establishing",
+      "visual_match": "HIGH_MATCH",
       "image_type": "establishing mission illustration",
       "emotion": "curiosity with restrained tension",
       "motion": {"type": "slow_push_in", "easing": "smoothstep", "intensity": 1.0, "focus": {"x": 0.50, "y": 0.48}}
@@ -26,6 +46,8 @@
       "zoom_end": 1.11,
       "story_beat": "the spacecraft travels toward Mars while two teams work with different units",
       "visual_intent": "make the hidden systems mismatch legible without inventing a document",
+      "visual_function": "contextual",
+      "visual_match": "HIGH_MATCH",
       "image_type": "editorial reconstruction of spacecraft and trajectory",
       "emotion": "unease",
       "motion": {"type": "focus_reframe", "easing": "smoothstep", "intensity": 0.9, "focus": {"x": 0.50, "y": 0.50}}
@@ -37,6 +59,8 @@
       "zoom_end": 1.12,
       "story_beat": "one team used metric units and another used imperial units",
       "visual_intent": "direct attention to the human process where the mismatch could have been caught",
+      "visual_function": "evidence",
+      "visual_match": "HIGH_MATCH",
       "image_type": "stylized mission-control reconstruction",
       "emotion": "quiet dread",
       "motion": {"type": "slow_push_in", "easing": "smoothstep", "intensity": 0.95, "focus": {"x": 0.52, "y": 0.46}}
@@ -48,6 +72,8 @@
       "zoom_end": 1.14,
       "story_beat": "a tiny conversion mistake sends the spacecraft toward the wrong trajectory",
       "visual_intent": "turn the abstract unit error into a visible point of no return",
+      "visual_function": "reveal",
+      "visual_match": "HIGH_MATCH",
       "image_type": "editorial trajectory reconstruction",
       "emotion": "danger and acceleration",
       "motion": {"type": "focus_reframe", "easing": "ease_in_out", "intensity": 1.0, "focus": {"x": 0.55, "y": 0.50}}
@@ -59,6 +85,8 @@
       "zoom_end": 1.11,
       "story_beat": "the team does not catch the problem before the spacecraft reaches Mars",
       "visual_intent": "hold on the silence and absence of an alarm",
+      "visual_function": "emotional",
+      "visual_match": "HIGH_MATCH",
       "image_type": "aftermath reconstruction",
       "emotion": "isolation and dread",
       "motion": {"type": "slow_push_in", "easing": "smoothstep", "intensity": 0.85, "focus": {"x": 0.50, "y": 0.50}}
@@ -70,6 +98,8 @@
       "zoom_end": 1.13,
       "story_beat": "the Mars Climate Orbiter vanishes before entering orbit",
       "visual_intent": "deliver the consequence and leave a clean final image for the payoff",
+      "visual_function": "payoff",
+      "visual_match": "HIGH_MATCH",
       "image_type": "consequence illustration",
       "emotion": "finality",
       "motion": {"type": "focus_reframe", "easing": "smoothstep", "intensity": 0.95, "focus": {"x": 0.48, "y": 0.50}}
@@ -89,6 +119,9 @@
   "captions": {
     "path": "assets/mars-climate-orbiter-captions.ass",
     "sync_policy": "narration_locked",
+    "alignment_mode": "phrase_level_manual_reviewed",
+    "word_level_available": false,
+    "sync_tolerance_frames": 3,
     "end_tolerance_seconds": 0.10
   },
   "approval": {
