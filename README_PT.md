@@ -183,10 +183,9 @@ Esse comando falha se faltar qualquer cena ou sidecar. Só depois de aprovar os
 frames no celular o arquivo deve ser apontado no manifest do episódio como uma
 nova versão visual.
 
-O assembler aplica o perfil `senior-editor-v1`: movimento individual por cena,
-easing suave, zoom conservador e hard cuts como padrão. Ele não usa pacote de
-transições, glitch ou efeitos decorativos. O motion source é silencioso por
-design; narração, captions e mix continuam sendo validados na etapa final.
+O renderer autoral aplica movimento individual por cena, easing suave, zoom
+conservador e transições discretas. Ele não usa shake, glitch ou randomização
+não auditável. Narração, captions e mix continuam sendo validados na etapa final.
 
 Também existe um workflow manual em GitHub Actions. No celular: abra o
 repositório, entre em **Actions**, escolha **Generate free Mars visuals**, toque
