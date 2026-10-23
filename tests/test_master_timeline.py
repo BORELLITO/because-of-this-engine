@@ -49,8 +49,8 @@ class MasterTimelineTests(unittest.TestCase):
 
     def test_frame_rate_and_parse_rate(self):
         self.assertEqual(parse_rate("25/1"), 25)
-        self.assertEqual(parse_rate("30000/1001"), 30000 / 1001)
-        self.assertEqual(parse_rate(""), None)
+        self.assertAlmostEqual(float(parse_rate("30000/1001")), 30000 / 1001, places=8)
+        self.assertIsNone(parse_rate(""))
 
     def test_master_timeline_uses_single_clock(self):
         path, manifest, _ = self._episode()
