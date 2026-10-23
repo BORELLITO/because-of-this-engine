@@ -29,7 +29,7 @@
     {
       "scene_id": "S01",
       "image": "assets/S01.png",
-      "duration": 12.0,
+      "duration": 12,
       "zoom_end": 1.12,
       "story_beat": "establish the mission and the long journey to Mars",
       "visual_intent": "give scale and orientation before the failure is revealed",
@@ -37,7 +37,15 @@
       "visual_match": "HIGH_MATCH",
       "image_type": "establishing mission illustration",
       "emotion": "curiosity with restrained tension",
-      "motion": {"type": "slow_push_in", "easing": "smoothstep", "intensity": 1.0, "focus": {"x": 0.50, "y": 0.48}}
+      "motion": {
+        "type": "slow_push_in",
+        "easing": "smoothstep",
+        "intensity": 1,
+        "focus": {
+          "x": 0.5,
+          "y": 0.48
+        }
+      }
     },
     {
       "scene_id": "S02",
@@ -50,12 +58,20 @@
       "visual_match": "HIGH_MATCH",
       "image_type": "editorial reconstruction of spacecraft and trajectory",
       "emotion": "unease",
-      "motion": {"type": "focus_reframe", "easing": "smoothstep", "intensity": 0.9, "focus": {"x": 0.50, "y": 0.50}}
+      "motion": {
+        "type": "focus_reframe",
+        "easing": "smoothstep",
+        "intensity": 0.9,
+        "focus": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
     },
     {
       "scene_id": "S03",
       "image": "assets/S03-repaired-v2.webp",
-      "duration": 8.0,
+      "duration": 8,
       "zoom_end": 1.12,
       "story_beat": "one team used metric units and another used imperial units",
       "visual_intent": "direct attention to the human process where the mismatch could have been caught",
@@ -63,7 +79,15 @@
       "visual_match": "HIGH_MATCH",
       "image_type": "stylized mission-control reconstruction",
       "emotion": "quiet dread",
-      "motion": {"type": "slow_push_in", "easing": "smoothstep", "intensity": 0.95, "focus": {"x": 0.52, "y": 0.46}}
+      "motion": {
+        "type": "slow_push_in",
+        "easing": "smoothstep",
+        "intensity": 0.95,
+        "focus": {
+          "x": 0.52,
+          "y": 0.46
+        }
+      }
     },
     {
       "scene_id": "S04",
@@ -76,7 +100,15 @@
       "visual_match": "HIGH_MATCH",
       "image_type": "editorial trajectory reconstruction",
       "emotion": "danger and acceleration",
-      "motion": {"type": "focus_reframe", "easing": "ease_in_out", "intensity": 1.0, "focus": {"x": 0.55, "y": 0.50}}
+      "motion": {
+        "type": "focus_reframe",
+        "easing": "ease_in_out",
+        "intensity": 1,
+        "focus": {
+          "x": 0.55,
+          "y": 0.5
+        }
+      }
     },
     {
       "scene_id": "S05",
@@ -89,7 +121,15 @@
       "visual_match": "HIGH_MATCH",
       "image_type": "aftermath reconstruction",
       "emotion": "isolation and dread",
-      "motion": {"type": "slow_push_in", "easing": "smoothstep", "intensity": 0.85, "focus": {"x": 0.50, "y": 0.50}}
+      "motion": {
+        "type": "slow_push_in",
+        "easing": "smoothstep",
+        "intensity": 0.85,
+        "focus": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
     },
     {
       "scene_id": "S06",
@@ -102,7 +142,15 @@
       "visual_match": "HIGH_MATCH",
       "image_type": "consequence illustration",
       "emotion": "finality",
-      "motion": {"type": "focus_reframe", "easing": "smoothstep", "intensity": 0.95, "focus": {"x": 0.48, "y": 0.50}}
+      "motion": {
+        "type": "focus_reframe",
+        "easing": "smoothstep",
+        "intensity": 0.95,
+        "focus": {
+          "x": 0.48,
+          "y": 0.5
+        }
+      }
     }
   ],
   "transition_duration": 0.33,
@@ -122,7 +170,8 @@
     "alignment_mode": "phrase_level_manual_reviewed",
     "word_level_available": false,
     "sync_tolerance_frames": 3,
-    "end_tolerance_seconds": 0.10
+    "end_tolerance_seconds": 0.1,
+    "alignment_source": "captions_ass_reviewed_against_narration_master"
   },
   "approval": {
     "path": "approvals/mars-climate-orbiter-001-preview-approved.json"
