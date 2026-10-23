@@ -211,6 +211,15 @@ def build_timeline(
     alignment_mode = captions.get("alignment_mode")
     if alignment_mode not in {"forced_alignment", "hybrid_alignment", "phrase_level_manual_reviewed"}:
         raise MasterTimelineError("Captions must declare a supported alignment_mode.")
+    alignment_source = str(captions.get("alignment_source", "")).strip()
+    word_level_available = bool(captions.get("word_level_available", False))
+    if alignment_mode == "phrase_level_manual_reviewed" and (
+        word_level_available or not alignment_source
+    ):
+        raise MasterTimelineError(
+            "Phrase-level alignment must explicitly declare its reviewed source and "
+            "word_level_available=false."
+        )
     tolerance = int(captions.get("sync_tolerance_frames", SYNC_TOLERANCE_FRAMES_DEFAULT))
     if tolerance < 1 or tolerance > 6:
         raise MasterTimelineError("sync_tolerance_frames must stay between 1 and 6.")
@@ -224,6 +233,51 @@ def build_timeline(
         raise MasterTimelineError(
             f"Caption end gap {end_gap:.3f}s exceeds the locked tolerance {end_tolerance:.3f}s."
         )
+    scene_report = []
+    scene_cursor = 0.0
+    scenes = manifest.get("scenes")
+    if not isinstance(scenes, list) or not scenes:
+        raise MasterTimelineError("The master timeline requires scenes.")
+    for index, scene in enumerate(scenes):
+        try:
+            scene_duration = float(scene["duration"])
+        except (KeyError, TypeError, ValueError) as exc:
+            raise MasterTimelineError(
+                f"Scene {scene.get('scene_id', index + 1)} has no valid duration."
+            ) from exc
+        if scene_duration <= 0:
+            raise MasterTimelineError(f"Scene {scene.get('scene_id', index + 1)} duration must be positive.")
+        transition = 0.0
+        if index > 0:
+            transition_spec = scene.get("transition")
+            if isinstance(transition_spec, dict):
+                transition = float(transition_spec.get("duration", 0.0))
+            else:
+                transition = float(manifest.get("transition_duration", 0.0))
+        input_start = scene_cursor
+        input_end = input_start + scene_duration
+        output_end = input_end
+        if index < len(scenes) - 1:
+            output_end -= transition
+        scene_report.append({
+            "scene_id": scene.get("scene_id", f"S{index + 1:02d}"),
+            "input_start_seconds": round(input_start, 6),
+            "input_end_seconds": round(input_end, 6),
+            "output_end_seconds": round(output_end, 6),
+            "start_frame": _frame_index(input_start, fps),
+            "end_frame": _frame_index(output_end, fps),
+            "duration_seconds": round(scene_duration, 6),
+            "transition_in_seconds": round(transition, 6),
+            "motion_type": (scene.get("motion") or {}).get("type"),
+            "visual_function": scene.get("visual_function"),
+            "visual_match": scene.get("visual_match"),
+        })
+        scene_cursor = output_end
+    if abs(scene_cursor - duration) > 0.10:
+        raise MasterTimelineError(
+            f"Scene timeline {scene_cursor:.3f}s does not match narration {duration:.3f}s."
+        )
+
     event_report = _event_report(caption_events, fps)
     max_quantization = max(
         [item["start_quantization_delta_frames"] for item in event_report]
@@ -239,12 +293,20 @@ def build_timeline(
         "audio_duration_seconds": round(duration, 6),
         "audio_sample_count": int(audio_info["sample_count"]),
         "alignment_mode": alignment_mode,
-        "word_level_available": bool(captions.get("word_level_available", False)),
+        "alignment_source": alignment_source,
+        "alignment_confidence": (
+            "word_level" if word_level_available
+            else "reviewed_phrase_level"
+        ),
+        "word_level_available": word_level_available,
         "word_level_status": (
             "available" if captions.get("word_level_available") else "not_available_phrase_alignment_used"
         ),
         "caption_count": len(caption_events),
         "caption_end_gap_seconds": round(end_gap, 6),
+        "scene_count": len(scene_report),
+        "scene_timeline_duration_seconds": round(scene_cursor, 6),
+        "scenes": scene_report,
         "caption_tolerance_frames": tolerance,
         "captions": event_report,
         "anchors": _anchor_report(caption_events, duration, fps),
