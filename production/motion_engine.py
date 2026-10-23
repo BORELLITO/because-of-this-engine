@@ -146,6 +146,11 @@ def normalize_transition(scene: dict[str, Any], default_duration: float, index: 
     duration = requested.get("duration", 0.0 if transition_type == "hard_cut" else default_duration)
     if not isinstance(duration, (int, float)) or duration < 0:
         raise ValueError(f"Transition duration must be non-negative for scene {scene.get('scene_id', index + 1)}")
+    # FFmpeg's xfade needs a positive interval. A hard cut is represented by
+    # one frame (25 fps), which is perceptually a cut and keeps the timeline
+    # arithmetic honest.
+    if transition_type == "hard_cut" and float(duration) == 0.0:
+        duration = 1.0 / 25.0
     return {"type": transition_type, "duration": float(duration)}
 
 
