@@ -1,30 +1,32 @@
 # Authorial pipeline upgrade status
 
-## Implemented
+## Implemented in the independent engine
 
 - canonical authorial manifest schema `1.1`;
-- external captions required for release;
-- duplicate scene and schema checks;
-- release validator for images, provenance, captions, duration, codecs, and streams;
-- preview approval gate bound to manifest, episode inputs, and preview output;
-- provenance-safe image ingestion;
-- preview/final workflow with fail-closed validation;
-- contract-only CI validation;
-- regression tests for approval and caption gates.
+- narration-first timeline gate with a 0.75 s tolerance;
+- external captions, duplicate scene and schema checks;
+- provenance-safe image ingestion and release validation;
+- deterministic contextual motion engine with smoothstep/ease-in-out;
+- subpixel-stable Pillow frame rendering with no shake or random jitter;
+- controlled motion variety gate and per-scene visual-plan fields;
+- contextual transition contract with conservative crossfade default;
+- optional music/license and AI-disclosure gates;
+- preview approval bound to manifest, inputs and preview output;
+- atomic render promotion and fail-closed workflow behavior;
+- regression tests for motion selection, invalid easing, repetition and transitions.
 
-## Still requires episode assets
+## Current Mars contract
 
-The Mars example remains a contract template until these files are supplied under
-`examples/assets/`:
+The Mars manifest now covers the complete Charon narration instead of six equal
+placeholder scenes. It includes a beat, visual intent, image type, emotion and
+motion choice for every scene. It still requires real WAV, reviewed images and
+provenance sidecars under `examples/assets/`.
 
-- `mars-climate-orbiter-charon.wav`;
-- `S01.png` through `S06.png`;
-- one JSON provenance sidecar for each image.
+## Honest release status
 
-Do not create an approval file before reviewing the preview on a phone.
+The engine upgrade is implemented and unit-tested. A new episode is **not**
+declared final until the asset-complete preview passes the validator, is watched
+on a phone, and receives a fresh hash-bound approval file.
 
-## Current honest status
-
-The code path is upgraded and guarded, but no new authorial MP4 is claimed as
-validated until a real asset-complete preview is rendered and passes the release
-validator.
+See `production/DOCUMENTARY_ENGINE_AUDIT_2026-10-23.md` for the complete audit,
+priority matrix, residual risks and operational checklist.
