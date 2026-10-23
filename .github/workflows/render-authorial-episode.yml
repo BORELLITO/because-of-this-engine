@@ -64,6 +64,12 @@ jobs:
           python production/preflight_authorial_episode.py \
             --manifest "${{ inputs.manifest }}"
 
+      - name: Create narration-locked master contract
+        run: |
+          python production/create_master_contract.py \
+            --manifest "${{ inputs.manifest }}" \
+            --mode "${{ inputs.mode }}"
+
       - name: Require preview approval for final
         if: inputs.mode == 'final'
         run: |
@@ -82,6 +88,13 @@ jobs:
             --manifest "${{ inputs.manifest }}" \
             --mode "${{ inputs.mode }}" \
             --report "examples/rendered/authorial-validation-${{ inputs.mode }}.json"
+
+      - name: Validate master timeline and post-render sync
+        run: |
+          python production/validate_master_timeline.py \
+            --manifest "${{ inputs.manifest }}" \
+            --mode "${{ inputs.mode }}" \
+            --report "examples/rendered/master-timeline-${{ inputs.mode }}.json"
 
       - name: Upload validated package
         uses: actions/upload-artifact@v4
