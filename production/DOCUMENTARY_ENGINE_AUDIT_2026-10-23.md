@@ -260,3 +260,12 @@ algorithm.
 - **Monitorar:** tempo de render final, retenção, claims, legibilidade.
 - **Manter como está:** isolamento, provenance, captions externas, approval gate.
 - **Remover:** shake, randomização não auditável e fallback silencioso.
+
+## Artefatos operacionais adicionados
+
+- `production/preflight_authorial_episode.py`: preflight não destrutivo antes do
+  render, com bloqueio para imagem ilegível ou sidecar ausente;
+- `examples/music-license-register.template.json`: registro free-first de faixa,
+  licença, atribuição e risco de Content ID;
+- `examples/feedback-loop-template.json`: coleta padronizada de retenção,
+  payoff, claims e próximo teste.
