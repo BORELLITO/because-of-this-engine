@@ -96,6 +96,33 @@ jobs:
             --mode "${{ inputs.mode }}" \
             --report "examples/rendered/master-timeline-${{ inputs.mode }}.json"
 
+      - name: Publish validation receipt
+        if: always()
+        run: |
+          REPORT="examples/rendered/master-timeline-${{ inputs.mode }}.json"
+          {
+            echo "## Because of This — validation receipt"
+            if [ -f "${REPORT}" ]; then
+              python - "${REPORT}" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          report = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+          print(f"- status: {report.get('status')}")
+          print(f"- video_id: {report.get('video_id')}")
+          print(f"- mode: {report.get('mode')}")
+          print(f"- narration: {report.get('timeline', {}).get('audio_duration_seconds')} s")
+          print(f"- captions: {report.get('timeline', {}).get('caption_count')}")
+          print(f"- post_render_sync: {report.get('media', {}).get('post_render_sync')}")
+          print(f"- stale_artifact_check: {report.get('stale_artifact_check')}")
+          gates = report.get("critical_gates", {})
+          print(f"- critical_gates: {', '.join(k for k, v in gates.items() if v)}")
+          PY
+            else
+              echo "- status: no validation receipt was produced"
+            fi
+          } >> "${GITHUB_STEP_SUMMARY}"
+
       - name: Upload validated package (best effort)
         # GitHub artifact storage can be temporarily quota-blocked even after all
         # quality gates pass. Delivery availability must not rewrite a valid render
