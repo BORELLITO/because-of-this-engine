@@ -57,19 +57,46 @@ def normalize_words(value: str) -> list[str]:
     return re.findall(r"[a-z0-9]+(?:'[a-z0-9]+)?", value)
 
 
+def ass_event_fields(path: Path) -> list[str]:
+    """Read the declared ASS Events format without weakening strict parsing."""
+    in_events = False
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if line.startswith("["):
+            in_events = line.lower() == "[events]"
+            continue
+        if in_events and line.lower().startswith("format:"):
+            fields = [item.strip().lower() for item in line.split(":", 1)[1].split(",")]
+            required = {"start", "end", "text"}
+            if not required.issubset(fields) or len(fields) != len(set(fields)):
+                raise ReleaseValidationError("ASS Events format must declare unique Start, End and Text fields.")
+            return fields
+    # A missing Events format is not ambiguous: require the canonical 10-field
+    # ASS layout so malformed legacy files fail closed.
+    return [
+        "layer", "start", "end", "style", "name",
+        "marginl", "marginr", "marginv", "effect", "text",
+    ]
+
+
 def caption_events(path: Path) -> list[tuple[float, float, str]]:
     events: list[tuple[float, float, str]] = []
+    event_fields = ass_event_fields(path)
+    start_index = event_fields.index("start")
+    end_index = event_fields.index("end")
+    text_index = event_fields.index("text")
+    field_count = len(event_fields)
     for raw in path.read_text(encoding="utf-8").splitlines():
         line = raw.strip()
         if not line.startswith("Dialogue:"):
             continue
-        fields = line.split(",", 9)
-        if len(fields) < 10:
+        fields = line.split(",", field_count - 1)
+        if len(fields) != field_count:
             raise ReleaseValidationError(f"Malformed ASS Dialogue line: {raw}")
-        start, end = parse_ass_time(fields[1]), parse_ass_time(fields[2])
+        start, end = parse_ass_time(fields[start_index]), parse_ass_time(fields[end_index])
         if end <= start:
             raise ReleaseValidationError(f"Caption interval is not positive: {raw}")
-        events.append((start, end, fields[9]))
+        events.append((start, end, fields[text_index]))
     if not events:
         raise ReleaseValidationError("Caption file has no Dialogue events.")
     events.sort(key=lambda item: item[0])
