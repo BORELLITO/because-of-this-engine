@@ -1,133 +1,81 @@
 # Authorial rendering
 
-This is the independent rendering layer for Because of This. It does not connect to or modify Capta Pronto, Corte Fino, Publisher, or Creator.
+This is the independent rendering layer for Because of This. It does not connect
+to or modify Capta Pronto, Corte Fino, Publisher, or Creator.
 
 ## Official pipeline
 
-1. build the episode manifest with schema `1.1`;
-2. provide the narration, captions, and reviewed image assets;
-3. run a low-cost `preview`;
-4. inspect the preview on a mobile screen;
-5. create an approval file bound to the exact manifest hash;
-6. run `final`;
-7. run the release validator;
-8. deliver the validated package.
+1. close the factual script and narration;
+2. mark beats, pauses, reveal and payoff;
+3. build the visual plan and provide reviewed authorial images;
+4. render a low-cost `preview`;
+5. inspect the preview on a mobile screen;
+6. create an approval file bound to the exact manifest hash;
+7. render `final`;
+8. run the release validator;
+9. deliver the validated package.
 
 A final render without a matching preview approval is blocked.
 
+## Motion and transitions
+
+The official renderer uses deterministic, subpixel-stable motion. Supported
+movement types are `slow_push_in`, `slow_pull_out`, directional pans,
+`focus_reframe`, `static_hold` and `subtle_rotation_push_in`. The motion engine
+chooses a safe default from the narrative metadata when a scene does not specify
+one. It does not use random movement and never applies shake/glitch effects.
+
+Each scene may provide:
+
+```json
+"motion": {
+  "type": "slow_push_in",
+  "easing": "smoothstep",
+  "intensity": 1.0,
+  "focus": {"x": 0.5, "y": 0.5}
+}
+```
+
+Transitions default to a short crossfade for backward compatibility. A scene
+may set `transition.type` and `transition.duration` when the beat warrants it.
+The validator rejects invalid values and three identical motions in a row.
+
 ## Modes
 
-- `preview`: 1080x1920, fast review render
-- `final`: 2160x3840, delivery render
-
-The renderer applies only:
-
-- slow deterministic zoom;
-- short fade crossfades;
-- external ASS captions;
-- narration muxing;
-- vertical H.264/AAC export.
-
-There is no shake effect and no image regeneration during assembly.
+- `preview`: 1080x1920, fast review render;
+- `final`: 2160x3840, delivery render.
 
 ## Manifest contract
 
-The release manifest must provide:
+The release manifest must provide `schema_version: "1.1"`, `video_id`,
+`audio.path` pointing to mono 24 kHz 16-bit WAV, unique scenes, captions,
+output path, and provenance sidecars. For the strongest gate set, enable
+`require_visual_plan: true` and `require_music: true` only after the episode has
+a real licensed music entry.
 
-- `schema_version: "1.1"`;
-- `video_id`;
-- `script.path`;
-- `audio.path` pointing to mono 24 kHz 16-bit WAV;
-- one or more scenes with unique `scene_id`, `image`, `duration`, and optional `zoom_end`;
-- `captions.path`;
-- `approval.path`;
-- `output.path` containing `{mode}`;
-- `require_captions: true`;
-- `require_provenance: true`.
+Every scene should contain `story_beat`, `visual_intent`, `image_type` and
+`emotion`. Images are illustrations/reconstructions unless independently
+verified; the engine must never present generated pixels as documentary proof.
 
-Each image must have a sidecar JSON containing provider/model/prompt/style and generation provenance.
-
-All referenced files must remain inside the episode directory. Missing files, invalid audio, missing captions, unsafe zoom values, path escapes, duplicate scene IDs, or invalid durations stop the render before FFmpeg starts.
-
-## Authorial image generation
-
-For a generated episode, use the authorial prompt pack with an explicitly
-selected provider:
+## Validation and workflow
 
 ```bash
-python production/generate_authorial_assets.py \
-  --prompt-pack examples/mars-climate-orbiter-authorial-prompt-pack-v1.json \
-  --output-dir examples/assets \
-  --provider cloudflare
-```
+python production/render_authorial_episode.py \
+  --manifest examples/mars-climate-orbiter-render-manifest-v1.json \
+  --mode preview --validate-only
 
-The command never calls NASA and never silently falls back to a different
-provider. Gemini image generation remains billing-gated by the provider adapter;
-Cloudflare credentials and model availability must be checked before use.
-
-For a manually generated image, use the provenance-safe ingest command below.
-
-## Asset ingestion
-
-For images generated outside GitHub, use the provenance-safe ingest command:
-
-```bash
-python production/ingest_authorial_asset.py \
-  --source /path/to/generated.png \
-  --output examples/assets/S01.png \
-  --scene-id S01 \
-  --provider manual-approved-imagegen \
-  --model unknown \
-  --prompt-pack examples/mars-climate-orbiter-authorial-prompt-pack-v1.json
-```
-
-The command copies the existing image and creates the required JSON sidecar. It
-does not generate, improve, or silently replace visual content.
-
-## Validation
-
-The renderer checks the input contract. After FFmpeg completes, run:
-
-```bash
 python production/validate_authorial_episode.py \
   --manifest examples/mars-climate-orbiter-render-manifest-v1.json \
   --mode preview
 ```
 
-The release validator checks:
-
-- image readability and minimum size;
-- image provenance sidecars;
-- caption timing and overlap;
-- caption/script word identity when a script is provided;
-- output dimensions;
-- H.264/AAC streams;
-- output duration against narration;
-- presence of both video and audio.
-
-`PREVIEW_VALIDATED` is not `APPROVED`. A human mobile review and an exact approval hash are required before final delivery.
-
-## Creating approval
-
-After reviewing the preview on a phone, create the approval file:
-
-```bash
-python production/create_preview_approval.py \
-  --manifest examples/mars-climate-orbiter-render-manifest-v1.json \
-  --reviewer Borelli \
-  --output approvals/mars-climate-orbiter-001-preview-approved.json \
-  --approved
-```
-
-The command binds approval to the exact manifest, images, audio, captions, and
-preview MP4. Any later input change invalidates the approval.
-
-## GitHub Actions
-
-Run **Render authorial episode** manually and select `preview` first. The workflow blocks `final` unless the approval file exists and matches the current manifest hash. The validated package is uploaded only after the release validator passes.
-
-The example manifest is a contract template. Its audio and image assets must be supplied in `examples/assets/` before rendering.
+The validator checks image readability, provenance, visual-plan metadata,
+motion variety, timeline-to-narration, caption timing/identity, output
+dimensions, H.264/AAC streams and optional music licensing. `PREVIEW_VALIDATED`
+is not `APPROVED`; a human mobile review and exact approval hash are required.
 
 ## Operational rule
 
-Preview first, final second. A failed render never replaces an existing output because the renderer writes to a temporary file and promotes it only after a successful mux.
+Preview first, final second. A failed render never replaces an existing output:
+the renderer writes to a temporary file and promotes it only after a successful
+mux. Providers never fall back silently.
