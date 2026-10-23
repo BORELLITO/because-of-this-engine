@@ -269,3 +269,14 @@ algorithm.
   licença, atribuição e risco de Content ID;
 - `examples/feedback-loop-template.json`: coleta padronizada de retenção,
   payoff, claims e próximo teste.
+
+## Segunda auditoria — resultado
+
+O antigo `production/run_episode.py` ainda chamava `render_mars_final.py` e
+`validate_episode.py`, criando dois caminhos concorrentes. Ele foi convertido
+em um orquestrador único do schema `1.1`, com lock, preflight, aprovação para
+final, render autoral, validação e log JSONL. Manifests legados agora falham
+explicitamente em vez de executar um motor diferente silenciosamente.
+
+Smoke test executado após a alteração: preflight aprovado, 11 testes unitários
+passaram e um MP4 sintético de 2,0 s foi renderizado em 1080×1920 com H.264/AAC.
