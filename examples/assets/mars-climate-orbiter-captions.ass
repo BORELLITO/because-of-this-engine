@@ -12,8 +12,8 @@ Style: Default,DejaVu Sans,50,&H00FFFFFF,&H00FFFFFF,&H00101624,&H80101624,-1,0,0
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 Dialogue: 0,0:00:00.30,0:00:03.99,Default,,0,0,300,,NASA's Mars Climate Orbiter\Ntraveled for {\c&H0054C8FF&}nine months{\c&H00FFFFFF&} to reach Mars.
 Dialogue: 0,0:00:04.57,0:00:06.58,Default,,0,0,300,,Then, during its arrival,\N{\c&H0054C8FF&}contact disappeared.{\c&H00FFFFFF&}
-Dialogue: 0,0:00:07.16,0:00:09.00,Default,,0,0,300,,The cause sounds almost impossible:\Ntwo parts of the mission.
-Dialogue: 0,0:00:09.00,0:00:11.85,Default,,0,0,300,,The mission used two systems with\N{\c&H0054C8FF&}different units.{\c&H00FFFFFF&}
+Dialogue: 0,0:00:07.16,0:00:09.00,Default,,0,0,300,,The cause sounds almost impossible:\Ntwo parts of the mission
+Dialogue: 0,0:00:09.00,0:00:11.85,Default,,0,0,300,,were using {\c&H0054C8FF&}different units.{\c&H00FFFFFF&}
 Dialogue: 0,0:00:12.43,0:00:14.77,Default,,0,0,300,,Ground software reported thruster forces\Nin {\c&H0054C8FF&}pound-seconds.{\c&H00FFFFFF&}
 Dialogue: 0,0:00:15.35,0:00:17.70,Default,,0,0,300,,Navigation expected metric units:\N{\c&H0054C8FF&}newton-seconds.{\c&H00FFFFFF&}
 Dialogue: 0,0:00:18.28,0:00:21.00,Default,,0,0,300,,So the force data was interpreted\Nincorrectly, and the spacecraft's
