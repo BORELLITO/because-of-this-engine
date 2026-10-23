@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "episode_id": "replace-me",
+  "published_at_utc": "",
+  "platform": "youtube_shorts",
+  "measurements": {
+    "views_24h": null,
+    "average_view_duration_seconds": null,
+    "average_percentage_viewed": null,
+    "first_beat_retention": null,
+    "reveal_retention": null,
+    "payoff_retention": null,
+    "likes": null,
+    "comments": null,
+    "shares": null,
+    "copyright_claims": 0,
+    "ai_disclosure_applied": null
+  },
+  "diagnosis": {
+    "strongest_beat": "",
+    "weakest_beat": "",
+    "likely_cause": "",
+    "confidence": "unknown",
+    "next_test": ""
+  }
+}
