@@ -158,7 +158,7 @@
   "require_captions": true,
   "require_provenance": true,
   "require_visual_plan": true,
-  "require_music": false,
+  "require_music": true,
   "disclosure": {
     "visuals": "AI-assisted editorial illustrations/reconstructions; no generated frame is presented as documentary evidence",
     "realistic_synthetic_media_review_required": true,
