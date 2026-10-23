@@ -20,9 +20,9 @@ The official path is the generic authorial episode pipeline:
 - `.github/workflows/validate.yml`: compile, tests, and JSON checks.
 - `.github/workflows/render-authorial-episode.yml`: preview/final workflow.
 
-The older Mars renderer and validator remain as legacy compatibility paths while
-the authorial pipeline is migrated. They are not the official path for new
-episodes.
+The older Mars renderer and validator remain in the repository for historical
+reference only. `production/run_episode.py` rejects legacy manifests so a new
+episode cannot silently take the wrong path.
 
 A release episode requires a Charon-compatible 24 kHz mono WAV, external ASS
 captions, reviewed 9:16 images, image provenance sidecars, a preview render,
@@ -32,9 +32,9 @@ NASA, Cloudflare, and Gemini providers are separate adapters. NASA imagery is
 not considered an authorial cartoon asset by itself; a provider must be selected
 explicitly and every visual remains subject to human review.
 
-The motion assembler applies only deterministic smooth zoom and short fade
-crossfades. It does not use shake, glitch, decorative transition packs, or
-image regeneration during assembly.
+The motion assembler applies deterministic contextual motion, subpixel-stable
+crops, smooth easing and understated transitions. It does not use shake, glitch,
+decorative transition packs, randomization or image regeneration during assembly.
 
 ## Local run
 
@@ -60,9 +60,8 @@ python production/validate_authorial_episode.py \
   --mode preview
 ```
 
-Legacy Mars runs are manifest-driven and remain protected by their historical
-validator. New authorial releases must use the preview, approval, and release
-validation gates described in `production/AUTHORIAL_RENDERING.md`.
+New authorial releases use the single preview, approval, preflight and release
+validation path described in `production/AUTHORIAL_RENDERING.md`.
 
 `PREVIEW_VALIDATED` is not `APPROVED`. A human mobile-speaker review and an
 exact approval hash are required before any final delivery step.
