@@ -32,7 +32,7 @@
     },
     {
       "scene_id": "S03",
-      "image": "assets/S03-repaired.webp",
+      "image": "assets/S03-repaired-v2.webp",
       "duration": 8.0,
       "zoom_end": 1.05,
       "story_beat": "one team used metric units and another used imperial units",
