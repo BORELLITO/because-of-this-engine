@@ -124,6 +124,7 @@ jobs:
           } >> "${GITHUB_STEP_SUMMARY}"
 
       - name: Upload validated package (best effort)
+        id: upload_validated_package
         # GitHub artifact storage can be temporarily quota-blocked even after all
         # quality gates pass. Delivery availability must not rewrite a valid render
         # as a content/synchronization failure.
@@ -138,3 +139,18 @@ jobs:
             examples/assets/*.json
           if-no-files-found: error
           retention-days: 1
+
+      - name: Publish artifact delivery status
+        if: always()
+        run: |
+          {
+            echo ""
+            echo "### Artifact delivery"
+            echo "- upload_step_outcome: ${{ steps.upload_validated_package.outcome }}"
+            if [ "${{ steps.upload_validated_package.outcome }}" = "success" ]; then
+              echo "- status: PASS"
+            else
+              echo "- status: BLOCKED"
+              echo "- note: quality and synchronization gates remain authoritative; download delivery was not validated"
+            fi
+          } >> "${GITHUB_STEP_SUMMARY}"
