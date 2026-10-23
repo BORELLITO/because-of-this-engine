@@ -281,4 +281,4 @@ explicitamente em vez de executar um motor diferente silenciosamente.
 Smoke test executado após a alteração: preflight aprovado, 11 testes unitários
 passaram e um MP4 sintético de 2,0 s foi renderizado em 1080×1920 com H.264/AAC.
 Na revisão de assets, S03.png foi identificado como corrompido e substituído por
-S03-repaired.webp, com sidecar de provenance e referência atualizada no manifest.
+S03-repaired-v2.webp, com sidecar de provenance e referência atualizada no manifest.
