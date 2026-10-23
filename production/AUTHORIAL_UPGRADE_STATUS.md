@@ -15,8 +15,10 @@
 - atomic render promotion and fail-closed workflow behavior;
 - regression tests for motion selection, invalid easing, repetition and transitions;
 - narration-locked master contract on a 24 kHz audio sample clock and 25 fps rational timebase;
-- source fingerprinting for manifest, narration, captions and scene assets;
+- source fingerprinting for manifest, narration, captions, scene assets, provenance and engine code;
+- one scene clock with transition-aware frame boundaries connected to the narration master;
 - post-render media gate for zero start offsets, CFR, duration, sample rate and mux consistency;
+- explicit alignment provenance and an honesty gate that rejects undeclared phrase-level timing;
 - explicit visual-story gate requiring a function and match grade per scene;
 - honest phrase-level caption alignment when word-level forced alignment is unavailable (no invented word precision);
 - best-effort artifact delivery separated from content-quality gates so GitHub storage quota cannot rewrite a valid render as a sync failure.
