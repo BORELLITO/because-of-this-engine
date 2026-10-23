@@ -68,7 +68,7 @@ def audio_duration(path: Path) -> float:
         raise RenderError(f"Invalid narration WAV: {path}") from exc
 
 
-def validate_manifest(manifest: dict[str, Any], episode_dir: Path) -> dict[str, Any]:
+def validate_manifest(manifest: dict[str, Any], episode_dir: Path, mode: str = "preview") -> dict[str, Any]:
     if manifest.get("schema_version") != "1.1":
         raise RenderError("Authorial release manifests must use schema_version 1.1.")
     video_id = manifest.get("video_id")
@@ -142,6 +142,27 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path) -> dict[str, 
         if not caption_path.is_file():
             raise RenderError(f"Caption file not found: {caption_path}")
 
+    music_path = None
+    music_volume = 0.08
+    music = manifest.get("music")
+    music_required = manifest.get("require_music", False) is True and mode == "final"
+    if music_required and not isinstance(music, dict):
+        raise RenderError("Music is required but no music contract was provided.")
+    if music is not None:
+        if not isinstance(music, dict):
+            raise RenderError("music must be an object when provided.")
+        if not music.get("license") or music.get("commercial_use") is not True:
+            raise RenderError("Music requires a license and explicit commercial_use=true.")
+        if music.get("license") == "creative_commons" and not music.get("attribution"):
+            raise RenderError("Creative Commons music requires attribution text.")
+        music_path = resolve_inside(episode_dir, music.get("path"))
+        if not music_path.is_file():
+            raise RenderError(f"Licensed music file not found: {music_path}")
+        candidate_volume = music.get("volume", music_volume)
+        if isinstance(candidate_volume, bool) or not isinstance(candidate_volume, (int, float)) or not 0 <= candidate_volume <= 0.25:
+            raise RenderError("Music volume must be between 0 and 0.25.")
+        music_volume = float(candidate_volume)
+
     output = manifest.get("output", {})
     if not isinstance(output, dict):
         raise RenderError("Manifest output must be an object.")
@@ -156,6 +177,8 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path) -> dict[str, 
         "video_id": video_id.strip(),
         "scenes": normalized,
         "audio": audio_path,
+        "music": music_path,
+        "music_volume": music_volume,
         "captions": caption_path,
         "transition": float(default_transition),
         "output_template": output_path,
@@ -342,9 +365,30 @@ def caption_filter(path: Path) -> str:
     return f"subtitles={path.as_posix().replace(':', r'\\:')}"
 
 
-def mux_audio(video: Path, audio: Path, captions: Path | None, duration: float, output: Path) -> None:
+def mux_audio(
+    video: Path,
+    audio: Path,
+    captions: Path | None,
+    duration: float,
+    output: Path,
+    music: Path | None = None,
+    music_volume: float = 0.08,
+) -> None:
     command = ["ffmpeg", "-y", "-i", str(video), "-i", str(audio)]
-    if captions:
+    if music:
+        command.extend(["-stream_loop", "-1", "-i", str(music)])
+        filters = []
+        if captions:
+            filters.append(f"[0:v]{caption_filter(captions)}[v]")
+        filters.extend([
+            "[1:a]aresample=24000,volume=1.0,asplit=2[voice_sidechain][voice_mix]",
+            f"[2:a]aresample=24000,volume={music_volume:.4f}[music]",
+            "[music][voice_sidechain]sidechaincompress=threshold=0.035:ratio=8:attack=20:release=400[ducked]",
+            "[voice_mix][ducked]amix=inputs=2:duration=first:dropout_transition=0:normalize=0,alimiter=limit=0.95[a]",
+        ])
+        command.extend(["-filter_complex", ";".join(filters)])
+        command.extend(["-map", "[v]" if captions else "0:v:0", "-map", "[a]"])
+    elif captions:
         command.extend(["-filter_complex", f"[0:v]{caption_filter(captions)}[v]", "-map", "[v]", "-map", "1:a:0"])
     else:
         command.extend(["-map", "0:v:0", "-map", "1:a:0"])
@@ -358,7 +402,7 @@ def mux_audio(video: Path, audio: Path, captions: Path | None, duration: float, 
 
 def render(manifest_path: Path, mode: str, output_override: Path | None) -> Path:
     episode_dir = manifest_path.parent.resolve()
-    spec = validate_manifest(read_json(manifest_path), episode_dir)
+    spec = validate_manifest(read_json(manifest_path), episode_dir, mode=mode)
     width, height = SIZES[mode]
     output_value = output_override if output_override else episode_dir / spec["output_template"].format(mode=mode)
     output = (output_value if output_value.is_absolute() else episode_dir / output_value).resolve()
@@ -377,7 +421,10 @@ def render(manifest_path: Path, mode: str, output_override: Path | None) -> Path
         assemble_scenes(scene_files, [scene["duration"] for scene in spec["scenes"]], spec["transition"], silent, transitions)
         partial = output.with_name(f".{output.name}.part")
         try:
-            mux_audio(silent, spec["audio"], spec["captions"], spec["audio_duration"], partial)
+            mux_audio(
+                silent, spec["audio"], spec["captions"], spec["audio_duration"], partial,
+                music=spec["music"], music_volume=spec["music_volume"],
+            )
             os.replace(partial, output)
         finally:
             partial.unlink(missing_ok=True)
@@ -392,7 +439,7 @@ def main() -> int:
     parser.add_argument("--validate-only", action="store_true")
     args = parser.parse_args()
     manifest_path = args.manifest.resolve()
-    spec = validate_manifest(read_json(manifest_path), manifest_path.parent.resolve())
+    spec = validate_manifest(read_json(manifest_path), manifest_path.parent.resolve(), mode=args.mode)
     if args.validate_only:
         print(json.dumps({
             "video_id": spec["video_id"],
