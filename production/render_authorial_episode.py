@@ -155,6 +155,8 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, mode: str = "
             raise RenderError("Music requires a license and explicit commercial_use=true.")
         if music.get("license") == "creative_commons" and not music.get("attribution"):
             raise RenderError("Creative Commons music requires attribution text.")
+        if music.get("attribution_required") is True and not music.get("attribution"):
+            raise RenderError("This music license requires attribution text.")
         music_path = resolve_inside(episode_dir, music.get("path"))
         if not music_path.is_file():
             raise RenderError(f"Licensed music file not found: {music_path}")
