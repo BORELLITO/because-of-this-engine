@@ -232,6 +232,26 @@ e gates de qualidade. Depois deste commit, o motor está apto para um novo
 preview técnico; ainda não se deve declarar um episódio final aprovado sem
 renderizar e assistir esse preview no celular.
 
+## Base de pesquisa utilizada
+
+- YouTube monetization policy: original, non-repetitious content and commercial
+  rights are required; reused material needs substantive original value:
+  <https://support.google.com/youtube/answer/1311392>.
+- YouTube altered/synthetic media guidance: realistic AI-generated or meaningfully
+  altered content must be disclosed during upload:
+  <https://support.google.com/youtube/answer/14328491>.
+- YouTube Audio Library guidance: Audio Library assets are the platform's known
+  copyright-safe option; Creative Commons attribution remains required when
+  applicable: <https://support.google.com/youtube/answer/3376882>.
+- FFmpeg filter documentation: `xfade` requires matching constant-frame-rate
+  inputs and an explicit duration, which informs the renderer's timeline gate:
+  <https://ffmpeg.org/ffmpeg-filters.html>.
+
+These sources establish platform/technical constraints. The exact motion
+vocabulary, 0.75 s tolerance, mobile safe-zone review and intensity limits are
+house engineering policies for this project, not claims about YouTube's ranking
+algorithm.
+
 ## Classificação final
 
 - **Corrigir agora:** renderer/motion/timeline/gates (implementado nesta etapa).
