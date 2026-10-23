@@ -8,14 +8,18 @@ to or modify Capta Pronto, Corte Fino, Publisher, or Creator.
 1. close the factual script and narration;
 2. mark beats, pauses, reveal and payoff;
 3. build the visual plan and provide reviewed authorial images;
-4. render a low-cost `preview`;
-5. inspect the preview on a mobile screen;
-6. create an approval file bound to the exact manifest hash;
-7. render `final`;
-8. run the release validator;
-9. deliver the validated package.
+4. create a narration-locked master contract (audio sample clock + rational frame timebase);
+5. render a low-cost `preview`;
+6. run the normal release validator;
+7. run the post-render master-timeline gate;
+8. inspect the preview on a mobile screen;
+9. create an approval file bound to the exact manifest/source fingerprint;
+10. render `final`;
+11. rerun both validators and deliver the validated package.
 
-A final render without a matching preview approval is blocked.
+A final render without a matching preview approval is blocked. A stale contract
+whose source fingerprint no longer matches the manifest, audio, captions or scene
+assets is blocked.
 
 ## Motion and transitions
 
@@ -48,14 +52,16 @@ The validator rejects invalid values and three identical motions in a row.
 ## Manifest contract
 
 The release manifest must provide `schema_version: "1.1"`, `video_id`,
+`timeline_version: "1.0"`, `fps`, `timebase`, `audio_sample_rate`,
 `audio.path` pointing to mono 24 kHz 16-bit WAV, unique scenes, captions,
 output path, and provenance sidecars. For the strongest gate set, enable
 `require_visual_plan: true` and `require_music: true` only after the episode has
 a real licensed music entry.
 
-Every scene should contain `story_beat`, `visual_intent`, `image_type` and
-`emotion`. Images are illustrations/reconstructions unless independently
-verified; the engine must never present generated pixels as documentary proof.
+Every scene should contain `story_beat`, `visual_intent`, `image_type`,
+`emotion`, `visual_function` and `visual_match`. Images are
+illustrations/reconstructions unless independently verified; the engine must
+never present generated pixels as documentary proof.
 
 ## Validation and workflow
 
@@ -64,18 +70,31 @@ python production/render_authorial_episode.py \
   --manifest examples/mars-climate-orbiter-render-manifest-v1.json \
   --mode preview --validate-only
 
+python production/create_master_contract.py \
+  --manifest examples/mars-climate-orbiter-render-manifest-v1.json \
+  --mode preview
+
 python production/validate_authorial_episode.py \
+  --manifest examples/mars-climate-orbiter-render-manifest-v1.json \
+  --mode preview
+
+python production/validate_master_timeline.py \
   --manifest examples/mars-climate-orbiter-render-manifest-v1.json \
   --mode preview
 ```
 
-The validator checks image readability, provenance, visual-plan metadata,
+The normal validator checks image readability, provenance, visual-plan metadata,
 motion variety, timeline-to-narration, caption timing/identity, output
-dimensions, H.264/AAC streams and optional music licensing. `PREVIEW_VALIDATED`
-is not `APPROVED`; a human mobile review and exact approval hash are required.
+dimensions, H.264/AAC streams and optional music licensing. The master gate
+adds source-fingerprint freshness, exact sample/frame timebase checks, final
+CFR/mux checks, post-render duration consistency and the visual-story mapping.
+`MASTER_TIMELINE_VALIDATED` is not `APPROVED`; a human mobile review and
+exact approval hash are required.
 
 ## Operational rule
 
 Preview first, final second. A failed render never replaces an existing output:
 the renderer writes to a temporary file and promotes it only after a successful
-mux. Providers never fall back silently.
+mux. Providers never fall back silently. GitHub artifact storage is delivery
+infrastructure, not a content gate; when quota is unavailable the run remains
+valid and records the delivery warning.
