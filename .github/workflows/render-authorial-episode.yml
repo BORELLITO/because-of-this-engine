@@ -28,9 +28,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Check FFmpeg
+      - name: Install FFmpeg with retries
+        env:
+          DEBIAN_FRONTEND: noninteractive
         run: |
-          command -v ffmpeg
+          sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=60 update
+          sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=60 install -y --no-install-recommends ffmpeg
           ffmpeg -version | head -n 1
 
       - name: Setup Python
