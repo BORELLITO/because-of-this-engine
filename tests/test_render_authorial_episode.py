@@ -1,16 +1,9 @@
-import json
 import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from production.render_authorial_episode import (
-    RenderError,
-    SIZES,
-    scene_filter,
-    validate_manifest,
-    xfade_filter,
-)
+from production.render_authorial_episode import RenderError, SIZES, scene_filter, validate_manifest, xfade_filter
 
 
 class AuthorialRenderTests(unittest.TestCase):
@@ -24,8 +17,8 @@ class AuthorialRenderTests(unittest.TestCase):
             "video_id": "demo-001",
             "audio": {"path": "voice.wav"},
             "scenes": [
-                {"scene_id": "S01", "image": "s01.png", "duration": 4.6, "zoom_end": 1.08},
-                {"scene_id": "S02", "image": "s02.png", "duration": 4.6, "zoom_end": 1.07},
+                {"scene_id": "S01", "image": "s01.png", "duration": 0.665, "zoom_end": 1.08},
+                {"scene_id": "S02", "image": "s02.png", "duration": 0.665, "zoom_end": 1.07},
             ],
             "transition_duration": 0.33,
             "require_captions": False,
@@ -35,7 +28,7 @@ class AuthorialRenderTests(unittest.TestCase):
         self.assertEqual(SIZES["preview"], (1080, 1920))
         self.assertEqual(SIZES["final"], (2160, 3840))
 
-    def test_scene_filter_has_smooth_zoom_and_fixed_fps(self):
+    def test_scene_filter_has_compatibility_zoom_and_fixed_fps(self):
         value = scene_filter(1080, 1920, 115, 1.08)
         self.assertIn("zoompan", value)
         self.assertIn("d=115", value)
@@ -53,7 +46,6 @@ class AuthorialRenderTests(unittest.TestCase):
             manifest["scenes"][1]["image"] = "missing.png"
             with self.assertRaises(RenderError):
                 validate_manifest(manifest, root)
-
 
     def test_release_defaults_to_external_captions(self):
         with tempfile.TemporaryDirectory() as temp:
