@@ -15,11 +15,11 @@
   },
   "voice": {
     "provider": "gemini",
-    "model": "gemini-2.5-flash-preview-tts",
+    "model": "gemini-3.8-flash-lite-tts",
     "voice": "Charon",
     "language": "en-US",
-    "style": "Low, restrained male suspense narration in clear American English. Natural pauses, clear diction and controlled tension.",
-    "model_rationale": "Selected for stable high-volume narration after Flash-Lite produced inconsistent recognition of short and content words; the forced word-timestamp gate remains mandatory."
+    "style": "Clear American English, crisp diction, moderate pace, restrained suspense.",
+    "model_rationale": "Current production route: Gemini 3.8 Flash-Lite TTS, which shares the documented Interactions schema with Gemini 3.8 Flash TTS; the pipeline remains fail-closed on word-timestamp alignment."
   },
   "script": {
     "path": "script.txt",
@@ -590,7 +590,7 @@
     "status": "PENDING",
     "reviewer": "",
     "reviewed_at": "",
-    "notes": "Automated rebuild: strict word-highlight timestamps, legibility contrast gate, bounded function-word recovery, cinematic noir grade, branded loop outro and 12 unique clips. Gemini 2.5 Flash TTS selected for a stable high-volume narration pass. Human approval remains required before final publication."
+    "notes": "Automated rebuild: strict word-highlight timestamps, legibility contrast gate, bounded function-word recovery, cinematic noir grade, branded loop outro and 12 unique clips. Gemini 3.8 Flash-Lite TTS with concise delivery direction is the active production route. Human approval remains required before final publication."
   },
   "editing": {
     "clip_quantity": {
