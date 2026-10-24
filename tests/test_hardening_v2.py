@@ -39,7 +39,7 @@ class PipelineStateTests(unittest.TestCase):
             root = Path(directory)
             manifest = self._manifest(root)
             load_or_initialize(manifest)
-            manifest.write_text(manifest.read_text(encoding="utf-8").replace("state-test-001", "changed-job"), encoding="utf-8")
+            manifest.write_text(manifest.read_text(encoding="utf-8") + "\n", encoding="utf-8")
             with self.assertRaises(PipelineStateError):
                 load_or_initialize(manifest)
 
