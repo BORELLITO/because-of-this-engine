@@ -140,22 +140,50 @@ def assemble(scene_files: list[Path], scenes: list[dict[str, Any]], output: Path
     run(command)
 
 
-def brand_filter(brand: dict[str, Any]) -> str:
+def ass_time(seconds: float) -> str:
+    total_centiseconds = max(0, round(seconds * 100))
+    hours, remainder = divmod(total_centiseconds, 360000)
+    minutes, remainder = divmod(remainder, 6000)
+    secs, centiseconds = divmod(remainder, 100)
+    return f"{hours}:{minutes:02d}:{secs:02d}.{centiseconds:02d}"
+
+
+def ass_color(value: str) -> str:
+    raw = str(value or "#E3262E").lstrip("#")
+    if len(raw) != 6 or any(char not in "0123456789abcdefABCDEF" for char in raw):
+        raw = "E3262E"
+    red, green, blue = raw[0:2], raw[2:4], raw[4:6]
+    return f"&H00{blue}{green}{red}"
+
+
+def write_brand_ass(path: Path, brand: dict[str, Any], duration: float) -> Path | None:
     if brand.get("watermark_enabled", True) is False:
-        return ""
-    text = str(brand.get("watermark_text", "|B")).replace("'", "\\'")
-    color = str(brand.get("accent_color", "#E3262E"))
-    # Drawtext is a vector/text HUD overlay, not a narrative still image.
-    return f"drawtext=text='{text}':fontcolor={color}:fontsize=42:borderw=2:bordercolor=black@0.75:x=54:y=70:alpha=0.88"
+        return None
+    text = str(brand.get("watermark_text", "|B")).replace("\\", "\\\\").replace("{", "\\{").replace("}", "\\}")
+    ass = f"""[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,StrikeOut,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding
+Style: Brand,Arial,42,{ass_color(brand.get("accent_color", "#E3262E"))},&H00FFFFFF,&H00000000,&H80000000,1,0,0,0,100,100,0,0,1,2,1,9,54,54,80,1
+
+[Events]
+Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
+Dialogue: 0,0:00:00.00,{ass_time(duration)},Brand,,0,0,0,,{text}
+"""
+    path.write_text(ass, encoding="utf-8")
+    return path
 
 
-def mux_audio(video: Path, audio: Path, captions: Path, output: Path, duration: float, music: Path | None, music_volume: float, brand: dict[str, Any]) -> None:
+def mux_audio(video: Path, audio: Path, captions: Path, output: Path, duration: float, music: Path | None, music_volume: float, brand_ass: Path | None) -> None:
     command = ["ffmpeg", "-y", "-i", str(video), "-i", str(audio)]
     filters: list[str] = []
     video_chain = f"[0:v]subtitles='{_escape_filter_path(captions)}'"
-    hud = brand_filter(brand)
-    if hud:
-        video_chain += f",{hud}"
+    if brand_ass:
+        video_chain += f",subtitles='{_escape_filter_path(brand_ass)}'"
     video_chain += "[v]"
     filters.append(video_chain)
     if music:
@@ -194,7 +222,8 @@ def render(manifest_path: Path, mode: str) -> Path:
         if spec["music"]:
             music_path = (manifest_path.parent / spec["music"]["path"]).resolve()
             music_volume = float(spec["music"].get("volume", 0.06))
-        mux_audio(assembled, spec["audio_path"], spec["caption_path"], output, narration_seconds, music_path, music_volume, spec["brand"])
+        brand_ass = write_brand_ass(Path(temp) / "brand.ass", spec["brand"], narration_seconds)
+        mux_audio(assembled, spec["audio_path"], spec["caption_path"], output, narration_seconds, music_path, music_volume, brand_ass)
     return output
 
 
