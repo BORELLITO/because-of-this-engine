@@ -334,6 +334,8 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
         "music": music,
         "total_scene_duration": total,
         "brand": brand,
+        "clip_policy": clip_policy,
+        "clip_quantity_gate": quantity_report,
     }
 
 
