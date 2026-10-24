@@ -74,16 +74,19 @@ class NarrationTests(unittest.TestCase):
 
 
 
-    def test_rest_stream_collects_pcm_chunks_and_writes_wav(self) -> None:
-        pcm = b"\x00\x00" * 2400
-        encoded = base64.b64encode(pcm).decode("ascii")
-        body = (
-            "event: step.delta\n"
-            + "data: "
-            + json.dumps({"delta": {"type": "audio", "data": encoded}})
-            + "\n\n"
-            + "event: interaction.completed\n"
-            + 'data: {"id":"stream-request","status":"completed"}\n\n'
+    def test_rest_unary_extracts_documented_wav_response(self) -> None:
+        expected_audio = make_wav()
+        encoded = base64.b64encode(expected_audio).decode("ascii")
+        body = json.dumps(
+            {
+                "id": "rest-request",
+                "steps": [
+                    {
+                        "type": "model_output",
+                        "content": [{"type": "audio", "data": encoded}],
+                    }
+                ],
+            }
         ).encode("utf-8")
 
         class FakeResponse:
@@ -98,26 +101,26 @@ class NarrationTests(unittest.TestCase):
             def __exit__(self, *args):
                 return None
 
-            def readline(self):
-                return self.stream.readline()
+            def read(self):
+                return self.stream.read()
 
         with patch.object(narrate.urllib.request, "urlopen", return_value=FakeResponse()):
             with tempfile.TemporaryDirectory() as temp_dir:
-                output_path = Path(temp_dir) / "stream.wav"
+                output_path = Path(temp_dir) / "rest.wav"
                 metadata = narrate.generate_narration(
-                    "A streaming test script.",
+                    "A REST test script.",
                     output_path,
                     api_key="test-key-never-sent",
                     overwrite=True,
                     request_timeout_seconds=5,
-                    transport="rest_stream",
+                    transport="rest_unary",
                 )
                 output_bytes = output_path.read_bytes()
 
-        self.assertEqual(metadata["transport"], "rest_stream")
-        self.assertEqual(metadata["request_id"], "stream-request")
+        self.assertEqual(metadata["transport"], "rest_unary")
+        self.assertEqual(metadata["request_id"], "rest-request")
         self.assertEqual(metadata["duration_seconds"], 0.1)
-        self.assertTrue(output_bytes.startswith(b"RIFF"))
+        self.assertEqual(output_bytes, expected_audio)
 
     def test_api_timeout_fails_fast_without_writing_output(self) -> None:
         class SlowInteractions:
