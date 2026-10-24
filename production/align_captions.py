@@ -68,7 +68,22 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
             continue
         token = _normalise(raw[index])
         if token:
-            result.append((raw[index], [[token]]))
+            short_word_variants = {
+                "a": [["a"], ["uh"], ["ah"]],
+                "an": [["an"], ["un"]],
+                "the": [["the"], ["uh"], ["thuh"]],
+                "to": [["to"], ["two"], ["tuh"]],
+                "of": [["of"], ["uhv"], ["ov"]],
+                "and": [["and"], ["n"], ["ənd"]],
+                "for": [["for"], ["fer"]],
+                "in": [["in"], ["ən"]],
+                "on": [["on"], ["awn"]],
+                "at": [["at"], ["ət"]],
+                "is": [["is"], ["iz"]],
+                "was": [["was"], ["wuz"]],
+                "it": [["it"], ["ət"]],
+            }
+            result.append((raw[index], short_word_variants.get(token, [[token]])))
         index += 1
     return result
 
@@ -134,10 +149,11 @@ def _align_chunk(chunk: str, asr_words: list[dict[str, Any]], cursor: int) -> tu
     required = len(units)
     if matched < required:
         missing = len(units) - matched
+        matched_canonical = [item["canonical"] for item in positions]
         raise AlignmentError(
             f"Could not align caption phrase {chunk!r}: matched {matched}/{len(units)} "
-            f"spoken units ({missing} missing). Strict word-highlight alignment requires "
-            "every canonical word to have a real timestamp."
+            f"spoken units ({missing} missing). Matched canonical units: {matched_canonical}. "
+            "Strict word-highlight alignment requires every canonical word to have a real timestamp."
         )
     return positions[0]["start"], positions[-1]["end"], search_cursor, positions
 
