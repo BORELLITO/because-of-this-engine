@@ -88,11 +88,11 @@ jobs:
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: python production/google_drive_assets.py --manifest "${{ inputs.manifest }}" --require-drive-assets
 
-      - name: Generate narration with Google Gemini TTS (streaming REST)
+      - name: Generate narration with Google Gemini TTS (documented REST)
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_TTS_TIMEOUT_SECONDS: "180"
-          GEMINI_TTS_TRANSPORT: "rest_stream"
+          GEMINI_TTS_TRANSPORT: "rest_unary"
         run: |
           set -euo pipefail
           EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
