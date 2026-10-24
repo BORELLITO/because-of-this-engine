@@ -47,10 +47,10 @@ preview run completed successfully through all content gates:
 - stale-artifact check: `PASS`
 - scene timeline: `PASS`
 - alignment honesty: `PASS`
-- caption events: 18
+- caption events: 21
 - narration duration: 58.36 s
 
-The run's artifact upload was best-effort and was externally blocked by GitHub
+The caption QA gate now validates the real Mars ASS before render. The run's artifact upload was best-effort and was externally blocked by GitHub
 Actions storage quota; this does not invalidate the render or its gates. The same
 run now publishes a validation receipt in the GitHub job summary, and a fresh
 artifact can be uploaded automatically after quota recalculation.
