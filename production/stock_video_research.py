@@ -21,10 +21,9 @@ from pathlib import Path
 from typing import Any, Callable
 
 SCHEMA_VERSION = "1.0"
-NASA_SEARCH = "https://images-api.nasa.gov/search"
 PEXELS_SEARCH = "https://api.pexels.com/videos/search"
 PIXABAY_SEARCH = "https://pixabay.com/api/videos/"
-PROVIDER_ORDER = ("nasa", "pexels", "pixabay")
+PROVIDER_ORDER = ("pexels", "pixabay")
 
 _STOPWORDS = {
     "a", "an", "and", "as", "at", "before", "by", "for", "from", "in", "into",
@@ -147,65 +146,10 @@ def _base_candidate(
     }
 
 
-def _query_variants(query: SceneQuery) -> list[str]:
-    """Keep provider search precise while allowing one bounded broadening step."""
-    variants = [query.query]
-    terms = query.query.split()
-    if len(terms) > 4:
-        variants.append(" ".join(terms[:4]))
-    if len(terms) > 3:
-        variants.append(" ".join(terms[-3:]))
-    return list(dict.fromkeys(value.strip() for value in variants if value.strip()))
-
-
-def _search_nasa(query: SceneQuery, limit: int) -> list[dict[str, Any]]:
-    results: list[dict[str, Any]] = []
-    for variant in _query_variants(query):
-        params = urllib.parse.urlencode({
-            "q": variant,
-            "media_type": "video",
-            "page_size": min(max(limit, 1), 100),
-        })
-        payload = _get_json(f"{NASA_SEARCH}?{params}")
-        items = payload.get("collection", {}).get("items", [])
-        if not isinstance(items, list) or not items:
-            continue
-        for item in items:
-            data = item.get("data", [{}]) if isinstance(item, dict) else [{}]
-            record = data[0] if isinstance(data, list) and data else {}
-            if not isinstance(record, dict):
-                continue
-            nasa_id = str(record.get("nasa_id") or "").strip()
-            if not nasa_id:
-                continue
-            links = item.get("links", []) if isinstance(item, dict) else []
-            preview = None
-            if isinstance(links, list):
-                for link in links:
-                    if isinstance(link, dict) and link.get("rel") == "preview":
-                        preview = link.get("href")
-                        break
-            results.append(_base_candidate(
-                provider="nasa",
-                candidate_id=nasa_id,
-                title=str(record.get("title") or nasa_id),
-                description=str(record.get("description") or ""),
-                tags=" ".join(record.get("keywords") or []) if isinstance(record.get("keywords"), list) else "",
-                source_page_url=f"https://images.nasa.gov/details/{urllib.parse.quote(nasa_id)}",
-                download_url=preview if isinstance(preview, str) else None,
-                license_url="https://www.nasa.gov/nasa-brand-center/images-and-media/",
-                license_name="NASA_MEDIA_GUIDELINES_REVIEW",
-                duration=None,
-                width=None,
-                height=None,
-            ))
-        if results:
-            break
-    return results
 def _search_pexels(query: SceneQuery, limit: int) -> list[dict[str, Any]]:
     key = os.environ.get("PEXELS_API_KEY", "").strip()
     if not key:
-        return []
+        raise ResearchError("PEXELS_API_KEY is not configured; use browser review or add the free Pexels API key.")
     params = urllib.parse.urlencode({"query": query.query, "per_page": min(max(limit, 1), 80)})
     payload = _get_json(f"{PEXELS_SEARCH}?{params}", {"Authorization": key})
     results: list[dict[str, Any]] = []
@@ -240,7 +184,7 @@ def _search_pexels(query: SceneQuery, limit: int) -> list[dict[str, Any]]:
 def _search_pixabay(query: SceneQuery, limit: int) -> list[dict[str, Any]]:
     key = os.environ.get("PIXABAY_API_KEY", "").strip()
     if not key:
-        return []
+        raise ResearchError("PIXABAY_API_KEY is not configured; use browser review or add the free Pixabay API key.")
     params = urllib.parse.urlencode({
         "key": key,
         "q": query.query,
@@ -320,7 +264,6 @@ def research(
     if unknown:
         raise ResearchError(f"Unsupported provider(s): {', '.join(unknown)}")
     searchers = searchers or {
-        "nasa": _search_nasa,
         "pexels": _search_pexels,
         "pixabay": _search_pixabay,
     }
