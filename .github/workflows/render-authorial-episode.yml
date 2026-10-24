@@ -53,6 +53,17 @@ jobs:
       - name: Run engine regression tests
         run: python -m unittest discover -s tests -v
 
+      - name: Run strict caption QA
+        run: |
+          EXTRA=""
+          if [ "${{ inputs.mode }}" = "final" ]; then
+            EXTRA="--require-word-level"
+          fi
+          python production/caption_quality.py \
+            --manifest "${{ inputs.manifest }}" \
+            --report "examples/rendered/caption-quality-${{ inputs.mode }}.json" \
+            ${EXTRA}
+
       - name: Validate authorial manifest and motion contract
         run: |
           python production/render_authorial_episode.py \
@@ -125,9 +136,6 @@ jobs:
 
       - name: Upload validated package (best effort)
         id: upload_validated_package
-        # GitHub artifact storage can be temporarily quota-blocked even after all
-        # quality gates pass. Delivery availability must not rewrite a valid render
-        # as a content/synchronization failure.
         continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
