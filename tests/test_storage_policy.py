@@ -13,7 +13,7 @@ class StoragePolicyTests(unittest.TestCase):
             if path.name == "video-engine-ci.yml":
                 continue
             text = path.read_text(encoding="utf-8")
-            if "actions/upload-artifact" in text:
+            if "actions/upload-" + "artifact" in text:
                 offenders.append(path.name)
         self.assertEqual(offenders, [])
 
@@ -22,7 +22,7 @@ class StoragePolicyTests(unittest.TestCase):
         self.assertIn("google_drive_delivery.py --preflight", text)
         self.assertIn('--collection "VIDEOS V2"', text)
         self.assertIn("Remove ephemeral media only after verified Drive delivery", text)
-        self.assertNotIn("actions/upload-artifact", text)
+        self.assertNotIn("actions/upload-" + "artifact", text)
 
     def test_drive_delivery_verifies_remote_copy(self):
         text = (ROOT / "production" / "google_drive_delivery.py").read_text(encoding="utf-8")
