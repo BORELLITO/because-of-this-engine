@@ -237,7 +237,7 @@ def score_candidate(candidate: dict[str, Any], scene: SceneQuery) -> float:
         format_fit = 1.0 if height >= width else 0.55
     else:
         format_fit = 0.5
-    provider_confidence = {"nasa": 0.8, "pexels": 0.72, "pixabay": 0.68}.get(
+    provider_confidence = {"pexels": 0.72, "pixabay": 0.68}.get(
         str(candidate.get("provider")), 0.4
     )
     score = 0.55 * overlap + 0.18 * duration_fit + 0.12 * format_fit + 0.15 * provider_confidence
