@@ -68,15 +68,25 @@ def finalize(manifest_path: Path, release_report_path: Path, delivery_receipt_pa
         asset = scene["asset"]
         assets.append({
             "scene_id": scene["scene_id"],
-            "asset_id": asset["asset_id"],
-            "provider": asset["provider"],
-            "source_page_url": asset["source_page_url"],
-            "license": asset["license"],
-            "sha256": asset["sha256"],
-            "perceptual_hash": asset.get("perceptual_hash"),
-            "drive_file_id": asset.get("drive_file_id"),
+            "story_beat": scene.get("story_beat"),
+            "visual_intent": scene.get("visual_intent"),
             "visual_match": scene["visual_match"],
+            "match_score": scene.get("match_score"),
             "visual_truth": scene["visual_truth"],
+            "duration": scene.get("duration"),
+            "transition": scene.get("transition"),
+            "asset": {
+                key: asset.get(key)
+                for key in (
+                    "asset_id", "path", "drive_file_id", "provider",
+                    "source_page_url", "license", "rights_status",
+                    "approved_for_render", "sha256", "perceptual_hash",
+                    "reuse_status", "episode_id", "author",
+                    "acquisition_timestamp", "original_filename", "mime_type",
+                    "duration_seconds", "width", "height", "filesize_bytes",
+                    "job_ownership", "scene_usage",
+                )
+            },
         })
     research = manifest.get("research") or {}
     captions_spec = manifest.get("captions") or {}
@@ -114,6 +124,13 @@ def finalize(manifest_path: Path, release_report_path: Path, delivery_receipt_pa
             "music": manifest.get("music"),
         },
         "voice": manifest.get("voice"),
+        "narration": manifest.get("audio"),
+        "captions": captions_spec,
+        "render_config": {
+            "fps": manifest.get("fps"),
+            "output": manifest.get("output"),
+            "preview_final_sizes": {"preview": "1080x1920", "final": "2160x3840"},
+        },
         "fingerprints": {
             "manifest_sha256": sha256_file(manifest_path),
             "script_sha256": sha256_file(resolve_inside(base, manifest["script"]["path"], "Script")),
