@@ -7,6 +7,13 @@ import wave
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+import sys
+
+# Allow the workflow to execute this file directly from the repository root.
+REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+if str(REPOSITORY_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPOSITORY_ROOT))
+
 from production.caption_quality import CaptionQualityError, audio_duration, quality_report
 from production.video_asset_contract import VideoContractError, load_manifest, validate_manifest
 
