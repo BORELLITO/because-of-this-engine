@@ -140,7 +140,20 @@ def _align_chunk(chunk: str, asr_words: list[dict[str, Any]], cursor: int) -> tu
         )
     return positions[0]["start"], positions[-1]["end"], search_cursor, positions
 
-def _recognize(audio_path: Path, model_path: Path) -> list[dict[str, Any]]:
+def _canonical_vocabulary(script: str) -> list[str]:
+    vocabulary: set[str] = set()
+    for _original, alternatives in _units(script):
+        for alternative in alternatives:
+            vocabulary.update(alternative)
+    return sorted(token for token in vocabulary if token)
+
+
+def _recognize(
+    audio_path: Path,
+    model_path: Path,
+    *,
+    vocabulary: list[str] | None = None,
+) -> list[dict[str, Any]]:
     try:
         from vosk import KaldiRecognizer, Model
     except ImportError as exc:
@@ -152,6 +165,12 @@ def _recognize(audio_path: Path, model_path: Path) -> list[dict[str, Any]]:
             if audio.getnchannels() != 1 or audio.getsampwidth() != 2 or audio.getframerate() != 24000:
                 raise AlignmentError("Narration must be mono 24 kHz 16-bit PCM WAV.")
             recognizer = KaldiRecognizer(Model(str(model_path)), 24000)
+            if vocabulary:
+                # A second, constrained pass reduces predictable ASR substitutions
+                # while retaining real timestamps from the final WAV. The grammar
+                # is derived only from the canonical script; it never invents
+                # caption timings.
+                recognizer.SetGrammar(json.dumps(vocabulary, ensure_ascii=False))
             recognizer.SetWords(True)
             payloads: list[dict[str, Any]] = []
             while True:
@@ -183,6 +202,20 @@ def _recognize(audio_path: Path, model_path: Path) -> list[dict[str, Any]]:
     if not words:
         raise AlignmentError("Speech recognizer returned no word timestamps.")
     return words
+
+
+def _align_chunks(
+    chunks: list[str],
+    asr_words: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    events: list[dict[str, Any]] = []
+    sidecar_chunks: list[dict[str, Any]] = []
+    cursor = 0
+    for chunk in chunks:
+        start, end, cursor, positions = _align_chunk(chunk, asr_words, cursor)
+        events.append({"start": start, "end": end, "text": chunk})
+        sidecar_chunks.append({"text": chunk, "words": positions})
+    return events, sidecar_chunks
 
 def _write_ass(path: Path, events: list[dict[str, Any]]) -> None:
     header = """[Script Info]
@@ -219,18 +252,29 @@ def generate(manifest_path: Path, model_path: Path) -> dict[str, Any]:
     finally:
         duration.close()
 
-    asr_words = _recognize(audio_path, model_path)
+    script = (base / manifest["script"]["path"]).read_text(encoding="utf-8").strip()
     chunks = phrase_chunks(
-        (base / manifest["script"]["path"]).read_text(encoding="utf-8").strip(),
+        script,
         max_line_chars=int(captions.get("max_line_chars", 42)),
     )
-    events: list[dict[str, Any]] = []
-    cursor = 0
-    sidecar_chunks: list[dict[str, Any]] = []
-    for chunk in chunks:
-        start, end, cursor, positions = _align_chunk(chunk, asr_words, cursor)
-        events.append({"start": start, "end": end, "text": chunk})
-        sidecar_chunks.append({"text": chunk, "words": positions})
+    first_error: AlignmentError | None = None
+    try:
+        asr_words = _recognize(audio_path, model_path)
+        events, sidecar_chunks = _align_chunks(chunks, asr_words)
+    except AlignmentError as exc:
+        first_error = exc
+        constrained_vocabulary = _canonical_vocabulary(script)
+        try:
+            asr_words = _recognize(
+                audio_path,
+                model_path,
+                vocabulary=constrained_vocabulary,
+            )
+            events, sidecar_chunks = _align_chunks(chunks, asr_words)
+        except AlignmentError as constrained_error:
+            raise AlignmentError(
+                f"{first_error} Grammar-constrained retry also failed: {constrained_error}"
+            ) from constrained_error
 
     for index in range(1, len(events)):
         boundary = (events[index - 1]["end"] + events[index]["start"]) / 2
@@ -264,7 +308,6 @@ def generate(manifest_path: Path, model_path: Path) -> dict[str, Any]:
         "event_count": len(events),
         "recognized_words": len(asr_words),
     }
-
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
