@@ -64,7 +64,10 @@ def _scene_query(scene: dict[str, Any], override: str | None = None) -> SceneQue
     if override and override.strip():
         query = override.strip()
     else:
+        raw_keywords = scene.get("search_keywords", [])
+        keyword_text = " ".join(str(value) for value in raw_keywords) if isinstance(raw_keywords, list) else str(raw_keywords)
         pieces = [
+            keyword_text,
             scene.get("story_beat", ""),
             scene.get("visual_intent", ""),
             scene.get("image_type", ""),
@@ -144,15 +147,30 @@ def _base_candidate(
     }
 
 
+def _query_variants(query: SceneQuery) -> list[str]:
+    """Keep provider search precise while allowing one bounded broadening step."""
+    variants = [query.query]
+    terms = query.query.split()
+    if len(terms) > 4:
+        variants.append(" ".join(terms[:4]))
+    if len(terms) > 3:
+        variants.append(" ".join(terms[-3:]))
+    return list(dict.fromkeys(value.strip() for value in variants if value.strip()))
+
+
 def _search_nasa(query: SceneQuery, limit: int) -> list[dict[str, Any]]:
-    params = urllib.parse.urlencode({
-        "q": query.query,
-        "media_type": "video",
-        "page_size": min(max(limit, 1), 100),
-    })
-    payload = _get_json(f"{NASA_SEARCH}?{params}")
-    items = payload.get("collection", {}).get("items", [])
     results: list[dict[str, Any]] = []
+    for variant in _query_variants(query):
+        params = urllib.parse.urlencode({
+            "q": variant,
+            "media_type": "video",
+            "page_size": min(max(limit, 1), 100),
+        })
+        payload = _get_json(f"{NASA_SEARCH}?{params}")
+        items = payload.get("collection", {}).get("items", [])
+        if not isinstance(items, list) or not items:
+            continue
+        results = []
     for item in items if isinstance(items, list) else []:
         data = item.get("data", [{}]) if isinstance(item, dict) else [{}]
         record = data[0] if isinstance(data, list) and data else {}
@@ -168,20 +186,22 @@ def _search_nasa(query: SceneQuery, limit: int) -> list[dict[str, Any]]:
                 if isinstance(link, dict) and link.get("rel") == "preview":
                     preview = link.get("href")
                     break
-        results.append(_base_candidate(
-            provider="nasa",
-            candidate_id=nasa_id,
-            title=str(record.get("title") or nasa_id),
-            description=str(record.get("description") or ""),
-            tags=" ".join(record.get("keywords") or []) if isinstance(record.get("keywords"), list) else "",
-            source_page_url=f"https://images.nasa.gov/details/{urllib.parse.quote(nasa_id)}",
-            download_url=preview if isinstance(preview, str) else None,
-            license_url="https://www.nasa.gov/nasa-brand-center/images-and-media/",
-            license_name="NASA_MEDIA_GUIDELINES_REVIEW",
-            duration=None,
-            width=None,
-            height=None,
-        ))
+            results.append(_base_candidate(
+                provider="nasa",
+                candidate_id=nasa_id,
+                title=str(record.get("title") or nasa_id),
+                description=str(record.get("description") or ""),
+                tags=" ".join(record.get("keywords") or []) if isinstance(record.get("keywords"), list) else "",
+                source_page_url=f"https://images.nasa.gov/details/{urllib.parse.quote(nasa_id)}",
+                download_url=preview if isinstance(preview, str) else None,
+                license_url="https://www.nasa.gov/nasa-brand-center/images-and-media/",
+                license_name="NASA_MEDIA_GUIDELINES_REVIEW",
+                duration=None,
+                width=None,
+                height=None,
+            ))
+        if results:
+            break
     return results
 
 
