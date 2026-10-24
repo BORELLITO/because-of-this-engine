@@ -78,16 +78,41 @@ def finalize(manifest_path: Path, release_report_path: Path, delivery_receipt_pa
             "visual_match": scene["visual_match"],
             "visual_truth": scene["visual_truth"],
         })
+    research = manifest.get("research") or {}
+    captions_spec = manifest.get("captions") or {}
+    alignment_sidecar = resolve_inside(
+        base,
+        captions_spec.get("alignment_sidecar", "captions/narration.alignment.json"),
+        "Caption alignment sidecar",
+    )
     payload = {
         "status": "READY_FOR_CLEANUP",
+        "publication_status": "FINAL_CANDIDATE" if mode == "final" else "PREVIEW_ONLY",
         "job_id": job_id_from_manifest(manifest),
         "engine_version": "2.0",
         "schema_version": manifest.get("schema_version"),
         "video_id": manifest.get("video_id"),
+        "truth_mode": (manifest.get("story_profile") or {}).get("truth_mode"),
         "mode": mode,
         "git_commit": __import__("os").environ.get("GITHUB_SHA"),
         "workflow_run": __import__("os").environ.get("GITHUB_RUN_ID"),
         "topic": manifest.get("title"),
+        "research_fingerprint": canonical_hash(research),
+        "alignment": {
+            "mode": captions_spec.get("alignment_mode"),
+            "source": captions_spec.get("alignment_source"),
+            "word_level_available": captions_spec.get("word_level_available"),
+            "sidecar_sha256": sha256_file(alignment_sidecar) if alignment_sidecar.is_file() else None,
+            "sidecar_path": str(alignment_sidecar),
+        },
+        "edit_config": {
+            "editing": manifest.get("editing"),
+            "transitions": [scene.get("transition", {}) for scene in manifest.get("scenes", [])],
+            "loop": manifest.get("loop"),
+            "color_grade": manifest.get("color_grade"),
+            "brand": manifest.get("brand"),
+            "music": manifest.get("music"),
+        },
         "voice": manifest.get("voice"),
         "fingerprints": {
             "manifest_sha256": sha256_file(manifest_path),
@@ -124,7 +149,10 @@ def mark_complete(final_manifest_path: Path, cleanup_receipt_path: Path) -> dict
         raise FinalManifestError("Final manifest is not waiting for cleanup completion.")
     if receipt.get("status") != "DRIVE_VERIFIED":
         raise FinalManifestError("Cleanup completion requires a verified Drive receipt.")
-    payload["status"] = "PRODUCTION_COMPLETE"
+    completion_status = (
+        "PRODUCTION_COMPLETE" if payload.get("mode") == "final" else "PREVIEW_COMPLETE"
+    )
+    payload["status"] = completion_status
     payload["cleanup"] = {
         "status": "PASS",
         "verified_before_cleanup": True,
@@ -132,7 +160,7 @@ def mark_complete(final_manifest_path: Path, cleanup_receipt_path: Path) -> dict
         "completed_at_utc": datetime.now(timezone.utc).isoformat(),
     }
     final_manifest_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    return {"status": "PRODUCTION_COMPLETE", "path": str(final_manifest_path), "job_id": payload.get("job_id")}
+    return {"status": completion_status, "path": str(final_manifest_path), "job_id": payload.get("job_id")}
 
 
 
