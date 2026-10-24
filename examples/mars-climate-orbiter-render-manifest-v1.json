@@ -45,7 +45,13 @@
           "x": 0.5,
           "y": 0.48
         }
-      }
+      },
+      "search_keywords": [
+        "Mars Climate Orbiter",
+        "spacecraft",
+        "space mission",
+        "Mars"
+      ]
     },
     {
       "scene_id": "S02",
@@ -66,7 +72,14 @@
           "x": 0.5,
           "y": 0.5
         }
-      }
+      },
+      "search_keywords": [
+        "spacecraft",
+        "Mars",
+        "trajectory",
+        "mission control",
+        "data"
+      ]
     },
     {
       "scene_id": "S03",
@@ -87,7 +100,14 @@
           "x": 0.52,
           "y": 0.46
         }
-      }
+      },
+      "search_keywords": [
+        "mission control",
+        "engineering",
+        "computer",
+        "unit conversion",
+        "data"
+      ]
     },
     {
       "scene_id": "S04",
@@ -108,7 +128,14 @@
           "x": 0.55,
           "y": 0.5
         }
-      }
+      },
+      "search_keywords": [
+        "spacecraft",
+        "Mars",
+        "trajectory",
+        "orbit",
+        "navigation"
+      ]
     },
     {
       "scene_id": "S05",
@@ -129,7 +156,14 @@
           "x": 0.5,
           "y": 0.5
         }
-      }
+      },
+      "search_keywords": [
+        "mission control",
+        "spacecraft",
+        "Mars",
+        "communication",
+        "control room"
+      ]
     },
     {
       "scene_id": "S06",
@@ -150,7 +184,14 @@
           "x": 0.48,
           "y": 0.5
         }
-      }
+      },
+      "search_keywords": [
+        "Mars",
+        "spacecraft",
+        "orbit",
+        "planet",
+        "space mission"
+      ]
     }
   ],
   "transition_duration": 0.33,
