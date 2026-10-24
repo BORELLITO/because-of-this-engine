@@ -123,6 +123,13 @@ jobs:
             --manifest "${{ inputs.manifest }}" \
             --report "$(dirname "${{ inputs.manifest }}")/rendered/caption-quality-${{ inputs.mode }}.json" \
             ${EXTRA}
+      - name: Evaluate canonical gates before render
+        run: |
+          python production/quality_gates.py \
+            --manifest "${{ inputs.manifest }}" \
+            --mode "${{ inputs.mode }}" \
+            --phase pre-render \
+            --report "$(dirname "${{ inputs.manifest }}")/rendered/quality-gates-pre-render.json"
 
       - name: Validate v2 video contract
         run: python production/render_video_episode.py --manifest "${{ inputs.manifest }}" --mode "${{ inputs.mode }}" --validate-only
@@ -142,6 +149,14 @@ jobs:
             --manifest "${{ inputs.manifest }}" \
             --mode "${{ inputs.mode }}" \
             --report "$(dirname "${{ inputs.manifest }}")/rendered/video-release-${{ inputs.mode }}.json"
+      - name: Evaluate canonical gates after render QA
+        run: |
+          python production/quality_gates.py \
+            --manifest "${{ inputs.manifest }}" \
+            --mode "${{ inputs.mode }}" \
+            --phase post-render \
+            --release-report "$(dirname "${{ inputs.manifest }}")/rendered/video-release-${{ inputs.mode }}.json" \
+            --report "$(dirname "${{ inputs.manifest }}")/rendered/quality-gates-post-render.json"
 
       - name: Mark QA passed
         run: python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition QA_PASSED --stage qa
@@ -269,4 +284,45 @@ jobs:
             --job-id "${JOB_ID}" \
             --path "${FINAL_MANIFEST}" \
             --receipt "${RUNNER_TEMP}/complete-delivery.json"
-          python production/pipeline_state.py --manifest "${MANIFEST}" --transition COMPLETE --stage complete
+
+      - name: Evaluate final canonical gates
+        env:
+          MANIFEST: ${{ inputs.manifest }}
+          MODE: ${{ inputs.mode }}
+        run: |
+          set -euo pipefail
+          FINAL_MANIFEST="$(dirname "${MANIFEST}")/rendered/final-manifest-$(python - "${MANIFEST}" "${MODE}" <<'PY'
+          import sys
+          import json
+          from pathlib import Path
+          value = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+          print(f"{value['video_id']}-{sys.argv[2]}.json")
+          PY
+          )"
+          python production/quality_gates.py \
+            --manifest "${MANIFEST}" \
+            --mode "${MODE}" \
+            --phase final \
+            --release-report "$(dirname "${MANIFEST}")/rendered/video-release-${MODE}.json" \
+            --delivery-receipt "${RUNNER_TEMP}/complete-delivery.json" \
+            --final-manifest "${FINAL_MANIFEST}" \
+            --cleanup-receipt "${RUNNER_TEMP}/final-delivery.json" \
+            --report "$(dirname "${MANIFEST}")/rendered/quality-gates-final.json"
+
+      - name: Deliver final canonical gate report
+        env:
+          BECAUSE_OF_THIS_DRIVE_FOLDER_ID: "1A-oyowfHtdciB2_NZSLIZ0oG-ajOeYVb"
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          python production/google_drive_delivery.py \
+            --collection "VIDEOS V2" \
+            --delivery-name "render-${JOB_ID}-${{ inputs.mode }}" \
+            --job-id "${JOB_ID}" \
+            --path "$(dirname "${{ inputs.manifest }}")/rendered/quality-gates-final.json" \
+            --receipt "${RUNNER_TEMP}/gate-delivery.json"
+
+      - name: Mark pipeline complete
+        run: python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition COMPLETE --stage complete
+

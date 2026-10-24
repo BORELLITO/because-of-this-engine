@@ -36,6 +36,8 @@ imagem são proibidos.
 - Nenhum asset narrativo repetido no mesmo episódio.
 - Nenhum clipe reutilizado entre episódios quando estiver PERMANENTLY_RETIRED.
 - URL, licença, ID do Drive, SHA-256 e aprovação são obrigatórios.
+- O relatório canônico G0–G12 é gerado em fases e não permite declarar produção completa com gate bloqueado.
+- A QA técnica executa blackdetect, freezedetect e silencedetect; preto contínuo inesperado bloqueia a entrega e freeze/silêncio prolongado ficam registrados como alertas.
 
 ## Arquivos principais
 
@@ -45,6 +47,8 @@ imagem são proibidos.
 - production/video_asset_contract.py: contrato v2 fail-closed.
 - production/render_video_episode.py: renderizador FFmpeg determinístico.
 - production/validate_video_release.py: gate final independente de mídia e legendas.
+- production/quality_gates.py: matriz canônica G0–G12 por fase.
+- production/media_anomaly.py: detecção técnica de preto, freeze e silêncio.
 - production/pipeline_state.py: identidade estável do job e máquina de estados explícita.
 - production/finalize_manifest.py: manifest final reproduzível e registro de cleanup.
 - production/caption_quality.py: sincronização e legibilidade das legendas.
