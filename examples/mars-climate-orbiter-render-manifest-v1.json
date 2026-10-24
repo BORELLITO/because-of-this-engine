@@ -212,7 +212,12 @@
     "word_level_available": false,
     "sync_tolerance_frames": 3,
     "end_tolerance_seconds": 0.1,
-    "alignment_source": "captions_ass_reviewed_against_narration_master"
+    "alignment_source": "captions_ass_reviewed_against_narration_master",
+    "profile": "corte_fino_adapted_v1",
+    "target_cps": 20,
+    "max_cps": 28,
+    "max_lines": 2,
+    "max_line_chars": 42
   },
   "approval": {
     "path": "approvals/mars-climate-orbiter-001-preview-approved.json"
