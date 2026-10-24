@@ -12,6 +12,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from production.caption_quality import CaptionQualityError, quality_report
+from production.media_anomaly import MediaAnomalyError, analyze
 from production.render_video_episode import SIZES, audio_duration
 from production.video_asset_contract import VideoContractError, ffprobe, load_manifest, sha256_file, validate_manifest
 
@@ -57,6 +58,14 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
         caption_report = quality_report(manifest_path, require_word_level=mode == "final")
     except CaptionQualityError as exc:
         raise VideoContractError(f"Caption gate failed during release validation: {exc}") from exc
+    try:
+        anomaly_report = analyze(output)
+    except MediaAnomalyError as exc:
+        raise VideoContractError(f"Media anomaly gate failed during release validation: {exc}") from exc
+    if anomaly_report["status"] == "BLOCKED":
+        raise VideoContractError(
+            f"Media anomaly gate found {anomaly_report['blocking_findings']} blocking finding(s)."
+        )
     editorial = manifest.get("editorial_qa") or {}
     editorial_status = editorial.get("status", "NOT_DECLARED")
     if mode == "final" and editorial_status != "PASS":
@@ -99,7 +108,8 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
         "technical_qa": "PASS",
         "editorial_qa": editorial_status,
         "post_render_sync": "PASS",
-        "anomaly_gate": "BASIC_PASS",
+        "anomaly_gate": anomaly_report["status"],
+        "anomaly_scan": anomaly_report,
         "asset_sha256": asset_hashes,
     }
 

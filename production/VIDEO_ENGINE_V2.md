@@ -78,7 +78,9 @@ folder and refuses to overwrite a file owned by another job.
 The final release requires verified research references, complete asset
 provenance, word-level caption evidence, and an explicit human
 `editorial_qa.status=PASS`. The release validator independently rechecks the
-rendered media and captions. After the first verified delivery, the engine
+rendered media, captions and black/freeze/silence anomalies. The canonical
+G0–G12 report is emitted before render, after release QA and after verified
+delivery/cleanup; a blocked gate cannot be silently skipped. After the first verified delivery, the engine
 writes a reproducibility manifest, performs scoped cleanup, marks cleanup
 complete, and re-delivers the completed manifest.
 
