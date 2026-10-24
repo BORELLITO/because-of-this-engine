@@ -23,6 +23,11 @@ concurrency:
   group: because-of-this-v2-${{ inputs.manifest }}-${{ inputs.mode }}
   cancel-in-progress: false
 
+# Single workflow-level destination for all preflight, delivery and receipt steps.
+# The Python adapter keeps the same value only as a local-development fallback.
+env:
+  BECAUSE_OF_THIS_DRIVE_FOLDER_ID: "1A-oyowfHtdciB2_NZSLIZ0oG-ajOeYVb"
+
 jobs:
   render:
     runs-on: ubuntu-latest
@@ -75,7 +80,6 @@ jobs:
 
       - name: Verify Google Drive delivery destination
         env:
-          BECAUSE_OF_THIS_DRIVE_FOLDER_ID: "1A-oyowfHtdciB2_NZSLIZ0oG-ajOeYVb"
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
@@ -227,7 +231,6 @@ jobs:
 
       - name: Deliver validated v2 production to Google Drive
         env:
-          BECAUSE_OF_THIS_DRIVE_FOLDER_ID: "1A-oyowfHtdciB2_NZSLIZ0oG-ajOeYVb"
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
@@ -257,7 +260,6 @@ jobs:
         env:
           MANIFEST: ${{ inputs.manifest }}
           MODE: ${{ inputs.mode }}
-          BECAUSE_OF_THIS_DRIVE_FOLDER_ID: "1A-oyowfHtdciB2_NZSLIZ0oG-ajOeYVb"
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
@@ -308,7 +310,6 @@ jobs:
         env:
           MANIFEST: ${{ inputs.manifest }}
           MODE: ${{ inputs.mode }}
-          BECAUSE_OF_THIS_DRIVE_FOLDER_ID: "1A-oyowfHtdciB2_NZSLIZ0oG-ajOeYVb"
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
@@ -355,7 +356,6 @@ jobs:
 
       - name: Deliver final canonical gate report
         env:
-          BECAUSE_OF_THIS_DRIVE_FOLDER_ID: "1A-oyowfHtdciB2_NZSLIZ0oG-ajOeYVb"
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
