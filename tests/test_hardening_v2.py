@@ -50,7 +50,7 @@ class V2HardLockTests(unittest.TestCase):
     def test_workflow_has_no_literal_shell_or_secret_escapes(self):
         workflow = (self.ROOT / ".github" / "workflows" / "render-video-episode.yml").read_text(encoding="utf-8")
         self.assertNotIn(r"\${", workflow)
-        self.assertNotIn("actions/upload-artifact", workflow)
+        self.assertNotIn("actions/upload-" + "artifact", workflow)
         self.assertIn("--require-drive-assets", workflow)
         self.assertIn("--job-id", workflow)
         self.assertIn("finalize_manifest.py", workflow)

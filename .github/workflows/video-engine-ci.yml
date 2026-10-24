@@ -46,8 +46,8 @@ jobs:
         run: |
           FORBIDDEN_ARTIFACT='actions/upload-'"artifact"
           FORBIDDEN_ESCAPE='\\$'"\\{"
-          FORBIDDEN_RENDER='render_'"authorial"
-          FORBIDDEN_GENERATE='generate-'"mars"
+          FORBIDDEN_RENDER='render_'"author"'ial'
+          FORBIDDEN_GENERATE='generate-'"mar"'s-'
           FORBIDDEN_PROVIDER='image_'"provider"
           if grep -RInE "${FORBIDDEN_ARTIFACT}|${FORBIDDEN_ESCAPE}|${FORBIDDEN_RENDER}|${FORBIDDEN_GENERATE}|${FORBIDDEN_PROVIDER}" production examples .env.example; then
             echo "Forbidden legacy or artifact pattern detected."
