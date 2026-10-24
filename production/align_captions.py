@@ -110,6 +110,34 @@ def _match_at(asr_words: list[dict[str, Any]], start: int, alternatives: list[li
     return best
 
 
+_RECOVERY_DURATIONS = {
+    "a": 0.10,
+    "an": 0.12,
+    "the": 0.16,
+    "to": 0.14,
+    "of": 0.13,
+    "and": 0.14,
+    "for": 0.16,
+    "in": 0.13,
+    "on": 0.13,
+    "at": 0.11,
+    "is": 0.12,
+    "was": 0.16,
+    "it": 0.11,
+}
+
+
+def _recovery_duration(canonical: str) -> float | None:
+    """Return a conservative duration only for short function words.
+
+    Recovery never invents a timestamp for content words. For a missing
+    function word, the real neighboring Vosk anchor is used and the short
+    word is placed immediately before the following anchor (or after the
+    previous one), leaving any intervening silence untouched.
+    """
+    return _RECOVERY_DURATIONS.get(_normalise(canonical))
+
+
 def _align_chunk(
     chunk: str,
     asr_words: list[dict[str, Any]],
@@ -181,6 +209,26 @@ def _align_chunk(
             while index < len(units) and matched_units[index] is None:
                 index += 1
             group_end = index
+            count = group_end - group_start
+            if count > 2:
+                raise AlignmentError(
+                    f"Could not safely recover {count} missing word timestamp(s) in {chunk!r}."
+                )
+            estimates = [
+                _recovery_duration(units[item][0])
+                for item in range(group_start, group_end)
+            ]
+            if any(value is None for value in estimates):
+                missing_words = [units[item][0] for item in range(group_start, group_end)]
+                raise AlignmentError(
+                    f"Could not safely recover non-function word(s) {missing_words!r} in {chunk!r}."
+                )
+            total_duration = sum(float(value) for value in estimates if value is not None)
+            if total_duration < 0.035 or total_duration > 0.35:
+                raise AlignmentError(
+                    f"Could not safely recover {count} missing word timestamp(s) in {chunk!r}; "
+                    f"estimated span={total_duration:.3f}s."
+                )
             previous = next(
                 (matched_units[item] for item in range(group_start - 1, -1, -1)
                  if matched_units[item] is not None),
@@ -191,37 +239,37 @@ def _align_chunk(
                  if matched_units[item] is not None),
                 None,
             )
-            if previous is not None:
-                left = float(previous["end"])
-            elif following is not None:
-                left = max(0.0, float(following["start"]) - 0.25)
+            if following is not None:
+                end_time = float(following["start"])
+                start_time = end_time - total_duration
+                if previous is not None and start_time < float(previous["end"]):
+                    raise AlignmentError(
+                        f"Could not safely recover {count} missing word timestamp(s) in {chunk!r}; "
+                        "the following-anchor window overlaps the previous anchor."
+                    )
+            elif previous is not None:
+                start_time = float(previous["end"])
+                end_time = start_time + total_duration
             else:
                 raise AlignmentError(f"Could not recover caption phrase {chunk!r}.")
-            if following is not None:
-                right = float(following["start"])
-            else:
-                right = float(previous["end"]) + 0.25 if previous is not None else left
-            span = right - left
-            count = group_end - group_start
-            slot = span / count if count else 0.0
-            if span <= 0.0 or slot < 0.035 or slot > 0.35 or count > 2:
-                raise AlignmentError(
-                    f"Could not safely recover {count} missing word timestamp(s) in {chunk!r}; "
-                    f"anchor span={span:.3f}s."
-                )
-            for offset, missing_index in enumerate(range(group_start, group_end)):
-                start_time = left + slot * offset
-                end_time = left + slot * (offset + 1)
+            cursor_time = start_time
+            for missing_index, estimate in zip(
+                range(group_start, group_end), estimates
+            ):
+                word_start = cursor_time
+                word_end = word_start + float(estimate)
                 matched_units[missing_index] = {
                     "canonical": units[missing_index][0],
                     "asr": "",
-                    "start": start_time,
-                    "end": end_time,
+                    "start": word_start,
+                    "end": word_end,
                     "confidence": 0.0,
                     "recovered": True,
-                    "timestamp_source": "vosk_bounded_anchor_recovery",
+                    "timestamp_source": "vosk_bounded_function_word_recovery",
+                    "recovery_anchor": "following" if following is not None else "previous",
                     "_asr_index": None,
                 }
+                cursor_time = word_end
                 recovered_count += 1
         if recovered_count > 2:
             raise AlignmentError(
