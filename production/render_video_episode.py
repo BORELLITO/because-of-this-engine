@@ -264,7 +264,7 @@ def mux_audio(
 
     logo_enabled = logo_path is not None and brand.get("logo_enabled", False) is True
     if logo_enabled:
-        command.extend(["-loop", "1", "-framerate", str(FPS), "-i", str(logo_path)])
+        # The logo is a static frame. Sampling it at 1 fps lets overlay repeat the\n        # frame at the video rate without decoding a large PNG 25 times per second.\n        command.extend(["-loop", "1", "-framerate", "1", "-i", str(logo_path)])
         logo_width = int(brand.get("logo_width", 360))
         logo_opacity = float(brand.get("logo_opacity", 0.82))
         logo_margin = int(brand.get("logo_margin", 54))
