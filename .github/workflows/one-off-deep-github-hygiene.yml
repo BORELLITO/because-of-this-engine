@@ -1,38 +1,55 @@
-name: One-off prune redundant Actions runs
+name: GitHub Housekeeping
 
 on:
-  push:
-    paths:
-      - ".github/workflows/one-off-deep-github-hygiene.yml"
   workflow_dispatch:
+  schedule:
+    - cron: "20 6 * * 0"
 
 permissions:
   actions: write
-  contents: write
+  contents: read
+
+concurrency:
+  group: github-housekeeping
+  cancel-in-progress: false
 
 jobs:
-  prune:
+  housekeeping:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Keep only useful run history
+      - name: Prune disposable Actions storage and history
         uses: actions/github-script@v7
-        env:
-          REPORT_PATH: redundant_run_cleanup_report.json
         with:
           script: |
-            const fs = require('fs');
             const { owner, repo } = context.repo;
+            const now = Date.now();
+            const DAY = 24 * 60 * 60 * 1000;
+            const protectedArtifactName = /(release|backup|permanent|keep)/i;
+
+            const artifacts = await github.paginate(
+              github.rest.actions.listArtifactsForRepo,
+              { owner, repo, per_page: 100 }
+            );
+            let artifactsDeleted = 0;
+            let artifactBytesDeleted = 0;
+            for (const a of artifacts) {
+              if (protectedArtifactName.test(a.name || '')) continue;
+              const ageDays = (now - new Date(a.created_at).getTime()) / DAY;
+              if (!a.expired && ageDays <= 3) continue;
+              try {
+                await github.rest.actions.deleteArtifact({ owner, repo, artifact_id: a.id });
+                artifactsDeleted++;
+                artifactBytesDeleted += a.size_in_bytes || 0;
+              } catch (e) {
+                core.warning(`Artifact ${a.id}: ${e.status || e.message}`);
+              }
+            }
 
             const runs = await github.paginate(
               github.rest.actions.listWorkflowRunsForRepo,
               { owner, repo, per_page: 100 }
             );
-
-            const buckets = new Map();
             const classify = (run) => {
               if (run.conclusion === 'success') return 'success';
               if (['failure','timed_out','action_required','startup_failure'].includes(run.conclusion)) return 'failure';
@@ -40,7 +57,7 @@ jobs:
               return 'other';
             };
             const keepLimit = { success: 20, failure: 20, cancelled: 5, other: 20 };
-
+            const buckets = new Map();
             for (const run of runs) {
               if (run.status !== 'completed') continue;
               const cls = classify(run);
@@ -49,76 +66,50 @@ jobs:
               buckets.get(key).push(run);
             }
 
-            const deleted = [];
-            const kept = [];
+            let runsDeleted = 0;
             for (const [key, group] of buckets.entries()) {
               group.sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
               const cls = key.split(':').pop();
               const limit = keepLimit[cls] ?? 20;
-
-              for (let i = 0; i < group.length; i++) {
+              for (let i = limit; i < group.length; i++) {
                 const run = group[i];
-                const item = {
-                  id: run.id,
-                  workflow_id: run.workflow_id,
-                  name: run.name,
-                  conclusion: run.conclusion,
-                  created_at: run.created_at,
-                  head_branch: run.head_branch
-                };
-
-                if (run.id === context.runId || i < limit) {
-                  kept.push({ ...item, reason: run.id === context.runId ? 'current-run' : `latest-${limit}-${cls}` });
-                  continue;
-                }
-
+                if (run.id === context.runId) continue;
                 try {
-                  await github.rest.actions.deleteWorkflowRun({
-                    owner, repo, run_id: run.id
-                  });
-                  deleted.push(item);
+                  await github.rest.actions.deleteWorkflowRun({ owner, repo, run_id: run.id });
+                  runsDeleted++;
                 } catch (e) {
-                  kept.push({ ...item, reason: `delete-failed:${e.status || e.message}` });
+                  core.warning(`Run ${run.id}: ${e.status || e.message}`);
                 }
               }
             }
 
-            const remaining = await github.paginate(
-              github.rest.actions.listWorkflowRunsForRepo,
-              { owner, repo, per_page: 100 }
-            );
+            let cachesDeleted = 0;
+            let cacheBytesDeleted = 0;
+            try {
+              const response = await github.request('GET /repos/{owner}/{repo}/actions/caches', {
+                owner, repo, per_page: 100
+              });
+              for (const c of (response.data.actions_caches || [])) {
+                const idleDays = (now - new Date(c.last_accessed_at || c.created_at).getTime()) / DAY;
+                if (idleDays <= 21) continue;
+                try {
+                  await github.request('DELETE /repos/{owner}/{repo}/actions/caches/{cache_id}', {
+                    owner, repo, cache_id: c.id
+                  });
+                  cachesDeleted++;
+                  cacheBytesDeleted += c.size_in_bytes || 0;
+                } catch (e) {
+                  core.warning(`Cache ${c.id}: ${e.status || e.message}`);
+                }
+              }
+            } catch (e) {
+              core.warning(`Cache audit: ${e.status || e.message}`);
+            }
 
-            const report = {
-              generated_at: new Date().toISOString(),
-              repository: `${owner}/${repo}`,
-              policy: {
-                success_per_workflow: 20,
-                failure_per_workflow: 20,
-                cancelled_skipped_neutral_per_workflow: 5,
-                in_progress_and_queued: 'always preserved'
-              },
-              before_count: runs.length,
-              deleted_count: deleted.length,
-              after_count: remaining.length,
-              deleted_by_name: deleted.reduce((acc, x) => {
-                acc[x.name] = (acc[x.name] || 0) + 1;
-                return acc;
-              }, {}),
-              deleted: deleted
-            };
-
-            fs.writeFileSync(process.env.REPORT_PATH, JSON.stringify(report, null, 2) + '\n');
-            core.summary
-              .addHeading('Redundant Actions run cleanup')
-              .addRaw(`Before: ${runs.length}\n`)
-              .addRaw(`Deleted: ${deleted.length}\n`)
-              .addRaw(`After: ${remaining.length}\n`);
-            await core.summary.write();
-
-      - name: Commit cleanup report
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add redundant_run_cleanup_report.json
-          git commit -m "chore: record Actions run cleanup" || exit 0
-          git push
+            await core.summary
+              .addHeading('GitHub Housekeeping')
+              .addRaw(`Artifacts deleted: ${artifactsDeleted} (${artifactBytesDeleted} bytes)\n`)
+              .addRaw(`Workflow runs deleted: ${runsDeleted}\n`)
+              .addRaw(`Stale caches deleted: ${cachesDeleted} (${cacheBytesDeleted} bytes)\n`)
+              .addRaw('Branches and releases are never deleted automatically.\n')
+              .write();
