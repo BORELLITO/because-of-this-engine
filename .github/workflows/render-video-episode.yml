@@ -207,4 +207,44 @@ jobs:
           find "${EPISODE_DIR}" -type f \( -path "*/rendered/*.mp4" -o -path "*/rendered/*.mov" -o -path "*/rendered/*.mkv" -o -path "*/runtime-assets/*.mp4" -o -path "*/runtime-assets/*.mov" -o -path "*/runtime-assets/*.mkv" \) -delete
           echo "v2 media delivered and verified in Google Drive; scoped runner-local media removed." >> "${GITHUB_STEP_SUMMARY}"
           python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition CLEANED --stage cleanup
-          python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition COMPLETE --stage complete
+
+      - name: Mark final manifest complete after cleanup
+        run: |
+          python production/finalize_manifest.py \
+            --manifest "$(dirname "${{ inputs.manifest }}")/rendered/final-manifest-$(python - "${{ inputs.manifest }}" "${{ inputs.mode }}" <<'PY'
+          import sys
+          import json
+          from pathlib import Path
+          value = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+          print(f"{value['video_id']}-{sys.argv[2]}.json")
+          PY
+          )" \
+            --delivery-receipt "${RUNNER_TEMP}/final-delivery.json" \
+            --mode "${{ inputs.mode }}" \
+            --complete
+
+      - name: Deliver complete final manifest
+        env:
+          MANIFEST: ${{ inputs.manifest }}
+          MODE: ${{ inputs.mode }}
+          BECAUSE_OF_THIS_DRIVE_FOLDER_ID: "1A-oyowfHtdciB2_NZSLIZ0oG-ajOeYVb"
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+          FINAL_MANIFEST="$(dirname "${MANIFEST}")/rendered/final-manifest-$(python - "${MANIFEST}" "${MODE}" <<'PY'
+          import sys
+          import json
+          from pathlib import Path
+          value = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+          print(f"{value['video_id']}-{sys.argv[2]}.json")
+          PY
+          )"
+          python production/google_drive_delivery.py \
+            --collection "VIDEOS V2" \
+            --delivery-name "render-${JOB_ID}-${MODE}" \
+            --job-id "${JOB_ID}" \
+            --path "${FINAL_MANIFEST}" \
+            --receipt "${RUNNER_TEMP}/complete-delivery.json"
+          python production/pipeline_state.py --manifest "${MANIFEST}" --transition COMPLETE --stage complete
