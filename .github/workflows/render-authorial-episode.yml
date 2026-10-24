@@ -53,6 +53,15 @@ jobs:
       - name: Run engine regression tests
         run: python -m unittest discover -s tests -v
 
+      - name: Verify Google Drive destination
+        env:
+          BECAUSE_OF_THIS_DRIVE_FOLDER_ID: "1GUOcSRo91xxypW-GgCchubhx9FaMGk5u"
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: python production/google_drive_delivery.py --preflight
+
+
       - name: Run strict caption QA
         run: |
           EXTRA=""
@@ -134,31 +143,35 @@ jobs:
             fi
           } >> "${GITHUB_STEP_SUMMARY}"
 
-      - name: Upload validated package (best effort)
-        id: upload_validated_package
-        continue-on-error: true
-        uses: actions/upload-artifact@v4
-        with:
-          name: because-of-this-${{ inputs.mode }}-validated-package
-          path: |
-            examples/rendered/*.mp4
-            examples/rendered/*.json
-            ${{ inputs.manifest }}
-            examples/assets/*.json
-          if-no-files-found: error
-          retention-days: 1
-
-      - name: Publish artifact delivery status
-        if: always()
+      - name: Deliver validated production to Google Drive
+        id: drive_delivery
+        env:
+          BECAUSE_OF_THIS_DRIVE_FOLDER_ID: "1GUOcSRo91xxypW-GgCchubhx9FaMGk5u"
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: |
-          {
-            echo ""
-            echo "### Artifact delivery"
-            echo "- upload_step_outcome: ${{ steps.upload_validated_package.outcome }}"
-            if [ "${{ steps.upload_validated_package.outcome }}" = "success" ]; then
-              echo "- status: PASS"
-            else
-              echo "- status: BLOCKED"
-              echo "- note: quality and synchronization gates remain authoritative; download delivery was not validated"
-            fi
-          } >> "${GITHUB_STEP_SUMMARY}"
+          python production/google_drive_delivery.py \
+            --collection "VIDEOS" \
+            --delivery-name "render-${{ inputs.mode }}-${{ github.run_id }}" \
+            --path examples/rendered \
+            --path "${{ inputs.manifest }}" \
+            --receipt "${RUNNER_TEMP}/drive-delivery.json"
+
+          python - "${RUNNER_TEMP}/drive-delivery.json" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          report = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+          with open(Path(__import__("os").environ["GITHUB_STEP_SUMMARY"]), "a", encoding="utf-8") as handle:
+              handle.write("\n## Google Drive delivery\n")
+              handle.write(f"- status: {report.get('status')}\n")
+              handle.write(f"- files: {report.get('file_count')}\n")
+              handle.write(f"- folder: {report.get('delivery_folder_url')}\n")
+          PY
+
+      - name: Remove local rendered media after verified Drive delivery
+        if: success()
+        run: |
+          find examples/rendered -type f \( -name "*.mp4" -o -name "*.mov" -o -name "*.mkv" -o -name "*.zip" \) -delete
+          echo "Rendered media delivered to Google Drive; runner-local copies removed." >> "${GITHUB_STEP_SUMMARY}"
