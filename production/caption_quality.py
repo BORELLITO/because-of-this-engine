@@ -281,6 +281,19 @@ def quality_report(manifest_path: Path, require_word_level: bool = False) -> dic
             raise CaptionQualityError("Caption alignment sidecar duration does not match narration.")
         if any(not isinstance(item, dict) or not item.get("word") for item in sidecar["words"]):
             raise CaptionQualityError("Caption alignment sidecar contains invalid word timestamps.")
+        recovered_count = int(sidecar.get("recovered_word_count", 0) or 0)
+        recovered_count += sum(
+            1
+            for chunk in sidecar.get("captions", [])
+            if isinstance(chunk, dict)
+            for word in (chunk.get("words") or [])
+            if isinstance(word, dict) and word.get("recovered") is True
+        )
+        if recovered_count:
+            raise CaptionQualityError(
+                f"Forced alignment contains {recovered_count} estimated timestamp(s); "
+                "real word timestamps are mandatory in every production mode."
+            )
     if require_word_level and not word_level:
         raise CaptionQualityError(
             "Final release requires real word-level alignment; current captions are explicitly phrase-level."
