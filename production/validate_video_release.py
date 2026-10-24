@@ -7,6 +7,9 @@ import argparse
 import json
 from pathlib import Path
 from typing import Any
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from production.caption_quality import CaptionQualityError, quality_report
 from production.render_video_episode import SIZES, audio_duration
