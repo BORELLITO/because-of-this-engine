@@ -125,6 +125,13 @@ jobs:
             --style "${STYLE}" \
             --overwrite
 
+      - name: Normalize narration duration into Shorts contract
+        run: |
+          set -euo pipefail
+          python production/normalize_narration_duration.py \
+            --manifest "${{ inputs.manifest }}" \
+            --ffmpeg ffmpeg
+
 
       - name: Install Vosk forced-alignment model
         run: |
