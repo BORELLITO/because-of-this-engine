@@ -49,3 +49,21 @@ python production/validate_video_release.py --manifest <episode>/manifest.json -
 
 The GitHub workflow is `.github/workflows/render-video-episode.yml`. This v2 contract is the authoritative production path. Image-based manifests
 are rejected by the video-only contract.
+
+## Job identity, state and final receipt
+
+Every episode has a stable `job_id`. The state machine records the accepted
+stage transitions and refuses to reuse a state file after the manifest
+fingerprint changes. A rerun of the same job uses the same Drive delivery
+folder and refuses to overwrite a file owned by another job.
+
+The final release requires verified research references, complete asset
+provenance, word-level caption evidence, and an explicit human
+`editorial_qa.status=PASS`. The release validator independently rechecks the
+rendered media and captions. After the first verified delivery, the engine
+writes a reproducibility manifest, performs scoped cleanup, marks cleanup
+complete, and re-delivers the completed manifest.
+
+A final job may declare `PRODUCTION_COMPLETE` only after all of these are true:
+validated media, verified Drive delivery, reproducibility manifest, scoped
+cleanup, and final-manifest re-delivery.
