@@ -182,7 +182,7 @@
     },
     {
       "scene_id": "S04",
-      "duration": 18.5,
+      "duration": 18,
       "story_beat": "turn: the figure moves closer when the lights return",
       "visual_intent": "show the point of no return without inventing a literal hallway",
       "visual_function": "tension",
@@ -223,7 +223,7 @@
     },
     {
       "scene_id": "S05",
-      "duration": 15.7,
+      "duration": 16.2,
       "story_beat": "payoff: the camera becomes the thing still watching",
       "visual_intent": "resolve the story with smoke and an impossible final implication",
       "visual_function": "payoff",
