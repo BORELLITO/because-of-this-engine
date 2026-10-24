@@ -44,7 +44,9 @@ imagem são proibidos.
 - production/google_drive_assets.py: ponte Drive para o runner.
 - production/video_asset_contract.py: contrato v2 fail-closed.
 - production/render_video_episode.py: renderizador FFmpeg determinístico.
-- production/validate_video_release.py: gate de mídia final.
+- production/validate_video_release.py: gate final independente de mídia e legendas.
+- production/pipeline_state.py: identidade estável do job e máquina de estados explícita.
+- production/finalize_manifest.py: manifest final reproduzível e registro de cleanup.
 - production/caption_quality.py: sincronização e legibilidade das legendas.
 - production/google_drive_delivery.py: entrega verificada no Drive.
 - examples/video-only-episode-manifest-v2.template.json: template de episódio.
@@ -63,7 +65,8 @@ imagem são proibidos.
   preview ou final.
 
 O template possui placeholders de propósito. Um episódio real precisa receber
-narracão, legendas word-level, música licenciada e IDs/checksums dos vídeos
-aprovados no Drive.
+narração, legendas word-level, música licenciada, pesquisa verificada, IDs/checksums
+dos vídeos aprovados no Drive e QA editorial humano antes do modo final.
+O modo final é fail-closed enquanto esses gates não existirem.
 
 
