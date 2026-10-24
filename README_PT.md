@@ -73,4 +73,6 @@ narração, legendas word-level, música licenciada, pesquisa verificada, IDs/ch
 dos vídeos aprovados no Drive e QA editorial humano antes do modo final.
 O modo final é fail-closed enquanto esses gates não existirem.
 
+O preview é somente validação: o recibo termina em `PREVIEW_COMPLETE` e nunca é uma publicação de produção. Apenas uma execução `final` com aprovação editorial humana pode chegar a `PRODUCTION_COMPLETE`.
+
 
