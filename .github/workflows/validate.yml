@@ -2,10 +2,28 @@ name: Validate engine
 
 on:
   push:
+    paths:
+      - "narrate.py"
+      - "production/**"
+      - "tests/**"
+      - "requirements.txt"
+      - "examples/*.json"
+      - ".github/workflows/validate.yml"
   pull_request:
+    paths:
+      - "narrate.py"
+      - "production/**"
+      - "tests/**"
+      - "requirements.txt"
+      - "examples/*.json"
+      - ".github/workflows/validate.yml"
 
 permissions:
   contents: read
+
+concurrency:
+  group: validate-engine-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test-and-compile:
