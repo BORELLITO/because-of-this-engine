@@ -191,6 +191,7 @@ def _validate_word_highlight(
     if max_error_ms < 1 or max_error_ms > 100:
         raise CaptionQualityError("word_highlight_tolerance_ms must be between 1 and 100 ms.")
     total_words = 0
+    recovered_words = 0
     for index, (event, chunk) in enumerate(zip(events, chunks), start=1):
         words = chunk.get("words") if isinstance(chunk, dict) else None
         if not isinstance(words, list) or not words:
@@ -202,6 +203,13 @@ def _validate_word_highlight(
                 "exactly two transforms per word are required."
             )
         for word_index, word in enumerate(words):
+            if word.get("recovered") is True:
+                recovered_words += 1
+                recovered_duration = float(word["end"]) - float(word["start"])
+                if recovered_duration > 0.35:
+                    raise CaptionQualityError(
+                        f"Caption C{index:03d} word {word_index + 1} exceeds the bounded recovery window."
+                    )
             active = transforms[word_index * 2]
             reset = transforms[word_index * 2 + 1]
             expected_start = round((float(word["start"]) - event["start"]) * 1000)
@@ -215,12 +223,15 @@ def _validate_word_highlight(
                     f"Caption C{index:03d} word {word_index + 1} has an invalid active/reset color pair."
                 )
         total_words += len(words)
+    if recovered_words > 2:
+        raise CaptionQualityError("Word highlight contains more than two bounded-recovery words.")
     return {
         "enabled": True,
         "mode": "timestamp_color_transform",
         "active_word_color": active_color,
         "contrast_against_black_outline": round(contrast, 2),
         "word_count": total_words,
+        "recovered_word_count": recovered_words,
         "tolerance_ms": max_error_ms,
     }
 
@@ -345,7 +356,11 @@ def quality_report(manifest_path: Path, require_word_level: bool = False) -> dic
         "alignment_mode": alignment_mode,
         "word_level_available": word_level,
         "alignment_source": alignment_source,
-        "timing_claim": "word_level_verified" if word_level else "reviewed_phrase_level",
+        "timing_claim": (
+            "word_level_verified_with_bounded_anchor_recovery"
+            if word_level and sidecar and sidecar.get("recovered_word_count", 0)
+            else ("word_level_verified" if word_level else "reviewed_phrase_level")
+        ),
         "word_highlight": word_highlight,
         "thresholds": {
             "max_lines": max_lines,
