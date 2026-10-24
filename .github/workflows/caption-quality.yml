@@ -1,0 +1,75 @@
+name: Caption quality gate
+
+on:
+  push:
+    paths:
+      - "production/caption_quality.py"
+      - "production/CAPTION_QA.md"
+      - "examples/mars_climate_orbiter.txt"
+      - "examples/assets/mars-climate-orbiter-captions.ass"
+      - "examples/assets/mars-climate-orbiter-charon.wav"
+      - "examples/mars-climate-orbiter-render-manifest-v1.json"
+      - "tests/test_caption_quality.py"
+      - ".github/workflows/caption-quality.yml"
+  pull_request:
+    paths:
+      - "production/caption_quality.py"
+      - "examples/**"
+      - "tests/test_caption_quality.py"
+      - ".github/workflows/caption-quality.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  caption-quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install runtime dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Run caption regression suite
+        run: python -m unittest tests.test_caption_quality -v
+
+      - name: Validate Mars captions
+        run: |
+          mkdir -p examples/rendered
+          python production/caption_quality.py             --manifest examples/mars-climate-orbiter-render-manifest-v1.json             --report examples/rendered/caption-quality-mars.json
+
+      - name: Publish caption receipt
+        if: always()
+        run: |
+          {
+            echo "## Because of This — caption QA"
+            if [ -f examples/rendered/caption-quality-mars.json ]; then
+              python - <<'PY'
+          import json
+          from pathlib import Path
+          report = json.loads(Path("examples/rendered/caption-quality-mars.json").read_text(encoding="utf-8"))
+          print(f"- status: {report.get('status')}")
+          print(f"- events: {report.get('event_count')}")
+          print(f"- alignment: {report.get('timing_claim')}")
+          print(f"- narration: {report.get('audio_duration_seconds')} s")
+          print(f"- max CPS: {report.get('thresholds', {}).get('max_cps')}")
+          PY
+            else
+              echo "- status: no caption receipt was produced"
+            fi
+          } >> "${GITHUB_STEP_SUMMARY}"
+
+      - name: Upload caption receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: because-of-this-caption-quality
+          path: examples/rendered/caption-quality-mars.json
+          if-no-files-found: error
+          retention-days: 7
