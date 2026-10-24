@@ -112,11 +112,12 @@ class NarrationTests(unittest.TestCase):
                     request_timeout_seconds=5,
                     transport="rest_stream",
                 )
+                output_bytes = output_path.read_bytes()
 
         self.assertEqual(metadata["transport"], "rest_stream")
         self.assertEqual(metadata["request_id"], "stream-request")
         self.assertEqual(metadata["duration_seconds"], 0.1)
-        self.assertTrue(output_path.read_bytes().startswith(b"RIFF"))
+        self.assertTrue(output_bytes.startswith(b"RIFF"))
 
     def test_api_timeout_fails_fast_without_writing_output(self) -> None:
         class SlowInteractions:
