@@ -88,6 +88,27 @@ jobs:
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: python production/google_drive_assets.py --manifest "${{ inputs.manifest }}" --require-drive-assets
 
+      - name: Generate narration with Google Gemini TTS
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_TTS_MODEL: ${{ vars.GEMINI_TTS_MODEL }}
+          GEMINI_TTS_VOICE: ${{ vars.GEMINI_TTS_VOICE }}
+        run: |
+          set -euo pipefail
+          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
+          MODEL="${GEMINI_TTS_MODEL:-gemini-3.8-flash-lite-tts}"
+          VOICE="${GEMINI_TTS_VOICE:-Charon}"
+          python narrate.py \
+            --input "${EPISODE_DIR}/script.txt" \
+            --output "${EPISODE_DIR}/audio/narration.wav" \
+            --model "${MODEL}" \
+            --voice "${VOICE}" \
+            --style "Low, restrained male suspense narration in clear American English. Natural pauses, clear diction and controlled tension." \
+            --overwrite
+
+      - name: Generate preview captions from final narration
+        run: python production/generate_phrase_captions.py --manifest "${{ inputs.manifest }}"
+
       - name: Mark assets approved
         run: python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition ASSETS_APPROVED --stage assets
 
