@@ -47,7 +47,7 @@ jobs:
           from pathlib import Path
 
           manifest = sys.argv[1]
-          if not re.fullmatch(r"episodes/[^/]+/manifest\\.json", manifest):
+          if not re.fullmatch(r"episodes/[^/]+/manifest\.json", manifest):
               raise SystemExit("Manifest must be exactly inside episodes/<episode>/manifest.json.")
           if not Path(manifest).is_file():
               raise SystemExit(f"Manifest does not exist: {manifest}")
