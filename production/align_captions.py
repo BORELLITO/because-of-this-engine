@@ -110,12 +110,18 @@ def _match_at(asr_words: list[dict[str, Any]], start: int, alternatives: list[li
     return best
 
 
-def _align_chunk(chunk: str, asr_words: list[dict[str, Any]], cursor: int) -> tuple[float, float, int, list[dict[str, Any]]]:
+def _align_chunk(
+    chunk: str,
+    asr_words: list[dict[str, Any]],
+    cursor: int,
+    *,
+    recover_missing: bool = False,
+) -> tuple[float, float, int, list[dict[str, Any]]]:
     units = _units(chunk)
     if not units:
         raise AlignmentError("Caption chunk contains no spoken words.")
     matched = 0
-    positions: list[dict[str, Any]] = []
+    matched_units: list[dict[str, Any] | None] = []
     search_cursor = cursor
     for original, alternatives in units:
         found: tuple[int, int, float, float] | None = None
@@ -134,27 +140,101 @@ def _align_chunk(chunk: str, asr_words: list[dict[str, Any]], cursor: int) -> tu
             if found is None or rank > found[3]:
                 found = (candidate, size, score, rank)
         if found is None:
+            matched_units.append(None)
             continue
         candidate, size, score, _rank = found
         matched += 1
-        positions.append({
+        matched_units.append({
             "canonical": original,
             "asr": " ".join(word["word"] for word in asr_words[candidate:candidate + size]),
             "start": asr_words[candidate]["start"],
             "end": asr_words[candidate + size - 1]["end"],
             "confidence": round(score, 3),
+            "recovered": False,
+            "timestamp_source": "vosk_word_timestamp",
+            "_asr_index": candidate,
         })
         search_cursor = candidate + size
 
-    required = len(units)
-    if matched < required:
-        missing = len(units) - matched
-        matched_canonical = [item["canonical"] for item in positions]
-        raise AlignmentError(
-            f"Could not align caption phrase {chunk!r}: matched {matched}/{len(units)} "
-            f"spoken units ({missing} missing). Matched canonical units: {matched_canonical}. "
-            "Strict word-highlight alignment requires every canonical word to have a real timestamp."
-        )
+    if matched < len(units):
+        if not recover_missing:
+            missing = len(units) - matched
+            matched_canonical = [
+                item["canonical"] for item in matched_units if item is not None
+            ]
+            raise AlignmentError(
+                f"Could not align caption phrase {chunk!r}: matched {matched}/{len(units)} "
+                f"spoken units ({missing} missing). Matched canonical units: {matched_canonical}. "
+                "Strict word-highlight alignment requires every canonical word to have a real timestamp."
+            )
+        if matched == 0:
+            raise AlignmentError(
+                f"Could not recover caption phrase {chunk!r}: no Vosk word anchors were found."
+            )
+        recovered_count = 0
+        index = 0
+        while index < len(units):
+            if matched_units[index] is not None:
+                index += 1
+                continue
+            group_start = index
+            while index < len(units) and matched_units[index] is None:
+                index += 1
+            group_end = index
+            previous = next(
+                (matched_units[item] for item in range(group_start - 1, -1, -1)
+                 if matched_units[item] is not None),
+                None,
+            )
+            following = next(
+                (matched_units[item] for item in range(group_end, len(units))
+                 if matched_units[item] is not None),
+                None,
+            )
+            if previous is not None:
+                left = float(previous["end"])
+            elif following is not None:
+                left = max(0.0, float(following["start"]) - 0.25)
+            else:
+                raise AlignmentError(f"Could not recover caption phrase {chunk!r}.")
+            if following is not None:
+                right = float(following["start"])
+            else:
+                right = float(previous["end"]) + 0.25 if previous is not None else left
+            span = right - left
+            count = group_end - group_start
+            slot = span / count if count else 0.0
+            if span <= 0.0 or slot < 0.035 or slot > 0.35 or count > 2:
+                raise AlignmentError(
+                    f"Could not safely recover {count} missing word timestamp(s) in {chunk!r}; "
+                    f"anchor span={span:.3f}s."
+                )
+            for offset, missing_index in enumerate(range(group_start, group_end)):
+                start_time = left + slot * offset
+                end_time = left + slot * (offset + 1)
+                matched_units[missing_index] = {
+                    "canonical": units[missing_index][0],
+                    "asr": "",
+                    "start": start_time,
+                    "end": end_time,
+                    "confidence": 0.0,
+                    "recovered": True,
+                    "timestamp_source": "vosk_bounded_anchor_recovery",
+                    "_asr_index": None,
+                }
+                recovered_count += 1
+        if recovered_count > 2:
+            raise AlignmentError(
+                f"Could not safely recover caption phrase {chunk!r}: "
+                f"{recovered_count} words require anchor recovery."
+            )
+
+    positions = [item for item in matched_units if item is not None]
+    if len(positions) != len(units):
+        raise AlignmentError(f"Caption phrase {chunk!r} did not produce a complete word timeline.")
+    positions.sort(key=lambda item: (float(item["start"]), float(item["end"])))
+    for item in positions:
+        item.pop("_asr_index", None)
     return positions[0]["start"], positions[-1]["end"], search_cursor, positions
 
 def _canonical_vocabulary(script: str) -> list[str]:
@@ -224,12 +304,16 @@ def _recognize(
 def _align_chunks(
     chunks: list[str],
     asr_words: list[dict[str, Any]],
+    *,
+    recover_missing: bool = False,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     events: list[dict[str, Any]] = []
     sidecar_chunks: list[dict[str, Any]] = []
     cursor = 0
     for chunk in chunks:
-        start, end, cursor, positions = _align_chunk(chunk, asr_words, cursor)
+        start, end, cursor, positions = _align_chunk(
+            chunk, asr_words, cursor, recover_missing=recover_missing
+        )
         events.append({"start": start, "end": end, "text": chunk})
         sidecar_chunks.append({"text": chunk, "words": positions})
     return events, sidecar_chunks
@@ -346,6 +430,7 @@ def generate(manifest_path: Path, model_path: Path) -> dict[str, Any]:
         max_line_chars=int(captions.get("max_line_chars", 42)),
     )
     first_error: AlignmentError | None = None
+    recovered_word_count = 0
     try:
         asr_words = _recognize(audio_path, model_path)
         events, sidecar_chunks = _align_chunks(chunks, asr_words)
@@ -358,7 +443,18 @@ def generate(manifest_path: Path, model_path: Path) -> dict[str, Any]:
                 model_path,
                 vocabulary=constrained_vocabulary,
             )
-            events, sidecar_chunks = _align_chunks(chunks, asr_words)
+            try:
+                events, sidecar_chunks = _align_chunks(chunks, asr_words)
+            except AlignmentError as constrained_error:
+                events, sidecar_chunks = _align_chunks(
+                    chunks, asr_words, recover_missing=True
+                )
+                recovered_word_count = sum(
+                    1
+                    for chunk in sidecar_chunks
+                    for word in chunk.get("words", [])
+                    if word.get("recovered") is True
+                )
         except AlignmentError as constrained_error:
             raise AlignmentError(
                 f"{first_error} Grammar-constrained retry also failed: {constrained_error}"
@@ -388,6 +484,10 @@ def generate(manifest_path: Path, model_path: Path) -> dict[str, Any]:
         "word_count": len(asr_words),
         "words": asr_words,
         "captions": sidecar_chunks,
+        "timing_mode": "vosk_word_timestamps"
+        if recovered_word_count == 0
+        else "vosk_word_timestamps_with_bounded_anchor_recovery",
+        "recovered_word_count": recovered_word_count,
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return {
         "status": "FORCED_CAPTIONS_GENERATED",
@@ -398,6 +498,7 @@ def generate(manifest_path: Path, model_path: Path) -> dict[str, Any]:
         "recognized_words": len(asr_words),
         "word_highlight_mode": "timestamp_color_transform",
         "active_word_color": active_word_color,
+        "recovered_word_count": recovered_word_count,
     }
 
 def main() -> int:
