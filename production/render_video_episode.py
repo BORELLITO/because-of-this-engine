@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import shlex
 import subprocess
 import tempfile
 from pathlib import Path
@@ -83,7 +82,15 @@ def xfade_filter(durations: list[float], transitions: list[dict[str, Any]]) -> s
     parts: list[str] = []
     accumulated = durations[0]
     previous = "0:v"
-    names = {"crossfade": "fade", "soft_dissolve": "fade", "dip_to_black": "fadeblack", "motion_match": "smoothright"}
+    # FFmpeg has no literal hard-cut xfade; one frame of fade is the
+    # deterministic, visually instantaneous cut used by the contract.
+    names = {
+        "hard_cut": "fade",
+        "crossfade": "fade",
+        "soft_dissolve": "fade",
+        "dip_to_black": "fadeblack",
+        "motion_match": "smoothright",
+    }
     for index in range(1, len(durations)):
         spec = transitions[index - 1] if index - 1 < len(transitions) else {"type": "crossfade", "duration": 0.25}
         duration = transition_duration(spec)
@@ -103,30 +110,91 @@ def transition_duration(spec: dict[str, Any]) -> float:
     return max(float(spec.get("duration", 0.25)), 1 / FPS)
 
 
-def narration_locked_scenes(scenes: list[dict[str, Any]], narration_seconds: float) -> list[dict[str, Any]]:
-    """Scale scene durations to the final narration while preserving every unique clip.
+def _bounded_weighted_allocation(
+    planned: list[float],
+    lower: list[float],
+    upper: list[float],
+    target: float,
+) -> list[float]:
+    if not planned or len(planned) != len(lower) or len(planned) != len(upper):
+        raise RenderError("Narration-locked allocation requires matching scene bounds.")
+    if sum(lower) - 0.001 > target:
+        raise RenderError("Narration is shorter than the minimum visual-beat allocation.")
+    if sum(upper) + 0.001 < target:
+        raise RenderError("Narration is longer than the source-safe visual-beat allocation.")
 
-    xfade consumes each transition duration from the assembled timeline, so the
-    scene sum targets narration + transition overlap. The manifest remains the
-    editorial plan; this in-memory schedule is the final audio-locked timeline.
+    durations = list(lower)
+    remaining = target - sum(durations)
+    weights = [max(float(value), 0.01) for value in planned]
+    while remaining > 0.00001:
+        active = [index for index, value in enumerate(upper) if value - durations[index] > 0.00001]
+        if not active:
+            raise RenderError("Could not distribute the narration across source-safe scene limits.")
+        weight_total = sum(weights[index] for index in active)
+        progress = 0.0
+        for index in active:
+            share = remaining * weights[index] / weight_total
+            addition = min(share, upper[index] - durations[index])
+            durations[index] += addition
+            progress += addition
+        if progress <= 0.00001:
+            raise RenderError("Narration-locked allocation stalled before reaching the target duration.")
+        remaining -= progress
+    return durations
+
+
+def narration_locked_scenes(
+    scenes: list[dict[str, Any]],
+    narration_seconds: float,
+    clip_policy: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    """Scale scenes to narration while respecting source and editorial limits.
+
+    Every unique clip is preserved. Transition overlap is included in the
+    scene-sum target, and no locked scene may exceed the usable source length.
     """
+    if not scenes:
+        raise RenderError("Narration-locked rendering requires at least one scene.")
     if not 60.0 <= narration_seconds <= 75.0:
         raise RenderError(f"Narration duration must remain between 60s and 75s; got {narration_seconds:.3f}s.")
-    planned_total = sum(float(scene["duration"]) for scene in scenes)
+
+    policy = clip_policy or {
+        "min_scene_seconds": 2.0,
+        "max_scene_seconds": 20.0,
+    }
+    planned = [float(scene["duration"]) for scene in scenes]
+    planned_total = sum(planned)
     if planned_total <= 0:
         raise RenderError("Scene timeline must have a positive planned duration.")
-    transitions = [scene.get("transition", {"type": "crossfade", "duration": 0.25}) for scene in scenes[1:]]
+
+    transitions = [
+        scene.get("transition", {"type": "crossfade", "duration": 0.25})
+        for scene in scenes[1:]
+    ]
     overlap = sum(transition_duration(spec) for spec in transitions)
     target_scene_sum = narration_seconds + overlap
-    scale = target_scene_sum / planned_total
-    locked: list[dict[str, Any]] = []
+
+    lower = [float(policy.get("min_scene_seconds", 2.0)) for _ in scenes]
+    upper: list[float] = []
     for scene in scenes:
+        scene_limit = float(policy.get("max_scene_seconds", 20.0))
+        asset = scene.get("asset") or {}
+        metadata = asset.get("metadata") or {}
+        source_duration = metadata.get("duration") or asset.get("duration_seconds")
+        if source_duration:
+            source_in = float(scene.get("source_in", 0.0))
+            scene_limit = min(scene_limit, float(source_duration) - source_in - 0.05)
+        upper.append(scene_limit)
+    for index, (low, high) in enumerate(zip(lower, upper), start=1):
+        if high < low:
+            raise RenderError(f"Scene {index} source is shorter than its minimum visual beat.")
+
+    locked_durations = _bounded_weighted_allocation(planned, lower, upper, target_scene_sum)
+    locked: list[dict[str, Any]] = []
+    for scene, duration in zip(scenes, locked_durations):
         copy = dict(scene)
-        copy["duration"] = float(scene["duration"]) * scale
-        if copy["duration"] > 20.0:
-            raise RenderError(f"Audio-locked scene {scene['scene_id']} exceeds the 20s visual-beat limit.")
+        copy["duration"] = duration
         locked.append(copy)
-    locked[-1]["duration"] = target_scene_sum - sum(float(scene["duration"]) for scene in locked[:-1])
     return locked
 
 
@@ -204,7 +272,11 @@ def render(manifest_path: Path, mode: str) -> Path:
     manifest = load_manifest(manifest_path)
     spec = validate_manifest(manifest, manifest_path.parent, mode=mode, check_files=True)
     narration_seconds = audio_duration(spec["audio_path"])
-    locked_scenes = narration_locked_scenes(spec["scenes"], narration_seconds)
+    locked_scenes = narration_locked_scenes(
+        spec["scenes"],
+        narration_seconds,
+        clip_policy=spec.get("clip_policy"),
+    )
     width, height = SIZES[mode]
     output_template = str(manifest.get("output", {}).get("path", "rendered/{video_id}-{mode}.mp4"))
     output = (manifest_path.parent / output_template.format(video_id=spec["video_id"], mode=mode)).resolve()

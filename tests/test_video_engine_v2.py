@@ -23,7 +23,7 @@ def manifest():
                 "asset_id": f"asset-{index}",
                 "path": f"assets/clip-{index}.mp4",
                 "provider": "mixkit",
-                "source_page_url": "https://mixkit.co/",
+                "source_page_url": f"https://mixkit.co/clip-{index}",
                 "license": "Stock Video Free License",
                 "rights_status": "APPROVED",
                 "approved_for_render": True,
@@ -40,6 +40,7 @@ def manifest():
             "central_question": "What was missed?",
             "visual_symbol": "a red signal",
         },
+        "editing": {"clip_quantity": {"enforce": False}},
         "audio": {"path": "audio/narration.wav"},
         "captions": {"path": "captions/narration.ass"},
         "brand": {"watermark_text": "|B"},
@@ -97,12 +98,36 @@ class VideoEngineV2Tests(unittest.TestCase):
         self.assertAlmostEqual(sum(scene["duration"] for scene in locked) - overlap, 70.2, places=5)
         self.assertNotEqual([scene["duration"] for scene in locked], [scene["duration"] for scene in scenes])
 
+    def test_enforced_clip_quantity_blocks_underedited_episode(self):
+        value = manifest()
+        value["editing"]["clip_quantity"]["enforce"] = True
+        with self.assertRaisesRegex(VideoContractError, "requires 10-18 unique video clips"):
+            validate_manifest(value, Path("/tmp"), check_files=False)
+
+    def test_exact_match_requires_stronger_semantic_score(self):
+        value = manifest()
+        value["scenes"][0]["match_score"] = 0.79
+        with self.assertRaisesRegex(VideoContractError, "EXACT semantic-match threshold"):
+            validate_manifest(value, Path("/tmp"), check_files=False)
+
+    def test_narration_lock_respects_source_duration_caps(self):
+        scenes = manifest()["scenes"]
+        for scene in scenes:
+            scene["transition"] = {"type": "crossfade", "duration": 0.25}
+            scene["asset"]["duration_seconds"] = 30
+        scenes[0]["asset"]["duration_seconds"] = 12
+        locked = narration_locked_scenes(scenes, 70.2)
+        self.assertLessEqual(locked[0]["duration"], 11.951)
+        self.assertAlmostEqual(sum(item["duration"] for item in locked) - 0.25 * 3, 70.2, places=5)
+
     def test_research_never_auto_approves_and_never_uses_images(self):
         value = manifest()
         result = build_queue(value, {"mixkit": lambda query, limit: [{"title": "signal", "duration_seconds": 15, "width": 1080, "height": 1920}]})
         candidate = result["scenes"][0]["candidates"][0]
         self.assertFalse(candidate["approved_for_render"])
         self.assertEqual(result["scenes"][0]["image_fallback"], "FORBIDDEN")
+        self.assertTrue(result["selection_rules"]["no_repeat_animation"])
+        self.assertEqual(result["clip_quantity_gate"]["status"], "ADVISORY")
 
 
 if __name__ == "__main__":

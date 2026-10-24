@@ -42,11 +42,31 @@ def tokenize(text: str) -> list[str]:
     return re.findall(r"[A-Za-z0-9]+(?:'[A-Za-z0-9]+)?|[^A-Za-z0-9\s]", text)
 
 
-def phrase_chunks(script: str) -> list[str]:
+def _balanced_lines(sentence: str, width: int) -> list[str]:
+    words = sentence.split()
+    if not words:
+        return []
+    if len(sentence) <= width:
+        return [sentence]
+
+    candidates: list[tuple[float, list[str]]] = []
+    for split in range(1, len(words)):
+        left, right = " ".join(words[:split]), " ".join(words[split:])
+        if len(left) <= width and len(right) <= width:
+            imbalance = abs(len(left) - len(right))
+            candidates.append((max(len(left), len(right)) + imbalance * 0.15, [left, right]))
+    if candidates:
+        candidates.sort(key=lambda item: item[0])
+        return candidates[0][1]
+
+    return wrap(sentence, width=width, break_long_words=False, break_on_hyphens=False)[:2]
+
+
+def phrase_chunks(script: str, max_line_chars: int = 42) -> list[str]:
     sentences = [part.strip() for part in re.split(r"(?<=[.!?])\s+", script.strip()) if part.strip()]
     chunks: list[str] = []
     for sentence in sentences:
-        lines = wrap(sentence, width=42, break_long_words=False, break_on_hyphens=False)
+        lines = _balanced_lines(sentence, max_line_chars)
         for index in range(0, len(lines), 2):
             chunk = lines[index:index + 2]
             if chunk:
@@ -64,7 +84,11 @@ def generate(manifest_path: Path) -> dict:
     audio_path = (base / manifest["audio"]["path"]).resolve()
     duration = read_duration(audio_path)
     script = script_path.read_text(encoding="utf-8").strip()
-    chunks = phrase_chunks(script)
+    caption_config = manifest.get("captions") or {}
+    max_line_chars = int(caption_config.get("max_line_chars", 42))
+    if max_line_chars < 20:
+        raise CaptionGenerationError("Caption max_line_chars must be at least 20.")
+    chunks = phrase_chunks(script, max_line_chars=max_line_chars)
 
     weights = [max(1, len(tokenize(chunk))) for chunk in chunks]
     total_weight = sum(weights)

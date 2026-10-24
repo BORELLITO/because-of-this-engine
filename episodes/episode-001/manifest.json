@@ -285,5 +285,18 @@
     "reviewer": "",
     "reviewed_at": "",
     "notes": "Preview test only. Human approval is required before any final release."
+  },
+  "editing": {
+    "clip_quantity": {
+      "mode": "adaptive",
+      "min_clips": 10,
+      "target_min": 12,
+      "target_max": 16,
+      "max_clips": 18,
+      "min_scene_seconds": 2,
+      "max_scene_seconds": 20,
+      "enforce": false,
+      "reason": "Approved pilot baseline; new episodes must use the enforced v2 quantity target."
+    }
   }
 }

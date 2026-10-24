@@ -16,6 +16,12 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
+from production.editorial_policy import (
+    EditorialPolicyError,
+    clip_quantity_policy,
+    validate_clip_quantity,
+)
+
 SCHEMA_VERSION = "2.0"
 MIN_STORY_SECONDS = 60.0
 MAX_STORY_SECONDS = 75.0
@@ -23,6 +29,8 @@ ALLOWED_MATCHES = {"EXACT", "NEAR", "EXPLANATORY", "SYMBOLIC", "ATMOSPHERE"}
 ALLOWED_TRUTH = {"VERIFIED_FACT", "EXPLAINED_PHENOMENON", "DECLARED_FICTION"}
 ALLOWED_STATUSES = {"APPROVED", "REVIEW_REQUIRED", "REJECTED"}
 ALLOWED_PROVIDERS = {"mixkit", "pixabay", "pexels", "drive", "original"}
+ALLOWED_TRANSITIONS = {"hard_cut", "crossfade", "soft_dissolve", "dip_to_black", "motion_match"}
+MATCH_THRESHOLDS = {"EXACT": 0.80, "NEAR": 0.68, "EXPLANATORY": 0.60, "SYMBOLIC": 0.55, "ATMOSPHERE": 0.55}
 FINAL_PROVENANCE_FIELDS = ("author", "acquisition_timestamp", "original_filename", "mime_type", "duration_seconds", "width", "height", "filesize_bytes", "drive_file_id", "job_ownership", "scene_usage")
 
 
@@ -161,16 +169,17 @@ def validate_asset_record(record: dict[str, Any], base: Path, episode_id: str, *
         if actual.lower() != str(record["sha256"]).lower():
             raise VideoContractError(f"Asset {asset_id} sha256 does not match the downloaded file.")
         metadata = ffprobe(path)
+        actual_phash = perceptual_hash(path)
         declared_phash = record.get("perceptual_hash")
         if declared_phash:
             if not re.fullmatch(r"[0-9a-fA-F]{64}", str(declared_phash)):
                 raise VideoContractError(f"Asset {asset_id} perceptual_hash must be 64 hexadecimal characters.")
-            actual_phash = perceptual_hash(path)
             if actual_phash.lower() != str(declared_phash).lower():
                 raise VideoContractError(f"Asset {asset_id} perceptual_hash does not match the downloaded file.")
     else:
         metadata = {}
-    return {**record, "asset_id": asset_id, "path": path, "metadata": metadata}
+        actual_phash = None
+    return {**record, "asset_id": asset_id, "path": path, "metadata": metadata, "animation_fingerprint": actual_phash}
 
 
 def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str = "preview", check_files: bool = True) -> dict[str, Any]:
@@ -196,11 +205,17 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
     scenes = manifest.get("scenes")
     if not isinstance(scenes, list) or not scenes:
         raise VideoContractError("Manifest requires at least one video scene.")
+    try:
+        clip_policy = clip_quantity_policy(manifest)
+    except EditorialPolicyError as exc:
+        raise VideoContractError(str(exc)) from exc
     seen_ids: set[str] = set()
     seen_asset_ids: set[str] = set()
     seen_hashes: set[str] = set()
+    seen_sources: set[str] = set()
     seen_phashes: set[str] = set()
     normalized: list[dict[str, Any]] = []
+    quantity_report = None
     total = 0.0
     for index, scene in enumerate(scenes, start=1):
         if not isinstance(scene, dict):
@@ -214,8 +229,16 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
         duration = scene.get("duration")
         if isinstance(duration, bool) or not isinstance(duration, (int, float)) or duration <= 0:
             raise VideoContractError(f"Scene {scene_id} requires a positive duration.")
-        if duration > 20:
-            raise VideoContractError(f"Scene {scene_id} is too long; split the visual beat below 20 seconds.")
+        if duration < clip_policy["min_scene_seconds"]:
+            raise VideoContractError(
+                f"Scene {scene_id} is too short; keep visual beats at or above "
+                f"{clip_policy['min_scene_seconds']:.2f}s."
+            )
+        if duration > clip_policy["max_scene_seconds"]:
+            raise VideoContractError(
+                f"Scene {scene_id} is too long; split the visual beat below "
+                f"{clip_policy['max_scene_seconds']:.2f}s."
+            )
         for key in ("story_beat", "visual_intent", "visual_function", "visual_match", "visual_truth"):
             _required_text(scene, key, f"Scene {scene_id}")
         if scene["visual_match"] not in ALLOWED_MATCHES:
@@ -223,21 +246,48 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
         score = scene.get("match_score")
         if isinstance(score, bool) or not isinstance(score, (int, float)) or not 0 <= score <= 1:
             raise VideoContractError(f"Scene {scene_id} requires match_score between 0 and 1.")
-        if score < 0.55 and scene["visual_match"] not in {"SYMBOLIC", "ATMOSPHERE"}:
-            raise VideoContractError(f"Scene {scene_id} is below the semantic-match threshold.")
+        required_score = MATCH_THRESHOLDS[scene["visual_match"]]
+        if score < required_score:
+            raise VideoContractError(
+                f"Scene {scene_id} is below the {scene['visual_match']} semantic-match threshold "
+                f"({score:.2f} < {required_score:.2f})."
+            )
+        transition = scene.get("transition", {"type": "crossfade", "duration": 0.25})
+        if not isinstance(transition, dict):
+            raise VideoContractError(f"Scene {scene_id} transition must be an object.")
+        transition_type = str(transition.get("type", "crossfade"))
+        transition_duration = transition.get("duration", 0.25)
+        if transition_type not in ALLOWED_TRANSITIONS:
+            raise VideoContractError(f"Scene {scene_id} has an unsupported transition type.")
+        if isinstance(transition_duration, bool) or not isinstance(transition_duration, (int, float)) or transition_duration < 0:
+            raise VideoContractError(f"Scene {scene_id} transition duration must be non-negative.")
+        if transition_type == "hard_cut" and transition_duration > 0.08:
+            raise VideoContractError(f"Scene {scene_id} hard_cut must remain effectively instantaneous.")
+        if transition_duration >= duration:
+            raise VideoContractError(f"Scene {scene_id} transition cannot consume the entire scene.")
         asset = validate_asset_record(scene.get("asset"), episode_dir, episode_id, mode=mode, check_file=check_files)
         for key, seen, label in (("asset_id", seen_asset_ids, "asset"), ("sha256", seen_hashes, "sha256")):
             value = str(asset[key]).lower()
             if value in seen:
                 raise VideoContractError(f"Narrative {label} is repeated in episode {episode_id}: {value}")
             seen.add(value)
-        if asset.get("perceptual_hash"):
-            phash = str(asset["perceptual_hash"]).lower()
+        source_url = str(asset.get("source_page_url", "")).strip().lower()
+        if source_url and source_url in seen_sources:
+            raise VideoContractError(f"Narrative source page is repeated in episode {episode_id}: {source_url}")
+        if source_url:
+            seen_sources.add(source_url)
+        phash = asset.get("animation_fingerprint") or asset.get("perceptual_hash")
+        if phash:
+            phash = str(phash).lower()
             if phash in seen_phashes:
                 raise VideoContractError(f"Narrative animation perceptually repeats in episode {episode_id}: {phash}")
             seen_phashes.add(phash)
         total += float(duration)
         normalized.append({**scene, "scene_id": scene_id, "duration": float(duration), "asset": asset})
+    try:
+        quantity_report = validate_clip_quantity(len(normalized), clip_policy)
+    except EditorialPolicyError as exc:
+        raise VideoContractError(str(exc)) from exc
     if total < MIN_STORY_SECONDS or total > MAX_STORY_SECONDS:
         raise VideoContractError(f"Scene timeline must be between {MIN_STORY_SECONDS:.0f}s and {MAX_STORY_SECONDS:.0f}s; got {total:.3f}s.")
     captions = manifest.get("captions")
