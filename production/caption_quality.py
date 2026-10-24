@@ -227,8 +227,11 @@ def _validate_word_highlight(
                     f"Caption C{index:03d} word {word_index + 1} has an invalid active/reset color pair."
                 )
         total_words += len(words)
-    if recovered_words > 2:
-        raise CaptionQualityError("Word highlight contains more than two bounded-recovery words.")
+    if recovered_words:
+        raise CaptionQualityError(
+            f"Word highlight contains {recovered_words} estimated timestamp(s); "
+            "production release requires a real Vosk timestamp for every canonical word."
+        )
     return {
         "enabled": True,
         "mode": "timestamp_color_transform",
