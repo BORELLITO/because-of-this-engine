@@ -170,22 +170,21 @@ def _search_nasa(query: SceneQuery, limit: int) -> list[dict[str, Any]]:
         items = payload.get("collection", {}).get("items", [])
         if not isinstance(items, list) or not items:
             continue
-        results = []
-    for item in items if isinstance(items, list) else []:
-        data = item.get("data", [{}]) if isinstance(item, dict) else [{}]
-        record = data[0] if isinstance(data, list) and data else {}
-        if not isinstance(record, dict):
-            continue
-        nasa_id = str(record.get("nasa_id") or "").strip()
-        if not nasa_id:
-            continue
-        links = item.get("links", []) if isinstance(item, dict) else []
-        preview = None
-        if isinstance(links, list):
-            for link in links:
-                if isinstance(link, dict) and link.get("rel") == "preview":
-                    preview = link.get("href")
-                    break
+        for item in items:
+            data = item.get("data", [{}]) if isinstance(item, dict) else [{}]
+            record = data[0] if isinstance(data, list) and data else {}
+            if not isinstance(record, dict):
+                continue
+            nasa_id = str(record.get("nasa_id") or "").strip()
+            if not nasa_id:
+                continue
+            links = item.get("links", []) if isinstance(item, dict) else []
+            preview = None
+            if isinstance(links, list):
+                for link in links:
+                    if isinstance(link, dict) and link.get("rel") == "preview":
+                        preview = link.get("href")
+                        break
             results.append(_base_candidate(
                 provider="nasa",
                 candidate_id=nasa_id,
@@ -203,8 +202,6 @@ def _search_nasa(query: SceneQuery, limit: int) -> list[dict[str, Any]]:
         if results:
             break
     return results
-
-
 def _search_pexels(query: SceneQuery, limit: int) -> list[dict[str, Any]]:
     key = os.environ.get("PEXELS_API_KEY", "").strip()
     if not key:
