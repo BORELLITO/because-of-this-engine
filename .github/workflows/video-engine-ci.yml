@@ -1,0 +1,42 @@
+name: Video engine v2 CI
+
+on:
+  push:
+    branches:
+      - main
+      - v2-video-only-investigative-noir
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Compile production code
+        run: python -m py_compile production/*.py
+      - name: Run regression and v2 tests
+        run: python -m unittest discover -s tests -v
+      - name: Validate template has only video scenes
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          value = json.loads(Path("examples/video-only-episode-manifest-v2.template.json").read_text())
+          assert value["schema_version"] == "2.0"
+          assert all("image" not in scene for scene in value["scenes"])
+          assert len(value["scenes"]) >= 4
+          print("VIDEO_ONLY_TEMPLATE_PASS")
+          PY
+
+

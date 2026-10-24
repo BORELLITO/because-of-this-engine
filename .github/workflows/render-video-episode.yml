@@ -1,0 +1,134 @@
+name: Render video-only episode v2
+
+on:
+  workflow_dispatch:
+    inputs:
+      manifest:
+        description: "v2 episode manifest path"
+        required: true
+        type: string
+      mode:
+        description: "Render size"
+        required: true
+        default: "preview"
+        type: choice
+        options:
+          - preview
+          - final
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install static FFmpeg with retries
+        run: |
+          set -euo pipefail
+          mkdir -p "\${RUNNER_TEMP}/ffmpeg"
+          curl --fail --location --retry 5 --retry-all-errors \
+            --connect-timeout 20 --max-time 240 \
+            "https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz" \
+            --output "\${RUNNER_TEMP}/ffmpeg.tar.xz"
+          tar -xJf "\${RUNNER_TEMP}/ffmpeg.tar.xz" -C "\${RUNNER_TEMP}/ffmpeg"
+          FFMPEG_DIR="\$(find "\${RUNNER_TEMP}/ffmpeg" -maxdepth 1 -mindepth 1 -type d -name 'ffmpeg-*static' -print -quit)"
+          test -n "\${FFMPEG_DIR}"
+          echo "\${FFMPEG_DIR}" >> "\${GITHUB_PATH}"
+          "\${FFMPEG_DIR}/ffmpeg" -version | head -n 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install runtime dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Run engine regression tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Verify Google Drive delivery destination
+        env:
+          BECAUSE_OF_THIS_DRIVE_FOLDER_ID: "1A-oyowfHtdciB2_NZSLIZ0oG-ajOeYVb"
+          GOOGLE_CLIENT_ID: \${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: \${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: \${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: python production/google_drive_delivery.py --preflight
+
+      - name: Hydrate approved video assets from Drive
+        env:
+          GOOGLE_CLIENT_ID: \${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: \${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: \${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: python production/google_drive_assets.py --manifest "\${{ inputs.manifest }}"
+
+      - name: Run strict caption QA
+        run: |
+          EXTRA=""
+          if [ "\${{ inputs.mode }}" = "final" ]; then
+            EXTRA="--require-word-level"
+          fi
+          python production/caption_quality.py \
+            --manifest "\${{ inputs.manifest }}" \
+            --report "\$(dirname "\${{ inputs.manifest }}")/rendered/caption-quality-\${{ inputs.mode }}.json" \
+            \${EXTRA}
+
+      - name: Validate v2 video contract
+        run: python production/render_video_episode.py --manifest "\${{ inputs.manifest }}" --mode "\${{ inputs.mode }}" --validate-only
+
+      - name: Render narration-locked episode
+        run: python production/render_video_episode.py --manifest "\${{ inputs.manifest }}" --mode "\${{ inputs.mode }}"
+
+      - name: Validate release media and reuse gates
+        run: |
+          python production/validate_video_release.py \
+            --manifest "\${{ inputs.manifest }}" \
+            --mode "\${{ inputs.mode }}" \
+            --report "\$(dirname "\${{ inputs.manifest }}")/rendered/video-release-\${{ inputs.mode }}.json"
+
+      - name: Publish v2 validation receipt
+        if: always()
+        run: |
+          REPORT="\$(dirname "\${{ inputs.manifest }}")/rendered/video-release-\${{ inputs.mode }}.json"
+          {
+            echo "## Because of This — v2 validation receipt"
+            if [ -f "\${REPORT}" ]; then
+              python - "\${REPORT}" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          report = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+          for key in ("status", "video_id", "mode", "duration_seconds", "dimensions", "codec", "asset_reuse_gate", "post_render_sync"):
+              print(f"- {key}: {report.get(key)}")
+          PY
+            else
+              echo "- status: no v2 validation receipt was produced"
+            fi
+          } >> "\${GITHUB_STEP_SUMMARY}"
+
+      - name: Deliver validated v2 production to Google Drive
+        env:
+          BECAUSE_OF_THIS_DRIVE_FOLDER_ID: "1A-oyowfHtdciB2_NZSLIZ0oG-ajOeYVb"
+          GOOGLE_CLIENT_ID: \${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: \${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: \${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          python production/google_drive_delivery.py \
+            --collection "VIDEOS V2" \
+            --delivery-name "render-\${{ inputs.mode }}-\${{ github.run_id }}" \
+            --path "\$(dirname "\${{ inputs.manifest }}")/rendered" \
+            --path "\${{ inputs.manifest }}" \
+            --receipt "\${RUNNER_TEMP}/drive-delivery.json"
+
+      - name: Remove ephemeral render and downloaded media after verified delivery
+        if: success()
+        run: |
+          find . -type f \( -path "*/rendered/*.mp4" -o -path "*/rendered/*.mov" -o -path "*/rendered/*.mkv" -o -path "*/runtime-assets/*.mp4" -o -path "*/runtime-assets/*.mov" -o -path "*/runtime-assets/*.mkv" \) -delete
+          echo "v2 media delivered to Google Drive; runner-local media removed." >> "\${GITHUB_STEP_SUMMARY}"
+
+

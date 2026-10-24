@@ -1,0 +1,151 @@
+{
+  "schema_version": "2.0",
+  "video_id": "episode-001",
+  "title": "A question worth one minute",
+  "language": "en",
+  "fps": 25,
+  "story_profile": {
+    "format": "The Hidden Detail",
+    "truth_mode": "VERIFIED_FACT",
+    "primary_emotion": "curiosity",
+    "secondary_emotion": "tension",
+    "central_question": "What detail changed the outcome?",
+    "visual_symbol": "a red signal line"
+  },
+  "script": {
+    "path": "script.txt",
+    "word_count_target": 165
+  },
+  "audio": {
+    "path": "audio/narration.wav",
+    "master": "narration",
+    "sample_rate": 24000,
+    "channels": 1
+  },
+  "captions": {
+    "path": "captions/narration.ass",
+    "alignment_mode": "forced_alignment",
+    "alignment_source": "word-level forced alignment from final narration",
+    "word_level_available": true,
+    "max_lines": 2,
+    "max_line_chars": 42,
+    "target_cps": 20,
+    "max_cps": 28,
+    "end_tolerance_seconds": 0.1
+  },
+  "music": {
+    "path": "audio/suspense-bed.wav",
+    "license": "replace-with-verified-license",
+    "commercial_use": true,
+    "attribution_required": false,
+    "volume": 0.06
+  },
+  "brand": {
+    "watermark_enabled": true,
+    "watermark_text": "|B",
+    "accent_color": "#E3262E"
+  },
+  "output": {
+    "path": "rendered/{video_id}-{mode}.mp4"
+  },
+  "scenes": [
+    {
+      "scene_id": "S01",
+      "duration": 15.5,
+      "story_beat": "hook: introduce the unexplained detail",
+      "visual_intent": "show the central object before the audience understands it",
+      "visual_function": "establishing",
+      "visual_match": "EXACT",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.92,
+      "focus": {"x": 0.5, "y": 0.5},
+      "transition": {"type": "hard_cut", "duration": 0.0},
+      "asset": {
+        "asset_id": "episode-001-s01",
+        "path": "runtime-assets/episode-001-s01.mp4",
+        "drive_file_id": "PUT_APPROVED_DRIVE_FILE_ID_HERE",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/",
+        "license": "Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "PUT_64_HEX_SHA256_HERE",
+        "perceptual_hash": "OPTIONAL_16_HEX_PHASH",
+        "reuse_status": "FRESH",
+        "episode_id": "episode-001"
+      }
+    },
+    {
+      "scene_id": "S02",
+      "duration": 15.5,
+      "story_beat": "context: explain the normal expectation",
+      "visual_intent": "make the baseline easy to understand",
+      "visual_function": "contextual",
+      "visual_match": "NEAR",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.78,
+      "asset": {
+        "asset_id": "episode-001-s02",
+        "path": "runtime-assets/episode-001-s02.mp4",
+        "drive_file_id": "PUT_APPROVED_DRIVE_FILE_ID_HERE",
+        "provider": "pixabay",
+        "source_page_url": "https://pixabay.com/",
+        "license": "Pixabay Content License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "PUT_64_HEX_SHA256_HERE",
+        "reuse_status": "FRESH",
+        "episode_id": "episode-001"
+      }
+    },
+    {
+      "scene_id": "S03",
+      "duration": 15.5,
+      "story_beat": "tension: show the consequence of the overlooked detail",
+      "visual_intent": "turn the evidence into a point of no return",
+      "visual_function": "reveal",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.7,
+      "asset": {
+        "asset_id": "episode-001-s03",
+        "path": "runtime-assets/episode-001-s03.mp4",
+        "drive_file_id": "PUT_APPROVED_DRIVE_FILE_ID_HERE",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/",
+        "license": "Pexels License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "PUT_64_HEX_SHA256_HERE",
+        "reuse_status": "FRESH",
+        "episode_id": "episode-001"
+      }
+    },
+    {
+      "scene_id": "S04",
+      "duration": 15.5,
+      "story_beat": "closing: answer the question and leave a bigger implication",
+      "visual_intent": "resolve the story with the central symbol",
+      "visual_function": "payoff",
+      "visual_match": "SYMBOLIC",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.64,
+      "transition": {"type": "dip_to_black", "duration": 0.3},
+      "asset": {
+        "asset_id": "episode-001-s04",
+        "path": "runtime-assets/episode-001-s04.mp4",
+        "drive_file_id": "PUT_APPROVED_DRIVE_FILE_ID_HERE",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/",
+        "license": "Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "PUT_64_HEX_SHA256_HERE",
+        "reuse_status": "FRESH",
+        "episode_id": "episode-001"
+      }
+    }
+  ]
+}
+
+

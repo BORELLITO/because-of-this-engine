@@ -1,0 +1,191 @@
+#!/usr/bin/env python3
+"""Deterministic video-only renderer for Because of This Engine v2."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import shlex
+import subprocess
+import tempfile
+from pathlib import Path
+from typing import Any
+
+from production.video_asset_contract import VideoContractError, ffprobe, load_manifest, validate_manifest
+
+FPS = 25
+SIZES = {"preview": (1080, 1920), "final": (2160, 3840)}
+
+
+class RenderError(RuntimeError):
+    pass
+
+
+def run(command: list[str], timeout: int = 900) -> subprocess.CompletedProcess[str]:
+    try:
+        return subprocess.run(command, check=True, timeout=timeout, text=True, capture_output=True)
+    except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired) as exc:
+        detail = getattr(exc, "stderr", "") or str(exc)
+        raise RenderError(f"FFmpeg command failed: {detail[-2000:]}") from exc
+
+
+def audio_duration(path: Path) -> float:
+    command = ["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=nw=1:nk=1", str(path)]
+    try:
+        return float(run(command, timeout=60).stdout.strip())
+    except (ValueError, RenderError) as exc:
+        raise RenderError(f"Could not read narration duration: {path}") from exc
+
+
+def _escape_filter_path(path: Path) -> str:
+    return str(path).replace("\\", "\\\\").replace(":", r"\:").replace("'", r"\'")
+
+
+def scene_filter(width: int, height: int, focus_x: float, focus_y: float) -> str:
+    return (
+        f"scale={width}:{height}:force_original_aspect_ratio=increase,"
+        f"crop={width}:{height}:x='(iw-ow)*{focus_x:.4f}':y='(ih-oh)*{focus_y:.4f}',"
+        f"fps={FPS},setpts=PTS-STARTPTS,format=yuv420p"
+    )
+
+
+def render_scene(scene: dict[str, Any], width: int, height: int, output: Path) -> None:
+    asset = scene["asset"]
+    source = Path(asset["path"])
+    info = ffprobe(source)
+    source_in = float(scene.get("source_in", 0.0))
+    requested = float(scene["duration"])
+    if source_in < 0 or source_in + requested > float(info["duration"]) + 0.05:
+        raise RenderError(
+            f"Asset {asset['asset_id']} is too short for scene {scene['scene_id']} "
+            f"({info['duration']:.3f}s available, {source_in + requested:.3f}s required)."
+        )
+    focus = scene.get("focus", {"x": 0.5, "y": 0.5})
+    focus_x = float(focus.get("x", 0.5))
+    focus_y = float(focus.get("y", 0.5))
+    if not 0 <= focus_x <= 1 or not 0 <= focus_y <= 1:
+        raise RenderError(f"Scene {scene['scene_id']} has an invalid focus point.")
+    run([
+        "ffmpeg", "-y", "-ss", f"{source_in:.3f}", "-t", f"{requested:.3f}",
+        "-i", str(source), "-an", "-vf", scene_filter(width, height, focus_x, focus_y),
+        "-r", str(FPS), "-c:v", "libx264", "-preset", "veryfast", "-crf", "21",
+        "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(output),
+    ])
+
+
+def xfade_filter(durations: list[float], transitions: list[dict[str, Any]]) -> str:
+    if len(durations) == 1:
+        return "[0:v]null[v]"
+    labels: list[str] = []
+    parts: list[str] = []
+    accumulated = durations[0]
+    previous = "0:v"
+    names = {"crossfade": "fade", "soft_dissolve": "fade", "dip_to_black": "fadeblack", "motion_match": "smoothright"}
+    for index in range(1, len(durations)):
+        spec = transitions[index - 1] if index - 1 < len(transitions) else {"type": "crossfade", "duration": 0.25}
+        duration = max(float(spec.get("duration", 0.25)), 1 / FPS)
+        if duration >= min(accumulated, durations[index]):
+            raise RenderError(f"Transition before scene {index + 1} is longer than its adjacent scene.")
+        label = f"v{index}"
+        kind = names.get(str(spec.get("type", "crossfade")), "fade")
+        parts.append(f"[{previous}][{index}:v]xfade=transition={kind}:duration={duration:.3f}:offset={accumulated - duration:.3f}[{label}]")
+        labels.append(label)
+        previous = label
+        accumulated += durations[index] - duration
+    parts.append(f"[{previous}]format=yuv420p[v]")
+    return ";".join(parts)
+
+
+def assemble(scene_files: list[Path], scenes: list[dict[str, Any]], output: Path) -> None:
+    command = ["ffmpeg", "-y"]
+    for path in scene_files:
+        command.extend(["-i", str(path)])
+    transitions = [scene.get("transition", {"type": "crossfade", "duration": 0.25}) for scene in scenes[1:]]
+    graph = xfade_filter([float(scene["duration"]) for scene in scenes], transitions)
+    command.extend(["-filter_complex", graph, "-map", "[v]", "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "21", "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(output)])
+    run(command)
+
+
+def brand_filter(brand: dict[str, Any]) -> str:
+    if brand.get("watermark_enabled", True) is False:
+        return ""
+    text = str(brand.get("watermark_text", "|B")).replace("'", "\\'")
+    color = str(brand.get("accent_color", "#E3262E"))
+    # Drawtext is a vector/text HUD overlay, not a narrative still image.
+    return f"drawtext=text='{text}':fontcolor={color}:fontsize=42:borderw=2:bordercolor=black@0.75:x=54:y=70:alpha=0.88"
+
+
+def mux_audio(video: Path, audio: Path, captions: Path, output: Path, duration: float, music: Path | None, music_volume: float, brand: dict[str, Any]) -> None:
+    command = ["ffmpeg", "-y", "-i", str(video), "-i", str(audio)]
+    filters: list[str] = []
+    video_chain = f"[0:v]subtitles='{_escape_filter_path(captions)}'"
+    hud = brand_filter(brand)
+    if hud:
+        video_chain += f",{hud}"
+    video_chain += "[v]"
+    filters.append(video_chain)
+    if music:
+        command.extend(["-stream_loop", "-1", "-i", str(music)])
+        filters.extend([
+            "[1:a]aresample=48000,asplit=2[voice_sc][voice_mix]",
+            f"[2:a]aresample=48000,volume={music_volume:.4f}[music]",
+            "[music][voice_sc]sidechaincompress=threshold=0.035:ratio=10:attack=15:release=420[ducked]",
+            "[voice_mix][ducked]amix=inputs=2:duration=first:dropout_transition=0:normalize=0,loudnorm=I=-15:TP=-1.0:LRA=11,alimiter=limit=0.95[a]",
+        ])
+    else:
+        filters.append("[1:a]aresample=48000,loudnorm=I=-15:TP=-1.0:LRA=11,alimiter=limit=0.95[a]")
+    command.extend(["-filter_complex", ";".join(filters), "-map", "[v]", "-map", "[a]", "-t", f"{duration:.3f}", "-c:v", "libx264", "-preset", "veryfast", "-crf", "21", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(output)])
+    run(command)
+
+
+def render(manifest_path: Path, mode: str) -> Path:
+    manifest = load_manifest(manifest_path)
+    spec = validate_manifest(manifest, manifest_path.parent, mode=mode, check_files=True)
+    narration_seconds = audio_duration(spec["audio_path"])
+    if abs(narration_seconds - spec["total_scene_duration"]) > 0.35:
+        raise RenderError(f"Scene timeline {spec['total_scene_duration']:.3f}s does not match narration {narration_seconds:.3f}s.")
+    width, height = SIZES[mode]
+    output_template = str(manifest.get("output", {}).get("path", "rendered/{video_id}-{mode}.mp4"))
+    output = (manifest_path.parent / output_template.format(video_id=spec["video_id"], mode=mode)).resolve()
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="because-of-this-scenes-") as temp:
+        scene_files: list[Path] = []
+        for index, scene in enumerate(spec["scenes"], start=1):
+            target = Path(temp) / f"scene-{index:02d}.mp4"
+            render_scene(scene, width, height, target)
+            scene_files.append(target)
+        assembled = Path(temp) / "assembled.mp4"
+        assemble(scene_files, spec["scenes"], assembled)
+        music_path = None
+        music_volume = 0.06
+        if spec["music"]:
+            music_path = (manifest_path.parent / spec["music"]["path"]).resolve()
+            music_volume = float(spec["music"].get("volume", 0.06))
+        mux_audio(assembled, spec["audio_path"], spec["caption_path"], output, narration_seconds, music_path, music_volume, spec["brand"])
+    return output
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--manifest", type=Path, required=True)
+    parser.add_argument("--mode", choices=tuple(SIZES), default="preview")
+    parser.add_argument("--validate-only", action="store_true")
+    args = parser.parse_args(argv)
+    try:
+        manifest = load_manifest(args.manifest.resolve())
+        spec = validate_manifest(manifest, args.manifest.resolve().parent, mode=args.mode, check_files=not args.validate_only)
+        if args.validate_only:
+            print(json.dumps({"status": "VIDEO_CONTRACT_PASS", "video_id": spec["video_id"], "mode": args.mode, "scenes": len(spec["scenes"]), "timeline_seconds": round(spec["total_scene_duration"], 3)}, ensure_ascii=False))
+        else:
+            output = render(args.manifest.resolve(), args.mode)
+            print(json.dumps({"status": "VIDEO_RENDER_COMPLETE", "video_id": spec["video_id"], "mode": args.mode, "output": str(output)}, ensure_ascii=False))
+        return 0
+    except (VideoContractError, RenderError, OSError, ValueError) as exc:
+        print(f"VIDEO RENDER BLOCKED: {exc}")
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+
