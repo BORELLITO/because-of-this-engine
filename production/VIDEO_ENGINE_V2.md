@@ -46,9 +46,10 @@ crossfades and dissolves are used only when the edit calls for continuity.
 Preview is 1080×1920 and final is 2160×3840, both at 25 fps.
 
 Captions are generated from the same narration and remain external ASS
-captions until the final mux. The brand HUD uses the `|B` watermark during
-the story; the full wordmark belongs on title/opening/closing cards when a
-clean transparent master is available.
+captions until the final mux. The brand HUD uses the original full wordmark in the upper-right safe area,
+with a fixed symmetric right margin and chroma-key removal of its embedded
+black plate. The legacy `|B` text mark remains only as a fallback when the
+canonical logo asset is unavailable.
 
 ## Audio
 
