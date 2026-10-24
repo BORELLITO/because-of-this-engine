@@ -13,7 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from production.caption_quality import CaptionQualityError, quality_report
 from production.media_anomaly import MediaAnomalyError, analyze
-from production.render_video_episode import SIZES, audio_duration
+from production.render_video_episode import SIZES, audio_duration, rendered_duration
 from production.video_asset_contract import VideoContractError, ffprobe, load_manifest, sha256_file, validate_manifest
 
 
@@ -50,9 +50,11 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
     if media.get("sample_rate") != 48000 or int(media.get("channels") or 0) < 1:
         raise VideoContractError("Release audio must be 48 kHz with at least one channel.")
     narration = audio_duration(spec["audio_path"])
-    if abs(float(media["duration"]) - narration) > 0.15:
+    expected_duration = rendered_duration(manifest, narration)
+    if abs(float(media["duration"]) - expected_duration) > 0.15:
         raise VideoContractError(
-            f"Release duration {media['duration']:.3f}s does not match narration {narration:.3f}s."
+            f"Release duration {media['duration']:.3f}s does not match the "
+            f"narration-plus-loop contract {expected_duration:.3f}s."
         )
     try:
         caption_report = quality_report(manifest_path, require_word_level=mode == "final")
@@ -78,6 +80,8 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
         "mode": mode,
         "output": str(output),
         "duration_seconds": round(float(media["duration"]), 3),
+        "narration_duration_seconds": round(narration, 3),
+        "loop_outro_seconds": round(expected_duration - narration, 3),
         "dimensions": f"{media['width']}x{media['height']}",
         "fps": media.get("fps"),
         "codec": media.get("codec"),
@@ -108,6 +112,8 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
         "technical_qa": "PASS",
         "editorial_qa": editorial_status,
         "post_render_sync": "PASS",
+        "loop_gate": "PASS" if expected_duration > narration else "DISABLED",
+        "color_grade": (manifest.get("color_grade") or {}).get("preset", "default"),
         "anomaly_gate": anomaly_report["status"],
         "anomaly_scan": anomaly_report,
         "asset_sha256": asset_hashes,
