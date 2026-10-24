@@ -61,6 +61,19 @@ class V2HardLockTests(unittest.TestCase):
         offenders = [path for path in paths if any(token in path.lower() for token in forbidden)]
         self.assertEqual(offenders, [])
 
+    def test_workflows_pin_external_actions_by_commit(self):
+        workflow_dir = self.ROOT / ".github" / "workflows"
+        refs = {
+            "actions/checkout": "11d5960a326750d5838078e36cf38b85af677262",
+            "actions/setup-python": "a26af69be951a213d495a4c3e4e4022e16d87065",
+            "actions/github-script": "f28e40c7f34bde8b3046d885e986cb6290c5673b",
+        }
+        for workflow in workflow_dir.glob("*.yml"):
+            content = workflow.read_text(encoding="utf-8")
+            for action, commit in refs.items():
+                if action in content:
+                    self.assertIn(f"{action}@{commit}", content)
+
 
 if __name__ == "__main__":
     unittest.main()
