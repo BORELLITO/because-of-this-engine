@@ -34,3 +34,9 @@ def test_alignment_searches_across_segment_gap_without_guessing_times() -> None:
     assert end == 21.1
     assert cursor == 25
     assert len(positions) == 5
+
+
+def test_production_path_never_emits_estimated_timestamps() -> None:
+    source = MODULE_PATH.read_text(encoding="utf-8")
+    assert "recover_missing=True" not in source
+    assert "vosk_word_timestamps_with_bounded_anchor_recovery" not in source
