@@ -46,7 +46,9 @@ Random filler and image fallback are forbidden.
 - production/google_drive_assets.py: Drive-to-runner asset bridge.
 - production/video_asset_contract.py: fail-closed v2 contract.
 - production/render_video_episode.py: deterministic FFmpeg renderer.
-- production/validate_video_release.py: post-render release gate.
+- production/validate_video_release.py: post-render release gate with independent media/caption verification.
+- production/pipeline_state.py: stable job identity and explicit state machine.
+- production/finalize_manifest.py: reproducible final manifest and cleanup completion record.
 - production/caption_quality.py: caption synchronization and readability.
 - production/google_drive_delivery.py: verified Drive delivery.
 - examples/video-only-episode-manifest-v2.template.json: episode template.
@@ -65,7 +67,8 @@ Random filler and image fallback are forbidden.
   manifest and supports preview or final.
 
 The template contains placeholders intentionally. A real episode must first
-receive its narration, word-level captions, licensed music and approved Drive
-video IDs/checksums.
+receive its narration, word-level captions, licensed music, verified research,
+approved Drive video IDs/checksums and human editorial QA before final release.
+Final mode is fail-closed until those gates are present.
 
 
