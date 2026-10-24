@@ -71,4 +71,6 @@ receive its narration, word-level captions, licensed music, verified research,
 approved Drive video IDs/checksums and human editorial QA before final release.
 Final mode is fail-closed until those gates are present.
 
+Preview is validation-only: its reproducibility receipt ends in `PREVIEW_COMPLETE` and is never a production publication. Only a `final` run with human editorial approval may reach `PRODUCTION_COMPLETE`.
+
 
