@@ -43,6 +43,6 @@ validated.
 
 ## Current Mars result
 
-The current asset contains 18 reviewed phrase-level events, covering the full
+The current asset contains 21 reviewed phrase-level events, covering the full
 156-word canonical transcript. That is a valid technical preview state, but it
 is not a word-level timing proof and still requires human listening/phone review.
