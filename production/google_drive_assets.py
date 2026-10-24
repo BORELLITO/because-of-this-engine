@@ -56,30 +56,59 @@ def sha256_file(path: Path) -> str:
 
 
 def download(drive, file_id: str, target: Path) -> dict[str, Any]:
-    metadata = drive.files().get(fileId=file_id, fields="id,name,mimeType,size,parents,trashed", supportsAllDrives=True).execute(num_retries=3)
+    metadata = drive.files().get(
+        fileId=file_id,
+        fields="id,name,mimeType,size,parents,trashed,modifiedTime",
+        supportsAllDrives=True,
+    ).execute(num_retries=3)
     if metadata.get("trashed"):
         raise AssetHydrationError(f"Drive asset is trashed: {file_id}")
-    if not str(metadata.get("mimeType", "")).startswith("video/"):
+    mime_type = str(metadata.get("mimeType", ""))
+    if not mime_type.startswith("video/"):
         raise AssetHydrationError(f"Drive asset is not a video: {metadata.get('name', file_id)}")
     target.parent.mkdir(parents=True, exist_ok=True)
-    request = drive.files().get_media(fileId=file_id, supportsAllDrives=True)
-    with target.open("wb") as handle:
-        downloader = MediaIoBaseDownload(handle, request, chunksize=8 * 1024 * 1024)
-        done = False
-        while not done:
-            _, done = downloader.next_chunk(num_retries=3)
-    return {"id": metadata["id"], "name": metadata.get("name"), "mimeType": metadata.get("mimeType"), "size": target.stat().st_size, "sha256": sha256_file(target)}
+    partial = target.with_name(target.name + ".part")
+    try:
+        request = drive.files().get_media(fileId=file_id, supportsAllDrives=True)
+        with partial.open("wb") as handle:
+            downloader = MediaIoBaseDownload(handle, request, chunksize=8 * 1024 * 1024)
+            done = False
+            while not done:
+                _, done = downloader.next_chunk(num_retries=3)
+        size = partial.stat().st_size
+        expected_size = int(metadata.get("size", 0) or 0)
+        if expected_size and size != expected_size:
+            raise AssetHydrationError(f"Drive asset size mismatch: {file_id}")
+        os.replace(partial, target)
+    except Exception:
+        if partial.exists():
+            partial.unlink()
+        raise
+    return {
+        "id": metadata["id"],
+        "name": metadata.get("name"),
+        "mimeType": mime_type,
+        "size": target.stat().st_size,
+        "sha256": sha256_file(target),
+        "modifiedTime": metadata.get("modifiedTime"),
+    }
 
 
-def hydrate(manifest_path: Path) -> dict[str, Any]:
+def hydrate(manifest_path: Path, *, require_drive_assets: bool = False) -> dict[str, Any]:
     manifest = load_manifest(manifest_path)
     assets = []
+    seen_drive_ids: set[str] = set()
     for scene in manifest.get("scenes", []):
         asset = scene.get("asset", {})
         file_id = str(asset.get("drive_file_id", "")).strip()
         path = resolve_inside(manifest_path.parent, asset.get("path"), f"Asset {asset.get('asset_id', '?')} path")
         if file_id:
+            if file_id in seen_drive_ids:
+                raise AssetHydrationError(f"Drive asset is reused in this episode: {file_id}")
+            seen_drive_ids.add(file_id)
             assets.append((file_id, path, asset))
+        elif require_drive_assets:
+            raise AssetHydrationError(f"Asset {asset.get('asset_id', '?')} is missing drive_file_id.")
         elif not path.is_file():
             raise AssetHydrationError(f"Asset {asset.get('asset_id', '?')} has no drive_file_id and is not present locally.")
     if assets:
@@ -95,9 +124,10 @@ def hydrate(manifest_path: Path) -> dict[str, Any]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, required=True)
+    parser.add_argument("--require-drive-assets", action="store_true")
     args = parser.parse_args()
     try:
-        print(json.dumps(hydrate(args.manifest.resolve()), ensure_ascii=False))
+        print(json.dumps(hydrate(args.manifest.resolve(), require_drive_assets=args.require_drive_assets), ensure_ascii=False))
         return 0
     except (AssetHydrationError, VideoContractError, OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"DRIVE ASSET HYDRATION BLOCKED: {exc}")
