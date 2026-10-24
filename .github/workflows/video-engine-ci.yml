@@ -4,13 +4,16 @@ on:
   push:
     branches:
       - main
-      - v2-video-only-investigative-noir
   pull_request:
     branches:
       - main
 
 permissions:
   contents: read
+
+concurrency:
+  group: video-engine-v2-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   contract:
@@ -25,7 +28,7 @@ jobs:
         run: python -m pip install -r requirements.txt
       - name: Compile production code
         run: python -m py_compile production/*.py
-      - name: Run regression and v2 tests
+      - name: Run regression, contract and hardening tests
         run: python -m unittest discover -s tests -v
       - name: Validate template has only video scenes
         run: |
@@ -34,9 +37,14 @@ jobs:
           from pathlib import Path
           value = json.loads(Path("examples/video-only-episode-manifest-v2.template.json").read_text())
           assert value["schema_version"] == "2.0"
-          assert all("image" not in scene for scene in value["scenes"])
+          assert all("image" not in scene and "image_path" not in scene for scene in value["scenes"])
+          assert all(scene["asset"]["provider"] in {"mixkit", "pixabay", "pexels", "drive", "original"} for scene in value["scenes"])
           assert len(value["scenes"]) >= 4
           print("VIDEO_ONLY_TEMPLATE_PASS")
           PY
-
-
+      - name: Verify no Actions artifact delivery or literal workflow escapes
+        run: |
+          if grep -RInE 'actions/upload-artifact|\\\$\\{|render-authorial|generate-mars|image_provider' production examples .env.example; then
+            echo "Forbidden legacy or artifact pattern detected."
+            exit 1
+          fi

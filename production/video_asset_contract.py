@@ -22,6 +22,8 @@ MAX_STORY_SECONDS = 75.0
 ALLOWED_MATCHES = {"EXACT", "NEAR", "EXPLANATORY", "SYMBOLIC", "ATMOSPHERE"}
 ALLOWED_TRUTH = {"VERIFIED_FACT", "EXPLAINED_PHENOMENON", "DECLARED_FICTION"}
 ALLOWED_STATUSES = {"APPROVED", "REVIEW_REQUIRED", "REJECTED"}
+ALLOWED_PROVIDERS = {"mixkit", "pixabay", "pexels", "drive", "original"}
+FINAL_PROVENANCE_FIELDS = ("author", "acquisition_timestamp", "original_filename", "mime_type", "duration_seconds", "width", "height", "filesize_bytes", "drive_file_id", "job_ownership", "scene_usage")
 
 
 class VideoContractError(ValueError):
@@ -68,6 +70,16 @@ def perceptual_hash(path: Path) -> str:
     return f"{int(bits, 2):064x}"
 
 
+def _rate(value: str | None) -> float | None:
+    if not value or value in {"0/0", "N/A"}:
+        return None
+    try:
+        numerator, denominator = value.split("/", 1)
+        return float(numerator) / float(denominator)
+    except (ValueError, ZeroDivisionError):
+        return None
+
+
 def ffprobe(path: Path) -> dict[str, Any]:
     command = [
         "ffprobe", "-v", "error", "-show_streams", "-show_format",
@@ -77,19 +89,32 @@ def ffprobe(path: Path) -> dict[str, Any]:
         result = subprocess.run(command, check=True, capture_output=True, text=True, timeout=60)
         data = json.loads(result.stdout)
     except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired, json.JSONDecodeError) as exc:
-        raise VideoContractError(f"Could not inspect video asset: {path}") from exc
+        raise VideoContractError(f"Could not inspect media: {path}") from exc
     streams = data.get("streams") or []
     video = next((item for item in streams if item.get("codec_type") == "video"), None)
+    audio = next((item for item in streams if item.get("codec_type") == "audio"), None)
     if not video:
-        raise VideoContractError(f"Asset has no video stream: {path}")
+        raise VideoContractError(f"Media has no video stream: {path}")
     try:
-        duration = float(video.get("duration") or data.get("format", {}).get("duration"))
+        duration = float(data.get("format", {}).get("duration") or video.get("duration"))
     except (TypeError, ValueError) as exc:
-        raise VideoContractError(f"Asset duration is unavailable: {path}") from exc
+        raise VideoContractError(f"Media duration is unavailable: {path}") from exc
     if duration <= 0:
-        raise VideoContractError(f"Asset duration is not positive: {path}")
-    return {"duration": duration, "width": int(video.get("width", 0)), "height": int(video.get("height", 0)), "codec": video.get("codec_name")}
-
+        raise VideoContractError(f"Media duration is not positive: {path}")
+    return {
+        "duration": duration,
+        "width": int(video.get("width", 0)),
+        "height": int(video.get("height", 0)),
+        "codec": video.get("codec_name"),
+        "pix_fmt": video.get("pix_fmt"),
+        "fps": _rate(video.get("avg_frame_rate") or video.get("r_frame_rate")),
+        "has_audio": audio is not None,
+        "audio_codec": audio.get("codec_name") if audio else None,
+        "sample_rate": int(audio.get("sample_rate", 0)) if audio and str(audio.get("sample_rate", "0")).isdigit() else None,
+        "channels": int(audio.get("channels", 0)) if audio else 0,
+        "format_name": data.get("format", {}).get("format_name"),
+        "size": int(data.get("format", {}).get("size", 0) or 0),
+    }
 
 def _required_text(record: dict[str, Any], key: str, label: str) -> str:
     value = record.get(key)
@@ -98,13 +123,13 @@ def _required_text(record: dict[str, Any], key: str, label: str) -> str:
     return value.strip()
 
 
-def validate_asset_record(record: dict[str, Any], base: Path, episode_id: str, *, check_file: bool = True) -> dict[str, Any]:
+def validate_asset_record(record: dict[str, Any], base: Path, episode_id: str, *, mode: str = "preview", check_file: bool = True) -> dict[str, Any]:
     if not isinstance(record, dict):
         raise VideoContractError("Each video asset record must be an object.")
     asset_id = _required_text(record, "asset_id", "Video asset")
     path = resolve_inside(base, record.get("path"), f"Asset {asset_id} path")
     provider = _required_text(record, "provider", f"Asset {asset_id}").lower()
-    if provider not in {"mixkit", "pixabay", "pexels", "drive", "original"}:
+    if provider not in ALLOWED_PROVIDERS:
         raise VideoContractError(f"Asset {asset_id} uses an unsupported video provider: {provider}")
     _required_text(record, "source_page_url", f"Asset {asset_id}")
     _required_text(record, "license", f"Asset {asset_id}")
@@ -117,6 +142,18 @@ def validate_asset_record(record: dict[str, Any], base: Path, episode_id: str, *
         raise VideoContractError(f"Asset {asset_id} is permanently retired and cannot be reused.")
     if record.get("episode_id") not in {None, episode_id}:
         raise VideoContractError(f"Asset {asset_id} is assigned to another episode.")
+    if mode == "final":
+        for key in FINAL_PROVENANCE_FIELDS:
+            value = record.get(key)
+            if value is None or (isinstance(value, str) and not value.strip()):
+                raise VideoContractError(f"Asset {asset_id} is missing final provenance field: {key}.")
+        if str(record.get("job_ownership")) != episode_id:
+            raise VideoContractError(f"Asset {asset_id} provenance ownership does not match video_id.")
+        if str(record.get("drive_file_id")).strip() == "":
+            raise VideoContractError(f"Asset {asset_id} requires a Drive file ID for final release.")
+        for key in ("duration_seconds", "width", "height", "filesize_bytes"):
+            if isinstance(record.get(key), bool) or not isinstance(record.get(key), (int, float)) or record[key] <= 0:
+                raise VideoContractError(f"Asset {asset_id} provenance field {key} must be positive.")
     if check_file:
         if not path.is_file():
             raise VideoContractError(f"Approved video asset is missing: {path}")
@@ -124,6 +161,13 @@ def validate_asset_record(record: dict[str, Any], base: Path, episode_id: str, *
         if actual.lower() != str(record["sha256"]).lower():
             raise VideoContractError(f"Asset {asset_id} sha256 does not match the downloaded file.")
         metadata = ffprobe(path)
+        declared_phash = record.get("perceptual_hash")
+        if declared_phash:
+            if not re.fullmatch(r"[0-9a-fA-F]{64}", str(declared_phash)):
+                raise VideoContractError(f"Asset {asset_id} perceptual_hash must be 64 hexadecimal characters.")
+            actual_phash = perceptual_hash(path)
+            if actual_phash.lower() != str(declared_phash).lower():
+                raise VideoContractError(f"Asset {asset_id} perceptual_hash does not match the downloaded file.")
     else:
         metadata = {}
     return {**record, "asset_id": asset_id, "path": path, "metadata": metadata}
@@ -133,6 +177,9 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
     if manifest.get("schema_version") != SCHEMA_VERSION:
         raise VideoContractError(f"Video-only manifests must use schema_version {SCHEMA_VERSION}.")
     episode_id = _required_text(manifest, "video_id", "Manifest")
+    job_id = manifest.get("job_id") or (manifest.get("job") or {}).get("job_id")
+    if job_id is not None and not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]{2,119}", str(job_id)):
+        raise VideoContractError("Manifest job_id is unsafe or invalid.")
     story = manifest.get("story_profile")
     if not isinstance(story, dict):
         raise VideoContractError("Manifest requires a story_profile object.")
@@ -178,7 +225,7 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
             raise VideoContractError(f"Scene {scene_id} requires match_score between 0 and 1.")
         if score < 0.55 and scene["visual_match"] not in {"SYMBOLIC", "ATMOSPHERE"}:
             raise VideoContractError(f"Scene {scene_id} is below the semantic-match threshold.")
-        asset = validate_asset_record(scene.get("asset"), episode_dir, episode_id, check_file=check_files)
+        asset = validate_asset_record(scene.get("asset"), episode_dir, episode_id, mode=mode, check_file=check_files)
         for key, seen, label in (("asset_id", seen_asset_ids, "asset"), ("sha256", seen_hashes, "sha256")):
             value = str(asset[key]).lower()
             if value in seen:
@@ -211,11 +258,26 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
         music_path = resolve_inside(episode_dir, music.get("path"), "Music path")
         if check_files and not music_path.is_file():
             raise VideoContractError(f"Licensed music file is missing: {music_path}")
+    if mode == "final":
+        research = manifest.get("research")
+        if not isinstance(research, dict) or not isinstance(research.get("sources"), list) or not research["sources"]:
+            raise VideoContractError("Final release requires research.sources with verified references.")
+        if not str(research.get("accessed_at", "")).strip():
+            raise VideoContractError("Final release requires research.accessed_at.")
+        if research.get("confidence") not in {"HIGH", "MEDIUM"}:
+            raise VideoContractError("Final release requires research confidence HIGH or MEDIUM.")
+        editorial = manifest.get("editorial_qa")
+        if not isinstance(editorial, dict) or editorial.get("status") != "PASS":
+            raise VideoContractError("Final release requires editorial_qa.status=PASS after human review.")
+        for key in ("reviewer", "reviewed_at"):
+            if not str(editorial.get(key, "")).strip():
+                raise VideoContractError(f"Final release requires editorial_qa.{key}.")
     brand = manifest.get("brand", {})
     if not isinstance(brand, dict):
         raise VideoContractError("brand must be an object.")
     return {
         "video_id": episode_id,
+        "job_id": str(job_id) if job_id else None,
         "scenes": normalized,
         "audio_path": audio_path,
         "caption_path": caption_path,
