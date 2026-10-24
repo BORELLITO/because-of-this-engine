@@ -78,5 +78,17 @@ class V2HardLockTests(unittest.TestCase):
                     self.assertIn(f"{action}@{commit}", content)
 
 
+    def test_direct_production_scripts_bootstrap_repository_root(self):
+        expected = "sys.path.insert(0, str(Path(__file__).resolve().parents[1]))"
+        for filename in (
+            "production/google_drive_assets.py",
+            "production/render_video_episode.py",
+            "production/validate_video_release.py",
+            "production/finalize_manifest.py",
+        ):
+            content = (self.ROOT / filename).read_text(encoding="utf-8")
+            self.assertIn(expected, content, filename)
+
+
 if __name__ == "__main__":
     unittest.main()

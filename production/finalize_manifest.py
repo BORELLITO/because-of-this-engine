@@ -9,6 +9,9 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from production.pipeline_state import canonical_hash, job_id_from_manifest, sha256_file
 from production.video_asset_contract import VideoContractError, load_manifest, resolve_inside
