@@ -66,10 +66,27 @@ jobs:
             fi
           } >> "${GITHUB_STEP_SUMMARY}"
 
-      - name: Upload caption receipt
+      - name: Upload caption receipt (best effort)
+        id: upload_caption_receipt
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: because-of-this-caption-quality
           path: examples/rendered/caption-quality-mars.json
           if-no-files-found: error
           retention-days: 7
+
+      - name: Publish caption delivery status
+        if: always()
+        run: |
+          {
+            echo ""
+            echo "### Caption receipt delivery"
+            echo "- upload_step_outcome: ${{ steps.upload_caption_receipt.outcome }}"
+            if [ "${{ steps.upload_caption_receipt.outcome }}" = "success" ]; then
+              echo "- status: PASS"
+            else
+              echo "- status: BLOCKED"
+              echo "- note: caption QA result remains authoritative; artifact storage is unavailable"
+            fi
+          } >> "${GITHUB_STEP_SUMMARY}"
