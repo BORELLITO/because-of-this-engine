@@ -2,7 +2,7 @@ import unittest
 from pathlib import Path
 
 from production.video_asset_contract import VideoContractError, validate_manifest
-from production.render_video_episode import scene_filter, xfade_filter
+from production.render_video_episode import narration_locked_scenes, scene_filter, xfade_filter
 from production.video_asset_research import build_queue
 
 
@@ -75,6 +75,15 @@ class VideoEngineV2Tests(unittest.TestCase):
         value = xfade_filter([15, 15, 15], [{"type": "crossfade", "duration": 0.25}] * 2)
         self.assertIn("offset=14.750", value)
         self.assertIn("offset=29.500", value)
+
+    def test_narration_locked_timeline_matches_audio_after_transition_overlap(self):
+        scenes = manifest()["scenes"]
+        for index, scene in enumerate(scenes):
+            scene["transition"] = {"type": "crossfade", "duration": 0.25} if index else {"type": "hard_cut", "duration": 0}
+        locked = narration_locked_scenes(scenes, 70.2)
+        overlap = 0.25 * 3 + 0.25
+        self.assertAlmostEqual(sum(scene["duration"] for scene in locked) - overlap, 70.2, places=5)
+        self.assertNotEqual([scene["duration"] for scene in locked], [scene["duration"] for scene in scenes])
 
     def test_research_never_auto_approves_and_never_uses_images(self):
         value = manifest()

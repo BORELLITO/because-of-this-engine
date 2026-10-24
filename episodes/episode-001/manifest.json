@@ -59,7 +59,7 @@
   "scenes": [
     {
       "scene_id": "S01",
-      "duration": 15,
+      "duration": 16,
       "story_beat": "hook: reveal the nightly recording behind the glass",
       "visual_intent": "make the impossible figure the first undeniable visual",
       "visual_function": "establishing",
@@ -100,7 +100,7 @@
     },
     {
       "scene_id": "S02",
-      "duration": 9,
+      "duration": 7.8,
       "story_beat": "context: show the only person willing to investigate",
       "visual_intent": "connect the unseen threat to a human reaction",
       "visual_function": "contextual",
@@ -141,7 +141,7 @@
     },
     {
       "scene_id": "S03",
-      "duration": 11,
+      "duration": 10,
       "story_beat": "escalation: prove that the watcher is outside the sealed room",
       "visual_intent": "turn the glass into a boundary that has already failed",
       "visual_function": "reveal",
@@ -182,7 +182,7 @@
     },
     {
       "scene_id": "S04",
-      "duration": 18,
+      "duration": 18.5,
       "story_beat": "turn: the figure moves closer when the lights return",
       "visual_intent": "show the point of no return without inventing a literal hallway",
       "visual_function": "tension",
@@ -223,7 +223,7 @@
     },
     {
       "scene_id": "S05",
-      "duration": 15,
+      "duration": 15.7,
       "story_beat": "payoff: the camera becomes the thing still watching",
       "visual_intent": "resolve the story with smoke and an impossible final implication",
       "visual_function": "payoff",

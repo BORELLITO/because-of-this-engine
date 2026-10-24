@@ -86,7 +86,7 @@ def xfade_filter(durations: list[float], transitions: list[dict[str, Any]]) -> s
     names = {"crossfade": "fade", "soft_dissolve": "fade", "dip_to_black": "fadeblack", "motion_match": "smoothright"}
     for index in range(1, len(durations)):
         spec = transitions[index - 1] if index - 1 < len(transitions) else {"type": "crossfade", "duration": 0.25}
-        duration = max(float(spec.get("duration", 0.25)), 1 / FPS)
+        duration = transition_duration(spec)
         if duration >= min(accumulated, durations[index]):
             raise RenderError(f"Transition before scene {index + 1} is longer than its adjacent scene.")
         label = f"v{index}"
@@ -97,6 +97,37 @@ def xfade_filter(durations: list[float], transitions: list[dict[str, Any]]) -> s
         accumulated += durations[index] - duration
     parts.append(f"[{previous}]format=yuv420p[v]")
     return ";".join(parts)
+
+
+def transition_duration(spec: dict[str, Any]) -> float:
+    return max(float(spec.get("duration", 0.25)), 1 / FPS)
+
+
+def narration_locked_scenes(scenes: list[dict[str, Any]], narration_seconds: float) -> list[dict[str, Any]]:
+    """Scale scene durations to the final narration while preserving every unique clip.
+
+    xfade consumes each transition duration from the assembled timeline, so the
+    scene sum targets narration + transition overlap. The manifest remains the
+    editorial plan; this in-memory schedule is the final audio-locked timeline.
+    """
+    if not 60.0 <= narration_seconds <= 75.0:
+        raise RenderError(f"Narration duration must remain between 60s and 75s; got {narration_seconds:.3f}s.")
+    planned_total = sum(float(scene["duration"]) for scene in scenes)
+    if planned_total <= 0:
+        raise RenderError("Scene timeline must have a positive planned duration.")
+    transitions = [scene.get("transition", {"type": "crossfade", "duration": 0.25}) for scene in scenes[1:]]
+    overlap = sum(transition_duration(spec) for spec in transitions)
+    target_scene_sum = narration_seconds + overlap
+    scale = target_scene_sum / planned_total
+    locked: list[dict[str, Any]] = []
+    for scene in scenes:
+        copy = dict(scene)
+        copy["duration"] = float(scene["duration"]) * scale
+        if copy["duration"] > 20.0:
+            raise RenderError(f"Audio-locked scene {scene['scene_id']} exceeds the 20s visual-beat limit.")
+        locked.append(copy)
+    locked[-1]["duration"] = target_scene_sum - sum(float(scene["duration"]) for scene in locked[:-1])
+    return locked
 
 
 def assemble(scene_files: list[Path], scenes: list[dict[str, Any]], output: Path) -> None:
@@ -145,20 +176,19 @@ def render(manifest_path: Path, mode: str) -> Path:
     manifest = load_manifest(manifest_path)
     spec = validate_manifest(manifest, manifest_path.parent, mode=mode, check_files=True)
     narration_seconds = audio_duration(spec["audio_path"])
-    if abs(narration_seconds - spec["total_scene_duration"]) > 0.35:
-        raise RenderError(f"Scene timeline {spec['total_scene_duration']:.3f}s does not match narration {narration_seconds:.3f}s.")
+    locked_scenes = narration_locked_scenes(spec["scenes"], narration_seconds)
     width, height = SIZES[mode]
     output_template = str(manifest.get("output", {}).get("path", "rendered/{video_id}-{mode}.mp4"))
     output = (manifest_path.parent / output_template.format(video_id=spec["video_id"], mode=mode)).resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="because-of-this-scenes-") as temp:
         scene_files: list[Path] = []
-        for index, scene in enumerate(spec["scenes"], start=1):
+        for index, scene in enumerate(locked_scenes, start=1):
             target = Path(temp) / f"scene-{index:02d}.mp4"
             render_scene(scene, width, height, target)
             scene_files.append(target)
         assembled = Path(temp) / "assembled.mp4"
-        assemble(scene_files, spec["scenes"], assembled)
+        assemble(scene_files, locked_scenes, assembled)
         music_path = None
         music_volume = 0.06
         if spec["music"]:
