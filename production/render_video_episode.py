@@ -246,25 +246,65 @@ Dialogue: 0,0:00:00.00,{ass_time(duration)},Brand,,0,0,0,,{text}
     return path
 
 
-def mux_audio(video: Path, audio: Path, captions: Path, output: Path, duration: float, music: Path | None, music_volume: float, brand_ass: Path | None) -> None:
+def mux_audio(
+    video: Path,
+    audio: Path,
+    captions: Path,
+    output: Path,
+    duration: float,
+    music: Path | None,
+    music_volume: float,
+    brand_ass: Path | None,
+    logo_path: Path | None,
+    brand: dict[str, Any],
+) -> None:
     command = ["ffmpeg", "-y", "-i", str(video), "-i", str(audio)]
     filters: list[str] = []
-    video_chain = f"[0:v]subtitles='{_escape_filter_path(captions)}'"
-    if brand_ass:
-        video_chain += f",subtitles='{_escape_filter_path(brand_ass)}'"
-    video_chain += "[v]"
-    filters.append(video_chain)
+    filters.append(f"[0:v]subtitles='{_escape_filter_path(captions)}'[captioned]")
+
+    logo_enabled = logo_path is not None and brand.get("logo_enabled", False) is True
+    if logo_enabled:
+        command.extend(["-loop", "1", "-framerate", str(FPS), "-i", str(logo_path)])
+        logo_width = int(brand.get("logo_width", 360))
+        logo_opacity = float(brand.get("logo_opacity", 0.82))
+        logo_margin = int(brand.get("logo_margin", 54))
+        logo_top = int(brand.get("logo_top", 72))
+        filters.extend([
+            (
+                f"[2:v]format=rgba,scale={logo_width}:-1,"
+                "colorkey=0x000000:0.18:0.05,"
+                f"colorchannelmixer=aa={logo_opacity:.3f}[logo]"
+            ),
+            (
+                f"[captioned][logo]overlay="
+                f"x=main_w-overlay_w-{logo_margin}:y={logo_top}:"
+                "eof_action=repeat:shortest=1[v]"
+            ),
+        ])
+    elif brand_ass:
+        filters.append(f"[captioned]subtitles='{_escape_filter_path(brand_ass)}'[v]")
+    else:
+        filters.append("[captioned]null[v]")
+
+    music_input_index = 2 + int(logo_enabled)
     if music:
         command.extend(["-stream_loop", "-1", "-i", str(music)])
         filters.extend([
             "[1:a]aresample=48000,asplit=2[voice_sc][voice_mix]",
-            f"[2:a]aresample=48000,volume={music_volume:.4f}[music]",
+            f"[{music_input_index}:a]aresample=48000,volume={music_volume:.4f}[music]",
             "[music][voice_sc]sidechaincompress=threshold=0.035:ratio=10:attack=15:release=420[ducked]",
             "[voice_mix][ducked]amix=inputs=2:duration=first:dropout_transition=0:normalize=0,loudnorm=I=-15:TP=-1.0:LRA=11,alimiter=limit=0.95[a]",
         ])
     else:
         filters.append("[1:a]aresample=48000,loudnorm=I=-15:TP=-1.0:LRA=11,alimiter=limit=0.95[a]")
-    command.extend(["-filter_complex", ";".join(filters), "-map", "[v]", "-map", "[a]", "-t", f"{duration:.3f}", "-c:v", "libx264", "-preset", "veryfast", "-crf", "21", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(output)])
+    command.extend([
+        "-filter_complex", ";".join(filters),
+        "-map", "[v]", "-map", "[a]",
+        "-t", f"{duration:.3f}",
+        "-c:v", "libx264", "-preset", "veryfast", "-crf", "21",
+        "-c:a", "aac", "-b:a", "192k", "-ar", "48000",
+        "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(output),
+    ])
     run(command)
 
 
@@ -294,8 +334,20 @@ def render(manifest_path: Path, mode: str) -> Path:
         if spec["music"]:
             music_path = (manifest_path.parent / spec["music"]["path"]).resolve()
             music_volume = float(spec["music"].get("volume", 0.06))
-        brand_ass = write_brand_ass(Path(temp) / "brand.ass", spec["brand"], narration_seconds)
-        mux_audio(assembled, spec["audio_path"], spec["caption_path"], output, narration_seconds, music_path, music_volume, brand_ass)
+        logo_path = spec.get("brand_logo_path")
+        brand_ass = None if logo_path else write_brand_ass(Path(temp) / "brand.ass", spec["brand"], narration_seconds)
+        mux_audio(
+            assembled,
+            spec["audio_path"],
+            spec["caption_path"],
+            output,
+            narration_seconds,
+            music_path,
+            music_volume,
+            brand_ass,
+            logo_path,
+            spec["brand"],
+        )
     return output
 
 

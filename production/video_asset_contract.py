@@ -325,6 +325,32 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
     brand = manifest.get("brand", {})
     if not isinstance(brand, dict):
         raise VideoContractError("brand must be an object.")
+
+    brand_logo_path = None
+    if brand.get("logo_enabled", False) is True:
+        logo_value = brand.get("logo_path")
+        if not isinstance(logo_value, str) or not logo_value.strip():
+            raise VideoContractError("brand.logo_path is required when brand.logo_enabled=true.")
+        logo_root = episode_dir.parent.parent if episode_dir.parent.name == "episodes" else episode_dir
+        logo_candidate = (logo_root / logo_value).resolve()
+        if logo_candidate != logo_root and logo_root not in logo_candidate.parents:
+            raise VideoContractError("Brand logo path must remain inside the project root.")
+        if check_files and not logo_candidate.is_file():
+            raise VideoContractError(f"Brand logo file is missing: {logo_candidate}")
+        width = brand.get("logo_width", 360)
+        opacity = brand.get("logo_opacity", 0.82)
+        margin = brand.get("logo_margin", 54)
+        top = brand.get("logo_top", 72)
+        if isinstance(width, bool) or not isinstance(width, (int, float)) or not 240 <= float(width) <= 720:
+            raise VideoContractError("brand.logo_width must be between 240 and 720 pixels.")
+        if isinstance(opacity, bool) or not isinstance(opacity, (int, float)) or not 0.2 <= float(opacity) <= 1.0:
+            raise VideoContractError("brand.logo_opacity must be between 0.2 and 1.0.")
+        if isinstance(margin, bool) or not isinstance(margin, (int, float)) or not 24 <= float(margin) <= 240:
+            raise VideoContractError("brand.logo_margin must be between 24 and 240 pixels.")
+        if isinstance(top, bool) or not isinstance(top, (int, float)) or not 24 <= float(top) <= 360:
+            raise VideoContractError("brand.logo_top must be between 24 and 360 pixels.")
+        brand_logo_path = logo_candidate
+
     return {
         "video_id": episode_id,
         "job_id": str(job_id) if job_id else None,
@@ -334,6 +360,7 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
         "music": music,
         "total_scene_duration": total,
         "brand": brand,
+        "brand_logo_path": brand_logo_path,
         "clip_policy": clip_policy,
         "clip_quantity_gate": quantity_report,
     }
