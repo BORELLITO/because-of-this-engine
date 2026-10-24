@@ -63,8 +63,8 @@ class StockVideoResearchTests(unittest.TestCase):
         }
         result = research(
             manifest,
-            provider="nasa",
-            searchers={"nasa": lambda query, limit: [{
+            provider="pexels",
+            searchers={"pexels": lambda query, limit: [{
                 "provider": "nasa",
                 "candidate_id": "N1",
                 "title": "Spacecraft journey",
