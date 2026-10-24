@@ -191,3 +191,25 @@ em **Run workflow** e selecione uma cena. O workflow usa o provedor NASA e não
 exige secrets. Os arquivos aparecem como artefato para download. Cloudflare só
 é necessário se você optar conscientemente por executar o provedor generativo
 alternativo fora desse fluxo padrão.
+
+## Pesquisa de vídeo ilustrativo com revisão no Web Cloud Browser
+
+O motor agora possui uma camada separada para pesquisar vídeos de apoio que possam acompanhar cada trecho da narração. Ela não substitui automaticamente as imagens autorais nem publica um vídeo externo sem aprovação.
+
+Fluxo seguro:
+
+1. O manifest transforma o beat, a intenção visual e a função da cena em consultas específicas.
+2. O workflow Research stock video candidates consulta NASA, Pexels e Pixabay quando a fonte estiver habilitada.
+3. Cada candidato recebe URL da página original, URL da licença, duração, resolução, fonte, score de relevância e registro de direitos.
+4. O Web Cloud Browser é usado para abrir a página original em tempo real e revisar se o clipe realmente corresponde à narração, se há marca d'água, pessoas, marcas ou contexto enganoso.
+5. O estado permanece REVIEW_REQUIRED até a aprovação humana do item exato. Sem aprovação, o motor mantém o frame autoral atual como fallback.
+
+### Fontes e limites
+
+- NASA: excelente para material factual e espacial; a autorização não é inferida pelo domínio. Verifique as diretrizes de mídia, terceiros, logos e contexto antes de monetizar.
+- Pexels: vídeos gratuitos, modificáveis e sem atribuição obrigatória segundo a licença do site; ainda é necessário revisar pessoas, marcas e uso indevido de endosso.
+- Pixabay: permite uso gratuito e adaptação sem atribuição obrigatória segundo o resumo de licença; a própria plataforma alerta que podem existir direitos adicionais de terceiros.
+
+Pexels e Pixabay exigem uma chave de API nos secrets PEXELS_API_KEY e PIXABAY_API_KEY para pesquisa automatizada. A NASA pode ser consultada sem essas chaves. A ausência de chave não é tratada como erro fatal: o relatório informa a fonte indisponível e preserva as demais.
+
+O workflow é manual por desenho: pesquisar não significa aceitar. O vídeo só deve entrar no render depois de registrar a página original, a licença, o checksum do arquivo baixado, a decisão editorial e a data da revisão. O motor não apresenta um clipe ilustrativo como prova documental do fato narrado.
