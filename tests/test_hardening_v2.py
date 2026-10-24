@@ -85,6 +85,7 @@ class V2HardLockTests(unittest.TestCase):
             "production/render_video_episode.py",
             "production/validate_video_release.py",
             "production/finalize_manifest.py",
+            "production/quality_gates.py",
         ):
             content = (self.ROOT / filename).read_text(encoding="utf-8")
             self.assertIn(expected, content, filename)
