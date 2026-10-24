@@ -15,7 +15,7 @@
   },
   "voice": {
     "provider": "gemini",
-    "model": "gemini-3.8-flash-lite-tts",
+    "model": "gemini-3.8-flash-tts",
     "voice": "Charon",
     "language": "en-US",
     "style": "Low, restrained male suspense narration in clear American English. Natural pauses, clear diction and controlled tension."
