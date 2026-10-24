@@ -1,0 +1,289 @@
+{
+  "schema_version": "2.0",
+  "video_id": "because-of-this-episode-001",
+  "job_id": "because-of-this-episode-001",
+  "title": "The Camera That Still Turns On at 3:17",
+  "language": "en",
+  "fps": 25,
+  "story_profile": {
+    "format": "The Last Recording",
+    "truth_mode": "DECLARED_FICTION",
+    "primary_emotion": "tension",
+    "secondary_emotion": "curiosity",
+    "central_question": "Why does the sealed hotel's camera still turn on every night?",
+    "visual_symbol": "the glass door"
+  },
+  "script": {
+    "path": "script.txt",
+    "word_count_target": 156
+  },
+  "audio": {
+    "path": "audio/narration.wav",
+    "master": "narration",
+    "sample_rate": 24000,
+    "channels": 1
+  },
+  "captions": {
+    "path": "captions/narration.ass",
+    "alignment_mode": "hybrid_alignment",
+    "alignment_source": "deterministic phrase timing generated from the final narration duration; word-level alignment is not claimed in preview",
+    "word_level_available": false,
+    "max_lines": 2,
+    "max_line_chars": 42,
+    "target_cps": 20,
+    "max_cps": 28,
+    "end_tolerance_seconds": 0.1
+  },
+  "music": {
+    "path": "audio/suspense-bed.mp3",
+    "drive_file_id": "1bDbbr-bMA3puBvrQ2QzvSTfbicXJmdni",
+    "provider": "mixkit",
+    "source_page_url": "https://mixkit.co/free-stock-music/mood/suspenseful/",
+    "license": "Mixkit Stock Music Free License",
+    "commercial_use": true,
+    "attribution_required": false,
+    "volume": 0.06,
+    "author": "Michael Ramir C.",
+    "original_filename": "871.mp3",
+    "mime_type": "audio/mpeg",
+    "filesize_bytes": 3243407
+  },
+  "brand": {
+    "watermark_enabled": true,
+    "watermark_text": "|B",
+    "accent_color": "#E3262E"
+  },
+  "output": {
+    "path": "rendered/{video_id}-{mode}.mp4"
+  },
+  "scenes": [
+    {
+      "scene_id": "S01",
+      "duration": 15,
+      "story_beat": "hook: reveal the nightly recording behind the glass",
+      "visual_intent": "make the impossible figure the first undeniable visual",
+      "visual_function": "establishing",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.95,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "hard_cut",
+        "duration": 0
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-001-s01",
+        "path": "runtime-assets/s01.mp4",
+        "drive_file_id": "1Wgahgc8o0j8PySfrZfaWPG4-MYM_yX5h",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/grim-silhouette-presses-hands-and-face-against-glass-100562/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "feea34fa97b6bd82316d40f0f31ebe8f7713183d3d74ccda2084d7354fc533ee",
+        "reuse_status": "FRESH",
+        "episode_id": "because-of-this-episode-001",
+        "author": "Mixkit contributor",
+        "acquisition_timestamp": "2026-10-24T15:19:00Z",
+        "original_filename": "100562-video-720.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 20.228542,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 7696207,
+        "job_ownership": "because-of-this-episode-001",
+        "scene_usage": "S01"
+      }
+    },
+    {
+      "scene_id": "S02",
+      "duration": 9,
+      "story_beat": "context: show the only person willing to investigate",
+      "visual_intent": "connect the unseen threat to a human reaction",
+      "visual_function": "contextual",
+      "visual_match": "NEAR",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.82,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.25
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-001-s02",
+        "path": "runtime-assets/s02.mp4",
+        "drive_file_id": "1wb_VHpmS253H2lc2JOodcyI2xm4Qb2cZ",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/woman-in-white-looks-out-startled-in-dim-room-100580/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "01d007d41cf5a8508c381ada0435bd5e5b695b725cbd1872fae706d4f5da9428",
+        "reuse_status": "FRESH",
+        "episode_id": "because-of-this-episode-001",
+        "author": "Mixkit contributor",
+        "acquisition_timestamp": "2026-10-24T15:19:00Z",
+        "original_filename": "100580-video-720.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 8.883875,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 3377107,
+        "job_ownership": "because-of-this-episode-001",
+        "scene_usage": "S02"
+      }
+    },
+    {
+      "scene_id": "S03",
+      "duration": 11,
+      "story_beat": "escalation: prove that the watcher is outside the sealed room",
+      "visual_intent": "turn the glass into a boundary that has already failed",
+      "visual_function": "reveal",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.91,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.25
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-001-s03",
+        "path": "runtime-assets/s03.mp4",
+        "drive_file_id": "1i_nkf7AQb1xdesPcjpwEUvUJcaJhlBhT",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/silhouette-lurks-at-glass-door-under-eerie-moonlight-100577/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "d9e47aa280703e6e710f4b3f0fceb45400cfdd94303bd3e8d4956be61e2f730e",
+        "reuse_status": "FRESH",
+        "episode_id": "because-of-this-episode-001",
+        "author": "Mixkit contributor",
+        "acquisition_timestamp": "2026-10-24T15:19:00Z",
+        "original_filename": "100577-video-720.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 11.344667,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 4848860,
+        "job_ownership": "because-of-this-episode-001",
+        "scene_usage": "S03"
+      }
+    },
+    {
+      "scene_id": "S04",
+      "duration": 18,
+      "story_beat": "turn: the figure moves closer when the lights return",
+      "visual_intent": "show the point of no return without inventing a literal hallway",
+      "visual_function": "tension",
+      "visual_match": "NEAR",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.78,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.25
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-001-s04",
+        "path": "runtime-assets/s04.mp4",
+        "drive_file_id": "1xWZTU_EHI2-UUqmppw47YvOUDKWwoaoI",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/mysterious-figure-peers-through-door-in-dim-garden-100576/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "7738ae135d6feded2b728e0411ae0b88c69f1338bc1c203ecd95907aa3fc67bb",
+        "reuse_status": "FRESH",
+        "episode_id": "because-of-this-episode-001",
+        "author": "Mixkit contributor",
+        "acquisition_timestamp": "2026-10-24T15:19:00Z",
+        "original_filename": "100576-video-720.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 23.940583,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 9173863,
+        "job_ownership": "because-of-this-episode-001",
+        "scene_usage": "S04"
+      }
+    },
+    {
+      "scene_id": "S05",
+      "duration": 15,
+      "story_beat": "payoff: the camera becomes the thing still watching",
+      "visual_intent": "resolve the story with smoke and an impossible final implication",
+      "visual_function": "payoff",
+      "visual_match": "SYMBOLIC",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.72,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "dip_to_black",
+        "duration": 0.3
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-001-s05",
+        "path": "runtime-assets/s05.mp4",
+        "drive_file_id": "16YwWliXEYgUJgE7R54CNjep8x6eRygZl",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/smoke-slowly-flows-and-floats-on-a-dark-environment-50950/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "c28fdc42f967b861424da0e3cc96808522f3048d1269ef0bbf398e6c35a0704b",
+        "reuse_status": "FRESH",
+        "episode_id": "because-of-this-episode-001",
+        "author": "Mixkit contributor",
+        "acquisition_timestamp": "2026-10-24T15:19:00Z",
+        "original_filename": "50950-720.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 19.644625,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 7356543,
+        "job_ownership": "because-of-this-episode-001",
+        "scene_usage": "S05"
+      }
+    }
+  ],
+  "research": {
+    "sources": [
+      {
+        "url": "https://mixkit.co/license/#videoFree",
+        "title": "Mixkit Stock Video Free License",
+        "accessed_at": "2026-10-24",
+        "facts": [
+          "The selected clips are listed under the Mixkit Stock Video Free License."
+        ]
+      }
+    ],
+    "accessed_at": "2026-10-24",
+    "confidence": "HIGH",
+    "uncertainties": [
+      "This episode is explicitly declared fiction; visual continuity is editorial rather than factual."
+    ]
+  },
+  "editorial_qa": {
+    "status": "PENDING",
+    "reviewer": "",
+    "reviewed_at": "",
+    "notes": "Preview test only. Human approval is required before any final release."
+  }
+}
