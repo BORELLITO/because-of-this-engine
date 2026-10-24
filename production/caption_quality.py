@@ -206,9 +206,13 @@ def _validate_word_highlight(
             if word.get("recovered") is True:
                 recovered_words += 1
                 recovered_duration = float(word["end"]) - float(word["start"])
-                if recovered_duration > 0.35:
+                if word.get("timestamp_source") != "vosk_bounded_function_word_recovery":
                     raise CaptionQualityError(
-                        f"Caption C{index:03d} word {word_index + 1} exceeds the bounded recovery window."
+                        f"Caption C{index:03d} word {word_index + 1} has an unsupported recovery source."
+                    )
+                if not 0.035 <= recovered_duration <= 0.35:
+                    raise CaptionQualityError(
+                        f"Caption C{index:03d} word {word_index + 1} is outside the bounded recovery window."
                     )
             active = transforms[word_index * 2]
             reset = transforms[word_index * 2 + 1]
