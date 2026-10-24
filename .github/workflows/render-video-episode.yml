@@ -133,18 +133,18 @@ jobs:
             --ffmpeg ffmpeg
 
 
-      - name: Install Vosk forced-alignment model
+      - name: Install Vosk high-accuracy forced-alignment model
         run: |
           set -euo pipefail
           MODEL_ROOT="${RUNNER_TEMP}/vosk"
           mkdir -p "${MODEL_ROOT}"
           curl --fail --location --retry 5 --retry-all-errors \
             --connect-timeout 20 --max-time 240 \
-            "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip" \
+            "https://alphacephei.com/vosk/models/vosk-model-en-us-0.22-lgraph.zip" \
             --output "${MODEL_ROOT}/model.zip"
           unzip -q "${MODEL_ROOT}/model.zip" -d "${MODEL_ROOT}"
-          test -d "${MODEL_ROOT}/vosk-model-small-en-us-0.15"
-          echo "VOSK_MODEL_DIR=${MODEL_ROOT}/vosk-model-small-en-us-0.15" >> "${GITHUB_ENV}"
+          test -d "${MODEL_ROOT}/vosk-model-en-us-0.22-lgraph"
+          echo "VOSK_MODEL_DIR=${MODEL_ROOT}/vosk-model-en-us-0.22-lgraph" >> "${GITHUB_ENV}"
 
       # generate_phrase_captions.py remains the phrase-segmentation helper; timing is now forced from the final WAV.
       - name: Generate forced-aligned captions from final narration
