@@ -309,6 +309,16 @@ def mux_audio(
     run(command)
 
 
+def prepare_logo(source: Path, output: Path, width: int) -> Path:
+    """Decode and resize the static logo once before the long mux."""
+    run([
+        "ffmpeg", "-v", "error", "-y", "-i", str(source),
+        "-vf", f"scale={width}:-1:flags=lanczos,format=rgba",
+        "-frames:v", "1", "-update", "1", str(output),
+    ])
+    return output
+
+
 def render(manifest_path: Path, mode: str) -> Path:
     manifest = load_manifest(manifest_path)
     spec = validate_manifest(manifest, manifest_path.parent, mode=mode, check_files=True)
@@ -336,6 +346,12 @@ def render(manifest_path: Path, mode: str) -> Path:
             music_path = (manifest_path.parent / spec["music"]["path"]).resolve()
             music_volume = float(spec["music"].get("volume", 0.06))
         logo_path = spec.get("brand_logo_path")
+        if logo_path is not None and spec["brand"].get("logo_enabled", False) is True:
+            logo_path = prepare_logo(
+                logo_path,
+                Path(temp) / "brand-logo-runtime.png",
+                int(spec["brand"].get("logo_width", 360)),
+            )
         brand_ass = None if logo_path else write_brand_ass(Path(temp) / "brand.ass", spec["brand"], narration_seconds)
         mux_audio(
             assembled,

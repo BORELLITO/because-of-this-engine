@@ -5,7 +5,7 @@ import unittest
 import wave
 from pathlib import Path
 
-from production.render_video_episode import ffprobe, mux_audio
+from production.render_video_episode import ffprobe, mux_audio, prepare_logo
 
 
 @unittest.skipUnless(shutil.which("ffmpeg") and shutil.which("ffprobe"), "FFmpeg is required for the media smoke test")
@@ -35,7 +35,9 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 Dialogue: 0,0:00:00.00,0:00:01.20,Default,,0,0,300,,Smoke test
 """, encoding="utf-8")
             self._run(["ffmpeg", "-y", "-f", "lavfi", "-i", "color=c=black:s=360x90:r=25", "-vf", "drawbox=x=10:y=10:w=340:h=70:color=0xE3262E@1:t=fill", "-frames:v", "1", str(logo)])
-            mux_audio(source, voice, captions, output, 1.2, None, 0.06, None, logo,
+            runtime_logo = root / "runtime-logo.png"
+            prepare_logo(logo, runtime_logo, 360)
+            mux_audio(source, voice, captions, output, 1.2, None, 0.06, None, runtime_logo,
                       {"logo_enabled": True, "logo_width": 360, "logo_opacity": 0.82, "logo_margin": 54, "logo_top": 72})
             media = ffprobe(output)
             self.assertEqual((media["width"], media["height"]), (1080, 1920))
