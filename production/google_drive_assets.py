@@ -44,7 +44,7 @@ def service():
         token_uri="https://oauth2.googleapis.com/token",
         client_id=require_env("GOOGLE_CLIENT_ID"),
         client_secret=require_env("GOOGLE_CLIENT_SECRET"),
-        scopes=["https://www.googleapis.com/auth/drive.readonly"],
+        scopes=["https://www.googleapis.com/auth/drive"],
     )
     creds.refresh(Request())
     return build("drive", "v3", credentials=creds, cache_discovery=False)
