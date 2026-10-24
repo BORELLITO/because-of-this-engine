@@ -95,10 +95,6 @@ Style: Default,Arial,48,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,1,0,0,0,100,
 Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
 """ + "\n".join(events) + "\n"
     caption_path.write_text(ass, encoding="utf-8")
-    manifest["captions"]["alignment_mode"] = "hybrid_alignment"
-    manifest["captions"]["alignment_source"] = "deterministic phrase timing generated from the final narration duration; word-level alignment is not claimed in preview"
-    manifest["captions"]["word_level_available"] = False
-    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return {"status": "PHRASE_CAPTIONS_GENERATED", "caption_path": str(caption_path), "duration_seconds": round(duration, 3), "event_count": len(events)}
 
 
