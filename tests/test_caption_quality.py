@@ -18,7 +18,7 @@ class CaptionQualityTests(unittest.TestCase):
             handle.setnchannels(1)
             handle.setsampwidth(2)
             handle.setframerate(24000)
-            handle.writeframes(b"\x00\x00" * 24000)
+            handle.writeframes(b"\x00\x00" * 48000)
         captions = root / "assets" / "captions.ass"
         captions.write_text(
             """[Script Info]
@@ -31,7 +31,7 @@ Style: Default,DejaVu Sans,50,&H00FFFFFF,&H00FFFFFF,&H00101624,&H80101624,-1,0,0
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-Dialogue: 0,0:00:00.10,0:00:01.00,Default,,0,0,300,,The signal disappeared.
+Dialogue: 0,0:00:00.10,0:00:02.00,Default,,0,0,300,,The signal disappeared.
 """,
             encoding="utf-8",
         )
