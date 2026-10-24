@@ -58,8 +58,14 @@
       "visual_match": "EXACT",
       "visual_truth": "VERIFIED_FACT",
       "match_score": 0.92,
-      "focus": {"x": 0.5, "y": 0.5},
-      "transition": {"type": "hard_cut", "duration": 0.0},
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "hard_cut",
+        "duration": 0
+      },
       "asset": {
         "asset_id": "episode-001-s01",
         "path": "runtime-assets/episode-001-s01.mp4",
@@ -70,9 +76,19 @@
         "rights_status": "APPROVED",
         "approved_for_render": true,
         "sha256": "PUT_64_HEX_SHA256_HERE",
-        "perceptual_hash": "OPTIONAL_16_HEX_PHASH",
+        "perceptual_hash": "PUT_64_HEX_PHASH_HERE",
         "reuse_status": "FRESH",
-        "episode_id": "episode-001"
+        "episode_id": "episode-001",
+        "author": "Replace with uploader or original creator",
+        "acquisition_timestamp": "YYYY-MM-DDThh:mm:ssZ",
+        "original_filename": "approved-source-filename.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 15,
+        "width": 1080,
+        "height": 1920,
+        "filesize_bytes": 1,
+        "job_ownership": "episode-001",
+        "scene_usage": "S01"
       }
     },
     {
@@ -95,7 +111,18 @@
         "approved_for_render": true,
         "sha256": "PUT_64_HEX_SHA256_HERE",
         "reuse_status": "FRESH",
-        "episode_id": "episode-001"
+        "episode_id": "episode-001",
+        "author": "Replace with uploader or original creator",
+        "acquisition_timestamp": "YYYY-MM-DDThh:mm:ssZ",
+        "original_filename": "approved-source-filename.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 15,
+        "width": 1080,
+        "height": 1920,
+        "filesize_bytes": 1,
+        "job_ownership": "episode-001",
+        "scene_usage": "S02",
+        "perceptual_hash": "PUT_64_HEX_PHASH_HERE"
       }
     },
     {
@@ -118,7 +145,18 @@
         "approved_for_render": true,
         "sha256": "PUT_64_HEX_SHA256_HERE",
         "reuse_status": "FRESH",
-        "episode_id": "episode-001"
+        "episode_id": "episode-001",
+        "author": "Replace with uploader or original creator",
+        "acquisition_timestamp": "YYYY-MM-DDThh:mm:ssZ",
+        "original_filename": "approved-source-filename.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 15,
+        "width": 1080,
+        "height": 1920,
+        "filesize_bytes": 1,
+        "job_ownership": "episode-001",
+        "scene_usage": "S03",
+        "perceptual_hash": "PUT_64_HEX_PHASH_HERE"
       }
     },
     {
@@ -130,7 +168,10 @@
       "visual_match": "SYMBOLIC",
       "visual_truth": "VERIFIED_FACT",
       "match_score": 0.64,
-      "transition": {"type": "dip_to_black", "duration": 0.3},
+      "transition": {
+        "type": "dip_to_black",
+        "duration": 0.3
+      },
       "asset": {
         "asset_id": "episode-001-s04",
         "path": "runtime-assets/episode-001-s04.mp4",
@@ -142,10 +183,41 @@
         "approved_for_render": true,
         "sha256": "PUT_64_HEX_SHA256_HERE",
         "reuse_status": "FRESH",
-        "episode_id": "episode-001"
+        "episode_id": "episode-001",
+        "author": "Replace with uploader or original creator",
+        "acquisition_timestamp": "YYYY-MM-DDThh:mm:ssZ",
+        "original_filename": "approved-source-filename.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 15,
+        "width": 1080,
+        "height": 1920,
+        "filesize_bytes": 1,
+        "job_ownership": "episode-001",
+        "scene_usage": "S04",
+        "perceptual_hash": "PUT_64_HEX_PHASH_HERE"
       }
     }
-  ]
+  ],
+  "job_id": "because-of-this-episode-001",
+  "research": {
+    "sources": [
+      {
+        "url": "https://replace-with-primary-source.example",
+        "title": "Replace with a verified primary source",
+        "accessed_at": "YYYY-MM-DD",
+        "facts": [
+          "Replace with the central verified fact"
+        ]
+      }
+    ],
+    "accessed_at": "YYYY-MM-DD",
+    "confidence": "HIGH",
+    "uncertainties": []
+  },
+  "editorial_qa": {
+    "status": "PENDING",
+    "reviewer": "",
+    "reviewed_at": "",
+    "notes": "Set PASS only after human review confirms story, visual truth, pacing and originality."
+  }
 }
-
-
