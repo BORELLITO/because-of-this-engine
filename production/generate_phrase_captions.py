@@ -59,7 +59,7 @@ def _balanced_lines(sentence: str, width: int) -> list[str]:
         candidates.sort(key=lambda item: item[0])
         return candidates[0][1]
 
-    return wrap(sentence, width=width, break_long_words=False, break_on_hyphens=False)[:2]
+    return wrap(sentence, width=width, break_long_words=False, break_on_hyphens=False)
 
 
 def phrase_chunks(script: str, max_line_chars: int = 42) -> list[str]:
