@@ -131,12 +131,13 @@ def _align_chunk(chunk: str, asr_words: list[dict[str, Any]], cursor: int) -> tu
         })
         search_cursor = candidate + size
 
-    required = max(1, int(len(units) * 0.72))
+    required = len(units)
     if matched < required:
         missing = len(units) - matched
         raise AlignmentError(
             f"Could not align caption phrase {chunk!r}: matched {matched}/{len(units)} "
-            f"spoken units ({missing} missing)."
+            f"spoken units ({missing} missing). Strict word-highlight alignment requires "
+            "every canonical word to have a real timestamp."
         )
     return positions[0]["start"], positions[-1]["end"], search_cursor, positions
 
@@ -217,7 +218,70 @@ def _align_chunks(
         sidecar_chunks.append({"text": chunk, "words": positions})
     return events, sidecar_chunks
 
-def _write_ass(path: Path, events: list[dict[str, Any]]) -> None:
+def _ass_color(value: str) -> str:
+    raw = str(value or "#FF7777").lstrip("#")
+    if len(raw) != 6 or any(char not in "0123456789abcdefABCDEF" for char in raw):
+        raise AlignmentError("Active-word caption color must be a valid six-digit hex color.")
+    red, green, blue = raw[0:2], raw[2:4], raw[4:6]
+    return f"&H00{blue}{green}{red}&"
+
+
+def _highlighted_chunk(
+    chunk: str,
+    event_start: float,
+    event_end: float,
+    positions: list[dict[str, Any]],
+    active_word_color: str,
+) -> str:
+    """Build one ASS event whose active word is colored by exact audio time.
+
+    The event remains a single phrase, so normal caption QA sees the canonical
+    transcript once. Each word receives two ASS color transforms: white to the
+    soft brand red at the word's real start, then back to white at its real end.
+    """
+
+    if not positions:
+        raise AlignmentError("Caption phrase has no word timestamps for highlighting.")
+    color = _ass_color(active_word_color)
+    duration_ms = max(1, round((event_end - event_start) * 1000))
+    cursor = 0
+    pieces: list[str] = []
+    for position in positions:
+        canonical = str(position.get("canonical", "")).strip()
+        if not canonical:
+            raise AlignmentError("Caption word position is missing its canonical token.")
+        match = re.search(re.escape(canonical), chunk[cursor:], flags=re.IGNORECASE)
+        if match is None:
+            raise AlignmentError(
+                f"Could not map aligned canonical word {canonical!r} back to caption text {chunk!r}."
+            )
+        token_start = cursor + match.start()
+        token_end = cursor + match.end()
+        start_ms = max(0, min(duration_ms, round((float(position["start"]) - event_start) * 1000)))
+        end_ms = max(start_ms + 1, min(duration_ms, round((float(position["end"]) - event_start) * 1000)))
+        reset_end_ms = min(duration_ms + 1000, end_ms + 1)
+        tags = (
+            "{\\1c&H00FFFFFF&"
+            f"\\t({start_ms},{end_ms},\\1c{color})"
+            f"\\t({end_ms},{reset_end_ms},\\1c&H00FFFFFF&)"
+            "}"
+        )
+        pieces.append(chunk[cursor:token_start])
+        pieces.append(tags)
+        pieces.append(chunk[token_start:token_end])
+        cursor = token_end
+    pieces.append(chunk[cursor:])
+    return "".join(pieces)
+
+
+def _write_ass(
+    path: Path,
+    events: list[dict[str, Any]],
+    sidecar_chunks: list[dict[str, Any]],
+    active_word_color: str,
+) -> None:
+    if len(events) != len(sidecar_chunks):
+        raise AlignmentError("Caption events and alignment chunks must have identical counts.")
     header = """[Script Info]
 ScriptType: v4.00+
 PlayResX: 1080
@@ -231,13 +295,21 @@ Style: Default,Arial,48,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,1,0,0,0,100,
 [Events]
 Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
 """
-    lines = [
-        f"Dialogue: 0,{ass_time(event['start'])},{ass_time(event['end'])},Default,,0,0,0,,{event['text']}"
-        for event in events
-    ]
+    lines: list[str] = []
+    for event, chunk in zip(events, sidecar_chunks):
+        text = _highlighted_chunk(
+            event["text"],
+            float(event["start"]),
+            float(event["end"]),
+            chunk.get("words") or [],
+            active_word_color,
+        )
+        lines.append(
+            f"Dialogue: 0,{ass_time(event['start'])},{ass_time(event['end'])},"
+            f"Default,,0,0,0,,{text}"
+        )
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(header + "\n".join(lines) + "\n", encoding="utf-8")
-
 
 def generate(manifest_path: Path, model_path: Path) -> dict[str, Any]:
     manifest_path = manifest_path.resolve()
@@ -288,7 +360,8 @@ def generate(manifest_path: Path, model_path: Path) -> dict[str, Any]:
         event["start"] = round(max(0.0, event["start"]), 3)
         event["end"] = round(min(audio_seconds, event["end"]), 3)
 
-    _write_ass(caption_path, events)
+    active_word_color = str(captions.get("active_word_color", "#FF7777"))
+    _write_ass(caption_path, events, sidecar_chunks, active_word_color)
     sidecar_path = (base / captions.get("alignment_sidecar", "captions/narration.alignment.json")).resolve()
     sidecar_path.parent.mkdir(parents=True, exist_ok=True)
     sidecar_path.write_text(json.dumps({
@@ -307,6 +380,8 @@ def generate(manifest_path: Path, model_path: Path) -> dict[str, Any]:
         "duration_seconds": round(audio_seconds, 3),
         "event_count": len(events),
         "recognized_words": len(asr_words),
+        "word_highlight_mode": "timestamp_color_transform",
+        "active_word_color": active_word_color,
     }
 
 def main() -> int:
