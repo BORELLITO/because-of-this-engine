@@ -8,6 +8,7 @@ and GitHub Actions; the renderer never depends on a temporary stock-site URL.
 
 from __future__ import annotations
 
+import sys
 import argparse
 import hashlib
 import json
@@ -19,6 +20,8 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from production.video_asset_contract import VideoContractError, load_manifest, resolve_inside
 
