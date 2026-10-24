@@ -6,6 +6,7 @@ import io
 import json
 import sys
 import tempfile
+import time
 import types
 import unittest
 import wave
@@ -69,6 +70,32 @@ class NarrationTests(unittest.TestCase):
             self.assertEqual(calls[0]["model"], narrate.DEFAULT_MODEL)
             self.assertEqual(calls[0]["generation_config"]["speech_config"][0]["voice"], "Charon")
             self.assertEqual(len(calls), 1)
+
+
+    def test_api_timeout_fails_fast_without_writing_output(self) -> None:
+        class SlowInteractions:
+            def create(self, **kwargs):
+                time.sleep(0.2)
+                return None
+
+        class SlowClient:
+            def __init__(self, *, api_key: str):
+                self.interactions = SlowInteractions()
+
+        fake_google = types.ModuleType("google")
+        fake_google.genai = types.SimpleNamespace(Client=SlowClient)
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output_path = Path(temp_dir) / "voice.wav"
+            with patch.dict(sys.modules, {"google": fake_google}):
+                with self.assertRaisesRegex(narrate.NarrationError, "timed out"):
+                    narrate.generate_narration(
+                        "A short test script.",
+                        output_path,
+                        api_key="test-key-never-sent",
+                        request_timeout_seconds=0.02,
+                    )
+            self.assertFalse(output_path.exists())
 
     def test_existing_output_is_not_overwritten_without_flag(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
