@@ -174,10 +174,22 @@ def evaluate(manifest_path: Path, mode: str, phase: str, *, release_report_path:
     else: results.append(_gate("G11", "DELIVERY", "DEFERRED", f"phase {phase} runs before Drive delivery"))
     cleanup = _read(cleanup_receipt_path, "cleanup receipt")
     if 12 in active:
-        complete = final_manifest and final_manifest.get("status") == "PRODUCTION_COMPLETE"
+        expected_completion = "PRODUCTION_COMPLETE" if mode == "final" else "PREVIEW_COMPLETE"
+        complete = final_manifest and final_manifest.get("status") == expected_completion
         verified_cleanup = cleanup and cleanup.get("status") == "DRIVE_VERIFIED"
-        if complete and verified_cleanup: results.append(_gate("G12", "CLEANUP", "PASS", "final manifest complete after verified cleanup"))
-        else: results.append(_gate("G12", "CLEANUP", "BLOCKED", "PRODUCTION_COMPLETE and a verified cleanup receipt are required"))
+        if complete and verified_cleanup:
+            status = "PASS" if mode == "final" else "ADVISORY"
+            evidence = (
+                "final manifest complete after verified cleanup"
+                if mode == "final"
+                else "preview cleanup verified; preview is never a production publication"
+            )
+            results.append(_gate("G12", "CLEANUP", status, evidence))
+        else:
+            results.append(_gate(
+                "G12", "CLEANUP", "BLOCKED",
+                f"{expected_completion} and a verified cleanup receipt are required"
+            ))
     else: results.append(_gate("G12", "CLEANUP", "DEFERRED", f"phase {phase} runs before cleanup"))
     blocking = [item for item in results if item["status"] == "BLOCKED"]
     return {"status": "GATES_BLOCKED" if blocking else ("GATES_PASS" if phase == "final" else "GATES_PHASE_PASS"),
