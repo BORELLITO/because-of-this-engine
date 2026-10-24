@@ -141,7 +141,7 @@ def audio_duration(path: Path) -> float:
 
 
 
-_TRANSFORM_RE = re.compile(r"\\\\t\\((\\d+),(\\d+),\\\\1c(&H[0-9A-Fa-f]{8}&)\\)")
+_TRANSFORM_RE = re.compile(r"\\t\((\d+),(\d+),\\1c(&H[0-9A-Fa-f]{8}&)\)")
 
 
 def _ass_color(value: str) -> str:
