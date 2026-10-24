@@ -54,6 +54,9 @@ class V2HardLockTests(unittest.TestCase):
         self.assertIn("--require-drive-assets", workflow)
         self.assertIn("--job-id", workflow)
         self.assertIn("finalize_manifest.py", workflow)
+        self.assertIn("narrate.py", workflow)
+        self.assertIn("GEMINI_API_KEY", workflow)
+        self.assertIn("generate_phrase_captions.py", workflow)
 
     def test_old_engine_paths_are_not_reintroduced(self):
         paths = [path.relative_to(self.ROOT).as_posix() for path in self.ROOT.rglob("*") if path.is_file()]
