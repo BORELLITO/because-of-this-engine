@@ -122,6 +122,7 @@ jobs:
             --model "${MODEL}" \
             --voice "${VOICE}" \
             --style "${STYLE}" \
+            --overwrite
 
 
       - name: Generate preview captions from final narration
