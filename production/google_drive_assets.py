@@ -55,7 +55,7 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-def download(drive, file_id: str, target: Path) -> dict[str, Any]:
+def download(drive, file_id: str, target: Path, expected_prefix: str) -> dict[str, Any]:
     metadata = drive.files().get(
         fileId=file_id,
         fields="id,name,mimeType,size,parents,trashed,modifiedTime",
@@ -64,8 +64,11 @@ def download(drive, file_id: str, target: Path) -> dict[str, Any]:
     if metadata.get("trashed"):
         raise AssetHydrationError(f"Drive asset is trashed: {file_id}")
     mime_type = str(metadata.get("mimeType", ""))
-    if not mime_type.startswith("video/"):
-        raise AssetHydrationError(f"Drive asset is not a video: {metadata.get('name', file_id)}")
+    if not mime_type.startswith(expected_prefix):
+        raise AssetHydrationError(
+            f"Drive asset MIME type mismatch for {metadata.get('name', file_id)}: "
+            f"expected {expected_prefix}"
+        )
     target.parent.mkdir(parents=True, exist_ok=True)
     partial = target.with_name(target.name + ".part")
     try:
@@ -106,19 +109,32 @@ def hydrate(manifest_path: Path, *, require_drive_assets: bool = False) -> dict[
             if file_id in seen_drive_ids:
                 raise AssetHydrationError(f"Drive asset is reused in this episode: {file_id}")
             seen_drive_ids.add(file_id)
-            assets.append((file_id, path, asset))
+            assets.append((file_id, path, asset, "video"))
         elif require_drive_assets:
             raise AssetHydrationError(f"Asset {asset.get('asset_id', '?')} is missing drive_file_id.")
         elif not path.is_file():
             raise AssetHydrationError(f"Asset {asset.get('asset_id', '?')} has no drive_file_id and is not present locally.")
+    music = manifest.get("music")
+    if isinstance(music, dict):
+        music_id = str(music.get("drive_file_id", "")).strip()
+        music_path = resolve_inside(manifest_path.parent, music.get("path"), "Music path")
+        if music_id:
+            if music_id in seen_drive_ids:
+                raise AssetHydrationError(f"Drive asset is reused in this episode: {music_id}")
+            seen_drive_ids.add(music_id)
+            assets.append((music_id, music_path, music, "audio"))
+        elif require_drive_assets:
+            raise AssetHydrationError("Music is missing drive_file_id.")
+        elif not music_path.is_file():
+            raise AssetHydrationError("Music has no drive_file_id and is not present locally.")
     if assets:
         drive = service()
-        for file_id, path, record in assets:
-            result = download(drive, file_id, path)
+        for file_id, path, record, kind in assets:
+            result = download(drive, file_id, path, "video/" if kind == "video" else "audio/")
             expected = str(record.get("sha256", "")).lower()
             if expected and result["sha256"].lower() != expected:
                 raise AssetHydrationError(f"Drive asset {record.get('asset_id')} checksum mismatch after download.")
-    return {"status": "DRIVE_ASSETS_HYDRATED", "video_id": manifest.get("video_id"), "asset_count": len(manifest.get("scenes", [])), "downloaded": len(assets)}
+    return {"status": "DRIVE_ASSETS_HYDRATED", "video_id": manifest.get("video_id"), "asset_count": len(manifest.get("scenes", [])), "downloaded": len(assets), "downloaded_videos": sum(1 for item in assets if item[3] == "video"), "downloaded_audio": sum(1 for item in assets if item[3] == "audio")}
 
 
 def main() -> int:
