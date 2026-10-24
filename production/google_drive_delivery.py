@@ -22,7 +22,7 @@ from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 
 FOLDER_MIME = "application/vnd.google-apps.folder"
-DEFAULT_ROOT_FOLDER = "1GUOcSRo91xxypW-GgCchubhx9FaMGk5u"
+DEFAULT_ROOT_FOLDER = "1A-oyowfHtdciB2_NZSLIZ0oG-ajOeYVb"
 
 
 class DeliveryError(RuntimeError):
@@ -97,7 +97,7 @@ def child_by_name(drive, parent_id: str, name: str, mime_type: str | None = None
         drive.files()
         .list(
             q=" and ".join(query),
-            fields="files(id,name,mimeType,size,md5Checksum,webViewLink)",
+            fields="files(id,name,mimeType,size,md5Checksum,webViewLink,appProperties)",
             pageSize=10,
             spaces="drive",
             supportsAllDrives=True,
@@ -156,7 +156,7 @@ def iter_files(paths: Iterable[Path]) -> list[tuple[Path, Path]]:
     return results
 
 
-def upload_verified(drive, parent_id: str, local: Path, remote_name: str) -> dict:
+def upload_verified(drive, parent_id: str, local: Path, remote_name: str, job_id: str) -> dict:
     local_size = local.stat().st_size
     local_md5 = md5(local)
     mime_type = mimetypes.guess_type(local.name)[0] or "application/octet-stream"
@@ -169,11 +169,15 @@ def upload_verified(drive, parent_id: str, local: Path, remote_name: str) -> dic
         "appProperties": {
             "engine": "because-of-this",
             "github_run_id": os.environ.get("GITHUB_RUN_ID", ""),
+            "job_id": job_id,
         },
     }
     fields = "id,name,size,md5Checksum,webViewLink,parents"
 
     if existing:
+        properties = existing.get("appProperties") or {}
+        if properties.get("engine") != "because-of-this" or properties.get("job_id") != job_id:
+            raise DeliveryError(f"Refusing to overwrite a Drive file without matching job ownership: {remote_name}")
         remote = (
             drive.files()
             .update(
@@ -223,6 +227,7 @@ def deliver(
     collection: str,
     delivery_name: str,
     paths: list[Path],
+    job_id: str,
 ) -> dict:
     drive = service()
     root = validate_folder(drive, root_folder_id)
@@ -241,13 +246,14 @@ def deliver(
                 if cursor not in folder_cache:
                     folder_cache[cursor] = ensure_folder(drive, parent_id, safe_name(part))
                 parent_id = folder_cache[cursor]
-        uploaded.append(upload_verified(drive, parent_id, local, relative.name))
+        uploaded.append(upload_verified(drive, parent_id, local, relative.name, job_id))
 
     return {
         "status": "DRIVE_VERIFIED",
         "root_folder": {"id": root["id"], "name": root.get("name")},
         "collection": collection,
         "delivery_name": delivery_name,
+        "job_id": job_id,
         "delivery_folder_id": delivery_id,
         "delivery_folder_url": f"https://drive.google.com/drive/folders/{delivery_id}",
         "file_count": len(uploaded),
@@ -266,6 +272,7 @@ def main() -> int:
     parser.add_argument("--delivery-name", default=f"github-run-{os.environ.get('GITHUB_RUN_ID', 'local')}")
     parser.add_argument("--path", action="append", default=[])
     parser.add_argument("--receipt", type=Path)
+    parser.add_argument("--job-id", default=os.environ.get("BECAUSE_OF_THIS_JOB_ID", ""))
     args = parser.parse_args()
 
     try:
@@ -282,12 +289,15 @@ def main() -> int:
 
         if not args.path:
             raise DeliveryError("At least one --path is required for delivery.")
+        if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]{2,119}", args.job_id):
+            raise DeliveryError("A safe --job-id is required for idempotent delivery.")
 
         report = deliver(
             root_folder_id,
             args.collection,
             args.delivery_name,
             [Path(value) for value in args.path],
+            args.job_id,
         )
         payload = json.dumps(report, ensure_ascii=False, indent=2) + "\n"
         if args.receipt:
