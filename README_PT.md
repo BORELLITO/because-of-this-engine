@@ -206,10 +206,11 @@ Fluxo seguro:
 
 ### Fontes e limites
 
-- NASA: excelente para material factual e espacial; a autorização não é inferida pelo domínio. Verifique as diretrizes de mídia, terceiros, logos e contexto antes de monetizar.
-- Pexels: vídeos gratuitos, modificáveis e sem atribuição obrigatória segundo a licença do site; ainda é necessário revisar pessoas, marcas e uso indevido de endosso.
-- Pixabay: permite uso gratuito e adaptação sem atribuição obrigatória segundo o resumo de licença; a própria plataforma alerta que podem existir direitos adicionais de terceiros.
+- Pexels: fonte principal para B-roll, com vídeos gratuitos, modificáveis e sem atribuição obrigatória segundo a licença do site; ainda é necessário revisar pessoas, marcas e uso indevido de endosso.
+- Pixabay: fallback gratuito para ampliar a busca; permite uso e adaptação sem atribuição obrigatória segundo o resumo de licença, mas a própria plataforma alerta que podem existir direitos adicionais de terceiros.
 
-Pexels e Pixabay exigem uma chave de API nos secrets PEXELS_API_KEY e PIXABAY_API_KEY para pesquisa automatizada. A NASA pode ser consultada sem essas chaves. A ausência de chave não é tratada como erro fatal: o relatório informa a fonte indisponível e preserva as demais.
+A NASA não participa desta camada de vídeo. O provedor NASA existente continua separado no fluxo de imagens factuais e não é usado pelo pesquisador de stock video.
+
+Pexels e Pixabay exigem uma chave de API nos secrets PEXELS_API_KEY e PIXABAY_API_KEY para pesquisa automatizada. As chaves são gratuitas dentro dos limites de cada serviço; a pesquisa pelo Web Cloud Browser continua disponível para revisão manual. A ausência de chave não é tratada como erro fatal: o relatório informa a fonte indisponível e preserva as demais.
 
 O workflow é manual por desenho: pesquisar não significa aceitar. O vídeo só deve entrar no render depois de registrar a página original, a licença, o checksum do arquivo baixado, a decisão editorial e a data da revisão. O motor não apresenta um clipe ilustrativo como prova documental do fato narrado.
