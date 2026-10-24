@@ -275,6 +275,27 @@ Dialogue: 0,0:00:00.00,{ass_time(duration)},Brand,,0,0,0,,{text}
     return path
 
 
+def write_loop_ass(path: Path, title: str, duration: float) -> Path:
+    """Render the branded loop card through libass, not FFmpeg drawtext."""
+    safe_title = str(title).replace("\\", "\\\\").replace("{", "\\{").replace("}", "\\}")
+    ass = f"""[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,StrikeOut,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding
+Style: Loop,Arial,60,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,1,0,0,0,100,100,0,0,1,3,0,5,40,40,40,1
+
+[Events]
+Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
+Dialogue: 0,0:00:00.00,{ass_time(duration)},Loop,,0,0,0,,{{\\fad(180,300)}}{safe_title}
+"""
+    path.write_text(ass, encoding="utf-8")
+    return path
+
+
 def loop_outro_seconds(manifest: dict[str, Any]) -> float:
     loop = manifest.get("loop") or {}
     if loop.get("enabled") is not True:
@@ -336,21 +357,20 @@ def mux_audio(
     else:
         filters.append("[captioned]null[main_visual]")
 
+    loop_ass_path: Path | None = None
     if outro_seconds > 0:
-        loop_title = str(loop.get("title", "BECAUSE OF THIS")).replace(":", "\\:")
-        fontfile = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
-        font_size = max(52, round(width / 18))
+        loop_title = str(loop.get("title", "BECAUSE OF THIS"))
+        loop_ass_path = output.parent / f".{output.stem}-loop.ass"
+        write_loop_ass(loop_ass_path, loop_title, outro_seconds)
         card_start_fade = max(0.0, outro_seconds - 0.30)
         filters.extend([
             (
                 f"color=c=black:s={width}x{height}:r={FPS}:d={outro_seconds:.3f},"
-                f"drawtext=fontfile='{_escape_filter_path(Path(fontfile))}':"
-                f"text='{loop_title}':fontcolor=white:fontsize={font_size}:"
-                "borderw=3:bordercolor=black:x=(w-text_w)/2:y=(h-text_h)/2,"
-                "fade=t=in:st=0:d=0.18,"
+                f"fade=t=in:st=0:d=0.18,"
                 f"fade=t=out:st={card_start_fade:.3f}:d=0.30,"
-                "format=yuv420p,setpts=PTS-STARTPTS[outro]"
+                "format=yuv420p,setpts=PTS-STARTPTS[outro_base]"
             ),
+            f"[outro_base]subtitles='{_escape_filter_path(loop_ass_path)}'[outro]",
             "[main_visual]format=yuv420p,setpts=PTS-STARTPTS[main]",
             "[main][outro]concat=n=2:v=1:a=0[v]",
         ])
@@ -381,7 +401,11 @@ def mux_audio(
         "-c:a", "aac", "-b:a", "192k", "-ar", "48000",
         "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(output),
     ])
-    run(command)
+    try:
+        run(command)
+    finally:
+        if loop_ass_path is not None:
+            loop_ass_path.unlink(missing_ok=True)
 
 def prepare_logo(source: Path, output: Path, width: int) -> Path:
     """Decode and resize the static logo once before the long mux."""
