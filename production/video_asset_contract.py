@@ -241,6 +241,13 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
             )
         for key in ("story_beat", "visual_intent", "visual_function", "visual_match", "visual_truth"):
             _required_text(scene, key, f"Scene {scene_id}")
+        if scene["visual_truth"] not in ALLOWED_TRUTH:
+            raise VideoContractError(f"Scene {scene_id} has an invalid visual_truth mode.")
+        if scene["visual_truth"] != story["truth_mode"]:
+            raise VideoContractError(
+                f"Scene {scene_id} visual_truth {scene['visual_truth']!r} "
+                f"does not match story_profile.truth_mode {story['truth_mode']!r}."
+            )
         if scene["visual_match"] not in ALLOWED_MATCHES:
             raise VideoContractError(f"Scene {scene_id} has an invalid visual_match.")
         score = scene.get("match_score")
