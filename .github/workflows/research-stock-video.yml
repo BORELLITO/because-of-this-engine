@@ -16,11 +16,11 @@ on:
       provider:
         description: "Provider to query"
         required: true
-        default: "pexels"
+        default: "pixabay"
         type: choice
         options:
-          - pexels
           - pixabay
+          - pexels
           - all
       query:
         description: "Optional query override for the selected scene"
