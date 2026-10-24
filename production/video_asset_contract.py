@@ -104,8 +104,8 @@ def validate_asset_record(record: dict[str, Any], base: Path, episode_id: str, *
     asset_id = _required_text(record, "asset_id", "Video asset")
     path = resolve_inside(base, record.get("path"), f"Asset {asset_id} path")
     provider = _required_text(record, "provider", f"Asset {asset_id}").lower()
-    if provider not in {"mixkit", "pixabay", "pexels", "drive", "authorial"}:
-        raise VideoContractError(f"Asset {asset_id} uses an unsupported provider: {provider}")
+    if provider not in {"mixkit", "pixabay", "pexels", "drive", "original"}:
+        raise VideoContractError(f"Asset {asset_id} uses an unsupported video provider: {provider}")
     _required_text(record, "source_page_url", f"Asset {asset_id}")
     _required_text(record, "license", f"Asset {asset_id}")
     _required_text(record, "sha256", f"Asset {asset_id}")

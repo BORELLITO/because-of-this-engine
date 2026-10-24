@@ -1,216 +1,69 @@
-# BECAUSE OF THIS — Motor independente de documentários verticais
+# BECAUSE OF THIS — Motor v2 definitivo
 
-Este repositório reúne o motor faceless independente para documentários verticais do canal. Ele mantém o fluxo isolado de roteiro, narração, visuais autorais, montagem, captions, controle de licença e validação; não depende dos motores CaptaPronto, Corte Fino, Publisher ou Creator.
+Este é o único motor oficial do canal Because of This. Ele é independente do
+Corte Fino, Rajada 011, CaptaPronto, Publisher e de todos os outros projetos.
 
-## Escolha inicial
+## Arquitetura oficial
 
-- Provedor: Google Gemini API, conexão direta.
-- Modelo padrão: `gemini-3.8-flash-lite-tts`.
-- Voz inicial: `Charon` (perfil informativo da biblioteca pré-criada do Gemini).
-- Estilo: narração documental em inglês americano, natural e contida.
-- Saída: WAV, com arquivo JSON de proveniência.
+O pipeline v2 é exclusivamente baseado em vídeo:
 
-A API oficial mostra faixa gratuita para os modelos TTS Gemini 3.8. A cota efetiva varia por projeto e deve ser conferida no AI Studio. Para manter o teste sem cobrança, use o projeto sem faturamento ativo e pare quando a cota gratuita acabar; não habilite faturamento para contornar limite. O nível gratuito também informa que dados podem ser usados para melhorar produtos do Google. Não envie material sensível. O script faz uma única solicitação por execução e não tenta novamente automaticamente.
+1. A história e a narração definem o relógio principal.
+2. O Cloud Browser pesquisa Mixkit, Pixabay e Pexels e cria uma fila de
+   revisão.
+3. O clipe exato e a licença são aprovados.
+4. O arquivo aprovado é colocado no Google Drive.
+5. O GitHub Actions baixa o asset, confirma que é vídeo, verifica o SHA-256 e
+   renderiza com FFmpeg.
+6. Legendas, verdade visual, reutilização e mídia final passam pelos gates.
+7. O resultado validado é enviado ao Drive e a mídia temporária é removida do
+   runner.
 
-## Requisitos
+Imagens narrativas estáticas não são aceitas. Se o vídeo exato não estiver
+disponível, o manifest precisa declarar um fallback semântico: NEAR,
+EXPLANATORY, SYMBOLIC ou ATMOSPHERE. Preenchimento aleatório e fallback para
+imagem são proibidos.
 
-- Python 3.10 ou superior.
-- Chave da Gemini API criada no Google AI Studio.
-- Acesso ao modelo TTS e cota disponível no projeto Google.
+## Gates de qualidade
 
-## Instalação
+- Episódio entre 60 e 75 segundos.
+- Formato 9:16: preview 1080×1920 ou final 2160×3840.
+- H.264/AAC, 25 fps, faststart e nenhuma deformação.
+- Duração das cenas travada na narração.
+- Legendas ASS externas geradas a partir da narração final.
+- Duas linhas no máximo, safe zone mobile e limite de CPS.
+- Música de suspense licenciada abaixo da voz, com ducking e controle de
+  loudness/true peak.
+- Nenhum asset narrativo repetido no mesmo episódio.
+- Nenhum clipe reutilizado entre episódios quando estiver PERMANENTLY_RETIRED.
+- URL, licença, ID do Drive, SHA-256 e aprovação são obrigatórios.
 
-No terminal, dentro desta pasta:
+## Arquivos principais
 
-```bash
-python -m venv .venv
-```
-
-Ative o ambiente virtual e instale:
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-Configure `GEMINI_API_KEY` como variável de ambiente. Não salve a chave no código, no Git ou em prints.
-
-Linux/macOS:
-
-```bash
-export GEMINI_API_KEY="SUA_CHAVE_AQUI"
-```
-
-PowerShell:
-
-```powershell
-$env:GEMINI_API_KEY="SUA_CHAVE_AQUI"
-```
-
-## Gerar a locução
-
-O pacote inclui o roteiro da Mars Climate Orbiter usado nesta etapa. Para gerar a primeira amostra, rode:
-
-```bash
-python narrate.py --input examples/mars_climate_orbiter.txt --output output/mars-climate-orbiter.wav
-```
-
-O programa gera:
-
-- `output/narracao.wav` — áudio para revisão e edição;
-- `output/narracao.wav.json` — provedor, modelo, voz, duração, data e hash do roteiro (não grava o texto do roteiro).
-
-Para escolher outra voz pré-criada ou orientar a entrega:
-
-```bash
-python narrate.py --input roteiro.txt --output output/narracao.wav --voice Kore --style "Neutral American English documentary narration; measured, clear, natural, with restrained emphasis."
-```
-
-O script não sobrescreve saídas por padrão. Use `--overwrite` conscientemente quando quiser substituir o áudio e o sidecar. Cada execução faz no máximo uma chamada de geração. Se ocorrer erro de rede, cota ou autenticação, corrija a causa antes de executar novamente.
+- narrate.py: adaptador isolado de TTS Gemini.
+- production/video_asset_research.py: fila de pesquisa e fallback semântico.
+- production/google_drive_assets.py: ponte Drive para o runner.
+- production/video_asset_contract.py: contrato v2 fail-closed.
+- production/render_video_episode.py: renderizador FFmpeg determinístico.
+- production/validate_video_release.py: gate de mídia final.
+- production/caption_quality.py: sincronização e legibilidade das legendas.
+- production/google_drive_delivery.py: entrega verificada no Drive.
+- examples/video-only-episode-manifest-v2.template.json: template de episódio.
+- production/VIDEO_ENGINE_V2.md: contrato detalhado de produção.
 
 ## Verificações locais
 
-Para rodar os testes sem chave e sem chamar a API:
+    python -m pip install -r requirements.txt
+    python -m unittest discover -s tests -v
+    python -m py_compile production/*.py
 
-```bash
-python -m unittest discover -s tests -v
-```
+## GitHub Actions
 
-Os testes usam uma resposta simulada apenas para verificar formato WAV, registro de proveniência, proteção contra sobrescrita e rejeição de saídas inválidas. Eles não comprovam a qualidade da voz nem consomem créditos.
+- Video engine v2 CI executa compilação, regressão e testes de contrato.
+- Render video-only episode v2 recebe um manifest v2 preenchido e oferece
+  preview ou final.
 
-## Pipeline oficial do episódio — schema 1.1
+O template possui placeholders de propósito. Um episódio real precisa receber
+narracão, legendas word-level, música licenciada e IDs/checksums dos vídeos
+aprovados no Drive.
 
-A narração Charon aprovada do episódio Mars Climate Orbiter está em
-`examples/assets/mars-climate-orbiter-charon.wav`. O fluxo oficial é
-`run_episode.py`: preflight, render, validação e registro de execução.
 
-Rodar a suíte sem chave de API:
-
-```bash
-python -m unittest discover -s tests -v
-```
-
-Gerar e validar o preview:
-
-```bash
-python production/run_episode.py \
-  --manifest examples/mars-climate-orbiter-render-manifest-v1.json \
-  --mode preview --render
-```
-
-Depois de assistir ao preview no celular e criar a aprovação vinculada aos
-hashes exatos de entrada e saída, o final pode ser solicitado com
-`--mode final --render`. Sem aprovação válida, o render final é bloqueado.
-
-### Música e licença
-
-O renderer aceita uma faixa licenciada declarada no manifest. A voz permanece
-em primeiro plano; a trilha recebe ganho baixo, ducking automático durante a
-narração e limitação de pico. O ganho configurável é limitado a 0,25 e o padrão
-é 0,08.
-
-O manifest de exemplo já exige música no final (`require_music: true`), mas
-não inclui uma faixa. Por isso, o preview pode ser renderizado sem trilha e o
-final permanece bloqueado até uma faixa ser selecionada e documentada. Registre
-arquivo, fonte, licença, permissão comercial, atribuição quando exigida e risco
-de Content ID em `examples/music-license-register.template.json`. Não presuma
-que uma faixa é segura só por ser chamada de royalty-free.
-
-O pipeline verifica codec, resolução, duração, sincronismo de captions,
-proveniência e movimento. A aprovação perceptual no celular continua sendo
-necessária; validação técnica não garante qualidade editorial nem monetização.
-
-## Gerador visual gratuito e profissional
-
-O motor independente possui três adaptadores. O padrão gratuito e sem cadastro
-é a NASA Image and Video Library: ele busca uma imagem factual relacionada à
-cena, recorta para 9:16 e grava a origem no sidecar. Cloudflare Workers AI e
-Gemini continuam disponíveis como opções explícitas, sem fallback automático
-entre provedores.
-
-- padrão gratuito sem chave: `nasa`;
-- alternativa generativa opcional: `@cf/stabilityai/stable-diffusion-xl-base-1.0`;
-- premium opcional: `gemini-3-pro-image` (Nano Banana Pro), bloqueado por padrão;
-- saída: PNG vertical, sem texto embutido, com sidecar de proveniência;
-- captions e rótulos factuais continuam na camada de edição;
-- limite local de chamadas e ledger diário impedem geração acidental em loop.
-
-Para gerar os frames sem criar conta adicional:
-
-```bash
-python production/generate_mars_images.py --provider nasa --scene S01
-```
-
-O provedor usa a busca pública da NASA, sem API key. As cenas S01 e S03 usam
-o identificador do Mars Climate Orbiter quando disponível; as demais usam
-consultas temáticas controladas. Isso reduz imagens sem relação com o roteiro,
-mas cada PNG ainda precisa de aprovação humana. A licença não deve ser inferida
-apenas pelo domínio: confirme créditos, terceiros e restrições do item antes de
-monetizar.
-
-A Cloudflare informa uma alocação gratuita diária de 10.000 neurons. Para usar
-esse caminho, é necessário criar uma conta Cloudflare, habilitar Workers AI e
-gerar um token de execução de modelos. Configure `CLOUDFLARE_ACCOUNT_ID` e
-`CLOUDFLARE_API_TOKEN` fora do GitHub e rode:
-
-```bash
-python production/generate_mars_images.py --provider cloudflare --scene S01
-```
-
-Para gerar todas as seis cenas, use `--scene ALL`. O script para se já houver
-saída, se o limite diário local for atingido ou se a API falhar; ele não tenta
-novamente sozinho. A geração premium exige a confirmação explícita:
-
-```bash
-GEMINI_ALLOW_PREMIUM_IMAGE=1 \
-GEMINI_ALLOW_IMAGE_BILLING=1 \
-python production/generate_mars_images.py --provider gemini --model gemini-3-pro-image --scene S01 --image-size 2K
-```
-
-Antes de monetizar, confirme a licença do modelo escolhido. A integração não substitui
-automaticamente o visual atual: os assets precisam passar pela revisão humana
-antes de entrarem no MP4 final.
-
-Depois da revisão dos seis PNGs, o motion source pode ser montado sem alterar o
-renderizador dos outros motores:
-
-```bash
-python production/build_mars_visual_ai.py
-```
-
-Esse comando falha se faltar qualquer cena ou sidecar. Só depois de aprovar os
-frames no celular o arquivo deve ser apontado no manifest do episódio como uma
-nova versão visual.
-
-O renderer autoral aplica movimento individual por cena, easing suave, zoom
-conservador e transições discretas. Ele não usa shake, glitch ou randomização
-não auditável. Quando a faixa licenciada é declarada, a mixagem voice-first e os gates de licença são aplicados no release final.
-
-Também existe um workflow manual em GitHub Actions. No celular: abra o
-repositório, entre em **Actions**, escolha **Generate free Mars visuals**, toque
-em **Run workflow** e selecione uma cena. O workflow usa o provedor NASA e não
-exige secrets. Os arquivos aparecem como artefato para download. Cloudflare só
-é necessário se você optar conscientemente por executar o provedor generativo
-alternativo fora desse fluxo padrão.
-
-## Pesquisa de vídeo ilustrativo com revisão no Web Cloud Browser
-
-O motor agora possui uma camada separada para pesquisar vídeos de apoio que possam acompanhar cada trecho da narração. Ela não substitui automaticamente as imagens autorais nem publica um vídeo externo sem aprovação.
-
-Fluxo seguro:
-
-1. O manifest transforma o beat, a intenção visual e a função da cena em consultas específicas.
-2. O workflow Research stock video candidates consulta NASA, Pexels e Pixabay quando a fonte estiver habilitada.
-3. Cada candidato recebe URL da página original, URL da licença, duração, resolução, fonte, score de relevância e registro de direitos.
-4. O Web Cloud Browser é usado para abrir a página original em tempo real e revisar se o clipe realmente corresponde à narração, se há marca d'água, pessoas, marcas ou contexto enganoso.
-5. O estado permanece REVIEW_REQUIRED até a aprovação humana do item exato. Sem aprovação, o motor mantém o frame autoral atual como fallback.
-
-### Fontes e limites
-
-- Pixabay: fonte automatizável principal neste momento. A API de vídeos é gratuita dentro dos limites do serviço e a licença permite uso e adaptação, mas exige revisão de direitos adicionais de terceiros.
-- Pexels: fallback/manual para pesquisa no Web Cloud Browser; a licença é adequada para B-roll, porém a emissão de novas chaves de API estava pausada na verificação atual.
-
-A NASA não participa desta camada de vídeo. O provedor NASA existente continua separado no fluxo de imagens factuais e não é usado pelo pesquisador de stock video.
-
-Pixabay exige uma chave de API no secret PIXABAY_API_KEY para pesquisa automatizada. A chave é gratuita dentro dos limites do serviço. Pexels exige PEXELS_API_KEY, mas a emissão de novas chaves estava pausada na verificação atual; por isso, Pexels permanece como rota manual até a situação mudar. A ausência de chave não é tratada como erro fatal: o relatório informa a fonte indisponível e preserva as demais.
-
-O workflow é manual por desenho: pesquisar não significa aceitar. O vídeo só deve entrar no render depois de registrar a página original, a licença, o checksum do arquivo baixado, a decisão editorial e a data da revisão. O motor não apresenta um clipe ilustrativo como prova documental do fato narrado.

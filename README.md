@@ -1,75 +1,71 @@
-# BECAUSE OF THIS — Independent Engine
+# BECAUSE OF THIS — Engine v2
 
-Independent free-first engine for suspenseful science Shorts. It does not
-modify or depend on Capta Pronto, Corte Fino, Publisher, Creator, or any other
-protected engine.
+The definitive production engine for the Because of This channel. It is
+independent from Corte Fino, Rajada 011, CaptaPronto, Publisher and every
+other project.
 
-## Current architecture
+## Official architecture
 
-The official path is the generic authorial episode pipeline:
+The v2 pipeline is video-only:
 
-- `narrate.py`: optional Gemini TTS adapter with Charon support and provenance.
-- `production/build_authorial_prompt_pack.py`: reusable visual prompt builder.
-- `production/generate_authorial_assets.py`: explicit authorial provider adapter.
-- `production/ingest_authorial_asset.py`: provenance-safe manual asset ingestion.
-- `production/render_authorial_episode.py`: deterministic FFmpeg assembler with optional licensed, ducked background music.
-- `production/validate_authorial_episode.py`: fail-closed release validator.
-- `production/require_preview_approval.py`: final-render approval gate.
-- `examples/`: episode manifests, scripts, captions, and asset contracts.
-- `tests/`: unit and regression tests.
-- `.github/workflows/validate.yml`: compile, tests, and JSON checks.
-- `.github/workflows/render-authorial-episode.yml`: preview/final workflow.
+1. Story and narration define the master clock.
+2. Cloud Browser research creates a review queue from Mixkit, Pixabay and
+   Pexels.
+3. A human approves the exact clip and its licence.
+4. The approved file is staged in Google Drive.
+5. GitHub Actions hydrates the asset, verifies its MIME type and SHA-256, and
+   renders with FFmpeg.
+6. Captions, visual truth, reuse and final media gates run before delivery.
+7. Validated media is uploaded to Drive and ephemeral runner media is removed.
 
-The older Mars renderer and validator remain in the repository for historical
-reference only. `production/run_episode.py` rejects legacy manifests so a new
-episode cannot silently take the wrong path.
+Narrative still images are not supported. A scene must contain a real video
+asset. If the exact visual is unavailable, the manifest must explicitly
+declare a semantic fallback: NEAR, EXPLANATORY, SYMBOLIC or ATMOSPHERE.
+Random filler and image fallback are forbidden.
 
-A release episode requires a Charon-compatible 24 kHz mono WAV, external ASS
-captions, reviewed 9:16 images, image provenance sidecars, a validated preview,
-human approval, and a validated final render. Final mode also requires a
-licensed music file with explicit commercial-use metadata; the example manifest
-intentionally blocks final rendering until a track is attached and reviewed.
+## Quality gates
 
-NASA, Cloudflare, and Gemini providers are separate adapters. NASA imagery is
-not considered an authorial cartoon asset by itself; a provider must be selected
-explicitly and every visual remains subject to human review.
+- 60–75 second episode duration.
+- 9:16 output: 1080×1920 preview or 2160×3840 final.
+- H.264/AAC, 25 fps, faststart and no stretched footage.
+- Narration-locked scene timing.
+- External ASS captions generated from the final narration.
+- Two-line mobile-safe captions with CPS limits.
+- Licensed suspense music below the voice, with sidechain ducking and
+  loudness/true-peak control.
+- No repeated narrative asset in an episode.
+- No repeated clip across episodes when its registry status is
+  PERMANENTLY_RETIRED.
+- Source URL, licence, Drive ID, SHA-256 and approval status are required.
 
-The motion assembler applies deterministic contextual motion, subpixel-stable
-crops, smooth easing and understated transitions. It does not use shake, glitch,
-decorative transition packs, randomization or image regeneration during assembly.
+## Useful files
 
-## Local run
+- narrate.py: isolated Gemini TTS adapter.
+- production/video_asset_research.py: review queue and semantic fallback
+  ladder.
+- production/google_drive_assets.py: Drive-to-runner asset bridge.
+- production/video_asset_contract.py: fail-closed v2 contract.
+- production/render_video_episode.py: deterministic FFmpeg renderer.
+- production/validate_video_release.py: post-render release gate.
+- production/caption_quality.py: caption synchronization and readability.
+- production/google_drive_delivery.py: verified Drive delivery.
+- examples/video-only-episode-manifest-v2.template.json: episode template.
+- production/VIDEO_ENGINE_V2.md: detailed production contract.
 
-```bash
-python -m venv .venv
-python -m pip install -r requirements.txt
-python -m unittest discover -s tests -v
-python production/run_episode.py \
-  --manifest examples/mars-climate-orbiter-render-manifest-v1.json \
-  --mode preview --render
-```
+## Local checks
 
-For the new authorial path, validate the contract and render a preview:
+    python -m pip install -r requirements.txt
+    python -m unittest discover -s tests -v
+    python -m py_compile production/*.py
 
-```bash
-python production/validate_authorial_manifest_contract.py \
-  --manifest examples/mars-climate-orbiter-render-manifest-v1.json
-python production/render_authorial_episode.py \
-  --manifest examples/mars-climate-orbiter-render-manifest-v1.json \
-  --mode preview
-python production/validate_authorial_episode.py \
-  --manifest examples/mars-climate-orbiter-render-manifest-v1.json \
-  --mode preview
-```
+## GitHub Actions
 
-New authorial releases use the single preview, approval, preflight and release
-validation path described in `production/AUTHORIAL_RENDERING.md`.
+- Video engine v2 CI runs compile, regression and contract tests.
+- Render video-only episode v2 is manually dispatched with a populated v2
+  manifest and supports preview or final.
 
-`PREVIEW_VALIDATED` is not `APPROVED`. A human mobile-speaker review and an
-exact approval hash are required before any final delivery step. When configured,
-the music bed is kept low, ducked under narration and peak-limited. The engine
-does not infer rights from a track name or hosting domain.
+The template contains placeholders intentionally. A real episode must first
+receive its narration, word-level captions, licensed music and approved Drive
+video IDs/checksums.
 
-Generated WAV/MP4 media and local run logs are intentionally not versioned;
-the repository stores source code, manifests, metadata, tests, and audit
-records.
+
