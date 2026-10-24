@@ -17,15 +17,32 @@ Every scene records:
 - semantic `visual_match`, `match_score` and `visual_truth`.
 
 The renderer blocks missing provenance, stale checksums, unapproved assets,
-static narrative image fields and any repeated asset/checksum/perceptual hash
-inside the episode. A clip shorter than its assigned beat is blocked; clips
-are never looped to fill time.
+static narrative image fields and any repeated source/checksum/animation
+fingerprint inside the episode. A clip shorter than its assigned beat is
+blocked; clips are never looped to fill time.
+
+## Clip quantity and visual storytelling
+
+New episodes use an adaptive clip policy: 10 unique clips is the hard
+minimum, 12–16 is the target range, and 18 is the hard maximum for a
+60–75-second story. The story is divided into narrative beats, and each beat
+receives its own fresh video asset. The policy rejects under-edited episodes
+unless the manifest explicitly marks an already approved pilot baseline.
+
+Candidate discovery ranks exact semantic matches first, then near,
+explanatory, symbolic and atmospheric fallbacks. A fallback is never allowed
+to replace a scene silently: the manifest records its match class and score.
+The final contract also rejects repeated source pages and duplicate animation
+fingerprints, even when filenames or checksums differ.
 
 ## Timeline and edit
 
-Narration is the master clock. Scene durations must total the narration within
-350 ms. Each scene is trimmed from a real video stream, stripped of source
-audio, scaled/cropped to 9:16 and joined with deterministic transitions.
+Narration is the master clock. Scene durations are allocated to the measured
+narration while respecting each source video's usable duration, a 2–20-second
+visual-beat range and transition overlap. Each scene is trimmed from a real
+video stream, stripped of source audio, scaled/cropped to 9:16 and joined with
+deterministic transitions. Hard cuts remain effectively instantaneous;
+crossfades and dissolves are used only when the edit calls for continuity.
 Preview is 1080×1920 and final is 2160×3840, both at 25 fps.
 
 Captions are generated from the same narration and remain external ASS
