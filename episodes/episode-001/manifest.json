@@ -53,7 +53,7 @@
     "watermark_text": "|B",
     "accent_color": "#E3262E",
     "logo_enabled": true,
-    "logo_path": "../../brand/because-of-this-logo.png",
+    "logo_path": "brand/because-of-this-logo.png",
     "logo_width": 360,
     "logo_opacity": 0.82,
     "logo_margin": 54,
