@@ -88,10 +88,12 @@ def finalize(manifest_path: Path, release_report_path: Path, delivery_receipt_pa
         "git_commit": __import__("os").environ.get("GITHUB_SHA"),
         "workflow_run": __import__("os").environ.get("GITHUB_RUN_ID"),
         "topic": manifest.get("title"),
+        "voice": manifest.get("voice"),
         "fingerprints": {
             "manifest_sha256": sha256_file(manifest_path),
             "script_sha256": sha256_file(resolve_inside(base, manifest["script"]["path"], "Script")),
             "narration_sha256": sha256_file(audio),
+            "voice_metadata_sha256": sha256_file(audio.with_name(audio.name + ".json")) if audio.with_name(audio.name + ".json").is_file() else None,
             "captions_sha256": sha256_file(captions),
             "footage_sha256": canonical_hash([item["sha256"] for item in assets]),
             "timeline_sha256": _fingerprint_timeline(manifest),

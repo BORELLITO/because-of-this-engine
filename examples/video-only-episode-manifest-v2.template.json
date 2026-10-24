@@ -12,6 +12,13 @@
     "central_question": "What detail changed the outcome?",
     "visual_symbol": "a red signal line"
   },
+  "voice": {
+    "provider": "gemini",
+    "model": "gemini-3.8-flash-lite-tts",
+    "voice": "Charon",
+    "language": "en-US",
+    "style": "Low, restrained male suspense narration in clear American English. Natural pauses, clear diction and controlled tension."
+  },
   "script": {
     "path": "script.txt",
     "word_count_target": 165
