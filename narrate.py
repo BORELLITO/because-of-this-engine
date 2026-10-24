@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Generate one narration WAV through Google's Gemini TTS API.
 
-The production path uses the documented Interactions REST streaming endpoint so
-that long narrations produce incremental audio and actionable HTTP errors. The
+The production path uses the documented Interactions REST endpoint so
+that narration uses the provider's supported unary audio contract and actionable HTTP errors. The
 legacy SDK path remains available only as an explicit fallback via
 ``GEMINI_TTS_TRANSPORT=sdk``.
 """
@@ -30,7 +30,7 @@ from typing import Any
 
 DEFAULT_MODEL = "gemini-3.8-flash-tts"
 DEFAULT_VOICE = "Charon"
-DEFAULT_TRANSPORT = "rest_stream"
+DEFAULT_TRANSPORT = "rest_unary"
 DEFAULT_SAMPLE_RATE = 24000
 DEFAULT_STYLE = (
     "Neutral American English documentary narration. Clear, natural, "
@@ -166,7 +166,6 @@ def _request_payload(text: str, model: str, voice: str, style: str) -> bytes:
         ],
         "response_format": {"type": "audio"},
         "generation_config": {"speech_config": [{"voice": voice}]},
-        "stream": True,
     }
     return json.dumps(payload, ensure_ascii=False).encode("utf-8")
 
@@ -232,6 +231,45 @@ def _audio_from_stream_event(value: Any) -> tuple[bytes | None, str | None, str 
     return None, request_id, None
 
 
+def _rest_audio_from_response(value: Any) -> tuple[bytes, str | None]:
+    """Extract the last model audio block from the documented REST response."""
+    if not isinstance(value, dict):
+        raise NarrationError("Google TTS returned a non-object REST response.")
+    request_id = value.get("id") if isinstance(value.get("id"), str) else None
+    error = value.get("error")
+    if error:
+        if isinstance(error, dict):
+            error = error.get("message") or json.dumps(error, ensure_ascii=False)
+        raise NarrationError(f"Google TTS REST interaction failed: {str(error)[:400]}")
+
+    candidates: list[Any] = []
+    output_audio = value.get("output_audio")
+    if isinstance(output_audio, dict):
+        candidates.append(output_audio)
+    steps = value.get("steps")
+    if isinstance(steps, list):
+        for step in reversed(steps):
+            if not isinstance(step, dict):
+                continue
+            if step.get("type") not in {"model_output", "audio"}:
+                continue
+            content = step.get("content")
+            if isinstance(content, list):
+                candidates.extend(reversed(content))
+            elif isinstance(content, dict):
+                candidates.append(content)
+
+    for candidate in candidates:
+        if isinstance(candidate, dict) and candidate.get("type") == "audio":
+            return _decode_base64_audio(candidate.get("data")), request_id
+        if isinstance(candidate, dict) and candidate.get("data"):
+            return _decode_base64_audio(candidate.get("data")), request_id
+    raise NarrationError(
+        "Google TTS REST response completed without audio. "
+        "Check model access, voice name and API availability."
+    )
+
+
 def _request_rest_stream(
     text: str,
     *,
@@ -241,73 +279,51 @@ def _request_rest_stream(
     style: str,
     timeout_seconds: float,
 ) -> tuple[bytes, str | None]:
+    """Call the documented unary Interactions REST endpoint.
+
+    The provider documentation returns a complete WAV in a JSON response
+    (steps[].content[].data or output_audio.data). The old implementation
+    advertised SSE streaming and waited on an unsupported stream contract,
+    which caused the 180-second timeout seen in production.
+    """
     request = urllib.request.Request(
         INTERACTIONS_URL,
         data=_request_payload(text, model, voice, style),
         headers={
             "x-goog-api-key": api_key,
             "Content-Type": "application/json",
-            "Accept": "text/event-stream",
+            "Accept": "application/json",
         },
         method="POST",
     )
-    # The outer daemon guard enforces the total request budget. This socket
-    # timeout also prevents a silent SSE connection from blocking forever.
-    socket_timeout = max(1.0, min(60.0, timeout_seconds))
-    pcm = bytearray()
-    request_id: str | None = None
-    data_lines: list[str] = []
-
-    def flush_event() -> None:
-        nonlocal request_id
-        if not data_lines:
-            return
-        raw = "".join(data_lines).strip()
-        data_lines.clear()
-        if not raw or raw == "[DONE]":
-            return
-        try:
-            value = json.loads(raw)
-        except json.JSONDecodeError as exc:
-            raise NarrationError("Google TTS returned malformed streaming event data.") from exc
-        chunk, event_id, error = _audio_from_stream_event(value)
-        request_id = request_id or event_id
-        if error:
-            raise NarrationError(f"Google TTS streaming interaction failed: {error[:400]}")
-        if chunk:
-            pcm.extend(chunk)
-
+    socket_timeout = max(1.0, min(600.0, timeout_seconds))
     try:
         with urllib.request.urlopen(request, timeout=socket_timeout) as response:
-            if int(getattr(response, "status", 200)) >= 400:
-                raise NarrationError(f"Google TTS returned unexpected HTTP status {response.status}.")
-            while True:
-                line = response.readline()
-                if not line:
-                    break
-                decoded = line.decode("utf-8", errors="replace").rstrip("\r\n")
-                if decoded.startswith("data:"):
-                    data_lines.append(decoded[5:].lstrip())
-                elif not decoded.strip():
-                    flush_event()
-            flush_event()
+            status = int(getattr(response, "status", 200))
+            raw = response.read()
+            if status >= 400:
+                raise NarrationError(f"Google TTS returned unexpected HTTP status {status}.")
+            try:
+                value = json.loads(raw.decode("utf-8"))
+            except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+                raise NarrationError("Google TTS returned malformed JSON.") from exc
     except urllib.error.HTTPError as exc:
         raise _http_error(exc) from exc
     except urllib.error.URLError as exc:
         reason = getattr(exc, "reason", exc)
         if isinstance(reason, socket.timeout):
-            raise NarrationError(f"Google TTS stream timed out after {timeout_seconds:.1f} seconds.") from exc
+            raise NarrationError(f"Google TTS request timed out after {timeout_seconds:.1f} seconds.") from exc
         raise NarrationError(f"Google TTS network error: {reason}") from exc
     except socket.timeout as exc:
-        raise NarrationError(f"Google TTS stream timed out after {timeout_seconds:.1f} seconds.") from exc
+        raise NarrationError(f"Google TTS request timed out after {timeout_seconds:.1f} seconds.") from exc
 
-    if not pcm:
+    audio, request_id = _rest_audio_from_response(value)
+    if not audio.startswith(b"RIFF") or audio[8:12] != b"WAVE":
         raise NarrationError(
-            "Google TTS stream completed without audio. Check the API key, model access, "
-            "voice name and Gemini API availability."
+            "Google TTS returned audio without a valid WAV container. "
+            "The v2 pipeline requires the documented audio/wav response."
         )
-    return _pcm_to_wav(bytes(pcm)), request_id
-
+    return audio, request_id
 
 def _request_sdk_audio(
     text: str,
@@ -367,7 +383,7 @@ def _request_audio(
     timeout_seconds: float,
     transport: str,
 ) -> tuple[bytes, str | None]:
-    if transport == "rest_stream":
+    if transport in {"rest_unary", "rest_stream"}:
         return _request_with_timeout(
             lambda: _request_rest_stream(
                 text,
@@ -389,7 +405,7 @@ def _request_audio(
             timeout_seconds=timeout_seconds,
         )
     raise NarrationError(
-        f"Unsupported GEMINI_TTS_TRANSPORT={transport!r}. Use rest_stream or sdk."
+        f"Unsupported GEMINI_TTS_TRANSPORT={transport!r}. Use rest_unary or sdk."
     )
 
 
@@ -463,7 +479,7 @@ def main() -> int:
     parser.add_argument("--model", default=DEFAULT_MODEL, help=f"Gemini TTS model (default: {DEFAULT_MODEL})")
     parser.add_argument("--voice", default=DEFAULT_VOICE, help=f"Gemini prebuilt voice (default: {DEFAULT_VOICE})")
     parser.add_argument("--style", default=DEFAULT_STYLE, help="Short delivery direction for the narrator")
-    parser.add_argument("--transport", default=None, help="TTS transport: rest_stream (default) or sdk")
+    parser.add_argument("--transport", default=None, help="TTS transport: rest_unary (default) or sdk")
     parser.add_argument("--overwrite", action="store_true", help="Replace an existing WAV and metadata sidecar")
     args = parser.parse_args()
 
