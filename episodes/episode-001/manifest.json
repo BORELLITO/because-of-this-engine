@@ -15,11 +15,11 @@
   },
   "voice": {
     "provider": "gemini",
-    "model": "gemini-3.8-flash-lite-tts",
+    "model": "gemini-3.8-flash-tts",
     "voice": "Charon",
     "language": "en-US",
     "style": "Clear American English, crisp diction, moderate pace, restrained suspense.",
-    "model_rationale": "Current production route: Gemini 3.8 Flash-Lite TTS, which shares the documented Interactions schema with Gemini 3.8 Flash TTS; the pipeline remains fail-closed on word-timestamp alignment."
+    "model_rationale": "Production target: Gemini 3.8 Flash TTS for maximum acoustic fidelity and pronunciation stability. The run is intentionally deferred until the documented daily quota resets."
   },
   "script": {
     "path": "script.txt",
@@ -590,7 +590,7 @@
     "status": "PENDING",
     "reviewer": "",
     "reviewed_at": "",
-    "notes": "Automated rebuild: strict word-highlight timestamps, soft-red legibility contrast gate, production release blocked on any estimated timestamp, cinematic noir grade, branded loop outro and 12 unique clips. Gemini 3.8 Flash-Lite TTS is the active route. Human approval remains required before final publication."
+    "notes": "Automated rebuild: strict word-highlight timestamps, soft-red legibility contrast gate, production release blocked on any estimated timestamp, cinematic noir grade, branded loop outro and 12 unique clips. Gemini 3.8 Flash TTS is the production target; the last render was externally blocked by the daily model quota. Human approval remains required before final publication."
   },
   "editing": {
     "clip_quantity": {
