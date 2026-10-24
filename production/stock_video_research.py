@@ -23,7 +23,7 @@ from typing import Any, Callable
 SCHEMA_VERSION = "1.0"
 PEXELS_SEARCH = "https://api.pexels.com/videos/search"
 PIXABAY_SEARCH = "https://pixabay.com/api/videos/"
-PROVIDER_ORDER = ("pexels", "pixabay")
+PROVIDER_ORDER = ("pixabay", "pexels")
 
 _STOPWORDS = {
     "a", "an", "and", "as", "at", "before", "by", "for", "from", "in", "into",
