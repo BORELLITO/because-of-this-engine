@@ -47,6 +47,5 @@ python production/render_video_episode.py --manifest <episode>/manifest.json --m
 python production/validate_video_release.py --manifest <episode>/manifest.json --mode preview
 ```
 
-The GitHub workflow is `.github/workflows/render-video-episode.yml`. This v2 contract is the
-authoritative production path; legacy image workflows and manifests are not
-part of the repository.
+The GitHub workflow is `.github/workflows/render-video-episode.yml`. This v2 contract is the authoritative production path. Image-based manifests
+are rejected by the video-only contract.
