@@ -161,6 +161,22 @@ def quality_report(manifest_path: Path, require_word_level: bool = False) -> dic
         raise CaptionQualityError("Caption alignment_source is required.")
     if alignment_mode == "phrase_level_manual_reviewed" and word_level:
         raise CaptionQualityError("Phrase-level captions cannot declare word_level_available=true.")
+    if alignment_mode == "forced_alignment" or word_level:
+        sidecar_path = resolve_inside(
+            base,
+            captions.get("alignment_sidecar", "captions/narration.alignment.json"),
+            "Caption alignment sidecar",
+        )
+        try:
+            sidecar = json.loads(sidecar_path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+            raise CaptionQualityError("Caption alignment sidecar is unreadable.") from exc
+        if sidecar.get("status") != "FORCED_ALIGNMENT_PASS" or not isinstance(sidecar.get("words"), list):
+            raise CaptionQualityError("Forced caption alignment sidecar is incomplete.")
+        if abs(float(sidecar.get("audio_duration_seconds", -1)) - duration) > 0.15:
+            raise CaptionQualityError("Caption alignment sidecar duration does not match narration.")
+        if any(not isinstance(item, dict) or not item.get("word") for item in sidecar["words"]):
+            raise CaptionQualityError("Caption alignment sidecar contains invalid word timestamps.")
     if require_word_level and not word_level:
         raise CaptionQualityError(
             "Final release requires real word-level alignment; current captions are explicitly phrase-level."
