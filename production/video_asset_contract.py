@@ -296,18 +296,28 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
     caption_path = resolve_inside(episode_dir, captions.get("path"), "Captions path")
     if check_files and not caption_path.is_file():
         raise VideoContractError(f"Captions file is missing: {caption_path}")
+    if captions.get("alignment_mode") != "forced_alignment" or captions.get("word_level_available") is not True:
+        raise VideoContractError(
+            "Every v2 render requires forced_alignment captions with real word timestamps."
+        )
+    alignment_sidecar = resolve_inside(
+        episode_dir,
+        captions.get("alignment_sidecar", "captions/narration.alignment.json"),
+        "Caption alignment sidecar",
+    )
+    if check_files and not alignment_sidecar.is_file():
+        raise VideoContractError(f"Caption alignment sidecar is missing: {alignment_sidecar}")
     music = manifest.get("music")
-    if mode == "final" and not isinstance(music, dict):
-        raise VideoContractError("Final release requires a licensed suspense music object.")
-    if music is not None:
-        if not isinstance(music, dict) or not music.get("license") or music.get("commercial_use") is not True:
-            raise VideoContractError("Music requires explicit commercial_use=true and a licence.")
-        volume = music.get("volume", 0.06)
-        if isinstance(volume, bool) or not isinstance(volume, (int, float)) or not 0 < volume <= 0.18:
-            raise VideoContractError("Music volume must be between 0 and 0.18 for voice-first mixing.")
-        music_path = resolve_inside(episode_dir, music.get("path"), "Music path")
-        if check_files and not music_path.is_file():
-            raise VideoContractError(f"Licensed music file is missing: {music_path}")
+    if not isinstance(music, dict):
+        raise VideoContractError("Every v2 render requires a licensed suspense music object.")
+    if not music.get("license") or music.get("commercial_use") is not True:
+        raise VideoContractError("Music requires explicit commercial_use=true and a licence.")
+    volume = music.get("volume", 0.12)
+    if isinstance(volume, bool) or not isinstance(volume, (int, float)) or not 0.08 <= volume <= 0.18:
+        raise VideoContractError("Music volume must be between 0.08 and 0.18 for audible voice-first mixing.")
+    music_path = resolve_inside(episode_dir, music.get("path"), "Music path")
+    if check_files and not music_path.is_file():
+        raise VideoContractError(f"Licensed music file is missing: {music_path}")
     if mode == "final":
         research = manifest.get("research")
         if not isinstance(research, dict) or not isinstance(research.get("sources"), list) or not research["sources"]:

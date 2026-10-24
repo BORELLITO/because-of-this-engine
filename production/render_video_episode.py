@@ -287,17 +287,18 @@ def mux_audio(
     else:
         filters.append("[captioned]null[v]")
 
+    if music is None:
+        raise RenderError("Background suspense music is mandatory; refusing a voice-only render.")
+    if not music.is_file():
+        raise RenderError(f"Background suspense music file is missing: {music}")
     music_input_index = 2 + int(logo_enabled)
-    if music:
-        command.extend(["-stream_loop", "-1", "-i", str(music)])
-        filters.extend([
-            "[1:a]aresample=48000,asplit=2[voice_sc][voice_mix]",
-            f"[{music_input_index}:a]aresample=48000,volume={music_volume:.4f}[music]",
-            "[music][voice_sc]sidechaincompress=threshold=0.035:ratio=10:attack=15:release=420[ducked]",
-            "[voice_mix][ducked]amix=inputs=2:duration=first:dropout_transition=0:normalize=0,loudnorm=I=-15:TP=-1.0:LRA=11,alimiter=limit=0.95[a]",
-        ])
-    else:
-        filters.append("[1:a]aresample=48000,loudnorm=I=-15:TP=-1.0:LRA=11,alimiter=limit=0.95[a]")
+    command.extend(["-stream_loop", "-1", "-i", str(music)])
+    filters.extend([
+        "[1:a]aresample=48000,asplit=2[voice_sc][voice_mix]",
+        f"[{music_input_index}:a]aresample=48000,volume={music_volume:.4f}[music]",
+        "[music][voice_sc]sidechaincompress=threshold=0.050:ratio=8:attack=20:release=400:makeup=1[ducked]",
+        "[voice_mix][ducked]amix=inputs=2:duration=first:dropout_transition=0:normalize=0,loudnorm=I=-15:TP=-1.0:LRA=11,alimiter=limit=0.95[a]",
+    ])
     command.extend([
         "-filter_complex", ";".join(filters),
         "-map", "[v]", "-map", "[a]",
@@ -340,11 +341,13 @@ def render(manifest_path: Path, mode: str) -> Path:
             scene_files.append(target)
         assembled = Path(temp) / "assembled.mp4"
         assemble(scene_files, locked_scenes, assembled)
-        music_path = None
-        music_volume = 0.06
-        if spec["music"]:
-            music_path = (manifest_path.parent / spec["music"]["path"]).resolve()
-            music_volume = float(spec["music"].get("volume", 0.06))
+        music_spec = spec.get("music")
+        if not isinstance(music_spec, dict):
+            raise RenderError("Manifest must declare a licensed suspense music object.")
+        music_path = (manifest_path.parent / str(music_spec["path"])).resolve()
+        if not music_path.is_file():
+            raise RenderError(f"Licensed suspense music file is missing: {music_path}")
+        music_volume = float(music_spec.get("volume", 0.12))
         logo_path = spec.get("brand_logo_path")
         if logo_path is not None and spec["brand"].get("logo_enabled", False) is True:
             logo_path = prepare_logo(
