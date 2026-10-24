@@ -1,0 +1,130 @@
+{
+  "generated_at": "2026-10-24T11:13:03.021Z",
+  "repository": "BORELLITO/because-of-this-engine",
+  "default_branch": "main",
+  "repository_size_kb": 12019,
+  "cleanup_policy": {
+    "artifacts": "expired or successful-run artifacts older than 1 day; protected names kept",
+    "workflow_runs": "cancelled/skipped/neutral >7d; success >14d; failures >30d",
+    "caches": "unused >14d",
+    "branches": "unprotected + fully merged + last commit >30d",
+    "releases": "audit only",
+    "large_versioned_files": "audit only"
+  },
+  "artifacts": {
+    "before_count": 0,
+    "before_bytes": 0,
+    "deleted_count": 0,
+    "deleted_bytes": 0,
+    "after_count": 0,
+    "after_bytes": 0,
+    "deleted": [],
+    "kept": []
+  },
+  "workflow_runs": {
+    "before_count": 323,
+    "deleted_count": 0,
+    "deleted": [],
+    "kept_count": 323
+  },
+  "caches": {
+    "before_count": 0,
+    "before_bytes": 0,
+    "deleted_count": 0,
+    "deleted_bytes": 0,
+    "after_count": 0,
+    "after_bytes": 0,
+    "deleted": [],
+    "kept": []
+  },
+  "branches": {
+    "before_count": 1,
+    "deleted_count": 0,
+    "deleted": [],
+    "kept": [
+      {
+        "name": "main",
+        "reason": "default-branch"
+      }
+    ]
+  },
+  "releases": [],
+  "workflows": [
+    {
+      "id": 392007028,
+      "name": "Build authorial prompt pack",
+      "path": ".github/workflows/build-authorial-prompt-pack.yml",
+      "state": "active",
+      "created_at": "2026-10-21T17:51:27.000Z",
+      "updated_at": "2026-10-21T17:51:27.000Z"
+    },
+    {
+      "id": 395018078,
+      "name": "Caption quality gate",
+      "path": ".github/workflows/caption-quality.yml",
+      "state": "active",
+      "created_at": "2026-10-24T10:36:08.000Z",
+      "updated_at": "2026-10-24T10:36:08.000Z"
+    },
+    {
+      "id": 392000850,
+      "name": "Generate free-first Mars visuals",
+      "path": ".github/workflows/generate-free-first-mars-images.yml",
+      "state": "active",
+      "created_at": "2026-10-21T17:44:30.000Z",
+      "updated_at": "2026-10-21T17:44:30.000Z"
+    },
+    {
+      "id": 391222977,
+      "name": "Generate free Mars visuals",
+      "path": ".github/workflows/generate-mars-images.yml",
+      "state": "active",
+      "created_at": "2026-10-21T02:27:31.000Z",
+      "updated_at": "2026-10-21T02:27:31.000Z"
+    },
+    {
+      "id": 395040180,
+      "name": "One-off deep GitHub hygiene",
+      "path": ".github/workflows/one-off-deep-github-hygiene.yml",
+      "state": "active",
+      "created_at": "2026-10-24T11:12:39.000Z",
+      "updated_at": "2026-10-24T11:12:39.000Z"
+    },
+    {
+      "id": 392021988,
+      "name": "Render authorial episode",
+      "path": ".github/workflows/render-authorial-episode.yml",
+      "state": "active",
+      "created_at": "2026-10-21T18:08:06.000Z",
+      "updated_at": "2026-10-21T18:08:06.000Z"
+    },
+    {
+      "id": 394748321,
+      "name": "Research stock video candidates",
+      "path": ".github/workflows/research-stock-video.yml",
+      "state": "active",
+      "created_at": "2026-10-24T01:49:26.000Z",
+      "updated_at": "2026-10-24T01:49:26.000Z"
+    },
+    {
+      "id": 391195233,
+      "name": "Validate engine",
+      "path": ".github/workflows/validate.yml",
+      "state": "active",
+      "created_at": "2026-10-21T01:41:49.000Z",
+      "updated_at": "2026-10-21T01:42:37.000Z"
+    }
+  ],
+  "large_versioned_files": [
+    {
+      "path": "examples/assets/music/youtube-audio-library.mp3",
+      "size_in_bytes": 8100086,
+      "sha": "38e806e205efa6e9ae38ea6c5479cb01decce6f2"
+    },
+    {
+      "path": "examples/assets/mars-climate-orbiter-charon.wav",
+      "size_in_bytes": 2801324,
+      "sha": "cbf413457c1e1ded625be5c7fc8bdee2033f27c2"
+    }
+  ]
+}
