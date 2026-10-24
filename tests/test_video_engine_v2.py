@@ -2,7 +2,7 @@ import unittest
 from pathlib import Path
 
 from production.video_asset_contract import VideoContractError, validate_manifest
-from production.render_video_episode import narration_locked_scenes, scene_filter, xfade_filter
+from production.render_video_episode import ass_color, narration_locked_scenes, scene_filter, xfade_filter, write_brand_ass
 from production.video_asset_research import build_queue
 
 
@@ -75,6 +75,17 @@ class VideoEngineV2Tests(unittest.TestCase):
         value = xfade_filter([15, 15, 15], [{"type": "crossfade", "duration": 0.25}] * 2)
         self.assertIn("offset=14.750", value)
         self.assertIn("offset=29.500", value)
+
+    def test_brand_overlay_uses_ass_and_not_drawtext(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory) / "brand.ass"
+            result = write_brand_ass(target, {"watermark_enabled": True, "watermark_text": "|B", "accent_color": "#E3262E"}, 70.2)
+            self.assertEqual(result, target)
+            content = target.read_text(encoding="utf-8")
+            self.assertIn("Style: Brand", content)
+            self.assertIn("Dialogue: 0,0:00:00.00,0:01:10.20,Brand", content)
+            self.assertNotIn("drawtext", content)
+        self.assertEqual(ass_color("#E3262E"), "&H002E26E3")
 
     def test_narration_locked_timeline_matches_audio_after_transition_overlap(self):
         scenes = manifest()["scenes"]
