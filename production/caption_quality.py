@@ -174,8 +174,16 @@ def quality_report(manifest_path: Path, require_word_level: bool = False) -> dic
     max_lines = int(captions.get("max_lines", 2))
     max_line_chars = int(captions.get("max_line_chars", 42))
     max_cps = float(captions.get("max_cps", 24.0))
+    target_cps = float(captions.get("target_cps", max_cps))
     end_tolerance = float(captions.get("end_tolerance_seconds", 0.10))
-    if max_lines < 1 or max_lines > 2 or max_line_chars < 20 or max_cps <= 0:
+    if (
+        max_lines < 1
+        or max_lines > 2
+        or max_line_chars < 20
+        or target_cps <= 0
+        or max_cps <= 0
+        or target_cps > max_cps
+    ):
         raise CaptionQualityError("Caption readability thresholds are invalid.")
 
     quality_events = []
@@ -199,6 +207,7 @@ def quality_report(manifest_path: Path, require_word_level: bool = False) -> dic
             "duration": round(event["duration"], 3),
             "cps": round(cps, 2),
             "line_count": len(lines),
+            "within_target_cps": cps <= target_cps,
             "text": event["visible_text"],
         })
 
@@ -232,6 +241,7 @@ def quality_report(manifest_path: Path, require_word_level: bool = False) -> dic
         "thresholds": {
             "max_lines": max_lines,
             "max_line_chars": max_line_chars,
+            "target_cps": target_cps,
             "max_cps": max_cps,
             "end_tolerance_seconds": end_tolerance,
         },
