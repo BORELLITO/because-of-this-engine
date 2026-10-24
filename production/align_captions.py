@@ -477,13 +477,10 @@ def generate(manifest_path: Path, model_path: Path) -> dict[str, Any]:
         script,
         max_line_chars=int(captions.get("max_line_chars", 42)),
     )
-    first_error: AlignmentError | None = None
-    recovered_word_count = 0
     try:
         asr_words = _recognize(audio_path, model_path)
         events, sidecar_chunks = _align_chunks(chunks, asr_words)
-    except AlignmentError as exc:
-        first_error = exc
+    except AlignmentError as first_error:
         constrained_vocabulary = _canonical_vocabulary(script)
         try:
             asr_words = _recognize(
@@ -491,23 +488,11 @@ def generate(manifest_path: Path, model_path: Path) -> dict[str, Any]:
                 model_path,
                 vocabulary=constrained_vocabulary,
             )
-            try:
-                events, sidecar_chunks = _align_chunks(chunks, asr_words)
-            except AlignmentError as constrained_error:
-                events, sidecar_chunks = _align_chunks(
-                    chunks, asr_words, recover_missing=True
-                )
-                recovered_word_count = sum(
-                    1
-                    for chunk in sidecar_chunks
-                    for word in chunk.get("words", [])
-                    if word.get("recovered") is True
-                )
+            events, sidecar_chunks = _align_chunks(chunks, asr_words)
         except AlignmentError as constrained_error:
             raise AlignmentError(
                 f"{first_error} Grammar-constrained retry also failed: {constrained_error}"
             ) from constrained_error
-
     for index in range(1, len(events)):
         boundary = (events[index - 1]["end"] + events[index]["start"]) / 2
         events[index - 1]["end"] = boundary
@@ -532,10 +517,8 @@ def generate(manifest_path: Path, model_path: Path) -> dict[str, Any]:
         "word_count": len(asr_words),
         "words": asr_words,
         "captions": sidecar_chunks,
-        "timing_mode": "vosk_word_timestamps"
-        if recovered_word_count == 0
-        else "vosk_word_timestamps_with_bounded_anchor_recovery",
-        "recovered_word_count": recovered_word_count,
+        "timing_mode": "vosk_word_timestamps",
+        "recovered_word_count": 0,
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return {
         "status": "FORCED_CAPTIONS_GENERATED",
@@ -546,7 +529,7 @@ def generate(manifest_path: Path, model_path: Path) -> dict[str, Any]:
         "recognized_words": len(asr_words),
         "word_highlight_mode": "timestamp_color_transform",
         "active_word_color": active_word_color,
-        "recovered_word_count": recovered_word_count,
+        "recovered_word_count": 0,
     }
 
 def main() -> int:
