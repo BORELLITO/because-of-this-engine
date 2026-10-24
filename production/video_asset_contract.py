@@ -123,7 +123,7 @@ def _required_text(record: dict[str, Any], key: str, label: str) -> str:
     return value.strip()
 
 
-def validate_asset_record(record: dict[str, Any], base: Path, episode_id: str, *, check_file: bool = True) -> dict[str, Any]:
+def validate_asset_record(record: dict[str, Any], base: Path, episode_id: str, *, mode: str = "preview", check_file: bool = True) -> dict[str, Any]:
     if not isinstance(record, dict):
         raise VideoContractError("Each video asset record must be an object.")
     asset_id = _required_text(record, "asset_id", "Video asset")
@@ -225,7 +225,7 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
             raise VideoContractError(f"Scene {scene_id} requires match_score between 0 and 1.")
         if score < 0.55 and scene["visual_match"] not in {"SYMBOLIC", "ATMOSPHERE"}:
             raise VideoContractError(f"Scene {scene_id} is below the semantic-match threshold.")
-        asset = validate_asset_record(scene.get("asset"), episode_dir, episode_id, check_file=check_files)
+        asset = validate_asset_record(scene.get("asset"), episode_dir, episode_id, mode=mode, check_file=check_files)
         for key, seen, label in (("asset_id", seen_asset_ids, "asset"), ("sha256", seen_hashes, "sha256")):
             value = str(asset[key]).lower()
             if value in seen:
