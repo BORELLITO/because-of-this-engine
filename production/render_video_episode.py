@@ -43,15 +43,44 @@ def _escape_filter_path(path: Path) -> str:
     return str(path).replace("\\", "\\\\").replace(":", r"\:").replace("'", r"\'")
 
 
-def scene_filter(width: int, height: int, focus_x: float, focus_y: float) -> str:
-    return (
-        f"scale={width}:{height}:force_original_aspect_ratio=increase,"
-        f"crop={width}:{height}:x='(iw-ow)*{focus_x:.4f}':y='(ih-oh)*{focus_y:.4f}',"
-        f"fps={FPS},setpts=PTS-STARTPTS,format=yuv420p"
-    )
+def scene_filter(
+    width: int,
+    height: int,
+    focus_x: float,
+    focus_y: float,
+    color_grade: dict[str, Any] | None = None,
+) -> str:
+    grade = color_grade or {}
+    filters = [
+        f"scale={width}:{height}:force_original_aspect_ratio=increase",
+        f"crop={width}:{height}:x='(iw-ow)*{focus_x:.4f}':y='(ih-oh)*{focus_y:.4f}'",
+    ]
+    if grade.get("enabled") is True:
+        brightness = float(grade.get("brightness", -0.03))
+        contrast = float(grade.get("contrast", 1.08))
+        saturation = float(grade.get("saturation", 0.90))
+        gamma = float(grade.get("gamma", 0.96))
+        if not -0.20 <= brightness <= 0.20 or not 0.80 <= contrast <= 1.30:
+            raise RenderError("Color grade brightness/contrast is outside the safe editorial range.")
+        if not 0.65 <= saturation <= 1.15 or not 0.80 <= gamma <= 1.15:
+            raise RenderError("Color grade saturation/gamma is outside the safe editorial range.")
+        filters.append(
+            f"eq=brightness={brightness:.4f}:contrast={contrast:.4f}:"
+            f"saturation={saturation:.4f}:gamma={gamma:.4f}"
+        )
+        if grade.get("vignette", True) is True:
+            filters.append("vignette=PI/5")
+    filters.extend([f"fps={FPS}", "setpts=PTS-STARTPTS", "format=yuv420p"])
+    return ",".join(filters)
 
 
-def render_scene(scene: dict[str, Any], width: int, height: int, output: Path) -> None:
+def render_scene(
+    scene: dict[str, Any],
+    width: int,
+    height: int,
+    output: Path,
+    color_grade: dict[str, Any] | None = None,
+) -> None:
     asset = scene["asset"]
     source = Path(asset["path"])
     info = ffprobe(source)
@@ -69,7 +98,7 @@ def render_scene(scene: dict[str, Any], width: int, height: int, output: Path) -
         raise RenderError(f"Scene {scene['scene_id']} has an invalid focus point.")
     run([
         "ffmpeg", "-y", "-ss", f"{source_in:.3f}", "-t", f"{requested:.3f}",
-        "-i", str(source), "-an", "-vf", scene_filter(width, height, focus_x, focus_y),
+        "-i", str(source), "-an", "-vf", scene_filter(width, height, focus_x, focus_y, color_grade),
         "-r", str(FPS), "-c:v", "libx264", "-preset", "veryfast", "-crf", "21",
         "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(output),
     ])
@@ -246,25 +275,44 @@ Dialogue: 0,0:00:00.00,{ass_time(duration)},Brand,,0,0,0,,{text}
     return path
 
 
+def loop_outro_seconds(manifest: dict[str, Any]) -> float:
+    loop = manifest.get("loop") or {}
+    if loop.get("enabled") is not True:
+        return 0.0
+    seconds = float(loop.get("outro_seconds", 0.8))
+    if not 0.4 <= seconds <= 1.5:
+        raise RenderError("Loop outro must be between 0.4s and 1.5s.")
+    return seconds
+
+
+def rendered_duration(manifest: dict[str, Any], narration_seconds: float) -> float:
+    return narration_seconds + loop_outro_seconds(manifest)
+
+
 def mux_audio(
     video: Path,
     audio: Path,
     captions: Path,
     output: Path,
-    duration: float,
+    narration_duration: float,
     music: Path | None,
     music_volume: float,
     brand_ass: Path | None,
     logo_path: Path | None,
     brand: dict[str, Any],
+    width: int,
+    height: int,
+    loop: dict[str, Any],
 ) -> None:
+    outro_seconds = loop_outro_seconds({"loop": loop})
+    total_duration = narration_duration + outro_seconds
+    audio_fade = min(float(loop.get("audio_fade_seconds", 0.35)), max(0.1, outro_seconds))
     command = ["ffmpeg", "-y", "-i", str(video), "-i", str(audio)]
     filters: list[str] = []
     filters.append(f"[0:v]subtitles='{_escape_filter_path(captions)}'[captioned]")
 
     logo_enabled = logo_path is not None and brand.get("logo_enabled", False) is True
     if logo_enabled:
-        # Static logo input is sampled at 1 fps; overlay repeats it at the 25 fps video clock.
         command.extend(["-loop", "1", "-framerate", "1", "-i", str(logo_path)])
         logo_width = int(brand.get("logo_width", 360))
         logo_opacity = float(brand.get("logo_opacity", 0.82))
@@ -279,13 +327,34 @@ def mux_audio(
             (
                 f"[captioned][logo]overlay="
                 f"x=main_w-overlay_w-{logo_margin}:y={logo_top}:"
-                "eof_action=repeat:shortest=1[v]"
+                "eof_action=repeat:shortest=1[main_visual]"
             ),
         ])
     elif brand_ass:
-        filters.append(f"[captioned]subtitles='{_escape_filter_path(brand_ass)}'[v]")
+        filters.append(f"[captioned]subtitles='{_escape_filter_path(brand_ass)}'[main_visual]")
     else:
-        filters.append("[captioned]null[v]")
+        filters.append("[captioned]null[main_visual]")
+
+    if outro_seconds > 0:
+        loop_title = str(loop.get("title", "BECAUSE OF THIS")).replace(":", "\\:")
+        fontfile = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+        font_size = max(52, round(width / 18))
+        card_start_fade = max(0.0, outro_seconds - 0.30)
+        filters.extend([
+            (
+                f"color=c=black:s={width}x{height}:r={FPS}:d={outro_seconds:.3f},"
+                f"drawtext=fontfile='{_escape_filter_path(Path(fontfile))}':"
+                f"text='{loop_title}':fontcolor=white:fontsize={font_size}:"
+                "borderw=3:bordercolor=black:x=(w-text_w)/2:y=(h-text_h)/2,"
+                "fade=t=in:st=0:d=0.18,"
+                f"fade=t=out:st={card_start_fade:.3f}:d=0.30,"
+                "format=yuv420p,setpts=PTS-STARTPTS[outro]"
+            ),
+            "[main_visual]format=yuv420p,setpts=PTS-STARTPTS[main]",
+            "[main][outro]concat=n=2:v=1:a=0[v]",
+        ])
+    else:
+        filters.append("[main_visual]format=yuv420p,setpts=PTS-STARTPTS[v]")
 
     if music is None:
         raise RenderError("Background suspense music is mandatory; refusing a voice-only render.")
@@ -293,22 +362,25 @@ def mux_audio(
         raise RenderError(f"Background suspense music file is missing: {music}")
     music_input_index = 2 + int(logo_enabled)
     command.extend(["-stream_loop", "-1", "-i", str(music)])
+    voice_pad = f",apad=pad_dur={outro_seconds:.3f}" if outro_seconds > 0 else ""
     filters.extend([
-        "[1:a]aresample=48000,asplit=2[voice_sc][voice_mix]",
+        f"[1:a]aresample=48000{voice_pad},asplit=2[voice_sc][voice_mix]",
         f"[{music_input_index}:a]aresample=48000,volume={music_volume:.4f}[music]",
         "[music][voice_sc]sidechaincompress=threshold=0.050:ratio=8:attack=20:release=400:makeup=1[ducked]",
-        "[voice_mix][ducked]amix=inputs=2:duration=first:dropout_transition=0:normalize=0,loudnorm=I=-15:TP=-1.0:LRA=11,alimiter=limit=0.95[a]",
+        "[voice_mix][ducked]amix=inputs=2:duration=first:dropout_transition=0:normalize=0[mixed]",
+        f"[mixed]loudnorm=I=-15:TP=-1.0:LRA=11,alimiter=limit=0.95"
+        + (f",afade=t=out:st={max(0.0, total_duration - audio_fade):.3f}:d={audio_fade:.3f}" if outro_seconds > 0 else "")
+        + "[a]",
     ])
     command.extend([
         "-filter_complex", ";".join(filters),
         "-map", "[v]", "-map", "[a]",
-        "-t", f"{duration:.3f}",
+        "-t", f"{total_duration:.3f}",
         "-c:v", "libx264", "-preset", "veryfast", "-crf", "21",
         "-c:a", "aac", "-b:a", "192k", "-ar", "48000",
         "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(output),
     ])
     run(command)
-
 
 def prepare_logo(source: Path, output: Path, width: int) -> Path:
     """Decode and resize the static logo once before the long mux."""
@@ -337,7 +409,7 @@ def render(manifest_path: Path, mode: str) -> Path:
         scene_files: list[Path] = []
         for index, scene in enumerate(locked_scenes, start=1):
             target = Path(temp) / f"scene-{index:02d}.mp4"
-            render_scene(scene, width, height, target)
+            render_scene(scene, width, height, target, manifest.get("color_grade"))
             scene_files.append(target)
         assembled = Path(temp) / "assembled.mp4"
         assemble(scene_files, locked_scenes, assembled)
@@ -367,6 +439,9 @@ def render(manifest_path: Path, mode: str) -> Path:
             brand_ass,
             logo_path,
             spec["brand"],
+            width,
+            height,
+            manifest.get("loop") or {},
         )
     return output
 
