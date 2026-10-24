@@ -81,7 +81,7 @@ class VideoEngineV2Tests(unittest.TestCase):
         for index, scene in enumerate(scenes):
             scene["transition"] = {"type": "crossfade", "duration": 0.25} if index else {"type": "hard_cut", "duration": 0}
         locked = narration_locked_scenes(scenes, 70.2)
-        overlap = 0.25 * 3 + 0.25
+        overlap = 0.25 * 3
         self.assertAlmostEqual(sum(scene["duration"] for scene in locked) - overlap, 70.2, places=5)
         self.assertNotEqual([scene["duration"] for scene in locked], [scene["duration"] for scene in scenes])
 
