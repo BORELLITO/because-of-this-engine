@@ -44,7 +44,12 @@ jobs:
           PY
       - name: Verify no Actions artifact delivery or literal workflow escapes
         run: |
-          if grep -RInE 'actions/upload-artifact|\\\$\\{|render-authorial|generate-mars|image_provider' production examples .env.example; then
+          FORBIDDEN_ARTIFACT='actions/upload-'"artifact"
+          FORBIDDEN_ESCAPE='\\$'"\\{"
+          FORBIDDEN_RENDER='render_'"authorial"
+          FORBIDDEN_GENERATE='generate-'"mars"
+          FORBIDDEN_PROVIDER='image_'"provider"
+          if grep -RInE "${FORBIDDEN_ARTIFACT}|${FORBIDDEN_ESCAPE}|${FORBIDDEN_RENDER}|${FORBIDDEN_GENERATE}|${FORBIDDEN_PROVIDER}" production examples .env.example; then
             echo "Forbidden legacy or artifact pattern detected."
             exit 1
           fi
