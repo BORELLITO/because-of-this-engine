@@ -16,10 +16,9 @@ on:
       provider:
         description: "Provider to query"
         required: true
-        default: "nasa"
+        default: "pexels"
         type: choice
         options:
-          - nasa
           - pexels
           - pixabay
           - all
