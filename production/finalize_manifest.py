@@ -76,7 +76,7 @@ def finalize(manifest_path: Path, release_report_path: Path, delivery_receipt_pa
             "visual_truth": scene["visual_truth"],
         })
     payload = {
-        "status": "PRODUCTION_COMPLETE",
+        "status": "READY_FOR_CLEANUP",
         "job_id": job_id_from_manifest(manifest),
         "engine_version": "2.0",
         "schema_version": manifest.get("schema_version"),
@@ -111,16 +111,43 @@ def finalize(manifest_path: Path, release_report_path: Path, delivery_receipt_pa
     return {"status": "FINAL_MANIFEST_WRITTEN", "path": str(final_path), "job_id": payload["job_id"], "fingerprints": payload["fingerprints"]}
 
 
+def mark_complete(final_manifest_path: Path, cleanup_receipt_path: Path) -> dict[str, Any]:
+    final_manifest_path = final_manifest_path.resolve()
+    payload = _read_json(final_manifest_path, "final manifest")
+    receipt = _read_json(cleanup_receipt_path.resolve(), "cleanup delivery receipt")
+    if payload.get("status") != "READY_FOR_CLEANUP":
+        raise FinalManifestError("Final manifest is not waiting for cleanup completion.")
+    if receipt.get("status") != "DRIVE_VERIFIED":
+        raise FinalManifestError("Cleanup completion requires a verified Drive receipt.")
+    payload["status"] = "PRODUCTION_COMPLETE"
+    payload["cleanup"] = {
+        "status": "PASS",
+        "verified_before_cleanup": True,
+        "verified_after_cleanup": True,
+        "completed_at_utc": datetime.now(timezone.utc).isoformat(),
+    }
+    final_manifest_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+    return {"status": "PRODUCTION_COMPLETE", "path": str(final_manifest_path), "job_id": payload.get("job_id")}
+
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, required=True)
-    parser.add_argument("--release-report", type=Path, required=True)
+    parser.add_argument("--release-report", type=Path)
     parser.add_argument("--delivery-receipt", type=Path, required=True)
     parser.add_argument("--mode", choices=("preview", "final"), required=True)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--complete", action="store_true", help="Mark an already delivered final manifest complete after cleanup.")
     args = parser.parse_args()
     try:
-        print(json.dumps(finalize(args.manifest, args.release_report, args.delivery_receipt, args.mode, args.output), ensure_ascii=False, indent=2))
+        if args.complete:
+            result = mark_complete(args.manifest, args.delivery_receipt)
+        else:
+            if not args.release_report:
+                parser.error("--release-report is required unless --complete is used.")
+            result = finalize(args.manifest, args.release_report, args.delivery_receipt, args.mode, args.output)
+        print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0
     except (FinalManifestError, VideoContractError, OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"FINAL MANIFEST BLOCKED: {exc}")
