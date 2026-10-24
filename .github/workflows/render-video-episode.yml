@@ -93,6 +93,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_TTS_MODEL: ${{ vars.GEMINI_TTS_MODEL }}
           GEMINI_TTS_VOICE: ${{ vars.GEMINI_TTS_VOICE }}
+          GEMINI_TTS_TIMEOUT_SECONDS: "180"
         run: |
           set -euo pipefail
           EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"

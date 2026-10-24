@@ -13,7 +13,9 @@ import hashlib
 import json
 import os
 import sys
+import queue
 import tempfile
+import threading
 import wave
 from datetime import datetime, timezone
 from pathlib import Path
@@ -88,6 +90,35 @@ def _atomic_write(path: Path, data: bytes) -> None:
         raise NarrationError(f"Could not safely write output file: {path}") from exc
 
 
+
+
+def _request_with_timeout(request: Any, timeout_seconds: float) -> Any:
+    """Run one provider call with a daemon guard against indefinite hangs."""
+    result_queue: queue.Queue[tuple[str, Any]] = queue.Queue(maxsize=1)
+
+    def worker() -> None:
+        try:
+            result_queue.put(("ok", request()))
+        except BaseException as exc:  # SDK exception types vary by release.
+            result_queue.put(("error", exc))
+
+    thread = threading.Thread(target=worker, name="gemini-tts-request", daemon=True)
+    thread.start()
+    thread.join(timeout_seconds)
+    if thread.is_alive():
+        raise NarrationError(
+            f"Google TTS request timed out after {timeout_seconds:.1f} seconds. "
+            "No automatic retry was made."
+        )
+    try:
+        status, value = result_queue.get_nowait()
+    except queue.Empty as exc:
+        raise NarrationError("Google TTS request ended without a response.") from exc
+    if status == "error":
+        raise value
+    return value
+
+
 def generate_narration(
     text: str,
     output_path: Path,
@@ -97,6 +128,7 @@ def generate_narration(
     voice: str = DEFAULT_VOICE,
     style: str = DEFAULT_STYLE,
     overwrite: bool = False,
+    request_timeout_seconds: float | None = None,
 ) -> dict[str, Any]:
     """Generate one WAV and a JSON provenance sidecar; never retries a request."""
     output_path = output_path.expanduser().resolve()
@@ -115,9 +147,18 @@ def generate_narration(
             "Missing dependency. Install requirements.txt in the active Python environment."
         ) from exc
 
-    try:
+    if request_timeout_seconds is None:
+        raw_timeout = os.environ.get("GEMINI_TTS_TIMEOUT_SECONDS", "180").strip()
+        try:
+            request_timeout_seconds = float(raw_timeout)
+        except ValueError as exc:
+            raise NarrationError("GEMINI_TTS_TIMEOUT_SECONDS must be numeric.") from exc
+    if request_timeout_seconds <= 0 or request_timeout_seconds > 600:
+        raise NarrationError("TTS request timeout must be greater than 0 and at most 600 seconds.")
+
+    def request() -> Any:
         client = genai.Client(api_key=api_key)
-        interaction = client.interactions.create(
+        return client.interactions.create(
             model=model,
             input=[
                 {
@@ -136,6 +177,11 @@ def generate_narration(
             response_format={"type": "audio"},
             generation_config={"speech_config": [{"voice": voice}]},
         )
+
+    try:
+        interaction = _request_with_timeout(request, request_timeout_seconds)
+    except NarrationError:
+        raise
     except Exception as exc:  # SDK exceptions vary; do not expose request details or secrets.
         raise NarrationError(
             "Google TTS request failed. Check the API key, model access, quota, and connection. "
