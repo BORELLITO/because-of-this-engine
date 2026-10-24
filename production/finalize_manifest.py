@@ -126,7 +126,7 @@ def mark_complete(final_manifest_path: Path, cleanup_receipt_path: Path) -> dict
         "verified_after_cleanup": True,
         "completed_at_utc": datetime.now(timezone.utc).isoformat(),
     }
-    final_manifest_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+    final_manifest_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return {"status": "PRODUCTION_COMPLETE", "path": str(final_manifest_path), "job_id": payload.get("job_id")}
 
 
