@@ -12,8 +12,8 @@ Style: Default,DejaVu Sans,50,&H00FFFFFF,&H00FFFFFF,&H00101624,&H80101624,-1,0,0
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 Dialogue: 0,0:00:00.30,0:00:03.99,Default,,0,0,300,,NASA's Mars Climate Orbiter\Ntraveled for {\c&H0054C8FF&}nine months{\c&H00FFFFFF&} to reach Mars.
 Dialogue: 0,0:00:04.57,0:00:06.58,Default,,0,0,300,,Then, during its arrival,\N{\c&H0054C8FF&}contact disappeared.{\c&H00FFFFFF&}
-Dialogue: 0,0:00:07.16,0:00:09.00,Default,,0,0,300,,The cause sounds almost impossible:\Ntwo parts of the mission
-Dialogue: 0,0:00:09.00,0:00:11.85,Default,,0,0,300,,were using {\c&H0054C8FF&}different units.{\c&H00FFFFFF&}
+Dialogue: 0,0:00:07.16,0:00:08.60,Default,,0,0,300,,The cause sounds almost impossible:
+Dialogue: 0,0:00:08.60,0:00:11.85,Default,,0,0,300,,two parts of the mission\nwere using {\c&H0054C8FF&}different units.{\c&H00FFFFFF&}
 Dialogue: 0,0:00:12.43,0:00:14.77,Default,,0,0,300,,Ground software reported thruster forces\Nin {\c&H0054C8FF&}pound-seconds.{\c&H00FFFFFF&}
 Dialogue: 0,0:00:15.35,0:00:17.70,Default,,0,0,300,,Navigation expected metric units:\N{\c&H0054C8FF&}newton-seconds.{\c&H00FFFFFF&}
 Dialogue: 0,0:00:18.28,0:00:21.00,Default,,0,0,300,,So the force data was interpreted\Nincorrectly, and the spacecraft's
@@ -24,7 +24,7 @@ Dialogue: 0,0:00:34.76,0:00:38.11,Default,,0,0,300,,NASA later concluded it like
 Dialogue: 0,0:00:38.69,0:00:44.05,Default,,0,0,300,,But the unit mismatch was only\N{\c&H0054C8FF&}part of the failure.{\c&H00FFFFFF&}
 Dialogue: 0,0:00:44.63,0:00:47.25,Default,,0,0,300,,Investigators also found communication\Nand systems-engineering problems
 Dialogue: 0,0:00:47.25,0:00:50.32,Default,,0,0,300,,that kept {\c&H0054C8FF&}warning signs{\c&H00FFFFFF&} from being\Nresolved in time.
-Dialogue: 0,0:00:50.90,0:00:53.15,Default,,0,0,300,,A spacecraft crossed {\c&H0054C8FF&}millions of miles,{\c&H00FFFFFF&}\Nand a mismatch between pounds
-Dialogue: 0,0:00:53.15,0:00:55.00,Default,,0,0,300,,and newtons helped decide\Nits fate.
-Dialogue: 0,0:00:55.00,0:00:56.65,Default,,0,0,300,,Because of this, the lesson was bigger than\N“check your units.”
+Dialogue: 0,0:00:50.90,0:00:53.15,Default,,0,0,300,,A spacecraft crossed {\c&H0054C8FF&}millions of miles,{\c&H00FFFFFF&}\nand a mismatch between pounds
+Dialogue: 0,0:00:53.15,0:00:55.00,Default,,0,0,300,,and newtons helped decide\nits fate.
+Dialogue: 0,0:00:55.00,0:00:56.65,Default,,0,0,300,,Because of this, the lesson was bigger than\n“check your units.”
 Dialogue: 0,0:00:56.65,0:00:58.36,Default,,0,0,300,,Every team had to understand how its data\naffected the whole mission.
