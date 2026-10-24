@@ -103,16 +103,24 @@ def _align_chunk(chunk: str, asr_words: list[dict[str, Any]], cursor: int) -> tu
     positions: list[dict[str, Any]] = []
     search_cursor = cursor
     for original, alternatives in units:
-        found: tuple[int, int, float] | None = None
-        for candidate in range(search_cursor, min(len(asr_words), search_cursor + 12)):
+        found: tuple[int, int, float, float] | None = None
+        # Speech recognizers finalize audio in natural pauses. A caption can
+        # therefore begin several recognized tokens after the previous one,
+        # especially when Vosk emits segment results. Search a generous,
+        # bounded lookahead but still keep the timeline strictly monotonic.
+        window_end = min(len(asr_words), search_cursor + 48)
+        for candidate in range(search_cursor, window_end):
             match = _match_at(asr_words, candidate, alternatives)
-            if match:
-                size, score = match
-                found = (candidate, size, score)
-                break
+            if not match:
+                continue
+            size, score = match
+            gap = candidate - search_cursor
+            rank = score - min(gap, 24) * 0.003
+            if found is None or rank > found[3]:
+                found = (candidate, size, score, rank)
         if found is None:
             continue
-        candidate, size, score = found
+        candidate, size, score, _rank = found
         matched += 1
         positions.append({
             "canonical": original,
@@ -132,7 +140,6 @@ def _align_chunk(chunk: str, asr_words: list[dict[str, Any]], cursor: int) -> tu
         )
     return positions[0]["start"], positions[-1]["end"], search_cursor, positions
 
-
 def _recognize(audio_path: Path, model_path: Path) -> list[dict[str, Any]]:
     try:
         from vosk import KaldiRecognizer, Model
@@ -146,29 +153,36 @@ def _recognize(audio_path: Path, model_path: Path) -> list[dict[str, Any]]:
                 raise AlignmentError("Narration must be mono 24 kHz 16-bit PCM WAV.")
             recognizer = KaldiRecognizer(Model(str(model_path)), 24000)
             recognizer.SetWords(True)
+            payloads: list[dict[str, Any]] = []
             while True:
                 frames = audio.readframes(4000)
                 if not frames:
                     break
-                recognizer.AcceptWaveform(frames)
-            payloads = [json.loads(recognizer.FinalResult())]
+                if recognizer.AcceptWaveform(frames):
+                    payloads.append(json.loads(recognizer.Result()))
+            payloads.append(json.loads(recognizer.FinalResult()))
     except (OSError, wave.Error, json.JSONDecodeError) as exc:
         raise AlignmentError(f"Could not recognize narration audio: {audio_path}") from exc
 
     words: list[dict[str, Any]] = []
+    seen: set[tuple[str, float, float]] = set()
     for payload in payloads:
         for item in payload.get("result", []):
             if item.get("word") and isinstance(item.get("start"), (int, float)) and isinstance(item.get("end"), (int, float)):
+                key = (str(item["word"]), float(item["start"]), float(item["end"]))
+                if key in seen:
+                    continue
+                seen.add(key)
                 words.append({
                     "word": str(item["word"]),
                     "start": float(item["start"]),
                     "end": float(item["end"]),
                     "confidence": float(item.get("conf", 0.0)),
                 })
+    words.sort(key=lambda item: (item["start"], item["end"]))
     if not words:
         raise AlignmentError("Speech recognizer returned no word timestamps.")
     return words
-
 
 def _write_ass(path: Path, events: list[dict[str, Any]]) -> None:
     header = """[Script Info]
