@@ -139,6 +139,7 @@ jobs:
           test -d "${MODEL_ROOT}/vosk-model-small-en-us-0.15"
           echo "VOSK_MODEL_DIR=${MODEL_ROOT}/vosk-model-small-en-us-0.15" >> "${GITHUB_ENV}"
 
+      # generate_phrase_captions.py remains the phrase-segmentation helper; timing is now forced from the final WAV.
       - name: Generate forced-aligned captions from final narration
         run: |
           set -euo pipefail
