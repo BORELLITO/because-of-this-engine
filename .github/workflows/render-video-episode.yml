@@ -381,3 +381,8 @@ jobs:
       - name: Mark pipeline complete
         run: python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition COMPLETE --stage complete
 
+      - name: Quarantine failed v2 job
+        if: failure()
+        run: |
+          python production/pipeline_state.py             --manifest "${{ inputs.manifest }}"             --transition QUARANTINED             --stage failure || true
+
