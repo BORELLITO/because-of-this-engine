@@ -73,6 +73,7 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
     if mode == "final" and editorial_status != "PASS":
         raise VideoContractError("Final release requires editorial_qa.status=PASS.")
     asset_hashes = [str(scene["asset"]["sha256"]).lower() for scene in manifest["scenes"]]
+    editorial_pass = editorial_status == "PASS"
     return {
         "status": "VIDEO_RELEASE_VALIDATED",
         "job_id": spec.get("job_id"),
@@ -97,8 +98,8 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
         "caption_timing_claim": caption_report["timing_claim"],
         "asset_reuse_gate": "PASS",
         "provenance_gate": "PASS",
-        "visual_truth_gate": "CONTRACT_PASS",
-        "semantic_match_gate": "PASS",
+        "visual_truth_gate": "PASS" if editorial_pass else "CONTRACT_ONLY",
+        "semantic_match_gate": "PASS" if editorial_pass else "ADVISORY",
         "transition_gate": "PASS",
         "clip_count": len(manifest["scenes"]),
         "clip_quantity_gate": spec["clip_quantity_gate"],
