@@ -10,6 +10,9 @@ import subprocess
 import tempfile
 from pathlib import Path
 from typing import Any
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from production.video_asset_contract import VideoContractError, ffprobe, load_manifest, validate_manifest
 
