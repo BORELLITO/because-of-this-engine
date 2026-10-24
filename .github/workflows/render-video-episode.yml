@@ -91,21 +91,39 @@ jobs:
       - name: Generate narration with Google Gemini TTS
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_TTS_MODEL: ${{ vars.GEMINI_TTS_MODEL }}
-          GEMINI_TTS_VOICE: ${{ vars.GEMINI_TTS_VOICE }}
           GEMINI_TTS_TIMEOUT_SECONDS: "180"
         run: |
           set -euo pipefail
           EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
-          MODEL="${GEMINI_TTS_MODEL:-gemini-3.8-flash-lite-tts}"
-          VOICE="${GEMINI_TTS_VOICE:-Charon}"
+          MODEL="$(python - "${EPISODE_DIR}/manifest.json" <<'PY'
+          import json
+          import sys
+          value = json.loads(open(sys.argv[1], encoding="utf-8").read())
+          print(value["voice"]["model"])
+          PY
+          )"
+          VOICE="$(python - "${EPISODE_DIR}/manifest.json" <<'PY'
+          import json
+          import sys
+          value = json.loads(open(sys.argv[1], encoding="utf-8").read())
+          print(value["voice"]["voice"])
+          PY
+          )"
+          STYLE="$(python - "${EPISODE_DIR}/manifest.json" <<'PY'
+          import json
+          import sys
+          value = json.loads(open(sys.argv[1], encoding="utf-8").read())
+          print(value["voice"]["style"])
+          PY
+          )"
           python narrate.py \
             --input "${EPISODE_DIR}/script.txt" \
             --output "${EPISODE_DIR}/audio/narration.wav" \
             --model "${MODEL}" \
             --voice "${VOICE}" \
-            --style "Low, restrained male suspense narration in clear American English. Natural pauses, clear diction and controlled tension." \
+            --style "${STYLE}" \
             --overwrite
+
 
       - name: Generate preview captions from final narration
         run: python production/generate_phrase_captions.py --manifest "${{ inputs.manifest }}"

@@ -198,6 +198,7 @@ def generate_narration(
         "voice": voice,
         "style": style,
         "format": "WAV / 24 kHz mono PCM as returned by Gemini TTS",
+        "language": "en-US",
         "duration_seconds": duration_seconds,
         "script_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),

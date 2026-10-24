@@ -56,11 +56,28 @@ def _script(m: dict[str, Any], base: Path) -> tuple[str, str]:
 
 def _voice(m: dict[str, Any], base: Path) -> tuple[str, str, float | None]:
     try:
-        duration = audio_duration(_inside(base, m["audio"]["path"], "Narration"))
-    except (KeyError, OSError, ValueError, wave.Error, CaptionQualityError, RuntimeError) as exc:
+        audio_path = _inside(base, m["audio"]["path"], "Narration")
+        duration = audio_duration(audio_path)
+        profile = m.get("voice")
+        if not isinstance(profile, dict):
+            return "BLOCKED", "manifest.voice is required as the canonical voice profile", duration
+        required = ("provider", "model", "voice", "language", "style")
+        missing = [key for key in required if not str(profile.get(key, "")).strip()]
+        if missing:
+            return "BLOCKED", "manifest.voice missing: " + ", ".join(missing), duration
+        metadata_path = audio_path.with_name(audio_path.name + ".json")
+        metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+        if "gemini" not in str(metadata.get("provider", "")).lower():
+            return "BLOCKED", "narration sidecar provider is not Gemini", duration
+        for key in ("model", "voice", "language", "style"):
+            if metadata.get(key) != profile.get(key):
+                return "BLOCKED", f"voice sidecar {key} does not match manifest.voice", duration
+    except (KeyError, OSError, UnicodeError, ValueError, TypeError, wave.Error,
+            CaptionQualityError, json.JSONDecodeError, RuntimeError) as exc:
         return "BLOCKED", str(exc), None
-    if not 60 <= duration <= 75: return "BLOCKED", f"narration duration {duration:.3f}s is outside 60–75s", duration
-    return "PASS", f"measured narration {duration:.3f}s", duration
+    if not 60 <= duration <= 75:
+        return "BLOCKED", f"narration duration {duration:.3f}s is outside 60–75s", duration
+    return "PASS", f"measured narration {duration:.3f}s; voice profile and sidecar agree", duration
 
 def _assets(m: dict[str, Any], base: Path, mode: str) -> tuple[str, str]:
     try: spec = validate_manifest(m, base, mode=mode, check_files=True)
