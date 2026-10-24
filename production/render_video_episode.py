@@ -300,10 +300,11 @@ def mux_audio(
     brand_ass: Path | None,
     logo_path: Path | None,
     brand: dict[str, Any],
-    width: int,
-    height: int,
-    loop: dict[str, Any],
+    width: int = 1080,
+    height: int = 1920,
+    loop: dict[str, Any] | None = None,
 ) -> None:
+    loop = loop or {}
     outro_seconds = loop_outro_seconds({"loop": loop})
     total_duration = narration_duration + outro_seconds
     audio_fade = min(float(loop.get("audio_fade_seconds", 0.35)), max(0.1, outro_seconds))
