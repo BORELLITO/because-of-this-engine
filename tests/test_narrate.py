@@ -60,6 +60,7 @@ class NarrationTests(unittest.TestCase):
                     "A short test script.",
                     output_path,
                     api_key="test-key-never-sent",
+                    transport="sdk",
                 )
 
             self.assertEqual(output_path.read_bytes(), expected_audio)
@@ -71,6 +72,51 @@ class NarrationTests(unittest.TestCase):
             self.assertEqual(calls[0]["generation_config"]["speech_config"][0]["voice"], "Charon")
             self.assertEqual(len(calls), 1)
 
+
+
+    def test_rest_stream_collects_pcm_chunks_and_writes_wav(self) -> None:
+        pcm = b"\x00\x00" * 2400
+        encoded = base64.b64encode(pcm).decode("ascii")
+        body = (
+            "event: step.delta\n"
+            + "data: "
+            + json.dumps({"delta": {"type": "audio", "data": encoded}})
+            + "\n\n"
+            + "event: interaction.completed\n"
+            + 'data: {"id":"stream-request","status":"completed"}\n\n'
+        ).encode("utf-8")
+
+        class FakeResponse:
+            status = 200
+
+            def __init__(self) -> None:
+                self.stream = io.BytesIO(body)
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                return None
+
+            def readline(self):
+                return self.stream.readline()
+
+        with patch.object(narrate.urllib.request, "urlopen", return_value=FakeResponse()):
+            with tempfile.TemporaryDirectory() as temp_dir:
+                output_path = Path(temp_dir) / "stream.wav"
+                metadata = narrate.generate_narration(
+                    "A streaming test script.",
+                    output_path,
+                    api_key="test-key-never-sent",
+                    overwrite=True,
+                    request_timeout_seconds=5,
+                    transport="rest_stream",
+                )
+
+        self.assertEqual(metadata["transport"], "rest_stream")
+        self.assertEqual(metadata["request_id"], "stream-request")
+        self.assertEqual(metadata["duration_seconds"], 0.1)
+        self.assertTrue(output_path.read_bytes().startswith(b"RIFF"))
 
     def test_api_timeout_fails_fast_without_writing_output(self) -> None:
         class SlowInteractions:
@@ -94,6 +140,7 @@ class NarrationTests(unittest.TestCase):
                         output_path,
                         api_key="test-key-never-sent",
                         request_timeout_seconds=0.02,
+                        transport="sdk",
                     )
             self.assertFalse(output_path.exists())
 
