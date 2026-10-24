@@ -32,14 +32,15 @@
   },
   "captions": {
     "path": "captions/narration.ass",
-    "alignment_mode": "hybrid_alignment",
-    "alignment_source": "deterministic phrase timing generated from the final narration duration; word-level alignment is not claimed in preview",
-    "word_level_available": false,
+    "alignment_mode": "forced_alignment",
+    "alignment_source": "Vosk word timestamps extracted from the final narration WAV; caption text remains the canonical script.",
+    "word_level_available": true,
     "max_lines": 2,
     "max_line_chars": 42,
     "target_cps": 20,
     "max_cps": 28,
-    "end_tolerance_seconds": 0.1
+    "end_tolerance_seconds": 0.1,
+    "alignment_sidecar": "captions/narration.alignment.json"
   },
   "music": {
     "path": "audio/suspense-bed.mp3",
@@ -49,7 +50,7 @@
     "license": "Mixkit Stock Music Free License",
     "commercial_use": true,
     "attribution_required": false,
-    "volume": 0.06,
+    "volume": 0.12,
     "author": "Michael Ramir C.",
     "original_filename": "871.mp3",
     "mime_type": "audio/mpeg",
@@ -72,9 +73,9 @@
   "scenes": [
     {
       "scene_id": "S01",
-      "duration": 16,
-      "story_beat": "hook: reveal the nightly recording behind the glass",
-      "visual_intent": "make the impossible figure the first undeniable visual",
+      "duration": 9,
+      "story_beat": "hook: reveal the same figure behind the sealed glass",
+      "visual_intent": "make the impossible recording the first undeniable visual",
       "visual_function": "establishing",
       "visual_match": "EXACT",
       "visual_truth": "DECLARED_FICTION",
@@ -113,8 +114,49 @@
     },
     {
       "scene_id": "S02",
-      "duration": 7.8,
-      "story_beat": "context: show the only person willing to investigate",
+      "duration": 5,
+      "story_beat": "context: anchor the story to the exact nightly time",
+      "visual_intent": "make 3:17 visually memorable before the investigation begins",
+      "visual_function": "time_anchor",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.94,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.18
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-001-s02",
+        "path": "runtime-assets/s06.mp4",
+        "drive_file_id": "1JuLGBtsAOrmC1PVvNnRutSqs3pK2l9P4",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/analog-wall-clock-on-a-black-background-in-a-closed-28886/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "6980f788a2606d4c071da2099f34ce2f9caec5d6f50418454bc1cda288d2def3",
+        "reuse_status": "FRESH",
+        "episode_id": "because-of-this-episode-001",
+        "author": "Mixkit contributor",
+        "acquisition_timestamp": "2026-10-24T18:45:00Z",
+        "original_filename": "28886-720.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 10.041667,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 3152198,
+        "job_ownership": "because-of-this-episode-001",
+        "scene_usage": "S02"
+      }
+    },
+    {
+      "scene_id": "S03",
+      "duration": 6,
+      "story_beat": "context: show the person who decides to investigate",
       "visual_intent": "connect the unseen threat to a human reaction",
       "visual_function": "contextual",
       "visual_match": "NEAR",
@@ -126,7 +168,7 @@
       },
       "transition": {
         "type": "crossfade",
-        "duration": 0.25
+        "duration": 0.18
       },
       "asset": {
         "asset_id": "because-of-this-episode-001-s02",
@@ -153,9 +195,91 @@
       }
     },
     {
-      "scene_id": "S03",
-      "duration": 10,
-      "story_beat": "escalation: prove that the watcher is outside the sealed room",
+      "scene_id": "S04",
+      "duration": 4.5,
+      "story_beat": "escalation: the sealed room waits in darkness",
+      "visual_intent": "turn the location into a silent, threatening space",
+      "visual_function": "atmosphere",
+      "visual_match": "SYMBOLIC",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.72,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.18
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-001-s04",
+        "path": "runtime-assets/s07.mp4",
+        "drive_file_id": "15jUQ5IboTHLVM9PHFKKtqCOBCzPZJI_-",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/candle-lighting-in-the-dark-3458/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "dd39518761ec11386f260db36378a8a10655284a7ce65bfd8cf3b5fa8b248429",
+        "reuse_status": "FRESH",
+        "episode_id": "because-of-this-episode-001",
+        "author": "Mixkit contributor",
+        "acquisition_timestamp": "2026-10-24T18:45:00Z",
+        "original_filename": "3458-720.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 12.958333,
+        "width": 720,
+        "height": 1280,
+        "filesize_bytes": 4494312,
+        "job_ownership": "because-of-this-episode-001",
+        "scene_usage": "S04"
+      }
+    },
+    {
+      "scene_id": "S05",
+      "duration": 6,
+      "story_beat": "escalation: the camera keeps recording while the guard waits",
+      "visual_intent": "show the lonely act of watching and waiting",
+      "visual_function": "evidence",
+      "visual_match": "NEAR",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.8,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.18
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-001-s05",
+        "path": "runtime-assets/s10.mp4",
+        "drive_file_id": "121gu9gycStwWm10vM6YquZGn6Q0WeSRx",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/working-on-a-laptop-at-night-17450/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "72d37d7a637874715b0429a4d90e38e15b417373e5e100913e3c420bfeb71250",
+        "reuse_status": "FRESH",
+        "episode_id": "because-of-this-episode-001",
+        "author": "Mixkit contributor",
+        "acquisition_timestamp": "2026-10-24T18:45:00Z",
+        "original_filename": "17450-720.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 40,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 15078039,
+        "job_ownership": "because-of-this-episode-001",
+        "scene_usage": "S05"
+      }
+    },
+    {
+      "scene_id": "S06",
+      "duration": 6,
+      "story_beat": "reveal: prove the watcher is outside the sealed room",
       "visual_intent": "turn the glass into a boundary that has already failed",
       "visual_function": "reveal",
       "visual_match": "EXACT",
@@ -167,7 +291,7 @@
       },
       "transition": {
         "type": "crossfade",
-        "duration": 0.25
+        "duration": 0.18
       },
       "asset": {
         "asset_id": "because-of-this-episode-001-s03",
@@ -194,21 +318,62 @@
       }
     },
     {
-      "scene_id": "S04",
-      "duration": 18,
-      "story_beat": "turn: the figure moves closer when the lights return",
-      "visual_intent": "show the point of no return without inventing a literal hallway",
-      "visual_function": "tension",
-      "visual_match": "NEAR",
+      "scene_id": "S07",
+      "duration": 4.5,
+      "story_beat": "turn: the lights go out and return",
+      "visual_intent": "make the electrical flicker the visual point of no return",
+      "visual_function": "turn",
+      "visual_match": "EXACT",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.78,
+      "match_score": 0.9,
       "focus": {
         "x": 0.5,
         "y": 0.5
       },
       "transition": {
         "type": "crossfade",
-        "duration": 0.25
+        "duration": 0.18
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-001-s07",
+        "path": "runtime-assets/s08.mp4",
+        "drive_file_id": "1AUPpHC6Y2YkKxFdBTDf_zoyp2H_mEReq",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/a-wall-lamp-flashing-in-the-dark-17430/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "110972473fbf64ac627b6312950f706ff917799d59ba7f6a6db10abe49427ab5",
+        "reuse_status": "FRESH",
+        "episode_id": "because-of-this-episode-001",
+        "author": "Mixkit contributor",
+        "acquisition_timestamp": "2026-10-24T18:45:00Z",
+        "original_filename": "17430-720.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 10.08,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 3822593,
+        "job_ownership": "because-of-this-episode-001",
+        "scene_usage": "S07"
+      }
+    },
+    {
+      "scene_id": "S08",
+      "duration": 6,
+      "story_beat": "turn: the figure is suddenly closer than before",
+      "visual_intent": "show the threat crossing distance without explanation",
+      "visual_function": "tension",
+      "visual_match": "NEAR",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.8,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.18
       },
       "asset": {
         "asset_id": "because-of-this-episode-001-s04",
@@ -235,11 +400,134 @@
       }
     },
     {
-      "scene_id": "S05",
-      "duration": 16.2,
-      "story_beat": "payoff: the camera becomes the thing still watching",
-      "visual_intent": "resolve the story with smoke and an impossible final implication",
+      "scene_id": "S09",
+      "duration": 5.5,
+      "story_beat": "escalation: the hallway is no longer empty",
+      "visual_intent": "make the impossible presence feel physically near",
+      "visual_function": "tension",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.9,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.18
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-001-s09",
+        "path": "runtime-assets/s11.mp4",
+        "drive_file_id": "1bCCZMVe_N6mBpfHoaNwcQAIRe2NCBaNh",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/ghost-in-the-hall-1986/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "9bb62bebbb422a8fec08528bc7d13bb6a2c71199e7c537cf7a6464c798c420c8",
+        "reuse_status": "FRESH",
+        "episode_id": "because-of-this-episode-001",
+        "author": "Mixkit contributor",
+        "acquisition_timestamp": "2026-10-24T18:45:00Z",
+        "original_filename": "1986-720.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 18.351667,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 5181790,
+        "job_ownership": "because-of-this-episode-001",
+        "scene_usage": "S09"
+      }
+    },
+    {
+      "scene_id": "S10",
+      "duration": 5,
+      "story_beat": "payoff setup: the guard reacts before the final detail",
+      "visual_intent": "give the human reaction room to land",
+      "visual_function": "reaction",
+      "visual_match": "NEAR",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.78,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.18
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-001-s10",
+        "path": "runtime-assets/s12.mp4",
+        "drive_file_id": "1N5hiys0el68aiMhqcXZtuBx8WtB_w1Qk",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/woman-in-shock-holds-her-head-in-dark-room-100578/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "131396e833a757f8d6f27de6ad5ca37efac503767b68f520a886e44624edc7ea",
+        "reuse_status": "FRESH",
+        "episode_id": "because-of-this-episode-001",
+        "author": "Mixkit contributor",
+        "acquisition_timestamp": "2026-10-24T18:45:00Z",
+        "original_filename": "100578-video-720.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 7.632625,
+        "width": 720,
+        "height": 1280,
+        "filesize_bytes": 2970463,
+        "job_ownership": "because-of-this-episode-001",
+        "scene_usage": "S10"
+      }
+    },
+    {
+      "scene_id": "S11",
+      "duration": 5,
+      "story_beat": "payoff: time advances one minute to the final recording",
+      "visual_intent": "use falling time to tighten the last reveal",
       "visual_function": "payoff",
+      "visual_match": "SYMBOLIC",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.7,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.18
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-001-s11",
+        "path": "runtime-assets/s09.mp4",
+        "drive_file_id": "1BIpnLnWGV8FJNk756ZdiYQKaw0iXbbS2",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/sand-falling-from-an-hourglass-on-a-black-background-28901/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "c0634cf35616c07a3d63d5ce74200311dfc3c6469837f362c9702067f3c094c7",
+        "reuse_status": "FRESH",
+        "episode_id": "because-of-this-episode-001",
+        "author": "Mixkit contributor",
+        "acquisition_timestamp": "2026-10-24T18:45:00Z",
+        "original_filename": "28901-720.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 10.666667,
+        "width": 720,
+        "height": 1280,
+        "filesize_bytes": 3362228,
+        "job_ownership": "because-of-this-episode-001",
+        "scene_usage": "S11"
+      }
+    },
+    {
+      "scene_id": "S12",
+      "duration": 6.5,
+      "story_beat": "resolution: the camera still turns on every night",
+      "visual_intent": "end on the unresolved image that keeps the story alive",
+      "visual_function": "finale",
       "visual_match": "SYMBOLIC",
       "visual_truth": "DECLARED_FICTION",
       "match_score": 0.72,
@@ -249,7 +537,7 @@
       },
       "transition": {
         "type": "dip_to_black",
-        "duration": 0.3
+        "duration": 0.24
       },
       "asset": {
         "asset_id": "because-of-this-episode-001-s05",
@@ -297,7 +585,7 @@
     "status": "PENDING",
     "reviewer": "",
     "reviewed_at": "",
-    "notes": "Preview test only. Human approval is required before any final release."
+    "notes": "Automated rebuild: forced caption alignment and 12 unique clips. Human approval remains required before final publication."
   },
   "editing": {
     "clip_quantity": {
@@ -308,8 +596,8 @@
       "max_clips": 18,
       "min_scene_seconds": 2,
       "max_scene_seconds": 20,
-      "enforce": false,
-      "reason": "Approved pilot baseline; new episodes must use the enforced v2 quantity target."
+      "enforce": true,
+      "reason": "Operational v2 lock: every episode must use 10-18 unique clips; target 12-16, never repeated."
     }
   }
 }
