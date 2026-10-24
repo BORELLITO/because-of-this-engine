@@ -139,6 +139,91 @@ def audio_duration(path: Path) -> float:
         raise CaptionQualityError(f"Narration could not be read: {path}") from exc
 
 
+
+
+_TRANSFORM_RE = re.compile(r"\\\\t\\((\\d+),(\\d+),\\\\1c(&H[0-9A-Fa-f]{8}&)\\)")
+
+
+def _ass_color(value: str) -> str:
+    raw = str(value or "").lstrip("#")
+    if len(raw) != 6 or any(char not in "0123456789abcdefABCDEF" for char in raw):
+        raise CaptionQualityError("Active-word caption color must be a valid six-digit hex color.")
+    red, green, blue = raw[0:2], raw[2:4], raw[4:6]
+    return f"&H00{blue}{green}{red}&"
+
+
+def _relative_luminance(value: str) -> float:
+    raw = str(value).lstrip("#")
+    channels = [int(raw[index:index + 2], 16) / 255.0 for index in (0, 2, 4)]
+    linear = [
+        channel / 12.92 if channel <= 0.04045 else ((channel + 0.055) / 1.055) ** 2.4
+        for channel in channels
+    ]
+    return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2]
+
+
+def _validate_word_highlight(
+    events: list[dict[str, Any]],
+    sidecar: dict[str, Any],
+    captions: dict[str, Any],
+) -> dict[str, Any]:
+    if captions.get("word_highlight_enabled") is not True:
+        return {"enabled": False}
+    if captions.get("word_highlight_mode") != "timestamp_color_transform":
+        raise CaptionQualityError(
+            "Word highlight must use timestamp_color_transform; guessed or frame-based highlighting is forbidden."
+        )
+    active_color = str(captions.get("active_word_color", "")).strip()
+    if not active_color:
+        raise CaptionQualityError("Word highlight requires active_word_color.")
+    _ass_color(active_color)
+    contrast = (max(_relative_luminance(active_color), 0.0) + 0.05) / 0.05
+    if contrast < 4.5:
+        raise CaptionQualityError(
+            f"Active-word color {active_color} is not sufficiently legible against the black outline."
+        )
+    chunks = sidecar.get("captions")
+    if not isinstance(chunks, list) or len(chunks) != len(events):
+        raise CaptionQualityError("Word highlight sidecar chunks do not match caption events.")
+    active_ass = _ass_color(active_color)
+    reset_ass = "&H00FFFFFF&"
+    max_error_ms = int(captions.get("word_highlight_tolerance_ms", 35))
+    if max_error_ms < 1 or max_error_ms > 100:
+        raise CaptionQualityError("word_highlight_tolerance_ms must be between 1 and 100 ms.")
+    total_words = 0
+    for index, (event, chunk) in enumerate(zip(events, chunks), start=1):
+        words = chunk.get("words") if isinstance(chunk, dict) else None
+        if not isinstance(words, list) or not words:
+            raise CaptionQualityError(f"Caption C{index:03d} has no word-level highlight timestamps.")
+        transforms = _TRANSFORM_RE.findall(event["text"])
+        if len(transforms) != len(words) * 2:
+            raise CaptionQualityError(
+                f"Caption C{index:03d} has {len(transforms)} color transforms for {len(words)} words; "
+                "exactly two transforms per word are required."
+            )
+        for word_index, word in enumerate(words):
+            active = transforms[word_index * 2]
+            reset = transforms[word_index * 2 + 1]
+            expected_start = round((float(word["start"]) - event["start"]) * 1000)
+            expected_end = round((float(word["end"]) - event["start"]) * 1000)
+            if abs(int(active[0]) - expected_start) > max_error_ms or abs(int(active[1]) - expected_end) > max_error_ms:
+                raise CaptionQualityError(
+                    f"Caption C{index:03d} word {word_index + 1} is not synchronized to the alignment sidecar."
+                )
+            if active[2].upper() != active_ass.upper() or reset[2].upper() != reset_ass.upper():
+                raise CaptionQualityError(
+                    f"Caption C{index:03d} word {word_index + 1} has an invalid active/reset color pair."
+                )
+        total_words += len(words)
+    return {
+        "enabled": True,
+        "mode": "timestamp_color_transform",
+        "active_word_color": active_color,
+        "contrast_against_black_outline": round(contrast, 2),
+        "word_count": total_words,
+        "tolerance_ms": max_error_ms,
+    }
+
 def quality_report(manifest_path: Path, require_word_level: bool = False) -> dict[str, Any]:
     manifest_path = manifest_path.resolve()
     base = manifest_path.parent
@@ -155,6 +240,7 @@ def quality_report(manifest_path: Path, require_word_level: bool = False) -> dic
     alignment_mode = captions.get("alignment_mode")
     alignment_source = str(captions.get("alignment_source", "")).strip()
     word_level = captions.get("word_level_available") is True
+    sidecar: dict[str, Any] | None = None
     if alignment_mode not in {"forced_alignment", "hybrid_alignment", "phrase_level_manual_reviewed"}:
         raise CaptionQualityError("Manifest declares an unsupported caption alignment_mode.")
     if not alignment_source:
@@ -181,6 +267,12 @@ def quality_report(manifest_path: Path, require_word_level: bool = False) -> dic
         raise CaptionQualityError(
             "Final release requires real word-level alignment; current captions are explicitly phrase-level."
         )
+
+    word_highlight = {"enabled": False}
+    if captions.get("word_highlight_enabled") is True:
+        if sidecar is None:
+            raise CaptionQualityError("Word highlight requires a readable forced-alignment sidecar.")
+        word_highlight = _validate_word_highlight(events, sidecar, captions)
 
     script_words = normalize_words(script_path.read_text(encoding="utf-8"))
     caption_words = normalize_words(" ".join(event["text"] for event in events))
@@ -254,6 +346,7 @@ def quality_report(manifest_path: Path, require_word_level: bool = False) -> dic
         "word_level_available": word_level,
         "alignment_source": alignment_source,
         "timing_claim": "word_level_verified" if word_level else "reviewed_phrase_level",
+        "word_highlight": word_highlight,
         "thresholds": {
             "max_lines": max_lines,
             "max_line_chars": max_line_chars,
