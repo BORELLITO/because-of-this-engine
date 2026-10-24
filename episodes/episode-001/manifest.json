@@ -40,7 +40,11 @@
     "target_cps": 20,
     "max_cps": 28,
     "end_tolerance_seconds": 0.1,
-    "alignment_sidecar": "captions/narration.alignment.json"
+    "alignment_sidecar": "captions/narration.alignment.json",
+    "word_highlight_enabled": true,
+    "word_highlight_mode": "timestamp_color_transform",
+    "active_word_color": "#FF7777",
+    "word_highlight_tolerance_ms": 35
   },
   "music": {
     "path": "audio/suspense-bed.mp3",
@@ -127,7 +131,7 @@
       },
       "transition": {
         "type": "crossfade",
-        "duration": 0.18
+        "duration": 0.16
       },
       "asset": {
         "asset_id": "because-of-this-episode-001-s02",
@@ -168,7 +172,7 @@
       },
       "transition": {
         "type": "crossfade",
-        "duration": 0.18
+        "duration": 0.14
       },
       "asset": {
         "asset_id": "because-of-this-episode-001-s03",
@@ -208,7 +212,7 @@
         "y": 0.5
       },
       "transition": {
-        "type": "crossfade",
+        "type": "dip_to_black",
         "duration": 0.18
       },
       "asset": {
@@ -250,7 +254,7 @@
       },
       "transition": {
         "type": "crossfade",
-        "duration": 0.18
+        "duration": 0.16
       },
       "asset": {
         "asset_id": "because-of-this-episode-001-s05",
@@ -290,8 +294,8 @@
         "y": 0.5
       },
       "transition": {
-        "type": "crossfade",
-        "duration": 0.18
+        "type": "hard_cut",
+        "duration": 0.04
       },
       "asset": {
         "asset_id": "because-of-this-episode-001-s06",
@@ -331,8 +335,8 @@
         "y": 0.5
       },
       "transition": {
-        "type": "crossfade",
-        "duration": 0.18
+        "type": "dip_to_black",
+        "duration": 0.14
       },
       "asset": {
         "asset_id": "because-of-this-episode-001-s07",
@@ -373,7 +377,7 @@
       },
       "transition": {
         "type": "crossfade",
-        "duration": 0.18
+        "duration": 0.16
       },
       "asset": {
         "asset_id": "because-of-this-episode-001-s08",
@@ -413,8 +417,8 @@
         "y": 0.5
       },
       "transition": {
-        "type": "crossfade",
-        "duration": 0.18
+        "type": "hard_cut",
+        "duration": 0.04
       },
       "asset": {
         "asset_id": "because-of-this-episode-001-s09",
@@ -455,7 +459,7 @@
       },
       "transition": {
         "type": "crossfade",
-        "duration": 0.18
+        "duration": 0.14
       },
       "asset": {
         "asset_id": "because-of-this-episode-001-s10",
@@ -495,8 +499,8 @@
         "y": 0.5
       },
       "transition": {
-        "type": "crossfade",
-        "duration": 0.18
+        "type": "dip_to_black",
+        "duration": 0.12
       },
       "asset": {
         "asset_id": "because-of-this-episode-001-s11",
@@ -585,7 +589,7 @@
     "status": "PENDING",
     "reviewer": "",
     "reviewed_at": "",
-    "notes": "Automated rebuild: forced caption alignment and 12 unique clips. Human approval remains required before final publication."
+    "notes": "Automated rebuild: strict word-highlight timestamps, legibility contrast gate, cinematic noir grade, branded loop outro and 12 unique clips. Human approval remains required before final publication."
   },
   "editing": {
     "clip_quantity": {
@@ -599,5 +603,23 @@
       "enforce": true,
       "reason": "Operational v2 lock: every episode must use 10-18 unique clips; target 12-16, never repeated."
     }
+  },
+  "loop": {
+    "enabled": true,
+    "title": "BECAUSE OF THIS",
+    "outro_seconds": 0.8,
+    "audio_fade_seconds": 0.35,
+    "restart_safe": true,
+    "reason": "Operational v2 lock: every episode closes with a soft branded signature and restarts cleanly."
+  },
+  "color_grade": {
+    "enabled": true,
+    "preset": "investigative_noir",
+    "brightness": -0.03,
+    "contrast": 1.08,
+    "saturation": 0.9,
+    "gamma": 0.96,
+    "vignette": true,
+    "reason": "Dark suspense grade with preserved action readability and brand-red separation."
   }
 }
