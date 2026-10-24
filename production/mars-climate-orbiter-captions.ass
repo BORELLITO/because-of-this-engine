@@ -22,8 +22,9 @@ Dialogue: 0,0:00:24.55,0:00:29.91,Default,,0,0,300,,When the orbiter reached Mar
 Dialogue: 0,0:00:30.49,0:00:34.18,Default,,0,0,300,,it passed {\c&H0054C8FF&}too close{\c&H00FFFFFF&} to the planet.
 Dialogue: 0,0:00:34.76,0:00:38.11,Default,,0,0,300,,NASA later concluded it likely\N{\c&H0054C8FF&}burned up{\c&H00FFFFFF&} in the Martian atmosphere.
 Dialogue: 0,0:00:38.69,0:00:44.05,Default,,0,0,300,,But the unit mismatch was only\N{\c&H0054C8FF&}part of the failure.{\c&H00FFFFFF&}
-Dialogue: 0,0:00:44.63,0:00:47.25,Default,,0,0,300,,Investigators also found communication\Nand systems-engineering problems
-Dialogue: 0,0:00:47.25,0:00:50.32,Default,,0,0,300,,that kept {\c&H0054C8FF&}warning signs{\c&H00FFFFFF&} from being\Nresolved in time.
+Dialogue: 0,0:00:44.63,0:00:46.40,Default,,0,0,300,,Investigators also found\Ncommunication
+Dialogue: 0,0:00:46.40,0:00:48.00,Default,,0,0,300,,and systems-engineering\Nproblems
+Dialogue: 0,0:00:48.00,0:00:50.55,Default,,0,0,300,,that kept {\c&H0054C8FF&}warning signs{\c&H00FFFFFF&}\Nfrom being resolved in time.
 Dialogue: 0,0:00:50.90,0:00:53.15,Default,,0,0,300,,A spacecraft crossed {\c&H0054C8FF&}millions of miles,{\c&H00FFFFFF&}\nand a mismatch between pounds
 Dialogue: 0,0:00:53.15,0:00:55.00,Default,,0,0,300,,and newtons helped decide\Nits fate.
 Dialogue: 0,0:00:55.00,0:00:56.65,Default,,0,0,300,,Because of this, the lesson was bigger than\N“check your units.”
