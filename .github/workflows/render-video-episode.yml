@@ -75,6 +75,12 @@ jobs:
           )"
           echo "JOB_ID=${JOB_ID}" >> "${GITHUB_ENV}"
 
+      - name: Mark research stage
+        run: python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition RESEARCHED --stage research
+
+      - name: Mark script approval stage
+        run: python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition SCRIPT_APPROVED --stage script
+
       - name: Run engine regression tests
         run: python -m unittest discover -s tests -v
 
@@ -136,6 +142,8 @@ jobs:
             --manifest "${{ inputs.manifest }}" \
             --ffmpeg ffmpeg
 
+      - name: Mark voice stage
+        run: python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition VOICE_READY --stage voice
 
       - name: Install Vosk high-accuracy forced-alignment model
         run: |
@@ -151,6 +159,9 @@ jobs:
           echo "VOSK_MODEL_DIR=${MODEL_ROOT}/vosk-model-en-us-0.22-lgraph" >> "${GITHUB_ENV}"
 
       # generate_phrase_captions.py remains the phrase-segmentation helper; timing is now forced from the final WAV.
+      - name: Mark visual plan stage
+        run: python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition VISUAL_PLAN_READY --stage visual-plan
+
       - name: Generate forced-aligned captions from final narration
         run: |
           set -euo pipefail
