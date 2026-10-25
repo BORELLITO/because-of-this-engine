@@ -1776,17 +1776,17 @@
       },
       {
         "scene_id": "S06",
-        "event": "the figure is now standing at the end of the hallway",
+        "event": "the figure is now walking at the end of the hallway",
         "state_before": "figure_absent_from_glass",
         "state_after": "figure_at_hallway_closer",
         "causal_role": "reveal",
         "emotion": "fear",
-        "visual_motif": "closer hallway silhouette",
+        "visual_motif": "closer hallway silhouette in motion",
         "entities": [
           "figure",
           "hallway"
         ],
-        "narration_excerpt": "It was standing at the end of the hallway, closer than before."
+        "narration_excerpt": "It was walking at the end of the hallway, closer than before."
       },
       {
         "scene_id": "S07",
