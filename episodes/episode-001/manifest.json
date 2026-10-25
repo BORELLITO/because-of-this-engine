@@ -114,7 +114,64 @@
         "height": 720,
         "filesize_bytes": 7696207,
         "job_ownership": "because-of-this-episode-001",
-        "scene_usage": "S01"
+        "scene_usage": "S01",
+        "visual_evidence": {
+          "source_title": "Grim silhouette presses hands and face against glass",
+          "subjects": [
+            "silhouette"
+          ],
+          "actions": [
+            "standing",
+            "pressing"
+          ],
+          "environments": [
+            "interior"
+          ],
+          "objects": [
+            "glass_door"
+          ],
+          "moods": [
+            "eerie"
+          ],
+          "reviewed": true,
+          "basis": "Mixkit source page title and browser visual review",
+          "notes": "Figure is visibly behind a glass surface in a dark interior."
+        }
+      },
+      "narration_excerpt": "At exactly 3:17 every morning, the security camera inside an abandoned hotel recorded the same figure standing behind the glass door.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "subjects": [
+            "silhouette"
+          ],
+          "actions": [
+            "standing"
+          ],
+          "environments": [
+            "interior"
+          ],
+          "objects": [
+            "glass_door"
+          ]
+        },
+        "preferred": {
+          "environments": [
+            "hotel"
+          ],
+          "objects": [
+            "security_camera"
+          ],
+          "moods": [
+            "eerie"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ]
       }
     },
     {
@@ -155,7 +212,46 @@
         "height": 720,
         "filesize_bytes": 3152198,
         "job_ownership": "because-of-this-episode-001",
-        "scene_usage": "S02"
+        "scene_usage": "S02",
+        "visual_evidence": {
+          "source_title": "Analog wall clock on a black background",
+          "objects": [
+            "clock"
+          ],
+          "environments": [
+            "darkness"
+          ],
+          "moods": [
+            "eerie"
+          ],
+          "reviewed": true,
+          "basis": "Mixkit source page title and browser visual review",
+          "notes": "The time anchor is represented directly by a clock."
+        }
+      },
+      "narration_excerpt": "At exactly 3:17 every morning",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "objects": [
+            "clock"
+          ]
+        },
+        "preferred": {
+          "environments": [
+            "darkness",
+            "interior"
+          ],
+          "moods": [
+            "eerie"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ]
       }
     },
     {
@@ -196,7 +292,59 @@
         "height": 720,
         "filesize_bytes": 3377107,
         "job_ownership": "because-of-this-episode-001",
-        "scene_usage": "S03"
+        "scene_usage": "S03",
+        "visual_evidence": {
+          "source_title": "Woman in white looks out startled in dim room",
+          "subjects": [
+            "person"
+          ],
+          "actions": [
+            "standing",
+            "watching"
+          ],
+          "environments": [
+            "interior",
+            "darkness"
+          ],
+          "moods": [
+            "eerie"
+          ],
+          "reviewed": true,
+          "basis": "Mixkit source page title and browser visual review",
+          "notes": "Near match for a human waiting and watching inside the dark building."
+        }
+      },
+      "narration_excerpt": "A night guard finally decided to wait beside it. For twenty minutes, nothing moved.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "subjects": [
+            "security_guard"
+          ],
+          "actions": [
+            "standing"
+          ],
+          "environments": [
+            "interior"
+          ]
+        },
+        "preferred": {
+          "actions": [
+            "watching"
+          ],
+          "environments": [
+            "hotel",
+            "darkness"
+          ],
+          "moods": [
+            "eerie"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach"
+        ]
       }
     },
     {
@@ -237,7 +385,51 @@
         "height": 1280,
         "filesize_bytes": 4494312,
         "job_ownership": "because-of-this-episode-001",
-        "scene_usage": "S04"
+        "scene_usage": "S04",
+        "visual_evidence": {
+          "source_title": "Candle lighting in the dark",
+          "objects": [
+            "light"
+          ],
+          "environments": [
+            "darkness"
+          ],
+          "actions": [
+            "flickering"
+          ],
+          "moods": [
+            "eerie"
+          ],
+          "reviewed": true,
+          "basis": "Mixkit source page title and browser visual review",
+          "notes": "Symbolic lighting beat; no literal hotel claim is made."
+        }
+      },
+      "narration_excerpt": "Then the lights went out.",
+      "visual_semantics": {
+        "role": "symbolic",
+        "required": {
+          "objects": [
+            "light"
+          ],
+          "environments": [
+            "darkness"
+          ]
+        },
+        "preferred": {
+          "actions": [
+            "flickering"
+          ],
+          "moods": [
+            "eerie"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ]
       }
     },
     {
@@ -278,7 +470,60 @@
         "height": 720,
         "filesize_bytes": 15078039,
         "job_ownership": "because-of-this-episode-001",
-        "scene_usage": "S05"
+        "scene_usage": "S05",
+        "visual_evidence": {
+          "source_title": "Working on a laptop at night",
+          "subjects": [
+            "person"
+          ],
+          "actions": [
+            "watching"
+          ],
+          "environments": [
+            "interior",
+            "darkness"
+          ],
+          "objects": [
+            "screen"
+          ],
+          "moods": [
+            "eerie"
+          ],
+          "reviewed": true,
+          "basis": "Mixkit source page title and browser visual review",
+          "notes": "Symbolic monitoring image; it is not presented as the literal figure."
+        }
+      },
+      "narration_excerpt": "When they came back, the figure was no longer behind the glass.",
+      "visual_semantics": {
+        "role": "symbolic",
+        "required": {
+          "subjects": [
+            "person"
+          ],
+          "actions": [
+            "watching"
+          ],
+          "environments": [
+            "interior"
+          ],
+          "objects": [
+            "screen"
+          ]
+        },
+        "preferred": {
+          "objects": [
+            "security_camera"
+          ],
+          "moods": [
+            "eerie"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach"
+        ]
       }
     },
     {
@@ -319,7 +564,57 @@
         "height": 720,
         "filesize_bytes": 4848860,
         "job_ownership": "because-of-this-episode-001",
-        "scene_usage": "S06"
+        "scene_usage": "S06",
+        "visual_evidence": {
+          "source_title": "Silhouette lurks at glass door under eerie moonlight",
+          "subjects": [
+            "silhouette"
+          ],
+          "actions": [
+            "standing"
+          ],
+          "environments": [
+            "interior"
+          ],
+          "objects": [
+            "glass_door"
+          ],
+          "moods": [
+            "eerie"
+          ],
+          "reviewed": true,
+          "basis": "Mixkit source page title and browser visual review",
+          "notes": "Near match for the figure crossing the boundary; hallway is a declared preferred, not claimed exact, element."
+        }
+      },
+      "narration_excerpt": "It was standing at the end of the hallway, closer than before.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "subjects": [
+            "silhouette"
+          ],
+          "actions": [
+            "standing"
+          ],
+          "objects": [
+            "glass_door"
+          ]
+        },
+        "preferred": {
+          "environments": [
+            "hallway"
+          ],
+          "moods": [
+            "eerie"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ]
       }
     },
     {
@@ -360,7 +655,54 @@
         "height": 720,
         "filesize_bytes": 3822593,
         "job_ownership": "because-of-this-episode-001",
-        "scene_usage": "S07"
+        "scene_usage": "S07",
+        "visual_evidence": {
+          "source_title": "A wall lamp flashing in the dark",
+          "objects": [
+            "light"
+          ],
+          "environments": [
+            "darkness"
+          ],
+          "actions": [
+            "flickering"
+          ],
+          "moods": [
+            "eerie"
+          ],
+          "reviewed": true,
+          "basis": "Mixkit source page title and browser visual review",
+          "notes": "This is intentionally insufficient for the new gate and must be recollected."
+        }
+      },
+      "narration_excerpt": "The guard ran outside and called the police.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "subjects": [
+            "security_guard"
+          ],
+          "actions": [
+            "running"
+          ],
+          "environments": [
+            "exterior"
+          ]
+        },
+        "preferred": {
+          "objects": [
+            "police"
+          ],
+          "moods": [
+            "urgency"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ]
       }
     },
     {
@@ -401,7 +743,50 @@
         "height": 720,
         "filesize_bytes": 9173863,
         "job_ownership": "because-of-this-episode-001",
-        "scene_usage": "S08"
+        "scene_usage": "S08",
+        "visual_evidence": {
+          "source_title": "Ghost in the hall",
+          "subjects": [
+            "silhouette"
+          ],
+          "environments": [
+            "hallway",
+            "interior"
+          ],
+          "moods": [
+            "eerie"
+          ],
+          "reviewed": true,
+          "basis": "Mixkit source page title and browser visual review",
+          "notes": "Represents the impossible presence in the building; missing evidence is preserved as preferred uncertainty."
+        }
+      },
+      "narration_excerpt": "They found no footprints, no broken lock, and no person inside the building.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "subjects": [
+            "silhouette"
+          ],
+          "environments": [
+            "hallway"
+          ]
+        },
+        "preferred": {
+          "objects": [
+            "footprints",
+            "lock"
+          ],
+          "moods": [
+            "eerie"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ]
       }
     },
     {
@@ -442,7 +827,49 @@
         "height": 720,
         "filesize_bytes": 5181790,
         "job_ownership": "because-of-this-episode-001",
-        "scene_usage": "S09"
+        "scene_usage": "S09",
+        "visual_evidence": {
+          "source_title": "Ghost in the hall",
+          "subjects": [
+            "silhouette"
+          ],
+          "environments": [
+            "hallway",
+            "interior"
+          ],
+          "moods": [
+            "eerie"
+          ],
+          "reviewed": true,
+          "basis": "Mixkit source page and browser visual review",
+          "notes": "This is intentionally insufficient: a ghost hallway cannot stand in for camera evidence."
+        }
+      },
+      "narration_excerpt": "But the camera had captured one final detail.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "objects": [
+            "security_camera"
+          ],
+          "actions": [
+            "recording"
+          ]
+        },
+        "preferred": {
+          "objects": [
+            "screen"
+          ],
+          "moods": [
+            "eerie"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ]
       }
     },
     {
@@ -483,7 +910,55 @@
         "height": 1280,
         "filesize_bytes": 2970463,
         "job_ownership": "because-of-this-episode-001",
-        "scene_usage": "S10"
+        "scene_usage": "S10",
+        "visual_evidence": {
+          "source_title": "Woman in shock holds her head in a dark room",
+          "subjects": [
+            "person"
+          ],
+          "actions": [
+            "standing"
+          ],
+          "environments": [
+            "interior",
+            "darkness"
+          ],
+          "moods": [
+            "eerie"
+          ],
+          "reviewed": true,
+          "basis": "Mixkit source page and browser visual review",
+          "notes": "This is intentionally insufficient: shock is not the narrated pointing action."
+        }
+      },
+      "narration_excerpt": "At 3:18, the figure lifted one hand and pointed directly at the camera.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "subjects": [
+            "silhouette"
+          ],
+          "actions": [
+            "pointing"
+          ],
+          "objects": [
+            "security_camera"
+          ]
+        },
+        "preferred": {
+          "objects": [
+            "clock"
+          ],
+          "moods": [
+            "eerie"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ]
       }
     },
     {
@@ -524,7 +999,51 @@
         "height": 1280,
         "filesize_bytes": 3362228,
         "job_ownership": "because-of-this-episode-001",
-        "scene_usage": "S11"
+        "scene_usage": "S11",
+        "visual_evidence": {
+          "source_title": "Sand falling from an hourglass on a black background",
+          "objects": [
+            "hourglass"
+          ],
+          "actions": [
+            "standing"
+          ],
+          "environments": [
+            "darkness"
+          ],
+          "moods": [
+            "eerie"
+          ],
+          "reviewed": true,
+          "basis": "Mixkit source page title and browser visual review",
+          "notes": "Symbolic passage of time; it does not claim to show the hotel demolition."
+        }
+      },
+      "narration_excerpt": "The hotel was demolished the next week. The recording was deleted.",
+      "visual_semantics": {
+        "role": "symbolic",
+        "required": {
+          "objects": [
+            "hourglass"
+          ]
+        },
+        "preferred": {
+          "actions": [
+            "demolition"
+          ],
+          "environments": [
+            "darkness"
+          ],
+          "moods": [
+            "eerie"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ]
       }
     },
     {
@@ -541,8 +1060,8 @@
         "y": 0.5
       },
       "transition": {
-        "type": "dip_to_black",
-        "duration": 0.24
+        "type": "crossfade",
+        "duration": 0.14
       },
       "asset": {
         "asset_id": "because-of-this-episode-001-s12",
@@ -565,7 +1084,51 @@
         "height": 720,
         "filesize_bytes": 7356543,
         "job_ownership": "because-of-this-episode-001",
-        "scene_usage": "S12"
+        "scene_usage": "S12",
+        "visual_evidence": {
+          "source_title": "Smoke slowly flows and floats on a dark environment",
+          "objects": [
+            "smoke"
+          ],
+          "environments": [
+            "darkness"
+          ],
+          "moods": [
+            "eerie"
+          ],
+          "reviewed": true,
+          "basis": "Mixkit source page and browser visual review",
+          "notes": "This is intentionally insufficient: atmosphere cannot replace the recurring camera image."
+        }
+      },
+      "narration_excerpt": "But every night at 3:17, the same camera still turns on.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "objects": [
+            "security_camera"
+          ],
+          "actions": [
+            "recording"
+          ]
+        },
+        "preferred": {
+          "objects": [
+            "clock"
+          ],
+          "environments": [
+            "darkness"
+          ],
+          "moods": [
+            "eerie"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ]
       }
     }
   ],
@@ -622,5 +1185,26 @@
     "gamma": 0.96,
     "vignette": true,
     "reason": "Dark suspense grade with preserved action readability and brand-red separation."
+  },
+  "visual_story_contract": {
+    "version": "2.1",
+    "narration_is_master_context": true,
+    "required_scene_fields": [
+      "narration_excerpt",
+      "visual_semantics",
+      "asset.visual_evidence"
+    ],
+    "match_dimensions": [
+      "subjects",
+      "actions",
+      "environments",
+      "objects",
+      "moods",
+      "composition"
+    ],
+    "forbidden_concepts_block": true,
+    "keyword_only_matching": false,
+    "human_visual_review_required": true,
+    "policy_note": "A near or symbolic fallback must be explicit; it may not silently replace a literal story beat."
   }
 }
