@@ -1,4 +1,4 @@
-# Because of This Engine v2.0
+# Because of This Engine v2.0 — Visual Contract 2.2
 
 The production path is **video-only**. Narrative scenes cannot contain still
 images. The only supported flow is:
@@ -52,7 +52,11 @@ promoted to an exact match. Keyword-only matching is disabled.
 The visual story QA gate runs before narration/rendering and emits one result
 per scene with coverage, missing anchors and forbidden hits. This makes a
 mismatched clip a pipeline error instead of a subjective problem discovered
-only after watching the final video.
+only after watching the final video. It reports every blocked scene in one pass.
+Explicit negations are handled as context: "no person" becomes an empty or
+unoccupied search intent, while the forbidden concepts remain hard blockers.
+Editorial review notes are never used as visual evidence, preventing a note
+such as "not a guard" from creating a false match.
 
 ## Timeline and edit
 
@@ -61,7 +65,10 @@ narration while respecting each source video's usable duration, a 2–20-second
 visual-beat range and transition overlap. Each scene is trimmed from a real
 video stream, stripped of source audio, scaled/cropped to 9:16 and joined with
 deterministic transitions. Hard cuts remain effectively instantaneous;
-crossfades and dissolves are used only when the edit calls for continuity.
+crossfades and dissolves are kept short for continuity, and dip-to-black is
+reserved for deliberate beat changes. The contract blocks consecutive
+dip-to-black transitions and any non-hard-cut transition longer than 0.30
+seconds.
 Preview is 1080×1920 and final is 2160×3840, both at 25 fps.
 
 Captions are generated from the same narration and remain external ASS
