@@ -43,6 +43,12 @@ Every scene is tied to a canonical `narration_excerpt` and a reviewed
 environment, object, mood and composition. Asset evidence is recorded in the
 same dimensions, so a clip is judged against the complete narrated beat.
 
+Every scene must also declare visual_semantics.narrative_anchors.direct_required
+and minimum_direct. These are concrete events or entities that the reviewed
+clip must visibly contain. Symbolic footage may support mood, time or uncertainty,
+but it cannot replace a direct narrated event such as demolition, running,
+pointing or recording. Missing direct anchors block the scene before rendering.
+
 The research queue generates focused query variants from those dimensions and
 keeps rejected candidates visible for audit. A forbidden concept (for example,
 a medical vial in a hotel scene) blocks the candidate. A near, symbolic or
