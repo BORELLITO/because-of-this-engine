@@ -122,7 +122,7 @@ jobs:
           python production/visual_story_qa.py \
             --manifest "${{ inputs.manifest }}" \
             --mode "${{ inputs.mode }}" \
-            --report "$(dirname "${{ inputs.manifest }}")/rendered/visual-story-qa-${{ inputs.mode }}}.json"
+            --report "$(dirname "${{ inputs.manifest }}")/rendered/visual-story-qa-${{ inputs.mode }}.json"
 
       - name: Generate narration with Google Gemini TTS (documented REST)
         env:
