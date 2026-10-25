@@ -29,6 +29,18 @@ def _scene_report(scene: dict, mode: str) -> dict:
         candidate = scene.get("asset")
         if not isinstance(candidate, dict):
             raise ValueError("scene asset is missing")
+        visual_semantics = scene.get("visual_semantics") or {}
+        narrative_anchors = visual_semantics.get("narrative_anchors")
+        direct_required = narrative_anchors.get("direct_required") if isinstance(narrative_anchors, dict) else None
+        if (
+            not isinstance(narrative_anchors, dict)
+            or not isinstance(direct_required, list)
+            or not direct_required
+            or any(not isinstance(item, str) or not item.strip() for item in direct_required)
+        ):
+            raise ValueError(
+                "visual_semantics.narrative_anchors.direct_required is mandatory for every scene"
+            )
         result = visual_match_report(scene, candidate, require_review=True)
         qa.update({
             "semantic_score": result.get("score"),
