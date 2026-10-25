@@ -38,6 +38,46 @@ def _inside(base: Path, value: str, label: str) -> Path:
 def _gate(code: str, name: str, status: str, evidence: str) -> dict[str, str]:
     return {"code": code, "name": name, "status": status, "evidence": evidence}
 
+def _story_intelligence(m: dict[str, Any], base: Path, mode: str) -> tuple[str, str, dict[str, Any]]:
+    visual_path = base / "rendered" / f"visual-story-qa-{mode}.json"
+    timing_path = base / "rendered" / "narration-coverage.json"
+    try:
+        visual = _read(visual_path, "visual story QA")
+        timing = _read(timing_path, "narration coverage")
+        if visual.get("status") != "VISUAL_STORY_QA_PASS":
+            return "BLOCKED", "visual story QA is not PASS", {
+                "visual_story_qa": visual,
+                "narration_coverage": timing,
+            }
+        story = visual.get("story_intelligence") or {}
+        if story.get("status") != "STORY_INTELLIGENCE_PASS":
+            return "BLOCKED", "story intelligence is not PASS", {
+                "visual_story_qa": visual,
+                "narration_coverage": timing,
+            }
+        coverage = timing.get("narration_coverage") or {}
+        if timing.get("status") != "STORY_INTELLIGENCE_PASS":
+            return "BLOCKED", "forced-alignment narration coverage is not PASS", {
+                "visual_story_qa": visual,
+                "narration_coverage": timing,
+            }
+        if coverage.get("timing_status") != "FORCED_ALIGNMENT_SCENE_TIMES_PASS":
+            return "BLOCKED", "scene timing is not forced-alignment verified", {
+                "visual_story_qa": visual,
+                "narration_coverage": timing,
+            }
+        return "PASS", (
+            f"story graph, sequence continuity and {coverage.get('scene_count', '?')} "
+            "forced-aligned scene spans verified"
+        ), {
+            "visual_story_qa": visual,
+            "narration_coverage": timing,
+        }
+    except (OSError, RuntimeError, ValueError, TypeError, json.JSONDecodeError) as exc:
+        return "BLOCKED", str(exc), {}
+
+
+
 def _research(m: dict[str, Any], mode: str) -> tuple[str, str]:
     value = m.get("research")
     if not isinstance(value, dict) or not isinstance(value.get("sources"), list) or not value["sources"]:
@@ -130,6 +170,22 @@ def evaluate(manifest_path: Path, mode: str, phase: str, *, release_report_path:
         "schema 2.0, stable job_id and 25 fps" if config_ok else "schema 2.0, video_id, stable job_id and fps=25 are required"))
     status, evidence = _research(manifest, mode); results.append(_gate("G1", "RESEARCH", status, evidence))
     status, evidence = _script(manifest, base); results.append(_gate("G2", "SCRIPT", status, evidence))
+    status, evidence, story_integrity = _story_intelligence(manifest, base, mode)
+    results.append(_gate("S0", "STORY_INTELLIGENCE", status, evidence))
+    results.append(_gate(
+        "S1",
+        "SEQUENCE_CONTINUITY",
+        "PASS" if status == "PASS" else "BLOCKED",
+        "story graph entity continuity and final motif recall verified"
+        if status == "PASS" else "sequence continuity depends on STORY_INTELLIGENCE",
+    ))
+    results.append(_gate(
+        "S2",
+        "NARRATION_COVERAGE",
+        "PASS" if status == "PASS" else "BLOCKED",
+        "canonical script covered once in scene order with forced-aligned timing"
+        if status == "PASS" else "narration coverage/timing depends on STORY_INTELLIGENCE",
+    ))
     status, evidence, duration = _voice(manifest, base); results.append(_gate("G3", "VOICE", status, evidence))
     release = _read(release_report_path, "release report")
     final_manifest = _read(final_manifest_path, "final manifest")
@@ -195,6 +251,7 @@ def evaluate(manifest_path: Path, mode: str, phase: str, *, release_report_path:
     return {"status": "GATES_BLOCKED" if blocking else ("GATES_PASS" if phase == "final" else "GATES_PHASE_PASS"),
         "phase": phase, "job_id": manifest.get("job_id") or (manifest.get("job") or {}).get("job_id"),
         "video_id": manifest.get("video_id"), "mode": mode, "gates": results,
+        "story_integrity": story_integrity,
         "blocking_gates": [item["code"] for item in blocking],
         "generated_at_utc": datetime.now(timezone.utc).isoformat()}
 
