@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Semantic visual-story contract for Because of This Engine v2.
+"""Auditable visual semantics for Because of This Engine v2.
 
-The engine must select footage for the narrated beat, not for an isolated
-keyword.  This module deliberately uses a small, auditable ontology instead
-of opaque similarity: subject, action, environment, object, mood and
-forbidden concepts are recorded with every approved asset.
+Metadata can discover a candidate, but only explicit reviewed visual evidence
+can approve it for a narrative beat.  The ontology is intentionally small and
+fail-closed so generic words cannot launder an unrelated clip into a match.
 """
 
 from __future__ import annotations
@@ -13,9 +12,9 @@ import re
 from typing import Any
 
 DIMENSIONS = ("subjects", "actions", "environments", "objects", "moods", "composition")
+ALLOWED_ROLES = {"literal", "explanatory", "symbolic", "atmosphere"}
+MOTION_SENSITIVE_ACTIONS = {"running", "pointing", "opening", "recording", "flickering", "demolition"}
 
-# Canonical concepts with controlled aliases.  This is intentionally small and
-# reviewable; unknown terms never become a silent semantic match.
 CONCEPT_ALIASES: dict[str, set[str]] = {
     "person": {"person", "people", "human", "man", "woman", "figure", "guard", "officer"},
     "silhouette": {"silhouette", "shadow", "shadows", "dark figure", "mysterious figure"},
@@ -25,9 +24,9 @@ CONCEPT_ALIASES: dict[str, set[str]] = {
     "hallway": {"hallway", "corridor", "passage", "hall"},
     "glass_door": {"glass door", "glass", "windowed door", "glass wall"},
     "sealed_room": {"sealed room", "sealed", "locked room", "locked door", "locked"},
-    "security_camera": {"security camera", "surveillance camera", "cctv", "camera", "monitor"},
+    "security_camera": {"security camera", "surveillance camera", "cctv", "camera"},
     "clock": {"clock", "analog clock", "wall clock", "time", "3:17", "3:18"},
-    "screen": {"screen", "monitor", "laptop", "display", "recording"},
+    "screen": {"screen", "laptop", "display"},
     "light": {"light", "lights", "lamp", "wall lamp", "illumination"},
     "darkness": {"dark", "darkness", "night", "dim", "black"},
     "police": {"police", "police officer", "officer"},
@@ -37,10 +36,11 @@ CONCEPT_ALIASES: dict[str, set[str]] = {
     "hourglass": {"hourglass", "sand timer", "falling sand"},
     "medical_vial": {"ampoule", "ampule", "vial", "medical vial", "medicine", "syringe"},
     "laboratory": {"laboratory", "lab", "clinic", "hospital", "medical room"},
-    # Sand is intentionally excluded: an hourglass can contain sand without being a beach.\n    "beach": {"beach", "ocean", "sea", "palm tree"},
+    "beach": {"beach", "ocean", "sea", "palm tree"},
     "office": {"office", "corporate office", "desk office"},
     "standing": {"standing", "stand", "wait", "waiting", "still"},
-    "watching": {"watching", "watch", "monitoring", "recording", "observing"},
+    "watching": {"watching", "watch", "monitoring", "observing"},
+    "recording": {"recording", "records", "captured", "surveillance footage"},
     "pressing": {"pressing", "pressed", "hands against glass", "face against glass"},
     "pointing": {"pointing", "point", "points", "gesture", "raises one hand"},
     "opening": {"opening", "open", "opened", "door opens"},
@@ -88,61 +88,108 @@ def aliases(value: Any) -> set[str]:
 
 def text_has_concept(text: str, concept: str) -> bool:
     normalized_text = normalize(text)
-    wanted = aliases(concept)
-    for phrase in wanted:
+    for phrase in aliases(concept):
         if not phrase:
             continue
-        # Match complete words/phrases only.  Removing spaces creates false
-        # positives such as "sand" inside "hands and".
-        if " " in phrase:
-            if re.search(r"(?<![a-z0-9])" + re.escape(phrase) + r"(?![a-z0-9])", normalized_text):
-                return True
-        elif re.search(r"(?<![a-z0-9])" + re.escape(phrase) + r"(?![a-z0-9])", normalized_text):
+        pattern = r"(?<![a-z0-9])" + re.escape(phrase) + r"(?![a-z0-9])"
+        if re.search(pattern, normalized_text):
             return True
     return False
 
 
 def _dimension_values(record: dict[str, Any], dimension: str) -> list[str]:
     evidence = record.get("visual_evidence") or {}
-    if isinstance(evidence, dict) and values(evidence.get(dimension)):
+    if isinstance(evidence, dict):
         return values(evidence.get(dimension))
     return []
 
 
 def evidence_text(record: dict[str, Any]) -> str:
+    """Return discovery/review text, never editorial notes or source URLs."""
     evidence = record.get("visual_evidence") or {}
     parts: list[str] = []
     for key in ("source_title", "source_description", "title", "description", "tags", "category", "mood", "motion", "composition"):
         parts.extend(values(record.get(key)))
     if isinstance(evidence, dict):
-        # Editorial notes describe review decisions; they are never visual evidence.
         for key in ("source_title", "source_description", *DIMENSIONS):
             parts.extend(values(evidence.get(key)))
-    parts.extend(values(record.get("source_page_url")))
     return " ".join(parts)
 
 
-def _matched(required: list[str], available: list[str], text: str) -> list[str]:
+def _available_for_dimension(
+    record: dict[str, Any],
+    dimension: str,
+    *,
+    allow_text_fallback: bool,
+) -> list[str]:
+    explicit = _dimension_values(record, dimension)
+    if explicit:
+        return explicit
+    return [evidence_text(record)] if allow_text_fallback else []
+
+
+def _matched(
+    required: list[str],
+    available: list[str],
+    text: str,
+    *,
+    allow_text_fallback: bool,
+) -> list[str]:
     found: list[str] = []
     available_text = " ".join(available)
     for wanted in required:
         if any(text_has_concept(candidate, wanted) for candidate in available):
             found.append(wanted)
-        elif text_has_concept(available_text, wanted) or text_has_concept(text, wanted):
+        elif allow_text_fallback and text_has_concept(available_text or text, wanted):
             found.append(wanted)
     return found
 
 
-def _available_for_dimension(record: dict[str, Any], dimension: str) -> list[str]:
-    explicit = _dimension_values(record, dimension)
-    if explicit:
-        return explicit
-    # Search metadata only as a fallback.  The approved record should still
-    # carry explicit visual_evidence for a final release.
-    return [evidence_text(record)]
+def _merged_dimensions(*specs: dict[str, Any]) -> dict[str, list[str]]:
+    merged: dict[str, list[str]] = {}
+    for dimension in DIMENSIONS:
+        result: list[str] = []
+        for spec in specs:
+            if not isinstance(spec, dict):
+                continue
+            for item in values(spec.get(dimension)):
+                if item not in result:
+                    result.append(item)
+        if result:
+            merged[dimension] = result
+    return merged
 
 
-def visual_match_report(scene: dict[str, Any], candidate: dict[str, Any], *, require_review: bool = False) -> dict[str, Any]:
+def _pixel_review_issues(scene: dict[str, Any], candidate: dict[str, Any]) -> list[str]:
+    evidence = candidate.get("visual_evidence") or {}
+    if not isinstance(evidence, dict):
+        return ["visual_evidence is missing"]
+    issues: list[str] = []
+    for key in ("reviewer", "reviewed_at", "review_method"):
+        if not str(evidence.get(key, "")).strip():
+            issues.append(f"pixel evidence requires {key}")
+    timestamps = evidence.get("sample_timestamps")
+    if not isinstance(timestamps, list) or len(timestamps) < 3:
+        issues.append("pixel evidence requires at least three sample_timestamps")
+    elif any(isinstance(item, bool) or not isinstance(item, (int, float)) or item < 0 for item in timestamps):
+        issues.append("pixel evidence sample_timestamps must be non-negative numbers")
+    for key in ("observed_subjects", "observed_actions", "observed_environments", "observed_objects"):
+        if not isinstance(evidence.get(key), list):
+            issues.append(f"pixel evidence requires {key}")
+    spec = candidate.get("_visual_semantics_for_review") or scene.get("visual_semantics") or {}
+    required_actions = _merged_dimensions(spec.get("required") or {}, spec.get("critical") or {}).get("actions", [])
+    if set(required_actions) & MOTION_SENSITIVE_ACTIONS:
+        if not evidence.get("action_window") and not evidence.get("usable_window"):
+            issues.append("motion-sensitive beat requires action_window or usable_window")
+    return issues
+
+
+def visual_match_report(
+    scene: dict[str, Any],
+    candidate: dict[str, Any],
+    *,
+    require_review: bool = False,
+) -> dict[str, Any]:
     spec = scene.get("visual_semantics") or {}
     if not isinstance(spec, dict):
         return {
@@ -152,30 +199,44 @@ def visual_match_report(scene: dict[str, Any], candidate: dict[str, Any], *, req
             "missing_contract": ["visual_semantics"],
         }
 
-    required = spec.get("required") or {}
-    preferred = spec.get("preferred") or {}
-    forbidden = values(spec.get("forbidden"))
     role = str(spec.get("role", "literal")).lower()
+    required = spec.get("required") or {}
+    critical = spec.get("critical") or {}
+    preferred = spec.get("preferred") or {}
+    forbidden = values(spec.get("forbidden")) + values(spec.get("must_not_show"))
+    semantic_required = _merged_dimensions(required, critical)
+    has_semantic_contract = bool(semantic_required or _merged_dimensions(preferred))
     text = evidence_text(candidate)
     evidence = candidate.get("visual_evidence") or {}
     reviewed = isinstance(evidence, dict) and evidence.get("reviewed") is True
     basis = str(evidence.get("basis", "")).strip() if isinstance(evidence, dict) else ""
+    allow_text_fallback = not require_review
 
     forbidden_hits = [item for item in forbidden if text_has_concept(text, item)]
     matched: dict[str, list[str]] = {}
     missing: dict[str, list[str]] = {}
+    critical_missing: dict[str, list[str]] = {}
     required_count = 0
     matched_count = 0
     anchor_hits = 0
 
     for dimension in DIMENSIONS:
-        wanted = values(required.get(dimension))
+        wanted = values(semantic_required.get(dimension))
         if not wanted:
             continue
         required_count += len(wanted)
-        found = _matched(wanted, _available_for_dimension(candidate, dimension), text)
+        available = _available_for_dimension(
+            candidate,
+            dimension,
+            allow_text_fallback=allow_text_fallback,
+        )
+        found = _matched(wanted, available, text, allow_text_fallback=allow_text_fallback)
         matched[dimension] = found
         missing[dimension] = [item for item in wanted if item not in found]
+        critical_wanted = values(critical.get(dimension))
+        critical_missing[dimension] = [item for item in critical_wanted if item not in found]
+        if not critical_missing[dimension]:
+            critical_missing.pop(dimension)
         matched_count += len(found)
         if found and dimension in {"subjects", "actions", "environments", "objects"}:
             anchor_hits += 1
@@ -184,8 +245,14 @@ def visual_match_report(scene: dict[str, Any], candidate: dict[str, Any], *, req
     preferred_hits = 0
     for dimension in DIMENSIONS:
         wanted = values(preferred.get(dimension))
-        if wanted:
-            preferred_hits += len(_matched(wanted, _available_for_dimension(candidate, dimension), text))
+        if not wanted:
+            continue
+        available = _available_for_dimension(
+            candidate,
+            dimension,
+            allow_text_fallback=allow_text_fallback,
+        )
+        preferred_hits += len(_matched(wanted, available, text, allow_text_fallback=allow_text_fallback))
 
     coverage = matched_count / required_count if required_count else 0.0
     preferred_coverage = preferred_hits / preferred_count if preferred_count else 0.0
@@ -198,16 +265,24 @@ def visual_match_report(scene: dict[str, Any], candidate: dict[str, Any], *, req
     needed_coverage = MATCH_COVERAGE.get(claimed_match, MATCH_COVERAGE["NEAR"])
     required_dimensions = sum(
         1 for dimension in ("subjects", "actions", "environments", "objects")
-        if values(required.get(dimension))
+        if values(semantic_required.get(dimension))
     )
     min_anchors = 1 if role in {"symbolic", "atmosphere"} else min(2, required_dimensions)
     reasons: list[str] = []
+    if role not in ALLOWED_ROLES:
+        reasons.append(f"invalid visual semantic role: {role}")
+    if not has_semantic_contract:
+        reasons.append("visual_semantics must declare required, critical or preferred dimensions")
     if forbidden_hits:
         reasons.append("forbidden concepts detected: " + ", ".join(forbidden_hits))
     if require_review and not reviewed:
         reasons.append("visual evidence was not reviewed")
     if require_review and not basis:
         reasons.append("visual evidence basis is missing")
+    if critical_missing:
+        reasons.append("critical visual anchors missing: " + ", ".join(
+            f"{dimension}={','.join(items)}" for dimension, items in critical_missing.items()
+        ))
     if required_count and coverage < needed_coverage:
         reasons.append(f"required visual coverage {coverage:.2f} is below {needed_coverage:.2f} for {claimed_match}")
     if required_count and anchor_hits < min_anchors:
@@ -223,20 +298,35 @@ def visual_match_report(scene: dict[str, Any], candidate: dict[str, Any], *, req
         "preferred_coverage": round(preferred_coverage, 4),
         "matched": matched,
         "missing": missing,
+        "critical_missing": critical_missing,
         "forbidden_hits": forbidden_hits,
         "reviewed": reviewed,
         "evidence_basis": basis,
+        "pixel_evidence": {
+            "status": "PRESENT" if not _pixel_review_issues(scene, {**candidate, "_visual_semantics_for_review": spec}) else "MISSING_OR_INCOMPLETE",
+            "issues": _pixel_review_issues(scene, {**candidate, "_visual_semantics_for_review": spec}),
+        },
         "reason": "; ".join(reasons) if reasons else "subject/action/environment/object fit passed",
     }
 
 
-def require_visual_fit(scene: dict[str, Any], candidate: dict[str, Any], *, mode: str = "preview") -> dict[str, Any]:
+def require_visual_fit(
+    scene: dict[str, Any],
+    candidate: dict[str, Any],
+    *,
+    mode: str = "preview",
+) -> dict[str, Any]:
     evidence = candidate.get("visual_evidence")
     if not isinstance(evidence, dict):
         raise ValueError(f"Scene {scene.get('scene_id', '?')} asset requires visual_evidence.")
     report = visual_match_report(scene, candidate, require_review=True)
     if report["status"] != "PASS":
         raise ValueError(f"Scene {scene.get('scene_id', '?')} visual semantic gate blocked: {report['reason']}")
-    if mode == "final" and evidence.get("reviewed") is not True:
-        raise ValueError(f"Scene {scene.get('scene_id', '?')} requires reviewed visual evidence for final release.")
+    if mode == "final":
+        pixel_issues = _pixel_review_issues(scene, candidate)
+        if pixel_issues:
+            raise ValueError(
+                f"Scene {scene.get('scene_id', '?')} pixel evidence gate blocked: "
+                + "; ".join(pixel_issues)
+            )
     return report
