@@ -54,8 +54,35 @@ def _semantic_terms(scene: dict[str, Any]) -> list[str]:
     return terms
 
 
+def _narrative_search_terms(excerpt: Any) -> tuple[list[str], set[str]]:
+    """Translate explicit negation into positive stock-search intent.
+
+    Search engines often treat "no person" as a request for a person. We
+    therefore remove negated subjects from the positive token stream and add
+    auditable visual qualifiers such as "empty" and "unoccupied". The
+    semantic gate remains authoritative after retrieval.
+    """
+    text = str(excerpt or "").lower()
+    negative_terms: list[str] = []
+    excluded: set[str] = set()
+
+    if re.search(r"\bno\s+(person|people|one|figure)\b", text):
+        negative_terms.extend(["empty", "unoccupied", "without people"])
+        excluded.update({"person", "people", "one", "figure"})
+    if re.search(r"\bno\s+(footprints?|tracks?)\b", text):
+        negative_terms.extend(["clean floor", "empty hallway"])
+        excluded.update({"footprint", "footprints", "tracks"})
+    if re.search(r"\bno\s+broken\s+lock\b", text):
+        negative_terms.extend(["intact lock", "closed door"])
+        excluded.update({"broken", "lock"})
+    if re.search(r"\bno\s+longer\b", text):
+        negative_terms.extend(["empty", "unoccupied"])
+
+    return negative_terms, excluded
+
+
 def query_variants_for_scene(scene: dict[str, Any]) -> list[str]:
-    """Build several focused queries, keeping the narrative context intact."""
+    """Build focused queries while preserving the complete narrative beat."""
     excerpt = scene.get("narration_excerpt", "")
     spec = scene.get("visual_semantics") or {}
     required: list[str] = []
@@ -68,11 +95,20 @@ def query_variants_for_scene(scene: dict[str, Any]) -> list[str]:
         required.extend(_tokens(scene.get("story_beat", "")))
         required.extend(_tokens(scene.get("visual_intent", "")))
 
+    negative_terms, excluded = _narrative_search_terms(excerpt)
     unique: list[str] = []
-    for value in required + _semantic_terms(scene) + _tokens(excerpt):
-        for word in _tokens(value):
-            if word not in unique:
-                unique.append(word)
+
+    def add_terms(items: list[str]) -> None:
+        for value in items:
+            for word in _tokens(value):
+                if word not in excluded and word not in unique:
+                    unique.append(word)
+
+    add_terms(negative_terms)
+    add_terms(required)
+    add_terms(_semantic_terms(scene))
+    add_terms(_tokens(excerpt))
+
     if not unique:
         raise ResearchError(f"Scene {scene.get('scene_id', '?')} lacks narrative visual language.")
 
@@ -81,7 +117,8 @@ def query_variants_for_scene(scene: dict[str, Any]) -> list[str]:
     if len(unique) >= 5:
         variants.append(" ".join(unique[:6]))
     if excerpt:
-        excerpt_query = " ".join(_tokens(excerpt)[:10])
+        excerpt_tokens = [word for word in _tokens(excerpt) if word not in excluded]
+        excerpt_query = " ".join(excerpt_tokens[:10])
         if excerpt_query and excerpt_query not in variants:
             variants.append(excerpt_query)
     return variants[:3]
