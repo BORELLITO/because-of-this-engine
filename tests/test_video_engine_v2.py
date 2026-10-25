@@ -72,11 +72,13 @@ class VideoEngineV2Tests(unittest.TestCase):
         self.assertIn("force_original_aspect_ratio=increase", value)
         self.assertIn("fps=25", value)
         self.assertNotIn("zoompan", value)
+        self.assertIn("setsar=1", value)
 
     def test_transitions_are_narration_timeline_aware(self):
         value = xfade_filter([15, 15, 15], [{"type": "crossfade", "duration": 0.25}] * 2)
         self.assertIn("offset=14.750", value)
         self.assertIn("offset=29.500", value)
+        self.assertIn("setsar=1", value)
 
     def test_brand_overlay_uses_ass_and_not_drawtext(self):
         with tempfile.TemporaryDirectory() as directory:
