@@ -95,7 +95,54 @@
         "height": 1920,
         "filesize_bytes": 1,
         "job_ownership": "episode-001",
-        "scene_usage": "S01"
+        "scene_usage": "S01",
+        "visual_evidence": {
+          "source_title": "Replace with the approved source title",
+          "subjects": [
+            "replace-subject"
+          ],
+          "actions": [
+            "replace-action"
+          ],
+          "environments": [
+            "replace-environment"
+          ],
+          "objects": [
+            "replace-object"
+          ],
+          "moods": [
+            "replace-mood"
+          ],
+          "reviewed": false,
+          "basis": "Replace with source page title plus browser visual review",
+          "notes": "Do not approve until this evidence is checked against the actual clip."
+        }
+      },
+      "narration_excerpt": "Replace with the exact sentence or phrase narrated in this beat.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "subjects": [
+            "replace-subject"
+          ],
+          "actions": [
+            "replace-action"
+          ],
+          "environments": [
+            "replace-environment"
+          ],
+          "objects": [
+            "replace-object"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "replace-mood"
+          ]
+        },
+        "forbidden": [
+          "replace-forbidden-visual"
+        ]
       }
     },
     {
@@ -129,7 +176,54 @@
         "filesize_bytes": 1,
         "job_ownership": "episode-001",
         "scene_usage": "S02",
-        "perceptual_hash": "PUT_64_HEX_PHASH_HERE"
+        "perceptual_hash": "PUT_64_HEX_PHASH_HERE",
+        "visual_evidence": {
+          "source_title": "Replace with the approved source title",
+          "subjects": [
+            "replace-subject"
+          ],
+          "actions": [
+            "replace-action"
+          ],
+          "environments": [
+            "replace-environment"
+          ],
+          "objects": [
+            "replace-object"
+          ],
+          "moods": [
+            "replace-mood"
+          ],
+          "reviewed": false,
+          "basis": "Replace with source page title plus browser visual review",
+          "notes": "Do not approve until this evidence is checked against the actual clip."
+        }
+      },
+      "narration_excerpt": "Replace with the exact sentence or phrase narrated in this beat.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "subjects": [
+            "replace-subject"
+          ],
+          "actions": [
+            "replace-action"
+          ],
+          "environments": [
+            "replace-environment"
+          ],
+          "objects": [
+            "replace-object"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "replace-mood"
+          ]
+        },
+        "forbidden": [
+          "replace-forbidden-visual"
+        ]
       }
     },
     {
@@ -163,7 +257,54 @@
         "filesize_bytes": 1,
         "job_ownership": "episode-001",
         "scene_usage": "S03",
-        "perceptual_hash": "PUT_64_HEX_PHASH_HERE"
+        "perceptual_hash": "PUT_64_HEX_PHASH_HERE",
+        "visual_evidence": {
+          "source_title": "Replace with the approved source title",
+          "subjects": [
+            "replace-subject"
+          ],
+          "actions": [
+            "replace-action"
+          ],
+          "environments": [
+            "replace-environment"
+          ],
+          "objects": [
+            "replace-object"
+          ],
+          "moods": [
+            "replace-mood"
+          ],
+          "reviewed": false,
+          "basis": "Replace with source page title plus browser visual review",
+          "notes": "Do not approve until this evidence is checked against the actual clip."
+        }
+      },
+      "narration_excerpt": "Replace with the exact sentence or phrase narrated in this beat.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "subjects": [
+            "replace-subject"
+          ],
+          "actions": [
+            "replace-action"
+          ],
+          "environments": [
+            "replace-environment"
+          ],
+          "objects": [
+            "replace-object"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "replace-mood"
+          ]
+        },
+        "forbidden": [
+          "replace-forbidden-visual"
+        ]
       }
     },
     {
@@ -201,7 +342,54 @@
         "filesize_bytes": 1,
         "job_ownership": "episode-001",
         "scene_usage": "S04",
-        "perceptual_hash": "PUT_64_HEX_PHASH_HERE"
+        "perceptual_hash": "PUT_64_HEX_PHASH_HERE",
+        "visual_evidence": {
+          "source_title": "Replace with the approved source title",
+          "subjects": [
+            "replace-subject"
+          ],
+          "actions": [
+            "replace-action"
+          ],
+          "environments": [
+            "replace-environment"
+          ],
+          "objects": [
+            "replace-object"
+          ],
+          "moods": [
+            "replace-mood"
+          ],
+          "reviewed": false,
+          "basis": "Replace with source page title plus browser visual review",
+          "notes": "Do not approve until this evidence is checked against the actual clip."
+        }
+      },
+      "narration_excerpt": "Replace with the exact sentence or phrase narrated in this beat.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "subjects": [
+            "replace-subject"
+          ],
+          "actions": [
+            "replace-action"
+          ],
+          "environments": [
+            "replace-environment"
+          ],
+          "objects": [
+            "replace-object"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "replace-mood"
+          ]
+        },
+        "forbidden": [
+          "replace-forbidden-visual"
+        ]
       }
     }
   ],
@@ -226,5 +414,25 @@
     "reviewer": "",
     "reviewed_at": "",
     "notes": "Set PASS only after human review confirms story, visual truth, pacing and originality."
+  },
+  "visual_story_contract": {
+    "version": "2.1",
+    "narration_is_master_context": true,
+    "required_scene_fields": [
+      "narration_excerpt",
+      "visual_semantics",
+      "asset.visual_evidence"
+    ],
+    "match_dimensions": [
+      "subjects",
+      "actions",
+      "environments",
+      "objects",
+      "moods",
+      "composition"
+    ],
+    "forbidden_concepts_block": true,
+    "keyword_only_matching": false,
+    "human_visual_review_required": true
   }
 }
