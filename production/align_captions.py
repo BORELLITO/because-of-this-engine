@@ -353,6 +353,70 @@ def _recognize(
     return words
 
 
+
+def _merge_word_timings(*passes: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Merge real word timestamps from independent acoustic passes.
+
+    A phrase-scoped pass may recover a word that a broad pass missed. Every
+    merged item still comes from Vosk's acoustic result; this function never
+    fabricates a timestamp or interpolates a missing word.
+    """
+    merged: dict[tuple[str, float, float], dict[str, Any]] = {}
+    for word_pass in passes:
+        for item in word_pass:
+            word = str(item.get("word", "")).strip()
+            if not word:
+                continue
+            start = float(item["start"])
+            end = float(item["end"])
+            key = (_normalise(word), round(start, 3), round(end, 3))
+            current = merged.get(key)
+            if current is None or float(item.get("confidence", 0.0)) > float(current.get("confidence", 0.0)):
+                merged[key] = dict(item)
+    return sorted(merged.values(), key=lambda item: (float(item["start"]), float(item["end"])))
+
+
+def _cursor_for_time(asr_words: list[dict[str, Any]], timestamp: float) -> int:
+    for index, item in enumerate(asr_words):
+        if float(item["start"]) >= max(0.0, timestamp - 0.02):
+            return index
+    return len(asr_words)
+
+
+def _recover_with_phrase_vocabulary(
+    chunks: list[str],
+    base_words: list[dict[str, Any]],
+    audio_path: Path,
+    model_path: Path,
+) -> list[dict[str, Any]]:
+    """Retry only failed phrases with a narrowly-scoped Vosk grammar.
+
+    Broad grammars are useful for context but can drop short or acoustically
+    weak content words. A phrase-scoped pass reduces the competing vocabulary
+    and contributes only real Vosk word timestamps. The final full alignment
+    is still mandatory; no estimated timings are accepted.
+    """
+    merged = list(base_words)
+    cursor_time = 0.0
+    for chunk in chunks:
+        cursor = _cursor_for_time(merged, cursor_time)
+        try:
+            _start, end, _next_cursor, _positions = _align_chunk(chunk, merged, cursor)
+        except AlignmentError:
+            phrase_vocabulary = _canonical_vocabulary(chunk)
+            if not phrase_vocabulary:
+                raise
+            targeted_words = _recognize(
+                audio_path,
+                model_path,
+                vocabulary=phrase_vocabulary,
+            )
+            merged = _merge_word_timings(merged, targeted_words)
+            cursor = _cursor_for_time(merged, cursor_time)
+            _start, end, _next_cursor, _positions = _align_chunk(chunk, merged, cursor)
+        cursor_time = float(end)
+    return merged
+
 def _align_chunks(
     chunks: list[str],
     asr_words: list[dict[str, Any]],
