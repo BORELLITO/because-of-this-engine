@@ -21,6 +21,7 @@ from production.editorial_policy import (
     clip_quantity_policy,
     validate_clip_quantity,
 )
+from production.visual_semantics import require_visual_fit
 
 SCHEMA_VERSION = "2.0"
 MIN_STORY_SECONDS = 60.0
@@ -202,6 +203,15 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
     audio_path = resolve_inside(episode_dir, audio.get("path"), "Narration path")
     if check_files and not audio_path.is_file():
         raise VideoContractError(f"Narration file is missing: {audio_path}")
+    script = manifest.get("script")
+    if not isinstance(script, dict):
+        raise VideoContractError("Manifest requires a canonical script object.")
+    script_path = resolve_inside(episode_dir, script.get("path"), "Script path")
+    script_text = ""
+    if check_files:
+        if not script_path.is_file():
+            raise VideoContractError(f"Script file is missing: {script_path}")
+        script_text = re.sub(r"\\s+", " ", script_path.read_text(encoding="utf-8").lower()).strip()
     scenes = manifest.get("scenes")
     if not isinstance(scenes, list) or not scenes:
         raise VideoContractError("Manifest requires at least one video scene.")
@@ -239,8 +249,17 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
                 f"Scene {scene_id} is too long; split the visual beat below "
                 f"{clip_policy['max_scene_seconds']:.2f}s."
             )
-        for key in ("story_beat", "visual_intent", "visual_function", "visual_match", "visual_truth"):
+        for key in ("story_beat", "visual_intent", "visual_function", "visual_match", "visual_truth", "narration_excerpt"):
             _required_text(scene, key, f"Scene {scene_id}")
+        visual_semantics = scene.get("visual_semantics")
+        if not isinstance(visual_semantics, dict):
+            raise VideoContractError(f"Scene {scene_id} requires visual_semantics.")
+        if check_files:
+            excerpt = re.sub(r"\\s+", " ", str(scene["narration_excerpt"]).lower()).strip()
+            if excerpt not in script_text:
+                raise VideoContractError(
+                    f"Scene {scene_id} narration_excerpt is not present in the canonical script."
+                )
         if scene["visual_truth"] not in ALLOWED_TRUTH:
             raise VideoContractError(f"Scene {scene_id} has an invalid visual_truth mode.")
         if scene["visual_truth"] != story["truth_mode"]:
@@ -273,6 +292,10 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
         if transition_duration >= duration:
             raise VideoContractError(f"Scene {scene_id} transition cannot consume the entire scene.")
         asset = validate_asset_record(scene.get("asset"), episode_dir, episode_id, mode=mode, check_file=check_files)
+        try:
+            visual_qa = require_visual_fit(scene, asset, mode=mode)
+        except (ValueError, TypeError) as exc:
+            raise VideoContractError(str(exc)) from exc
         for key, seen, label in (("asset_id", seen_asset_ids, "asset"), ("sha256", seen_hashes, "sha256")):
             value = str(asset[key]).lower()
             if value in seen:
@@ -290,7 +313,26 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
                 raise VideoContractError(f"Narrative animation perceptually repeats in episode {episode_id}: {phash}")
             seen_phashes.add(phash)
         total += float(duration)
-        normalized.append({**scene, "scene_id": scene_id, "duration": float(duration), "asset": asset})
+        normalized.append({
+            **scene,
+            "scene_id": scene_id,
+            "duration": float(duration),
+            "asset": asset,
+            "visual_qa": visual_qa,
+        })
+    for index, scene in enumerate(normalized):
+        transition = scene.get("transition", {})
+        transition_type = str(transition.get("type", "crossfade"))
+        if index > 0:
+            previous_type = str(normalized[index - 1].get("transition", {}).get("type", "crossfade"))
+            if transition_type == "dip_to_black" and previous_type == "dip_to_black":
+                raise VideoContractError(
+                    f"Scenes {normalized[index - 1]['scene_id']} and {scene['scene_id']} cannot use consecutive dip_to_black transitions."
+                )
+        if transition_type != "hard_cut" and float(transition.get("duration", 0.25)) > 0.30:
+            raise VideoContractError(
+                f"Scene {scene['scene_id']} transition is too long for short-form narrative pacing."
+            )
     try:
         quantity_report = validate_clip_quantity(len(normalized), clip_policy)
     except EditorialPolicyError as exc:
