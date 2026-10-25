@@ -290,6 +290,7 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
         raise VideoContractError(str(exc)) from exc
     seen_ids: set[str] = set()
     seen_asset_ids: set[str] = set()
+    seen_paths: set[str] = set()
     seen_hashes: set[str] = set()
     seen_sources: set[str] = set()
     seen_phashes: set[str] = set()
@@ -371,6 +372,12 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
                 f"Scene {scene_id} actual semantic score is below the "
                 f"{scene['visual_match']} threshold ({actual_score:.2f} < {required_score:.2f})."
             )
+        path_key = str(asset["path"]).lower()
+        if path_key in seen_paths:
+            raise VideoContractError(
+                f"Runtime asset path is repeated in episode {episode_id}: {path_key}"
+            )
+        seen_paths.add(path_key)
         for key, seen, label in (("asset_id", seen_asset_ids, "asset"), ("sha256", seen_hashes, "sha256")):
             value = str(asset[key]).lower()
             if value in seen:
