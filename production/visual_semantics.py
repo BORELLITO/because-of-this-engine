@@ -299,7 +299,19 @@ def visual_match_report(
         }
 
     role = str(spec.get("role", "literal")).lower()
-    narrative_alignment = _narrative_anchor_report(scene, candidate)
+    narrative_contract_declared = isinstance(spec.get("narrative_anchors"), dict)
+    narrative_alignment = (
+        _narrative_anchor_report(scene, candidate)
+        if narrative_contract_declared
+        else {
+            "status": "NOT_DECLARED",
+            "direct_required": [],
+            "direct_hits": [],
+            "direct_missing": [],
+            "minimum_direct": 0,
+            "invalid": [],
+        }
+    )
     required = spec.get("required") or {}
     critical = spec.get("critical") or {}
     preferred = spec.get("preferred") or {}
@@ -369,11 +381,15 @@ def visual_match_report(
     )
     min_anchors = 1 if role in {"symbolic", "atmosphere"} else min(2, required_dimensions)
     reasons: list[str] = []
-    if narrative_alignment["invalid"]:
+    if narrative_alignment["status"] == "BLOCKED" and narrative_alignment["invalid"]:
         reasons.append("invalid narrative anchor contract: " + ", ".join(narrative_alignment["invalid"]))
-    if narrative_alignment["direct_missing"] or len(narrative_alignment["direct_hits"]) < narrative_alignment["minimum_direct"]:
+    if narrative_alignment["status"] == "BLOCKED" and (
+        narrative_alignment["direct_missing"]
+        or len(narrative_alignment["direct_hits"]) < narrative_alignment["minimum_direct"]
+    ):
         reasons.append(
-            "direct narrative anchors missing: " + ", ".join(narrative_alignment["direct_missing"] or ["minimum_direct"])
+            "direct narrative anchors missing: "
+            + ", ".join(narrative_alignment["direct_missing"] or ["minimum_direct"])
         )
     if role not in ALLOWED_ROLES:
         reasons.append(f"invalid visual semantic role: {role}")
