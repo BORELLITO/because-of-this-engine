@@ -49,6 +49,15 @@ class NarrativeAnchorGateTests(unittest.TestCase):
         self.assertEqual(report["status"], "BLOCKED")
         self.assertIn("demolition", report["narrative_alignment"]["direct_missing"])
 
+    def test_missing_narrative_anchor_contract_blocks(self) -> None:
+        scene = self._scene()
+        del scene["visual_semantics"]["narrative_anchors"]
+        direct = candidate(action="demolition")
+        direct["visual_evidence"]["objects"] = ["hourglass"]
+        report = visual_match_report(scene, direct, require_review=True)
+        self.assertEqual(report["status"], "BLOCKED")
+        self.assertIn("narrative_anchors is required", report["reason"])
+
     def test_direct_narrative_anchor_passes(self) -> None:
         scene = self._scene()
         direct = candidate(action="demolition")
