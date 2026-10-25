@@ -136,7 +136,9 @@
           "observed_objects": [
             "replace-object"
           ]
-        }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 15
       },
       "narration_excerpt": "Replace with the exact sentence or phrase narrated in this beat.",
       "visual_semantics": {
@@ -242,7 +244,9 @@
           "observed_objects": [
             "replace-object"
           ]
-        }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 15
       },
       "narration_excerpt": "Replace with the exact sentence or phrase narrated in this beat.",
       "visual_semantics": {
@@ -348,7 +352,9 @@
           "observed_objects": [
             "replace-object"
           ]
-        }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 15
       },
       "narration_excerpt": "Replace with the exact sentence or phrase narrated in this beat.",
       "visual_semantics": {
@@ -458,7 +464,9 @@
           "observed_objects": [
             "replace-object"
           ]
-        }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 15
       },
       "narration_excerpt": "Replace with the exact sentence or phrase narrated in this beat.",
       "visual_semantics": {
@@ -607,4 +615,4 @@
     "allow_overlap": false,
     "timing_source": "forced_alignment_sidecar"
   }
-}\n
+}
