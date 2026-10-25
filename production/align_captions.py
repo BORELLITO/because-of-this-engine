@@ -85,6 +85,14 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 # This is an explicit lexical ASR variant only; timing still
                 # comes from the real Vosk word timestamp in the final WAV.
                 "than": [["than"], ["then"]],
+                # Content-word variants address common Vosk substitutions in
+                # this production voice. They may match only a real ASR token;
+                # no timestamp is ever synthesized or estimated.
+                "figure": [["figure"], ["finger"], ["figger"]],
+                "went": [["went"], ["when"]],
+                "pointed": [["pointed"], ["point"], ["pointing"]],
+                "directly": [["directly"], ["direct"]],
+                "camera": [["camera"], ["cameras"]],
                 "it": [["it"], ["ət"]],
             }
             result.append((raw[index], short_word_variants.get(token, [[token]])))
