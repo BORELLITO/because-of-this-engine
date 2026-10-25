@@ -56,4 +56,3 @@ def test_alignment_accepts_explicit_than_then_asr_variant() -> None:
     assert end == 1.7
     assert cursor == 3
     assert [item["canonical"] for item in positions] == ["closer", "than", "before"]
-\n
