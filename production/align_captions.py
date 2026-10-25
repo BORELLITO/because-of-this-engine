@@ -558,9 +558,20 @@ def generate(manifest_path: Path, model_path: Path) -> dict[str, Any]:
             )
             events, sidecar_chunks = _align_chunks(chunks, asr_words)
         except AlignmentError as constrained_error:
-            raise AlignmentError(
-                f"{first_error} Grammar-constrained retry also failed: {constrained_error}"
-            ) from constrained_error
+            try:
+                asr_words = _recover_with_phrase_vocabulary(
+                    chunks,
+                    asr_words,
+                    audio_path,
+                    model_path,
+                )
+                events, sidecar_chunks = _align_chunks(chunks, asr_words)
+            except AlignmentError as phrase_error:
+                raise AlignmentError(
+                    f"{first_error} Grammar-constrained retry also failed: "
+                    f"{constrained_error} Phrase-scoped acoustic retry also failed: "
+                    f"{phrase_error}"
+                ) from phrase_error
     for index in range(1, len(events)):
         boundary = (events[index - 1]["end"] + events[index]["start"]) / 2
         events[index - 1]["end"] = boundary
