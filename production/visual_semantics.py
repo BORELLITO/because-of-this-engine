@@ -17,6 +17,7 @@ MOTION_SENSITIVE_ACTIONS = {"running", "walking", "pointing", "opening", "record
 
 CONCEPT_ALIASES: dict[str, set[str]] = {
     "person": {"person", "people", "human", "man", "woman", "figure", "guard", "officer"},
+    "figure": {"figure", "silhouette", "shadow", "dark figure", "mysterious figure"},
     "silhouette": {"silhouette", "shadow", "shadows", "dark figure", "mysterious figure"},
     "security_guard": {"security guard", "guard", "watchman", "security officer"},
     "hotel": {"hotel", "motel", "inn", "lodge", "abandoned hotel"},
