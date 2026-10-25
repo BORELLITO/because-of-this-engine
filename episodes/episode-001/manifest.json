@@ -23,7 +23,7 @@
   },
   "script": {
     "path": "script.txt",
-    "word_count_target": 156
+    "word_count_target": 153
   },
   "audio": {
     "path": "audio/narration.wav",
@@ -171,15 +171,26 @@
           "laboratory",
           "beach",
           "office"
-        ]
+        ],
+        "critical": {
+          "subjects": [
+            "silhouette"
+          ],
+          "actions": [
+            "standing"
+          ],
+          "objects": [
+            "glass_door"
+          ]
+        }
       }
     },
     {
       "scene_id": "S02",
       "duration": 5,
-      "story_beat": "context: anchor the story to the exact nightly time",
-      "visual_intent": "make 3:17 visually memorable before the investigation begins",
-      "visual_function": "time_anchor",
+      "story_beat": "context: reveal the room sealed for eleven years",
+      "visual_intent": "make the sealed-room contradiction concrete before the guard enters",
+      "visual_function": "contradiction",
       "visual_match": "EXACT",
       "visual_truth": "DECLARED_FICTION",
       "match_score": 0.94,
@@ -229,18 +240,28 @@
           "notes": "The time anchor is represented directly by a clock."
         }
       },
-      "narration_excerpt": "At exactly 3:17 every morning",
+      "narration_excerpt": "The strange part was not the face. It was the fact that the door opened into a room that had been sealed for eleven years.",
       "visual_semantics": {
         "role": "literal",
         "required": {
+          "environments": [
+            "interior"
+          ],
           "objects": [
-            "clock"
+            "sealed_room"
+          ]
+        },
+        "critical": {
+          "objects": [
+            "sealed_room"
           ]
         },
         "preferred": {
+          "objects": [
+            "glass_door"
+          ],
           "environments": [
-            "darkness",
-            "interior"
+            "hotel"
           ],
           "moods": [
             "eerie"
@@ -344,7 +365,18 @@
           "medical_vial",
           "laboratory",
           "beach"
-        ]
+        ],
+        "critical": {
+          "subjects": [
+            "security_guard"
+          ],
+          "actions": [
+            "standing"
+          ],
+          "environments": [
+            "interior"
+          ]
+        }
       }
     },
     {
@@ -429,7 +461,15 @@
           "laboratory",
           "beach",
           "office"
-        ]
+        ],
+        "critical": {
+          "objects": [
+            "light"
+          ],
+          "environments": [
+            "darkness"
+          ]
+        }
       }
     },
     {
@@ -519,7 +559,15 @@
           "beach",
           "silhouette",
           "person"
-        ]
+        ],
+        "critical": {
+          "objects": [
+            "glass_door"
+          ],
+          "environments": [
+            "interior"
+          ]
+        }
       }
     },
     {
@@ -610,7 +658,18 @@
           "laboratory",
           "beach",
           "office"
-        ]
+        ],
+        "critical": {
+          "subjects": [
+            "silhouette"
+          ],
+          "actions": [
+            "standing"
+          ],
+          "environments": [
+            "hallway"
+          ]
+        }
       }
     },
     {
@@ -698,7 +757,18 @@
           "laboratory",
           "beach",
           "office"
-        ]
+        ],
+        "critical": {
+          "subjects": [
+            "security_guard"
+          ],
+          "actions": [
+            "running"
+          ],
+          "environments": [
+            "exterior"
+          ]
+        }
       }
     },
     {
@@ -781,7 +851,12 @@
           "office",
           "silhouette",
           "person"
-        ]
+        ],
+        "critical": {
+          "environments": [
+            "hallway"
+          ]
+        }
       }
     },
     {
@@ -864,7 +939,15 @@
           "laboratory",
           "beach",
           "office"
-        ]
+        ],
+        "critical": {
+          "objects": [
+            "security_camera"
+          ],
+          "actions": [
+            "recording"
+          ]
+        }
       }
     },
     {
@@ -953,7 +1036,18 @@
           "laboratory",
           "beach",
           "office"
-        ]
+        ],
+        "critical": {
+          "subjects": [
+            "silhouette"
+          ],
+          "actions": [
+            "pointing"
+          ],
+          "objects": [
+            "security_camera"
+          ]
+        }
       }
     },
     {
@@ -1038,7 +1132,12 @@
           "laboratory",
           "beach",
           "office"
-        ]
+        ],
+        "critical": {
+          "objects": [
+            "hourglass"
+          ]
+        }
       }
     },
     {
@@ -1123,7 +1222,15 @@
           "laboratory",
           "beach",
           "office"
-        ]
+        ],
+        "critical": {
+          "objects": [
+            "security_camera"
+          ],
+          "actions": [
+            "recording"
+          ]
+        }
       }
     }
   ],
@@ -1201,5 +1308,323 @@
     "keyword_only_matching": false,
     "human_visual_review_required": true,
     "policy_note": "Literal beats must match every required narrative dimension and must not contradict explicit negation. Near or symbolic fallback is allowed only when the scene declares it and the visual remains non-contradictory."
+  },
+  "story_graph": {
+    "version": "1.0",
+    "entities": [
+      {
+        "entity_id": "figure",
+        "canonical_name": "the figure",
+        "aliases": [
+          "the figure",
+          "same figure",
+          "it",
+          "silhouette"
+        ],
+        "continuity_mode": "same anonymous presence across the recording"
+      },
+      {
+        "entity_id": "security_guard",
+        "canonical_name": "the night guard",
+        "aliases": [
+          "night guard",
+          "the guard",
+          "he",
+          "they"
+        ],
+        "continuity_mode": "same human investigator from waiting through escape"
+      },
+      {
+        "entity_id": "camera",
+        "canonical_name": "the security camera",
+        "aliases": [
+          "security camera",
+          "the camera",
+          "same camera"
+        ],
+        "continuity_mode": "recurring recording device and final motif"
+      },
+      {
+        "entity_id": "hotel",
+        "canonical_name": "the abandoned hotel",
+        "aliases": [
+          "abandoned hotel",
+          "building",
+          "hotel"
+        ],
+        "continuity_mode": "fixed location until demolition"
+      },
+      {
+        "entity_id": "glass_door",
+        "canonical_name": "the glass door",
+        "aliases": [
+          "glass door",
+          "glass"
+        ],
+        "continuity_mode": "fixed boundary between the sealed room and hallway"
+      },
+      {
+        "entity_id": "sealed_room",
+        "canonical_name": "the sealed room",
+        "aliases": [
+          "sealed room",
+          "room sealed for eleven years",
+          "locked room"
+        ],
+        "continuity_mode": "same impossible room established in the contradiction beat"
+      },
+      {
+        "entity_id": "hallway",
+        "canonical_name": "the hallway",
+        "aliases": [
+          "hallway",
+          "corridor",
+          "end of the hallway"
+        ],
+        "continuity_mode": "same interior route where the figure reappears"
+      },
+      {
+        "entity_id": "light",
+        "canonical_name": "the lights",
+        "aliases": [
+          "lights",
+          "light"
+        ],
+        "continuity_mode": "state changes from on to out and drives the reveal"
+      },
+      {
+        "entity_id": "police",
+        "canonical_name": "the police",
+        "aliases": [
+          "police"
+        ],
+        "continuity_mode": "external search authority"
+      },
+      {
+        "entity_id": "footprints",
+        "canonical_name": "footprints",
+        "aliases": [
+          "footprints",
+          "tracks"
+        ],
+        "continuity_mode": "absence evidence searched for and not found"
+      },
+      {
+        "entity_id": "lock",
+        "canonical_name": "the lock",
+        "aliases": [
+          "lock",
+          "broken lock"
+        ],
+        "continuity_mode": "absence evidence inspected and not found"
+      },
+      {
+        "entity_id": "recording",
+        "canonical_name": "the recording",
+        "aliases": [
+          "recording",
+          "final detail"
+        ],
+        "continuity_mode": "evidence captured, then deleted"
+      },
+      {
+        "entity_id": "time",
+        "canonical_name": "3:17",
+        "aliases": [
+          "3:17",
+          "3:18",
+          "every night"
+        ],
+        "continuity_mode": "recurring temporal trigger"
+      }
+    ],
+    "beats": [
+      {
+        "scene_id": "S01",
+        "event": "camera records the same figure behind the glass door at 3:17",
+        "state_before": "camera_off_before_3_17",
+        "state_after": "figure_recorded_behind_glass",
+        "causal_role": "hook",
+        "emotion": "curiosity",
+        "visual_motif": "figure behind glass",
+        "entities": [
+          "camera",
+          "hotel",
+          "figure",
+          "glass_door"
+        ],
+        "narration_excerpt": "At exactly 3:17 every morning, the security camera inside an abandoned hotel recorded the same figure standing behind the glass door."
+      },
+      {
+        "scene_id": "S02",
+        "event": "the door opens into a room sealed for eleven years",
+        "state_before": "figure_recorded_behind_glass",
+        "state_after": "sealed_room_contradiction_established",
+        "causal_role": "contradiction",
+        "emotion": "unease",
+        "visual_motif": "sealed room boundary",
+        "entities": [
+          "hotel",
+          "glass_door",
+          "sealed_room"
+        ],
+        "narration_excerpt": "The strange part was not the face. It was the fact that the door opened into a room that had been sealed for eleven years."
+      },
+      {
+        "scene_id": "S03",
+        "event": "the night guard waits beside the door while nothing moves",
+        "state_before": "sealed_room_contradiction_established",
+        "state_after": "guard_waiting_beside_door",
+        "causal_role": "investigation",
+        "emotion": "anticipation",
+        "visual_motif": "isolated watcher",
+        "entities": [
+          "security_guard",
+          "figure",
+          "glass_door"
+        ],
+        "narration_excerpt": "A night guard finally decided to wait beside it. For twenty minutes, nothing moved."
+      },
+      {
+        "scene_id": "S04",
+        "event": "the lights go out after the waiting period",
+        "state_before": "guard_waiting_beside_door",
+        "state_after": "lights_out",
+        "causal_role": "escalation",
+        "emotion": "dread",
+        "visual_motif": "light extinguished",
+        "entities": [
+          "security_guard",
+          "light",
+          "sealed_room"
+        ],
+        "narration_excerpt": "Then the lights went out."
+      },
+      {
+        "scene_id": "S05",
+        "event": "the lights return and the figure is no longer behind the glass",
+        "state_before": "lights_out",
+        "state_after": "figure_absent_from_glass",
+        "causal_role": "disappearance",
+        "emotion": "confusion",
+        "visual_motif": "empty glass boundary",
+        "entities": [
+          "figure",
+          "glass_door",
+          "camera"
+        ],
+        "narration_excerpt": "When they came back, the figure was no longer behind the glass."
+      },
+      {
+        "scene_id": "S06",
+        "event": "the figure is now standing at the end of the hallway",
+        "state_before": "figure_absent_from_glass",
+        "state_after": "figure_at_hallway_closer",
+        "causal_role": "reveal",
+        "emotion": "fear",
+        "visual_motif": "closer hallway silhouette",
+        "entities": [
+          "figure",
+          "hallway"
+        ],
+        "narration_excerpt": "It was standing at the end of the hallway, closer than before."
+      },
+      {
+        "scene_id": "S07",
+        "event": "the guard runs outside and calls the police",
+        "state_before": "figure_at_hallway_closer",
+        "state_after": "guard_outside_calls_police",
+        "causal_role": "flight",
+        "emotion": "panic",
+        "visual_motif": "escape to exterior",
+        "entities": [
+          "security_guard",
+          "hotel",
+          "police"
+        ],
+        "narration_excerpt": "The guard ran outside and called the police."
+      },
+      {
+        "scene_id": "S08",
+        "event": "the search finds no footprints, broken lock, or person inside",
+        "state_before": "guard_outside_calls_police",
+        "state_after": "search_finds_no_evidence",
+        "causal_role": "negative_evidence",
+        "emotion": "incertitude",
+        "visual_motif": "empty hallway",
+        "entities": [
+          "police",
+          "hallway",
+          "footprints",
+          "lock",
+          "hotel"
+        ],
+        "narration_excerpt": "They found no footprints, no broken lock, and no person inside the building."
+      },
+      {
+        "scene_id": "S09",
+        "event": "the camera captures one final detail",
+        "state_before": "search_finds_no_evidence",
+        "state_after": "camera_captures_final_detail",
+        "causal_role": "evidence",
+        "emotion": "curiosity",
+        "visual_motif": "recording close-up",
+        "entities": [
+          "camera",
+          "recording"
+        ],
+        "narration_excerpt": "But the camera had captured one final detail."
+      },
+      {
+        "scene_id": "S10",
+        "event": "at 3:18 the figure points directly at the camera",
+        "state_before": "camera_captures_final_detail",
+        "state_after": "figure_points_at_camera_3_18",
+        "causal_role": "payoff",
+        "emotion": "shock",
+        "visual_motif": "pointing silhouette",
+        "entities": [
+          "figure",
+          "camera",
+          "time"
+        ],
+        "narration_excerpt": "At 3:18, the figure lifted one hand and pointed directly at the camera."
+      },
+      {
+        "scene_id": "S11",
+        "event": "the hotel is demolished and the recording is deleted",
+        "state_before": "figure_points_at_camera_3_18",
+        "state_after": "hotel_demolished_recording_deleted",
+        "causal_role": "false_closure",
+        "emotion": "relief_then_doubt",
+        "visual_motif": "time erases evidence",
+        "entities": [
+          "hotel",
+          "recording",
+          "time"
+        ],
+        "narration_excerpt": "The hotel was demolished the next week. The recording was deleted."
+      },
+      {
+        "scene_id": "S12",
+        "event": "the same camera still turns on every night at 3:17",
+        "state_before": "hotel_demolished_recording_deleted",
+        "state_after": "camera_still_turns_on_3_17",
+        "causal_role": "recurrence",
+        "emotion": "chill",
+        "visual_motif": "camera returns to 3:17",
+        "entities": [
+          "camera",
+          "time",
+          "figure"
+        ],
+        "narration_excerpt": "But every night at 3:17, the same camera still turns on."
+      }
+    ]
+  },
+  "narrative_coverage": {
+    "policy": "ordered_scene_excerpts_cover_canonical_script_once",
+    "allow_overlap": false,
+    "timing_source": "forced_alignment_sidecar"
   }
-}
+}\n
