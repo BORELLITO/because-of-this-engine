@@ -85,6 +85,12 @@ class VideoEngineV2Tests(unittest.TestCase):
         with self.assertRaisesRegex(VideoContractError, "sha256 is repeated"):
             validate_manifest(value, Path("/tmp"), check_files=False)
 
+    def test_video_contract_rejects_duplicate_runtime_asset_path(self):
+        value = manifest()
+        value["scenes"][1]["asset"]["path"] = value["scenes"][0]["asset"]["path"]
+        with self.assertRaisesRegex(VideoContractError, "Runtime asset path is repeated"):
+            validate_manifest(value, Path("/tmp"), check_files=False)
+
     def test_contract_requires_sixty_to_seventy_five_seconds(self):
         value = manifest()
         value["scenes"][0]["duration"] = 2
