@@ -169,6 +169,12 @@
           "subjects": [
             "replace-subject"
           ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "replace-direct-narrative-anchor"
+          ],
+          "minimum_direct": 1
         }
       }
     },
@@ -277,6 +283,12 @@
           "subjects": [
             "replace-subject"
           ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "replace-direct-narrative-anchor"
+          ],
+          "minimum_direct": 1
         }
       }
     },
@@ -385,6 +397,12 @@
           "subjects": [
             "replace-subject"
           ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "replace-direct-narrative-anchor"
+          ],
+          "minimum_direct": 1
         }
       }
     },
@@ -497,6 +515,12 @@
           "subjects": [
             "replace-subject"
           ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "replace-direct-narrative-anchor"
+          ],
+          "minimum_direct": 1
         }
       }
     }
