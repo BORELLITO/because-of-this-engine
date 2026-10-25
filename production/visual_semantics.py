@@ -62,6 +62,38 @@ MATCH_COVERAGE = {
     "ATMOSPHERE": 0.25,
 }
 
+# Concrete anchors are intentionally narrow.  They prevent an atmospheric
+# metaphor from substituting for a narrated event such as demolition, running,
+# pointing or recording.  Abstract concepts like time and fear are not anchors.
+NARRATIVE_ANCHOR_DIMENSIONS = {
+    "person": "subjects",
+    "figure": "subjects",
+    "silhouette": "subjects",
+    "security_guard": "subjects",
+    "police": "subjects",
+    "camera": "objects",
+    "security_camera": "objects",
+    "glass_door": "objects",
+    "glass_surface": "objects",
+    "lock": "objects",
+    "light": "objects",
+    "hourglass": "objects",
+    "footprints": "objects",
+    "recording": "actions",
+    "standing": "actions",
+    "walking": "actions",
+    "running": "actions",
+    "pointing": "actions",
+    "opening": "actions",
+    "flickering": "actions",
+    "demolition": "actions",
+    "hotel": "environments",
+    "hallway": "environments",
+    "interior": "environments",
+    "exterior": "environments",
+    "darkness": "environments",
+}
+
 
 def normalize(value: Any) -> str:
     text = str(value or "").lower().replace("_", " ").replace("-", " ")
@@ -186,6 +218,71 @@ def _pixel_review_issues(scene: dict[str, Any], candidate: dict[str, Any]) -> li
     return issues
 
 
+def _narrative_anchor_report(
+    scene: dict[str, Any],
+    candidate: dict[str, Any],
+) -> dict[str, Any]:
+    """Verify direct visual evidence for concrete narrated anchors.
+
+    A scene may still use symbolism for mood, time or uncertainty, but an
+    explicitly declared concrete anchor must be visible in the reviewed
+    evidence.  This is deliberately separate from the generic semantic score,
+    which otherwise allows a strong symbolic match to hide a missing event.
+    """
+    spec = scene.get("visual_semantics") or {}
+    contract = spec.get("narrative_anchors") or {}
+    if not isinstance(contract, dict):
+        return {
+            "status": "BLOCKED",
+            "direct_required": [],
+            "direct_hits": [],
+            "direct_missing": [],
+            "minimum_direct": 0,
+            "invalid": ["narrative_anchors must be an object"],
+        }
+
+    direct_required = values(contract.get("direct_required"))
+    direct_hits: list[str] = []
+    direct_missing: list[str] = []
+    invalid: list[str] = []
+    for anchor in direct_required:
+        normalized = normalize(anchor).replace(" ", "_")
+        dimension = NARRATIVE_ANCHOR_DIMENSIONS.get(normalized)
+        if not dimension:
+            invalid.append(anchor)
+            continue
+        available = _available_for_dimension(
+            candidate,
+            dimension,
+            allow_text_fallback=False,
+        )
+        if any(text_has_concept(item, anchor) for item in available):
+            direct_hits.append(anchor)
+        else:
+            direct_missing.append(anchor)
+
+    minimum_raw = contract.get("minimum_direct", 1 if direct_required else 0)
+    try:
+        minimum_direct = int(minimum_raw)
+    except (TypeError, ValueError):
+        minimum_direct = -1
+    if minimum_direct < 0 or minimum_direct > len(direct_required):
+        invalid.append("minimum_direct")
+    status = (
+        "PASS"
+        if not invalid and len(direct_hits) >= minimum_direct
+        else "BLOCKED"
+    )
+    return {
+        "status": status,
+        "direct_required": direct_required,
+        "direct_hits": direct_hits,
+        "direct_missing": direct_missing,
+        "minimum_direct": minimum_direct,
+        "invalid": invalid,
+    }
+
+
 def visual_match_report(
     scene: dict[str, Any],
     candidate: dict[str, Any],
@@ -202,6 +299,7 @@ def visual_match_report(
         }
 
     role = str(spec.get("role", "literal")).lower()
+    narrative_alignment = _narrative_anchor_report(scene, candidate)
     required = spec.get("required") or {}
     critical = spec.get("critical") or {}
     preferred = spec.get("preferred") or {}
@@ -271,6 +369,12 @@ def visual_match_report(
     )
     min_anchors = 1 if role in {"symbolic", "atmosphere"} else min(2, required_dimensions)
     reasons: list[str] = []
+    if narrative_alignment["invalid"]:
+        reasons.append("invalid narrative anchor contract: " + ", ".join(narrative_alignment["invalid"]))
+    if narrative_alignment["direct_missing"] or len(narrative_alignment["direct_hits"]) < narrative_alignment["minimum_direct"]:
+        reasons.append(
+            "direct narrative anchors missing: " + ", ".join(narrative_alignment["direct_missing"] or ["minimum_direct"])
+        )
     if role not in ALLOWED_ROLES:
         reasons.append(f"invalid visual semantic role: {role}")
     if not has_semantic_contract:
@@ -308,6 +412,7 @@ def visual_match_report(
             "status": "PRESENT" if not _pixel_review_issues(scene, {**candidate, "_visual_semantics_for_review": spec}) else "MISSING_OR_INCOMPLETE",
             "issues": _pixel_review_issues(scene, {**candidate, "_visual_semantics_for_review": spec}),
         },
+        "narrative_alignment": narrative_alignment,
         "reason": "; ".join(reasons) if reasons else "subject/action/environment/object fit passed",
     }
 
