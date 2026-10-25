@@ -37,7 +37,7 @@ CONCEPT_ALIASES: dict[str, set[str]] = {
     "hourglass": {"hourglass", "sand timer", "falling sand"},
     "medical_vial": {"ampoule", "ampule", "vial", "medical vial", "medicine", "syringe"},
     "laboratory": {"laboratory", "lab", "clinic", "hospital", "medical room"},
-    "beach": {"beach", "ocean", "sea", "sand", "palm tree"},
+    # Sand is intentionally excluded: an hourglass can contain sand without being a beach.\n    "beach": {"beach", "ocean", "sea", "palm tree"},
     "office": {"office", "corporate office", "desk office"},
     "standing": {"standing", "stand", "wait", "waiting", "still"},
     "watching": {"watching", "watch", "monitoring", "recording", "observing"},
