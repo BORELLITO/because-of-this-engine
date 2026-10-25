@@ -230,15 +230,15 @@ def _narrative_anchor_report(
     which otherwise allows a strong symbolic match to hide a missing event.
     """
     spec = scene.get("visual_semantics") or {}
-    contract = spec.get("narrative_anchors") or {}
-    if not isinstance(contract, dict):
+    contract = spec.get("narrative_anchors")
+    if not isinstance(contract, dict) or not contract:
         return {
             "status": "BLOCKED",
             "direct_required": [],
             "direct_hits": [],
             "direct_missing": [],
             "minimum_direct": 0,
-            "invalid": ["narrative_anchors must be an object"],
+            "invalid": ["narrative_anchors is required for every scene"],
         }
 
     direct_required = values(contract.get("direct_required"))
