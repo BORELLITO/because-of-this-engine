@@ -56,3 +56,35 @@ def test_alignment_accepts_explicit_than_then_asr_variant() -> None:
     assert end == 1.7
     assert cursor == 3
     assert [item["canonical"] for item in positions] == ["closer", "than", "before"]
+
+
+def test_phrase_scoped_retry_merges_only_real_vosk_word_timestamps() -> None:
+    base_words = [
+        {"word": "then", "start": 20.0, "end": 20.2, "confidence": 0.9},
+        {"word": "the", "start": 20.2, "end": 20.4, "confidence": 0.9},
+    ]
+    targeted_words = [
+        *base_words,
+        {"word": "lights", "start": 20.4, "end": 20.7, "confidence": 0.82},
+        {"word": "went", "start": 20.7, "end": 20.9, "confidence": 0.84},
+        {"word": "out", "start": 20.9, "end": 21.1, "confidence": 0.86},
+    ]
+    original_recognize = align_captions._recognize
+    try:
+        align_captions._recognize = lambda *_args, **_kwargs: targeted_words
+        merged = align_captions._recover_with_phrase_vocabulary(
+            ["Then the lights went out."],
+            base_words,
+            Path("/tmp/narration.wav"),
+            Path("/tmp/vosk-model"),
+        )
+    finally:
+        align_captions._recognize = original_recognize
+
+    _start, _end, _cursor, positions = align_captions._align_chunk(
+        "Then the lights went out.", merged, 0
+    )
+    assert [item["canonical"] for item in positions] == [
+        "Then", "the", "lights", "went", "out"
+    ]
+    assert all(item["timestamp_source"] == "vosk_word_timestamp" for item in positions)
