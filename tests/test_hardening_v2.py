@@ -78,6 +78,54 @@ class V2HardLockTests(unittest.TestCase):
                     self.assertIn(f"{action}@{commit}", content)
 
 
+    def test_final_manifest_hashes_nested_asset_sha256(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "rendered").mkdir()
+            (root / "audio").mkdir()
+            (root / "captions").mkdir()
+            for relative in (
+                "script.txt",
+                "audio/narration.wav",
+                "captions/narration.ass",
+                "captions/narration.alignment.json",
+                "rendered/hash-test-001-preview.mp4",
+            ):
+                path = root / relative
+                path.write_bytes(b"test")
+            manifest = {
+                "schema_version": "2.0",
+                "video_id": "hash-test-001",
+                "job_id": "hash-test-001",
+                "output": {"path": "rendered/{video_id}-{mode}.mp4"},
+                "script": {"path": "script.txt"},
+                "audio": {"path": "audio/narration.wav"},
+                "captions": {
+                    "path": "captions/narration.ass",
+                    "alignment_sidecar": "captions/narration.alignment.json",
+                    "alignment_mode": "forced_alignment",
+                    "alignment_source": "test",
+                    "word_level_available": True,
+                },
+                "scenes": [{
+                    "scene_id": "S01",
+                    "duration": 1,
+                    "asset": {"asset_id": "asset-001", "sha256": "asset-hash-001"},
+                    "visual_match": "EXACT",
+                    "visual_truth": "DECLARED_FICTION",
+                }],
+            }
+            (root / "release.json").write_text(json.dumps({"status": "VIDEO_RELEASE_VALIDATED"}), encoding="utf-8")\n            (root / "delivery.json").write_text(json.dumps({"status": "DRIVE_VERIFIED"}), encoding="utf-8")\n            with patch("production.finalize_manifest.load_manifest", return_value=manifest):
+                result = finalize(
+                    root / "manifest.json",
+                    root / "release.json",
+                    root / "delivery.json",
+                    "preview",
+                )
+            self.assertEqual(result["status"], "FINAL_MANIFEST_WRITTEN")
+            payload = json.loads((root / "rendered" / "final-manifest-hash-test-001-preview.json").read_text(encoding="utf-8"))
+            self.assertEqual(payload["fingerprints"]["footage_sha256"], "a1f17f4d3c0b4f96b3a4e73fda92f643f71d25fb6d13a2a4956b7e8f7085afcb")
+
     def test_direct_production_scripts_bootstrap_repository_root(self):
         expected = "sys.path.insert(0, str(Path(__file__).resolve().parents[1]))"
         for filename in (
