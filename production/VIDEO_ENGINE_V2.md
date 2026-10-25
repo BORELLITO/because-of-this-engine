@@ -35,6 +35,25 @@ to replace a scene silently: the manifest records its match class and score.
 The final contract also rejects repeated source pages and duplicate animation
 fingerprints, even when filenames or checksums differ.
 
+
+## Visual story semantic gate
+
+Every scene is tied to a canonical `narration_excerpt` and a reviewed
+`visual_semantics` contract. The contract separates subject, action,
+environment, object, mood and composition. Asset evidence is recorded in the
+same dimensions, so a clip is judged against the complete narrated beat.
+
+The research queue generates focused query variants from those dimensions and
+keeps rejected candidates visible for audit. A forbidden concept (for example,
+a medical vial in a hotel scene) blocks the candidate. A near, symbolic or
+atmospheric fallback is allowed only when explicitly declared and never silently
+promoted to an exact match. Keyword-only matching is disabled.
+
+The visual story QA gate runs before narration/rendering and emits one result
+per scene with coverage, missing anchors and forbidden hits. This makes a
+mismatched clip a pipeline error instead of a subjective problem discovered
+only after watching the final video.
+
 ## Timeline and edit
 
 Narration is the master clock. Scene durations are allocated to the measured
