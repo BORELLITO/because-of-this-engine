@@ -5,6 +5,7 @@ from pathlib import Path
 from production.video_asset_contract import VideoContractError, validate_manifest
 from production.render_video_episode import ass_color, narration_locked_scenes, scene_filter, xfade_filter, write_brand_ass
 from production.video_asset_research import build_queue
+from production.visual_semantics import text_has_concept
 
 
 def manifest():
@@ -156,6 +157,11 @@ class VideoEngineV2Tests(unittest.TestCase):
         self.assertTrue(result["selection_rules"]["no_repeat_animation"])
         self.assertFalse(result["selection_rules"]["keyword_only_matching"])
         self.assertEqual(result["clip_quantity_gate"]["status"], "ADVISORY")
+
+    def test_semantic_matcher_respects_word_boundaries(self):
+        self.assertFalse(text_has_concept("hands and face against glass", "beach"))
+        self.assertFalse(text_has_concept("a dark interior", "sand"))
+        self.assertTrue(text_has_concept("sand falling in an hourglass", "sand"))
 
     def test_semantic_gate_rejects_medical_vial_for_hotel_beat(self):
         value = manifest()
