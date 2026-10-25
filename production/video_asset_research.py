@@ -26,7 +26,7 @@ FALLBACK_LADDER = ("EXACT", "NEAR", "EXPLANATORY", "SYMBOLIC", "ATMOSPHERE")
 _STOP_WORDS = {
     "a", "an", "and", "at", "behind", "by", "for", "from", "in", "into", "is",
     "of", "on", "or", "show", "shows", "that", "the", "this", "to", "with",
-    "visual", "scene", "video",
+    "visual", "scene", "video", "no", "not",
 }
 
 
