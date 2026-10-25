@@ -18,6 +18,18 @@ def manifest():
             "visual_function": "evidence",
             "visual_match": "EXACT",
             "visual_truth": "VERIFIED_FACT",
+            "narration_excerpt": "the investigation reaches beat",
+            "visual_semantics": {
+                "role": "literal",
+                "required": {
+                    "subjects": ["person"],
+                    "actions": ["standing"],
+                    "environments": ["interior"],
+                    "objects": ["screen"],
+                },
+                "preferred": {"moods": ["eerie"]},
+                "forbidden": ["medical_vial", "laboratory"],
+            },
             "match_score": 0.9,
             "asset": {
                 "asset_id": f"asset-{index}",
@@ -29,6 +41,16 @@ def manifest():
                 "approved_for_render": True,
                 "sha256": f"{index + 1:064x}",
                 "episode_id": "v2-demo",
+                "visual_evidence": {
+                    "source_title": "Person standing at a screen in a dark interior",
+                    "subjects": ["person"],
+                    "actions": ["standing"],
+                    "environments": ["interior"],
+                    "objects": ["screen"],
+                    "moods": ["eerie"],
+                    "reviewed": True,
+                    "basis": "test fixture",
+                },
             },
         })
     return {
@@ -41,6 +63,7 @@ def manifest():
             "visual_symbol": "a red signal",
         },
         "editing": {"clip_quantity": {"enforce": False}},
+        "script": {"path": "script.txt"},
         "audio": {"path": "audio/narration.wav"},
         "captions": {"path": "captions/narration.ass"},
         "brand": {"watermark_text": "|B"},
@@ -124,12 +147,56 @@ class VideoEngineV2Tests(unittest.TestCase):
 
     def test_research_never_auto_approves_and_never_uses_images(self):
         value = manifest()
-        result = build_queue(value, {"mixkit": lambda query, limit: [{"title": "signal", "duration_seconds": 15, "width": 1080, "height": 1920}]})
+        result = build_queue(value, {"mixkit": lambda query, limit: [{"title": "Person standing at a screen in a dark interior", "duration_seconds": 15, "width": 1080, "height": 1920,
+                         "visual_evidence": {"subjects": ["person"], "actions": ["standing"], "environments": ["interior"],
+                                             "objects": ["screen"], "moods": ["eerie"]}}]})
         candidate = result["scenes"][0]["candidates"][0]
         self.assertFalse(candidate["approved_for_render"])
         self.assertEqual(result["scenes"][0]["image_fallback"], "FORBIDDEN")
         self.assertTrue(result["selection_rules"]["no_repeat_animation"])
+        self.assertFalse(result["selection_rules"]["keyword_only_matching"])
         self.assertEqual(result["clip_quantity_gate"]["status"], "ADVISORY")
+
+    def test_semantic_gate_rejects_medical_vial_for_hotel_beat(self):
+        value = manifest()
+        scene = value["scenes"][0]
+        scene["visual_semantics"]["forbidden"] = ["medical_vial", "laboratory"]
+        scene["asset"]["visual_evidence"] = {
+            "source_title": "Medical ampoule on a table",
+            "subjects": ["object"],
+            "actions": ["standing"],
+            "environments": ["laboratory"],
+            "objects": ["medical_vial"],
+            "reviewed": True,
+            "basis": "test fixture",
+        }
+        with self.assertRaisesRegex(VideoContractError, "forbidden concepts detected"):
+            validate_manifest(value, Path("/tmp"), check_files=False)
+
+    def test_research_quarantines_context_free_candidate(self):
+        value = manifest()
+        result = build_queue(value, {
+            "mixkit": lambda query, limit: [{
+                "title": "Beautiful abstract object",
+                "duration_seconds": 15,
+                "width": 1080,
+                "height": 1920,
+                "visual_evidence": {"moods": ["eerie"]},
+            }]
+        })
+        self.assertEqual(result["scenes"][0]["candidates"], [])
+        self.assertEqual(len(result["scenes"][0]["rejected_candidates"]), 1)
+        self.assertEqual(
+            result["scenes"][0]["rejected_candidates"][0]["selection_status"],
+            "REJECTED_SEMANTIC_MISMATCH",
+        )
+
+    def test_contract_rejects_consecutive_dip_to_black_transitions(self):
+        value = manifest()
+        value["scenes"][1]["transition"] = {"type": "dip_to_black", "duration": 0.14}
+        value["scenes"][2]["transition"] = {"type": "dip_to_black", "duration": 0.14}
+        with self.assertRaisesRegex(VideoContractError, "consecutive dip_to_black"):
+            validate_manifest(value, Path("/tmp"), check_files=False)
 
 
 if __name__ == "__main__":
