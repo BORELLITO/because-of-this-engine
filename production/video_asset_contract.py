@@ -32,7 +32,21 @@ ALLOWED_STATUSES = {"APPROVED", "REVIEW_REQUIRED", "REJECTED"}
 ALLOWED_PROVIDERS = {"mixkit", "pixabay", "pexels", "drive", "original"}
 ALLOWED_TRANSITIONS = {"hard_cut", "crossfade", "soft_dissolve", "dip_to_black", "motion_match"}
 MATCH_THRESHOLDS = {"EXACT": 0.80, "NEAR": 0.68, "EXPLANATORY": 0.60, "SYMBOLIC": 0.55, "ATMOSPHERE": 0.55}
-FINAL_PROVENANCE_FIELDS = ("author", "acquisition_timestamp", "original_filename", "mime_type", "duration_seconds", "width", "height", "filesize_bytes", "drive_file_id", "job_ownership", "scene_usage")
+FINAL_PROVENANCE_FIELDS = (
+    "author",
+    "acquisition_timestamp",
+    "original_filename",
+    "mime_type",
+    "duration_seconds",
+    "width",
+    "height",
+    "filesize_bytes",
+    "drive_file_id",
+    "job_ownership",
+    "scene_usage",
+    "source_segment_in",
+    "source_segment_out",
+)
 
 
 class VideoContractError(ValueError):
@@ -163,6 +177,19 @@ def validate_asset_record(record: dict[str, Any], base: Path, episode_id: str, *
         for key in ("duration_seconds", "width", "height", "filesize_bytes"):
             if isinstance(record.get(key), bool) or not isinstance(record.get(key), (int, float)) or record[key] <= 0:
                 raise VideoContractError(f"Asset {asset_id} provenance field {key} must be positive.")
+        segment_in = record.get("source_segment_in")
+        segment_out = record.get("source_segment_out")
+        if (
+            isinstance(segment_in, bool)
+            or not isinstance(segment_in, (int, float))
+            or segment_in < 0
+            or isinstance(segment_out, bool)
+            or not isinstance(segment_out, (int, float))
+            or segment_out <= segment_in
+        ):
+            raise VideoContractError(
+                f"Asset {asset_id} source segment must satisfy 0 <= source_segment_in < source_segment_out."
+            )
     if check_file:
         if not path.is_file():
             raise VideoContractError(f"Approved video asset is missing: {path}")
