@@ -18,12 +18,12 @@
     "model": "gemini-3.8-flash-tts",
     "voice": "Charon",
     "language": "en-US",
-    "style": "Clear American English, crisp diction, moderate pace, restrained suspense.",
-    "model_rationale": "Production target: Gemini 3.8 Flash TTS for maximum acoustic fidelity and pronunciation stability. The run is intentionally deferred until the documented daily quota resets."
+    "style": "Clear American English, crisp diction, moderate pace, restrained suspense. Pronounce numbers as spoken English words with clear word boundaries; preserve every word exactly.",
+    "model_rationale": "Production target: Gemini 3.8 Flash TTS. The canonical narration is authored for clear spoken-word boundaries and strict real-timestamp caption alignment."
   },
   "script": {
     "path": "script.txt",
-    "word_count_target": 153
+    "word_count_target": 147
   },
   "audio": {
     "path": "audio/narration.wav",
@@ -163,7 +163,7 @@
           }
         }
       },
-      "narration_excerpt": "At exactly 3:17 every morning, the security camera inside an abandoned hotel recorded the same figure standing behind the glass door.",
+      "narration_excerpt": "At exactly three seventeen every morning, the security camera inside an abandoned hotel recorded the same figure standing behind the glass door.",
       "visual_semantics": {
         "role": "literal",
         "required": {
@@ -301,7 +301,7 @@
         "source_segment_in": 0,
         "source_segment_out": 11.136125
       },
-      "narration_excerpt": "The strange part was not the face. It was the fact that the door opened into a room that had been sealed for eleven years.",
+      "narration_excerpt": "The strange part was not the face. The door opened into the sealed room. It had been locked for eleven years.",
       "visual_semantics": {
         "role": "symbolic",
         "required": {
@@ -560,7 +560,7 @@
           }
         }
       },
-      "narration_excerpt": "Then the lights went out.",
+      "narration_excerpt": "Then everything went dark.",
       "visual_semantics": {
         "role": "symbolic",
         "required": {
@@ -1352,7 +1352,7 @@
         "source_segment_in": 0,
         "source_segment_out": 9.62
       },
-      "narration_excerpt": "At 3:18, the figure lifted one hand and pointed directly at the camera.",
+      "narration_excerpt": "At three eighteen, the figure pointed directly at the camera.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1610,7 +1610,7 @@
         "source_segment_in": 0,
         "source_segment_out": 12.32
       },
-      "narration_excerpt": "But every night at 3:17, the same camera still turns on.",
+      "narration_excerpt": "But every night at three seventeen, the same camera still turns on.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1680,7 +1680,7 @@
     "status": "PENDING",
     "reviewer": "",
     "reviewed_at": "",
-    "notes": "Automated rebuild: strict word-highlight timestamps, soft-red legibility contrast gate, production release blocked on any estimated timestamp, cinematic noir grade, branded loop outro and 12 unique clips. Gemini 3.8 Flash TTS is the production target; the last render was externally blocked by the daily model quota. Human approval remains required before final publication."
+    "notes": "Automated rebuild: strict real word-highlight timestamps, soft-red legibility contrast gate, production release blocked on any estimated timestamp, cinematic noir grade, branded loop outro and 12 unique clips. Gemini 3.8 Flash TTS is the production target. Human approval remains required before final publication."
   },
   "editing": {
     "clip_quantity": {
@@ -1878,7 +1878,7 @@
           "figure",
           "glass_door"
         ],
-        "narration_excerpt": "At exactly 3:17 every morning, the security camera inside an abandoned hotel recorded the same figure standing behind the glass door."
+        "narration_excerpt": "At exactly three seventeen every morning, the security camera inside an abandoned hotel recorded the same figure standing behind the glass door."
       },
       {
         "scene_id": "S02",
@@ -1893,7 +1893,7 @@
           "glass_door",
           "sealed_room"
         ],
-        "narration_excerpt": "The strange part was not the face. It was the fact that the door opened into a room that had been sealed for eleven years."
+        "narration_excerpt": "The strange part was not the face. The door opened into the sealed room. It had been locked for eleven years."
       },
       {
         "scene_id": "S03",
@@ -1923,7 +1923,7 @@
           "light",
           "sealed_room"
         ],
-        "narration_excerpt": "Then the lights went out."
+        "narration_excerpt": "Then everything went dark."
       },
       {
         "scene_id": "S05",
@@ -2013,7 +2013,7 @@
           "camera",
           "time"
         ],
-        "narration_excerpt": "At 3:18, the figure lifted one hand and pointed directly at the camera."
+        "narration_excerpt": "At three eighteen, the figure pointed directly at the camera."
       },
       {
         "scene_id": "S11",
@@ -2043,7 +2043,7 @@
           "time",
           "figure"
         ],
-        "narration_excerpt": "But every night at 3:17, the same camera still turns on."
+        "narration_excerpt": "But every night at three seventeen, the same camera still turns on."
       }
     ]
   },
