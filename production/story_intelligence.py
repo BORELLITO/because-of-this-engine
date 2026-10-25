@@ -143,6 +143,54 @@ def validate_story_graph(manifest: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def validate_sequence_continuity(
+    manifest: dict[str, Any],
+    story_graph_report: dict[str, Any],
+) -> dict[str, Any]:
+    beats = story_graph_report.get("beats") or []
+    if not beats:
+        raise StoryIntegrityError("Sequence continuity requires story graph beats.")
+    entity_counts: dict[str, int] = {}
+    adjacency: list[dict[str, Any]] = []
+    for index, beat in enumerate(beats):
+        current = set(str(item) for item in beat.get("entities", []))
+        for entity_id in current:
+            entity_counts[entity_id] = entity_counts.get(entity_id, 0) + 1
+        if index:
+            previous = set(str(item) for item in beats[index - 1].get("entities", []))
+            shared = sorted(previous & current)
+            adjacency.append({
+                "from_scene": beats[index - 1]["scene_id"],
+                "to_scene": beat["scene_id"],
+                "shared_entities": shared,
+                "linked_by_state": (
+                    beats[index - 1].get("state_after") == beat.get("state_before")
+                ),
+                "status": "PASS" if shared or (
+                    beats[index - 1].get("state_after") == beat.get("state_before")
+                ) else "WEAK",
+            })
+    first_entities = set(str(item) for item in beats[0].get("entities", []))
+    final_entities = set(str(item) for item in beats[-1].get("entities", []))
+    final_recall = sorted(first_entities & final_entities)
+    if not final_recall:
+        raise StoryIntegrityError(
+            "Final beat does not recall any opening story entity or motif."
+        )
+    recurring = sorted(entity_id for entity_id, count in entity_counts.items() if count >= 2)
+    if not recurring:
+        raise StoryIntegrityError("Story graph has no recurring entity/motif for continuity.")
+    weak_links = [item for item in adjacency if item["status"] == "WEAK"]
+    return {
+        "status": "SEQUENCE_CONTINUITY_PASS",
+        "scene_count": len(beats),
+        "recurring_entities": recurring,
+        "final_motif_recall": final_recall,
+        "adjacency": adjacency,
+        "weak_link_count": len(weak_links),
+    }
+
+
 def validate_narration_coverage(manifest: dict[str, Any], script_text: str) -> dict[str, Any]:
     script_tokens = normalize_tokens(script_text)
     if not script_tokens:
@@ -234,12 +282,14 @@ def attach_audio_timestamps(report: dict[str, Any], alignment: dict[str, Any], s
 
 def audit_manifest(manifest: dict[str, Any], script_text: str, alignment: dict[str, Any] | None = None) -> dict[str, Any]:
     story = validate_story_graph(manifest)
+    sequence = validate_sequence_continuity(manifest, story)
     coverage = validate_narration_coverage(manifest, script_text)
     if alignment is not None:
         coverage = attach_audio_timestamps(coverage, alignment, script_text)
     return {
         "status": "STORY_INTELLIGENCE_PASS",
         "story_graph": story,
+        "sequence_continuity": sequence,
         "narration_coverage": coverage,
     }
 
