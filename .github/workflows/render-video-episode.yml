@@ -116,6 +116,14 @@ jobs:
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: python production/google_drive_assets.py --manifest "${{ inputs.manifest }}" --require-drive-assets
 
+      - name: Run strict visual story semantic gate
+        run: |
+          set -euo pipefail
+          python production/visual_story_qa.py \
+            --manifest "${{ inputs.manifest }}" \
+            --mode "${{ inputs.mode }}" \
+            --report "$(dirname "${{ inputs.manifest }}")/rendered/visual-story-qa-${{ inputs.mode }}}.json"
+
       - name: Generate narration with Google Gemini TTS (documented REST)
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
