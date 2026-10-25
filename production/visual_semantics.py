@@ -115,7 +115,8 @@ def evidence_text(record: dict[str, Any]) -> str:
     for key in ("source_title", "source_description", "title", "description", "tags", "category", "mood", "motion", "composition"):
         parts.extend(values(record.get(key)))
     if isinstance(evidence, dict):
-        for key in ("source_title", "source_description", "notes", *DIMENSIONS):
+        # Editorial notes describe review decisions; they are never visual evidence.
+        for key in ("source_title", "source_description", *DIMENSIONS):
             parts.extend(values(evidence.get(key)))
     parts.extend(values(record.get("source_page_url")))
     return " ".join(parts)
