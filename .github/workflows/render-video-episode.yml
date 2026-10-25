@@ -195,6 +195,15 @@ jobs:
             --manifest "${{ inputs.manifest }}" \
             --model-dir "${VOSK_MODEL_DIR}"
 
+      - name: Run forced-alignment narration coverage gate
+        run: |
+          set -euo pipefail
+          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
+          python production/story_intelligence.py \
+            --manifest "${{ inputs.manifest }}" \
+            --alignment "${EPISODE_DIR}/captions/narration.alignment.json" \
+            --report "${EPISODE_DIR}/rendered/narration-coverage.json"
+
       - name: Mark assets approved
         run: python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition ASSETS_APPROVED --stage assets
 
