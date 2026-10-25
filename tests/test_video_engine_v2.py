@@ -5,7 +5,7 @@ from pathlib import Path
 from production.video_asset_contract import VideoContractError, validate_manifest
 from production.render_video_episode import ass_color, narration_locked_scenes, scene_filter, xfade_filter, write_brand_ass
 from production.video_asset_research import build_queue
-from production.visual_semantics import text_has_concept
+from production.visual_semantics import text_has_concept, visual_match_report
 
 
 def manifest():
@@ -162,6 +162,27 @@ class VideoEngineV2Tests(unittest.TestCase):
         self.assertFalse(text_has_concept("hands and face against glass", "beach"))
         self.assertFalse(text_has_concept("a dark interior", "sand"))
         self.assertTrue(text_has_concept("sand falling in an hourglass", "sand"))
+
+    def test_single_required_visual_dimension_is_allowed(self):
+        value = manifest()
+        scene = value["scenes"][0]
+        scene["visual_match"] = "EXACT"
+        scene["visual_semantics"] = {
+            "role": "literal",
+            "required": {"objects": ["clock"]},
+            "preferred": {},
+            "forbidden": [],
+        }
+        asset = {
+            "visual_evidence": {
+                "source_title": "Analog wall clock",
+                "objects": ["clock"],
+                "reviewed": True,
+                "basis": "test fixture",
+            }
+        }
+        report = visual_match_report(scene, asset, require_review=True)
+        self.assertEqual(report["status"], "PASS")
 
     def test_semantic_gate_rejects_medical_vial_for_hotel_beat(self):
         value = manifest()
