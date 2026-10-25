@@ -239,7 +239,7 @@ def validate_asset_record(record: dict[str, Any], base: Path, episode_id: str, *
         if actual.lower() != str(record["sha256"]).lower():
             raise VideoContractError(f"Asset {asset_id} sha256 does not match the downloaded file.")
         metadata = ffprobe(path)
-        actual_phash = perceptual_hash(path)
+        actual_phash = perceptual_hash(path, duration=float(metadata["duration"]))
         declared_phash = record.get("perceptual_hash")
         if declared_phash:
             if not re.fullmatch(r"[0-9a-fA-F]{64}", str(declared_phash)):
