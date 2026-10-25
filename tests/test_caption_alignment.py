@@ -88,3 +88,23 @@ def test_phrase_scoped_retry_merges_only_real_vosk_word_timestamps() -> None:
         "Then", "the", "lights", "went", "out"
     ]
     assert all(item["timestamp_source"] == "vosk_word_timestamp" for item in positions)
+
+
+def test_alignment_accepts_real_asr_lexical_variants_without_recovery() -> None:
+    asr_words = [
+        {"word": "when", "start": 1.0, "end": 1.2},
+        {"word": "finger", "start": 1.2, "end": 1.5},
+        {"word": "pointing", "start": 1.5, "end": 1.8},
+        {"word": "direct", "start": 1.8, "end": 2.1},
+        {"word": "cameras", "start": 2.1, "end": 2.4},
+    ]
+
+    _start, _end, _cursor, positions = align_captions._align_chunk(
+        "went figure pointed directly camera.", asr_words, 0
+    )
+
+    assert [item["canonical"] for item in positions] == [
+        "went", "figure", "pointed", "directly", "camera"
+    ]
+    assert all(item["timestamp_source"] == "vosk_word_timestamp" for item in positions)
+    assert all(item["recovered"] is False for item in positions)
