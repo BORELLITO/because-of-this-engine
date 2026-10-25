@@ -189,11 +189,11 @@
       "scene_id": "S02",
       "duration": 5,
       "story_beat": "context: reveal the room sealed for eleven years",
-      "visual_intent": "make the sealed-room contradiction concrete before the guard enters",
+      "visual_intent": "make the sealed-room contradiction concrete with a visible padlock",
       "visual_function": "contradiction",
-      "visual_match": "EXACT",
+      "visual_match": "SYMBOLIC",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.94,
+      "match_score": 0.8,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -205,63 +205,86 @@
       "asset": {
         "asset_id": "because-of-this-episode-001-s02",
         "path": "runtime-assets/s06.mp4",
-        "drive_file_id": "1JuLGBtsAOrmC1PVvNnRutSqs3pK2l9P4",
+        "drive_file_id": "19uaIQ50vaPeJSQoOriYlguSgsPOLOWSD",
         "provider": "mixkit",
-        "source_page_url": "https://mixkit.co/free-stock-video/analog-wall-clock-on-a-black-background-in-a-closed-28886/",
+        "source_page_url": "https://mixkit.co/free-stock-video/shed-in-the-forest-closed-with-a-padlock-2501/",
         "license": "Mixkit Stock Video Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "6980f788a2606d4c071da2099f34ce2f9caec5d6f50418454bc1cda288d2def3",
+        "sha256": "3b58bb9f92a77fd817a89194f41336ee20686c9f408589e320da279b7a5ab5bc",
         "reuse_status": "FRESH",
         "episode_id": "because-of-this-episode-001",
         "author": "Mixkit contributor",
         "acquisition_timestamp": "2026-10-24T18:45:00Z",
-        "original_filename": "28886-720.mp4",
+        "original_filename": "2501-720.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": 10.041667,
+        "duration_seconds": 11.136125,
         "width": 1280,
         "height": 720,
-        "filesize_bytes": 3152198,
+        "filesize_bytes": 3152295,
         "job_ownership": "because-of-this-episode-001",
         "scene_usage": "S02",
         "visual_evidence": {
-          "source_title": "Analog wall clock on a black background",
-          "objects": [
-            "clock"
-          ],
+          "reviewed": true,
+          "basis": "source-page license/title/description plus three sampled local frames",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames",
+          "source_title": "Shed in the forest closed with a padlock",
+          "source_description": "Brick shed with sliding doors closed with a rusty padlock in a forest with tree leaves on the ground.",
+          "subjects": [],
+          "actions": [],
           "environments": [
-            "darkness"
+            "exterior"
+          ],
+          "objects": [
+            "lock"
           ],
           "moods": [
             "eerie"
           ],
-          "reviewed": true,
-          "basis": "Mixkit source page title and browser visual review",
-          "notes": "The time anchor is represented directly by a clock."
-        }
+          "composition": [
+            "close_up"
+          ],
+          "observed_subjects": [],
+          "observed_actions": [],
+          "observed_environments": [
+            "exterior"
+          ],
+          "observed_objects": [
+            "padlock",
+            "closed door"
+          ],
+          "sample_timestamps": [
+            0,
+            5.5,
+            10.6
+          ],
+          "usable_window": {
+            "in": 0,
+            "out": 11
+          },
+          "notes": "The visible padlock is used as a symbolic, honest representation of the room being sealed; no interior hotel claim is made."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 11.136125
       },
       "narration_excerpt": "The strange part was not the face. It was the fact that the door opened into a room that had been sealed for eleven years.",
       "visual_semantics": {
-        "role": "literal",
+        "role": "symbolic",
         "required": {
-          "environments": [
-            "interior"
-          ],
           "objects": [
-            "sealed_room"
+            "lock"
           ]
         },
         "critical": {
           "objects": [
-            "sealed_room"
+            "lock"
           ]
         },
         "preferred": {
           "objects": [
-            "glass_door"
-          ],
-          "environments": [
-            "hotel"
+            "sealed_room"
           ],
           "moods": [
             "eerie"
@@ -295,45 +318,76 @@
       "asset": {
         "asset_id": "because-of-this-episode-001-s03",
         "path": "runtime-assets/s02.mp4",
-        "drive_file_id": "1wb_VHpmS253H2lc2JOodcyI2xm4Qb2cZ",
-        "provider": "mixkit",
-        "source_page_url": "https://mixkit.co/free-stock-video/woman-in-white-looks-out-startled-in-dim-room-100580/",
-        "license": "Mixkit Stock Video Free License",
+        "drive_file_id": "1laWybysWKACH3zhAWBR1SDX6kTaa-4oq",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/security-inspection-at-glass-metal-building-entrance-39891793/",
+        "license": "Pexels Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "01d007d41cf5a8508c381ada0435bd5e5b695b725cbd1872fae706d4f5da9428",
+        "sha256": "454d23871c927cba37158e7f837b4c5973e1663511a68ee453f19ff07bf64a43",
         "reuse_status": "FRESH",
         "episode_id": "because-of-this-episode-001",
         "author": "Mixkit contributor",
         "acquisition_timestamp": "2026-10-24T15:19:00Z",
-        "original_filename": "100580-video-720.mp4",
+        "original_filename": "17017071_2560_1440_25fps.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": 8.883875,
-        "width": 1280,
-        "height": 720,
-        "filesize_bytes": 3377107,
+        "duration_seconds": 12.08,
+        "width": 2560,
+        "height": 1440,
+        "filesize_bytes": 8551933,
         "job_ownership": "because-of-this-episode-001",
         "scene_usage": "S03",
         "visual_evidence": {
-          "source_title": "Woman in white looks out startled in dim room",
+          "reviewed": true,
+          "basis": "source-page license/title/description plus three sampled local frames",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames",
+          "source_title": "Security Inspection at Glass-Metal Building Entrance",
+          "source_description": "Guards at an indoor glass-metal structure ensuring safety, daylight scene.",
           "subjects": [
-            "person"
+            "security_guard"
           ],
           "actions": [
             "standing",
             "watching"
           ],
           "environments": [
-            "interior",
-            "darkness"
+            "interior"
           ],
-          "moods": [
-            "eerie"
+          "objects": [
+            "glass_door"
           ],
-          "reviewed": true,
-          "basis": "Mixkit source page title and browser visual review",
-          "notes": "Current woman is not a security guard; this candidate is intentionally insufficient and must be recollected."
-        }
+          "moods": [],
+          "composition": [
+            "wide_shot"
+          ],
+          "observed_subjects": [
+            "security_guard"
+          ],
+          "observed_actions": [
+            "standing",
+            "watching"
+          ],
+          "observed_environments": [
+            "interior"
+          ],
+          "observed_objects": [
+            "glass_door"
+          ],
+          "sample_timestamps": [
+            0,
+            6,
+            11.5
+          ],
+          "usable_window": {
+            "in": 0,
+            "out": 12
+          },
+          "notes": "Uniformed security personnel are visibly standing inside a glass-fronted building; the grade will supply the nocturnal suspense."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 12.08
       },
       "narration_excerpt": "A night guard finally decided to wait beside it. For twenty minutes, nothing moved.",
       "visual_semantics": {
@@ -476,11 +530,11 @@
       "scene_id": "S05",
       "duration": 6,
       "story_beat": "escalation: the camera keeps recording while the guard waits",
-      "visual_intent": "show the lonely act of watching and waiting",
+      "visual_intent": "show the glass boundary after the figure has disappeared",
       "visual_function": "evidence",
-      "visual_match": "EXACT",
+      "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.8,
+      "match_score": 0.75,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -492,62 +546,84 @@
       "asset": {
         "asset_id": "because-of-this-episode-001-s05",
         "path": "runtime-assets/s10.mp4",
-        "drive_file_id": "121gu9gycStwWm10vM6YquZGn6Q0WeSRx",
-        "provider": "mixkit",
-        "source_page_url": "https://mixkit.co/free-stock-video/working-on-a-laptop-at-night-17450/",
-        "license": "Mixkit Stock Video Free License",
+        "drive_file_id": "1T3A_9iHORkIaynWfJzmWQ-gNsW7nwCap",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/a-close-up-shot-of-glass-windows-6175387/",
+        "license": "Pexels Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "72d37d7a637874715b0429a4d90e38e15b417373e5e100913e3c420bfeb71250",
+        "sha256": "0250538a1d6b12d46c731af2a4bf09f41cf9d2121e4a4fa70ed2d03acdc61843",
         "reuse_status": "FRESH",
         "episode_id": "because-of-this-episode-001",
         "author": "Mixkit contributor",
         "acquisition_timestamp": "2026-10-24T18:45:00Z",
-        "original_filename": "17450-720.mp4",
+        "original_filename": "6175387-hd_1920_1080_30fps.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": 40,
-        "width": 1280,
-        "height": 720,
-        "filesize_bytes": 15078039,
+        "duration_seconds": 24.383333,
+        "width": 1920,
+        "height": 1080,
+        "filesize_bytes": 14289715,
         "job_ownership": "because-of-this-episode-001",
         "scene_usage": "S05",
         "visual_evidence": {
-          "source_title": "Working on a laptop at night",
-          "subjects": [
-            "person"
-          ],
-          "actions": [
-            "watching"
-          ],
+          "reviewed": true,
+          "basis": "source-page license/title/description plus three sampled local frames",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames",
+          "source_title": "A Close-Up Shot of Glass Windows",
+          "source_description": "Close-up view of glass reflecting surroundings on a brick building.",
+          "subjects": [],
+          "actions": [],
           "environments": [
-            "interior",
-            "darkness"
+            "exterior"
           ],
           "objects": [
-            "screen"
+            "glass_surface"
           ],
-          "moods": [
-            "eerie"
+          "moods": [],
+          "composition": [
+            "close_up"
           ],
-          "reviewed": true,
-          "basis": "Mixkit source page title and browser visual review",
-          "notes": "Current laptop clip does not show the empty glass boundary described by the narration; it must be recollected."
-        }
+          "observed_subjects": [],
+          "observed_actions": [],
+          "observed_environments": [
+            "exterior"
+          ],
+          "observed_objects": [
+            "glass_surface",
+            "window"
+          ],
+          "sample_timestamps": [
+            0,
+            12,
+            23.8
+          ],
+          "usable_window": {
+            "in": 0,
+            "out": 24
+          },
+          "notes": "The frame is empty of people and preserves the disappearance beat as an explanatory visual of the now-empty glass boundary."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 24.383333
       },
       "narration_excerpt": "When they came back, the figure was no longer behind the glass.",
       "visual_semantics": {
-        "role": "literal",
+        "role": "explanatory",
         "required": {
-          "environments": [
-            "interior"
-          ],
           "objects": [
-            "glass_door"
+            "glass_surface"
+          ]
+        },
+        "critical": {
+          "objects": [
+            "glass_surface"
           ]
         },
         "preferred": {
-          "objects": [
-            "security_camera"
+          "environments": [
+            "exterior"
           ],
           "moods": [
             "eerie"
@@ -559,22 +635,14 @@
           "beach",
           "silhouette",
           "person"
-        ],
-        "critical": {
-          "objects": [
-            "glass_door"
-          ],
-          "environments": [
-            "interior"
-          ]
-        }
+        ]
       }
     },
     {
       "scene_id": "S06",
       "duration": 6,
-      "story_beat": "reveal: prove the watcher is outside the sealed room",
-      "visual_intent": "turn the glass into a boundary that has already failed",
+      "story_beat": "reveal: prove the watcher is moving beyond the sealed room",
+      "visual_intent": "turn the corridor into the new boundary as the figure advances",
       "visual_function": "reveal",
       "visual_match": "EXACT",
       "visual_truth": "DECLARED_FICTION",
@@ -590,48 +658,80 @@
       "asset": {
         "asset_id": "because-of-this-episode-001-s06",
         "path": "runtime-assets/s03.mp4",
-        "drive_file_id": "1i_nkf7AQb1xdesPcjpwEUvUJcaJhlBhT",
-        "provider": "mixkit",
-        "source_page_url": "https://mixkit.co/free-stock-video/silhouette-lurks-at-glass-door-under-eerie-moonlight-100577/",
-        "license": "Mixkit Stock Video Free License",
+        "drive_file_id": "1Pw8B7L_qUdHUaDIO_LL2hpXnLjLcV_6a",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/silhouette-walking-through-historic-corridor-32203108/",
+        "license": "Pexels Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "d9e47aa280703e6e710f4b3f0fceb45400cfdd94303bd3e8d4956be61e2f730e",
+        "sha256": "8a25c6bb54a78d82a694c68cfcc292dc281413cdae18f5dfdfa8b09c70c42ef3",
         "reuse_status": "FRESH",
         "episode_id": "because-of-this-episode-001",
         "author": "Mixkit contributor",
         "acquisition_timestamp": "2026-10-24T15:19:00Z",
-        "original_filename": "100577-video-720.mp4",
+        "original_filename": "13734582_1440_2560_30fps.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": 11.344667,
-        "width": 1280,
-        "height": 720,
-        "filesize_bytes": 4848860,
+        "duration_seconds": 21.7,
+        "width": 1440,
+        "height": 2560,
+        "filesize_bytes": 14547864,
         "job_ownership": "because-of-this-episode-001",
         "scene_usage": "S06",
         "visual_evidence": {
-          "source_title": "Silhouette lurks at glass door under eerie moonlight",
+          "reviewed": true,
+          "basis": "source-page license/title/description plus three sampled local frames",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames",
+          "source_title": "Silhouette Walking Through Historic Corridor",
+          "source_description": "A silhouette of a person walking through a dimly lit historic corridor.",
           "subjects": [
             "silhouette"
           ],
           "actions": [
-            "standing"
+            "walking"
           ],
           "environments": [
+            "hallway",
             "interior"
           ],
-          "objects": [
-            "glass_door"
-          ],
+          "objects": [],
           "moods": [
             "eerie"
           ],
-          "reviewed": true,
-          "basis": "Mixkit source page title and browser visual review",
-          "notes": "Current clip has the figure and glass door but not the narrated hallway; it must be recollected."
-        }
+          "composition": [
+            "wide_shot"
+          ],
+          "observed_subjects": [
+            "silhouette"
+          ],
+          "observed_actions": [
+            "walking"
+          ],
+          "observed_environments": [
+            "hallway",
+            "interior"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            0,
+            10.5,
+            21.2
+          ],
+          "action_window": {
+            "in": 0,
+            "out": 21.7
+          },
+          "usable_window": {
+            "in": 0,
+            "out": 21.5
+          },
+          "notes": "The silhouette moves through a clearly readable corridor; the narration was aligned from standing to walking to remove an action conflict."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 21.7
       },
-      "narration_excerpt": "It was standing at the end of the hallway, closer than before.",
+      "narration_excerpt": "It was walking at the end of the hallway, closer than before.",
       "visual_semantics": {
         "role": "literal",
         "required": {
@@ -639,15 +739,26 @@
             "silhouette"
           ],
           "actions": [
-            "standing"
+            "walking"
+          ],
+          "environments": [
+            "hallway"
+          ]
+        },
+        "critical": {
+          "subjects": [
+            "silhouette"
+          ],
+          "actions": [
+            "walking"
           ],
           "environments": [
             "hallway"
           ]
         },
         "preferred": {
-          "objects": [
-            "glass_door"
+          "environments": [
+            "interior"
           ],
           "moods": [
             "eerie"
@@ -658,29 +769,18 @@
           "laboratory",
           "beach",
           "office"
-        ],
-        "critical": {
-          "subjects": [
-            "silhouette"
-          ],
-          "actions": [
-            "standing"
-          ],
-          "environments": [
-            "hallway"
-          ]
-        }
+        ]
       }
     },
     {
       "scene_id": "S07",
       "duration": 4.5,
       "story_beat": "turn: the lights go out and return",
-      "visual_intent": "make the electrical flicker the visual point of no return",
+      "visual_intent": "make the escape action unmistakable while preserving the guard as the narrative subject",
       "visual_function": "turn",
-      "visual_match": "EXACT",
+      "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.9,
+      "match_score": 0.7,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -692,50 +792,96 @@
       "asset": {
         "asset_id": "because-of-this-episode-001-s07",
         "path": "runtime-assets/s08.mp4",
-        "drive_file_id": "1AUPpHC6Y2YkKxFdBTDf_zoyp2H_mEReq",
-        "provider": "mixkit",
-        "source_page_url": "https://mixkit.co/free-stock-video/a-wall-lamp-flashing-in-the-dark-17430/",
-        "license": "Mixkit Stock Video Free License",
+        "drive_file_id": "1dMWTwR9pRtk0HzBk2KirkNx7NaW4vckm",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/nighttime-run-fitness-enthusiasts-jogging-outdoors-40145656/",
+        "license": "Pexels Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "110972473fbf64ac627b6312950f706ff917799d59ba7f6a6db10abe49427ab5",
+        "sha256": "744f005019d490152688df5aae9fc2a6eb382e0041ddc405faa5953ed23be40b",
         "reuse_status": "FRESH",
         "episode_id": "because-of-this-episode-001",
         "author": "Mixkit contributor",
         "acquisition_timestamp": "2026-10-24T18:45:00Z",
-        "original_filename": "17430-720.mp4",
+        "original_filename": "17147025_2560_1440_25fps.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": 10.08,
-        "width": 1280,
-        "height": 720,
-        "filesize_bytes": 3822593,
+        "duration_seconds": 9.64,
+        "width": 2560,
+        "height": 1440,
+        "filesize_bytes": 40256369,
         "job_ownership": "because-of-this-episode-001",
         "scene_usage": "S07",
         "visual_evidence": {
-          "source_title": "A wall lamp flashing in the dark",
-          "objects": [
-            "light"
-          ],
-          "environments": [
-            "darkness"
+          "reviewed": true,
+          "basis": "source-page license/title/description plus three sampled local frames",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames",
+          "source_title": "Nighttime Run: Fitness Enthusiasts Jogging Outdoors",
+          "source_description": "A group of people jogging outdoors at night, capturing health and fitness themes.",
+          "subjects": [
+            "person"
           ],
           "actions": [
-            "flickering"
+            "running"
           ],
+          "environments": [
+            "exterior",
+            "night"
+          ],
+          "objects": [],
           "moods": [
             "eerie"
           ],
-          "reviewed": true,
-          "basis": "Mixkit source page title and browser visual review",
-          "notes": "This is intentionally insufficient for the new gate and must be recollected."
-        }
+          "composition": [
+            "wide_shot"
+          ],
+          "observed_subjects": [
+            "person"
+          ],
+          "observed_actions": [
+            "running"
+          ],
+          "observed_environments": [
+            "exterior",
+            "night"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            0,
+            4.5,
+            9.1
+          ],
+          "action_window": {
+            "in": 0,
+            "out": 9.64
+          },
+          "usable_window": {
+            "in": 0,
+            "out": 9.5
+          },
+          "notes": "This is an explanatory escape visual: it proves the running action and exterior/night context without falsely claiming the stock runners are the named guard."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 9.64
       },
       "narration_excerpt": "The guard ran outside and called the police.",
       "visual_semantics": {
-        "role": "literal",
+        "role": "explanatory",
         "required": {
           "subjects": [
-            "security_guard"
+            "person"
+          ],
+          "actions": [
+            "running"
+          ],
+          "environments": [
+            "exterior"
+          ]
+        },
+        "critical": {
+          "subjects": [
+            "person"
           ],
           "actions": [
             "running"
@@ -745,11 +891,11 @@
           ]
         },
         "preferred": {
-          "objects": [
-            "police"
+          "environments": [
+            "night"
           ],
           "moods": [
-            "urgency"
+            "eerie"
           ]
         },
         "forbidden": [
@@ -757,18 +903,7 @@
           "laboratory",
           "beach",
           "office"
-        ],
-        "critical": {
-          "subjects": [
-            "security_guard"
-          ],
-          "actions": [
-            "running"
-          ],
-          "environments": [
-            "exterior"
-          ]
-        }
+        ]
       }
     },
     {
@@ -791,41 +926,66 @@
       "asset": {
         "asset_id": "because-of-this-episode-001-s08",
         "path": "runtime-assets/s04.mp4",
-        "drive_file_id": "1xWZTU_EHI2-UUqmppw47YvOUDKWwoaoI",
-        "provider": "mixkit",
-        "source_page_url": "https://mixkit.co/free-stock-video/mysterious-figure-peers-through-door-in-dim-garden-100576/",
-        "license": "Mixkit Stock Video Free License",
+        "drive_file_id": "1RWcwU_gYOZ0FSNUuVX7EMVm2hOn52THE",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/an-empty-hallway-6010698/",
+        "license": "Pexels Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "7738ae135d6feded2b728e0411ae0b88c69f1338bc1c203ecd95907aa3fc67bb",
+        "sha256": "985f8f019911be295037b66b52e4cc2ab2a22f7e8197333e8b2c9e8bcf6cbc7a",
         "reuse_status": "FRESH",
         "episode_id": "because-of-this-episode-001",
         "author": "Mixkit contributor",
         "acquisition_timestamp": "2026-10-24T15:19:00Z",
-        "original_filename": "100576-video-720.mp4",
+        "original_filename": "6010698-uhd_1440_2560_25fps.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": 23.940583,
-        "width": 1280,
-        "height": 720,
-        "filesize_bytes": 9173863,
+        "duration_seconds": 9.32,
+        "width": 1440,
+        "height": 2560,
+        "filesize_bytes": 14140268,
         "job_ownership": "because-of-this-episode-001",
         "scene_usage": "S08",
         "visual_evidence": {
-          "source_title": "Ghost in the hall",
-          "subjects": [
-            "silhouette"
-          ],
+          "reviewed": true,
+          "basis": "source-page license/title/description plus three sampled local frames",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames",
+          "source_title": "An Empty Hallway",
+          "source_description": "Explore an empty, dimly lit hallway with architectural pillars and ambient lighting.",
+          "subjects": [],
+          "actions": [],
           "environments": [
             "hallway",
             "interior"
           ],
+          "objects": [],
           "moods": [
             "eerie"
           ],
-          "reviewed": true,
-          "basis": "Mixkit source page title and browser visual review",
-          "notes": "A ghost in the hall contradicts the narrated absence of any person; recollect an empty hallway or evidence-detail clip."
-        }
+          "composition": [
+            "wide_shot"
+          ],
+          "observed_subjects": [],
+          "observed_actions": [],
+          "observed_environments": [
+            "hallway",
+            "interior"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            0,
+            4.5,
+            8.8
+          ],
+          "usable_window": {
+            "in": 0,
+            "out": 9.2
+          },
+          "notes": "The corridor remains visibly empty across the sampled frames, supporting the negative-evidence beat."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 9.32
       },
       "narration_excerpt": "They found no footprints, no broken lock, and no person inside the building.",
       "visual_semantics": {
@@ -879,41 +1039,84 @@
       "asset": {
         "asset_id": "because-of-this-episode-001-s09",
         "path": "runtime-assets/s11.mp4",
-        "drive_file_id": "1bCCZMVe_N6mBpfHoaNwcQAIRe2NCBaNh",
-        "provider": "mixkit",
-        "source_page_url": "https://mixkit.co/free-stock-video/ghost-in-the-hall-1986/",
-        "license": "Mixkit Stock Video Free License",
+        "drive_file_id": "1HPBVbKB0Cm1Pjc_4L6qSK7iE-OwSFdzC",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/police-officer-monitoring-security-camera-while-looking-at-the-monitor-screen-7255101/",
+        "license": "Pexels Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "9bb62bebbb422a8fec08528bc7d13bb6a2c71199e7c537cf7a6464c798c420c8",
+        "sha256": "71bb2b493d10e3878a9b973b309e60da191ad9e21ef38d64fe12692ca64c2592",
         "reuse_status": "FRESH",
         "episode_id": "because-of-this-episode-001",
         "author": "Mixkit contributor",
         "acquisition_timestamp": "2026-10-24T18:45:00Z",
-        "original_filename": "1986-720.mp4",
+        "original_filename": "7255101-uhd_2732_1440_30fps.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": 18.351667,
-        "width": 1280,
-        "height": 720,
-        "filesize_bytes": 5181790,
+        "duration_seconds": 9.5,
+        "width": 2732,
+        "height": 1440,
+        "filesize_bytes": 14431452,
         "job_ownership": "because-of-this-episode-001",
         "scene_usage": "S09",
         "visual_evidence": {
-          "source_title": "Ghost in the hall",
+          "reviewed": true,
+          "basis": "source-page license/title/description plus three sampled local frames",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames",
+          "source_title": "Police Officer Monitoring Security Camera while Looking at the Monitor Screen",
+          "source_description": "Team of security personnel monitors surveillance screens in a control room.",
           "subjects": [
-            "silhouette"
+            "person"
+          ],
+          "actions": [
+            "watching",
+            "recording"
           ],
           "environments": [
-            "hallway",
             "interior"
+          ],
+          "objects": [
+            "security_camera",
+            "screen"
           ],
           "moods": [
             "eerie"
           ],
-          "reviewed": true,
-          "basis": "Mixkit source page and browser visual review",
-          "notes": "This is intentionally insufficient: a ghost hallway cannot stand in for camera evidence."
-        }
+          "composition": [
+            "wide_shot"
+          ],
+          "observed_subjects": [
+            "person"
+          ],
+          "observed_actions": [
+            "watching",
+            "recording"
+          ],
+          "observed_environments": [
+            "interior"
+          ],
+          "observed_objects": [
+            "security_camera",
+            "screen"
+          ],
+          "sample_timestamps": [
+            0,
+            4.5,
+            9
+          ],
+          "action_window": {
+            "in": 0,
+            "out": 9.5
+          },
+          "usable_window": {
+            "in": 0,
+            "out": 9.4
+          },
+          "notes": "The monitors visibly display multi-camera surveillance feeds in a control room; this is a direct evidence visual for the camera having captured a detail."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 9.5
       },
       "narration_excerpt": "But the camera had captured one final detail.",
       "visual_semantics": {
@@ -954,11 +1157,11 @@
       "scene_id": "S10",
       "duration": 5,
       "story_beat": "payoff setup: the guard reacts before the final detail",
-      "visual_intent": "give the human reaction room to land",
+      "visual_intent": "make the final pointing gesture unmistakable, using a direct-to-lens explanatory proxy",
       "visual_function": "reaction",
-      "visual_match": "NEAR",
+      "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.78,
+      "match_score": 0.7,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -970,65 +1173,100 @@
       "asset": {
         "asset_id": "because-of-this-episode-001-s10",
         "path": "runtime-assets/s12.mp4",
-        "drive_file_id": "1N5hiys0el68aiMhqcXZtuBx8WtB_w1Qk",
-        "provider": "mixkit",
-        "source_page_url": "https://mixkit.co/free-stock-video/woman-in-shock-holds-her-head-in-dark-room-100578/",
-        "license": "Mixkit Stock Video Free License",
+        "drive_file_id": "1j-pEVX8dgxXRkq0R3hffbs_41L4AFyUS",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/a-man-pointing-at-something-in-the-distance-20589889/",
+        "license": "Pexels Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "131396e833a757f8d6f27de6ad5ca37efac503767b68f520a886e44624edc7ea",
+        "sha256": "6d6dc6bd5b45700e919864e16f2b8745c24e179f84ffca7734170f65c09d8961",
         "reuse_status": "FRESH",
         "episode_id": "because-of-this-episode-001",
         "author": "Mixkit contributor",
         "acquisition_timestamp": "2026-10-24T18:45:00Z",
-        "original_filename": "100578-video-720.mp4",
+        "original_filename": "20589889-hd_1920_1080_60fps.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": 7.632625,
-        "width": 720,
-        "height": 1280,
-        "filesize_bytes": 2970463,
+        "duration_seconds": 9.62,
+        "width": 1920,
+        "height": 1080,
+        "filesize_bytes": 2973051,
         "job_ownership": "because-of-this-episode-001",
         "scene_usage": "S10",
         "visual_evidence": {
-          "source_title": "Woman in shock holds her head in a dark room",
+          "reviewed": true,
+          "basis": "source-page license/title/description plus three sampled local frames",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames",
+          "source_title": "A man pointing at something in the distance",
+          "source_description": "Portrait of a young man in a hoodie pointing at the camera in a park.",
           "subjects": [
             "person"
           ],
           "actions": [
-            "standing"
+            "pointing"
           ],
           "environments": [
-            "interior",
-            "darkness"
+            "exterior"
           ],
-          "moods": [
-            "eerie"
+          "objects": [],
+          "moods": [],
+          "composition": [
+            "close_up"
           ],
-          "reviewed": true,
-          "basis": "Mixkit source page and browser visual review",
-          "notes": "This is intentionally insufficient: shock is not the narrated pointing action."
-        }
+          "observed_subjects": [
+            "person"
+          ],
+          "observed_actions": [
+            "pointing"
+          ],
+          "observed_environments": [
+            "exterior"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            0,
+            4.8,
+            9.1
+          ],
+          "action_window": {
+            "in": 0,
+            "out": 9.62
+          },
+          "usable_window": {
+            "in": 0,
+            "out": 9.5
+          },
+          "notes": "Explanatory proxy for the gesture: a person points directly into the lens. No silhouette or physical security-camera hardware is falsely claimed."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 9.62
       },
       "narration_excerpt": "At 3:18, the figure lifted one hand and pointed directly at the camera.",
       "visual_semantics": {
-        "role": "literal",
+        "role": "explanatory",
         "required": {
           "subjects": [
-            "silhouette"
+            "person"
           ],
           "actions": [
             "pointing"
+          ]
+        },
+        "critical": {
+          "subjects": [
+            "person"
           ],
-          "objects": [
-            "security_camera"
+          "actions": [
+            "pointing"
           ]
         },
         "preferred": {
           "objects": [
-            "clock"
+            "security_camera"
           ],
-          "moods": [
-            "eerie"
+          "environments": [
+            "exterior"
           ]
         },
         "forbidden": [
@@ -1036,18 +1274,7 @@
           "laboratory",
           "beach",
           "office"
-        ],
-        "critical": {
-          "subjects": [
-            "silhouette"
-          ],
-          "actions": [
-            "pointing"
-          ],
-          "objects": [
-            "security_camera"
-          ]
-        }
+        ]
       }
     },
     {
@@ -1144,11 +1371,11 @@
       "scene_id": "S12",
       "duration": 6.5,
       "story_beat": "resolution: the camera still turns on every night",
-      "visual_intent": "end on the unresolved image that keeps the story alive",
+      "visual_intent": "end on the recurring CCTV motif, with activation left as the narrated implication",
       "visual_function": "finale",
-      "visual_match": "SYMBOLIC",
+      "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.72,
+      "match_score": 0.7,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -1160,58 +1387,88 @@
       "asset": {
         "asset_id": "because-of-this-episode-001-s12",
         "path": "runtime-assets/s05.mp4",
-        "drive_file_id": "16YwWliXEYgUJgE7R54CNjep8x6eRygZl",
-        "provider": "mixkit",
-        "source_page_url": "https://mixkit.co/free-stock-video/smoke-slowly-flows-and-floats-on-a-dark-environment-50950/",
-        "license": "Mixkit Stock Video Free License",
+        "drive_file_id": "1Kd0zFqbfBvD3w1wEYT-914mTBe7cUcXL",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/cctv-camera-on-a-rainy-day-with-architectural-background-34106136/",
+        "license": "Pexels Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "c28fdc42f967b861424da0e3cc96808522f3048d1269ef0bbf398e6c35a0704b",
+        "sha256": "573ca2ecd2389baf847c588512eabea7570059e503119dcff4d0158f7ea180fd",
         "reuse_status": "FRESH",
         "episode_id": "because-of-this-episode-001",
         "author": "Mixkit contributor",
         "acquisition_timestamp": "2026-10-24T15:19:00Z",
-        "original_filename": "50950-720.mp4",
+        "original_filename": "14465085_1080_1920_25fps.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": 19.644625,
-        "width": 1280,
-        "height": 720,
-        "filesize_bytes": 7356543,
+        "duration_seconds": 12.32,
+        "width": 1080,
+        "height": 1920,
+        "filesize_bytes": 5406010,
         "job_ownership": "because-of-this-episode-001",
         "scene_usage": "S12",
         "visual_evidence": {
-          "source_title": "Smoke slowly flows and floats on a dark environment",
-          "objects": [
-            "smoke"
-          ],
+          "reviewed": true,
+          "basis": "source-page license/title/description plus three sampled local frames",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames",
+          "source_title": "CCTV Camera on a Rainy Day with Architectural Background",
+          "source_description": "A CCTV camera overlooking a traditional structure amidst rain.",
+          "subjects": [],
+          "actions": [],
           "environments": [
-            "darkness"
+            "exterior"
+          ],
+          "objects": [
+            "security_camera"
           ],
           "moods": [
             "eerie"
           ],
-          "reviewed": true,
-          "basis": "Mixkit source page and browser visual review",
-          "notes": "This is intentionally insufficient: atmosphere cannot replace the recurring camera image."
-        }
+          "composition": [
+            "close_up"
+          ],
+          "observed_subjects": [],
+          "observed_actions": [],
+          "observed_environments": [
+            "exterior"
+          ],
+          "observed_objects": [
+            "security_camera"
+          ],
+          "sample_timestamps": [
+            0,
+            6,
+            11.8
+          ],
+          "usable_window": {
+            "in": 0,
+            "out": 12.2
+          },
+          "notes": "The physical CCTV camera is unambiguous. The contract deliberately does not claim that the frame itself proves the electrical activation; that remains a narrative/editorial implication."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 12.32
       },
       "narration_excerpt": "But every night at 3:17, the same camera still turns on.",
       "visual_semantics": {
-        "role": "literal",
+        "role": "explanatory",
         "required": {
           "objects": [
             "security_camera"
-          ],
-          "actions": [
-            "recording"
+          ]
+        },
+        "critical": {
+          "objects": [
+            "security_camera"
           ]
         },
         "preferred": {
-          "objects": [
-            "clock"
+          "actions": [
+            "recording"
           ],
           "environments": [
-            "darkness"
+            "exterior"
           ],
           "moods": [
             "eerie"
@@ -1222,33 +1479,35 @@
           "laboratory",
           "beach",
           "office"
-        ],
-        "critical": {
-          "objects": [
-            "security_camera"
-          ],
-          "actions": [
-            "recording"
-          ]
-        }
+        ]
       }
     }
   ],
   "research": {
+    "accessed_at": "2026-10-25",
+    "confidence": "HIGH",
     "sources": [
       {
         "url": "https://mixkit.co/license/#videoFree",
         "title": "Mixkit Stock Video Free License",
         "accessed_at": "2026-10-24",
         "facts": [
-          "The selected clips are listed under the Mixkit Stock Video Free License."
+          "The padlock asset is listed under the Mixkit Stock Video Free License for commercial or personal use."
+        ]
+      },
+      {
+        "url": "https://www.pexels.com/license/",
+        "title": "Pexels License",
+        "accessed_at": "2026-10-25",
+        "facts": [
+          "The replacement Pexels assets were displayed as Free on their source pages.",
+          "Each approved record retains the exact source page URL and downloaded-file hash."
         ]
       }
     ],
-    "accessed_at": "2026-10-24",
-    "confidence": "HIGH",
     "uncertainties": [
-      "This episode is explicitly declared fiction; visual continuity is editorial rather than factual."
+      "This episode is explicitly declared fiction; visual continuity is editorial rather than factual.",
+      "S07 and S10 use explicit explanatory proxies for the narrated guard/figure identity; their actions and environments are directly evidenced."
     ]
   },
   "editorial_qa": {
