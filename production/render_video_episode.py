@@ -172,25 +172,132 @@ def _bounded_weighted_allocation(
     return durations
 
 
+def load_narration_coverage(manifest_path: Path) -> dict[str, Any]:
+    report_path = manifest_path.parent / "rendered" / "narration-coverage.json"
+    if not report_path.is_file():
+        raise RenderError(
+            "Narration coverage report is missing; render requires forced-alignment scene timing."
+        )
+    try:
+        report = json.loads(report_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise RenderError(f"Could not read narration coverage report: {report_path}") from exc
+    coverage = report.get("narration_coverage") or {}
+    if report.get("status") != "STORY_INTELLIGENCE_PASS":
+        raise RenderError("Narration coverage report is not STORY_INTELLIGENCE_PASS.")
+    if coverage.get("timing_status") != "FORCED_ALIGNMENT_SCENE_TIMES_PASS":
+        raise RenderError("Narration coverage report has no forced-alignment scene times.")
+    scenes = coverage.get("scenes")
+    if not isinstance(scenes, list) or not scenes:
+        raise RenderError("Narration coverage report contains no scene timing spans.")
+    return report
+
+
+def _audio_timed_scene_durations(
+    scenes: list[dict[str, Any]],
+    narration_seconds: float,
+    spans: list[dict[str, Any]],
+    clip_policy: dict[str, Any],
+) -> list[float]:
+    if len(scenes) != len(spans):
+        raise RenderError("Forced-alignment scene timing count does not match the manifest.")
+    scene_ids = [str(scene.get("scene_id")) for scene in scenes]
+    span_ids = [str(span.get("scene_id")) for span in spans]
+    if scene_ids != span_ids:
+        raise RenderError(
+            f"Forced-alignment scene order mismatch: expected {scene_ids}, got {span_ids}."
+        )
+    boundaries = [0.0]
+    for index in range(len(spans) - 1):
+        current_end = float(spans[index].get("audio_end", -1))
+        next_start = float(spans[index + 1].get("audio_start", -1))
+        if current_end < 0 or next_start < 0 or next_start + 0.001 < current_end:
+            raise RenderError("Forced-alignment scene spans overlap or contain invalid timestamps.")
+        boundaries.append((current_end + next_start) / 2.0)
+    boundaries.append(float(narration_seconds))
+    durations: list[float] = []
+    min_seconds = float(clip_policy.get("min_scene_seconds", 2.0))
+    max_seconds = float(clip_policy.get("max_scene_seconds", 20.0))
+    for index, scene in enumerate(scenes):
+        base_duration = boundaries[index + 1] - boundaries[index]
+        transition_after = (
+            transition_duration(scenes[index + 1].get("transition", {}))
+            if index < len(scenes) - 1
+            else 0.0
+        )
+        duration = base_duration + transition_after
+        if base_duration < min_seconds - 0.02:
+            raise RenderError(
+                f"Scene {scene.get('scene_id')} narration span is {base_duration:.3f}s, "
+                f"below the {min_seconds:.2f}s visual-beat minimum."
+            )
+        if base_duration > max_seconds + 0.02:
+            raise RenderError(
+                f"Scene {scene.get('scene_id')} narration span is {base_duration:.3f}s, "
+                f"above the {max_seconds:.2f}s visual-beat maximum; split the beat."
+            )
+        source_duration = (scene.get("asset") or {}).get("metadata", {}).get("duration")
+        if source_duration is None:
+            source_duration = (scene.get("asset") or {}).get("duration_seconds")
+        if source_duration is not None:
+            source_in = float(scene.get("source_in", 0.0))
+            if source_in + duration > float(source_duration) + 0.05:
+                raise RenderError(
+                    f"Scene {scene.get('scene_id')} forced-alignment duration exceeds source duration."
+                )
+        durations.append(duration)
+    if abs(sum(durations) - sum(boundaries[-1:] or [0]) - sum(
+        transition_duration(scenes[index + 1].get("transition", {}))
+        for index in range(len(scenes) - 1)
+    )) > 0.05:
+        raise RenderError("Forced-alignment scene durations do not reconcile with narration duration.")
+    return durations
+
+
 def narration_locked_scenes(
     scenes: list[dict[str, Any]],
     narration_seconds: float,
     clip_policy: dict[str, Any] | None = None,
+    narration_spans: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
-    """Scale scenes to narration while respecting source and editorial limits.
+    """Lock scene boundaries to forced-alignment spans when available.
 
-    Every unique clip is preserved. Transition overlap is included in the
-    scene-sum target, and no locked scene may exceed the usable source length.
+    The legacy proportional allocator remains available for isolated unit
+    tests and backwards-compatible tooling, but production render always
+    supplies narration_spans from the final WAV.
     """
     if not scenes:
         raise RenderError("Narration-locked rendering requires at least one scene.")
     if not 60.0 <= narration_seconds <= 75.0:
-        raise RenderError(f"Narration duration must remain between 60s and 75s; got {narration_seconds:.3f}s.")
+        raise RenderError(
+            f"Narration duration must remain between 60s and 75s; got {narration_seconds:.3f}s."
+        )
 
     policy = clip_policy or {
         "min_scene_seconds": 2.0,
         "max_scene_seconds": 20.0,
     }
+    if narration_spans is not None:
+        durations = _audio_timed_scene_durations(
+            scenes,
+            narration_seconds,
+            narration_spans,
+            policy,
+        )
+        locked: list[dict[str, Any]] = []
+        for scene, duration, span in zip(scenes, durations, narration_spans):
+            copy = dict(scene)
+            copy["duration"] = duration
+            copy["narration_span"] = {
+                "audio_start": float(span["audio_start"]),
+                "audio_end": float(span["audio_end"]),
+                "word_start_index": span.get("word_start_index"),
+                "word_end_index": span.get("word_end_index"),
+                "timing_source": span.get("timing_source"),
+            }
+            locked.append(copy)
+        return locked
+
     planned = [float(scene["duration"]) for scene in scenes]
     planned_total = sum(planned)
     if planned_total <= 0:
@@ -219,13 +326,12 @@ def narration_locked_scenes(
             raise RenderError(f"Scene {index} source is shorter than its minimum visual beat.")
 
     locked_durations = _bounded_weighted_allocation(planned, lower, upper, target_scene_sum)
-    locked: list[dict[str, Any]] = []
+    locked = []
     for scene, duration in zip(scenes, locked_durations):
         copy = dict(scene)
         copy["duration"] = duration
         locked.append(copy)
     return locked
-
 
 def assemble(scene_files: list[Path], scenes: list[dict[str, Any]], output: Path) -> None:
     command = ["ffmpeg", "-y"]
@@ -421,10 +527,13 @@ def render(manifest_path: Path, mode: str) -> Path:
     manifest = load_manifest(manifest_path)
     spec = validate_manifest(manifest, manifest_path.parent, mode=mode, check_files=True)
     narration_seconds = audio_duration(spec["audio_path"])
+    coverage_report = load_narration_coverage(manifest_path)
+    coverage = coverage_report["narration_coverage"]
     locked_scenes = narration_locked_scenes(
         spec["scenes"],
         narration_seconds,
         clip_policy=spec.get("clip_policy"),
+        narration_spans=coverage["scenes"],
     )
     width, height = SIZES[mode]
     output_template = str(manifest.get("output", {}).get("path", "rendered/{video_id}-{mode}.mp4"))
@@ -481,7 +590,15 @@ def main(argv: list[str] | None = None) -> int:
         manifest = load_manifest(args.manifest.resolve())
         spec = validate_manifest(manifest, args.manifest.resolve().parent, mode=args.mode, check_files=not args.validate_only)
         if args.validate_only:
-            print(json.dumps({"status": "VIDEO_CONTRACT_PASS", "video_id": spec["video_id"], "mode": args.mode, "scenes": len(spec["scenes"]), "timeline_seconds": round(spec["total_scene_duration"], 3)}, ensure_ascii=False))
+            coverage = load_narration_coverage(args.manifest.resolve())
+            print(json.dumps({
+                "status": "VIDEO_CONTRACT_PASS",
+                "video_id": spec["video_id"],
+                "mode": args.mode,
+                "scenes": len(spec["scenes"]),
+                "timeline_seconds": round(spec["total_scene_duration"], 3),
+                "narration_timing": coverage["narration_coverage"].get("timing_status"),
+            }, ensure_ascii=False))
         else:
             output = render(args.manifest.resolve(), args.mode)
             print(json.dumps({"status": "VIDEO_RENDER_COMPLETE", "video_id": spec["video_id"], "mode": args.mode, "output": str(output)}, ensure_ascii=False))
