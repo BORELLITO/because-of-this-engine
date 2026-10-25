@@ -1182,7 +1182,7 @@
     "reason": "Dark suspense grade with preserved action readability and brand-red separation."
   },
   "visual_story_contract": {
-    "version": "2.1",
+    "version": "2.2",
     "narration_is_master_context": true,
     "required_scene_fields": [
       "narration_excerpt",
