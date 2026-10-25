@@ -40,3 +40,20 @@ def test_production_path_never_emits_estimated_timestamps() -> None:
     source = MODULE_PATH.read_text(encoding="utf-8")
     assert "recover_missing=True" not in source
     assert "vosk_word_timestamps_with_bounded_anchor_recovery" not in source
+
+def test_alignment_accepts_explicit_than_then_asr_variant() -> None:
+    asr_words = [
+        {"word": "closer", "start": 1.0, "end": 1.2},
+        {"word": "then", "start": 1.2, "end": 1.4},
+        {"word": "before", "start": 1.4, "end": 1.7},
+    ]
+
+    start, end, cursor, positions = align_captions._align_chunk(
+        "closer than before.", asr_words, 0
+    )
+
+    assert start == 1.0
+    assert end == 1.7
+    assert cursor == 3
+    assert [item["canonical"] for item in positions] == ["closer", "than", "before"]
+\n
