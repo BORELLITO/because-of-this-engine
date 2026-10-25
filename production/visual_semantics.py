@@ -89,10 +89,17 @@ def aliases(value: Any) -> set[str]:
 def text_has_concept(text: str, concept: str) -> bool:
     normalized_text = normalize(text)
     wanted = aliases(concept)
-    return any(
-        phrase and (phrase in normalized_text or phrase.replace(" ", "") in normalized_text.replace(" ", ""))
-        for phrase in wanted
-    )
+    for phrase in wanted:
+        if not phrase:
+            continue
+        # Match complete words/phrases only.  Removing spaces creates false
+        # positives such as "sand" inside "hands and".
+        if " " in phrase:
+            if re.search(r"(?<![a-z0-9])" + re.escape(phrase) + r"(?![a-z0-9])", normalized_text):
+                return True
+        elif re.search(r"(?<![a-z0-9])" + re.escape(phrase) + r"(?![a-z0-9])", normalized_text):
+            return True
+    return False
 
 
 def _dimension_values(record: dict[str, Any], dimension: str) -> list[str]:
