@@ -195,7 +195,11 @@ def visual_match_report(scene: dict[str, Any], candidate: dict[str, Any], *, req
 
     claimed_match = str(scene.get("visual_match", "NEAR")).upper()
     needed_coverage = MATCH_COVERAGE.get(claimed_match, MATCH_COVERAGE["NEAR"])
-    min_anchors = 1 if role in {"symbolic", "atmosphere"} else 2
+    required_dimensions = sum(
+        1 for dimension in ("subjects", "actions", "environments", "objects")
+        if values(required.get(dimension))
+    )
+    min_anchors = 1 if role in {"symbolic", "atmosphere"} else min(2, required_dimensions)
     reasons: list[str] = []
     if forbidden_hits:
         reasons.append("forbidden concepts detected: " + ", ".join(forbidden_hits))
