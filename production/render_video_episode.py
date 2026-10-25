@@ -70,7 +70,7 @@ def scene_filter(
         )
         if grade.get("vignette", True) is True:
             filters.append("vignette=PI/5")
-    filters.extend([f"fps={FPS}", "setpts=PTS-STARTPTS", "format=yuv420p"])
+    filters.extend([f"fps={FPS}", "setpts=PTS-STARTPTS", "format=yuv420p", "setsar=1"])
     return ",".join(filters)
 
 
@@ -131,7 +131,7 @@ def xfade_filter(durations: list[float], transitions: list[dict[str, Any]]) -> s
         labels.append(label)
         previous = label
         accumulated += durations[index] - duration
-    parts.append(f"[{previous}]format=yuv420p[v]")
+    parts.append(f"[{previous}]format=yuv420p,setsar=1[v]")
     return ";".join(parts)
 
 
@@ -368,10 +368,10 @@ def mux_audio(
                 f"color=c=black:s={width}x{height}:r={FPS}:d={outro_seconds:.3f},"
                 f"fade=t=in:st=0:d=0.18,"
                 f"fade=t=out:st={card_start_fade:.3f}:d=0.30,"
-                "format=yuv420p,setpts=PTS-STARTPTS[outro_base]"
+                "format=yuv420p,setsar=1,setpts=PTS-STARTPTS[outro_base]"
             ),
             f"[outro_base]subtitles='{_escape_filter_path(loop_ass_path)}'[outro]",
-            "[main_visual]format=yuv420p,setpts=PTS-STARTPTS[main]",
+            "[main_visual]format=yuv420p,setsar=1,setpts=PTS-STARTPTS[main]",
             "[main][outro]concat=n=2:v=1:a=0[v]",
         ])
     else:
