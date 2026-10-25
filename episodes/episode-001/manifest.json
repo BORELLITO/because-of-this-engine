@@ -207,6 +207,13 @@
           "objects": [
             "glass_door"
           ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "figure",
+            "glass_door"
+          ],
+          "minimum_direct": 2
         }
       }
     },
@@ -320,7 +327,13 @@
           "laboratory",
           "beach",
           "office"
-        ]
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "lock"
+          ],
+          "minimum_direct": 1
+        }
       }
     },
     {
@@ -455,6 +468,13 @@
           "environments": [
             "interior"
           ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "security_guard",
+            "standing"
+          ],
+          "minimum_direct": 2
         }
       }
     },
@@ -572,6 +592,13 @@
           "environments": [
             "darkness"
           ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "light",
+            "darkness"
+          ],
+          "minimum_direct": 2
         }
       }
     },
@@ -684,7 +711,13 @@
           "beach",
           "silhouette",
           "person"
-        ]
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "glass_surface"
+          ],
+          "minimum_direct": 1
+        }
       }
     },
     {
@@ -818,7 +851,15 @@
           "laboratory",
           "beach",
           "office"
-        ]
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "silhouette",
+            "walking",
+            "hallway"
+          ],
+          "minimum_direct": 3
+        }
       }
     },
     {
@@ -952,7 +993,14 @@
           "laboratory",
           "beach",
           "office"
-        ]
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "person",
+            "running"
+          ],
+          "minimum_direct": 2
+        }
       }
     },
     {
@@ -1065,6 +1113,12 @@
           "environments": [
             "hallway"
           ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "hallway"
+          ],
+          "minimum_direct": 1
         }
       }
     },
@@ -1199,6 +1253,13 @@
           "actions": [
             "recording"
           ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "security_camera",
+            "recording"
+          ],
+          "minimum_direct": 2
         }
       }
     },
@@ -1323,16 +1384,23 @@
           "laboratory",
           "beach",
           "office"
-        ]
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "person",
+            "pointing"
+          ],
+          "minimum_direct": 2
+        }
       }
     },
     {
       "scene_id": "S11",
       "duration": 5,
       "story_beat": "payoff: time advances one minute to the final recording",
-      "visual_intent": "use falling time to tighten the last reveal",
+      "visual_intent": "show direct visual evidence of the hotel demolition while preserving the deleted-recording aftermath as a supporting mystery",
       "visual_function": "payoff",
-      "visual_match": "SYMBOLIC",
+      "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
       "match_score": 0.7,
       "focus": {
@@ -1351,9 +1419,9 @@
         "source_page_url": "https://mixkit.co/free-stock-video/sand-falling-from-an-hourglass-on-a-black-background-28901/",
         "license": "Mixkit Stock Video Free License",
         "rights_status": "APPROVED",
-        "approved_for_render": true,
+        "approved_for_render": false,
         "sha256": "c0634cf35616c07a3d63d5ce74200311dfc3c6469837f362c9702067f3c094c7",
-        "reuse_status": "FRESH",
+        "reuse_status": "PERMANENTLY_RETIRED",
         "episode_id": "because-of-this-episode-001",
         "author": "Mixkit contributor",
         "acquisition_timestamp": "2026-10-24T18:45:00Z",
@@ -1381,7 +1449,7 @@
           ],
           "reviewed": true,
           "basis": "source-page license/title plus three sampled local frames",
-          "notes": "The hourglass and falling sand are unambiguous; it is an honest symbolic representation of time passing, not literal demolition.",
+          "notes": "This asset is retired from narrative use: an hourglass only symbolizes time and does not directly represent the narrated hotel demolition.",
           "reviewer": "OpenAI visual audit",
           "reviewed_at": "2026-10-25T00:00:00Z",
           "review_method": "source-page license check plus three sampled local frames at 0.5s, 5.3s and 10.0s",
@@ -1408,18 +1476,19 @@
       },
       "narration_excerpt": "The hotel was demolished the next week. The recording was deleted.",
       "visual_semantics": {
-        "role": "symbolic",
+        "role": "explanatory",
         "required": {
-          "objects": [
-            "hourglass"
+          "actions": [
+            "demolition"
           ]
         },
         "preferred": {
-          "actions": [
-            "demolition"
-          ],
           "environments": [
+            "hotel",
             "darkness"
+          ],
+          "objects": [
+            "recording"
           ],
           "moods": [
             "eerie"
@@ -1432,9 +1501,15 @@
           "office"
         ],
         "critical": {
-          "objects": [
-            "hourglass"
+          "actions": [
+            "demolition"
           ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "demolition"
+          ],
+          "minimum_direct": 1
         }
       }
     },
@@ -1550,7 +1625,13 @@
           "laboratory",
           "beach",
           "office"
-        ]
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "security_camera"
+          ],
+          "minimum_direct": 1
+        }
       }
     }
   ],
