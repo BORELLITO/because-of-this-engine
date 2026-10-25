@@ -115,7 +115,27 @@
           ],
           "reviewed": false,
           "basis": "Replace with source page title plus browser visual review",
-          "notes": "Do not approve until this evidence is checked against the actual clip."
+          "notes": "Do not approve until this evidence is checked against the actual clip.",
+          "reviewer": "replace-reviewer",
+          "reviewed_at": "YYYY-MM-DDThh:mm:ssZ",
+          "review_method": "frame-by-frame browser review",
+          "sample_timestamps": [
+            0,
+            1,
+            2
+          ],
+          "observed_subjects": [
+            "replace-subject"
+          ],
+          "observed_actions": [
+            "replace-action"
+          ],
+          "observed_environments": [
+            "replace-environment"
+          ],
+          "observed_objects": [
+            "replace-object"
+          ]
         }
       },
       "narration_excerpt": "Replace with the exact sentence or phrase narrated in this beat.",
@@ -142,7 +162,12 @@
         },
         "forbidden": [
           "replace-forbidden-visual"
-        ]
+        ],
+        "critical": {
+          "subjects": [
+            "replace-subject"
+          ]
+        }
       }
     },
     {
@@ -196,7 +221,27 @@
           ],
           "reviewed": false,
           "basis": "Replace with source page title plus browser visual review",
-          "notes": "Do not approve until this evidence is checked against the actual clip."
+          "notes": "Do not approve until this evidence is checked against the actual clip.",
+          "reviewer": "replace-reviewer",
+          "reviewed_at": "YYYY-MM-DDThh:mm:ssZ",
+          "review_method": "frame-by-frame browser review",
+          "sample_timestamps": [
+            0,
+            1,
+            2
+          ],
+          "observed_subjects": [
+            "replace-subject"
+          ],
+          "observed_actions": [
+            "replace-action"
+          ],
+          "observed_environments": [
+            "replace-environment"
+          ],
+          "observed_objects": [
+            "replace-object"
+          ]
         }
       },
       "narration_excerpt": "Replace with the exact sentence or phrase narrated in this beat.",
@@ -223,7 +268,12 @@
         },
         "forbidden": [
           "replace-forbidden-visual"
-        ]
+        ],
+        "critical": {
+          "subjects": [
+            "replace-subject"
+          ]
+        }
       }
     },
     {
@@ -277,7 +327,27 @@
           ],
           "reviewed": false,
           "basis": "Replace with source page title plus browser visual review",
-          "notes": "Do not approve until this evidence is checked against the actual clip."
+          "notes": "Do not approve until this evidence is checked against the actual clip.",
+          "reviewer": "replace-reviewer",
+          "reviewed_at": "YYYY-MM-DDThh:mm:ssZ",
+          "review_method": "frame-by-frame browser review",
+          "sample_timestamps": [
+            0,
+            1,
+            2
+          ],
+          "observed_subjects": [
+            "replace-subject"
+          ],
+          "observed_actions": [
+            "replace-action"
+          ],
+          "observed_environments": [
+            "replace-environment"
+          ],
+          "observed_objects": [
+            "replace-object"
+          ]
         }
       },
       "narration_excerpt": "Replace with the exact sentence or phrase narrated in this beat.",
@@ -304,7 +374,12 @@
         },
         "forbidden": [
           "replace-forbidden-visual"
-        ]
+        ],
+        "critical": {
+          "subjects": [
+            "replace-subject"
+          ]
+        }
       }
     },
     {
@@ -362,7 +437,27 @@
           ],
           "reviewed": false,
           "basis": "Replace with source page title plus browser visual review",
-          "notes": "Do not approve until this evidence is checked against the actual clip."
+          "notes": "Do not approve until this evidence is checked against the actual clip.",
+          "reviewer": "replace-reviewer",
+          "reviewed_at": "YYYY-MM-DDThh:mm:ssZ",
+          "review_method": "frame-by-frame browser review",
+          "sample_timestamps": [
+            0,
+            1,
+            2
+          ],
+          "observed_subjects": [
+            "replace-subject"
+          ],
+          "observed_actions": [
+            "replace-action"
+          ],
+          "observed_environments": [
+            "replace-environment"
+          ],
+          "observed_objects": [
+            "replace-object"
+          ]
         }
       },
       "narration_excerpt": "Replace with the exact sentence or phrase narrated in this beat.",
@@ -389,7 +484,12 @@
         },
         "forbidden": [
           "replace-forbidden-visual"
-        ]
+        ],
+        "critical": {
+          "subjects": [
+            "replace-subject"
+          ]
+        }
       }
     }
   ],
@@ -434,5 +534,77 @@
     "forbidden_concepts_block": true,
     "keyword_only_matching": false,
     "human_visual_review_required": true
+  },
+  "story_graph": {
+    "version": "1.0",
+    "entities": [
+      {
+        "entity_id": "main_subject",
+        "canonical_name": "replace-main-subject",
+        "aliases": [
+          "replace-alias"
+        ],
+        "continuity_mode": "replace continuity rule"
+      }
+    ],
+    "beats": [
+      {
+        "scene_id": "S01",
+        "event": "replace with the causal event of this beat",
+        "state_before": "initial_state",
+        "state_after": "state_after_1",
+        "causal_role": "replace-causal-role",
+        "emotion": "replace-emotion",
+        "visual_motif": "replace-visual-motif",
+        "entities": [
+          "main_subject"
+        ],
+        "narration_excerpt": "Replace with the exact sentence or phrase narrated in this beat."
+      },
+      {
+        "scene_id": "S02",
+        "event": "replace with the causal event of this beat",
+        "state_before": "state_after_1",
+        "state_after": "state_after_2",
+        "causal_role": "replace-causal-role",
+        "emotion": "replace-emotion",
+        "visual_motif": "replace-visual-motif",
+        "entities": [
+          "main_subject"
+        ],
+        "narration_excerpt": "Replace with the exact sentence or phrase narrated in this beat."
+      },
+      {
+        "scene_id": "S03",
+        "event": "replace with the causal event of this beat",
+        "state_before": "state_after_2",
+        "state_after": "state_after_3",
+        "causal_role": "replace-causal-role",
+        "emotion": "replace-emotion",
+        "visual_motif": "replace-visual-motif",
+        "entities": [
+          "main_subject"
+        ],
+        "narration_excerpt": "Replace with the exact sentence or phrase narrated in this beat."
+      },
+      {
+        "scene_id": "S04",
+        "event": "replace with the causal event of this beat",
+        "state_before": "state_after_3",
+        "state_after": "state_after_4",
+        "causal_role": "replace-causal-role",
+        "emotion": "replace-emotion",
+        "visual_motif": "replace-visual-motif",
+        "entities": [
+          "main_subject"
+        ],
+        "narration_excerpt": "Replace with the exact sentence or phrase narrated in this beat."
+      }
+    ]
+  },
+  "narrative_coverage": {
+    "policy": "ordered_scene_excerpts_cover_canonical_script_once",
+    "allow_overlap": false,
+    "timing_source": "forced_alignment_sidecar"
   }
-}
+}\n
