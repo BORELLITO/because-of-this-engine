@@ -40,6 +40,7 @@ def _scene_report(scene: dict, mode: str) -> dict:
             "critical_missing": result.get("critical_missing"),
             "forbidden_hits": result.get("forbidden_hits"),
             "matched": result.get("matched"),
+            "narrative_alignment": result.get("narrative_alignment"),
             "reviewed": result.get("reviewed"),
             "evidence_basis": result.get("evidence_basis"),
             "pixel_evidence": result.get("pixel_evidence"),
