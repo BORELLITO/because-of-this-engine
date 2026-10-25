@@ -164,6 +164,29 @@ class VideoEngineV2Tests(unittest.TestCase):
         self.assertTrue(text_has_concept("sand falling in an hourglass", "sand"))
         self.assertFalse(text_has_concept("sand falling in an hourglass", "beach"))
 
+    def test_negative_story_beat_rejects_present_figure(self):
+        value = manifest()
+        scene = value["scenes"][0]
+        scene["visual_match"] = "NEAR"
+        scene["visual_semantics"] = {
+            "role": "literal",
+            "required": {"environments": ["hallway"]},
+            "preferred": {"objects": ["footprints"]},
+            "forbidden": ["person", "silhouette"],
+        }
+        asset = {
+            "visual_evidence": {
+                "source_title": "Ghost in the hall",
+                "subjects": ["silhouette"],
+                "environments": ["hallway"],
+                "reviewed": True,
+                "basis": "test fixture",
+            }
+        }
+        report = visual_match_report(scene, asset, require_review=True)
+        self.assertEqual(report["status"], "BLOCKED")
+        self.assertIn("silhouette", report["forbidden_hits"])
+
     def test_single_required_visual_dimension_is_allowed(self):
         value = manifest()
         scene = value["scenes"][0]
