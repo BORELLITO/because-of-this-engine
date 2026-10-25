@@ -58,6 +58,25 @@ unoccupied search intent, while the forbidden concepts remain hard blockers.
 Editorial review notes are never used as visual evidence, preventing a note
 such as "not a guard" from creating a false match.
 
+## Story intelligence and evidence
+
+Before asset search, the manifest must contain a story graph with stable
+entities, aliases, causal beats, temporal states and a visual motif for every
+scene. Each scene's narration excerpt is then matched as an ordered,
+non-overlapping subsequence of the canonical script. Missing paragraphs,
+duplicated excerpts and out-of-order beats block the job.
+
+After Gemini TTS and Vosk forced alignment, the same gate attaches real
+word-time spans to every scene. The renderer uses those spans as its master
+clock; it does not proportionally stretch scenes away from the words being
+spoken. The alignment report is required before validate-only or render.
+
+A semantic match is not pixel proof. Final release evidence must include the
+reviewer, review timestamp and method, at least three sampled timestamps,
+observed subjects/actions/environments/objects, and an action window for
+motion-sensitive beats. Source URLs, titles and editorial notes can guide
+discovery but cannot satisfy a final visual anchor.
+
 ## Timeline and edit
 
 Narration is the master clock. Scene durations are allocated to the measured
