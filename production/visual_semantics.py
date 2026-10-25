@@ -13,7 +13,7 @@ from typing import Any
 
 DIMENSIONS = ("subjects", "actions", "environments", "objects", "moods", "composition")
 ALLOWED_ROLES = {"literal", "explanatory", "symbolic", "atmosphere"}
-MOTION_SENSITIVE_ACTIONS = {"running", "pointing", "opening", "recording", "flickering", "demolition"}
+MOTION_SENSITIVE_ACTIONS = {"running", "walking", "pointing", "opening", "recording", "flickering", "demolition"}
 
 CONCEPT_ALIASES: dict[str, set[str]] = {
     "person": {"person", "people", "human", "man", "woman", "figure", "guard", "officer"},
@@ -23,6 +23,7 @@ CONCEPT_ALIASES: dict[str, set[str]] = {
     "interior": {"interior", "inside", "room", "building"},
     "hallway": {"hallway", "corridor", "passage", "hall"},
     "glass_door": {"glass door", "glass", "windowed door", "glass wall"},
+    "glass_surface": {"glass surface", "glass", "window", "windows", "glass window", "glass windows"},
     "sealed_room": {"sealed room", "sealed", "locked room", "locked door", "locked"},
     "security_camera": {"security camera", "surveillance camera", "cctv", "camera"},
     "clock": {"clock", "analog clock", "wall clock", "time", "3:17", "3:18"},
@@ -46,6 +47,7 @@ CONCEPT_ALIASES: dict[str, set[str]] = {
     "opening": {"opening", "open", "opened", "door opens"},
     "flickering": {"flickering", "flicker", "flashing", "lights out", "power outage"},
     "running": {"running", "run", "runs", "fleeing", "escape"},
+    "walking": {"walking", "walk", "walks", "jogging", "jog"},
     "demolition": {"demolished", "demolition", "destroyed", "wrecking"},
     "eerie": {"eerie", "ominous", "sinister", "suspense", "mysterious", "creepy"},
     "close_up": {"close up", "close-up", "detail shot", "macro"},
