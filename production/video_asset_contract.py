@@ -323,6 +323,30 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
         visual_semantics = scene.get("visual_semantics")
         if not isinstance(visual_semantics, dict):
             raise VideoContractError(f"Scene {scene_id} requires visual_semantics.")
+        narrative_anchors = visual_semantics.get("narrative_anchors")
+        if not isinstance(narrative_anchors, dict):
+            raise VideoContractError(
+                f"Scene {scene_id} requires visual_semantics.narrative_anchors."
+            )
+        direct_required = narrative_anchors.get("direct_required")
+        if (
+            not isinstance(direct_required, list)
+            or not direct_required
+            or any(not isinstance(item, str) or not item.strip() for item in direct_required)
+        ):
+            raise VideoContractError(
+                f"Scene {scene_id} requires at least one direct narrative anchor."
+            )
+        minimum_direct = narrative_anchors.get("minimum_direct", 1)
+        if (
+            isinstance(minimum_direct, bool)
+            or not isinstance(minimum_direct, int)
+            or minimum_direct < 1
+            or minimum_direct > len(direct_required)
+        ):
+            raise VideoContractError(
+                f"Scene {scene_id} narrative_anchors.minimum_direct is invalid."
+            )
         if check_files:
             excerpt = re.sub(r"\\s+", " ", str(scene["narration_excerpt"]).lower()).strip()
             if excerpt not in script_text:
