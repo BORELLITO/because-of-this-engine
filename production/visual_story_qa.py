@@ -16,7 +16,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from production.video_asset_contract import load_manifest
-from production.visual_semantics import require_visual_fit
+from production.visual_semantics import require_visual_fit, visual_match_report
 
 
 def _scene_report(scene: dict, mode: str) -> dict:
@@ -33,7 +33,7 @@ def _scene_report(scene: dict, mode: str) -> dict:
         candidate = scene.get("asset")
         if not isinstance(candidate, dict):
             raise ValueError("scene asset is missing")
-        result = require_visual_fit(scene, candidate, mode=mode)
+        result = visual_match_report(scene, candidate, require_review=True)
         qa.update({
             "semantic_score": result.get("score"),
             "coverage": result.get("coverage"),
@@ -43,7 +43,14 @@ def _scene_report(scene: dict, mode: str) -> dict:
             "missing": result.get("missing"),
             "forbidden_hits": result.get("forbidden_hits"),
             "matched": result.get("matched"),
+            "reviewed": result.get("reviewed"),
+            "evidence_basis": result.get("evidence_basis"),
         })
+        if result.get("status") != "PASS":
+            return qa
+        # Keep the production assertion in this path as a second fail-closed
+        # check, including the final-mode review rule.
+        require_visual_fit(scene, candidate, mode=mode)
     except (ValueError, TypeError, AttributeError) as exc:
         qa.update({
             "status": "BLOCKED",
@@ -54,6 +61,8 @@ def _scene_report(scene: dict, mode: str) -> dict:
             "missing": {},
             "forbidden_hits": [],
             "matched": {},
+            "reviewed": False,
+            "evidence_basis": "",
         })
     return qa
 
