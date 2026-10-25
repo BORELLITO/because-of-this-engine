@@ -137,7 +137,7 @@ def finalize(manifest_path: Path, release_report_path: Path, delivery_receipt_pa
             "narration_sha256": sha256_file(audio),
             "voice_metadata_sha256": sha256_file(audio.with_name(audio.name + ".json")) if audio.with_name(audio.name + ".json").is_file() else None,
             "captions_sha256": sha256_file(captions),
-            "footage_sha256": canonical_hash([item["sha256"] for item in assets]),
+            "footage_sha256": canonical_hash([item["asset"]["sha256"] for item in assets]),
             "timeline_sha256": _fingerprint_timeline(manifest),
             "render_sha256": sha256_file(output),
         },
