@@ -16,7 +16,7 @@ class VideoFingerprintTests(unittest.TestCase):
         path = command[command.index("-i") + 1]
         # Simulate distinct RGB content at every sampled position.  The
         # important regression is that the detector never depends on frame 0.
-        base = 1 if "clip-a" in path else 2
+        base = 32 if "clip-a" in path else 64
         value = min(255, base + int(timestamp * 10))
         return subprocess.CompletedProcess(command, 0, stdout=bytes([value]) * FINGERPRINT_FRAME_BYTES, stderr=b"")
 
