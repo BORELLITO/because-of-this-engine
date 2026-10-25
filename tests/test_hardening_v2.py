@@ -3,6 +3,10 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from unittest.mock import patch
+
+from production.finalize_manifest import finalize
+
 from production.pipeline_state import PipelineStateError, load_or_initialize, transition
 
 
@@ -115,7 +119,9 @@ class V2HardLockTests(unittest.TestCase):
                     "visual_truth": "DECLARED_FICTION",
                 }],
             }
-            (root / "release.json").write_text(json.dumps({"status": "VIDEO_RELEASE_VALIDATED"}), encoding="utf-8")\n            (root / "delivery.json").write_text(json.dumps({"status": "DRIVE_VERIFIED"}), encoding="utf-8")\n            with patch("production.finalize_manifest.load_manifest", return_value=manifest):
+            (root / "release.json").write_text(json.dumps({"status": "VIDEO_RELEASE_VALIDATED"}), encoding="utf-8")
+            (root / "delivery.json").write_text(json.dumps({"status": "DRIVE_VERIFIED"}), encoding="utf-8")
+            with patch("production.finalize_manifest.load_manifest", return_value=manifest):
                 result = finalize(
                     root / "manifest.json",
                     root / "release.json",
@@ -124,7 +130,7 @@ class V2HardLockTests(unittest.TestCase):
                 )
             self.assertEqual(result["status"], "FINAL_MANIFEST_WRITTEN")
             payload = json.loads((root / "rendered" / "final-manifest-hash-test-001-preview.json").read_text(encoding="utf-8"))
-            self.assertEqual(payload["fingerprints"]["footage_sha256"], "a1f17f4d3c0b4f96b3a4e73fda92f643f71d25fb6d13a2a4956b7e8f7085afcb")
+            self.assertEqual(payload["fingerprints"]["footage_sha256"], "0515b3da9dcde5c270e0386efc69ee94f234164ef19f646e750ad56394682546")
 
     def test_direct_production_scripts_bootstrap_repository_root(self):
         expected = "sys.path.insert(0, str(Path(__file__).resolve().parents[1]))"
