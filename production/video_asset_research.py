@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Create review queues for approved-stock video discovery.
+"""Create review queues for semantically approved stock-video discovery.
 
-The queue is intentionally video-only and fail-closed. It asks for one
-distinct clip per narrative beat, ranks exact matches above semantic fallbacks,
-and records the reason a near match may be considered.
+The queue is video-only and fail-closed.  Search phrases are generated from
+the scene's narrative excerpt and visual contract, while candidate ranking uses
+subject/action/environment/object evidence rather than isolated keyword overlap.
 """
 
 from __future__ import annotations
@@ -15,6 +15,11 @@ from pathlib import Path
 from typing import Any, Callable
 
 from production.editorial_policy import clip_quantity_policy, clip_quantity_report
+from production.visual_semantics import (
+    DIMENSIONS,
+    evidence_text,
+    visual_match_report,
+)
 
 PROVIDER_ORDER = ("mixkit", "pixabay", "pexels")
 FALLBACK_LADDER = ("EXACT", "NEAR", "EXPLANATORY", "SYMBOLIC", "ATMOSPHERE")
@@ -30,57 +35,89 @@ class ResearchError(ValueError):
 
 
 def _tokens(value: Any) -> list[str]:
-    return [word for word in re.findall(r"[a-z0-9]+", str(value).lower()) if word not in _STOP_WORDS]
+    return [
+        word for word in re.findall(r"[a-z0-9:]+", str(value).lower())
+        if word not in _STOP_WORDS
+    ]
+
+
+def _semantic_terms(scene: dict[str, Any]) -> list[str]:
+    spec = scene.get("visual_semantics") or {}
+    terms: list[str] = []
+    if isinstance(spec, dict):
+        for group in ("required", "preferred"):
+            values = spec.get(group) or {}
+            if isinstance(values, dict):
+                for dimension in DIMENSIONS:
+                    for value in values.get(dimension, []) or []:
+                        terms.extend(_tokens(value))
+    return terms
+
+
+def query_variants_for_scene(scene: dict[str, Any]) -> list[str]:
+    """Build several focused queries, keeping the narrative context intact."""
+    excerpt = scene.get("narration_excerpt", "")
+    spec = scene.get("visual_semantics") or {}
+    required: list[str] = []
+    if isinstance(spec, dict):
+        groups = spec.get("required") or {}
+        if isinstance(groups, dict):
+            for dimension in ("subjects", "actions", "environments", "objects"):
+                required.extend(str(item) for item in groups.get(dimension, []) or [])
+    if not required:
+        required.extend(_tokens(scene.get("story_beat", "")))
+        required.extend(_tokens(scene.get("visual_intent", "")))
+
+    unique: list[str] = []
+    for value in required + _semantic_terms(scene) + _tokens(excerpt):
+        for word in _tokens(value):
+            if word not in unique:
+                unique.append(word)
+    if not unique:
+        raise ResearchError(f"Scene {scene.get('scene_id', '?')} lacks narrative visual language.")
+
+    primary = " ".join(unique[:12])
+    variants = [primary]
+    if len(unique) >= 5:
+        variants.append(" ".join(unique[:6]))
+    if excerpt:
+        excerpt_query = " ".join(_tokens(excerpt)[:10])
+        if excerpt_query and excerpt_query not in variants:
+            variants.append(excerpt_query)
+    return variants[:3]
 
 
 def query_for_scene(scene: dict[str, Any]) -> str:
-    """Build a search query from action, emotion and narrative function."""
-    values = [
-        scene.get("story_beat", ""),
-        scene.get("visual_intent", ""),
-        scene.get("visual_function", ""),
-        scene.get("shot_role", ""),
-        scene.get("emotion", ""),
-        scene.get("visual_symbol", ""),
-    ]
-    unique: list[str] = []
-    for word in _tokens(" ".join(str(value) for value in values)):
-        if word not in unique:
-            unique.append(word)
-    if not unique:
-        raise ResearchError(f"Scene {scene.get('scene_id', '?')} lacks story language for search.")
-    return " ".join(unique[:14])
+    return query_variants_for_scene(scene)[0]
 
 
 def _candidate_text(candidate: dict[str, Any]) -> str:
-    keys = (
-        "title", "description", "tags", "category", "mood", "motion",
-        "composition", "visual_function", "emotion",
-    )
-    return " ".join(str(candidate.get(key, "")) for key in keys)
+    return evidence_text(candidate)
 
 
 def _fallback_tier(candidate: dict[str, Any], scene: dict[str, Any]) -> str:
     declared = str(candidate.get("visual_match", "")).upper()
     if declared in FALLBACK_LADDER:
         return declared
-    overlap = set(_tokens(query_for_scene(scene))) & set(_tokens(_candidate_text(candidate)))
-    if len(overlap) >= 4:
+    guard = visual_match_report(scene, candidate)
+    score = float(guard.get("score", 0.0))
+    if score >= 0.80:
         return "EXACT"
-    if len(overlap) >= 2:
+    if score >= 0.66:
         return "NEAR"
-    if candidate.get("visual_function") == scene.get("visual_function"):
+    if score >= 0.50:
         return "EXPLANATORY"
-    if candidate.get("mood") or candidate.get("emotion"):
+    if score >= 0.34:
         return "SYMBOLIC"
     return "ATMOSPHERE"
 
 
 def score_candidate(candidate: dict[str, Any], scene: dict[str, Any]) -> float:
-    query = set(_tokens(query_for_scene(scene)))
-    searchable = set(_tokens(_candidate_text(candidate)))
-    overlap = len(query & searchable) / max(len(query), 1)
+    guard = visual_match_report(scene, candidate, require_review=False)
+    if guard.get("status") == "BLOCKED":
+        return 0.0
 
+    semantic = float(guard.get("score", 0.0))
     duration = float(candidate.get("duration_seconds", 0) or 0)
     target = float(scene.get("duration", 1) or 1)
     duration_fit = min(duration / target, target / duration) if duration > 0 else 0.0
@@ -88,13 +125,12 @@ def score_candidate(candidate: dict[str, Any], scene: dict[str, Any]) -> float:
     width = int(candidate.get("width", 0) or 0)
     height = int(candidate.get("height", 0) or 0)
     orientation = 1.0 if height >= width and height > 0 else 0.45
-
-    scene_function = str(scene.get("visual_function", "")).lower()
-    function_fit = 1.0 if scene_function and scene_function in _candidate_text(candidate).lower() else 0.0
     provider = 0.90 if candidate.get("provider") == "mixkit" else 0.75 if candidate.get("provider") == "pixabay" else 0.70
     rights = 1.0 if candidate.get("license") or candidate.get("rights_status") == "APPROVED" else 0.0
 
-    return round(min(1.0, 0.45 * overlap + 0.15 * duration_fit + 0.10 * orientation + 0.10 * function_fit + 0.10 * provider + 0.10 * rights), 4)
+    # Semantic fit dominates.  Duration, vertical suitability and rights are
+    # tie-breakers, never substitutes for narrative relevance.
+    return round(min(1.0, 0.68 * semantic + 0.12 * duration_fit + 0.08 * orientation + 0.06 * provider + 0.06 * rights), 4)
 
 
 def _candidate_key(candidate: dict[str, Any]) -> str:
@@ -113,7 +149,10 @@ def _prepare_candidate(candidate: dict[str, Any], provider: str, scene: dict[str
         "rights_status": "REVIEW_REQUIRED",
         "fallback_tier": _fallback_tier(candidate, scene),
     }
+    guard = visual_match_report(scene, prepared, require_review=False)
+    prepared["visual_guard"] = guard
     prepared["relevance_score"] = score_candidate(prepared, scene)
+    prepared["selection_status"] = "REVIEW_REQUIRED" if guard.get("status") == "PASS" else "REJECTED_SEMANTIC_MISMATCH"
     return prepared
 
 
@@ -130,8 +169,9 @@ def build_queue(
 
     results = []
     for scene in manifest.get("scenes", []):
-        query = query_for_scene(scene)
+        variants = query_variants_for_scene(scene)
         candidates = []
+        rejected = []
         errors = []
         unique_keys: set[str] = set()
         for provider in PROVIDER_ORDER:
@@ -139,31 +179,42 @@ def build_queue(
             if not searcher:
                 continue
             try:
-                for raw in searcher(query, limit):
-                    candidate = _prepare_candidate(raw, provider, scene)
-                    key = _candidate_key(candidate)
-                    if key in unique_keys:
-                        continue
-                    unique_keys.add(key)
-                    candidates.append(candidate)
+                for query in variants:
+                    for raw in searcher(query, limit):
+                        candidate = _prepare_candidate(raw, provider, scene)
+                        key = _candidate_key(candidate)
+                        if key in unique_keys:
+                            continue
+                        unique_keys.add(key)
+                        if candidate["selection_status"] == "REJECTED_SEMANTIC_MISMATCH":
+                            rejected.append(candidate)
+                        else:
+                            candidates.append(candidate)
             except Exception as exc:
                 errors.append(f"{provider}: {exc}")
 
-        candidates.sort(key=lambda item: (item["relevance_score"], item["fallback_tier"] == "EXACT"), reverse=True)
+        candidates.sort(key=lambda item: item["relevance_score"], reverse=True)
+        rejected.sort(key=lambda item: item["visual_guard"].get("score", 0.0), reverse=True)
         results.append({
             "scene_id": scene.get("scene_id"),
-            "query": query,
+            "narration_excerpt": scene.get("narration_excerpt"),
+            "query": variants[0],
+            "query_variants": variants,
             "approval_status": "REVIEW_REQUIRED",
             "fallback_ladder": list(FALLBACK_LADDER),
             "candidates": candidates[: max(1, limit) * len(PROVIDER_ORDER)],
+            "rejected_candidates": rejected[: max(1, limit)],
             "provider_errors": errors,
             "image_fallback": "FORBIDDEN",
-            "selection_rule": "one fresh source clip per narrative beat; never repeat source, hash or animation fingerprint",
+            "selection_rule": (
+                "match the complete narrative beat using subject, action, environment "
+                "and object evidence; reject forbidden or context-free filler"
+            ),
         })
 
     quantity = clip_quantity_report(len(results), policy)
     return {
-        "schema_version": "2.0",
+        "schema_version": "2.1",
         "video_id": manifest.get("video_id"),
         "research_type": "approved_video_asset_queue",
         "providers": list(PROVIDER_ORDER),
@@ -176,6 +227,9 @@ def build_queue(
             "maximum_unique_clips": policy["max_clips"],
             "no_repeat_animation": True,
             "image_fallback": "FORBIDDEN",
+            "keyword_only_matching": False,
+            "semantic_dimensions": ["subjects", "actions", "environments", "objects", "moods", "composition"],
+            "forbidden_concepts_block": True,
         },
     }
 
@@ -195,6 +249,7 @@ def main() -> int:
             "scenes": len(result["scenes"]),
             "clip_quantity_gate": result["clip_quantity_gate"],
             "image_fallback": "FORBIDDEN",
+            "keyword_only_matching": False,
         }, ensure_ascii=False))
         return 0
     except (OSError, ValueError, json.JSONDecodeError) as exc:
