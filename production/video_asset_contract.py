@@ -71,26 +71,68 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-def perceptual_hash(path: Path) -> str:
-    """Return a small deterministic video fingerprint from the first frame.
+FINGERPRINT_VERSION = 2
+FINGERPRINT_SAMPLE_FRACTIONS = (0.15, 0.35, 0.50, 0.65, 0.85)
+FINGERPRINT_FRAME_WIDTH = 24
+FINGERPRINT_FRAME_HEIGHT = 24
+FINGERPRINT_FRAME_BYTES = FINGERPRINT_FRAME_WIDTH * FINGERPRINT_FRAME_HEIGHT * 3
 
-    This is deliberately not used as a copyright identifier.  It catches the
-    common mistake of reusing the same clip under a different filename or
-    crop.  FFmpeg is already a runtime dependency of the renderer.
+
+def perceptual_hash(path: Path, *, duration: float | None = None) -> str:
+    """Return a deterministic multi-frame visual fingerprint for an asset.
+
+    The previous implementation fingerprinted only the first grayscale frame.
+    Dark clips commonly begin with a near-black frame, collapsing unrelated
+    animations to the same all-f hash and blocking valid episodes.  v2 samples
+    five normalized positions across the clip, preserves coarse RGB structure,
+    and quantizes the pixels before hashing for stability across ordinary
+    encoding differences.  This is an anti-reuse signal, not a copyright
+    identifier.
     """
-    command = [
-        "ffmpeg", "-v", "error", "-i", str(path), "-frames:v", "1",
-        "-vf", "scale=16:16,format=gray", "-f", "rawvideo", "-",
+    if duration is None:
+        duration = float(ffprobe(path)["duration"])
+    if duration <= 0:
+        raise VideoContractError(f"Video duration is not positive: {path}")
+
+    # Keep every sample inside the media.  The small margin avoids requesting
+    # a frame exactly at EOF, which is unreliable across codecs.
+    margin = min(0.05, duration / 10.0)
+    timestamps = [
+        min(max(duration * fraction, 0.0), max(0.0, duration - margin))
+        for fraction in FINGERPRINT_SAMPLE_FRACTIONS
     ]
-    try:
-        raw = subprocess.run(command, check=True, capture_output=True, timeout=60).stdout
-    except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired) as exc:
-        raise VideoContractError(f"Could not fingerprint video asset: {path}") from exc
-    if len(raw) != 256:
-        raise VideoContractError(f"Video asset has no readable first frame: {path}")
-    average = sum(raw) / len(raw)
-    bits = "".join("1" if value >= average else "0" for value in raw)
-    return f"{int(bits, 2):064x}"
+    normalized_frames: list[bytes] = []
+    for timestamp in timestamps:
+        command = [
+            "ffmpeg", "-v", "error",
+            "-ss", f"{timestamp:.3f}", "-i", str(path),
+            "-frames:v", "1", "-an",
+            "-vf",
+            (
+                f"scale={FINGERPRINT_FRAME_WIDTH}:{FINGERPRINT_FRAME_HEIGHT}:"
+                "force_original_aspect_ratio=decrease,"
+                f"pad={FINGERPRINT_FRAME_WIDTH}:{FINGERPRINT_FRAME_HEIGHT}:"
+                "(ow-iw)/2:(oh-ih)/2,format=rgb24"
+            ),
+            "-f", "rawvideo", "-pix_fmt", "rgb24", "-",
+        ]
+        try:
+            raw = subprocess.run(
+                command, check=True, capture_output=True, timeout=60
+            ).stdout
+        except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired) as exc:
+            raise VideoContractError(
+                f"Could not fingerprint video asset at {timestamp:.3f}s: {path}"
+            ) from exc
+        if len(raw) != FINGERPRINT_FRAME_BYTES:
+            raise VideoContractError(
+                f"Video asset has no readable fingerprint frame at {timestamp:.3f}s: {path}"
+            )
+        # Four-bit quantization suppresses tiny codec noise while retaining
+        # enough spatial and chromatic structure to distinguish clips.
+        normalized_frames.append(bytes(value >> 4 for value in raw))
+
+    return hashlib.sha256(b"".join(normalized_frames)).hexdigest()
 
 
 def _rate(value: str | None) -> float | None:
