@@ -162,6 +162,7 @@ class VideoEngineV2Tests(unittest.TestCase):
         self.assertFalse(text_has_concept("hands and face against glass", "beach"))
         self.assertFalse(text_has_concept("a dark interior", "sand"))
         self.assertTrue(text_has_concept("sand falling in an hourglass", "sand"))
+        self.assertFalse(text_has_concept("sand falling in an hourglass", "beach"))
 
     def test_single_required_visual_dimension_is_allowed(self):
         value = manifest()
