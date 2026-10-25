@@ -134,8 +134,33 @@
             "eerie"
           ],
           "reviewed": true,
-          "basis": "Mixkit source page title and browser visual review",
-          "notes": "Figure is visibly behind a glass surface in a dark interior."
+          "basis": "source-page license/title plus three sampled local frames",
+          "notes": "The sampled frames consistently show the same dark figure pressed against a glass boundary; no hotel-specific claim is made.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames at 0.5s, 10.0s and 19.5s",
+          "observed_subjects": [
+            "silhouette"
+          ],
+          "observed_actions": [
+            "standing",
+            "pressing"
+          ],
+          "observed_environments": [
+            "interior"
+          ],
+          "observed_objects": [
+            "glass_door"
+          ],
+          "sample_timestamps": [
+            0.5,
+            10,
+            19.5
+          ],
+          "usable_window": {
+            "in": 0,
+            "out": 20.2
+          }
         }
       },
       "narration_excerpt": "At exactly 3:17 every morning, the security camera inside an abandoned hotel recorded the same figure standing behind the glass door.",
@@ -487,8 +512,32 @@
             "eerie"
           ],
           "reviewed": true,
-          "basis": "Mixkit source page title and browser visual review",
-          "notes": "Symbolic lighting beat; no literal hotel claim is made."
+          "basis": "source-page license/title plus three sampled local frames",
+          "notes": "The candle flame is visibly isolated against darkness and functions as a symbolic lights-out beat.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames at 0.5s, 6.5s and 12.3s",
+          "observed_subjects": [],
+          "observed_actions": [
+            "flickering",
+            "lighting"
+          ],
+          "observed_environments": [
+            "darkness"
+          ],
+          "observed_objects": [
+            "light",
+            "candle"
+          ],
+          "sample_timestamps": [
+            0.5,
+            6.5,
+            12.3
+          ],
+          "usable_window": {
+            "in": 0,
+            "out": 12.95
+          }
         }
       },
       "narration_excerpt": "Then the lights went out.",
@@ -1331,8 +1380,30 @@
             "eerie"
           ],
           "reviewed": true,
-          "basis": "Mixkit source page title and browser visual review",
-          "notes": "Symbolic passage of time; it does not claim to show the hotel demolition."
+          "basis": "source-page license/title plus three sampled local frames",
+          "notes": "The hourglass and falling sand are unambiguous; it is an honest symbolic representation of time passing, not literal demolition.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames at 0.5s, 5.3s and 10.0s",
+          "observed_subjects": [],
+          "observed_actions": [
+            "falling"
+          ],
+          "observed_environments": [
+            "darkness"
+          ],
+          "observed_objects": [
+            "hourglass"
+          ],
+          "sample_timestamps": [
+            0.5,
+            5.3,
+            10
+          ],
+          "usable_window": {
+            "in": 0,
+            "out": 10.6
+          }
         }
       },
       "narration_excerpt": "The hotel was demolished the next week. The recording was deleted.",
