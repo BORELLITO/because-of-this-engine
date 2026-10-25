@@ -4,7 +4,7 @@ from pathlib import Path
 
 from production.video_asset_contract import VideoContractError, validate_manifest
 from production.render_video_episode import ass_color, narration_locked_scenes, scene_filter, xfade_filter, write_brand_ass
-from production.video_asset_research import build_queue
+from production.video_asset_research import build_queue, query_variants_for_scene
 from production.visual_semantics import text_has_concept, visual_match_report
 
 
@@ -252,6 +252,22 @@ class VideoEngineV2Tests(unittest.TestCase):
         }
         with self.assertRaisesRegex(VideoContractError, "forbidden concepts detected"):
             validate_manifest(value, Path("/tmp"), check_files=False)
+
+    def test_research_translates_negative_narrative_context(self):
+        value = manifest()
+        scene = value["scenes"][0]
+        scene["narration_excerpt"] = "They found no footprints and no person inside the hallway."
+        scene["visual_semantics"] = {
+            "role": "literal",
+            "required": {"environments": ["hallway"]},
+            "preferred": {"objects": ["footprints"]},
+            "forbidden": ["person", "silhouette"],
+        }
+        queries = query_variants_for_scene(scene)
+        self.assertIn("empty", queries[0])
+        self.assertIn("unoccupied", queries[0])
+        self.assertNotIn("person", queries[0].split())
+        self.assertNotIn("footprints", queries[0].split())
 
     def test_research_quarantines_context_free_candidate(self):
         value = manifest()
