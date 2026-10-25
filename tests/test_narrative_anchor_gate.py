@@ -52,6 +52,7 @@ class NarrativeAnchorGateTests(unittest.TestCase):
     def test_direct_narrative_anchor_passes(self) -> None:
         scene = self._scene()
         direct = candidate(action="demolition")
+        direct["visual_evidence"]["objects"] = ["hourglass"]
         report = visual_match_report(scene, direct, require_review=True)
         self.assertEqual(report["status"], "PASS")
         self.assertEqual(report["narrative_alignment"]["direct_hits"], ["demolition"])
