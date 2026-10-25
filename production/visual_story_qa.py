@@ -21,7 +21,9 @@ def main() -> int:
     args = parser.parse_args()
     try:
         manifest = load_manifest(args.manifest)
-        spec = validate_manifest(manifest, args.manifest.parent, mode=args.mode, check_files=True)
+        # This gate runs before TTS. Drive hydration already proved the files exist;
+        # visual-story QA must remain independent of narration/caption artifacts.
+        spec = validate_manifest(manifest, args.manifest.parent, mode=args.mode, check_files=False)
         scenes = []
         for scene in spec["scenes"]:
             qa = scene.get("visual_qa") or {}
