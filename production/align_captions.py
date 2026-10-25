@@ -81,6 +81,10 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 "at": [["at"], ["ət"]],
                 "is": [["is"], ["iz"]],
                 "was": [["was"], ["wuz"]],
+                # Vosk may realize the unstressed vowel in “than” as “then”.
+                # This is an explicit lexical ASR variant only; timing still
+                # comes from the real Vosk word timestamp in the final WAV.
+                "than": [["than"], ["then"]],
                 "it": [["it"], ["ət"]],
             }
             result.append((raw[index], short_word_variants.get(token, [[token]])))
