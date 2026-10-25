@@ -164,6 +164,35 @@ class VideoEngineV2Tests(unittest.TestCase):
         self.assertTrue(text_has_concept("sand falling in an hourglass", "sand"))
         self.assertFalse(text_has_concept("sand falling in an hourglass", "beach"))
 
+    def test_editorial_notes_cannot_create_semantic_matches(self):
+        value = manifest()
+        scene = value["scenes"][0]
+        scene["visual_match"] = "EXACT"
+        scene["visual_semantics"] = {
+            "role": "literal",
+            "required": {
+                "subjects": ["security_guard"],
+                "actions": ["standing"],
+                "environments": ["interior"],
+            },
+            "preferred": {},
+            "forbidden": [],
+        }
+        asset = {
+            "visual_evidence": {
+                "source_title": "Woman in a dim room",
+                "subjects": ["person"],
+                "actions": ["standing"],
+                "environments": ["interior"],
+                "notes": "This is not a security guard; recollect the clip.",
+                "reviewed": True,
+                "basis": "test fixture",
+            }
+        }
+        report = visual_match_report(scene, asset, require_review=True)
+        self.assertEqual(report["status"], "BLOCKED")
+        self.assertIn("security_guard", report["missing"]["subjects"])
+
     def test_negative_story_beat_rejects_present_figure(self):
         value = manifest()
         scene = value["scenes"][0]
