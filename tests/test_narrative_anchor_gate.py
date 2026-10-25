@@ -60,6 +60,29 @@ class NarrativeAnchorGateTests(unittest.TestCase):
         self.assertEqual(qa["status"], "BLOCKED")
         self.assertIn("narrative_anchors.direct_required is mandatory", qa["reason"])
 
+    def test_figure_anchor_accepts_silhouette_alias(self) -> None:
+        scene = {
+            "scene_id": "S01",
+            "visual_match": "EXACT",
+            "visual_semantics": {
+                "role": "literal",
+                "required": {"subjects": ["silhouette"]},
+                "critical": {"subjects": ["silhouette"]},
+                "narrative_anchors": {
+                    "direct_required": ["figure"],
+                    "minimum_direct": 1,
+                },
+            },
+        }
+        direct = candidate(action="standing")
+        direct["visual_evidence"]["subjects"] = ["silhouette"]
+        direct["visual_evidence"]["observed_subjects"] = ["silhouette"]
+        direct["visual_evidence"]["environments"] = ["interior"]
+        direct["visual_evidence"]["observed_environments"] = ["interior"]
+        report = visual_match_report(scene, direct, require_review=True)
+        self.assertEqual(report["status"], "PASS")
+        self.assertEqual(report["narrative_alignment"]["direct_hits"], ["figure"])
+
     def test_direct_narrative_anchor_passes(self) -> None:
         scene = self._scene()
         direct = candidate(action="demolition")
