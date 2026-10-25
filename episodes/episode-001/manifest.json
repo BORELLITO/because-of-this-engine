@@ -260,7 +260,7 @@
       "story_beat": "context: show the person who decides to investigate",
       "visual_intent": "connect the unseen threat to a human reaction",
       "visual_function": "contextual",
-      "visual_match": "NEAR",
+      "visual_match": "EXACT",
       "visual_truth": "DECLARED_FICTION",
       "match_score": 0.82,
       "focus": {
@@ -311,7 +311,7 @@
           ],
           "reviewed": true,
           "basis": "Mixkit source page title and browser visual review",
-          "notes": "Near match for a human waiting and watching inside the dark building."
+          "notes": "Current woman is not a security guard; this candidate is intentionally insufficient and must be recollected."
         }
       },
       "narration_excerpt": "A night guard finally decided to wait beside it. For twenty minutes, nothing moved.",
@@ -438,7 +438,7 @@
       "story_beat": "escalation: the camera keeps recording while the guard waits",
       "visual_intent": "show the lonely act of watching and waiting",
       "visual_function": "evidence",
-      "visual_match": "NEAR",
+      "visual_match": "EXACT",
       "visual_truth": "DECLARED_FICTION",
       "match_score": 0.8,
       "focus": {
@@ -491,24 +491,18 @@
           ],
           "reviewed": true,
           "basis": "Mixkit source page title and browser visual review",
-          "notes": "Symbolic monitoring image; it is not presented as the literal figure."
+          "notes": "Current laptop clip does not show the empty glass boundary described by the narration; it must be recollected."
         }
       },
       "narration_excerpt": "When they came back, the figure was no longer behind the glass.",
       "visual_semantics": {
-        "role": "symbolic",
+        "role": "literal",
         "required": {
-          "subjects": [
-            "person"
-          ],
-          "actions": [
-            "watching"
-          ],
           "environments": [
             "interior"
           ],
           "objects": [
-            "screen"
+            "glass_door"
           ]
         },
         "preferred": {
@@ -522,7 +516,9 @@
         "forbidden": [
           "medical_vial",
           "laboratory",
-          "beach"
+          "beach",
+          "silhouette",
+          "person"
         ]
       }
     },
@@ -584,7 +580,7 @@
           ],
           "reviewed": true,
           "basis": "Mixkit source page title and browser visual review",
-          "notes": "Near match for the figure crossing the boundary; hallway is a declared preferred, not claimed exact, element."
+          "notes": "Current clip has the figure and glass door but not the narrated hallway; it must be recollected."
         }
       },
       "narration_excerpt": "It was standing at the end of the hallway, closer than before.",
@@ -597,13 +593,13 @@
           "actions": [
             "standing"
           ],
-          "objects": [
-            "glass_door"
+          "environments": [
+            "hallway"
           ]
         },
         "preferred": {
-          "environments": [
-            "hallway"
+          "objects": [
+            "glass_door"
           ],
           "moods": [
             "eerie"
@@ -758,16 +754,13 @@
           ],
           "reviewed": true,
           "basis": "Mixkit source page title and browser visual review",
-          "notes": "Represents the impossible presence in the building; missing evidence is preserved as preferred uncertainty."
+          "notes": "A ghost in the hall contradicts the narrated absence of any person; recollect an empty hallway or evidence-detail clip."
         }
       },
       "narration_excerpt": "They found no footprints, no broken lock, and no person inside the building.",
       "visual_semantics": {
         "role": "literal",
         "required": {
-          "subjects": [
-            "silhouette"
-          ],
           "environments": [
             "hallway"
           ]
@@ -785,7 +778,9 @@
           "medical_vial",
           "laboratory",
           "beach",
-          "office"
+          "office",
+          "silhouette",
+          "person"
         ]
       }
     },
@@ -1205,6 +1200,6 @@
     "forbidden_concepts_block": true,
     "keyword_only_matching": false,
     "human_visual_review_required": true,
-    "policy_note": "A near or symbolic fallback must be explicit; it may not silently replace a literal story beat."
+    "policy_note": "Literal beats must match every required narrative dimension and must not contradict explicit negation. Near or symbolic fallback is allowed only when the scene declares it and the visual remains non-contradictory."
   }
 }
