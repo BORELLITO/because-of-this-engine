@@ -1402,7 +1402,7 @@
       "visual_function": "payoff",
       "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.7,
+      "match_score": 0.9,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -1413,66 +1413,80 @@
       },
       "asset": {
         "asset_id": "because-of-this-episode-001-s11",
-        "path": "runtime-assets/s09.mp4",
-        "drive_file_id": "1BIpnLnWGV8FJNk756ZdiYQKaw0iXbbS2",
-        "provider": "mixkit",
-        "source_page_url": "https://mixkit.co/free-stock-video/sand-falling-from-an-hourglass-on-a-black-background-28901/",
-        "license": "Mixkit Stock Video Free License",
+        "path": "runtime-assets/s11.mp4",
+        "drive_file_id": "1z0OO73dVzSnxgTJaieXS21RBCbtqbWLA",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/video-of-building-collapsing-855464/",
+        "license": "Pexels Free License",
         "rights_status": "APPROVED",
-        "approved_for_render": false,
-        "sha256": "c0634cf35616c07a3d63d5ce74200311dfc3c6469837f362c9702067f3c094c7",
-        "reuse_status": "PERMANENTLY_RETIRED",
+        "approved_for_render": true,
+        "sha256": "0b140a38e69e20a01ff276606db946eb2213ebbe5bac5bef8341939612fd3e69",
+        "reuse_status": "FRESH",
         "episode_id": "because-of-this-episode-001",
-        "author": "Mixkit contributor",
-        "acquisition_timestamp": "2026-10-24T18:45:00Z",
-        "original_filename": "28901-720.mp4",
+        "author": "Pixabay contributor via Pexels",
+        "acquisition_timestamp": "2026-10-25T23:22:39.992Z",
+        "original_filename": "855464-hd_1920_1080_25fps.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": 10.666667,
-        "width": 720,
-        "height": 1280,
-        "filesize_bytes": 3362228,
+        "duration_seconds": 29.28,
+        "width": 1920,
+        "height": 1080,
+        "filesize_bytes": 16528292,
         "job_ownership": "because-of-this-episode-001",
         "scene_usage": "S11",
         "visual_evidence": {
-          "source_title": "Sand falling from an hourglass on a black background",
-          "objects": [
-            "hourglass"
-          ],
+          "source_title": "Video Of Building Collapsing",
+          "source_description": "A large-scale demolition of buildings using explosives, captured in detail.",
+          "subjects": [],
           "actions": [
-            "standing"
+            "demolition",
+            "collapsing"
           ],
           "environments": [
-            "darkness"
+            "exterior"
+          ],
+          "objects": [
+            "building"
           ],
           "moods": [
             "eerie"
           ],
+          "composition": [
+            "wide_shot"
+          ],
           "reviewed": true,
-          "basis": "source-page license/title plus three sampled local frames",
-          "notes": "This asset is retired from narrative use: an hourglass only symbolizes time and does not directly represent the narrated hotel demolition.",
+          "basis": "Pexels public source page and four sampled local frames at 1s, 10s, 20s and 28s",
+          "notes": "The sampled frames visibly show a multi-storey building collapsing and generating demolition dust. The footage is treated as direct generic demolition evidence; it does not claim to depict the fictional hotel specifically.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-25T00:00:00Z",
-          "review_method": "source-page license check plus three sampled local frames at 0.5s, 5.3s and 10.0s",
+          "reviewed_at": "2026-10-25T23:22:39.992Z",
+          "review_method": "Pexels license/source-page check plus four sampled local frames at 1s, 10s, 20s and 28s",
           "observed_subjects": [],
           "observed_actions": [
-            "falling"
+            "demolition",
+            "collapsing"
           ],
           "observed_environments": [
-            "darkness"
+            "exterior"
           ],
           "observed_objects": [
-            "hourglass"
+            "building"
           ],
           "sample_timestamps": [
-            0.5,
-            5.3,
-            10
+            1,
+            10,
+            20,
+            28
           ],
           "usable_window": {
             "in": 0,
-            "out": 10.6
+            "out": 29.28
+          },
+          "action_window": {
+            "in": 1,
+            "out": 28
           }
-        }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 29.28
       },
       "narration_excerpt": "The hotel was demolished the next week. The recording was deleted.",
       "visual_semantics": {
