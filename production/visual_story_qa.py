@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Run the fail-closed visual-story gate for a v2 episode.
-
-This gate is deliberately diagnostic as well as blocking: it audits every
-scene and writes all incompatible beats to one report, instead of hiding the
-remaining failures behind the first bad scene.
-"""
+"""Run the fail-closed visual-story and story-intelligence gates for v2."""
 
 from __future__ import annotations
 
@@ -15,6 +10,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from production.story_intelligence import StoryIntegrityError, audit_manifest
 from production.video_asset_contract import load_manifest
 from production.visual_semantics import require_visual_fit, visual_match_report
 
@@ -41,15 +37,15 @@ def _scene_report(scene: dict, mode: str) -> dict:
             "status": result.get("status"),
             "reason": result.get("reason"),
             "missing": result.get("missing"),
+            "critical_missing": result.get("critical_missing"),
             "forbidden_hits": result.get("forbidden_hits"),
             "matched": result.get("matched"),
             "reviewed": result.get("reviewed"),
             "evidence_basis": result.get("evidence_basis"),
+            "pixel_evidence": result.get("pixel_evidence"),
         })
         if result.get("status") != "PASS":
             return qa
-        # Keep the production assertion in this path as a second fail-closed
-        # check, including the final-mode review rule.
         require_visual_fit(scene, candidate, mode=mode)
     except (ValueError, TypeError, AttributeError) as exc:
         qa.update({
@@ -59,10 +55,12 @@ def _scene_report(scene: dict, mode: str) -> dict:
             "coverage": 0.0,
             "preferred_coverage": 0.0,
             "missing": {},
+            "critical_missing": {},
             "forbidden_hits": [],
             "matched": {},
             "reviewed": False,
             "evidence_basis": "",
+            "pixel_evidence": {"status": "BLOCKED", "issues": [str(exc)]},
         })
     return qa
 
@@ -76,21 +74,37 @@ def main() -> int:
 
     try:
         manifest = load_manifest(args.manifest)
+        story_report = None
+        story_error = None
+        try:
+            script_path = (args.manifest.resolve().parent / manifest["script"]["path"]).resolve()
+            script_text = script_path.read_text(encoding="utf-8")
+            story_report = audit_manifest(manifest, script_text)
+        except (OSError, KeyError, TypeError, ValueError, StoryIntegrityError) as exc:
+            story_error = str(exc)
+
         scenes = [_scene_report(scene, args.mode) for scene in manifest.get("scenes", [])]
         blocked = [scene for scene in scenes if scene["status"] != "PASS"]
+        status = "VISUAL_STORY_QA_PASS" if story_error is None and not blocked else "VISUAL_STORY_QA_BLOCKED"
         report = {
-            "status": "VISUAL_STORY_QA_PASS" if not blocked else "VISUAL_STORY_QA_BLOCKED",
+            "status": status,
             "video_id": manifest.get("video_id"),
             "mode": args.mode,
             "scene_count": len(scenes),
             "blocked_scene_count": len(blocked),
+            "story_intelligence": story_report,
+            "story_intelligence_error": story_error,
             "scenes": scenes,
             "blocking_scenes": blocked,
             "policy": {
+                "story_graph_required": True,
+                "narration_coverage_required": True,
                 "narration_is_master_context": True,
                 "isolated_keyword_matching": False,
                 "forbidden_visuals_blocked": True,
+                "critical_visual_anchors_blocked": True,
                 "reviewed_visual_evidence_required": True,
+                "pixel_evidence_required_in_final": True,
                 "all_scene_failures_reported": True,
             },
         }
@@ -100,7 +114,7 @@ def main() -> int:
             encoding="utf-8",
         )
         print(json.dumps(report, ensure_ascii=False))
-        return 1 if blocked else 0
+        return 1 if status != "VISUAL_STORY_QA_PASS" else 0
     except (OSError, ValueError, TypeError, json.JSONDecodeError) as exc:
         print(f"VISUAL STORY QA BLOCKED: {exc}")
         return 1
