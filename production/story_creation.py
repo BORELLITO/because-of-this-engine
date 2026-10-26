@@ -14,8 +14,9 @@ from typing import Any, Iterable, Mapping
 
 
 TRUTH_MODES = {
-    "REAL_FACTUAL",
+    "VERIFIED_FACT",
     "DOCUMENTED_RECONSTRUCTION",
+    "EXPLAINED_PHENOMENON",
     "DECLARED_FICTION",
 }
 
@@ -144,10 +145,10 @@ def _truth_gate(manifest: Mapping[str, Any], sc: Mapping[str, Any]) -> dict[str,
     if mode not in TRUTH_MODES:
         return _gate("C1", "TRUTH_MODE", False, ["truth mode must be explicitly declared"])
     evidence = [f"mode={mode}"]
-    if mode == "REAL_FACTUAL":
+    if mode == "VERIFIED_FACT":
         sources = truth.get("sources") if isinstance(truth, Mapping) else None
         passed = _all_text(sources)
-        evidence.append("factual claims have source references" if passed else "REAL_FACTUAL requires non-empty sources")
+        evidence.append("verified claims have source references" if passed else "VERIFIED_FACT requires non-empty sources")
     elif mode == "DOCUMENTED_RECONSTRUCTION":
         sources = truth.get("sources") if isinstance(truth, Mapping) else None
         note = truth.get("reconstruction_note") if isinstance(truth, Mapping) else None
@@ -156,6 +157,15 @@ def _truth_gate(manifest: Mapping[str, Any], sc: Mapping[str, Any]) -> dict[str,
             "reconstruction boundaries are declared"
             if passed
             else "DOCUMENTED_RECONSTRUCTION requires sources and reconstruction_note"
+        )
+    elif mode == "EXPLAINED_PHENOMENON":
+        sources = truth.get("sources") if isinstance(truth, Mapping) else None
+        explanation = truth.get("explanation") if isinstance(truth, Mapping) else None
+        passed = _all_text(sources) and _text(explanation)
+        evidence.append(
+            "phenomenon explanation and source references are explicit"
+            if passed
+            else "EXPLAINED_PHENOMENON requires sources and explanation"
         )
     else:
         disclosure = truth.get("disclosure") if isinstance(truth, Mapping) else None
