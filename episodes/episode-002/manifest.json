@@ -1067,7 +1067,7 @@
         },
         "narrative_anchors": {
           "direct_required": [
-            "screen"
+            "watching"
           ],
           "minimum_direct": 1
         }
@@ -1451,10 +1451,9 @@
         },
         "narrative_anchors": {
           "direct_required": [
-            "pressing",
             "glass_door"
           ],
-          "minimum_direct": 2
+          "minimum_direct": 1
         }
       }
     },
