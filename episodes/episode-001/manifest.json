@@ -67,7 +67,7 @@
     "accent_color": "#E3262E",
     "logo_enabled": true,
     "logo_path": "brand/because-of-this-logo.png",
-    "logo_width": 432,
+    "logo_width": 540,
     "logo_opacity": 0.82,
     "logo_margin": 54,
     "logo_top": 72
@@ -1827,10 +1827,14 @@
   "loop": {
     "enabled": true,
     "title": "BECAUSE OF THIS",
-    "outro_seconds": 0.8,
-    "audio_fade_seconds": 0.35,
+    "transition": "continuity_fade",
+    "outro_seconds": 1.2,
+    "tail_fade_seconds": 0.55,
+    "card_fade_in_seconds": 0.24,
+    "card_fade_out_seconds": 0.36,
+    "audio_fade_seconds": 0.60,
     "restart_safe": true,
-    "reason": "Operational v2 lock: every episode closes with a soft branded signature and restarts cleanly."
+    "reason": "Continuity fade bridges the final visual beat into the branded signature and avoids a hard ending."
   },
   "color_grade": {
     "enabled": true,
