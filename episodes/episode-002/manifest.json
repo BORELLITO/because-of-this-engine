@@ -198,10 +198,9 @@
         },
         "narrative_anchors": {
           "direct_required": [
-            "man",
             "pointing"
           ],
-          "minimum_direct": 2
+          "minimum_direct": 1
         }
       }
     },
@@ -317,7 +316,7 @@
         },
         "narrative_anchors": {
           "direct_required": [
-            "camera"
+            "security_camera"
           ],
           "minimum_direct": 1
         }
@@ -446,7 +445,7 @@
         },
         "narrative_anchors": {
           "direct_required": [
-            "guard"
+            "security_guard"
           ],
           "minimum_direct": 1
         }
@@ -565,7 +564,7 @@
         },
         "narrative_anchors": {
           "direct_required": [
-            "locked"
+            "lock"
           ],
           "minimum_direct": 1
         }
@@ -795,7 +794,7 @@
         },
         "narrative_anchors": {
           "direct_required": [
-            "window"
+            "glass_surface"
           ],
           "minimum_direct": 1
         }
@@ -929,8 +928,8 @@
         },
         "narrative_anchors": {
           "direct_required": [
-            "same man",
-            "corridor"
+            "silhouette",
+            "hallway"
           ],
           "minimum_direct": 2
         }
@@ -1068,10 +1067,9 @@
         },
         "narrative_anchors": {
           "direct_required": [
-            "police",
-            "footage"
+            "screen"
           ],
-          "minimum_direct": 2
+          "minimum_direct": 1
         }
       }
     },
@@ -1191,10 +1189,9 @@
         },
         "narrative_anchors": {
           "direct_required": [
-            "no entrance",
-            "no reflection"
+            "darkness"
           ],
-          "minimum_direct": 2
+          "minimum_direct": 1
         }
       }
     },
@@ -1321,7 +1318,7 @@
         },
         "narrative_anchors": {
           "direct_required": [
-            "building collapsed"
+            "demolition"
           ],
           "minimum_direct": 1
         }
@@ -1454,9 +1451,8 @@
         },
         "narrative_anchors": {
           "direct_required": [
-            "one frame",
-            "hand",
-            "glass"
+            "pressing",
+            "glass_door"
           ],
           "minimum_direct": 2
         }
@@ -1574,10 +1570,9 @@
         },
         "narrative_anchors": {
           "direct_required": [
-            "timestamp",
-            "camera"
+            "security_camera"
           ],
-          "minimum_direct": 2
+          "minimum_direct": 1
         }
       }
     }
