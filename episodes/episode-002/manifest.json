@@ -23,7 +23,7 @@
   },
   "script": {
     "path": "script.txt",
-    "word_count_target": 157
+    "word_count_target": 154
   },
   "audio": {
     "path": "audio/narration.wav",
@@ -651,7 +651,7 @@
         "source_segment_in": 0,
         "source_segment_out": 9.32
       },
-      "narration_excerpt": "the hallway was empty,",
+      "narration_excerpt": "the hallway was empty. The lights were off,",
       "visual_semantics": {
         "role": "literal",
         "required": {
@@ -893,7 +893,7 @@
         "source_segment_in": 0,
         "source_segment_out": 21.7
       },
-      "narration_excerpt": "Then the camera showed the same man inside. He stood at the end of the corridor, facing the same place, completely still, as if he had been waiting there for someone who never arrived.",
+      "narration_excerpt": "Then the camera showed the same man inside. He stood at the end of the corridor, facing the same place.",
       "visual_semantics": {
         "role": "literal",
         "required": {
@@ -1034,7 +1034,7 @@
         "source_segment_in": 0,
         "source_segment_out": 9.5
       },
-      "narration_excerpt": "Police replayed the footage,",
+      "narration_excerpt": "Police replayed the footage, again and again,",
       "visual_semantics": {
         "role": "literal",
         "required": {
@@ -1289,7 +1289,7 @@
         "source_segment_in": 0,
         "source_segment_out": 29.28
       },
-      "narration_excerpt": "Twelve minutes later, the building collapsed. The recording was supposed to end there.",
+      "narration_excerpt": "Twelve minutes later, the building collapsed. The recording ended there. Nothing moved.",
       "visual_semantics": {
         "role": "literal",
         "required": {
@@ -1540,7 +1540,7 @@
         "source_segment_in": 0,
         "source_segment_out": 12.32
       },
-      "narration_excerpt": "In the corner, the timestamp read three eighteen. The next morning, the camera turned on again. This time, it was inside a different building, aimed at another empty floor.",
+      "narration_excerpt": "In the corner, the timestamp read three eighteen. The next morning, the camera turned on again. This time, it was inside a different building, aimed at another empty floor. Then the feed went black.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1972,7 +1972,7 @@
           "hallway",
           "building"
         ],
-        "narration_excerpt": "the hallway was empty,"
+        "narration_excerpt": "the hallway was empty. The lights were off,"
       },
       {
         "scene_id": "S06",
@@ -2003,7 +2003,7 @@
           "hallway",
           "building"
         ],
-        "narration_excerpt": "Then the camera showed the same man inside. He stood at the end of the corridor, facing the same place, completely still, as if he had been waiting there for someone who never arrived."
+        "narration_excerpt": "Then the camera showed the same man inside. He stood at the end of the corridor, facing the same place."
       },
       {
         "scene_id": "S08",
@@ -2018,7 +2018,7 @@
           "recording",
           "camera"
         ],
-        "narration_excerpt": "Police replayed the footage,"
+        "narration_excerpt": "Police replayed the footage, again and again,"
       },
       {
         "scene_id": "S09",
@@ -2048,7 +2048,7 @@
           "time",
           "recording"
         ],
-        "narration_excerpt": "Twelve minutes later, the building collapsed. The recording was supposed to end there."
+        "narration_excerpt": "Twelve minutes later, the building collapsed. The recording ended there. Nothing moved."
       },
       {
         "scene_id": "S11",
@@ -2080,7 +2080,7 @@
           "time",
           "recording"
         ],
-        "narration_excerpt": "In the corner, the timestamp read three eighteen. The next morning, the camera turned on again. This time, it was inside a different building, aimed at another empty floor."
+        "narration_excerpt": "In the corner, the timestamp read three eighteen. The next morning, the camera turned on again. This time, it was inside a different building, aimed at another empty floor. Then the feed went black."
       }
     ]
   },
