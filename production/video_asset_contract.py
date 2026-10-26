@@ -252,6 +252,38 @@ def validate_asset_record(record: dict[str, Any], base: Path, episode_id: str, *
     return {**record, "asset_id": asset_id, "path": path, "metadata": metadata, "animation_fingerprint": actual_phash}
 
 
+def _validate_cinematic_grade(manifest: dict[str, Any], mode: str) -> None:
+    """Fail closed when final output does not use the approved suspense look."""
+    if mode != "final":
+        return
+    grade = manifest.get("color_grade")
+    if not isinstance(grade, dict) or grade.get("enabled") is not True:
+        raise VideoContractError("Final release requires an enabled color_grade.")
+    if grade.get("preset") != "investigative_noir_suspense":
+        raise VideoContractError("Final release requires the investigative_noir_suspense preset.")
+    suspense = grade.get("cinematic_suspense")
+    if not isinstance(suspense, dict) or suspense.get("enabled") is not True:
+        raise VideoContractError("Final release requires the cinematic_suspense layer.")
+    for key, lower, upper in (
+        ("cool_shadows", 0.0, 0.10),
+        ("warm_highlights", 0.0, 0.06),
+    ):
+        value = suspense.get(key)
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or not lower <= float(value) <= upper:
+            raise VideoContractError(f"color_grade.cinematic_suspense.{key} is outside the safe range.")
+    if grade.get("vignette") is not True:
+        raise VideoContractError("Final release requires the suspense vignette.")
+    for key, lower, upper in (
+        ("brightness", -0.20, 0.20),
+        ("contrast", 0.80, 1.30),
+        ("saturation", 0.65, 1.15),
+        ("gamma", 0.80, 1.15),
+    ):
+        value = grade.get(key)
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or not lower <= float(value) <= upper:
+            raise VideoContractError(f"color_grade.{key} is outside the safe range.")
+
+
 def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str = "preview", check_files: bool = True) -> dict[str, Any]:
     if manifest.get("schema_version") != SCHEMA_VERSION:
         raise VideoContractError(f"Video-only manifests must use schema_version {SCHEMA_VERSION}.")
@@ -284,6 +316,7 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
     scenes = manifest.get("scenes")
     if not isinstance(scenes, list) or not scenes:
         raise VideoContractError("Manifest requires at least one video scene.")
+    _validate_cinematic_grade(manifest, mode)
     try:
         clip_policy = clip_quantity_policy(manifest)
     except EditorialPolicyError as exc:
@@ -478,7 +511,7 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
             raise VideoContractError("Brand logo path must remain inside the project root.")
         if check_files and not logo_candidate.is_file():
             raise VideoContractError(f"Brand logo file is missing: {logo_candidate}")
-        width = brand.get("logo_width", 360)
+        width = brand.get("logo_width", 432)
         opacity = brand.get("logo_opacity", 0.82)
         margin = brand.get("logo_margin", 54)
         top = brand.get("logo_top", 72)
@@ -490,6 +523,8 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
             raise VideoContractError("brand.logo_margin must be between 24 and 240 pixels.")
         if isinstance(top, bool) or not isinstance(top, (int, float)) or not 24 <= float(top) <= 360:
             raise VideoContractError("brand.logo_top must be between 24 and 360 pixels.")
+        if mode == "final" and float(width) < 432:
+            raise VideoContractError("Final release requires the logo to use the 20% larger width of at least 432 pixels.")
         brand_logo_path = logo_candidate
 
     return {

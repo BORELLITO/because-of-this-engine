@@ -56,10 +56,10 @@ def scene_filter(
         f"crop={width}:{height}:x='(iw-ow)*{focus_x:.4f}':y='(ih-oh)*{focus_y:.4f}'",
     ]
     if grade.get("enabled") is True:
-        brightness = float(grade.get("brightness", -0.03))
-        contrast = float(grade.get("contrast", 1.08))
-        saturation = float(grade.get("saturation", 0.90))
-        gamma = float(grade.get("gamma", 0.96))
+        brightness = float(grade.get("brightness", -0.04))
+        contrast = float(grade.get("contrast", 1.12))
+        saturation = float(grade.get("saturation", 0.84))
+        gamma = float(grade.get("gamma", 0.94))
         if not -0.20 <= brightness <= 0.20 or not 0.80 <= contrast <= 1.30:
             raise RenderError("Color grade brightness/contrast is outside the safe editorial range.")
         if not 0.65 <= saturation <= 1.15 or not 0.80 <= gamma <= 1.15:
@@ -68,11 +68,29 @@ def scene_filter(
             f"eq=brightness={brightness:.4f}:contrast={contrast:.4f}:"
             f"saturation={saturation:.4f}:gamma={gamma:.4f}"
         )
+
+        suspense = grade.get("cinematic_suspense") or {}
+        suspense_enabled = suspense.get("enabled") is True
+        if suspense_enabled:
+            cool_shadows = float(suspense.get("cool_shadows", 0.035))
+            warm_highlights = float(suspense.get("warm_highlights", 0.012))
+            if not 0.0 <= cool_shadows <= 0.10:
+                raise RenderError("Cinematic suspense cool_shadows is outside the safe editorial range.")
+            if not 0.0 <= warm_highlights <= 0.06:
+                raise RenderError("Cinematic suspense warm_highlights is outside the safe editorial range.")
+            # Cool, slightly desaturated shadows plus restrained warm highlights
+            # create the channel's investigative-noir suspense signature.
+            filters.append(
+                "colorbalance="
+                f"rs={-cool_shadows:.4f}:gs={-(cool_shadows * 0.45):.4f}:"
+                f"bs={cool_shadows:.4f}:rh={warm_highlights:.4f}:"
+                f"gh={(warm_highlights * 0.55):.4f}:bh={-warm_highlights:.4f}"
+            )
+
         if grade.get("vignette", True) is True:
-            filters.append("vignette=PI/5")
+            filters.append("vignette=PI/4" if suspense_enabled else "vignette=PI/5")
     filters.extend([f"fps={FPS}", "setpts=PTS-STARTPTS", "format=yuv420p", "setsar=1"])
     return ",".join(filters)
-
 
 def render_scene(
     scene: dict[str, Any],
@@ -442,7 +460,7 @@ def mux_audio(
     logo_enabled = logo_path is not None and brand.get("logo_enabled", False) is True
     if logo_enabled:
         command.extend(["-loop", "1", "-framerate", "1", "-i", str(logo_path)])
-        logo_width = int(brand.get("logo_width", 360))
+        logo_width = int(brand.get("logo_width", 432))
         logo_opacity = float(brand.get("logo_opacity", 0.82))
         logo_margin = int(brand.get("logo_margin", 54))
         logo_top = int(brand.get("logo_top", 72))
@@ -559,7 +577,7 @@ def render(manifest_path: Path, mode: str) -> Path:
             logo_path = prepare_logo(
                 logo_path,
                 Path(temp) / "brand-logo-runtime.png",
-                int(spec["brand"].get("logo_width", 360)),
+                int(spec["brand"].get("logo_width", 432)),
             )
         brand_ass = None if logo_path else write_brand_ass(Path(temp) / "brand.ass", spec["brand"], narration_seconds)
         mux_audio(

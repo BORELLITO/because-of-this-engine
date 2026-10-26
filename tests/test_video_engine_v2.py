@@ -104,6 +104,25 @@ class VideoEngineV2Tests(unittest.TestCase):
         self.assertNotIn("zoompan", value)
         self.assertIn("setsar=1", value)
 
+    def test_cinematic_suspense_grade_is_explicit_and_safe(self):
+        value = scene_filter(1080, 1920, 0.5, 0.5, {
+            "enabled": True,
+            "preset": "investigative_noir_suspense",
+            "brightness": -0.04,
+            "contrast": 1.12,
+            "saturation": 0.84,
+            "gamma": 0.94,
+            "vignette": True,
+            "cinematic_suspense": {
+                "enabled": True,
+                "cool_shadows": 0.035,
+                "warm_highlights": 0.012,
+            },
+        })
+        self.assertIn("colorbalance=", value)
+        self.assertIn("vignette=PI/4", value)
+        self.assertIn("eq=brightness=-0.0400:contrast=1.1200", value)
+
     def test_transitions_are_narration_timeline_aware(self):
         value = xfade_filter([15, 15, 15], [{"type": "crossfade", "duration": 0.25}] * 2)
         self.assertIn("offset=14.750", value)

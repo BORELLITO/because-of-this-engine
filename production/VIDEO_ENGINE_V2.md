@@ -83,6 +83,19 @@ observed subjects/actions/environments/objects, and an action window for
 motion-sensitive beats. Source URLs, titles and editorial notes can guide
 discovery but cannot satisfy a final visual anchor.
 
+## Cinematic suspense and brand scale
+
+Final renders use the locked investigative_noir_suspense preset. The layer applies
+a controlled dark grade, cooler shadows, restrained warm highlights and a
+moderate noir vignette to the video layers only. Captions, the original logo
+and the loop card are composited afterward, so readability and brand colors are
+not crushed by the grade. The renderer validates all grade parameters against
+safe editorial ranges and blocks final output when the suspense layer is absent.
+
+The canonical logo is rendered at 432px wide, 20% larger than the previous
+360px lock, while retaining the same top-right safe-area margins and opacity.
+The final contract rejects a smaller logo width.
+
 ## Timeline and edit
 
 Narration is the master clock. Scene durations are allocated to the measured
