@@ -99,6 +99,14 @@ jobs:
       - name: Mark script approval stage
         run: python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition SCRIPT_APPROVED --stage script
 
+      - name: Run pre-render story creation intelligence
+        run: |
+          set -euo pipefail
+          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
+          python production/story_creation.py \
+            --manifest "${{ inputs.manifest }}" \
+            --report "${EPISODE_DIR}/rendered/story-creation-${{ inputs.mode }}.json"
+
       - name: Run engine regression tests
         run: python -m unittest discover -s tests -v
 
