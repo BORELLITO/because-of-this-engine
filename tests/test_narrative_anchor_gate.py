@@ -83,6 +83,30 @@ class NarrativeAnchorGateTests(unittest.TestCase):
         self.assertEqual(report["status"], "PASS")
         self.assertEqual(report["narrative_alignment"]["direct_hits"], ["figure"])
 
+    def test_forbidden_concepts_use_observed_pixels_for_approval(self) -> None:
+        scene = {
+            "scene_id": "S02",
+            "visual_match": "EXACT",
+            "visual_semantics": {
+                "role": "literal",
+                "required": {"environments": ["hotel"]},
+                "forbidden": ["person"],
+                "narrative_anchors": {
+                    "direct_required": ["hotel"],
+                    "minimum_direct": 1,
+                },
+            },
+        }
+        reviewed = candidate(action="standing")
+        reviewed["source_description"] = "person in a hotel hallway"
+        report = visual_match_report(scene, reviewed, require_review=True)
+        self.assertEqual(report["status"], "PASS")
+
+        reviewed["visual_evidence"]["observed_subjects"] = ["person"]
+        blocked = visual_match_report(scene, reviewed, require_review=True)
+        self.assertEqual(blocked["status"], "BLOCKED")
+        self.assertIn("person", blocked["forbidden_hits"])
+
     def test_direct_narrative_anchor_passes(self) -> None:
         scene = self._scene()
         direct = candidate(action="demolition")
