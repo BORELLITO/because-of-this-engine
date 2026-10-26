@@ -23,10 +23,10 @@ CONCEPT_ALIASES: dict[str, set[str]] = {
     "hotel": {"hotel", "motel", "inn", "lodge", "abandoned hotel"},
     "interior": {"interior", "inside", "room", "building"},
     "hallway": {"hallway", "corridor", "passage", "hall"},
-    "glass_door": {"glass door", "glass", "windowed door", "glass wall"},
+    "glass_door": {"glass door", "windowed door"},
     "glass_surface": {"glass surface", "glass", "window", "windows", "glass window", "glass windows"},
     "sealed_room": {"sealed room", "sealed", "locked room", "locked door", "locked"},
-    "security_camera": {"security camera", "surveillance camera", "cctv", "camera"},
+    "security_camera": {"security camera", "surveillance camera", "cctv"},
     "clock": {"clock", "analog clock", "wall clock", "time", "3:17", "3:18"},
     "screen": {"screen", "laptop", "display"},
     "light": {"light", "lights", "lamp", "wall lamp", "illumination"},
@@ -137,6 +137,17 @@ def _dimension_values(record: dict[str, Any], dimension: str) -> list[str]:
     if isinstance(evidence, dict):
         return values(evidence.get(dimension))
     return []
+
+
+def observed_evidence_text(record: dict[str, Any]) -> str:
+    """Return only reviewer-declared observations from sampled pixels."""
+    evidence = record.get("visual_evidence") or {}
+    if not isinstance(evidence, dict):
+        return ""
+    parts: list[str] = []
+    for key in ("observed_subjects", "observed_actions", "observed_environments", "observed_objects"):
+        parts.extend(values(evidence.get(key)))
+    return " ".join(parts)
 
 
 def evidence_text(record: dict[str, Any]) -> str:
@@ -325,7 +336,8 @@ def visual_match_report(
     basis = str(evidence.get("basis", "")).strip() if isinstance(evidence, dict) else ""
     allow_text_fallback = not require_review
 
-    forbidden_hits = [item for item in forbidden if text_has_concept(text, item)]
+    forbidden_basis = observed_evidence_text(candidate) if require_review else text
+    forbidden_hits = [item for item in forbidden if text_has_concept(forbidden_basis, item)]
     matched: dict[str, list[str]] = {}
     missing: dict[str, list[str]] = {}
     critical_missing: dict[str, list[str]] = {}
