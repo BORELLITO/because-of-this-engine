@@ -284,6 +284,30 @@ def _validate_cinematic_grade(manifest: dict[str, Any], mode: str) -> None:
             raise VideoContractError(f"color_grade.{key} is outside the safe range.")
 
 
+def _validate_loop(manifest: dict[str, Any], mode: str) -> None:
+    """Require a continuity fade so the branded close never hard-cuts."""
+    if mode != "final":
+        return
+    loop = manifest.get("loop")
+    if not isinstance(loop, dict) or loop.get("enabled") is not True:
+        raise VideoContractError("Final release requires an enabled branded loop outro.")
+    if loop.get("transition") != "continuity_fade":
+        raise VideoContractError("Final release requires loop.transition=continuity_fade.")
+    ranges = (
+        ("outro_seconds", 0.8, 1.5),
+        ("tail_fade_seconds", 0.25, 0.90),
+        ("card_fade_in_seconds", 0.12, 0.60),
+        ("card_fade_out_seconds", 0.18, 0.70),
+        ("audio_fade_seconds", 0.35, 0.90),
+    )
+    for key, lower, upper in ranges:
+        value = loop.get(key)
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or not lower <= float(value) <= upper:
+            raise VideoContractError(
+                f"loop.{key} must be between {lower:.2f}s and {upper:.2f}s for final release."
+            )
+
+
 def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str = "preview", check_files: bool = True) -> dict[str, Any]:
     if manifest.get("schema_version") != SCHEMA_VERSION:
         raise VideoContractError(f"Video-only manifests must use schema_version {SCHEMA_VERSION}.")
@@ -317,6 +341,7 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
     if not isinstance(scenes, list) or not scenes:
         raise VideoContractError("Manifest requires at least one video scene.")
     _validate_cinematic_grade(manifest, mode)
+    _validate_loop(manifest, mode)
     try:
         clip_policy = clip_quantity_policy(manifest)
     except EditorialPolicyError as exc:
@@ -511,7 +536,7 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
             raise VideoContractError("Brand logo path must remain inside the project root.")
         if check_files and not logo_candidate.is_file():
             raise VideoContractError(f"Brand logo file is missing: {logo_candidate}")
-        width = brand.get("logo_width", 432)
+        width = brand.get("logo_width", 540)
         opacity = brand.get("logo_opacity", 0.82)
         margin = brand.get("logo_margin", 54)
         top = brand.get("logo_top", 72)
@@ -523,8 +548,8 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
             raise VideoContractError("brand.logo_margin must be between 24 and 240 pixels.")
         if isinstance(top, bool) or not isinstance(top, (int, float)) or not 24 <= float(top) <= 360:
             raise VideoContractError("brand.logo_top must be between 24 and 360 pixels.")
-        if mode == "final" and float(width) < 432:
-            raise VideoContractError("Final release requires the logo to use the 20% larger width of at least 432 pixels.")
+        if mode == "final" and float(width) < 540:
+            raise VideoContractError("Final release requires the enlarged logo width of at least 540 pixels.")
         brand_logo_path = logo_candidate
 
     return {
