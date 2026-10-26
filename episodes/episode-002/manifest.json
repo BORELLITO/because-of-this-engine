@@ -1926,7 +1926,7 @@
         "event": "the camera records what the man is watching",
         "state_before": "man_points_at_building",
         "state_after": "camera_marks_fourth_floor",
-        "causal_role": "question",
+        "causal_role": "setup",
         "emotion": "tension",
         "visual_motif": "camera lens at night",
         "entities": [
@@ -1985,7 +1985,7 @@
         "event": "the windows remain dark",
         "state_before": "hallway_empty",
         "state_after": "windows_dark",
-        "causal_role": "atmosphere",
+        "causal_role": "escalation",
         "emotion": "dread",
         "visual_motif": "dark glass boundary",
         "entities": [
