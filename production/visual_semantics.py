@@ -336,7 +336,15 @@ def visual_match_report(
     basis = str(evidence.get("basis", "")).strip() if isinstance(evidence, dict) else ""
     allow_text_fallback = not require_review
 
-    forbidden_basis = observed_evidence_text(candidate) if require_review else text
+    if require_review:
+        forbidden_basis = observed_evidence_text(candidate)
+        if not forbidden_basis:
+            evidence_values = []
+            for dimension in ("subjects", "actions", "environments", "objects"):
+                evidence_values.extend(_dimension_values(candidate, dimension))
+            forbidden_basis = " ".join(evidence_values)
+    else:
+        forbidden_basis = text
     forbidden_hits = [item for item in forbidden if text_has_concept(forbidden_basis, item)]
     matched: dict[str, list[str]] = {}
     missing: dict[str, list[str]] = {}
