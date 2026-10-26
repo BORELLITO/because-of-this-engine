@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Canonical G0–G12 gate report for Because of This Engine v2."""
+"""Canonical production gates plus pre-render story creation gates for Because of This Engine v2."""
 from __future__ import annotations
 import argparse
 import json
@@ -15,6 +15,7 @@ if str(Path(__file__).resolve().parents[1]) not in sys.path:
 
 from production.caption_quality import CaptionQualityError, audio_duration, quality_report
 from production.video_asset_contract import VideoContractError, load_manifest, validate_manifest
+from production.story_creation import CREATION_GATES, audit_story_creation
 
 GATES = tuple((f"G{i}", name) for i, name in enumerate((
     "CONFIG", "RESEARCH", "SCRIPT", "VOICE", "ASSETS", "PROVENANCE",
@@ -76,6 +77,17 @@ def _story_intelligence(m: dict[str, Any], base: Path, mode: str) -> tuple[str, 
     except (OSError, RuntimeError, ValueError, TypeError, json.JSONDecodeError) as exc:
         return "BLOCKED", str(exc), {}
 
+
+def _story_creation(m: dict[str, Any], base: Path, mode: str) -> tuple[str, str, dict[str, Any]]:
+    report_path = base / "rendered" / f"story-creation-{mode}.json"
+    try:
+        report = _read(report_path, "story creation report") if report_path.is_file() else audit_story_creation(m)
+        if report.get("status") != "STORY_CREATION_PASS":
+            blocked = report.get("blocked_gates") or [gate.get("code") for gate in report.get("gates", []) if gate.get("status") != "PASS"]
+            return "BLOCKED", f"story creation blocked: {', '.join(blocked)}", report
+        return "PASS", f"{len(CREATION_GATES)} creation gates passed before render", report
+    except (OSError, RuntimeError, ValueError, TypeError, json.JSONDecodeError) as exc:
+        return "BLOCKED", str(exc), {}
 
 
 def _research(m: dict[str, Any], mode: str) -> tuple[str, str]:
@@ -170,6 +182,15 @@ def evaluate(manifest_path: Path, mode: str, phase: str, *, release_report_path:
         "schema 2.0, stable job_id and 25 fps" if config_ok else "schema 2.0, video_id, stable job_id and fps=25 are required"))
     status, evidence = _research(manifest, mode); results.append(_gate("G1", "RESEARCH", status, evidence))
     status, evidence = _script(manifest, base); results.append(_gate("G2", "SCRIPT", status, evidence))
+    status, evidence, story_creation = _story_creation(manifest, base, mode)
+    for creation_gate in story_creation.get("gates", []):
+        gate_evidence = "; ".join(creation_gate.get("evidence", []))
+        results.append(_gate(
+            creation_gate.get("code", "C?"),
+            creation_gate.get("name", "STORY_CREATION"),
+            creation_gate.get("status", "BLOCKED"),
+            gate_evidence,
+        ))
     status, evidence, story_integrity = _story_intelligence(manifest, base, mode)
     results.append(_gate("S0", "STORY_INTELLIGENCE", status, evidence))
     results.append(_gate(
@@ -252,6 +273,7 @@ def evaluate(manifest_path: Path, mode: str, phase: str, *, release_report_path:
         "phase": phase, "job_id": manifest.get("job_id") or (manifest.get("job") or {}).get("job_id"),
         "video_id": manifest.get("video_id"), "mode": mode, "gates": results,
         "story_integrity": story_integrity,
+        "story_creation": story_creation,
         "blocking_gates": [item["code"] for item in blocking],
         "generated_at_utc": datetime.now(timezone.utc).isoformat()}
 
