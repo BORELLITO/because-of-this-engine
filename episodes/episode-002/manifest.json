@@ -23,7 +23,7 @@
   },
   "script": {
     "path": "script.txt",
-    "word_count_target": 165
+    "word_count_target": 162
   },
   "audio": {
     "path": "audio/narration.wav",
@@ -413,7 +413,7 @@
         "source_segment_in": 0,
         "source_segment_out": 12.08
       },
-      "narration_excerpt": "The guard checked the main entrance twice.",
+      "narration_excerpt": "The guard checked the main entrance again.",
       "visual_semantics": {
         "role": "literal",
         "required": {
@@ -765,7 +765,7 @@
         "source_segment_in": 0,
         "source_segment_out": 24.383333
       },
-      "narration_excerpt": "and every window in the building was completely dark.",
+      "narration_excerpt": "and the windows were completely dark.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1544,7 +1544,7 @@
         "source_segment_in": 0,
         "source_segment_out": 32.64
       },
-      "narration_excerpt": "In the corner, the timestamp read three eighteen. The next morning, the camera turned on again. This time, it was inside a different building, aimed at another empty floor. Then the feed went black.",
+      "narration_excerpt": "In the corner, the timestamp read three eighteen. The next morning, the camera turned on again. This time, it was inside a different building, aimed at another empty floor. Then the screen went black.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1946,7 +1946,7 @@
           "guard",
           "building"
         ],
-        "narration_excerpt": "The guard checked the main entrance twice."
+        "narration_excerpt": "The guard checked the main entrance again."
       },
       {
         "scene_id": "S04",
@@ -1991,7 +1991,7 @@
           "windows",
           "building"
         ],
-        "narration_excerpt": "and every window in the building was completely dark."
+        "narration_excerpt": "and the windows were completely dark."
       },
       {
         "scene_id": "S07",
@@ -2084,7 +2084,7 @@
           "time",
           "recording"
         ],
-        "narration_excerpt": "In the corner, the timestamp read three eighteen. The next morning, the camera turned on again. This time, it was inside a different building, aimed at another empty floor. Then the feed went black."
+        "narration_excerpt": "In the corner, the timestamp read three eighteen. The next morning, the camera turned on again. This time, it was inside a different building, aimed at another empty floor. Then the screen went black."
       }
     ]
   },
