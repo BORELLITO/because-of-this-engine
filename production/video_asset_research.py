@@ -273,7 +273,7 @@ def build_queue(
                             rejected.append(candidate)
                         elif candidate["selection_status"] == "REJECTED_SEMANTIC_MISMATCH":
                             candidate["global_memory_check"] = "PASS"
-                            candidates.append(candidate)
+                            rejected.append(candidate)
                         else:
                             candidate["global_memory_check"] = "PASS"
                             candidate["source_asset_key"] = source_key
