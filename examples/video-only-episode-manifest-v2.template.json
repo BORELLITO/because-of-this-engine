@@ -61,15 +61,15 @@
   "color_grade": {
     "enabled": true,
     "preset": "investigative_noir_suspense",
-    "brightness": -0.04,
-    "contrast": 1.12,
-    "saturation": 0.84,
-    "gamma": 0.94,
+    "brightness": -0.03,
+    "contrast": 1.08,
+    "saturation": 0.9,
+    "gamma": 0.96,
     "vignette": true,
     "cinematic_suspense": {
       "enabled": true,
-      "cool_shadows": 0.035,
-      "warm_highlights": 0.012,
+      "cool_shadows": 0.025,
+      "warm_highlights": 0.01,
       "description": "Cooler shadows, restrained warm highlights and a controlled noir vignette for suspense."
     }
   },

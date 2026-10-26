@@ -108,20 +108,20 @@ class VideoEngineV2Tests(unittest.TestCase):
         value = scene_filter(1080, 1920, 0.5, 0.5, {
             "enabled": True,
             "preset": "investigative_noir_suspense",
-            "brightness": -0.04,
-            "contrast": 1.12,
-            "saturation": 0.84,
-            "gamma": 0.94,
+            "brightness": -0.03,
+            "contrast": 1.08,
+            "saturation": 0.90,
+            "gamma": 0.96,
             "vignette": True,
             "cinematic_suspense": {
                 "enabled": True,
-                "cool_shadows": 0.035,
-                "warm_highlights": 0.012,
+                "cool_shadows": 0.025,
+                "warm_highlights": 0.010,
             },
         })
         self.assertIn("colorbalance=", value)
-        self.assertIn("vignette=PI/4", value)
-        self.assertIn("eq=brightness=-0.0400:contrast=1.1200", value)
+        self.assertIn("vignette=PI/5", value)
+        self.assertIn("eq=brightness=-0.0300:contrast=1.0800", value)
 
     def test_transitions_are_narration_timeline_aware(self):
         value = xfade_filter([15, 15, 15], [{"type": "crossfade", "duration": 0.25}] * 2)

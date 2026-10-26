@@ -56,10 +56,10 @@ def scene_filter(
         f"crop={width}:{height}:x='(iw-ow)*{focus_x:.4f}':y='(ih-oh)*{focus_y:.4f}'",
     ]
     if grade.get("enabled") is True:
-        brightness = float(grade.get("brightness", -0.04))
-        contrast = float(grade.get("contrast", 1.12))
-        saturation = float(grade.get("saturation", 0.84))
-        gamma = float(grade.get("gamma", 0.94))
+        brightness = float(grade.get("brightness", -0.03))
+        contrast = float(grade.get("contrast", 1.08))
+        saturation = float(grade.get("saturation", 0.90))
+        gamma = float(grade.get("gamma", 0.96))
         if not -0.20 <= brightness <= 0.20 or not 0.80 <= contrast <= 1.30:
             raise RenderError("Color grade brightness/contrast is outside the safe editorial range.")
         if not 0.65 <= saturation <= 1.15 or not 0.80 <= gamma <= 1.15:
@@ -72,8 +72,8 @@ def scene_filter(
         suspense = grade.get("cinematic_suspense") or {}
         suspense_enabled = suspense.get("enabled") is True
         if suspense_enabled:
-            cool_shadows = float(suspense.get("cool_shadows", 0.035))
-            warm_highlights = float(suspense.get("warm_highlights", 0.012))
+            cool_shadows = float(suspense.get("cool_shadows", 0.025))
+            warm_highlights = float(suspense.get("warm_highlights", 0.010))
             if not 0.0 <= cool_shadows <= 0.10:
                 raise RenderError("Cinematic suspense cool_shadows is outside the safe editorial range.")
             if not 0.0 <= warm_highlights <= 0.06:
@@ -88,7 +88,7 @@ def scene_filter(
             )
 
         if grade.get("vignette", True) is True:
-            filters.append("vignette=PI/4" if suspense_enabled else "vignette=PI/5")
+            filters.append("vignette=PI/5")
     filters.extend([f"fps={FPS}", "setpts=PTS-STARTPTS", "format=yuv420p", "setsar=1"])
     return ",".join(filters)
 
