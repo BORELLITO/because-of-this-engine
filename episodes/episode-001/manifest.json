@@ -1653,6 +1653,131 @@
       }
     }
   ],
+  "story_creation": {
+    "schema_version": "1.0",
+    "legacy_backfill": true,
+    "backfill_reason": "Episode 001 was already approved under the v2 visual-story contract and is migrated into the v5 creation contract without rewriting its canonical story.",
+    "idea": {
+      "title": "The Camera That Still Turns On at 3:17",
+      "premise": "A security camera records the same figure behind a glass door in a hotel sealed for eleven years.",
+      "audience_promise": "Follow the contradiction until the final recurrence makes the recording impossible to dismiss.",
+      "central_question": "Why does the sealed hotel's camera still turn on every night?",
+      "hook_type": "impossible_recording"
+    },
+    "truth": {
+      "mode": "DECLARED_FICTION",
+      "disclosure": "This episode is an original fictional suspense story; stock footage is used as declared visual representation.",
+      "sources": []
+    },
+    "causal_chain": {
+      "cause": "The camera records a figure behind a door that has been sealed for eleven years.",
+      "escalation": [
+        "The guard waits beside the door and the lights go out.",
+        "When the lights return, the figure has moved into the hallway.",
+        "The police find no footprints, broken lock or person inside."
+      ],
+      "consequence": "The recording captures the figure pointing at the camera one minute after the recurring trigger.",
+      "why_it_mattered": "The hotel is demolished and the evidence is deleted, but the same camera still activates every night."
+    },
+    "emotional_arc": {
+      "primary": "tension",
+      "secondary": "curiosity",
+      "target_sensations": [
+        "curiosity",
+        "unease",
+        "dread",
+        "chill"
+      ]
+    },
+    "promise_payoff": {
+      "promise": "The opening promises an explanation for the figure behind the sealed glass.",
+      "payoff": "The final recurrence shows that demolition and deletion did not end the impossible event.",
+      "payoff_type": "recurrence",
+      "promise_paid": true
+    },
+    "visual_feasibility": {
+      "checked_before_script": false,
+      "scene_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12"
+      ],
+      "approved_scene_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12"
+      ],
+      "coverage_ratio": 1.0
+    },
+    "channel_diversity": {
+      "comparison_window": "last_20_episodes",
+      "recent_episode_count": 0,
+      "similarity_score": 0.0,
+      "similarity_status": "BASELINE",
+      "unique_signature": "sealed-hotel-camera-317-moving-figure"
+    },
+    "original_authorship": {
+      "original_script": true,
+      "original_narration": true,
+      "editorial_transform": true,
+      "asset_provenance_complete": true,
+      "mass_production_risk": "LOW"
+    },
+    "monetization_safety": {
+      "youtube_ad_safety": "LOW_RISK",
+      "tiktok_originality": "ORIGINAL",
+      "claims_reviewed": true,
+      "disclosure_present": true,
+      "risk_flags": {
+        "graphic_content": "NONE",
+        "harmful_claims": "NONE",
+        "shocking_content": "LOW"
+      }
+    },
+    "duration": {
+      "target_seconds": 69,
+      "planned_seconds": 69,
+      "estimated_narration_seconds": 68.4,
+      "padding_seconds": 0,
+      "padding_status": "PASS"
+    },
+    "red_team": {
+      "status": "PASS",
+      "editorial": {
+        "status": "PASS",
+        "blocking_issues": [],
+        "notes": "Hook, escalation, recurrence and scene contracts are explicit."
+      },
+      "factual": {
+        "status": "PASS",
+        "blocking_issues": [],
+        "notes": "Fiction mode is explicit; visual proxies are not presented as factual evidence."
+      },
+      "monetization": {
+        "status": "PASS",
+        "blocking_issues": [],
+        "notes": "No graphic violence, harmful instruction or unverified real-world claim is used."
+      }
+    }
+  },
   "research": {
     "accessed_at": "2026-10-25",
     "confidence": "HIGH",

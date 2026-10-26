@@ -6,7 +6,7 @@
   "fps": 25,
   "story_profile": {
     "format": "The Hidden Detail",
-    "truth_mode": "VERIFIED_FACT",
+    "truth_mode": "REAL_FACTUAL",
     "primary_emotion": "curiosity",
     "secondary_emotion": "tension",
     "central_question": "What detail changed the outcome?",
@@ -546,6 +546,106 @@
       }
     }
   ],
+  "story_creation": {
+    "schema_version": "1.0",
+    "idea": {
+      "title": "A question worth one minute",
+      "premise": "Replace with the concrete premise in one sentence.",
+      "audience_promise": "Replace with the specific payoff the viewer will receive.",
+      "central_question": "What detail changed the outcome?",
+      "hook_type": "impossible_evidence"
+    },
+    "truth": {
+      "mode": "REAL_FACTUAL",
+      "sources": [
+        "replace-with-primary-source"
+      ],
+      "disclosure": "Facts are presented with source-backed wording.",
+      "reconstruction_note": ""
+    },
+    "causal_chain": {
+      "cause": "Replace with the initiating cause.",
+      "escalation": [
+        "Replace with escalation one.",
+        "Replace with escalation two."
+      ],
+      "consequence": "Replace with the consequence.",
+      "why_it_mattered": "Replace with why the consequence mattered."
+    },
+    "emotional_arc": {
+      "primary": "tension",
+      "secondary": "curiosity",
+      "target_sensations": [
+        "curiosity",
+        "unease",
+        "relief"
+      ]
+    },
+    "promise_payoff": {
+      "promise": "Replace with the question the opening promises to answer.",
+      "payoff": "Replace with the concrete final answer or meaningful recurrence.",
+      "payoff_type": "reveal",
+      "promise_paid": false
+    },
+    "visual_feasibility": {
+      "checked_before_script": false,
+      "scene_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "approved_scene_ids": [],
+      "coverage_ratio": 0.0
+    },
+    "channel_diversity": {
+      "comparison_window": "last_20_episodes",
+      "recent_episode_count": 0,
+      "similarity_score": 0.0,
+      "similarity_status": "PASS",
+      "unique_signature": "replace-with-distinctive-story-signature"
+    },
+    "original_authorship": {
+      "original_script": false,
+      "original_narration": false,
+      "editorial_transform": false,
+      "asset_provenance_complete": false,
+      "mass_production_risk": "UNKNOWN"
+    },
+    "monetization_safety": {
+      "youtube_ad_safety": "UNREVIEWED",
+      "tiktok_originality": "UNREVIEWED",
+      "claims_reviewed": false,
+      "disclosure_present": false,
+      "risk_flags": {
+        "graphic_content": "UNREVIEWED",
+        "harmful_claims": "UNREVIEWED",
+        "shocking_content": "UNREVIEWED"
+      }
+    },
+    "duration": {
+      "target_seconds": 62,
+      "planned_seconds": 62,
+      "estimated_narration_seconds": 61.5,
+      "padding_seconds": 0,
+      "padding_status": "PENDING"
+    },
+    "red_team": {
+      "status": "PENDING",
+      "editorial": {
+        "status": "PENDING",
+        "blocking_issues": []
+      },
+      "factual": {
+        "status": "PENDING",
+        "blocking_issues": []
+      },
+      "monetization": {
+        "status": "PENDING",
+        "blocking_issues": []
+      }
+    }
+  },
   "job_id": "because-of-this-episode-001",
   "research": {
     "sources": [
