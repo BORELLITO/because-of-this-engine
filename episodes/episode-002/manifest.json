@@ -1461,11 +1461,11 @@
       "scene_id": "S12",
       "duration": 8.5,
       "story_beat": "recurrence: the camera turns on inside another building",
-      "visual_intent": "end on the recurring camera motif and reopen the mystery",
-      "visual_function": "finale",
+      "visual_intent": "leave the viewer inside a different building after the camera returns",
+      "visual_function": "recurrence",
       "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.73,
+      "match_score": 0.8,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -1477,83 +1477,87 @@
       "asset": {
         "asset_id": "because-of-this-episode-002-s12",
         "path": "runtime-assets/s12.mp4",
-        "drive_file_id": "1P_ncUawSApDyDyJIOvr6fWyz-heVk0Pm",
+        "drive_file_id": "1fqRupryR6KEcKlRaLFK5tEC0EnrofEaD",
         "provider": "pexels",
-        "source_page_url": "https://www.pexels.com/video/cctv-camera-on-a-rainy-day-with-architectural-background-34106136/",
+        "source_page_url": "https://www.pexels.com/video/security-officer-walking-down-historic-staircase-35074178/",
         "license": "Pexels Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "573ca2ecd2389baf847c588512eabea7570059e503119dcff4d0158f7ea180fd",
-        "reuse_status": "REUSED_APPROVED_COPY",
+        "sha256": "2c9c1f57654de26f8f24d87fedbc98372c33d53b9fc5548bcca33eb310e71630",
+        "reuse_status": "REUSED_APPROVED",
         "episode_id": "because-of-this-episode-002",
-        "author": "Pexels source contributor",
-        "acquisition_timestamp": "2026-10-24T15:19:00Z",
-        "original_filename": "14465085_1080_1920_25fps.mp4",
+        "author": "khezez | خزاز",
+        "acquisition_timestamp": "2026-10-25T21:27:52.342Z",
+        "original_filename": "pexels-security-officer-staircase-35074178.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": 12.32,
+        "duration_seconds": 32.64,
         "width": 1080,
         "height": 1920,
-        "filesize_bytes": 5406010,
+        "filesize_bytes": 14926216,
         "job_ownership": "because-of-this-episode-002",
         "scene_usage": "S12",
         "visual_evidence": {
           "reviewed": true,
-          "basis": "source-page license/title/description plus three sampled local frames",
+          "basis": "Pexels source-page license/title/description plus three sampled local frames",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-25T00:00:00Z",
+          "reviewed_at": "2026-10-26T00:00:00Z",
           "review_method": "source-page license check plus three sampled local frames",
-          "source_title": "CCTV Camera on a Rainy Day with Architectural Background",
-          "source_description": "A CCTV camera overlooking a traditional structure amidst rain.",
-          "subjects": [],
-          "actions": [],
+          "source_title": "Security Officer Walking Down Historic Staircase",
+          "source_description": "A uniformed officer walks down a historic building's staircase.",
+          "subjects": [
+            "security_guard"
+          ],
+          "actions": [
+            "walking"
+          ],
           "environments": [
-            "exterior"
+            "interior"
           ],
-          "objects": [
-            "security_camera"
+          "objects": [],
+          "moods": [],
+          "composition": [],
+          "observed_subjects": [
+            "security_guard"
           ],
-          "moods": [
-            "eerie"
+          "observed_actions": [
+            "walking"
           ],
-          "composition": [
-            "close_up"
-          ],
-          "observed_subjects": [],
-          "observed_actions": [],
           "observed_environments": [
-            "exterior"
+            "interior"
           ],
-          "observed_objects": [
-            "security_camera"
-          ],
+          "observed_objects": [],
           "sample_timestamps": [
             0,
-            6,
-            11.8
+            16,
+            31.6
           ],
+          "action_window": {
+            "in": 0,
+            "out": 32.64
+          },
           "usable_window": {
             "in": 0,
-            "out": 12.2
+            "out": 32.5
           },
-          "notes": "The physical CCTV camera is unambiguous. The contract deliberately does not claim that the frame itself proves the electrical activation; that remains a narrative/editorial implication."
+          "notes": "Interior staircase and a uniformed officer are used as an honest proxy for the different building. The clip does not claim to show CCTV hardware or a literal feed."
         },
         "source_segment_in": 0,
-        "source_segment_out": 12.32
+        "source_segment_out": 32.64
       },
       "narration_excerpt": "In the corner, the timestamp read three eighteen. The next morning, the camera turned on again. This time, it was inside a different building, aimed at another empty floor. Then the feed went black.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
-          "objects": [
-            "security_camera"
+          "environments": [
+            "interior"
           ]
         },
         "preferred": {
-          "environments": [
-            "exterior"
+          "subjects": [
+            "security_guard"
           ],
-          "moods": [
-            "eerie"
+          "actions": [
+            "walking"
           ]
         },
         "forbidden": [
@@ -1563,13 +1567,13 @@
           "office"
         ],
         "critical": {
-          "objects": [
-            "security_camera"
+          "environments": [
+            "interior"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "security_camera"
+            "interior"
           ],
           "minimum_direct": 1
         }
