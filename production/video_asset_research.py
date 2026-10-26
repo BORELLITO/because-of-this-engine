@@ -260,23 +260,24 @@ def build_queue(
                             continue
                         unique_keys.add(key)
                         source_key = source_asset_key(candidate)
-                        if not source_key:
+                        if asset_memory["status"] == "READY" and not source_key:
                             candidate["selection_status"] = "REJECTED_MISSING_SOURCE_IDENTITY"
                             candidate["global_memory_check"] = "BLOCKED"
                             candidate["rejection_reason"] = "provider source identity is required before visual approval"
                             rejected.append(candidate)
-                        elif source_key in asset_memory["retired_source_keys"]:
+                        elif asset_memory["status"] == "READY" and source_key in asset_memory["retired_source_keys"]:
                             candidate["selection_status"] = "REJECTED_GLOBAL_REUSE"
                             candidate["global_memory_check"] = "BLOCKED"
                             candidate["source_asset_key"] = source_key
                             candidate["rejection_reason"] = "source asset is already retired in the global memory registry"
                             rejected.append(candidate)
                         elif candidate["selection_status"] == "REJECTED_SEMANTIC_MISMATCH":
-                            candidate["global_memory_check"] = "PASS"
+                            candidate["global_memory_check"] = asset_memory["status"]
                             rejected.append(candidate)
                         else:
-                            candidate["global_memory_check"] = "PASS"
-                            candidate["source_asset_key"] = source_key
+                            candidate["global_memory_check"] = asset_memory["status"]
+                            if source_key:
+                                candidate["source_asset_key"] = source_key
                             candidates.append(candidate)
             except Exception as exc:
                 errors.append(f"{provider}: {exc}")
