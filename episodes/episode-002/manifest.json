@@ -1,0 +1,2098 @@
+{
+  "schema_version": "2.0",
+  "video_id": "because-of-this-episode-002",
+  "job_id": "because-of-this-episode-002",
+  "title": "The Man Who Pointed Before the Collapse",
+  "language": "en",
+  "fps": 25,
+  "story_profile": {
+    "format": "The Warning That Arrived First",
+    "truth_mode": "DECLARED_FICTION",
+    "primary_emotion": "tension",
+    "secondary_emotion": "curiosity",
+    "central_question": "Why was the man pointing at a building that collapsed twelve minutes later?",
+    "visual_symbol": "the pointing hand behind glass"
+  },
+  "voice": {
+    "provider": "gemini",
+    "model": "gemini-3.8-flash-tts",
+    "voice": "Charon",
+    "language": "en-US",
+    "style": "Clear American English, crisp diction, moderate pace, restrained suspense. Pronounce numbers as spoken English words with clear word boundaries; preserve every word exactly.",
+    "model_rationale": "Production target: Gemini 3.8 Flash TTS. The canonical narration is authored for clear spoken-word boundaries and strict real-timestamp caption alignment."
+  },
+  "script": {
+    "path": "script.txt",
+    "word_count_target": 139
+  },
+  "audio": {
+    "path": "audio/narration.wav",
+    "master": "narration",
+    "sample_rate": 24000,
+    "channels": 1
+  },
+  "captions": {
+    "path": "captions/narration.ass",
+    "alignment_mode": "forced_alignment",
+    "alignment_source": "Vosk word timestamps extracted from the final narration WAV; caption text remains the canonical script.",
+    "word_level_available": true,
+    "max_lines": 2,
+    "max_line_chars": 42,
+    "target_cps": 20,
+    "max_cps": 28,
+    "end_tolerance_seconds": 0.1,
+    "alignment_sidecar": "captions/narration.alignment.json",
+    "word_highlight_enabled": true,
+    "word_highlight_mode": "timestamp_color_transform",
+    "active_word_color": "#FF7777",
+    "word_highlight_tolerance_ms": 35
+  },
+  "music": {
+    "path": "audio/suspense-bed.mp3",
+    "drive_file_id": "1bDbbr-bMA3puBvrQ2QzvSTfbicXJmdni",
+    "provider": "mixkit",
+    "source_page_url": "https://mixkit.co/free-stock-music/mood/suspenseful/",
+    "license": "Mixkit Stock Music Free License",
+    "commercial_use": true,
+    "attribution_required": false,
+    "volume": 0.12,
+    "author": "Michael Ramir C.",
+    "original_filename": "871.mp3",
+    "mime_type": "audio/mpeg",
+    "filesize_bytes": 3243407
+  },
+  "brand": {
+    "watermark_enabled": false,
+    "watermark_text": "|B",
+    "accent_color": "#E3262E",
+    "logo_enabled": true,
+    "logo_path": "brand/because-of-this-logo.png",
+    "logo_width": 432,
+    "logo_opacity": 0.82,
+    "logo_margin": 54,
+    "logo_top": 72
+  },
+  "output": {
+    "path": "rendered/{video_id}-{mode}.mp4"
+  },
+  "scenes": [
+    {
+      "scene_id": "S01",
+      "duration": 6,
+      "story_beat": "hook: a city camera catches a man pointing at an empty building",
+      "visual_intent": "make the pointing gesture the first undeniable anomaly",
+      "visual_function": "hook",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.95,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "hard_cut",
+        "duration": 0
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-002-s01",
+        "path": "runtime-assets/s01.mp4",
+        "drive_file_id": "1j-pEVX8dgxXRkq0R3hffbs_41L4AFyUS",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/a-man-pointing-at-something-in-the-distance-20589889/",
+        "license": "Pexels Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "6d6dc6bd5b45700e919864e16f2b8745c24e179f84ffca7734170f65c09d8961",
+        "reuse_status": "REUSED_APPROVED",
+        "episode_id": "because-of-this-episode-002",
+        "author": "Pexels source contributor",
+        "acquisition_timestamp": "2026-10-24T18:45:00Z",
+        "original_filename": "20589889-hd_1920_1080_60fps.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 9.62,
+        "width": 1920,
+        "height": 1080,
+        "filesize_bytes": 2973051,
+        "job_ownership": "because-of-this-episode-002",
+        "scene_usage": "S01",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "source-page license/title/description plus three sampled local frames",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames",
+          "source_title": "A man pointing at something in the distance",
+          "source_description": "Portrait of a young man in a hoodie pointing at the camera in a park.",
+          "subjects": [
+            "person"
+          ],
+          "actions": [
+            "pointing"
+          ],
+          "environments": [
+            "exterior"
+          ],
+          "objects": [],
+          "moods": [],
+          "composition": [
+            "close_up"
+          ],
+          "observed_subjects": [
+            "person"
+          ],
+          "observed_actions": [
+            "pointing"
+          ],
+          "observed_environments": [
+            "exterior"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            0,
+            4.8,
+            9.1
+          ],
+          "action_window": {
+            "in": 0,
+            "out": 9.62
+          },
+          "usable_window": {
+            "in": 0,
+            "out": 9.5
+          },
+          "notes": "Explanatory proxy for the gesture: a person points directly into the lens. No silhouette or physical security-camera hardware is falsely claimed."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 9.62
+      },
+      "narration_excerpt": "At 3:17 in the morning, a city camera caught a man pointing at an empty building.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "subjects": [
+            "person"
+          ],
+          "actions": [
+            "pointing"
+          ]
+        },
+        "preferred": {
+          "environments": [
+            "exterior",
+            "night"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ],
+        "critical": {
+          "subjects": [
+            "person"
+          ],
+          "actions": [
+            "pointing"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "man",
+            "pointing"
+          ],
+          "minimum_direct": 2
+        }
+      }
+    },
+    {
+      "scene_id": "S02",
+      "duration": 5,
+      "story_beat": "question: the camera records what the man is watching",
+      "visual_intent": "turn the camera into the witness of the story",
+      "visual_function": "context",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.78,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-002-s02",
+        "path": "runtime-assets/s02.mp4",
+        "drive_file_id": "1Kd0zFqbfBvD3w1wEYT-914mTBe7cUcXL",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/cctv-camera-on-a-rainy-day-with-architectural-background-34106136/",
+        "license": "Pexels Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "573ca2ecd2389baf847c588512eabea7570059e503119dcff4d0158f7ea180fd",
+        "reuse_status": "REUSED_APPROVED",
+        "episode_id": "because-of-this-episode-002",
+        "author": "Pexels source contributor",
+        "acquisition_timestamp": "2026-10-24T15:19:00Z",
+        "original_filename": "14465085_1080_1920_25fps.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 12.32,
+        "width": 1080,
+        "height": 1920,
+        "filesize_bytes": 5406010,
+        "job_ownership": "because-of-this-episode-002",
+        "scene_usage": "S02",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "source-page license/title/description plus three sampled local frames",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames",
+          "source_title": "CCTV Camera on a Rainy Day with Architectural Background",
+          "source_description": "A CCTV camera overlooking a traditional structure amidst rain.",
+          "subjects": [],
+          "actions": [],
+          "environments": [
+            "exterior"
+          ],
+          "objects": [
+            "security_camera"
+          ],
+          "moods": [
+            "eerie"
+          ],
+          "composition": [
+            "close_up"
+          ],
+          "observed_subjects": [],
+          "observed_actions": [],
+          "observed_environments": [
+            "exterior"
+          ],
+          "observed_objects": [
+            "security_camera"
+          ],
+          "sample_timestamps": [
+            0,
+            6,
+            11.8
+          ],
+          "usable_window": {
+            "in": 0,
+            "out": 12.2
+          },
+          "notes": "The physical CCTV camera is unambiguous. The contract deliberately does not claim that the frame itself proves the electrical activation; that remains a narrative/editorial implication."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 12.32
+      },
+      "narration_excerpt": "He wasn't looking at the street. He was pointing at the fourth floor.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "objects": [
+            "security_camera"
+          ]
+        },
+        "preferred": {
+          "environments": [
+            "exterior"
+          ],
+          "moods": [
+            "eerie"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ],
+        "critical": {
+          "objects": [
+            "security_camera"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "camera"
+          ],
+          "minimum_direct": 1
+        }
+      }
+    },
+    {
+      "scene_id": "S03",
+      "duration": 4.5,
+      "story_beat": "investigation: the guard checks the entrance",
+      "visual_intent": "introduce the human witness who tests the anomaly",
+      "visual_function": "investigation",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.88,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-002-s03",
+        "path": "runtime-assets/s03.mp4",
+        "drive_file_id": "1laWybysWKACH3zhAWBR1SDX6kTaa-4oq",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/security-inspection-at-glass-metal-building-entrance-39891793/",
+        "license": "Pexels Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "454d23871c927cba37158e7f837b4c5973e1663511a68ee453f19ff07bf64a43",
+        "reuse_status": "REUSED_APPROVED",
+        "episode_id": "because-of-this-episode-002",
+        "author": "Pexels source contributor",
+        "acquisition_timestamp": "2026-10-24T15:19:00Z",
+        "original_filename": "17017071_2560_1440_25fps.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 12.08,
+        "width": 2560,
+        "height": 1440,
+        "filesize_bytes": 8551933,
+        "job_ownership": "because-of-this-episode-002",
+        "scene_usage": "S03",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "source-page license/title/description plus three sampled local frames",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames",
+          "source_title": "Security Inspection at Glass-Metal Building Entrance",
+          "source_description": "Guards at an indoor glass-metal structure ensuring safety, daylight scene.",
+          "subjects": [
+            "security_guard"
+          ],
+          "actions": [
+            "standing",
+            "watching"
+          ],
+          "environments": [
+            "interior"
+          ],
+          "objects": [
+            "glass_door"
+          ],
+          "moods": [],
+          "composition": [
+            "wide_shot"
+          ],
+          "observed_subjects": [
+            "security_guard"
+          ],
+          "observed_actions": [
+            "standing",
+            "watching"
+          ],
+          "observed_environments": [
+            "interior"
+          ],
+          "observed_objects": [
+            "glass_door"
+          ],
+          "sample_timestamps": [
+            0,
+            6,
+            11.5
+          ],
+          "usable_window": {
+            "in": 0,
+            "out": 12
+          },
+          "notes": "Uniformed security personnel are visibly standing inside a glass-fronted building; the grade will supply the nocturnal suspense."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 12.08
+      },
+      "narration_excerpt": "The guard checked the entrance.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "subjects": [
+            "security_guard"
+          ],
+          "actions": [
+            "standing"
+          ],
+          "environments": [
+            "interior"
+          ]
+        },
+        "preferred": {
+          "objects": [
+            "glass_door"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ],
+        "critical": {
+          "subjects": [
+            "security_guard"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "guard"
+          ],
+          "minimum_direct": 1
+        }
+      }
+    },
+    {
+      "scene_id": "S04",
+      "duration": 4.5,
+      "story_beat": "contradiction: the entrance is visibly locked",
+      "visual_intent": "make the physical barrier concrete",
+      "visual_function": "contradiction",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.92,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-002-s04",
+        "path": "runtime-assets/s04.mp4",
+        "drive_file_id": "19uaIQ50vaPeJSQoOriYlguSgsPOLOWSD",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/shed-in-the-forest-closed-with-a-padlock-2501/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "3b58bb9f92a77fd817a89194f41336ee20686c9f408589e320da279b7a5ab5bc",
+        "reuse_status": "REUSED_APPROVED",
+        "episode_id": "because-of-this-episode-002",
+        "author": "Mixkit contributor",
+        "acquisition_timestamp": "2026-10-24T18:45:00Z",
+        "original_filename": "2501-720.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 11.136125,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 3152295,
+        "job_ownership": "because-of-this-episode-002",
+        "scene_usage": "S04",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "source-page license/title/description plus three sampled local frames",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames",
+          "source_title": "Shed in the forest closed with a padlock",
+          "source_description": "Brick shed with sliding doors closed with a rusty padlock in a forest with tree leaves on the ground.",
+          "subjects": [],
+          "actions": [],
+          "environments": [
+            "exterior"
+          ],
+          "objects": [
+            "lock"
+          ],
+          "moods": [
+            "eerie"
+          ],
+          "composition": [
+            "close_up"
+          ],
+          "observed_subjects": [],
+          "observed_actions": [],
+          "observed_environments": [
+            "exterior"
+          ],
+          "observed_objects": [
+            "padlock",
+            "closed door"
+          ],
+          "sample_timestamps": [
+            0,
+            5.5,
+            10.6
+          ],
+          "usable_window": {
+            "in": 0,
+            "out": 11
+          },
+          "notes": "The visible padlock is used as a symbolic, honest representation of the room being sealed; no interior hotel claim is made."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 11.136125
+      },
+      "narration_excerpt": "The doors were locked,",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "objects": [
+            "lock"
+          ]
+        },
+        "preferred": {
+          "environments": [
+            "exterior"
+          ],
+          "moods": [
+            "eerie"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ],
+        "critical": {
+          "objects": [
+            "lock"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "locked"
+          ],
+          "minimum_direct": 1
+        }
+      }
+    },
+    {
+      "scene_id": "S05",
+      "duration": 4.5,
+      "story_beat": "contradiction: the hallway is empty",
+      "visual_intent": "show the absence that should settle the question",
+      "visual_function": "atmosphere",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.9,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-002-s05",
+        "path": "runtime-assets/s05.mp4",
+        "drive_file_id": "1RWgEHVRetJKI_wWmlECTyG01w9riHkeo",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/an-empty-hallway-6010698/",
+        "license": "Pexels Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "985f8f019911be295037b66b52e4cc2ab2a22f7e8197333e8b2c9e8bcf6cbc7a",
+        "reuse_status": "REUSED_APPROVED",
+        "episode_id": "because-of-this-episode-002",
+        "author": "Pexels source contributor",
+        "acquisition_timestamp": "2026-10-24T15:19:00Z",
+        "original_filename": "6010698-uhd_1440_2560_25fps.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 9.32,
+        "width": 1440,
+        "height": 2560,
+        "filesize_bytes": 14140268,
+        "job_ownership": "because-of-this-episode-002",
+        "scene_usage": "S05",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "source-page license/title/description plus three sampled local frames",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames",
+          "source_title": "An Empty Hallway",
+          "source_description": "Explore an empty, dimly lit hallway with architectural pillars and ambient lighting.",
+          "subjects": [],
+          "actions": [],
+          "environments": [
+            "hallway",
+            "interior"
+          ],
+          "objects": [],
+          "moods": [
+            "eerie"
+          ],
+          "composition": [
+            "wide_shot"
+          ],
+          "observed_subjects": [],
+          "observed_actions": [],
+          "observed_environments": [
+            "hallway",
+            "interior"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            0,
+            4.5,
+            8.8
+          ],
+          "usable_window": {
+            "in": 0,
+            "out": 9.2
+          },
+          "notes": "The corridor remains visibly empty across the sampled frames, supporting the negative-evidence beat."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 9.32
+      },
+      "narration_excerpt": "the hallway was empty,",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "environments": [
+            "hallway"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "eerie"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ],
+        "critical": {
+          "environments": [
+            "hallway"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "hallway"
+          ],
+          "minimum_direct": 1
+        }
+      }
+    },
+    {
+      "scene_id": "S06",
+      "duration": 4.5,
+      "story_beat": "contradiction: every window is dark",
+      "visual_intent": "extend the absence from the hallway to the entire building",
+      "visual_function": "atmosphere",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.72,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-002-s06",
+        "path": "runtime-assets/s06.mp4",
+        "drive_file_id": "1T3A_9iHORkIaynWfJzmWQ-gNsW7nwCap",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/a-close-up-shot-of-glass-windows-6175387/",
+        "license": "Pexels Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "0250538a1d6b12d46c731af2a4bf09f41cf9d2121e4a4fa70ed2d03acdc61843",
+        "reuse_status": "REUSED_APPROVED",
+        "episode_id": "because-of-this-episode-002",
+        "author": "Pexels source contributor",
+        "acquisition_timestamp": "2026-10-24T18:45:00Z",
+        "original_filename": "6175387-hd_1920_1080_30fps.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 24.383333,
+        "width": 1920,
+        "height": 1080,
+        "filesize_bytes": 14289715,
+        "job_ownership": "because-of-this-episode-002",
+        "scene_usage": "S06",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "source-page license/title/description plus three sampled local frames",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames",
+          "source_title": "A Close-Up Shot of Glass Windows",
+          "source_description": "Close-up view of glass reflecting surroundings on a brick building.",
+          "subjects": [],
+          "actions": [],
+          "environments": [
+            "exterior"
+          ],
+          "objects": [
+            "glass_surface"
+          ],
+          "moods": [],
+          "composition": [
+            "close_up"
+          ],
+          "observed_subjects": [],
+          "observed_actions": [],
+          "observed_environments": [
+            "exterior"
+          ],
+          "observed_objects": [
+            "glass_surface",
+            "window"
+          ],
+          "sample_timestamps": [
+            0,
+            12,
+            23.8
+          ],
+          "usable_window": {
+            "in": 0,
+            "out": 24
+          },
+          "notes": "The frame is empty of people and preserves the disappearance beat as an explanatory visual of the now-empty glass boundary."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 24.383333
+      },
+      "narration_excerpt": "and every window was dark.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "objects": [
+            "glass_surface"
+          ]
+        },
+        "preferred": {
+          "environments": [
+            "exterior"
+          ],
+          "moods": [
+            "eerie"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ],
+        "critical": {
+          "objects": [
+            "glass_surface"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "window"
+          ],
+          "minimum_direct": 1
+        }
+      }
+    },
+    {
+      "scene_id": "S07",
+      "duration": 6,
+      "story_beat": "reveal: the same presence appears inside the corridor",
+      "visual_intent": "move the anomaly across the sealed boundary",
+      "visual_function": "reveal",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.86,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-002-s07",
+        "path": "runtime-assets/s07.mp4",
+        "drive_file_id": "1Pw8B7L_qUdHUaDIO_LL2hpXnLjLcV_6a",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/silhouette-walking-through-historic-corridor-32203108/",
+        "license": "Pexels Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "8a25c6bb54a78d82a694c68cfcc292dc281413cdae18f5dfdfa8b09c70c42ef3",
+        "reuse_status": "REUSED_APPROVED",
+        "episode_id": "because-of-this-episode-002",
+        "author": "Pexels source contributor",
+        "acquisition_timestamp": "2026-10-24T15:19:00Z",
+        "original_filename": "13734582_1440_2560_30fps.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 21.7,
+        "width": 1440,
+        "height": 2560,
+        "filesize_bytes": 14547864,
+        "job_ownership": "because-of-this-episode-002",
+        "scene_usage": "S07",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "source-page license/title/description plus three sampled local frames",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames",
+          "source_title": "Silhouette Walking Through Historic Corridor",
+          "source_description": "A silhouette of a person walking through a dimly lit historic corridor.",
+          "subjects": [
+            "silhouette"
+          ],
+          "actions": [
+            "walking"
+          ],
+          "environments": [
+            "hallway",
+            "interior"
+          ],
+          "objects": [],
+          "moods": [
+            "eerie"
+          ],
+          "composition": [
+            "wide_shot"
+          ],
+          "observed_subjects": [
+            "silhouette"
+          ],
+          "observed_actions": [
+            "walking"
+          ],
+          "observed_environments": [
+            "hallway",
+            "interior"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            0,
+            10.5,
+            21.2
+          ],
+          "action_window": {
+            "in": 0,
+            "out": 21.7
+          },
+          "usable_window": {
+            "in": 0,
+            "out": 21.5
+          },
+          "notes": "The silhouette moves through a clearly readable corridor; the narration was aligned from standing to walking to remove an action conflict."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 21.7
+      },
+      "narration_excerpt": "Then the camera showed the same man inside. He stood at the end of the corridor, facing the same place.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "subjects": [
+            "silhouette"
+          ],
+          "actions": [
+            "walking"
+          ],
+          "environments": [
+            "hallway"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "eerie"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ],
+        "critical": {
+          "subjects": [
+            "silhouette"
+          ],
+          "environments": [
+            "hallway"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "same man",
+            "corridor"
+          ],
+          "minimum_direct": 2
+        }
+      }
+    },
+    {
+      "scene_id": "S08",
+      "duration": 5,
+      "story_beat": "evidence: police replay the footage",
+      "visual_intent": "shift from witness fear to formal examination",
+      "visual_function": "evidence",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.9,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-002-s08",
+        "path": "runtime-assets/s08.mp4",
+        "drive_file_id": "1HPBVbKB0Cm1Pjc_4L6qSK7iE-OwSFdzC",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/police-officer-monitoring-security-camera-while-looking-at-the-monitor-screen-7255101/",
+        "license": "Pexels Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "71bb2b493d10e3878a9b973b309e60da191ad9e21ef38d64fe12692ca64c2592",
+        "reuse_status": "REUSED_APPROVED",
+        "episode_id": "because-of-this-episode-002",
+        "author": "Pexels source contributor",
+        "acquisition_timestamp": "2026-10-24T18:45:00Z",
+        "original_filename": "7255101-uhd_2732_1440_30fps.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 9.5,
+        "width": 2732,
+        "height": 1440,
+        "filesize_bytes": 14431452,
+        "job_ownership": "because-of-this-episode-002",
+        "scene_usage": "S08",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "source-page license/title/description plus three sampled local frames",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames",
+          "source_title": "Police Officer Monitoring Security Camera while Looking at the Monitor Screen",
+          "source_description": "Team of security personnel monitors surveillance screens in a control room.",
+          "subjects": [
+            "person"
+          ],
+          "actions": [
+            "watching",
+            "recording"
+          ],
+          "environments": [
+            "interior"
+          ],
+          "objects": [
+            "security_camera",
+            "screen"
+          ],
+          "moods": [
+            "eerie"
+          ],
+          "composition": [
+            "wide_shot"
+          ],
+          "observed_subjects": [
+            "person"
+          ],
+          "observed_actions": [
+            "watching",
+            "recording"
+          ],
+          "observed_environments": [
+            "interior"
+          ],
+          "observed_objects": [
+            "security_camera",
+            "screen"
+          ],
+          "sample_timestamps": [
+            0,
+            4.5,
+            9
+          ],
+          "action_window": {
+            "in": 0,
+            "out": 9.5
+          },
+          "usable_window": {
+            "in": 0,
+            "out": 9.4
+          },
+          "notes": "The monitors visibly display multi-camera surveillance feeds in a control room; this is a direct evidence visual for the camera having captured a detail."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 9.5
+      },
+      "narration_excerpt": "Police replayed the footage,",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "subjects": [
+            "person"
+          ],
+          "actions": [
+            "watching"
+          ],
+          "environments": [
+            "interior"
+          ]
+        },
+        "preferred": {
+          "objects": [
+            "security_camera",
+            "screen"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ],
+        "critical": {
+          "subjects": [
+            "person"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "police",
+            "footage"
+          ],
+          "minimum_direct": 2
+        }
+      }
+    },
+    {
+      "scene_id": "S09",
+      "duration": 7.5,
+      "story_beat": "negative evidence: the replay finds only darkness and absence",
+      "visual_intent": "let the evidence disappear into a controlled suspense pause",
+      "visual_function": "atmosphere",
+      "visual_match": "SYMBOLIC",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.68,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-002-s09",
+        "path": "runtime-assets/s09.mp4",
+        "drive_file_id": "15jUQ5IboTHLVM9PHFKKtqCOBCzPZJI_-",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/candle-lighting-in-the-dark-3458/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "dd39518761ec11386f260db36378a8a10655284a7ce65bfd8cf3b5fa8b248429",
+        "reuse_status": "REUSED_APPROVED",
+        "episode_id": "because-of-this-episode-002",
+        "author": "Mixkit contributor",
+        "acquisition_timestamp": "2026-10-24T18:45:00Z",
+        "original_filename": "3458-720.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 12.958333,
+        "width": 720,
+        "height": 1280,
+        "filesize_bytes": 4494312,
+        "job_ownership": "because-of-this-episode-002",
+        "scene_usage": "S09",
+        "visual_evidence": {
+          "source_title": "Candle lighting in the dark",
+          "objects": [
+            "light"
+          ],
+          "environments": [
+            "darkness"
+          ],
+          "actions": [
+            "flickering"
+          ],
+          "moods": [
+            "eerie"
+          ],
+          "reviewed": true,
+          "basis": "source-page license/title plus three sampled local frames",
+          "notes": "The candle flame is visibly isolated against darkness and functions as a symbolic lights-out beat.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames at 0.5s, 6.5s and 12.3s",
+          "observed_subjects": [],
+          "observed_actions": [
+            "flickering",
+            "lighting"
+          ],
+          "observed_environments": [
+            "darkness"
+          ],
+          "observed_objects": [
+            "light",
+            "candle"
+          ],
+          "sample_timestamps": [
+            0.5,
+            6.5,
+            12.3
+          ],
+          "usable_window": {
+            "in": 0,
+            "out": 12.95
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 12.958333
+      },
+      "narration_excerpt": "but found no entrance, no footsteps, and no reflection in the glass.",
+      "visual_semantics": {
+        "role": "symbolic",
+        "required": {
+          "objects": [
+            "light"
+          ],
+          "environments": [
+            "darkness"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "eerie"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ],
+        "critical": {
+          "objects": [
+            "light"
+          ],
+          "environments": [
+            "darkness"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "no entrance",
+            "no reflection"
+          ],
+          "minimum_direct": 2
+        }
+      }
+    },
+    {
+      "scene_id": "S10",
+      "duration": 6,
+      "story_beat": "consequence: the building collapses twelve minutes later",
+      "visual_intent": "pay off the warning with an irreversible physical consequence",
+      "visual_function": "consequence",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.94,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "dip_to_black",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-002-s10",
+        "path": "runtime-assets/s10.mp4",
+        "drive_file_id": "1z0OO73dVzSnxgTJaieXS21RBCbtqbWLA",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/video-of-building-collapsing-855464/",
+        "license": "Pexels Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "0b140a38e69e20a01ff276606db946eb2213ebbe5bac5bef8341939612fd3e69",
+        "reuse_status": "REUSED_APPROVED",
+        "episode_id": "because-of-this-episode-002",
+        "author": "Pixabay contributor via Pexels",
+        "acquisition_timestamp": "2026-10-25T23:22:39.992Z",
+        "original_filename": "855464-hd_1920_1080_25fps.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 29.28,
+        "width": 1920,
+        "height": 1080,
+        "filesize_bytes": 16528292,
+        "job_ownership": "because-of-this-episode-002",
+        "scene_usage": "S10",
+        "visual_evidence": {
+          "source_title": "Video Of Building Collapsing",
+          "source_description": "A large-scale demolition of buildings using explosives, captured in detail.",
+          "subjects": [],
+          "actions": [
+            "demolition",
+            "collapsing"
+          ],
+          "environments": [
+            "exterior"
+          ],
+          "objects": [
+            "building"
+          ],
+          "moods": [
+            "eerie"
+          ],
+          "composition": [
+            "wide_shot"
+          ],
+          "reviewed": true,
+          "basis": "Pexels public source page and four sampled local frames at 1s, 10s, 20s and 28s",
+          "notes": "The sampled frames visibly show a multi-storey building collapsing and generating demolition dust. The footage is treated as direct generic demolition evidence; it does not claim to depict the fictional hotel specifically.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T23:22:39.992Z",
+          "review_method": "Pexels license/source-page check plus four sampled local frames at 1s, 10s, 20s and 28s",
+          "observed_subjects": [],
+          "observed_actions": [
+            "demolition",
+            "collapsing"
+          ],
+          "observed_environments": [
+            "exterior"
+          ],
+          "observed_objects": [
+            "building"
+          ],
+          "sample_timestamps": [
+            1,
+            10,
+            20,
+            28
+          ],
+          "usable_window": {
+            "in": 0,
+            "out": 29.28
+          },
+          "action_window": {
+            "in": 1,
+            "out": 28
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 29.28
+      },
+      "narration_excerpt": "Twelve minutes later, the building collapsed. The recording should have ended there.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "actions": [
+            "demolition"
+          ]
+        },
+        "preferred": {
+          "objects": [
+            "building"
+          ],
+          "environments": [
+            "exterior"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ],
+        "critical": {
+          "actions": [
+            "demolition"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "building collapsed"
+          ],
+          "minimum_direct": 1
+        }
+      }
+    },
+    {
+      "scene_id": "S11",
+      "duration": 8,
+      "story_beat": "payoff: one recovered frame shows a hand pressed against glass",
+      "visual_intent": "replace the destroyed building with a closer and more personal threat",
+      "visual_function": "payoff",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.91,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-002-s11",
+        "path": "runtime-assets/s11.mp4",
+        "drive_file_id": "1Wgahgc8o0j8PySfrZfaWPG4-MYM_yX5h",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/grim-silhouette-presses-hands-and-face-against-glass-100562/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "feea34fa97b6bd82316d40f0f31ebe8f7713183d3d74ccda2084d7354fc533ee",
+        "reuse_status": "REUSED_APPROVED",
+        "episode_id": "because-of-this-episode-002",
+        "author": "Mixkit contributor",
+        "acquisition_timestamp": "2026-10-24T15:19:00Z",
+        "original_filename": "100562-video-720.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 20.228542,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 7696207,
+        "job_ownership": "because-of-this-episode-002",
+        "scene_usage": "S11",
+        "visual_evidence": {
+          "source_title": "Grim silhouette presses hands and face against glass",
+          "subjects": [
+            "silhouette"
+          ],
+          "actions": [
+            "standing",
+            "pressing"
+          ],
+          "environments": [
+            "interior"
+          ],
+          "objects": [
+            "glass_door"
+          ],
+          "moods": [
+            "eerie"
+          ],
+          "reviewed": true,
+          "basis": "source-page license/title plus three sampled local frames",
+          "notes": "The sampled frames consistently show the same dark figure pressed against a glass boundary; no hotel-specific claim is made.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames at 0.5s, 10.0s and 19.5s",
+          "observed_subjects": [
+            "silhouette"
+          ],
+          "observed_actions": [
+            "standing",
+            "pressing"
+          ],
+          "observed_environments": [
+            "interior"
+          ],
+          "observed_objects": [
+            "glass_door"
+          ],
+          "sample_timestamps": [
+            0.5,
+            10,
+            19.5
+          ],
+          "usable_window": {
+            "in": 0,
+            "out": 20.2
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 20.228542
+      },
+      "narration_excerpt": "But one frame was recovered from the backup drive. It showed a hand pressed against a pane of glass.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "subjects": [
+            "silhouette"
+          ],
+          "actions": [
+            "pressing"
+          ],
+          "environments": [
+            "interior"
+          ],
+          "objects": [
+            "glass_door"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "eerie"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ],
+        "critical": {
+          "actions": [
+            "pressing"
+          ],
+          "objects": [
+            "glass_door"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "one frame",
+            "hand",
+            "glass"
+          ],
+          "minimum_direct": 2
+        }
+      }
+    },
+    {
+      "scene_id": "S12",
+      "duration": 8.5,
+      "story_beat": "recurrence: the camera turns on inside another building",
+      "visual_intent": "end on the recurring camera motif and reopen the mystery",
+      "visual_function": "finale",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.73,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-002-s12",
+        "path": "runtime-assets/s12.mp4",
+        "drive_file_id": "1Kd0zFqbfBvD3w1wEYT-914mTBe7cUcXL",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/cctv-camera-on-a-rainy-day-with-architectural-background-34106136/",
+        "license": "Pexels Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "573ca2ecd2389baf847c588512eabea7570059e503119dcff4d0158f7ea180fd",
+        "reuse_status": "REUSED_APPROVED",
+        "episode_id": "because-of-this-episode-002",
+        "author": "Pexels source contributor",
+        "acquisition_timestamp": "2026-10-24T15:19:00Z",
+        "original_filename": "14465085_1080_1920_25fps.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 12.32,
+        "width": 1080,
+        "height": 1920,
+        "filesize_bytes": 5406010,
+        "job_ownership": "because-of-this-episode-002",
+        "scene_usage": "S12",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "source-page license/title/description plus three sampled local frames",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-25T00:00:00Z",
+          "review_method": "source-page license check plus three sampled local frames",
+          "source_title": "CCTV Camera on a Rainy Day with Architectural Background",
+          "source_description": "A CCTV camera overlooking a traditional structure amidst rain.",
+          "subjects": [],
+          "actions": [],
+          "environments": [
+            "exterior"
+          ],
+          "objects": [
+            "security_camera"
+          ],
+          "moods": [
+            "eerie"
+          ],
+          "composition": [
+            "close_up"
+          ],
+          "observed_subjects": [],
+          "observed_actions": [],
+          "observed_environments": [
+            "exterior"
+          ],
+          "observed_objects": [
+            "security_camera"
+          ],
+          "sample_timestamps": [
+            0,
+            6,
+            11.8
+          ],
+          "usable_window": {
+            "in": 0,
+            "out": 12.2
+          },
+          "notes": "The physical CCTV camera is unambiguous. The contract deliberately does not claim that the frame itself proves the electrical activation; that remains a narrative/editorial implication."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 12.32
+      },
+      "narration_excerpt": "In the corner, the timestamp read 3:18. The next morning, the camera turned on again. This time, it was inside a different building.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "objects": [
+            "security_camera"
+          ]
+        },
+        "preferred": {
+          "environments": [
+            "exterior"
+          ],
+          "moods": [
+            "eerie"
+          ]
+        },
+        "forbidden": [
+          "medical_vial",
+          "laboratory",
+          "beach",
+          "office"
+        ],
+        "critical": {
+          "objects": [
+            "security_camera"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "timestamp",
+            "camera"
+          ],
+          "minimum_direct": 2
+        }
+      }
+    }
+  ],
+  "story_creation": {
+    "schema_version": "1.0",
+    "idea": {
+      "title": "The Man Who Pointed Before the Collapse",
+      "premise": "A city camera records a man pointing at a building twelve minutes before it collapses.",
+      "audience_promise": "Follow the warning from the street to the recovered frame that turns the disaster into a personal threat.",
+      "central_question": "Why was the man pointing at a building that collapsed twelve minutes later?",
+      "hook_type": "pre_collapse_warning"
+    },
+    "truth": {
+      "mode": "DECLARED_FICTION",
+      "disclosure": "This episode is an original fictional suspense story; licensed stock footage is used as declared visual representation.",
+      "sources": []
+    },
+    "causal_chain": {
+      "cause": "A man points at an empty building while a city camera records him.",
+      "escalation": [
+        "The entrance is locked and the building appears completely empty.",
+        "The same presence appears inside without a visible entrance.",
+        "The recording finds no physical evidence before the building collapses."
+      ],
+      "consequence": "A recovered frame shows a hand pressed against glass after the building is gone.",
+      "why_it_mattered": "The camera turns on again inside another building the next morning, moving the threat from the location to the viewer."
+    },
+    "emotional_arc": {
+      "primary": "tension",
+      "secondary": "curiosity",
+      "target_sensations": [
+        "curiosity",
+        "unease",
+        "dread",
+        "chill"
+      ]
+    },
+    "promise_payoff": {
+      "promise": "The opening promises an explanation for the man's warning.",
+      "payoff": "The recovered frame and next-morning recurrence reveal that the warning was not about the building alone.",
+      "payoff_type": "recurrence",
+      "promise_paid": true
+    },
+    "visual_feasibility": {
+      "checked_before_script": true,
+      "scene_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12"
+      ],
+      "approved_scene_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12"
+      ],
+      "coverage_ratio": 1
+    },
+    "channel_diversity": {
+      "comparison_window": "last_20_episodes",
+      "recent_episode_count": 1,
+      "similarity_score": 0.18,
+      "similarity_status": "PASS",
+      "unique_signature": "precollapse-pointing-man-recovered-glass-frame"
+    },
+    "original_authorship": {
+      "original_script": true,
+      "original_narration": true,
+      "editorial_transform": true,
+      "asset_provenance_complete": true,
+      "mass_production_risk": "LOW"
+    },
+    "monetization_safety": {
+      "youtube_ad_safety": "LOW_RISK",
+      "tiktok_originality": "ORIGINAL",
+      "claims_reviewed": true,
+      "disclosure_present": true,
+      "risk_flags": {
+        "graphic_content": "NONE",
+        "harmful_claims": "NONE",
+        "shocking_content": "LOW"
+      }
+    },
+    "duration": {
+      "target_seconds": 69.5,
+      "planned_seconds": 69.5,
+      "estimated_narration_seconds": 67,
+      "padding_seconds": 0,
+      "padding_status": "PASS"
+    },
+    "red_team": {
+      "status": "PASS",
+      "editorial": {
+        "status": "PASS",
+        "blocking_issues": [],
+        "notes": "Hook, escalation, recovered-frame payoff and recurrence are causally linked."
+      },
+      "factual": {
+        "status": "PASS",
+        "blocking_issues": [],
+        "notes": "Fiction mode is explicit; source footage is never presented as proof of a real collapse."
+      },
+      "monetization": {
+        "status": "PASS",
+        "blocking_issues": [],
+        "notes": "No graphic violence, harmful instruction or real-world allegation is used."
+      }
+    }
+  },
+  "research": {
+    "accessed_at": "2026-10-26",
+    "confidence": "HIGH",
+    "sources": [
+      {
+        "url": "https://mixkit.co/license/",
+        "title": "Mixkit License",
+        "accessed_at": "2026-10-26",
+        "facts": [
+          "The Mixkit clips are retained with source-page URLs and approved commercial-use license records."
+        ]
+      },
+      {
+        "url": "https://www.pexels.com/license/",
+        "title": "Pexels License",
+        "accessed_at": "2026-10-26",
+        "facts": [
+          "The Pexels clips are retained with source-page URLs, approved license records and downloaded-file hashes."
+        ]
+      }
+    ],
+    "uncertainties": [
+      "This episode is explicitly declared fiction; stock footage represents the narrated story rather than documenting a real collapse."
+    ]
+  },
+  "editorial_qa": {
+    "status": "PASS",
+    "reviewer": "Because of This production owner request",
+    "reviewed_at": "2026-10-26T06:30:00-03:00",
+    "notes": "Final render requested to validate the upgraded story creation layer; all automated creation, semantic, provenance, timing and monetization gates remain mandatory."
+  },
+  "editing": {
+    "clip_quantity": {
+      "mode": "adaptive",
+      "min_clips": 10,
+      "target_min": 12,
+      "target_max": 16,
+      "max_clips": 18,
+      "min_scene_seconds": 2,
+      "max_scene_seconds": 20,
+      "enforce": true,
+      "reason": "Operational v2 lock: every episode must use 10-18 unique clips; target 12-16, never repeated."
+    }
+  },
+  "loop": {
+    "enabled": true,
+    "title": "BECAUSE OF THIS",
+    "outro_seconds": 0.8,
+    "audio_fade_seconds": 0.35,
+    "restart_safe": true,
+    "reason": "Operational v2 lock: every episode closes with a soft branded signature and restarts cleanly."
+  },
+  "color_grade": {
+    "enabled": true,
+    "preset": "investigative_noir_suspense",
+    "brightness": -0.03,
+    "contrast": 1.08,
+    "saturation": 0.9,
+    "gamma": 0.96,
+    "vignette": true,
+    "cinematic_suspense": {
+      "enabled": true,
+      "cool_shadows": 0.025,
+      "warm_highlights": 0.01,
+      "description": "Cooler shadows, restrained warm highlights and a controlled noir vignette for suspense."
+    },
+    "reason": "Final editorial lock: cinematic suspense treatment with readable subjects, captions and brand-red separation."
+  },
+  "visual_story_contract": {
+    "version": "2.2",
+    "narration_is_master_context": true,
+    "required_scene_fields": [
+      "narration_excerpt",
+      "visual_semantics",
+      "asset.visual_evidence"
+    ],
+    "match_dimensions": [
+      "subjects",
+      "actions",
+      "environments",
+      "objects",
+      "moods",
+      "composition"
+    ],
+    "forbidden_concepts_block": true,
+    "keyword_only_matching": false,
+    "human_visual_review_required": true,
+    "policy_note": "Literal beats must match every required narrative dimension and must not contradict explicit negation. Near or symbolic fallback is allowed only when the scene declares it and the visual remains non-contradictory."
+  },
+  "story_graph": {
+    "version": "1.0",
+    "entities": [
+      {
+        "entity_id": "pointing_man",
+        "canonical_name": "the pointing man",
+        "aliases": [
+          "man",
+          "same man",
+          "person"
+        ],
+        "continuity_mode": "same anonymous witness across the recording"
+      },
+      {
+        "entity_id": "camera",
+        "canonical_name": "the city camera",
+        "aliases": [
+          "camera",
+          "city camera",
+          "CCTV"
+        ],
+        "continuity_mode": "recurring recording device and final motif"
+      },
+      {
+        "entity_id": "building",
+        "canonical_name": "the empty building",
+        "aliases": [
+          "building",
+          "different building",
+          "fourth floor"
+        ],
+        "continuity_mode": "fixed location until collapse"
+      },
+      {
+        "entity_id": "guard",
+        "canonical_name": "the entrance guard",
+        "aliases": [
+          "guard",
+          "security guard"
+        ],
+        "continuity_mode": "human witness who checks the entrance"
+      },
+      {
+        "entity_id": "lock",
+        "canonical_name": "the entrance lock",
+        "aliases": [
+          "lock",
+          "doors",
+          "locked"
+        ],
+        "continuity_mode": "physical barrier inspected before the reveal"
+      },
+      {
+        "entity_id": "hallway",
+        "canonical_name": "the corridor",
+        "aliases": [
+          "hallway",
+          "corridor"
+        ],
+        "continuity_mode": "interior route where the presence appears"
+      },
+      {
+        "entity_id": "windows",
+        "canonical_name": "the dark windows",
+        "aliases": [
+          "window",
+          "windows",
+          "glass"
+        ],
+        "continuity_mode": "boundary that shows no interior activity"
+      },
+      {
+        "entity_id": "police",
+        "canonical_name": "the police review",
+        "aliases": [
+          "police"
+        ],
+        "continuity_mode": "external authority that reviews the footage"
+      },
+      {
+        "entity_id": "recording",
+        "canonical_name": "the recovered recording",
+        "aliases": [
+          "recording",
+          "footage",
+          "backup drive",
+          "frame"
+        ],
+        "continuity_mode": "evidence that survives the collapse"
+      },
+      {
+        "entity_id": "time",
+        "canonical_name": "the recurring timestamp",
+        "aliases": [
+          "3:17",
+          "3:18",
+          "next morning"
+        ],
+        "continuity_mode": "temporal trigger that returns at the end"
+      },
+      {
+        "entity_id": "silhouette",
+        "canonical_name": "the silhouette behind glass",
+        "aliases": [
+          "silhouette",
+          "hand"
+        ],
+        "continuity_mode": "visual representation of the unexplained presence"
+      }
+    ],
+    "beats": [
+      {
+        "scene_id": "S01",
+        "event": "camera captures a man pointing at an empty building",
+        "state_before": "ordinary_night",
+        "state_after": "man_points_at_building",
+        "causal_role": "hook",
+        "emotion": "curiosity",
+        "visual_motif": "pointing man beside building",
+        "entities": [
+          "camera",
+          "pointing_man",
+          "building",
+          "time"
+        ],
+        "narration_excerpt": "At 3:17 in the morning, a city camera caught a man pointing at an empty building."
+      },
+      {
+        "scene_id": "S02",
+        "event": "the camera records what the man is watching",
+        "state_before": "man_points_at_building",
+        "state_after": "camera_marks_fourth_floor",
+        "causal_role": "question",
+        "emotion": "tension",
+        "visual_motif": "camera lens at night",
+        "entities": [
+          "camera",
+          "pointing_man",
+          "building"
+        ],
+        "narration_excerpt": "He wasn't looking at the street. He was pointing at the fourth floor."
+      },
+      {
+        "scene_id": "S03",
+        "event": "the entrance guard checks the building",
+        "state_before": "camera_marks_fourth_floor",
+        "state_after": "guard_checks_entrance",
+        "causal_role": "investigation",
+        "emotion": "anticipation",
+        "visual_motif": "isolated guard at entrance",
+        "entities": [
+          "guard",
+          "building"
+        ],
+        "narration_excerpt": "The guard checked the entrance."
+      },
+      {
+        "scene_id": "S04",
+        "event": "the lock confirms the doors are closed",
+        "state_before": "guard_checks_entrance",
+        "state_after": "doors_locked",
+        "causal_role": "contradiction",
+        "emotion": "unease",
+        "visual_motif": "padlock on closed entrance",
+        "entities": [
+          "guard",
+          "lock",
+          "building"
+        ],
+        "narration_excerpt": "The doors were locked,"
+      },
+      {
+        "scene_id": "S05",
+        "event": "the hallway remains empty",
+        "state_before": "doors_locked",
+        "state_after": "hallway_empty",
+        "causal_role": "contradiction",
+        "emotion": "dread",
+        "visual_motif": "empty corridor",
+        "entities": [
+          "lock",
+          "hallway",
+          "building"
+        ],
+        "narration_excerpt": "the hallway was empty,"
+      },
+      {
+        "scene_id": "S06",
+        "event": "the windows remain dark",
+        "state_before": "hallway_empty",
+        "state_after": "windows_dark",
+        "causal_role": "atmosphere",
+        "emotion": "dread",
+        "visual_motif": "dark glass boundary",
+        "entities": [
+          "hallway",
+          "windows",
+          "building"
+        ],
+        "narration_excerpt": "and every window was dark."
+      },
+      {
+        "scene_id": "S07",
+        "event": "the same man appears inside the corridor",
+        "state_before": "windows_dark",
+        "state_after": "man_inside_without_entry",
+        "causal_role": "reveal",
+        "emotion": "shock",
+        "visual_motif": "silhouette in corridor",
+        "entities": [
+          "pointing_man",
+          "silhouette",
+          "hallway",
+          "building"
+        ],
+        "narration_excerpt": "Then the camera showed the same man inside. He stood at the end of the corridor, facing the same place."
+      },
+      {
+        "scene_id": "S08",
+        "event": "police replay the footage",
+        "state_before": "man_inside_without_entry",
+        "state_after": "footage_under_review",
+        "causal_role": "evidence",
+        "emotion": "incertitude",
+        "visual_motif": "police monitor",
+        "entities": [
+          "police",
+          "recording",
+          "camera"
+        ],
+        "narration_excerpt": "Police replayed the footage,"
+      },
+      {
+        "scene_id": "S09",
+        "event": "the review finds no entrance, footsteps or reflection",
+        "state_before": "footage_under_review",
+        "state_after": "evidence_absent",
+        "causal_role": "negative_evidence",
+        "emotion": "fear",
+        "visual_motif": "light swallowed by darkness",
+        "entities": [
+          "police",
+          "recording",
+          "windows"
+        ],
+        "narration_excerpt": "but found no entrance, no footsteps, and no reflection in the glass."
+      },
+      {
+        "scene_id": "S10",
+        "event": "the building collapses twelve minutes later",
+        "state_before": "evidence_absent",
+        "state_after": "building_collapsed",
+        "causal_role": "consequence",
+        "emotion": "shock",
+        "visual_motif": "building collapse",
+        "entities": [
+          "building",
+          "time",
+          "recording"
+        ],
+        "narration_excerpt": "Twelve minutes later, the building collapsed. The recording should have ended there."
+      },
+      {
+        "scene_id": "S11",
+        "event": "one recovered frame shows a hand pressed against glass",
+        "state_before": "building_collapsed",
+        "state_after": "hand_against_glass",
+        "causal_role": "payoff",
+        "emotion": "chill",
+        "visual_motif": "hand against glass",
+        "entities": [
+          "recording",
+          "silhouette",
+          "windows",
+          "camera"
+        ],
+        "narration_excerpt": "But one frame was recovered from the backup drive. It showed a hand pressed against a pane of glass."
+      },
+      {
+        "scene_id": "S12",
+        "event": "the camera turns on inside another building the next morning",
+        "state_before": "hand_against_glass",
+        "state_after": "camera_recurs_in_new_building",
+        "causal_role": "recurrence",
+        "emotion": "chill",
+        "visual_motif": "camera returns at a new location",
+        "entities": [
+          "camera",
+          "building",
+          "time",
+          "recording"
+        ],
+        "narration_excerpt": "In the corner, the timestamp read 3:18. The next morning, the camera turned on again. This time, it was inside a different building."
+      }
+    ]
+  },
+  "narrative_coverage": {
+    "policy": "ordered_scene_excerpts_cover_canonical_script_once",
+    "allow_overlap": false,
+    "timing_source": "forced_alignment_sidecar"
+  }
+}
