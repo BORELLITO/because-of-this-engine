@@ -23,7 +23,7 @@
   },
   "script": {
     "path": "script.txt",
-    "word_count_target": 139
+    "word_count_target": 137
   },
   "audio": {
     "path": "audio/narration.wav",
@@ -1482,14 +1482,14 @@
       "asset": {
         "asset_id": "because-of-this-episode-002-s12",
         "path": "runtime-assets/s12.mp4",
-        "drive_file_id": "1Kd0zFqbfBvD3w1wEYT-914mTBe7cUcXL",
+        "drive_file_id": "1P_ncUawSApDyDyJIOvr6fWyz-heVk0Pm",
         "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/cctv-camera-on-a-rainy-day-with-architectural-background-34106136/",
         "license": "Pexels Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
         "sha256": "573ca2ecd2389baf847c588512eabea7570059e503119dcff4d0158f7ea180fd",
-        "reuse_status": "REUSED_APPROVED",
+        "reuse_status": "REUSED_APPROVED_COPY",
         "episode_id": "because-of-this-episode-002",
         "author": "Pexels source contributor",
         "acquisition_timestamp": "2026-10-24T15:19:00Z",
