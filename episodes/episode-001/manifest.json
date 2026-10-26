@@ -161,7 +161,9 @@
             "in": 0,
             "out": 20.2
           }
-        }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 20.228542
       },
       "narration_excerpt": "At exactly three seventeen every morning, the security camera inside an abandoned hotel recorded the same figure standing behind the glass door.",
       "visual_semantics": {
@@ -1677,10 +1679,10 @@
     ]
   },
   "editorial_qa": {
-    "status": "PENDING",
-    "reviewer": "",
-    "reviewed_at": "",
-    "notes": "Automated rebuild: strict real word-highlight timestamps, soft-red legibility contrast gate, production release blocked on any estimated timestamp, cinematic noir grade, branded loop outro and 12 unique clips. Gemini 3.8 Flash TTS is the production target. Human approval remains required before final publication."
+    "status": "PASS",
+    "reviewer": "BORELLITO",
+    "reviewed_at": "2026-10-25T23:52:00-03:00",
+    "notes": "Aprovado explicitamente pelo proprietário do canal para produção final após revisão editorial do preview; manter todas as travas automatizadas de sincronia, semântica visual, áudio, loop, marca e entrega."
   },
   "editing": {
     "clip_quantity": {
