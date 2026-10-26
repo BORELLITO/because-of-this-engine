@@ -23,7 +23,7 @@
   },
   "script": {
     "path": "script.txt",
-    "word_count_target": 156
+    "word_count_target": 157
   },
   "audio": {
     "path": "audio/narration.wav",
@@ -1289,7 +1289,7 @@
         "source_segment_in": 0,
         "source_segment_out": 29.28
       },
-      "narration_excerpt": "Twelve minutes later, the building collapsed. The recording should have ended there.",
+      "narration_excerpt": "Twelve minutes later, the building collapsed. The recording was supposed to end there.",
       "visual_semantics": {
         "role": "literal",
         "required": {
@@ -1413,7 +1413,7 @@
         "source_segment_in": 0,
         "source_segment_out": 20.228542
       },
-      "narration_excerpt": "But one frame was recovered from the backup drive. It showed a hand pressed against a pane of glass.",
+      "narration_excerpt": "But one frame was recovered from the backup drive. It showed a hand pressed against a glass door.",
       "visual_semantics": {
         "role": "literal",
         "required": {
@@ -1540,7 +1540,7 @@
         "source_segment_in": 0,
         "source_segment_out": 12.32
       },
-      "narration_excerpt": "In the corner, the timestamp read 3:18. The next morning, the camera turned on again. This time, it was inside a different building, aimed at another empty floor.",
+      "narration_excerpt": "In the corner, the timestamp read three eighteen. The next morning, the camera turned on again. This time, it was inside a different building, aimed at another empty floor.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -2048,7 +2048,7 @@
           "time",
           "recording"
         ],
-        "narration_excerpt": "Twelve minutes later, the building collapsed. The recording should have ended there."
+        "narration_excerpt": "Twelve minutes later, the building collapsed. The recording was supposed to end there."
       },
       {
         "scene_id": "S11",
@@ -2064,7 +2064,7 @@
           "windows",
           "camera"
         ],
-        "narration_excerpt": "But one frame was recovered from the backup drive. It showed a hand pressed against a pane of glass."
+        "narration_excerpt": "But one frame was recovered from the backup drive. It showed a hand pressed against a glass door."
       },
       {
         "scene_id": "S12",
@@ -2080,7 +2080,7 @@
           "time",
           "recording"
         ],
-        "narration_excerpt": "In the corner, the timestamp read 3:18. The next morning, the camera turned on again. This time, it was inside a different building, aimed at another empty floor."
+        "narration_excerpt": "In the corner, the timestamp read three eighteen. The next morning, the camera turned on again. This time, it was inside a different building, aimed at another empty floor."
       }
     ]
   },
