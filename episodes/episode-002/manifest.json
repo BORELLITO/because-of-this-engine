@@ -23,7 +23,7 @@
   },
   "script": {
     "path": "script.txt",
-    "word_count_target": 154
+    "word_count_target": 156
   },
   "audio": {
     "path": "audio/narration.wav",
@@ -413,7 +413,7 @@
         "source_segment_in": 0,
         "source_segment_out": 12.08
       },
-      "narration_excerpt": "The guard checked the entrance.",
+      "narration_excerpt": "The guard checked the main entrance twice.",
       "visual_semantics": {
         "role": "literal",
         "required": {
@@ -1946,7 +1946,7 @@
           "guard",
           "building"
         ],
-        "narration_excerpt": "The guard checked the entrance."
+        "narration_excerpt": "The guard checked the main entrance twice."
       },
       {
         "scene_id": "S04",
