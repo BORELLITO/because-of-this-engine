@@ -107,6 +107,15 @@ jobs:
             --manifest "${{ inputs.manifest }}" \
             --report "${EPISODE_DIR}/rendered/story-creation-${{ inputs.mode }}.json"
 
+      - name: Run global no-repeat asset brain
+        run: |
+          set -euo pipefail
+          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
+          python production/asset_reuse_brain.py \
+            --manifest "${{ inputs.manifest }}" \
+            --repo-root "." \
+            --report "${EPISODE_DIR}/rendered/asset-reuse-brain-${{ inputs.mode }}.json"
+
       - name: Run engine regression tests
         run: python -m unittest discover -s tests -v
 
