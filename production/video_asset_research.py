@@ -14,6 +14,7 @@ import re
 from pathlib import Path
 from typing import Any, Callable
 
+from production.asset_reuse_brain import REGISTRY_SCHEMA_VERSION, source_asset_key
 from production.editorial_policy import clip_quantity_policy, clip_quantity_report
 from production.visual_semantics import (
     DIMENSIONS,
@@ -32,6 +33,38 @@ _STOP_WORDS = {
 
 class ResearchError(ValueError):
     pass
+
+
+def _load_asset_memory(registry_path: Path | None) -> dict[str, Any]:
+    if registry_path is None:
+        return {
+            "status": "NOT_CONFIGURED",
+            "registry_path": None,
+            "retired_source_keys": set(),
+        }
+    path = registry_path.resolve()
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ResearchError(f"Asset memory registry is unavailable: {path}") from exc
+    if not isinstance(payload, dict) or payload.get("schema_version") != REGISTRY_SCHEMA_VERSION:
+        raise ResearchError("Asset memory registry has an unsupported schema.")
+    assets = payload.get("assets")
+    if not isinstance(assets, list):
+        raise ResearchError("Asset memory registry assets must be a list.")
+    retired_source_keys: set[str] = set()
+    for index, asset in enumerate(assets, start=1):
+        if not isinstance(asset, dict):
+            raise ResearchError(f"Asset memory registry record {index} is invalid.")
+        key = str(asset.get("source_asset_key") or "").strip().lower()
+        if not key:
+            raise ResearchError(f"Asset memory registry record {index} has no source_asset_key.")
+        retired_source_keys.add(key)
+    return {
+        "status": "READY",
+        "registry_path": str(path),
+        "retired_source_keys": retired_source_keys,
+    }
 
 
 def _tokens(value: Any) -> list[str]:
@@ -197,10 +230,13 @@ def build_queue(
     manifest: dict[str, Any],
     searchers: dict[str, Callable[[str, int], list[dict[str, Any]]]] | None = None,
     limit: int = 8,
+    *,
+    registry_path: Path | None = None,
 ) -> dict[str, Any]:
     searchers = searchers or {}
     try:
         policy = clip_quantity_policy(manifest)
+        asset_memory = _load_asset_memory(registry_path)
     except ValueError as exc:
         raise ResearchError(str(exc)) from exc
 
@@ -223,9 +259,25 @@ def build_queue(
                         if key in unique_keys:
                             continue
                         unique_keys.add(key)
-                        if candidate["selection_status"] == "REJECTED_SEMANTIC_MISMATCH":
+                        source_key = source_asset_key(candidate)
+                        if asset_memory["status"] == "READY" and not source_key:
+                            candidate["selection_status"] = "REJECTED_MISSING_SOURCE_IDENTITY"
+                            candidate["global_memory_check"] = "BLOCKED"
+                            candidate["rejection_reason"] = "provider source identity is required before visual approval"
+                            rejected.append(candidate)
+                        elif asset_memory["status"] == "READY" and source_key in asset_memory["retired_source_keys"]:
+                            candidate["selection_status"] = "REJECTED_GLOBAL_REUSE"
+                            candidate["global_memory_check"] = "BLOCKED"
+                            candidate["source_asset_key"] = source_key
+                            candidate["rejection_reason"] = "source asset is already retired in the global memory registry"
+                            rejected.append(candidate)
+                        elif candidate["selection_status"] == "REJECTED_SEMANTIC_MISMATCH":
+                            candidate["global_memory_check"] = asset_memory["status"]
                             rejected.append(candidate)
                         else:
+                            candidate["global_memory_check"] = asset_memory["status"]
+                            if source_key:
+                                candidate["source_asset_key"] = source_key
                             candidates.append(candidate)
             except Exception as exc:
                 errors.append(f"{provider}: {exc}")
@@ -242,6 +294,11 @@ def build_queue(
             "candidates": candidates[: max(1, limit) * len(PROVIDER_ORDER)],
             "rejected_candidates": rejected[: max(1, limit)],
             "provider_errors": errors,
+            "asset_memory": {
+                "status": asset_memory["status"],
+                "registry_path": asset_memory["registry_path"],
+                "retired_source_count": len(asset_memory["retired_source_keys"]),
+            },
             "image_fallback": "FORBIDDEN",
             "selection_rule": (
                 "match the complete narrative beat using subject, action, environment "
@@ -267,6 +324,8 @@ def build_queue(
             "keyword_only_matching": False,
             "semantic_dimensions": ["subjects", "actions", "environments", "objects", "moods", "composition"],
             "forbidden_concepts_block": True,
+            "global_no_repeat_source_asset": True,
+            "asset_memory_required_for_release": True,
         },
     }
 
@@ -275,10 +334,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--output", type=Path, default=Path("video-asset-review-queue.json"))
+    parser.add_argument("--asset-registry", type=Path, default=None)
     args = parser.parse_args()
     try:
         manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
-        result = build_queue(manifest)
+        result = build_queue(manifest, registry_path=args.asset_registry)
         args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print(json.dumps({
             "status": "VIDEO_ASSET_QUEUE_CREATED",

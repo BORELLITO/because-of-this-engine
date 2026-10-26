@@ -111,9 +111,11 @@ jobs:
         run: |
           set -euo pipefail
           EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
+          test -s "episodes/asset-memory-registry.json"
           python production/asset_reuse_brain.py \
             --manifest "${{ inputs.manifest }}" \
             --repo-root "." \
+            --registry "episodes/asset-memory-registry.json" \
             --report "${EPISODE_DIR}/rendered/asset-reuse-brain-${{ inputs.mode }}.json"
 
       - name: Run engine regression tests
@@ -133,6 +135,32 @@ jobs:
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: python production/google_drive_assets.py --manifest "${{ inputs.manifest }}" --require-drive-assets
 
+      - name: Restore verified narration cache
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
+          python production/narration_cache.py \
+            --manifest "${{ inputs.manifest }}" \
+            --restore \
+            --status-file "${RUNNER_TEMP}/narration-cache.json"
+          CACHE_STATUS="$(python - "${RUNNER_TEMP}/narration-cache.json" <<'PY'
+          import json
+          import sys
+          print(json.load(open(sys.argv[1], encoding="utf-8")).get("status", "NARRATION_CACHE_MISS"))
+          PY
+          )"
+          if [ "${CACHE_STATUS}" = "NARRATION_CACHE_HIT" ]; then
+            echo "NARRATION_CACHE_HIT=true" >> "${GITHUB_ENV}"
+            echo "TTS_QUOTA_PREFLIGHT=NARRATION_CACHE_HIT" >> "${GITHUB_STEP_SUMMARY}"
+          else
+            echo "NARRATION_CACHE_HIT=false" >> "${GITHUB_ENV}"
+            echo "TTS_QUOTA_PREFLIGHT=NARRATION_CACHE_MISS" >> "${GITHUB_STEP_SUMMARY}"
+          fi
+
       - name: Run strict visual story semantic gate
         run: |
           set -euo pipefail
@@ -142,6 +170,7 @@ jobs:
             --report "$(dirname "${{ inputs.manifest }}")/rendered/visual-story-qa-${{ inputs.mode }}.json"
 
       - name: Generate narration with Google Gemini TTS (documented REST)
+        if: env.NARRATION_CACHE_HIT != 'true'
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_TTS_TIMEOUT_SECONDS: "180"
@@ -184,6 +213,16 @@ jobs:
           python production/normalize_narration_duration.py \
             --manifest "${{ inputs.manifest }}" \
             --ffmpeg ffmpeg
+
+      - name: Annotate and persist verified narration cache
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+          python production/narration_cache.py --manifest "${{ inputs.manifest }}" --annotate
+          python production/narration_cache.py --manifest "${{ inputs.manifest }}" --store
 
       - name: Mark voice stage
         run: python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition VOICE_READY --stage voice

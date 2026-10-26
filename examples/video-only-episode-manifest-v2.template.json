@@ -6,7 +6,7 @@
   "fps": 25,
   "story_profile": {
     "format": "The Hidden Detail",
-    "truth_mode": "REAL_FACTUAL",
+    "truth_mode": "VERIFIED_FACT",
     "primary_emotion": "curiosity",
     "secondary_emotion": "tension",
     "central_question": "What detail changed the outcome?",

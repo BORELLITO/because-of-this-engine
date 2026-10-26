@@ -143,6 +143,31 @@ class StoryCreationTests(unittest.TestCase):
         manifest["story_creation"]["red_team"]["factual"]["status"] = "BLOCKED"
         self.assertEqual(self.gate(audit_story_creation(manifest), "C11")["status"], "BLOCKED")
 
+    def test_legacy_truth_mode_is_rejected(self):
+        manifest = valid_manifest()
+        manifest["story_creation"]["truth"] = {
+            "mode": "REAL_FACTUAL",
+            "sources": ["https://example.com/source"],
+        }
+        self.assertEqual(self.gate(audit_story_creation(manifest), "C1")["status"], "BLOCKED")
+
+    def test_verified_fact_requires_sources(self):
+        manifest = valid_manifest()
+        manifest["story_creation"]["truth"] = {
+            "mode": "VERIFIED_FACT",
+            "sources": ["https://example.com/source"],
+        }
+        self.assertEqual(self.gate(audit_story_creation(manifest), "C1")["status"], "PASS")
+
+    def test_explained_phenomenon_requires_explanation(self):
+        manifest = valid_manifest()
+        manifest["story_creation"]["truth"] = {
+            "mode": "EXPLAINED_PHENOMENON",
+            "sources": ["https://example.com/source"],
+            "explanation": "The observed effect has a documented physical explanation.",
+        }
+        self.assertEqual(self.gate(audit_story_creation(manifest), "C1")["status"], "PASS")
+
     def test_fiction_needs_disclosure(self):
         manifest = valid_manifest()
         manifest["story_creation"]["truth"]["disclosure"] = ""
