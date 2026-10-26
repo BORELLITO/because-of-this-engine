@@ -16,6 +16,7 @@ if str(Path(__file__).resolve().parents[1]) not in sys.path:
 from production.caption_quality import CaptionQualityError, audio_duration, quality_report
 from production.video_asset_contract import VideoContractError, load_manifest, validate_manifest
 from production.story_creation import CREATION_GATES, audit_story_creation
+from production.asset_reuse_brain import AssetReuseBrainError, audit as audit_asset_reuse
 
 GATES = tuple((f"G{i}", name) for i, name in enumerate((
     "CONFIG", "RESEARCH", "SCRIPT", "VOICE", "ASSETS", "PROVENANCE",
@@ -87,6 +88,22 @@ def _story_creation(m: dict[str, Any], base: Path, mode: str) -> tuple[str, str,
             return "BLOCKED", f"story creation blocked: {', '.join(blocked)}", report
         return "PASS", f"{len(CREATION_GATES)} creation gates passed before render", report
     except (OSError, RuntimeError, ValueError, TypeError, json.JSONDecodeError) as exc:
+        return "BLOCKED", str(exc), {}
+
+
+def _asset_reuse_brain(manifest_path: Path, base: Path, mode: str) -> tuple[str, str, dict[str, Any]]:
+    report_path = base / "rendered" / f"asset-reuse-brain-{mode}.json"
+    try:
+        report = (
+            _read(report_path, "asset reuse brain report")
+            if report_path.is_file()
+            else audit_asset_reuse(manifest_path, base.parents[1])
+        )
+        if report.get("status") not in {"ASSET_REUSE_PASS", "LEGACY_BASELINE_PASS"}:
+            duplicates = len(report.get("cross_episode_duplicates", []))
+            return "BLOCKED", f"global no-repeat brain blocked {duplicates} cross-episode overlap(s)", report
+        return "PASS", report.get("reason", "global no-repeat brain passed"), report
+    except (AssetReuseBrainError, OSError, RuntimeError, ValueError, TypeError, json.JSONDecodeError) as exc:
         return "BLOCKED", str(exc), {}
 
 
@@ -193,6 +210,8 @@ def evaluate(manifest_path: Path, mode: str, phase: str, *, release_report_path:
         ))
     status, evidence, story_integrity = _story_intelligence(manifest, base, mode)
     results.append(_gate("S0", "STORY_INTELLIGENCE", status, evidence))
+    reuse_status, reuse_evidence, reuse_brain = _asset_reuse_brain(manifest_path, base, mode)
+    results.append(_gate("R0", "GLOBAL_ASSET_REUSE", reuse_status, reuse_evidence))
     results.append(_gate(
         "S1",
         "SEQUENCE_CONTINUITY",
@@ -274,6 +293,7 @@ def evaluate(manifest_path: Path, mode: str, phase: str, *, release_report_path:
         "video_id": manifest.get("video_id"), "mode": mode, "gates": results,
         "story_integrity": story_integrity,
         "story_creation": story_creation,
+        "asset_reuse_brain": reuse_brain,
         "blocking_gates": [item["code"] for item in blocking],
         "generated_at_utc": datetime.now(timezone.utc).isoformat()}
 
