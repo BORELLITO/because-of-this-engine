@@ -23,7 +23,7 @@
   },
   "script": {
     "path": "script.txt",
-    "word_count_target": 137
+    "word_count_target": 156
   },
   "audio": {
     "path": "audio/narration.wav",
@@ -893,7 +893,7 @@
         "source_segment_in": 0,
         "source_segment_out": 21.7
       },
-      "narration_excerpt": "Then the camera showed the same man inside. He stood at the end of the corridor, facing the same place.",
+      "narration_excerpt": "Then the camera showed the same man inside. He stood at the end of the corridor, facing the same place, completely still, as if he had been waiting there for someone who never arrived.",
       "visual_semantics": {
         "role": "literal",
         "required": {
@@ -1540,7 +1540,7 @@
         "source_segment_in": 0,
         "source_segment_out": 12.32
       },
-      "narration_excerpt": "In the corner, the timestamp read 3:18. The next morning, the camera turned on again. This time, it was inside a different building.",
+      "narration_excerpt": "In the corner, the timestamp read 3:18. The next morning, the camera turned on again. This time, it was inside a different building, aimed at another empty floor.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
