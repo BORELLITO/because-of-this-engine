@@ -399,9 +399,17 @@ Dialogue: 0,0:00:00.00,{ass_time(duration)},Brand,,0,0,0,,{text}
     return path
 
 
-def write_loop_ass(path: Path, title: str, duration: float) -> Path:
+def write_loop_ass(
+    path: Path,
+    title: str,
+    duration: float,
+    fade_in_seconds: float = 0.24,
+    fade_out_seconds: float = 0.36,
+) -> Path:
     """Render the branded loop card through libass, not FFmpeg drawtext."""
     safe_title = str(title).replace("\\", "\\\\").replace("{", "\\{").replace("}", "\\}")
+    fade_in_ms = max(80, min(round(fade_in_seconds * 1000), round(duration * 1000 * 0.45)))
+    fade_out_ms = max(120, min(round(fade_out_seconds * 1000), round(duration * 1000 * 0.55)))
     ass = f"""[Script Info]
 ScriptType: v4.00+
 PlayResX: 1080
@@ -410,11 +418,11 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,StrikeOut,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding
-Style: Loop,Arial,60,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,1,0,0,0,100,100,0,0,1,3,0,5,40,40,40,1
+Style: Loop,Arial,60,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,1,0,0,0,100,100,40,0,0,1,3,0,5,40,40,40,1
 
 [Events]
 Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
-Dialogue: 0,0:00:00.00,{ass_time(duration)},Loop,,0,0,0,,{{\\fad(180,300)}}{safe_title}
+Dialogue: 0,0:00:00.00,{ass_time(duration)},Loop,,0,0,0,,{{\\fad({fade_in_ms},{fade_out_ms})}}{safe_title}
 """
     path.write_text(ass, encoding="utf-8")
     return path
@@ -424,9 +432,9 @@ def loop_outro_seconds(manifest: dict[str, Any]) -> float:
     loop = manifest.get("loop") or {}
     if loop.get("enabled") is not True:
         return 0.0
-    seconds = float(loop.get("outro_seconds", 0.8))
-    if not 0.4 <= seconds <= 1.5:
-        raise RenderError("Loop outro must be between 0.4s and 1.5s.")
+    seconds = float(loop.get("outro_seconds", 1.2))
+    if not 0.8 <= seconds <= 1.5:
+        raise RenderError("Loop outro must be between 0.8s and 1.5s for a smooth branded close.")
     return seconds
 
 
@@ -452,7 +460,16 @@ def mux_audio(
     loop = loop or {}
     outro_seconds = loop_outro_seconds({"loop": loop})
     total_duration = narration_duration + outro_seconds
-    audio_fade = min(float(loop.get("audio_fade_seconds", 0.35)), max(0.1, outro_seconds))
+    audio_fade = min(float(loop.get("audio_fade_seconds", 0.60)), max(0.1, outro_seconds))
+    tail_fade_seconds = float(loop.get("tail_fade_seconds", 0.55))
+    card_fade_in_seconds = float(loop.get("card_fade_in_seconds", 0.24))
+    card_fade_out_seconds = float(loop.get("card_fade_out_seconds", 0.36))
+    if not 0.25 <= tail_fade_seconds <= 0.90:
+        raise RenderError("Loop tail_fade_seconds must be between 0.25s and 0.90s.")
+    if not 0.12 <= card_fade_in_seconds <= 0.60:
+        raise RenderError("Loop card_fade_in_seconds must be between 0.12s and 0.60s.")
+    if not 0.18 <= card_fade_out_seconds <= 0.70:
+        raise RenderError("Loop card_fade_out_seconds must be between 0.18s and 0.70s.")
     command = ["ffmpeg", "-y", "-i", str(video), "-i", str(audio)]
     filters: list[str] = []
     filters.append(f"[0:v]subtitles='{_escape_filter_path(captions)}'[captioned]")
@@ -460,7 +477,7 @@ def mux_audio(
     logo_enabled = logo_path is not None and brand.get("logo_enabled", False) is True
     if logo_enabled:
         command.extend(["-loop", "1", "-framerate", "1", "-i", str(logo_path)])
-        logo_width = int(brand.get("logo_width", 432))
+        logo_width = int(brand.get("logo_width", 540))
         logo_opacity = float(brand.get("logo_opacity", 0.82))
         logo_margin = int(brand.get("logo_margin", 54))
         logo_top = int(brand.get("logo_top", 72))
@@ -485,17 +502,27 @@ def mux_audio(
     if outro_seconds > 0:
         loop_title = str(loop.get("title", "BECAUSE OF THIS"))
         loop_ass_path = output.parent / f".{output.stem}-loop.ass"
-        write_loop_ass(loop_ass_path, loop_title, outro_seconds)
-        card_start_fade = max(0.0, outro_seconds - 0.30)
+        write_loop_ass(
+            loop_ass_path,
+            loop_title,
+            outro_seconds,
+            fade_in_seconds=card_fade_in_seconds,
+            fade_out_seconds=card_fade_out_seconds,
+        )
+        card_start_fade = max(0.0, outro_seconds - card_fade_out_seconds)
         filters.extend([
             (
                 f"color=c=black:s={width}x{height}:r={FPS}:d={outro_seconds:.3f},"
-                f"fade=t=in:st=0:d=0.18,"
-                f"fade=t=out:st={card_start_fade:.3f}:d=0.30,"
+                f"fade=t=in:st=0:d={card_fade_in_seconds:.3f},"
+                f"fade=t=out:st={card_start_fade:.3f}:d={card_fade_out_seconds:.3f},"
                 "format=yuv420p,setsar=1,setpts=PTS-STARTPTS[outro_base]"
             ),
             f"[outro_base]subtitles='{_escape_filter_path(loop_ass_path)}'[outro]",
-            "[main_visual]format=yuv420p,setsar=1,setpts=PTS-STARTPTS[main]",
+            (
+                f"[main_visual]format=yuv420p,"
+                f"fade=t=out:st={max(0.0, narration_duration - tail_fade_seconds):.3f}:"
+                f"d={tail_fade_seconds:.3f},setsar=1,setpts=PTS-STARTPTS[main]"
+            ),
             "[main][outro]concat=n=2:v=1:a=0[v]",
         ])
     else:
