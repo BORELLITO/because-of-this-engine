@@ -560,7 +560,9 @@
             "in": 0,
             "out": 12.95
           }
-        }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 12.958333
       },
       "narration_excerpt": "Then everything went dark.",
       "visual_semantics": {
