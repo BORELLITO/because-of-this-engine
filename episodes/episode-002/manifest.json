@@ -23,7 +23,7 @@
   },
   "script": {
     "path": "script.txt",
-    "word_count_target": 155
+    "word_count_target": 165
   },
   "audio": {
     "path": "audio/narration.wav",
@@ -535,7 +535,7 @@
         "source_segment_in": 0,
         "source_segment_out": 11.136125
       },
-      "narration_excerpt": "The doors were locked,",
+      "narration_excerpt": "The entrance doors were locked tight, with no way in.",
       "visual_semantics": {
         "role": "literal",
         "required": {
@@ -765,7 +765,7 @@
         "source_segment_in": 0,
         "source_segment_out": 24.383333
       },
-      "narration_excerpt": "and every window was dark.",
+      "narration_excerpt": "and every window in the building was completely dark.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1961,7 +1961,7 @@
           "lock",
           "building"
         ],
-        "narration_excerpt": "The doors were locked,"
+        "narration_excerpt": "The entrance doors were locked tight, with no way in."
       },
       {
         "scene_id": "S05",
@@ -1991,7 +1991,7 @@
           "windows",
           "building"
         ],
-        "narration_excerpt": "and every window was dark."
+        "narration_excerpt": "and every window in the building was completely dark."
       },
       {
         "scene_id": "S07",
