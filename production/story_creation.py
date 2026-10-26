@@ -57,6 +57,7 @@ ALLOWED_ROLES = {
 
 ALLOWED_EMOTIONS = {
     "curiosity",
+    "tension",
     "unease",
     "anticipation",
     "dread",
