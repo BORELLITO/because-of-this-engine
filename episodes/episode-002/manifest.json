@@ -1067,7 +1067,7 @@
         },
         "narrative_anchors": {
           "direct_required": [
-            "watching"
+            "person"
           ],
           "minimum_direct": 1
         }
