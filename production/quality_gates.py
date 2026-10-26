@@ -97,9 +97,13 @@ def _asset_reuse_brain(manifest_path: Path, base: Path, mode: str) -> tuple[str,
         report = (
             _read(report_path, "asset reuse brain report")
             if report_path.is_file()
-            else audit_asset_reuse(manifest_path, base.parents[1])
+            else audit_asset_reuse(
+                manifest_path,
+                base.parents[1],
+                registry_path=base.parents[1] / "episodes" / "asset-memory-registry.json",
+            )
         )
-        if report.get("status") not in {"ASSET_REUSE_PASS", "LEGACY_BASELINE_PASS"}:
+        if report.get("status") != "ASSET_REUSE_PASS":
             duplicates = len(report.get("cross_episode_duplicates", []))
             return "BLOCKED", f"global no-repeat brain blocked {duplicates} cross-episode overlap(s)", report
         return "PASS", report.get("reason", "global no-repeat brain passed"), report
