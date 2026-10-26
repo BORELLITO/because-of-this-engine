@@ -111,6 +111,7 @@ jobs:
         run: |
           set -euo pipefail
           EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
+          test -s "episodes/asset-memory-registry.json"
           python production/asset_reuse_brain.py \
             --manifest "${{ inputs.manifest }}" \
             --repo-root "." \
