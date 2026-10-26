@@ -115,6 +115,7 @@ jobs:
           python production/asset_reuse_brain.py \
             --manifest "${{ inputs.manifest }}" \
             --repo-root "." \
+            --registry "episodes/asset-memory-registry.json" \
             --report "${EPISODE_DIR}/rendered/asset-reuse-brain-${{ inputs.mode }}.json"
 
       - name: Run engine regression tests
