@@ -625,22 +625,23 @@ def generate(
         script,
         max_line_chars=int(captions.get("max_line_chars", 42)),
     )
+    asr_words: list[dict[str, Any]] = []
     try:
         asr_words = _recognize(audio_path, model_path)
         events, sidecar_chunks = _align_chunks(chunks, asr_words)
     except AlignmentError as first_error:
         secondary_error: AlignmentError | None = None
+        secondary_aligned = False
         if secondary_model_path is not None:
             try:
                 secondary_words = _recognize(audio_path, secondary_model_path)
                 asr_words = _merge_word_timings(asr_words, secondary_words)
                 events, sidecar_chunks = _align_chunks(chunks, asr_words)
+                secondary_aligned = True
             except AlignmentError as error:
                 secondary_error = error
 
-        if secondary_error is None and "events" in locals():
-            pass
-        else:
+        if not secondary_aligned:
             constrained_vocabulary = _canonical_vocabulary(script)
             try:
                 asr_words = _recognize_passes(
@@ -688,11 +689,15 @@ def generate(
         "status": "FORCED_ALIGNMENT_PASS",
         "provider": "Vosk",
         "model": str(model_path),
+        "models": [str(path) for path in model_paths],
         "audio_duration_seconds": round(audio_seconds, 3),
         "word_count": len(asr_words),
         "words": asr_words,
         "captions": sidecar_chunks,
-        "timing_mode": "vosk_word_timestamps",
+        "timing_mode": (
+            "vosk_multi_model_word_timestamps"
+            if secondary_model_path is not None else "vosk_word_timestamps"
+        ),
         "recovered_word_count": 0,
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return {
