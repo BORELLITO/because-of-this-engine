@@ -40,6 +40,17 @@ class CanonicalConfigTests(unittest.TestCase):
         with self.assertRaisesRegex(CanonicalConfigError, "Legacy or missing profiles are blocked"):
             validate_canonical_manifest(manifest)
 
+    def test_no_live_manifest_retains_known_legacy_settings(self):
+        paths = [
+            self.ROOT / "examples" / "video-only-episode-manifest-v2.template.json",
+            *sorted((self.ROOT / "episodes").glob("*/manifest.json")),
+        ]
+        forbidden = ('"watermark_enabled": true', '"logo_width": 432', '"volume": 0.06')
+        for path in paths:
+            content = path.read_text(encoding="utf-8")
+            for value in forbidden:
+                self.assertNotIn(value, content, f"{value} remains in {path}")
+
     def test_profile_fingerprint_changes_if_profile_changes(self):
         manifest = self._load("episodes/episode-001/manifest.json")
         changed = copy.deepcopy(manifest)
