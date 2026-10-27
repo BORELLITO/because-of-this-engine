@@ -128,16 +128,19 @@ def render_scene(
 
 
 def xfade_filter(durations: list[float], transitions: list[dict[str, Any]]) -> str:
+    # Normalize every input before xfade/concat. Some source containers expose
+    # an indeterminate frame rate (1/0) even after scene encoding; xfade
+    # requires an explicit constant-rate input on every branch.
+    normalized_inputs = [
+        f"[{index}:v]fps={FPS},settb=1/12800,setpts=N/({FPS}*TB)[i{index}]"
+        for index in range(len(durations))
+    ]
     if len(durations) == 1:
-        return "[0:v]null[v]"
-    labels: list[str] = []
-    parts: list[str] = []
+        return f"{normalized_inputs[0]};[i0]format=yuv420p,setsar=1[v]"
+    parts: list[str] = list(normalized_inputs)
     accumulated = durations[0]
-    previous = "0:v"
-    # FFmpeg has no literal hard-cut xfade; one frame of fade is the
-    # deterministic, visually instantaneous cut used by the contract.
+    previous = "i0"
     names = {
-        "hard_cut": "fade",
         "crossfade": "fade",
         "soft_dissolve": "fade",
         "dip_to_black": "fadeblack",
@@ -151,21 +154,16 @@ def xfade_filter(durations: list[float], transitions: list[dict[str, Any]]) -> s
         label = f"v{index}"
         transition_type = str(spec.get("type", "crossfade"))
         if transition_type == "hard_cut":
-            # A one-frame xfade is not a hard cut: on the static FFmpeg build it
-            # can terminate a chained graph at the cut point. Concatenating the
-            # already-normalized clips is deterministic and frame-accurate.
             raw_label = f"{label}_raw"
-            parts.append(f"[{previous}][{index}:v]concat=n=2:v=1:a=0[{raw_label}]")
+            parts.append(f"[{previous}][i{index}]concat=n=2:v=1:a=0[{raw_label}]")
             parts.append(f"[{raw_label}]fps={FPS},settb=1/12800,setpts=N/({FPS}*TB)[{label}]")
-            labels.append(label)
             previous = label
             accumulated += durations[index]
             continue
         kind = names.get(transition_type, "fade")
         raw_label = f"{label}_raw"
-        parts.append(f"[{previous}][{index}:v]xfade=transition={kind}:duration={duration:.3f}:offset={accumulated - duration:.3f}[{raw_label}]")
+        parts.append(f"[{previous}][i{index}]xfade=transition={kind}:duration={duration:.3f}:offset={accumulated - duration:.3f}[{raw_label}]")
         parts.append(f"[{raw_label}]fps={FPS},settb=1/12800,setpts=N/({FPS}*TB)[{label}]")
-        labels.append(label)
         previous = label
         accumulated += durations[index] - duration
     parts.append(f"[{previous}]format=yuv420p,setsar=1[v]")
