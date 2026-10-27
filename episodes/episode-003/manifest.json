@@ -76,8 +76,8 @@
   },
   "asset_reuse_brain": {
     "policy": "global_no_repeat",
-    "legacy_baseline": true,
-    "reason": "Episode 003 is a new factual story; all ten staged clips have new episode ownership and are blocked from reuse in other episodes."
+    "legacy_baseline": false,
+    "reason": "Episode 003 is a new factual story; all twelve staged source assets are new episode ownership and remain globally blocked from reuse in later episodes."
   },
   "scenes": [
     {
