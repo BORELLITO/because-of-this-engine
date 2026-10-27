@@ -71,7 +71,7 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
             short_word_variants = {
                 "a": [["a"], ["uh"], ["ah"]],
                 "an": [["an"], ["un"]],
-                "the": [["the"], ["uh"], ["thuh"]],
+                "the": [["the"], ["uh"], ["thuh"], ["thee"]],
                 "to": [["to"], ["two"], ["tuh"]],
                 "of": [["of"], ["uhv"], ["ov"]],
                 "and": [["and"], ["n"], ["ənd"]],
