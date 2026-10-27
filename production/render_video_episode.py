@@ -377,6 +377,7 @@ def mux_audio(
     width: int = 1080,
     height: int = 1920,
     loop: dict[str, Any] | None = None,
+    loop_logo_path: Path | None = None,
 ) -> None:
     loop = loop or {}
     outro_seconds = loop_outro_seconds({"loop": loop})
@@ -426,25 +427,55 @@ def mux_audio(
         filters.append("[captioned]null[main_visual]")
 
     loop_ass_path: Path | None = None
+    loop_logo_enabled = loop_logo_path is not None and outro_seconds > 0
+    loop_logo_input_index = 2 + int(logo_enabled)
+    if loop_logo_enabled:
+        command.extend(["-loop", "1", "-framerate", str(FPS), "-i", str(loop_logo_path)])
+
     if outro_seconds > 0:
-        loop_title = str(loop.get("title", "BECAUSE OF THIS"))
-        loop_ass_path = output.parent / f".{output.stem}-loop.ass"
-        write_loop_ass(
-            loop_ass_path,
-            loop_title,
-            outro_seconds,
-            fade_in_seconds=card_fade_in_seconds,
-            fade_out_seconds=card_fade_out_seconds,
-        )
         card_start_fade = max(0.0, outro_seconds - card_fade_out_seconds)
-        filters.extend([
+        filters.append(
             (
                 f"color=c=black:s={width}x{height}:r={FPS}:d={outro_seconds:.3f},"
-                f"fade=t=in:st=0:d={card_fade_in_seconds:.3f},"
-                f"fade=t=out:st={card_start_fade:.3f}:d={card_fade_out_seconds:.3f},"
                 "format=yuv420p,setsar=1,setpts=PTS-STARTPTS[outro_base]"
-            ),
-            f"[outro_base]subtitles='{_escape_filter_path(loop_ass_path)}'[outro]",
+            )
+        )
+        if loop_logo_enabled:
+            loop_logo_width = int(loop.get("logo_width", 900))
+            if not 600 <= loop_logo_width <= 1040:
+                raise RenderError("Loop logo width must be between 600 and 1040 pixels.")
+            filters.extend([
+                (
+                    f"[{loop_logo_input_index}:v]format=rgba,scale={loop_logo_width}:-1:"
+                    f"flags=lanczos[outro_logo]"
+                ),
+                (
+                    "[outro_base][outro_logo]overlay="
+                    "x=(main_w-overlay_w)/2:y=(main_h-overlay_h)/2:"
+                    "eof_action=repeat:shortest=1[outro_composed]"
+                ),
+                (
+                    f"[outro_composed]fade=t=in:st=0:d={card_fade_in_seconds:.3f},"
+                    f"fade=t=out:st={card_start_fade:.3f}:d={card_fade_out_seconds:.3f},"
+                    "format=yuv420p,setsar=1,setpts=PTS-STARTPTS[outro]"
+                ),
+            ])
+        else:
+            loop_title = str(loop.get("title", "BECAUSE OF THIS"))
+            loop_ass_path = output.parent / f".{output.stem}-loop.ass"
+            write_loop_ass(
+                loop_ass_path,
+                loop_title,
+                outro_seconds,
+                fade_in_seconds=card_fade_in_seconds,
+                fade_out_seconds=card_fade_out_seconds,
+            )
+            filters.extend([
+                f"[outro_base]fade=t=in:st=0:d={card_fade_in_seconds:.3f},"
+                f"fade=t=out:st={card_start_fade:.3f}:d={card_fade_out_seconds:.3f},"
+                f"subtitles='{_escape_filter_path(loop_ass_path)}'[outro]",
+            ])
+        filters.extend([
             (
                 f"[main_visual]format=yuv420p,"
                 f"fade=t=out:st={max(0.0, narration_duration - tail_fade_seconds):.3f}:"
@@ -459,7 +490,7 @@ def mux_audio(
         raise RenderError("Background suspense music is mandatory; refusing a voice-only render.")
     if not music.is_file():
         raise RenderError(f"Background suspense music file is missing: {music}")
-    music_input_index = 2 + int(logo_enabled)
+    music_input_index = 2 + int(logo_enabled) + int(loop_logo_enabled)
     command.extend(["-stream_loop", "-1", "-i", str(music)])
     voice_pad = f",apad=pad_dur={outro_seconds:.3f}" if outro_seconds > 0 else ""
     filters.extend([
@@ -548,6 +579,7 @@ def render(manifest_path: Path, mode: str) -> Path:
             width,
             height,
             manifest.get("loop") or {},
+            loop_logo_path=spec.get("loop_logo_path"),
         )
     return output
 
