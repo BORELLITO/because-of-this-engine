@@ -1828,7 +1828,7 @@
   "loop": {
     "enabled": true,
     "logo_source": "brand_logo_transparent",
-    "logo_width": 1040,
+    "logo_width": 820,
     "title": "BECAUSE OF THIS",
     "transition": "continuity_fade",
     "outro_seconds": 1.2,
