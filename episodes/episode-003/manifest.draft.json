@@ -106,17 +106,17 @@
         "license": "Pexels Free License",
         "rights_status": "PENDING_FRAME_QA",
         "approved_for_render": false,
-        "sha256": "PENDING_DRIVE_HYDRATION",
+        "sha256": "7a2cb67b9002026fe75ea54fb3fdc1f6055c256aee4f903769e5751d982896a0",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
         "author": "pexels source contributor",
         "acquisition_timestamp": "2026-10-27T00:00:00Z",
         "original_filename": "episode-003-s01-night-lake-pexels.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": null,
-        "width": null,
-        "height": null,
-        "filesize_bytes": null,
+        "duration_seconds": 14.76475,
+        "width": 1080,
+        "height": 1920,
+        "filesize_bytes": 3359708,
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S01",
         "visual_evidence": {
@@ -165,7 +165,7 @@
           "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
         },
         "source_segment_in": 0,
-        "source_segment_out": null
+        "source_segment_out": 14.76475
       },
       "narration_excerpt": "At first, Lake Nyos looked completely calm.",
       "visual_semantics": {
@@ -230,17 +230,17 @@
         "license": "Pexels Free License",
         "rights_status": "PENDING_FRAME_QA",
         "approved_for_render": false,
-        "sha256": "PENDING_DRIVE_HYDRATION",
+        "sha256": "202a69d9b13ae08e6d5cd39b9ed3de2918dd0af577af58f976370f72bf835bca",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
         "author": "pexels source contributor",
         "acquisition_timestamp": "2026-10-27T00:00:00Z",
         "original_filename": "episode-003-s02-village-at-night-pexels.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": null,
-        "width": null,
-        "height": null,
-        "filesize_bytes": null,
+        "duration_seconds": 6.973633,
+        "width": 3840,
+        "height": 2160,
+        "filesize_bytes": 10564979,
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S02",
         "visual_evidence": {
@@ -289,7 +289,7 @@
           "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
         },
         "source_segment_in": 0,
-        "source_segment_out": null
+        "source_segment_out": 6.973633
       },
       "narration_excerpt": "Families living near the water went to sleep.",
       "visual_semantics": {
@@ -354,17 +354,17 @@
         "license": "Pexels Free License",
         "rights_status": "PENDING_FRAME_QA",
         "approved_for_render": false,
-        "sha256": "PENDING_DRIVE_HYDRATION",
+        "sha256": "d102b7e8c6cc6d4f3162409ab60aea6041d4175ec34b26dc843451108487bf55",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
         "author": "pexels source contributor",
         "acquisition_timestamp": "2026-10-27T00:00:00Z",
         "original_filename": "episode-003-s04-underwater-gas-bubbles-pexels.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": null,
-        "width": null,
-        "height": null,
-        "filesize_bytes": null,
+        "duration_seconds": 15.978333,
+        "width": 2560,
+        "height": 1440,
+        "filesize_bytes": 24211453,
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S03",
         "visual_evidence": {
@@ -411,7 +411,7 @@
           "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
         },
         "source_segment_in": 0,
-        "source_segment_out": null
+        "source_segment_out": 15.978333
       },
       "narration_excerpt": "During the night, the lake released a massive cloud of carbon dioxide.",
       "visual_semantics": {
@@ -475,17 +475,17 @@
         "license": "Mixkit Stock Video Free License",
         "rights_status": "PENDING_FRAME_QA",
         "approved_for_render": false,
-        "sha256": "PENDING_DRIVE_HYDRATION",
+        "sha256": "eaf8bdb684eb65102d8eb055342f2e392e86f4b27e2932deff6e2c0220b5b292",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
         "author": "mixkit source contributor",
         "acquisition_timestamp": "2026-10-27T00:00:00Z",
         "original_filename": "episode-003-s08-fog-covered-hill-mixkit.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": null,
-        "width": null,
-        "height": null,
-        "filesize_bytes": null,
+        "duration_seconds": 28.361667,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 9112854,
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S04",
         "visual_evidence": {
@@ -534,7 +534,7 @@
           "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
         },
         "source_segment_in": 0,
-        "source_segment_out": null
+        "source_segment_out": 28.361667
       },
       "narration_excerpt": "The gas was invisible, odorless, and heavier than air.",
       "visual_semantics": {
@@ -599,17 +599,17 @@
         "license": "Pexels Free License",
         "rights_status": "PENDING_FRAME_QA",
         "approved_for_render": false,
-        "sha256": "PENDING_DRIVE_HYDRATION",
+        "sha256": "495336bad32b4f8a2c474e95bb7a15af5ec94ddd8f61251ac4c978c7ad3e2f22",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
         "author": "pexels source contributor",
         "acquisition_timestamp": "2026-10-27T00:00:00Z",
         "original_filename": "episode-003-s05-foggy-valley-pexels.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": null,
-        "width": null,
-        "height": null,
-        "filesize_bytes": null,
+        "duration_seconds": 12.7127,
+        "width": 1080,
+        "height": 1920,
+        "filesize_bytes": 5530149,
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S05",
         "visual_evidence": {
@@ -658,7 +658,7 @@
           "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
         },
         "source_segment_in": 0,
-        "source_segment_out": null
+        "source_segment_out": 12.7127
       },
       "narration_excerpt": "It rolled downhill into nearby villages.",
       "visual_semantics": {
@@ -723,17 +723,17 @@
         "license": "Pexels Free License",
         "rights_status": "PENDING_FRAME_QA",
         "approved_for_render": false,
-        "sha256": "PENDING_DRIVE_HYDRATION",
+        "sha256": "b1cb76729061ecafd5706f9a7524e50316adcee8ca02783782e477b83f7e275f",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
         "author": "pexels source contributor",
         "acquisition_timestamp": "2026-10-27T00:00:00Z",
         "original_filename": "episode-003-s06-village-at-dawn-pexels.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": null,
-        "width": null,
-        "height": null,
-        "filesize_bytes": null,
+        "duration_seconds": 12.929583,
+        "width": 2160,
+        "height": 3840,
+        "filesize_bytes": 41888178,
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S06",
         "visual_evidence": {
@@ -782,7 +782,7 @@
           "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
         },
         "source_segment_in": 0,
-        "source_segment_out": null
+        "source_segment_out": 12.929583
       },
       "narration_excerpt": "By morning, more than seventeen hundred people and thousands of animals were dead.",
       "visual_semantics": {
@@ -847,17 +847,17 @@
         "license": "Mixkit Stock Video Free License",
         "rights_status": "PENDING_FRAME_QA",
         "approved_for_render": false,
-        "sha256": "PENDING_DRIVE_HYDRATION",
+        "sha256": "f433bf18fffd647e469118d9b2997edb4df888cc18b2dcf3f7d4e7be4087abf0",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
         "author": "mixkit source contributor",
         "acquisition_timestamp": "2026-10-27T00:00:00Z",
         "original_filename": "episode-003-s07-lake-at-dusk-mixkit.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": null,
-        "width": null,
-        "height": null,
-        "filesize_bytes": null,
+        "duration_seconds": 20.395375,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 7666952,
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S07",
         "visual_evidence": {
@@ -906,7 +906,7 @@
           "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
         },
         "source_segment_in": 0,
-        "source_segment_out": null
+        "source_segment_out": 20.395375
       },
       "narration_excerpt": "There was no fire. No battlefield. No visible warning.",
       "visual_semantics": {
@@ -971,17 +971,17 @@
         "license": "Pexels Free License",
         "rights_status": "PENDING_FRAME_QA",
         "approved_for_render": false,
-        "sha256": "PENDING_DRIVE_HYDRATION",
+        "sha256": "456aeb4d701dd9c641dc2692a4e09292a90b377e02fbfdb22ed06b071a2e9f76",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
         "author": "pexels source contributor",
         "acquisition_timestamp": "2026-10-27T00:00:00Z",
         "original_filename": "episode-003-s03-volcanic-crater-pexels.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": null,
-        "width": null,
-        "height": null,
-        "filesize_bytes": null,
+        "duration_seconds": 7.5,
+        "width": 3840,
+        "height": 2160,
+        "filesize_bytes": 29524738,
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S08",
         "visual_evidence": {
@@ -1030,7 +1030,7 @@
           "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
         },
         "source_segment_in": 0,
-        "source_segment_out": null
+        "source_segment_out": 7.5
       },
       "narration_excerpt": "Scientists later discovered that volcanic activity beneath the lake had been feeding carbon dioxide into its deep water for years.",
       "visual_semantics": {
@@ -1095,17 +1095,17 @@
         "license": "Mixkit Stock Video Free License",
         "rights_status": "PENDING_FRAME_QA",
         "approved_for_render": false,
-        "sha256": "PENDING_DRIVE_HYDRATION",
+        "sha256": "42e364b72bf56b61f77d9e2699c0be31a3147b55e654a0104b87d0c6c87dda15",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
         "author": "mixkit source contributor",
         "acquisition_timestamp": "2026-10-27T00:00:00Z",
         "original_filename": "episode-003-s09-natural-lake-landscape-mixkit.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": null,
-        "width": null,
-        "height": null,
-        "filesize_bytes": null,
+        "duration_seconds": 18.351667,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 5950679,
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S09",
         "visual_evidence": {
@@ -1154,7 +1154,7 @@
           "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
         },
         "source_segment_in": 0,
-        "source_segment_out": null
+        "source_segment_out": 18.351667
       },
       "narration_excerpt": "A rare limnic eruption suddenly released that trapped gas.",
       "visual_semantics": {
@@ -1219,17 +1219,17 @@
         "license": "Mixkit Stock Video Free License",
         "rights_status": "PENDING_FRAME_QA",
         "approved_for_render": false,
-        "sha256": "PENDING_DRIVE_HYDRATION",
+        "sha256": "778410a64f9259b18cae33a09433bdcfe7da9909fd035559ebcc21bc5bab34e7",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
         "author": "mixkit source contributor",
         "acquisition_timestamp": "2026-10-27T00:00:00Z",
         "original_filename": "episode-003-s10-aerial-lake-forest-mixkit.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": null,
-        "width": null,
-        "height": null,
-        "filesize_bytes": null,
+        "duration_seconds": 18.476792,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 6659003,
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S10",
         "visual_evidence": {
@@ -1278,7 +1278,7 @@
           "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
         },
         "source_segment_in": 0,
-        "source_segment_out": null
+        "source_segment_out": 18.476792
       },
       "narration_excerpt": "Engineers eventually installed pipes to drain gas from the lake's depths and reduce the danger. Because of this, other volcanic lakes are now monitored.",
       "visual_semantics": {
@@ -1343,14 +1343,14 @@
         "license": "Pexels Free License",
         "rights_status": "PENDING_FRAME_QA",
         "approved_for_render": false,
-        "sha256": "PENDING_DRIVE_HYDRATION",
+        "sha256": "4cf3de7c3ce7e5bfccb5b2f9ed2458712bd42f8bbc3cdcfd4f080d7aa8d45292",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
         "author": "Pexels source contributor",
         "acquisition_timestamp": "2026-10-27T00:00:00Z",
         "original_filename": "episode-003-s11-industrial-piping-pexels.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": 7,
+        "duration_seconds": 7.92,
         "width": 4096,
         "height": 2160,
         "filesize_bytes": 17318504,
@@ -1407,7 +1407,7 @@
           "notes": "Representational engineering footage; do not present the factory as Lake Nyos itself."
         },
         "source_segment_in": 0,
-        "source_segment_out": 7
+        "source_segment_out": 7.92
       },
       "narration_excerpt": "Engineers eventually installed pipes to drain gas from the lake's depths and reduce the danger.",
       "visual_semantics": {
@@ -1472,14 +1472,14 @@
         "license": "Pexels Free License",
         "rights_status": "PENDING_FRAME_QA",
         "approved_for_render": false,
-        "sha256": "PENDING_DRIVE_HYDRATION",
+        "sha256": "c00cb0b0b350a8c93f763b46e825675d3fd94ec467f88a0818f933efe0102d98",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
         "author": "Pexels source contributor",
         "acquisition_timestamp": "2026-10-27T00:00:00Z",
         "original_filename": "episode-003-s12-industrial-valves-pexels.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": 7,
+        "duration_seconds": 7.56,
         "width": 4096,
         "height": 2160,
         "filesize_bytes": 11846295,
@@ -1538,7 +1538,7 @@
           "notes": "Representational engineering detail; use as the final monitoring/degassing cue, not as literal Lake Nyos footage."
         },
         "source_segment_in": 0,
-        "source_segment_out": 7
+        "source_segment_out": 7.56
       },
       "narration_excerpt": "But Lake Nyos left behind a terrifying lesson. Some of the deadliest disasters do not look dangerous until they have already begun. Because of this, other volcanic lakes are now monitored for the same hidden threat.",
       "visual_semantics": {
@@ -1730,7 +1730,7 @@
     "status": "PENDING_ASSET_QA",
     "reviewer": "Because of This production owner request",
     "reviewed_at": null,
-    "notes": "Canonical profile normalized: voice style, scene truth enum and direct narrative anchors now match the locked v2 contract. Final approval remains blocked on Drive hydration, SHA-256 checksums, sampled-frame evidence, narration and captions."
+    "notes": "Drive hydration metadata complete: all twelve unique assets have verified SHA-256, positive media dimensions/durations and video/mp4 MIME. Final approval remains blocked only on sampled-frame evidence, approved rights flags, narration and captions."
   },
   "editing": {
     "clip_quantity": {
@@ -2005,6 +2005,6 @@
   },
   "engine_profile": "because-of-this-v2-locked-2026-10",
   "engine_profile_fingerprint": "343ab39c203c08b5166115e6b14dab4348de069ef1feb27f3f440b5dc2783237",
-  "lifecycle_status": "DRAFT_ASSET_QA",
+  "lifecycle_status": "DRAFT_FRAME_QA",
   "archive_reason": ""
 }
