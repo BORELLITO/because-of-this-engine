@@ -12,6 +12,10 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+import sys
+
+if str(Path(__file__).resolve().parents[1]) not in sys.path:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from production.canonical_config import (
     CANONICAL_PROFILE_FINGERPRINT,
