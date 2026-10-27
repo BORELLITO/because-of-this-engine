@@ -447,7 +447,7 @@ def mux_audio(
             filters.extend([
                 (
                     f"[{loop_logo_input_index}:v]format=rgba,scale={loop_logo_width}:-1:"
-                    f"flags=lanczos[outro_logo]"
+                    "flags=lanczos,colorkey=0x000000:0.18:0.05[outro_logo]"
                 ),
                 (
                     "[outro_base][outro_logo]overlay="
