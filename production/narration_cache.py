@@ -168,7 +168,7 @@ def manifest_cache_spec(manifest_path: Path) -> dict[str, Any]:
         "script_text": text,
         "tts_script_text": tts_text,
         "script_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
-        "tts_script_sha256": hashlib.sha256(tts_text.encode("utf-8")).hexdigest(),
+        "tts_script_sha256": (hashlib.sha256(tts_text.encode("utf-8")).hexdigest() if tts_text != text else None),
         "model": str(voice["model"]),
         "voice": str(voice["voice"]),
         "language": str(voice["language"]),
@@ -208,6 +208,8 @@ def validate_entry(spec: dict[str, Any], audio_path: Path, sidecar_path: Path) -
         "normalization_version": spec["normalization_version"],
         "cache_schema_version": CACHE_SCHEMA_VERSION,
     }
+    if spec.get("tts_script_sha256"):
+        expected["tts_script_sha256"] = spec["tts_script_sha256"]
     mismatches = [
         key for key, value in expected.items()
         if metadata.get(key) != value
@@ -252,6 +254,8 @@ def annotate_local(spec: dict[str, Any]) -> dict[str, Any]:
         "sha256": sha256_file(audio_path),
         "cache_status": "VERIFIED",
     })
+    if spec.get("tts_script_sha256"):
+        metadata["tts_script_sha256"] = spec["tts_script_sha256"]
     spec["sidecar_path"].parent.mkdir(parents=True, exist_ok=True)
     temp_name: str | None = None
     try:
