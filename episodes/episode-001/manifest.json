@@ -1827,6 +1827,10 @@
   },
   "loop": {
     "enabled": true,
+    "logo_enabled": true,
+    "logo_drive_file_id": "1UE1U-xTusOkR8N4yx_re3LUX2YjPoACA",
+    "logo_path": "brand/because-of-this-outro-logo.png",
+    "logo_width": 900,
     "title": "BECAUSE OF THIS",
     "transition": "continuity_fade",
     "outro_seconds": 1.2,
