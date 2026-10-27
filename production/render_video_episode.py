@@ -128,45 +128,29 @@ def render_scene(
 
 
 def xfade_filter(durations: list[float], transitions: list[dict[str, Any]]) -> str:
-    # Normalize every input before xfade/concat. Some source containers expose
-    # an indeterminate frame rate (1/0) even after scene encoding; xfade
-    # requires an explicit constant-rate input on every branch.
-    normalized_inputs = [
-        f"[{index}:v]fps={FPS},settb=1/12800,setpts=N/({FPS}*TB)[i{index}]"
-        for index in range(len(durations))
-    ]
-    if len(durations) == 1:
-        return f"{normalized_inputs[0]};[i0]format=yuv420p,setsar=1[v]"
-    parts: list[str] = list(normalized_inputs)
-    accumulated = durations[0]
-    previous = "i0"
-    names = {
-        "crossfade": "fade",
-        "soft_dissolve": "fade",
-        "dip_to_black": "fadeblack",
-        "motion_match": "smoothright",
-    }
-    for index in range(1, len(durations)):
-        spec = transitions[index - 1] if index - 1 < len(transitions) else {"type": "crossfade", "duration": 0.25}
-        duration = transition_duration(spec)
-        if duration >= min(accumulated, durations[index]):
-            raise RenderError(f"Transition before scene {index + 1} is longer than its adjacent scene.")
-        label = f"v{index}"
-        transition_type = str(spec.get("type", "crossfade"))
-        if transition_type == "hard_cut":
-            raw_label = f"{label}_raw"
-            parts.append(f"[{previous}][i{index}]concat=n=2:v=1:a=0[{raw_label}]")
-            parts.append(f"[{raw_label}]fps={FPS},settb=1/12800,setpts=N/({FPS}*TB)[{label}]")
-            previous = label
-            accumulated += durations[index]
-            continue
-        kind = names.get(transition_type, "fade")
-        raw_label = f"{label}_raw"
-        parts.append(f"[{previous}][i{index}]xfade=transition={kind}:duration={duration:.3f}:offset={accumulated - duration:.3f}[{raw_label}]")
-        parts.append(f"[{raw_label}]fps={FPS},settb=1/12800,setpts=N/({FPS}*TB)[{label}]")
-        previous = label
-        accumulated += durations[index] - duration
-    parts.append(f"[{previous}]format=yuv420p,setsar=1[v]")
+    # Build one deterministic CFR timeline. Chained xfade graphs are fragile on
+    # the static FFmpeg build: a later branch can report 1/0 even after local
+    # normalization, which is exactly the kind of hidden clock failure the
+    # release gate must prevent. Each scene already includes the overlap budget
+    # in its render duration, so trim that budget before concatenating.
+    labels: list[str] = []
+    parts: list[str] = []
+    for index, duration in enumerate(durations):
+        keep = duration
+        if index < len(durations) - 1:
+            spec = transitions[index] if index < len(transitions) else {"type": "crossfade", "duration": 0.25}
+            keep -= transition_duration(spec)
+        if keep <= 0:
+            raise RenderError(f"Scene {index + 1} has no positive duration after transition budget.")
+        label = f"i{index}"
+        parts.append(
+            f"[{index}:v]fps={FPS},trim=duration={keep:.3f},"
+            f"settb=1/12800,setpts=N/({FPS}*TB),format=yuv420p,setsar=1[{label}]"
+        )
+        labels.append(label)
+    inputs = "".join(f"[{label}]" for label in labels)
+    parts.append(f"{inputs}concat=n={len(labels)}:v=1:a=0[raw]")
+    parts.append(f"[raw]fps={FPS},settb=1/12800,setpts=N/({FPS}*TB),format=yuv420p,setsar=1[v]")
     return ";".join(parts)
 
 
