@@ -156,7 +156,7 @@ def xfade_filter(durations: list[float], transitions: list[dict[str, Any]]) -> s
             # already-normalized clips is deterministic and frame-accurate.
             raw_label = f"{label}_raw"
             parts.append(f"[{previous}][{index}:v]concat=n=2:v=1:a=0[{raw_label}]")
-            parts.append(f"[{raw_label}]settb=1/12800,setpts=PTS-STARTPTS[{label}]")
+            parts.append(f"[{raw_label}]fps={FPS},settb=1/12800,setpts=PTS-STARTPTS[{label}]")
             labels.append(label)
             previous = label
             accumulated += durations[index]
