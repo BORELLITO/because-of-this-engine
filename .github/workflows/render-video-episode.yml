@@ -42,6 +42,7 @@ jobs:
         run: |
           set -euo pipefail
           python - "${MANIFEST}" <<'PY'
+          import json
           import re
           import sys
           from pathlib import Path
@@ -49,8 +50,12 @@ jobs:
           manifest = sys.argv[1]
           if not re.fullmatch(r"episodes/[^/]+/manifest\.json", manifest):
               raise SystemExit("Manifest must be exactly inside episodes/<episode>/manifest.json.")
-          if not Path(manifest).is_file():
+          manifest_path = Path(manifest)
+          if not manifest_path.is_file():
               raise SystemExit(f"Manifest does not exist: {manifest}")
+          value = json.loads(manifest_path.read_text(encoding="utf-8"))
+          if value.get("lifecycle_status") == "ARCHIVED_HISTORICAL":
+              raise SystemExit("Historical archived manifests cannot enter the production workflow.")
           print(f"V2_MANIFEST_SCOPE_PASS: {manifest}")
           PY
 
