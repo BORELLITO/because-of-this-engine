@@ -22,6 +22,7 @@ from production.editorial_policy import (
     validate_clip_quantity,
 )
 from production.visual_semantics import require_visual_fit
+from production.canonical_config import CanonicalConfigError, validate_canonical_manifest
 
 SCHEMA_VERSION = "2.0"
 MIN_STORY_SECONDS = 60.0
@@ -308,7 +309,13 @@ def _validate_loop(manifest: dict[str, Any], mode: str) -> None:
             )
 
 
-def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str = "preview", check_files: bool = True) -> dict[str, Any]:
+def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str = "preview", check_files: bool = True, enforce_canonical: bool = False) -> dict[str, Any]:
+    canonical_report = None
+    if enforce_canonical:
+        try:
+            canonical_report = validate_canonical_manifest(manifest)
+        except CanonicalConfigError as exc:
+            raise VideoContractError(str(exc)) from exc
     if manifest.get("schema_version") != SCHEMA_VERSION:
         raise VideoContractError(f"Video-only manifests must use schema_version {SCHEMA_VERSION}.")
     episode_id = _required_text(manifest, "video_id", "Manifest")
@@ -564,6 +571,7 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
         "brand_logo_path": brand_logo_path,
         "clip_policy": clip_policy,
         "clip_quantity_gate": quantity_report,
+        "canonical_config": canonical_report,
     }
 
 
