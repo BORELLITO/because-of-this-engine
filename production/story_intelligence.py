@@ -18,7 +18,13 @@ _TOKEN_RE = re.compile(r"[a-z0-9]+(?::[a-z0-9]+)?(?:'[a-z0-9]+)?", re.IGNORECASE
 
 
 def normalize_tokens(value: Any) -> list[str]:
-    text = str(value or "").lower().replace("—", " ").replace("–", " ")
+    text = (
+        str(value or "")
+        .lower()
+        .replace("’", "'")
+        .replace("—", " ")
+        .replace("–", " ")
+    )
     return _TOKEN_RE.findall(text)
 
 
