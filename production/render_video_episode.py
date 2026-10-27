@@ -446,8 +446,10 @@ def mux_audio(
                 raise RenderError("Loop logo width must be between 600 and 1040 pixels.")
             filters.extend([
                 (
-                    f"[{loop_logo_input_index}:v]format=rgba,scale={loop_logo_width}:-1:"
-                    "flags=lanczos,colorkey=0x000000:0.18:0.05[outro_logo]"
+                    f"[{loop_logo_input_index}:v]format=rgba,"
+                    "crop=iw*0.62:ih*0.40:(iw-ow)/2:(ih-oh)/2,"
+                    f"scale={loop_logo_width}:-1:flags=lanczos,"
+                    "colorkey=0x000000:0.18:0.05[outro_logo]"
                 ),
                 (
                     "[outro_base][outro_logo]overlay="
