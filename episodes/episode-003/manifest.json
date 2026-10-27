@@ -178,7 +178,7 @@
         "source_segment_in": 0,
         "source_segment_out": 14.76475
       },
-      "narration_excerpt": "At first, Lake Nyos looked completely calm.",
+      "narration_excerpt": "What if a lake could kill without making a sound?",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -313,7 +313,7 @@
         "source_segment_in": 0,
         "source_segment_out": 6.973633
       },
-      "narration_excerpt": "Families living near the water went to sleep.",
+      "narration_excerpt": "On August twenty-first, nineteen eighty-six, families living near Lake Nyos in Cameroon went to sleep beside water that looked completely calm.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -715,7 +715,7 @@
         "source_segment_in": 0,
         "source_segment_out": 12.7127
       },
-      "narration_excerpt": "It rolled downhill into nearby villages.",
+      "narration_excerpt": "It rolled downhill into nearby villages, replacing the oxygen people were breathing.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1255,7 +1255,7 @@
         "source_segment_in": 0,
         "source_segment_out": 18.351667
       },
-      "narration_excerpt": "A rare limnic eruption suddenly released that trapped gas.",
+      "narration_excerpt": "A rare limnic eruption suddenly released that trapped gas. The exact trigger is still debated, but the result was undeniable: a silent cloud moving through the darkness.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1390,7 +1390,7 @@
         "source_segment_in": 0,
         "source_segment_out": 18.476792
       },
-      "narration_excerpt": "Engineers eventually installed pipes to drain gas from the lake's depths and reduce the danger. Because of this, other volcanic lakes are now monitored.",
+      "narration_excerpt": "Engineers eventually installed pipes",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1530,7 +1530,7 @@
         "source_segment_in": 0,
         "source_segment_out": 7.92
       },
-      "narration_excerpt": "Engineers eventually installed pipes to drain gas from the lake's depths and reduce the danger.",
+      "narration_excerpt": "to drain gas from the lake’s depths and reduce the danger.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
