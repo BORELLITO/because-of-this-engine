@@ -640,7 +640,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         manifest = load_manifest(args.manifest.resolve())
-        spec = validate_manifest(manifest, args.manifest.resolve().parent, mode=args.mode, check_files=not args.validate_only)
+        spec = validate_manifest(manifest, args.manifest.resolve().parent, mode=args.mode, check_files=not args.validate_only, enforce_canonical=True)
         if args.validate_only:
             coverage = load_narration_coverage(args.manifest.resolve())
             print(json.dumps({
