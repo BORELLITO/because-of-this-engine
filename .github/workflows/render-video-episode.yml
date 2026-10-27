@@ -244,6 +244,7 @@ jobs:
             --ffmpeg ffmpeg
 
       - name: Annotate and persist verified narration cache
+        if: env.NARRATION_CACHE_HIT != 'true'
         env:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
