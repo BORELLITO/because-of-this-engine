@@ -82,7 +82,7 @@
   "scenes": [
     {
       "scene_id": "S01",
-      "duration": 6.5,
+      "duration": 6,
       "story_beat": "hook: a calm lake looks harmless before the disaster",
       "visual_intent": "make the still water feel like the first clue",
       "visual_function": "hook",
@@ -217,7 +217,7 @@
     },
     {
       "scene_id": "S02",
-      "duration": 7,
+      "duration": 6,
       "story_beat": "context: families sleep near the lake",
       "visual_intent": "place the nearby settlement inside the nighttime danger zone",
       "visual_function": "context",
@@ -352,7 +352,7 @@
     },
     {
       "scene_id": "S03",
-      "duration": 7,
+      "duration": 6,
       "story_beat": "inciting event: the lake releases a massive cloud of carbon dioxide",
       "visual_intent": "translate the invisible release into a non-literal underwater cue",
       "visual_function": "inciting_event",
@@ -484,7 +484,7 @@
     },
     {
       "scene_id": "S04",
-      "duration": 7,
+      "duration": 6,
       "story_beat": "explanation: invisible, odorless gas heavier than air",
       "visual_intent": "make the unseen threat feel physically present without claiming literal gas visibility",
       "visual_function": "explanation",
@@ -619,7 +619,7 @@
     },
     {
       "scene_id": "S05",
-      "duration": 7,
+      "duration": 6,
       "story_beat": "escalation: the cloud rolls downhill into nearby villages",
       "visual_intent": "show the valley geometry and downward movement",
       "visual_function": "escalation",
@@ -754,7 +754,7 @@
     },
     {
       "scene_id": "S06",
-      "duration": 6.5,
+      "duration": 6,
       "story_beat": "consequence: morning reveals the scale without graphic imagery",
       "visual_intent": "use an empty settlement at dawn as restrained aftermath",
       "visual_function": "consequence",
@@ -889,7 +889,7 @@
     },
     {
       "scene_id": "S07",
-      "duration": 7,
+      "duration": 6,
       "story_beat": "contradiction: no fire, battlefield or visible warning",
       "visual_intent": "hold on a quiet landscape to underline the absence of an obvious disaster",
       "visual_function": "contradiction",
@@ -1024,7 +1024,7 @@
     },
     {
       "scene_id": "S08",
-      "duration": 7,
+      "duration": 6,
       "story_beat": "investigation: volcanic activity feeds gas into deep water",
       "visual_intent": "connect the lake to its volcanic source",
       "visual_function": "investigation",
@@ -1159,7 +1159,7 @@
     },
     {
       "scene_id": "S09",
-      "duration": 7,
+      "duration": 6,
       "story_beat": "reveal: a rare limnic eruption releases the trapped gas",
       "visual_intent": "escalate from mist to a wide geographic view of the release mechanism",
       "visual_function": "reveal",
@@ -1294,7 +1294,7 @@
     },
     {
       "scene_id": "S10",
-      "duration": 7.5,
+      "duration": 6.5,
       "story_beat": "response and payoff: degassing, monitoring and the final warning",
       "visual_intent": "end on a composed lake image that carries the lesson into the present",
       "visual_function": "response_and_payoff",
