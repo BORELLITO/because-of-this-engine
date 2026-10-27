@@ -51,9 +51,21 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
         raise VideoContractError("Release audio must be 48 kHz with at least one channel.")
     narration = audio_duration(spec["audio_path"])
     expected_duration = rendered_duration(manifest, narration)
+    video_duration = float(media.get("video_duration") or 0.0)
+    audio_stream_duration = float(media.get("audio_duration") or 0.0)
+    if abs(video_duration - expected_duration) > 0.15:
+        raise VideoContractError(
+            f"Video stream duration {video_duration:.3f}s does not match the "
+            f"narration-plus-loop contract {expected_duration:.3f}s."
+        )
+    if audio_stream_duration <= 0 or abs(audio_stream_duration - expected_duration) > 0.15:
+        raise VideoContractError(
+            f"Audio stream duration {audio_stream_duration:.3f}s does not match the "
+            f"narration-plus-loop contract {expected_duration:.3f}s."
+        )
     if abs(float(media["duration"]) - expected_duration) > 0.15:
         raise VideoContractError(
-            f"Release duration {media['duration']:.3f}s does not match the "
+            f"Container duration {media['duration']:.3f}s does not match the "
             f"narration-plus-loop contract {expected_duration:.3f}s."
         )
     try:
@@ -81,6 +93,9 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
         "mode": mode,
         "output": str(output),
         "duration_seconds": round(float(media["duration"]), 3),
+        "video_stream_duration_seconds": round(video_duration, 3),
+        "audio_stream_duration_seconds": round(audio_stream_duration, 3),
+        "stream_duration_delta_seconds": round(abs(video_duration - audio_stream_duration), 3),
         "narration_duration_seconds": round(narration, 3),
         "loop_outro_seconds": round(expected_duration - narration, 3),
         "dimensions": f"{media['width']}x{media['height']}",
