@@ -93,6 +93,25 @@ NARRATIVE_ANCHOR_DIMENSIONS = {
     "interior": "environments",
     "exterior": "environments",
     "darkness": "environments",
+    # Concrete narrative anchors used by factual nature/disaster episodes.
+    # These remain fail-closed: a manifest must still provide reviewed pixel
+    # evidence for the declared subject/environment.
+    "lake": "subjects",
+    "water": "subjects",
+    "village": "subjects",
+    "rooftops": "subjects",
+    "bubbles": "subjects",
+    "fog": "subjects",
+    "hill": "subjects",
+    "valley": "subjects",
+    "crater": "subjects",
+    "volcano": "subjects",
+    "mountains": "subjects",
+    "forest": "subjects",
+    "industrial_machinery": "subjects",
+    "pipes": "subjects",
+    "industrial_pipelines": "subjects",
+    "valves": "subjects",
 }
 
 
