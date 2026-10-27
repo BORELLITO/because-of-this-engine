@@ -153,6 +153,8 @@ class V2HardLockTests(unittest.TestCase):
         self.assertIn('"video_duration": video_duration', contract)
         self.assertIn("Video stream duration", release)
         self.assertIn("stream_duration_delta_seconds", release)
+        self.assertIn("concat=n=", render)
+        self.assertNotIn("xfade=transition=", render)
 
     def test_direct_production_scripts_bootstrap_repository_root(self):
         expected = "sys.path.insert(0, str(Path(__file__).resolve().parents[1]))"
