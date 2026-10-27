@@ -1,0 +1,191 @@
+{
+  "schema": "because-of-this.asset-review.v1",
+  "episode_id": "episode-003",
+  "title": "The Lake That Killed Without a Sound",
+  "lifecycle_status": "ASSET_RESEARCH_IN_PROGRESS",
+  "engine_profile": "because-of-this-v2-locked-2026-10",
+  "engine_fingerprint": "343ab39c203c08b5166115e6b14dab4348de069ef1feb27f3f440b5dc2783237",
+  "render_gate": "BLOCKED_PENDING_CHECKSUMS_AND_FRAME_QA",
+  "note": "Research and Drive staging completed through the authorized native browser. This file is not a render manifest and must not be dispatched to production.",
+  "coverage": {
+    "hard_minimum_unique_clips": 10,
+    "unique_clips_staged": 10,
+    "target_range": "12-16",
+    "planned_visual_strategy": "10 clips reused only as short, semantically distinct cuts; add two targeted inserts if frame QA identifies coverage gaps."
+  },
+  "audio": {
+    "music_path": "audio/episode-002-echoes-andrew-ev.mp3",
+    "drive_file_id": "1u-1ZKkVxKTw_E6vEzW0VcpF2lfjGfmeI",
+    "drive_url": "https://drive.google.com/file/d/1u-1ZKkVxKTw_E6vEzW0VcpF2lfjGfmeI/view?usp=drivesdk",
+    "license": "Mixkit Stock Music Free License",
+    "status": "STAGED"
+  },
+  "assets_folder": {
+    "name": "episode-003-assets",
+    "drive_url": "https://drive.google.com/drive/folders/12dR7HzVwCbr6eQdHzjHMwYvtsWuQe1rF"
+  },
+  "assets": [
+    {
+      "shot_id": "s01",
+      "filename": "episode-003-s01-night-lake-pexels.mp4",
+      "drive_file_id": "17ioAKZfKAl_t_EGfGaAP3EmPTuKKpVQ-",
+      "source": "https://www.pexels.com/video/serene-nighttime-lake-view-with-reflective-water-37215217/",
+      "source_platform": "Pexels",
+      "visual_role": "hook; apparently calm lake at night",
+      "story_beats": [
+        "hook",
+        "calm_before_event"
+      ],
+      "source_review": "BROWSER_PAGE_REVIEWED",
+      "frame_qc": "PENDING",
+      "checksum": "PENDING_DRIVE_HYDRATION"
+    },
+    {
+      "shot_id": "s02",
+      "filename": "episode-003-s02-village-at-night-pexels.mp4",
+      "drive_file_id": "1Ie1IEJuT4M2hWeV-bJzmScLifiuudQ_8",
+      "source": "https://www.pexels.com/video/serene-twilight-over-traditional-village-rooftops-40262415/",
+      "source_platform": "Pexels",
+      "visual_role": "families and settlement at night",
+      "story_beats": [
+        "families_near_lake",
+        "nightfall"
+      ],
+      "source_review": "BROWSER_PAGE_REVIEWED",
+      "frame_qc": "PENDING",
+      "checksum": "PENDING_DRIVE_HYDRATION"
+    },
+    {
+      "shot_id": "s03",
+      "filename": "episode-003-s03-volcanic-crater-pexels.mp4",
+      "drive_file_id": "1D8q4QcUN697aRHOEIyneytx252EPcugY",
+      "source": "https://www.pexels.com/video/aerial-view-of-volcanic-crater-at-sunrise-35224611/",
+      "source_platform": "Pexels",
+      "visual_role": "volcanic system beneath the lake",
+      "story_beats": [
+        "volcanic_activity",
+        "hidden_source"
+      ],
+      "source_review": "BROWSER_PAGE_REVIEWED",
+      "frame_qc": "PENDING",
+      "checksum": "PENDING_DRIVE_HYDRATION"
+    },
+    {
+      "shot_id": "s04",
+      "filename": "episode-003-s04-underwater-gas-bubbles-pexels.mp4",
+      "drive_file_id": "1YfOn2VJ6tm6CXxlXfHn0t8r_2CCckoFm",
+      "source": "https://www.pexels.com/video/air-bubbles-underwater-8823141/",
+      "source_platform": "Pexels",
+      "visual_role": "gas accumulating below the surface",
+      "story_beats": [
+        "carbon_dioxide_accumulation",
+        "deep_water"
+      ],
+      "source_review": "BROWSER_PAGE_REVIEWED",
+      "frame_qc": "PENDING",
+      "checksum": "PENDING_DRIVE_HYDRATION"
+    },
+    {
+      "shot_id": "s05",
+      "filename": "episode-003-s05-foggy-valley-pexels.mp4",
+      "drive_file_id": "1Gx6qNizNbkuLbwqKpH-RhUAJsrut5wHo",
+      "source": "https://www.pexels.com/video/aerial-view-of-foggy-mountain-valley-38542191/",
+      "source_platform": "Pexels",
+      "visual_role": "invisible heavy gas moving downhill",
+      "story_beats": [
+        "odorless_invisible_gas",
+        "downhill_flow"
+      ],
+      "source_review": "BROWSER_PAGE_REVIEWED",
+      "frame_qc": "PENDING",
+      "checksum": "PENDING_DRIVE_HYDRATION"
+    },
+    {
+      "shot_id": "s06",
+      "filename": "episode-003-s06-village-at-dawn-pexels.mp4",
+      "drive_file_id": "11EHQjTSojSmAcFkthJmqcjg2IxSm2XYQ",
+      "source": "https://www.pexels.com/video/aerial-view-of-indonesian-village-at-sunrise-31992956/",
+      "source_platform": "Pexels",
+      "visual_role": "morning aftermath without graphic imagery",
+      "story_beats": [
+        "morning_after",
+        "human_cost"
+      ],
+      "source_review": "BROWSER_PAGE_REVIEWED",
+      "frame_qc": "PENDING",
+      "checksum": "PENDING_DRIVE_HYDRATION"
+    },
+    {
+      "shot_id": "s07",
+      "filename": "episode-003-s07-lake-at-dusk-mixkit.mp4",
+      "drive_file_id": "15VJ1ZnlAKrD-NIW2boNTVE6_bPqPHbPZ",
+      "source": "https://mixkit.co/free-stock-video/aerial-view-of-lake-at-dusk-101509/",
+      "source_platform": "Mixkit",
+      "visual_role": "quiet, empty landscape after the event",
+      "story_beats": [
+        "no_visible_warning",
+        "silent_disaster"
+      ],
+      "source_review": "BROWSER_PAGE_AND_PLAYER_REVIEWED",
+      "frame_qc": "PENDING",
+      "license": "Mixkit Stock Video Free License",
+      "checksum": "PENDING_DRIVE_HYDRATION"
+    },
+    {
+      "shot_id": "s08",
+      "filename": "episode-003-s08-fog-covered-hill-mixkit.mp4",
+      "drive_file_id": "1Fgsyiji0og_N13-jGVVBQ0TbuCl7l37A",
+      "source": "https://mixkit.co/free-stock-video/fog-covered-hill-in-an-aerial-shot-44271/",
+      "source_platform": "Mixkit",
+      "visual_role": "gas cloud visual metaphor; controlled reveal",
+      "story_beats": [
+        "gas_cloud",
+        "darkness"
+      ],
+      "source_review": "BROWSER_PAGE_AND_PLAYER_REVIEWED",
+      "frame_qc": "PENDING",
+      "license": "Mixkit Stock Video Free License",
+      "checksum": "PENDING_DRIVE_HYDRATION"
+    },
+    {
+      "shot_id": "s09",
+      "filename": "episode-003-s09-natural-lake-landscape-mixkit.mp4",
+      "drive_file_id": "1J9EIerTI3_n1N0u2kGHybVS4YJgmFKm1",
+      "source": "https://mixkit.co/free-stock-video/natural-landscape-with-a-lake-in-an-aerial-view-50201/",
+      "source_platform": "Mixkit",
+      "visual_role": "wide geography and scientific context",
+      "story_beats": [
+        "lake_context",
+        "monitoring"
+      ],
+      "source_review": "BROWSER_PAGE_AND_PLAYER_REVIEWED",
+      "frame_qc": "PENDING",
+      "license": "Mixkit Stock Video Free License",
+      "checksum": "PENDING_DRIVE_HYDRATION"
+    },
+    {
+      "shot_id": "s10",
+      "filename": "episode-003-s10-aerial-lake-forest-mixkit.mp4",
+      "drive_file_id": "1ljxITaAWERBEI1DghBU1JDtYxTODymJ9",
+      "source": "https://mixkit.co/free-stock-video/aerial-tour-of-a-lake-in-the-middle-of-a-41381/",
+      "source_platform": "Mixkit",
+      "visual_role": "final warning; other volcanic lakes monitored",
+      "story_beats": [
+        "lesson",
+        "ongoing_monitoring"
+      ],
+      "source_review": "BROWSER_PAGE_AND_PLAYER_REVIEWED",
+      "frame_qc": "PENDING",
+      "license": "Mixkit Stock Video Free License",
+      "checksum": "PENDING_DRIVE_HYDRATION"
+    }
+  ],
+  "next_gate": [
+    "hydrate Drive assets through the canonical engine",
+    "compute and record SHA-256 checksums",
+    "sample opening, middle and ending frames for every staged asset",
+    "approve scene-to-beat coverage",
+    "generate narration and captions",
+    "only then create and dispatch the production manifest"
+  ]
+}
