@@ -42,6 +42,7 @@ jobs:
         run: |
           set -euo pipefail
           python - "${MANIFEST}" <<'PY'
+          import json
           import re
           import sys
           from pathlib import Path
@@ -49,8 +50,12 @@ jobs:
           manifest = sys.argv[1]
           if not re.fullmatch(r"episodes/[^/]+/manifest\.json", manifest):
               raise SystemExit("Manifest must be exactly inside episodes/<episode>/manifest.json.")
-          if not Path(manifest).is_file():
+          manifest_path = Path(manifest)
+          if not manifest_path.is_file():
               raise SystemExit(f"Manifest does not exist: {manifest}")
+          value = json.loads(manifest_path.read_text(encoding="utf-8"))
+          if value.get("lifecycle_status") == "ARCHIVED_HISTORICAL":
+              raise SystemExit("Historical archived manifests cannot enter the production workflow.")
           print(f"V2_MANIFEST_SCOPE_PASS: {manifest}")
           PY
 
@@ -65,11 +70,15 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p "${RUNNER_TEMP}/ffmpeg"
+          FFMPEG_URL="https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz"
           curl --fail --location --retry 5 --retry-all-errors \
-            --connect-timeout 20 --max-time 240 \
-            "https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz" \
-            --output "${RUNNER_TEMP}/ffmpeg.tar.xz"
-          tar -xJf "${RUNNER_TEMP}/ffmpeg.tar.xz" -C "${RUNNER_TEMP}/ffmpeg"
+            --connect-timeout 20 --max-time 240 "${FFMPEG_URL}" \
+            --output "${RUNNER_TEMP}/ffmpeg-release-amd64-static.tar.xz"
+          curl --fail --location --retry 5 --retry-all-errors \
+            --connect-timeout 20 --max-time 60 "${FFMPEG_URL}.md5" \
+            --output "${RUNNER_TEMP}/ffmpeg-release-amd64-static.tar.xz.md5"
+          (cd "${RUNNER_TEMP}" && md5sum -c ffmpeg-release-amd64-static.tar.xz.md5)
+          tar -xJf "${RUNNER_TEMP}/ffmpeg-release-amd64-static.tar.xz" -C "${RUNNER_TEMP}/ffmpeg"
           FFMPEG_DIR="$(find "${RUNNER_TEMP}/ffmpeg" -maxdepth 1 -mindepth 1 -type d -name 'ffmpeg-*static' -print -quit)"
           test -n "${FFMPEG_DIR}"
           echo "${FFMPEG_DIR}" >> "${GITHUB_PATH}"
@@ -81,7 +90,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install runtime dependencies
-        run: python -m pip install -r requirements.txt
+        run: python -m pip install -r requirements.lock.txt
 
       - name: Initialize stable job state
         env:
@@ -243,6 +252,7 @@ jobs:
             --connect-timeout 20 --max-time 240 \
             "https://alphacephei.com/vosk/models/vosk-model-en-us-0.22-lgraph.zip" \
             --output "${MODEL_ROOT}/model.zip"
+          echo "d9838b4aaa82a75c4a17f5aca300eaca129aaab2a7cbf951bafbb500eb9c4334  ${MODEL_ROOT}/model.zip" | sha256sum -c -
           unzip -q "${MODEL_ROOT}/model.zip" -d "${MODEL_ROOT}"
           test -d "${MODEL_ROOT}/vosk-model-en-us-0.22-lgraph"
           echo "VOSK_MODEL_DIR=${MODEL_ROOT}/vosk-model-en-us-0.22-lgraph" >> "${GITHUB_ENV}"

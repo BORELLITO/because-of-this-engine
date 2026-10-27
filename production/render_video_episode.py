@@ -157,39 +157,6 @@ def transition_duration(spec: dict[str, Any]) -> float:
     return max(float(spec.get("duration", 0.25)), 1 / FPS)
 
 
-def _bounded_weighted_allocation(
-    planned: list[float],
-    lower: list[float],
-    upper: list[float],
-    target: float,
-) -> list[float]:
-    if not planned or len(planned) != len(lower) or len(planned) != len(upper):
-        raise RenderError("Narration-locked allocation requires matching scene bounds.")
-    if sum(lower) - 0.001 > target:
-        raise RenderError("Narration is shorter than the minimum visual-beat allocation.")
-    if sum(upper) + 0.001 < target:
-        raise RenderError("Narration is longer than the source-safe visual-beat allocation.")
-
-    durations = list(lower)
-    remaining = target - sum(durations)
-    weights = [max(float(value), 0.01) for value in planned]
-    while remaining > 0.00001:
-        active = [index for index, value in enumerate(upper) if value - durations[index] > 0.00001]
-        if not active:
-            raise RenderError("Could not distribute the narration across source-safe scene limits.")
-        weight_total = sum(weights[index] for index in active)
-        progress = 0.0
-        for index in active:
-            share = remaining * weights[index] / weight_total
-            addition = min(share, upper[index] - durations[index])
-            durations[index] += addition
-            progress += addition
-        if progress <= 0.00001:
-            raise RenderError("Narration-locked allocation stalled before reaching the target duration.")
-        remaining -= progress
-    return durations
-
-
 def load_narration_coverage(manifest_path: Path) -> dict[str, Any]:
     report_path = manifest_path.parent / "rendered" / "narration-coverage.json"
     if not report_path.is_file():
@@ -277,14 +244,9 @@ def narration_locked_scenes(
     narration_seconds: float,
     clip_policy: dict[str, Any] | None = None,
     narration_spans: list[dict[str, Any]] | None = None,
-    *,
-    allow_legacy: bool = False,
 ) -> list[dict[str, Any]]:
-    """Lock scene boundaries to forced-alignment spans from the final WAV.
+    """Lock scene boundaries exclusively to forced-alignment spans from the final WAV."""
 
-    The proportional allocator is retained only for explicit legacy unit-test
-    callers. Production rendering is fail-closed when forced timing is absent.
-    """
     if not scenes:
         raise RenderError("Narration-locked rendering requires at least one scene.")
     if not 60.0 <= narration_seconds <= 75.0:
@@ -296,9 +258,9 @@ def narration_locked_scenes(
         "min_scene_seconds": 2.0,
         "max_scene_seconds": 20.0,
     }
-    if narration_spans is None and not allow_legacy:
+    if narration_spans is None:
         raise RenderError(
-            "Forced-alignment narration spans are mandatory; legacy proportional timing is disabled for production."
+            "Forced-alignment narration spans are mandatory; no legacy timing path exists."
         )
     if narration_spans is not None:
         durations = _audio_timed_scene_durations(
@@ -321,41 +283,6 @@ def narration_locked_scenes(
             locked.append(copy)
         return locked
 
-    planned = [float(scene["duration"]) for scene in scenes]
-    planned_total = sum(planned)
-    if planned_total <= 0:
-        raise RenderError("Scene timeline must have a positive planned duration.")
-
-    transitions = [
-        scene.get("transition", {"type": "crossfade", "duration": 0.25})
-        for scene in scenes[1:]
-    ]
-    overlap = sum(transition_duration(spec) for spec in transitions)
-    target_scene_sum = narration_seconds + overlap
-
-    lower = [float(policy.get("min_scene_seconds", 2.0)) for _ in scenes]
-    upper: list[float] = []
-    for scene in scenes:
-        scene_limit = float(policy.get("max_scene_seconds", 20.0))
-        asset = scene.get("asset") or {}
-        metadata = asset.get("metadata") or {}
-        source_duration = metadata.get("duration") or asset.get("duration_seconds")
-        if source_duration:
-            source_in = float(scene.get("source_in", 0.0))
-            scene_limit = min(scene_limit, float(source_duration) - source_in - 0.05)
-        upper.append(scene_limit)
-    for index, (low, high) in enumerate(zip(lower, upper), start=1):
-        if high < low:
-            raise RenderError(f"Scene {index} source is shorter than its minimum visual beat.")
-
-    locked_durations = _bounded_weighted_allocation(planned, lower, upper, target_scene_sum)
-    locked = []
-    for scene, duration in zip(scenes, locked_durations):
-        copy = dict(scene)
-        copy["duration"] = duration
-        locked.append(copy)
-    return locked
-
 def assemble(scene_files: list[Path], scenes: list[dict[str, Any]], output: Path) -> None:
     command = ["ffmpeg", "-y"]
     for path in scene_files:
@@ -372,36 +299,6 @@ def ass_time(seconds: float) -> str:
     minutes, remainder = divmod(remainder, 6000)
     secs, centiseconds = divmod(remainder, 100)
     return f"{hours}:{minutes:02d}:{secs:02d}.{centiseconds:02d}"
-
-
-def ass_color(value: str) -> str:
-    raw = str(value or "#E3262E").lstrip("#")
-    if len(raw) != 6 or any(char not in "0123456789abcdefABCDEF" for char in raw):
-        raw = "E3262E"
-    red, green, blue = raw[0:2], raw[2:4], raw[4:6]
-    return f"&H00{blue}{green}{red}"
-
-
-def write_brand_ass(path: Path, brand: dict[str, Any], duration: float) -> Path | None:
-    if brand.get("watermark_enabled", True) is False:
-        return None
-    text = str(brand.get("watermark_text", "|B")).replace("\\", "\\\\").replace("{", "\\{").replace("}", "\\}")
-    ass = f"""[Script Info]
-ScriptType: v4.00+
-PlayResX: 1080
-PlayResY: 1920
-ScaledBorderAndShadow: yes
-
-[V4+ Styles]
-Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,StrikeOut,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding
-Style: Brand,Arial,42,{ass_color(brand.get("accent_color", "#E3262E"))},&H00FFFFFF,&H00000000,&H80000000,1,0,0,0,100,100,0,0,1,2,1,9,54,54,80,1
-
-[Events]
-Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
-Dialogue: 0,0:00:00.00,{ass_time(duration)},Brand,,0,0,0,,{text}
-"""
-    path.write_text(ass, encoding="utf-8")
-    return path
 
 
 def write_loop_ass(
@@ -455,8 +352,7 @@ def mux_audio(
     narration_duration: float,
     music: Path | None,
     music_volume: float,
-    brand_ass: Path | None,
-    logo_path: Path | None,
+        logo_path: Path | None,
     brand: dict[str, Any],
     width: int = 1080,
     height: int = 1920,
@@ -498,8 +394,6 @@ def mux_audio(
                 "eof_action=repeat:shortest=1[main_visual]"
             ),
         ])
-    elif brand_ass:
-        filters.append(f"[captioned]subtitles='{_escape_filter_path(brand_ass)}'[main_visual]")
     else:
         filters.append("[captioned]null[main_visual]")
 
@@ -613,7 +507,6 @@ def render(manifest_path: Path, mode: str) -> Path:
             )
         if logo_path is None or spec["brand"].get("logo_enabled") is not True:
             raise RenderError("Canonical profile requires the Because Of This logo overlay.")
-        brand_ass = None
         mux_audio(
             assembled,
             spec["audio_path"],
@@ -622,7 +515,6 @@ def render(manifest_path: Path, mode: str) -> Path:
             narration_seconds,
             music_path,
             music_volume,
-            brand_ass,
             logo_path,
             spec["brand"],
             width,

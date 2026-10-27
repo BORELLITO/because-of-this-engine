@@ -775,5 +775,7 @@
     "card_fade_out_seconds": 0.36,
     "audio_fade_seconds": 0.6,
     "restart_safe": true
-  }
+  },
+  "engine_profile_fingerprint": "343ab39c203c08b5166115e6b14dab4348de069ef1feb27f3f440b5dc2783237",
+  "lifecycle_status": "TEMPLATE_CANONICAL"
 }

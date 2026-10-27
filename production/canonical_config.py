@@ -155,6 +155,12 @@ def validate_canonical_manifest(
             f"{source_label} must declare engine_profile={CANONICAL_PROFILE_ID!r}; "
             f"got {profile!r}. Legacy or missing profiles are blocked."
         )
+    declared_fingerprint = manifest.get("engine_profile_fingerprint")
+    if declared_fingerprint != CANONICAL_PROFILE_FINGERPRINT:
+        raise CanonicalConfigError(
+            f"{source_label} must declare the exact canonical profile fingerprint; "
+            f"got {declared_fingerprint!r}."
+        )
 
     differences = _differences(CANONICAL_PROFILE, canonical_settings(manifest))
     if differences:

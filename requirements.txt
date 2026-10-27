@@ -1,6 +1,6 @@
-google-genai>=2.25.0,<3.0.0
-Pillow>=10.0.0,<12.0.0
-google-api-python-client>=2,<3
-google-auth>=2,<3
-google-auth-httplib2>=0.2,<1
-vosk>=0.3.45,<0.4
+google-genai==2.33.0
+Pillow==11.3.0
+google-api-python-client==2.201.0
+google-auth==2.62.0
+google-auth-httplib2==0.4.4
+vosk==0.3.45
