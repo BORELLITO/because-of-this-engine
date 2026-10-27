@@ -54,6 +54,13 @@ jobs:
           print(f"V2_MANIFEST_SCOPE_PASS: {manifest}")
           PY
 
+      - name: Enforce canonical engine profile
+        env:
+          MANIFEST: ${{ inputs.manifest }}
+        run: |
+          set -euo pipefail
+          python production/canonical_config.py --manifest "${MANIFEST}"
+
       - name: Install static FFmpeg with retries
         run: |
           set -euo pipefail
