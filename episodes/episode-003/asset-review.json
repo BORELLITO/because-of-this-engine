@@ -76,11 +76,11 @@
       ],
       "source_review": "BROWSER_PAGE_REVIEWED",
       "frame_qc": "PENDING",
-      "checksum": "d102b7e8c6cc6d4f3162409ab60aea6041d4175ec34b26dc843451108487bf55",
-      "duration_seconds": 15.978333,
-      "width": 2560,
-      "height": 1440,
-      "size_bytes": 24211453
+      "checksum": "456aeb4d701dd9c641dc2692a4e09292a90b377e02fbfdb22ed06b071a2e9f76",
+      "duration_seconds": 7.5,
+      "width": 3840,
+      "height": 2160,
+      "size_bytes": 29524738
     },
     {
       "shot_id": "s04",
@@ -95,11 +95,11 @@
       ],
       "source_review": "BROWSER_PAGE_REVIEWED",
       "frame_qc": "PENDING",
-      "checksum": "eaf8bdb684eb65102d8eb055342f2e392e86f4b27e2932deff6e2c0220b5b292",
-      "duration_seconds": 28.361667,
-      "width": 1280,
-      "height": 720,
-      "size_bytes": 9112854
+      "checksum": "d102b7e8c6cc6d4f3162409ab60aea6041d4175ec34b26dc843451108487bf55",
+      "duration_seconds": 15.978333,
+      "width": 2560,
+      "height": 1440,
+      "size_bytes": 24211453
     },
     {
       "shot_id": "s05",
@@ -173,11 +173,11 @@
       "source_review": "BROWSER_PAGE_AND_PLAYER_REVIEWED",
       "frame_qc": "PENDING",
       "license": "Mixkit Stock Video Free License",
-      "checksum": "456aeb4d701dd9c641dc2692a4e09292a90b377e02fbfdb22ed06b071a2e9f76",
-      "duration_seconds": 7.5,
-      "width": 3840,
-      "height": 2160,
-      "size_bytes": 29524738
+      "checksum": "eaf8bdb684eb65102d8eb055342f2e392e86f4b27e2932deff6e2c0220b5b292",
+      "duration_seconds": 28.361667,
+      "width": 1280,
+      "height": 720,
+      "size_bytes": 9112854
     },
     {
       "shot_id": "s09",
