@@ -322,6 +322,7 @@ def _recognize(
     model_path: Path,
     *,
     vocabulary: list[str] | None = None,
+    grammar_phrases: list[str] | None = None,
 ) -> list[dict[str, Any]]:
     try:
         from vosk import KaldiRecognizer, Model
@@ -334,12 +335,13 @@ def _recognize(
             if audio.getnchannels() != 1 or audio.getsampwidth() != 2 or audio.getframerate() != 24000:
                 raise AlignmentError("Narration must be mono 24 kHz 16-bit PCM WAV.")
             recognizer = KaldiRecognizer(Model(str(model_path)), 24000)
-            if vocabulary:
-                # A second, constrained pass reduces predictable ASR substitutions
-                # while retaining real timestamps from the final WAV. The grammar
-                # is derived only from the canonical script; it never invents
-                # caption timings.
-                recognizer.SetGrammar(json.dumps(vocabulary, ensure_ascii=False))
+            if vocabulary or grammar_phrases:
+                # Constrained passes retain real timestamps from the final WAV.
+                # Phrase entries are accepted by Vosk as multi-word grammar
+                # alternatives, which helps preserve short words at acoustic
+                # boundaries without fabricating any timing.
+                grammar = grammar_phrases if grammar_phrases else vocabulary
+                recognizer.SetGrammar(json.dumps(grammar, ensure_ascii=False))
             recognizer.SetWords(True)
             payloads: list[dict[str, Any]] = []
             while True:
@@ -442,7 +444,25 @@ def _recover_with_phrase_vocabulary(
             )
             merged = _merge_word_timings(merged, targeted_words)
             cursor = _cursor_for_time(merged, cursor_time)
-            _start, end, _next_cursor, _positions = _align_chunk(chunk, merged, cursor)
+            try:
+                _start, end, _next_cursor, _positions = _align_chunk(chunk, merged, cursor)
+            except AlignmentError:
+                # A vocabulary-only grammar can still drop an unstressed word.
+                # Retry with the failed phrase and its immediate context as
+                # multi-word grammar entries. Any accepted token must still be
+                # emitted by Vosk with a real start/end timestamp.
+                grammar_phrases = [
+                    str(value).replace(r"\N", " ")
+                    for value in chunks[context_start:context_end]
+                ]
+                sequence_words = _recognize(
+                    audio_path,
+                    model_path,
+                    grammar_phrases=grammar_phrases,
+                )
+                merged = _merge_word_timings(merged, sequence_words)
+                cursor = _cursor_for_time(merged, cursor_time)
+                _start, end, _next_cursor, _positions = _align_chunk(chunk, merged, cursor)
         cursor_time = float(end)
     return merged
 
