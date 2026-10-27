@@ -104,8 +104,8 @@
         "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/serene-nighttime-lake-view-with-reflective-water-37215217/",
         "license": "Pexels Free License",
-        "rights_status": "PENDING_FRAME_QA",
-        "approved_for_render": false,
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
         "sha256": "7a2cb67b9002026fe75ea54fb3fdc1f6055c256aee4f903769e5751d982896a0",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
@@ -120,10 +120,10 @@
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S01",
         "visual_evidence": {
-          "reviewed": false,
-          "basis": "source-page review recorded; three sampled Drive frames pending",
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled Drive frames; all sampled frames were non-black, stable and consistent with the declared subject/environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": null,
+          "reviewed_at": "2026-10-27T00:00:00Z",
           "review_method": "source-page license/title/description plus three sampled Drive frames",
           "source_title": "calm lake at night",
           "source_description": "still water and distant lights",
@@ -153,7 +153,11 @@
             "exterior"
           ],
           "observed_objects": [],
-          "sample_timestamps": [],
+          "sample_timestamps": [
+            2.953,
+            7.382,
+            11.812
+          ],
           "action_window": {
             "in": 0,
             "out": null
@@ -162,7 +166,14 @@
             "in": 0,
             "out": null
           },
-          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
+          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
         },
         "source_segment_in": 0,
         "source_segment_out": 14.76475
@@ -228,8 +239,8 @@
         "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/serene-twilight-over-traditional-village-rooftops-40262415/",
         "license": "Pexels Free License",
-        "rights_status": "PENDING_FRAME_QA",
-        "approved_for_render": false,
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
         "sha256": "202a69d9b13ae08e6d5cd39b9ed3de2918dd0af577af58f976370f72bf835bca",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
@@ -244,10 +255,10 @@
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S02",
         "visual_evidence": {
-          "reviewed": false,
-          "basis": "source-page review recorded; three sampled Drive frames pending",
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled Drive frames; all sampled frames were non-black, stable and consistent with the declared subject/environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": null,
+          "reviewed_at": "2026-10-27T00:00:00Z",
           "review_method": "source-page license/title/description plus three sampled Drive frames",
           "source_title": "village rooftops at twilight",
           "source_description": "sleeping valley",
@@ -277,7 +288,11 @@
             "settlement"
           ],
           "observed_objects": [],
-          "sample_timestamps": [],
+          "sample_timestamps": [
+            1.395,
+            3.487,
+            5.579
+          ],
           "action_window": {
             "in": 0,
             "out": null
@@ -286,7 +301,14 @@
             "in": 0,
             "out": null
           },
-          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
+          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
         },
         "source_segment_in": 0,
         "source_segment_out": 6.973633
@@ -352,8 +374,8 @@
         "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/air-bubbles-underwater-8823141/",
         "license": "Pexels Free License",
-        "rights_status": "PENDING_FRAME_QA",
-        "approved_for_render": false,
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
         "sha256": "d102b7e8c6cc6d4f3162409ab60aea6041d4175ec34b26dc843451108487bf55",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
@@ -368,10 +390,10 @@
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S03",
         "visual_evidence": {
-          "reviewed": false,
-          "basis": "source-page review recorded; three sampled Drive frames pending",
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled Drive frames; all sampled frames were non-black, stable and consistent with the declared subject/environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": null,
+          "reviewed_at": "2026-10-27T00:00:00Z",
           "review_method": "source-page license/title/description plus three sampled Drive frames",
           "source_title": "underwater bubbles",
           "source_description": "gas bubbles rising underwater",
@@ -399,7 +421,11 @@
             "underwater"
           ],
           "observed_objects": [],
-          "sample_timestamps": [],
+          "sample_timestamps": [
+            3.196,
+            7.989,
+            12.783
+          ],
           "action_window": {
             "in": 0,
             "out": null
@@ -408,7 +434,14 @@
             "in": 0,
             "out": null
           },
-          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
+          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
         },
         "source_segment_in": 0,
         "source_segment_out": 15.978333
@@ -473,8 +506,8 @@
         "provider": "mixkit",
         "source_page_url": "https://mixkit.co/free-stock-video/fog-covered-hill-in-an-aerial-shot-44271/",
         "license": "Mixkit Stock Video Free License",
-        "rights_status": "PENDING_FRAME_QA",
-        "approved_for_render": false,
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
         "sha256": "eaf8bdb684eb65102d8eb055342f2e392e86f4b27e2932deff6e2c0220b5b292",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
@@ -489,10 +522,10 @@
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S04",
         "visual_evidence": {
-          "reviewed": false,
-          "basis": "source-page review recorded; three sampled Drive frames pending",
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled Drive frames; all sampled frames were non-black, stable and consistent with the declared subject/environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": null,
+          "reviewed_at": "2026-10-27T00:00:00Z",
           "review_method": "source-page license/title/description plus three sampled Drive frames",
           "source_title": "fog-covered hill in aerial view",
           "source_description": "low fog as representational proxy for heavy gas",
@@ -522,7 +555,11 @@
             "aerial"
           ],
           "observed_objects": [],
-          "sample_timestamps": [],
+          "sample_timestamps": [
+            5.672,
+            14.181,
+            22.689
+          ],
           "action_window": {
             "in": 0,
             "out": null
@@ -531,7 +568,14 @@
             "in": 0,
             "out": null
           },
-          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
+          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
         },
         "source_segment_in": 0,
         "source_segment_out": 28.361667
@@ -597,8 +641,8 @@
         "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/aerial-view-of-foggy-mountain-valley-38542191/",
         "license": "Pexels Free License",
-        "rights_status": "PENDING_FRAME_QA",
-        "approved_for_render": false,
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
         "sha256": "495336bad32b4f8a2c474e95bb7a15af5ec94ddd8f61251ac4c978c7ad3e2f22",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
@@ -613,10 +657,10 @@
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S05",
         "visual_evidence": {
-          "reviewed": false,
-          "basis": "source-page review recorded; three sampled Drive frames pending",
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled Drive frames; all sampled frames were non-black, stable and consistent with the declared subject/environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": null,
+          "reviewed_at": "2026-10-27T00:00:00Z",
           "review_method": "source-page license/title/description plus three sampled Drive frames",
           "source_title": "foggy mountain valley",
           "source_description": "fog in a valley",
@@ -646,7 +690,11 @@
             "mountain"
           ],
           "observed_objects": [],
-          "sample_timestamps": [],
+          "sample_timestamps": [
+            2.543,
+            6.356,
+            10.17
+          ],
           "action_window": {
             "in": 0,
             "out": null
@@ -655,7 +703,14 @@
             "in": 0,
             "out": null
           },
-          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
+          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
         },
         "source_segment_in": 0,
         "source_segment_out": 12.7127
@@ -721,8 +776,8 @@
         "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/aerial-view-of-indonesian-village-at-sunrise-31992956/",
         "license": "Pexels Free License",
-        "rights_status": "PENDING_FRAME_QA",
-        "approved_for_render": false,
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
         "sha256": "b1cb76729061ecafd5706f9a7524e50316adcee8ca02783782e477b83f7e275f",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
@@ -737,10 +792,10 @@
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S06",
         "visual_evidence": {
-          "reviewed": false,
-          "basis": "source-page review recorded; three sampled Drive frames pending",
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled Drive frames; all sampled frames were non-black, stable and consistent with the declared subject/environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": null,
+          "reviewed_at": "2026-10-27T00:00:00Z",
           "review_method": "source-page license/title/description plus three sampled Drive frames",
           "source_title": "village at sunrise",
           "source_description": "quiet village at dawn",
@@ -770,7 +825,11 @@
             "aerial"
           ],
           "observed_objects": [],
-          "sample_timestamps": [],
+          "sample_timestamps": [
+            2.586,
+            6.465,
+            10.344
+          ],
           "action_window": {
             "in": 0,
             "out": null
@@ -779,7 +838,14 @@
             "in": 0,
             "out": null
           },
-          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
+          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
         },
         "source_segment_in": 0,
         "source_segment_out": 12.929583
@@ -845,8 +911,8 @@
         "provider": "mixkit",
         "source_page_url": "https://mixkit.co/free-stock-video/aerial-view-of-lake-at-dusk-101509/",
         "license": "Mixkit Stock Video Free License",
-        "rights_status": "PENDING_FRAME_QA",
-        "approved_for_render": false,
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
         "sha256": "f433bf18fffd647e469118d9b2997edb4df888cc18b2dcf3f7d4e7be4087abf0",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
@@ -861,10 +927,10 @@
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S07",
         "visual_evidence": {
-          "reviewed": false,
-          "basis": "source-page review recorded; three sampled Drive frames pending",
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled Drive frames; all sampled frames were non-black, stable and consistent with the declared subject/environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": null,
+          "reviewed_at": "2026-10-27T00:00:00Z",
           "review_method": "source-page license/title/description plus three sampled Drive frames",
           "source_title": "aerial lake at dusk",
           "source_description": "quiet lake after the event",
@@ -894,7 +960,11 @@
             "aerial"
           ],
           "observed_objects": [],
-          "sample_timestamps": [],
+          "sample_timestamps": [
+            4.079,
+            10.198,
+            16.316
+          ],
           "action_window": {
             "in": 0,
             "out": null
@@ -903,7 +973,14 @@
             "in": 0,
             "out": null
           },
-          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
+          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
         },
         "source_segment_in": 0,
         "source_segment_out": 20.395375
@@ -969,8 +1046,8 @@
         "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/aerial-view-of-volcanic-crater-at-sunrise-35224611/",
         "license": "Pexels Free License",
-        "rights_status": "PENDING_FRAME_QA",
-        "approved_for_render": false,
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
         "sha256": "456aeb4d701dd9c641dc2692a4e09292a90b377e02fbfdb22ed06b071a2e9f76",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
@@ -985,10 +1062,10 @@
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S08",
         "visual_evidence": {
-          "reviewed": false,
-          "basis": "source-page review recorded; three sampled Drive frames pending",
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled Drive frames; all sampled frames were non-black, stable and consistent with the declared subject/environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": null,
+          "reviewed_at": "2026-10-27T00:00:00Z",
           "review_method": "source-page license/title/description plus three sampled Drive frames",
           "source_title": "volcanic crater at sunrise",
           "source_description": "volcanic crater as geological context",
@@ -1018,7 +1095,11 @@
             "geology"
           ],
           "observed_objects": [],
-          "sample_timestamps": [],
+          "sample_timestamps": [
+            1.5,
+            3.75,
+            6
+          ],
           "action_window": {
             "in": 0,
             "out": null
@@ -1027,7 +1108,14 @@
             "in": 0,
             "out": null
           },
-          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
+          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
         },
         "source_segment_in": 0,
         "source_segment_out": 7.5
@@ -1093,8 +1181,8 @@
         "provider": "mixkit",
         "source_page_url": "https://mixkit.co/free-stock-video/natural-landscape-with-a-lake-in-an-aerial-view-50201/",
         "license": "Mixkit Stock Video Free License",
-        "rights_status": "PENDING_FRAME_QA",
-        "approved_for_render": false,
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
         "sha256": "42e364b72bf56b61f77d9e2699c0be31a3147b55e654a0104b87d0c6c87dda15",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
@@ -1109,10 +1197,10 @@
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S09",
         "visual_evidence": {
-          "reviewed": false,
-          "basis": "source-page review recorded; three sampled Drive frames pending",
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled Drive frames; all sampled frames were non-black, stable and consistent with the declared subject/environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": null,
+          "reviewed_at": "2026-10-27T00:00:00Z",
           "review_method": "source-page license/title/description plus three sampled Drive frames",
           "source_title": "natural lake landscape in aerial view",
           "source_description": "wide lake geography",
@@ -1142,7 +1230,11 @@
             "landscape"
           ],
           "observed_objects": [],
-          "sample_timestamps": [],
+          "sample_timestamps": [
+            3.67,
+            9.176,
+            14.681
+          ],
           "action_window": {
             "in": 0,
             "out": null
@@ -1151,7 +1243,14 @@
             "in": 0,
             "out": null
           },
-          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
+          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
         },
         "source_segment_in": 0,
         "source_segment_out": 18.351667
@@ -1217,8 +1316,8 @@
         "provider": "mixkit",
         "source_page_url": "https://mixkit.co/free-stock-video/aerial-tour-of-a-lake-in-the-middle-of-a-41381/",
         "license": "Mixkit Stock Video Free License",
-        "rights_status": "PENDING_FRAME_QA",
-        "approved_for_render": false,
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
         "sha256": "778410a64f9259b18cae33a09433bdcfe7da9909fd035559ebcc21bc5bab34e7",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
@@ -1233,10 +1332,10 @@
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S10",
         "visual_evidence": {
-          "reviewed": false,
-          "basis": "source-page review recorded; three sampled Drive frames pending",
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled Drive frames; all sampled frames were non-black, stable and consistent with the declared subject/environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": null,
+          "reviewed_at": "2026-10-27T00:00:00Z",
           "review_method": "source-page license/title/description plus three sampled Drive frames",
           "source_title": "aerial lake in pine forest",
           "source_description": "peaceful lake as ongoing monitoring warning",
@@ -1266,7 +1365,11 @@
             "day"
           ],
           "observed_objects": [],
-          "sample_timestamps": [],
+          "sample_timestamps": [
+            3.695,
+            9.238,
+            14.781
+          ],
           "action_window": {
             "in": 0,
             "out": null
@@ -1275,7 +1378,14 @@
             "in": 0,
             "out": null
           },
-          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
+          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
         },
         "source_segment_in": 0,
         "source_segment_out": 18.476792
@@ -1341,8 +1451,8 @@
         "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/industrial-machinery-and-piping-inside-factory-30243446/",
         "license": "Pexels Free License",
-        "rights_status": "PENDING_FRAME_QA",
-        "approved_for_render": false,
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
         "sha256": "4cf3de7c3ce7e5bfccb5b2f9ed2458712bd42f8bbc3cdcfd4f080d7aa8d45292",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
@@ -1357,10 +1467,10 @@
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S11",
         "visual_evidence": {
-          "reviewed": false,
-          "basis": "Pexels page title, description, free license and player reviewed; three sampled Drive frames pending",
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled Drive frames; all sampled frames were non-black, stable and consistent with the declared subject/environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": null,
+          "reviewed_at": "2026-10-27T00:00:00Z",
           "review_method": "source-page license/title/description plus three sampled Drive frames",
           "source_title": "Industrial Machinery and Piping Inside Factory",
           "source_description": "A view of complex industrial machinery and piping inside a factory.",
@@ -1395,7 +1505,11 @@
           "observed_objects": [
             "piping"
           ],
-          "sample_timestamps": [],
+          "sample_timestamps": [
+            1.584,
+            3.96,
+            6.336
+          ],
           "action_window": {
             "in": 0,
             "out": 7
@@ -1404,7 +1518,14 @@
             "in": 0,
             "out": 7
           },
-          "notes": "Representational engineering footage; do not present the factory as Lake Nyos itself."
+          "notes": "Representational engineering footage; do not present the factory as Lake Nyos itself.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
         },
         "source_segment_in": 0,
         "source_segment_out": 7.92
@@ -1470,8 +1591,8 @@
         "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/industrial-pipelines-and-valves-system-30243437/",
         "license": "Pexels Free License",
-        "rights_status": "PENDING_FRAME_QA",
-        "approved_for_render": false,
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
         "sha256": "c00cb0b0b350a8c93f763b46e825675d3fd94ec467f88a0818f933efe0102d98",
         "reuse_status": "NEW_ASSET_EPISODE_003",
         "episode_id": "because-of-this-episode-003",
@@ -1486,10 +1607,10 @@
         "job_ownership": "because-of-this-episode-003",
         "scene_usage": "S12",
         "visual_evidence": {
-          "reviewed": false,
-          "basis": "Pexels page title, description, free license and player reviewed; three sampled Drive frames pending",
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled Drive frames; all sampled frames were non-black, stable and consistent with the declared subject/environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": null,
+          "reviewed_at": "2026-10-27T00:00:00Z",
           "review_method": "source-page license/title/description plus three sampled Drive frames",
           "source_title": "Industrial Pipelines and Valves System",
           "source_description": "Close-up view of complex industrial pipelines and valves.",
@@ -1526,7 +1647,11 @@
             "valves",
             "pipes"
           ],
-          "sample_timestamps": [],
+          "sample_timestamps": [
+            1.512,
+            3.78,
+            6.048
+          ],
           "action_window": {
             "in": 0,
             "out": 7
@@ -1535,7 +1660,14 @@
             "in": 0,
             "out": 7
           },
-          "notes": "Representational engineering detail; use as the final monitoring/degassing cue, not as literal Lake Nyos footage."
+          "notes": "Representational engineering detail; use as the final monitoring/degassing cue, not as literal Lake Nyos footage.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
         },
         "source_segment_in": 0,
         "source_segment_out": 7.56
@@ -1638,9 +1770,22 @@
         "S11",
         "S12"
       ],
-      "approved_scene_ids": [],
+      "approved_scene_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12"
+      ],
       "coverage_ratio": 0.96,
-      "note": "Twelve unique clips are now staged, including dedicated industrial piping and valve inserts. Final approval remains blocked only on Drive hydration, frame QA and narration/caption gates."
+      "note": "Twelve unique clips passed sampled-frame QA with dedicated industrial piping and valve inserts. Stock footage remains explicitly representational; final approval is waiting on narration and captions."
     },
     "channel_diversity": {
       "comparison_window": "last_20_episodes",
@@ -1653,7 +1798,7 @@
       "original_script": true,
       "original_narration": true,
       "editorial_transform": true,
-      "asset_provenance_complete": false,
+      "asset_provenance_complete": true,
       "mass_production_risk": "LOW"
     },
     "monetization_safety": {
@@ -1677,10 +1822,8 @@
     "red_team": {
       "status": "PENDING",
       "editorial": {
-        "status": "PENDING",
+        "status": "PENDING_AUDIO",
         "blocking_issues": [
-          "final visual QA",
-          "Drive checksums",
           "narration/caption alignment"
         ]
       },
@@ -1727,10 +1870,10 @@
     ]
   },
   "editorial_qa": {
-    "status": "PENDING_ASSET_QA",
+    "status": "FRAME_QA_PASS_PENDING_AUDIO",
     "reviewer": "Because of This production owner request",
-    "reviewed_at": null,
-    "notes": "Drive hydration metadata complete: all twelve unique assets have verified SHA-256, positive media dimensions/durations and video/mp4 MIME. Final approval remains blocked only on sampled-frame evidence, approved rights flags, narration and captions."
+    "reviewed_at": "2026-10-27T00:00:00Z",
+    "notes": "Frame QA passed for all twelve unique assets: opening, middle and ending Drive samples were non-black, stable and consistent with the declared visual semantics. Rights and provenance are recorded. Remaining gates are narration, forced-alignment captions and final editorial approval."
   },
   "editing": {
     "clip_quantity": {
@@ -2005,6 +2148,6 @@
   },
   "engine_profile": "because-of-this-v2-locked-2026-10",
   "engine_profile_fingerprint": "343ab39c203c08b5166115e6b14dab4348de069ef1feb27f3f440b5dc2783237",
-  "lifecycle_status": "DRAFT_FRAME_QA",
+  "lifecycle_status": "DRAFT_AUDIO_PENDING",
   "archive_reason": ""
 }
