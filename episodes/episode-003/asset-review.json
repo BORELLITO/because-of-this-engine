@@ -6,12 +6,12 @@
   "engine_profile": "because-of-this-v2-locked-2026-10",
   "engine_fingerprint": "343ab39c203c08b5166115e6b14dab4348de069ef1feb27f3f440b5dc2783237",
   "render_gate": "BLOCKED_PENDING_CHECKSUMS_AND_FRAME_QA",
-  "note": "Research and Drive staging completed through the authorized native browser. This file is not a render manifest and must not be dispatched to production.",
+  "note": "Research and Drive staging completed through the authorized native browser. Twelve unique clips are now staged. This file is not a render manifest and must not be dispatched to production.",
   "coverage": {
     "hard_minimum_unique_clips": 10,
-    "unique_clips_staged": 10,
+    "unique_clips_staged": 12,
     "target_range": "12-16",
-    "planned_visual_strategy": "10 clips reused only as short, semantically distinct cuts; add two targeted inserts if frame QA identifies coverage gaps."
+    "planned_visual_strategy": "12 unique clips with dedicated industrial piping and valve inserts; no clip is reused across episodes."
   },
   "audio": {
     "music_path": "audio/episode-002-echoes-andrew-ev.mp3",
@@ -177,6 +177,36 @@
       "source_review": "BROWSER_PAGE_AND_PLAYER_REVIEWED",
       "frame_qc": "PENDING",
       "license": "Mixkit Stock Video Free License",
+      "checksum": "PENDING_DRIVE_HYDRATION"
+    },
+    {
+      "shot_id": "s11",
+      "filename": "episode-003-s11-industrial-piping-pexels.mp4",
+      "drive_file_id": "1Avcya41l6J2H1_bnn_y6LHsbrkjeLTwh",
+      "source": "https://www.pexels.com/video/industrial-machinery-and-piping-inside-factory-30243446/",
+      "source_platform": "Pexels",
+      "visual_role": "engineering response; industrial piping context",
+      "story_beats": [
+        "degassing_response",
+        "engineering"
+      ],
+      "source_review": "BROWSER_PAGE_AND_PLAYER_REVIEWED",
+      "frame_qc": "PENDING",
+      "checksum": "PENDING_DRIVE_HYDRATION"
+    },
+    {
+      "shot_id": "s12",
+      "filename": "episode-003-s12-industrial-valves-pexels.mp4",
+      "drive_file_id": "1OKqhWPIkBm2wHW2tQx8S3_fZqv5M9j-9",
+      "source": "https://www.pexels.com/video/industrial-pipelines-and-valves-system-30243437/",
+      "source_platform": "Pexels",
+      "visual_role": "valves and controlled release; engineering detail",
+      "story_beats": [
+        "degassing_pipes",
+        "monitoring"
+      ],
+      "source_review": "BROWSER_PAGE_AND_PLAYER_REVIEWED",
+      "frame_qc": "PENDING",
       "checksum": "PENDING_DRIVE_HYDRATION"
     }
   ],
