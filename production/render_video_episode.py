@@ -149,7 +149,17 @@ def xfade_filter(durations: list[float], transitions: list[dict[str, Any]]) -> s
         if duration >= min(accumulated, durations[index]):
             raise RenderError(f"Transition before scene {index + 1} is longer than its adjacent scene.")
         label = f"v{index}"
-        kind = names.get(str(spec.get("type", "crossfade")), "fade")
+        transition_type = str(spec.get("type", "crossfade"))
+        if transition_type == "hard_cut":
+            # A one-frame xfade is not a hard cut: on the static FFmpeg build it
+            # can terminate a chained graph at the cut point. Concatenating the
+            # already-normalized clips is deterministic and frame-accurate.
+            parts.append(f"[{previous}][{index}:v]concat=n=2:v=1:a=0[{label}]")
+            labels.append(label)
+            previous = label
+            accumulated += durations[index]
+            continue
+        kind = names.get(transition_type, "fade")
         parts.append(f"[{previous}][{index}:v]xfade=transition={kind}:duration={duration:.3f}:offset={accumulated - duration:.3f}[{label}]")
         labels.append(label)
         previous = label
@@ -159,6 +169,8 @@ def xfade_filter(durations: list[float], transitions: list[dict[str, Any]]) -> s
 
 
 def transition_duration(spec: dict[str, Any]) -> float:
+    if str(spec.get("type", "crossfade")) == "hard_cut":
+        return 0.0
     return max(float(spec.get("duration", 0.25)), 1 / FPS)
 
 
