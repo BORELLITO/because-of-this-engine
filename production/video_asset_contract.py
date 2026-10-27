@@ -353,7 +353,7 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
     if check_files:
         if not script_path.is_file():
             raise VideoContractError(f"Script file is missing: {script_path}")
-        script_text = re.sub(r"\\s+", " ", script_path.read_text(encoding="utf-8").lower()).strip()
+        script_text = re.sub(r"\s+", " ", script_path.read_text(encoding="utf-8").lower()).strip()
     scenes = manifest.get("scenes")
     if not isinstance(scenes, list) or not scenes:
         raise VideoContractError("Manifest requires at least one video scene.")
@@ -400,7 +400,7 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
         if not isinstance(visual_semantics, dict):
             raise VideoContractError(f"Scene {scene_id} requires visual_semantics.")
         if check_files:
-            excerpt = re.sub(r"\\s+", " ", str(scene["narration_excerpt"]).lower()).strip()
+            excerpt = re.sub(r"\s+", " ", str(scene["narration_excerpt"]).lower()).strip()
             if excerpt not in script_text:
                 raise VideoContractError(
                     f"Scene {scene_id} narration_excerpt is not present in the canonical script."
