@@ -513,6 +513,15 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
     )
     if check_files and not alignment_sidecar.is_file():
         raise VideoContractError(f"Caption alignment sidecar is missing: {alignment_sidecar}")
+    loop_logo_path = None
+    loop = manifest.get("loop") or {}
+    if loop.get("logo_enabled", False) is True:
+        loop_logo_value = loop.get("logo_path")
+        if not isinstance(loop_logo_value, str) or not loop_logo_value.strip():
+            raise VideoContractError("loop.logo_path is required when loop.logo_enabled=true.")
+        loop_logo_path = resolve_inside(episode_dir, loop_logo_value, "Loop logo path")
+        if check_files and not loop_logo_path.is_file():
+            raise VideoContractError(f"Loop logo file is missing: {loop_logo_path}")
     music = manifest.get("music")
     if not isinstance(music, dict):
         raise VideoContractError("Every v2 render requires a licensed suspense music object.")
@@ -579,6 +588,7 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
         "total_scene_duration": total,
         "brand": brand,
         "brand_logo_path": brand_logo_path,
+        "loop_logo_path": loop_logo_path,
         "clip_policy": clip_policy,
         "clip_quantity_gate": quantity_report,
         "canonical_config": canonical_report,
