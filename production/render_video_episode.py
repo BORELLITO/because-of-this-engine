@@ -579,7 +579,7 @@ def render(manifest_path: Path, mode: str) -> Path:
             width,
             height,
             manifest.get("loop") or {},
-            loop_logo_path=spec.get("loop_logo_path"),
+            loop_logo_path=(spec.get("brand_logo_path") if (manifest.get("loop") or {}).get("logo_source") == "brand_logo_transparent" else spec.get("loop_logo_path")),
         )
     return output
 
