@@ -180,7 +180,7 @@
       },
       "narration_excerpt": "At first, Lake Nyos looked completely calm.",
       "visual_semantics": {
-        "role": "representational",
+        "role": "explanatory",
         "required": {
           "subjects": [
             "lake",
@@ -315,7 +315,7 @@
       },
       "narration_excerpt": "Families living near the water went to sleep.",
       "visual_semantics": {
-        "role": "representational",
+        "role": "explanatory",
         "required": {
           "subjects": [
             "village",
@@ -448,7 +448,7 @@
       },
       "narration_excerpt": "During the night, the lake released a massive cloud of carbon dioxide.",
       "visual_semantics": {
-        "role": "representational",
+        "role": "explanatory",
         "required": {
           "subjects": [
             "bubbles",
@@ -582,7 +582,7 @@
       },
       "narration_excerpt": "The gas was invisible, odorless, and heavier than air.",
       "visual_semantics": {
-        "role": "representational",
+        "role": "explanatory",
         "required": {
           "subjects": [
             "fog",
@@ -717,7 +717,7 @@
       },
       "narration_excerpt": "It rolled downhill into nearby villages.",
       "visual_semantics": {
-        "role": "representational",
+        "role": "explanatory",
         "required": {
           "subjects": [
             "fog",
@@ -852,7 +852,7 @@
       },
       "narration_excerpt": "By morning, more than seventeen hundred people and thousands of animals were dead.",
       "visual_semantics": {
-        "role": "representational",
+        "role": "explanatory",
         "required": {
           "subjects": [
             "village",
@@ -987,7 +987,7 @@
       },
       "narration_excerpt": "There was no fire. No battlefield. No visible warning.",
       "visual_semantics": {
-        "role": "representational",
+        "role": "explanatory",
         "required": {
           "subjects": [
             "lake",
@@ -1122,7 +1122,7 @@
       },
       "narration_excerpt": "Scientists later discovered that volcanic activity beneath the lake had been feeding carbon dioxide into its deep water for years.",
       "visual_semantics": {
-        "role": "representational",
+        "role": "explanatory",
         "required": {
           "subjects": [
             "crater",
@@ -1257,7 +1257,7 @@
       },
       "narration_excerpt": "A rare limnic eruption suddenly released that trapped gas.",
       "visual_semantics": {
-        "role": "representational",
+        "role": "explanatory",
         "required": {
           "subjects": [
             "lake",
@@ -1392,7 +1392,7 @@
       },
       "narration_excerpt": "Engineers eventually installed pipes to drain gas from the lake's depths and reduce the danger. Because of this, other volcanic lakes are now monitored.",
       "visual_semantics": {
-        "role": "representational",
+        "role": "explanatory",
         "required": {
           "subjects": [
             "lake",
@@ -1532,7 +1532,7 @@
       },
       "narration_excerpt": "Engineers eventually installed pipes to drain gas from the lake's depths and reduce the danger.",
       "visual_semantics": {
-        "role": "representational",
+        "role": "explanatory",
         "required": {
           "subjects": [
             "industrial machinery",
@@ -1674,7 +1674,7 @@
       },
       "narration_excerpt": "But Lake Nyos left behind a terrifying lesson. Some of the deadliest disasters do not look dangerous until they have already begun. Because of this, other volcanic lakes are now monitored for the same hidden threat.",
       "visual_semantics": {
-        "role": "representational",
+        "role": "explanatory",
         "required": {
           "subjects": [
             "industrial pipelines",
@@ -2116,7 +2116,7 @@
       {
         "scene_id": "S11",
         "event": "show industrial piping as the engineering response",
-        "state_before": "limnic_release",
+        "state_before": "monitored_threat",
         "state_after": "degassing_response",
         "causal_role": "response",
         "emotion": "relief",
