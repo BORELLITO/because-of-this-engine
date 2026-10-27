@@ -167,8 +167,18 @@ def ffprobe(path: Path) -> dict[str, Any]:
         raise VideoContractError(f"Media duration is unavailable: {path}") from exc
     if duration <= 0:
         raise VideoContractError(f"Media duration is not positive: {path}")
+    try:
+        video_duration = float(video.get("duration") or 0.0)
+    except (TypeError, ValueError):
+        video_duration = 0.0
+    try:
+        audio_duration = float(audio.get("duration") or 0.0) if audio else 0.0
+    except (TypeError, ValueError):
+        audio_duration = 0.0
     return {
         "duration": duration,
+        "video_duration": video_duration,
+        "audio_duration": audio_duration,
         "width": int(video.get("width", 0)),
         "height": int(video.get("height", 0)),
         "codec": video.get("codec_name"),
