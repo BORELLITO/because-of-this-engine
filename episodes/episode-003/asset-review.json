@@ -217,5 +217,16 @@
     "approve scene-to-beat coverage",
     "generate narration and captions",
     "only then create and dispatch the production manifest"
-  ]
+  ],
+  "validation": {
+    "checked_at": "2026-10-27",
+    "drive_folder_id": "12dR7HzVwCbr6eQdHzjHMwYvtsWuQe1rF",
+    "manifest_scene_count": 12,
+    "unique_video_drive_ids": 12,
+    "missing_video_drive_ids": [],
+    "duplicate_video_drive_ids": [],
+    "music_drive_id": "1u-1ZKkVxKTw_E6vEzW0VcpF2lfjGfmeI",
+    "music_location": "Audio folder; intentionally separate from episode-003-assets",
+    "status": "DRIVE_ID_SET_COMPLETE_FRAME_QA_PENDING"
+  }
 }
