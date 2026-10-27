@@ -2102,5 +2102,8 @@
     "allow_overlap": false,
     "timing_source": "forced_alignment_sidecar"
   },
-  "engine_profile": "because-of-this-v2-locked-2026-10"
+  "engine_profile": "because-of-this-v2-locked-2026-10",
+  "engine_profile_fingerprint": "343ab39c203c08b5166115e6b14dab4348de069ef1feb27f3f440b5dc2783237",
+  "lifecycle_status": "ARCHIVED_HISTORICAL",
+  "archive_reason": "Pilot manifest retained for audit history; its reused assets are permanently blocked from new production."
 }
