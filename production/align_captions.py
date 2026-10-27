@@ -48,7 +48,7 @@ def _normalise(value: str) -> str:
 
 
 def _units(text: str) -> list[tuple[str, list[list[str]]]]:
-    raw = re.findall(r"[A-Za-z0-9]+(?:'[A-Za-z0-9]+)?|:", text.replace(r"\N", " "))
+    raw = re.findall(r"[A-Za-z0-9]+(?:['’][A-Za-z0-9]+)?|:", text.replace(r"\N", " "))
     result: list[tuple[str, list[list[str]]]] = []
     index = 0
     while index < len(raw):
@@ -94,6 +94,11 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 "directly": [["directly"], ["direct"]],
                 "camera": [["camera"], ["cameras"]],
                 "it": [["it"], ["ət"]],
+                # Compound words and possessives can be emitted by ASR with a
+                # different token boundary. These alternatives still require
+                # every accepted token to have a real Vosk timestamp.
+                "downhill": [["downhill"], ["down", "hill"]],
+                "lakes": [["lakes"], ["lake"]],
                 # Proper-name and specialist-term realizations observed in
                 # factual narration. These are lexical ASR variants only; every
                 # accepted match must still come from a real Vosk timestamp.
@@ -418,6 +423,15 @@ def _recognize_passes(
     return _merge_word_timings(*passes)
 
 
+def _grammar_phrase(value: str) -> str:
+    """Normalize a phrase before passing it to Vosk's grammar decoder."""
+    tokens = re.findall(
+        r"[A-Za-z0-9]+(?:['’][A-Za-z0-9]+)?",
+        str(value).replace(r"\N", " "),
+    )
+    return " ".join(_normalise(token) for token in tokens if _normalise(token))
+
+
 def _cursor_for_time(asr_words: list[dict[str, Any]], timestamp: float) -> int:
     for index, item in enumerate(asr_words):
         if float(item["start"]) >= max(0.0, timestamp - 0.02):
@@ -472,7 +486,7 @@ def _recover_with_phrase_vocabulary(
                 # multi-word grammar entries. Any accepted token must still be
                 # emitted by Vosk with a real start/end timestamp.
                 grammar_phrases = [
-                    str(value).replace(r"\N", " ")
+                    _grammar_phrase(value)
                     for value in chunks[context_start:context_end]
                 ]
                 sequence_words = _recognize_passes(
