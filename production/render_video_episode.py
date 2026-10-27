@@ -277,12 +277,13 @@ def narration_locked_scenes(
     narration_seconds: float,
     clip_policy: dict[str, Any] | None = None,
     narration_spans: list[dict[str, Any]] | None = None,
+    *,
+    allow_legacy: bool = False,
 ) -> list[dict[str, Any]]:
-    """Lock scene boundaries to forced-alignment spans when available.
+    """Lock scene boundaries to forced-alignment spans from the final WAV.
 
-    The legacy proportional allocator remains available for isolated unit
-    tests and backwards-compatible tooling, but production render always
-    supplies narration_spans from the final WAV.
+    The proportional allocator is retained only for explicit legacy unit-test
+    callers. Production rendering is fail-closed when forced timing is absent.
     """
     if not scenes:
         raise RenderError("Narration-locked rendering requires at least one scene.")
@@ -295,6 +296,10 @@ def narration_locked_scenes(
         "min_scene_seconds": 2.0,
         "max_scene_seconds": 20.0,
     }
+    if narration_spans is None and not allow_legacy:
+        raise RenderError(
+            "Forced-alignment narration spans are mandatory; legacy proportional timing is disabled for production."
+        )
     if narration_spans is not None:
         durations = _audio_timed_scene_durations(
             scenes,
@@ -570,7 +575,7 @@ def prepare_logo(source: Path, output: Path, width: int) -> Path:
 
 def render(manifest_path: Path, mode: str) -> Path:
     manifest = load_manifest(manifest_path)
-    spec = validate_manifest(manifest, manifest_path.parent, mode=mode, check_files=True)
+    spec = validate_manifest(manifest, manifest_path.parent, mode=mode, check_files=True, enforce_canonical=True)
     narration_seconds = audio_duration(spec["audio_path"])
     coverage_report = load_narration_coverage(manifest_path)
     coverage = coverage_report["narration_coverage"]
@@ -604,9 +609,11 @@ def render(manifest_path: Path, mode: str) -> Path:
             logo_path = prepare_logo(
                 logo_path,
                 Path(temp) / "brand-logo-runtime.png",
-                int(spec["brand"].get("logo_width", 432)),
+                int(spec["brand"].get("logo_width", 540)),
             )
-        brand_ass = None if logo_path else write_brand_ass(Path(temp) / "brand.ass", spec["brand"], narration_seconds)
+        if logo_path is None or spec["brand"].get("logo_enabled") is not True:
+            raise RenderError("Canonical profile requires the Because Of This logo overlay.")
+        brand_ass = None
         mux_audio(
             assembled,
             spec["audio_path"],
