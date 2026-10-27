@@ -130,10 +130,23 @@ def hydrate(manifest_path: Path, *, require_drive_assets: bool = False) -> dict[
             raise AssetHydrationError("Music is missing drive_file_id.")
         elif not music_path.is_file():
             raise AssetHydrationError("Music has no drive_file_id and is not present locally.")
+    loop = manifest.get("loop")
+    if isinstance(loop, dict) and loop.get("logo_enabled", False) is True:
+        logo_id = str(loop.get("logo_drive_file_id", "")).strip()
+        logo_path = resolve_inside(manifest_path.parent, loop.get("logo_path"), "Loop logo path")
+        if logo_id:
+            if logo_id in seen_drive_ids:
+                raise AssetHydrationError(f"Drive asset is reused in this episode: {logo_id}")
+            seen_drive_ids.add(logo_id)
+            assets.append((logo_id, logo_path, loop, "image"))
+        elif require_drive_assets:
+            raise AssetHydrationError("Loop logo is missing logo_drive_file_id.")
+        elif not logo_path.is_file():
+            raise AssetHydrationError("Loop logo has no logo_drive_file_id and is not present locally.")
     if assets:
         drive = service()
         for file_id, path, record, kind in assets:
-            result = download(drive, file_id, path, "video/" if kind == "video" else "audio/")
+            result = download(drive, file_id, path, "video/" if kind == "video" else "audio/" if kind == "audio" else "image/")
             expected = str(record.get("sha256", "")).lower()
             if expected and result["sha256"].lower() != expected:
                 raise AssetHydrationError(f"Drive asset {record.get('asset_id')} checksum mismatch after download.")
