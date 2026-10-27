@@ -1725,12 +1725,12 @@
         "S11",
         "S12"
       ],
-      "coverage_ratio": 1.0
+      "coverage_ratio": 1
     },
     "channel_diversity": {
       "comparison_window": "last_20_episodes",
       "recent_episode_count": 0,
-      "similarity_score": 0.0,
+      "similarity_score": 0,
       "similarity_status": "BASELINE",
       "unique_signature": "sealed-hotel-camera-317-moving-figure"
     },
@@ -1832,7 +1832,7 @@
     "tail_fade_seconds": 0.55,
     "card_fade_in_seconds": 0.24,
     "card_fade_out_seconds": 0.36,
-    "audio_fade_seconds": 0.60,
+    "audio_fade_seconds": 0.6,
     "restart_safe": true,
     "reason": "Continuity fade bridges the final visual beat into the branded signature and avoids a hard ending."
   },
@@ -2190,5 +2190,6 @@
     "policy": "ordered_scene_excerpts_cover_canonical_script_once",
     "allow_overlap": false,
     "timing_source": "forced_alignment_sidecar"
-  }
+  },
+  "engine_profile": "because-of-this-v2-locked-2026-10"
 }
