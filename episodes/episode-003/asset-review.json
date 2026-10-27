@@ -2,10 +2,10 @@
   "schema": "because-of-this.asset-review.v1",
   "episode_id": "episode-003",
   "title": "The Lake That Killed Without a Sound",
-  "lifecycle_status": "FRAME_QA_PENDING",
+  "lifecycle_status": "AUDIO_QA_PENDING",
   "engine_profile": "because-of-this-v2-locked-2026-10",
   "engine_fingerprint": "343ab39c203c08b5166115e6b14dab4348de069ef1feb27f3f440b5dc2783237",
-  "render_gate": "BLOCKED_PENDING_FRAME_QA_NARRATION_AND_CAPTIONS",
+  "render_gate": "BLOCKED_PENDING_NARRATION_AND_CAPTIONS",
   "note": "Research and Drive staging completed through the authorized native browser. Twelve unique clips are now staged. This file is not a render manifest and must not be dispatched to production.",
   "coverage": {
     "hard_minimum_unique_clips": 10,
@@ -37,12 +37,20 @@
         "calm_before_event"
       ],
       "source_review": "BROWSER_PAGE_REVIEWED",
-      "frame_qc": "PENDING",
+      "frame_qc": "PASS_NONBLACK_STABLE_SEMANTIC",
       "checksum": "7a2cb67b9002026fe75ea54fb3fdc1f6055c256aee4f903769e5751d982896a0",
       "duration_seconds": 14.76475,
       "width": 1080,
       "height": 1920,
-      "size_bytes": 3359708
+      "size_bytes": 3359708,
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "sample_timestamps": [
+        2.953,
+        7.382,
+        11.812
+      ],
+      "frame_qc_notes": "Opening, middle and ending Drive samples were non-black, stable and consistent with the declared subject/environment."
     },
     {
       "shot_id": "s02",
@@ -56,12 +64,20 @@
         "nightfall"
       ],
       "source_review": "BROWSER_PAGE_REVIEWED",
-      "frame_qc": "PENDING",
+      "frame_qc": "PASS_NONBLACK_STABLE_SEMANTIC",
       "checksum": "202a69d9b13ae08e6d5cd39b9ed3de2918dd0af577af58f976370f72bf835bca",
       "duration_seconds": 6.973633,
       "width": 3840,
       "height": 2160,
-      "size_bytes": 10564979
+      "size_bytes": 10564979,
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "sample_timestamps": [
+        1.395,
+        3.487,
+        5.579
+      ],
+      "frame_qc_notes": "Opening, middle and ending Drive samples were non-black, stable and consistent with the declared subject/environment."
     },
     {
       "shot_id": "s03",
@@ -75,12 +91,20 @@
         "hidden_source"
       ],
       "source_review": "BROWSER_PAGE_REVIEWED",
-      "frame_qc": "PENDING",
+      "frame_qc": "PASS_NONBLACK_STABLE_SEMANTIC",
       "checksum": "456aeb4d701dd9c641dc2692a4e09292a90b377e02fbfdb22ed06b071a2e9f76",
       "duration_seconds": 7.5,
       "width": 3840,
       "height": 2160,
-      "size_bytes": 29524738
+      "size_bytes": 29524738,
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "sample_timestamps": [
+        1.5,
+        3.75,
+        6
+      ],
+      "frame_qc_notes": "Opening, middle and ending Drive samples were non-black, stable and consistent with the declared subject/environment."
     },
     {
       "shot_id": "s04",
@@ -94,12 +118,20 @@
         "deep_water"
       ],
       "source_review": "BROWSER_PAGE_REVIEWED",
-      "frame_qc": "PENDING",
+      "frame_qc": "PASS_NONBLACK_STABLE_SEMANTIC",
       "checksum": "d102b7e8c6cc6d4f3162409ab60aea6041d4175ec34b26dc843451108487bf55",
       "duration_seconds": 15.978333,
       "width": 2560,
       "height": 1440,
-      "size_bytes": 24211453
+      "size_bytes": 24211453,
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "sample_timestamps": [
+        3.196,
+        7.989,
+        12.783
+      ],
+      "frame_qc_notes": "Opening, middle and ending Drive samples were non-black, stable and consistent with the declared subject/environment."
     },
     {
       "shot_id": "s05",
@@ -113,12 +145,20 @@
         "downhill_flow"
       ],
       "source_review": "BROWSER_PAGE_REVIEWED",
-      "frame_qc": "PENDING",
+      "frame_qc": "PASS_NONBLACK_STABLE_SEMANTIC",
       "checksum": "495336bad32b4f8a2c474e95bb7a15af5ec94ddd8f61251ac4c978c7ad3e2f22",
       "duration_seconds": 12.7127,
       "width": 1080,
       "height": 1920,
-      "size_bytes": 5530149
+      "size_bytes": 5530149,
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "sample_timestamps": [
+        2.543,
+        6.356,
+        10.17
+      ],
+      "frame_qc_notes": "Opening, middle and ending Drive samples were non-black, stable and consistent with the declared subject/environment."
     },
     {
       "shot_id": "s06",
@@ -132,12 +172,20 @@
         "human_cost"
       ],
       "source_review": "BROWSER_PAGE_REVIEWED",
-      "frame_qc": "PENDING",
+      "frame_qc": "PASS_NONBLACK_STABLE_SEMANTIC",
       "checksum": "b1cb76729061ecafd5706f9a7524e50316adcee8ca02783782e477b83f7e275f",
       "duration_seconds": 12.929583,
       "width": 2160,
       "height": 3840,
-      "size_bytes": 41888178
+      "size_bytes": 41888178,
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "sample_timestamps": [
+        2.586,
+        6.465,
+        10.344
+      ],
+      "frame_qc_notes": "Opening, middle and ending Drive samples were non-black, stable and consistent with the declared subject/environment."
     },
     {
       "shot_id": "s07",
@@ -151,13 +199,21 @@
         "silent_disaster"
       ],
       "source_review": "BROWSER_PAGE_AND_PLAYER_REVIEWED",
-      "frame_qc": "PENDING",
+      "frame_qc": "PASS_NONBLACK_STABLE_SEMANTIC",
       "license": "Mixkit Stock Video Free License",
       "checksum": "f433bf18fffd647e469118d9b2997edb4df888cc18b2dcf3f7d4e7be4087abf0",
       "duration_seconds": 20.395375,
       "width": 1280,
       "height": 720,
-      "size_bytes": 7666952
+      "size_bytes": 7666952,
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "sample_timestamps": [
+        4.079,
+        10.198,
+        16.316
+      ],
+      "frame_qc_notes": "Opening, middle and ending Drive samples were non-black, stable and consistent with the declared subject/environment."
     },
     {
       "shot_id": "s08",
@@ -171,13 +227,21 @@
         "darkness"
       ],
       "source_review": "BROWSER_PAGE_AND_PLAYER_REVIEWED",
-      "frame_qc": "PENDING",
+      "frame_qc": "PASS_NONBLACK_STABLE_SEMANTIC",
       "license": "Mixkit Stock Video Free License",
       "checksum": "eaf8bdb684eb65102d8eb055342f2e392e86f4b27e2932deff6e2c0220b5b292",
       "duration_seconds": 28.361667,
       "width": 1280,
       "height": 720,
-      "size_bytes": 9112854
+      "size_bytes": 9112854,
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "sample_timestamps": [
+        5.672,
+        14.181,
+        22.689
+      ],
+      "frame_qc_notes": "Opening, middle and ending Drive samples were non-black, stable and consistent with the declared subject/environment."
     },
     {
       "shot_id": "s09",
@@ -191,13 +255,21 @@
         "monitoring"
       ],
       "source_review": "BROWSER_PAGE_AND_PLAYER_REVIEWED",
-      "frame_qc": "PENDING",
+      "frame_qc": "PASS_NONBLACK_STABLE_SEMANTIC",
       "license": "Mixkit Stock Video Free License",
       "checksum": "42e364b72bf56b61f77d9e2699c0be31a3147b55e654a0104b87d0c6c87dda15",
       "duration_seconds": 18.351667,
       "width": 1280,
       "height": 720,
-      "size_bytes": 5950679
+      "size_bytes": 5950679,
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "sample_timestamps": [
+        3.67,
+        9.176,
+        14.681
+      ],
+      "frame_qc_notes": "Opening, middle and ending Drive samples were non-black, stable and consistent with the declared subject/environment."
     },
     {
       "shot_id": "s10",
@@ -211,13 +283,21 @@
         "ongoing_monitoring"
       ],
       "source_review": "BROWSER_PAGE_AND_PLAYER_REVIEWED",
-      "frame_qc": "PENDING",
+      "frame_qc": "PASS_NONBLACK_STABLE_SEMANTIC",
       "license": "Mixkit Stock Video Free License",
       "checksum": "778410a64f9259b18cae33a09433bdcfe7da9909fd035559ebcc21bc5bab34e7",
       "duration_seconds": 18.476792,
       "width": 1280,
       "height": 720,
-      "size_bytes": 6659003
+      "size_bytes": 6659003,
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "sample_timestamps": [
+        3.695,
+        9.238,
+        14.781
+      ],
+      "frame_qc_notes": "Opening, middle and ending Drive samples were non-black, stable and consistent with the declared subject/environment."
     },
     {
       "shot_id": "s11",
@@ -231,12 +311,20 @@
         "engineering"
       ],
       "source_review": "BROWSER_PAGE_AND_PLAYER_REVIEWED",
-      "frame_qc": "PENDING",
+      "frame_qc": "PASS_NONBLACK_STABLE_SEMANTIC",
       "checksum": "4cf3de7c3ce7e5bfccb5b2f9ed2458712bd42f8bbc3cdcfd4f080d7aa8d45292",
       "duration_seconds": 7.92,
       "width": 4096,
       "height": 2160,
-      "size_bytes": 17318504
+      "size_bytes": 17318504,
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "sample_timestamps": [
+        1.584,
+        3.96,
+        6.336
+      ],
+      "frame_qc_notes": "Opening, middle and ending Drive samples were non-black, stable and consistent with the declared subject/environment."
     },
     {
       "shot_id": "s12",
@@ -250,21 +338,27 @@
         "monitoring"
       ],
       "source_review": "BROWSER_PAGE_AND_PLAYER_REVIEWED",
-      "frame_qc": "PENDING",
+      "frame_qc": "PASS_NONBLACK_STABLE_SEMANTIC",
       "checksum": "c00cb0b0b350a8c93f763b46e825675d3fd94ec467f88a0818f933efe0102d98",
       "duration_seconds": 7.56,
       "width": 4096,
       "height": 2160,
-      "size_bytes": 11846295
+      "size_bytes": 11846295,
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "sample_timestamps": [
+        1.512,
+        3.78,
+        6.048
+      ],
+      "frame_qc_notes": "Opening, middle and ending Drive samples were non-black, stable and consistent with the declared subject/environment."
     }
   ],
   "next_gate": [
-    "hydrate Drive assets through the canonical engine",
-    "compute and record SHA-256 checksums",
-    "sample opening, middle and ending frames for every staged asset",
-    "approve scene-to-beat coverage",
-    "generate narration and captions",
-    "only then create and dispatch the production manifest"
+    "generate final narration WAV from the canonical voice profile",
+    "run forced word alignment and create captions/narration.ass plus alignment sidecar",
+    "perform final editorial/red-team review",
+    "only then promote manifest.draft.json to manifest.json and dispatch final render"
   ],
   "validation": {
     "checked_at": "2026-10-27",
@@ -275,9 +369,11 @@
     "duplicate_video_drive_ids": [],
     "music_drive_id": "1u-1ZKkVxKTw_E6vEzW0VcpF2lfjGfmeI",
     "music_location": "Audio folder; intentionally separate from episode-003-assets",
-    "status": "DRIVE_ID_SET_COMPLETE_FRAME_QA_PENDING",
+    "status": "DRIVE_HYDRATED_FRAME_QA_PASS_AUDIO_PENDING",
     "hydration_status": "SHA256_COMPUTED_AND_MIME_VERIFIED",
     "checksum_count": 12,
-    "video_mime_count": 12
+    "video_mime_count": 12,
+    "frame_qc_count": 12,
+    "rights_approved_count": 12
   }
 }
