@@ -94,6 +94,17 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 "directly": [["directly"], ["direct"]],
                 "camera": [["camera"], ["cameras"]],
                 "it": [["it"], ["ət"]],
+                # Proper-name and specialist-term realizations observed in
+                # factual narration. These are lexical ASR variants only; every
+                # accepted match must still come from a real Vosk timestamp.
+                "nyos": [
+                    ["nyos"], ["nios"], ["nious"], ["neos"], ["nayos"], ["niyos"],
+                    ["nee", "os"], ["nee", "ohs"], ["knee", "os"], ["nigh", "os"],
+                ],
+                "limnic": [
+                    ["limnic"], ["limnik"], ["limnick"], ["lim", "nick"],
+                    ["lim", "nic"], ["lim", "nik"], ["lim", "neck"], ["limn", "ick"],
+                ],
             }
             result.append((raw[index], short_word_variants.get(token, [[token]])))
         index += 1
