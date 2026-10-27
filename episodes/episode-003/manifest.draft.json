@@ -197,8 +197,10 @@
           "actions": []
         },
         "narrative_anchors": {
-          "direct_required": [],
-          "minimum_direct": 0
+          "direct_required": [
+            "lake"
+          ],
+          "minimum_direct": 1
         }
       }
     },
@@ -319,8 +321,10 @@
           "actions": []
         },
         "narrative_anchors": {
-          "direct_required": [],
-          "minimum_direct": 0
+          "direct_required": [
+            "village"
+          ],
+          "minimum_direct": 1
         }
       }
     },
@@ -438,8 +442,10 @@
           "actions": []
         },
         "narrative_anchors": {
-          "direct_required": [],
-          "minimum_direct": 0
+          "direct_required": [
+            "bubbles"
+          ],
+          "minimum_direct": 1
         }
       }
     },
@@ -560,8 +566,10 @@
           "actions": []
         },
         "narrative_anchors": {
-          "direct_required": [],
-          "minimum_direct": 0
+          "direct_required": [
+            "fog"
+          ],
+          "minimum_direct": 1
         }
       }
     },
@@ -682,8 +690,10 @@
           "actions": []
         },
         "narrative_anchors": {
-          "direct_required": [],
-          "minimum_direct": 0
+          "direct_required": [
+            "valley"
+          ],
+          "minimum_direct": 1
         }
       }
     },
@@ -804,8 +814,10 @@
           "actions": []
         },
         "narrative_anchors": {
-          "direct_required": [],
-          "minimum_direct": 0
+          "direct_required": [
+            "village"
+          ],
+          "minimum_direct": 1
         }
       }
     },
@@ -926,8 +938,10 @@
           "actions": []
         },
         "narrative_anchors": {
-          "direct_required": [],
-          "minimum_direct": 0
+          "direct_required": [
+            "lake"
+          ],
+          "minimum_direct": 1
         }
       }
     },
@@ -1048,8 +1062,10 @@
           "actions": []
         },
         "narrative_anchors": {
-          "direct_required": [],
-          "minimum_direct": 0
+          "direct_required": [
+            "crater"
+          ],
+          "minimum_direct": 1
         }
       }
     },
@@ -1170,8 +1186,10 @@
           "actions": []
         },
         "narrative_anchors": {
-          "direct_required": [],
-          "minimum_direct": 0
+          "direct_required": [
+            "lake"
+          ],
+          "minimum_direct": 1
         }
       }
     },
@@ -1292,8 +1310,10 @@
           "actions": []
         },
         "narrative_anchors": {
-          "direct_required": [],
-          "minimum_direct": 0
+          "direct_required": [
+            "lake"
+          ],
+          "minimum_direct": 1
         }
       }
     },
@@ -1710,7 +1730,7 @@
     "status": "PENDING_ASSET_QA",
     "reviewer": "Because of This production owner request",
     "reviewed_at": null,
-    "notes": "Draft manifest updated with twelve unique Drive-staged clips, including dedicated industrial piping and valve inserts. Final approval requires Drive hydration, SHA-256 checksums, three sampled frames per asset, narration, captions and semantic coverage review."
+    "notes": "Structural QA normalized: every scene now declares a direct narrative anchor. Final approval remains blocked on Drive hydration, SHA-256 checksums, sampled-frame evidence, narration and captions."
   },
   "editing": {
     "clip_quantity": {
