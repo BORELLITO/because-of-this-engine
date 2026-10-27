@@ -73,12 +73,12 @@ jobs:
           FFMPEG_URL="https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz"
           curl --fail --location --retry 5 --retry-all-errors \
             --connect-timeout 20 --max-time 240 "${FFMPEG_URL}" \
-            --output "${RUNNER_TEMP}/ffmpeg.tar.xz"
+            --output "${RUNNER_TEMP}/ffmpeg-release-amd64-static.tar.xz"
           curl --fail --location --retry 5 --retry-all-errors \
             --connect-timeout 20 --max-time 60 "${FFMPEG_URL}.md5" \
-            --output "${RUNNER_TEMP}/ffmpeg.tar.xz.md5"
+            --output "${RUNNER_TEMP}/ffmpeg-release-amd64-static.tar.xz.md5"
           (cd "${RUNNER_TEMP}" && md5sum -c ffmpeg.tar.xz.md5)
-          tar -xJf "${RUNNER_TEMP}/ffmpeg.tar.xz" -C "${RUNNER_TEMP}/ffmpeg"
+          tar -xJf "${RUNNER_TEMP}/ffmpeg-release-amd64-static.tar.xz" -C "${RUNNER_TEMP}/ffmpeg"
           FFMPEG_DIR="$(find "${RUNNER_TEMP}/ffmpeg" -maxdepth 1 -mindepth 1 -type d -name 'ffmpeg-*static' -print -quit)"
           test -n "${FFMPEG_DIR}"
           echo "${FFMPEG_DIR}" >> "${GITHUB_PATH}"
