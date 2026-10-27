@@ -71,7 +71,7 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
             short_word_variants = {
                 "a": [["a"], ["uh"], ["ah"]],
                 "an": [["an"], ["un"]],
-                "the": [["the"], ["uh"], ["thuh"], ["a"], ["duh"], ["t"]],
+                "the": [["the"], ["uh"], ["thuh"]],
                 "to": [["to"], ["two"], ["tuh"]],
                 "of": [["of"], ["uhv"], ["ov"]],
                 "and": [["and"], ["n"], ["ənd"]],
@@ -79,7 +79,7 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 "in": [["in"], ["ən"]],
                 "on": [["on"], ["awn"]],
                 "at": [["at"], ["ət"]],
-                "is": [["is"], ["iz"], ["s"], ["z"], ["uhz"], ["a"]],
+                "is": [["is"], ["iz"]],
                 "was": [["was"], ["wuz"]],
                 # Vosk may realize the unstressed vowel in “than” as “then”.
                 # This is an explicit lexical ASR variant only; timing still
