@@ -271,7 +271,17 @@ def audit(
     manifest_records: list[dict[str, Any]] = []
     for path in manifests:
         manifest_records.extend(_episode_records(path))
-    all_records = manifest_records + registry_records
+    archived_episode_ids = {
+        _norm(_manifest(path).get("video_id"))
+        for path in manifests
+        if _norm(_manifest(path).get("lifecycle_status")) == "archived_historical"
+    }
+    all_records = [
+        record
+        for record in manifest_records + registry_records
+        if record["episode_id"] == target_id
+        or record["episode_id"] not in archived_episode_ids
+    ]
     target_records = [record for record in manifest_records if record["episode_id"] == target_id]
     if not target_records:
         raise AssetReuseBrainError("Target manifest contains no usable video assets.")
@@ -310,7 +320,10 @@ def audit(
                     "previous_episode": other["episode_id"],
                     "previous_scene": other["scene_id"],
                     "previous_asset": other["asset_id"],
-                    "historical": other["episode_id"] in LEGACY_BASELINE_EPISODES,
+                    "historical": (
+                        other["episode_id"] in LEGACY_BASELINE_EPISODES
+                        or other["episode_id"] in archived_episode_ids
+                    ),
                 })
 
     unique_cross: list[dict[str, Any]] = []
@@ -363,6 +376,7 @@ def audit(
         "within_episode_duplicates": within_episode,
         "cross_episode_duplicates": unique_cross,
         "legacy_baseline": legacy_baseline,
+        "ignored_historical_episode_ids": sorted(archived_episode_ids - {target_id}),
         "retired_source_assets": sorted({
             item["key"] for item in unique_cross if item["key_type"] == "source_asset"
         }),
