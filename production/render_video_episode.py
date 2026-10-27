@@ -154,7 +154,9 @@ def xfade_filter(durations: list[float], transitions: list[dict[str, Any]]) -> s
             # A one-frame xfade is not a hard cut: on the static FFmpeg build it
             # can terminate a chained graph at the cut point. Concatenating the
             # already-normalized clips is deterministic and frame-accurate.
-            parts.append(f"[{previous}][{index}:v]concat=n=2:v=1:a=0[{label}]")
+            raw_label = f"{label}_raw"
+            parts.append(f"[{previous}][{index}:v]concat=n=2:v=1:a=0[{raw_label}]")
+            parts.append(f"[{raw_label}]settb=1/12800,setpts=PTS-STARTPTS[{label}]")
             labels.append(label)
             previous = label
             accumulated += durations[index]
