@@ -19,6 +19,7 @@
     "voice": "Charon",
     "language": "en-US",
     "style": "Clear American English, crisp diction, moderate pace, restrained suspense. Pronounce numbers as spoken English words with clear word boundaries; preserve every word exactly.",
+    "tts_script_path": "tts-pronunciation.txt",
     "model_rationale": "Production target: the locked Because Of This narration profile with strict word-level caption alignment."
   },
   "script": {
