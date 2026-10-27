@@ -3,6 +3,22 @@
 Este é o único motor oficial do canal Because of This. Ele é independente do
 Corte Fino, Rajada 011, CaptaPronto, Publisher e de todos os outros projetos.
 
+## Motor canônico único — HARD LOCK
+
+A configuração abaixo é a única autorizada para novas produções:
+
+- **Perfil:** `because-of-this-v2-locked-2026-10`
+- **Versão:** `2.0`
+- **Fingerprint:** `343ab39c203c08b5166115e6b14dab4348de069ef1feb27f3f440b5dc2783237`
+- **Fonte única da verdade:** `production/canonical_config.py`
+- **Rota oficial:** branch `main` → GitHub Actions → Google Drive
+
+Todo manifesto precisa declarar exatamente o perfil e o fingerprint acima.
+Qualquer configuração ausente, antiga ou divergente é bloqueada
+automaticamente pelo contrato fail-closed e pelo CI. O manifesto histórico do
+episódio 002 permanece apenas para auditoria e não é uma fonte alternativa de
+produção.
+
 ## Arquitetura oficial
 
 O pipeline v2 é exclusivamente baseado em vídeo:
@@ -42,6 +58,7 @@ imagem são proibidos.
 ## Arquivos principais
 
 - narrate.py: adaptador isolado de TTS Gemini.
+- production/canonical_config.py: perfil único, fingerprint e bloqueio fail-closed.
 - production/video_asset_research.py: fila de pesquisa e fallback semântico.
 - production/google_drive_assets.py: ponte Drive para o runner.
 - production/video_asset_contract.py: contrato v2 fail-closed.
@@ -74,5 +91,3 @@ dos vídeos aprovados no Drive e QA editorial humano antes do modo final.
 O modo final é fail-closed enquanto esses gates não existirem.
 
 O preview é somente validação: o recibo termina em `PREVIEW_COMPLETE` e nunca é uma publicação de produção. Apenas uma execução `final` com aprovação editorial humana pode chegar a `PRODUCTION_COMPLETE`.
-
-
