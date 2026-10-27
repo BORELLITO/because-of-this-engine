@@ -42,6 +42,13 @@ jobs:
           assert len(value["scenes"]) >= 4
           print("VIDEO_ONLY_TEMPLATE_PASS")
           PY
+      - name: Validate locked canonical engine profile
+        run: |
+          set -euo pipefail
+          python production/canonical_config.py --manifest examples/video-only-episode-manifest-v2.template.json
+          python production/canonical_config.py --manifest episodes/episode-001/manifest.json
+          python production/canonical_config.py --manifest episodes/episode-002/manifest.json
+
       - name: Verify no Actions artifact delivery or literal workflow escapes
         run: |
           FORBIDDEN_ARTIFACT='actions/upload-'"artifact"
