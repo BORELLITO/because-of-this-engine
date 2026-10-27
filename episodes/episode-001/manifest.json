@@ -70,6 +70,7 @@
     "logo_width": 540,
     "logo_opacity": 0.82,
     "logo_anchor": "center_top",
+    "logo_margin": 54,
     "logo_top": 72
   },
   "output": {
