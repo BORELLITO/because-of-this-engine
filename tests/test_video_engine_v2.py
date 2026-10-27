@@ -124,8 +124,9 @@ class VideoEngineV2Tests(unittest.TestCase):
 
     def test_transitions_are_narration_timeline_aware(self):
         value = xfade_filter([15, 15, 15], [{"type": "crossfade", "duration": 0.25}] * 2)
-        self.assertIn("offset=14.750", value)
-        self.assertIn("offset=29.500", value)
+        self.assertIn("trim=duration=14.750", value)
+        self.assertIn("trim=duration=15.000", value)
+        self.assertIn("concat=n=3:v=1:a=0", value)
         self.assertIn("setsar=1", value)
 
     def test_production_timing_requires_forced_alignment(self):
