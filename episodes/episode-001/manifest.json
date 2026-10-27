@@ -64,6 +64,7 @@
   "brand": {
     "watermark_enabled": false,
     "watermark_text": "|B",
+    "logo_enabled": true,
     "accent_color": "#E3262E",
     "logo_path": "brand/because-of-this-logo.png",
     "logo_width": 540,
@@ -1828,7 +1829,6 @@
     "enabled": true,
     "logo_source": "brand_logo_transparent",
     "logo_width": 760,
-    "logo_enabled": true,
     "title": "BECAUSE OF THIS",
     "transition": "continuity_fade",
     "outro_seconds": 1.2,
