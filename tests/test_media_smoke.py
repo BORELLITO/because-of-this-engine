@@ -39,7 +39,7 @@ Dialogue: 0,0:00:00.00,0:00:01.20,Default,,0,0,300,,Smoke test
             runtime_logo = root / "runtime-logo.png"
             prepare_logo(logo, runtime_logo, 360)
             mux_audio(source, voice, captions, output, 1.2, music, 0.12, None, runtime_logo,
-                      {"logo_enabled": True, "logo_width": 360, "logo_opacity": 0.82, "logo_margin": 54, "logo_top": 72})
+                      {"logo_enabled": True, "logo_width": 360, "logo_opacity": 0.82, "logo_anchor": "center_top", "logo_top": 72})
             media = ffprobe(output)
             self.assertEqual((media["width"], media["height"]), (1080, 1920))
             self.assertEqual(media["codec"], "h264")
