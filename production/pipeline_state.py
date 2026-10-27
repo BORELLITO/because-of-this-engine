@@ -202,6 +202,7 @@ def main() -> int:
     parser.add_argument("--initialize", action="store_true")
     parser.add_argument("--transition", choices=STATES)
     parser.add_argument("--stage", default="pipeline")
+    parser.add_argument("--allow-noncanonical", action="store_true", help="Only for isolated local fixtures; production CLI remains locked.")
     args = parser.parse_args()
     try:
         if args.initialize:
