@@ -398,6 +398,26 @@ def _merge_word_timings(*passes: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return sorted(merged.values(), key=lambda item: (float(item["start"]), float(item["end"])))
 
 
+def _recognize_passes(
+    audio_path: Path,
+    model_paths: list[Path],
+    *,
+    vocabulary: list[str] | None = None,
+    grammar_phrases: list[str] | None = None,
+) -> list[dict[str, Any]]:
+    """Run independent acoustic recognizers and merge only real word timings."""
+    passes = [
+        _recognize(
+            audio_path,
+            model_path,
+            vocabulary=vocabulary,
+            grammar_phrases=grammar_phrases,
+        )
+        for model_path in model_paths
+    ]
+    return _merge_word_timings(*passes)
+
+
 def _cursor_for_time(asr_words: list[dict[str, Any]], timestamp: float) -> int:
     for index, item in enumerate(asr_words):
         if float(item["start"]) >= max(0.0, timestamp - 0.02):
@@ -409,7 +429,7 @@ def _recover_with_phrase_vocabulary(
     chunks: list[str],
     base_words: list[dict[str, Any]],
     audio_path: Path,
-    model_path: Path,
+    model_paths: list[Path],
 ) -> list[dict[str, Any]]:
     """Retry only failed phrases with a narrowly-scoped Vosk grammar.
 
@@ -437,9 +457,9 @@ def _recover_with_phrase_vocabulary(
             phrase_vocabulary = _canonical_vocabulary(context_text)
             if not phrase_vocabulary:
                 raise
-            targeted_words = _recognize(
+            targeted_words = _recognize_passes(
                 audio_path,
-                model_path,
+                model_paths,
                 vocabulary=phrase_vocabulary,
             )
             merged = _merge_word_timings(merged, targeted_words)
@@ -455,9 +475,9 @@ def _recover_with_phrase_vocabulary(
                     str(value).replace(r"\N", " ")
                     for value in chunks[context_start:context_end]
                 ]
-                sequence_words = _recognize(
+                sequence_words = _recognize_passes(
                     audio_path,
-                    model_path,
+                    model_paths,
                     grammar_phrases=grammar_phrases,
                 )
                 merged = _merge_word_timings(merged, sequence_words)
@@ -576,7 +596,11 @@ Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(header + "\n".join(lines) + "\n", encoding="utf-8")
 
-def generate(manifest_path: Path, model_path: Path) -> dict[str, Any]:
+def generate(
+    manifest_path: Path,
+    model_path: Path,
+    secondary_model_path: Path | None = None,
+) -> dict[str, Any]:
     manifest_path = manifest_path.resolve()
     base = manifest_path.parent
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -589,6 +613,13 @@ def generate(manifest_path: Path, model_path: Path) -> dict[str, Any]:
     finally:
         duration.close()
 
+    model_paths = [model_path]
+    if secondary_model_path is not None:
+        model_paths.append(secondary_model_path)
+    for path in model_paths:
+        if not path.is_dir():
+            raise AlignmentError(f"Vosk model directory is missing: {path}")
+
     script = (base / manifest["script"]["path"]).read_text(encoding="utf-8").strip()
     chunks = phrase_chunks(
         script,
@@ -598,29 +629,45 @@ def generate(manifest_path: Path, model_path: Path) -> dict[str, Any]:
         asr_words = _recognize(audio_path, model_path)
         events, sidecar_chunks = _align_chunks(chunks, asr_words)
     except AlignmentError as first_error:
-        constrained_vocabulary = _canonical_vocabulary(script)
-        try:
-            asr_words = _recognize(
-                audio_path,
-                model_path,
-                vocabulary=constrained_vocabulary,
-            )
-            events, sidecar_chunks = _align_chunks(chunks, asr_words)
-        except AlignmentError as constrained_error:
+        secondary_error: AlignmentError | None = None
+        if secondary_model_path is not None:
             try:
-                asr_words = _recover_with_phrase_vocabulary(
-                    chunks,
-                    asr_words,
+                secondary_words = _recognize(audio_path, secondary_model_path)
+                asr_words = _merge_word_timings(asr_words, secondary_words)
+                events, sidecar_chunks = _align_chunks(chunks, asr_words)
+            except AlignmentError as error:
+                secondary_error = error
+
+        if secondary_error is None and "events" in locals():
+            pass
+        else:
+            constrained_vocabulary = _canonical_vocabulary(script)
+            try:
+                asr_words = _recognize_passes(
                     audio_path,
-                    model_path,
+                    model_paths,
+                    vocabulary=constrained_vocabulary,
                 )
                 events, sidecar_chunks = _align_chunks(chunks, asr_words)
-            except AlignmentError as phrase_error:
-                raise AlignmentError(
-                    f"{first_error} Grammar-constrained retry also failed: "
-                    f"{constrained_error} Phrase-scoped acoustic retry also failed: "
-                    f"{phrase_error}"
-                ) from phrase_error
+            except AlignmentError as constrained_error:
+                try:
+                    asr_words = _recover_with_phrase_vocabulary(
+                        chunks,
+                        asr_words,
+                        audio_path,
+                        model_paths,
+                    )
+                    events, sidecar_chunks = _align_chunks(chunks, asr_words)
+                except AlignmentError as phrase_error:
+                    secondary_note = (
+                        f" Secondary acoustic retry also failed: {secondary_error}"
+                        if secondary_error is not None else ""
+                    )
+                    raise AlignmentError(
+                        f"{first_error}{secondary_note} "
+                        f"Grammar-constrained retry also failed: {constrained_error} "
+                        f"Phrase-scoped acoustic retry also failed: {phrase_error}"
+                    ) from phrase_error
     for index in range(1, len(events)):
         boundary = (events[index - 1]["end"] + events[index]["start"]) / 2
         events[index - 1]["end"] = boundary
@@ -664,9 +711,13 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--model-dir", type=Path, required=True)
+    parser.add_argument("--secondary-model-dir", type=Path, default=None)
     args = parser.parse_args()
     try:
-        print(json.dumps(generate(args.manifest, args.model_dir), ensure_ascii=False))
+        print(json.dumps(
+            generate(args.manifest, args.model_dir, args.secondary_model_dir),
+            ensure_ascii=False,
+        ))
         return 0
     except (AlignmentError, OSError, KeyError, json.JSONDecodeError) as exc:
         print(f"FORCED CAPTION ALIGNMENT BLOCKED: {exc}")
