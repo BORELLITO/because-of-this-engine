@@ -59,6 +59,10 @@ class V2HardLockTests(unittest.TestCase):
         self.assertIn("narrate.py", workflow)
         self.assertIn("GEMINI_API_KEY", workflow)
         self.assertIn("generate_phrase_captions.py", workflow)
+        self.assertIn("canonical_config.py", workflow)
+        self.assertIn("enforce_canonical=True", (self.ROOT / "production" / "render_video_episode.py").read_text(encoding="utf-8"))
+        self.assertIn("engine_profile", (self.ROOT / "production" / "pipeline_state.py").read_text(encoding="utf-8"))
+
 
     def test_old_engine_paths_are_not_reintroduced(self):
         paths = [path.relative_to(self.ROOT).as_posix() for path in self.ROOT.rglob("*") if path.is_file()]

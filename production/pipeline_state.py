@@ -12,6 +12,17 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+import sys
+
+if str(Path(__file__).resolve().parents[1]) not in sys.path:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from production.canonical_config import (
+    CANONICAL_PROFILE_FINGERPRINT,
+    CANONICAL_PROFILE_ID,
+    CanonicalConfigError,
+    validate_canonical_manifest,
+)
 
 STATES = (
     "CREATED",
@@ -115,9 +126,15 @@ def _atomic_write(path: Path, payload: dict[str, Any]) -> None:
             os.unlink(temp_name)
 
 
-def load_or_initialize(manifest_path: Path) -> dict[str, Any]:
+def load_or_initialize(manifest_path: Path, *, enforce_canonical: bool = False) -> dict[str, Any]:
     manifest_path = manifest_path.resolve()
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    canonical_report = None
+    if enforce_canonical:
+        try:
+            canonical_report = validate_canonical_manifest(manifest, source_label=str(manifest_path))
+        except CanonicalConfigError as exc:
+            raise PipelineStateError(str(exc)) from exc
     job_id = job_id_from_manifest(manifest)
     path = state_path(manifest_path, job_id)
     manifest_sha = sha256_file(manifest_path)
@@ -125,11 +142,26 @@ def load_or_initialize(manifest_path: Path) -> dict[str, Any]:
         state = json.loads(path.read_text(encoding="utf-8"))
         if state.get("job_id") != job_id or state.get("manifest_sha256") != manifest_sha:
             raise PipelineStateError("Existing job state does not belong to this manifest fingerprint.")
+        if enforce_canonical and (
+            state.get("engine_profile") != CANONICAL_PROFILE_ID
+            or state.get("config_fingerprint") != CANONICAL_PROFILE_FINGERPRINT
+        ):
+            raise PipelineStateError("Existing job state does not carry the locked canonical engine profile.")
         return state
     state = {
         "job_id": job_id,
         "video_id": manifest.get("video_id"),
         "engine_version": "2.0",
+        "engine_profile": (
+            canonical_report.get("profile_id")
+            if canonical_report
+            else manifest.get("engine_profile")
+        ),
+        "config_fingerprint": (
+            canonical_report.get("profile_fingerprint")
+            if canonical_report
+            else None
+        ),
         "schema_version": manifest.get("schema_version"),
         "manifest_path": str(manifest_path),
         "manifest_sha256": manifest_sha,
@@ -142,10 +174,10 @@ def load_or_initialize(manifest_path: Path) -> dict[str, Any]:
     return state
 
 
-def transition(manifest_path: Path, target: str, stage: str, details: dict[str, Any] | None = None) -> dict[str, Any]:
+def transition(manifest_path: Path, target: str, stage: str, details: dict[str, Any] | None = None, *, enforce_canonical: bool = False) -> dict[str, Any]:
     if target not in STATES:
         raise PipelineStateError(f"Unknown pipeline state: {target}")
-    state = load_or_initialize(manifest_path)
+    state = load_or_initialize(manifest_path, enforce_canonical=enforce_canonical)
     current = state["state"]
     if current in TERMINAL:
         if current == target:
@@ -170,12 +202,13 @@ def main() -> int:
     parser.add_argument("--initialize", action="store_true")
     parser.add_argument("--transition", choices=STATES)
     parser.add_argument("--stage", default="pipeline")
+    parser.add_argument("--allow-noncanonical", action="store_true", help="Only for isolated local fixtures; production CLI remains locked.")
     args = parser.parse_args()
     try:
         if args.initialize:
-            state = load_or_initialize(args.manifest)
+            state = load_or_initialize(args.manifest, enforce_canonical=not args.allow_noncanonical)
         elif args.transition:
-            state = transition(args.manifest, args.transition, args.stage)
+            state = transition(args.manifest, args.transition, args.stage, enforce_canonical=not args.allow_noncanonical)
         else:
             parser.error("Choose --initialize or --transition.")
         print(json.dumps({"status": "PIPELINE_STATE_OK", **state}, ensure_ascii=False))

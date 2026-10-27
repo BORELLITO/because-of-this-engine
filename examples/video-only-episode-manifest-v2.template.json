@@ -17,7 +17,7 @@
     "model": "gemini-3.8-flash-tts",
     "voice": "Charon",
     "language": "en-US",
-    "style": "Low, restrained male suspense narration in clear American English. Natural pauses, clear diction and controlled tension."
+    "style": "Clear American English, crisp diction, moderate pace, restrained suspense. Pronounce numbers as spoken English words with clear word boundaries; preserve every word exactly."
   },
   "script": {
     "path": "script.txt",
@@ -32,28 +32,32 @@
   "captions": {
     "path": "captions/narration.ass",
     "alignment_mode": "forced_alignment",
-    "alignment_source": "word-level forced alignment from final narration",
+    "alignment_source": "Vosk word timestamps extracted from the final narration WAV; caption text remains the canonical script.",
     "word_level_available": true,
     "max_lines": 2,
     "max_line_chars": 42,
     "target_cps": 20,
     "max_cps": 28,
-    "end_tolerance_seconds": 0.1
+    "end_tolerance_seconds": 0.1,
+    "word_highlight_enabled": true,
+    "word_highlight_mode": "timestamp_color_transform",
+    "active_word_color": "#FF7777",
+    "word_highlight_tolerance_ms": 35
   },
   "music": {
     "path": "audio/suspense-bed.wav",
     "license": "replace-with-verified-license",
     "commercial_use": true,
     "attribution_required": false,
-    "volume": 0.06
+    "volume": 0.12
   },
   "brand": {
-    "watermark_enabled": true,
+    "watermark_enabled": false,
     "watermark_text": "|B",
     "accent_color": "#E3262E",
     "logo_enabled": true,
     "logo_path": "brand/because-of-this-logo.png",
-    "logo_width": 432,
+    "logo_width": 540,
     "logo_opacity": 0.82,
     "logo_margin": 54,
     "logo_top": 72
@@ -596,12 +600,12 @@
         "S04"
       ],
       "approved_scene_ids": [],
-      "coverage_ratio": 0.0
+      "coverage_ratio": 0
     },
     "channel_diversity": {
       "comparison_window": "last_20_episodes",
       "recent_episode_count": 0,
-      "similarity_score": 0.0,
+      "similarity_score": 0,
       "similarity_status": "PASS",
       "unique_signature": "replace-with-distinctive-story-signature"
     },
@@ -759,5 +763,17 @@
     "policy": "ordered_scene_excerpts_cover_canonical_script_once",
     "allow_overlap": false,
     "timing_source": "forced_alignment_sidecar"
+  },
+  "engine_profile": "because-of-this-v2-locked-2026-10",
+  "loop": {
+    "enabled": true,
+    "title": "BECAUSE OF THIS",
+    "transition": "continuity_fade",
+    "outro_seconds": 1.2,
+    "tail_fade_seconds": 0.55,
+    "card_fade_in_seconds": 0.24,
+    "card_fade_out_seconds": 0.36,
+    "audio_fade_seconds": 0.6,
+    "restart_safe": true
   }
 }
