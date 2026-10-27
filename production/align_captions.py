@@ -418,12 +418,21 @@ def _recover_with_phrase_vocabulary(
     """
     merged = list(base_words)
     cursor_time = 0.0
-    for chunk in chunks:
+    for index, chunk in enumerate(chunks):
         cursor = _cursor_for_time(merged, cursor_time)
         try:
             _start, end, _next_cursor, _positions = _align_chunk(chunk, merged, cursor)
         except AlignmentError:
-            phrase_vocabulary = _canonical_vocabulary(chunk)
+            # Keep the retry scoped to the failed phrase, but include one
+            # neighboring phrase on each side. Short function words at a
+            # caption boundary are often acoustically realized together with
+            # the next content word (for example, "the danger"). The added
+            # context improves recognition without changing canonical text or
+            # inventing any timestamp.
+            context_start = max(0, index - 1)
+            context_end = min(len(chunks), index + 2)
+            context_text = " ".join(chunks[context_start:context_end])
+            phrase_vocabulary = _canonical_vocabulary(context_text)
             if not phrase_vocabulary:
                 raise
             targeted_words = _recognize(
