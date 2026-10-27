@@ -141,6 +141,19 @@ class V2HardLockTests(unittest.TestCase):
             payload = json.loads((root / "rendered" / "final-manifest-hash-test-001-preview.json").read_text(encoding="utf-8"))
             self.assertEqual(payload["fingerprints"]["footage_sha256"], "0515b3da9dcde5c270e0386efc69ee94f234164ef19f646e750ad56394682546")
 
+    def test_hud_and_stream_duration_are_hard_locked(self):
+        render = (self.ROOT / "production" / "render_video_episode.py").read_text(encoding="utf-8")
+        release = (self.ROOT / "production" / "validate_video_release.py").read_text(encoding="utf-8")
+        contract = (self.ROOT / "production" / "video_asset_contract.py").read_text(encoding="utf-8")
+        self.assertIn('logo_anchor = str(brand.get("logo_anchor", "center_top"))', render)
+        self.assertIn("x=(main_w-overlay_w)/2:y=", render)
+        self.assertIn(",8,40,40,110,1", render)
+        self.assertIn("tpad=stop_mode=clone", render)
+        self.assertIn("Assembled video clock drifted", render)
+        self.assertIn('"video_duration": video_duration', contract)
+        self.assertIn("Video stream duration", release)
+        self.assertIn("stream_duration_delta_seconds", release)
+
     def test_direct_production_scripts_bootstrap_repository_root(self):
         expected = "sys.path.insert(0, str(Path(__file__).resolve().parents[1]))"
         for filename in (
