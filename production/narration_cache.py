@@ -19,15 +19,28 @@ import wave
 from pathlib import Path
 from typing import Any
 
-from production.google_drive_delivery import (
-    DEFAULT_ROOT_FOLDER,
+try:
+    from production.google_drive_delivery import (
+        DEFAULT_ROOT_FOLDER,
     MediaFileUpload,
     child_by_name,
     ensure_folder,
     normalize_folder_id,
     service,
-    validate_folder,
-)
+        validate_folder,
+    )
+except ModuleNotFoundError as exc:
+    if exc.name != "production":
+        raise
+    from google_drive_delivery import (
+        DEFAULT_ROOT_FOLDER,
+        MediaFileUpload,
+        child_by_name,
+        ensure_folder,
+        normalize_folder_id,
+        service,
+        validate_folder,
+    )
 
 CACHE_SCHEMA_VERSION = 1
 NORMALIZATION_VERSION = "shorts-60-75-v1"
