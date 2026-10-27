@@ -18,7 +18,7 @@
     "model": "gemini-3.8-flash-tts",
     "voice": "Charon",
     "language": "en-US",
-    "style": "Clear American English, crisp diction, moderate pace, restrained suspense. Pronounce numbers as spoken English words with clear word boundaries; preserve every word exactly.",
+    "style": "Clear American English, crisp diction, brisk but natural pace, restrained suspense. Pronounce numbers as spoken English words with clear word boundaries; preserve every word exactly.",
     "model_rationale": "Production target: the locked Because Of This narration profile with strict word-level caption alignment."
   },
   "script": {
