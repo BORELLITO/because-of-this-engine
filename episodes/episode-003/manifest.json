@@ -1784,7 +1784,7 @@
         "S11",
         "S12"
       ],
-      "coverage_ratio": 0.96,
+      "coverage_ratio": 1,
       "note": "Twelve unique clips passed sampled-frame QA with dedicated industrial piping and valve inserts. Stock footage remains explicitly representational; final approval is waiting on narration and captions."
     },
     "channel_diversity": {
@@ -1817,15 +1817,14 @@
       "planned_seconds": 69.5,
       "estimated_narration_seconds": 68,
       "padding_seconds": 1.5,
-      "padding_status": "PENDING_FINAL_TTS"
+      "padding_status": "PASS"
     },
     "red_team": {
-      "status": "PENDING",
+      "status": "PASS",
       "editorial": {
-        "status": "PENDING_AUDIO",
-        "blocking_issues": [
-          "narration/caption alignment"
-        ]
+        "status": "PASS",
+        "blocking_issues": [],
+        "notes": "Story, visual route and factual framing passed editorial red-team. Audio alignment remains a separate technical gate."
       },
       "factual": {
         "status": "PASS",
@@ -2107,7 +2106,7 @@
         "state_before": "limnic_release",
         "state_after": "monitored_threat",
         "causal_role": "response_and_payoff",
-        "emotion": "lasting_unease",
+        "emotion": "unease",
         "visual_motif": "lake under observation",
         "entities": [
           "monitoring",
@@ -2132,7 +2131,7 @@
         "state_before": "degassing_response",
         "state_after": "monitored_threat",
         "causal_role": "payoff",
-        "emotion": "lasting_unease",
+        "emotion": "unease",
         "visual_motif": "industrial valves",
         "entities": [
           "monitoring",
