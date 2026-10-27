@@ -1,0 +1,1702 @@
+{
+  "schema_version": "2.0",
+  "video_id": "because-of-this-episode-003",
+  "job_id": "because-of-this-episode-003",
+  "title": "The Lake That Killed Without a Sound",
+  "language": "en",
+  "fps": 25,
+  "story_profile": {
+    "format": "The Invisible Disaster",
+    "truth_mode": "VERIFIED_FACT",
+    "primary_emotion": "dread",
+    "secondary_emotion": "curiosity",
+    "central_question": "How did a calm volcanic lake kill more than seventeen hundred people overnight?",
+    "visual_symbol": "a still lake under a dark sky"
+  },
+  "voice": {
+    "provider": "gemini",
+    "model": "gemini-3.8-flash-tts",
+    "voice": "Charon",
+    "language": "en-US",
+    "style": "Clear American English, crisp diction, restrained suspense, moderate pace. Preserve every canonical word exactly.",
+    "model_rationale": "Production target: the locked Because Of This narration profile with strict word-level caption alignment."
+  },
+  "script": {
+    "path": "script.txt",
+    "word_count_target": 168
+  },
+  "audio": {
+    "path": "audio/narration.wav",
+    "master": "narration",
+    "sample_rate": 24000,
+    "channels": 1
+  },
+  "captions": {
+    "path": "captions/narration.ass",
+    "alignment_mode": "forced_alignment",
+    "alignment_source": "Vosk word timestamps extracted from the final narration WAV; caption text remains the canonical script.",
+    "word_level_available": true,
+    "max_lines": 2,
+    "max_line_chars": 42,
+    "target_cps": 20,
+    "max_cps": 28,
+    "end_tolerance_seconds": 0.1,
+    "alignment_sidecar": "captions/narration.alignment.json",
+    "word_highlight_enabled": true,
+    "word_highlight_mode": "timestamp_color_transform",
+    "active_word_color": "#FF7777",
+    "word_highlight_tolerance_ms": 35
+  },
+  "music": {
+    "path": "audio/episode-003-echoes-andrew-ev.mp3",
+    "drive_file_id": "1u-1ZKkVxKTw_E6vEzW0VcpF2lfjGfmeI",
+    "provider": "mixkit",
+    "source_page_url": "https://mixkit.co/free-stock-music/mood/suspenseful/",
+    "license": "Mixkit Stock Music Free License",
+    "commercial_use": true,
+    "attribution_required": false,
+    "volume": 0.12,
+    "author": "Andrew Ev",
+    "original_filename": "episode-002-echoes-andrew-ev.mp3",
+    "mime_type": "audio/mpeg"
+  },
+  "brand": {
+    "watermark_enabled": false,
+    "watermark_text": "|B",
+    "accent_color": "#E3262E",
+    "logo_enabled": true,
+    "logo_path": "brand/because-of-this-logo.png",
+    "logo_width": 540,
+    "logo_opacity": 0.82,
+    "logo_margin": 54,
+    "logo_top": 72
+  },
+  "output": {
+    "path": "rendered/{video_id}-{mode}.mp4"
+  },
+  "asset_reuse_brain": {
+    "policy": "global_no_repeat",
+    "legacy_baseline": true,
+    "reason": "Episode 003 is a new factual story; all ten staged clips have new episode ownership and are blocked from reuse in other episodes."
+  },
+  "scenes": [
+    {
+      "scene_id": "S01",
+      "duration": 6.5,
+      "story_beat": "hook: a calm lake looks harmless before the disaster",
+      "visual_intent": "make the still water feel like the first clue",
+      "visual_function": "hook",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "match_score": 0.82,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "hard_cut",
+        "duration": 0
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-003-s01",
+        "path": "runtime-assets/s01.mp4",
+        "drive_file_id": "17ioAKZfKAl_t_EGfGaAP3EmPTuKKpVQ-",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/serene-nighttime-lake-view-with-reflective-water-37215217/",
+        "license": "Pexels Free License",
+        "rights_status": "PENDING_FRAME_QA",
+        "approved_for_render": false,
+        "sha256": "PENDING_DRIVE_HYDRATION",
+        "reuse_status": "NEW_ASSET_EPISODE_003",
+        "episode_id": "because-of-this-episode-003",
+        "author": "pexels source contributor",
+        "acquisition_timestamp": "2026-10-27T00:00:00Z",
+        "original_filename": "episode-003-s01-night-lake-pexels.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": null,
+        "width": null,
+        "height": null,
+        "filesize_bytes": null,
+        "job_ownership": "because-of-this-episode-003",
+        "scene_usage": "S01",
+        "visual_evidence": {
+          "reviewed": false,
+          "basis": "source-page review recorded; three sampled Drive frames pending",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": null,
+          "review_method": "source-page license/title/description plus three sampled Drive frames",
+          "source_title": "calm lake at night",
+          "source_description": "still water and distant lights",
+          "subjects": [
+            "lake",
+            "water"
+          ],
+          "actions": [],
+          "environments": [
+            "night",
+            "exterior"
+          ],
+          "objects": [],
+          "moods": [
+            "restrained suspense"
+          ],
+          "composition": [
+            "still lake"
+          ],
+          "observed_subjects": [
+            "lake",
+            "water"
+          ],
+          "observed_actions": [],
+          "observed_environments": [
+            "night",
+            "exterior"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": null
+      },
+      "narration_excerpt": "At first, Lake Nyos looked completely calm.",
+      "visual_semantics": {
+        "role": "representational",
+        "required": {
+          "subjects": [
+            "lake",
+            "water"
+          ],
+          "actions": []
+        },
+        "preferred": {
+          "environments": [
+            "night",
+            "exterior"
+          ]
+        },
+        "forbidden": [
+          "graphic_death",
+          "fire",
+          "battlefield",
+          "medical_vial"
+        ],
+        "critical": {
+          "subjects": [
+            "lake",
+            "water"
+          ],
+          "actions": []
+        },
+        "narrative_anchors": {
+          "direct_required": [],
+          "minimum_direct": 0
+        }
+      }
+    },
+    {
+      "scene_id": "S02",
+      "duration": 7,
+      "story_beat": "context: families sleep near the lake",
+      "visual_intent": "place the nearby settlement inside the nighttime danger zone",
+      "visual_function": "context",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "match_score": 0.8,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-003-s02",
+        "path": "runtime-assets/s02.mp4",
+        "drive_file_id": "1Ie1IEJuT4M2hWeV-bJzmScLifiuudQ_8",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/serene-twilight-over-traditional-village-rooftops-40262415/",
+        "license": "Pexels Free License",
+        "rights_status": "PENDING_FRAME_QA",
+        "approved_for_render": false,
+        "sha256": "PENDING_DRIVE_HYDRATION",
+        "reuse_status": "NEW_ASSET_EPISODE_003",
+        "episode_id": "because-of-this-episode-003",
+        "author": "pexels source contributor",
+        "acquisition_timestamp": "2026-10-27T00:00:00Z",
+        "original_filename": "episode-003-s02-village-at-night-pexels.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": null,
+        "width": null,
+        "height": null,
+        "filesize_bytes": null,
+        "job_ownership": "because-of-this-episode-003",
+        "scene_usage": "S02",
+        "visual_evidence": {
+          "reviewed": false,
+          "basis": "source-page review recorded; three sampled Drive frames pending",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": null,
+          "review_method": "source-page license/title/description plus three sampled Drive frames",
+          "source_title": "village rooftops at twilight",
+          "source_description": "sleeping valley",
+          "subjects": [
+            "village",
+            "rooftops"
+          ],
+          "actions": [],
+          "environments": [
+            "night",
+            "settlement"
+          ],
+          "objects": [],
+          "moods": [
+            "restrained suspense"
+          ],
+          "composition": [
+            "night village"
+          ],
+          "observed_subjects": [
+            "village",
+            "rooftops"
+          ],
+          "observed_actions": [],
+          "observed_environments": [
+            "night",
+            "settlement"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": null
+      },
+      "narration_excerpt": "Families living near the water went to sleep.",
+      "visual_semantics": {
+        "role": "representational",
+        "required": {
+          "subjects": [
+            "village",
+            "rooftops"
+          ],
+          "actions": []
+        },
+        "preferred": {
+          "environments": [
+            "night",
+            "settlement"
+          ]
+        },
+        "forbidden": [
+          "graphic_death",
+          "fire",
+          "battlefield",
+          "medical_vial"
+        ],
+        "critical": {
+          "subjects": [
+            "village",
+            "rooftops"
+          ],
+          "actions": []
+        },
+        "narrative_anchors": {
+          "direct_required": [],
+          "minimum_direct": 0
+        }
+      }
+    },
+    {
+      "scene_id": "S03",
+      "duration": 7,
+      "story_beat": "inciting event: the lake releases a massive cloud of carbon dioxide",
+      "visual_intent": "translate the invisible release into a non-literal underwater cue",
+      "visual_function": "inciting_event",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "match_score": 0.76,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-003-s03",
+        "path": "runtime-assets/s03.mp4",
+        "drive_file_id": "1YfOn2VJ6tm6CXxlXfHn0t8r_2CCckoFm",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/air-bubbles-underwater-8823141/",
+        "license": "Pexels Free License",
+        "rights_status": "PENDING_FRAME_QA",
+        "approved_for_render": false,
+        "sha256": "PENDING_DRIVE_HYDRATION",
+        "reuse_status": "NEW_ASSET_EPISODE_003",
+        "episode_id": "because-of-this-episode-003",
+        "author": "pexels source contributor",
+        "acquisition_timestamp": "2026-10-27T00:00:00Z",
+        "original_filename": "episode-003-s04-underwater-gas-bubbles-pexels.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": null,
+        "width": null,
+        "height": null,
+        "filesize_bytes": null,
+        "job_ownership": "because-of-this-episode-003",
+        "scene_usage": "S03",
+        "visual_evidence": {
+          "reviewed": false,
+          "basis": "source-page review recorded; three sampled Drive frames pending",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": null,
+          "review_method": "source-page license/title/description plus three sampled Drive frames",
+          "source_title": "underwater bubbles",
+          "source_description": "gas bubbles rising underwater",
+          "subjects": [
+            "bubbles",
+            "water"
+          ],
+          "actions": [],
+          "environments": [
+            "underwater"
+          ],
+          "objects": [],
+          "moods": [
+            "restrained suspense"
+          ],
+          "composition": [
+            "underwater"
+          ],
+          "observed_subjects": [
+            "bubbles",
+            "water"
+          ],
+          "observed_actions": [],
+          "observed_environments": [
+            "underwater"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": null
+      },
+      "narration_excerpt": "During the night, the lake released a massive cloud of carbon dioxide.",
+      "visual_semantics": {
+        "role": "representational",
+        "required": {
+          "subjects": [
+            "bubbles",
+            "water"
+          ],
+          "actions": []
+        },
+        "preferred": {
+          "environments": [
+            "underwater"
+          ]
+        },
+        "forbidden": [
+          "graphic_death",
+          "fire",
+          "battlefield",
+          "medical_vial"
+        ],
+        "critical": {
+          "subjects": [
+            "bubbles",
+            "water"
+          ],
+          "actions": []
+        },
+        "narrative_anchors": {
+          "direct_required": [],
+          "minimum_direct": 0
+        }
+      }
+    },
+    {
+      "scene_id": "S04",
+      "duration": 7,
+      "story_beat": "explanation: invisible, odorless gas heavier than air",
+      "visual_intent": "make the unseen threat feel physically present without claiming literal gas visibility",
+      "visual_function": "explanation",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "match_score": 0.78,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-003-s04",
+        "path": "runtime-assets/s04.mp4",
+        "drive_file_id": "1Fgsyiji0og_N13-jGVVBQ0TbuCl7l37A",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/fog-covered-hill-in-an-aerial-shot-44271/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "PENDING_FRAME_QA",
+        "approved_for_render": false,
+        "sha256": "PENDING_DRIVE_HYDRATION",
+        "reuse_status": "NEW_ASSET_EPISODE_003",
+        "episode_id": "because-of-this-episode-003",
+        "author": "mixkit source contributor",
+        "acquisition_timestamp": "2026-10-27T00:00:00Z",
+        "original_filename": "episode-003-s08-fog-covered-hill-mixkit.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": null,
+        "width": null,
+        "height": null,
+        "filesize_bytes": null,
+        "job_ownership": "because-of-this-episode-003",
+        "scene_usage": "S04",
+        "visual_evidence": {
+          "reviewed": false,
+          "basis": "source-page review recorded; three sampled Drive frames pending",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": null,
+          "review_method": "source-page license/title/description plus three sampled Drive frames",
+          "source_title": "fog-covered hill in aerial view",
+          "source_description": "low fog as representational proxy for heavy gas",
+          "subjects": [
+            "fog",
+            "hill"
+          ],
+          "actions": [],
+          "environments": [
+            "valley",
+            "aerial"
+          ],
+          "objects": [],
+          "moods": [
+            "restrained suspense"
+          ],
+          "composition": [
+            "valley and hill"
+          ],
+          "observed_subjects": [
+            "fog",
+            "hill"
+          ],
+          "observed_actions": [],
+          "observed_environments": [
+            "valley",
+            "aerial"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": null
+      },
+      "narration_excerpt": "The gas was invisible, odorless, and heavier than air.",
+      "visual_semantics": {
+        "role": "representational",
+        "required": {
+          "subjects": [
+            "fog",
+            "hill"
+          ],
+          "actions": []
+        },
+        "preferred": {
+          "environments": [
+            "valley",
+            "aerial"
+          ]
+        },
+        "forbidden": [
+          "graphic_death",
+          "fire",
+          "battlefield",
+          "medical_vial"
+        ],
+        "critical": {
+          "subjects": [
+            "fog",
+            "hill"
+          ],
+          "actions": []
+        },
+        "narrative_anchors": {
+          "direct_required": [],
+          "minimum_direct": 0
+        }
+      }
+    },
+    {
+      "scene_id": "S05",
+      "duration": 7,
+      "story_beat": "escalation: the cloud rolls downhill into nearby villages",
+      "visual_intent": "show the valley geometry and downward movement",
+      "visual_function": "escalation",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "match_score": 0.8,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-003-s05",
+        "path": "runtime-assets/s05.mp4",
+        "drive_file_id": "1Gx6qNizNbkuLbwqKpH-RhUAJsrut5wHo",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/aerial-view-of-foggy-mountain-valley-38542191/",
+        "license": "Pexels Free License",
+        "rights_status": "PENDING_FRAME_QA",
+        "approved_for_render": false,
+        "sha256": "PENDING_DRIVE_HYDRATION",
+        "reuse_status": "NEW_ASSET_EPISODE_003",
+        "episode_id": "because-of-this-episode-003",
+        "author": "pexels source contributor",
+        "acquisition_timestamp": "2026-10-27T00:00:00Z",
+        "original_filename": "episode-003-s05-foggy-valley-pexels.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": null,
+        "width": null,
+        "height": null,
+        "filesize_bytes": null,
+        "job_ownership": "because-of-this-episode-003",
+        "scene_usage": "S05",
+        "visual_evidence": {
+          "reviewed": false,
+          "basis": "source-page review recorded; three sampled Drive frames pending",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": null,
+          "review_method": "source-page license/title/description plus three sampled Drive frames",
+          "source_title": "foggy mountain valley",
+          "source_description": "fog in a valley",
+          "subjects": [
+            "fog",
+            "valley"
+          ],
+          "actions": [],
+          "environments": [
+            "aerial",
+            "mountain"
+          ],
+          "objects": [],
+          "moods": [
+            "restrained suspense"
+          ],
+          "composition": [
+            "mountain valley"
+          ],
+          "observed_subjects": [
+            "fog",
+            "valley"
+          ],
+          "observed_actions": [],
+          "observed_environments": [
+            "aerial",
+            "mountain"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": null
+      },
+      "narration_excerpt": "It rolled downhill into nearby villages.",
+      "visual_semantics": {
+        "role": "representational",
+        "required": {
+          "subjects": [
+            "fog",
+            "valley"
+          ],
+          "actions": []
+        },
+        "preferred": {
+          "environments": [
+            "aerial",
+            "mountain"
+          ]
+        },
+        "forbidden": [
+          "graphic_death",
+          "fire",
+          "battlefield",
+          "medical_vial"
+        ],
+        "critical": {
+          "subjects": [
+            "fog",
+            "valley"
+          ],
+          "actions": []
+        },
+        "narrative_anchors": {
+          "direct_required": [],
+          "minimum_direct": 0
+        }
+      }
+    },
+    {
+      "scene_id": "S06",
+      "duration": 6.5,
+      "story_beat": "consequence: morning reveals the scale without graphic imagery",
+      "visual_intent": "use an empty settlement at dawn as restrained aftermath",
+      "visual_function": "consequence",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "match_score": 0.82,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-003-s06",
+        "path": "runtime-assets/s06.mp4",
+        "drive_file_id": "11EHQjTSojSmAcFkthJmqcjg2IxSm2XYQ",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/aerial-view-of-indonesian-village-at-sunrise-31992956/",
+        "license": "Pexels Free License",
+        "rights_status": "PENDING_FRAME_QA",
+        "approved_for_render": false,
+        "sha256": "PENDING_DRIVE_HYDRATION",
+        "reuse_status": "NEW_ASSET_EPISODE_003",
+        "episode_id": "because-of-this-episode-003",
+        "author": "pexels source contributor",
+        "acquisition_timestamp": "2026-10-27T00:00:00Z",
+        "original_filename": "episode-003-s06-village-at-dawn-pexels.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": null,
+        "width": null,
+        "height": null,
+        "filesize_bytes": null,
+        "job_ownership": "because-of-this-episode-003",
+        "scene_usage": "S06",
+        "visual_evidence": {
+          "reviewed": false,
+          "basis": "source-page review recorded; three sampled Drive frames pending",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": null,
+          "review_method": "source-page license/title/description plus three sampled Drive frames",
+          "source_title": "village at sunrise",
+          "source_description": "quiet village at dawn",
+          "subjects": [
+            "village",
+            "rooftops"
+          ],
+          "actions": [],
+          "environments": [
+            "dawn",
+            "aerial"
+          ],
+          "objects": [],
+          "moods": [
+            "restrained suspense"
+          ],
+          "composition": [
+            "village"
+          ],
+          "observed_subjects": [
+            "village",
+            "rooftops"
+          ],
+          "observed_actions": [],
+          "observed_environments": [
+            "dawn",
+            "aerial"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": null
+      },
+      "narration_excerpt": "By morning, more than seventeen hundred people and thousands of animals were dead.",
+      "visual_semantics": {
+        "role": "representational",
+        "required": {
+          "subjects": [
+            "village",
+            "rooftops"
+          ],
+          "actions": []
+        },
+        "preferred": {
+          "environments": [
+            "dawn",
+            "aerial"
+          ]
+        },
+        "forbidden": [
+          "graphic_death",
+          "fire",
+          "battlefield",
+          "medical_vial"
+        ],
+        "critical": {
+          "subjects": [
+            "village",
+            "rooftops"
+          ],
+          "actions": []
+        },
+        "narrative_anchors": {
+          "direct_required": [],
+          "minimum_direct": 0
+        }
+      }
+    },
+    {
+      "scene_id": "S07",
+      "duration": 7,
+      "story_beat": "contradiction: no fire, battlefield or visible warning",
+      "visual_intent": "hold on a quiet landscape to underline the absence of an obvious disaster",
+      "visual_function": "contradiction",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "match_score": 0.74,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-003-s07",
+        "path": "runtime-assets/s07.mp4",
+        "drive_file_id": "15VJ1ZnlAKrD-NIW2boNTVE6_bPqPHbPZ",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/aerial-view-of-lake-at-dusk-101509/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "PENDING_FRAME_QA",
+        "approved_for_render": false,
+        "sha256": "PENDING_DRIVE_HYDRATION",
+        "reuse_status": "NEW_ASSET_EPISODE_003",
+        "episode_id": "because-of-this-episode-003",
+        "author": "mixkit source contributor",
+        "acquisition_timestamp": "2026-10-27T00:00:00Z",
+        "original_filename": "episode-003-s07-lake-at-dusk-mixkit.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": null,
+        "width": null,
+        "height": null,
+        "filesize_bytes": null,
+        "job_ownership": "because-of-this-episode-003",
+        "scene_usage": "S07",
+        "visual_evidence": {
+          "reviewed": false,
+          "basis": "source-page review recorded; three sampled Drive frames pending",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": null,
+          "review_method": "source-page license/title/description plus three sampled Drive frames",
+          "source_title": "aerial lake at dusk",
+          "source_description": "quiet lake after the event",
+          "subjects": [
+            "lake",
+            "water"
+          ],
+          "actions": [],
+          "environments": [
+            "dusk",
+            "aerial"
+          ],
+          "objects": [],
+          "moods": [
+            "restrained suspense"
+          ],
+          "composition": [
+            "lake at dusk"
+          ],
+          "observed_subjects": [
+            "lake",
+            "water"
+          ],
+          "observed_actions": [],
+          "observed_environments": [
+            "dusk",
+            "aerial"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": null
+      },
+      "narration_excerpt": "There was no fire. No battlefield. No visible warning.",
+      "visual_semantics": {
+        "role": "representational",
+        "required": {
+          "subjects": [
+            "lake",
+            "water"
+          ],
+          "actions": []
+        },
+        "preferred": {
+          "environments": [
+            "dusk",
+            "aerial"
+          ]
+        },
+        "forbidden": [
+          "graphic_death",
+          "fire",
+          "battlefield",
+          "medical_vial"
+        ],
+        "critical": {
+          "subjects": [
+            "lake",
+            "water"
+          ],
+          "actions": []
+        },
+        "narrative_anchors": {
+          "direct_required": [],
+          "minimum_direct": 0
+        }
+      }
+    },
+    {
+      "scene_id": "S08",
+      "duration": 7,
+      "story_beat": "investigation: volcanic activity feeds gas into deep water",
+      "visual_intent": "connect the lake to its volcanic source",
+      "visual_function": "investigation",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "match_score": 0.8,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-003-s08",
+        "path": "runtime-assets/s08.mp4",
+        "drive_file_id": "1D8q4QcUN697aRHOEIyneytx252EPcugY",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/aerial-view-of-volcanic-crater-at-sunrise-35224611/",
+        "license": "Pexels Free License",
+        "rights_status": "PENDING_FRAME_QA",
+        "approved_for_render": false,
+        "sha256": "PENDING_DRIVE_HYDRATION",
+        "reuse_status": "NEW_ASSET_EPISODE_003",
+        "episode_id": "because-of-this-episode-003",
+        "author": "pexels source contributor",
+        "acquisition_timestamp": "2026-10-27T00:00:00Z",
+        "original_filename": "episode-003-s03-volcanic-crater-pexels.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": null,
+        "width": null,
+        "height": null,
+        "filesize_bytes": null,
+        "job_ownership": "because-of-this-episode-003",
+        "scene_usage": "S08",
+        "visual_evidence": {
+          "reviewed": false,
+          "basis": "source-page review recorded; three sampled Drive frames pending",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": null,
+          "review_method": "source-page license/title/description plus three sampled Drive frames",
+          "source_title": "volcanic crater at sunrise",
+          "source_description": "volcanic crater as geological context",
+          "subjects": [
+            "crater",
+            "volcano"
+          ],
+          "actions": [],
+          "environments": [
+            "aerial",
+            "geology"
+          ],
+          "objects": [],
+          "moods": [
+            "restrained suspense"
+          ],
+          "composition": [
+            "volcanic crater"
+          ],
+          "observed_subjects": [
+            "crater",
+            "volcano"
+          ],
+          "observed_actions": [],
+          "observed_environments": [
+            "aerial",
+            "geology"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": null
+      },
+      "narration_excerpt": "Scientists later discovered that volcanic activity beneath the lake had been feeding carbon dioxide into its deep water for years.",
+      "visual_semantics": {
+        "role": "representational",
+        "required": {
+          "subjects": [
+            "crater",
+            "volcano"
+          ],
+          "actions": []
+        },
+        "preferred": {
+          "environments": [
+            "aerial",
+            "geology"
+          ]
+        },
+        "forbidden": [
+          "graphic_death",
+          "fire",
+          "battlefield",
+          "medical_vial"
+        ],
+        "critical": {
+          "subjects": [
+            "crater",
+            "volcano"
+          ],
+          "actions": []
+        },
+        "narrative_anchors": {
+          "direct_required": [],
+          "minimum_direct": 0
+        }
+      }
+    },
+    {
+      "scene_id": "S09",
+      "duration": 7,
+      "story_beat": "reveal: a rare limnic eruption releases the trapped gas",
+      "visual_intent": "escalate from mist to a wide geographic view of the release mechanism",
+      "visual_function": "reveal",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "match_score": 0.76,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-003-s09",
+        "path": "runtime-assets/s09.mp4",
+        "drive_file_id": "1J9EIerTI3_n1N0u2kGHybVS4YJgmFKm1",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/natural-landscape-with-a-lake-in-an-aerial-view-50201/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "PENDING_FRAME_QA",
+        "approved_for_render": false,
+        "sha256": "PENDING_DRIVE_HYDRATION",
+        "reuse_status": "NEW_ASSET_EPISODE_003",
+        "episode_id": "because-of-this-episode-003",
+        "author": "mixkit source contributor",
+        "acquisition_timestamp": "2026-10-27T00:00:00Z",
+        "original_filename": "episode-003-s09-natural-lake-landscape-mixkit.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": null,
+        "width": null,
+        "height": null,
+        "filesize_bytes": null,
+        "job_ownership": "because-of-this-episode-003",
+        "scene_usage": "S09",
+        "visual_evidence": {
+          "reviewed": false,
+          "basis": "source-page review recorded; three sampled Drive frames pending",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": null,
+          "review_method": "source-page license/title/description plus three sampled Drive frames",
+          "source_title": "natural lake landscape in aerial view",
+          "source_description": "wide lake geography",
+          "subjects": [
+            "lake",
+            "mountains"
+          ],
+          "actions": [],
+          "environments": [
+            "aerial",
+            "landscape"
+          ],
+          "objects": [],
+          "moods": [
+            "restrained suspense"
+          ],
+          "composition": [
+            "lake and mountains"
+          ],
+          "observed_subjects": [
+            "lake",
+            "mountains"
+          ],
+          "observed_actions": [],
+          "observed_environments": [
+            "aerial",
+            "landscape"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": null
+      },
+      "narration_excerpt": "A rare limnic eruption suddenly released that trapped gas.",
+      "visual_semantics": {
+        "role": "representational",
+        "required": {
+          "subjects": [
+            "lake",
+            "mountains"
+          ],
+          "actions": []
+        },
+        "preferred": {
+          "environments": [
+            "aerial",
+            "landscape"
+          ]
+        },
+        "forbidden": [
+          "graphic_death",
+          "fire",
+          "battlefield",
+          "medical_vial"
+        ],
+        "critical": {
+          "subjects": [
+            "lake",
+            "mountains"
+          ],
+          "actions": []
+        },
+        "narrative_anchors": {
+          "direct_required": [],
+          "minimum_direct": 0
+        }
+      }
+    },
+    {
+      "scene_id": "S10",
+      "duration": 7.5,
+      "story_beat": "response and payoff: degassing, monitoring and the final warning",
+      "visual_intent": "end on a composed lake image that carries the lesson into the present",
+      "visual_function": "response_and_payoff",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "match_score": 0.72,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-003-s10",
+        "path": "runtime-assets/s10.mp4",
+        "drive_file_id": "1ljxITaAWERBEI1DghBU1JDtYxTODymJ9",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/aerial-tour-of-a-lake-in-the-middle-of-a-41381/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "PENDING_FRAME_QA",
+        "approved_for_render": false,
+        "sha256": "PENDING_DRIVE_HYDRATION",
+        "reuse_status": "NEW_ASSET_EPISODE_003",
+        "episode_id": "because-of-this-episode-003",
+        "author": "mixkit source contributor",
+        "acquisition_timestamp": "2026-10-27T00:00:00Z",
+        "original_filename": "episode-003-s10-aerial-lake-forest-mixkit.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": null,
+        "width": null,
+        "height": null,
+        "filesize_bytes": null,
+        "job_ownership": "because-of-this-episode-003",
+        "scene_usage": "S10",
+        "visual_evidence": {
+          "reviewed": false,
+          "basis": "source-page review recorded; three sampled Drive frames pending",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": null,
+          "review_method": "source-page license/title/description plus three sampled Drive frames",
+          "source_title": "aerial lake in pine forest",
+          "source_description": "peaceful lake as ongoing monitoring warning",
+          "subjects": [
+            "lake",
+            "forest"
+          ],
+          "actions": [],
+          "environments": [
+            "aerial",
+            "day"
+          ],
+          "objects": [],
+          "moods": [
+            "restrained suspense"
+          ],
+          "composition": [
+            "lake and forest"
+          ],
+          "observed_subjects": [
+            "lake",
+            "forest"
+          ],
+          "observed_actions": [],
+          "observed_environments": [
+            "aerial",
+            "day"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration and on-screen copy must not falsely identify the location as the literal source footage."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": null
+      },
+      "narration_excerpt": "Engineers eventually installed pipes to drain gas from the lake's depths and reduce the danger. Because of this, other volcanic lakes are now monitored.",
+      "visual_semantics": {
+        "role": "representational",
+        "required": {
+          "subjects": [
+            "lake",
+            "forest"
+          ],
+          "actions": []
+        },
+        "preferred": {
+          "environments": [
+            "aerial",
+            "day"
+          ]
+        },
+        "forbidden": [
+          "graphic_death",
+          "fire",
+          "battlefield",
+          "medical_vial"
+        ],
+        "critical": {
+          "subjects": [
+            "lake",
+            "forest"
+          ],
+          "actions": []
+        },
+        "narrative_anchors": {
+          "direct_required": [],
+          "minimum_direct": 0
+        }
+      }
+    }
+  ],
+  "story_creation": {
+    "schema_version": "1.0",
+    "idea": {
+      "title": "The Lake That Killed Without a Sound",
+      "premise": "In 1986, Lake Nyos released an invisible carbon-dioxide cloud that moved into nearby villages while the water still looked calm.",
+      "audience_promise": "Follow the hidden chain from volcanic gas beneath the lake to the silent disaster and the engineering response.",
+      "central_question": "How did a calm volcanic lake kill more than seventeen hundred people overnight?",
+      "hook_type": "calm_surface_invisible_threat"
+    },
+    "truth": {
+      "mode": "VERIFIED_FACT",
+      "disclosure": "This episode recounts the verified Lake Nyos gas disaster; stock footage is used as clearly representational visual coverage.",
+      "sources": [
+        "https://science.nasa.gov/earth/earth-observatory/lake-nyos-cameroon-86244/",
+        "https://pubs.usgs.gov/of/1987/0097/report.pdf",
+        "https://pubmed.ncbi.nlm.nih.gov/17789781/"
+      ]
+    },
+    "causal_chain": {
+      "cause": "Volcanic activity fed carbon dioxide into the deep water of Lake Nyos.",
+      "escalation": [
+        "The gas accumulated invisibly for years.",
+        "A rare limnic eruption released it into the valley.",
+        "The heavier-than-air cloud displaced breathable oxygen in nearby villages."
+      ],
+      "consequence": "More than seventeen hundred people and thousands of animals died overnight.",
+      "why_it_mattered": "The disaster led to degassing pipes and monitoring of other volcanic lakes."
+    },
+    "emotional_arc": {
+      "primary": "dread",
+      "secondary": "curiosity",
+      "target_sensations": [
+        "curiosity",
+        "unease",
+        "dread",
+        "chill"
+      ]
+    },
+    "promise_payoff": {
+      "promise": "A lake that looks peaceful can conceal a lethal mechanism.",
+      "payoff": "The final lesson connects Lake Nyos to ongoing monitoring and engineered degassing.",
+      "payoff_type": "mechanism_and_response",
+      "promise_paid": true
+    },
+    "visual_feasibility": {
+      "checked_before_script": true,
+      "scene_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10"
+      ],
+      "approved_scene_ids": [],
+      "coverage_ratio": 0.83,
+      "note": "Ten unique clips satisfy the hard minimum. Exact degassing-pipe coverage remains a deliberate QA gap before final approval."
+    },
+    "channel_diversity": {
+      "comparison_window": "last_20_episodes",
+      "recent_episode_count": 2,
+      "similarity_score": 0.12,
+      "similarity_status": "PASS",
+      "unique_signature": "lake-surface-invisible-gas-disaster"
+    },
+    "original_authorship": {
+      "original_script": true,
+      "original_narration": true,
+      "editorial_transform": true,
+      "asset_provenance_complete": false,
+      "mass_production_risk": "LOW"
+    },
+    "monetization_safety": {
+      "youtube_ad_safety": "LOW_RISK",
+      "tiktok_originality": "ORIGINAL",
+      "claims_reviewed": true,
+      "disclosure_present": true,
+      "risk_flags": {
+        "graphic_content": "NONE",
+        "harmful_claims": "NONE",
+        "shocking_content": "LOW"
+      }
+    },
+    "duration": {
+      "target_seconds": 68,
+      "planned_seconds": 69.5,
+      "estimated_narration_seconds": 68,
+      "padding_seconds": 1.5,
+      "padding_status": "PENDING_FINAL_TTS"
+    },
+    "red_team": {
+      "status": "PENDING",
+      "editorial": {
+        "status": "PENDING",
+        "blocking_issues": [
+          "final visual QA",
+          "exact degassing-pipe coverage"
+        ]
+      },
+      "factual": {
+        "status": "PASS",
+        "blocking_issues": [],
+        "notes": "Core claims are sourced to NASA, USGS and peer-reviewed literature."
+      },
+      "monetization": {
+        "status": "PASS",
+        "blocking_issues": [],
+        "notes": "No graphic imagery or harmful instructions."
+      }
+    }
+  },
+  "research": {
+    "accessed_at": "2026-10-27",
+    "confidence": "HIGH",
+    "sources": [
+      {
+        "url": "https://science.nasa.gov/earth/earth-observatory/lake-nyos-cameroon-86244/",
+        "title": "Lake Nyos, Cameroon",
+        "facts": [
+          "Carbon dioxide from Lake Nyos moved into the valley and killed nearly 1,800 people and 3,500 livestock."
+        ]
+      },
+      {
+        "url": "https://pubs.usgs.gov/of/1987/0097/report.pdf",
+        "title": "The 21 August 1986 Lake Nyos Gas Disaster in Cameroon",
+        "facts": [
+          "The USGS report documents the volcanic setting and carbon-dioxide release mechanism."
+        ]
+      },
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17789781/",
+        "title": "The 1986 Lake Nyos gas disaster in Cameroon, West Africa",
+        "facts": [
+          "Peer-reviewed evidence supports carbon dioxide stored in deep lake water as the source."
+        ]
+      }
+    ],
+    "uncertainties": [
+      "The exact trigger of the limnic eruption remains debated in the literature."
+    ]
+  },
+  "editorial_qa": {
+    "status": "PENDING_ASSET_QA",
+    "reviewer": "Because of This production owner request",
+    "reviewed_at": null,
+    "notes": "Draft manifest created after asset staging. Final approval requires Drive hydration, SHA-256 checksums, three sampled frames per asset, narration, captions and semantic coverage review."
+  },
+  "editing": {
+    "clip_quantity": {
+      "mode": "adaptive",
+      "min_clips": 10,
+      "target_min": 12,
+      "target_max": 16,
+      "max_clips": 18,
+      "min_scene_seconds": 2,
+      "max_scene_seconds": 20,
+      "enforce": true,
+      "reason": "Locked v2 rule: 10-18 unique clips per episode; target 12-16, never repeated."
+    }
+  },
+  "loop": {
+    "enabled": true,
+    "title": "BECAUSE OF THIS",
+    "transition": "continuity_fade",
+    "outro_seconds": 1.2,
+    "tail_fade_seconds": 0.55,
+    "card_fade_in_seconds": 0.24,
+    "card_fade_out_seconds": 0.36,
+    "audio_fade_seconds": 0.6,
+    "restart_safe": true,
+    "reason": "Continuity fade bridges the final warning into the branded signature."
+  },
+  "color_grade": {
+    "enabled": true,
+    "preset": "investigative_noir_suspense",
+    "brightness": -0.03,
+    "contrast": 1.08,
+    "saturation": 0.9,
+    "gamma": 0.96,
+    "vignette": true,
+    "cinematic_suspense": {
+      "enabled": true,
+      "cool_shadows": 0.025,
+      "warm_highlights": 0.01,
+      "description": "Cool shadows, restrained warm highlights and controlled noir vignette."
+    },
+    "reason": "Locked channel look."
+  },
+  "visual_story_contract": {
+    "version": "2.2",
+    "narration_is_master_context": true,
+    "required_scene_fields": [
+      "narration_excerpt",
+      "visual_semantics",
+      "asset.visual_evidence"
+    ],
+    "match_dimensions": [
+      "subjects",
+      "actions",
+      "environments",
+      "objects",
+      "moods",
+      "composition"
+    ],
+    "forbidden_concepts_block": true,
+    "keyword_only_matching": false,
+    "human_visual_review_required": true,
+    "policy_note": "Literal beats must match required narrative dimensions; representational coverage must be declared and non-contradictory."
+  },
+  "story_graph": {
+    "version": "1.0",
+    "entities": [
+      {
+        "entity_id": "lake_nyos",
+        "canonical_name": "Lake Nyos",
+        "aliases": [
+          "lake",
+          "volcanic lake"
+        ],
+        "continuity_mode": "same lake throughout"
+      },
+      {
+        "entity_id": "villages",
+        "canonical_name": "nearby villages",
+        "aliases": [
+          "village",
+          "valley"
+        ],
+        "continuity_mode": "same valley communities"
+      },
+      {
+        "entity_id": "carbon_dioxide",
+        "canonical_name": "carbon dioxide cloud",
+        "aliases": [
+          "gas",
+          "cloud",
+          "invisible gas"
+        ],
+        "continuity_mode": "invisible threat moving downhill"
+      },
+      {
+        "entity_id": "volcanic_source",
+        "canonical_name": "volcanic activity beneath the lake",
+        "aliases": [
+          "volcano",
+          "crater"
+        ],
+        "continuity_mode": "deep geological source"
+      },
+      {
+        "entity_id": "monitoring",
+        "canonical_name": "monitoring of volcanic lakes",
+        "aliases": [
+          "monitoring",
+          "pipes"
+        ],
+        "continuity_mode": "present-day consequence"
+      }
+    ],
+    "beats": [
+      {
+        "scene_id": "S01",
+        "event": "introduce a calm lake and the impossible question",
+        "state_before": "ordinary_night",
+        "state_after": "calm_lake_hook",
+        "causal_role": "hook",
+        "emotion": "curiosity",
+        "visual_motif": "still water under darkness",
+        "entities": [
+          "lake_nyos"
+        ]
+      },
+      {
+        "scene_id": "S02",
+        "event": "place families and the lake on the night of the disaster",
+        "state_before": "calm_lake_hook",
+        "state_after": "sleeping_valley",
+        "causal_role": "context",
+        "emotion": "unease",
+        "visual_motif": "sleeping village",
+        "entities": [
+          "villages",
+          "lake_nyos"
+        ]
+      },
+      {
+        "scene_id": "S03",
+        "event": "the lake releases an invisible cloud",
+        "state_before": "sleeping_valley",
+        "state_after": "gas_released",
+        "causal_role": "inciting_event",
+        "emotion": "dread",
+        "visual_motif": "surface disturbance",
+        "entities": [
+          "lake_nyos",
+          "carbon_dioxide"
+        ]
+      },
+      {
+        "scene_id": "S04",
+        "event": "carbon dioxide is invisible, odorless and heavy",
+        "state_before": "gas_released",
+        "state_after": "unseen_threat",
+        "causal_role": "explanation",
+        "emotion": "fear",
+        "visual_motif": "underwater bubbles",
+        "entities": [
+          "carbon_dioxide"
+        ]
+      },
+      {
+        "scene_id": "S05",
+        "event": "the cloud moves downhill toward villages",
+        "state_before": "unseen_threat",
+        "state_after": "valley_covered",
+        "causal_role": "escalation",
+        "emotion": "panic",
+        "visual_motif": "low fog",
+        "entities": [
+          "carbon_dioxide",
+          "villages"
+        ]
+      },
+      {
+        "scene_id": "S06",
+        "event": "reveal the human cost without graphic imagery",
+        "state_before": "valley_covered",
+        "state_after": "morning_after",
+        "causal_role": "consequence",
+        "emotion": "shock",
+        "visual_motif": "empty village at dawn",
+        "entities": [
+          "villages"
+        ]
+      },
+      {
+        "scene_id": "S07",
+        "event": "contrast the absence of fire or visible warning",
+        "state_before": "morning_after",
+        "state_after": "quiet_aftermath",
+        "causal_role": "contradiction",
+        "emotion": "confusion",
+        "visual_motif": "quiet lake",
+        "entities": [
+          "lake_nyos"
+        ]
+      },
+      {
+        "scene_id": "S08",
+        "event": "explain volcanic activity feeding gas into deep water",
+        "state_before": "quiet_aftermath",
+        "state_after": "hidden_source_exposed",
+        "causal_role": "investigation",
+        "emotion": "curiosity",
+        "visual_motif": "volcanic geology",
+        "entities": [
+          "volcanic_source",
+          "carbon_dioxide"
+        ]
+      },
+      {
+        "scene_id": "S09",
+        "event": "explain the rare limnic eruption and debated trigger",
+        "state_before": "hidden_source_exposed",
+        "state_after": "limnic_release",
+        "causal_role": "reveal",
+        "emotion": "dread",
+        "visual_motif": "fog and release",
+        "entities": [
+          "lake_nyos",
+          "carbon_dioxide"
+        ]
+      },
+      {
+        "scene_id": "S10",
+        "event": "show the response and connect it to ongoing monitoring",
+        "state_before": "limnic_release",
+        "state_after": "monitored_threat",
+        "causal_role": "response_and_payoff",
+        "emotion": "lasting_unease",
+        "visual_motif": "lake under observation",
+        "entities": [
+          "monitoring",
+          "lake_nyos"
+        ]
+      }
+    ]
+  },
+  "narrative_coverage": {
+    "policy": "ordered_scene_excerpts_cover_canonical_script_once",
+    "allow_overlap": false,
+    "timing_source": "forced_alignment_sidecar"
+  },
+  "engine_profile": "because-of-this-v2-locked-2026-10",
+  "engine_profile_fingerprint": "343ab39c203c08b5166115e6b14dab4348de069ef1feb27f3f440b5dc2783237",
+  "lifecycle_status": "DRAFT_ASSET_QA",
+  "archive_reason": ""
+}
