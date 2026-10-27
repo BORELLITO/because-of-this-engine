@@ -215,8 +215,21 @@ jobs:
           print(value["voice"]["style"])
           PY
           )"
+          NARRATION_INPUT="$(python - "${EPISODE_DIR}/manifest.json" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          manifest_path = Path(sys.argv[1]).resolve()
+          value = json.loads(manifest_path.read_text(encoding="utf-8"))
+          configured = (value.get("voice") or {}).get("tts_script_path")
+          path = (manifest_path.parent / configured).resolve() if configured else (manifest_path.parent / "script.txt").resolve()
+          if path == manifest_path.parent or manifest_path.parent not in path.parents:
+              raise SystemExit("TTS pronunciation script must stay inside the episode directory.")
+          print(path)
+          PY
+          )"
           python narrate.py \
-            --input "${EPISODE_DIR}/script.txt" \
+            --input "${NARRATION_INPUT}" \
             --output "${EPISODE_DIR}/audio/narration.wav" \
             --model "${MODEL}" \
             --voice "${VOICE}" \
