@@ -114,9 +114,14 @@ def render_scene(
     focus_y = float(focus.get("y", 0.5))
     if not 0 <= focus_x <= 1 or not 0 <= focus_y <= 1:
         raise RenderError(f"Scene {scene['scene_id']} has an invalid focus point.")
+    # Keep the clip duration deterministic even when a source file has sparse
+    # timestamps or an early EOF. The contract still rejects genuinely short
+    # sources; tpad only makes the encoded scene clock explicit for xfade.
+    filters = scene_filter(width, height, focus_x, focus_y, color_grade)
+    filters += f",tpad=stop_mode=clone:stop_duration={requested:.3f},trim=duration={requested:.3f},setpts=PTS-STARTPTS"
     run([
-        "ffmpeg", "-y", "-ss", f"{source_in:.3f}", "-t", f"{requested:.3f}",
-        "-i", str(source), "-an", "-vf", scene_filter(width, height, focus_x, focus_y, color_grade),
+        "ffmpeg", "-y", "-ss", f"{source_in:.3f}", "-i", str(source), "-an",
+        "-vf", filters, "-t", f"{requested:.3f}",
         "-r", str(FPS), "-c:v", "libx264", "-preset", "veryfast", "-crf", "21",
         "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(output),
     ])
@@ -284,13 +289,30 @@ def narration_locked_scenes(
         return locked
 
 def assemble(scene_files: list[Path], scenes: list[dict[str, Any]], output: Path) -> None:
+    expected_durations = [float(scene["duration"]) for scene in scenes]
+    for path, expected in zip(scene_files, expected_durations):
+        actual = float(ffprobe(path).get("video_duration") or 0.0)
+        if actual <= 0 or abs(actual - expected) > 0.10:
+            raise RenderError(
+                f"Rendered scene clock drifted before assembly: {path.name} "
+                f"is {actual:.3f}s, expected {expected:.3f}s."
+            )
     command = ["ffmpeg", "-y"]
     for path in scene_files:
         command.extend(["-i", str(path)])
     transitions = [scene.get("transition", {"type": "crossfade", "duration": 0.25}) for scene in scenes[1:]]
-    graph = xfade_filter([float(scene["duration"]) for scene in scenes], transitions)
+    graph = xfade_filter(expected_durations, transitions)
     command.extend(["-filter_complex", graph, "-map", "[v]", "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "21", "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(output)])
     run(command)
+    actual_output = float(ffprobe(output).get("video_duration") or 0.0)
+    expected_output = sum(expected_durations) - sum(
+        transition_duration(scene.get("transition", {})) for scene in scenes[1:]
+    )
+    if abs(actual_output - expected_output) > 0.15:
+        raise RenderError(
+            f"Assembled video clock drifted: {actual_output:.3f}s, "
+            f"expected {expected_output:.3f}s."
+        )
 
 
 def ass_time(seconds: float) -> str:
@@ -320,7 +342,7 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,StrikeOut,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding
-Style: Loop,Arial,60,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,1,0,0,0,100,100,0,0,1,3,0,5,40,40,40,1
+Style: Loop,Arial,60,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,1,0,0,0,100,100,0,0,1,3,0,8,40,40,110,1
 
 [Events]
 Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
@@ -361,6 +383,12 @@ def mux_audio(
     loop = loop or {}
     outro_seconds = loop_outro_seconds({"loop": loop})
     total_duration = narration_duration + outro_seconds
+    assembled_duration = float(ffprobe(video).get("video_duration") or 0.0)
+    if abs(assembled_duration - narration_duration) > 0.15:
+        raise RenderError(
+            f"Cannot mux audio over an incomplete visual timeline: "
+            f"{assembled_duration:.3f}s of video for {narration_duration:.3f}s of narration."
+        )
     audio_fade = min(float(loop.get("audio_fade_seconds", 0.60)), max(0.1, outro_seconds))
     tail_fade_seconds = float(loop.get("tail_fade_seconds", 0.55))
     card_fade_in_seconds = float(loop.get("card_fade_in_seconds", 0.24))
@@ -380,8 +408,10 @@ def mux_audio(
         command.extend(["-loop", "1", "-framerate", "1", "-i", str(logo_path)])
         logo_width = int(brand.get("logo_width", 540))
         logo_opacity = float(brand.get("logo_opacity", 0.82))
-        logo_margin = int(brand.get("logo_margin", 54))
         logo_top = int(brand.get("logo_top", 72))
+        logo_anchor = str(brand.get("logo_anchor", "center_top"))
+        if logo_anchor != "center_top":
+            raise RenderError("Canonical logo anchor must be center_top.")
         filters.extend([
             (
                 f"[2:v]format=rgba,scale={logo_width}:-1,"
@@ -390,7 +420,7 @@ def mux_audio(
             ),
             (
                 f"[captioned][logo]overlay="
-                f"x=main_w-overlay_w-{logo_margin}:y={logo_top}:"
+                f"x=(main_w-overlay_w)/2:y={logo_top}:"
                 "eof_action=repeat:shortest=1[main_visual]"
             ),
         ])
