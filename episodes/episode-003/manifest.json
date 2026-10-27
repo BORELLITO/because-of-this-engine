@@ -18,7 +18,7 @@
     "model": "gemini-3.8-flash-tts",
     "voice": "Charon",
     "language": "en-US",
-    "style": "Clear American English, crisp diction, brisk but natural pace, restrained suspense. Pronounce numbers as spoken English words with clear word boundaries; preserve every word exactly.",
+    "style": "Clear American English, crisp diction, moderate pace, restrained suspense. Pronounce numbers as spoken English words with clear word boundaries; preserve every word exactly.",
     "model_rationale": "Production target: the locked Because Of This narration profile with strict word-level caption alignment."
   },
   "script": {
@@ -313,7 +313,7 @@
         "source_segment_in": 0,
         "source_segment_out": 6.973633
       },
-      "narration_excerpt": "On August twenty-first, nineteen eighty-six, families living near Lake Nyos in Cameroon went to sleep beside water that looked completely calm.",
+      "narration_excerpt": "On August twenty-first, nineteen eighty-six, families living near Lake Nyos went to sleep beside calm water.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -850,7 +850,7 @@
         "source_segment_in": 0,
         "source_segment_out": 12.929583
       },
-      "narration_excerpt": "By morning, more than seventeen hundred people and thousands of animals were dead.",
+      "narration_excerpt": "By morning, more than seventeen hundred people and animals were dead.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1120,7 +1120,7 @@
         "source_segment_in": 0,
         "source_segment_out": 7.5
       },
-      "narration_excerpt": "Scientists later discovered that volcanic activity beneath the lake had been feeding carbon dioxide into its deep water for years.",
+      "narration_excerpt": "Scientists discovered volcanic activity beneath the lake had fed carbon dioxide into deep water for years.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1255,7 +1255,7 @@
         "source_segment_in": 0,
         "source_segment_out": 18.351667
       },
-      "narration_excerpt": "A rare limnic eruption suddenly released that trapped gas. The exact trigger is still debated, but the result was undeniable: a silent cloud moving through the darkness.",
+      "narration_excerpt": "A rare limnic eruption released that trapped gas. The exact trigger is still debated, but a silent cloud moved through the darkness.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1390,7 +1390,7 @@
         "source_segment_in": 0,
         "source_segment_out": 18.476792
       },
-      "narration_excerpt": "Engineers eventually installed pipes",
+      "narration_excerpt": "Engineers installed pipes",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1672,7 +1672,7 @@
         "source_segment_in": 0,
         "source_segment_out": 7.56
       },
-      "narration_excerpt": "But Lake Nyos left behind a terrifying lesson. Some of the deadliest disasters do not look dangerous until they have already begun. Because of this, other volcanic lakes are now monitored for the same hidden threat.",
+      "narration_excerpt": "But Lake Nyos left behind a terrifying lesson about hidden danger. Some of the deadliest disasters do not look dangerous until they begin. Because of this, other volcanic lakes are now monitored for the same threat.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
