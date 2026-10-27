@@ -1296,6 +1296,266 @@
           "minimum_direct": 0
         }
       }
+    },
+    {
+      "scene_id": "S11",
+      "duration": 4.5,
+      "story_beat": "response: engineers install pipes to release gas from the lake",
+      "visual_intent": "show real industrial piping as the engineering-response bridge",
+      "visual_function": "response",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "match_score": 0.9,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-003-s11",
+        "path": "runtime-assets/s11.mp4",
+        "drive_file_id": "1Avcya41l6J2H1_bnn_y6LHsbrkjeLTwh",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/industrial-machinery-and-piping-inside-factory-30243446/",
+        "license": "Pexels Free License",
+        "rights_status": "PENDING_FRAME_QA",
+        "approved_for_render": false,
+        "sha256": "PENDING_DRIVE_HYDRATION",
+        "reuse_status": "NEW_ASSET_EPISODE_003",
+        "episode_id": "because-of-this-episode-003",
+        "author": "Pexels source contributor",
+        "acquisition_timestamp": "2026-10-27T00:00:00Z",
+        "original_filename": "episode-003-s11-industrial-piping-pexels.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 7,
+        "width": 4096,
+        "height": 2160,
+        "filesize_bytes": 17318504,
+        "job_ownership": "because-of-this-episode-003",
+        "scene_usage": "S11",
+        "visual_evidence": {
+          "reviewed": false,
+          "basis": "Pexels page title, description, free license and player reviewed; three sampled Drive frames pending",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": null,
+          "review_method": "source-page license/title/description plus three sampled Drive frames",
+          "source_title": "Industrial Machinery and Piping Inside Factory",
+          "source_description": "A view of complex industrial machinery and piping inside a factory.",
+          "subjects": [
+            "industrial machinery",
+            "pipes"
+          ],
+          "actions": [],
+          "environments": [
+            "factory",
+            "industrial"
+          ],
+          "objects": [
+            "piping"
+          ],
+          "moods": [
+            "technical",
+            "controlled"
+          ],
+          "composition": [
+            "close_up"
+          ],
+          "observed_subjects": [
+            "industrial machinery",
+            "pipes"
+          ],
+          "observed_actions": [],
+          "observed_environments": [
+            "factory",
+            "industrial"
+          ],
+          "observed_objects": [
+            "piping"
+          ],
+          "sample_timestamps": [],
+          "action_window": {
+            "in": 0,
+            "out": 7
+          },
+          "usable_window": {
+            "in": 0,
+            "out": 7
+          },
+          "notes": "Representational engineering footage; do not present the factory as Lake Nyos itself."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 7
+      },
+      "narration_excerpt": "Engineers eventually installed pipes to drain gas from the lake's depths and reduce the danger.",
+      "visual_semantics": {
+        "role": "representational",
+        "required": {
+          "subjects": [
+            "industrial machinery",
+            "pipes"
+          ],
+          "actions": []
+        },
+        "preferred": {
+          "environments": [
+            "factory",
+            "industrial"
+          ]
+        },
+        "forbidden": [
+          "graphic_death",
+          "fire",
+          "battlefield",
+          "medical_vial"
+        ],
+        "critical": {
+          "subjects": [
+            "industrial machinery",
+            "pipes"
+          ],
+          "actions": []
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "pipes"
+          ],
+          "minimum_direct": 1
+        }
+      }
+    },
+    {
+      "scene_id": "S12",
+      "duration": 4.5,
+      "story_beat": "payoff: monitoring and the lesson that danger can look ordinary",
+      "visual_intent": "use valves and piping as the final controlled-release detail before the lake returns",
+      "visual_function": "payoff",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "match_score": 0.9,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-003-s12",
+        "path": "runtime-assets/s12.mp4",
+        "drive_file_id": "1OKqhWPIkBm2wHW2tQx8S3_fZqv5M9j-9",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/industrial-pipelines-and-valves-system-30243437/",
+        "license": "Pexels Free License",
+        "rights_status": "PENDING_FRAME_QA",
+        "approved_for_render": false,
+        "sha256": "PENDING_DRIVE_HYDRATION",
+        "reuse_status": "NEW_ASSET_EPISODE_003",
+        "episode_id": "because-of-this-episode-003",
+        "author": "Pexels source contributor",
+        "acquisition_timestamp": "2026-10-27T00:00:00Z",
+        "original_filename": "episode-003-s12-industrial-valves-pexels.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 7,
+        "width": 4096,
+        "height": 2160,
+        "filesize_bytes": 11846295,
+        "job_ownership": "because-of-this-episode-003",
+        "scene_usage": "S12",
+        "visual_evidence": {
+          "reviewed": false,
+          "basis": "Pexels page title, description, free license and player reviewed; three sampled Drive frames pending",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": null,
+          "review_method": "source-page license/title/description plus three sampled Drive frames",
+          "source_title": "Industrial Pipelines and Valves System",
+          "source_description": "Close-up view of complex industrial pipelines and valves.",
+          "subjects": [
+            "industrial pipelines",
+            "valves"
+          ],
+          "actions": [],
+          "environments": [
+            "industrial",
+            "engineering"
+          ],
+          "objects": [
+            "valves",
+            "pipes"
+          ],
+          "moods": [
+            "controlled",
+            "technical"
+          ],
+          "composition": [
+            "close_up"
+          ],
+          "observed_subjects": [
+            "industrial pipelines",
+            "valves"
+          ],
+          "observed_actions": [],
+          "observed_environments": [
+            "industrial",
+            "engineering"
+          ],
+          "observed_objects": [
+            "valves",
+            "pipes"
+          ],
+          "sample_timestamps": [],
+          "action_window": {
+            "in": 0,
+            "out": 7
+          },
+          "usable_window": {
+            "in": 0,
+            "out": 7
+          },
+          "notes": "Representational engineering detail; use as the final monitoring/degassing cue, not as literal Lake Nyos footage."
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 7
+      },
+      "narration_excerpt": "But Lake Nyos left behind a terrifying lesson. Some of the deadliest disasters do not look dangerous until they have already begun. Because of this, other volcanic lakes are now monitored for the same hidden threat.",
+      "visual_semantics": {
+        "role": "representational",
+        "required": {
+          "subjects": [
+            "industrial pipelines",
+            "valves"
+          ],
+          "actions": []
+        },
+        "preferred": {
+          "environments": [
+            "industrial",
+            "engineering"
+          ]
+        },
+        "forbidden": [
+          "graphic_death",
+          "fire",
+          "battlefield",
+          "medical_vial"
+        ],
+        "critical": {
+          "subjects": [
+            "industrial pipelines",
+            "valves"
+          ],
+          "actions": []
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "valves"
+          ],
+          "minimum_direct": 1
+        }
+      }
     }
   ],
   "story_creation": {
@@ -1354,11 +1614,13 @@
         "S07",
         "S08",
         "S09",
-        "S10"
+        "S10",
+        "S11",
+        "S12"
       ],
       "approved_scene_ids": [],
-      "coverage_ratio": 0.83,
-      "note": "Ten unique clips satisfy the hard minimum. Exact degassing-pipe coverage remains a deliberate QA gap before final approval."
+      "coverage_ratio": 0.96,
+      "note": "Twelve unique clips are now staged, including dedicated industrial piping and valve inserts. Final approval remains blocked only on Drive hydration, frame QA and narration/caption gates."
     },
     "channel_diversity": {
       "comparison_window": "last_20_episodes",
@@ -1398,7 +1660,8 @@
         "status": "PENDING",
         "blocking_issues": [
           "final visual QA",
-          "exact degassing-pipe coverage"
+          "Drive checksums",
+          "narration/caption alignment"
         ]
       },
       "factual": {
@@ -1447,7 +1710,7 @@
     "status": "PENDING_ASSET_QA",
     "reviewer": "Because of This production owner request",
     "reviewed_at": null,
-    "notes": "Draft manifest created after asset staging. Final approval requires Drive hydration, SHA-256 checksums, three sampled frames per asset, narration, captions and semantic coverage review."
+    "notes": "Draft manifest updated with twelve unique Drive-staged clips, including dedicated industrial piping and valve inserts. Final approval requires Drive hydration, SHA-256 checksums, three sampled frames per asset, narration, captions and semantic coverage review."
   },
   "editing": {
     "clip_quantity": {
@@ -1683,6 +1946,31 @@
         "causal_role": "response_and_payoff",
         "emotion": "lasting_unease",
         "visual_motif": "lake under observation",
+        "entities": [
+          "monitoring",
+          "lake_nyos"
+        ]
+      },
+      {
+        "scene_id": "S11",
+        "event": "show industrial piping as the engineering response",
+        "state_before": "limnic_release",
+        "state_after": "degassing_response",
+        "causal_role": "response",
+        "emotion": "relief",
+        "visual_motif": "pipes and machinery",
+        "entities": [
+          "monitoring"
+        ]
+      },
+      {
+        "scene_id": "S12",
+        "event": "connect controlled valves to ongoing monitoring and the final lesson",
+        "state_before": "degassing_response",
+        "state_after": "monitored_threat",
+        "causal_role": "payoff",
+        "emotion": "lasting_unease",
+        "visual_motif": "industrial valves",
         "entities": [
           "monitoring",
           "lake_nyos"
