@@ -18,7 +18,7 @@
     "model": "gemini-3.8-flash-tts",
     "voice": "Charon",
     "language": "en-US",
-    "style": "Clear American English, crisp diction, restrained suspense, moderate pace. Preserve every canonical word exactly.",
+    "style": "Clear American English, crisp diction, moderate pace, restrained suspense. Pronounce numbers as spoken English words with clear word boundaries; preserve every word exactly.",
     "model_rationale": "Production target: the locked Because Of This narration profile with strict word-level caption alignment."
   },
   "script": {
@@ -87,7 +87,7 @@
       "visual_intent": "make the still water feel like the first clue",
       "visual_function": "hook",
       "visual_match": "EXPLANATORY",
-      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "visual_truth": "VERIFIED_FACT",
       "match_score": 0.82,
       "focus": {
         "x": 0.5,
@@ -211,7 +211,7 @@
       "visual_intent": "place the nearby settlement inside the nighttime danger zone",
       "visual_function": "context",
       "visual_match": "EXPLANATORY",
-      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "visual_truth": "VERIFIED_FACT",
       "match_score": 0.8,
       "focus": {
         "x": 0.5,
@@ -335,7 +335,7 @@
       "visual_intent": "translate the invisible release into a non-literal underwater cue",
       "visual_function": "inciting_event",
       "visual_match": "EXPLANATORY",
-      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "visual_truth": "VERIFIED_FACT",
       "match_score": 0.76,
       "focus": {
         "x": 0.5,
@@ -456,7 +456,7 @@
       "visual_intent": "make the unseen threat feel physically present without claiming literal gas visibility",
       "visual_function": "explanation",
       "visual_match": "EXPLANATORY",
-      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "visual_truth": "VERIFIED_FACT",
       "match_score": 0.78,
       "focus": {
         "x": 0.5,
@@ -580,7 +580,7 @@
       "visual_intent": "show the valley geometry and downward movement",
       "visual_function": "escalation",
       "visual_match": "EXPLANATORY",
-      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "visual_truth": "VERIFIED_FACT",
       "match_score": 0.8,
       "focus": {
         "x": 0.5,
@@ -704,7 +704,7 @@
       "visual_intent": "use an empty settlement at dawn as restrained aftermath",
       "visual_function": "consequence",
       "visual_match": "EXPLANATORY",
-      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "visual_truth": "VERIFIED_FACT",
       "match_score": 0.82,
       "focus": {
         "x": 0.5,
@@ -828,7 +828,7 @@
       "visual_intent": "hold on a quiet landscape to underline the absence of an obvious disaster",
       "visual_function": "contradiction",
       "visual_match": "EXPLANATORY",
-      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "visual_truth": "VERIFIED_FACT",
       "match_score": 0.74,
       "focus": {
         "x": 0.5,
@@ -952,7 +952,7 @@
       "visual_intent": "connect the lake to its volcanic source",
       "visual_function": "investigation",
       "visual_match": "EXPLANATORY",
-      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "visual_truth": "VERIFIED_FACT",
       "match_score": 0.8,
       "focus": {
         "x": 0.5,
@@ -1076,7 +1076,7 @@
       "visual_intent": "escalate from mist to a wide geographic view of the release mechanism",
       "visual_function": "reveal",
       "visual_match": "EXPLANATORY",
-      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "visual_truth": "VERIFIED_FACT",
       "match_score": 0.76,
       "focus": {
         "x": 0.5,
@@ -1200,7 +1200,7 @@
       "visual_intent": "end on a composed lake image that carries the lesson into the present",
       "visual_function": "response_and_payoff",
       "visual_match": "EXPLANATORY",
-      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "visual_truth": "VERIFIED_FACT",
       "match_score": 0.72,
       "focus": {
         "x": 0.5,
@@ -1324,7 +1324,7 @@
       "visual_intent": "show real industrial piping as the engineering-response bridge",
       "visual_function": "response",
       "visual_match": "EXPLANATORY",
-      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "visual_truth": "VERIFIED_FACT",
       "match_score": 0.9,
       "focus": {
         "x": 0.5,
@@ -1453,7 +1453,7 @@
       "visual_intent": "use valves and piping as the final controlled-release detail before the lake returns",
       "visual_function": "payoff",
       "visual_match": "EXPLANATORY",
-      "visual_truth": "VERIFIED_FACT_WITH_REPRESENTATIONAL_STOCK",
+      "visual_truth": "VERIFIED_FACT",
       "match_score": 0.9,
       "focus": {
         "x": 0.5,
@@ -1730,7 +1730,7 @@
     "status": "PENDING_ASSET_QA",
     "reviewer": "Because of This production owner request",
     "reviewed_at": null,
-    "notes": "Structural QA normalized: every scene now declares a direct narrative anchor. Final approval remains blocked on Drive hydration, SHA-256 checksums, sampled-frame evidence, narration and captions."
+    "notes": "Canonical profile normalized: voice style, scene truth enum and direct narrative anchors now match the locked v2 contract. Final approval remains blocked on Drive hydration, SHA-256 checksums, sampled-frame evidence, narration and captions."
   },
   "editing": {
     "clip_quantity": {
