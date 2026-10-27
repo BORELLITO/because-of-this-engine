@@ -89,6 +89,24 @@ def _script_text(manifest_path: Path, manifest: dict[str, Any]) -> str:
     return text
 
 
+def _tts_script_text(manifest_path: Path, manifest: dict[str, Any], canonical_text: str) -> str:
+    voice = manifest.get("voice") or {}
+    value = voice.get("tts_script_path")
+    if not isinstance(value, str) or not value.strip():
+        return canonical_text
+    path = (manifest_path.parent / value).resolve()
+    base = manifest_path.parent.resolve()
+    if path == base or base not in path.parents:
+        raise NarrationCacheError("voice.tts_script_path must stay inside the episode directory.")
+    try:
+        text = path.read_text(encoding="utf-8").strip()
+    except OSError as exc:
+        raise NarrationCacheError(f"Could not read TTS pronunciation script: {path}") from exc
+    if not text:
+        raise NarrationCacheError("TTS pronunciation script is empty.")
+    return text
+
+
 def cache_key(
     script_text: str,
     *,
@@ -96,6 +114,7 @@ def cache_key(
     voice: str,
     language: str,
     style: str,
+    tts_script_text: str | None = None,
     normalization_version: str = NORMALIZATION_VERSION,
 ) -> str:
     payload = {
@@ -107,6 +126,10 @@ def cache_key(
         "style": str(style).strip(),
         "normalization_version": str(normalization_version).strip(),
     }
+    if tts_script_text is not None and tts_script_text != script_text:
+        payload["tts_script_sha256"] = hashlib.sha256(
+            tts_script_text.encode("utf-8")
+        ).hexdigest()
     return hashlib.sha256(
         json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
     ).hexdigest()
@@ -123,12 +146,14 @@ def manifest_cache_spec(manifest_path: Path) -> dict[str, Any]:
     if missing:
         raise NarrationCacheError("Manifest voice is missing: " + ", ".join(missing))
     text = _script_text(manifest_path, manifest)
+    tts_text = _tts_script_text(manifest_path, manifest, text)
     key = cache_key(
         text,
         model=str(voice["model"]),
         voice=str(voice["voice"]),
         language=str(voice["language"]),
         style=str(voice["style"]),
+        tts_script_text=tts_text,
     )
     audio = manifest.get("audio") or {}
     audio_value = audio.get("path")
@@ -141,7 +166,9 @@ def manifest_cache_spec(manifest_path: Path) -> dict[str, Any]:
     return {
         "manifest": manifest,
         "script_text": text,
+        "tts_script_text": tts_text,
         "script_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
+        "tts_script_sha256": hashlib.sha256(tts_text.encode("utf-8")).hexdigest(),
         "model": str(voice["model"]),
         "voice": str(voice["voice"]),
         "language": str(voice["language"]),
@@ -173,6 +200,7 @@ def validate_entry(spec: dict[str, Any], audio_path: Path, sidecar_path: Path) -
     expected = {
         "cache_key": spec["cache_key"],
         "script_sha256": spec["script_sha256"],
+        "tts_script_sha256": spec["tts_script_sha256"],
         "model": spec["model"],
         "voice": spec["voice"],
         "language": spec["language"],
@@ -214,6 +242,7 @@ def annotate_local(spec: dict[str, Any]) -> dict[str, Any]:
         "cache_schema_version": CACHE_SCHEMA_VERSION,
         "cache_key": spec["cache_key"],
         "script_sha256": spec["script_sha256"],
+        "tts_script_sha256": spec["tts_script_sha256"],
         "model": spec["model"],
         "voice": spec["voice"],
         "language": spec["language"],
