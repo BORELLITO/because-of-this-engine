@@ -17,6 +17,7 @@ from production.caption_quality import CaptionQualityError, audio_duration, qual
 from production.video_asset_contract import VideoContractError, load_manifest, validate_manifest
 from production.story_creation import CREATION_GATES, audit_story_creation
 from production.asset_reuse_brain import AssetReuseBrainError, audit as audit_asset_reuse
+from production.canonical_config import CanonicalConfigError, validate_canonical_manifest
 
 GATES = tuple((f"G{i}", name) for i, name in enumerate((
     "CONFIG", "RESEARCH", "SCRIPT", "VOICE", "ASSETS", "PROVENANCE",
@@ -159,7 +160,7 @@ def _voice(m: dict[str, Any], base: Path) -> tuple[str, str, float | None]:
     return "PASS", f"measured narration {duration:.3f}s; voice profile and sidecar agree", duration
 
 def _assets(m: dict[str, Any], base: Path, mode: str) -> tuple[str, str]:
-    try: spec = validate_manifest(m, base, mode=mode, check_files=True)
+    try: spec = validate_manifest(m, base, mode=mode, check_files=True, enforce_canonical=True)
     except (VideoContractError, OSError, ValueError) as exc: return "BLOCKED", str(exc)
     return "PASS", f"{len(spec['scenes'])} unique approved video scene(s)"
 
@@ -196,11 +197,22 @@ def evaluate(manifest_path: Path, mode: str, phase: str, *, release_report_path:
     base, manifest = manifest_path.parent, load_manifest(manifest_path)
     active = ACTIVE_BY_PHASE[phase]
     results: list[dict[str, str]] = []
-    config_ok = (manifest.get("schema_version") == "2.0" and str(manifest.get("video_id", "")).strip()
-                 and str(manifest.get("job_id") or (manifest.get("job") or {}).get("job_id") or "").strip()
-                 and manifest.get("fps") == 25)
-    results.append(_gate("G0", "CONFIG", "PASS" if config_ok else "BLOCKED",
-        "schema 2.0, stable job_id and 25 fps" if config_ok else "schema 2.0, video_id, stable job_id and fps=25 are required"))
+    try:
+        canonical = validate_canonical_manifest(manifest, source_label=str(manifest_path))
+        config_ok = (
+            manifest.get("schema_version") == "2.0"
+            and str(manifest.get("video_id", "")).strip()
+            and str(manifest.get("job_id") or (manifest.get("job") or {}).get("job_id") or "").strip()
+        )
+        config_evidence = (
+            f"locked profile {canonical['profile_id']} "
+            f"(fingerprint {canonical['profile_fingerprint'][:12]})"
+            if config_ok else "schema 2.0, video_id and stable job_id are required"
+        )
+    except (CanonicalConfigError, TypeError, ValueError) as exc:
+        config_ok = False
+        config_evidence = str(exc)
+    results.append(_gate("G0", "CONFIG", "PASS" if config_ok else "BLOCKED", config_evidence))
     status, evidence = _research(manifest, mode); results.append(_gate("G1", "RESEARCH", status, evidence))
     status, evidence = _script(manifest, base); results.append(_gate("G2", "SCRIPT", status, evidence))
     status, evidence, story_creation = _story_creation(manifest, base, mode)
