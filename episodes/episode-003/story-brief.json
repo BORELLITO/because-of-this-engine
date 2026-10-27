@@ -1,0 +1,180 @@
+{
+  "schema_version": "1.0",
+  "episode_id": "because-of-this-episode-003",
+  "title": "The Lake That Killed Without a Sound",
+  "truth_mode": "VERIFIED_FACT",
+  "format": "The Invisible Disaster",
+  "language": "en",
+  "primary_emotion": "dread",
+  "secondary_emotion": "curiosity",
+  "central_question": "How did a calm volcanic lake kill more than seventeen hundred people overnight?",
+  "visual_symbol": "a still lake under a dark sky",
+  "canonical_script_path": "episodes/episode-003/script.txt",
+  "target_duration_seconds": 68,
+  "music": {
+    "title": "Echoes",
+    "author": "Andrew Ev",
+    "provider": "Mixkit",
+    "drive_file_id": "1u-1ZKkVxKTw_E6vEzW0VcpF2lfjGfmeI",
+    "source_page_url": "https://mixkit.co/free-stock-music/mood/suspenseful/",
+    "license": "Mixkit Stock Music Free License",
+    "commercial_use": true,
+    "attribution_required": false,
+    "planned_path": "audio/episode-003-echoes-andrew-ev.mp3"
+  },
+  "sources": [
+    {
+      "url": "https://science.nasa.gov/earth/earth-observatory/lake-nyos-cameroon-86244/",
+      "title": "Lake Nyos, Cameroon",
+      "facts": [
+        "A carbon-dioxide cloud released from Lake Nyos in 1986 moved into the valley and killed nearly 1,800 people and 3,500 livestock."
+      ]
+    },
+    {
+      "url": "https://pubs.usgs.gov/of/1987/0097/report.pdf",
+      "title": "The 21 August 1986 Lake Nyos Gas Disaster in Cameroon",
+      "facts": [
+        "USGS investigation identifies carbon dioxide as the toxic agent and documents the volcanic setting and gas-release mechanism."
+      ]
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17789781/",
+      "title": "The 1986 Lake Nyos gas disaster in Cameroon, West Africa",
+      "facts": [
+        "Peer-reviewed geochemical evidence supports carbon dioxide stored in the deep lake water as the source of the disaster."
+      ]
+    }
+  ],
+  "story_graph": {
+    "entities": [
+      {
+        "id": "lake_nyos",
+        "name": "Lake Nyos",
+        "continuity": "same volcanic lake throughout"
+      },
+      {
+        "id": "villages",
+        "name": "nearby villages",
+        "continuity": "same valley communities"
+      },
+      {
+        "id": "carbon_dioxide",
+        "name": "carbon dioxide cloud",
+        "continuity": "invisible threat moving downhill"
+      },
+      {
+        "id": "volcanic_source",
+        "name": "volcanic activity beneath the lake",
+        "continuity": "deep geological source"
+      },
+      {
+        "id": "degassing_pipes",
+        "name": "degassing pipes",
+        "continuity": "engineered mitigation after the disaster"
+      },
+      {
+        "id": "monitoring",
+        "name": "monitoring of volcanic lakes",
+        "continuity": "present-day consequence"
+      }
+    ],
+    "beats": [
+      {
+        "scene_id": "S01",
+        "event": "introduce a calm lake and the impossible question",
+        "role": "hook",
+        "emotion": "curiosity",
+        "motif": "still water under darkness"
+      },
+      {
+        "scene_id": "S02",
+        "event": "place families and the lake in Cameroon on the night of the disaster",
+        "role": "context",
+        "emotion": "unease",
+        "motif": "sleeping valley"
+      },
+      {
+        "scene_id": "S03",
+        "event": "the lake releases an invisible cloud",
+        "role": "inciting_event",
+        "emotion": "dread",
+        "motif": "surface disturbance"
+      },
+      {
+        "scene_id": "S04",
+        "event": "show carbon dioxide as invisible, odorless and heavier than air",
+        "role": "explanation",
+        "emotion": "fear",
+        "motif": "low fog or unseen movement"
+      },
+      {
+        "scene_id": "S05",
+        "event": "show the cloud moving downhill toward villages",
+        "role": "escalation",
+        "emotion": "panic",
+        "motif": "valley at night"
+      },
+      {
+        "scene_id": "S06",
+        "event": "reveal the scale of the deaths without graphic imagery",
+        "role": "consequence",
+        "emotion": "shock",
+        "motif": "empty village at dawn"
+      },
+      {
+        "scene_id": "S07",
+        "event": "contrast the absence of fire or visible warning",
+        "role": "contradiction",
+        "emotion": "confusion",
+        "motif": "quiet aftermath"
+      },
+      {
+        "scene_id": "S08",
+        "event": "explain volcanic activity feeding gas into deep water",
+        "role": "investigation",
+        "emotion": "curiosity",
+        "motif": "deep lake / volcanic geology"
+      },
+      {
+        "scene_id": "S09",
+        "event": "explain the rare limnic eruption and acknowledge the trigger is debated",
+        "role": "reveal",
+        "emotion": "dread",
+        "motif": "water turning into release"
+      },
+      {
+        "scene_id": "S10",
+        "event": "show engineers installing pipes to release the gas",
+        "role": "response",
+        "emotion": "relief",
+        "motif": "pipe and water plume"
+      },
+      {
+        "scene_id": "S11",
+        "event": "frame the lesson: danger can remain visually ordinary",
+        "role": "reflection",
+        "emotion": "chill",
+        "motif": "peaceful lake after disaster"
+      },
+      {
+        "scene_id": "S12",
+        "event": "connect Lake Nyos to monitoring other volcanic lakes",
+        "role": "payoff",
+        "emotion": "lasting unease",
+        "motif": "observation and warning"
+      }
+    ]
+  },
+  "production_policy": {
+    "no_reused_clips": true,
+    "video_only": true,
+    "source_providers": [
+      "Mixkit",
+      "Pexels",
+      "Pixabay"
+    ],
+    "each_scene_requires_visual_review": true,
+    "final_manifest_requires_drive_ids_sha256_and_license": true,
+    "status": "STORY_READY_ASSET_RESEARCH_PENDING"
+  }
+}
