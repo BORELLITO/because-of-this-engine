@@ -99,7 +99,8 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 # accepted match must still come from a real Vosk timestamp.
                 "nyos": [
                     ["nyos"], ["nios"], ["nious"], ["neos"], ["nayos"], ["niyos"],
-                    ["nee", "os"], ["nee", "ohs"], ["knee", "os"], ["nigh", "os"],\n                    ["n"], ["no"], ["nose"], ["knows"],
+                    ["nee", "os"], ["nee", "ohs"], ["knee", "os"], ["nigh", "os"],
+                    ["n"], ["no"], ["nose"], ["knows"],
                 ],
                 "limnic": [
                     ["limnic"], ["limnik"], ["limnick"], ["lim", "nick"],
