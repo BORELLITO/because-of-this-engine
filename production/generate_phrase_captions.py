@@ -62,6 +62,35 @@ def _balanced_lines(sentence: str, width: int) -> list[str]:
     return wrap(sentence, width=width, break_long_words=False, break_on_hyphens=False)
 
 
+
+_TRAILING_FUNCTION_WORDS = {"a", "an", "the", "to", "of", "and", "in", "on"}
+
+
+def _keep_trailing_function_word_with_next_chunk(chunks: list[str]) -> list[str]:
+    """Keep a short boundary word with the following acoustic context.
+
+    Caption segmentation may otherwise leave an unstressed article such as
+    "the" at the end of one chunk while its noun starts the next. Moving only
+    that canonical token preserves the transcript and improves strict
+    acoustic alignment at the boundary.
+    """
+    adjusted = list(chunks)
+    for index in range(len(adjusted) - 1):
+        match = re.search(
+            r"(?P<prefix>.*?)(?P<space>\s+)(?P<word>[A-Za-z]+)(?P<punct>[.!?,]*)$",
+            adjusted[index],
+        )
+        if not match or match.group("punct"):
+            continue
+        if match.group("word").lower() not in _TRAILING_FUNCTION_WORDS:
+            continue
+        adjusted[index] = match.group("prefix").rstrip()
+        adjusted[index + 1] = (
+            f"{match.group('word')}{match.group('punct')} {adjusted[index + 1]}"
+        ).strip()
+    return [chunk for chunk in adjusted if chunk]
+
+
 def phrase_chunks(script: str, max_line_chars: int = 42) -> list[str]:
     sentences = [part.strip() for part in re.split(r"(?<=[.!?])\s+", script.strip()) if part.strip()]
     chunks: list[str] = []
@@ -73,7 +102,7 @@ def phrase_chunks(script: str, max_line_chars: int = 42) -> list[str]:
                 chunks.append("\\N".join(chunk))
     if not chunks:
         raise CaptionGenerationError("Script produced no caption phrases.")
-    return chunks
+    return _keep_trailing_function_word_with_next_chunk(chunks)
 
 
 def generate(manifest_path: Path) -> dict:
