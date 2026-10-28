@@ -1,0 +1,2170 @@
+{
+  "schema_version": "2.0",
+  "video_id": "because-of-this-episode-004",
+  "job_id": "because-of-this-episode-004",
+  "title": "The Wave That Climbed Higher Than a Skyscraper",
+  "language": "en",
+  "fps": 25,
+  "story_profile": {
+    "format": "The Impossible Scale",
+    "truth_mode": "VERIFIED_FACT",
+    "primary_emotion": "awe",
+    "secondary_emotion": "dread",
+    "central_question": "How did a wave in a narrow Alaskan bay rise higher than the Empire State Building?",
+    "visual_symbol": "a quiet bay beneath a steep mountainside"
+  },
+  "voice": {
+    "provider": "gemini",
+    "model": "gemini-3.8-flash-tts",
+    "voice": "Charon",
+    "language": "en-US",
+    "style": "Clear American English, crisp diction, moderate pace, restrained suspense. Pronounce numbers as spoken English words with clear word boundaries; preserve every word exactly.",
+    "tts_script_path": "tts-pronunciation.txt",
+    "model_rationale": "Production target: the locked Because Of This narration profile with strict word-level caption alignment."
+  },
+  "script": {
+    "path": "script.txt",
+    "word_count_target": 173
+  },
+  "audio": {
+    "path": "audio/narration.wav",
+    "master": "narration",
+    "sample_rate": 24000,
+    "channels": 1
+  },
+  "captions": {
+    "path": "captions/narration.ass",
+    "alignment_mode": "forced_alignment",
+    "alignment_source": "Vosk word timestamps extracted from the final narration WAV; caption text remains the canonical script.",
+    "word_level_available": true,
+    "max_lines": 2,
+    "max_line_chars": 42,
+    "target_cps": 20,
+    "max_cps": 28,
+    "end_tolerance_seconds": 0.1,
+    "alignment_sidecar": "captions/narration.alignment.json",
+    "word_highlight_enabled": true,
+    "word_highlight_mode": "timestamp_color_transform",
+    "active_word_color": "#FF7777",
+    "word_highlight_tolerance_ms": 35,
+    "style": {
+      "font_name": "Arial",
+      "font_size": 48,
+      "primary_color": "&H00FFFFFF&",
+      "secondary_color": "&H00FFFFFF&",
+      "outline_color": "&H00000000&",
+      "back_color": "&H80000000&",
+      "bold": 1,
+      "italic": 0,
+      "underline": 0,
+      "strike_out": 0,
+      "scale_x": 100,
+      "scale_y": 100,
+      "spacing": 0,
+      "angle": 0,
+      "border_style": 1,
+      "outline": 3,
+      "shadow": 1,
+      "alignment": 2,
+      "margin_l": 100,
+      "margin_r": 100,
+      "margin_v": 320,
+      "encoding": 1
+    }
+  },
+  "music": {
+    "path": "audio/episode-004-fallen-eugenio-mininni.mp3",
+    "drive_file_id": "1-E_3FqL7iT4bOCfb2nixOn63Q5Vtmgom",
+    "provider": "mixkit",
+    "source_page_url": "https://mixkit.co/free-stock-music/mood/tension/",
+    "license": "Mixkit Stock Music Free License",
+    "commercial_use": true,
+    "attribution_required": false,
+    "volume": 0.12,
+    "author": "Eugenio Mininni",
+    "original_filename": "Fallen (Asper).mp3",
+    "mime_type": "audio/mpeg",
+    "sha256": "3d1d4ee42d13c167dcba407e52b57073b4e402cf68718662bef9cbe0a2fb4ef4",
+    "filesize_bytes": 9436800
+  },
+  "brand": {
+    "watermark_enabled": false,
+    "watermark_text": "|B",
+    "accent_color": "#E3262E",
+    "logo_enabled": true,
+    "logo_path": "brand/because-of-this-logo.png",
+    "logo_width": 540,
+    "logo_opacity": 0.82,
+    "logo_margin": 54,
+    "logo_top": 72,
+    "logo_anchor": "center_top"
+  },
+  "output": {
+    "path": "rendered/{video_id}-{mode}.mp4"
+  },
+  "asset_reuse_brain": {
+    "policy": "global_no_repeat",
+    "legacy_baseline": false,
+    "reason": "Episode 004 is a new factual story; all twelve staged source assets and the new music track are newly acquired and remain globally blocked from reuse in later episodes."
+  },
+  "scenes": [
+    {
+      "scene_id": "S01",
+      "duration": 5.5,
+      "story_beat": "hook: What if the tallest tsunami ever recorded began with a mountain falling into a quiet bay?",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "hook",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.82,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "hard_cut",
+        "duration": 0
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-004-s01",
+        "path": "runtime-assets/s01.mp4",
+        "drive_file_id": "1YRhDjcsYJxuLgzEAVsBkpUXNayd6t2BT",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/sea-waves-in-a-little-bay-1954/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "13c2e72f7e463d5fee90493024ceed782d2647e3fc562ac18dc6e821f1cf1ccd",
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "Mixkit source contributor",
+        "acquisition_timestamp": "2026-10-28T02:20:00Z",
+        "original_filename": "because-of-this-episode-004-waves-mixkit.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 15.306958,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 4489715,
+        "job_ownership": "because-of-this-episode-004",
+        "scene_usage": "S01",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T02:20:00Z",
+          "review_method": "source-page license/title/description plus three sampled frames",
+          "source_title": "sea waves in a little bay",
+          "source_description": "Mixkit stock video used as representational coverage.",
+          "subjects": [
+            "moving"
+          ],
+          "actions": [
+            "sea",
+            "coast"
+          ],
+          "environments": [
+            "calm",
+            "ominous"
+          ],
+          "objects": [],
+          "composition": [
+            "representational stock framing"
+          ],
+          "observed_subjects": [
+            "moving"
+          ],
+          "observed_actions": [
+            "sea",
+            "coast"
+          ],
+          "observed_environments": [
+            "calm",
+            "ominous"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            1,
+            7.653479,
+            14.306958
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 15.306958
+      },
+      "narration_excerpt": "What if the tallest tsunami ever recorded began with a mountain falling into a quiet bay?",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "subjects": [
+            "moving"
+          ],
+          "actions": [
+            "sea",
+            "coast"
+          ],
+          "environments": [
+            "calm",
+            "ominous"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "moving"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "moving"
+          ],
+          "minimum_direct": 1
+        }
+      }
+    },
+    {
+      "scene_id": "S02",
+      "duration": 5.5,
+      "story_beat": "context: On July ninth, nineteen fifty-eight, a magnitude seven point eight earthquake shook southeast Alaska.",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "context",
+      "visual_match": "SYMBOLIC",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.72,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-004-s02",
+        "path": "runtime-assets/s02.mp4",
+        "drive_file_id": "1V3tb61jIMM4ExnLE2reEZDOMqepJy0KC",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/aerial-shot-of-a-forest-covered-with-trees-and-vegetation-26105/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "fa6ad644a09b6635121c68dd7dee38fa4184af222be141fce726ac345dcf0fd9",
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "Mixkit source contributor",
+        "acquisition_timestamp": "2026-10-28T02:20:00Z",
+        "original_filename": "because-of-this-episode-004-forest-aerial-mixkit.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 30.03,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 9667969,
+        "job_ownership": "because-of-this-episode-004",
+        "scene_usage": "S02",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T02:20:00Z",
+          "review_method": "source-page license/title/description plus three sampled frames",
+          "source_title": "Aerial shot of a forest covered with trees and vegetation",
+          "source_description": "Mixkit stock video used as representational coverage.",
+          "subjects": [
+            "aerial movement"
+          ],
+          "actions": [
+            "mountainous land",
+            "wilderness"
+          ],
+          "environments": [
+            "remote",
+            "uneasy"
+          ],
+          "objects": [],
+          "composition": [
+            "representational stock framing"
+          ],
+          "observed_subjects": [
+            "aerial movement"
+          ],
+          "observed_actions": [
+            "mountainous land",
+            "wilderness"
+          ],
+          "observed_environments": [
+            "remote",
+            "uneasy"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            1,
+            15.015,
+            29.03
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 30.03
+      },
+      "narration_excerpt": "On July ninth, nineteen fifty-eight, a magnitude seven point eight earthquake shook southeast Alaska.",
+      "visual_semantics": {
+        "role": "symbolic",
+        "required": {
+          "subjects": [
+            "aerial movement"
+          ],
+          "actions": [
+            "mountainous land",
+            "wilderness"
+          ],
+          "environments": [
+            "remote",
+            "uneasy"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "aerial movement"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "aerial movement"
+          ],
+          "minimum_direct": 1
+        }
+      }
+    },
+    {
+      "scene_id": "S03",
+      "duration": 5.5,
+      "story_beat": "inciting_event: At Lituya Bay, the shaking tore rock from the mountainside.",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "inciting_event",
+      "visual_match": "SYMBOLIC",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.7,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-004-s03",
+        "path": "runtime-assets/s03.mp4",
+        "drive_file_id": "1f-CQptPFdiwVKgOfD4UrxR9KfMdX_Opf",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/forest-aerial-view-121/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "37146e0821e0b09c7a2d000820b683cc78089e7f7c1f32c3a0ff3591b2a2bcd7",
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "Mixkit source contributor",
+        "acquisition_timestamp": "2026-10-28T02:20:00Z",
+        "original_filename": "because-of-this-episode-004-forest-overhead-mixkit.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 21.104417,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 6940529,
+        "job_ownership": "because-of-this-episode-004",
+        "scene_usage": "S03",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T02:20:00Z",
+          "review_method": "source-page license/title/description plus three sampled frames",
+          "source_title": "Forest aerial view",
+          "source_description": "Mixkit stock video used as representational coverage.",
+          "subjects": [
+            "overhead movement"
+          ],
+          "actions": [
+            "wilderness"
+          ],
+          "environments": [
+            "unstable",
+            "ominous"
+          ],
+          "objects": [],
+          "composition": [
+            "representational stock framing"
+          ],
+          "observed_subjects": [
+            "overhead movement"
+          ],
+          "observed_actions": [
+            "wilderness"
+          ],
+          "observed_environments": [
+            "unstable",
+            "ominous"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            1,
+            10.5522085,
+            20.104417
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 21.104417
+      },
+      "narration_excerpt": "At Lituya Bay, the shaking tore rock from the mountainside.",
+      "visual_semantics": {
+        "role": "symbolic",
+        "required": {
+          "subjects": [
+            "overhead movement"
+          ],
+          "actions": [
+            "wilderness"
+          ],
+          "environments": [
+            "unstable",
+            "ominous"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "overhead movement"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "overhead movement"
+          ],
+          "minimum_direct": 1
+        }
+      }
+    },
+    {
+      "scene_id": "S04",
+      "duration": 6,
+      "story_beat": "inciting_event: It plunged into the narrow inlet like an impact.",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "inciting_event",
+      "visual_match": "SYMBOLIC",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.76,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-004-s04",
+        "path": "runtime-assets/s04.mp4",
+        "drive_file_id": "1ffn-LLVauLYV4FrAX1qLv_gaotZ-1fuW",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/waves-crash-on-the-shore-1078/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "e4f05b616b4e19604b40c9e4fa162d7f71cfe25fa8ee973b785b287d58916092",
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "Mixkit source contributor",
+        "acquisition_timestamp": "2026-10-28T02:20:00Z",
+        "original_filename": "because-of-this-episode-004-waves-shore-mixkit.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 45.670625,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 15823870,
+        "job_ownership": "because-of-this-episode-004",
+        "scene_usage": "S04",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T02:20:00Z",
+          "review_method": "source-page license/title/description plus three sampled frames",
+          "source_title": "Waves crash on the shore",
+          "source_description": "Mixkit stock video used as representational coverage.",
+          "subjects": [
+            "crashing"
+          ],
+          "actions": [
+            "shore",
+            "sea"
+          ],
+          "environments": [
+            "violent",
+            "ominous"
+          ],
+          "objects": [],
+          "composition": [
+            "representational stock framing"
+          ],
+          "observed_subjects": [
+            "crashing"
+          ],
+          "observed_actions": [
+            "shore",
+            "sea"
+          ],
+          "observed_environments": [
+            "violent",
+            "ominous"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            1,
+            22.8353125,
+            44.670625
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 45.670625
+      },
+      "narration_excerpt": "It plunged into the narrow inlet like an impact.",
+      "visual_semantics": {
+        "role": "symbolic",
+        "required": {
+          "subjects": [
+            "crashing"
+          ],
+          "actions": [
+            "shore",
+            "sea"
+          ],
+          "environments": [
+            "violent",
+            "ominous"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "crashing"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "crashing"
+          ],
+          "minimum_direct": 1
+        }
+      }
+    },
+    {
+      "scene_id": "S05",
+      "duration": 6,
+      "story_beat": "reveal: Water shot up the opposite slope to one thousand seven hundred and twenty feet, higher than the Empire State Building.",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "reveal",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.8,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-004-s05",
+        "path": "runtime-assets/s05.mp4",
+        "drive_file_id": "1e4Ory9X_gXQL7ON_gh_EgfhATr-WtfcF",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/waves-crash-on-a-shore-with-boulders-1088/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "b2399b21dd91e83500aa5a2cd6229e9b6bc8fbdab845a38c2de59b58bbaf6dc0",
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "Mixkit source contributor",
+        "acquisition_timestamp": "2026-10-28T02:20:00Z",
+        "original_filename": "because-of-this-episode-004-waves-boulders-mixkit.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 21.646625,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 7754943,
+        "job_ownership": "because-of-this-episode-004",
+        "scene_usage": "S05",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T02:20:00Z",
+          "review_method": "source-page license/title/description plus three sampled frames",
+          "source_title": "Waves crash on a shore with boulders",
+          "source_description": "Mixkit stock video used as representational coverage.",
+          "subjects": [
+            "crashing"
+          ],
+          "actions": [
+            "shore"
+          ],
+          "environments": [
+            "powerful",
+            "dread"
+          ],
+          "objects": [],
+          "composition": [
+            "representational stock framing"
+          ],
+          "observed_subjects": [
+            "crashing"
+          ],
+          "observed_actions": [
+            "shore"
+          ],
+          "observed_environments": [
+            "powerful",
+            "dread"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            1,
+            10.8233125,
+            20.646625
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 21.646625
+      },
+      "narration_excerpt": "Water shot up the opposite slope to one thousand seven hundred and twenty feet, higher than the Empire State Building.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "subjects": [
+            "crashing"
+          ],
+          "actions": [
+            "shore"
+          ],
+          "environments": [
+            "powerful",
+            "dread"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "crashing"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "crashing"
+          ],
+          "minimum_direct": 1
+        }
+      }
+    },
+    {
+      "scene_id": "S06",
+      "duration": 6,
+      "story_beat": "consequence: The wave stripped forests, erased cabins, and carried boats over land.",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "consequence",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.74,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-004-s06",
+        "path": "runtime-assets/s06.mp4",
+        "drive_file_id": "14hs-eZWaPVou1PwNMCgaYhfoYt2ccoBo",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/boat-in-the-open-sea-1911/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "aaccaeaab5fa0a85fde79b58bf6ec9969dba5cd531e208a58565b929fd56637a",
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "Mixkit source contributor",
+        "acquisition_timestamp": "2026-10-28T02:20:00Z",
+        "original_filename": "because-of-this-episode-004-boat-open-sea-mixkit.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 13.830483,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 5169241,
+        "job_ownership": "because-of-this-episode-004",
+        "scene_usage": "S06",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T02:20:00Z",
+          "review_method": "source-page license/title/description plus three sampled frames",
+          "source_title": "Boat in the open sea",
+          "source_description": "Mixkit stock video used as representational coverage.",
+          "subjects": [
+            "sailing"
+          ],
+          "actions": [
+            "open sea"
+          ],
+          "environments": [
+            "isolated",
+            "vulnerable"
+          ],
+          "objects": [],
+          "composition": [
+            "representational stock framing"
+          ],
+          "observed_subjects": [
+            "sailing"
+          ],
+          "observed_actions": [
+            "open sea"
+          ],
+          "observed_environments": [
+            "isolated",
+            "vulnerable"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            1,
+            6.9152415,
+            12.830483
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 13.830483
+      },
+      "narration_excerpt": "The wave stripped forests, erased cabins, and carried boats over land.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "subjects": [
+            "sailing"
+          ],
+          "actions": [
+            "open sea"
+          ],
+          "environments": [
+            "isolated",
+            "vulnerable"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "sailing"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "sailing"
+          ],
+          "minimum_direct": 1
+        }
+      }
+    },
+    {
+      "scene_id": "S07",
+      "duration": 5.5,
+      "story_beat": "eyewitness: One fisherman watched as the surge lifted his boat above the trees.",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "eyewitness",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.78,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-004-s07",
+        "path": "runtime-assets/s07.mp4",
+        "drive_file_id": "1L9OP2xFsnUQZje109S09tpVPz22Y9Joj",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/fishing-boat-in-the-sea-1914/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "b9f3fcac08808357d49f78d679faded97f5016e2fde55300ad545b21d4cc1530",
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "Mixkit source contributor",
+        "acquisition_timestamp": "2026-10-28T02:20:00Z",
+        "original_filename": "because-of-this-episode-004-fishing-boat-mixkit.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 10.5,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 2898067,
+        "job_ownership": "because-of-this-episode-004",
+        "scene_usage": "S07",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T02:20:00Z",
+          "review_method": "source-page license/title/description plus three sampled frames",
+          "source_title": "Fishing boat in the sea",
+          "source_description": "Mixkit stock video used as representational coverage.",
+          "subjects": [
+            "floating",
+            "sailing"
+          ],
+          "actions": [
+            "sea"
+          ],
+          "environments": [
+            "isolated",
+            "tense"
+          ],
+          "objects": [],
+          "composition": [
+            "representational stock framing"
+          ],
+          "observed_subjects": [
+            "floating",
+            "sailing"
+          ],
+          "observed_actions": [
+            "sea"
+          ],
+          "observed_environments": [
+            "isolated",
+            "tense"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            1,
+            5.25,
+            9.5
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 10.5
+      },
+      "narration_excerpt": "One fisherman watched as the surge lifted his boat above the trees.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "subjects": [
+            "floating",
+            "sailing"
+          ],
+          "actions": [
+            "sea"
+          ],
+          "environments": [
+            "isolated",
+            "tense"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "floating",
+            "sailing"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "floating"
+          ],
+          "minimum_direct": 1
+        }
+      }
+    },
+    {
+      "scene_id": "S08",
+      "duration": 5.5,
+      "story_beat": "consequence: Two people died; others survived because the bay was nearly empty.",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "consequence",
+      "visual_match": "ATMOSPHERE",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.68,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-004-s08",
+        "path": "runtime-assets/s08.mp4",
+        "drive_file_id": "1nxuDEjQZuftV-0FTrMAeO5LF23axzlOd",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/aerial-shot-of-a-huge-forest-full-of-trees-51103/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "d4f128b93a1da12d99de36cb34b24f9596667820a89e41968a45bd34e8ffd5ae",
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "Mixkit source contributor",
+        "acquisition_timestamp": "2026-10-28T02:20:00Z",
+        "original_filename": "because-of-this-episode-004-forest-expanse-mixkit.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 27.610917,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 8582414,
+        "job_ownership": "because-of-this-episode-004",
+        "scene_usage": "S08",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T02:20:00Z",
+          "review_method": "source-page license/title/description plus three sampled frames",
+          "source_title": "Aerial shot of a huge forest full of trees",
+          "source_description": "Mixkit stock video used as representational coverage.",
+          "subjects": [
+            "aerial movement"
+          ],
+          "actions": [
+            "wilderness"
+          ],
+          "environments": [
+            "empty",
+            "somber"
+          ],
+          "objects": [],
+          "composition": [
+            "representational stock framing"
+          ],
+          "observed_subjects": [
+            "aerial movement"
+          ],
+          "observed_actions": [
+            "wilderness"
+          ],
+          "observed_environments": [
+            "empty",
+            "somber"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            1,
+            13.8054585,
+            26.610917
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 27.610917
+      },
+      "narration_excerpt": "Two people died; others survived because the bay was nearly empty.",
+      "visual_semantics": {
+        "role": "atmosphere",
+        "required": {
+          "subjects": [
+            "aerial movement"
+          ],
+          "actions": [
+            "wilderness"
+          ],
+          "environments": [
+            "empty",
+            "somber"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "aerial movement"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "aerial movement"
+          ],
+          "minimum_direct": 1
+        }
+      }
+    },
+    {
+      "scene_id": "S09",
+      "duration": 5.5,
+      "story_beat": "explanation: Lituya Bay is narrow and steep, like a giant bathtub.",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "explanation",
+      "visual_match": "SYMBOLIC",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.74,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-004-s09",
+        "path": "runtime-assets/s09.mp4",
+        "drive_file_id": "1JF-11bXfVR61A4Ce4CVaJKwXuRX3iE7h",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/aerial-view-of-a-vast-forest-44606/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "430976fb907087cbbbef5975acf6859793e59d0331312ad7ae1738ad4fa37be5",
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "Mixkit source contributor",
+        "acquisition_timestamp": "2026-10-28T02:20:00Z",
+        "original_filename": "because-of-this-episode-004-vast-forest-mixkit.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 30.28025,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 10267487,
+        "job_ownership": "because-of-this-episode-004",
+        "scene_usage": "S09",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T02:20:00Z",
+          "review_method": "source-page license/title/description plus three sampled frames",
+          "source_title": "Aerial view of a vast forest",
+          "source_description": "Mixkit stock video used as representational coverage.",
+          "subjects": [
+            "aerial movement"
+          ],
+          "actions": [
+            "mountains",
+            "wilderness"
+          ],
+          "environments": [
+            "vast",
+            "contained"
+          ],
+          "objects": [],
+          "composition": [
+            "representational stock framing"
+          ],
+          "observed_subjects": [
+            "aerial movement"
+          ],
+          "observed_actions": [
+            "mountains",
+            "wilderness"
+          ],
+          "observed_environments": [
+            "vast",
+            "contained"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            1,
+            15.140125,
+            29.28025
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 30.28025
+      },
+      "narration_excerpt": "Lituya Bay is narrow and steep, like a giant bathtub.",
+      "visual_semantics": {
+        "role": "symbolic",
+        "required": {
+          "subjects": [
+            "aerial movement"
+          ],
+          "actions": [
+            "mountains",
+            "wilderness"
+          ],
+          "environments": [
+            "vast",
+            "contained"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "aerial movement"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "aerial movement"
+          ],
+          "minimum_direct": 1
+        }
+      }
+    },
+    {
+      "scene_id": "S10",
+      "duration": 6,
+      "story_beat": "explanation: The landslide displaced water, while the walls trapped its energy and sent it racing back and forth.",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "explanation",
+      "visual_match": "SYMBOLIC",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.75,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-004-s10",
+        "path": "runtime-assets/s10.mp4",
+        "drive_file_id": "1cwUm1MB2D6JzoVqmFKymhnV9wx8otxUD",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/air-tour-around-a-huge-mountain-44613/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "744b339e09598fbc6321a589f33765c216d0afb925b17087f2c6f9f1cc103721",
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "Mixkit source contributor",
+        "acquisition_timestamp": "2026-10-28T02:20:00Z",
+        "original_filename": "because-of-this-episode-004-mountain-aerial-mixkit.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 15.598917,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 4777706,
+        "job_ownership": "because-of-this-episode-004",
+        "scene_usage": "S10",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T02:20:00Z",
+          "review_method": "source-page license/title/description plus three sampled frames",
+          "source_title": "Air tour around a huge mountain",
+          "source_description": "Mixkit stock video used as representational coverage.",
+          "subjects": [
+            "aerial movement"
+          ],
+          "actions": [
+            "mountains",
+            "wilderness"
+          ],
+          "environments": [
+            "massive",
+            "threatening"
+          ],
+          "objects": [],
+          "composition": [
+            "representational stock framing"
+          ],
+          "observed_subjects": [
+            "aerial movement"
+          ],
+          "observed_actions": [
+            "mountains",
+            "wilderness"
+          ],
+          "observed_environments": [
+            "massive",
+            "threatening"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            1,
+            7.7994585,
+            14.598917
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 15.598917
+      },
+      "narration_excerpt": "The landslide displaced water, while the walls trapped its energy and sent it racing back and forth.",
+      "visual_semantics": {
+        "role": "symbolic",
+        "required": {
+          "subjects": [
+            "aerial movement"
+          ],
+          "actions": [
+            "mountains",
+            "wilderness"
+          ],
+          "environments": [
+            "massive",
+            "threatening"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "aerial movement"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "aerial movement"
+          ],
+          "minimum_direct": 1
+        }
+      }
+    },
+    {
+      "scene_id": "S11",
+      "duration": 5,
+      "story_beat": "evidence: Scientists later found the scars still visible in the forest. Because of this, researchers began treating landslides as tsunami threats.",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "evidence",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.8,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-004-s11",
+        "path": "runtime-assets/s11.mp4",
+        "drive_file_id": "1ekbKvCG3bcBk0x4PeNF8E4Hs3iQxmzbo",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/aerial-tour-over-a-mountain-range-44638/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "e1be15f0a694daa56ceac5f8c5832107a8de27b10e27d187bc9fd5b91225e09a",
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "Mixkit source contributor",
+        "acquisition_timestamp": "2026-10-28T02:20:00Z",
+        "original_filename": "because-of-this-episode-004-mountain-range-mixkit.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 24.941583,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 8292408,
+        "job_ownership": "because-of-this-episode-004",
+        "scene_usage": "S11",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T02:20:00Z",
+          "review_method": "source-page license/title/description plus three sampled frames",
+          "source_title": "Aerial tour over a mountain range",
+          "source_description": "Mixkit stock video used as representational coverage.",
+          "subjects": [
+            "aerial movement"
+          ],
+          "actions": [
+            "mountain range",
+            "wilderness"
+          ],
+          "environments": [
+            "evidence",
+            "quiet aftermath"
+          ],
+          "objects": [],
+          "composition": [
+            "representational stock framing"
+          ],
+          "observed_subjects": [
+            "aerial movement"
+          ],
+          "observed_actions": [
+            "mountain range",
+            "wilderness"
+          ],
+          "observed_environments": [
+            "evidence",
+            "quiet aftermath"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            1,
+            12.4707915,
+            23.941583
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 24.941583
+      },
+      "narration_excerpt": "Scientists later found the scars still visible in the forest. Because of this, researchers began treating landslides as tsunami threats.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "subjects": [
+            "aerial movement"
+          ],
+          "actions": [
+            "mountain range",
+            "wilderness"
+          ],
+          "environments": [
+            "evidence",
+            "quiet aftermath"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "aerial movement"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "aerial movement"
+          ],
+          "minimum_direct": 1
+        }
+      }
+    },
+    {
+      "scene_id": "S12",
+      "duration": 5,
+      "story_beat": "payoff: A tsunami does not need an ocean. Sometimes, all it needs is a mountainside, a narrow bay, and a few seconds of silence.",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "payoff",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.79,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      },
+      "asset": {
+        "asset_id": "because-of-this-episode-004-s12",
+        "path": "runtime-assets/s12.mp4",
+        "drive_file_id": "1vK_H2Mba_XkL4s5vBmUwF19vvjg61pFJ",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/aerial-view-of-a-mountain-top-43129/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "80256f2c241e0b6d3f20a188952fbdbab1c754e57b09fa5fce6423e6f8b5876d",
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "Mixkit source contributor",
+        "acquisition_timestamp": "2026-10-28T02:20:00Z",
+        "original_filename": "because-of-this-episode-004-mountain-top-mixkit.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 20.937583,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 7275810,
+        "job_ownership": "because-of-this-episode-004",
+        "scene_usage": "S12",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T02:20:00Z",
+          "review_method": "source-page license/title/description plus three sampled frames",
+          "source_title": "Aerial view of a mountain top",
+          "source_description": "Mixkit stock video used as representational coverage.",
+          "subjects": [
+            "aerial movement"
+          ],
+          "actions": [
+            "mountains",
+            "wilderness"
+          ],
+          "environments": [
+            "ominous",
+            "final warning"
+          ],
+          "objects": [],
+          "composition": [
+            "representational stock framing"
+          ],
+          "observed_subjects": [
+            "aerial movement"
+          ],
+          "observed_actions": [
+            "mountains",
+            "wilderness"
+          ],
+          "observed_environments": [
+            "ominous",
+            "final warning"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            1,
+            10.4687915,
+            19.937583
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 20.937583
+      },
+      "narration_excerpt": "A tsunami does not need an ocean. Sometimes, all it needs is a mountainside, a narrow bay, and a few seconds of silence.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "subjects": [
+            "aerial movement"
+          ],
+          "actions": [
+            "mountains",
+            "wilderness"
+          ],
+          "environments": [
+            "ominous",
+            "final warning"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "aerial movement"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "aerial movement"
+          ],
+          "minimum_direct": 1
+        }
+      }
+    }
+  ],
+  "story_creation": {
+    "schema_version": "1.0",
+    "idea": {
+      "title": "The Wave That Climbed Higher Than a Skyscraper",
+      "premise": "In 1958, a landslide in Alaska's Lituya Bay sent water 1,720 feet up a mountainside.",
+      "audience_promise": "Follow the chain from earthquake to landslide to the highest tsunami run-up ever recorded.",
+      "central_question": "How did a wave in a narrow Alaskan bay rise higher than the Empire State Building?",
+      "hook_type": "impossible_scale"
+    },
+    "truth": {
+      "mode": "VERIFIED_FACT",
+      "sources": [
+        "https://www.noaa.gov/jetstream/tsunamis/tsunami-generation-landslides",
+        "https://www.usgs.gov/publications/field-observations-effects-alaska-earthquake-10-july-1958",
+        "https://pubs.usgs.gov/pp/0354c/report.pdf"
+      ],
+      "disclosure": "This episode recounts the verified 1958 Lituya Bay megatsunami; stock footage is used as clearly representational visual coverage.",
+      "reconstruction_note": "The exact visual footage is representational stock, not archival footage of the event."
+    },
+    "causal_chain": {
+      "cause": "A magnitude 7.8 earthquake triggered a massive rockslide into Lituya Bay.",
+      "escalation": [
+        "The rockslide displaced water inside a narrow inlet.",
+        "The bay walls amplified and redirected the surge.",
+        "Water reached a maximum run-up of about 1,720 feet."
+      ],
+      "consequence": "Forests were stripped, boats were carried over land, and two people died in the bay.",
+      "why_it_mattered": "The event showed that landslides can generate extreme local tsunamis even without an open-ocean wave."
+    },
+    "emotional_arc": {
+      "primary": "awe",
+      "secondary": "dread",
+      "target_sensations": [
+        "curiosity",
+        "scale",
+        "unease",
+        "chill"
+      ]
+    },
+    "promise_payoff": {
+      "promise": "A quiet bay can produce a wave taller than a skyscraper.",
+      "payoff": "The final warning reframes tsunamis as a landslide threat, not only an ocean event.",
+      "payoff_type": "mechanism_and_warning",
+      "promise_paid": true
+    },
+    "visual_feasibility": {
+      "checked_before_script": true,
+      "scene_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12"
+      ],
+      "approved_scene_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12"
+      ],
+      "coverage_ratio": 1,
+      "note": "Twelve unique Mixkit clips passed sampled-frame QA as non-black, stable and semantically consistent representational coverage."
+    },
+    "channel_diversity": {
+      "comparison_window": "last_20_episodes",
+      "recent_episode_count": 3,
+      "similarity_score": 0.18,
+      "similarity_status": "PASS",
+      "unique_signature": "landslide-generated-megatsunami-impossible-scale"
+    },
+    "original_authorship": {
+      "original_script": true,
+      "original_narration": true,
+      "editorial_transform": true,
+      "asset_provenance_complete": true,
+      "mass_production_risk": "LOW"
+    },
+    "monetization_safety": {
+      "youtube_ad_safety": "LOW_RISK",
+      "tiktok_originality": "ORIGINAL",
+      "claims_reviewed": true,
+      "disclosure_present": true,
+      "risk_flags": {
+        "graphic_content": "NONE",
+        "harmful_claims": "NONE",
+        "shocking_content": "LOW"
+      }
+    },
+    "duration": {
+      "target_seconds": 68,
+      "planned_seconds": 67.2,
+      "estimated_narration_seconds": 68,
+      "padding_seconds": 0,
+      "padding_status": "PASS"
+    },
+    "red_team": {
+      "status": "PASS",
+      "editorial": {
+        "status": "PASS",
+        "blocking_issues": [],
+        "notes": "Story, visual route and factual framing passed editorial red-team; preview review remains before final release."
+      },
+      "factual": {
+        "status": "PASS",
+        "blocking_issues": [],
+        "notes": "Core claims are sourced to NOAA and USGS primary or institutional records."
+      },
+      "monetization": {
+        "status": "PASS",
+        "blocking_issues": [],
+        "notes": "No graphic imagery or harmful instructions."
+      }
+    }
+  },
+  "research": {
+    "accessed_at": "2026-10-28",
+    "confidence": "HIGH",
+    "sources": [
+      {
+        "url": "https://www.noaa.gov/jetstream/tsunamis/tsunami-generation-landslides",
+        "title": "Tsunami Generation: Landslides",
+        "facts": [
+          "A rock fall into Lituya Bay sent water surging over the opposite shore and clearing trees up to 1,720 feet.",
+          "The event is considered the highest tsunami ever recorded."
+        ]
+      },
+      {
+        "url": "https://www.usgs.gov/publications/field-observations-effects-alaska-earthquake-10-july-1958",
+        "title": "Field observations on effects of Alaska earthquake of 10 July 1958",
+        "facts": [
+          "The Alaska earthquake was magnitude 7.8 and the Lituya Bay wave reached more than 1,700 feet."
+        ]
+      },
+      {
+        "url": "https://pubs.usgs.gov/pp/0354c/report.pdf",
+        "title": "Giant Waves in Lituya Bay, Alaska",
+        "facts": [
+          "A rockslide caused water to surge to about 1,740 feet and left a sharp forest trimline around the bay."
+        ]
+      }
+    ],
+    "uncertainties": [
+      "The exact trigger sequence and measured maximum vary slightly between historical sources; the episode uses the commonly cited 1,720-foot run-up."
+    ]
+  },
+  "editorial_qa": {
+    "status": "PENDING",
+    "reviewer": "",
+    "reviewed_at": "",
+    "notes": "Preview requested by the production owner; final approval will follow visual and audio review."
+  },
+  "editing": {
+    "clip_quantity": {
+      "mode": "adaptive",
+      "min_clips": 10,
+      "target_min": 12,
+      "target_max": 16,
+      "max_clips": 18,
+      "min_scene_seconds": 2,
+      "max_scene_seconds": 20,
+      "enforce": true,
+      "reason": "Locked v2 rule: 10-18 unique clips per episode; target 12-16, never repeated."
+    }
+  },
+  "loop": {
+    "enabled": true,
+    "title": "BECAUSE OF THIS",
+    "transition": "continuity_fade",
+    "outro_seconds": 1.2,
+    "tail_fade_seconds": 0.55,
+    "card_fade_in_seconds": 0.24,
+    "card_fade_out_seconds": 0.36,
+    "audio_fade_seconds": 0.6,
+    "restart_safe": true,
+    "reason": "Continuity fade bridges the final warning into the branded signature.",
+    "logo_source": "brand_logo_transparent",
+    "logo_width": 820,
+    "logo_anchor": "center_center"
+  },
+  "color_grade": {
+    "enabled": true,
+    "preset": "investigative_noir_suspense",
+    "brightness": -0.03,
+    "contrast": 1.08,
+    "saturation": 0.9,
+    "gamma": 0.96,
+    "vignette": true,
+    "cinematic_suspense": {
+      "enabled": true,
+      "cool_shadows": 0.025,
+      "warm_highlights": 0.01,
+      "description": "Cool shadows, restrained warm highlights and controlled noir vignette."
+    },
+    "reason": "Locked channel look."
+  },
+  "visual_story_contract": {
+    "version": "2.2",
+    "narration_is_master_context": true,
+    "required_scene_fields": [
+      "narration_excerpt",
+      "visual_semantics",
+      "asset.visual_evidence"
+    ],
+    "match_dimensions": [
+      "subjects",
+      "actions",
+      "environments",
+      "objects",
+      "moods",
+      "composition"
+    ],
+    "forbidden_concepts_block": true,
+    "keyword_only_matching": false,
+    "human_visual_review_required": true,
+    "policy_note": "Literal beats must match required narrative dimensions; representational coverage must be declared and non-contradictory."
+  },
+  "story_graph": {
+    "version": "1.0",
+    "entities": [
+      {
+        "entity_id": "lituya_bay",
+        "canonical_name": "Lituya Bay",
+        "aliases": [
+          "bay",
+          "inlet"
+        ],
+        "continuity_mode": "same narrow Alaskan bay throughout"
+      },
+      {
+        "entity_id": "rockslide",
+        "canonical_name": "earthquake-triggered rockslide",
+        "aliases": [
+          "rock",
+          "landslide",
+          "mountainside"
+        ],
+        "continuity_mode": "single impact into the bay"
+      },
+      {
+        "entity_id": "megatsunami",
+        "canonical_name": "Lituya Bay megatsunami",
+        "aliases": [
+          "wave",
+          "surge",
+          "tsunami"
+        ],
+        "continuity_mode": "same surge amplified by the inlet"
+      },
+      {
+        "entity_id": "forest_trimline",
+        "canonical_name": "forest trimline",
+        "aliases": [
+          "scars",
+          "cleared forest"
+        ],
+        "continuity_mode": "lasting physical evidence"
+      },
+      {
+        "entity_id": "landslide_risk",
+        "canonical_name": "landslide-generated tsunami threat",
+        "aliases": [
+          "tsunami threat",
+          "warning"
+        ],
+        "continuity_mode": "final scientific lesson"
+      }
+    ],
+    "beats": [
+      {
+        "scene_id": "S01",
+        "event": "hook: What if the tallest tsunami ever recorded began with a mountain falling into a quiet bay?",
+        "state_before": "ordinary_bay",
+        "state_after": "state_1",
+        "causal_role": "hook",
+        "emotion": "curiosity",
+        "visual_motif": "quiet bay",
+        "entities": [
+          "lituya_bay"
+        ],
+        "narration_excerpt": "What if the tallest tsunami ever recorded began with a mountain falling into a quiet bay?"
+      },
+      {
+        "scene_id": "S02",
+        "event": "context: On July ninth, nineteen fifty-eight, a magnitude seven point eight earthquake shook southeast Alaska.",
+        "state_before": "state_1",
+        "state_after": "state_2",
+        "causal_role": "context",
+        "emotion": "unease",
+        "visual_motif": "remote forest",
+        "entities": [
+          "lituya_bay"
+        ],
+        "narration_excerpt": "On July ninth, nineteen fifty-eight, a magnitude seven point eight earthquake shook southeast Alaska."
+      },
+      {
+        "scene_id": "S03",
+        "event": "inciting_event: At Lituya Bay, the shaking tore rock from the mountainside.",
+        "state_before": "state_2",
+        "state_after": "state_3",
+        "causal_role": "inciting_event",
+        "emotion": "dread",
+        "visual_motif": "unstable terrain",
+        "entities": [
+          "lituya_bay"
+        ],
+        "narration_excerpt": "At Lituya Bay, the shaking tore rock from the mountainside."
+      },
+      {
+        "scene_id": "S04",
+        "event": "inciting_event: It plunged into the narrow inlet like an impact.",
+        "state_before": "state_3",
+        "state_after": "state_4",
+        "causal_role": "inciting_event",
+        "emotion": "impact",
+        "visual_motif": "crashing water",
+        "entities": [
+          "lituya_bay"
+        ],
+        "narration_excerpt": "It plunged into the narrow inlet like an impact."
+      },
+      {
+        "scene_id": "S05",
+        "event": "reveal: Water shot up the opposite slope to one thousand seven hundred and twenty feet, higher than the Empire State Building.",
+        "state_before": "state_4",
+        "state_after": "state_5",
+        "causal_role": "reveal",
+        "emotion": "awe",
+        "visual_motif": "vertical surge",
+        "entities": [
+          "lituya_bay"
+        ],
+        "narration_excerpt": "Water shot up the opposite slope to one thousand seven hundred and twenty feet, higher than the Empire State Building."
+      },
+      {
+        "scene_id": "S06",
+        "event": "consequence: The wave stripped forests, erased cabins, and carried boats over land.",
+        "state_before": "state_5",
+        "state_after": "state_6",
+        "causal_role": "consequence",
+        "emotion": "shock",
+        "visual_motif": "boat on water",
+        "entities": [
+          "lituya_bay"
+        ],
+        "narration_excerpt": "The wave stripped forests, erased cabins, and carried boats over land."
+      },
+      {
+        "scene_id": "S07",
+        "event": "eyewitness: One fisherman watched as the surge lifted his boat above the trees.",
+        "state_before": "state_6",
+        "state_after": "state_7",
+        "causal_role": "eyewitness",
+        "emotion": "tension",
+        "visual_motif": "lone fisherman",
+        "entities": [
+          "lituya_bay"
+        ],
+        "narration_excerpt": "One fisherman watched as the surge lifted his boat above the trees."
+      },
+      {
+        "scene_id": "S08",
+        "event": "consequence: Two people died; others survived because the bay was nearly empty.",
+        "state_before": "state_7",
+        "state_after": "state_8",
+        "causal_role": "consequence",
+        "emotion": "somber",
+        "visual_motif": "empty forest",
+        "entities": [
+          "lituya_bay"
+        ],
+        "narration_excerpt": "Two people died; others survived because the bay was nearly empty."
+      },
+      {
+        "scene_id": "S09",
+        "event": "explanation: Lituya Bay is narrow and steep, like a giant bathtub.",
+        "state_before": "state_8",
+        "state_after": "state_9",
+        "causal_role": "explanation",
+        "emotion": "scale",
+        "visual_motif": "contained valley",
+        "entities": [
+          "lituya_bay"
+        ],
+        "narration_excerpt": "Lituya Bay is narrow and steep, like a giant bathtub."
+      },
+      {
+        "scene_id": "S10",
+        "event": "explanation: The landslide displaced water, while the walls trapped its energy and sent it racing back and forth.",
+        "state_before": "state_9",
+        "state_after": "state_10",
+        "causal_role": "explanation",
+        "emotion": "force",
+        "visual_motif": "mountain force",
+        "entities": [
+          "lituya_bay"
+        ],
+        "narration_excerpt": "The landslide displaced water, while the walls trapped its energy and sent it racing back and forth."
+      },
+      {
+        "scene_id": "S11",
+        "event": "evidence: Scientists later found the scars still visible in the forest. Because of this, researchers began treating landslides as tsunami threats.",
+        "state_before": "state_10",
+        "state_after": "state_11",
+        "causal_role": "evidence",
+        "emotion": "evidence",
+        "visual_motif": "forest scar",
+        "entities": [
+          "lituya_bay"
+        ],
+        "narration_excerpt": "Scientists later found the scars still visible in the forest. Because of this, researchers began treating landslides as tsunami threats."
+      },
+      {
+        "scene_id": "S12",
+        "event": "payoff: A tsunami does not need an ocean. Sometimes, all it needs is a mountainside, a narrow bay, and a few seconds of silence.",
+        "state_before": "state_11",
+        "state_after": "state_12",
+        "causal_role": "payoff",
+        "emotion": "warning",
+        "visual_motif": "mountain warning",
+        "entities": [
+          "lituya_bay"
+        ],
+        "narration_excerpt": "A tsunami does not need an ocean. Sometimes, all it needs is a mountainside, a narrow bay, and a few seconds of silence."
+      }
+    ]
+  },
+  "narrative_coverage": {
+    "policy": "ordered_scene_excerpts_cover_canonical_script_once",
+    "allow_overlap": false,
+    "timing_source": "forced_alignment_sidecar"
+  },
+  "engine_profile": "because-of-this-v2-locked-2026-10",
+  "engine_profile_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
+  "lifecycle_status": "DRAFT_AUDIO_PENDING"
+}
