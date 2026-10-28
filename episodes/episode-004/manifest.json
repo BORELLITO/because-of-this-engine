@@ -73,19 +73,20 @@
     }
   },
   "music": {
-    "path": "audio/episode-004-fallen-eugenio-mininni.mp3",
-    "drive_file_id": "1-E_3FqL7iT4bOCfb2nixOn63Q5Vtmgom",
+    "path": "audio/episode-004-fright-night.mp3",
+    "drive_file_id": "16cUkF0tGZfU92I6OBzObOZkNosCl4J_a",
     "provider": "mixkit",
-    "source_page_url": "https://mixkit.co/free-stock-music/mood/tension/",
+    "source_page_url": "https://mixkit.co/free-stock-music/mood/suspenseful/",
     "license": "Mixkit Stock Music Free License",
     "commercial_use": true,
     "attribution_required": false,
     "volume": 0.12,
-    "author": "Eugenio Mininni",
-    "original_filename": "Fallen (Asper).mp3",
+    "author": "Michael Ramir C.",
+    "original_filename": "Fright Night.mp3",
     "mime_type": "audio/mpeg",
-    "sha256": "3d1d4ee42d13c167dcba407e52b57073b4e402cf68718662bef9cbe0a2fb4ef4",
-    "filesize_bytes": 9436800
+    "sha256": "144384cf2bcda8070a0d11c8aa98c3ae547de861a553275788669b7cf6a57bcd",
+    "filesize_bytes": 3243407,
+    "duration_seconds": 101.32898
   },
   "brand": {
     "watermark_enabled": false,
@@ -396,9 +397,9 @@
       "story_beat": "inciting_event: In the bay, the shaking ripped the rock from the mountainside.",
       "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
       "visual_function": "inciting_event",
-      "visual_match": "SYMBOLIC",
+      "visual_match": "EXPLANATORY",
       "visual_truth": "VERIFIED_FACT",
-      "match_score": 0.84,
+      "match_score": 0.94,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -408,42 +409,43 @@
         "duration": 0.14
       },
       "asset": {
-        "provider": "mixkit",
-        "license": "Mixkit Stock Video Free License",
+        "provider": "pexels",
+        "license": "Pexels Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
         "reuse_status": "NEW_ASSET_EPISODE_004",
         "episode_id": "because-of-this-episode-004",
-        "author": "Mixkit source contributor",
+        "author": "Marina Leonova",
         "acquisition_timestamp": "2026-10-28T07:15:00Z",
         "mime_type": "video/mp4",
         "job_ownership": "because-of-this-episode-004",
         "asset_id": "because-of-this-episode-004-s03",
         "path": "runtime-assets/s03.mp4",
-        "drive_file_id": "1Gzw51VtrmItiVLsPcDP-nQv6mR6o5bWm",
-        "source_page_url": "https://mixkit.co/free-stock-video/aerial-tour-over-a-mountain-range-44638/",
-        "sha256": "e1be15f0a694daa56ceac5f8c5832107a8de27b10e27d187bc9fd5b91225e09a",
-        "original_filename": "aerial-tour-over-a-mountain-range-44638.mp4",
-        "filesize_bytes": 8292408,
-        "duration_seconds": 24.941583,
-        "width": 1280,
-        "height": 720,
+        "drive_file_id": "1sMdAhvVQdn6oZhvffn3U4yu4WONO-_5y",
+        "source_page_url": "https://www.pexels.com/video/landslide-in-a-mountain-9354609/",
+        "sha256": "",
+        "original_filename": "landslide-in-a-mountain-pexels-9354609.mp4",
+        "filesize_bytes": 6977956,
+        "duration_seconds": 22.255567,
+        "width": 720,
+        "height": 1280,
         "scene_usage": "S03",
         "visual_evidence": {
           "reviewed": true,
-          "basis": "Source-page review plus sampled frames; footage is stable, non-black and semantically consistent with the declared representational subject and environment.",
+          "basis": "Source-page review plus three sampled Drive frames; footage is stable, non-black and consistent with the declared representational subject and environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-28T07:15:00Z",
-          "review_method": "source-page license/title/description plus sampled frames",
-          "source_title": "Aerial tour over a mountain range",
-          "source_description": "Slow aerial tour above a rocky mountain range covered with vegetation and trees.",
+          "reviewed_at": "2026-10-28T08:00:00Z",
+          "review_method": "source-page license/title/description plus three sampled Drive frames",
+          "source_title": "Landslide in a Mountain",
+          "source_description": "Spectacular rockfall on a rugged mountain slope during the day.",
           "subjects": [
             "mountains",
             "rock",
             "terrain"
           ],
           "actions": [
-            "aerial movement"
+            "rockfall",
+            "falling"
           ],
           "environments": [
             "steep",
@@ -460,7 +462,8 @@
             "terrain"
           ],
           "observed_actions": [
-            "aerial movement"
+            "rockfall",
+            "falling"
           ],
           "observed_environments": [
             "steep",
@@ -470,8 +473,8 @@
           "observed_objects": [],
           "sample_timestamps": [
             1,
-            12.4707915,
-            23.941583
+            11.1277835,
+            21.255567
           ],
           "action_window": {
             "in": 0,
@@ -481,7 +484,7 @@
             "in": 0,
             "out": null
           },
-          "notes": "Commercial-use stock coverage of rocky terrain to represent the mountainside; not literal footage of the 1958 slide.",
+          "notes": "Free-use Pexels rockfall coverage directly represents the mountainside failure; it is representational stock and not literal archival footage of Lituya Bay.",
           "pixel_qc": {
             "status": "PASS",
             "sampled_frame_count": 3,
@@ -491,7 +494,7 @@
           }
         },
         "source_segment_in": 0,
-        "source_segment_out": 24.941583
+        "source_segment_out": 22.255567
       },
       "narration_excerpt": "In the bay, the shaking ripped the rock from the mountainside.",
       "visual_semantics": {
@@ -968,7 +971,7 @@
       "visual_function": "eyewitness",
       "visual_match": "EXPLANATORY",
       "visual_truth": "VERIFIED_FACT",
-      "match_score": 0.86,
+      "match_score": 0.92,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -978,46 +981,45 @@
         "duration": 0.14
       },
       "asset": {
-        "provider": "mixkit",
-        "license": "Mixkit Stock Video Free License",
+        "provider": "pexels",
+        "license": "Pexels Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
         "reuse_status": "NEW_ASSET_EPISODE_004",
         "episode_id": "because-of-this-episode-004",
-        "author": "Mixkit source contributor",
+        "author": "dabatepatvideos",
         "acquisition_timestamp": "2026-10-28T07:15:00Z",
         "mime_type": "video/mp4",
         "job_ownership": "because-of-this-episode-004",
         "asset_id": "because-of-this-episode-004-s07",
         "path": "runtime-assets/s07.mp4",
-        "drive_file_id": "119GSwyqIebwA3-sWGsCsIuWgH8MOtV9P",
-        "source_page_url": "https://mixkit.co/free-stock-video/beautiful-coast-with-motorboats-and-a-pier-seen-from-the-5363/",
-        "sha256": "a9eef7cd117d274108d47a8fcafd6623b32f548df2c55471b3cd3dbd0614bc23",
-        "original_filename": "beautiful-coast-with-motorboats-and-a-pier-seen-from-the-5363.mp4",
-        "filesize_bytes": 3044180,
-        "duration_seconds": 10.01,
+        "drive_file_id": "1dcPJ879fUkI32DG0rl7eUHtw1_XzdTRA",
+        "source_page_url": "https://www.pexels.com/video/boat-in-a-lake-in-the-forest-8051904/",
+        "sha256": "",
+        "original_filename": "boat-in-a-lake-in-the-forest-pexels-8051904.mp4",
+        "filesize_bytes": 8496621,
+        "duration_seconds": 30.058333,
         "width": 1280,
         "height": 720,
         "scene_usage": "S07",
         "visual_evidence": {
           "reviewed": true,
-          "basis": "Source-page review plus sampled frames; footage is stable, non-black and semantically consistent with the declared representational subject and environment.",
+          "basis": "Source-page review plus three sampled Drive frames; footage is stable, non-black and consistent with the declared representational subject and environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-28T07:15:00Z",
-          "review_method": "source-page license/title/description plus sampled frames",
-          "source_title": "Beautiful coast with motorboats and a pier seen from the air",
-          "source_description": "Aerial shot of a coast at the foot of a huge hill with boats in the water.",
+          "reviewed_at": "2026-10-28T08:00:00Z",
+          "review_method": "source-page license/title/description plus three sampled Drive frames",
+          "source_title": "Boat in a Lake in the Forest",
+          "source_description": "Calm lake with boat and tranquil reflections in lush nature setting.",
           "subjects": [
             "boat",
             "water",
-            "hills"
+            "trees"
           ],
           "actions": [
-            "moving",
-            "sailing"
+            "floating"
           ],
           "environments": [
-            "coast",
+            "forest",
             "isolated",
             "tense"
           ],
@@ -1028,22 +1030,21 @@
           "observed_subjects": [
             "boat",
             "water",
-            "hills"
+            "trees"
           ],
           "observed_actions": [
-            "moving",
-            "sailing"
+            "floating"
           ],
           "observed_environments": [
-            "coast",
+            "forest",
             "isolated",
             "tense"
           ],
           "observed_objects": [],
           "sample_timestamps": [
             1,
-            5.005,
-            9.01
+            15.0291665,
+            29.058333
           ],
           "action_window": {
             "in": 0,
@@ -1053,7 +1054,7 @@
             "in": 0,
             "out": null
           },
-          "notes": "Commercial-use stock coverage of boats beneath a steep coast; representational eyewitness context, not archival footage.",
+          "notes": "Free-use Pexels footage provides a clearly readable boat framed against trees, supporting the eyewitness beat without claiming literal event footage.",
           "pixel_qc": {
             "status": "PASS",
             "sampled_frame_count": 3,
@@ -1063,7 +1064,7 @@
           }
         },
         "source_segment_in": 0,
-        "source_segment_out": 10.01
+        "source_segment_out": 30.058333
       },
       "narration_excerpt": "One fisherman watched as the surge lifted his boat above the trees.",
       "visual_semantics": {
@@ -1535,7 +1536,7 @@
       "visual_function": "evidence",
       "visual_match": "EXPLANATORY",
       "visual_truth": "VERIFIED_FACT",
-      "match_score": 0.86,
+      "match_score": 0.9,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -1557,27 +1558,28 @@
         "job_ownership": "because-of-this-episode-004",
         "asset_id": "because-of-this-episode-004-s11",
         "path": "runtime-assets/s11.mp4",
-        "drive_file_id": "1cKSP_OQcFa9I8rFVFdZ7BAXkKJN8neKe",
-        "source_page_url": "https://mixkit.co/free-stock-video/flying-through-the-trees-of-a-forest-43126/",
-        "sha256": "4c7b3fa96deb9f7533fd3be5f18fc9efa48c007dfd1a38ede2dd1ce00039e1a7",
-        "original_filename": "flying-through-the-trees-of-a-forest-43126.mp4",
-        "filesize_bytes": 7100198,
-        "duration_seconds": 20.061708,
+        "drive_file_id": "1wgQgDazjRUpc3o6TpoylvsLGbnxVRi3V",
+        "source_page_url": "https://mixkit.co/free-stock-video/relief-of-an-arid-climate-covered-with-rocks-and-trees-49775/",
+        "sha256": "",
+        "original_filename": "rocky-forest-aerial-mixkit-49775.mp4",
+        "filesize_bytes": 7025152,
+        "duration_seconds": 20.186833,
         "width": 1280,
         "height": 720,
         "scene_usage": "S11",
         "visual_evidence": {
           "reviewed": true,
-          "basis": "Source-page review plus sampled frames; footage is stable, non-black and semantically consistent with the declared representational subject and environment.",
+          "basis": "Source-page review plus three sampled Drive frames; footage is stable, non-black and consistent with the declared representational subject and environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-28T07:15:00Z",
-          "review_method": "source-page license/title/description plus sampled frames",
-          "source_title": "Flying through the trees of a forest",
-          "source_description": "Aerial view passing through leafless trees in a mountainous forest.",
+          "reviewed_at": "2026-10-28T08:00:00Z",
+          "review_method": "source-page license/title/description plus three sampled Drive frames",
+          "source_title": "Relief of an arid climate covered with rocks and trees",
+          "source_description": "Slow air travel over a rocky relief covered with rocks, trees and dry grass.",
           "subjects": [
-            "mountains",
             "forest",
-            "trees"
+            "trees",
+            "rock",
+            "terrain"
           ],
           "actions": [
             "aerial movement"
@@ -1592,9 +1594,10 @@
             "representational stock framing"
           ],
           "observed_subjects": [
-            "mountains",
             "forest",
-            "trees"
+            "trees",
+            "rock",
+            "terrain"
           ],
           "observed_actions": [
             "aerial movement"
@@ -1607,8 +1610,8 @@
           "observed_objects": [],
           "sample_timestamps": [
             1,
-            10.030854,
-            19.061708
+            10.0934165,
+            19.186833
           ],
           "action_window": {
             "in": 0,
@@ -1618,7 +1621,7 @@
             "in": 0,
             "out": null
           },
-          "notes": "Commercial-use stock coverage of a scarred-looking mountainous forest to support the later evidence beat without claiming literal trimline footage.",
+          "notes": "Commercial-use Mixkit aerial coverage exposes rocky ground among trees, making the evidence/scar beat more legible without claiming literal survey footage.",
           "pixel_qc": {
             "status": "PASS",
             "sampled_frame_count": 3,
@@ -1628,7 +1631,7 @@
           }
         },
         "source_segment_in": 0,
-        "source_segment_out": 20.061708
+        "source_segment_out": 20.186833
       },
       "narration_excerpt": "Scientists later found the scars still visible in the forest. Because of this, researchers called landslides tsunami threats.",
       "visual_semantics": {
