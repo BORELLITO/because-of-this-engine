@@ -822,7 +822,7 @@
     {
       "scene_id": "S06",
       "duration": 6,
-      "story_beat": "consequence: The wave stripped forests, erased cabins, and carried boats over land.",
+      "story_beat": "consequence: The wave stripped forests, erased cabins, and carried boats across the land.",
       "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
       "visual_function": "consequence",
       "visual_match": "EXPLANATORY",
@@ -924,7 +924,7 @@
         "source_segment_in": 0,
         "source_segment_out": 13.830483
       },
-      "narration_excerpt": "The wave stripped forests, erased cabins, and carried boats over land.",
+      "narration_excerpt": "The wave stripped forests, erased cabins, and carried boats across the land.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1248,7 +1248,7 @@
     {
       "scene_id": "S09",
       "duration": 5.5,
-      "story_beat": "explanation: Lituya Bay is narrow and steep, like a giant bathtub.",
+      "story_beat": "explanation: The bay is narrow and steep, like a giant bathtub.",
       "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
       "visual_function": "explanation",
       "visual_match": "SYMBOLIC",
@@ -1350,7 +1350,7 @@
         "source_segment_in": 0,
         "source_segment_out": 30.28025
       },
-      "narration_excerpt": "Lituya Bay is narrow and steep, like a giant bathtub.",
+      "narration_excerpt": "The bay is narrow and steep, like a giant bathtub.",
       "visual_semantics": {
         "role": "symbolic",
         "required": {
@@ -2163,7 +2163,7 @@
       },
       {
         "scene_id": "S06",
-        "event": "consequence: The wave stripped forests, erased cabins, and carried boats over land.",
+        "event": "consequence: The wave stripped forests, erased cabins, and carried boats across the land.",
         "state_before": "state_5",
         "state_after": "state_6",
         "causal_role": "consequence",
@@ -2172,7 +2172,7 @@
         "entities": [
           "lituya_bay"
         ],
-        "narration_excerpt": "The wave stripped forests, erased cabins, and carried boats over land."
+        "narration_excerpt": "The wave stripped forests, erased cabins, and carried boats across the land."
       },
       {
         "scene_id": "S07",
@@ -2202,7 +2202,7 @@
       },
       {
         "scene_id": "S09",
-        "event": "explanation: Lituya Bay is narrow and steep, like a giant bathtub.",
+        "event": "explanation: The bay is narrow and steep, like a giant bathtub.",
         "state_before": "state_8",
         "state_after": "state_9",
         "causal_role": "explanation",
@@ -2211,7 +2211,7 @@
         "entities": [
           "lituya_bay"
         ],
-        "narration_excerpt": "Lituya Bay is narrow and steep, like a giant bathtub."
+        "narration_excerpt": "The bay is narrow and steep, like a giant bathtub."
       },
       {
         "scene_id": "S10",
@@ -2262,5 +2262,5 @@
   "engine_profile": "because-of-this-v2-locked-2026-10",
   "engine_profile_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
   "lifecycle_status": "DRAFT_AUDIO_PENDING",
-  "updated_at": "2026-10-28T02:36:00Z"
+  "updated_at": "2026-10-28T02:40:00Z"
 }
