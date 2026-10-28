@@ -685,10 +685,9 @@ def generate(
                         f"Grammar-constrained retry also failed: {constrained_error} "
                         f"Phrase-scoped acoustic retry also failed: {phrase_error}"
                     ) from phrase_error
-    for index in range(1, len(events)):
-        boundary = (events[index - 1]["end"] + events[index]["start"]) / 2
-        events[index - 1]["end"] = boundary
-        events[index]["start"] = boundary
+    # Keep intermediate event boundaries anchored to the real Vosk word spans.
+    # Moving them after alignment can clip the first/last word of a phrase and
+    # make ASS transforms disagree with the verified alignment sidecar.
     events[0]["start"] = 0.0
     events[-1]["end"] = audio_seconds
     for event in events:
