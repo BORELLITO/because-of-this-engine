@@ -21,6 +21,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from production.generate_phrase_captions import ass_time, phrase_chunks
+from production.canonical_config import caption_ass_style_line
 
 
 class AlignmentError(RuntimeError):
@@ -581,7 +582,8 @@ def _write_ass(
 ) -> None:
     if len(events) != len(sidecar_chunks):
         raise AlignmentError("Caption events and alignment chunks must have identical counts.")
-    header = """[Script Info]
+    style_line = caption_ass_style_line()
+    header = f"""[Script Info]
 ScriptType: v4.00+
 PlayResX: 1080
 PlayResY: 1920
@@ -589,7 +591,7 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,StrikeOut,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding
-Style: Default,Arial,48,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,1,0,0,0,100,100,0,0,1,3,1,2,100,100,320,1
+{style_line}
 
 [Events]
 Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
