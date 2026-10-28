@@ -452,6 +452,11 @@ def mux_audio(
 
     loop_ass_path: Path | None = None
     loop_logo_enabled = loop_logo_path is not None and outro_seconds > 0
+    if outro_seconds > 0 and not loop_logo_enabled:
+        raise RenderError(
+            "Branded outro requires the canonical transparent Because Of This logo; "
+            "text-only outro fallback is disabled."
+        )
     loop_logo_input_index = 2 + int(logo_enabled)
     if loop_logo_enabled:
         command.extend(["-loop", "1", "-framerate", str(FPS), "-i", str(loop_logo_path)])
@@ -465,9 +470,12 @@ def mux_audio(
             )
         )
         if loop_logo_enabled:
-            loop_logo_width = int(loop.get("logo_width", 900))
-            if not 600 <= loop_logo_width <= 1040:
-                raise RenderError("Loop logo width must be between 600 and 1040 pixels.")
+            loop_logo_width = int(loop.get("logo_width", 820))
+            loop_logo_anchor = str(loop.get("logo_anchor", "center_center"))
+            if loop_logo_anchor != "center_center":
+                raise RenderError("Canonical loop logo anchor must be center_center.")
+            if loop_logo_width != 820:
+                raise RenderError("Canonical loop logo width must be 820 pixels.")
             filters.extend([
                 (
                     f"[{loop_logo_input_index}:v]format=rgba,"
@@ -487,20 +495,10 @@ def mux_audio(
                 ),
             ])
         else:
-            loop_title = str(loop.get("title", "BECAUSE OF THIS"))
-            loop_ass_path = output.parent / f".{output.stem}-loop.ass"
-            write_loop_ass(
-                loop_ass_path,
-                loop_title,
-                outro_seconds,
-                fade_in_seconds=card_fade_in_seconds,
-                fade_out_seconds=card_fade_out_seconds,
+            raise RenderError(
+                "Canonical branded outro requires the transparent logo; "
+                "text-only BECAUSE OF THIS cards are forbidden."
             )
-            filters.extend([
-                f"[outro_base]fade=t=in:st=0:d={card_fade_in_seconds:.3f},"
-                f"fade=t=out:st={card_start_fade:.3f}:d={card_fade_out_seconds:.3f},"
-                f"subtitles='{_escape_filter_path(loop_ass_path)}'[outro]",
-            ])
         filters.extend([
             (
                 f"[main_visual]format=yuv420p,"
