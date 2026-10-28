@@ -92,9 +92,14 @@ and the loop card are composited afterward, so readability and brand colors are
 not crushed by the grade. The renderer validates all grade parameters against
 safe editorial ranges and blocks final output when the suspense layer is absent.
 
-The canonical logo is rendered at 432px wide, 20% larger than the previous
-360px lock, while retaining the same top-right safe-area margins and opacity.
-The final contract rejects a smaller logo width.
+The canonical logo is rendered at a fixed 540px width, centered on the top
+safe area at y=72px with opacity 0.82. The position, scale and opacity are
+identity locks; the final contract rejects drift.
+
+The branded close is also locked: the transparent canonical logo is centered at
+820px on a black card with a 0.55-second tail fade, 0.24-second card fade-in,
+0.36-second card fade-out and 0.60-second audio fade. Text-only outro fallbacks
+are forbidden.
 
 ## Timeline and edit
 
@@ -110,10 +115,15 @@ seconds.
 Preview is 1080×1920 and final is 2160×3840, both at 25 fps.
 
 Captions are generated from the same narration and remain external ASS
-captions until the final mux. The brand HUD uses the original full wordmark in the upper-right safe area,
-with a fixed symmetric right margin and chroma-key removal of its embedded
-black plate. The legacy `|B` text mark remains only as a fallback when the
-canonical logo asset is unavailable.
+captions until the final mux. Their HUD is fixed at Arial 48px, bold, bottom
+center (ASS alignment 2), with margins 100/100/320, 3px outline and 1px shadow.
+The karaoke behavior is fixed to real word timestamps: white text transitions
+to brand red (#FF7777) only during each spoken word, then returns to white.
+The renderer rejects any missing or alternate style.
+
+The top logo is fixed to the centered top safe area, and the final card uses
+only the transparent logo. The legacy `|B` text mark is never rendered as a
+fallback.
 
 ## Audio
 
