@@ -10,11 +10,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from production.render_video_episode import SIZES, layout_px
 from production.video_asset_contract import VideoContractError, ffprobe
 
 EXPECTED = {
     "engine_profile": "because-of-this-v2-locked-2026-10",
-    "dimensions": [1080, 1920],
     "brand": {
         "logo_enabled": True,
         "logo_anchor": "center_top",
@@ -67,7 +67,9 @@ def run(manifest_path: Path, mode: str, report_path: Path) -> int:
     errors: list[str] = []
     checks: dict[str, Any] = {}
     _assert(checks, "engine_profile", manifest.get("engine_profile"), EXPECTED["engine_profile"], errors)
-    _assert(checks, "dimensions", [1080, 1920], EXPECTED["dimensions"], errors)
+    if mode not in SIZES:
+        raise VideoContractError(f"Unknown render mode: {mode}")
+    expected_dimensions = list(SIZES[mode])
 
     brand = manifest.get("brand") or {}
     for key, expected in EXPECTED["brand"].items():
@@ -89,7 +91,7 @@ def run(manifest_path: Path, mode: str, report_path: Path) -> int:
         media = {}
     else:
         media = ffprobe(video_path)
-        _assert(checks, "rendered_dimensions", [media["width"], media["height"]], EXPECTED["dimensions"], errors)
+        _assert(checks, "rendered_dimensions", [media["width"], media["height"]], expected_dimensions, errors)
         _assert(checks, "rendered_has_audio", media["has_audio"], True, errors)
         if not 60.0 <= float(media["duration"]) <= 75.0:
             errors.append(f"rendered duration is outside 60-75s: {media['duration']}")
@@ -99,6 +101,12 @@ def run(manifest_path: Path, mode: str, report_path: Path) -> int:
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "manifest": str(manifest_path),
         "video": str(video_path),
+        "expected_dimensions": expected_dimensions,
+        "expected_visual_layout": {
+            "logo_width_px": layout_px(EXPECTED["brand"]["logo_width"], expected_dimensions[0]),
+            "logo_top_px": layout_px(EXPECTED["brand"]["logo_top"], expected_dimensions[0]),
+            "outro_logo_width_px": layout_px(EXPECTED["loop"]["logo_width"], expected_dimensions[0]),
+        },
         "checks": checks,
         "media": media,
         "errors": errors,

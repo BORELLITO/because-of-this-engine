@@ -27,6 +27,20 @@ class RenderError(RuntimeError):
     pass
 
 
+def layout_px(reference_pixels: int, output_width: int) -> int:
+    """Scale approved preview-space HUD coordinates to the output resolution.
+
+    The canonical profile remains based on 1080px width; 4K final doubles
+    logo, position and outro size without changing the relative composition.
+    """
+    reference_width = SIZES["preview"][0]
+    if output_width not in {size[0] for size in SIZES.values()}:
+        raise RenderError(f"Unsupported HUD output width: {output_width}")
+    if reference_pixels <= 0:
+        raise RenderError("HUD reference size must be positive.")
+    return int(round(reference_pixels * output_width / reference_width))
+
+
 def run(command: list[str], timeout: int = 900) -> subprocess.CompletedProcess[str]:
     try:
         return subprocess.run(command, check=True, timeout=timeout, text=True, capture_output=True)
@@ -408,13 +422,13 @@ def mux_audio(
             raise RenderError("Canonical logo anchor must be center_top.")
         filters.extend([
             (
-                f"[2:v]format=rgba,scale={logo_width}:-1,"
+                f"[2:v]format=rgba,scale={layout_px(logo_width, width)}:-1,"
                 "colorkey=0x000000:0.18:0.05,"
                 f"colorchannelmixer=aa={logo_opacity:.3f}[logo]"
             ),
             (
                 f"[captioned][logo]overlay="
-                f"x=(main_w-overlay_w)/2:y={logo_top}:"
+                f"x=(main_w-overlay_w)/2:y={layout_px(logo_top, width)}:"
                 "eof_action=repeat:shortest=1[main_visual]"
             ),
         ])
@@ -450,7 +464,7 @@ def mux_audio(
                 (
                     f"[{loop_logo_input_index}:v]format=rgba,"
                     "crop=iw*0.62:ih*0.40:(iw-ow)/2:(ih-oh)/2,"
-                    f"scale={loop_logo_width}:-1:flags=lanczos,"
+                    f"scale={layout_px(loop_logo_width, width)}:-1:flags=lanczos,"
                     "colorkey=0x000000:0.18:0.05[outro_logo]"
                 ),
                 (
@@ -553,7 +567,7 @@ def render(manifest_path: Path, mode: str) -> Path:
             logo_path = prepare_logo(
                 logo_path,
                 Path(temp) / "brand-logo-runtime.png",
-                int(spec["brand"].get("logo_width", 540)),
+                layout_px(int(spec["brand"].get("logo_width", 540)), width),
             )
         if logo_path is None or spec["brand"].get("logo_enabled") is not True:
             raise RenderError("Canonical profile requires the Because Of This logo overlay.")
