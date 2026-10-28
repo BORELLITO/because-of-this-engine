@@ -1895,10 +1895,10 @@
     ]
   },
   "editorial_qa": {
-    "status": "FRAME_QA_PASS_PENDING_AUDIO",
-    "reviewer": "Because of This production owner request",
-    "reviewed_at": "2026-10-27T00:00:00Z",
-    "notes": "Frame QA passed for all twelve unique assets: opening, middle and ending Drive samples were non-black, stable and consistent with the declared visual semantics. Rights and provenance are recorded. Remaining gates are narration, forced-alignment captions and final editorial approval."
+    "status": "PASS",
+    "reviewer": "Borelli — production owner approval",
+    "reviewed_at": "2026-10-28T01:37:00.075Z",
+    "notes": "Final editorial approval granted by the production owner after review of the approved preview. Frame QA, story integrity, narration alignment, fixed HUD, karaoke captions and refined logo-only outro are approved for final release."
   },
   "editing": {
     "clip_quantity": {
