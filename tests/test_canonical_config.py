@@ -22,6 +22,8 @@ class CanonicalConfigTests(unittest.TestCase):
             "examples/video-only-episode-manifest-v2.template.json",
             "episodes/episode-001/manifest.json",
             "episodes/episode-002/manifest.json",
+            "episodes/episode-003/manifest.json",
+            "episodes/episode-003/manifest.draft.json",
         )
         for relative in paths:
             report = validate_canonical_manifest(self._load(relative), source_label=relative)
@@ -50,6 +52,19 @@ class CanonicalConfigTests(unittest.TestCase):
             content = path.read_text(encoding="utf-8")
             for value in forbidden:
                 self.assertNotIn(value, content, f"{value} remains in {path}")
+
+    def test_fixed_visual_identity_locks_cannot_drift(self):
+        manifest = self._load("episodes/episode-003/manifest.json")
+        cases = (
+            ("brand", "logo_anchor", "center_top", "brand.logo_anchor"),
+            ("captions", "style", {**manifest["captions"]["style"], "alignment": 7}, "captions.style.alignment"),
+            ("loop", "logo_width", 900, "loop.logo_width"),
+        )
+        for section, key, value, expected in cases:
+            changed = copy.deepcopy(manifest)
+            changed[section][key] = value
+            with self.assertRaisesRegex(CanonicalConfigError, expected):
+                validate_canonical_manifest(changed)
 
     def test_profile_fingerprint_changes_if_profile_changes(self):
         manifest = self._load("episodes/episode-001/manifest.json")
