@@ -80,6 +80,9 @@ jobs:
           set -euo pipefail
           python production/canonical_config.py --manifest "${MANIFEST}"
 
+      - name: Enforce single active engine policy
+        run: python production/engine_singleton_guard.py --repo-root .
+
       - name: Install static FFmpeg with retries
         run: |
           set -euo pipefail
