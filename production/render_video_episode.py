@@ -17,6 +17,10 @@ from production.video_asset_contract import VideoContractError, ffprobe, load_ma
 
 FPS = 25
 SIZES = {"preview": (1080, 1920), "final": (2160, 3840)}
+# A single approved take may be shorter than its forced narration span. Allow
+# bounded reuse of that same take inside the same scene, but fail closed when
+# the renderer would need an excessive loop count.
+MAX_SOURCE_LOOP_MULTIPLIER = 3.0
 
 
 class RenderError(RuntimeError):
@@ -104,11 +108,19 @@ def render_scene(
     info = ffprobe(source)
     source_in = float(scene.get("source_in", 0.0))
     requested = float(scene["duration"])
-    if source_in < 0 or source_in + requested > float(info["duration"]) + 0.05:
+    available = float(info["duration"]) - source_in
+    if source_in < 0 or available <= 0.05:
         raise RenderError(
-            f"Asset {asset['asset_id']} is too short for scene {scene['scene_id']} "
-            f"({info['duration']:.3f}s available, {source_in + requested:.3f}s required)."
+            f"Asset {asset['asset_id']} has no usable source window for scene "
+            f"{scene['scene_id']}."
         )
+    if requested > available * MAX_SOURCE_LOOP_MULTIPLIER + 0.05:
+        raise RenderError(
+            f"Asset {asset['asset_id']} is too short even for bounded same-scene looping "
+            f"({available:.3f}s available, {requested:.3f}s required, "
+            f"limit={MAX_SOURCE_LOOP_MULTIPLIER:.1f}x)."
+        )
+    loop_source = requested > available + 0.05
     focus = scene.get("focus", {"x": 0.5, "y": 0.5})
     focus_x = float(focus.get("x", 0.5))
     focus_y = float(focus.get("y", 0.5))
@@ -119,8 +131,11 @@ def render_scene(
     # sources; tpad only makes the encoded scene clock explicit for xfade.
     filters = scene_filter(width, height, focus_x, focus_y, color_grade)
     filters += f",tpad=stop_mode=clone:stop_duration={requested:.3f},trim=duration={requested:.3f},setpts=PTS-STARTPTS"
+    input_args = ["-ss", f"{source_in:.3f}"]
+    if loop_source:
+        input_args = ["-stream_loop", "-1", *input_args]
     run([
-        "ffmpeg", "-y", "-ss", f"{source_in:.3f}", "-i", str(source), "-an",
+        "ffmpeg", "-y", *input_args, "-i", str(source), "-an",
         "-vf", filters, "-t", f"{requested:.3f}",
         "-r", str(FPS), "-c:v", "libx264", "-preset", "veryfast", "-crf", "21",
         "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(output),
@@ -229,9 +244,15 @@ def _audio_timed_scene_durations(
             source_duration = (scene.get("asset") or {}).get("duration_seconds")
         if source_duration is not None:
             source_in = float(scene.get("source_in", 0.0))
-            if source_in + duration > float(source_duration) + 0.05:
+            available = float(source_duration) - source_in
+            if available <= 0.05:
                 raise RenderError(
-                    f"Scene {scene.get('scene_id')} forced-alignment duration exceeds source duration."
+                    f"Scene {scene.get('scene_id')} has no usable source window."
+                )
+            if duration > available * MAX_SOURCE_LOOP_MULTIPLIER + 0.05:
+                raise RenderError(
+                    f"Scene {scene.get('scene_id')} forced-alignment duration exceeds "
+                    f"bounded same-scene source-loop capacity."
                 )
         durations.append(duration)
     if abs(sum(durations) - sum(boundaries[-1:] or [0]) - sum(
