@@ -73,20 +73,20 @@
     }
   },
   "music": {
-    "path": "audio/episode-004-cinematic-thriller-percussive-piano.mp3",
-    "drive_file_id": "1qSNqR51q5qwnyVAwGkq1zbjyOYqeE04G",
+    "path": "audio/episode-004-suspense-tension-trailer-2.mp3",
+    "drive_file_id": "1LJtxg5fXoheepYVK5HO1M1DhEo_pVIDg",
     "provider": "pixabay",
-    "source_page_url": "https://pixabay.com/music/suspense-cinematic-thriller-percussive-piano-tension-539552/",
+    "source_page_url": "https://pixabay.com/music/suspense-suspense-tension-trailer-2-345353/",
     "license": "Pixabay Content License",
     "commercial_use": true,
     "attribution_required": false,
     "volume": 0.12,
-    "author": "Sonican",
-    "original_filename": "sonican-cinematic-thriller-percussive-piano-tension-539552.mp3",
+    "author": "DELOSound",
+    "original_filename": "delosound-suspense-tension-trailer-2-345353.mp3",
     "mime_type": "audio/mpeg",
-    "sha256": "799f53df995b7bad9a798df603de4eab518c9271a95b3c81db74d767694fb805",
-    "filesize_bytes": 5185201,
-    "duration_seconds": 162.037531
+    "sha256": "dd57de53251011da1cc72f22c81595e80c03151c46d4a43e71aa6baaf2bc98cc",
+    "filesize_bytes": 4353462,
+    "duration_seconds": 136.045688
   },
   "brand": {
     "watermark_enabled": false,
@@ -2311,5 +2311,5 @@
   "engine_profile": "because-of-this-v2-locked-2026-10",
   "engine_profile_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
   "lifecycle_status": "DRAFT_AUDIO_PENDING",
-  "updated_at": "2026-10-28T08:05:00Z"
+  "updated_at": "2026-10-28T08:10:00Z"
 }
