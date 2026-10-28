@@ -348,7 +348,9 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS"
           }
-        }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 30.071708
       },
       "narration_excerpt": "On July ninth, nineteen fifty-eight, a magnitude seven point eight earthquake shook southeast Alaska.",
       "visual_semantics": {
@@ -489,7 +491,9 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS"
           }
-        }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 24.941583
       },
       "narration_excerpt": "In the bay, the shaking ripped the rock from the mountainside.",
       "visual_semantics": {
@@ -917,7 +921,9 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS"
           }
-        }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 30.113417
       },
       "narration_excerpt": "The wave stripped forests, erased cabins, and carried boats across the land.",
       "visual_semantics": {
@@ -1061,7 +1067,9 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS"
           }
-        }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 10.01
       },
       "narration_excerpt": "One fisherman watched as the surge lifted his boat above the trees.",
       "visual_semantics": {
@@ -1201,7 +1209,9 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS"
           }
-        }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 27.610917
       },
       "narration_excerpt": "Two people died; others survived because the bay was nearly empty.",
       "visual_semantics": {
@@ -1343,7 +1353,9 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS"
           }
-        }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 10.468792
       },
       "narration_excerpt": "The bay is narrow and steep, like a giant bathtub.",
       "visual_semantics": {
@@ -1626,7 +1638,9 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS"
           }
-        }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 20.061708
       },
       "narration_excerpt": "Scientists later found the scars still visible in the forest. Because of this, researchers called landslides tsunami threats.",
       "visual_semantics": {
