@@ -1,0 +1,8 @@
+{
+  "policy_version": "1.0",
+  "active_engine_profile": "because-of-this-v2-locked-2026-10",
+  "active_engine_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
+  "update_rule": "approved_update_supersedes_previous_active_engine",
+  "retired_versions": "must_not_remain_executable_in_active_tree",
+  "history_rule": "git_history_is_retained_for_audit_but_is_never_an_execution_source"
+}
