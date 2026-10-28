@@ -151,6 +151,15 @@ jobs:
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: python production/google_drive_assets.py --manifest "${{ inputs.manifest }}" --require-drive-assets
 
+      - name: Run visual asset preflight and build contact sheet
+        run: |
+          set -euo pipefail
+          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
+          python production/asset_preflight.py \
+            --manifest "${{ inputs.manifest }}" \
+            --report "${EPISODE_DIR}/rendered/visual-preflight-${{ inputs.mode }}.json" \
+            --contact-sheet "${EPISODE_DIR}/rendered/visual-contact-sheet-${{ inputs.mode }}.jpg"
+
       - name: Restore verified narration cache
         env:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
@@ -345,6 +354,15 @@ jobs:
             --manifest "${{ inputs.manifest }}" \
             --mode "${{ inputs.mode }}" \
             --report "$(dirname "${{ inputs.manifest }}")/rendered/video-release-${{ inputs.mode }}.json"
+      - name: Run golden layout regression
+        run: |
+          set -euo pipefail
+          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
+          python production/golden_frame_regression.py \
+            --manifest "${{ inputs.manifest }}" \
+            --mode "${{ inputs.mode }}" \
+            --report "${EPISODE_DIR}/rendered/golden-layout-${{ inputs.mode }}.json"
+
       - name: Evaluate canonical gates after render QA
         run: |
           python production/quality_gates.py \
