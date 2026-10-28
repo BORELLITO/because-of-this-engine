@@ -304,6 +304,12 @@ def _validate_loop(manifest: dict[str, Any], mode: str) -> None:
         raise VideoContractError("Final release requires an enabled branded loop outro.")
     if loop.get("transition") != "continuity_fade":
         raise VideoContractError("Final release requires loop.transition=continuity_fade.")
+    if loop.get("logo_source") != "brand_logo_transparent":
+        raise VideoContractError("Final release requires the transparent brand logo outro.")
+    if loop.get("logo_anchor") != "center_center":
+        raise VideoContractError("Final release requires loop.logo_anchor=center_center.")
+    if loop.get("logo_width") != 820:
+        raise VideoContractError("Final release requires loop.logo_width=820.")
     ranges = (
         ("outro_seconds", 0.8, 1.5),
         ("tail_fade_seconds", 0.25, 0.90),
@@ -566,6 +572,8 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
         opacity = brand.get("logo_opacity", 0.82)
         margin = brand.get("logo_margin", 54)
         top = brand.get("logo_top", 72)
+        if brand.get("logo_anchor") != "center_top":
+            raise VideoContractError("Canonical brand logo anchor must be center_top.")
         if isinstance(width, bool) or not isinstance(width, (int, float)) or not 240 <= float(width) <= 720:
             raise VideoContractError("brand.logo_width must be between 240 and 720 pixels.")
         if isinstance(opacity, bool) or not isinstance(opacity, (int, float)) or not 0.2 <= float(opacity) <= 1.0:
