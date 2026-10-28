@@ -504,9 +504,8 @@ def mux_audio(
         "-c:a", "aac", "-b:a", "192k", "-ar", "48000",
         "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(output),
     ])
-    try:
-        run(command)
-    finally:
+    run(command)
+
 
 def prepare_logo(source: Path, output: Path, width: int) -> Path:
     """Decode and resize the static logo once before the long mux."""
