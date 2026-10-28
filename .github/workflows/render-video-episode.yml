@@ -36,6 +36,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
 
+      - name: Require latest main revision at checkout
+        run: |
+          set -euo pipefail
+          if [ "${GITHUB_REF}" != "refs/heads/main" ]; then
+            echo "::error::Only the current main branch may run the Because Of This production engine."
+            exit 1
+          fi
+          CURRENT_MAIN_SHA="$(git ls-remote --exit-code origin refs/heads/main | awk '{print $1}')"
+          if [ -z "${CURRENT_MAIN_SHA}" ] || [ "${CURRENT_MAIN_SHA}" != "${GITHUB_SHA}" ]; then
+            echo "::error::Stale workflow revision blocked. Dispatched ${GITHUB_SHA}; current main ${CURRENT_MAIN_SHA}."
+            exit 1
+          fi
+          echo "LATEST_MAIN_REVISION_PASS=${GITHUB_SHA}"
+
       - name: Validate v2 manifest scope
         env:
           MANIFEST: ${{ inputs.manifest }}
@@ -342,6 +356,20 @@ jobs:
       - name: Mark timeline ready
         run: python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition TIMELINE_READY --stage timeline
 
+      - name: Recheck latest main revision before render
+        run: |
+          set -euo pipefail
+          if [ "${GITHUB_REF}" != "refs/heads/main" ]; then
+            echo "::error::Only the current main branch may run the Because Of This production engine."
+            exit 1
+          fi
+          CURRENT_MAIN_SHA="$(git ls-remote --exit-code origin refs/heads/main | awk '{print $1}')"
+          if [ -z "${CURRENT_MAIN_SHA}" ] || [ "${CURRENT_MAIN_SHA}" != "${GITHUB_SHA}" ]; then
+            echo "::error::Stale workflow revision blocked. Dispatched ${GITHUB_SHA}; current main ${CURRENT_MAIN_SHA}."
+            exit 1
+          fi
+          echo "LATEST_MAIN_REVISION_PASS=${GITHUB_SHA}"
+
       - name: Render narration-locked episode
         run: python production/render_video_episode.py --manifest "${{ inputs.manifest }}" --mode "${{ inputs.mode }}"
 
@@ -394,6 +422,20 @@ jobs:
               echo "- status: no v2 validation receipt was produced"
             fi
           } >> "${GITHUB_STEP_SUMMARY}"
+
+      - name: Block stale revision before Drive delivery
+        run: |
+          set -euo pipefail
+          if [ "${GITHUB_REF}" != "refs/heads/main" ]; then
+            echo "::error::Only the current main branch may run the Because Of This production engine."
+            exit 1
+          fi
+          CURRENT_MAIN_SHA="$(git ls-remote --exit-code origin refs/heads/main | awk '{print $1}')"
+          if [ -z "${CURRENT_MAIN_SHA}" ] || [ "${CURRENT_MAIN_SHA}" != "${GITHUB_SHA}" ]; then
+            echo "::error::Stale workflow revision blocked. Dispatched ${GITHUB_SHA}; current main ${CURRENT_MAIN_SHA}."
+            exit 1
+          fi
+          echo "LATEST_MAIN_REVISION_PASS=${GITHUB_SHA}"
 
       - name: Deliver validated v2 production to Google Drive
         env:
