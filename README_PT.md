@@ -9,7 +9,7 @@ A configuração abaixo é a única autorizada para novas produções:
 
 - **Perfil:** `because-of-this-v2-locked-2026-10`
 - **Versão:** `2.0`
-- **Fingerprint:** `343ab39c203c08b5166115e6b14dab4348de069ef1feb27f3f440b5dc2783237`
+- **Fingerprint:** `c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64`
 - **Fonte única da verdade:** `production/canonical_config.py`
 - **Rota oficial:** branch `main` → GitHub Actions → Google Drive
 
@@ -46,6 +46,12 @@ imagem são proibidos.
 - H.264/AAC, 25 fps, faststart e nenhuma deformação.
 - Duração das cenas travada na narração.
 - Legendas ASS externas geradas a partir da narração final.
+- HUD travada: Arial 48px, negrito, posição inferior central, outline 3px,
+  sombra 1px e margens 100/100/320.
+- Karaokê travado em timestamps reais por palavra: branco → vermelho de marca
+  (#FF7777) durante a palavra → branco.
+- Logo superior travado no centro em 540px; encerramento travado no logo
+  transparente centralizado em 820px com fade suave. Fallback textual é proibido.
 - Duas linhas no máximo, safe zone mobile e limite de CPS.
 - Música de suspense licenciada abaixo da voz, com ducking e controle de
   loudness/true peak.
