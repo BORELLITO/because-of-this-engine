@@ -83,6 +83,17 @@ jobs:
       - name: Enforce single active engine policy
         run: python production/engine_singleton_guard.py --repo-root .
 
+      - name: Validate episode against current visual contract
+        env:
+          MANIFEST: ${{ inputs.manifest }}
+          RENDER_MODE: ${{ inputs.mode }}
+        run: |
+          set -euo pipefail
+          python production/manifest_readiness.py \
+            --manifest "${MANIFEST}" \
+            --mode "${RENDER_MODE}" \
+            --report "$(dirname "${MANIFEST}")/rendered/readiness-${RENDER_MODE}.json"
+
       - name: Install static FFmpeg with retries
         run: |
           set -euo pipefail

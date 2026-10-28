@@ -161,3 +161,23 @@ complete, and re-delivers the completed manifest.
 A final job may declare `PRODUCTION_COMPLETE` only after all of these are true:
 validated media, verified Drive delivery, reproducibility manifest, scoped
 cleanup, and final-manifest re-delivery.
+
+
+## Current-engine compatibility and render-size consistency (2026-10-28)
+
+- The sole active production profile remains `because-of-this-v2-locked-2026-10` on `main`.
+- Every dispatched render is checked for the newest `main` commit at checkout,
+  before render and before Drive delivery. Historical commits are audit-only.
+- `manifest_readiness.py` requires approved `asset_class`, `scene_approval` and
+  clean-frame pixel-QC evidence before FFmpeg, downloads or TTS. Archived
+  episodes are blocked; final mode requires explicit editorial approval.
+  Missing visual approvals from older episodes must be verified by a reviewer,
+  never synthesized just to make the new engine pass.
+- The 1080x1920 preview and 2160x3840 final use identical relative HUD
+  geometry; logo widths and top offsets are preview-space references
+  multiplied by two in 4K. ASS caption coordinates scale via the renderer.
+- The golden-frame gate checks the correct dimensions for each render mode
+  and records expected HUD geometry, but does not replace visual inspection.
+- CI inventories older manifests without treating missing approvals as
+  automatically validated. If Actions fails before a runner starts, account
+  billing or runner availability must be resolved in GitHub.

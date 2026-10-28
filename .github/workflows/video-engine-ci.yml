@@ -31,6 +31,9 @@ jobs:
       - name: Enforce single active engine policy
         run: python production/engine_singleton_guard.py --repo-root .
 
+      - name: Audit episode readiness (historical manifests are report-only)
+        run: python production/manifest_readiness.py --inventory --episodes-dir episodes
+
       - name: Run regression, contract and hardening tests
         run: python -m unittest discover -s tests -v
       - name: Validate template has only video scenes
