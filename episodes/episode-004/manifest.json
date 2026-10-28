@@ -1392,7 +1392,7 @@
     {
       "scene_id": "S10",
       "duration": 6,
-      "story_beat": "explanation: The landslide displaced water. The bay walls held its energy and pushed it back and forth.",
+      "story_beat": "explanation: The landslide displaced water with force. The bay walls held its energy and pushed it back and forth.",
       "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
       "visual_function": "explanation",
       "visual_match": "SYMBOLIC",
@@ -1492,7 +1492,7 @@
         "source_segment_in": 0,
         "source_segment_out": 15.598917
       },
-      "narration_excerpt": "The landslide displaced water. The bay walls held its energy and pushed it back and forth.",
+      "narration_excerpt": "The landslide displaced water with force. The bay walls held its energy and pushed it back and forth.",
       "visual_semantics": {
         "role": "symbolic",
         "required": {
@@ -2215,7 +2215,7 @@
       },
       {
         "scene_id": "S10",
-        "event": "explanation: The landslide displaced water. The bay walls held its energy and pushed it back and forth.",
+        "event": "explanation: The landslide displaced water with force. The bay walls held its energy and pushed it back and forth.",
         "state_before": "state_9",
         "state_after": "state_10",
         "causal_role": "explanation",
@@ -2224,7 +2224,7 @@
         "entities": [
           "lituya_bay"
         ],
-        "narration_excerpt": "The landslide displaced water. The bay walls held its energy and pushed it back and forth."
+        "narration_excerpt": "The landslide displaced water with force. The bay walls held its energy and pushed it back and forth."
       },
       {
         "scene_id": "S11",
@@ -2262,5 +2262,5 @@
   "engine_profile": "because-of-this-v2-locked-2026-10",
   "engine_profile_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
   "lifecycle_status": "DRAFT_AUDIO_PENDING",
-  "updated_at": "2026-10-28T02:47:00Z"
+  "updated_at": "2026-10-28T02:51:00Z"
 }
