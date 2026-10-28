@@ -192,6 +192,52 @@ def ffprobe(path: Path) -> dict[str, Any]:
         "size": int(data.get("format", {}).get("size", 0) or 0),
     }
 
+\ndef _sample_strip_luma(path: Path, timestamp: float, crop_y: str) -> int:
+    """Return mean luma for a normalized horizontal strip of a video frame."""
+    command = [
+        "ffmpeg", "-v", "error",
+        "-ss", f"{timestamp:.3f}", "-i", str(path),
+        "-frames:v", "1", "-an",
+        "-vf", f"crop=iw:ih*0.08:0:{crop_y},scale=1:1,format=gray",
+        "-f", "rawvideo", "-pix_fmt", "gray", "-",
+    ]
+    try:
+        raw = subprocess.run(
+            command, check=True, capture_output=True, timeout=60
+        ).stdout
+    except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired) as exc:
+        raise VideoContractError(
+            f"Could not inspect frame layout for video asset: {path}"
+        ) from exc
+    if not raw:
+        raise VideoContractError(f"Video asset has no readable layout sample: {path}")
+    return int(sum(raw) / len(raw))
+
+
+def _validate_clean_frame_layout(path: Path, asset_id: str, duration: float) -> None:
+    """Reject source files with baked black/letterbox bands before composition.
+
+    The locked engine owns all framing, captions, branding and outro treatment.
+    Source assets must therefore be clean footage, not an already-composed
+    vertical card.  This catches persistent black bands in at least two of
+    three normalized samples while allowing naturally dark footage.
+    """
+    margin = min(0.05, duration / 10.0)
+    suspect_samples = 0
+    for fraction in (0.15, 0.50, 0.85):
+        timestamp = min(max(duration * fraction, 0.0), max(0.0, duration - margin))
+        top = _sample_strip_luma(path, timestamp, "0")
+        center = _sample_strip_luma(path, timestamp, "ih*0.46")
+        bottom = _sample_strip_luma(path, timestamp, "ih-ih*0.08")
+        if center >= 45 and (top <= 8 or bottom <= 8):
+            suspect_samples += 1
+    if suspect_samples >= 2:
+        raise VideoContractError(
+            f"Asset {asset_id} contains an embedded black/letterbox band or "
+            "pre-composed layout; supply clean full-frame footage."
+        )
+
+
 def _required_text(record: dict[str, Any], key: str, label: str) -> str:
     value = record.get(key)
     if not isinstance(value, str) or not value.strip():
@@ -250,6 +296,13 @@ def validate_asset_record(record: dict[str, Any], base: Path, episode_id: str, *
         if actual.lower() != str(record["sha256"]).lower():
             raise VideoContractError(f"Asset {asset_id} sha256 does not match the downloaded file.")
         metadata = ffprobe(path)
+        pixel_qc = ((record.get("visual_evidence") or {}).get("pixel_qc") or {})
+        embedded_layout = str(pixel_qc.get("embedded_layout", "")).strip().lower()
+        if embedded_layout in {"letterbox", "pillarbox", "baked_captions", "embedded_logo", "precomposed", "composited"}:
+            raise VideoContractError(
+                f"Asset {asset_id} declares a forbidden embedded layout: {embedded_layout}."
+            )
+        _validate_clean_frame_layout(path, asset_id, float(metadata["duration"]))
         actual_phash = perceptual_hash(path, duration=float(metadata["duration"]))
         declared_phash = record.get("perceptual_hash")
         if declared_phash:
