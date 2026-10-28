@@ -78,7 +78,9 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
         raise VideoContractError(f"Media anomaly gate failed during release validation: {exc}") from exc
     if anomaly_report["status"] == "BLOCKED":
         raise VideoContractError(
-            f"Media anomaly gate found {anomaly_report['blocking_findings']} blocking finding(s)."
+            "Media anomaly gate found "
+            f"{anomaly_report['blocking_findings']} blocking finding(s): "
+            f"{json.dumps(anomaly_report.get('findings', []), ensure_ascii=False)}"
         )
     editorial = manifest.get("editorial_qa") or {}
     editorial_status = editorial.get("status", "NOT_DECLARED")
