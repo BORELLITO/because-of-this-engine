@@ -951,8 +951,7 @@
           ],
           "environments": [
             "stormy",
-            "ominous",
-            "vulnerable"
+            "ominous"
           ]
         },
         "preferred": {},
@@ -969,7 +968,7 @@
         },
         "narrative_anchors": {
           "direct_required": [
-            "boat"
+            "water"
           ],
           "minimum_direct": 1
         }
@@ -1120,7 +1119,7 @@
         },
         "narrative_anchors": {
           "direct_required": [
-            "boat"
+            "trees"
           ],
           "minimum_direct": 1
         }
@@ -2292,5 +2291,5 @@
   "engine_profile": "because-of-this-v2-locked-2026-10",
   "engine_profile_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
   "lifecycle_status": "DRAFT_AUDIO_PENDING",
-  "updated_at": "2026-10-28T07:45:00Z"
+  "updated_at": "2026-10-28T07:50:00Z"
 }
