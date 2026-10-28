@@ -583,7 +583,7 @@ def _highlighted_chunk(
         token_start = cursor + match.start()
         token_end = cursor + match.end()
         start_ms = max(0, min(duration_ms, round((float(position["start"]) - event_start) * 1000)))
-        end_ms = max(start_ms + 1, min(duration_ms, round((float(position["end"]) - event_start) * 1000)))
+        end_ms = max(start_ms + 1, round((float(position["end"]) - event_start) * 1000))
         reset_end_ms = min(duration_ms + 1000, end_ms + 1)
         tags = (
             "{\\1c&H00FFFFFF&"
@@ -710,10 +710,13 @@ def generate(
                         f"Grammar-constrained retry also failed: {constrained_error} "
                         f"Phrase-scoped acoustic retry also failed: {phrase_error}"
                     ) from phrase_error
-    # Keep intermediate event boundaries anchored to the real Vosk word spans.
-    # Moving them after alignment can clip the first/last word of a phrase and
-    # make ASS transforms disagree with the verified alignment sidecar.
+    # Keep each phrase anchored to its real first word. If independent
+    # acoustic passes leave a tiny boundary overlap, close it at the next
+    # phrase's real start so ASS events never overlap on screen.
     events[0]["start"] = 0.0
+    for previous, current in zip(events, events[1:]):
+        if float(current["start"]) < float(previous["end"]):
+            previous["end"] = float(current["start"])
     events[-1]["end"] = audio_seconds
     for event in events:
         if event["end"] - event["start"] < 0.08:
