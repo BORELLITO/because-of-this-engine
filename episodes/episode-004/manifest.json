@@ -396,7 +396,7 @@
     {
       "scene_id": "S03",
       "duration": 5.5,
-      "story_beat": "inciting_event: At Lituya Bay, the shaking tore rock from the mountainside.",
+      "story_beat": "inciting_event: At Lituya Bay, the shaking ripped the rock from the mountainside.",
       "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
       "visual_function": "inciting_event",
       "visual_match": "SYMBOLIC",
@@ -496,7 +496,7 @@
         "source_segment_in": 0,
         "source_segment_out": 21.104417
       },
-      "narration_excerpt": "At Lituya Bay, the shaking tore rock from the mountainside.",
+      "narration_excerpt": "At Lituya Bay, the shaking ripped the rock from the mountainside.",
       "visual_semantics": {
         "role": "symbolic",
         "required": {
@@ -2124,7 +2124,7 @@
       },
       {
         "scene_id": "S03",
-        "event": "inciting_event: At Lituya Bay, the shaking tore rock from the mountainside.",
+        "event": "inciting_event: At Lituya Bay, the shaking ripped the rock from the mountainside.",
         "state_before": "state_2",
         "state_after": "state_3",
         "causal_role": "escalation",
@@ -2133,7 +2133,7 @@
         "entities": [
           "lituya_bay"
         ],
-        "narration_excerpt": "At Lituya Bay, the shaking tore rock from the mountainside."
+        "narration_excerpt": "At Lituya Bay, the shaking ripped the rock from the mountainside."
       },
       {
         "scene_id": "S04",
@@ -2262,5 +2262,5 @@
   "engine_profile": "because-of-this-v2-locked-2026-10",
   "engine_profile_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
   "lifecycle_status": "DRAFT_AUDIO_PENDING",
-  "updated_at": "2026-10-28T02:35:00Z"
+  "updated_at": "2026-10-28T02:32:00Z"
 }
