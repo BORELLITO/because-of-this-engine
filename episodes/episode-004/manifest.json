@@ -46,7 +46,7 @@
     "word_highlight_enabled": true,
     "word_highlight_mode": "timestamp_color_transform",
     "active_word_color": "#FF7777",
-    "word_highlight_tolerance_ms": 100,
+    "word_highlight_tolerance_ms": 35,
     "style": {
       "font_name": "Arial",
       "font_size": 48,
@@ -2262,5 +2262,5 @@
   "engine_profile": "because-of-this-v2-locked-2026-10",
   "engine_profile_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
   "lifecycle_status": "DRAFT_AUDIO_PENDING",
-  "updated_at": "2026-10-28T02:56:00Z"
+  "updated_at": "2026-10-28T03:00:00Z"
 }
