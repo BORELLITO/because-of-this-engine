@@ -72,3 +72,38 @@ class GoldenFrameModeTest(unittest.TestCase):
         self.assertEqual(layout_px(820, 2160), 1640)
         with self.assertRaises(RenderError):
             layout_px(540, 720)
+
+    def test_final_mux_ffmpeg_graph_preserves_relative_layout(self):
+        from production.render_video_episode import mux_audio
+
+        music = self.root / "music.wav"
+        music.write_bytes(b"mocked music")
+        brand = {"logo_enabled": True, "logo_width": 540,
+                 "logo_top": 72, "logo_opacity": 0.82,
+                 "logo_anchor": "center_top"}
+        loop = {"enabled": True, "outro_seconds": 1.2,
+                "logo_width": 820, "logo_anchor": "center_center"}
+        with patch("production.render_video_episode.ffprobe",
+                   return_value={"video_duration": 60.0}), \
+             patch("production.render_video_episode.run") as fake_ffmpeg:
+            mux_audio(
+                video=self.root / "video.mp4",
+                audio=self.root / "voice.wav",
+                captions=self.root / "captions.ass",
+                output=self.root / "final.mp4",
+                narration_duration=60.0,
+                music=music,
+                music_volume=0.12,
+                logo_path=self.root / "brand.png",
+                brand=brand,
+                width=2160,
+                height=3840,
+                loop=loop,
+                loop_logo_path=self.root / "outro.png",
+            )
+        command = fake_ffmpeg.call_args.args[0]
+        graph = command[command.index("-filter_complex") + 1]
+        self.assertIn("scale=1080:-1", graph)
+        self.assertIn("y=144:", graph)
+        self.assertIn("scale=1640:-1:flags=lanczos", graph)
+        self.assertIn("s=2160x3840", graph)
