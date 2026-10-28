@@ -73,20 +73,20 @@
     }
   },
   "music": {
-    "path": "audio/episode-004-fright-night.mp3",
-    "drive_file_id": "16cUkF0tGZfU92I6OBzObOZkNosCl4J_a",
-    "provider": "mixkit",
-    "source_page_url": "https://mixkit.co/free-stock-music/mood/suspenseful/",
-    "license": "Mixkit Stock Music Free License",
+    "path": "audio/episode-004-cinematic-thriller-percussive-piano.mp3",
+    "drive_file_id": "1qSNqR51q5qwnyVAwGkq1zbjyOYqeE04G",
+    "provider": "pixabay",
+    "source_page_url": "https://pixabay.com/music/suspense-cinematic-thriller-percussive-piano-tension-539552/",
+    "license": "Pixabay Content License",
     "commercial_use": true,
     "attribution_required": false,
     "volume": 0.12,
-    "author": "Michael Ramir C.",
-    "original_filename": "Fright Night.mp3",
+    "author": "Sonican",
+    "original_filename": "sonican-cinematic-thriller-percussive-piano-tension-539552.mp3",
     "mime_type": "audio/mpeg",
-    "sha256": "144384cf2bcda8070a0d11c8aa98c3ae547de861a553275788669b7cf6a57bcd",
-    "filesize_bytes": 3243407,
-    "duration_seconds": 101.32898
+    "sha256": "799f53df995b7bad9a798df603de4eab518c9271a95b3c81db74d767694fb805",
+    "filesize_bytes": 5185201,
+    "duration_seconds": 162.037531
   },
   "brand": {
     "watermark_enabled": false,
@@ -106,7 +106,7 @@
   "asset_reuse_brain": {
     "policy": "global_no_repeat",
     "legacy_baseline": false,
-    "reason": "Episode 004 is a new factual story; all twelve staged source assets and the new music track are newly acquired and remain globally blocked from reuse in later episodes."
+    "reason": "Episode 004 keeps the global no-repeat policy; four weak representational shots were replaced with newly audited impact/boat/aftermath footage and the suspense bed was replaced with a newly audited track."
   },
   "scenes": [
     {
@@ -541,9 +541,9 @@
       "story_beat": "inciting_event: It plunged into the narrow inlet like an impact.",
       "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
       "visual_function": "inciting_event",
-      "visual_match": "SYMBOLIC",
+      "visual_match": "EXPLANATORY",
       "visual_truth": "VERIFIED_FACT",
-      "match_score": 0.76,
+      "match_score": 0.96,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -555,70 +555,76 @@
       "asset": {
         "asset_id": "because-of-this-episode-004-s04",
         "path": "runtime-assets/s04.mp4",
-        "drive_file_id": "1ffn-LLVauLYV4FrAX1qLv_gaotZ-1fuW",
-        "provider": "mixkit",
-        "source_page_url": "https://mixkit.co/free-stock-video/waves-crash-on-the-shore-1078/",
-        "license": "Mixkit Stock Video Free License",
+        "drive_file_id": "1J5erwYiPp6oyP8bTlwFtwgJg3sHptXZH",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/stone-falling-into-lake-13723991/",
+        "license": "Pexels Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "e4f05b616b4e19604b40c9e4fa162d7f71cfe25fa8ee973b785b287d58916092",
+        "sha256": "fec05a1c5e67925fcbc40577c177fe782d58ef8fa0ff37625aa9c98ab100f351",
         "reuse_status": "NEW_ASSET_EPISODE_004",
         "episode_id": "because-of-this-episode-004",
-        "author": "Mixkit source contributor",
-        "acquisition_timestamp": "2026-10-28T02:20:00Z",
-        "original_filename": "because-of-this-episode-004-waves-shore-mixkit.mp4",
+        "author": "Marsel Sharipov",
+        "acquisition_timestamp": "2026-10-28T07:45:00Z",
+        "original_filename": "impact-stone-falling-lake-pexels-13723991.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": 45.670625,
-        "width": 1280,
-        "height": 720,
-        "filesize_bytes": 15823870,
+        "duration_seconds": 15.7,
+        "width": 1440,
+        "height": 2560,
+        "filesize_bytes": 27665451,
         "job_ownership": "because-of-this-episode-004",
         "scene_usage": "S04",
         "visual_evidence": {
           "reviewed": true,
-          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "basis": "Source-page review plus sampled frames; a visible stone drops into the water and produces a concentric splash/impact, with stable non-black frames.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-28T02:20:00Z",
-          "review_method": "source-page license/title/description plus three sampled frames",
-          "source_title": "Waves crash on the shore",
-          "source_description": "Mixkit stock video used as representational coverage.",
+          "reviewed_at": "2026-10-28T07:45:00Z",
+          "review_method": "source-page license/title/description plus sampled frames",
+          "source_title": "Stone Falling into Lake",
+          "source_description": "Calm ripples form on a reflective water surface in slow mo.",
           "subjects": [
             "water",
-            "waves",
-            "shore"
+            "stone",
+            "impact"
           ],
           "actions": [
-            "crashing"
+            "falling",
+            "impact",
+            "splashing"
           ],
           "environments": [
-            "shore",
-            "sea",
-            "violent",
+            "contained water",
+            "inlet",
             "ominous"
           ],
-          "objects": [],
+          "objects": [
+            "stone"
+          ],
           "composition": [
-            "representational stock framing"
+            "tight impact detail"
           ],
           "observed_subjects": [
             "water",
-            "waves",
-            "shore"
+            "stone",
+            "impact"
           ],
           "observed_actions": [
-            "crashing"
+            "falling",
+            "impact",
+            "splashing"
           ],
           "observed_environments": [
-            "shore",
-            "sea",
-            "violent",
+            "contained water",
+            "inlet",
             "ominous"
           ],
-          "observed_objects": [],
+          "observed_objects": [
+            "stone"
+          ],
           "sample_timestamps": [
             1,
-            22.8353125,
-            44.670625
+            7.85,
+            14.7
           ],
           "action_window": {
             "in": 0,
@@ -628,7 +634,7 @@
             "in": 0,
             "out": null
           },
-          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "notes": "Representational macro coverage of the rock entering confined water; it is not literal archival footage of Lituya Bay.",
           "pixel_qc": {
             "status": "PASS",
             "sampled_frame_count": 3,
@@ -646,16 +652,15 @@
         "required": {
           "subjects": [
             "water",
-            "waves",
-            "shore"
+            "stone"
           ],
           "actions": [
-            "crashing"
+            "falling",
+            "impact",
+            "splashing"
           ],
           "environments": [
-            "shore",
-            "sea",
-            "violent",
+            "contained",
             "ominous"
           ]
         },
@@ -828,7 +833,7 @@
       "visual_function": "consequence",
       "visual_match": "EXPLANATORY",
       "visual_truth": "VERIFIED_FACT",
-      "match_score": 0.88,
+      "match_score": 0.92,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -838,72 +843,78 @@
         "duration": 0.14
       },
       "asset": {
-        "provider": "mixkit",
-        "license": "Mixkit Stock Video Free License",
+        "provider": "pexels",
+        "license": "Pexels Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
         "reuse_status": "NEW_ASSET_EPISODE_004",
         "episode_id": "because-of-this-episode-004",
-        "author": "Mixkit source contributor",
-        "acquisition_timestamp": "2026-10-28T07:15:00Z",
+        "author": "Şiyar AKBALIK",
+        "acquisition_timestamp": "2026-10-28T07:45:00Z",
         "mime_type": "video/mp4",
         "job_ownership": "because-of-this-episode-004",
         "asset_id": "because-of-this-episode-004-s06",
         "path": "runtime-assets/s06.mp4",
-        "drive_file_id": "1FwjJI8xBq6D_-H0ZlBwZsKaSCXMT7-gp",
-        "source_page_url": "https://mixkit.co/free-stock-video/a-boat-sailing-in-the-bay-1941/",
-        "sha256": "f502cb3be3d3bda36980b88de8aad81a003dc8fd7cf36dc817ed477fb6581ee2",
-        "original_filename": "a-boat-sailing-in-the-bay-1941.mp4",
-        "filesize_bytes": 8956166,
-        "duration_seconds": 30.113417,
-        "width": 1280,
-        "height": 720,
+        "drive_file_id": "1Fl2Uot3x1wTpFTOBmZi_1uAixc2-KmcK",
+        "source_page_url": "https://www.pexels.com/video/a-boat-traveling-on-the-water-with-a-cloudy-sky-20066901/",
+        "sha256": "809735a0948aad10f9a81f451309bf937371ee88e31ba8331d371e16bf9f9b0d",
+        "original_filename": "storm-waves-boat-pexels-20066901.mp4",
+        "filesize_bytes": 15254071,
+        "duration_seconds": 8.17,
+        "width": 1440,
+        "height": 2560,
         "scene_usage": "S06",
         "visual_evidence": {
           "reviewed": true,
-          "basis": "Source-page review plus sampled frames; footage is stable, non-black and semantically consistent with the declared representational subject and environment.",
+          "basis": "Source-page review plus sampled frames; a boat is visibly exposed to breaking water under dark storm clouds.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-28T07:15:00Z",
+          "reviewed_at": "2026-10-28T07:45:00Z",
           "review_method": "source-page license/title/description plus sampled frames",
-          "source_title": "A boat sailing in the bay",
-          "source_description": "Aerial view of a boat sailing near a bay full of mountains.",
+          "source_title": "A boat traveling on the water with a cloudy sky",
+          "source_description": "Dramatic waves crashing into a boat on a stormy sea.",
           "subjects": [
             "boat",
             "water",
-            "bay",
-            "mountains"
+            "waves"
           ],
           "actions": [
-            "sailing"
+            "sailing",
+            "crashing",
+            "surging"
           ],
           "environments": [
-            "bay",
-            "isolated",
-            "vulnerable"
+            "stormy sea",
+            "ominous",
+            "exposed"
           ],
-          "objects": [],
+          "objects": [
+            "boat"
+          ],
           "composition": [
-            "representational stock framing"
+            "vertical close coverage of boat and wake"
           ],
           "observed_subjects": [
             "boat",
             "water",
-            "bay",
-            "mountains"
+            "waves"
           ],
           "observed_actions": [
-            "sailing"
+            "sailing",
+            "crashing",
+            "surging"
           ],
           "observed_environments": [
-            "bay",
-            "isolated",
-            "vulnerable"
+            "stormy sea",
+            "ominous",
+            "exposed"
           ],
-          "observed_objects": [],
+          "observed_objects": [
+            "boat"
+          ],
           "sample_timestamps": [
             1,
-            15.0567085,
-            29.113417
+            4.085,
+            7.17
           ],
           "action_window": {
             "in": 0,
@@ -913,7 +924,7 @@
             "in": 0,
             "out": null
           },
-          "notes": "Commercial-use stock coverage places the boat inside a mountainous bay, matching the narrated setting without claiming the boat is the historical vessel.",
+          "notes": "Representational coverage for the wave's destructive threat; it does not claim to show the historical boat being carried over land.",
           "pixel_qc": {
             "status": "PASS",
             "sampled_frame_count": 3,
@@ -932,15 +943,15 @@
           "subjects": [
             "boat",
             "water",
-            "bay",
-            "mountains"
+            "waves"
           ],
           "actions": [
-            "sailing"
+            "crashing",
+            "surging"
           ],
           "environments": [
-            "bay",
-            "isolated",
+            "stormy",
+            "ominous",
             "vulnerable"
           ]
         },
@@ -953,12 +964,12 @@
         ],
         "critical": {
           "subjects": [
-            "water"
+            "boat"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "water"
+            "boat"
           ],
           "minimum_direct": 1
         }
@@ -972,7 +983,7 @@
       "visual_function": "eyewitness",
       "visual_match": "EXPLANATORY",
       "visual_truth": "VERIFIED_FACT",
-      "match_score": 0.92,
+      "match_score": 0.91,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -982,70 +993,80 @@
         "duration": 0.14
       },
       "asset": {
-        "provider": "pexels",
-        "license": "Pexels Free License",
+        "provider": "pixabay",
+        "license": "Pixabay Content License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
         "reuse_status": "NEW_ASSET_EPISODE_004",
         "episode_id": "because-of-this-episode-004",
-        "author": "dabatepatvideos",
-        "acquisition_timestamp": "2026-10-28T07:15:00Z",
+        "author": "NoCopyrightMusicFree",
+        "acquisition_timestamp": "2026-10-28T07:45:00Z",
         "mime_type": "video/mp4",
         "job_ownership": "because-of-this-episode-004",
         "asset_id": "because-of-this-episode-004-s07",
         "path": "runtime-assets/s07.mp4",
-        "drive_file_id": "1dcPJ879fUkI32DG0rl7eUHtw1_XzdTRA",
-        "source_page_url": "https://www.pexels.com/video/boat-in-a-lake-in-the-forest-8051904/",
-        "sha256": "2bbdf2954a22f700683afc85727d1468fe88a0348206c65624c6a8d60ae3c496",
-        "original_filename": "boat-in-a-lake-in-the-forest-pexels-8051904.mp4",
-        "filesize_bytes": 8496621,
-        "duration_seconds": 30.058333,
-        "width": 1280,
-        "height": 720,
+        "drive_file_id": "1i1qyKA2bOd8S0NUc4oGU6xCdaCCVculc",
+        "source_page_url": "https://pixabay.com/videos/rain-trees-boat-fishing-boats-107910/",
+        "sha256": "88685a2f62cc1f14e5a942d212c18bfaa5beee7cd7c8c51fb34d8128019dad60",
+        "original_filename": "rain-trees-fishing-boat-pixabay-107910.mp4",
+        "filesize_bytes": 25996335,
+        "duration_seconds": 35.241667,
+        "width": 1920,
+        "height": 1080,
         "scene_usage": "S07",
         "visual_evidence": {
           "reviewed": true,
-          "basis": "Source-page review plus three sampled Drive frames; footage is stable, non-black and consistent with the declared representational subject and environment.",
+          "basis": "Source-page review plus sampled frames; fishing boats sit against a tree-lined bank in rain and heavy overcast, giving the eyewitness beat a visibly threatened atmosphere.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-28T08:00:00Z",
-          "review_method": "source-page license/title/description plus three sampled Drive frames",
-          "source_title": "Boat in a Lake in the Forest",
-          "source_description": "Calm lake with boat and tranquil reflections in lush nature setting.",
+          "reviewed_at": "2026-10-28T07:45:00Z",
+          "review_method": "source-page license/title/description plus sampled frames",
+          "source_title": "Rain, trees, boat",
+          "source_description": "Rain, trees, boat free stock video. Free for use & download.",
           "subjects": [
             "boat",
-            "water",
-            "trees"
+            "fishing boats",
+            "trees",
+            "water"
           ],
           "actions": [
-            "floating"
+            "floating",
+            "rainfall"
           ],
           "environments": [
-            "forest",
-            "isolated",
+            "storm",
+            "tree-lined water",
+            "overcast",
             "tense"
           ],
-          "objects": [],
+          "objects": [
+            "fishing boat"
+          ],
           "composition": [
-            "representational stock framing"
+            "wide eyewitness-like view across water"
           ],
           "observed_subjects": [
             "boat",
-            "water",
-            "trees"
+            "fishing boats",
+            "trees",
+            "water"
           ],
           "observed_actions": [
-            "floating"
+            "floating",
+            "rainfall"
           ],
           "observed_environments": [
-            "forest",
-            "isolated",
+            "storm",
+            "tree-lined water",
+            "overcast",
             "tense"
           ],
-          "observed_objects": [],
+          "observed_objects": [
+            "fishing boat"
+          ],
           "sample_timestamps": [
             1,
-            15.0291665,
-            29.058333
+            17.620833,
+            34.241667
           ],
           "action_window": {
             "in": 0,
@@ -1055,7 +1076,7 @@
             "in": 0,
             "out": null
           },
-          "notes": "Free-use Pexels footage provides a clearly readable boat framed against trees, supporting the eyewitness beat without claiming literal event footage.",
+          "notes": "Representational weather-and-boat coverage for the eyewitness beat; it is not literal footage of the 1958 fisherman.",
           "pixel_qc": {
             "status": "PASS",
             "sampled_frame_count": 3,
@@ -1077,11 +1098,11 @@
             "trees"
           ],
           "actions": [
-            "floating"
+            "floating",
+            "rainfall"
           ],
           "environments": [
-            "forest",
-            "isolated",
+            "storm",
             "tense"
           ]
         },
@@ -1094,12 +1115,12 @@
         ],
         "critical": {
           "subjects": [
-            "water"
+            "boat"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "water"
+            "boat"
           ],
           "minimum_direct": 1
         }
@@ -1536,7 +1557,7 @@
       "visual_function": "evidence",
       "visual_match": "EXPLANATORY",
       "visual_truth": "VERIFIED_FACT",
-      "match_score": 0.9,
+      "match_score": 0.97,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -1546,72 +1567,80 @@
         "duration": 0.14
       },
       "asset": {
-        "provider": "mixkit",
-        "license": "Mixkit Stock Video Free License",
+        "provider": "pexels",
+        "license": "Pexels Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
         "reuse_status": "NEW_ASSET_EPISODE_004",
         "episode_id": "because-of-this-episode-004",
-        "author": "Mixkit source contributor",
-        "acquisition_timestamp": "2026-10-28T07:15:00Z",
+        "author": "Alex Kad",
+        "acquisition_timestamp": "2026-10-28T07:45:00Z",
         "mime_type": "video/mp4",
         "job_ownership": "because-of-this-episode-004",
         "asset_id": "because-of-this-episode-004-s11",
         "path": "runtime-assets/s11.mp4",
-        "drive_file_id": "1wgQgDazjRUpc3o6TpoylvsLGbnxVRi3V",
-        "source_page_url": "https://mixkit.co/free-stock-video/relief-of-an-arid-climate-covered-with-rocks-and-trees-49775/",
-        "sha256": "220f144bf2244b7431c39971a27449187a83c8a9c5d9801958827939d910425b",
-        "original_filename": "rocky-forest-aerial-mixkit-49775.mp4",
-        "filesize_bytes": 7025152,
-        "duration_seconds": 20.186833,
+        "drive_file_id": "1um4NAVac4CZ1_bfd8uU2L2-Id5hbM5i3",
+        "source_page_url": "https://www.pexels.com/video/drone-view-of-fallen-trees-on-a-mountain-top-16558960/",
+        "sha256": "248ab465b939f2d83892ead036480691d699c359366f844e1536235adfbc9616",
+        "original_filename": "fallen-trees-mountain-pexels-16558960-720p.mp4",
+        "filesize_bytes": 62023539,
+        "duration_seconds": 62.929533,
         "width": 1280,
         "height": 720,
         "scene_usage": "S11",
         "visual_evidence": {
           "reviewed": true,
-          "basis": "Source-page review plus three sampled Drive frames; footage is stable, non-black and consistent with the declared representational subject and environment.",
+          "basis": "Source-page review plus sampled aerial frame; the clip clearly shows a mountain ridge with bare/fallen trees and a long stripped corridor.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-28T08:00:00Z",
-          "review_method": "source-page license/title/description plus three sampled Drive frames",
-          "source_title": "Relief of an arid climate covered with rocks and trees",
-          "source_description": "Slow air travel over a rocky relief covered with rocks, trees and dry grass.",
+          "reviewed_at": "2026-10-28T07:45:00Z",
+          "review_method": "source-page license/title/description plus sampled frame",
+          "source_title": "Drone View of Fallen Trees on a Mountain Top",
+          "source_description": "Aerial view of a rugged mountain ridge with bare trees and clear skies.",
           "subjects": [
             "forest",
             "trees",
-            "rock",
-            "terrain"
+            "terrain",
+            "mountain"
           ],
           "actions": [
-            "aerial movement"
+            "aerial movement",
+            "fallen"
           ],
           "environments": [
-            "mountain forest",
-            "evidence",
-            "quiet aftermath"
+            "mountain ridge",
+            "forest scar",
+            "aftermath",
+            "quiet"
           ],
-          "objects": [],
+          "objects": [
+            "fallen trees"
+          ],
           "composition": [
-            "representational stock framing"
+            "aerial evidence view"
           ],
           "observed_subjects": [
             "forest",
             "trees",
-            "rock",
-            "terrain"
+            "terrain",
+            "mountain"
           ],
           "observed_actions": [
-            "aerial movement"
+            "aerial movement",
+            "fallen"
           ],
           "observed_environments": [
-            "mountain forest",
-            "evidence",
-            "quiet aftermath"
+            "mountain ridge",
+            "forest scar",
+            "aftermath",
+            "quiet"
           ],
-          "observed_objects": [],
+          "observed_objects": [
+            "fallen trees"
+          ],
           "sample_timestamps": [
             1,
-            10.0934165,
-            19.186833
+            31.464766,
+            61.929533
           ],
           "action_window": {
             "in": 0,
@@ -1621,7 +1650,7 @@
             "in": 0,
             "out": null
           },
-          "notes": "Commercial-use Mixkit aerial coverage exposes rocky ground among trees, making the evidence/scar beat more legible without claiming literal survey footage.",
+          "notes": "Representational aerial evidence of a stripped mountain/forest corridor; it does not claim to be literal archival footage of Lituya Bay.",
           "pixel_qc": {
             "status": "PASS",
             "sampled_frame_count": 3,
@@ -1640,16 +1669,16 @@
           "subjects": [
             "forest",
             "trees",
-            "rock",
             "terrain"
           ],
           "actions": [
-            "aerial movement"
+            "aerial movement",
+            "fallen"
           ],
           "environments": [
-            "mountain forest",
-            "evidence",
-            "quiet aftermath"
+            "forest scar",
+            "aftermath",
+            "evidence"
           ]
         },
         "preferred": {},
@@ -1890,7 +1919,7 @@
         "S12"
       ],
       "coverage_ratio": 1,
-      "note": "Twelve unique Mixkit clips passed sampled-frame QA as non-black, stable and semantically consistent representational coverage."
+      "note": "Revised media pass: four semantically weak shots were replaced with newly audited Pexels/Pixabay footage; all twelve staged assets remain unique and rights-documented."
     },
     "channel_diversity": {
       "comparison_window": "last_20_episodes",
@@ -2263,5 +2292,5 @@
   "engine_profile": "because-of-this-v2-locked-2026-10",
   "engine_profile_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
   "lifecycle_status": "DRAFT_AUDIO_PENDING",
-  "updated_at": "2026-10-28T03:00:00Z"
+  "updated_at": "2026-10-28T07:45:00Z"
 }
