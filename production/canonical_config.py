@@ -39,6 +39,7 @@ CANONICAL_PROFILE: dict[str, Any] = {
         "logo_opacity": 0.82,
         "logo_margin": 54,
         "logo_top": 72,
+        "logo_anchor": "center_top",
     },
     "music": {
         "volume": 0.12,
@@ -55,6 +56,32 @@ CANONICAL_PROFILE: dict[str, Any] = {
         "word_highlight_mode": "timestamp_color_transform",
         "active_word_color": "#FF7777",
         "word_highlight_tolerance_ms": 35,
+        # The HUD typography and placement are identity-locked. Episode data
+        # may change the words and timestamps, never this render contract.
+        "style": {
+            "font_name": "Arial",
+            "font_size": 48,
+            "primary_color": "&H00FFFFFF&",
+            "secondary_color": "&H00FFFFFF&",
+            "outline_color": "&H00000000&",
+            "back_color": "&H80000000&",
+            "bold": 1,
+            "italic": 0,
+            "underline": 0,
+            "strike_out": 0,
+            "scale_x": 100,
+            "scale_y": 100,
+            "spacing": 0,
+            "angle": 0,
+            "border_style": 1,
+            "outline": 3,
+            "shadow": 1,
+            "alignment": 2,
+            "margin_l": 100,
+            "margin_r": 100,
+            "margin_v": 320,
+            "encoding": 1,
+        },
     },
     "color_grade": {
         "enabled": True,
@@ -74,6 +101,9 @@ CANONICAL_PROFILE: dict[str, Any] = {
         "enabled": True,
         "title": "BECAUSE OF THIS",
         "transition": "continuity_fade",
+        "logo_source": "brand_logo_transparent",
+        "logo_width": 820,
+        "logo_anchor": "center_center",
         "outro_seconds": 1.2,
         "tail_fade_seconds": 0.55,
         "card_fade_in_seconds": 0.24,
@@ -91,6 +121,37 @@ def _canonical_json(value: Any) -> bytes:
         sort_keys=True,
         separators=(",", ":"),
     ).encode("utf-8")
+
+
+def caption_ass_style_line(name: str = "Default") -> str:
+    """Return the one canonical ASS style used by preview and final renders."""
+    style = CANONICAL_PROFILE["captions"]["style"]
+    fields = (
+        name,
+        style["font_name"],
+        style["font_size"],
+        style["primary_color"],
+        style["secondary_color"],
+        style["outline_color"],
+        style["back_color"],
+        style["bold"],
+        style["italic"],
+        style["underline"],
+        style["strike_out"],
+        style["scale_x"],
+        style["scale_y"],
+        style["spacing"],
+        style["angle"],
+        style["border_style"],
+        style["outline"],
+        style["shadow"],
+        style["alignment"],
+        style["margin_l"],
+        style["margin_r"],
+        style["margin_v"],
+        style["encoding"],
+    )
+    return "Style: " + ",".join(str(value) for value in fields)
 
 
 CANONICAL_PROFILE_FINGERPRINT = hashlib.sha256(_canonical_json(CANONICAL_PROFILE)).hexdigest()
