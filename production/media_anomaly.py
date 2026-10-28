@@ -10,6 +10,7 @@ class MediaAnomalyError(RuntimeError):
     """Raised when anomaly analysis cannot be completed."""
 
 BLACK_BLOCK_SECONDS = 2.0
+BLACK_PIXEL_THRESHOLD = 0.03
 FREEZE_ADVISORY_SECONDS = 3.0
 SILENCE_ADVISORY_SECONDS = 3.0
 
@@ -52,7 +53,7 @@ def analyze(path: Path, *, timeout: int = 240) -> dict[str, Any]:
     if not path.is_file() or path.stat().st_size <= 0:
         raise MediaAnomalyError(f"Rendered media is missing or empty: {path}")
     command = ["ffmpeg", "-hide_banner", "-loglevel", "info", "-i", str(path),
-        "-vf", "blackdetect=d=2:pix_th=0.10,freezedetect=n=-60dB:d=3",
+        "-vf", f"blackdetect=d=2:pix_th={BLACK_PIXEL_THRESHOLD:.2f},freezedetect=n=-60dB:d=3",
         "-af", "silencedetect=n=-45dB:d=3", "-f", "null", "-"]
     try:
         result = subprocess.run(command, check=True, capture_output=True, text=True, timeout=timeout)
@@ -64,6 +65,7 @@ def analyze(path: Path, *, timeout: int = 240) -> dict[str, Any]:
     return {"status": "BLOCKED" if blocking else ("ADVISORY" if findings else "PASS"),
         "tool": "ffmpeg blackdetect/freezedetect/silencedetect",
         "thresholds": {"black_block_seconds": BLACK_BLOCK_SECONDS,
+            "black_pixel_threshold": BLACK_PIXEL_THRESHOLD,
             "freeze_advisory_seconds": FREEZE_ADVISORY_SECONDS,
             "silence_advisory_seconds": SILENCE_ADVISORY_SECONDS},
         "findings": findings, "blocking_findings": len(blocking)}
