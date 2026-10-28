@@ -423,7 +423,7 @@
         "path": "runtime-assets/s03.mp4",
         "drive_file_id": "1sMdAhvVQdn6oZhvffn3U4yu4WONO-_5y",
         "source_page_url": "https://www.pexels.com/video/landslide-in-a-mountain-9354609/",
-        "sha256": "",
+        "sha256": "d4d238c15614602836a0b39b43947f29d0ad7e9407da834806c6d2f83ad5bd00",
         "original_filename": "landslide-in-a-mountain-pexels-9354609.mp4",
         "filesize_bytes": 6977956,
         "duration_seconds": 22.255567,
@@ -506,7 +506,8 @@
             "terrain"
           ],
           "actions": [
-            "aerial movement"
+            "rockfall",
+            "falling"
           ],
           "environments": [
             "steep",
@@ -995,7 +996,7 @@
         "path": "runtime-assets/s07.mp4",
         "drive_file_id": "1dcPJ879fUkI32DG0rl7eUHtw1_XzdTRA",
         "source_page_url": "https://www.pexels.com/video/boat-in-a-lake-in-the-forest-8051904/",
-        "sha256": "",
+        "sha256": "2bbdf2954a22f700683afc85727d1468fe88a0348206c65624c6a8d60ae3c496",
         "original_filename": "boat-in-a-lake-in-the-forest-pexels-8051904.mp4",
         "filesize_bytes": 8496621,
         "duration_seconds": 30.058333,
@@ -1073,14 +1074,13 @@
           "subjects": [
             "boat",
             "water",
-            "hills"
+            "trees"
           ],
           "actions": [
-            "moving",
-            "sailing"
+            "floating"
           ],
           "environments": [
-            "coast",
+            "forest",
             "isolated",
             "tense"
           ]
@@ -1560,7 +1560,7 @@
         "path": "runtime-assets/s11.mp4",
         "drive_file_id": "1wgQgDazjRUpc3o6TpoylvsLGbnxVRi3V",
         "source_page_url": "https://mixkit.co/free-stock-video/relief-of-an-arid-climate-covered-with-rocks-and-trees-49775/",
-        "sha256": "",
+        "sha256": "220f144bf2244b7431c39971a27449187a83c8a9c5d9801958827939d910425b",
         "original_filename": "rocky-forest-aerial-mixkit-49775.mp4",
         "filesize_bytes": 7025152,
         "duration_seconds": 20.186833,
@@ -1638,9 +1638,10 @@
         "role": "explanatory",
         "required": {
           "subjects": [
-            "mountains",
             "forest",
-            "trees"
+            "trees",
+            "rock",
+            "terrain"
           ],
           "actions": [
             "aerial movement"
@@ -1660,16 +1661,14 @@
         ],
         "critical": {
           "subjects": [
-            "mountains",
             "forest"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "mountains",
             "forest"
           ],
-          "minimum_direct": 2
+          "minimum_direct": 1
         }
       }
     },
