@@ -121,6 +121,9 @@ def render_scene(
             f"limit={MAX_SOURCE_LOOP_MULTIPLIER:.1f}x)."
         )
     loop_source = requested > available + 0.05
+    # Use a finite loop count. An infinite input loop can keep FFmpeg alive
+    # after the output trim has satisfied its duration on some static builds.
+    loop_count = max(0, int((requested - 0.001) // available))
     focus = scene.get("focus", {"x": 0.5, "y": 0.5})
     focus_x = float(focus.get("x", 0.5))
     focus_y = float(focus.get("y", 0.5))
@@ -133,7 +136,7 @@ def render_scene(
     filters += f",tpad=stop_mode=clone:stop_duration={requested:.3f},trim=duration={requested:.3f},setpts=PTS-STARTPTS"
     input_args = ["-ss", f"{source_in:.3f}"]
     if loop_source:
-        input_args = ["-stream_loop", "-1", *input_args]
+        input_args = ["-stream_loop", str(loop_count), *input_args]
     run([
         "ffmpeg", "-y", *input_args, "-i", str(source), "-an",
         "-vf", filters, "-t", f"{requested:.3f}",
