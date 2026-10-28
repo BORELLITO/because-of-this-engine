@@ -56,7 +56,7 @@ class CanonicalConfigTests(unittest.TestCase):
     def test_fixed_visual_identity_locks_cannot_drift(self):
         manifest = self._load("episodes/episode-003/manifest.json")
         cases = (
-            ("brand", "logo_anchor", "center_top", "brand.logo_anchor"),
+            ("brand", "logo_anchor", "top_right", "brand.logo_anchor"),
             ("captions", "style", {**manifest["captions"]["style"], "alignment": 7}, "captions.style.alignment"),
             ("loop", "logo_width", 900, "loop.logo_width"),
         )
