@@ -130,7 +130,7 @@
         "asset_id": "because-of-this-episode-004-s01",
         "path": "runtime-assets/s01.mp4",
         "drive_file_id": "1iGup_o5oiT1_3VAUYuYoZ-ygp2YE9zwC",
-        "provider": "usgs",
+        "provider": "drive",
         "source_page_url": "https://www.usgs.gov/media/images/lituya-bay-1958",
         "license": "Public Domain",
         "rights_status": "APPROVED",
@@ -716,7 +716,7 @@
         "asset_id": "because-of-this-episode-004-s05",
         "path": "runtime-assets/s05.mp4",
         "drive_file_id": "1S38UdZnhkjXGjiEpnLcQjLBuDSh_YBxO",
-        "provider": "wikimedia_commons",
+        "provider": "drive",
         "source_page_url": "https://commons.wikimedia.org/wiki/File:Lituya-Bay-overview-with-arrows.png",
         "license": "Public Domain",
         "rights_status": "APPROVED",
@@ -1587,7 +1587,7 @@
         "duration": 0.14
       },
       "asset": {
-        "provider": "wikimedia_commons",
+        "provider": "drive",
         "license": "Public Domain",
         "rights_status": "APPROVED",
         "approved_for_render": true,
@@ -2311,5 +2311,5 @@
   "engine_profile": "because-of-this-v2-locked-2026-10",
   "engine_profile_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
   "lifecycle_status": "DRAFT_AUDIO_PENDING",
-  "updated_at": "2026-10-28T08:10:00Z"
+  "updated_at": "2026-10-28T08:20:00Z"
 }
