@@ -1748,11 +1748,11 @@
       "why_it_mattered": "The event showed that landslides can generate extreme local tsunamis even without an open-ocean wave."
     },
     "emotional_arc": {
-      "primary": "awe",
+      "primary": "wonder",
       "secondary": "dread",
       "target_sensations": [
         "curiosity",
-        "scale",
+        "wonder",
         "unease",
         "chill"
       ]
@@ -2032,7 +2032,7 @@
         "event": "inciting_event: At Lituya Bay, the shaking tore rock from the mountainside.",
         "state_before": "state_2",
         "state_after": "state_3",
-        "causal_role": "inciting_event",
+        "causal_role": "escalation",
         "emotion": "dread",
         "visual_motif": "unstable terrain",
         "entities": [
@@ -2045,8 +2045,8 @@
         "event": "inciting_event: It plunged into the narrow inlet like an impact.",
         "state_before": "state_3",
         "state_after": "state_4",
-        "causal_role": "inciting_event",
-        "emotion": "impact",
+        "causal_role": "escalation",
+        "emotion": "tension",
         "visual_motif": "crashing water",
         "entities": [
           "lituya_bay"
@@ -2059,7 +2059,7 @@
         "state_before": "state_4",
         "state_after": "state_5",
         "causal_role": "reveal",
-        "emotion": "awe",
+        "emotion": "wonder",
         "visual_motif": "vertical surge",
         "entities": [
           "lituya_bay"
@@ -2084,8 +2084,8 @@
         "event": "eyewitness: One fisherman watched as the surge lifted his boat above the trees.",
         "state_before": "state_6",
         "state_after": "state_7",
-        "causal_role": "eyewitness",
-        "emotion": "tension",
+        "causal_role": "tension",
+        "emotion": "fear",
         "visual_motif": "lone fisherman",
         "entities": [
           "lituya_bay"
@@ -2098,7 +2098,7 @@
         "state_before": "state_7",
         "state_after": "state_8",
         "causal_role": "consequence",
-        "emotion": "somber",
+        "emotion": "relief",
         "visual_motif": "empty forest",
         "entities": [
           "lituya_bay"
@@ -2111,7 +2111,7 @@
         "state_before": "state_8",
         "state_after": "state_9",
         "causal_role": "explanation",
-        "emotion": "scale",
+        "emotion": "anticipation",
         "visual_motif": "contained valley",
         "entities": [
           "lituya_bay"
@@ -2124,7 +2124,7 @@
         "state_before": "state_9",
         "state_after": "state_10",
         "causal_role": "explanation",
-        "emotion": "force",
+        "emotion": "tension",
         "visual_motif": "mountain force",
         "entities": [
           "lituya_bay"
@@ -2137,7 +2137,7 @@
         "state_before": "state_10",
         "state_after": "state_11",
         "causal_role": "evidence",
-        "emotion": "evidence",
+        "emotion": "wonder",
         "visual_motif": "forest scar",
         "entities": [
           "lituya_bay"
@@ -2150,7 +2150,7 @@
         "state_before": "state_11",
         "state_after": "state_12",
         "causal_role": "payoff",
-        "emotion": "warning",
+        "emotion": "chill",
         "visual_motif": "mountain warning",
         "entities": [
           "lituya_bay"
