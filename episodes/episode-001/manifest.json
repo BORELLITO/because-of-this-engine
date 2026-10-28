@@ -45,7 +45,31 @@
     "word_highlight_enabled": true,
     "word_highlight_mode": "timestamp_color_transform",
     "active_word_color": "#FF7777",
-    "word_highlight_tolerance_ms": 35
+    "word_highlight_tolerance_ms": 35,
+    "style": {
+      "font_name": "Arial",
+      "font_size": 48,
+      "primary_color": "&H00FFFFFF&",
+      "secondary_color": "&H00FFFFFF&",
+      "outline_color": "&H00000000&",
+      "back_color": "&H80000000&",
+      "bold": 1,
+      "italic": 0,
+      "underline": 0,
+      "strike_out": 0,
+      "scale_x": 100,
+      "scale_y": 100,
+      "spacing": 0,
+      "angle": 0,
+      "border_style": 1,
+      "outline": 3,
+      "shadow": 1,
+      "alignment": 2,
+      "margin_l": 100,
+      "margin_r": 100,
+      "margin_v": 320,
+      "encoding": 1
+    }
   },
   "music": {
     "path": "audio/suspense-bed.mp3",
@@ -1837,7 +1861,8 @@
     "card_fade_out_seconds": 0.36,
     "audio_fade_seconds": 0.6,
     "restart_safe": true,
-    "reason": "Continuity fade bridges the final visual beat into the branded signature and avoids a hard ending."
+    "reason": "Continuity fade bridges the final visual beat into the branded signature and avoids a hard ending.",
+    "logo_anchor": "center_center"
   },
   "color_grade": {
     "enabled": true,
@@ -2195,6 +2220,6 @@
     "timing_source": "forced_alignment_sidecar"
   },
   "engine_profile": "because-of-this-v2-locked-2026-10",
-  "engine_profile_fingerprint": "343ab39c203c08b5166115e6b14dab4348de069ef1feb27f3f440b5dc2783237",
+  "engine_profile_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
   "lifecycle_status": "PRODUCTION_READY"
 }
