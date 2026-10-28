@@ -156,13 +156,15 @@
           "source_title": "sea waves in a little bay",
           "source_description": "Mixkit stock video used as representational coverage.",
           "subjects": [
-            "moving"
+            "water",
+            "waves",
+            "bay"
           ],
           "actions": [
-            "sea",
-            "coast"
+            "moving"
           ],
           "environments": [
+            "coast",
             "calm",
             "ominous"
           ],
@@ -171,13 +173,15 @@
             "representational stock framing"
           ],
           "observed_subjects": [
-            "moving"
+            "water",
+            "waves",
+            "bay"
           ],
           "observed_actions": [
-            "sea",
-            "coast"
+            "moving"
           ],
           "observed_environments": [
+            "coast",
             "calm",
             "ominous"
           ],
@@ -212,13 +216,15 @@
         "role": "explanatory",
         "required": {
           "subjects": [
-            "moving"
+            "water",
+            "waves",
+            "bay"
           ],
           "actions": [
-            "sea",
-            "coast"
+            "moving"
           ],
           "environments": [
+            "coast",
             "calm",
             "ominous"
           ]
@@ -232,12 +238,12 @@
         ],
         "critical": {
           "subjects": [
-            "moving"
+            "water"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "moving"
+            "water"
           ],
           "minimum_direct": 1
         }
@@ -291,13 +297,16 @@
           "source_title": "Aerial shot of a forest covered with trees and vegetation",
           "source_description": "Mixkit stock video used as representational coverage.",
           "subjects": [
-            "aerial movement"
+            "mountains",
+            "forest",
+            "terrain"
           ],
           "actions": [
-            "mountainous land",
-            "wilderness"
+            "aerial movement"
           ],
           "environments": [
+            "mountainous land",
+            "wilderness",
             "remote",
             "uneasy"
           ],
@@ -306,13 +315,16 @@
             "representational stock framing"
           ],
           "observed_subjects": [
-            "aerial movement"
+            "mountains",
+            "forest",
+            "terrain"
           ],
           "observed_actions": [
-            "mountainous land",
-            "wilderness"
+            "aerial movement"
           ],
           "observed_environments": [
+            "mountainous land",
+            "wilderness",
             "remote",
             "uneasy"
           ],
@@ -347,13 +359,16 @@
         "role": "symbolic",
         "required": {
           "subjects": [
-            "aerial movement"
+            "mountains",
+            "forest",
+            "terrain"
           ],
           "actions": [
-            "mountainous land",
-            "wilderness"
+            "aerial movement"
           ],
           "environments": [
+            "mountainous land",
+            "wilderness",
             "remote",
             "uneasy"
           ]
@@ -367,12 +382,12 @@
         ],
         "critical": {
           "subjects": [
-            "aerial movement"
+            "mountains"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "aerial movement"
+            "mountains"
           ],
           "minimum_direct": 1
         }
@@ -426,12 +441,15 @@
           "source_title": "Forest aerial view",
           "source_description": "Mixkit stock video used as representational coverage.",
           "subjects": [
-            "overhead movement"
+            "mountains",
+            "forest",
+            "terrain"
           ],
           "actions": [
-            "wilderness"
+            "overhead movement"
           ],
           "environments": [
+            "wilderness",
             "unstable",
             "ominous"
           ],
@@ -440,12 +458,15 @@
             "representational stock framing"
           ],
           "observed_subjects": [
-            "overhead movement"
+            "mountains",
+            "forest",
+            "terrain"
           ],
           "observed_actions": [
-            "wilderness"
+            "overhead movement"
           ],
           "observed_environments": [
+            "wilderness",
             "unstable",
             "ominous"
           ],
@@ -480,12 +501,15 @@
         "role": "symbolic",
         "required": {
           "subjects": [
-            "overhead movement"
+            "mountains",
+            "forest",
+            "terrain"
           ],
           "actions": [
-            "wilderness"
+            "overhead movement"
           ],
           "environments": [
+            "wilderness",
             "unstable",
             "ominous"
           ]
@@ -499,12 +523,12 @@
         ],
         "critical": {
           "subjects": [
-            "overhead movement"
+            "mountains"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "overhead movement"
+            "mountains"
           ],
           "minimum_direct": 1
         }
@@ -558,13 +582,16 @@
           "source_title": "Waves crash on the shore",
           "source_description": "Mixkit stock video used as representational coverage.",
           "subjects": [
-            "crashing"
+            "water",
+            "waves",
+            "shore"
           ],
           "actions": [
-            "shore",
-            "sea"
+            "crashing"
           ],
           "environments": [
+            "shore",
+            "sea",
             "violent",
             "ominous"
           ],
@@ -573,13 +600,16 @@
             "representational stock framing"
           ],
           "observed_subjects": [
-            "crashing"
+            "water",
+            "waves",
+            "shore"
           ],
           "observed_actions": [
-            "shore",
-            "sea"
+            "crashing"
           ],
           "observed_environments": [
+            "shore",
+            "sea",
             "violent",
             "ominous"
           ],
@@ -614,13 +644,16 @@
         "role": "symbolic",
         "required": {
           "subjects": [
-            "crashing"
+            "water",
+            "waves",
+            "shore"
           ],
           "actions": [
-            "shore",
-            "sea"
+            "crashing"
           ],
           "environments": [
+            "shore",
+            "sea",
             "violent",
             "ominous"
           ]
@@ -634,12 +667,12 @@
         ],
         "critical": {
           "subjects": [
-            "crashing"
+            "water"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "crashing"
+            "water"
           ],
           "minimum_direct": 1
         }
@@ -693,12 +726,15 @@
           "source_title": "Waves crash on a shore with boulders",
           "source_description": "Mixkit stock video used as representational coverage.",
           "subjects": [
-            "crashing"
+            "water",
+            "waves",
+            "rocks"
           ],
           "actions": [
-            "shore"
+            "crashing"
           ],
           "environments": [
+            "shore",
             "powerful",
             "dread"
           ],
@@ -707,12 +743,15 @@
             "representational stock framing"
           ],
           "observed_subjects": [
-            "crashing"
+            "water",
+            "waves",
+            "rocks"
           ],
           "observed_actions": [
-            "shore"
+            "crashing"
           ],
           "observed_environments": [
+            "shore",
             "powerful",
             "dread"
           ],
@@ -747,12 +786,15 @@
         "role": "explanatory",
         "required": {
           "subjects": [
-            "crashing"
+            "water",
+            "waves",
+            "rocks"
           ],
           "actions": [
-            "shore"
+            "crashing"
           ],
           "environments": [
+            "shore",
             "powerful",
             "dread"
           ]
@@ -766,12 +808,12 @@
         ],
         "critical": {
           "subjects": [
-            "crashing"
+            "water"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "crashing"
+            "water"
           ],
           "minimum_direct": 1
         }
@@ -825,12 +867,16 @@
           "source_title": "Boat in the open sea",
           "source_description": "Mixkit stock video used as representational coverage.",
           "subjects": [
-            "sailing"
+            "boat",
+            "water",
+            "forest"
           ],
           "actions": [
-            "open sea"
+            "sailing"
           ],
           "environments": [
+            "open sea",
+            "coast",
             "isolated",
             "vulnerable"
           ],
@@ -839,12 +885,16 @@
             "representational stock framing"
           ],
           "observed_subjects": [
-            "sailing"
+            "boat",
+            "water",
+            "forest"
           ],
           "observed_actions": [
-            "open sea"
+            "sailing"
           ],
           "observed_environments": [
+            "open sea",
+            "coast",
             "isolated",
             "vulnerable"
           ],
@@ -879,12 +929,16 @@
         "role": "explanatory",
         "required": {
           "subjects": [
-            "sailing"
+            "boat",
+            "water",
+            "forest"
           ],
           "actions": [
-            "open sea"
+            "sailing"
           ],
           "environments": [
+            "open sea",
+            "coast",
             "isolated",
             "vulnerable"
           ]
@@ -898,12 +952,12 @@
         ],
         "critical": {
           "subjects": [
-            "sailing"
+            "water"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "sailing"
+            "water"
           ],
           "minimum_direct": 1
         }
@@ -957,13 +1011,16 @@
           "source_title": "Fishing boat in the sea",
           "source_description": "Mixkit stock video used as representational coverage.",
           "subjects": [
+            "boat",
+            "water",
+            "fishing boat"
+          ],
+          "actions": [
             "floating",
             "sailing"
           ],
-          "actions": [
-            "sea"
-          ],
           "environments": [
+            "sea",
             "isolated",
             "tense"
           ],
@@ -972,13 +1029,16 @@
             "representational stock framing"
           ],
           "observed_subjects": [
+            "boat",
+            "water",
+            "fishing boat"
+          ],
+          "observed_actions": [
             "floating",
             "sailing"
           ],
-          "observed_actions": [
-            "sea"
-          ],
           "observed_environments": [
+            "sea",
             "isolated",
             "tense"
           ],
@@ -1013,13 +1073,16 @@
         "role": "explanatory",
         "required": {
           "subjects": [
+            "boat",
+            "water",
+            "fishing boat"
+          ],
+          "actions": [
             "floating",
             "sailing"
           ],
-          "actions": [
-            "sea"
-          ],
           "environments": [
+            "sea",
             "isolated",
             "tense"
           ]
@@ -1033,13 +1096,12 @@
         ],
         "critical": {
           "subjects": [
-            "floating",
-            "sailing"
+            "water"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "floating"
+            "water"
           ],
           "minimum_direct": 1
         }
@@ -1093,12 +1155,14 @@
           "source_title": "Aerial shot of a huge forest full of trees",
           "source_description": "Mixkit stock video used as representational coverage.",
           "subjects": [
-            "aerial movement"
+            "forest",
+            "trees"
           ],
           "actions": [
-            "wilderness"
+            "aerial movement"
           ],
           "environments": [
+            "wilderness",
             "empty",
             "somber"
           ],
@@ -1107,12 +1171,14 @@
             "representational stock framing"
           ],
           "observed_subjects": [
-            "aerial movement"
+            "forest",
+            "trees"
           ],
           "observed_actions": [
-            "wilderness"
+            "aerial movement"
           ],
           "observed_environments": [
+            "wilderness",
             "empty",
             "somber"
           ],
@@ -1147,12 +1213,14 @@
         "role": "atmosphere",
         "required": {
           "subjects": [
-            "aerial movement"
+            "forest",
+            "trees"
           ],
           "actions": [
-            "wilderness"
+            "aerial movement"
           ],
           "environments": [
+            "wilderness",
             "empty",
             "somber"
           ]
@@ -1166,12 +1234,12 @@
         ],
         "critical": {
           "subjects": [
-            "aerial movement"
+            "forest"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "aerial movement"
+            "forest"
           ],
           "minimum_direct": 1
         }
@@ -1225,13 +1293,16 @@
           "source_title": "Aerial view of a vast forest",
           "source_description": "Mixkit stock video used as representational coverage.",
           "subjects": [
-            "aerial movement"
+            "mountains",
+            "valley",
+            "landscape"
           ],
           "actions": [
-            "mountains",
-            "wilderness"
+            "aerial movement"
           ],
           "environments": [
+            "mountains",
+            "wilderness",
             "vast",
             "contained"
           ],
@@ -1240,13 +1311,16 @@
             "representational stock framing"
           ],
           "observed_subjects": [
-            "aerial movement"
+            "mountains",
+            "valley",
+            "landscape"
           ],
           "observed_actions": [
-            "mountains",
-            "wilderness"
+            "aerial movement"
           ],
           "observed_environments": [
+            "mountains",
+            "wilderness",
             "vast",
             "contained"
           ],
@@ -1281,13 +1355,16 @@
         "role": "symbolic",
         "required": {
           "subjects": [
-            "aerial movement"
+            "mountains",
+            "valley",
+            "landscape"
           ],
           "actions": [
-            "mountains",
-            "wilderness"
+            "aerial movement"
           ],
           "environments": [
+            "mountains",
+            "wilderness",
             "vast",
             "contained"
           ]
@@ -1301,12 +1378,12 @@
         ],
         "critical": {
           "subjects": [
-            "aerial movement"
+            "valley"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "aerial movement"
+            "valley"
           ],
           "minimum_direct": 1
         }
@@ -1360,13 +1437,15 @@
           "source_title": "Air tour around a huge mountain",
           "source_description": "Mixkit stock video used as representational coverage.",
           "subjects": [
-            "aerial movement"
+            "mountains",
+            "terrain"
           ],
           "actions": [
-            "mountains",
-            "wilderness"
+            "aerial movement"
           ],
           "environments": [
+            "mountains",
+            "wilderness",
             "massive",
             "threatening"
           ],
@@ -1375,13 +1454,15 @@
             "representational stock framing"
           ],
           "observed_subjects": [
-            "aerial movement"
+            "mountains",
+            "terrain"
           ],
           "observed_actions": [
-            "mountains",
-            "wilderness"
+            "aerial movement"
           ],
           "observed_environments": [
+            "mountains",
+            "wilderness",
             "massive",
             "threatening"
           ],
@@ -1416,13 +1497,15 @@
         "role": "symbolic",
         "required": {
           "subjects": [
-            "aerial movement"
+            "mountains",
+            "terrain"
           ],
           "actions": [
-            "mountains",
-            "wilderness"
+            "aerial movement"
           ],
           "environments": [
+            "mountains",
+            "wilderness",
             "massive",
             "threatening"
           ]
@@ -1436,12 +1519,12 @@
         ],
         "critical": {
           "subjects": [
-            "aerial movement"
+            "mountains"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "aerial movement"
+            "mountains"
           ],
           "minimum_direct": 1
         }
@@ -1495,13 +1578,15 @@
           "source_title": "Aerial tour over a mountain range",
           "source_description": "Mixkit stock video used as representational coverage.",
           "subjects": [
-            "aerial movement"
+            "mountains",
+            "forest"
           ],
           "actions": [
-            "mountain range",
-            "wilderness"
+            "aerial movement"
           ],
           "environments": [
+            "mountain range",
+            "wilderness",
             "evidence",
             "quiet aftermath"
           ],
@@ -1510,13 +1595,15 @@
             "representational stock framing"
           ],
           "observed_subjects": [
-            "aerial movement"
+            "mountains",
+            "forest"
           ],
           "observed_actions": [
-            "mountain range",
-            "wilderness"
+            "aerial movement"
           ],
           "observed_environments": [
+            "mountain range",
+            "wilderness",
             "evidence",
             "quiet aftermath"
           ],
@@ -1551,13 +1638,15 @@
         "role": "explanatory",
         "required": {
           "subjects": [
-            "aerial movement"
+            "mountains",
+            "forest"
           ],
           "actions": [
-            "mountain range",
-            "wilderness"
+            "aerial movement"
           ],
           "environments": [
+            "mountain range",
+            "wilderness",
             "evidence",
             "quiet aftermath"
           ]
@@ -1571,12 +1660,12 @@
         ],
         "critical": {
           "subjects": [
-            "aerial movement"
+            "forest"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "aerial movement"
+            "forest"
           ],
           "minimum_direct": 1
         }
@@ -1630,13 +1719,15 @@
           "source_title": "Aerial view of a mountain top",
           "source_description": "Mixkit stock video used as representational coverage.",
           "subjects": [
-            "aerial movement"
+            "mountains",
+            "landscape"
           ],
           "actions": [
-            "mountains",
-            "wilderness"
+            "aerial movement"
           ],
           "environments": [
+            "mountains",
+            "wilderness",
             "ominous",
             "final warning"
           ],
@@ -1645,13 +1736,15 @@
             "representational stock framing"
           ],
           "observed_subjects": [
-            "aerial movement"
+            "mountains",
+            "landscape"
           ],
           "observed_actions": [
-            "mountains",
-            "wilderness"
+            "aerial movement"
           ],
           "observed_environments": [
+            "mountains",
+            "wilderness",
             "ominous",
             "final warning"
           ],
@@ -1686,13 +1779,15 @@
         "role": "explanatory",
         "required": {
           "subjects": [
-            "aerial movement"
+            "mountains",
+            "landscape"
           ],
           "actions": [
-            "mountains",
-            "wilderness"
+            "aerial movement"
           ],
           "environments": [
+            "mountains",
+            "wilderness",
             "ominous",
             "final warning"
           ]
@@ -1706,12 +1801,12 @@
         ],
         "critical": {
           "subjects": [
-            "aerial movement"
+            "mountains"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "aerial movement"
+            "mountains"
           ],
           "minimum_direct": 1
         }
@@ -2166,5 +2261,6 @@
   },
   "engine_profile": "because-of-this-v2-locked-2026-10",
   "engine_profile_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
-  "lifecycle_status": "DRAFT_AUDIO_PENDING"
+  "lifecycle_status": "DRAFT_AUDIO_PENDING",
+  "updated_at": "2026-10-28T02:35:00Z"
 }
