@@ -255,9 +255,9 @@
       "story_beat": "context: On July ninth, nineteen fifty-eight, a magnitude seven point eight earthquake shook southeast Alaska.",
       "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
       "visual_function": "context",
-      "visual_match": "SYMBOLIC",
+      "visual_match": "EXPLANATORY",
       "visual_truth": "VERIFIED_FACT",
-      "match_score": 0.72,
+      "match_score": 0.86,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -267,72 +267,70 @@
         "duration": 0.14
       },
       "asset": {
-        "asset_id": "because-of-this-episode-004-s02",
-        "path": "runtime-assets/s02.mp4",
-        "drive_file_id": "1V3tb61jIMM4ExnLE2reEZDOMqepJy0KC",
         "provider": "mixkit",
-        "source_page_url": "https://mixkit.co/free-stock-video/aerial-shot-of-a-forest-covered-with-trees-and-vegetation-26105/",
         "license": "Mixkit Stock Video Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "fa6ad644a09b6635121c68dd7dee38fa4184af222be141fce726ac345dcf0fd9",
         "reuse_status": "NEW_ASSET_EPISODE_004",
         "episode_id": "because-of-this-episode-004",
         "author": "Mixkit source contributor",
-        "acquisition_timestamp": "2026-10-28T02:20:00Z",
-        "original_filename": "because-of-this-episode-004-forest-aerial-mixkit.mp4",
+        "acquisition_timestamp": "2026-10-28T07:15:00Z",
         "mime_type": "video/mp4",
-        "duration_seconds": 30.03,
+        "job_ownership": "because-of-this-episode-004",
+        "asset_id": "because-of-this-episode-004-s02",
+        "path": "runtime-assets/s02.mp4",
+        "drive_file_id": "1YLbXlhEk6x0hVfS9WI9QPjyTjQq6sO8W",
+        "source_page_url": "https://mixkit.co/free-stock-video/bay-landscape-aerial-shot-1940/",
+        "sha256": "4e577b910b53103e04c8d7205b2ddec2e6cd7e768a540e2bf4c330014b3a3d19",
+        "original_filename": "bay-landscape-aerial-shot-1940.mp4",
+        "filesize_bytes": null,
+        "duration_seconds": 30.071708,
         "width": 1280,
         "height": 720,
-        "filesize_bytes": 9667969,
-        "job_ownership": "because-of-this-episode-004",
         "scene_usage": "S02",
         "visual_evidence": {
           "reviewed": true,
-          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "basis": "Source-page review plus sampled frames; footage is stable, non-black and semantically consistent with the declared representational subject and environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-28T02:20:00Z",
-          "review_method": "source-page license/title/description plus three sampled frames",
-          "source_title": "Aerial shot of a forest covered with trees and vegetation",
-          "source_description": "Mixkit stock video used as representational coverage.",
+          "reviewed_at": "2026-10-28T07:15:00Z",
+          "review_method": "source-page license/title/description plus sampled frames",
+          "source_title": "Bay landscape, aerial shot",
+          "source_description": "Aerial shot view of a bay landscape with mountains and big rocks in the calm sea.",
           "subjects": [
+            "bay",
             "mountains",
-            "forest",
-            "terrain"
+            "water"
           ],
           "actions": [
             "aerial movement"
           ],
           "environments": [
-            "mountainous land",
-            "wilderness",
             "remote",
-            "uneasy"
+            "steep",
+            "ominous"
           ],
           "objects": [],
           "composition": [
             "representational stock framing"
           ],
           "observed_subjects": [
+            "bay",
             "mountains",
-            "forest",
-            "terrain"
+            "water"
           ],
           "observed_actions": [
             "aerial movement"
           ],
           "observed_environments": [
-            "mountainous land",
-            "wilderness",
             "remote",
-            "uneasy"
+            "steep",
+            "ominous"
           ],
           "observed_objects": [],
           "sample_timestamps": [
             1,
-            15.015,
-            29.03
+            15.035854,
+            29.071708
           ],
           "action_window": {
             "in": 0,
@@ -342,7 +340,7 @@
             "in": 0,
             "out": null
           },
-          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "notes": "Commercial-use stock coverage of a mountainous bay; representational, not archival Lituya Bay footage.",
           "pixel_qc": {
             "status": "PASS",
             "sampled_frame_count": 3,
@@ -350,27 +348,24 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS"
           }
-        },
-        "source_segment_in": 0,
-        "source_segment_out": 30.03
+        }
       },
       "narration_excerpt": "On July ninth, nineteen fifty-eight, a magnitude seven point eight earthquake shook southeast Alaska.",
       "visual_semantics": {
-        "role": "symbolic",
+        "role": "explanatory",
         "required": {
           "subjects": [
+            "bay",
             "mountains",
-            "forest",
-            "terrain"
+            "water"
           ],
           "actions": [
             "aerial movement"
           ],
           "environments": [
-            "mountainous land",
-            "wilderness",
             "remote",
-            "uneasy"
+            "steep",
+            "ominous"
           ]
         },
         "preferred": {},
@@ -382,14 +377,16 @@
         ],
         "critical": {
           "subjects": [
+            "bay",
             "mountains"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
+            "bay",
             "mountains"
           ],
-          "minimum_direct": 1
+          "minimum_direct": 2
         }
       }
     },
@@ -401,7 +398,7 @@
       "visual_function": "inciting_event",
       "visual_match": "SYMBOLIC",
       "visual_truth": "VERIFIED_FACT",
-      "match_score": 0.7,
+      "match_score": 0.84,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -411,45 +408,45 @@
         "duration": 0.14
       },
       "asset": {
-        "asset_id": "because-of-this-episode-004-s03",
-        "path": "runtime-assets/s03.mp4",
-        "drive_file_id": "1f-CQptPFdiwVKgOfD4UrxR9KfMdX_Opf",
         "provider": "mixkit",
-        "source_page_url": "https://mixkit.co/free-stock-video/forest-aerial-view-121/",
         "license": "Mixkit Stock Video Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "37146e0821e0b09c7a2d000820b683cc78089e7f7c1f32c3a0ff3591b2a2bcd7",
         "reuse_status": "NEW_ASSET_EPISODE_004",
         "episode_id": "because-of-this-episode-004",
         "author": "Mixkit source contributor",
-        "acquisition_timestamp": "2026-10-28T02:20:00Z",
-        "original_filename": "because-of-this-episode-004-forest-overhead-mixkit.mp4",
+        "acquisition_timestamp": "2026-10-28T07:15:00Z",
         "mime_type": "video/mp4",
-        "duration_seconds": 21.104417,
+        "job_ownership": "because-of-this-episode-004",
+        "asset_id": "because-of-this-episode-004-s03",
+        "path": "runtime-assets/s03.mp4",
+        "drive_file_id": "1Gzw51VtrmItiVLsPcDP-nQv6mR6o5bWm",
+        "source_page_url": "https://mixkit.co/free-stock-video/aerial-tour-over-a-mountain-range-44638/",
+        "sha256": "e1be15f0a694daa56ceac5f8c5832107a8de27b10e27d187bc9fd5b91225e09a",
+        "original_filename": "aerial-tour-over-a-mountain-range-44638.mp4",
+        "filesize_bytes": null,
+        "duration_seconds": 24.941583,
         "width": 1280,
         "height": 720,
-        "filesize_bytes": 6940529,
-        "job_ownership": "because-of-this-episode-004",
         "scene_usage": "S03",
         "visual_evidence": {
           "reviewed": true,
-          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "basis": "Source-page review plus sampled frames; footage is stable, non-black and semantically consistent with the declared representational subject and environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-28T02:20:00Z",
-          "review_method": "source-page license/title/description plus three sampled frames",
-          "source_title": "Forest aerial view",
-          "source_description": "Mixkit stock video used as representational coverage.",
+          "reviewed_at": "2026-10-28T07:15:00Z",
+          "review_method": "source-page license/title/description plus sampled frames",
+          "source_title": "Aerial tour over a mountain range",
+          "source_description": "Slow aerial tour above a rocky mountain range covered with vegetation and trees.",
           "subjects": [
             "mountains",
-            "forest",
+            "rock",
             "terrain"
           ],
           "actions": [
-            "overhead movement"
+            "aerial movement"
           ],
           "environments": [
-            "wilderness",
+            "steep",
             "unstable",
             "ominous"
           ],
@@ -459,22 +456,22 @@
           ],
           "observed_subjects": [
             "mountains",
-            "forest",
+            "rock",
             "terrain"
           ],
           "observed_actions": [
-            "overhead movement"
+            "aerial movement"
           ],
           "observed_environments": [
-            "wilderness",
+            "steep",
             "unstable",
             "ominous"
           ],
           "observed_objects": [],
           "sample_timestamps": [
             1,
-            10.5522085,
-            20.104417
+            12.4707915,
+            23.941583
           ],
           "action_window": {
             "in": 0,
@@ -484,7 +481,7 @@
             "in": 0,
             "out": null
           },
-          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "notes": "Commercial-use stock coverage of rocky terrain to represent the mountainside; not literal footage of the 1958 slide.",
           "pixel_qc": {
             "status": "PASS",
             "sampled_frame_count": 3,
@@ -492,9 +489,7 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS"
           }
-        },
-        "source_segment_in": 0,
-        "source_segment_out": 21.104417
+        }
       },
       "narration_excerpt": "In the bay, the shaking ripped the rock from the mountainside.",
       "visual_semantics": {
@@ -502,14 +497,14 @@
         "required": {
           "subjects": [
             "mountains",
-            "forest",
+            "rock",
             "terrain"
           ],
           "actions": [
-            "overhead movement"
+            "aerial movement"
           ],
           "environments": [
-            "wilderness",
+            "steep",
             "unstable",
             "ominous"
           ]
@@ -523,14 +518,16 @@
         ],
         "critical": {
           "subjects": [
-            "mountains"
+            "mountains",
+            "rock"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "mountains"
+            "mountains",
+            "rock"
           ],
-          "minimum_direct": 1
+          "minimum_direct": 2
         }
       }
     },
@@ -827,7 +824,7 @@
       "visual_function": "consequence",
       "visual_match": "EXPLANATORY",
       "visual_truth": "VERIFIED_FACT",
-      "match_score": 0.74,
+      "match_score": 0.88,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -837,46 +834,46 @@
         "duration": 0.14
       },
       "asset": {
-        "asset_id": "because-of-this-episode-004-s06",
-        "path": "runtime-assets/s06.mp4",
-        "drive_file_id": "14hs-eZWaPVou1PwNMCgaYhfoYt2ccoBo",
         "provider": "mixkit",
-        "source_page_url": "https://mixkit.co/free-stock-video/boat-in-the-open-sea-1911/",
         "license": "Mixkit Stock Video Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "aaccaeaab5fa0a85fde79b58bf6ec9969dba5cd531e208a58565b929fd56637a",
         "reuse_status": "NEW_ASSET_EPISODE_004",
         "episode_id": "because-of-this-episode-004",
         "author": "Mixkit source contributor",
-        "acquisition_timestamp": "2026-10-28T02:20:00Z",
-        "original_filename": "because-of-this-episode-004-boat-open-sea-mixkit.mp4",
+        "acquisition_timestamp": "2026-10-28T07:15:00Z",
         "mime_type": "video/mp4",
-        "duration_seconds": 13.830483,
+        "job_ownership": "because-of-this-episode-004",
+        "asset_id": "because-of-this-episode-004-s06",
+        "path": "runtime-assets/s06.mp4",
+        "drive_file_id": "1FwjJI8xBq6D_-H0ZlBwZsKaSCXMT7-gp",
+        "source_page_url": "https://mixkit.co/free-stock-video/a-boat-sailing-in-the-bay-1941/",
+        "sha256": "f502cb3be3d3bda36980b88de8aad81a003dc8fd7cf36dc817ed477fb6581ee2",
+        "original_filename": "a-boat-sailing-in-the-bay-1941.mp4",
+        "filesize_bytes": null,
+        "duration_seconds": 30.113417,
         "width": 1280,
         "height": 720,
-        "filesize_bytes": 5169241,
-        "job_ownership": "because-of-this-episode-004",
         "scene_usage": "S06",
         "visual_evidence": {
           "reviewed": true,
-          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "basis": "Source-page review plus sampled frames; footage is stable, non-black and semantically consistent with the declared representational subject and environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-28T02:20:00Z",
-          "review_method": "source-page license/title/description plus three sampled frames",
-          "source_title": "Boat in the open sea",
-          "source_description": "Mixkit stock video used as representational coverage.",
+          "reviewed_at": "2026-10-28T07:15:00Z",
+          "review_method": "source-page license/title/description plus sampled frames",
+          "source_title": "A boat sailing in the bay",
+          "source_description": "Aerial view of a boat sailing near a bay full of mountains.",
           "subjects": [
             "boat",
             "water",
-            "forest"
+            "bay",
+            "mountains"
           ],
           "actions": [
             "sailing"
           ],
           "environments": [
-            "open sea",
-            "coast",
+            "bay",
             "isolated",
             "vulnerable"
           ],
@@ -887,22 +884,22 @@
           "observed_subjects": [
             "boat",
             "water",
-            "forest"
+            "bay",
+            "mountains"
           ],
           "observed_actions": [
             "sailing"
           ],
           "observed_environments": [
-            "open sea",
-            "coast",
+            "bay",
             "isolated",
             "vulnerable"
           ],
           "observed_objects": [],
           "sample_timestamps": [
             1,
-            6.9152415,
-            12.830483
+            15.0567085,
+            29.113417
           ],
           "action_window": {
             "in": 0,
@@ -912,7 +909,7 @@
             "in": 0,
             "out": null
           },
-          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "notes": "Commercial-use stock coverage places the boat inside a mountainous bay, matching the narrated setting without claiming the boat is the historical vessel.",
           "pixel_qc": {
             "status": "PASS",
             "sampled_frame_count": 3,
@@ -920,9 +917,7 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS"
           }
-        },
-        "source_segment_in": 0,
-        "source_segment_out": 13.830483
+        }
       },
       "narration_excerpt": "The wave stripped forests, erased cabins, and carried boats across the land.",
       "visual_semantics": {
@@ -931,14 +926,14 @@
           "subjects": [
             "boat",
             "water",
-            "forest"
+            "bay",
+            "mountains"
           ],
           "actions": [
             "sailing"
           ],
           "environments": [
-            "open sea",
-            "coast",
+            "bay",
             "isolated",
             "vulnerable"
           ]
@@ -952,14 +947,16 @@
         ],
         "critical": {
           "subjects": [
+            "boat",
             "water"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
+            "boat",
             "water"
           ],
-          "minimum_direct": 1
+          "minimum_direct": 2
         }
       }
     },
@@ -971,7 +968,7 @@
       "visual_function": "eyewitness",
       "visual_match": "EXPLANATORY",
       "visual_truth": "VERIFIED_FACT",
-      "match_score": 0.78,
+      "match_score": 0.86,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -981,46 +978,46 @@
         "duration": 0.14
       },
       "asset": {
-        "asset_id": "because-of-this-episode-004-s07",
-        "path": "runtime-assets/s07.mp4",
-        "drive_file_id": "1L9OP2xFsnUQZje109S09tpVPz22Y9Joj",
         "provider": "mixkit",
-        "source_page_url": "https://mixkit.co/free-stock-video/fishing-boat-in-the-sea-1914/",
         "license": "Mixkit Stock Video Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "b9f3fcac08808357d49f78d679faded97f5016e2fde55300ad545b21d4cc1530",
         "reuse_status": "NEW_ASSET_EPISODE_004",
         "episode_id": "because-of-this-episode-004",
         "author": "Mixkit source contributor",
-        "acquisition_timestamp": "2026-10-28T02:20:00Z",
-        "original_filename": "because-of-this-episode-004-fishing-boat-mixkit.mp4",
+        "acquisition_timestamp": "2026-10-28T07:15:00Z",
         "mime_type": "video/mp4",
-        "duration_seconds": 10.5,
+        "job_ownership": "because-of-this-episode-004",
+        "asset_id": "because-of-this-episode-004-s07",
+        "path": "runtime-assets/s07.mp4",
+        "drive_file_id": "119GSwyqIebwA3-sWGsCsIuWgH8MOtV9P",
+        "source_page_url": "https://mixkit.co/free-stock-video/beautiful-coast-with-motorboats-and-a-pier-seen-from-the-5363/",
+        "sha256": "a9eef7cd117d274108d47a8fcafd6623b32f548df2c55471b3cd3dbd0614bc23",
+        "original_filename": "beautiful-coast-with-motorboats-and-a-pier-seen-from-the-5363.mp4",
+        "filesize_bytes": null,
+        "duration_seconds": 10.01,
         "width": 1280,
         "height": 720,
-        "filesize_bytes": 2898067,
-        "job_ownership": "because-of-this-episode-004",
         "scene_usage": "S07",
         "visual_evidence": {
           "reviewed": true,
-          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "basis": "Source-page review plus sampled frames; footage is stable, non-black and semantically consistent with the declared representational subject and environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-28T02:20:00Z",
-          "review_method": "source-page license/title/description plus three sampled frames",
-          "source_title": "Fishing boat in the sea",
-          "source_description": "Mixkit stock video used as representational coverage.",
+          "reviewed_at": "2026-10-28T07:15:00Z",
+          "review_method": "source-page license/title/description plus sampled frames",
+          "source_title": "Beautiful coast with motorboats and a pier seen from the air",
+          "source_description": "Aerial shot of a coast at the foot of a huge hill with boats in the water.",
           "subjects": [
             "boat",
             "water",
-            "fishing boat"
+            "hills"
           ],
           "actions": [
-            "floating",
+            "moving",
             "sailing"
           ],
           "environments": [
-            "sea",
+            "coast",
             "isolated",
             "tense"
           ],
@@ -1031,22 +1028,22 @@
           "observed_subjects": [
             "boat",
             "water",
-            "fishing boat"
+            "hills"
           ],
           "observed_actions": [
-            "floating",
+            "moving",
             "sailing"
           ],
           "observed_environments": [
-            "sea",
+            "coast",
             "isolated",
             "tense"
           ],
           "observed_objects": [],
           "sample_timestamps": [
             1,
-            5.25,
-            9.5
+            5.005,
+            9.01
           ],
           "action_window": {
             "in": 0,
@@ -1056,7 +1053,7 @@
             "in": 0,
             "out": null
           },
-          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "notes": "Commercial-use stock coverage of boats beneath a steep coast; representational eyewitness context, not archival footage.",
           "pixel_qc": {
             "status": "PASS",
             "sampled_frame_count": 3,
@@ -1064,25 +1061,23 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS"
           }
-        },
-        "source_segment_in": 0,
-        "source_segment_out": 10.5
+        }
       },
       "narration_excerpt": "One fisherman watched as the surge lifted his boat above the trees.",
       "visual_semantics": {
-        "role": "explanatory",
+        "role": "symbolic",
         "required": {
           "subjects": [
             "boat",
             "water",
-            "fishing boat"
+            "hills"
           ],
           "actions": [
-            "floating",
+            "moving",
             "sailing"
           ],
           "environments": [
-            "sea",
+            "coast",
             "isolated",
             "tense"
           ]
@@ -1096,14 +1091,16 @@
         ],
         "critical": {
           "subjects": [
+            "boat",
             "water"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
+            "boat",
             "water"
           ],
-          "minimum_direct": 1
+          "minimum_direct": 2
         }
       }
     },
@@ -1113,9 +1110,9 @@
       "story_beat": "consequence: Two people died; others survived because the bay was nearly empty.",
       "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
       "visual_function": "consequence",
-      "visual_match": "ATMOSPHERE",
+      "visual_match": "SYMBOLIC",
       "visual_truth": "VERIFIED_FACT",
-      "match_score": 0.68,
+      "match_score": 0.82,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -1125,35 +1122,35 @@
         "duration": 0.14
       },
       "asset": {
-        "asset_id": "because-of-this-episode-004-s08",
-        "path": "runtime-assets/s08.mp4",
-        "drive_file_id": "1nxuDEjQZuftV-0FTrMAeO5LF23axzlOd",
         "provider": "mixkit",
-        "source_page_url": "https://mixkit.co/free-stock-video/aerial-shot-of-a-huge-forest-full-of-trees-51103/",
         "license": "Mixkit Stock Video Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "d4f128b93a1da12d99de36cb34b24f9596667820a89e41968a45bd34e8ffd5ae",
         "reuse_status": "NEW_ASSET_EPISODE_004",
         "episode_id": "because-of-this-episode-004",
         "author": "Mixkit source contributor",
-        "acquisition_timestamp": "2026-10-28T02:20:00Z",
-        "original_filename": "because-of-this-episode-004-forest-expanse-mixkit.mp4",
+        "acquisition_timestamp": "2026-10-28T07:15:00Z",
         "mime_type": "video/mp4",
+        "job_ownership": "because-of-this-episode-004",
+        "asset_id": "because-of-this-episode-004-s08",
+        "path": "runtime-assets/s08.mp4",
+        "drive_file_id": "1EyULZYBCE2SHiYuYy036cij7-TgwEzbo",
+        "source_page_url": "https://mixkit.co/free-stock-video/aerial-shot-of-a-huge-forest-full-of-trees-51103/",
+        "sha256": "d4f128b93a1da12d99de36cb34b24f9596667820a89e41968a45bd34e8ffd5ae",
+        "original_filename": "aerial-shot-of-a-huge-forest-full-of-trees-51103.mp4",
+        "filesize_bytes": null,
         "duration_seconds": 27.610917,
         "width": 1280,
         "height": 720,
-        "filesize_bytes": 8582414,
-        "job_ownership": "because-of-this-episode-004",
         "scene_usage": "S08",
         "visual_evidence": {
           "reviewed": true,
-          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "basis": "Source-page review plus sampled frames; footage is stable, non-black and semantically consistent with the declared representational subject and environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-28T02:20:00Z",
-          "review_method": "source-page license/title/description plus three sampled frames",
+          "reviewed_at": "2026-10-28T07:15:00Z",
+          "review_method": "source-page license/title/description plus sampled frames",
           "source_title": "Aerial shot of a huge forest full of trees",
-          "source_description": "Mixkit stock video used as representational coverage.",
+          "source_description": "An aerial perspective captures the vastness of a dense forest.",
           "subjects": [
             "forest",
             "trees"
@@ -1196,7 +1193,7 @@
             "in": 0,
             "out": null
           },
-          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "notes": "Commercial-use stock coverage of an empty forest to support the narration's absence-of-people consequence without depicting deaths.",
           "pixel_qc": {
             "status": "PASS",
             "sampled_frame_count": 3,
@@ -1204,13 +1201,11 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS"
           }
-        },
-        "source_segment_in": 0,
-        "source_segment_out": 27.610917
+        }
       },
       "narration_excerpt": "Two people died; others survived because the bay was nearly empty.",
       "visual_semantics": {
-        "role": "atmosphere",
+        "role": "explanatory",
         "required": {
           "subjects": [
             "forest",
@@ -1234,14 +1229,16 @@
         ],
         "critical": {
           "subjects": [
-            "forest"
+            "forest",
+            "trees"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "forest"
+            "forest",
+            "trees"
           ],
-          "minimum_direct": 1
+          "minimum_direct": 2
         }
       }
     },
@@ -1251,9 +1248,9 @@
       "story_beat": "explanation: The bay is narrow and steep, like a giant bathtub.",
       "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
       "visual_function": "explanation",
-      "visual_match": "SYMBOLIC",
+      "visual_match": "EXPLANATORY",
       "visual_truth": "VERIFIED_FACT",
-      "match_score": 0.74,
+      "match_score": 0.88,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -1263,39 +1260,39 @@
         "duration": 0.14
       },
       "asset": {
-        "asset_id": "because-of-this-episode-004-s09",
-        "path": "runtime-assets/s09.mp4",
-        "drive_file_id": "1JF-11bXfVR61A4Ce4CVaJKwXuRX3iE7h",
         "provider": "mixkit",
-        "source_page_url": "https://mixkit.co/free-stock-video/aerial-view-of-a-vast-forest-44606/",
         "license": "Mixkit Stock Video Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "430976fb907087cbbbef5975acf6859793e59d0331312ad7ae1738ad4fa37be5",
         "reuse_status": "NEW_ASSET_EPISODE_004",
         "episode_id": "because-of-this-episode-004",
         "author": "Mixkit source contributor",
-        "acquisition_timestamp": "2026-10-28T02:20:00Z",
-        "original_filename": "because-of-this-episode-004-vast-forest-mixkit.mp4",
+        "acquisition_timestamp": "2026-10-28T07:15:00Z",
         "mime_type": "video/mp4",
-        "duration_seconds": 30.28025,
+        "job_ownership": "because-of-this-episode-004",
+        "asset_id": "because-of-this-episode-004-s09",
+        "path": "runtime-assets/s09.mp4",
+        "drive_file_id": "13B4dVOo9MMw7_zZJbWnZj-UNCc2FLeHn",
+        "source_page_url": "https://mixkit.co/free-stock-video/speedboat-returning-to-a-beautiful-bay-seen-from-the-sky-5007/",
+        "sha256": "318f7a4f79c44cacc5ab06bb50abea3a836842c9423b9cbd688a5eb7a301b873",
+        "original_filename": "speedboat-returning-to-a-beautiful-bay-seen-from-the-sky-5007.mp4",
+        "filesize_bytes": null,
+        "duration_seconds": 10.468792,
         "width": 1280,
         "height": 720,
-        "filesize_bytes": 10267487,
-        "job_ownership": "because-of-this-episode-004",
         "scene_usage": "S09",
         "visual_evidence": {
           "reviewed": true,
-          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "basis": "Source-page review plus sampled frames; footage is stable, non-black and semantically consistent with the declared representational subject and environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-28T02:20:00Z",
-          "review_method": "source-page license/title/description plus three sampled frames",
-          "source_title": "Aerial view of a vast forest",
-          "source_description": "Mixkit stock video used as representational coverage.",
+          "reviewed_at": "2026-10-28T07:15:00Z",
+          "review_method": "source-page license/title/description plus sampled frames",
+          "source_title": "Speedboat returning to a beautiful bay seen from the sky",
+          "source_description": "A small motorboat returns to shore in a bay surrounded by hills and vegetation.",
           "subjects": [
             "mountains",
-            "valley",
-            "landscape"
+            "bay",
+            "water"
           ],
           "actions": [
             "aerial movement"
@@ -1303,8 +1300,8 @@
           "environments": [
             "mountains",
             "wilderness",
-            "vast",
-            "contained"
+            "contained",
+            "steep"
           ],
           "objects": [],
           "composition": [
@@ -1312,8 +1309,8 @@
           ],
           "observed_subjects": [
             "mountains",
-            "valley",
-            "landscape"
+            "bay",
+            "water"
           ],
           "observed_actions": [
             "aerial movement"
@@ -1321,14 +1318,14 @@
           "observed_environments": [
             "mountains",
             "wilderness",
-            "vast",
-            "contained"
+            "contained",
+            "steep"
           ],
           "observed_objects": [],
           "sample_timestamps": [
             1,
-            15.140125,
-            29.28025
+            5.234396,
+            9.468792
           ],
           "action_window": {
             "in": 0,
@@ -1338,7 +1335,7 @@
             "in": 0,
             "out": null
           },
-          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "notes": "Commercial-use stock coverage establishes a contained bay surrounded by hills, supporting the bathtub analogy.",
           "pixel_qc": {
             "status": "PASS",
             "sampled_frame_count": 3,
@@ -1346,9 +1343,7 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS"
           }
-        },
-        "source_segment_in": 0,
-        "source_segment_out": 30.28025
+        }
       },
       "narration_excerpt": "The bay is narrow and steep, like a giant bathtub.",
       "visual_semantics": {
@@ -1356,8 +1351,8 @@
         "required": {
           "subjects": [
             "mountains",
-            "valley",
-            "landscape"
+            "bay",
+            "water"
           ],
           "actions": [
             "aerial movement"
@@ -1365,8 +1360,8 @@
           "environments": [
             "mountains",
             "wilderness",
-            "vast",
-            "contained"
+            "contained",
+            "steep"
           ]
         },
         "preferred": {},
@@ -1378,14 +1373,16 @@
         ],
         "critical": {
           "subjects": [
-            "valley"
+            "mountains",
+            "bay"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "valley"
+            "mountains",
+            "bay"
           ],
-          "minimum_direct": 1
+          "minimum_direct": 2
         }
       }
     },
@@ -1538,7 +1535,7 @@
       "visual_function": "evidence",
       "visual_match": "EXPLANATORY",
       "visual_truth": "VERIFIED_FACT",
-      "match_score": 0.8,
+      "match_score": 0.86,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -1548,45 +1545,45 @@
         "duration": 0.14
       },
       "asset": {
-        "asset_id": "because-of-this-episode-004-s11",
-        "path": "runtime-assets/s11.mp4",
-        "drive_file_id": "1ekbKvCG3bcBk0x4PeNF8E4Hs3iQxmzbo",
         "provider": "mixkit",
-        "source_page_url": "https://mixkit.co/free-stock-video/aerial-tour-over-a-mountain-range-44638/",
         "license": "Mixkit Stock Video Free License",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "e1be15f0a694daa56ceac5f8c5832107a8de27b10e27d187bc9fd5b91225e09a",
         "reuse_status": "NEW_ASSET_EPISODE_004",
         "episode_id": "because-of-this-episode-004",
         "author": "Mixkit source contributor",
-        "acquisition_timestamp": "2026-10-28T02:20:00Z",
-        "original_filename": "because-of-this-episode-004-mountain-range-mixkit.mp4",
+        "acquisition_timestamp": "2026-10-28T07:15:00Z",
         "mime_type": "video/mp4",
-        "duration_seconds": 24.941583,
+        "job_ownership": "because-of-this-episode-004",
+        "asset_id": "because-of-this-episode-004-s11",
+        "path": "runtime-assets/s11.mp4",
+        "drive_file_id": "1cKSP_OQcFa9I8rFVFdZ7BAXkKJN8neKe",
+        "source_page_url": "https://mixkit.co/free-stock-video/flying-through-the-trees-of-a-forest-43126/",
+        "sha256": "4c7b3fa96deb9f7533fd3be5f18fc9efa48c007dfd1a38ede2dd1ce00039e1a7",
+        "original_filename": "flying-through-the-trees-of-a-forest-43126.mp4",
+        "filesize_bytes": null,
+        "duration_seconds": 20.061708,
         "width": 1280,
         "height": 720,
-        "filesize_bytes": 8292408,
-        "job_ownership": "because-of-this-episode-004",
         "scene_usage": "S11",
         "visual_evidence": {
           "reviewed": true,
-          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "basis": "Source-page review plus sampled frames; footage is stable, non-black and semantically consistent with the declared representational subject and environment.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-28T02:20:00Z",
-          "review_method": "source-page license/title/description plus three sampled frames",
-          "source_title": "Aerial tour over a mountain range",
-          "source_description": "Mixkit stock video used as representational coverage.",
+          "reviewed_at": "2026-10-28T07:15:00Z",
+          "review_method": "source-page license/title/description plus sampled frames",
+          "source_title": "Flying through the trees of a forest",
+          "source_description": "Aerial view passing through leafless trees in a mountainous forest.",
           "subjects": [
             "mountains",
-            "forest"
+            "forest",
+            "trees"
           ],
           "actions": [
             "aerial movement"
           ],
           "environments": [
-            "mountain range",
-            "wilderness",
+            "mountain forest",
             "evidence",
             "quiet aftermath"
           ],
@@ -1596,22 +1593,22 @@
           ],
           "observed_subjects": [
             "mountains",
-            "forest"
+            "forest",
+            "trees"
           ],
           "observed_actions": [
             "aerial movement"
           ],
           "observed_environments": [
-            "mountain range",
-            "wilderness",
+            "mountain forest",
             "evidence",
             "quiet aftermath"
           ],
           "observed_objects": [],
           "sample_timestamps": [
             1,
-            12.4707915,
-            23.941583
+            10.030854,
+            19.061708
           ],
           "action_window": {
             "in": 0,
@@ -1621,7 +1618,7 @@
             "in": 0,
             "out": null
           },
-          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "notes": "Commercial-use stock coverage of a scarred-looking mountainous forest to support the later evidence beat without claiming literal trimline footage.",
           "pixel_qc": {
             "status": "PASS",
             "sampled_frame_count": 3,
@@ -1629,9 +1626,7 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS"
           }
-        },
-        "source_segment_in": 0,
-        "source_segment_out": 24.941583
+        }
       },
       "narration_excerpt": "Scientists later found the scars still visible in the forest. Because of this, researchers called landslides tsunami threats.",
       "visual_semantics": {
@@ -1639,14 +1634,14 @@
         "required": {
           "subjects": [
             "mountains",
-            "forest"
+            "forest",
+            "trees"
           ],
           "actions": [
             "aerial movement"
           ],
           "environments": [
-            "mountain range",
-            "wilderness",
+            "mountain forest",
             "evidence",
             "quiet aftermath"
           ]
@@ -1660,14 +1655,16 @@
         ],
         "critical": {
           "subjects": [
+            "mountains",
             "forest"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
+            "mountains",
             "forest"
           ],
-          "minimum_direct": 1
+          "minimum_direct": 2
         }
       }
     },
