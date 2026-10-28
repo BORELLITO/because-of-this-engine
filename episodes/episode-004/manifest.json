@@ -1533,7 +1533,7 @@
     {
       "scene_id": "S11",
       "duration": 5,
-      "story_beat": "evidence: Scientists later found the scars still visible in the forest. Because of this, researchers began treating landslides as tsunami threats.",
+      "story_beat": "evidence: Scientists later found the scars still visible in the forest. Because of this, researchers called landslides tsunami threats.",
       "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
       "visual_function": "evidence",
       "visual_match": "EXPLANATORY",
@@ -1633,7 +1633,7 @@
         "source_segment_in": 0,
         "source_segment_out": 24.941583
       },
-      "narration_excerpt": "Scientists later found the scars still visible in the forest. Because of this, researchers began treating landslides as tsunami threats.",
+      "narration_excerpt": "Scientists later found the scars still visible in the forest. Because of this, researchers called landslides tsunami threats.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1674,7 +1674,7 @@
     {
       "scene_id": "S12",
       "duration": 5,
-      "story_beat": "payoff: A tsunami does not need an ocean. Sometimes, all it needs is a mountainside, a narrow bay, and a few seconds of silence.",
+      "story_beat": "payoff: A wave can happen without open ocean. Sometimes, all it needs is a mountainside, a narrow bay, and a few seconds of silence.",
       "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
       "visual_function": "payoff",
       "visual_match": "EXPLANATORY",
@@ -1774,7 +1774,7 @@
         "source_segment_in": 0,
         "source_segment_out": 20.937583
       },
-      "narration_excerpt": "A tsunami does not need an ocean. Sometimes, all it needs is a mountainside, a narrow bay, and a few seconds of silence.",
+      "narration_excerpt": "A wave can happen without open ocean. Sometimes, all it needs is a mountainside, a narrow bay, and a few seconds of silence.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -2228,7 +2228,7 @@
       },
       {
         "scene_id": "S11",
-        "event": "evidence: Scientists later found the scars still visible in the forest. Because of this, researchers began treating landslides as tsunami threats.",
+        "event": "evidence: Scientists later found the scars still visible in the forest. Because of this, researchers called landslides tsunami threats.",
         "state_before": "state_10",
         "state_after": "state_11",
         "causal_role": "evidence",
@@ -2237,11 +2237,11 @@
         "entities": [
           "lituya_bay"
         ],
-        "narration_excerpt": "Scientists later found the scars still visible in the forest. Because of this, researchers began treating landslides as tsunami threats."
+        "narration_excerpt": "Scientists later found the scars still visible in the forest. Because of this, researchers called landslides tsunami threats."
       },
       {
         "scene_id": "S12",
-        "event": "payoff: A tsunami does not need an ocean. Sometimes, all it needs is a mountainside, a narrow bay, and a few seconds of silence.",
+        "event": "payoff: A wave can happen without open ocean. Sometimes, all it needs is a mountainside, a narrow bay, and a few seconds of silence.",
         "state_before": "state_11",
         "state_after": "state_12",
         "causal_role": "payoff",
@@ -2250,7 +2250,7 @@
         "entities": [
           "lituya_bay"
         ],
-        "narration_excerpt": "A tsunami does not need an ocean. Sometimes, all it needs is a mountainside, a narrow bay, and a few seconds of silence."
+        "narration_excerpt": "A wave can happen without open ocean. Sometimes, all it needs is a mountainside, a narrow bay, and a few seconds of silence."
       }
     ]
   },
@@ -2262,5 +2262,5 @@
   "engine_profile": "because-of-this-v2-locked-2026-10",
   "engine_profile_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
   "lifecycle_status": "DRAFT_AUDIO_PENDING",
-  "updated_at": "2026-10-28T02:44:00Z"
+  "updated_at": "2026-10-28T02:47:00Z"
 }
