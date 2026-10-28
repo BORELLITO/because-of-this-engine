@@ -192,7 +192,8 @@ def ffprobe(path: Path) -> dict[str, Any]:
         "size": int(data.get("format", {}).get("size", 0) or 0),
     }
 
-\ndef _sample_strip_luma(path: Path, timestamp: float, crop_y: str) -> int:
+
+def _sample_strip_luma(path: Path, timestamp: float, crop_y: str) -> int:
     """Return mean luma for a normalized horizontal strip of a video frame."""
     command = [
         "ffmpeg", "-v", "error",
