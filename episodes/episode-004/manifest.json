@@ -379,16 +379,14 @@
         ],
         "critical": {
           "subjects": [
-            "bay",
             "mountains"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "bay",
             "mountains"
           ],
-          "minimum_direct": 2
+          "minimum_direct": 1
         }
       }
     },
@@ -522,16 +520,14 @@
         ],
         "critical": {
           "subjects": [
-            "mountains",
-            "rock"
+            "mountains"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "mountains",
-            "rock"
+            "mountains"
           ],
-          "minimum_direct": 2
+          "minimum_direct": 1
         }
       }
     },
@@ -953,16 +949,14 @@
         ],
         "critical": {
           "subjects": [
-            "boat",
             "water"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "boat",
             "water"
           ],
-          "minimum_direct": 2
+          "minimum_direct": 1
         }
       }
     },
@@ -1099,16 +1093,14 @@
         ],
         "critical": {
           "subjects": [
-            "boat",
             "water"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "boat",
             "water"
           ],
-          "minimum_direct": 2
+          "minimum_direct": 1
         }
       }
     },
@@ -1239,16 +1231,14 @@
         ],
         "critical": {
           "subjects": [
-            "forest",
-            "trees"
+            "forest"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "forest",
-            "trees"
+            "forest"
           ],
-          "minimum_direct": 2
+          "minimum_direct": 1
         }
       }
     },
@@ -1385,16 +1375,14 @@
         ],
         "critical": {
           "subjects": [
-            "mountains",
-            "bay"
+            "mountains"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "mountains",
-            "bay"
+            "mountains"
           ],
-          "minimum_direct": 2
+          "minimum_direct": 1
         }
       }
     },
