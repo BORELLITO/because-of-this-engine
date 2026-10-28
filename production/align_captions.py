@@ -417,7 +417,11 @@ def _merge_word_timings(*passes: list[dict[str, Any]]) -> list[dict[str, Any]]:
             )
             if key in seen_exact:
                 continue
-            if any(overlaps(candidate, existing) for existing in merged):
+            if any(
+                _normalise(str(existing.get("word", ""))) == _normalise(word)
+                and overlaps(candidate, existing)
+                for existing in merged
+            ):
                 continue
             seen_exact.add(key)
             merged.append(candidate)
