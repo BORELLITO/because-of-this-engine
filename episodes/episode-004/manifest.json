@@ -218,11 +218,15 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS",
             "embedded_layout": "NONE",
-            "full_frame": "PASS"
+            "full_frame": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
           }
         },
         "source_segment_in": 0,
-        "source_segment_out": 5.52
+        "source_segment_out": 5.52,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED"
       },
       "narration_excerpt": "What if the tallest tsunami ever recorded began with a mountain falling into a quiet bay?",
       "visual_semantics": {
@@ -360,11 +364,15 @@
             "sampled_frame_count": 3,
             "black_frame_check": "PASS",
             "stability_check": "PASS",
-            "semantic_consistency": "PASS"
+            "semantic_consistency": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
           }
         },
         "source_segment_in": 0,
-        "source_segment_out": 30.071708
+        "source_segment_out": 30.071708,
+        "asset_class": "atmosphere",
+        "scene_approval": "APPROVED"
       },
       "narration_excerpt": "On July ninth, nineteen fifty-eight, a magnitude seven point eight earthquake shook southeast Alaska.",
       "visual_semantics": {
@@ -503,11 +511,15 @@
             "sampled_frame_count": 3,
             "black_frame_check": "PASS",
             "stability_check": "PASS",
-            "semantic_consistency": "PASS"
+            "semantic_consistency": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
           }
         },
         "source_segment_in": 0,
-        "source_segment_out": 22.255567
+        "source_segment_out": 22.255567,
+        "asset_class": "reconstruction",
+        "scene_approval": "APPROVED"
       },
       "narration_excerpt": "In the bay, the shaking ripped the rock from the mountainside.",
       "visual_semantics": {
@@ -653,11 +665,15 @@
             "sampled_frame_count": 3,
             "black_frame_check": "PASS",
             "stability_check": "PASS",
-            "semantic_consistency": "PASS"
+            "semantic_consistency": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
           }
         },
         "source_segment_in": 0,
-        "source_segment_out": 45.670625
+        "source_segment_out": 45.670625,
+        "asset_class": "reconstruction",
+        "scene_approval": "APPROVED"
       },
       "narration_excerpt": "It plunged into the narrow inlet like an impact.",
       "visual_semantics": {
@@ -806,11 +822,15 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS",
             "embedded_layout": "NONE",
-            "full_frame": "PASS"
+            "full_frame": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
           }
         },
         "source_segment_in": 0,
-        "source_segment_out": 6
+        "source_segment_out": 6,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED"
       },
       "narration_excerpt": "Water shot up the opposite slope to one thousand seven hundred and twenty feet, higher than the Empire State Building.",
       "visual_semantics": {
@@ -955,11 +975,15 @@
             "sampled_frame_count": 3,
             "black_frame_check": "PASS",
             "stability_check": "PASS",
-            "semantic_consistency": "PASS"
+            "semantic_consistency": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
           }
         },
         "source_segment_in": 0,
-        "source_segment_out": 30.113417
+        "source_segment_out": 30.113417,
+        "asset_class": "atmosphere",
+        "scene_approval": "APPROVED"
       },
       "narration_excerpt": "The wave stripped forests, erased cabins, and carried boats across the land.",
       "visual_semantics": {
@@ -1106,11 +1130,15 @@
             "sampled_frame_count": 3,
             "black_frame_check": "PASS",
             "stability_check": "PASS",
-            "semantic_consistency": "PASS"
+            "semantic_consistency": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
           }
         },
         "source_segment_in": 0,
-        "source_segment_out": 30.058333
+        "source_segment_out": 30.058333,
+        "asset_class": "atmosphere",
+        "scene_approval": "APPROVED"
       },
       "narration_excerpt": "One fisherman watched as the surge lifted his boat above the trees.",
       "visual_semantics": {
@@ -1245,11 +1273,15 @@
             "sampled_frame_count": 3,
             "black_frame_check": "PASS",
             "stability_check": "PASS",
-            "semantic_consistency": "PASS"
+            "semantic_consistency": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
           }
         },
         "source_segment_in": 0,
-        "source_segment_out": 27.610917
+        "source_segment_out": 27.610917,
+        "asset_class": "atmosphere",
+        "scene_approval": "APPROVED"
       },
       "narration_excerpt": "Two people died; others survived because the bay was nearly empty.",
       "visual_semantics": {
@@ -1387,11 +1419,15 @@
             "sampled_frame_count": 3,
             "black_frame_check": "PASS",
             "stability_check": "PASS",
-            "semantic_consistency": "PASS"
+            "semantic_consistency": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
           }
         },
         "source_segment_in": 0,
-        "source_segment_out": 10.468792
+        "source_segment_out": 10.468792,
+        "asset_class": "atmosphere",
+        "scene_approval": "APPROVED"
       },
       "narration_excerpt": "The bay is narrow and steep, like a giant bathtub.",
       "visual_semantics": {
@@ -1529,11 +1565,15 @@
             "sampled_frame_count": 3,
             "black_frame_check": "PASS",
             "stability_check": "PASS",
-            "semantic_consistency": "PASS"
+            "semantic_consistency": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
           }
         },
         "source_segment_in": 0,
-        "source_segment_out": 15.598917
+        "source_segment_out": 15.598917,
+        "asset_class": "atmosphere",
+        "scene_approval": "APPROVED"
       },
       "narration_excerpt": "The landslide displaced water. The bay walls held its energy and pushed it back and forth.",
       "visual_semantics": {
@@ -1682,11 +1722,15 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS",
             "embedded_layout": "NONE",
-            "full_frame": "PASS"
+            "full_frame": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
           }
         },
         "source_segment_in": 0,
-        "source_segment_out": 5
+        "source_segment_out": 5,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED"
       },
       "narration_excerpt": "Scientists later found the scars still visible in the forest. Because of this, researchers called landslides tsunami threats.",
       "visual_semantics": {
@@ -1823,11 +1867,15 @@
             "sampled_frame_count": 3,
             "black_frame_check": "PASS",
             "stability_check": "PASS",
-            "semantic_consistency": "PASS"
+            "semantic_consistency": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
           }
         },
         "source_segment_in": 0,
-        "source_segment_out": 20.937583
+        "source_segment_out": 20.937583,
+        "asset_class": "atmosphere",
+        "scene_approval": "APPROVED"
       },
       "narration_excerpt": "A wave can happen without open ocean. Sometimes, all it needs is a mountainside, a narrow bay, and a few seconds of silence.",
       "visual_semantics": {
@@ -2317,5 +2365,13 @@
   "engine_profile": "because-of-this-v2-locked-2026-10",
   "engine_profile_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
   "lifecycle_status": "DRAFT_AUDIO_PENDING",
-  "updated_at": "2026-10-28T10:20:00Z"
+  "updated_at": "2026-10-28T11:00:00Z",
+  "visual_review_contract": {
+    "asset_class_required": true,
+    "individual_scene_approval_required": true,
+    "contact_sheet_required": true,
+    "external_branding": "NONE",
+    "crop_safety": "PASS",
+    "embedded_layout": "NONE"
+  }
 }
