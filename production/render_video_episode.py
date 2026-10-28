@@ -345,35 +345,6 @@ def ass_time(seconds: float) -> str:
     return f"{hours}:{minutes:02d}:{secs:02d}.{centiseconds:02d}"
 
 
-def write_loop_ass(
-    path: Path,
-    title: str,
-    duration: float,
-    fade_in_seconds: float = 0.24,
-    fade_out_seconds: float = 0.36,
-) -> Path:
-    """Render the branded loop card through libass, not FFmpeg drawtext."""
-    safe_title = str(title).replace("\\", "\\\\").replace("{", "\\{").replace("}", "\\}")
-    fade_in_ms = max(80, min(round(fade_in_seconds * 1000), round(duration * 1000 * 0.45)))
-    fade_out_ms = max(120, min(round(fade_out_seconds * 1000), round(duration * 1000 * 0.55)))
-    ass = f"""[Script Info]
-ScriptType: v4.00+
-PlayResX: 1080
-PlayResY: 1920
-ScaledBorderAndShadow: yes
-
-[V4+ Styles]
-Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,StrikeOut,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding
-Style: Loop,Arial,60,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,1,0,0,0,100,100,0,0,1,3,0,8,40,40,110,1
-
-[Events]
-Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
-Dialogue: 0,0:00:00.00,{ass_time(duration)},Loop,,0,0,0,,{{\\fad({fade_in_ms},{fade_out_ms})}}{safe_title}
-"""
-    path.write_text(ass, encoding="utf-8")
-    return path
-
-
 def loop_outro_seconds(manifest: dict[str, Any]) -> float:
     loop = manifest.get("loop") or {}
     if loop.get("enabled") is not True:
@@ -450,7 +421,6 @@ def mux_audio(
     else:
         filters.append("[captioned]null[main_visual]")
 
-    loop_ass_path: Path | None = None
     loop_logo_enabled = loop_logo_path is not None and outro_seconds > 0
     if outro_seconds > 0 and not loop_logo_enabled:
         raise RenderError(
@@ -537,8 +507,6 @@ def mux_audio(
     try:
         run(command)
     finally:
-        if loop_ass_path is not None:
-            loop_ass_path.unlink(missing_ok=True)
 
 def prepare_logo(source: Path, output: Path, width: int) -> Path:
     """Decode and resize the static logo once before the long mux."""
