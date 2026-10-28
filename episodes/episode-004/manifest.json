@@ -106,7 +106,7 @@
   "asset_reuse_brain": {
     "policy": "global_no_repeat",
     "legacy_baseline": false,
-    "reason": "Episode 004 keeps the global no-repeat policy; four weak representational shots were replaced with newly audited impact/boat/aftermath footage and the suspense bed was replaced with a newly audited track."
+    "reason": "Episode 004 now combines newly audited free-license representational footage with three unique public-domain USGS historical evidence takes; the global no-repeat policy remains active."
   },
   "scenes": [
     {
@@ -117,7 +117,7 @@
       "visual_function": "hook",
       "visual_match": "EXPLANATORY",
       "visual_truth": "VERIFIED_FACT",
-      "match_score": 0.82,
+      "match_score": 0.98,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -129,68 +129,78 @@
       "asset": {
         "asset_id": "because-of-this-episode-004-s01",
         "path": "runtime-assets/s01.mp4",
-        "drive_file_id": "1YRhDjcsYJxuLgzEAVsBkpUXNayd6t2BT",
-        "provider": "mixkit",
-        "source_page_url": "https://mixkit.co/free-stock-video/sea-waves-in-a-little-bay-1954/",
-        "license": "Mixkit Stock Video Free License",
+        "drive_file_id": "1iGup_o5oiT1_3VAUYuYoZ-ygp2YE9zwC",
+        "provider": "usgs",
+        "source_page_url": "https://www.usgs.gov/media/images/lituya-bay-1958",
+        "license": "Public Domain",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "13c2e72f7e463d5fee90493024ceed782d2647e3fc562ac18dc6e821f1cf1ccd",
+        "sha256": "66da1c858851e7a19b664dc0494966177d636cc5964719a6e2de90ac02456a99",
         "reuse_status": "NEW_ASSET_EPISODE_004",
         "episode_id": "because-of-this-episode-004",
-        "author": "Mixkit source contributor",
-        "acquisition_timestamp": "2026-10-28T02:20:00Z",
-        "original_filename": "because-of-this-episode-004-waves-mixkit.mp4",
+        "author": "Don J. Miller / U.S. Geological Survey",
+        "acquisition_timestamp": "2026-10-28T08:05:00Z",
+        "original_filename": "lituya-bay-1958-public-domain-hook-usgs.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": 15.306958,
-        "width": 1280,
-        "height": 720,
-        "filesize_bytes": 4489715,
+        "duration_seconds": 5.52,
+        "width": 1080,
+        "height": 1920,
+        "filesize_bytes": 274026,
         "job_ownership": "because-of-this-episode-004",
         "scene_usage": "S01",
         "visual_evidence": {
           "reviewed": true,
-          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "basis": "Official USGS historical aerial photograph of Lituya Bay after the 1958 event, converted to a restrained vertical motion take; the bay, steep mountains and light forest-damage trimline are directly visible.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-28T02:20:00Z",
-          "review_method": "source-page license/title/description plus three sampled frames",
-          "source_title": "sea waves in a little bay",
-          "source_description": "Mixkit stock video used as representational coverage.",
+          "reviewed_at": "2026-10-28T08:05:00Z",
+          "review_method": "USGS source-page title/description/license plus sampled frames of the derivative motion take",
+          "source_title": "Lituya Bay, 1958",
+          "source_description": "Historical aerial photo of Lituya Bay; the light areas show forest destroyed by the giant wave.",
           "subjects": [
+            "Lituya Bay",
+            "mountains",
             "water",
-            "waves",
-            "bay"
+            "forest damage"
           ],
           "actions": [
-            "moving"
+            "aerial overview",
+            "aftermath"
           ],
           "environments": [
-            "coast",
-            "calm",
-            "ominous"
+            "Alaska",
+            "narrow bay",
+            "steep mountains",
+            "historical aftermath"
           ],
-          "objects": [],
+          "objects": [
+            "forest trimline"
+          ],
           "composition": [
-            "representational stock framing"
+            "official historical aerial evidence with slow push-in"
           ],
           "observed_subjects": [
+            "Lituya Bay",
+            "mountains",
             "water",
-            "waves",
-            "bay"
+            "forest damage"
           ],
           "observed_actions": [
-            "moving"
+            "aerial overview",
+            "aftermath"
           ],
           "observed_environments": [
-            "coast",
-            "calm",
-            "ominous"
+            "Alaska",
+            "narrow bay",
+            "steep mountains",
+            "historical aftermath"
           ],
-          "observed_objects": [],
+          "observed_objects": [
+            "forest trimline"
+          ],
           "sample_timestamps": [
             1,
-            7.653479,
-            14.306958
+            2.76,
+            4.52
           ],
           "action_window": {
             "in": 0,
@@ -200,7 +210,7 @@
             "in": 0,
             "out": null
           },
-          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "notes": "This is historical representational evidence from the actual event area, not archival footage of the wave in motion.",
           "pixel_qc": {
             "status": "PASS",
             "sampled_frame_count": 3,
@@ -217,17 +227,18 @@
         "role": "explanatory",
         "required": {
           "subjects": [
-            "water",
-            "waves",
-            "bay"
+            "bay",
+            "mountains",
+            "water"
           ],
           "actions": [
-            "moving"
+            "aerial overview",
+            "aftermath"
           ],
           "environments": [
-            "coast",
-            "calm",
-            "ominous"
+            "remote",
+            "steep",
+            "quiet"
           ]
         },
         "preferred": {},
@@ -692,7 +703,7 @@
       "visual_function": "reveal",
       "visual_match": "EXPLANATORY",
       "visual_truth": "VERIFIED_FACT",
-      "match_score": 0.8,
+      "match_score": 0.99,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -704,68 +715,78 @@
       "asset": {
         "asset_id": "because-of-this-episode-004-s05",
         "path": "runtime-assets/s05.mp4",
-        "drive_file_id": "1e4Ory9X_gXQL7ON_gh_EgfhATr-WtfcF",
-        "provider": "mixkit",
-        "source_page_url": "https://mixkit.co/free-stock-video/waves-crash-on-a-shore-with-boulders-1088/",
-        "license": "Mixkit Stock Video Free License",
+        "drive_file_id": "1S38UdZnhkjXGjiEpnLcQjLBuDSh_YBxO",
+        "provider": "wikimedia_commons",
+        "source_page_url": "https://commons.wikimedia.org/wiki/File:Lituya-Bay-overview-with-arrows.png",
+        "license": "Public Domain",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "b2399b21dd91e83500aa5a2cd6229e9b6bc8fbdab845a38c2de59b58bbaf6dc0",
+        "sha256": "0c93b11fdda8997ff9d17856ed4b659633b33f0a02e50122f3faaa4f49669108",
         "reuse_status": "NEW_ASSET_EPISODE_004",
         "episode_id": "because-of-this-episode-004",
-        "author": "Mixkit source contributor",
-        "acquisition_timestamp": "2026-10-28T02:20:00Z",
-        "original_filename": "because-of-this-episode-004-waves-boulders-mixkit.mp4",
+        "author": "D.J. Miller / U.S. Geological Survey",
+        "acquisition_timestamp": "2026-10-28T08:05:00Z",
+        "original_filename": "lituya-bay-1958-public-domain-reveal-arrows.mp4",
         "mime_type": "video/mp4",
-        "duration_seconds": 21.646625,
-        "width": 1280,
-        "height": 720,
-        "filesize_bytes": 7754943,
+        "duration_seconds": 6,
+        "width": 1080,
+        "height": 1920,
+        "filesize_bytes": 321707,
         "job_ownership": "because-of-this-episode-004",
         "scene_usage": "S05",
         "visual_evidence": {
           "reviewed": true,
-          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "basis": "Official USGS aerial photograph with the red fall-location arrow and yellow high-point arrow; the historically documented wave path and forest trimline are visible.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-28T02:20:00Z",
-          "review_method": "source-page license/title/description plus three sampled frames",
-          "source_title": "Waves crash on a shore with boulders",
-          "source_description": "Mixkit stock video used as representational coverage.",
+          "reviewed_at": "2026-10-28T08:05:00Z",
+          "review_method": "Wikimedia/USGS source-page description/license plus sampled frames of the derivative motion take",
+          "source_title": "Lituya Bay overview with arrows",
+          "source_description": "Lituya Bay a few weeks after the 1958 tsunami, with the fall location and high point of the wave marked.",
           "subjects": [
+            "Lituya Bay",
+            "mountains",
             "water",
-            "waves",
-            "rocks"
+            "forest damage",
+            "wave path"
           ],
           "actions": [
-            "crashing"
+            "aerial evidence"
           ],
           "environments": [
-            "shore",
-            "powerful",
-            "dread"
+            "post-tsunami",
+            "steep bay",
+            "historical evidence"
           ],
-          "objects": [],
+          "objects": [
+            "red fall arrow",
+            "yellow high-point arrow"
+          ],
           "composition": [
-            "representational stock framing"
+            "annotated aerial proof with slow push-in"
           ],
           "observed_subjects": [
+            "Lituya Bay",
+            "mountains",
             "water",
-            "waves",
-            "rocks"
+            "forest damage",
+            "wave path"
           ],
           "observed_actions": [
-            "crashing"
+            "aerial evidence"
           ],
           "observed_environments": [
-            "shore",
-            "powerful",
-            "dread"
+            "post-tsunami",
+            "steep bay",
+            "historical evidence"
           ],
-          "observed_objects": [],
+          "observed_objects": [
+            "red fall arrow",
+            "yellow high-point arrow"
+          ],
           "sample_timestamps": [
             1,
-            10.8233125,
-            20.646625
+            3,
+            5
           ],
           "action_window": {
             "in": 0,
@@ -775,7 +796,7 @@
             "in": 0,
             "out": null
           },
-          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "notes": "The arrows are part of the public-domain explanatory image and directly support the reveal; this is not a literal recording of the wave.",
           "pixel_qc": {
             "status": "PASS",
             "sampled_frame_count": 3,
@@ -792,17 +813,17 @@
         "role": "explanatory",
         "required": {
           "subjects": [
+            "bay",
+            "mountains",
             "water",
-            "waves",
-            "rocks"
+            "forest damage"
           ],
           "actions": [
-            "crashing"
+            "aerial evidence"
           ],
           "environments": [
-            "shore",
-            "powerful",
-            "dread"
+            "steep",
+            "historical evidence"
           ]
         },
         "preferred": {},
@@ -1556,7 +1577,7 @@
       "visual_function": "evidence",
       "visual_match": "EXPLANATORY",
       "visual_truth": "VERIFIED_FACT",
-      "match_score": 0.97,
+      "match_score": 0.99,
       "focus": {
         "x": 0.5,
         "y": 0.5
@@ -1566,80 +1587,80 @@
         "duration": 0.14
       },
       "asset": {
-        "provider": "pexels",
-        "license": "Pexels Free License",
+        "provider": "wikimedia_commons",
+        "license": "Public Domain",
         "rights_status": "APPROVED",
         "approved_for_render": true,
         "reuse_status": "NEW_ASSET_EPISODE_004",
         "episode_id": "because-of-this-episode-004",
-        "author": "Alex Kad",
-        "acquisition_timestamp": "2026-10-28T07:45:00Z",
+        "author": "D.J. Miller / U.S. Geological Survey",
+        "acquisition_timestamp": "2026-10-28T08:05:00Z",
         "mime_type": "video/mp4",
         "job_ownership": "because-of-this-episode-004",
         "asset_id": "because-of-this-episode-004-s11",
         "path": "runtime-assets/s11.mp4",
-        "drive_file_id": "1um4NAVac4CZ1_bfd8uU2L2-Id5hbM5i3",
-        "source_page_url": "https://www.pexels.com/video/drone-view-of-fallen-trees-on-a-mountain-top-16558960/",
-        "sha256": "248ab465b939f2d83892ead036480691d699c359366f844e1536235adfbc9616",
-        "original_filename": "fallen-trees-mountain-pexels-16558960-720p.mp4",
-        "filesize_bytes": 62023539,
-        "duration_seconds": 62.929533,
-        "width": 1280,
-        "height": 720,
+        "drive_file_id": "1IwUVfpkaPYU8oUO6KpiHiY-aEvlY4jYs",
+        "source_page_url": "https://commons.wikimedia.org/wiki/File:Lituya_Bay_spit.jpg",
+        "sha256": "f12ffb7fac262cd80dd05a3e5bd13496d2c0035e0d20a7c780e1ce75c428d737",
+        "original_filename": "lituya-bay-1958-public-domain-evidence-spit.mp4",
+        "filesize_bytes": 287912,
+        "duration_seconds": 5,
+        "width": 1080,
+        "height": 1920,
         "scene_usage": "S11",
         "visual_evidence": {
           "reviewed": true,
-          "basis": "Source-page review plus sampled aerial frame; the clip clearly shows a mountain ridge with bare/fallen trees and a long stripped corridor.",
+          "basis": "Official USGS aftermath photograph showing wave damage, tree trunks in the water and stumps along the shoreline, converted to a restrained vertical motion take.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-28T07:45:00Z",
-          "review_method": "source-page license/title/description plus sampled frame",
-          "source_title": "Drone View of Fallen Trees on a Mountain Top",
-          "source_description": "Aerial view of a rugged mountain ridge with bare trees and clear skies.",
+          "reviewed_at": "2026-10-28T08:05:00Z",
+          "review_method": "Wikimedia/USGS source-page description/license plus sampled frames of the derivative motion take",
+          "source_title": "Lituya Bay spit",
+          "source_description": "Wave damage on the south shore of Lituya Bay; tree trunks are in the water and tree stumps line the shore.",
           "subjects": [
             "forest",
-            "trees",
-            "terrain",
-            "mountain"
+            "tree trunks",
+            "tree stumps",
+            "water",
+            "wave damage"
           ],
           "actions": [
-            "aerial movement",
-            "fallen"
+            "aftermath"
           ],
           "environments": [
-            "mountain ridge",
-            "forest scar",
-            "aftermath",
-            "quiet"
+            "wave-damaged shoreline",
+            "historical evidence",
+            "quiet aftermath"
           ],
           "objects": [
-            "fallen trees"
+            "tree trunks",
+            "tree stumps"
           ],
           "composition": [
-            "aerial evidence view"
+            "close aerial aftermath evidence with slow push-in"
           ],
           "observed_subjects": [
             "forest",
-            "trees",
-            "terrain",
-            "mountain"
+            "tree trunks",
+            "tree stumps",
+            "water",
+            "wave damage"
           ],
           "observed_actions": [
-            "aerial movement",
-            "fallen"
+            "aftermath"
           ],
           "observed_environments": [
-            "mountain ridge",
-            "forest scar",
-            "aftermath",
-            "quiet"
+            "wave-damaged shoreline",
+            "historical evidence",
+            "quiet aftermath"
           ],
           "observed_objects": [
-            "fallen trees"
+            "tree trunks",
+            "tree stumps"
           ],
           "sample_timestamps": [
             1,
-            31.464766,
-            61.929533
+            2.5,
+            4
           ],
           "action_window": {
             "in": 0,
@@ -1649,7 +1670,7 @@
             "in": 0,
             "out": null
           },
-          "notes": "Representational aerial evidence of a stripped mountain/forest corridor; it does not claim to be literal archival footage of Lituya Bay.",
+          "notes": "This is direct historical evidence of the wave's forest damage, not generic symbolic stock.",
           "pixel_qc": {
             "status": "PASS",
             "sampled_frame_count": 3,
@@ -1667,17 +1688,16 @@
         "required": {
           "subjects": [
             "forest",
-            "trees",
-            "terrain"
+            "tree trunks",
+            "tree stumps",
+            "water"
           ],
           "actions": [
-            "aerial movement",
-            "fallen"
+            "aftermath"
           ],
           "environments": [
-            "forest scar",
-            "aftermath",
-            "evidence"
+            "wave-damaged shoreline",
+            "historical evidence"
           ]
         },
         "preferred": {},
@@ -1689,12 +1709,12 @@
         ],
         "critical": {
           "subjects": [
-            "forest"
+            "water"
           ]
         },
         "narrative_anchors": {
           "direct_required": [
-            "forest"
+            "water"
           ],
           "minimum_direct": 1
         }
@@ -1918,7 +1938,7 @@
         "S12"
       ],
       "coverage_ratio": 1,
-      "note": "Revised media pass: four semantically weak shots were replaced with newly audited Pexels/Pixabay footage; all twelve staged assets remain unique and rights-documented."
+      "note": "Deep fidelity pass: three generic shots were replaced with unique public-domain USGS/Wikimedia historical evidence takes from Lituya Bay itself, while the remaining dynamic clips are individually audited and rights-documented."
     },
     "channel_diversity": {
       "comparison_window": "last_20_episodes",
@@ -2291,5 +2311,5 @@
   "engine_profile": "because-of-this-v2-locked-2026-10",
   "engine_profile_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
   "lifecycle_status": "DRAFT_AUDIO_PENDING",
-  "updated_at": "2026-10-28T07:55:00Z"
+  "updated_at": "2026-10-28T08:05:00Z"
 }
