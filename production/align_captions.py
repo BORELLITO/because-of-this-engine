@@ -383,25 +383,46 @@ def _recognize(
 
 
 def _merge_word_timings(*passes: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Merge real word timestamps from independent acoustic passes.
+    """Merge real word timestamps without creating a second timeline.
 
-    A phrase-scoped pass may recover a word that a broad pass missed. Every
-    merged item still comes from Vosk's acoustic result; this function never
-    fabricates a timestamp or interpolates a missing word.
+    Independent Vosk passes are useful for recovering a word that a broad pass
+    missed, but their outputs are not safe to concatenate: the same spoken
+    word can be returned with slightly different spans, and those spans can
+    interleave with the next word. Keep the first acoustic timeline as the
+    authority and admit later-pass words only when their real span fits a gap.
+    This preserves real timestamps while preventing synthetic overlaps.
     """
-    merged: dict[tuple[str, float, float], dict[str, Any]] = {}
+    merged: list[dict[str, Any]] = []
+    seen_exact: set[tuple[str, float, float]] = set()
+
+    def overlaps(left: dict[str, Any], right: dict[str, Any]) -> bool:
+        return (
+            float(left["start"]) < float(right["end"]) - 0.001
+            and float(right["start"]) < float(left["end"]) - 0.001
+        )
+
     for word_pass in passes:
-        for item in word_pass:
+        for item in sorted(
+            word_pass,
+            key=lambda value: (float(value["start"]), float(value["end"])),
+        ):
             word = str(item.get("word", "")).strip()
             if not word:
                 continue
-            start = float(item["start"])
-            end = float(item["end"])
-            key = (_normalise(word), round(start, 3), round(end, 3))
-            current = merged.get(key)
-            if current is None or float(item.get("confidence", 0.0)) > float(current.get("confidence", 0.0)):
-                merged[key] = dict(item)
-    return sorted(merged.values(), key=lambda item: (float(item["start"]), float(item["end"])))
+            candidate = dict(item)
+            key = (
+                _normalise(word),
+                round(float(candidate["start"]), 3),
+                round(float(candidate["end"]), 3),
+            )
+            if key in seen_exact:
+                continue
+            if any(overlaps(candidate, existing) for existing in merged):
+                continue
+            seen_exact.add(key)
+            merged.append(candidate)
+
+    return sorted(merged, key=lambda item: (float(item["start"]), float(item["end"])))
 
 
 def _recognize_passes(
