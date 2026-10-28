@@ -135,25 +135,25 @@
         "license": "Public Domain",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "66da1c858851e7a19b664dc0494966177d636cc5964719a6e2de90ac02456a99",
+        "sha256": "c95b6818c4da846a9799c5fa8fdc6b885cb5fbd98fdab965455bee48b3cd0c0e",
         "reuse_status": "NEW_ASSET_EPISODE_004",
         "episode_id": "because-of-this-episode-004",
         "author": "Don J. Miller / U.S. Geological Survey",
         "acquisition_timestamp": "2026-10-28T08:05:00Z",
-        "original_filename": "lituya-bay-1958-public-domain-hook-usgs.mp4",
+        "original_filename": "lituya-hook-clean-full-frame.mp4",
         "mime_type": "video/mp4",
         "duration_seconds": 5.52,
         "width": 1080,
         "height": 1920,
-        "filesize_bytes": 274026,
+        "filesize_bytes": 1147890,
         "job_ownership": "because-of-this-episode-004",
         "scene_usage": "S01",
         "visual_evidence": {
           "reviewed": true,
-          "basis": "Official USGS historical aerial photograph of Lituya Bay after the 1958 event, converted to a restrained vertical motion take; the bay, steep mountains and light forest-damage trimline are directly visible.",
+          "basis": "Official USGS historical aerial evidence, converted to a clean full-frame vertical motion take; the bay, steep mountains and forest-damage trimline are directly visible without embedded bars, captions or branding.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-28T08:05:00Z",
-          "review_method": "USGS source-page title/description/license plus sampled frames of the derivative motion take",
+          "reviewed_at": "2026-10-28T10:20:00Z",
+          "review_method": "source-page license/title/description plus sampled frames of the clean full-frame derivative take",
           "source_title": "Lituya Bay, 1958",
           "source_description": "Historical aerial photo of Lituya Bay; the light areas show forest destroyed by the giant wave.",
           "subjects": [
@@ -176,7 +176,7 @@
             "forest trimline"
           ],
           "composition": [
-            "official historical aerial evidence with slow push-in"
+            "clean full-frame historical evidence with restrained slow push-in"
           ],
           "observed_subjects": [
             "Lituya Bay",
@@ -210,17 +210,19 @@
             "in": 0,
             "out": null
           },
-          "notes": "This is historical representational evidence from the actual event area, not archival footage of the wave in motion.",
+          "notes": "Clean source take. The locked engine owns the vertical framing, logo, captions, color grade and outro; no pre-composed layout is permitted.",
           "pixel_qc": {
             "status": "PASS",
             "sampled_frame_count": 3,
             "black_frame_check": "PASS",
             "stability_check": "PASS",
-            "semantic_consistency": "PASS"
+            "semantic_consistency": "PASS",
+            "embedded_layout": "NONE",
+            "full_frame": "PASS"
           }
         },
         "source_segment_in": 0,
-        "source_segment_out": 15.306958
+        "source_segment_out": 5.52
       },
       "narration_excerpt": "What if the tallest tsunami ever recorded began with a mountain falling into a quiet bay?",
       "visual_semantics": {
@@ -721,25 +723,25 @@
         "license": "Public Domain",
         "rights_status": "APPROVED",
         "approved_for_render": true,
-        "sha256": "0c93b11fdda8997ff9d17856ed4b659633b33f0a02e50122f3faaa4f49669108",
+        "sha256": "47cfb44561d0a91703c53e92b2eb7a79fd2c12763db51827e580b8713ad99d7c",
         "reuse_status": "NEW_ASSET_EPISODE_004",
         "episode_id": "because-of-this-episode-004",
         "author": "D.J. Miller / U.S. Geological Survey",
         "acquisition_timestamp": "2026-10-28T08:05:00Z",
-        "original_filename": "lituya-bay-1958-public-domain-reveal-arrows.mp4",
+        "original_filename": "lituya-reveal-clean-full-frame.mp4",
         "mime_type": "video/mp4",
         "duration_seconds": 6,
         "width": 1080,
         "height": 1920,
-        "filesize_bytes": 321707,
+        "filesize_bytes": 1426455,
         "job_ownership": "because-of-this-episode-004",
         "scene_usage": "S05",
         "visual_evidence": {
           "reviewed": true,
-          "basis": "Official USGS aerial photograph with the red fall-location arrow and yellow high-point arrow; the historically documented wave path and forest trimline are visible.",
+          "basis": "Official USGS/Wikimedia public-domain aerial evidence, converted to a clean full-frame vertical motion take; the red fall-location arrow and yellow high-point arrow remain visible without embedded bars, captions or branding.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-28T08:05:00Z",
-          "review_method": "Wikimedia/USGS source-page description/license plus sampled frames of the derivative motion take",
+          "reviewed_at": "2026-10-28T10:20:00Z",
+          "review_method": "source-page license/title/description plus sampled frames of the clean full-frame derivative take",
           "source_title": "Lituya Bay overview with arrows",
           "source_description": "Lituya Bay a few weeks after the 1958 tsunami, with the fall location and high point of the wave marked.",
           "subjects": [
@@ -762,7 +764,7 @@
             "yellow high-point arrow"
           ],
           "composition": [
-            "annotated aerial proof with slow push-in"
+            "clean full-frame annotated aerial evidence with restrained slow push-in"
           ],
           "observed_subjects": [
             "Lituya Bay",
@@ -796,17 +798,19 @@
             "in": 0,
             "out": null
           },
-          "notes": "The arrows are part of the public-domain explanatory image and directly support the reveal; this is not a literal recording of the wave.",
+          "notes": "Clean source take. The public-domain arrows are source evidence; the file contains no pre-composed vertical card, captions or logo treatment.",
           "pixel_qc": {
             "status": "PASS",
             "sampled_frame_count": 3,
             "black_frame_check": "PASS",
             "stability_check": "PASS",
-            "semantic_consistency": "PASS"
+            "semantic_consistency": "PASS",
+            "embedded_layout": "NONE",
+            "full_frame": "PASS"
           }
         },
         "source_segment_in": 0,
-        "source_segment_out": 21.646625
+        "source_segment_out": 6
       },
       "narration_excerpt": "Water shot up the opposite slope to one thousand seven hundred and twenty feet, higher than the Empire State Building.",
       "visual_semantics": {
@@ -1601,19 +1605,19 @@
         "path": "runtime-assets/s11.mp4",
         "drive_file_id": "1IwUVfpkaPYU8oUO6KpiHiY-aEvlY4jYs",
         "source_page_url": "https://commons.wikimedia.org/wiki/File:Lituya_Bay_spit.jpg",
-        "sha256": "f12ffb7fac262cd80dd05a3e5bd13496d2c0035e0d20a7c780e1ce75c428d737",
-        "original_filename": "lituya-bay-1958-public-domain-evidence-spit.mp4",
-        "filesize_bytes": 287912,
+        "sha256": "38fc2b4a0d2a4fd0118411ffe82affe28797216eb44d347ec4048e2b3be37635",
+        "original_filename": "lituya-evidence-clean-full-frame.mp4",
+        "filesize_bytes": 1271073,
         "duration_seconds": 5,
         "width": 1080,
         "height": 1920,
         "scene_usage": "S11",
         "visual_evidence": {
           "reviewed": true,
-          "basis": "Official USGS aftermath photograph showing wave damage, tree trunks in the water and stumps along the shoreline, converted to a restrained vertical motion take.",
+          "basis": "Official USGS/Wikimedia public-domain aftermath evidence, converted to a clean full-frame vertical motion take; the wave-damaged shoreline and tree evidence remain visible without embedded bars, captions or branding.",
           "reviewer": "OpenAI visual audit",
-          "reviewed_at": "2026-10-28T08:05:00Z",
-          "review_method": "Wikimedia/USGS source-page description/license plus sampled frames of the derivative motion take",
+          "reviewed_at": "2026-10-28T10:20:00Z",
+          "review_method": "source-page license/title/description plus sampled frames of the clean full-frame derivative take",
           "source_title": "Lituya Bay spit",
           "source_description": "Wave damage on the south shore of Lituya Bay; tree trunks are in the water and tree stumps line the shore.",
           "subjects": [
@@ -1636,7 +1640,7 @@
             "tree stumps"
           ],
           "composition": [
-            "close aerial aftermath evidence with slow push-in"
+            "clean full-frame historical aftermath evidence with restrained slow push-in"
           ],
           "observed_subjects": [
             "forest",
@@ -1670,17 +1674,19 @@
             "in": 0,
             "out": null
           },
-          "notes": "This is direct historical evidence of the wave's forest damage, not generic symbolic stock.",
+          "notes": "Clean source take. The locked engine owns the vertical framing, logo, captions, color grade and outro; no pre-composed layout is permitted.",
           "pixel_qc": {
             "status": "PASS",
             "sampled_frame_count": 3,
             "black_frame_check": "PASS",
             "stability_check": "PASS",
-            "semantic_consistency": "PASS"
+            "semantic_consistency": "PASS",
+            "embedded_layout": "NONE",
+            "full_frame": "PASS"
           }
         },
         "source_segment_in": 0,
-        "source_segment_out": 20.186833
+        "source_segment_out": 5
       },
       "narration_excerpt": "Scientists later found the scars still visible in the forest. Because of this, researchers called landslides tsunami threats.",
       "visual_semantics": {
@@ -2311,5 +2317,5 @@
   "engine_profile": "because-of-this-v2-locked-2026-10",
   "engine_profile_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
   "lifecycle_status": "DRAFT_AUDIO_PENDING",
-  "updated_at": "2026-10-28T08:20:00Z"
+  "updated_at": "2026-10-28T10:20:00Z"
 }
