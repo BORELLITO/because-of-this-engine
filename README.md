@@ -33,10 +33,11 @@ Because Of This channel. V7.1 is driven by the pinned master prompt
 
 ## Lifecycle
 
-Use `--mode contract` for structural validation, `--mode dry-run` for local
-SSML and orchestration checks, `--mode preflight` before expensive media work,
-and `--mode production` only after final artifacts and human approval are
-registered. A blocked gate is an intentional stop, not an implicit fallback.
+Use `--mode contract` for structural validation before external work, `--mode
+dry-run` for local SSML and orchestration checks, `--mode preflight` after
+approved assets/music and narration coverage are hydrated, `--mode preview`
+for a render candidate, and `--mode production` only after final artifacts,
+preview approval and human approval are registered. A blocked gate is an intentional stop, not an implicit fallback.
 
 The current first episode is a V7 story/scene package but remains blocked at
 visual asset approval until unique licensed or original clips are registered.

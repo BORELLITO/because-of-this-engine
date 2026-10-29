@@ -259,13 +259,13 @@ def quality_report(manifest_path: Path, require_word_level: bool = False) -> dic
     alignment_source = str(captions.get("alignment_source", "")).strip()
     word_level = captions.get("word_level_available") is True
     sidecar: dict[str, Any] | None = None
-    if alignment_mode not in {"forced_alignment", "hybrid_alignment", "phrase_level_manual_reviewed"}:
+    if alignment_mode not in {"forced_alignment", "audio_final_forced_alignment", "hybrid_alignment", "phrase_level_manual_reviewed"}:
         raise CaptionQualityError("Manifest declares an unsupported caption alignment_mode.")
     if not alignment_source:
         raise CaptionQualityError("Caption alignment_source is required.")
     if alignment_mode == "phrase_level_manual_reviewed" and word_level:
         raise CaptionQualityError("Phrase-level captions cannot declare word_level_available=true.")
-    if alignment_mode == "forced_alignment" or word_level:
+    if alignment_mode in {"forced_alignment", "audio_final_forced_alignment"} or word_level:
         sidecar_path = resolve_inside(
             base,
             captions.get("alignment_sidecar", "captions/narration.alignment.json"),

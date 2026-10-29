@@ -5,9 +5,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse
 
 from production.production_record_v7 import validate_record, write_record
 
@@ -38,6 +40,20 @@ def close_g11(record: dict[str, Any], receipt: dict[str, Any]) -> dict[str, Any]
     expected_video = (record.get("production") or {}).get("production_id")
     if str(receipt.get("video_id")) != str(expected_video):
         raise PostPublicationError("publication receipt video_id does not match the production record")
+    if str(receipt.get("platform", "")).lower() not in {"youtube", "youtube_shorts", "tiktok", "instagram_reels"}:
+        raise PostPublicationError("publication platform is not in the approved receipt allowlist")
+    parsed_url = urlparse(str(receipt["public_url"]))
+    if parsed_url.scheme != "https" or not parsed_url.netloc:
+        raise PostPublicationError("publication receipt public_url must be an HTTPS URL")
+    if not re.fullmatch(r"[0-9a-fA-F]{64}", str(receipt["video_sha256"])):
+        raise PostPublicationError("publication receipt video_sha256 must be a 64-character hex digest")
+    try:
+        datetime.fromisoformat(str(receipt["published_at"]).replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise PostPublicationError("publication receipt published_at must be an ISO-8601 timestamp") from exc
+    prior_gates = [record["gates"][f"G{i}"] for i in range(11)]
+    if any(gate.get("state") != "passed" for gate in prior_gates):
+        raise PostPublicationError("G11 cannot close until G0 through G10 are all passed")
     gate = record["gates"]["G11"]
     if gate.get("state") == "passed":
         return record

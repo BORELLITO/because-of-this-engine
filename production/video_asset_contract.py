@@ -457,6 +457,22 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
             )
         for key in ("story_beat", "visual_intent", "visual_function", "visual_match", "visual_truth", "narration_excerpt"):
             _required_text(scene, key, f"Scene {scene_id}")
+        # V7.1 is the canonical semantic source. The renderer still exposes
+        # the older normalized fields internally, so derive only fields
+        # that are losslessly represented by the V7 visual contract. The
+        # human-approved match_score is deliberately never guessed.
+        if manifest.get("schema_version") == "3.0.0":
+            scene = dict(scene)
+            v7_semantics = scene.get("visual_semantics") if isinstance(scene.get("visual_semantics"), dict) else {}
+            anchors = v7_semantics.get("narrative_anchors") if isinstance(v7_semantics.get("narrative_anchors"), dict) else {}
+            direct_required = anchors.get("direct_required") if isinstance(anchors.get("direct_required"), list) else []
+            scene.setdefault("visual_intent", " | ".join(str(item).strip() for item in direct_required if str(item).strip()))
+            scene.setdefault("visual_function", "literal_evidence")
+            scene.setdefault("visual_match", "EXACT")
+            scene.setdefault("visual_truth", story["truth_mode"])
+            if "match_score" not in scene:
+                scene["match_score"] = v7_semantics.get("match_score")
+
         visual_semantics = scene.get("visual_semantics")
         if not isinstance(visual_semantics, dict):
             raise VideoContractError(f"Scene {scene_id} requires visual_semantics.")

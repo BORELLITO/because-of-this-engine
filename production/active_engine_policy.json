@@ -1,7 +1,7 @@
 {
   "policy_version": "3.0",
   "active_engine_profile": "because-of-this-v7-cloud-tts-2026-10",
-  "active_engine_fingerprint": "94c603fb7396835f05e89c07a70642580d10645fc96144d9cecb678f07da3f39",
+  "active_engine_fingerprint": "66cfb1b01334601e3ca0f48b7cd3e1d41f36c2c840997ecfba8d5d1567a25008",
   "active_engine_version": "7.1",
   "update_rule": "approved_update_supersedes_previous_active_engine",
   "retired_versions": "must_not_remain_executable_in_active_tree",

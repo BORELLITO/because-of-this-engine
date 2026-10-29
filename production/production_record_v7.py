@@ -113,6 +113,7 @@ def new_record(manifest: dict[str, Any], *, engine_bundle_id: str, engine_versio
             "updated_at": now(),
         },
         "story": {"story_id": story_id, "title": manifest.get("title", ""), "state": "draft"},
+        "story_graph": manifest.get("story_graph") or {"version": "pending", "entities": [], "beats": []},
         "emotional_map": manifest.get("emotional_map") or {"beats": [], "status": "pending"},
         "reveal_map": manifest.get("reveal_map") or {"known": [], "hidden": [], "status": "pending"},
         "scenes": scenes,
@@ -155,7 +156,7 @@ def validate_record(record: dict[str, Any]) -> dict[str, Any]:
     if not isinstance(record, dict):
         raise ProductionRecordError("production record must be an object")
     required = (
-        "schema_version", "schema_id", "project", "engine_bundle", "production", "story",
+        "schema_version", "schema_id", "project", "engine_bundle", "production", "story", "story_graph",
         "emotional_map", "reveal_map", "scenes", "visual_beats", "narration",
         "tts_request_records", "audio_assets", "captions", "packaging", "preview", "render",
         "gates", "incidents", "retries", "checkpoints", "artifacts", "rights_records",
@@ -180,6 +181,11 @@ def validate_record(record: dict[str, Any]) -> dict[str, Any]:
             raise ProductionRecordError(f"{gate_id} has an invalid state")
         if not isinstance(value.get("evidence"), str) or not value["evidence"].strip():
             raise ProductionRecordError(f"{gate_id} must contain evidence")
+    if state in {"approved_for_publication", "manually_published"}:
+        if any(gates[f"G{i}"].get("state") != "passed" for i in range(11)):
+            raise ProductionRecordError("publication-ready records require G0 through G10 to be passed")
+    if state == "manually_published" and gates["G11"].get("state") != "passed":
+        raise ProductionRecordError("manually_published records require G11 to be passed")
     for artifact in record.get("artifacts", []):
         if not isinstance(artifact, dict):
             raise ProductionRecordError("artifact records must be objects")
