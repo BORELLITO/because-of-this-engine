@@ -33,6 +33,7 @@ ALLOWED_TRUTH = {"VERIFIED_FACT", "DOCUMENTED_RECONSTRUCTION", "EXPLAINED_PHENOM
 ALLOWED_STATUSES = {"APPROVED", "REVIEW_REQUIRED", "REJECTED"}
 ALLOWED_PROVIDERS = {"mixkit", "pixabay", "pexels", "drive", "original"}
 ALLOWED_TRANSITIONS = {"hard_cut", "crossfade", "soft_dissolve", "dip_to_black", "motion_match"}
+PREVIEW_ONLY_MODE = "draft-preview"
 MATCH_THRESHOLDS = {"EXACT": 0.80, "NEAR": 0.68, "EXPLANATORY": 0.60, "SYMBOLIC": 0.55, "ATMOSPHERE": 0.55}
 FINAL_PROVENANCE_FIELDS = (
     "author",
@@ -260,8 +261,19 @@ def validate_asset_record(record: dict[str, Any], base: Path, episode_id: str, *
     _required_text(record, "sha256", f"Asset {asset_id}")
     if not re.fullmatch(r"[0-9a-fA-F]{64}", record["sha256"]):
         raise VideoContractError(f"Asset {asset_id} sha256 must be 64 hexadecimal characters.")
-    if record.get("rights_status") != "APPROVED" or record.get("approved_for_render") is not True:
-        raise VideoContractError(f"Asset {asset_id} is not approved for render.")
+    approved = record.get("rights_status") == "APPROVED" and record.get("approved_for_render") is True
+    preview_only = (
+        mode == PREVIEW_ONLY_MODE
+        and record.get("rights_status") == "PREVIEW_ONLY"
+        and record.get("approved_for_render") is False
+        and record.get("preview_only") is True
+        and str(record.get("preview_only_reason", "")).strip()
+    )
+    if not approved and not preview_only:
+        raise VideoContractError(
+            f"Asset {asset_id} is not approved for this render mode. "
+            "Only explicit PREVIEW_ONLY assets may enter draft-preview."
+        )
     if record.get("reuse_status", "FRESH") == "PERMANENTLY_RETIRED":
         raise VideoContractError(f"Asset {asset_id} is permanently retired and cannot be reused.")
     if record.get("episode_id") not in {None, episode_id}:
@@ -602,7 +614,19 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
     music = manifest.get("music")
     if not isinstance(music, dict):
         raise VideoContractError("Every v2 render requires a licensed suspense music object.")
-    if not music.get("license") or music.get("commercial_use") is not True:
+    if mode == PREVIEW_ONLY_MODE:
+        if (
+            not music.get("license")
+            or music.get("license_status") != "PREVIEW_ONLY"
+            or music.get("preview_only") is not True
+        ):
+            raise VideoContractError(
+                "draft-preview music must be explicitly marked license_status=PREVIEW_ONLY "
+                "and preview_only=true."
+            )
+        if not isinstance(music.get("commercial_use"), bool):
+            raise VideoContractError("draft-preview music requires an explicit commercial_use boolean.")
+    elif not music.get("license") or music.get("commercial_use") is not True:
         raise VideoContractError("Music requires explicit commercial_use=true and a licence.")
     volume = music.get("volume", 0.12)
     if isinstance(volume, bool) or not isinstance(volume, (int, float)) or not 0.08 <= volume <= 0.18:
