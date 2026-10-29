@@ -188,13 +188,13 @@ def evaluate(
         gates.append(_gate("G5", "AUDIO_MIX", "DEFERRED", f"phase {phase} runs before audio mix validation"))
 
     packaging = validate_packaging(manifest, strict=mode == "final")
+
+    caption_status, caption_evidence = _captions(manifest_path, mode)
+    gates.append(_gate("G6", "CAPTIONS_KARAOKE", caption_status, caption_evidence))
     if 7 in active or phase == "final":
         gates.append(_gate("G7", "PACKAGING", packaging["status"], "; ".join(packaging["errors"]) if packaging["errors"] else "three title/thumbnail directions, fiction disclosure and consequence-safe CTA verified"))
     else:
         gates.append(_gate("G7", "PACKAGING", "DEFERRED", f"phase {phase} runs before packaging validation"))
-
-    caption_status, caption_evidence = _captions(manifest_path, mode)
-    gates.append(_gate("G6", "CAPTIONS_KARAOKE", caption_status, caption_evidence))
 
     if 8 in active:
         if release and release.get("status") == "VIDEO_RELEASE_VALIDATED":
