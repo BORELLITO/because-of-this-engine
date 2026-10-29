@@ -1,0 +1,667 @@
+{
+  "schema_version": "1.0.0",
+  "brief_id": "video-001-asset-research-2026-10-29",
+  "video_id": "episode-001",
+  "title": "The Elevator That Stopped on a Floor That Didn't Exist",
+  "status": "RESEARCH_ONLY_NOT_APPROVED",
+  "created_at_utc": "2026-10-29",
+  "purpose": "Auditable research queue for G3 visual asset acquisition. This file does not approve, reserve, download, hash, or hydrate any runtime asset.",
+  "execution_impact": {
+    "manifest_changed": false,
+    "render_unlocked": false,
+    "g3_status": "PENDING_RESEARCH",
+    "g5_status": "PENDING_HUMAN_APPROVAL",
+    "safe_to_use_as_runtime_input": false
+  },
+  "hard_constraints": {
+    "truth_mode": "DECLARED_FICTION",
+    "licensed_visuals_are_reconstruction_not_documentary_evidence": true,
+    "primary_language": "literal evidence representation",
+    "visual_source_style": [
+      "CCTV",
+      "elevator monitor",
+      "hospital corridor",
+      "blueprints",
+      "maintenance evidence"
+    ],
+    "avoid": [
+      "laboratory",
+      "medical vial",
+      "beach",
+      "generic office",
+      "unrelated crowds",
+      "unexplained fantasy spectacle"
+    ],
+    "no_ai_generated_visuals": true,
+    "no_text_generated_inside_stock_clips": true,
+    "no_reused_clips": true,
+    "no_derived_clip_reuse": true,
+    "no_single_clip_reused_across_scenes": true,
+    "same_anonymous_guard_continuity_required": true,
+    "recurring_motifs": [
+      "red emergency lamp",
+      "2:14 timestamp",
+      "same hospital elevator"
+    ],
+    "runtime_asset_requirements": [
+      "source_page_url",
+      "provider_asset_id",
+      "downloaded_original",
+      "file_path",
+      "sha256",
+      "perceptual_hash",
+      "duration_seconds",
+      "width",
+      "height",
+      "fps",
+      "rights_status",
+      "commercial_use",
+      "human_approval",
+      "freshness_reservation"
+    ]
+  },
+  "license_policy": {
+    "research_source": "Pexels",
+    "source_license_url": "https://www.pexels.com/license/",
+    "provisional_interpretation": "Pexels states that its photos and videos may be used for free, attribution is not required, and modification is permitted; individual asset review and project approval remain mandatory.",
+    "caveats": [
+      "Do not redistribute unaltered clips as a stock library.",
+      "Do not imply endorsement by a depicted person, brand, or location.",
+      "Record the exact source page and the license evidence captured at acquisition time.",
+      "A permissive source license is not the same thing as G3 human approval."
+    ],
+    "default_rights_status": "RESEARCH_ONLY"
+  },
+  "acquisition_protocol": [
+    "Open the exact candidate page and confirm it is not an AI-generated asset.",
+    "Download the original highest-quality file available from the provider.",
+    "Record provider asset ID, source page, retrieval timestamp, dimensions, frame rate, duration, and license evidence.",
+    "Compute SHA-256 and perceptual hash; reject collisions with any existing episode asset.",
+    "Create a unique asset_id; never derive a second scene asset from an already-used clip.",
+    "Place the file in the approved Drive/runtime location and populate file_path.",
+    "Obtain human scene-level approval before changing rights_status to APPROVED.",
+    "Only then hydrate manifest scenes and allow G3/preflight to evaluate the asset."
+  ],
+  "candidate_sources": [
+    {
+      "candidate_id": "PEXELS-4354919",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/an-elevator-going-up-4354919/",
+      "described_format": {
+        "width": 1920,
+        "height": 1080,
+        "aspect_ratio": "16:9",
+        "duration_seconds": 9,
+        "fps": 25
+      },
+      "semantic_fit": [
+        "elevator indicator",
+        "hospital/elevator system atmosphere"
+      ],
+      "fit_state": "NEAR_MATCH_REQUIRES_FRAME_REVIEW",
+      "scene_eligibility": [
+        "S01",
+        "S08",
+        "S12"
+      ],
+      "rejection_risks": [
+        "display may not show the required 13 or below-basement state",
+        "2:14 must be added as compositor overlay, never asserted as source footage"
+      ]
+    },
+    {
+      "candidate_id": "PEXELS-15434928",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/an-elevator-screen-shows-going-downfloor-15434928/",
+      "described_format": {
+        "width": 2160,
+        "height": 3840,
+        "aspect_ratio": "9:16",
+        "duration_seconds": 22,
+        "fps": 25
+      },
+      "semantic_fit": [
+        "descending elevator indicator",
+        "elevator screen"
+      ],
+      "fit_state": "STRONG_FOR_MOTION_WEAK_FOR_LITERAL_TEXT",
+      "scene_eligibility": [
+        "S01",
+        "S08",
+        "S12"
+      ],
+      "rejection_risks": [
+        "vertical source needs crop/reframe for 9:16 output",
+        "source display values must not be presented as the story's exact 13 or below-basement evidence without approved composited treatment"
+      ]
+    },
+    {
+      "candidate_id": "PEXELS-7255101",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/police-officer-monitoring-security-camera-while-looking-at-the-monitor-screen-7255101/",
+      "described_format": {
+        "fps": 60
+      },
+      "semantic_fit": [
+        "operator monitoring security feed",
+        "security monitor"
+      ],
+      "fit_state": "NEAR_MATCH_REQUIRES_EXACT_METADATA_AND_FRAME_REVIEW",
+      "scene_eligibility": [
+        "S03",
+        "S10",
+        "S11"
+      ],
+      "rejection_risks": [
+        "police identity may conflict with hospital guard continuity",
+        "the log UI, 47 seconds, and second passenger must be compositor-generated overlays"
+      ]
+    },
+    {
+      "candidate_id": "PEXELS-38779108",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/high-tech-control-room-in-action-38779108/",
+      "described_format": {},
+      "semantic_fit": [
+        "operators monitoring multiple screens",
+        "control-room evidence"
+      ],
+      "fit_state": "DISCOVERY_CANDIDATE_REQUIRES_EXACT_METADATA_AND_FRAME_REVIEW",
+      "scene_eligibility": [
+        "S03",
+        "S06",
+        "S10",
+        "S11"
+      ],
+      "rejection_risks": [
+        "may feel too modern or unrelated to a hospital",
+        "must not be used if screens imply a different real organization or brand"
+      ]
+    },
+    {
+      "candidate_id": "PEXELS-38779102",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/modern-control-room-monitoring-operations-38779102/",
+      "described_format": {},
+      "semantic_fit": [
+        "control room with computers",
+        "surveillance/monitoring evidence"
+      ],
+      "fit_state": "DISCOVERY_CANDIDATE_REQUIRES_EXACT_METADATA_AND_FRAME_REVIEW",
+      "scene_eligibility": [
+        "S03",
+        "S06",
+        "S10",
+        "S11"
+      ],
+      "rejection_risks": [
+        "generic control room may weaken hospital specificity",
+        "all story-specific text must be created by the compositor"
+      ]
+    },
+    {
+      "candidate_id": "PEXELS-34779661",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/elevator-doors-opening-to-underground-garage-34779661/",
+      "described_format": {
+        "width": 1920,
+        "height": 1080,
+        "aspect_ratio": "16:9",
+        "duration_seconds": 17,
+        "fps": 29.97
+      },
+      "semantic_fit": [
+        "elevator doors opening",
+        "dark concrete destination"
+      ],
+      "fit_state": "STRONG_ATMOSPHERE_REQUIRES_LITERAL_ANCHOR_REVIEW",
+      "scene_eligibility": [
+        "S04",
+        "S05",
+        "S07"
+      ],
+      "rejection_risks": [
+        "underground garage is not automatically the impossible corridor",
+        "must reject if no narrow concrete corridor or no usable doorway transition is visible"
+      ]
+    },
+    {
+      "candidate_id": "PEXELS-5203510",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/an-empty-hospital-hallway-5203510/",
+      "described_format": {
+        "width": 1920,
+        "height": 1080,
+        "aspect_ratio": "16:9",
+        "duration_seconds": 4,
+        "fps": 59.94
+      },
+      "semantic_fit": [
+        "empty hospital corridor",
+        "night hospital atmosphere"
+      ],
+      "fit_state": "STRONG_FOR_HOSPITAL_CONTEXT_REQUIRES_RED-LAMP_MATCH",
+      "scene_eligibility": [
+        "S04",
+        "S05",
+        "S06",
+        "S09"
+      ],
+      "rejection_risks": [
+        "does not by itself prove the red corridor or CCTV perspective",
+        "may only be used where the exact shot retains a direct corridor anchor"
+      ]
+    },
+    {
+      "candidate_id": "PEXELS-36718656",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/empty-hospital-corridor-with-medical-equipment-36718656/",
+      "described_format": {
+        "width": 1920,
+        "height": 1080,
+        "aspect_ratio": "16:9",
+        "duration_seconds": 9,
+        "fps": 29.98
+      },
+      "semantic_fit": [
+        "empty hospital corridor",
+        "sterile maintenance environment"
+      ],
+      "fit_state": "NEAR_MATCH_REQUIRES_FRAME_REVIEW",
+      "scene_eligibility": [
+        "S04",
+        "S06",
+        "S09"
+      ],
+      "rejection_risks": [
+        "medical equipment can distract from the elevator anomaly",
+        "must reject if it reads as ordinary daytime hospital footage"
+      ]
+    },
+    {
+      "candidate_id": "PEXELS-5481188",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/a-person-walking-with-his-hands-behind-his-back-5481188/",
+      "described_format": {},
+      "semantic_fit": [
+        "distant anonymous figure in dark corridor"
+      ],
+      "fit_state": "NEAR_MATCH_REQUIRES_FRAME_REVIEW",
+      "scene_eligibility": [
+        "S05",
+        "S09"
+      ],
+      "rejection_risks": [
+        "uniform continuity is not established",
+        "must reject if subject identity or wardrobe cannot remain anonymous and match Elias"
+      ]
+    },
+    {
+      "candidate_id": "PEXELS-32365210",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/secure-metal-ladder-with-chain-and-padlock-32365210/",
+      "described_format": {
+        "width": 2160,
+        "height": 3840,
+        "aspect_ratio": "9:16",
+        "duration_seconds": 3,
+        "fps": 25
+      },
+      "semantic_fit": [
+        "chain and padlock",
+        "sealed access"
+      ],
+      "fit_state": "STRONG_FOR_LOCK_MOTIF_WEAK_FOR_LITERAL_ELEVATOR",
+      "scene_eligibility": [
+        "S07"
+      ],
+      "rejection_risks": [
+        "ladder is not an elevator; use only if framing can establish the chain as hospital evidence without semantic deception",
+        "must reject if the object cannot be identified as the elevator closure"
+      ]
+    },
+    {
+      "candidate_id": "PEXELS-6573544",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/close-up-footage-of-a-vault-6573544/",
+      "described_format": {},
+      "semantic_fit": [
+        "access-control keypad",
+        "locked mechanism"
+      ],
+      "fit_state": "DISCOVERY_CANDIDATE_REQUIRES_FRAME_REVIEW",
+      "scene_eligibility": [
+        "S02",
+        "S07"
+      ],
+      "rejection_risks": [
+        "vault semantics conflict with hospital elevator",
+        "reject unless the frame can be used only as a neutral mechanism insert"
+      ]
+    },
+    {
+      "candidate_id": "PEXELS-4941456",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/a-man-working-on-a-machine-design-4941456/",
+      "described_format": {},
+      "semantic_fit": [
+        "technical drawing/blueprint",
+        "maintenance evidence"
+      ],
+      "fit_state": "NEAR_MATCH_REQUIRES_EXACT_METADATA_AND_FRAME_REVIEW",
+      "scene_eligibility": [
+        "S06"
+      ],
+      "rejection_risks": [
+        "machine-design context may not read as elevator maintenance",
+        "blueprint shown must be replaced or composited so the thirteenth landing is an original story graphic"
+      ]
+    },
+    {
+      "candidate_id": "PEXELS-8964792",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/engineers-looking-at-the-blueprint-they-are-holding-8964792/",
+      "described_format": {},
+      "semantic_fit": [
+        "engineers reviewing blueprint"
+      ],
+      "fit_state": "DISCOVERY_CANDIDATE_REQUIRES_EXACT_METADATA_AND_FRAME_REVIEW",
+      "scene_eligibility": [
+        "S06"
+      ],
+      "rejection_risks": [
+        "outdoor construction context likely conflicts with hospital maintenance",
+        "must reject if hard hats/construction setting dominate"
+      ]
+    },
+    {
+      "candidate_id": "PEXELS-9574004",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/a-man-walking-at-the-hallway-while-pushing-a-trolley-9574004/",
+      "described_format": {
+        "width": 2160,
+        "height": 4096,
+        "aspect_ratio": "135:256",
+        "duration_seconds": 14,
+        "fps": 25
+      },
+      "semantic_fit": [
+        "person moving equipment through hospital corridor"
+      ],
+      "fit_state": "NEAR_MATCH_REQUIRES_FRAME_REVIEW",
+      "scene_eligibility": [
+        "S05",
+        "S06"
+      ],
+      "rejection_risks": [
+        "protective gear may not match Elias",
+        "vertical source may crop poorly",
+        "must not imply medical emergency or real patient event"
+      ]
+    }
+  ],
+  "scene_queue": [
+    {
+      "scene_id": "S01",
+      "direct_required": [
+        "elevator indicator",
+        "2:14 timestamp",
+        "hospital at night"
+      ],
+      "candidate_ids": [
+        "PEXELS-4354919",
+        "PEXELS-15434928"
+      ],
+      "research_query": "Pexels elevator display night close-up",
+      "current_decision": "DO_NOT_APPROVE_YET",
+      "missing_proof": [
+        "exact frame showing a usable indicator",
+        "story-specific 13 must be composited or sourced from an approved exact display",
+        "timestamp treatment"
+      ]
+    },
+    {
+      "scene_id": "S02",
+      "direct_required": [
+        "security guard",
+        "elevator panel",
+        "missing thirteenth button"
+      ],
+      "candidate_ids": [
+        "PEXELS-6573544"
+      ],
+      "research_query": "Pexels hospital security guard elevator panel",
+      "current_decision": "NO_ACCEPTED_CANDIDATE",
+      "missing_proof": [
+        "anonymous guard continuity",
+        "actual elevator panel",
+        "literal absence of button 13"
+      ]
+    },
+    {
+      "scene_id": "S03",
+      "direct_required": [
+        "digital system log",
+        "47 seconds",
+        "security monitor"
+      ],
+      "candidate_ids": [
+        "PEXELS-7255101",
+        "PEXELS-38779108",
+        "PEXELS-38779102"
+      ],
+      "research_query": "Pexels security monitor operator digital log",
+      "current_decision": "DO_NOT_APPROVE_YET",
+      "missing_proof": [
+        "exact metadata",
+        "neutral monitor frame",
+        "compositor-owned 47-second log overlay"
+      ]
+    },
+    {
+      "scene_id": "S04",
+      "direct_required": [
+        "CCTV view",
+        "elevator doors",
+        "concrete corridor",
+        "single red emergency lamp"
+      ],
+      "candidate_ids": [
+        "PEXELS-34779661",
+        "PEXELS-5203510",
+        "PEXELS-36718656"
+      ],
+      "research_query": "Pexels CCTV elevator doors concrete corridor red emergency light",
+      "current_decision": "DO_NOT_APPROVE_YET",
+      "missing_proof": [
+        "one shot or defensible cut that contains the full direct anchor set",
+        "CCTV treatment",
+        "red lamp must be visibly present rather than graded into an unrelated shot"
+      ]
+    },
+    {
+      "scene_id": "S05",
+      "direct_required": [
+        "guard entering corridor",
+        "signal loss",
+        "black surveillance feed"
+      ],
+      "candidate_ids": [
+        "PEXELS-34779661",
+        "PEXELS-5481188",
+        "PEXELS-9574004"
+      ],
+      "research_query": "Pexels anonymous security guard walking into corridor CCTV",
+      "current_decision": "NO_ACCEPTED_CANDIDATE",
+      "missing_proof": [
+        "same Elias wardrobe/identity",
+        "actual threshold crossing",
+        "signal-loss transition is compositor-owned"
+      ]
+    },
+    {
+      "scene_id": "S06",
+      "direct_required": [
+        "maintenance team",
+        "blueprints",
+        "empty elevator shaft landing",
+        "control board"
+      ],
+      "candidate_ids": [
+        "PEXELS-4941456",
+        "PEXELS-8964792",
+        "PEXELS-38779108"
+      ],
+      "research_query": "Pexels elevator maintenance technician blueprint control board",
+      "current_decision": "NO_ACCEPTED_CANDIDATE",
+      "missing_proof": [
+        "hospital-specific maintenance context",
+        "elevator shaft/landing evidence",
+        "control board shot",
+        "original blueprint overlay"
+      ]
+    },
+    {
+      "scene_id": "S07",
+      "direct_required": [
+        "locked elevator",
+        "chain or warning seal",
+        "hospital evidence"
+      ],
+      "candidate_ids": [
+        "PEXELS-32365210",
+        "PEXELS-34779661",
+        "PEXELS-6573544"
+      ],
+      "research_query": "Pexels chained locked elevator hospital",
+      "current_decision": "NO_ACCEPTED_CANDIDATE",
+      "missing_proof": [
+        "literal elevator closure",
+        "chain/warning seal attached to that elevator",
+        "hospital context"
+      ]
+    },
+    {
+      "scene_id": "S08",
+      "direct_required": [
+        "elevator display",
+        "2:14 timestamp",
+        "night hospital"
+      ],
+      "candidate_ids": [
+        "PEXELS-4354919",
+        "PEXELS-15434928"
+      ],
+      "research_query": "Pexels elevator indicator night hospital",
+      "current_decision": "DO_NOT_APPROVE_YET",
+      "missing_proof": [
+        "exact display state",
+        "2:14 compositor treatment",
+        "fresh asset distinct from S01"
+      ]
+    },
+    {
+      "scene_id": "S09",
+      "direct_required": [
+        "CCTV",
+        "red corridor",
+        "distant guard silhouette",
+        "matching uniform"
+      ],
+      "candidate_ids": [
+        "PEXELS-5481188",
+        "PEXELS-5203510",
+        "PEXELS-36718656"
+      ],
+      "research_query": "Pexels distant security guard silhouette red corridor CCTV",
+      "current_decision": "NO_ACCEPTED_CANDIDATE",
+      "missing_proof": [
+        "red corridor",
+        "matching uniform",
+        "CCTV framing",
+        "fresh non-derived clip"
+      ]
+    },
+    {
+      "scene_id": "S10",
+      "direct_required": [
+        "lobby monitor",
+        "Elias outside",
+        "elevator camera feed"
+      ],
+      "candidate_ids": [
+        "PEXELS-7255101",
+        "PEXELS-38779108",
+        "PEXELS-38779102"
+      ],
+      "research_query": "Pexels security monitor showing elevator camera lobby",
+      "current_decision": "DO_NOT_APPROVE_YET",
+      "missing_proof": [
+        "screen angle suitable for overlay",
+        "Elias outside frame",
+        "separate asset from S03"
+      ]
+    },
+    {
+      "scene_id": "S11",
+      "direct_required": [
+        "system log",
+        "second passenger entry",
+        "security evidence"
+      ],
+      "candidate_ids": [
+        "PEXELS-7255101",
+        "PEXELS-38779108",
+        "PEXELS-38779102"
+      ],
+      "research_query": "Pexels digital security log monitor entry",
+      "current_decision": "NO_ACCEPTED_CANDIDATE",
+      "missing_proof": [
+        "distinct asset from S03/S10",
+        "legible compositor-owned second passenger entry",
+        "approved evidence framing"
+      ]
+    },
+    {
+      "scene_id": "S12",
+      "direct_required": [
+        "descending elevator indicator",
+        "below basement",
+        "black fade",
+        "brand outro"
+      ],
+      "candidate_ids": [
+        "PEXELS-15434928",
+        "PEXELS-4354919"
+      ],
+      "research_query": "Pexels elevator descending indicator close-up",
+      "current_decision": "DO_NOT_APPROVE_YET",
+      "missing_proof": [
+        "literal descending movement",
+        "below-basement label must be original composited evidence",
+        "fresh asset distinct from S01/S08"
+      ]
+    }
+  ],
+  "acceptance_matrix": {
+    "S01": "human_approve_exact_candidate_then_hydrate",
+    "S02": "new_exact_candidate_required",
+    "S03": "human_approve_monitor_candidate_then_create_log_overlay",
+    "S04": "human_approve_literal_corridor_candidate",
+    "S05": "new_exact_guard-threshold_candidate_required",
+    "S06": "new_exact_maintenance_candidate_required",
+    "S07": "new_exact_chained-elevator_candidate_required",
+    "S08": "human_approve_fresh_display_candidate",
+    "S09": "new_exact_red-corridor-duplicate_candidate_required",
+    "S10": "human_approve_fresh_lobby-monitor_candidate",
+    "S11": "new_exact_second-passenger-evidence_candidate_required",
+    "S12": "human_approve_fresh_descending-indicator_candidate"
+  },
+  "stop_conditions": [
+    "Do not set any scene asset_status to APPROVED from this file.",
+    "Do not set music commercial_use to true from this file.",
+    "Do not populate runtime file_path, sha256, perceptual_hash, or Drive IDs with placeholders.",
+    "Do not reuse one downloaded clip across two scene IDs, even with a crop or color change.",
+    "Do not render a final or release candidate while any direct_required anchor is unmet."
+  ]
+}
