@@ -2,14 +2,14 @@
 
 This repository contains the single canonical production engine for the
 Because Of This channel. V7.1 is driven by the pinned master prompt
-`docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V7_1_CLOUD_TTS_INTEGRADO.txt` and schema
+`docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V7_1_EDGE_TTS_INTEGRADO.txt` and schema
 `because-of-this://schemas/production-record/3.0.0`.
 
 ## Active engine contract
 
 - Video-only vertical output: 1080×1920, 60 fps, 60–75 seconds.
-- Narration provider: Google Cloud Text-to-Speech only, `en-US-Standard-B`,
-  SSML, LINEAR16 at 24 kHz, with ADC/OAuth and no silent fallback.
+- Narration provider: Microsoft Edge online TTS only, `en-US-GuyNeural`,
+  prosody parameters, LINEAR16 at 24 kHz, with no API key, billing account or silent fallback.
 - Audio is the master clock. Captions are generated from final audio using
   forced alignment; estimated timings are not accepted.
 - Every visual beat requires direct semantic anchors, rights evidence,
@@ -25,8 +25,8 @@ Because Of This channel. V7.1 is driven by the pinned master prompt
   are V7.1 and rejects retired execution markers.
 - `production/v7_orchestrator.py` — G0–G11 evaluation, idempotency and
   production-record generation.
-- `production/cloud_tts.py` — Cloud TTS voice preflight, SSML synthesis,
-  chunk provenance, hashes and real-duration metadata.
+- `production/edge_tts.py` — Edge TTS voice preflight, chunk synthesis,
+  provenance, hashes and real-duration metadata; Google Cloud rollback is archived.
 - `production/v7_post_publication.py` — manual-only G11 verifier.
 - `.github/workflows/because-of-this-v7.yml` — manually dispatched production
   workflow; it stops on missing evidence and never publishes automatically.
