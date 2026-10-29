@@ -393,6 +393,10 @@ def _validate_loop(manifest: dict[str, Any], mode: str) -> None:
 
 
 def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str = "preview", check_files: bool = True, enforce_canonical: bool = True) -> dict[str, Any]:
+    # Normalize once at the contract boundary.  All path checks below compare
+    # absolute resolved paths; keeping a relative episode_dir here would make
+    # the brand-logo containment check reject an otherwise valid manifest.
+    episode_dir = episode_dir.resolve()
     canonical_report = None
     if enforce_canonical:
         try:
