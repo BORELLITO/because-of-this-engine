@@ -70,7 +70,19 @@
       "Record the exact source page and the license evidence captured at acquisition time.",
       "A permissive source license is not the same thing as G3 human approval."
     ],
-    "default_rights_status": "RESEARCH_ONLY"
+    "default_rights_status": "RESEARCH_ONLY",
+    "research_sources": [
+      "Pexels",
+      "Pixabay"
+    ],
+    "source_license_urls": [
+      "https://www.pexels.com/license/",
+      "https://pixabay.com/service/license-summary/"
+    ],
+    "additional_caveats": [
+      "Pixabay candidates remain provisional until the exact media page and current Content License terms are captured at acquisition time.",
+      "Search-result pages are discovery aids, not evidence that a particular asset is approved."
+    ]
   },
   "acquisition_protocol": [
     "Open the exact candidate page and confirm it is not an AI-generated asset.",
@@ -398,6 +410,134 @@
         "vertical source may crop poorly",
         "must not imply medical emergency or real patient event"
       ]
+    },
+    {
+      "candidate_id": "PEXELS-31751326",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/close-up-of-hand-pressing-elevator-control-panel-buttons-31751326/",
+      "described_format": {},
+      "semantic_fit": [
+        "elevator control panel",
+        "numbered buttons",
+        "hand interaction"
+      ],
+      "fit_state": "STRONG_FOR_PANEL_RESEARCH_REQUIRES_FRAME_REVIEW",
+      "scene_eligibility": [
+        "S02"
+      ],
+      "rejection_risks": [
+        "the frame may not establish the missing 13th button",
+        "hand/lighting may not match the anonymous guard continuity"
+      ]
+    },
+    {
+      "candidate_id": "PEXELS-7701962",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/close-up-view-of-a-person-pressing-elevator-button-7701962/",
+      "described_format": {},
+      "semantic_fit": [
+        "elevator buttons",
+        "red-lit panel",
+        "numbered control interface"
+      ],
+      "fit_state": "STRONG_FOR_PANEL_RESEARCH_REQUIRES_FRAME_REVIEW",
+      "scene_eligibility": [
+        "S02"
+      ],
+      "rejection_risks": [
+        "must verify whether the visible numbering can support the literal absence of 13",
+        "generic building context may conflict with hospital continuity"
+      ]
+    },
+    {
+      "candidate_id": "PIXABAY-320453",
+      "provider": "pixabay",
+      "source_page_url": "https://pixabay.com/videos/security-camera-cctv-surveillance-320453/",
+      "described_format": {
+        "width": 3328,
+        "height": 1856,
+        "fps": 24,
+        "media_type": "MP4"
+      },
+      "semantic_fit": [
+        "CCTV camera",
+        "night surveillance",
+        "monitor/security evidence atmosphere"
+      ],
+      "fit_state": "STRONG_FOR_CCTV_TEXTURE_REQUIRES_FRAME_REVIEW",
+      "scene_eligibility": [
+        "S03",
+        "S10",
+        "S11"
+      ],
+      "rejection_risks": [
+        "may be a camera/lens insert rather than a usable monitor view",
+        "story-specific log content must be compositor-generated",
+        "must reframe to 60fps output without inventing source motion"
+      ]
+    },
+    {
+      "candidate_id": "PIXABAY-130783",
+      "provider": "pixabay",
+      "source_page_url": "https://pixabay.com/pt/videos/elevador-porta-abrir-130783/",
+      "described_format": {
+        "width": 3840,
+        "height": 2160,
+        "fps": 30,
+        "media_type": "MP4"
+      },
+      "semantic_fit": [
+        "elevator doors opening",
+        "low-angle elevator architecture"
+      ],
+      "fit_state": "STRONG_FOR_ELEVATOR_DOOR_RESEARCH_REQUIRES_LITERAL_CONTEXT",
+      "scene_eligibility": [
+        "S04",
+        "S05",
+        "S07"
+      ],
+      "rejection_risks": [
+        "does not establish the impossible corridor or chain by itself",
+        "must reject if it reads as an ordinary lobby/elevator insert"
+      ]
+    },
+    {
+      "candidate_id": "PEXELS-9943144",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/a-woman-in-a-hoodie-walking-in-a-hallway-9943144/",
+      "described_format": {},
+      "semantic_fit": [
+        "anonymous silhouette",
+        "dim corridor",
+        "mysterious figure"
+      ],
+      "fit_state": "NEAR_MATCH_REQUIRES_FRAME_REVIEW",
+      "scene_eligibility": [
+        "S09"
+      ],
+      "rejection_risks": [
+        "hoodie is not Elias's uniform",
+        "must reject if the identity mismatch is visible or if CCTV framing cannot be established"
+      ]
+    },
+    {
+      "candidate_id": "PEXELS-35140392",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/mysterious-silhouette-walking-in-dim-corridor-35140392/",
+      "described_format": {},
+      "semantic_fit": [
+        "distant silhouette",
+        "dim corridor",
+        "night suspense"
+      ],
+      "fit_state": "NEAR_MATCH_REQUIRES_FRAME_REVIEW",
+      "scene_eligibility": [
+        "S09"
+      ],
+      "rejection_risks": [
+        "suitcase and corridor context may conflict with the story",
+        "must reject if the shot looks like ordinary travel footage"
+      ]
     }
   ],
   "scene_queue": [
@@ -428,14 +568,18 @@
         "missing thirteenth button"
       ],
       "candidate_ids": [
-        "PEXELS-6573544"
+        "PEXELS-6573544",
+        "PEXELS-31751326",
+        "PEXELS-7701962"
       ],
       "research_query": "Pexels hospital security guard elevator panel",
-      "current_decision": "NO_ACCEPTED_CANDIDATE",
+      "current_decision": "DO_NOT_APPROVE_YET",
       "missing_proof": [
         "anonymous guard continuity",
         "actual elevator panel",
-        "literal absence of button 13"
+        "literal absence of button 13",
+        "exact frame showing a numbered panel",
+        "hospital/guard continuity"
       ]
     },
     {
@@ -448,14 +592,18 @@
       "candidate_ids": [
         "PEXELS-7255101",
         "PEXELS-38779108",
-        "PEXELS-38779102"
+        "PEXELS-38779102",
+        "PIXABAY-320453"
       ],
       "research_query": "Pexels security monitor operator digital log",
       "current_decision": "DO_NOT_APPROVE_YET",
       "missing_proof": [
         "exact metadata",
         "neutral monitor frame",
-        "compositor-owned 47-second log overlay"
+        "compositor-owned 47-second log overlay",
+        "exact monitor/log frame",
+        "compositor-owned 47-second overlay",
+        "distinct asset from S10/S11"
       ]
     },
     {
@@ -469,14 +617,16 @@
       "candidate_ids": [
         "PEXELS-34779661",
         "PEXELS-5203510",
-        "PEXELS-36718656"
+        "PEXELS-36718656",
+        "PIXABAY-130783"
       ],
       "research_query": "Pexels CCTV elevator doors concrete corridor red emergency light",
       "current_decision": "DO_NOT_APPROVE_YET",
       "missing_proof": [
         "one shot or defensible cut that contains the full direct anchor set",
         "CCTV treatment",
-        "red lamp must be visibly present rather than graded into an unrelated shot"
+        "red lamp must be visibly present rather than graded into an unrelated shot",
+        "single shot or defensible cut containing elevator doors, concrete corridor and red lamp"
       ]
     },
     {
@@ -571,15 +721,18 @@
       "candidate_ids": [
         "PEXELS-5481188",
         "PEXELS-5203510",
-        "PEXELS-36718656"
+        "PEXELS-36718656",
+        "PEXELS-9943144",
+        "PEXELS-35140392"
       ],
       "research_query": "Pexels distant security guard silhouette red corridor CCTV",
-      "current_decision": "NO_ACCEPTED_CANDIDATE",
+      "current_decision": "DO_NOT_APPROVE_YET",
       "missing_proof": [
         "red corridor",
         "matching uniform",
         "CCTV framing",
-        "fresh non-derived clip"
+        "fresh non-derived clip",
+        "matching Elias uniform"
       ]
     },
     {
@@ -592,14 +745,16 @@
       "candidate_ids": [
         "PEXELS-7255101",
         "PEXELS-38779108",
-        "PEXELS-38779102"
+        "PEXELS-38779102",
+        "PIXABAY-320453"
       ],
       "research_query": "Pexels security monitor showing elevator camera lobby",
       "current_decision": "DO_NOT_APPROVE_YET",
       "missing_proof": [
         "screen angle suitable for overlay",
         "Elias outside frame",
-        "separate asset from S03"
+        "separate asset from S03",
+        "monitor view rather than camera insert"
       ]
     },
     {
@@ -612,14 +767,18 @@
       "candidate_ids": [
         "PEXELS-7255101",
         "PEXELS-38779108",
-        "PEXELS-38779102"
+        "PEXELS-38779102",
+        "PIXABAY-320453"
       ],
       "research_query": "Pexels digital security log monitor entry",
       "current_decision": "NO_ACCEPTED_CANDIDATE",
       "missing_proof": [
         "distinct asset from S03/S10",
         "legible compositor-owned second passenger entry",
-        "approved evidence framing"
+        "approved evidence framing",
+        "distinct evidence asset",
+        "legible second-passenger log",
+        "compositor-owned system record"
       ]
     },
     {
@@ -662,6 +821,17 @@
     "Do not set music commercial_use to true from this file.",
     "Do not populate runtime file_path, sha256, perceptual_hash, or Drive IDs with placeholders.",
     "Do not reuse one downloaded clip across two scene IDs, even with a crop or color change.",
-    "Do not render a final or release candidate while any direct_required anchor is unmet."
+    "Do not render a final or release candidate while any direct_required anchor is unmet.",
+    "Do not treat a provider search result or license summary as proof of a specific downloaded asset's rights."
+  ],
+  "updated_at_utc": "2026-10-29",
+  "research_passes": [
+    {
+      "pass_id": "PASS-02",
+      "date_utc": "2026-10-29",
+      "objective": "Resolve exact-anchor gaps in S02, S03, S04, S09, S10 and S11.",
+      "result": "Added panel, elevator-door, CCTV and corridor-silhouette candidates. No candidate was approved.",
+      "source_policy": "Pexels and Pixabay pages were treated as research leads only; exact page, media, license evidence, hashes and human approval remain required."
+    }
   ]
 }
