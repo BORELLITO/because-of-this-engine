@@ -78,7 +78,7 @@
       "type": "object",
       "required": ["provider"],
       "properties": {
-        "provider": { "const": "google_cloud_tts" },
+        "provider": { "const": "microsoft_edge_tts" },
         "language_code": { "const": "en-US" },
         "beats": { "type": "array" }
       }
