@@ -330,7 +330,11 @@ def evaluate(manifest: dict[str, Any], *, repo_root: Path, manifest_dir: Path, m
             allow_preview_only=allow_preview_only,
         ),
         "G4": _tts_gate(manifest, dry_run=(mode in {"contract", "dry-run"} or not check_cloud_tts)),
-        "G5": _audio_gate(manifest, require_approved=require_assets, manifest_dir=manifest_dir),
+        "G5": _audio_gate(
+            manifest,
+            require_approved=mode in {"preflight", "preview", "production"},
+            manifest_dir=manifest_dir,
+        ),
         "G6": _artifact_gate(manifest, manifest_dir, ("final_audio", "captions", "alignment"), "final audio/caption/alignment", blocking=(mode in {"draft-preview", "preview", "production"})),
         "G7": _packaging_gate(manifest),
         "G8": _artifact_gate(manifest, manifest_dir, ("preview", "preview_approval") if mode == "production" else ("preview",), "preview", blocking=(mode in {"draft-preview", "preview", "production"})),
