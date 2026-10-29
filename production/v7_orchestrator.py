@@ -167,6 +167,20 @@ def _packaging_gate(manifest: dict[str, Any]) -> dict[str, Any]:
     return _status(True, "three non-spoiler packaging candidates and post-consequence CTA are registered")
 
 
+def _artifact_gate(manifest: dict[str, Any], keys: tuple[str, ...], label: str, *, blocking: bool) -> dict[str, Any]:
+    """Check only artifacts explicitly named by the manifest.
+
+    This keeps the gate evidence reproducible and prevents a directory scan
+    from accidentally accepting a stale artifact from an earlier attempt.
+    """
+    base = Path(str(manifest.get("canonical_path") or "")).resolve()
+    # The caller supplies the repository-relative manifest path through the
+    # optional runtime field; absent paths remain pending rather than guessed.
+    artifact_paths = manifest.get("runtime_artifacts") if isinstance(manifest.get("runtime_artifacts"), dict) else {}
+    missing = [key for key in keys if not str(artifact_paths.get(key, "")).strip()]
+    return _status(not missing, f"{label} artifacts are registered" if not missing else f"missing {label} artifacts: {', '.join(missing)}", blocking=blocking)
+
+
 def _gate_record(gate_id: str, check: dict[str, Any]) -> dict[str, Any]:
     state = {"PASS": "passed", "BLOCKED": "blocked", "PENDING": "pending"}[check["status"]]
     return {
@@ -201,11 +215,11 @@ def evaluate(manifest: dict[str, Any], *, repo_root: Path, mode: str, check_clou
         "G3": _visual_gate(manifest, require_assets=require_assets),
         "G4": _tts_gate(manifest, dry_run=(mode in {"contract", "dry-run"} or not check_cloud_tts)),
         "G5": _status(True, "voice-first mix policy, sidechain and licensed/original audio fields are declared"),
-        "G6": _status(False, "captions remain pending until final Cloud TTS audio is generated and forced-aligned", blocking=require_assets),
+        "G6": _artifact_gate(manifest, ("final_audio", "captions", "alignment"), "final audio/caption/alignment", blocking=(mode == "production")),
         "G7": _packaging_gate(manifest),
-        "G8": _status(False, "full preview is pending; no render may be treated as approved", blocking=require_assets),
-        "G9": _status(False, "technical render QA is pending", blocking=require_assets),
-        "G10": _status(False, "human approval is required and has not been recorded", blocking=require_assets),
+        "G8": _artifact_gate(manifest, ("preview", "preview_approval"), "preview and preview approval", blocking=(mode == "production")),
+        "G9": _artifact_gate(manifest, ("render", "technical_qa"), "render and technical QA", blocking=(mode == "production")),
+        "G10": _status(bool((manifest.get("human_approval") or {}).get("status") == "PASS"), "human approval record is present" if (manifest.get("human_approval") or {}).get("status") == "PASS" else "human approval is required and has not been recorded", blocking=(mode == "production")),
         "G11": _status(False, "post-publication verification is manual and deferred", blocking=False),
     }
     if mode == "contract":
