@@ -82,6 +82,11 @@ jobs:
 
       - name: Enforce single active engine policy
         run: python production/engine_singleton_guard.py --repo-root .
+      - name: Enforce master prompt V6 contract
+        run: |
+          set -euo pipefail
+          python production/master_prompt_contract.py --repo-root . \
+            --manifest "${{ inputs.manifest }}"
 
       - name: Validate episode against current visual contract
         env:
