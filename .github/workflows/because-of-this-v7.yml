@@ -1,0 +1,210 @@
+name: Because Of This V7.1 production
+
+on:
+  workflow_dispatch:
+    inputs:
+      manifest:
+        description: "V7 manifest path: episodes/<episode>/manifest.json"
+        required: true
+        type: string
+      mode:
+        description: "Render target"
+        required: true
+        default: "preview"
+        type: choice
+        options: [preview, final]
+      confirm_cleanup:
+        description: "Human confirmation to remove ephemeral media after verified Drive delivery"
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: because-of-this-v7-${{ inputs.manifest }}-${{ inputs.mode }}
+  cancel-in-progress: false
+
+env:
+  BECAUSE_OF_THIS_DRIVE_FOLDER_ID: "1A-oyowfHtdciB2_NZSLIZ0oG-ajOeYVb"
+  PYTHONUNBUFFERED: "1"
+
+jobs:
+  production:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Require current main revision
+        run: |
+          set -euo pipefail
+          test "${GITHUB_REF}" = "refs/heads/main"
+          CURRENT_MAIN_SHA="$(git ls-remote --exit-code origin refs/heads/main | awk '{print $1}')"
+          test "${CURRENT_MAIN_SHA}" = "${GITHUB_SHA}"
+
+      - name: Validate V7 manifest scope
+        env:
+          MANIFEST: ${{ inputs.manifest }}
+        run: |
+          set -euo pipefail
+          python - "${MANIFEST}" <<'PY'
+          import json, re, sys
+          from pathlib import Path
+          path = sys.argv[1]
+          if not re.fullmatch(r"episodes/[^/]+/manifest\.json", path):
+              raise SystemExit("Manifest must be episodes/<episode>/manifest.json")
+          value = json.loads(Path(path).read_text(encoding="utf-8"))
+          if value.get("lifecycle_status") == "ARCHIVED_HISTORICAL":
+              raise SystemExit("Archived historical manifests cannot enter production")
+          print("V7_MANIFEST_SCOPE_PASS")
+          PY
+
+      - name: Setup Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Install locked dependencies
+        run: python -m pip install -r requirements.lock.txt
+
+      - name: Enforce the single active V7 engine
+        run: PYTHONPATH=. python production/v7_singleton_guard.py --repo-root .
+
+      - name: Validate V7 prompt, schema and manifest
+        run: |
+          PYTHONPATH=. python production/v7_contract.py --repo-root . \
+            --manifest "${{ inputs.manifest }}" --require-production
+
+      - name: Run fail-closed V7 preflight
+        run: |
+          mkdir -p "$(dirname "${{ inputs.manifest }}")/rendered"
+          PYTHONPATH=. python production/v7_orchestrator.py \
+            --repo-root . --manifest "${{ inputs.manifest }}" --mode preflight \
+            --report "$(dirname "${{ inputs.manifest }}")/rendered/v7-preflight-${{ inputs.mode }}.json"
+
+      - name: Configure Google Cloud ADC
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
+        run: |
+          set -euo pipefail
+          test -n "${GOOGLE_APPLICATION_CREDENTIALS_JSON}"
+          umask 077
+          printf '%s' "${GOOGLE_APPLICATION_CREDENTIALS_JSON}" > "${RUNNER_TEMP}/because-of-this-google-credentials.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=${RUNNER_TEMP}/because-of-this-google-credentials.json" >> "${GITHUB_ENV}"
+
+      - name: Cloud TTS quota, voice and authentication preflight
+        env:
+          GOOGLE_TTS_PROJECT_ID: ${{ secrets.GOOGLE_TTS_PROJECT_ID }}
+        run: PYTHONPATH=. python production/cloud_tts.py --manifest "${{ inputs.manifest }}" --preflight
+
+      - name: Generate narration with Google Cloud TTS
+        env:
+          GOOGLE_TTS_PROJECT_ID: ${{ secrets.GOOGLE_TTS_PROJECT_ID }}
+        run: |
+          set -euo pipefail
+          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
+          PYTHONPATH=. python production/cloud_tts.py \
+            --manifest "${{ inputs.manifest }}" \
+            --input "${EPISODE_DIR}/script.txt" \
+            --output-dir "${EPISODE_DIR}/audio"
+
+      - name: Install independent Vosk alignment models
+        run: |
+          set -euo pipefail
+          mkdir -p "${RUNNER_TEMP}/vosk"
+          curl --fail --location --retry 5 --retry-all-errors \
+            "https://alphacephei.com/vosk/models/vosk-model-en-us-0.22-lgraph.zip" \
+            --output "${RUNNER_TEMP}/vosk/model.zip"
+          unzip -q "${RUNNER_TEMP}/vosk/model.zip" -d "${RUNNER_TEMP}/vosk"
+          echo "VOSK_MODEL_DIR=${RUNNER_TEMP}/vosk/vosk-model-en-us-0.22-lgraph" >> "${GITHUB_ENV}"
+
+      - name: Generate captions from final narration audio
+        run: |
+          PYTHONPATH=. python production/align_captions.py \
+            --manifest "${{ inputs.manifest }}" \
+            --model-dir "${VOSK_MODEL_DIR}"
+
+      - name: Verify Drive and hydrate approved visual assets
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python production/google_drive_delivery.py --preflight
+          PYTHONPATH=. python production/google_drive_assets.py --manifest "${{ inputs.manifest }}" --require-drive-assets
+
+      - name: Run visual fidelity and no-repeat gates
+        run: |
+          set -euo pipefail
+          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
+          PYTHONPATH=. python production/asset_preflight.py \
+            --manifest "${{ inputs.manifest }}" \
+            --report "${EPISODE_DIR}/rendered/visual-preflight-${{ inputs.mode }}.json" \
+            --contact-sheet "${EPISODE_DIR}/rendered/visual-contact-sheet-${{ inputs.mode }}.jpg"
+          PYTHONPATH=. python production/visual_story_qa.py \
+            --manifest "${{ inputs.manifest }}" --mode "${{ inputs.mode }}" \
+            --report "${EPISODE_DIR}/rendered/visual-story-qa-${{ inputs.mode }}.json"
+
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Render preview or final media
+        run: |
+          PYTHONPATH=. python production/render_video_episode.py \
+            --manifest "${{ inputs.manifest }}" --mode "${{ inputs.mode }}"
+
+      - name: Register render artifacts for V7 release evaluation
+        env:
+          MANIFEST: ${{ inputs.manifest }}
+          MODE: ${{ inputs.mode }}
+        run: |
+          set -euo pipefail
+          python - "${MANIFEST}" "${MODE}" <<'PY'
+          import json, sys
+          from pathlib import Path
+          path = Path(sys.argv[1])
+          mode = sys.argv[2]
+          value = json.loads(path.read_text(encoding="utf-8"))
+          root = path.parent
+          value["runtime_artifacts"] = {
+              "final_audio": "audio/narration.wav",
+              "captions": "captions/narration.ass",
+              "alignment": "captions/narration.alignment.json",
+              "preview": f"rendered/preview-{mode}.mp4",
+              "preview_approval": "preview-approval.json",
+              "render": f"rendered/{value['video_id']}-{mode}.mp4",
+              "technical_qa": f"rendered/video-release-{mode}.json",
+          }
+          path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          PY
+
+      - name: Run V7 release gates
+        run: |
+          PYTHONPATH=. python production/v7_orchestrator.py \
+            --repo-root . --manifest "${{ inputs.manifest }}" --mode production \
+            --check-cloud-tts \
+            --report "$(dirname "${{ inputs.manifest }}")/rendered/v7-release-${{ inputs.mode }}.json"
+
+      - name: Deliver only after V7 approval gates pass
+        if: success()
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
+          PYTHONPATH=. python production/google_drive_delivery.py \
+            --collection "VIDEOS V7" \
+            --delivery-name "${{ inputs.manifest }}-${{ inputs.mode }}" \
+            --job-id "${{ github.run_id }}" \
+            --path "${EPISODE_DIR}/rendered" --path "${{ inputs.manifest }}" \
+            --receipt "${RUNNER_TEMP}/v7-drive-delivery.json"
+
+      - name: Manual-publication handoff
+        if: success()
+        run: echo "V7 production is delivered for manual publication; no automatic platform publication is permitted."

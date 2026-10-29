@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Canonical, fail-closed profile for the Because Of This video engine.
+"""V7.1 canonical production profile for Because Of This.
 
-The profile is deliberately centralized.  Episode manifests may contain
-episode-specific editorial data, but the production identity, timing, voice,
-caption, branding and outro settings must match this profile exactly.
+This module is the only active configuration authority.  The former Gemini
+profile is retained only in Git history/rollback documentation and is not
+accepted for active production.
 """
 
 from __future__ import annotations
@@ -14,19 +14,35 @@ import json
 from pathlib import Path
 from typing import Any
 
-CANONICAL_PROFILE_ID = "because-of-this-v2-locked-2026-10"
-CANONICAL_ENGINE_VERSION = "2.0"
+CANONICAL_PROFILE_ID = "because-of-this-v7-cloud-tts-2026-10"
+CANONICAL_ENGINE_VERSION = "7.1"
+CANONICAL_SCHEMA_ID = "because-of-this://schemas/production-record/3.0.0"
 
 CANONICAL_PROFILE: dict[str, Any] = {
     "fps": 60,
+    "render": {
+        "width": 1080,
+        "height": 1920,
+        "fps": 60,
+        "duration_min_seconds": 60,
+        "duration_max_seconds": 75,
+    },
     "voice": {
-        "provider": "gemini",
-        "model": "gemini-3.8-flash-tts",
-        "voice": "Charon",
+        "provider": "google_cloud_tts",
         "language": "en-US",
+        "language_code": "en-US",
+        "voice_name": "en-US-Standard-B",
+        "voice": "en-US-Standard-B",
+        "model_or_voice_type": "standard",
+        "ssml_gender": "MALE",
+        "sample_rate_hz": 24000,
+        "encoding": "LINEAR16",
+        "speaking_rate": 0.96,
+        "pitch": -1.0,
+        "volume_gain_db": 0.0,
         "style": (
-            "Clear American English, crisp diction, moderate pace, restrained suspense. "
-            "Pronounce numbers as spoken English words with clear word boundaries; preserve every word exactly."
+            "Grave American English narration. Controlled cinematic suspense, "
+            "clear diction, restrained intensity, intimate consequence, never theatrical."
         ),
     },
     "brand": {
@@ -43,9 +59,11 @@ CANONICAL_PROFILE: dict[str, Any] = {
     },
     "music": {
         "volume": 0.12,
+        "complete_track_reuse": "forbidden",
+        "sidechain_enabled": True,
     },
     "captions": {
-        "alignment_mode": "forced_alignment",
+        "alignment_mode": "audio_final_forced_alignment",
         "word_level_available": True,
         "max_lines": 2,
         "max_line_chars": 42,
@@ -56,8 +74,6 @@ CANONICAL_PROFILE: dict[str, Any] = {
         "word_highlight_mode": "timestamp_color_transform",
         "active_word_color": "#FF7777",
         "word_highlight_tolerance_ms": 35,
-        # The HUD typography and placement are identity-locked. Episode data
-        # may change the words and timestamps, never this render contract.
         "style": {
             "font_name": "Arial",
             "font_size": 48,
@@ -115,124 +131,78 @@ CANONICAL_PROFILE: dict[str, Any] = {
 
 
 def _canonical_json(value: Any) -> bytes:
-    return json.dumps(
-        value,
-        ensure_ascii=False,
-        sort_keys=True,
-        separators=(",", ":"),
-    ).encode("utf-8")
-
-
-def caption_ass_style_line(name: str = "Default") -> str:
-    """Return the one canonical ASS style used by preview and final renders."""
-    style = CANONICAL_PROFILE["captions"]["style"]
-    fields = (
-        name,
-        style["font_name"],
-        style["font_size"],
-        style["primary_color"],
-        style["secondary_color"],
-        style["outline_color"],
-        style["back_color"],
-        style["bold"],
-        style["italic"],
-        style["underline"],
-        style["strike_out"],
-        style["scale_x"],
-        style["scale_y"],
-        style["spacing"],
-        style["angle"],
-        style["border_style"],
-        style["outline"],
-        style["shadow"],
-        style["alignment"],
-        style["margin_l"],
-        style["margin_r"],
-        style["margin_v"],
-        style["encoding"],
-    )
-    return "Style: " + ",".join(str(value) for value in fields)
+    return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
 
 
 CANONICAL_PROFILE_FINGERPRINT = hashlib.sha256(_canonical_json(CANONICAL_PROFILE)).hexdigest()
 
 
+def caption_ass_style_line(name: str = "Default") -> str:
+    style = CANONICAL_PROFILE["captions"]["style"]
+    fields = (
+        name, style["font_name"], style["font_size"], style["primary_color"],
+        style["secondary_color"], style["outline_color"], style["back_color"],
+        style["bold"], style["italic"], style["underline"], style["strike_out"],
+        style["scale_x"], style["scale_y"], style["spacing"], style["angle"],
+        style["border_style"], style["outline"], style["shadow"], style["alignment"],
+        style["margin_l"], style["margin_r"], style["margin_v"], style["encoding"],
+    )
+    return "Style: " + ",".join(str(value) for value in fields)
+
+
 class CanonicalConfigError(ValueError):
-    """Raised when a manifest attempts to bypass the locked engine profile."""
-
-
-def canonical_settings(manifest: dict[str, Any]) -> dict[str, Any]:
-    """Extract only settings controlled by the locked production profile."""
-    voice = manifest.get("voice") if isinstance(manifest.get("voice"), dict) else {}
-    brand = manifest.get("brand") if isinstance(manifest.get("brand"), dict) else {}
-    music = manifest.get("music") if isinstance(manifest.get("music"), dict) else {}
-    captions = manifest.get("captions") if isinstance(manifest.get("captions"), dict) else {}
-    grade = manifest.get("color_grade") if isinstance(manifest.get("color_grade"), dict) else {}
-    suspense = grade.get("cinematic_suspense") if isinstance(grade.get("cinematic_suspense"), dict) else {}
-    loop = manifest.get("loop") if isinstance(manifest.get("loop"), dict) else {}
-
-    return {
-        "fps": manifest.get("fps"),
-        "voice": {key: voice.get(key) for key in CANONICAL_PROFILE["voice"]},
-        "brand": {key: brand.get(key) for key in CANONICAL_PROFILE["brand"]},
-        "music": {"volume": music.get("volume")},
-        "captions": {key: captions.get(key) for key in CANONICAL_PROFILE["captions"]},
-        "color_grade": {
-            key: grade.get(key)
-            for key in ("enabled", "preset", "brightness", "contrast", "saturation", "gamma", "vignette")
-        }
-        | {"cinematic_suspense": {key: suspense.get(key) for key in CANONICAL_PROFILE["color_grade"]["cinematic_suspense"]}},
-        "loop": {key: loop.get(key) for key in CANONICAL_PROFILE["loop"]},
-    }
+    pass
 
 
 def _differences(expected: Any, actual: Any, path: str = "") -> list[str]:
     if isinstance(expected, dict) and isinstance(actual, dict):
-        differences: list[str] = []
-        for key in expected:
+        result: list[str] = []
+        for key, value in expected.items():
             child = f"{path}.{key}" if path else key
             if key not in actual:
-                differences.append(f"{child}=<missing>")
+                result.append(f"{child}=<missing>")
             else:
-                differences.extend(_differences(expected[key], actual[key], child))
-        return differences
-    if expected != actual:
-        return [f"{path}: expected {expected!r}, got {actual!r}"]
-    return []
+                result.extend(_differences(value, actual[key], child))
+        return result
+    return [] if expected == actual else [f"{path}: expected {expected!r}, got {actual!r}"]
 
 
-def validate_canonical_manifest(
-    manifest: dict[str, Any],
-    *,
-    source_label: str = "manifest",
-) -> dict[str, Any]:
-    """Validate a manifest against the single canonical engine profile."""
+def canonical_settings(manifest: dict[str, Any]) -> dict[str, Any]:
+    settings: dict[str, Any] = {}
+    for key in ("fps", "voice", "brand", "music", "captions", "color_grade", "loop", "render"):
+        value = manifest.get(key)
+        settings[key] = value if isinstance(value, (dict, int, float, str, bool)) else None
+    return settings
+
+
+def validate_canonical_manifest(manifest: dict[str, Any], *, source_label: str = "manifest") -> dict[str, Any]:
     if not isinstance(manifest, dict):
         raise CanonicalConfigError(f"{source_label} must be a JSON object.")
 
-    profile = manifest.get("engine_profile")
-    if profile != CANONICAL_PROFILE_ID:
-        raise CanonicalConfigError(
-            f"{source_label} must declare engine_profile={CANONICAL_PROFILE_ID!r}; "
-            f"got {profile!r}. Legacy or missing profiles are blocked."
-        )
-    declared_fingerprint = manifest.get("engine_profile_fingerprint")
-    if declared_fingerprint != CANONICAL_PROFILE_FINGERPRINT:
-        raise CanonicalConfigError(
-            f"{source_label} must declare the exact canonical profile fingerprint; "
-            f"got {declared_fingerprint!r}."
-        )
+    # Archived V6 records remain readable for audit and rollback evidence, but
+    # cannot enter the V7 production path.
+    if manifest.get("lifecycle_status") == "ARCHIVED_HISTORICAL" and manifest.get("master_prompt_version") == "6.0":
+        return {"status": "LEGACY_ARCHIVED_AUDIT_PASS", "profile_id": manifest.get("engine_profile", "legacy-v6")}
+
+    if manifest.get("engine_profile") != CANONICAL_PROFILE_ID:
+        raise CanonicalConfigError(f"{source_label} must declare engine_profile={CANONICAL_PROFILE_ID!r}.")
+    if manifest.get("engine_profile_fingerprint") != CANONICAL_PROFILE_FINGERPRINT:
+        raise CanonicalConfigError(f"{source_label} has a non-canonical profile fingerprint.")
+    if manifest.get("master_prompt_version") != "7.1":
+        raise CanonicalConfigError(f"{source_label} must declare master_prompt_version='7.1'.")
+    if manifest.get("production_schema") != CANONICAL_SCHEMA_ID:
+        raise CanonicalConfigError(f"{source_label} must declare production_schema={CANONICAL_SCHEMA_ID!r}.")
 
     differences = _differences(CANONICAL_PROFILE, canonical_settings(manifest))
     if differences:
         preview = "; ".join(differences[:8])
         suffix = f" (+{len(differences) - 8} more)" if len(differences) > 8 else ""
-        raise CanonicalConfigError(f"{source_label} deviates from the locked profile: {preview}{suffix}")
-
+        raise CanonicalConfigError(f"{source_label} deviates from the V7.1 profile: {preview}{suffix}")
     return {
-        "status": "CANONICAL_CONFIG_PASS",
+        "status": "CANONICAL_CONFIG_V7_PASS",
         "profile_id": CANONICAL_PROFILE_ID,
         "engine_version": CANONICAL_ENGINE_VERSION,
+        "schema_id": CANONICAL_SCHEMA_ID,
         "profile_fingerprint": CANONICAL_PROFILE_FINGERPRINT,
     }
 
@@ -242,10 +212,8 @@ def main() -> int:
     parser.add_argument("--manifest", type=Path, required=True)
     args = parser.parse_args()
     try:
-        manifest_path = args.manifest.resolve()
-        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-        report = validate_canonical_manifest(manifest, source_label=str(manifest_path))
-        print(json.dumps(report, ensure_ascii=False))
+        value = json.loads(args.manifest.read_text(encoding="utf-8"))
+        print(json.dumps(validate_canonical_manifest(value, source_label=str(args.manifest)), ensure_ascii=False))
         return 0
     except (OSError, UnicodeError, json.JSONDecodeError, CanonicalConfigError) as exc:
         print(f"CANONICAL CONFIG BLOCKED: {exc}")

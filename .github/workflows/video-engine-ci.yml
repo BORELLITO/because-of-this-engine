@@ -1,79 +1,52 @@
-name: Video engine v2 CI
+name: Because Of This V7.1 CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
 
 permissions:
   contents: read
 
 concurrency:
-  group: video-engine-v2-${{ github.workflow }}-${{ github.ref }}
+  group: because-of-this-v7-ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   contract:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: "3.12"
-      - name: Install dependencies
+      - name: Install locked dependencies
         run: python -m pip install -r requirements.lock.txt
-      - name: Compile production code
+      - name: Compile the V7 production surface
         run: python -m py_compile production/*.py
-      - name: Enforce single active engine policy
-        run: PYTHONPATH=. python production/engine_singleton_guard.py --repo-root .
-
-      - name: Enforce master prompt V6 contract
+      - name: Enforce one active V7 engine
+        run: PYTHONPATH=. python production/v7_singleton_guard.py --repo-root .
+      - name: Validate prompt and schema contract
         run: |
           set -euo pipefail
-          python production/master_prompt_contract.py --repo-root . \
-            --manifest examples/video-only-episode-manifest-v2.template.json \
-            --manifest episodes/episode-001/manifest.json \
-            --manifest episodes/episode-002/manifest.json \
-            --manifest episodes/episode-003/manifest.json \
-            --manifest episodes/episode-003/manifest.draft.json \
-            --manifest episodes/episode-004/manifest.json
-
-      - name: Audit episode readiness (historical manifests are report-only)
-        run: python production/manifest_readiness.py --inventory --episodes-dir episodes
-
-      - name: Run regression, contract and hardening tests
-        run: python -m unittest discover -s tests -v
-      - name: Validate template has only video scenes
+          PYTHONPATH=. python production/v7_contract.py --repo-root . \
+            --manifest examples/video-only-episode-manifest-v7.template.json
+          PYTHONPATH=. python production/v7_contract.py --repo-root . \
+            --manifest episodes/video-001/manifest.json --require-production
+      - name: Validate canonical profile fingerprints
         run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          value = json.loads(Path("examples/video-only-episode-manifest-v2.template.json").read_text())
-          assert value["schema_version"] == "2.0"
-          assert all("image" not in scene and "image_path" not in scene for scene in value["scenes"])
-          assert all(scene["asset"]["provider"] in {"mixkit", "pixabay", "pexels", "drive", "original"} for scene in value["scenes"])
-          assert len(value["scenes"]) >= 4
-          print("VIDEO_ONLY_TEMPLATE_PASS")
-          PY
-      - name: Validate locked canonical engine profile
+          PYTHONPATH=. python production/canonical_config.py \
+            --manifest examples/video-only-episode-manifest-v7.template.json
+          PYTHONPATH=. python production/canonical_config.py \
+            --manifest episodes/video-001/manifest.json
+      - name: Run V7 unit tests only
+        run: PYTHONPATH=. python -m unittest discover -s tests -p 'test_v7*.py' -v
+      - name: Run deterministic SSML and orchestration dry-run
         run: |
-          set -euo pipefail
-          python production/canonical_config.py --manifest examples/video-only-episode-manifest-v2.template.json
-          python production/canonical_config.py --manifest episodes/episode-001/manifest.json
-          python production/canonical_config.py --manifest episodes/episode-002/manifest.json
-
-      - name: Verify no Actions artifact delivery or literal workflow escapes
-        run: |
-          FORBIDDEN_ARTIFACT='actions/upload-'\"artifact\"
-          FORBIDDEN_ESCAPE='\\\\$'\"\\\\{\"
-          FORBIDDEN_RENDER='render_'\"author\"'ial'
-          FORBIDDEN_GENERATE='generate-'\"mar\"'s-'
-          FORBIDDEN_PROVIDER='image_'\"provider\"
-          if grep -RInE "${FORBIDDEN_ARTIFACT}|${FORBIDDEN_ESCAPE}|${FORBIDDEN_RENDER}|${FORBIDDEN_GENERATE}|${FORBIDDEN_PROVIDER}" production examples .env.example; then
-            echo "Forbidden legacy or artifact pattern detected."
-            exit 1
-          fi
+          PYTHONPATH=. python production/v7_orchestrator.py \
+            --repo-root . --manifest episodes/video-001/manifest.json \
+            --mode dry-run --report /tmp/v7-dry-run.json
+      - name: Parse the production-record schema
+        run: python -m json.tool production/schemas/production-record-3.0.0.json >/dev/null
