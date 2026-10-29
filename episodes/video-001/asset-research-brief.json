@@ -833,5 +833,225 @@
       "result": "Added panel, elevator-door, CCTV and corridor-silhouette candidates. No candidate was approved.",
       "source_policy": "Pexels and Pixabay pages were treated as research leads only; exact page, media, license evidence, hashes and human approval remain required."
     }
-  ]
+  ],
+  "visual_review": {
+    "review_pass_id": "VISUAL-REVIEW-01",
+    "date_utc": "2026-10-29",
+    "status": "EDITORIAL_TRIAGE_ONLY",
+    "meaning": "This review classifies research leads by narrative usefulness. It is not rights approval, human scene approval, or runtime hydration.",
+    "decision_vocabulary": {
+      "SHORTLIST": "Candidate is worth exact-frame review and possible human approval.",
+      "ATMOSPHERE_ONLY": "Candidate may support mood but cannot satisfy the listed direct_required anchors.",
+      "REJECTED_FOR_LITERAL_USE": "Candidate conflicts with the story anchor or continuity and must not be used for that scene.",
+      "HOLD_FOR_EXACT_FRAME": "Metadata is promising but the exact downloaded frame must be inspected before any shortlist decision."
+    },
+    "dispositions": [
+      {
+        "candidate_id": "PEXELS-31751326",
+        "scenes": [
+          "S02"
+        ],
+        "decision": "SHORTLIST",
+        "reason": "Exact elevator control-panel action is present; this is the strongest lead for the panel contradiction.",
+        "unresolved": [
+          "must verify visible numbering and the literal absence of button 13",
+          "must preserve anonymous guard continuity"
+        ],
+        "next_action": "Acquire original for frame-level review; do not approve yet."
+      },
+      {
+        "candidate_id": "PEXELS-7701962",
+        "scenes": [
+          "S02"
+        ],
+        "decision": "SHORTLIST",
+        "reason": "Exact numbered elevator buttons with red lighting align with the panel motif.",
+        "unresolved": [
+          "must verify whether the frame visibly supports the missing 13th button",
+          "scene context is generic rather than hospital-specific"
+        ],
+        "next_action": "Keep as alternate panel candidate pending frame review."
+      },
+      {
+        "candidate_id": "PIXABAY-320453",
+        "scenes": [
+          "S03",
+          "S10",
+          "S11"
+        ],
+        "decision": "ATMOSPHERE_ONLY",
+        "reason": "The page describes a security camera/CCTV close-up, useful for surveillance texture but not necessarily a monitor showing a readable system log.",
+        "unresolved": [
+          "cannot prove 47 seconds, lobby monitor, or second passenger without a separate compositor-owned evidence layer"
+        ],
+        "next_action": "Use only as a neutral CCTV insert if a separate exact evidence asset is found."
+      },
+      {
+        "candidate_id": "PIXABAY-130783",
+        "scenes": [
+          "S04",
+          "S05",
+          "S07"
+        ],
+        "decision": "SHORTLIST",
+        "reason": "Exact elevator-door opening is present and the 4K landscape source is technically compatible after reframing.",
+        "unresolved": [
+          "does not prove the red corridor, threshold crossing, chain, or hospital setting"
+        ],
+        "next_action": "Review frames for transition utility; never label it as the impossible corridor by itself."
+      },
+      {
+        "candidate_id": "PEXELS-34779661",
+        "scenes": [
+          "S04",
+          "S05",
+          "S07"
+        ],
+        "decision": "SHORTLIST",
+        "reason": "Exact elevator doors opening into a dark concrete destination can support the threshold beat.",
+        "unresolved": [
+          "underground garage is not the story's impossible corridor",
+          "no literal chain or red emergency lamp established"
+        ],
+        "next_action": "Compare against PIXABAY-130783; choose at most one for a single scene after frame review."
+      },
+      {
+        "candidate_id": "PEXELS-5203510",
+        "scenes": [
+          "S04",
+          "S06",
+          "S09"
+        ],
+        "decision": "ATMOSPHERE_ONLY",
+        "reason": "Hospital corridor context is strong, but the page description does not establish CCTV, red lamp, duplicate guard, or maintenance evidence.",
+        "unresolved": [
+          "direct anchors remain unmet"
+        ],
+        "next_action": "Use only for a neutral hospital transition if a separate evidence shot carries the narrative anchor."
+      },
+      {
+        "candidate_id": "PEXELS-9943144",
+        "scenes": [
+          "S09"
+        ],
+        "decision": "REJECTED_FOR_LITERAL_USE",
+        "reason": "The page identifies a hooded person, while the story requires a distant figure in Elias's matching security uniform.",
+        "unresolved": [
+          "identity and wardrobe contradiction",
+          "no CCTV proof"
+        ],
+        "next_action": "Do not use for the duplicate-presence reveal."
+      },
+      {
+        "candidate_id": "PEXELS-35140392",
+        "scenes": [
+          "S09"
+        ],
+        "decision": "REJECTED_FOR_LITERAL_USE",
+        "reason": "The described silhouette carries a suitcase, introducing travel semantics that conflict with the red hospital corridor and matching-uniform reveal.",
+        "unresolved": [
+          "identity, wardrobe, corridor and CCTV mismatch"
+        ],
+        "next_action": "Do not use for S09."
+      },
+      {
+        "candidate_id": "PEXELS-32365210",
+        "scenes": [
+          "S07"
+        ],
+        "decision": "REJECTED_FOR_LITERAL_USE",
+        "reason": "The page describes a chained metal ladder, not a locked elevator; substituting it would create the exact semantic error this engine is designed to prevent.",
+        "unresolved": [
+          "object mismatch cannot be repaired by crop or grade"
+        ],
+        "next_action": "Do not use for the chained-elevator beat."
+      },
+      {
+        "candidate_id": "PEXELS-6573544",
+        "scenes": [
+          "S02",
+          "S07"
+        ],
+        "decision": "REJECTED_FOR_LITERAL_USE",
+        "reason": "The page describes a vault/access-control mechanism, which conflicts with the hospital elevator panel and chained-elevator evidence.",
+        "unresolved": [
+          "vault semantics"
+        ],
+        "next_action": "Do not use except as unrelated discovery reference."
+      },
+      {
+        "candidate_id": "PEXELS-8964792",
+        "scenes": [
+          "S06"
+        ],
+        "decision": "REJECTED_FOR_LITERAL_USE",
+        "reason": "The described engineers/blueprint setting is construction-oriented and does not establish hospital elevator maintenance.",
+        "unresolved": [
+          "context mismatch",
+          "no control board or elevator landing"
+        ],
+        "next_action": "Continue searching for hospital maintenance footage."
+      },
+      {
+        "candidate_id": "PEXELS-9574004",
+        "scenes": [
+          "S05",
+          "S06"
+        ],
+        "decision": "HOLD_FOR_EXACT_FRAME",
+        "reason": "A person moving equipment through a hospital hallway may support maintenance atmosphere, but the described protective gear and trolley do not prove Elias or elevator maintenance.",
+        "unresolved": [
+          "wardrobe continuity",
+          "threshold crossing",
+          "control-board/landing evidence"
+        ],
+        "next_action": "Only revisit if the exact frame provides a usable anonymous transition."
+      },
+      {
+        "candidate_id": "PEXELS-4354919",
+        "scenes": [
+          "S01",
+          "S08",
+          "S12"
+        ],
+        "decision": "HOLD_FOR_EXACT_FRAME",
+        "reason": "The page is an elevator-going-up indicator lead, but the story requires exact states 13, 2:14 and below-basement descent.",
+        "unresolved": [
+          "literal display values",
+          "freshness across scenes",
+          "timestamp treatment"
+        ],
+        "next_action": "Inspect original frames before shortlist."
+      },
+      {
+        "candidate_id": "PEXELS-15434928",
+        "scenes": [
+          "S01",
+          "S08",
+          "S12"
+        ],
+        "decision": "SHORTLIST",
+        "reason": "The page describes an elevator screen going down and provides a 9:16 source, making it the strongest technical lead for S12.",
+        "unresolved": [
+          "story-specific display values must be compositor-owned or visibly exact",
+          "cannot reuse the same clip across S01, S08 and S12"
+        ],
+        "next_action": "Reserve for one scene only after human selection."
+      }
+    ],
+    "scene_readiness": {
+      "S01": "NO_APPROVED_ASSET",
+      "S02": "SHORTLIST_EXISTS_EXACT_PANEL_STILL_REQUIRED",
+      "S03": "NO_APPROVED_ASSET_CCTV_TEXTURE_ONLY",
+      "S04": "SHORTLIST_EXISTS_LITERAL_RED_CORRIDOR_STILL_REQUIRED",
+      "S05": "NO_APPROVED_ASSET_GUARD_THRESHOLD_STILL_REQUIRED",
+      "S06": "NO_APPROVED_ASSET_MAINTENANCE_EVIDENCE_STILL_REQUIRED",
+      "S07": "NO_APPROVED_ASSET_CHAINED_ELEVATOR_STILL_REQUIRED",
+      "S08": "NO_APPROVED_ASSET_FRESH_DISPLAY_STILL_REQUIRED",
+      "S09": "NO_APPROVED_ASSET_MATCHING_UNIFORM_RED_CORRIDOR_STILL_REQUIRED",
+      "S10": "NO_APPROVED_ASSET_LOBBY_MONITOR_STILL_REQUIRED",
+      "S11": "NO_APPROVED_ASSET_SECOND_PASSENGER_LOG_STILL_REQUIRED",
+      "S12": "SHORTLIST_EXISTS_FRESH_DESCENDING_DISPLAY_STILL_REQUIRED"
+    }
+  }
 }
