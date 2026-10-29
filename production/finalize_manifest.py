@@ -129,7 +129,7 @@ def finalize(manifest_path: Path, release_report_path: Path, delivery_receipt_pa
         "render_config": {
             "fps": manifest.get("fps"),
             "output": manifest.get("output"),
-            "preview_final_sizes": {"preview": "1080x1920", "final": "2160x3840"},
+            "preview_final_sizes": {"preview": "1080x1920", "final": "1080x1920"},
         },
         "fingerprints": {
             "manifest_sha256": sha256_file(manifest_path),
