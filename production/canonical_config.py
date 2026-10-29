@@ -18,7 +18,7 @@ CANONICAL_PROFILE_ID = "because-of-this-v2-locked-2026-10"
 CANONICAL_ENGINE_VERSION = "2.0"
 
 CANONICAL_PROFILE: dict[str, Any] = {
-    "fps": 25,
+    "fps": 60,
     "voice": {
         "provider": "gemini",
         "model": "gemini-3.8-flash-tts",
