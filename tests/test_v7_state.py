@@ -18,6 +18,7 @@ class V7StateTests(unittest.TestCase):
         result = validate_record(record)
         self.assertEqual(result["schema_id"], "because-of-this://schemas/production-record/3.0.0")
         self.assertEqual(list(record["gates"]), [f"G{i}" for i in range(12)])
+        self.assertEqual(record["story_graph"]["version"], "7.1")
 
     def test_transitions_are_fail_closed(self):
         record = new_record(self.manifest, engine_bundle_id="test-bundle")
