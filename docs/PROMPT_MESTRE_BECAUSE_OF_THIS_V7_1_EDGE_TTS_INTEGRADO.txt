@@ -578,14 +578,14 @@ Ativo consumido não retorna ao banco operacional, mesmo que o vídeo nunca seja
 publicado depois da aprovação final.
 
 ======================================================================
-14. G4 — NARRAÇÃO COM GOOGLE CLOUD TEXT-TO-SPEECH
+14. G4 — NARRAÇÃO COM MICROSOFT EDGE ONLINE TTS
 ======================================================================
 
 O provedor oficial e único desta versão é:
 
-GOOGLE CLOUD TEXT-TO-SPEECH
+MICROSOFT EDGE ONLINE TTS
 
-Não use ElevenLabs, Kokoro, Piper, MeloTTS, Edge TTS ou outro provedor como
+Não use Google Cloud TTS, ElevenLabs, Kokoro, Piper, MeloTTS ou outro provedor como
 fallback automático nesta versão. Se o Edge TTS falhar, tente novamente de
 acordo com a política e bloqueie ou solicite reconexão. Trocar de provedor
 exige nova versão do motor e aprovação humana.
@@ -1077,7 +1077,7 @@ G0 preflight;
 G1 story;
 G2 rights_originality_fiction;
 G3 visual_fidelity;
-G4 cloud_tts_narration;
+G4 edge_tts_narration;
 G5 audio_mix;
 G6 captions_sync;
 G7 packaging;
