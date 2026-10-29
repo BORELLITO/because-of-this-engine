@@ -86,28 +86,20 @@ jobs:
             --report "$(dirname "${{ inputs.manifest }}")/rendered/v7-contract-${{ inputs.mode }}.json"
 
 
-      - name: Cloud TTS quota, voice and authentication preflight
-        env:
-          GOOGLE_TTS_PROJECT_ID: ${{ vars.GOOGLE_TTS_PROJECT_ID }}
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
-        run: PYTHONPATH=. python production/cloud_tts.py --manifest "${{ inputs.manifest }}" --preflight
+      - name: Edge TTS service and voice preflight
+        run: |
+          set -euo pipefail
+          command -v ffmpeg >/dev/null
+          PYTHONPATH=. python production/edge_tts.py --manifest "${{ inputs.manifest }}" --preflight
 
-      - name: Generate narration with Google Cloud TTS
-        env:
-          GOOGLE_TTS_PROJECT_ID: ${{ vars.GOOGLE_TTS_PROJECT_ID }}
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+      - name: Generate narration with Edge TTS
         run: |
           set -euo pipefail
           EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
-          PYTHONPATH=. python production/cloud_tts.py \
+          PYTHONPATH=. python production/edge_tts.py \
             --manifest "${{ inputs.manifest }}" \
             --input "${EPISODE_DIR}/script.txt" \
             --output-dir "${EPISODE_DIR}/audio"
-
       - name: Install independent Vosk alignment models
         run: |
           set -euo pipefail
@@ -245,16 +237,12 @@ jobs:
 
       - name: Run V7 release gates
         env:
-          GOOGLE_TTS_PROJECT_ID: ${{ vars.GOOGLE_TTS_PROJECT_ID }}
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: |
           GATE_MODE=preview
           if [ "${{ inputs.mode }}" = "final" ]; then GATE_MODE=production; fi
           PYTHONPATH=. python production/v7_orchestrator.py \
             --repo-root . --manifest "${{ inputs.manifest }}" --mode "${GATE_MODE}" \
-            --check-cloud-tts \
+            --check-edge-tts \
             --report "$(dirname "${{ inputs.manifest }}")/rendered/v7-release-${{ inputs.mode }}.json"
 
       - name: Deliver only after V7 approval gates pass
