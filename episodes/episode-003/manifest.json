@@ -2177,5 +2177,9 @@
   "engine_profile": "because-of-this-v2-locked-2026-10",
   "engine_profile_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
   "lifecycle_status": "DRAFT_AUDIO_PENDING",
-  "archive_reason": ""
+  "archive_reason": "",
+  "master_prompt_version": "6.0",
+  "master_prompt_sha256": "6792a1b3a85b4069c100f9b49cc04b7a169e92cc3a54d9abdf690c78efad74ed",
+  "production_schema": "because-of-this://schemas/production-record/2.1.0",
+  "human_approval_required": true
 }
