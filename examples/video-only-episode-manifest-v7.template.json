@@ -14,7 +14,7 @@
   "engine_profile": "because-of-this-v7-edge-tts-2026-10",
   "engine_profile_fingerprint": "84f6cb246cf34fbbc1d9c230ebaadd048abc602e7ef0b3ebc6486d0076df4af1",
   "master_prompt_version": "7.1",
-  "master_prompt_sha256": "9bd5a8854436418c5e9e2e449eca04b0052802a9585fc9f189d9d253adb51e80",
+  "master_prompt_sha256": "79503604dd3c21bce2b3eb5490ff217056117412049354069c1559003066a797",
   "production_schema": "because-of-this://schemas/production-record/3.0.0",
   "human_approval_required": true,
   "lifecycle_status": "DRAFT",
