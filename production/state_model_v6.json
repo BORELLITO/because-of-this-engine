@@ -1,0 +1,13 @@
+{
+  "model_version": "6.0",
+  "master_prompt_version": "6.0",
+  "production_states": ["draft","in_production","pending_validation","human_review","approved_for_publication","manually_published","blocked","canceled"],
+  "component_states": ["draft","generated","pending_validation","approved","needs_correction","rejected","archived","corrupted","legally_removed"],
+  "gate_states": ["pending","running","passed","failed","blocked"],
+  "incident_states": ["open","contained","recovering","resolved","rollback_required","safe_mode"],
+  "engine_version_states": ["candidate","active","stable","rollback_eligible","unstable","archived"],
+  "gate_order": ["G0","G1","G2","G3","G4","G5","G6","G7","G8","G9","G10","G11"],
+  "publication_policy": "MANUAL_ONLY",
+  "missing_dependency_policy": "FAIL_CLOSED",
+  "old_engine_policy": "RETIRED_VERSIONS_AUDIT_ONLY_AND_NON_EXECUTABLE"
+}
