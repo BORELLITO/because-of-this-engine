@@ -73,8 +73,9 @@ def profile_from_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
         raise CloudTTSError(str(exc)) from exc
     voice = manifest.get("voice") if isinstance(manifest.get("voice"), dict) else {}
     narration = manifest.get("narration") if isinstance(manifest.get("narration"), dict) else {}
-    for key in ("provider", "language_code", "voice_name"):
-        if key in narration and narration.get(key) != voice.get(key):
+    for key in ("provider", "language", "language_code", "voice", "voice_name"):
+        expected = voice.get("voice_name") if key == "voice" else voice.get(key)
+        if key in narration and narration.get(key) != expected:
             raise CloudTTSError(f"narration.{key} conflicts with the canonical voice profile")
     if voice.get("provider") != PROVIDER:
         raise CloudTTSError("V7 narration provider must be google_cloud_tts; no silent fallback is allowed")
