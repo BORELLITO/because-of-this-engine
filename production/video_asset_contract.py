@@ -25,6 +25,7 @@ from production.visual_semantics import require_visual_fit
 from production.canonical_config import CanonicalConfigError, validate_canonical_manifest
 
 SCHEMA_VERSION = "2.0"
+SUPPORTED_SCHEMA_VERSIONS = {"2.0", "3.0.0"}
 MIN_STORY_SECONDS = 60.0
 MAX_STORY_SECONDS = 75.0
 ALLOWED_MATCHES = {"EXACT", "NEAR", "EXPLANATORY", "SYMBOLIC", "ATMOSPHERE"}
@@ -386,8 +387,8 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
             canonical_report = validate_canonical_manifest(manifest)
         except CanonicalConfigError as exc:
             raise VideoContractError(str(exc)) from exc
-    if manifest.get("schema_version") != SCHEMA_VERSION:
-        raise VideoContractError(f"Video-only manifests must use schema_version {SCHEMA_VERSION}.")
+    if manifest.get("schema_version") not in SUPPORTED_SCHEMA_VERSIONS:
+        raise VideoContractError("Video-only manifests must use schema_version 2.0 or 3.0.0.")
     episode_id = _required_text(manifest, "video_id", "Manifest")
     job_id = manifest.get("job_id") or (manifest.get("job") or {}).get("job_id")
     if job_id is not None and not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]{2,119}", str(job_id)):
@@ -562,7 +563,7 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
     caption_path = resolve_inside(episode_dir, captions.get("path"), "Captions path")
     if check_files and not caption_path.is_file():
         raise VideoContractError(f"Captions file is missing: {caption_path}")
-    if captions.get("alignment_mode") != "forced_alignment" or captions.get("word_level_available") is not True:
+    if captions.get("alignment_mode") not in {"forced_alignment", "audio_final_forced_alignment"} or captions.get("word_level_available") is not True:
         raise VideoContractError(
             "Every v2 render requires forced_alignment captions with real word timestamps."
         )
