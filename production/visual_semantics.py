@@ -30,6 +30,7 @@ CONCEPT_ALIASES: dict[str, set[str]] = {
     "elevator": {"elevator", "lift"},
     "display": {"display", "indicator", "floor display", "number display"},
     "panel": {"panel", "control panel", "button panel"},
+    "missing_button": {"missing button", "no button", "button 13 missing", "missing thirteenth button"},
     "hospital": {"hospital", "medical building", "clinic"},
     "corridor": {"corridor", "hallway", "passage", "tunnel"},
     "red_emergency_lamp": {"red emergency lamp", "emergency lamp", "red lamp", "warning lamp"},
@@ -54,7 +55,10 @@ CONCEPT_ALIASES: dict[str, set[str]] = {
     "smoke": {"smoke", "mist", "fog", "haze"},
     "hourglass": {"hourglass", "sand timer", "falling sand"},
     "medical_vial": {"ampoule", "ampule", "vial", "medical vial", "medicine", "syringe"},
-    "laboratory": {"laboratory", "lab", "clinic", "hospital", "medical room"},
+    # Hospital is a valid narrative environment for this channel.  It must
+    # not be an alias of laboratory, otherwise a required hospital beat would
+    # trip the forbidden-laboratory rule by lexical accident.
+    "laboratory": {"laboratory", "lab", "clinic lab", "medical room"},
     "beach": {"beach", "ocean", "sea", "palm tree"},
     "office": {"office", "corporate office", "desk office"},
     "standing": {"standing", "stand", "wait", "waiting", "still"},
@@ -91,9 +95,10 @@ NARRATIVE_ANCHOR_DIMENSIONS = {
     "police": "subjects",
     "camera": "objects",
     "security_camera": "objects",
-    "elevator": "environments",
+    "elevator": "objects",
     "display": "objects",
     "panel": "objects",
+    "missing_button": "objects",
     "hospital": "environments",
     "corridor": "environments",
     "red_emergency_lamp": "objects",
