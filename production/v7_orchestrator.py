@@ -82,7 +82,7 @@ def _status(ok: bool, evidence: str, *, blocking: bool = True) -> dict[str, Any]
     }
 
 
-def _story_gate(manifest: dict[str, Any]) -> dict[str, Any]:
+def _story_gate(manifest: dict[str, Any], *, manifest_dir: Path | None = None, require_coverage: bool = False) -> dict[str, Any]:
     story = manifest.get("story")
     if not isinstance(story, dict):
         return _status(False, "structured story object is missing")
@@ -93,7 +93,21 @@ def _story_gate(manifest: dict[str, Any]) -> dict[str, Any]:
         missing.append("emotional_map.beats (minimum three non-flat beats)")
     if not isinstance(reveal, dict) or not str(reveal.get("reveal", "")).strip():
         missing.append("reveal_map.reveal")
-    return _status(not missing, "story graph contains person, risk, decision, wound, loss, emotional curve and reveal" if not missing else f"missing story requirements: {', '.join(missing)}")
+    if missing:
+        return _status(False, f"missing story requirements: {', '.join(missing)}")
+    if require_coverage and manifest_dir is not None:
+        runtime = manifest.get("runtime_artifacts") if isinstance(manifest.get("runtime_artifacts"), dict) else {}
+        hashes = manifest.get("runtime_artifact_hashes") if isinstance(manifest.get("runtime_artifact_hashes"), dict) else {}
+        relative = str(runtime.get("narration_coverage") or "rendered/narration-coverage.json").strip()
+        coverage_path = (manifest_dir / relative).resolve()
+        if coverage_path == manifest_dir or manifest_dir not in coverage_path.parents:
+            return _status(False, "narration coverage path escapes episode directory")
+        if not coverage_path.is_file():
+            return _status(False, f"narration coverage report is missing: {relative}")
+        declared = str(hashes.get("narration_coverage", "")).lower()
+        if declared and (not re.fullmatch(r"[0-9a-f]{64}", declared) or hashlib.sha256(coverage_path.read_bytes()).hexdigest() != declared):
+            return _status(False, "narration coverage report sha256 evidence is invalid")
+    return _status(True, "story graph and narration coverage contain person, risk, decision, wound, loss, emotional curve and reveal")
 
 
 def _rights_gate(manifest: dict[str, Any]) -> dict[str, Any]:
@@ -281,7 +295,7 @@ def evaluate(manifest: dict[str, Any], *, repo_root: Path, manifest_dir: Path, m
     contract = validate_manifest(manifest, source_label="manifest", require_production=require_assets)
     checks: dict[str, dict[str, Any]] = {
         "G0": _status(True, f"V7.1 prompt/schema/profile contract passed: {CANONICAL_PROFILE_ID}"),
-        "G1": _story_gate(manifest),
+        "G1": _story_gate(manifest, manifest_dir=manifest_dir, require_coverage=require_assets),
         "G2": _rights_gate(manifest),
         "G3": _visual_gate(manifest, require_assets=require_assets, manifest_dir=manifest_dir),
         "G4": _tts_gate(manifest, dry_run=(mode in {"contract", "dry-run"} or not check_cloud_tts)),
