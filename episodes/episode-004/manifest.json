@@ -2373,5 +2373,9 @@
     "external_branding": "NONE",
     "crop_safety": "PASS",
     "embedded_layout": "NONE"
-  }
+  },
+  "master_prompt_version": "6.0",
+  "master_prompt_sha256": "6792a1b3a85b4069c100f9b49cc04b7a169e92cc3a54d9abdf690c78efad74ed",
+  "production_schema": "because-of-this://schemas/production-record/2.1.0",
+  "human_approval_required": true
 }
