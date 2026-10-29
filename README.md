@@ -1,76 +1,58 @@
-# BECAUSE OF THIS — Engine v2
+# BECAUSE OF THIS — Engine V7.1
 
-The definitive production engine for the Because of This channel. It is
-independent from Corte Fino, Rajada 011, CaptaPronto, Publisher and every
-other project.
+This repository contains the single canonical production engine for the
+Because Of This channel. V7.1 is driven by the pinned master prompt
+`docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V7_1_CLOUD_TTS_INTEGRADO.txt` and schema
+`because-of-this://schemas/production-record/3.0.0`.
 
-## Official architecture
+## Active engine contract
 
-The v2 pipeline is video-only:
+- Video-only vertical output: 1080×1920, 60 fps, 60–75 seconds.
+- Narration provider: Google Cloud Text-to-Speech only, `en-US-Standard-B`,
+  SSML, LINEAR16 at 24 kHz, with ADC/OAuth and no silent fallback.
+- Audio is the master clock. Captions are generated from final audio using
+  forced alignment; estimated timings are not accepted.
+- Every visual beat requires direct semantic anchors, rights evidence,
+  SHA-256/perceptual identity and a reservation/consumption history that
+  prevents reuse or derivation reuse.
+- Publication is always manual. The engine produces a handoff and G11 closes
+  only from a matching manual publication receipt.
 
-1. Story and narration define the master clock.
-2. Cloud Browser research creates a review queue from Mixkit, Pixabay and
-   Pexels.
-3. A human approves the exact clip and its licence.
-4. The approved file is staged in Google Drive.
-5. GitHub Actions hydrates the asset, verifies its MIME type and SHA-256, and
-   renders with FFmpeg.
-6. Captions, visual truth, reuse and final media gates run before delivery.
-7. Validated media is uploaded to Drive and ephemeral runner media is removed.
+## Canonical entrypoints
 
-Narrative still images are not supported. A scene must contain a real video
-asset. If the exact visual is unavailable, the manifest must explicitly
-declare a semantic fallback: NEAR, EXPLANATORY, SYMBOLIC or ATMOSPHERE.
-Random filler and image fallback are forbidden.
+- `production/v7_contract.py` — prompt, schema, manifest and gate contract.
+- `production/v7_singleton_guard.py` — proves the active profile and workflow
+  are V7.1 and rejects retired execution markers.
+- `production/v7_orchestrator.py` — G0–G11 evaluation, idempotency and
+  production-record generation.
+- `production/cloud_tts.py` — Cloud TTS voice preflight, SSML synthesis,
+  chunk provenance, hashes and real-duration metadata.
+- `production/v7_post_publication.py` — manual-only G11 verifier.
+- `.github/workflows/because-of-this-v7.yml` — manually dispatched production
+  workflow; it stops on missing evidence and never publishes automatically.
 
-## Quality gates
+## Lifecycle
 
-- 60–75 second episode duration.
-- 9:16 output: 1080×1920 preview or 2160×3840 final.
-- H.264/AAC, 25 fps, faststart and no stretched footage.
-- Narration-locked scene timing.
-- External ASS captions generated from the final narration.
-- Two-line mobile-safe captions with CPS limits.
-- Licensed suspense music below the voice, with sidechain ducking and
-  loudness/true-peak control.
-- No repeated narrative asset in an episode.
-- No repeated clip across episodes when its registry status is
-  PERMANENTLY_RETIRED.
-- Source URL, licence, Drive ID, SHA-256 and approval status are required.
+Use `--mode contract` for structural validation, `--mode dry-run` for local
+SSML and orchestration checks, `--mode preflight` before expensive media work,
+and `--mode production` only after final artifacts and human approval are
+registered. A blocked gate is an intentional stop, not an implicit fallback.
 
-## Useful files
+The current first episode is a V7 story/scene package but remains blocked at
+visual asset approval until unique licensed or original clips are registered.
 
-- narrate.py: isolated Gemini TTS adapter.
-- production/video_asset_research.py: review queue and semantic fallback
-  ladder.
-- production/google_drive_assets.py: Drive-to-runner asset bridge.
-- production/video_asset_contract.py: fail-closed v2 contract.
-- production/render_video_episode.py: deterministic FFmpeg renderer.
-- production/validate_video_release.py: post-render release gate with independent media/caption verification.
-- production/pipeline_state.py: stable job identity and explicit state machine.
-- production/finalize_manifest.py: reproducible final manifest and cleanup completion record.
-- production/caption_quality.py: caption synchronization and readability.
-- production/google_drive_delivery.py: verified Drive delivery.
-- examples/video-only-episode-manifest-v2.template.json: episode template.
-- production/VIDEO_ENGINE_V2.md: detailed production contract.
+## Rollback
+
+The previous V6/Gemini engine is not executable from the active tree. Its
+entrypoints and exact stable commit are preserved under `archive/v6/` for
+auditing and an explicit reviewed rollback only.
 
 ## Local checks
 
-    python -m pip install -r requirements.txt
-    python -m unittest discover -s tests -v
-    python -m py_compile production/*.py
-
-## GitHub Actions
-
-- Video engine v2 CI runs compile, regression and contract tests.
-- Render video-only episode v2 is manually dispatched with a populated v2
-  manifest and supports preview or final.
-
-The template contains placeholders intentionally. A real episode must first
-receive its narration, word-level captions, licensed music, verified research,
-approved Drive video IDs/checksums and human editorial QA before final release.
-Final mode is fail-closed until those gates are present.
-
-Preview is validation-only: its reproducibility receipt ends in `PREVIEW_COMPLETE` and is never a production publication. Only a `final` run with human editorial approval may reach `PRODUCTION_COMPLETE`.
-
-
+```bash
+python -m pip install -r requirements.txt
+PYTHONPATH=. python -m unittest discover -s tests -p 'test_v7*.py' -v
+PYTHONPATH=. python production/v7_singleton_guard.py --repo-root .
+PYTHONPATH=. python production/v7_orchestrator.py --repo-root . \
+  --manifest episodes/video-001/manifest.json --mode dry-run
+```
