@@ -104,6 +104,12 @@ def _story_gate(manifest: dict[str, Any], *, manifest_dir: Path | None = None, r
             return _status(False, "narration coverage path escapes episode directory")
         if not coverage_path.is_file():
             return _status(False, f"narration coverage report is missing: {relative}")
+        try:
+            coverage_report = json.loads(coverage_path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError):
+            return _status(False, "narration coverage report is not valid JSON")
+        if not isinstance(coverage_report, dict) or coverage_report.get("status") != "STORY_INTELLIGENCE_PASS":
+            return _status(False, "narration coverage report is not a STORY_INTELLIGENCE_PASS artifact")
         declared = str(hashes.get("narration_coverage", "")).lower()
         if declared and (not re.fullmatch(r"[0-9a-f]{64}", declared) or hashlib.sha256(coverage_path.read_bytes()).hexdigest() != declared):
             return _status(False, "narration coverage report sha256 evidence is invalid")
