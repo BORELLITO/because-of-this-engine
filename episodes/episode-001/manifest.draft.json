@@ -1,0 +1,61 @@
+{
+  "schema_version": "2.0",
+  "video_id": "episode-001",
+  "title": "The Elevator That Stopped on a Floor That Didn't Exist",
+  "fps": 60,
+  "story_profile": {
+    "truth_mode": "DECLARED_FICTION",
+    "primary_emotion": "dread",
+    "secondary_emotion": "curiosity",
+    "central_question": "What opened beyond the elevator doors—and why was Elias already waiting there?",
+    "visual_symbol": "the red emergency lamp"
+  },
+  "script": {
+    "path": "script.txt",
+    "word_count_target": 160
+  },
+  "packaging": {
+    "candidates": [
+      {
+        "candidate_id": "PKG-01",
+        "title": "THE FLOOR THAT DIDN'T EXIST",
+        "thumbnail_text": "FLOOR 13",
+        "promise": "An elevator reaches a place missing from every blueprint.",
+        "mystery": "The passenger is withheld.",
+        "spoiler_risk": "LOW"
+      },
+      {
+        "candidate_id": "PKG-02",
+        "title": "THE ELEVATOR LOGGED TWO PASSENGERS",
+        "thumbnail_text": "TWO PASSENGERS",
+        "promise": "The evidence proves someone entered while the guard stayed outside.",
+        "mystery": "The identity of the second passenger is protected.",
+        "spoiler_risk": "LOW"
+      },
+      {
+        "candidate_id": "PKG-03",
+        "title": "THE DOORS OPENED BELOW THE BASEMENT",
+        "thumbnail_text": "BELOW B1",
+        "promise": "A hospital elevator begins descending somewhere the building does not have.",
+        "mystery": "The destination is withheld.",
+        "spoiler_risk": "MEDIUM"
+      }
+    ],
+    "selection_status": "PENDING_HUMAN_APPROVAL",
+    "description": "This episode is an original fictional suspense story. Licensed visual representations are used for atmosphere and evidence reconstruction.",
+    "cta": {
+      "text": "Follow for the next unexplained story.",
+      "placement": "after_consequence_with_final_logo",
+      "before_consequence": false
+    }
+  },
+  "engine_profile": "because-of-this-v2-locked-2026-10",
+  "engine_profile_fingerprint": "0c1a553876064876231898a735575eec7968ad42e8f231bfda04660f6ce1d4d6",
+  "lifecycle_status": "DRAFT",
+  "master_prompt_version": "6.0",
+  "master_prompt_sha256": "6792a1b3a85b4069c100f9b49cc04b7a169e92cc3a54d9abdf690c78efad74ed",
+  "production_schema": "because-of-this://schemas/production-record/2.1.0",
+  "human_approval_required": true,
+  "video_number": 1,
+  "engine_milestone": "FIRST_VIDEO_ON_REPAGINATED_ENGINE"
+}
