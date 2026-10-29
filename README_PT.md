@@ -97,3 +97,19 @@ dos vídeos aprovados no Drive e QA editorial humano antes do modo final.
 O modo final é fail-closed enquanto esses gates não existirem.
 
 O preview é somente validação: o recibo termina em `PREVIEW_COMPLETE` e nunca é uma publicação de produção. Apenas uma execução `final` com aprovação editorial humana pode chegar a `PRODUCTION_COMPLETE`.
+
+
+## Contrato mestre V6 integrado
+
+O arquivo `docs/PROMPT_MESTRE_BECAUSE_OF_THIS_FINAL_V6_EXECUTAVEL.txt` é o contrato operacional canônico do motor.
+
+- Versão do prompt: `6.0`
+- SHA-256: `6792a1b3a85b4069c100f9b49cc04b7a169e92cc3a54d9abdf690c78efad74ed`
+- Schema de produção: `because-of-this://schemas/production-record/2.1.0`
+- Gates obrigatórios: G0–G11, em ordem
+- Publicação: somente manual
+- Dependências ausentes: bloqueio fail-closed
+- Versões aposentadas: somente histórico de auditoria, nunca fonte de execução
+
+O CI e o workflow de renderização validam o hash do prompt, o schema, os estados,
+os gates e a vinculação de cada manifesto antes de qualquer render.
