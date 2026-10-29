@@ -22,6 +22,8 @@ class YouTubeAudioLibraryIngestTests(unittest.TestCase):
         self.metadata.write_text(json.dumps({
             "title": "Low Orbit", "artist": "Test Artist",
             "attribution_required": True, "attribution_text": "Credit Test Artist",
+            "similarity_review": {"status": "PASS"},
+            "device_tests": {"phone": "PASS", "headphones": "PASS", "low_volume": "PASS"},
         }))
         self.manifest = self.root / "manifest.json"
         self.manifest.write_text(json.dumps({"episode_id": "episode-1", "require_music": True}))
