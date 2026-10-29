@@ -29,11 +29,11 @@ jobs:
       - name: Validate manual publication receipt
         run: |
           set -euo pipefail
-          python production/post_publication_verifier.py             --final-manifest "${{ inputs.final_manifest }}"             --receipt "${{ inputs.receipt }}"
+          python production/post_publication_verifier.py --final-manifest "${{ inputs.final_manifest }}" --receipt "${{ inputs.receipt }}"
       - name: Advance pipeline state through G11
         run: |
           set -euo pipefail
-          PYTHONPATH=. python production/pipeline_state.py             --manifest "${{ inputs.manifest }}"             --transition PUBLISHED_VERIFIED             --stage post-publication
-          PYTHONPATH=. python production/pipeline_state.py             --manifest "${{ inputs.manifest }}"             --transition COMPLETE             --stage complete
+          PYTHONPATH=. python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition PUBLISHED_VERIFIED --stage post-publication
+          PYTHONPATH=. python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition COMPLETE --stage complete
       - name: Print completion
         run: echo "G11_POST_PUBLICATION_PASS"
