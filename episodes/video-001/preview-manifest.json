@@ -229,7 +229,7 @@
           "corridor",
           "elevator"
         ],
-        "narration_excerpt": "A figure in Elias's uniform stood at the far end of the red corridor."
+        "narration_excerpt": "This time, the camera stayed on. A figure in Elias's uniform stood at the far end of the red corridor."
       },
       {
         "scene_id": "S10",
@@ -1317,7 +1317,7 @@
       "beat_id": "beat-006",
       "duration": 6.2,
       "story_beat": "reveal",
-      "narration_excerpt": "A figure in Elias's uniform stood at the far end of the red corridor.",
+      "narration_excerpt": "This time, the camera stayed on. A figure in Elias's uniform stood at the far end of the red corridor.",
       "visual_semantics": {
         "role": "literal",
         "required": {
