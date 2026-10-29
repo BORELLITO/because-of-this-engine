@@ -19,10 +19,10 @@ class SingletonGuardTest(unittest.TestCase):
 
         prompt_path = self.root / MASTER_PROMPT_PATH
         prompt_path.parent.mkdir(parents=True)
-        prompt_path.write_bytes((canonical_root / guard.MASTER_PROMPT_PATH).read_bytes())
+        prompt_path.write_bytes((canonical_root / MASTER_PROMPT_PATH).read_bytes())
         schema_path = self.root / SCHEMA_PATH
         schema_path.parent.mkdir(parents=True)
-        schema_path.write_bytes((canonical_root / guard.SCHEMA_PATH).read_bytes())
+        schema_path.write_bytes((canonical_root / SCHEMA_PATH).read_bytes())
 
         (prod / "active_engine_policy.json").write_text(json.dumps({
             "active_engine_profile": guard.CANONICAL_PROFILE_ID,
