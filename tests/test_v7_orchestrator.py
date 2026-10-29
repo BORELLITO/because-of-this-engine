@@ -33,7 +33,7 @@ class V7OrchestratorTests(unittest.TestCase):
             mode="preflight",
         )
         self.assertEqual(report["status"], "V7_PREFLIGHT_BLOCKED")
-        self.assertEqual(report["blocking_gates"], ["G3", "G5"])
+        self.assertEqual(report["blocking_gates"], ["G1", "G3", "G5"])
 
     def test_artifact_gate_rejects_hash_mismatch(self):
         with tempfile.TemporaryDirectory() as directory:
