@@ -822,7 +822,9 @@
     "Do not populate runtime file_path, sha256, perceptual_hash, or Drive IDs with placeholders.",
     "Do not reuse one downloaded clip across two scene IDs, even with a crop or color change.",
     "Do not render a final or release candidate while any direct_required anchor is unmet.",
-    "Do not treat a provider search result or license summary as proof of a specific downloaded asset's rights."
+    "Do not treat a provider search result or license summary as proof of a specific downloaded asset's rights.",
+    "A downloaded research file cannot become a runtime asset until its source page, original file, hashes, rights record, Drive path and human approval are captured.",
+    "A candidate showing the right object but the wrong narrative context must remain ATMOSPHERE_ONLY or REJECTED_FOR_LITERAL_USE."
   ],
   "updated_at_utc": "2026-10-29",
   "research_passes": [
@@ -851,26 +853,26 @@
         "scenes": [
           "S02"
         ],
-        "decision": "SHORTLIST",
-        "reason": "Exact elevator control-panel action is present; this is the strongest lead for the panel contradiction.",
+        "decision": "REJECTED_FOR_LITERAL_USE",
+        "reason": "Actual original contains a generic three-button panel without numbered floors; it cannot prove the missing 13th button.",
         "unresolved": [
-          "must verify visible numbering and the literal absence of button 13",
-          "must preserve anonymous guard continuity"
+          "no numbered floors",
+          "no hospital or guard continuity"
         ],
-        "next_action": "Acquire original for frame-level review; do not approve yet."
+        "next_action": "Do not use for S02."
       },
       {
         "candidate_id": "PEXELS-7701962",
         "scenes": [
           "S02"
         ],
-        "decision": "SHORTLIST",
-        "reason": "Exact numbered elevator buttons with red lighting align with the panel motif.",
+        "decision": "HOLD_FOR_EXACT_FRAME",
+        "reason": "Actual original contains a numbered elevator panel, but only low-floor buttons are visible and the hospital/guard context is absent.",
         "unresolved": [
-          "must verify whether the frame visibly supports the missing 13th button",
-          "scene context is generic rather than hospital-specific"
+          "does not independently establish a building with a missing 13",
+          "must be reviewed against a stronger panel candidate"
         ],
-        "next_action": "Keep as alternate panel candidate pending frame review."
+        "next_action": "Keep only as a possible neutral panel insert; do not approve S02 from this file alone."
       },
       {
         "candidate_id": "PIXABAY-320453",
@@ -893,12 +895,12 @@
           "S05",
           "S07"
         ],
-        "decision": "SHORTLIST",
-        "reason": "Exact elevator-door opening is present and the 4K landscape source is technically compatible after reframing.",
+        "decision": "REJECTED_FOR_LITERAL_USE",
+        "reason": "Actual original is a bright ordinary lobby/elevator interior with no impossible concrete corridor, red emergency lamp or CCTV perspective.",
         "unresolved": [
-          "does not prove the red corridor, threshold crossing, chain, or hospital setting"
+          "all S04/S05/S07 literal anchors remain unmet"
         ],
-        "next_action": "Review frames for transition utility; never label it as the impossible corridor by itself."
+        "next_action": "Do not use for literal story evidence."
       },
       {
         "candidate_id": "PEXELS-34779661",
@@ -907,13 +909,14 @@
           "S05",
           "S07"
         ],
-        "decision": "SHORTLIST",
-        "reason": "Exact elevator doors opening into a dark concrete destination can support the threshold beat.",
+        "decision": "ATMOSPHERE_ONLY",
+        "reason": "Actual original provides elevator doors opening into a garage-like area, but the visible green exit light and ordinary architecture conflict with the red emergency corridor.",
         "unresolved": [
-          "underground garage is not the story's impossible corridor",
-          "no literal chain or red emergency lamp established"
+          "no red lamp",
+          "no CCTV framing",
+          "no guard threshold crossing"
         ],
-        "next_action": "Compare against PIXABAY-130783; choose at most one for a single scene after frame review."
+        "next_action": "Use only as a possible neutral door transition, not as S04 evidence."
       },
       {
         "candidate_id": "PEXELS-5203510",
@@ -1010,40 +1013,35 @@
       {
         "candidate_id": "PEXELS-4354919",
         "scenes": [
-          "S01",
-          "S08",
-          "S12"
+          "S01"
         ],
-        "decision": "HOLD_FOR_EXACT_FRAME",
-        "reason": "The page is an elevator-going-up indicator lead, but the story requires exact states 13, 2:14 and below-basement descent.",
+        "decision": "SHORTLIST",
+        "reason": "Frame inspection confirms the actual display sequence includes floor 13, making it the strongest literal source for the inciting anomaly.",
         "unresolved": [
-          "literal display values",
-          "freshness across scenes",
-          "timestamp treatment"
+          "2:14 timestamp must be a compositor-owned overlay",
+          "must not reuse this clip for S08 or S12"
         ],
-        "next_action": "Inspect original frames before shortlist."
+        "next_action": "Reserve for S01 only if human approves the exact source."
       },
       {
         "candidate_id": "PEXELS-15434928",
         "scenes": [
-          "S01",
-          "S08",
           "S12"
         ],
         "decision": "SHORTLIST",
-        "reason": "The page describes an elevator screen going down and provides a 9:16 source, making it the strongest technical lead for S12.",
+        "reason": "Frame inspection confirms a real descending indicator from 2 to 1 to 0 in a vertical source suitable for the final beat.",
         "unresolved": [
-          "story-specific display values must be compositor-owned or visibly exact",
-          "cannot reuse the same clip across S01, S08 and S12"
+          "below-basement state must be created as a distinct compositor-owned continuation",
+          "must not reuse this clip for S01 or S08"
         ],
-        "next_action": "Reserve for one scene only after human selection."
+        "next_action": "Reserve for S12 only if human approves the extension treatment."
       }
     ],
     "scene_readiness": {
-      "S01": "NO_APPROVED_ASSET",
-      "S02": "SHORTLIST_EXISTS_EXACT_PANEL_STILL_REQUIRED",
+      "S01": "SHORTLIST_EXISTS_LITERAL_13_DISPLAY_TIMESTAMP_STILL_REQUIRED",
+      "S02": "NO_ACCEPTED_ASSET_PANEL_SEMANTICS_STILL_WEAK",
       "S03": "NO_APPROVED_ASSET_CCTV_TEXTURE_ONLY",
-      "S04": "SHORTLIST_EXISTS_LITERAL_RED_CORRIDOR_STILL_REQUIRED",
+      "S04": "NO_APPROVED_ASSET_DOOR_ATMOSPHERE_ONLY",
       "S05": "NO_APPROVED_ASSET_GUARD_THRESHOLD_STILL_REQUIRED",
       "S06": "NO_APPROVED_ASSET_MAINTENANCE_EVIDENCE_STILL_REQUIRED",
       "S07": "NO_APPROVED_ASSET_CHAINED_ELEVATOR_STILL_REQUIRED",
@@ -1051,7 +1049,137 @@
       "S09": "NO_APPROVED_ASSET_MATCHING_UNIFORM_RED_CORRIDOR_STILL_REQUIRED",
       "S10": "NO_APPROVED_ASSET_LOBBY_MONITOR_STILL_REQUIRED",
       "S11": "NO_APPROVED_ASSET_SECOND_PASSENGER_LOG_STILL_REQUIRED",
-      "S12": "SHORTLIST_EXISTS_FRESH_DESCENDING_DISPLAY_STILL_REQUIRED"
+      "S12": "SHORTLIST_EXISTS_DESCENDING_2_TO_0_BELOW_BASEMENT_EXTENSION_REQUIRED"
     }
+  },
+  "runtime_inspection": {
+    "inspection_pass_id": "RUNTIME-INSPECTION-01",
+    "date_utc": "2026-10-29",
+    "status": "DOWNLOADED_FOR_INSPECTION_NOT_APPROVED",
+    "scope": "Downloaded provider originals to scratch only, extracted contact sheets, checked actual frames and technical metadata. These files are not runtime assets and are not uploaded to Drive.",
+    "receipts": [
+      {
+        "candidate_id": "PEXELS-31751326",
+        "source_page_url": "https://www.pexels.com/video/close-up-of-hand-pressing-elevator-control-panel-buttons-31751326/",
+        "inspection_filename": "S02_panel_31751326.mp4",
+        "sha256": "91d2c2e0a7d4a681a899f9798a73251cd7c78d94710fcba9440a040813fa28d7",
+        "observed_format": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 25,
+          "duration_seconds": 60.64
+        },
+        "observed_visual_facts": [
+          "close-up of a generic three-button panel",
+          "no numbered floor sequence visible",
+          "no literal evidence for missing floor 13"
+        ],
+        "inspection_decision": "REJECTED_FOR_LITERAL_USE",
+        "runtime_approval": false
+      },
+      {
+        "candidate_id": "PEXELS-7701962",
+        "source_page_url": "https://www.pexels.com/video/close-up-view-of-a-person-pressing-elevator-button-7701962/",
+        "inspection_filename": "S02_panel_7701962.mp4",
+        "sha256": "097badaaa20c605e7350772c07fe2a6a64f1b51da0814e51fcd00c63076a3221",
+        "observed_format": {
+          "width": 4096,
+          "height": 2160,
+          "fps": 25,
+          "duration_seconds": 20.56
+        },
+        "observed_visual_facts": [
+          "numbered elevator panel visible",
+          "visible sequence is limited to low floors such as 1 through 6",
+          "red-lit control interface",
+          "no hospital or guard continuity"
+        ],
+        "inspection_decision": "HOLD_FOR_EXACT_FRAME",
+        "runtime_approval": false
+      },
+      {
+        "candidate_id": "PIXABAY-130783",
+        "source_page_url": "https://pixabay.com/pt/videos/elevador-porta-abrir-130783/",
+        "inspection_filename": "S04_doors_130783.mp4",
+        "sha256": "2ae6ec0e370e31c236ed802106b311c82c42d4c79a3823a72159023ada21a302",
+        "observed_format": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 30,
+          "duration_seconds": 7.8
+        },
+        "observed_visual_facts": [
+          "ordinary bright elevator lobby",
+          "standard elevator interior",
+          "no concrete impossible corridor",
+          "no red emergency lamp",
+          "no CCTV perspective"
+        ],
+        "inspection_decision": "REJECTED_FOR_LITERAL_USE",
+        "runtime_approval": false
+      },
+      {
+        "candidate_id": "PEXELS-34779661",
+        "source_page_url": "https://www.pexels.com/video/elevator-doors-opening-to-underground-garage-34779661/",
+        "inspection_filename": "S04_doors_34779661.mp4",
+        "sha256": "9e1ac8877bf447dc94c1a501f025751cd8ddbe63da5ba3a8d928da992de1574e",
+        "observed_format": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "duration_seconds": 17
+        },
+        "observed_visual_facts": [
+          "low-angle elevator doors opening",
+          "dark parking/garage-like destination",
+          "visible green exit light",
+          "no red emergency lamp",
+          "not a literal red corridor"
+        ],
+        "inspection_decision": "ATMOSPHERE_ONLY",
+        "runtime_approval": false
+      },
+      {
+        "candidate_id": "PEXELS-4354919",
+        "source_page_url": "https://www.pexels.com/video/an-elevator-going-up-4354919/",
+        "inspection_filename": "S01_display_4354919.mp4",
+        "sha256": "152fed3f53920acd7eda4a6e9897bedf9ea8acae8541e24e326bb74011468609",
+        "observed_format": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 25,
+          "duration_seconds": 9
+        },
+        "observed_visual_facts": [
+          "actual red elevator display",
+          "sequence visibly includes 13 and continues upward",
+          "close-up evidence framing",
+          "no 2:14 timestamp in source"
+        ],
+        "inspection_decision": "SHORTLIST_FOR_S01_ONLY",
+        "runtime_approval": false
+      },
+      {
+        "candidate_id": "PEXELS-15434928",
+        "source_page_url": "https://www.pexels.com/video/an-elevator-screen-shows-going-downfloor-15434928/",
+        "inspection_filename": "S12_display_15434928.mp4",
+        "sha256": "3c1905a8e19a148fc1134b30fd66a655f9a311c6417985122b23593bd9407543",
+        "observed_format": {
+          "width": 2160,
+          "height": 3840,
+          "fps": 25,
+          "duration_seconds": 22
+        },
+        "observed_visual_facts": [
+          "vertical indicator visibly descends 2 to 1 to 0",
+          "direction arrows are visible",
+          "no below-basement state in source",
+          "blank lower display area can support a separate compositor-owned extension"
+        ],
+        "inspection_decision": "SHORTLIST_FOR_S12_WITH_COMPOSITOR_EXTENSION",
+        "runtime_approval": false
+      }
+    ],
+    "promotion_rule": "Inspection evidence may update editorial triage but cannot set rights_status, human_approval, freshness_reservation, file_path or manifest asset_status."
   }
 }
