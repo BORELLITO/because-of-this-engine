@@ -29,7 +29,7 @@ jobs:
       - name: Compile production code
         run: python -m py_compile production/*.py
       - name: Enforce single active engine policy
-        run: python -m production.engine_singleton_guard --repo-root .
+        run: PYTHONPATH=. python production/engine_singleton_guard.py --repo-root .
 
       - name: Enforce master prompt V6 contract
         run: |
