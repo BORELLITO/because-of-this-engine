@@ -7,7 +7,7 @@
   "retired_versions": "must_not_remain_executable_in_active_tree",
   "history_rule": "git_history_and_archive_are_retained_for_audit_but_are_never_an_execution_source",
   "master_prompt_version": "7.1",
-  "master_prompt_sha256": "9bd5a8854436418c5e9e2e449eca04b0052802a9585fc9f189d9d253adb51e80",
+  "master_prompt_sha256": "79503604dd3c21bce2b3eb5490ff217056117412049354069c1559003066a797",
   "production_schema": "because-of-this://schemas/production-record/3.0.0",
   "voice_provider": "microsoft_edge_tts",
   "voice_policy": {
