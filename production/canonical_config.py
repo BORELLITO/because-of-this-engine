@@ -64,6 +64,7 @@ CANONICAL_PROFILE: dict[str, Any] = {
     },
     "captions": {
         "alignment_mode": "audio_final_forced_alignment",
+        "alignment_source": "vosk_word_timestamps",
         "word_level_available": True,
         "max_lines": 2,
         "max_line_chars": 42,
