@@ -222,6 +222,7 @@ jobs:
           value = json.loads(path.read_text(encoding="utf-8"))
           root = path.parent
           runtime_artifacts = {
+              "narration_coverage": "rendered/narration-coverage.json",
               "final_audio": "audio/narration.wav",
               "captions": "captions/narration.ass",
               "alignment": "captions/narration.alignment.json",
