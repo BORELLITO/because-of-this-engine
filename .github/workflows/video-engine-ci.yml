@@ -31,6 +31,17 @@ jobs:
       - name: Enforce single active engine policy
         run: python production/engine_singleton_guard.py --repo-root .
 
+      - name: Enforce master prompt V6 contract
+        run: |
+          set -euo pipefail
+          python production/master_prompt_contract.py --repo-root . \
+            --manifest examples/video-only-episode-manifest-v2.template.json \
+            --manifest episodes/episode-001/manifest.json \
+            --manifest episodes/episode-002/manifest.json \
+            --manifest episodes/episode-003/manifest.json \
+            --manifest episodes/episode-003/manifest.draft.json \
+            --manifest episodes/episode-004/manifest.json
+
       - name: Audit episode readiness (historical manifests are report-only)
         run: python production/manifest_readiness.py --inventory --episodes-dir episodes
 
