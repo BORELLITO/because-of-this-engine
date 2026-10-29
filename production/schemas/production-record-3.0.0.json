@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "because-of-this://schemas/production-record/3.0.0",
+  "title": "Because Of This V7.1 production record",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "schema_id",
+    "project",
+    "engine_bundle",
+    "production",
+    "story",
+    "emotional_map",
+    "reveal_map",
+    "scenes",
+    "visual_beats",
+    "narration",
+    "tts_request_records",
+    "audio_assets",
+    "captions",
+    "packaging",
+    "preview",
+    "render",
+    "gates",
+    "incidents",
+    "retries",
+    "checkpoints",
+    "artifacts",
+    "rights_records",
+    "asset_reservations",
+    "drive_sync",
+    "human_decisions",
+    "metrics_reference",
+    "next_action"
+  ],
+  "properties": {
+    "schema_version": { "const": "3.0.0" },
+    "schema_id": { "const": "because-of-this://schemas/production-record/3.0.0" },
+    "record_id": { "type": "string", "minLength": 1 },
+    "project": {
+      "type": "object",
+      "required": ["project_id", "name", "language"],
+      "properties": {
+        "project_id": { "const": "because-of-this" },
+        "name": { "type": "string", "minLength": 1 },
+        "language": { "const": "en-US" }
+      }
+    },
+    "engine_bundle": {
+      "type": "object",
+      "required": ["engine_bundle_id", "version", "state"],
+      "properties": {
+        "engine_bundle_id": { "type": "string", "minLength": 1 },
+        "version": { "const": "7.1" },
+        "state": { "enum": ["candidate", "active", "stable", "rollback_eligible", "unstable", "archived"] }
+      }
+    },
+    "production": {
+      "type": "object",
+      "required": ["production_id", "production_version", "state", "created_at", "updated_at"],
+      "properties": {
+        "production_id": { "type": "string", "minLength": 1 },
+        "production_version": { "type": "string", "minLength": 1 },
+        "state": { "enum": ["draft", "preflight", "in_production", "pending_validation", "human_review", "approved_for_publication", "manually_published", "blocked", "canceled", "rollback_required", "safe_mode"] },
+        "created_at": { "type": "string", "minLength": 1 },
+        "updated_at": { "type": "string", "minLength": 1 }
+      }
+    },
+    "story": { "type": "object" },
+    "emotional_map": { "type": "object" },
+    "reveal_map": { "type": "object" },
+    "scenes": { "type": "array" },
+    "visual_beats": { "type": "array" },
+    "narration": {
+      "type": "object",
+      "required": ["provider"],
+      "properties": {
+        "provider": { "const": "google_cloud_tts" },
+        "language_code": { "const": "en-US" },
+        "beats": { "type": "array" }
+      }
+    },
+    "gates": {
+      "type": "object",
+      "required": ["G0", "G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9", "G10", "G11"]
+    },
+    "artifacts": { "type": "array" },
+    "incidents": { "type": "array" },
+    "retries": { "type": "array" },
+    "checkpoints": { "type": "array" },
+    "rights_records": { "type": "array" },
+    "asset_reservations": { "type": "array" },
+    "human_decisions": { "type": "array" },
+    "next_action": { "type": "string", "minLength": 1 }
+  }
+}
