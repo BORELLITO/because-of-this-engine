@@ -43,8 +43,8 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
         raise VideoContractError(f"Release must use H.264 video; got {media.get('codec')!r}.")
     if media.get("pix_fmt") != "yuv420p":
         raise VideoContractError(f"Release must use yuv420p; got {media.get('pix_fmt')!r}.")
-    if abs(float(media.get("fps") or 0) - 25.0) > 0.01:
-        raise VideoContractError(f"Release must be 25 fps; got {media.get('fps')!r}.")
+    if abs(float(media.get("fps") or 0) - 60.0) > 0.01:
+        raise VideoContractError(f"Release must be 60 fps; got {media.get('fps')!r}.")
     if not media.get("has_audio") or media.get("audio_codec") != "aac":
         raise VideoContractError("Release must contain an AAC audio stream.")
     if media.get("sample_rate") != 48000 or int(media.get("channels") or 0) < 1:

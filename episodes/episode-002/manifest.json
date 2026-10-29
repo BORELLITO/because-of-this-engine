@@ -4,7 +4,7 @@
   "job_id": "because-of-this-episode-002",
   "title": "The Man Who Pointed Before the Collapse",
   "language": "en",
-  "fps": 25,
+  "fps": 60,
   "story_profile": {
     "format": "The Warning That Arrived First",
     "truth_mode": "DECLARED_FICTION",
@@ -2131,7 +2131,7 @@
     "timing_source": "forced_alignment_sidecar"
   },
   "engine_profile": "because-of-this-v2-locked-2026-10",
-  "engine_profile_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
+  "engine_profile_fingerprint": "0c1a553876064876231898a735575eec7968ad42e8f231bfda04660f6ce1d4d6",
   "lifecycle_status": "ARCHIVED_HISTORICAL",
   "archive_reason": "Pilot manifest retained for audit history; its reused assets are permanently blocked from new production.",
   "master_prompt_version": "6.0",

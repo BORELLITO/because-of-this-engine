@@ -25,8 +25,8 @@ class ReleaseBoundaryTests(unittest.TestCase):
     def test_preview_can_never_become_production_complete(self) -> None:
         self.assertEqual(self._complete("preview"), "PREVIEW_COMPLETE")
 
-    def test_final_receipt_can_become_production_complete(self) -> None:
-        self.assertEqual(self._complete("final"), "PRODUCTION_COMPLETE")
+    def test_final_receipt_waits_for_manual_publication(self) -> None:
+        self.assertEqual(self._complete("final"), "READY_FOR_MANUAL_PUBLICATION")
 
 
 if __name__ == "__main__":

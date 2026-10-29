@@ -14,6 +14,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from production.pipeline_state import canonical_hash, job_id_from_manifest, sha256_file
+from production.prompt_compliance import PROMPT_GATE_ORDER
 from production.video_asset_contract import VideoContractError, load_manifest, resolve_inside
 
 
@@ -98,9 +99,15 @@ def finalize(manifest_path: Path, release_report_path: Path, delivery_receipt_pa
     payload = {
         "status": "READY_FOR_CLEANUP",
         "publication_status": "FINAL_CANDIDATE" if mode == "final" else "PREVIEW_ONLY",
+        "schema_id": "because-of-this://schemas/production-record/2.1.0",
+        "production_version": "2.1.0",
         "job_id": job_id_from_manifest(manifest),
+        "story_id": manifest.get("video_id"),
+        "production_id": job_id_from_manifest(manifest),
+        "engine_bundle_id": f"{manifest.get('engine_profile', 'because-of-this-v2-locked-2026-10')}:{manifest.get('engine_profile_fingerprint', '')}",
         "engine_version": "2.0",
-        "schema_version": manifest.get("schema_version"),
+        "manifest_schema_version": manifest.get("schema_version"),
+        "schema_version": "2.1.0",
         "video_id": manifest.get("video_id"),
         "truth_mode": (manifest.get("story_profile") or {}).get("truth_mode"),
         "mode": mode,
@@ -129,7 +136,7 @@ def finalize(manifest_path: Path, release_report_path: Path, delivery_receipt_pa
         "render_config": {
             "fps": manifest.get("fps"),
             "output": manifest.get("output"),
-            "preview_final_sizes": {"preview": "1080x1920", "final": "2160x3840"},
+            "preview_final_sizes": {"preview": "1080x1920", "final": "1080x1920"},
         },
         "fingerprints": {
             "manifest_sha256": sha256_file(manifest_path),
@@ -142,6 +149,31 @@ def finalize(manifest_path: Path, release_report_path: Path, delivery_receipt_pa
             "render_sha256": sha256_file(output),
         },
         "assets": assets,
+        "module_ids": ["story_creation", "visual_semantics", "narration", "captions", "render", "delivery"],
+        "scene_ids": [str(scene.get("scene_id")) for scene in manifest.get("scenes", [])],
+        "beat_ids": [str((scene.get("story_beat") or scene.get("scene_id"))) for scene in manifest.get("scenes", [])],
+        "attempts": manifest.get("attempts", []),
+        "fixes": manifest.get("fixes", []),
+        "approvals": manifest.get("approvals", []),
+        "incidents": manifest.get("incidents", []),
+        "rollbacks": manifest.get("rollbacks", []),
+        "hashes": {
+            "manifest": sha256_file(manifest_path),
+            "render": sha256_file(output),
+            "narration": sha256_file(audio),
+            "captions": sha256_file(captions),
+        },
+        "origins": {
+            "rendered-video": str(output),
+            "narration": str(audio),
+            "captions": str(captions),
+        },
+        "licenses": {
+            "music": (manifest.get("music") or {}).get("license"),
+            **{str(asset.get("asset_id")): asset.get("license") for asset in assets},
+        },
+        "gates": {code: {"name": name, "state": "pending", "evidence": "gate report pending at finalization"} for code, name in PROMPT_GATE_ORDER},
+        "next_action": "MANUAL_PUBLICATION_AND_POST_PUBLICATION_VERIFICATION" if mode == "final" else "HUMAN_PREVIEW_REVIEW",
         "qa": {
             "release_report": str(release_report_path.resolve()),
             "status": release.get("status"),
@@ -150,6 +182,11 @@ def finalize(manifest_path: Path, release_report_path: Path, delivery_receipt_pa
             "editorial_qa": release.get("editorial_qa"),
         },
         "delivery": delivery,
+        "artifacts": [
+            {"artifact_id": "rendered-video", "kind": "video", "sha256": sha256_file(output), "origin": str(output)},
+            {"artifact_id": "narration", "kind": "audio", "sha256": sha256_file(audio), "origin": str(audio)},
+            {"artifact_id": "captions", "kind": "captions", "sha256": sha256_file(captions), "origin": str(captions)},
+        ],
         "cleanup": {"status": "PENDING", "verified_before_cleanup": True},
         "timestamps": {"finalized_at_utc": datetime.now(timezone.utc).isoformat()},
     }
@@ -167,9 +204,12 @@ def mark_complete(final_manifest_path: Path, cleanup_receipt_path: Path) -> dict
     if receipt.get("status") != "DRIVE_VERIFIED":
         raise FinalManifestError("Cleanup completion requires a verified Drive receipt.")
     completion_status = (
-        "PRODUCTION_COMPLETE" if payload.get("mode") == "final" else "PREVIEW_COMPLETE"
+        "READY_FOR_MANUAL_PUBLICATION" if payload.get("mode") == "final" else "PREVIEW_COMPLETE"
     )
     payload["status"] = completion_status
+    if payload.get("mode") == "final":
+        payload["publication_status"] = "AWAITING_MANUAL_PUBLICATION"
+        payload["next_action"] = "MANUAL_PUBLICATION_AND_POST_PUBLICATION_VERIFICATION"
     payload["cleanup"] = {
         "status": "PASS",
         "verified_before_cleanup": True,

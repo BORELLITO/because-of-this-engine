@@ -16,7 +16,34 @@ MASTER_PROMPT_PATH = Path("docs/PROMPT_MESTRE_BECAUSE_OF_THIS_FINAL_V6_EXECUTAVE
 MASTER_PROMPT_SHA256 = "6792a1b3a85b4069c100f9b49cc04b7a169e92cc3a54d9abdf690c78efad74ed"
 SCHEMA_ID = "because-of-this://schemas/production-record/2.1.0"
 SCHEMA_PATH = Path("production/schemas/production-record-2.1.0.json")
-GATE_ORDER = tuple(f"G{i}" for i in range(12))
+GATE_ORDER = tuple(code for code, _ in (
+    ("G0", "PRE_FLIGHT"),
+    ("G1", "SCRIPT_SUSPENSE"),
+    ("G2", "RIGHTS_ORIGINALITY_FICTION"),
+    ("G3", "VISUAL_CLIPS"),
+    ("G4", "NARRATION"),
+    ("G5", "AUDIO_MIX"),
+    ("G6", "CAPTIONS_KARAOKE"),
+    ("G7", "PACKAGING"),
+    ("G8", "PREVIEW"),
+    ("G9", "RENDER_TECHNICAL"),
+    ("G10", "HUMAN_APPROVAL"),
+    ("G11", "POST_PUBLICATION"),
+))
+GATE_NAMES = {
+    "G0": "PRE_FLIGHT",
+    "G1": "SCRIPT_SUSPENSE",
+    "G2": "RIGHTS_ORIGINALITY_FICTION",
+    "G3": "VISUAL_CLIPS",
+    "G4": "NARRATION",
+    "G5": "AUDIO_MIX",
+    "G6": "CAPTIONS_KARAOKE",
+    "G7": "PACKAGING",
+    "G8": "PREVIEW",
+    "G9": "RENDER_TECHNICAL",
+    "G10": "HUMAN_APPROVAL",
+    "G11": "POST_PUBLICATION",
+}
 GATE_STATES = {"pending","running","passed","failed","blocked"}
 PRODUCTION_STATES = {"draft","in_production","pending_validation","human_review","approved_for_publication","manually_published","blocked","canceled"}
 COMPONENT_STATES = {"draft","generated","pending_validation","approved","needs_correction","rejected","archived","corrupted","legally_removed"}
@@ -80,16 +107,32 @@ def validate_production_record(record: dict[str, Any]) -> dict[str, Any]:
         raise MasterPromptContractError("production record must use schema 2.1.0")
     if not isinstance(record.get("states"), dict) or not isinstance(record.get("gates"), dict):
         raise MasterPromptContractError("production record states and gates must be objects")
-    if not isinstance(record.get("artifacts"), list):
-        raise MasterPromptContractError("production record artifacts must be an array")
-    invalid_gates = set(record["gates"]) - set(GATE_ORDER)
-    if invalid_gates:
-        raise MasterPromptContractError(f"unknown gates in production record: {sorted(invalid_gates)}")
+    required_collections = (
+        "module_ids", "scene_ids", "beat_ids", "attempts", "fixes", "approvals",
+        "incidents", "rollbacks", "hashes", "origins", "licenses",
+    )
+    missing_collections = [key for key in required_collections if key not in record]
+    if missing_collections:
+        raise MasterPromptContractError(f"production record missing audit collections: {missing_collections}")
+    if not all(isinstance(record[key], (list, dict)) for key in required_collections):
+        raise MasterPromptContractError("production record audit collections must be arrays or objects")
+    if tuple(record["gates"]) != GATE_ORDER:
+        raise MasterPromptContractError("production record gates must contain the exact ordered G0-G11 contract")
     for gate, value in record["gates"].items():
-        state = value if isinstance(value,str) else value.get("state") if isinstance(value,dict) else None
+        if not isinstance(value, dict) or value.get("name") != GATE_NAMES[gate]:
+            raise MasterPromptContractError(f"{gate} has the wrong canonical gate name")
+        state = value.get("state")
         if state not in GATE_STATES:
             raise MasterPromptContractError(f"{gate} has invalid gate state")
-    return {"status":"PRODUCTION_RECORD_SCHEMA_PASS","schema_id":SCHEMA_ID}
+        if not isinstance(value.get("evidence"), str) or not value["evidence"].strip():
+            raise MasterPromptContractError(f"{gate} must contain evidence")
+    for artifact in record["artifacts"]:
+        if not isinstance(artifact, dict):
+            raise MasterPromptContractError("every artifact must be an object")
+        for key in ("artifact_id", "kind", "sha256", "origin"):
+            if not isinstance(artifact.get(key), str) or not artifact[key].strip():
+                raise MasterPromptContractError(f"artifact missing {key}")
+    return {"status":"PRODUCTION_RECORD_SCHEMA_PASS","schema_id":SCHEMA_ID,"gate_order":list(GATE_ORDER)}
 
 def audit_repo(repo_root: Path, manifest_paths: list[Path]) -> dict[str, Any]:
     prompt_report = validate_master_prompt(repo_root)

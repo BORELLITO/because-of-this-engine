@@ -4,18 +4,184 @@
   "title": "Because Of This Production Record",
   "type": "object",
   "additionalProperties": true,
-  "required": ["schema_version","schema_id","story_id","engine_bundle_id","engine_version","production_id","production_version","states","gates","artifacts","next_action"],
+  "required": [
+    "schema_version",
+    "schema_id",
+    "story_id",
+    "engine_bundle_id",
+    "engine_version",
+    "production_id",
+    "production_version",
+    "states",
+    "gates",
+    "artifacts",
+    "module_ids",
+    "scene_ids",
+    "beat_ids",
+    "attempts",
+    "fixes",
+    "approvals",
+    "incidents",
+    "rollbacks",
+    "hashes",
+    "origins",
+    "licenses",
+    "next_action"
+  ],
   "properties": {
-    "schema_version": {"const": "2.1.0"},
-    "schema_id": {"const": "because-of-this://schemas/production-record/2.1.0"},
-    "story_id": {"type": "string", "minLength": 1},
-    "engine_bundle_id": {"type": "string", "minLength": 1},
-    "engine_version": {"type": "string", "minLength": 1},
-    "production_id": {"type": "string", "minLength": 1},
-    "production_version": {"type": "string", "minLength": 1},
-    "states": {"type": "object"},
-    "gates": {"type": "object"},
-    "artifacts": {"type": "array"},
-    "next_action": {"type": "string", "minLength": 1}
+    "schema_version": {
+      "const": "2.1.0"
+    },
+    "schema_id": {
+      "const": "because-of-this://schemas/production-record/2.1.0"
+    },
+    "story_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "engine_bundle_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "engine_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "production_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "production_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "states": {
+      "type": "object",
+      "minProperties": 1
+    },
+    "gates": {
+      "type": "object",
+      "minProperties": 12,
+      "propertyNames": {
+        "pattern": "^G([0-9]|1[01])$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "name",
+          "state",
+          "evidence"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "state": {
+            "enum": [
+              "pending",
+              "running",
+              "passed",
+              "failed",
+              "blocked"
+            ]
+          },
+          "evidence": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "artifact_id",
+          "kind",
+          "sha256",
+          "origin"
+        ],
+        "properties": {
+          "artifact_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[A-Fa-f0-9]{64}$"
+          },
+          "origin": {
+            "type": "string",
+            "minLength": 1
+          },
+          "license": {
+            "type": "string"
+          },
+          "drive_link": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "module_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "scene_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "beat_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "attempts": {
+      "type": "array"
+    },
+    "fixes": {
+      "type": "array"
+    },
+    "approvals": {
+      "type": "array"
+    },
+    "incidents": {
+      "type": "array"
+    },
+    "rollbacks": {
+      "type": "array"
+    },
+    "hashes": {
+      "type": "object",
+      "minProperties": 1
+    },
+    "origins": {
+      "type": "object",
+      "minProperties": 1
+    },
+    "licenses": {
+      "type": "object",
+      "minProperties": 1
+    },
+    "next_action": {
+      "type": "string",
+      "minLength": 1
+    }
   }
 }

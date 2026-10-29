@@ -1,0 +1,39 @@
+name: Because Of This post-publication G11
+
+on:
+  workflow_dispatch:
+    inputs:
+      manifest:
+        description: "Original episode manifest path"
+        required: true
+        type: string
+      final_manifest:
+        description: "Final reproducibility manifest path"
+        required: true
+        type: string
+      receipt:
+        description: "Manual publication receipt JSON path"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Validate manual publication receipt
+        run: |
+          set -euo pipefail
+          python production/post_publication_verifier.py --final-manifest "${{ inputs.final_manifest }}" --receipt "${{ inputs.receipt }}"
+      - name: Advance pipeline state through G11
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition PUBLISHED_VERIFIED --stage post-publication
+          PYTHONPATH=. python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition COMPLETE --stage complete
+      - name: Print completion
+        run: echo "G11_POST_PUBLICATION_PASS"

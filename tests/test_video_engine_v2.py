@@ -99,7 +99,7 @@ class VideoEngineV2Tests(unittest.TestCase):
     def test_renderer_uses_vertical_video_crop_and_fixed_fps(self):
         value = scene_filter(1080, 1920, 0.5, 0.5)
         self.assertIn("force_original_aspect_ratio=increase", value)
-        self.assertIn("fps=25", value)
+        self.assertIn("fps=60", value)
         self.assertNotIn("zoompan", value)
         self.assertIn("setsar=1", value)
 

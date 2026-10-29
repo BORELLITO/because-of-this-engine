@@ -4,7 +4,7 @@
   "job_id": "because-of-this-episode-003",
   "title": "The Lake That Killed Without a Sound",
   "language": "en",
-  "fps": 25,
+  "fps": 60,
   "story_profile": {
     "format": "The Invisible Disaster",
     "truth_mode": "VERIFIED_FACT",
@@ -2175,7 +2175,7 @@
     "timing_source": "forced_alignment_sidecar"
   },
   "engine_profile": "because-of-this-v2-locked-2026-10",
-  "engine_profile_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
+  "engine_profile_fingerprint": "0c1a553876064876231898a735575eec7968ad42e8f231bfda04660f6ce1d4d6",
   "lifecycle_status": "DRAFT_AUDIO_PENDING",
   "archive_reason": "",
   "master_prompt_version": "6.0",

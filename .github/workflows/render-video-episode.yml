@@ -15,6 +15,11 @@ on:
         options:
           - preview
           - final
+      confirm_cleanup:
+        description: "Human confirmation to delete runner-local ephemeral media after verified Drive delivery"
+        required: true
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -81,7 +86,7 @@ jobs:
           python production/canonical_config.py --manifest "${MANIFEST}"
 
       - name: Enforce single active engine policy
-        run: python production/engine_singleton_guard.py --repo-root .
+        run: PYTHONPATH=. python production/engine_singleton_guard.py --repo-root .
       - name: Enforce master prompt V6 contract
         run: |
           set -euo pipefail
@@ -166,6 +171,16 @@ jobs:
             --repo-root "." \
             --registry "episodes/asset-memory-registry.json" \
             --report "${EPISODE_DIR}/rendered/asset-reuse-brain-${{ inputs.mode }}.json"
+
+      - name: Run global no-repeat audio brain
+        run: |
+          set -euo pipefail
+          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
+          python production/audio_reuse_brain.py \
+            --manifest "${{ inputs.manifest }}" \
+            --repo-root "." \
+            --registry "episodes/audio-memory-registry.json" \
+            --report "${EPISODE_DIR}/rendered/audio-reuse-brain-${{ inputs.mode }}.json"
 
       - name: Run engine regression tests
         run: python -m unittest discover -s tests -v
@@ -361,6 +376,13 @@ jobs:
             --manifest "${{ inputs.manifest }}" \
             --report "$(dirname "${{ inputs.manifest }}")/rendered/caption-quality-${{ inputs.mode }}.json" \
             ${EXTRA}
+      - name: Enforce executable V6 prompt compliance before render
+        run: |
+          python production/prompt_compliance.py \
+            --manifest "${{ inputs.manifest }}" \
+            --mode "${{ inputs.mode }}" \
+            --report "$(dirname "${{ inputs.manifest }}")/rendered/prompt-compliance-pre-render.json"
+
       - name: Evaluate canonical gates before render
         run: |
           python production/quality_gates.py \
@@ -409,6 +431,14 @@ jobs:
             --manifest "${{ inputs.manifest }}" \
             --mode "${{ inputs.mode }}" \
             --report "${EPISODE_DIR}/rendered/golden-layout-${{ inputs.mode }}.json"
+
+      - name: Enforce executable V6 prompt compliance after render
+        run: |
+          python production/prompt_compliance.py \
+            --manifest "${{ inputs.manifest }}" \
+            --mode "${{ inputs.mode }}" \
+            --release-report "$(dirname "${{ inputs.manifest }}")/rendered/video-release-${{ inputs.mode }}.json" \
+            --report "$(dirname "${{ inputs.manifest }}")/rendered/prompt-compliance-post-render.json"
 
       - name: Evaluate canonical gates after render QA
         run: |
@@ -512,9 +542,13 @@ jobs:
         run: |
           set -euo pipefail
           EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
+          test "${{ inputs.confirm_cleanup }}" = "true"
           test -s "${RUNNER_TEMP}/final-delivery.json"
           grep -q '"status": "DRIVE_VERIFIED"' "${RUNNER_TEMP}/final-delivery.json"
-          find "${EPISODE_DIR}" -type f \( -path "*/rendered/*.mp4" -o -path "*/rendered/*.mov" -o -path "*/rendered/*.mkv" -o -path "*/runtime-assets/*.mp4" -o -path "*/runtime-assets/*.mov" -o -path "*/runtime-assets/*.mkv" \) -delete
+          python production/cleanup_confirmation.py \
+            --episode-dir "${EPISODE_DIR}" \
+            --delivery-receipt "${RUNNER_TEMP}/final-delivery.json" \
+            --confirmation "${{ inputs.confirm_cleanup }}"
           echo "v2 media delivered and verified in Google Drive; scoped runner-local media removed." >> "${GITHUB_STEP_SUMMARY}"
           python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition CLEANED --stage cleanup
 
@@ -594,8 +628,8 @@ jobs:
             --path "$(dirname "${{ inputs.manifest }}")/rendered/quality-gates-final.json" \
             --receipt "${RUNNER_TEMP}/gate-delivery.json"
 
-      - name: Mark pipeline complete
-        run: python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition COMPLETE --stage complete
+      - name: Mark pipeline ready for manual publication
+        run: python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition READY_FOR_MANUAL_PUBLICATION --stage manual-publication-ready
 
       - name: Quarantine failed v2 job
         if: failure()

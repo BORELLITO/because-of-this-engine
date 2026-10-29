@@ -15,8 +15,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from production.video_asset_contract import VideoContractError, ffprobe, load_manifest, validate_manifest
 
-FPS = 25
-SIZES = {"preview": (1080, 1920), "final": (2160, 3840)}
+FPS = 60
+SIZES = {"preview": (1080, 1920), "final": (1080, 1920)}
 # A single approved take may be shorter than its forced narration span. Allow
 # bounded reuse of that same take inside the same scene, but fail closed when
 # the renderer would need an excessive loop count.
@@ -30,7 +30,7 @@ class RenderError(RuntimeError):
 def layout_px(reference_pixels: int, output_width: int) -> int:
     """Scale approved preview-space HUD coordinates to the output resolution.
 
-    The canonical profile remains based on 1080px width; 4K final doubles
+    The canonical profile remains based on 1080px width; the final preserves
     logo, position and outro size without changing the relative composition.
     """
     reference_width = SIZES["preview"][0]

@@ -4,7 +4,7 @@
   "job_id": "because-of-this-episode-004",
   "title": "The Wave That Climbed Higher Than a Skyscraper",
   "language": "en",
-  "fps": 25,
+  "fps": 60,
   "story_profile": {
     "format": "The Impossible Scale",
     "truth_mode": "VERIFIED_FACT",
@@ -2363,7 +2363,7 @@
     "timing_source": "forced_alignment_sidecar"
   },
   "engine_profile": "because-of-this-v2-locked-2026-10",
-  "engine_profile_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
+  "engine_profile_fingerprint": "0c1a553876064876231898a735575eec7968ad42e8f231bfda04660f6ce1d4d6",
   "lifecycle_status": "DRAFT_AUDIO_PENDING",
   "updated_at": "2026-10-28T11:00:00Z",
   "visual_review_contract": {
