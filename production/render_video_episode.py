@@ -16,7 +16,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from production.video_asset_contract import VideoContractError, ffprobe, load_manifest, validate_manifest
 
 FPS = 60
-SIZES = {"preview": (1080, 1920), "final": (1080, 1920)}
+# draft-preview is deliberately separate from preview: it can carry explicit
+# PREVIEW_ONLY assets for editorial approval, but it is never a release mode.
+SIZES = {"draft-preview": (1080, 1920), "preview": (1080, 1920), "final": (1080, 1920)}
 # A single approved take may be shorter than its forced narration span. Allow
 # bounded reuse of that same take inside the same scene, but fail closed when
 # the renderer would need an excessive loop count.
