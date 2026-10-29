@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from production.cloud_tts import build_ssml, profile_from_manifest, synthesize_chunks
+from production.cloud_tts import CloudTTSError, build_ssml, profile_from_manifest, synthesize_chunks
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,6 +25,13 @@ class V7CloudTTSTests(unittest.TestCase):
         self.assertTrue(ssml.startswith("<speak><break time=\"120ms\"/>") )
         self.assertIn('<sub alias="ee-LY-us">Elias</sub>', ssml)
         self.assertIn("&amp;", ssml)
+
+    def test_manifest_voice_override_is_rejected(self):
+        manifest = dict(self.manifest)
+        manifest["narration"] = dict(self.manifest["narration"])
+        manifest["narration"]["voice_name"] = "en-US-Standard-C"
+        with self.assertRaises(CloudTTSError):
+            profile_from_manifest(manifest)
 
     def test_dry_run_is_idempotent_and_writes_no_audio(self):
         with tempfile.TemporaryDirectory() as directory:
