@@ -1,0 +1,26 @@
+{
+  "policy_version": "2.0",
+  "active_engine_profile": "because-of-this-v2-locked-2026-10",
+  "active_engine_fingerprint": "0c1a553876064876231898a735575eec7968ad42e8f231bfda04660f6ce1d4d6",
+  "update_rule": "approved_update_supersedes_previous_active_engine",
+  "retired_versions": "must_not_remain_executable_in_active_tree",
+  "history_rule": "git_history_is_retained_for_audit_but_is_never_an_execution_source",
+  "master_prompt_version": "6.0",
+  "master_prompt_sha256": "6792a1b3a85b4069c100f9b49cc04b7a169e92cc3a54d9abdf690c78efad74ed",
+  "production_schema": "because-of-this://schemas/production-record/2.1.0",
+  "publication_policy": "manual_only",
+  "render_contract": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 60,
+    "duration_min_seconds": 60,
+    "duration_max_seconds": 75
+  },
+  "missing_dependency_policy": "fail_closed",
+  "rollback_policy": {
+    "stable_slots": 2,
+    "activation": "atomic_prompt_code_schema_config",
+    "alternate_engine_profiles_executable": false,
+    "retired_versions": "audit_only_non_executable"
+  }
+}
