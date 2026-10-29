@@ -14,6 +14,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from production.pipeline_state import canonical_hash, job_id_from_manifest, sha256_file
+from production.prompt_compliance import PROMPT_GATE_ORDER
 from production.video_asset_contract import VideoContractError, load_manifest, resolve_inside
 
 
@@ -171,7 +172,7 @@ def finalize(manifest_path: Path, release_report_path: Path, delivery_receipt_pa
             "music": (manifest.get("music") or {}).get("license"),
             **{str(asset.get("asset_id")): asset.get("license") for asset in assets},
         },
-        "gates": {},
+        "gates": {code: {"name": name, "state": "pending", "evidence": "gate report pending at finalization"} for code, name in PROMPT_GATE_ORDER},
         "next_action": "MANUAL_PUBLICATION_AND_POST_PUBLICATION_VERIFICATION" if mode == "final" else "HUMAN_PREVIEW_REVIEW",
         "qa": {
             "release_report": str(release_report_path.resolve()),
