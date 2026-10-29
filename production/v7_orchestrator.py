@@ -34,7 +34,7 @@ from production.production_record_v7 import (
 from production.v7_contract import V7ContractError, load_json, validate_manifest, validate_prompt_and_schema
 
 ENGINE_BUNDLE_ID = "because-of-this-v7-cloud-tts-7.1"
-SAFE_MANIFEST = re.compile(r"^episodes/[^/]+/manifest\.json$")
+SAFE_MANIFEST = re.compile(r"^episodes/[^/]+/(?:manifest|preview-manifest)\.json$")
 REQUIRED_STORY_FIELDS = (
     "person",
     "central_question",
@@ -127,7 +127,13 @@ def _rights_gate(manifest: dict[str, Any]) -> dict[str, Any]:
     return _status(passed, "declared fiction disclosure and clip/derivation non-reuse rules are explicit" if passed else "fiction disclosure and clip/derivation non-reuse controls are incomplete")
 
 
-def _visual_gate(manifest: dict[str, Any], *, require_assets: bool, manifest_dir: Path | None = None) -> dict[str, Any]:
+def _visual_gate(
+    manifest: dict[str, Any],
+    *,
+    require_assets: bool,
+    manifest_dir: Path | None = None,
+    allow_preview_only: bool = False,
+) -> dict[str, Any]:
     scenes = manifest.get("scenes")
     if not isinstance(scenes, list) or not scenes:
         return _status(False, "no visual scenes are registered")
@@ -179,15 +185,28 @@ def _visual_gate(manifest: dict[str, Any], *, require_assets: bool, manifest_dir
                         problems.append(f"{scene_id}: asset.path escapes episode directory")
                     elif not asset_path.is_file():
                         problems.append(f"{scene_id}: hydrated asset file is missing")
-                if asset.get("rights_status") != "APPROVED" or asset.get("approved_for_render") is not True:
-                    problems.append(f"{scene_id}: asset rights approval missing")
+                approved = asset.get("rights_status") == "APPROVED" and asset.get("approved_for_render") is True
+                preview_candidate = (
+                    allow_preview_only
+                    and asset.get("rights_status") == "PREVIEW_ONLY"
+                    and asset.get("approved_for_render") is False
+                    and asset.get("preview_only") is True
+                    and str(asset.get("preview_only_reason", "")).strip()
+                )
+                if not approved and not preview_candidate:
+                    problems.append(f"{scene_id}: asset rights approval missing for this mode")
                 if asset.get("reuse_status", "FRESH") not in {"FRESH", "RESERVED"}:
                     problems.append(f"{scene_id}: asset reuse status is not fresh/reserved")
                 if asset.get("derived_from"):
                     problems.append(f"{scene_id}: derived clip reuse is forbidden")
     if not 60.0 <= total_duration <= 75.0:
         problems.append(f"scene duration total {total_duration:.3f}s is outside the 60–75s contract")
-    return _status(not problems, "all scene beats have direct semantic anchors and approved unique assets" if not problems else "; ".join(problems))
+    message = (
+        "all scene beats have direct semantic anchors and mode-valid unique assets"
+        if not problems
+        else "; ".join(problems)
+    )
+    return _status(not problems, message)
 
 
 def _tts_gate(manifest: dict[str, Any], *, dry_run: bool) -> dict[str, Any]:
@@ -294,22 +313,32 @@ def _gate_record(gate_id: str, check: dict[str, Any]) -> dict[str, Any]:
 
 
 def evaluate(manifest: dict[str, Any], *, repo_root: Path, manifest_dir: Path, mode: str, check_cloud_tts: bool = False) -> dict[str, Any]:
-    if mode not in {"contract", "preflight", "dry-run", "preview", "production"}:
+    if mode not in {"contract", "dry-run", "draft-preview", "preflight", "preview", "production"}:
         raise OrchestratorError(f"unsupported orchestration mode: {mode}")
     validate_prompt_and_schema(repo_root)
-    require_assets = mode in {"preflight", "preview", "production"}
+    require_assets = mode in {"draft-preview", "preflight", "preview", "production"}
+    allow_preview_only = mode == "draft-preview"
     contract = validate_manifest(manifest, source_label="manifest", require_production=require_assets)
     checks: dict[str, dict[str, Any]] = {
         "G0": _status(True, f"V7.1 prompt/schema/profile contract passed: {CANONICAL_PROFILE_ID}"),
         "G1": _story_gate(manifest, manifest_dir=manifest_dir, require_coverage=require_assets),
         "G2": _rights_gate(manifest),
-        "G3": _visual_gate(manifest, require_assets=require_assets, manifest_dir=manifest_dir),
+        "G3": _visual_gate(
+            manifest,
+            require_assets=require_assets,
+            manifest_dir=manifest_dir,
+            allow_preview_only=allow_preview_only,
+        ),
         "G4": _tts_gate(manifest, dry_run=(mode in {"contract", "dry-run"} or not check_cloud_tts)),
-        "G5": _audio_gate(manifest, require_approved=require_assets, manifest_dir=manifest_dir),
-        "G6": _artifact_gate(manifest, manifest_dir, ("final_audio", "captions", "alignment"), "final audio/caption/alignment", blocking=(mode in {"preview", "production"})),
+        "G5": _audio_gate(
+            manifest,
+            require_approved=mode in {"preflight", "preview", "production"},
+            manifest_dir=manifest_dir,
+        ),
+        "G6": _artifact_gate(manifest, manifest_dir, ("final_audio", "captions", "alignment"), "final audio/caption/alignment", blocking=(mode in {"draft-preview", "preview", "production"})),
         "G7": _packaging_gate(manifest),
-        "G8": _artifact_gate(manifest, manifest_dir, ("preview", "preview_approval") if mode == "production" else ("preview",), "preview", blocking=(mode in {"preview", "production"})),
-        "G9": _artifact_gate(manifest, manifest_dir, ("render", "technical_qa"), "render and technical QA", blocking=(mode in {"preview", "production"})),
+        "G8": _artifact_gate(manifest, manifest_dir, ("preview", "preview_approval") if mode == "production" else ("preview",), "preview", blocking=(mode in {"draft-preview", "preview", "production"})),
+        "G9": _artifact_gate(manifest, manifest_dir, ("render", "technical_qa"), "render and technical QA", blocking=(mode in {"draft-preview", "preview", "production"})),
         "G10": _status(bool((manifest.get("human_approval") or {}).get("status") == "PASS"), "human approval record is present" if (manifest.get("human_approval") or {}).get("status") == "PASS" else "human approval is required and has not been recorded", blocking=(mode == "production")),
         "G11": _status(False, "post-publication verification is manual and deferred", blocking=False),
     }
@@ -366,7 +395,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo-root", type=Path, default=Path("."))
     parser.add_argument("--manifest", type=Path, required=True)
-    parser.add_argument("--mode", choices=("contract", "preflight", "dry-run", "preview", "production"), default="preflight")
+    parser.add_argument("--mode", choices=("contract", "preflight", "dry-run", "draft-preview", "preview", "production"), default="preflight")
     parser.add_argument("--check-cloud-tts", action="store_true")
     parser.add_argument("--report", type=Path)
     parser.add_argument("--record", type=Path)

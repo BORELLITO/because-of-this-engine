@@ -81,7 +81,7 @@ def _scene_report(scene: dict, mode: str) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, required=True)
-    parser.add_argument("--mode", choices=("preview", "final"), default="preview")
+    parser.add_argument("--mode", choices=("draft-preview", "preview", "final"), default="preview")
     parser.add_argument("--report", type=Path, required=True)
     args = parser.parse_args()
 

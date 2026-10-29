@@ -1,7 +1,7 @@
 import unittest
 from pathlib import Path
 
-from production.video_asset_contract import VideoContractError, validate_manifest
+from production.video_asset_contract import VideoContractError, validate_asset_record, validate_manifest
 from production.render_video_episode import RenderError, narration_locked_scenes, scene_filter, xfade_filter
 from production.video_asset_research import build_queue, query_variants_for_scene
 from production.visual_semantics import text_has_concept, visual_match_report
@@ -72,6 +72,31 @@ def manifest():
 
 
 class VideoEngineV2Tests(unittest.TestCase):
+    def test_preview_only_assets_are_isolated_to_draft_preview(self):
+        record = {
+            "asset_id": "preview-only-001",
+            "path": "assets/clip.mp4",
+            "provider": "original",
+            "source_page_url": "https://drive.google.com/file/d/preview-only-001/view",
+            "license": "Compositor-owned draft preview only",
+            "rights_status": "PREVIEW_ONLY",
+            "approved_for_render": False,
+            "preview_only": True,
+            "preview_only_reason": "Human approval is pending.",
+            "sha256": "a" * 64,
+            "episode_id": "preview-001",
+        }
+        with self.assertRaisesRegex(VideoContractError, "not approved for this render mode"):
+            validate_asset_record(record, Path("/tmp"), "preview-001", mode="preview", check_file=False)
+        accepted = validate_asset_record(
+            record,
+            Path("/tmp"),
+            "preview-001",
+            mode="draft-preview",
+            check_file=False,
+        )
+        self.assertEqual(accepted["rights_status"], "PREVIEW_ONLY")
+
     def test_video_contract_rejects_narrative_images(self):
         value = manifest()
         value["scenes"][0]["image"] = "forbidden.png"

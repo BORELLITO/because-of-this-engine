@@ -11,10 +11,11 @@ from pathlib import Path
 from typing import Any
 
 from production.render_video_episode import SIZES, layout_px
+from production.canonical_config import CANONICAL_PROFILE_ID
 from production.video_asset_contract import VideoContractError, ffprobe
 
 EXPECTED = {
-    "engine_profile": "because-of-this-v2-locked-2026-10",
+    "engine_profile": CANONICAL_PROFILE_ID,
     "brand": {
         "logo_enabled": True,
         "logo_anchor": "center_top",
@@ -125,7 +126,7 @@ def run(manifest_path: Path, mode: str, report_path: Path) -> int:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--manifest", required=True)
-    parser.add_argument("--mode", required=True, choices=("preview", "final"))
+    parser.add_argument("--mode", required=True, choices=("draft-preview", "preview", "final"))
     parser.add_argument("--report", required=True)
     args = parser.parse_args()
     try:
