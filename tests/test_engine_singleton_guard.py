@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 
 from production import engine_singleton_guard as guard
+from production.master_prompt_contract import MASTER_PROMPT_PATH, SCHEMA_PATH
 
 
 class SingletonGuardTest(unittest.TestCase):
@@ -16,10 +17,10 @@ class SingletonGuardTest(unittest.TestCase):
         prod.mkdir()
         canonical_root = Path(__file__).resolve().parents[1]
 
-        prompt_path = self.root / guard.MASTER_PROMPT_PATH
+        prompt_path = self.root / MASTER_PROMPT_PATH
         prompt_path.parent.mkdir(parents=True)
         prompt_path.write_bytes((canonical_root / guard.MASTER_PROMPT_PATH).read_bytes())
-        schema_path = self.root / guard.SCHEMA_PATH
+        schema_path = self.root / SCHEMA_PATH
         schema_path.parent.mkdir(parents=True)
         schema_path.write_bytes((canonical_root / guard.SCHEMA_PATH).read_bytes())
 
