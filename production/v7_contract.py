@@ -123,6 +123,21 @@ def validate_manifest(manifest: dict[str, Any], *, source_label: str = "manifest
             raise V7ContractError("production narration provider must be google_cloud_tts")
         if not isinstance(narrative.get("beats"), list) or not narrative["beats"]:
             raise V7ContractError("production narration requires recoverable beat chunks")
+        story_graph = manifest.get("story_graph")
+        if not isinstance(story_graph, dict):
+            raise V7ContractError("production manifest requires story_graph")
+        if not isinstance(story_graph.get("entities"), list) or not story_graph["entities"]:
+            raise V7ContractError("story_graph.entities must be non-empty")
+        if not isinstance(story_graph.get("beats"), list) or len(story_graph["beats"]) != len(scenes):
+            raise V7ContractError("story_graph.beats must cover every visual scene")
+        music = manifest.get("music")
+        if not isinstance(music, dict):
+            raise V7ContractError("production manifest requires a music object")
+        for key in ("path", "license", "track_id"):
+            if not str(music.get(key, "")).strip():
+                raise V7ContractError(f"production music requires {key}")
+        if not isinstance(music.get("commercial_use"), bool):
+            raise V7ContractError("production music requires a boolean commercial_use field")
     return {"status": "V7_MANIFEST_PASS", "source": source_label, "canonical": canonical, "scene_count": len(scenes), "gates": list(GATE_NAMES.values())}
 
 
