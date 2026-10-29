@@ -78,12 +78,12 @@ jobs:
           PYTHONPATH=. python production/v7_contract.py --repo-root . \
             --manifest "${{ inputs.manifest }}" --require-production
 
-      - name: Run fail-closed V7 preflight
+      - name: Validate V7 contract before external work
         run: |
           mkdir -p "$(dirname "${{ inputs.manifest }}")/rendered"
           PYTHONPATH=. python production/v7_orchestrator.py \
-            --repo-root . --manifest "${{ inputs.manifest }}" --mode preflight \
-            --report "$(dirname "${{ inputs.manifest }}")/rendered/v7-preflight-${{ inputs.mode }}.json"
+            --repo-root . --manifest "${{ inputs.manifest }}" --mode contract \
+            --report "$(dirname "${{ inputs.manifest }}")/rendered/v7-contract-${{ inputs.mode }}.json"
 
       - name: Configure Google Cloud ADC
         env:
@@ -114,18 +114,32 @@ jobs:
       - name: Install independent Vosk alignment models
         run: |
           set -euo pipefail
-          mkdir -p "${RUNNER_TEMP}/vosk"
+          mkdir -p "${RUNNER_TEMP}/vosk" "${RUNNER_TEMP}/vosk-secondary"
           curl --fail --location --retry 5 --retry-all-errors \
             "https://alphacephei.com/vosk/models/vosk-model-en-us-0.22-lgraph.zip" \
             --output "${RUNNER_TEMP}/vosk/model.zip"
           unzip -q "${RUNNER_TEMP}/vosk/model.zip" -d "${RUNNER_TEMP}/vosk"
+          curl --fail --location --retry 5 --retry-all-errors \
+            "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip" \
+            --output "${RUNNER_TEMP}/vosk-secondary/model.zip"
+          unzip -q "${RUNNER_TEMP}/vosk-secondary/model.zip" -d "${RUNNER_TEMP}/vosk-secondary"
           echo "VOSK_MODEL_DIR=${RUNNER_TEMP}/vosk/vosk-model-en-us-0.22-lgraph" >> "${GITHUB_ENV}"
+          echo "VOSK_SECONDARY_MODEL_DIR=${RUNNER_TEMP}/vosk-secondary/vosk-model-small-en-us-0.15" >> "${GITHUB_ENV}"
 
       - name: Generate captions from final narration audio
         run: |
           PYTHONPATH=. python production/align_captions.py \
             --manifest "${{ inputs.manifest }}" \
-            --model-dir "${VOSK_MODEL_DIR}"
+            --model-dir "${VOSK_MODEL_DIR}" \
+            --secondary-model-dir "${VOSK_SECONDARY_MODEL_DIR}"
+
+      - name: Build forced-alignment story coverage report
+        run: |
+          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
+          PYTHONPATH=. python production/story_intelligence.py \
+            --manifest "${{ inputs.manifest }}" \
+            --alignment "${EPISODE_DIR}/captions/narration.alignment.json" \
+            --report "${EPISODE_DIR}/rendered/narration-coverage.json"
 
       - name: Verify Drive and hydrate approved visual assets
         env:
@@ -136,6 +150,27 @@ jobs:
           set -euo pipefail
           PYTHONPATH=. python production/google_drive_delivery.py --preflight
           PYTHONPATH=. python production/google_drive_assets.py --manifest "${{ inputs.manifest }}" --require-drive-assets
+
+      - name: Run global visual and audio no-reuse brains
+        run: |
+          set -euo pipefail
+          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
+          test -s episodes/asset-memory-registry.json
+          PYTHONPATH=. python production/asset_reuse_brain.py \
+            --manifest "${{ inputs.manifest }}" --repo-root . \
+            --registry episodes/asset-memory-registry.json \
+            --report "${EPISODE_DIR}/rendered/asset-reuse-brain-${{ inputs.mode }}.json"
+          PYTHONPATH=. python production/audio_reuse_brain.py \
+            --manifest "${{ inputs.manifest }}" --repo-root . \
+            --registry episodes/audio-memory-registry.json \
+            --report "${EPISODE_DIR}/rendered/audio-reuse-brain-${{ inputs.mode }}.json"
+
+      - name: Run hydrated V7 preflight
+        run: |
+          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
+          PYTHONPATH=. python production/v7_orchestrator.py \
+            --repo-root . --manifest "${{ inputs.manifest }}" --mode preflight \
+            --report "${EPISODE_DIR}/rendered/v7-preflight-${{ inputs.mode }}.json"
 
       - name: Run visual fidelity and no-repeat gates
         run: |
@@ -157,6 +192,22 @@ jobs:
           PYTHONPATH=. python production/render_video_episode.py \
             --manifest "${{ inputs.manifest }}" --mode "${{ inputs.mode }}"
 
+      - name: Run caption QA and technical release validation
+        run: |
+          set -euo pipefail
+          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
+          EXTRA=""
+          if [ "${{ inputs.mode }}" = "final" ]; then EXTRA="--require-word-level"; fi
+          PYTHONPATH=. python production/caption_quality.py \
+            --manifest "${{ inputs.manifest }}" \
+            --report "${EPISODE_DIR}/rendered/caption-quality-${{ inputs.mode }}.json" ${EXTRA}
+          PYTHONPATH=. python production/validate_video_release.py \
+            --manifest "${{ inputs.manifest }}" --mode "${{ inputs.mode }}" \
+            --report "${EPISODE_DIR}/rendered/video-release-${{ inputs.mode }}.json"
+          PYTHONPATH=. python production/golden_frame_regression.py \
+            --manifest "${{ inputs.manifest }}" --mode "${{ inputs.mode }}" \
+            --report "${EPISODE_DIR}/rendered/golden-layout-${{ inputs.mode }}.json"
+
       - name: Register render artifacts for V7 release evaluation
         env:
           MANIFEST: ${{ inputs.manifest }}
@@ -170,22 +221,36 @@ jobs:
           mode = sys.argv[2]
           value = json.loads(path.read_text(encoding="utf-8"))
           root = path.parent
-          value["runtime_artifacts"] = {
+          runtime_artifacts = {
               "final_audio": "audio/narration.wav",
               "captions": "captions/narration.ass",
               "alignment": "captions/narration.alignment.json",
-              "preview": f"rendered/preview-{mode}.mp4",
-              "preview_approval": "preview-approval.json",
+              "preview": f"rendered/{value['video_id']}-{mode}.mp4",
               "render": f"rendered/{value['video_id']}-{mode}.mp4",
               "technical_qa": f"rendered/video-release-{mode}.json",
           }
+          if mode == "final":
+              runtime_artifacts["preview_approval"] = "rendered/preview-approval.json"
+          hashes = {}
+          for key, relative in runtime_artifacts.items():
+              candidate = (root / relative).resolve()
+              if root not in candidate.parents:
+                  raise SystemExit(f"artifact escapes episode directory: {relative}")
+              if not candidate.is_file():
+                  raise SystemExit(f"artifact is missing: {relative}")
+              import hashlib
+              hashes[key] = hashlib.sha256(candidate.read_bytes()).hexdigest()
+          value["runtime_artifacts"] = runtime_artifacts
+          value["runtime_artifact_hashes"] = hashes
           path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
           PY
 
       - name: Run V7 release gates
         run: |
+          GATE_MODE=preview
+          if [ "${{ inputs.mode }}" = "final" ]; then GATE_MODE=production; fi
           PYTHONPATH=. python production/v7_orchestrator.py \
-            --repo-root . --manifest "${{ inputs.manifest }}" --mode production \
+            --repo-root . --manifest "${{ inputs.manifest }}" --mode "${GATE_MODE}" \
             --check-cloud-tts \
             --report "$(dirname "${{ inputs.manifest }}")/rendered/v7-release-${{ inputs.mode }}.json"
 
