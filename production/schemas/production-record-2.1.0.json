@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "because-of-this://schemas/production-record/2.1.0",
+  "title": "Because Of This Production Record",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schema_version","schema_id","story_id","engine_bundle_id","engine_version","production_id","production_version","states","gates","artifacts","next_action"],
+  "properties": {
+    "schema_version": {"const": "2.1.0"},
+    "schema_id": {"const": "because-of-this://schemas/production-record/2.1.0"},
+    "story_id": {"type": "string", "minLength": 1},
+    "engine_bundle_id": {"type": "string", "minLength": 1},
+    "engine_version": {"type": "string", "minLength": 1},
+    "production_id": {"type": "string", "minLength": 1},
+    "production_version": {"type": "string", "minLength": 1},
+    "states": {"type": "object"},
+    "gates": {"type": "object"},
+    "artifacts": {"type": "array"},
+    "next_action": {"type": "string", "minLength": 1}
+  }
+}
