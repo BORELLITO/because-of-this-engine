@@ -35,3 +35,4 @@ uritemplate==4.2.0
 urllib3==2.8.0
 vosk==0.3.45
 websockets==17.3
+edge-tts==7.3.1
