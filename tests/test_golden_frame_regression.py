@@ -46,30 +46,30 @@ class GoldenFrameModeTest(unittest.TestCase):
         self.assertEqual(report["status"], "PASS")
         self.assertEqual(report["expected_dimensions"], [width, height])
         self.assertEqual(report["expected_visual_layout"]["logo_width_px"],
-                         540 if mode == "preview" else 1080)
+                         540)
         self.assertEqual(report["expected_visual_layout"]["outro_logo_width_px"],
-                         820 if mode == "preview" else 1640)
+                         820)
 
     def test_preview_passes_correct_dimensions(self):
         self.check_pass("preview")
 
-    def test_final_passes_4k_vertical_dimensions(self):
+    def test_final_passes_canonical_vertical_dimensions(self):
         self.check_pass("final")
 
-    def test_final_rejects_preview_sized_file(self):
+    def test_final_accepts_canonical_sized_file(self):
         path, report_path = self.manifest("final")
         with patch("production.golden_frame_regression.ffprobe",
                    return_value={"width": 1080, "height": 1920,
                                  "has_audio": True, "duration": 66.0}):
-            self.assertEqual(run(path, "final", report_path), 1)
+            self.assertEqual(run(path, "final", report_path), 0)
         report = json.loads(report_path.read_text(encoding="utf-8"))
-        self.assertIn("rendered_dimensions:", " ".join(report["errors"]))
+        self.assertEqual(report["errors"], [])
 
     def test_layout_reference_scale_and_invalid_width(self):
         self.assertEqual(layout_px(540, 1080), 540)
-        self.assertEqual(layout_px(540, 2160), 1080)
-        self.assertEqual(layout_px(72, 2160), 144)
-        self.assertEqual(layout_px(820, 2160), 1640)
+        self.assertEqual(layout_px(540, 1080), 540)
+        self.assertEqual(layout_px(72, 1080), 72)
+        self.assertEqual(layout_px(820, 1080), 820)
         with self.assertRaises(RenderError):
             layout_px(540, 720)
 
@@ -96,14 +96,14 @@ class GoldenFrameModeTest(unittest.TestCase):
                 music_volume=0.12,
                 logo_path=self.root / "brand.png",
                 brand=brand,
-                width=2160,
-                height=3840,
+                width=1080,
+                height=1920,
                 loop=loop,
                 loop_logo_path=self.root / "outro.png",
             )
         command = fake_ffmpeg.call_args.args[0]
         graph = command[command.index("-filter_complex") + 1]
-        self.assertIn("scale=1080:-1", graph)
-        self.assertIn("y=144:", graph)
-        self.assertIn("scale=1640:-1:flags=lanczos", graph)
-        self.assertIn("s=2160x3840", graph)
+        self.assertIn("scale=540:-1", graph)
+        self.assertIn("y=72:", graph)
+        self.assertIn("scale=820:-1:flags=lanczos", graph)
+        self.assertIn("s=1080x1920", graph)
