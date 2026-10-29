@@ -102,6 +102,42 @@ def _access_token() -> str:
     direct = os.environ.get("GOOGLE_TTS_ACCESS_TOKEN", "").strip()
     if direct:
         return direct
+
+    # Prefer the repository's already-authorized Google OAuth refresh token
+    # when ADC is not present. This keeps Cloud TTS on the canonical provider
+    # without requiring a second long-lived service-account key. The refresh
+    # token must have been granted the cloud-platform scope; Drive-only tokens
+    # fail closed at refresh/API time and are never converted into a fallback
+    # provider.
+    oauth_values = {
+        name: os.environ.get(name, "").strip()
+        for name in ("GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "GOOGLE_REFRESH_TOKEN")
+    }
+    if all(oauth_values.values()):
+        try:
+            from google.auth.transport.requests import Request
+            from google.oauth2.credentials import Credentials
+
+            credentials = Credentials(
+                token=None,
+                refresh_token=oauth_values["GOOGLE_REFRESH_TOKEN"],
+                token_uri="https://oauth2.googleapis.com/token",
+                client_id=oauth_values["GOOGLE_CLIENT_ID"],
+                client_secret=oauth_values["GOOGLE_CLIENT_SECRET"],
+                scopes=["https://www.googleapis.com/auth/cloud-platform"],
+            )
+            credentials.refresh(Request())
+            token = str(credentials.token or "").strip()
+            if token:
+                return token
+            raise CloudTTSError("Google Cloud OAuth refresh produced no access token")
+        except CloudTTSError:
+            raise
+        except Exception as exc:
+            raise CloudTTSError(
+                "Google Cloud OAuth authentication unavailable; the refresh token must include cloud-platform scope"
+            ) from exc
+
     try:
         import google.auth
         from google.auth.transport.requests import Request
@@ -116,6 +152,16 @@ def _access_token() -> str:
     return token
 
 
+def cloud_credentials_configured() -> bool:
+    """Return whether one supported Cloud TTS credential route is configured."""
+    if os.environ.get("GOOGLE_TTS_ACCESS_TOKEN", "").strip():
+        return True
+    if os.environ.get("GOOGLE_APPLICATION_CREDENTIALS", "").strip():
+        return True
+    return all(
+        os.environ.get(name, "").strip()
+        for name in ("GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "GOOGLE_REFRESH_TOKEN")
+    )
 def _project_id() -> str:
     value = (os.environ.get("GOOGLE_TTS_PROJECT_ID") or os.environ.get("GOOGLE_CLOUD_PROJECT") or "").strip()
     if not value:
