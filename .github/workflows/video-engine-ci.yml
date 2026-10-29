@@ -29,7 +29,7 @@ jobs:
       - name: Compile production code
         run: python -m py_compile production/*.py
       - name: Enforce single active engine policy
-        run: python production/engine_singleton_guard.py --repo-root .
+        run: python -m production.engine_singleton_guard --repo-root .
 
       - name: Enforce master prompt V6 contract
         run: |
@@ -68,11 +68,11 @@ jobs:
 
       - name: Verify no Actions artifact delivery or literal workflow escapes
         run: |
-          FORBIDDEN_ARTIFACT='actions/upload-'"artifact"
-          FORBIDDEN_ESCAPE='\\$'"\\{"
-          FORBIDDEN_RENDER='render_'"author"'ial'
-          FORBIDDEN_GENERATE='generate-'"mar"'s-'
-          FORBIDDEN_PROVIDER='image_'"provider"
+          FORBIDDEN_ARTIFACT='actions/upload-'\"artifact\"
+          FORBIDDEN_ESCAPE='\\\\$'\"\\\\{\"
+          FORBIDDEN_RENDER='render_'\"author\"'ial'
+          FORBIDDEN_GENERATE='generate-'\"mar\"'s-'
+          FORBIDDEN_PROVIDER='image_'\"provider\"
           if grep -RInE "${FORBIDDEN_ARTIFACT}|${FORBIDDEN_ESCAPE}|${FORBIDDEN_RENDER}|${FORBIDDEN_GENERATE}|${FORBIDDEN_PROVIDER}" production examples .env.example; then
             echo "Forbidden legacy or artifact pattern detected."
             exit 1
