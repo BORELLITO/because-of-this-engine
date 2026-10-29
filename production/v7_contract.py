@@ -25,9 +25,9 @@ from production.production_record_v7 import (
 )
 
 PROMPT_VERSION = "7.1"
-PROMPT_PATH = Path("docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V7_1_CLOUD_TTS_INTEGRADO.txt")
+PROMPT_PATH = Path("docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V7_1_EDGE_TTS_INTEGRADO.txt")
 SCHEMA_PATH = Path("production/schemas/production-record-3.0.0.json")
-PROMPT_SHA256 = "c8018749d67a0fefdce76e894096de76d9f2b800eac0aad76327d21eb62bced9"
+PROMPT_SHA256 = "9bd5a8854436418c5e9e2e449eca04b0052802a9585fc9f189d9d253adb51e80"
 
 
 class V7ContractError(ValueError):
@@ -119,8 +119,8 @@ def validate_manifest(manifest: dict[str, Any], *, source_label: str = "manifest
         raise V7ContractError(f"{source_label} cannot enter production without visual scenes")
     narrative = manifest.get("narration") or {}
     if require_production:
-        if narrative.get("provider") != "google_cloud_tts":
-            raise V7ContractError("production narration provider must be google_cloud_tts")
+        if narrative.get("provider") != "microsoft_edge_tts":
+            raise V7ContractError("production narration provider must be microsoft_edge_tts")
         if not isinstance(narrative.get("beats"), list) or not narrative["beats"]:
             raise V7ContractError("production narration requires recoverable beat chunks")
         story_graph = manifest.get("story_graph")
