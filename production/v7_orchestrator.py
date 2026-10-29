@@ -20,7 +20,14 @@ from pathlib import Path
 from typing import Any
 
 from production.canonical_config import CANONICAL_PROFILE_FINGERPRINT, CANONICAL_PROFILE_ID
-from production.cloud_tts import CloudTTSError, build_ssml, chunks_from_manifest, profile_from_manifest, synthesize_chunks
+from production.cloud_tts import (
+    CloudTTSError,
+    build_ssml,
+    chunks_from_manifest,
+    cloud_credentials_configured,
+    profile_from_manifest,
+    synthesize_chunks,
+)
 from production.production_record_v7 import (
     GATE_NAMES,
     GATE_ORDER,
@@ -219,8 +226,11 @@ def _tts_gate(manifest: dict[str, Any], *, dry_run: bool) -> dict[str, Any]:
             for beat in beats:
                 build_ssml(str(beat["text"]), break_before_ms=int(beat.get("break_before_ms", 0) or 0), substitutions=beat.get("substitutions"))
             return _status(True, f"Cloud TTS SSML dry-run passed for {len(beats)} beat(s), voice={profile['voice_name']}")
-        if not os.environ.get("GOOGLE_TTS_ACCESS_TOKEN") and not os.environ.get("GOOGLE_APPLICATION_CREDENTIALS"):
-            return _status(False, "Google Cloud credentials are not available; configure ADC or GOOGLE_TTS_ACCESS_TOKEN")
+        if not cloud_credentials_configured():
+            return _status(
+                False,
+                "Google Cloud credentials are not available; configure access token, ADC, or Google OAuth refresh credentials",
+            )
         return _status(True, "Google Cloud credentials are present; execute cloud_tts.py --preflight before synthesis")
     except (CloudTTSError, ValueError, TypeError) as exc:
         return _status(False, str(exc))
