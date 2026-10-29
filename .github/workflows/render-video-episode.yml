@@ -172,6 +172,16 @@ jobs:
             --registry "episodes/asset-memory-registry.json" \
             --report "${EPISODE_DIR}/rendered/asset-reuse-brain-${{ inputs.mode }}.json"
 
+      - name: Run global no-repeat audio brain
+        run: |
+          set -euo pipefail
+          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
+          python production/audio_reuse_brain.py \
+            --manifest "${{ inputs.manifest }}" \
+            --repo-root "." \
+            --registry "episodes/audio-memory-registry.json" \
+            --report "${EPISODE_DIR}/rendered/audio-reuse-brain-${{ inputs.mode }}.json"
+
       - name: Run engine regression tests
         run: python -m unittest discover -s tests -v
 
