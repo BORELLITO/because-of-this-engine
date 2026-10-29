@@ -14,6 +14,13 @@ from production.canonical_config import (
     CANONICAL_PROFILE_FINGERPRINT,
     CANONICAL_PROFILE_ID,
 )
+from production.master_prompt_contract import (
+    MASTER_PROMPT_SHA256,
+    MASTER_PROMPT_VERSION,
+    SCHEMA_ID,
+    validate_master_prompt,
+    validate_manifest_contract,
+)
 
 POLICY_PATH = Path("production/active_engine_policy.json")
 SCAN_ROOTS = (Path("production"), Path(".github"), Path("examples"), Path("episodes"))
@@ -74,6 +81,14 @@ def _check_policy(repo_root: Path, errors: list[str]) -> None:
         errors.append("active policy does not require approved updates to supersede the previous engine")
     if policy.get("retired_versions") != "must_not_remain_executable_in_active_tree":
         errors.append("active policy does not quarantine retired versions")
+    if policy.get("master_prompt_version") != MASTER_PROMPT_VERSION:
+        errors.append("active policy is not bound to master prompt V6")
+    if policy.get("master_prompt_sha256") != MASTER_PROMPT_SHA256:
+        errors.append("active policy master prompt hash is not canonical")
+    if policy.get("production_schema") != SCHEMA_ID:
+        errors.append("active policy is not bound to production schema 2.1.0")
+    if policy.get("publication_policy") != "manual_only":
+        errors.append("active policy must keep publication manual-only")
 
 
 def _check_paths(repo_root: Path, errors: list[str]) -> None:
@@ -87,7 +102,10 @@ def _check_manifests(repo_root: Path, errors: list[str]) -> None:
     candidates: list[Path] = []
     for root in (repo_root / "episodes", repo_root / "examples"):
         if root.exists():
-            candidates.extend(path for path in root.rglob("*.json") if path.is_file())
+            candidates.extend(
+                path for path in root.rglob("*.json")
+                if path.is_file() and path.name in {"manifest.json", "manifest.draft.json"}
+            )
     for path in candidates:
         try:
             value = _load_json(path)
@@ -95,6 +113,10 @@ def _check_manifests(repo_root: Path, errors: list[str]) -> None:
             continue
         profile = value.get("engine_profile")
         fingerprint = value.get("engine_profile_fingerprint")
+        try:
+            validate_manifest_contract(value, source_label=str(path.relative_to(repo_root)))
+        except ValueError as exc:
+            errors.append(str(exc))
         if profile is None and fingerprint is None:
             continue
         if profile != CANONICAL_PROFILE_ID:
@@ -117,6 +139,10 @@ def _check_single_declaration(repo_root: Path, errors: list[str]) -> None:
 
 def run(repo_root: Path) -> int:
     errors: list[str] = []
+    try:
+        validate_master_prompt(repo_root)
+    except ValueError as exc:
+        errors.append(str(exc))
     _check_policy(repo_root, errors)
     _check_paths(repo_root, errors)
     _check_manifests(repo_root, errors)
