@@ -369,9 +369,9 @@ jobs:
       - name: Enforce executable V6 prompt compliance before render
         run: |
           python production/prompt_compliance.py \
-            --manifest "\${{ inputs.manifest }}" \
-            --mode "\${{ inputs.mode }}" \
-            --report "\$(dirname "\${{ inputs.manifest }}")/rendered/prompt-compliance-pre-render.json"
+            --manifest "${{ inputs.manifest }}" \
+            --mode "${{ inputs.mode }}" \
+            --report "$(dirname "${{ inputs.manifest }}")/rendered/prompt-compliance-pre-render.json"
 
       - name: Evaluate canonical gates before render
         run: |
@@ -425,10 +425,10 @@ jobs:
       - name: Enforce executable V6 prompt compliance after render
         run: |
           python production/prompt_compliance.py \
-            --manifest "\${{ inputs.manifest }}" \
-            --mode "\${{ inputs.mode }}" \
-            --release-report "\$(dirname "\${{ inputs.manifest }}")/rendered/video-release-\${{ inputs.mode }}.json" \
-            --report "\$(dirname "\${{ inputs.manifest }}")/rendered/prompt-compliance-post-render.json"
+            --manifest "${{ inputs.manifest }}" \
+            --mode "${{ inputs.mode }}" \
+            --release-report "$(dirname "${{ inputs.manifest }}")/rendered/video-release-${{ inputs.mode }}.json" \
+            --report "$(dirname "${{ inputs.manifest }}")/rendered/prompt-compliance-post-render.json"
 
       - name: Evaluate canonical gates after render QA
         run: |
@@ -532,13 +532,13 @@ jobs:
         run: |
           set -euo pipefail
           EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
-          test "\${{ inputs.confirm_cleanup }}" = "true"
+          test "${{ inputs.confirm_cleanup }}" = "true"
           test -s "\${RUNNER_TEMP}/final-delivery.json"
           grep -q '"status": "DRIVE_VERIFIED"' "\${RUNNER_TEMP}/final-delivery.json"
           python production/cleanup_confirmation.py \
             --episode-dir "\${EPISODE_DIR}" \
             --delivery-receipt "\${RUNNER_TEMP}/final-delivery.json" \
-            --confirmation "\${{ inputs.confirm_cleanup }}"
+            --confirmation "${{ inputs.confirm_cleanup }}"
           echo "v2 media delivered and verified in Google Drive; scoped runner-local media removed." >> "${GITHUB_STEP_SUMMARY}"
           python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition CLEANED --stage cleanup
 
