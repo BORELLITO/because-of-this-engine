@@ -1,0 +1,98 @@
+{
+  "schema_version": "3.0.0",
+  "video_id": "episode-template-v7",
+  "title": "V7.1 video-only episode template",
+  "language": "en-US",
+  "fps": 60,
+  "render": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 60,
+    "duration_min_seconds": 60,
+    "duration_max_seconds": 75
+  },
+  "engine_profile": "because-of-this-v7-cloud-tts-2026-10",
+  "engine_profile_fingerprint": "94c603fb7396835f05e89c07a70642580d10645fc96144d9cecb678f07da3f39",
+  "master_prompt_version": "7.1",
+  "master_prompt_sha256": "c8018749d67a0fefdce76e894096de76d9f2b800eac0aad76327d21eb62bced9",
+  "production_schema": "because-of-this://schemas/production-record/3.0.0",
+  "human_approval_required": true,
+  "lifecycle_status": "DRAFT",
+  "truth_mode": "DECLARED_FICTION",
+  "disclosure": "This is an original fictional suspense story. Licensed or original visual assets are representations, not documentary evidence.",
+  "story": {
+    "truth_mode": "DECLARED_FICTION",
+    "person": "A night-shift security guard",
+    "central_question": "What changed after the irreversible decision?",
+    "risk": "The character may lose identity, safety or the ability to return to ordinary life.",
+    "irreversible_decision": "The character acts after the warning is already clear.",
+    "consequence": "The action produces evidence that cannot be explained away.",
+    "wound": "The character has already learned not to trust the place or their own memory.",
+    "flaw": "Curiosity overrides the last safe exit.",
+    "something_to_lose": "The character's safety and ordinary identity.",
+    "hook": "A simple anomaly appears at the exact moment the building should be quiet.",
+    "reveal": "The final evidence changes the meaning of the opening image."
+  },
+  "emotional_map": {
+    "status": "DRAFT",
+    "beats": [
+      {"position": 0.10, "emotion": "curiosity", "intensity": 0.30},
+      {"position": 0.45, "emotion": "dread", "intensity": 0.70},
+      {"position": 0.82, "emotion": "shock", "intensity": 0.92},
+      {"position": 1.00, "emotion": "consequence", "intensity": 0.86}
+    ]
+  },
+  "reveal_map": {
+    "status": "DRAFT",
+    "known": ["the opening anomaly"],
+    "hidden": ["the identity or mechanism behind the anomaly"],
+    "reveal": "The evidence reveals that the apparent witness was also part of the event."
+  },
+  "visual_rules": {
+    "primary_language": "literal evidence representation",
+    "no_reused_clips": true,
+    "no_derived_clip_reuse": true,
+    "no_text_generated_inside_stock_clips": true
+  },
+  "voice": {
+    "provider": "google_cloud_tts",
+    "language": "en-US",
+    "language_code": "en-US",
+    "voice_name": "en-US-Standard-B",
+    "voice": "en-US-Standard-B",
+    "model_or_voice_type": "standard",
+    "ssml_gender": "MALE",
+    "sample_rate_hz": 24000,
+    "encoding": "LINEAR16",
+    "speaking_rate": 0.96,
+    "pitch": -1.0,
+    "volume_gain_db": 0.0,
+    "style": "Grave American English narration. Controlled cinematic suspense, clear diction, restrained intensity, intimate consequence, never theatrical."
+  },
+  "narration": {
+    "provider": "google_cloud_tts",
+    "language_code": "en-US",
+    "voice_name": "en-US-Standard-B",
+    "state": "DRAFT",
+    "beats": [
+      {"beat_id": "beat-001", "text": "At the exact moment the building should have been silent, the system recorded a movement that no camera could explain."}
+    ]
+  },
+  "script": {"path": "script.txt", "word_count_target": 160},
+  "audio": {"path": "audio/narration.wav", "source": "final_cloud_tts_audio"},
+  "captions": {"path": "captions/narration.ass", "alignment_sidecar": "captions/narration.alignment.json", "alignment_mode": "audio_final_forced_alignment", "word_level_available": true, "max_lines": 2, "max_line_chars": 42, "target_cps": 20, "max_cps": 28, "end_tolerance_seconds": 0.1, "word_highlight_enabled": true, "word_highlight_mode": "timestamp_color_transform", "active_word_color": "#FF7777", "word_highlight_tolerance_ms": 35, "style": {"font_name": "Arial", "font_size": 48, "primary_color": "&H00FFFFFF&", "secondary_color": "&H00FFFFFF&", "outline_color": "&H00000000&", "back_color": "&H80000000&", "bold": 1, "italic": 0, "underline": 0, "strike_out": 0, "scale_x": 100, "scale_y": 100, "spacing": 0, "angle": 0, "border_style": 1, "outline": 3, "shadow": 1, "alignment": 2, "margin_l": 100, "margin_r": 100, "margin_v": 320, "encoding": 1}},
+  "scenes": [],
+  "packaging": {
+    "candidates": [
+      {"candidate_id": "PKG-01", "title": "THE SIGNAL THAT SHOULD NOT EXIST", "thumbnail_text": "NO SIGNAL", "promise": "A system records an event that the building cannot contain.", "mystery": "The witness is withheld.", "spoiler_risk": "LOW"},
+      {"candidate_id": "PKG-02", "title": "THE LAST CAMERA FRAME", "thumbnail_text": "LAST FRAME", "promise": "The final frame changes what the first frame meant.", "mystery": "The consequence is withheld.", "spoiler_risk": "LOW"},
+      {"candidate_id": "PKG-03", "title": "THE BUILDING RECORDED SOMEONE ELSE", "thumbnail_text": "WHO WAS THERE?", "promise": "The log proves a presence no witness remembers.", "mystery": "The identity is withheld.", "spoiler_risk": "LOW"}
+    ],
+    "selection_status": "PENDING_HUMAN_APPROVAL",
+    "cta": {"text": "Follow for the next unexplained story.", "placement": "after_consequence_with_final_logo", "before_consequence": false}
+  },
+  "brand": {"watermark_enabled": false, "watermark_text": "|B", "accent_color": "#E3262E", "logo_enabled": true, "logo_path": "brand/because-of-this-logo.png", "logo_width": 540, "logo_opacity": 0.82, "logo_margin": 54, "logo_top": 72, "logo_anchor": "center_top"},
+  "music": {"volume": 0.12, "complete_track_reuse": "forbidden", "sidechain_enabled": true},
+  "color_grade": {"enabled": true, "preset": "investigative_noir_suspense", "brightness": -0.03, "contrast": 1.08, "saturation": 0.9, "gamma": 0.96, "vignette": true, "cinematic_suspense": {"enabled": true, "cool_shadows": 0.025, "warm_highlights": 0.01}},
+  "loop": {"enabled": true, "title": "BECAUSE OF THIS", "transition": "continuity_fade", "logo_source": "brand_logo_transparent", "logo_width": 820, "logo_anchor": "center_center", "outro_seconds": 1.2, "tail_fade_seconds": 0.55, "card_fade_in_seconds": 0.24, "card_fade_out_seconds": 0.36, "audio_fade_seconds": 0.6, "restart_safe": true}
+}
