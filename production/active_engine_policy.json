@@ -8,7 +8,14 @@
   "master_prompt_version": "6.0",
   "master_prompt_sha256": "6792a1b3a85b4069c100f9b49cc04b7a169e92cc3a54d9abdf690c78efad74ed",
   "production_schema": "because-of-this://schemas/production-record/2.1.0",
-  "publication_policy": "manual_only",\n  "render_contract": {"width": 1080, "height": 1920, "fps": 60, "duration_min_seconds": 60, "duration_max_seconds": 75},
+  "publication_policy": "manual_only",
+  "render_contract": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 60,
+    "duration_min_seconds": 60,
+    "duration_max_seconds": 75
+  },
   "missing_dependency_policy": "fail_closed",
   "rollback_policy": {
     "stable_slots": 2,
