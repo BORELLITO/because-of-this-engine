@@ -1,0 +1,5 @@
+{
+  "schema_version": "2.0",
+  "tracks": [],
+  "policy": "Complete tracks are never reused between episodes; reusable SFX require a three-video cooldown."
+}
