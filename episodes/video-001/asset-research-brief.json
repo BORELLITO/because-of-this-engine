@@ -538,6 +538,87 @@
         "suitcase and corridor context may conflict with the story",
         "must reject if the shot looks like ordinary travel footage"
       ]
+    },
+    {
+      "candidate_id": "PEXELS-4761720",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/video-footage-of-a-concrete-hallway-4761720/",
+      "described_format": {
+        "width": 3840,
+        "height": 2160,
+        "aspect_ratio": "16:9",
+        "duration_seconds": 10,
+        "fps": 24
+      },
+      "semantic_fit": [
+        "long concrete tunnel",
+        "fluorescent corridor",
+        "underground atmosphere"
+      ],
+      "fit_state": "SHORTLIST_WITH_COMPOSITOR_EXTENSION",
+      "scene_eligibility": [
+        "S04",
+        "S09"
+      ],
+      "rejection_risks": [
+        "no red emergency lamp in source",
+        "no CCTV interface",
+        "no distant guard figure",
+        "green cast may need careful grade without changing the literal anchor"
+      ]
+    },
+    {
+      "candidate_id": "PEXELS-15365457",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/an-empty-corridor-with-flickering-lights-15365457/",
+      "described_format": {
+        "width": 1080,
+        "height": 1920,
+        "aspect_ratio": "9:16",
+        "duration_seconds": 16,
+        "fps": 29.97
+      },
+      "semantic_fit": [
+        "dark empty corridor",
+        "flickering lights",
+        "red/brown corridor surfaces"
+      ],
+      "fit_state": "ATMOSPHERE_ONLY",
+      "scene_eligibility": [
+        "S04",
+        "S09"
+      ],
+      "rejection_risks": [
+        "no red emergency lamp",
+        "no CCTV perspective",
+        "no duplicate figure",
+        "ordinary building corridor semantics remain"
+      ]
+    },
+    {
+      "candidate_id": "PEXELS-4354915",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/a-person-pressing-an-elevator-button-4354915/",
+      "described_format": {
+        "width": 1920,
+        "height": 1080,
+        "aspect_ratio": "16:9",
+        "duration_seconds": 6,
+        "fps": 25
+      },
+      "semantic_fit": [
+        "hand pressing elevator button",
+        "control interface"
+      ],
+      "fit_state": "REJECTED_FOR_LITERAL_USE",
+      "scene_eligibility": [
+        "S02"
+      ],
+      "rejection_risks": [
+        "actual frame is a generic round-button panel",
+        "no floor numbering",
+        "cannot prove missing 13"
+      ]
     }
   ],
   "scene_queue": [
@@ -570,7 +651,8 @@
       "candidate_ids": [
         "PEXELS-6573544",
         "PEXELS-31751326",
-        "PEXELS-7701962"
+        "PEXELS-7701962",
+        "PEXELS-4354915"
       ],
       "research_query": "Pexels hospital security guard elevator panel",
       "current_decision": "DO_NOT_APPROVE_YET",
@@ -618,7 +700,9 @@
         "PEXELS-34779661",
         "PEXELS-5203510",
         "PEXELS-36718656",
-        "PIXABAY-130783"
+        "PIXABAY-130783",
+        "PEXELS-4761720",
+        "PEXELS-15365457"
       ],
       "research_query": "Pexels CCTV elevator doors concrete corridor red emergency light",
       "current_decision": "DO_NOT_APPROVE_YET",
@@ -626,7 +710,9 @@
         "one shot or defensible cut that contains the full direct anchor set",
         "CCTV treatment",
         "red lamp must be visibly present rather than graded into an unrelated shot",
-        "single shot or defensible cut containing elevator doors, concrete corridor and red lamp"
+        "single shot or defensible cut containing elevator doors, concrete corridor and red lamp",
+        "red lamp layer",
+        "literal figure/threshold evidence"
       ]
     },
     {
@@ -723,7 +809,9 @@
         "PEXELS-5203510",
         "PEXELS-36718656",
         "PEXELS-9943144",
-        "PEXELS-35140392"
+        "PEXELS-35140392",
+        "PEXELS-4761720",
+        "PEXELS-15365457"
       ],
       "research_query": "Pexels distant security guard silhouette red corridor CCTV",
       "current_decision": "DO_NOT_APPROVE_YET",
@@ -732,7 +820,9 @@
         "matching uniform",
         "CCTV framing",
         "fresh non-derived clip",
-        "matching Elias uniform"
+        "matching Elias uniform",
+        "matching uniform figure",
+        "red lamp"
       ]
     },
     {
@@ -824,7 +914,8 @@
     "Do not render a final or release candidate while any direct_required anchor is unmet.",
     "Do not treat a provider search result or license summary as proof of a specific downloaded asset's rights.",
     "A downloaded research file cannot become a runtime asset until its source page, original file, hashes, rights record, Drive path and human approval are captured.",
-    "A candidate showing the right object but the wrong narrative context must remain ATMOSPHERE_ONLY or REJECTED_FOR_LITERAL_USE."
+    "A candidate showing the right object but the wrong narrative context must remain ATMOSPHERE_ONLY or REJECTED_FOR_LITERAL_USE.",
+    "A compositor extension cannot be treated as source footage; its authored layers need their own asset IDs, hashes and human approval."
   ],
   "updated_at_utc": "2026-10-29",
   "research_passes": [
@@ -834,6 +925,12 @@
       "objective": "Resolve exact-anchor gaps in S02, S03, S04, S09, S10 and S11.",
       "result": "Added panel, elevator-door, CCTV and corridor-silhouette candidates. No candidate was approved.",
       "source_policy": "Pexels and Pixabay pages were treated as research leads only; exact page, media, license evidence, hashes and human approval remain required."
+    },
+    {
+      "pass_id": "PASS-03",
+      "date_utc": "2026-10-29",
+      "objective": "Inspect additional literal corridor and elevator-panel leads for S02, S04 and S09.",
+      "result": "Found a concrete tunnel and a dark vertical corridor as possible physical bases; no candidate alone satisfies the full red-lamp/CCTV/duplicate-figure anchor set. Rejected another unnumbered elevator-button insert."
     }
   ],
   "visual_review": {
@@ -845,7 +942,8 @@
       "SHORTLIST": "Candidate is worth exact-frame review and possible human approval.",
       "ATMOSPHERE_ONLY": "Candidate may support mood but cannot satisfy the listed direct_required anchors.",
       "REJECTED_FOR_LITERAL_USE": "Candidate conflicts with the story anchor or continuity and must not be used for that scene.",
-      "HOLD_FOR_EXACT_FRAME": "Metadata is promising but the exact downloaded frame must be inspected before any shortlist decision."
+      "HOLD_FOR_EXACT_FRAME": "Metadata is promising but the exact downloaded frame must be inspected before any shortlist decision.",
+      "SHORTLIST_WITH_COMPOSITOR_EXTENSION": "Physical source is strong enough to be considered only with a separately authored, auditable compositor layer that supplies the missing story-specific anchor."
     },
     "dispositions": [
       {
@@ -1035,18 +1133,60 @@
           "must not reuse this clip for S01 or S08"
         ],
         "next_action": "Reserve for S12 only if human approves the extension treatment."
+      },
+      {
+        "candidate_id": "PEXELS-4761720",
+        "scenes": [
+          "S04",
+          "S09"
+        ],
+        "decision": "SHORTLIST_WITH_COMPOSITOR_EXTENSION",
+        "reason": "Actual frame provides the strongest concrete tunnel base found so far, with centered depth suitable for the impossible corridor.",
+        "unresolved": [
+          "red emergency lamp must be a separately authored and auditable layer",
+          "CCTV perspective and distant matching figure remain absent",
+          "green color cast must not be misrepresented as source red"
+        ],
+        "next_action": "Keep as physical base only; do not approve until the extension treatment is designed and human-approved."
+      },
+      {
+        "candidate_id": "PEXELS-15365457",
+        "scenes": [
+          "S04",
+          "S09"
+        ],
+        "decision": "ATMOSPHERE_ONLY",
+        "reason": "Actual frame supplies a dark vertical corridor with reddish surfaces and flickering lights, but no literal story evidence.",
+        "unresolved": [
+          "no red lamp",
+          "no CCTV",
+          "no figure"
+        ],
+        "next_action": "Do not use as the sole S04/S09 asset."
+      },
+      {
+        "candidate_id": "PEXELS-4354915",
+        "scenes": [
+          "S02"
+        ],
+        "decision": "REJECTED_FOR_LITERAL_USE",
+        "reason": "Actual frame is another generic round-button insert with no numbering.",
+        "unresolved": [
+          "panel contradiction remains unsatisfied"
+        ],
+        "next_action": "Do not use for S02."
       }
     ],
     "scene_readiness": {
       "S01": "SHORTLIST_EXISTS_LITERAL_13_DISPLAY_TIMESTAMP_STILL_REQUIRED",
       "S02": "NO_ACCEPTED_ASSET_PANEL_SEMANTICS_STILL_WEAK",
       "S03": "NO_APPROVED_ASSET_CCTV_TEXTURE_ONLY",
-      "S04": "NO_APPROVED_ASSET_DOOR_ATMOSPHERE_ONLY",
+      "S04": "PHYSICAL_CORRIDOR_BASE_EXISTS_COMPOSITOR_RED_LAMP_AND_CCTV_STILL_REQUIRED",
       "S05": "NO_APPROVED_ASSET_GUARD_THRESHOLD_STILL_REQUIRED",
       "S06": "NO_APPROVED_ASSET_MAINTENANCE_EVIDENCE_STILL_REQUIRED",
       "S07": "NO_APPROVED_ASSET_CHAINED_ELEVATOR_STILL_REQUIRED",
       "S08": "NO_APPROVED_ASSET_FRESH_DISPLAY_STILL_REQUIRED",
-      "S09": "NO_APPROVED_ASSET_MATCHING_UNIFORM_RED_CORRIDOR_STILL_REQUIRED",
+      "S09": "CORRIDOR_BASE_EXISTS_MATCHING_FIGURE_RED_LAMP_AND_CCTV_STILL_REQUIRED",
       "S10": "NO_APPROVED_ASSET_LOBBY_MONITOR_STILL_REQUIRED",
       "S11": "NO_APPROVED_ASSET_SECOND_PASSENGER_LOG_STILL_REQUIRED",
       "S12": "SHORTLIST_EXISTS_DESCENDING_2_TO_0_BELOW_BASEMENT_EXTENSION_REQUIRED"
@@ -1177,6 +1317,68 @@
           "blank lower display area can support a separate compositor-owned extension"
         ],
         "inspection_decision": "SHORTLIST_FOR_S12_WITH_COMPOSITOR_EXTENSION",
+        "runtime_approval": false
+      },
+      {
+        "candidate_id": "PEXELS-4761720",
+        "source_page_url": "https://www.pexels.com/video/video-footage-of-a-concrete-hallway-4761720/",
+        "inspection_filename": "S04_concrete_4761720.mp4",
+        "sha256": "ec5c5fc5d830f920224f0bba160f22c8d91f11d4e7ef9bc7a8b7b03e1469b5ad",
+        "observed_format": {
+          "width": 3840,
+          "height": 2160,
+          "fps": 24,
+          "duration_seconds": 10
+        },
+        "observed_visual_facts": [
+          "long centered concrete/tunnel passage",
+          "strong green fluorescent cast",
+          "no visible red emergency lamp",
+          "no human figure",
+          "no CCTV frame"
+        ],
+        "inspection_decision": "SHORTLIST_WITH_COMPOSITOR_EXTENSION",
+        "runtime_approval": false
+      },
+      {
+        "candidate_id": "PEXELS-15365457",
+        "source_page_url": "https://www.pexels.com/video/an-empty-corridor-with-flickering-lights-15365457/",
+        "inspection_filename": "S09_corridor_15365457.mp4",
+        "sha256": "0769be7cd9431e49672a619abb553c6665c0229b009ca69310fec919bf658e3a",
+        "observed_format": {
+          "width": 1080,
+          "height": 1920,
+          "fps": 30,
+          "duration_seconds": 16
+        },
+        "observed_visual_facts": [
+          "vertical empty corridor",
+          "dark reddish/brown surfaces",
+          "flickering ceiling lights",
+          "no guard figure",
+          "no literal CCTV overlay"
+        ],
+        "inspection_decision": "ATMOSPHERE_ONLY",
+        "runtime_approval": false
+      },
+      {
+        "candidate_id": "PEXELS-4354915",
+        "source_page_url": "https://www.pexels.com/video/a-person-pressing-an-elevator-button-4354915/",
+        "inspection_filename": "S02_button_4354915.mp4",
+        "sha256": "35685b3b0e85b756a66d9d143ec91392e804688a0dc12f3592d7dd1f3b694766",
+        "observed_format": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 25,
+          "duration_seconds": 6
+        },
+        "observed_visual_facts": [
+          "generic round-button elevator panel",
+          "green illuminated button",
+          "no floor numbers",
+          "no missing-13 evidence"
+        ],
+        "inspection_decision": "REJECTED_FOR_LITERAL_USE",
         "runtime_approval": false
       }
     ],
