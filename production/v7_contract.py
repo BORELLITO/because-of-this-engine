@@ -27,7 +27,7 @@ from production.production_record_v7 import (
 PROMPT_VERSION = "7.1"
 PROMPT_PATH = Path("docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V7_1_EDGE_TTS_INTEGRADO.txt")
 SCHEMA_PATH = Path("production/schemas/production-record-3.0.0.json")
-PROMPT_SHA256 = "9bd5a8854436418c5e9e2e449eca04b0052802a9585fc9f189d9d253adb51e80"
+PROMPT_SHA256 = "79503604dd3c21bce2b3eb5490ff217056117412049354069c1559003066a797"
 
 
 class V7ContractError(ValueError):
