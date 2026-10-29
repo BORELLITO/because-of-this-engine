@@ -11,6 +11,7 @@
     "engine_bundle",
     "production",
     "story",
+    "story_graph",
     "emotional_map",
     "reveal_map",
     "scenes",
@@ -68,6 +69,7 @@
       }
     },
     "story": { "type": "object" },
+    "story_graph": { "type": "object" },
     "emotional_map": { "type": "object" },
     "reveal_map": { "type": "object" },
     "scenes": { "type": "array" },
