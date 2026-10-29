@@ -216,7 +216,7 @@ def preflight(manifest: dict) -> dict:
     try:
         voices = asyncio.run(_list_voices())
     except Exception as exc:
-        raise EdgeTTSError("Edge TTS voice catalog is unavailable; retry later") from exc
+        raise EdgeTTSError(f"Edge TTS voice catalog is unavailable ({type(exc).__name__}): {str(exc)[:240]}") from exc
     matches = [
         voice for voice in voices
         if isinstance(voice, dict)
