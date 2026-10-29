@@ -1,26 +1,20 @@
 {
-  "policy_version": "2.0",
-  "active_engine_profile": "because-of-this-v2-locked-2026-10",
-  "active_engine_fingerprint": "0c1a553876064876231898a735575eec7968ad42e8f231bfda04660f6ce1d4d6",
+  "policy_version": "3.0",
+  "active_engine_profile": "because-of-this-v7-cloud-tts-2026-10",
+  "active_engine_fingerprint": "94c603fb7396835f05e89c07a70642580d10645fc96144d9cecb678f07da3f39",
+  "active_engine_version": "7.1",
   "update_rule": "approved_update_supersedes_previous_active_engine",
   "retired_versions": "must_not_remain_executable_in_active_tree",
-  "history_rule": "git_history_is_retained_for_audit_but_is_never_an_execution_source",
-  "master_prompt_version": "6.0",
-  "master_prompt_sha256": "6792a1b3a85b4069c100f9b49cc04b7a169e92cc3a54d9abdf690c78efad74ed",
-  "production_schema": "because-of-this://schemas/production-record/2.1.0",
+  "history_rule": "git_history_and_archive_are_retained_for_audit_but_are_never_an_execution_source",
+  "master_prompt_version": "7.1",
+  "master_prompt_sha256": "c8018749d67a0fefdce76e894096de76d9f2b800eac0aad76327d21eb62bced9",
+  "production_schema": "because-of-this://schemas/production-record/3.0.0",
+  "voice_provider": "google_cloud_tts",
+  "voice_policy": {"language_code": "en-US", "voice_name": "en-US-Standard-B", "ssml_required": true, "provider_fallback": "forbidden"},
   "publication_policy": "manual_only",
-  "render_contract": {
-    "width": 1080,
-    "height": 1920,
-    "fps": 60,
-    "duration_min_seconds": 60,
-    "duration_max_seconds": 75
-  },
+  "render_contract": {"width": 1080, "height": 1920, "fps": 60, "duration_min_seconds": 60, "duration_max_seconds": 75},
   "missing_dependency_policy": "fail_closed",
-  "rollback_policy": {
-    "stable_slots": 2,
-    "activation": "atomic_prompt_code_schema_config",
-    "alternate_engine_profiles_executable": false,
-    "retired_versions": "audit_only_non_executable"
-  }
+  "rollback_policy": {"stable_slots": 2, "activation": "atomic_prompt_code_schema_config", "alternate_engine_profiles_executable": false, "retired_versions": "audit_only_non_executable", "last_stable_v6_commit": "66d51c6b6da2ba5639fea3c2eb7e2b566bbd1542"},
+  "audit_policy": {"drive_archive": "append_only", "metrics_start_after_days": 7, "automatic_prompt_changes": false, "automatic_publication": false},
+  "gate_order": ["G0", "G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9", "G10", "G11"]
 }
