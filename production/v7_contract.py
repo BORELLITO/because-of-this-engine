@@ -66,7 +66,7 @@ def validate_prompt_and_schema(repo_root: Path) -> dict[str, Any]:
         raise V7ContractError("schema is not version 3.0.0")
     text = prompt.read_text(encoding="utf-8")
     markers = (
-        "GOOGLE CLOUD TEXT-TO-SPEECH",
+        "MICROSOFT EDGE ONLINE TTS",
         "because-of-this://schemas/production-record/3.0.0",
         "G0 preflight",
         "G11 post_publication",
