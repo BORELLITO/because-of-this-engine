@@ -58,21 +58,19 @@ jobs:
           PYTHONPATH=. python production/v7_contract.py \
             --repo-root . --manifest "${{ inputs.manifest }}" --require-production
 
-      - name: Configure Google Cloud ADC
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
-        run: |
-          set -euo pipefail
-          test -n "${GOOGLE_APPLICATION_CREDENTIALS_JSON}"
-          umask 077
-          printf '%s' "${GOOGLE_APPLICATION_CREDENTIALS_JSON}" > "${RUNNER_TEMP}/because-of-this-google-credentials.json"
-          echo "GOOGLE_APPLICATION_CREDENTIALS=${RUNNER_TEMP}/because-of-this-google-credentials.json" >> "${GITHUB_ENV}"
 
       - name: Cloud TTS preflight and narration
         env:
-          GOOGLE_TTS_PROJECT_ID: ${{ secrets.GOOGLE_TTS_PROJECT_ID }}
+          GOOGLE_TTS_PROJECT_ID: ${{ vars.GOOGLE_TTS_PROJECT_ID }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: |
           set -euo pipefail
+          test -n "${GOOGLE_TTS_PROJECT_ID}"
+          test -n "${GOOGLE_CLIENT_ID}"
+          test -n "${GOOGLE_CLIENT_SECRET}"
+          test -n "${GOOGLE_REFRESH_TOKEN}"
           PYTHONPATH=. python production/cloud_tts.py --manifest "${{ inputs.manifest }}" --preflight
           PYTHONPATH=. python production/cloud_tts.py \
             --manifest "${{ inputs.manifest }}" \
@@ -146,6 +144,10 @@ jobs:
       - name: Register preview artifacts and evaluate V7 gates
         env:
           MANIFEST: ${{ inputs.manifest }}
+          GOOGLE_TTS_PROJECT_ID: ${{ vars.GOOGLE_TTS_PROJECT_ID }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: |
           set -euo pipefail
           python - "${MANIFEST}" <<'PY'
