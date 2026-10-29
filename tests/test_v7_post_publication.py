@@ -13,6 +13,8 @@ class V7PostPublicationTests(unittest.TestCase):
     def test_manual_receipt_closes_g11(self):
         manifest = json.loads((ROOT / "episodes/video-001/manifest.json").read_text(encoding="utf-8"))
         record = new_record(manifest, engine_bundle_id="test-bundle")
+        for index in range(11):
+            record["gates"][f"G{index}"]["state"] = "passed"
         receipt = {"video_id": "episode-001", "platform": "youtube", "public_url": "https://youtube.example/video", "published_at": "2026-10-29T00:00:00Z", "video_sha256": "a" * 64, "manual_confirmation": True, "automatic_publication": False}
         updated = close_g11(record, receipt)
         self.assertEqual(updated["gates"]["G11"]["state"], "passed")
