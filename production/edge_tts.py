@@ -96,7 +96,7 @@ def profile_from_manifest(manifest: dict) -> dict:
     }
 
 
-def build_text(text: str, *, substitutions: dict | None = None) -> str:
+def build_text(text: str, *, break_before_ms: int = 0, substitutions: dict | None = None) -> str:
     clean = " ".join(str(text or "").split()).strip()
     if not clean:
         raise EdgeTTSError("cannot synthesize empty text")
