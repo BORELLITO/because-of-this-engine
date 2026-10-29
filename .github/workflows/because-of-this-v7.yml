@@ -89,7 +89,7 @@ jobs:
       - name: Edge TTS service and voice preflight
         run: |
           set -euo pipefail
-          command -v ffmpeg >/dev/null
+          sudo apt-get update && sudo apt-get install -y ffmpeg
           PYTHONPATH=. python production/edge_tts.py --manifest "${{ inputs.manifest }}" --preflight
 
       - name: Generate narration with Edge TTS
