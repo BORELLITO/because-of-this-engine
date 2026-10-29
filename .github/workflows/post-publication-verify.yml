@@ -1,14 +1,10 @@
-name: Because Of This post-publication G11
+name: Because Of This V7.1 post-publication G11
 
 on:
   workflow_dispatch:
     inputs:
-      manifest:
-        description: "Original episode manifest path"
-        required: true
-        type: string
-      final_manifest:
-        description: "Final reproducibility manifest path"
+      record:
+        description: "V7 production record path"
         required: true
         type: string
       receipt:
@@ -26,14 +22,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-      - name: Validate manual publication receipt
+      - name: Setup Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Validate V7 manual publication receipt
         run: |
           set -euo pipefail
-          python production/post_publication_verifier.py --final-manifest "${{ inputs.final_manifest }}" --receipt "${{ inputs.receipt }}"
-      - name: Advance pipeline state through G11
-        run: |
-          set -euo pipefail
-          PYTHONPATH=. python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition PUBLISHED_VERIFIED --stage post-publication
-          PYTHONPATH=. python production/pipeline_state.py --manifest "${{ inputs.manifest }}" --transition COMPLETE --stage complete
-      - name: Print completion
-        run: echo "G11_POST_PUBLICATION_PASS"
+          PYTHONPATH=. python production/v7_post_publication.py \
+            --record "${{ inputs.record }}" --receipt "${{ inputs.receipt }}"
+      - name: Print G11 completion
+        run: echo "G11_MANUAL_PUBLICATION_PASS"
