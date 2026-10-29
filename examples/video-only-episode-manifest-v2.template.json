@@ -3,7 +3,7 @@
   "video_id": "episode-001",
   "title": "A question worth one minute",
   "language": "en",
-  "fps": 25,
+  "fps": 60,
   "story_profile": {
     "format": "The Hidden Detail",
     "truth_mode": "VERIFIED_FACT",
@@ -804,7 +804,7 @@
     "logo_width": 820,
     "logo_anchor": "center_center"
   },
-  "engine_profile_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
+  "engine_profile_fingerprint": "0c1a553876064876231898a735575eec7968ad42e8f231bfda04660f6ce1d4d6",
   "lifecycle_status": "TEMPLATE_CANONICAL",
   "master_prompt_version": "6.0",
   "master_prompt_sha256": "6792a1b3a85b4069c100f9b49cc04b7a169e92cc3a54d9abdf690c78efad74ed",
