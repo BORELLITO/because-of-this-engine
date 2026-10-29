@@ -225,7 +225,7 @@ def _tts_gate(manifest: dict[str, Any], *, dry_run: bool) -> dict[str, Any]:
         if dry_run:
             for beat in beats:
                 build_text(str(beat["text"]), break_before_ms=int(beat.get("break_before_ms", 0) or 0), substitutions=beat.get("substitutions"))
-            return _status(True, f"Edge TTS SSML dry-run passed for {len(beats)} beat(s), voice={profile['voice_name']}")
+            return _status(True, f"Edge TTS prosody dry-run passed for {len(beats)} beat(s), voice={profile['voice_name']}")
         if not edge_tts_available():
             return _status(
                 False,
