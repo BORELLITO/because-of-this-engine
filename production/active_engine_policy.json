@@ -4,5 +4,16 @@
   "active_engine_fingerprint": "c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64",
   "update_rule": "approved_update_supersedes_previous_active_engine",
   "retired_versions": "must_not_remain_executable_in_active_tree",
-  "history_rule": "git_history_is_retained_for_audit_but_is_never_an_execution_source"
+  "history_rule": "git_history_is_retained_for_audit_but_is_never_an_execution_source",
+  "master_prompt_version": "6.0",
+  "master_prompt_sha256": "6792a1b3a85b4069c100f9b49cc04b7a169e92cc3a54d9abdf690c78efad74ed",
+  "production_schema": "because-of-this://schemas/production-record/2.1.0",
+  "publication_policy": "manual_only",
+  "missing_dependency_policy": "fail_closed",
+  "rollback_policy": {
+    "stable_slots": 2,
+    "activation": "atomic_prompt_code_schema_config",
+    "alternate_engine_profiles_executable": false,
+    "retired_versions": "audit_only_non_executable"
+  }
 }
