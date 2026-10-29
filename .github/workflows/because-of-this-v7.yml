@@ -85,24 +85,21 @@ jobs:
             --repo-root . --manifest "${{ inputs.manifest }}" --mode contract \
             --report "$(dirname "${{ inputs.manifest }}")/rendered/v7-contract-${{ inputs.mode }}.json"
 
-      - name: Configure Google Cloud ADC
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
-        run: |
-          set -euo pipefail
-          test -n "${GOOGLE_APPLICATION_CREDENTIALS_JSON}"
-          umask 077
-          printf '%s' "${GOOGLE_APPLICATION_CREDENTIALS_JSON}" > "${RUNNER_TEMP}/because-of-this-google-credentials.json"
-          echo "GOOGLE_APPLICATION_CREDENTIALS=${RUNNER_TEMP}/because-of-this-google-credentials.json" >> "${GITHUB_ENV}"
 
       - name: Cloud TTS quota, voice and authentication preflight
         env:
-          GOOGLE_TTS_PROJECT_ID: ${{ secrets.GOOGLE_TTS_PROJECT_ID }}
+          GOOGLE_TTS_PROJECT_ID: ${{ vars.GOOGLE_TTS_PROJECT_ID }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: PYTHONPATH=. python production/cloud_tts.py --manifest "${{ inputs.manifest }}" --preflight
 
       - name: Generate narration with Google Cloud TTS
         env:
-          GOOGLE_TTS_PROJECT_ID: ${{ secrets.GOOGLE_TTS_PROJECT_ID }}
+          GOOGLE_TTS_PROJECT_ID: ${{ vars.GOOGLE_TTS_PROJECT_ID }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: |
           set -euo pipefail
           EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
@@ -247,6 +244,11 @@ jobs:
           PY
 
       - name: Run V7 release gates
+        env:
+          GOOGLE_TTS_PROJECT_ID: ${{ vars.GOOGLE_TTS_PROJECT_ID }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: |
           GATE_MODE=preview
           if [ "${{ inputs.mode }}" = "final" ]; then GATE_MODE=production; fi
