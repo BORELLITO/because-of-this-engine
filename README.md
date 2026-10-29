@@ -34,7 +34,7 @@ Because Of This channel. V7.1 is driven by the pinned master prompt
 ## Lifecycle
 
 Use `--mode contract` for structural validation before external work, `--mode
-dry-run` for local SSML and orchestration checks, `--mode preflight` after
+dry-run` for local Edge TTS prosody and orchestration checks, `--mode preflight` after
 approved assets/music and narration coverage are hydrated, `--mode preview`
 for a render candidate, and `--mode production` only after final artifacts,
 preview approval and human approval are registered. A blocked gate is an intentional stop, not an implicit fallback.
