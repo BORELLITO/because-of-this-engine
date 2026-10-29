@@ -59,24 +59,15 @@ jobs:
             --repo-root . --manifest "${{ inputs.manifest }}" --require-production
 
 
-      - name: Cloud TTS preflight and narration
-        env:
-          GOOGLE_TTS_PROJECT_ID: ${{ vars.GOOGLE_TTS_PROJECT_ID }}
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+      - name: Edge TTS preflight and narration
         run: |
           set -euo pipefail
-          test -n "${GOOGLE_TTS_PROJECT_ID}"
-          test -n "${GOOGLE_CLIENT_ID}"
-          test -n "${GOOGLE_CLIENT_SECRET}"
-          test -n "${GOOGLE_REFRESH_TOKEN}"
-          PYTHONPATH=. python production/cloud_tts.py --manifest "${{ inputs.manifest }}" --preflight
-          PYTHONPATH=. python production/cloud_tts.py \
+          command -v ffmpeg >/dev/null
+          PYTHONPATH=. python production/edge_tts.py --manifest "${{ inputs.manifest }}" --preflight
+          PYTHONPATH=. python production/edge_tts.py \
             --manifest "${{ inputs.manifest }}" \
             --input "episodes/video-001/script.txt" \
             --output-dir "episodes/video-001/audio"
-
       - name: Install independent Vosk alignment models
         run: |
           set -euo pipefail
@@ -144,10 +135,6 @@ jobs:
       - name: Register preview artifacts and evaluate V7 gates
         env:
           MANIFEST: ${{ inputs.manifest }}
-          GOOGLE_TTS_PROJECT_ID: ${{ vars.GOOGLE_TTS_PROJECT_ID }}
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: |
           set -euo pipefail
           python - "${MANIFEST}" <<'PY'
@@ -177,7 +164,7 @@ jobs:
           PY
           PYTHONPATH=. python production/v7_orchestrator.py \
             --repo-root . --manifest "${MANIFEST}" --mode draft-preview \
-            --check-cloud-tts \
+            --check-edge-tts \
             --report "episodes/video-001/rendered/v7-release-draft-preview.json"
 
       - name: Deliver verified preview bundle to Drive
