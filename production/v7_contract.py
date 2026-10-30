@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Executable V7.1 prompt, schema, manifest and gate contract."""
+"""Executable V7.2 Charon prompt, schema, manifest and gate contract."""
 
 from __future__ import annotations
 
@@ -24,10 +24,10 @@ from production.production_record_v7 import (
     validate_record,
 )
 
-PROMPT_VERSION = "7.1"
-PROMPT_PATH = Path("docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V7_1_PIPER_TTS_LOCAL.txt")
+PROMPT_VERSION = "7.2"
+PROMPT_PATH = Path("docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V7_2_CHARON_CLEAN_CLIPS.txt")
 SCHEMA_PATH = Path("production/schemas/production-record-3.0.0.json")
-PROMPT_SHA256 = "82db772fdff0dfd2e8e9bebe7d8a537d8ee9934192f36c1193baffa12503e17b"
+PROMPT_SHA256 = "f27797423fb055c214beeafe8f2973bceaf739c76b7ce53eea2790bfe9f40c0c"
 
 
 class V7ContractError(ValueError):
@@ -53,10 +53,10 @@ def validate_prompt_and_schema(repo_root: Path) -> dict[str, Any]:
     prompt = repo_root / PROMPT_PATH
     schema_path = repo_root / SCHEMA_PATH
     if not prompt.is_file():
-        raise V7ContractError(f"missing canonical V7.1 prompt: {PROMPT_PATH}")
+        raise V7ContractError(f"missing canonical V7.2 prompt: {PROMPT_PATH}")
     actual_hash = sha256_file(prompt)
     if actual_hash != PROMPT_SHA256:
-        raise V7ContractError(f"V7.1 prompt hash mismatch: expected {PROMPT_SHA256}, got {actual_hash}")
+        raise V7ContractError(f"V7.2 prompt hash mismatch: expected {PROMPT_SHA256}, got {actual_hash}")
     if not schema_path.is_file():
         raise V7ContractError(f"missing canonical schema: {SCHEMA_PATH}")
     schema = load_json(schema_path)
@@ -66,16 +66,18 @@ def validate_prompt_and_schema(repo_root: Path) -> dict[str, Any]:
         raise V7ContractError("schema is not version 3.0.0")
     text = prompt.read_text(encoding="utf-8")
     markers = (
-        "PIPER LOCAL NEURAL TTS",
+        "GOOGLE CLOUD TTS CHIRP 3 HD CHARON",
         "because-of-this://schemas/production-record/3.0.0",
         "G0 preflight",
         "G11 post_publication",
         "A publicação nunca é automática",
         "O mesmo clipe ou derivação dele nunca pode aparecer em outro vídeo",
+        "Captions are the only editorial text layer",
+        "NATURAL_SOURCE_ONLY",
     )
     missing = [marker for marker in markers if marker not in text]
     if missing:
-        raise V7ContractError(f"V7.1 prompt is incomplete: {missing}")
+        raise V7ContractError(f"V7.2 prompt is incomplete: {missing}")
     return {
         "status": "V7_PROMPT_SCHEMA_PASS",
         "prompt_version": PROMPT_VERSION,
@@ -98,9 +100,9 @@ def validate_manifest(manifest: dict[str, Any], *, source_label: str = "manifest
     if manifest.get("schema_version") not in {"3.0.0", "3.0"}:
         raise V7ContractError(f"{source_label} must declare schema_version 3.0.0")
     if manifest.get("master_prompt_version") != PROMPT_VERSION:
-        raise V7ContractError(f"{source_label} must declare master_prompt_version 7.1")
+        raise V7ContractError(f"{source_label} must declare master_prompt_version 7.2")
     if manifest.get("master_prompt_sha256") != PROMPT_SHA256:
-        raise V7ContractError(f"{source_label} has the wrong V7.1 prompt hash")
+        raise V7ContractError(f"{source_label} has the wrong V7.2 prompt hash")
     if manifest.get("production_schema") != CANONICAL_SCHEMA_ID:
         raise V7ContractError(f"{source_label} must declare production-record/3.0.0")
     if manifest.get("human_approval_required") is not True:
@@ -119,8 +121,8 @@ def validate_manifest(manifest: dict[str, Any], *, source_label: str = "manifest
         raise V7ContractError(f"{source_label} cannot enter production without visual scenes")
     narrative = manifest.get("narration") or {}
     if require_production:
-        if narrative.get("provider") != "piper_tts_local":
-            raise V7ContractError("production narration provider must be piper_tts_local")
+        if narrative.get("provider") != "google_cloud_tts":
+            raise V7ContractError("production narration provider must be google_cloud_tts")
         if not isinstance(narrative.get("beats"), list) or not narrative["beats"]:
             raise V7ContractError("production narration requires recoverable beat chunks")
         story_graph = manifest.get("story_graph")
