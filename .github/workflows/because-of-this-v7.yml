@@ -86,17 +86,25 @@ jobs:
             --report "$(dirname "${{ inputs.manifest }}")/rendered/v7-contract-${{ inputs.mode }}.json"
 
 
-      - name: Edge TTS service and voice preflight
+      - name: Download approved Piper local voice model
+        run: |
+          set -euo pipefail
+          PIPER_MODEL_DIR="${RUNNER_TEMP}/piper-models"
+          mkdir -p "${PIPER_MODEL_DIR}"
+          python -m piper.download_voices en_US-ryan-high --data-dir "${PIPER_MODEL_DIR}"
+          echo "PIPER_MODEL_DIR=${PIPER_MODEL_DIR}" >> "${GITHUB_ENV}"
+
+      - name: Piper TTS local model preflight
         run: |
           set -euo pipefail
           sudo apt-get update && sudo apt-get install -y ffmpeg
-          PYTHONPATH=. python production/edge_tts.py --manifest "${{ inputs.manifest }}" --preflight
+          PYTHONPATH=. python production/piper_tts.py --manifest "${{ inputs.manifest }}" --preflight
 
-      - name: Generate narration with Edge TTS
+      - name: Generate narration with Piper TTS
         run: |
           set -euo pipefail
           EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
-          PYTHONPATH=. python production/edge_tts.py \
+          PYTHONPATH=. python production/piper_tts.py \
             --manifest "${{ inputs.manifest }}" \
             --input "${EPISODE_DIR}/script.txt" \
             --output-dir "${EPISODE_DIR}/audio"
@@ -242,7 +250,7 @@ jobs:
           if [ "${{ inputs.mode }}" = "final" ]; then GATE_MODE=production; fi
           PYTHONPATH=. python production/v7_orchestrator.py \
             --repo-root . --manifest "${{ inputs.manifest }}" --mode "${GATE_MODE}" \
-            --check-edge-tts \
+            --check-piper-tts \
             --report "$(dirname "${{ inputs.manifest }}")/rendered/v7-release-${{ inputs.mode }}.json"
 
       - name: Deliver only after V7 approval gates pass

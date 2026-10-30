@@ -78,7 +78,7 @@
       "type": "object",
       "required": ["provider"],
       "properties": {
-        "provider": { "const": "microsoft_edge_tts" },
+        "provider": { "const": "piper_tts_local" },
         "language_code": { "const": "en-US" },
         "beats": { "type": "array" }
       }

@@ -2,14 +2,14 @@
 
 This repository contains the single canonical production engine for the
 Because Of This channel. V7.1 is driven by the pinned master prompt
-`docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V7_1_EDGE_TTS_INTEGRADO.txt` and schema
+`docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V7_1_PIPER_TTS_LOCAL.txt` and schema
 `because-of-this://schemas/production-record/3.0.0`.
 
 ## Active engine contract
 
 - Video-only vertical output: 1080×1920, 60 fps, 60–75 seconds.
-- Narration provider: Microsoft Edge online TTS only, `en-US-GuyNeural`,
-  prosody parameters, LINEAR16 at 24 kHz, with no API key, billing account or silent fallback.
+- Narration provider: local Piper neural TTS only, `en_US-ryan-high`,
+  LINEAR16 at 24 kHz, with no API key, billing account, network synthesis or silent fallback.
 - Audio is the master clock. Captions are generated from final audio using
   forced alignment; estimated timings are not accepted.
 - Every visual beat requires direct semantic anchors, rights evidence,
@@ -25,8 +25,8 @@ Because Of This channel. V7.1 is driven by the pinned master prompt
   are V7.1 and rejects retired execution markers.
 - `production/v7_orchestrator.py` — G0–G11 evaluation, idempotency and
   production-record generation.
-- `production/edge_tts.py` — Edge TTS voice preflight, chunk synthesis,
-  provenance, hashes and real-duration metadata; Google Cloud rollback is archived.
+- `production/piper_tts.py` — Piper local model preflight, chunk synthesis,
+  provenance, hashes and real-duration metadata; Edge and Google Cloud adapters are archived.
 - `production/v7_post_publication.py` — manual-only G11 verifier.
 - `.github/workflows/because-of-this-v7.yml` — manually dispatched production
   workflow; it stops on missing evidence and never publishes automatically.
@@ -34,7 +34,7 @@ Because Of This channel. V7.1 is driven by the pinned master prompt
 ## Lifecycle
 
 Use `--mode contract` for structural validation before external work, `--mode
-dry-run` for local Edge TTS prosody and orchestration checks, `--mode preflight` after
+dry-run` for local Piper TTS prosody and orchestration checks, `--mode preflight` after
 approved assets/music and narration coverage are hydrated, `--mode preview`
 for a render candidate, and `--mode production` only after final artifacts,
 preview approval and human approval are registered. A blocked gate is an intentional stop, not an implicit fallback.

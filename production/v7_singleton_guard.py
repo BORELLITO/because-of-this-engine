@@ -47,7 +47,7 @@ def audit(repo_root: Path) -> dict[str, object]:
     if len(workflows) != 1:
         raise SingletonGuardError("exactly one V7 workflow must be active")
     offenders: list[str] = []
-    for path in [policy_path, workflows[0], root / "production" / "v7_orchestrator.py", root / "production" / "edge_tts.py"]:
+    for path in [policy_path, workflows[0], root / "production" / "v7_orchestrator.py", root / "production" / "piper_tts.py"]:
         text = path.read_text(encoding="utf-8")
         for marker in FORBIDDEN_ACTIVE_MARKERS:
             if marker in text:

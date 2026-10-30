@@ -52,6 +52,21 @@ def _piper_voice_class():
     return PiperVoice
 
 
+def _synthesis_config(profile: dict):
+    try:
+        from piper.config import SynthesisConfig
+    except ImportError as exc:
+        raise PiperTTSError("piper-tts SynthesisConfig is unavailable") from exc
+    speaking_rate = float(profile.get("speaking_rate", 1.0))
+    if not 0.5 <= speaking_rate <= 2.0:
+        raise PiperTTSError("speaking_rate must be between 0.5 and 2.0")
+    volume_gain_db = float(profile.get("volume_gain_db", 0.0))
+    return SynthesisConfig(
+        length_scale=1.0 / speaking_rate,
+        volume=10 ** (volume_gain_db / 20.0),
+    )
+
+
 def _model_dir() -> Path:
     value = os.environ.get("PIPER_MODEL_DIR", "").strip()
     if not value:
@@ -176,6 +191,7 @@ def _convert_to_canonical(source_path: Path, destination: Path, sample_rate: int
 
 def synthesize_text(text: str, profile: dict, piper_voice, *, break_before_ms: int = 0):
     clean = build_text(text)
+    syn_config = _synthesis_config(profile)
     last_error = None
     with tempfile.TemporaryDirectory(prefix="because-of-this-piper-") as directory:
         source_path = Path(directory) / "source.wav"
@@ -183,7 +199,7 @@ def synthesize_text(text: str, profile: dict, piper_voice, *, break_before_ms: i
         for attempt in range(1, MAX_ATTEMPTS + 1):
             try:
                 with wave.open(str(source_path), "wb") as output:
-                    piper_voice.synthesize_wav(clean, output)
+                    piper_voice.synthesize_wav(clean, output, syn_config=syn_config)
                 last_error = None
                 break
             except Exception as exc:
@@ -212,6 +228,12 @@ def synthesize_text(text: str, profile: dict, piper_voice, *, break_before_ms: i
 def preflight(manifest: dict) -> dict:
     profile = profile_from_manifest(manifest)
     model, config = _model_paths(profile)
+    if shutil.which("ffmpeg") is None:
+        raise PiperTTSError("ffmpeg is required for canonical 24 kHz WAV normalization")
+    try:
+        json.loads(config.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        raise PiperTTSError(f"Piper voice configuration is unreadable: {config.name}") from exc
     voice = _load_voice(profile)
     del voice
     chunks = chunks_from_manifest(manifest, "")
@@ -223,6 +245,7 @@ def preflight(manifest: dict) -> dict:
         "voice_profile": profile,
         "model_path": str(model),
         "model_config_path": str(config),
+        "model_bytes": model.stat().st_size,
         "estimated_characters": estimated,
         "credential_policy": "no_api_key_or_billing_account_required",
         "network_policy": "model_download_is_explicit; synthesis_is_local",

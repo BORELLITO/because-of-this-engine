@@ -20,11 +20,11 @@ from pathlib import Path
 from typing import Any
 
 from production.canonical_config import CANONICAL_PROFILE_FINGERPRINT, CANONICAL_PROFILE_ID
-from production.edge_tts import (
-    EdgeTTSError,
+from production.piper_tts import (
+    PiperTTSError,
     build_text,
     chunks_from_manifest,
-    edge_tts_available,
+    piper_tts_available,
     profile_from_manifest,
     synthesize_chunks,
 )
@@ -40,7 +40,7 @@ from production.production_record_v7 import (
 )
 from production.v7_contract import V7ContractError, load_json, validate_manifest, validate_prompt_and_schema
 
-ENGINE_BUNDLE_ID = "because-of-this-v7-edge-tts-7.1"
+ENGINE_BUNDLE_ID = "because-of-this-v7-piper-tts-7.1"
 SAFE_MANIFEST = re.compile(r"^episodes/[^/]+/(?:manifest|preview-manifest)\.json$")
 REQUIRED_STORY_FIELDS = (
     "person",
@@ -221,18 +221,18 @@ def _tts_gate(manifest: dict[str, Any], *, dry_run: bool) -> dict[str, Any]:
         profile = profile_from_manifest(manifest)
         beats = chunks_from_manifest(manifest, "")
         if not beats or any(not str(beat.get("text", "")).strip() for beat in beats):
-            raise EdgeTTSError("narration beats must contain non-empty text")
+            raise PiperTTSError("narration beats must contain non-empty text")
         if dry_run:
             for beat in beats:
                 build_text(str(beat["text"]), break_before_ms=int(beat.get("break_before_ms", 0) or 0), substitutions=beat.get("substitutions"))
-            return _status(True, f"Edge TTS prosody dry-run passed for {len(beats)} beat(s), voice={profile['voice_name']}")
-        if not edge_tts_available():
+            return _status(True, f"Piper TTS prosody dry-run passed for {len(beats)} beat(s), voice={profile['voice_name']}")
+        if not piper_tts_available():
             return _status(
                 False,
-                "edge-tts dependency is not installed; install the locked Edge TTS dependency",
+                "piper-tts dependency is not installed; install the locked Piper TTS dependency",
             )
-        return _status(True, "Edge TTS dependency is present; execute edge_tts.py --preflight before synthesis")
-    except (EdgeTTSError, ValueError, TypeError) as exc:
+        return _status(True, "Piper TTS dependency is present; execute piper_tts.py --preflight before synthesis")
+    except (PiperTTSError, ValueError, TypeError) as exc:
         return _status(False, str(exc))
 
 
@@ -322,7 +322,7 @@ def _gate_record(gate_id: str, check: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def evaluate(manifest: dict[str, Any], *, repo_root: Path, manifest_dir: Path, mode: str, check_edge_tts: bool = False) -> dict[str, Any]:
+def evaluate(manifest: dict[str, Any], *, repo_root: Path, manifest_dir: Path, mode: str, check_piper_tts: bool = False) -> dict[str, Any]:
     if mode not in {"contract", "dry-run", "draft-preview", "preflight", "preview", "production"}:
         raise OrchestratorError(f"unsupported orchestration mode: {mode}")
     validate_prompt_and_schema(repo_root)
@@ -339,7 +339,7 @@ def evaluate(manifest: dict[str, Any], *, repo_root: Path, manifest_dir: Path, m
             manifest_dir=manifest_dir,
             allow_preview_only=allow_preview_only,
         ),
-        "G4": _tts_gate(manifest, dry_run=(mode in {"contract", "dry-run"} or not check_edge_tts)),
+        "G4": _tts_gate(manifest, dry_run=(mode in {"contract", "dry-run"} or not check_piper_tts)),
         "G5": _audio_gate(
             manifest,
             require_approved=mode in {"preflight", "preview", "production"},
@@ -392,7 +392,7 @@ def run(args: argparse.Namespace) -> int:
     if not SAFE_MANIFEST.fullmatch(relative):
         raise OrchestratorError("manifest must be episodes/<episode>/manifest.json")
     manifest = load_json(manifest_path)
-    report = evaluate(manifest, repo_root=repo_root, manifest_dir=manifest_path.parent, mode=args.mode, check_edge_tts=args.check_edge_tts)
+    report = evaluate(manifest, repo_root=repo_root, manifest_dir=manifest_path.parent, mode=args.mode, check_piper_tts=args.check_piper_tts)
     report_path = args.report.resolve() if args.report else manifest_path.parent / "rendered" / f"v7-{args.mode}.json"
     _write_json(report_path, {key: value for key, value in report.items() if key != "record"})
     record_path = args.record.resolve() if args.record else manifest_path.parent / ".engine" / "production-record-7.1.json"
@@ -406,7 +406,7 @@ def main() -> int:
     parser.add_argument("--repo-root", type=Path, default=Path("."))
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--mode", choices=("contract", "preflight", "dry-run", "draft-preview", "preview", "production"), default="preflight")
-    parser.add_argument("--check-edge-tts", action="store_true")
+    parser.add_argument("--check-piper-tts", action="store_true")
     parser.add_argument("--report", type=Path)
     parser.add_argument("--record", type=Path)
     try:

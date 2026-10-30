@@ -59,12 +59,20 @@ jobs:
             --repo-root . --manifest "${{ inputs.manifest }}" --require-production
 
 
-      - name: Edge TTS preflight and narration
+      - name: Download approved Piper local voice model
+        run: |
+          set -euo pipefail
+          PIPER_MODEL_DIR="${RUNNER_TEMP}/piper-models"
+          mkdir -p "${PIPER_MODEL_DIR}"
+          python -m piper.download_voices en_US-ryan-high --data-dir "${PIPER_MODEL_DIR}"
+          echo "PIPER_MODEL_DIR=${PIPER_MODEL_DIR}" >> "${GITHUB_ENV}"
+
+      - name: Piper TTS local model preflight and narration
         run: |
           set -euo pipefail
           sudo apt-get update && sudo apt-get install -y ffmpeg
-          PYTHONPATH=. python production/edge_tts.py --manifest "${{ inputs.manifest }}" --preflight
-          PYTHONPATH=. python production/edge_tts.py \
+          PYTHONPATH=. python production/piper_tts.py --manifest "${{ inputs.manifest }}" --preflight
+          PYTHONPATH=. python production/piper_tts.py \
             --manifest "${{ inputs.manifest }}" \
             --input "episodes/video-001/script.txt" \
             --output-dir "episodes/video-001/audio"
@@ -164,7 +172,7 @@ jobs:
           PY
           PYTHONPATH=. python production/v7_orchestrator.py \
             --repo-root . --manifest "${MANIFEST}" --mode draft-preview \
-            --check-edge-tts \
+            --check-piper-tts \
             --report "episodes/video-001/rendered/v7-release-draft-preview.json"
 
       - name: Deliver verified preview bundle to Drive

@@ -25,9 +25,9 @@ from production.production_record_v7 import (
 )
 
 PROMPT_VERSION = "7.1"
-PROMPT_PATH = Path("docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V7_1_EDGE_TTS_INTEGRADO.txt")
+PROMPT_PATH = Path("docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V7_1_PIPER_TTS_LOCAL.txt")
 SCHEMA_PATH = Path("production/schemas/production-record-3.0.0.json")
-PROMPT_SHA256 = "79503604dd3c21bce2b3eb5490ff217056117412049354069c1559003066a797"
+PROMPT_SHA256 = "82db772fdff0dfd2e8e9bebe7d8a537d8ee9934192f36c1193baffa12503e17b"
 
 
 class V7ContractError(ValueError):
@@ -66,7 +66,7 @@ def validate_prompt_and_schema(repo_root: Path) -> dict[str, Any]:
         raise V7ContractError("schema is not version 3.0.0")
     text = prompt.read_text(encoding="utf-8")
     markers = (
-        "MICROSOFT EDGE ONLINE TTS",
+        "PIPER LOCAL NEURAL TTS",
         "because-of-this://schemas/production-record/3.0.0",
         "G0 preflight",
         "G11 post_publication",
@@ -119,8 +119,8 @@ def validate_manifest(manifest: dict[str, Any], *, source_label: str = "manifest
         raise V7ContractError(f"{source_label} cannot enter production without visual scenes")
     narrative = manifest.get("narration") or {}
     if require_production:
-        if narrative.get("provider") != "microsoft_edge_tts":
-            raise V7ContractError("production narration provider must be microsoft_edge_tts")
+        if narrative.get("provider") != "piper_tts_local":
+            raise V7ContractError("production narration provider must be piper_tts_local")
         if not isinstance(narrative.get("beats"), list) or not narrative["beats"]:
             raise V7ContractError("production narration requires recoverable beat chunks")
         story_graph = manifest.get("story_graph")

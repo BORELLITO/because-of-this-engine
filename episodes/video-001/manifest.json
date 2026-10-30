@@ -13,15 +13,15 @@
     "duration_max_seconds": 75
   },
   "target_runtime_seconds": 69.5,
-  "engine_profile": "because-of-this-v7-edge-tts-2026-10",
-  "engine_profile_fingerprint": "84f6cb246cf34fbbc1d9c230ebaadd048abc602e7ef0b3ebc6486d0076df4af1",
+  "engine_profile": "because-of-this-v7-piper-tts-2026-10",
+  "engine_profile_fingerprint": "5b3b61ce198c7e5fbda1a1844ec91cc3d3529337c02d4a8d625c8880bf357ddb",
   "master_prompt_version": "7.1",
-  "master_prompt_sha256": "79503604dd3c21bce2b3eb5490ff217056117412049354069c1559003066a797",
+  "master_prompt_sha256": "82db772fdff0dfd2e8e9bebe7d8a537d8ee9934192f36c1193baffa12503e17b",
   "production_schema": "because-of-this://schemas/production-record/3.0.0",
   "human_approval_required": true,
   "lifecycle_status": "DRAFT",
   "video_number": 1,
-  "engine_milestone": "FIRST_VIDEO_ON_V7_EDGE_TTS_ENGINE",
+  "engine_milestone": "FIRST_VIDEO_ON_V7_PIPER_TTS_ENGINE",
   "canonical_path": "episodes/video-001",
   "truth_mode": "DECLARED_FICTION",
   "disclosure": "This is an original fictional suspense story. Licensed visual assets will represent the events and are not documentary evidence.",
@@ -343,24 +343,24 @@
     "no_text_generated_inside_stock_clips": true
   },
   "voice": {
-    "provider": "microsoft_edge_tts",
+    "provider": "piper_tts_local",
     "language": "en-US",
     "language_code": "en-US",
-    "voice_name": "en-US-GuyNeural",
-    "voice": "en-US-GuyNeural",
-    "model_or_voice_type": "neural",
+    "voice_name": "en_US-ryan-high",
+    "voice": "en_US-ryan-high",
+    "model_or_voice_type": "piper_neural_high",
     "ssml_gender": "MALE",
     "sample_rate_hz": 24000,
     "encoding": "LINEAR16",
-    "speaking_rate": 0.96,
-    "pitch": -1,
+    "speaking_rate": 0.70,
+    "pitch": 0,
     "volume_gain_db": 0,
     "style": "Grave American English narration. Controlled cinematic suspense, clear diction, restrained intensity, intimate consequence, never theatrical."
   },
   "narration": {
-    "provider": "microsoft_edge_tts",
+    "provider": "piper_tts_local",
     "language_code": "en-US",
-    "voice_name": "en-US-GuyNeural",
+    "voice_name": "en_US-ryan-high",
     "state": "DRAFT",
     "script_path": "script.txt",
     "beats": [
@@ -404,7 +404,7 @@
   },
   "audio": {
     "path": "audio/narration.wav",
-    "source": "final_edge_tts_audio"
+    "source": "final_piper_tts_audio"
   },
   "captions": {
     "path": "captions/narration.ass",

@@ -1,5 +1,5 @@
 BECAUSE OF THIS
-PROMPT MESTRE DEFINITIVO — V7.1 EDGE TTS INTEGRADO
+PROMPT MESTRE DEFINITIVO — V7.1 PIPER TTS LOCAL INTEGRADO
 MOTOR CANÔNICO DE CRIAÇÃO, IMPLEMENTAÇÃO, VALIDAÇÃO, AUDITORIA E RECUPERAÇÃO
 
 ======================================================================
@@ -585,10 +585,10 @@ O provedor oficial e único desta versão é:
 
 PIPER LOCAL NEURAL TTS
 
-Não use Google Cloud TTS, ElevenLabs, Kokoro, Piper, MeloTTS ou outro provedor como
-fallback automático nesta versão. Se o Piper TTS falhar, tente novamente de
-acordo com a política e bloqueie ou solicite reconexão. Trocar de provedor
-exige nova versão do motor e aprovação humana.
+Não use Google Cloud TTS, Microsoft Edge TTS, ElevenLabs, Kokoro, MeloTTS ou
+outro provedor como fallback automático nesta versão. Se o Piper TTS falhar,
+tente novamente de acordo com a política e bloqueie ou solicite correção.
+Trocar de provedor exige nova versão do motor e aprovação humana.
 
 14.1 PERFIL VOCAL
 
@@ -602,7 +602,7 @@ Use uma única voz sintética original com:
 - identidade vocal consistente entre vídeos.
 
 O nome exato da voz e do modelo deve vir de configuração aprovada e de uma
-allowlist validada contra as vozes realmente disponíveis na API. Não invente
+allowlist validada contra os arquivos locais realmente presentes. Não invente
 voice name, modelo ou parâmetro.
 
 O motor deve guardar um voice_profile_id estável contendo:
@@ -626,25 +626,28 @@ Se a voz ou a interpretação parecer indevidamente semelhante a uma pessoa
 real, bloqueie e gere somente após alterar parâmetros dentro do perfil
 aprovado, registrando o risco.
 
-14.2 AUTENTICAÇÃO E CUSTO
+14.2 EXECUÇÃO LOCAL, MODELO E CUSTO
 
-O adaptador deve usar ADC, OAuth ou conta de serviço protegida. Nunca aceite
-chave exposta no prompt, no código, no Drive ou no log.
+O adaptador deve carregar o modelo Piper a partir de um diretório local
+explicitamente configurado. A síntese não pode depender de API, conta de
+serviço, chave, OAuth, billing ou conexão de rede durante a produção.
 
 No pré-voo, confirme:
 
-- projeto Piper local TTS;
-- API Text-to-Speech habilitada;
-- credencial válida;
-- modelo local e dependências disponíveis;
-- limite de caracteres da produção;
-- limite financeiro configurado;
-- estimativa de custo;
-- política de bloqueio após o limite.
+- dependência `piper-tts` instalada na versão travada;
+- arquivo `.onnx` da voz aprovada disponível;
+- arquivo `.onnx.json` correspondente disponível;
+- modelo carregável sem credencial;
+- `ffmpeg` disponível para normalização do áudio;
+- diretório de modelo dentro do workspace temporário ou de uma fonte
+  versionada/autorizada;
+- integridade e hash dos arquivos do modelo, quando fornecidos pelo registro;
+- limite operacional de caracteres e duração configurado.
 
-“Cota gratuita” não significa custo ilimitado. Se billing, quota ou limite não
-puderem ser verificados, bloqueie antes de gerar. Nunca ultrapasse limite
-configurado silenciosamente.
+O download do modelo, quando necessário, deve ser uma etapa explícita,
+repetível e auditável do ambiente. Nunca baixe ou troque o modelo
+silenciosamente durante a síntese. Falha de modelo, dependência ou ferramenta
+de áudio bloqueia a produção.
 
 14.3 GERAÇÃO
 
@@ -1348,10 +1351,10 @@ Crie e execute, no mínimo:
 - testes de transição de estado;
 - testes de ID e idempotência;
 - testes do adaptador Piper TTS com resposta simulada e erro simulado;
-- teste real de pré-voo quando credencial estiver autorizada;
+- teste real de pré-voo quando o modelo local estiver disponível;
 - teste de parâmetros de prosódia inválido;
 - teste de pronúncia falha;
-- teste de quota e limite de custo;
+- teste de modelo ausente, modelo corrompido e `ffmpeg` ausente;
 - teste de retry do TTS;
 - teste de texto alterado ou frase omitida;
 - teste de áudio incompreensível;
@@ -1385,7 +1388,7 @@ Considere o motor implementado somente se:
 [ ] O schema é validado pelo código.
 [ ] Os estados e transições são controlados pelo código.
 [ ] O Piper TTS está conectado por adaptador real.
-[ ] Voz, modelo, parâmetros e custo possuem allowlist e registro.
+[ ] Voz, modelo, parâmetros e integridade possuem allowlist e registro.
 [ ] Não há credenciais expostas.
 [ ] O TTS usa parâmetros de prosódia, retries, geração por trechos e hashes.
 [ ] História e suspense possuem gates objetivos.
@@ -1425,7 +1428,7 @@ Ao terminar cada execução, entregue:
 10. artefatos e hashes;
 11. direitos e licenças verificadas;
 12. status Piper TTS;
-13. custo/quota verificados;
+13. limite operacional e disponibilidade do modelo verificados;
 14. sincronização do Drive;
 15. decisões humanas necessárias;
 16. bloqueios exatos;
@@ -1452,7 +1455,7 @@ permissão, artefato ou integração essencial ausente.
 [ ] Fidelidade visual mínima 8/10.
 [ ] Piper TTS disponível.
 [ ] Voz aprovada e allowlist validada.
-[ ] Cota, billing e limite de custo verificados.
+[ ] Modelo local, dependências e limite operacional verificados.
 [ ] Pronúncia e parâmetros de prosódia validados.
 [ ] Narração inteligível e emocionalmente coerente.
 [ ] Trilha e efeitos autorizados.
