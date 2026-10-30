@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import pytest
+import unittest
 
 from production.render_video_episode import scene_filter
 from production.visual_effects_v73 import (
@@ -39,39 +39,42 @@ PROFILE = {
 }
 
 
-def test_active_profile_is_validated_and_normalized() -> None:
-    value = validate_cinematic_suspense(PROFILE, require_active_profile=True)
-    assert value["profile"] == PROFILE_ID
-    assert value["profile_version"] == PROFILE_VERSION
-    assert value["shadow_crush"] == 0.045
+class VisualEffectsV731Tests(unittest.TestCase):
+    def test_active_profile_is_validated_and_normalized(self) -> None:
+        value = validate_cinematic_suspense(PROFILE, require_active_profile=True)
+        self.assertEqual(value["profile"], PROFILE_ID)
+        self.assertEqual(value["profile_version"], PROFILE_VERSION)
+        self.assertEqual(value["shadow_crush"], 0.045)
 
+    def test_renderer_contains_all_calibrated_dread_layers(self) -> None:
+        graph = scene_filter(1080, 1920, 0.5, 0.5, PROFILE, duration=8.0)
+        self.assertIn("eq=", graph)
+        self.assertIn(":eval=frame", graph)
+        self.assertIn("colorlevels=", graph)
+        self.assertIn("colorbalance=", graph)
+        self.assertIn("unsharp=", graph)
+        self.assertIn("vignette=angle=PI/5.8", graph)
+        self.assertIn("scale=1080:1920", graph)
 
-def test_renderer_contains_all_calibrated_dread_layers() -> None:
-    graph = scene_filter(1080, 1920, 0.5, 0.5, PROFILE, duration=8.0)
-    assert "eq=" in graph and ":eval=frame" in graph
-    assert "colorlevels=" in graph
-    assert "colorbalance=" in graph
-    assert "unsharp=" in graph
-    assert "vignette=angle=PI/5.8" in graph
-    assert "scale=1080:1920" in graph
-
-
-def test_legacy_profile_cannot_enter_active_production() -> None:
-    legacy = {
-        "enabled": True,
-        "cinematic_suspense": {
+    def test_legacy_profile_cannot_enter_active_production(self) -> None:
+        legacy = {
             "enabled": True,
-            "profile": "investigative_noir_suspense",
-        },
-    }
-    with pytest.raises(VisualEffectsError):
-        validate_cinematic_suspense(legacy, require_active_profile=True)
+            "cinematic_suspense": {
+                "enabled": True,
+                "profile": "investigative_noir_suspense",
+            },
+        }
+        with self.assertRaises(VisualEffectsError):
+            validate_cinematic_suspense(legacy, require_active_profile=True)
+
+    def test_effect_ranges_fail_closed(self) -> None:
+        invalid = {**PROFILE, "cinematic_suspense": {
+            **PROFILE["cinematic_suspense"],
+            "shadow_crush": 0.50,
+        }}
+        with self.assertRaises(VisualEffectsError):
+            validate_cinematic_suspense(invalid, require_active_profile=True)
 
 
-def test_effect_ranges_fail_closed() -> None:
-    invalid = {**PROFILE, "cinematic_suspense": {
-        **PROFILE["cinematic_suspense"],
-        "shadow_crush": 0.50,
-    }}
-    with pytest.raises(VisualEffectsError):
-        validate_cinematic_suspense(invalid, require_active_profile=True)
+if __name__ == "__main__":
+    unittest.main()
