@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Canonical V7.3.1 cinematic-dread visual-effects contract.
+"""Canonical V7.3.2 cinematic-dread visual-effects contract.
 
 The effect profile is intentionally deterministic and conservative: it increases
 perceived dread through shadow shaping, restrained color separation, a controlled
@@ -12,7 +12,7 @@ from __future__ import annotations
 from typing import Any
 
 PROFILE_ID = "cinematic_dread_v73"
-PROFILE_VERSION = "7.3.1"
+PROFILE_VERSION = "7.3.2"
 REFERENCE_BASIS = "cinematic_dread_v73_before_after_comparison"
 
 
@@ -78,11 +78,20 @@ def validate_cinematic_suspense(
             "cinematic_suspense.reference_basis must identify the approved before/after calibration"
         )
 
+    motion_smoothing = suspense.get("motion_smoothing", False)
+    if not isinstance(motion_smoothing, bool):
+        raise VisualEffectsError("cinematic_suspense.motion_smoothing must be boolean")
+    interpolation_fps = _number(suspense, "interpolation_fps", 60.0)
+    if interpolation_fps != int(interpolation_fps):
+        raise VisualEffectsError("cinematic_suspense.interpolation_fps must be an integer")
+
     normalized = {
         "enabled": True,
         "profile": profile,
         "profile_version": PROFILE_VERSION,
         "reference_basis": REFERENCE_BASIS,
+        "motion_smoothing": motion_smoothing,
+        "interpolation_fps": int(interpolation_fps),
         "motion_strength": _number(suspense, "motion_strength", 0.045),
         "push_in": _number(suspense, "push_in", 0.055),
         "cool_shadows": _number(suspense, "cool_shadows", 0.040),
@@ -92,6 +101,8 @@ def validate_cinematic_suspense(
         "flicker_strength": _number(suspense, "flicker_strength", 0.003),
         "flicker_period_seconds": _number(suspense, "flicker_period_seconds", 4.8),
         "detail_strength": _number(suspense, "detail_strength", 0.16),
+        "motion_smoothing": motion_smoothing,
+        "interpolation_fps": int(interpolation_fps),
         "vignette_angle": str(suspense.get("vignette_angle", "PI/5.8")),
         "edge_fade": suspense.get("edge_fade") is True,
     }
@@ -106,6 +117,7 @@ def validate_cinematic_suspense(
         "flicker_strength": (0.0, 0.02),
         "flicker_period_seconds": (2.0, 12.0),
         "detail_strength": (0.0, 0.40),
+        "interpolation_fps": (30.0, 120.0),
     }
     for key, (minimum, maximum) in ranges.items():
         value = normalized[key]
@@ -150,7 +162,7 @@ def validate_visual_effects(
         require_active_profile=require_active_profile,
     )
     return {
-        "status": "VISUAL_EFFECTS_V731_PASS",
+        "status": "VISUAL_EFFECTS_V732_PASS",
         "profile": suspense.get("profile"),
         "profile_version": suspense.get("profile_version", "legacy"),
         "reference_basis": suspense.get("reference_basis"),
