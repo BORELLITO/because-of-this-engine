@@ -446,7 +446,7 @@
       },
       {
         "beat_id": "beat-011",
-        "text": "Then the timestamp jumped to the present. The station's live monitor showed the same platform—empty, except for a lamp glowing behind the sealed wall."
+        "text": "Then the timestamp jumped to the present. The station's live monitor showed that platform—empty, except for a lamp glowing behind the sealed wall."
       },
       {
         "beat_id": "beat-012",
@@ -459,7 +459,7 @@
   },
   "script": {
     "path": "script.txt",
-    "word_count_target": 161
+    "word_count_target": 160
   },
   "audio": {
     "path": "audio/narration.wav",
