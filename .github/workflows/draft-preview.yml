@@ -1,9 +1,10 @@
-name: Because Of This V7.3 Charon suspense-cinema draft preview
+name: Because Of This V7.3.1 Charon cinematic-dread draft preview
 
 on:
   push:
     branches:
       - v7.3-charon-suspense-cinema-preview
+      - v7.3.1-cinematic-dread-effects-preview
   workflow_dispatch:
     inputs:
       manifest:
@@ -17,7 +18,7 @@ permissions:
 
 concurrency:
   group: because-of-this-v7.3-charon-suspense-cinema-media-global
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 env:
   BECAUSE_OF_THIS_DRIVE_FOLDER_ID: "1A-oyowfHtdciB2_NZSLIZ0oG-ajOeYVb"
@@ -39,11 +40,11 @@ jobs:
       - name: Install lightweight Drive metadata dependencies
         run: |
           python -m pip install google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib
-      - name: Disable legacy preview reuse for V7.2 Charon
+      - name: Disable legacy preview reuse for V7.3.1 Charon
         id: reuse_check
         run: |
           echo "reuse=false" >> "${GITHUB_OUTPUT}"
-          echo "V7.2_REUSE_DISABLED_PREVIOUS_PREVIEW_NOT_ELIGIBLE"
+          echo "V7.3.1_REUSE_DISABLED_PREVIOUS_PREVIEW_NOT_ELIGIBLE"
 
   draft-preview:
     needs: preflight-reuse
@@ -79,7 +80,7 @@ jobs:
       - name: Install locked dependencies
         run: python -m pip install -r requirements.lock.txt
 
-      - name: Validate canonical V7.2 Charon contract
+      - name: Validate canonical V7.3.1 Charon contract
         run: |
           PYTHONPATH=. python production/v7_contract.py \
             --repo-root . --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --require-production
@@ -102,8 +103,8 @@ jobs:
           set -euo pipefail
           PYTHONPATH=. python production/narration_cache.py \
             --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --restore \
-            --status-file "${RUNNER_TEMP}/v72-cache-result.json"
-          python - "${RUNNER_TEMP}/v72-cache-result.json" <<'PY'
+            --status-file "${RUNNER_TEMP}/v731-cache-result.json"
+          python - "${RUNNER_TEMP}/v731-cache-result.json" <<'PY'
           import json, os, sys
           status=json.load(open(sys.argv[1], encoding="utf-8"))["status"]
           if status not in {"NARRATION_CACHE_HIT","NARRATION_CACHE_MISS"}:

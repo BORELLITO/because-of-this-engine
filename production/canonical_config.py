@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""V7.2 canonical Gemini TTS Charon production profile for Because Of This.
+"""V7.3 Charon production profile with canonical cinematic-dread visual effects for Because Of This.
 
 This module is the only active configuration authority.  The former Gemini
 profile is retained only in Git history/rollback documentation and is not
@@ -14,8 +14,8 @@ import json
 from pathlib import Path
 from typing import Any
 
-CANONICAL_PROFILE_ID = "because-of-this-v7.2-charon-gemini-tts-2026-10"
-CANONICAL_ENGINE_VERSION = "7.2"
+CANONICAL_PROFILE_ID = "because-of-this-v7.3.1-charon-cinematic-dread-2026-10"
+CANONICAL_ENGINE_VERSION = "7.3.1"
 CANONICAL_SCHEMA_ID = "because-of-this://schemas/production-record/3.0.0"
 
 CANONICAL_PROFILE: dict[str, Any] = {
@@ -102,16 +102,28 @@ CANONICAL_PROFILE: dict[str, Any] = {
     },
     "color_grade": {
         "enabled": True,
-        "preset": "investigative_noir_suspense",
-        "brightness": -0.03,
-        "contrast": 1.08,
-        "saturation": 0.9,
-        "gamma": 0.96,
+        "preset": "cinematic_dread_v73",
+        "brightness": -0.05,
+        "contrast": 1.14,
+        "saturation": 0.84,
+        "gamma": 0.92,
         "vignette": True,
         "cinematic_suspense": {
             "enabled": True,
-            "cool_shadows": 0.025,
-            "warm_highlights": 0.01,
+            "profile": "cinematic_dread_v73",
+            "profile_version": "7.3.1",
+            "reference_basis": "cinematic_dread_v73_before_after_comparison",
+            "cool_shadows": 0.04,
+            "warm_highlights": 0.014,
+            "motion_strength": 0.045,
+            "push_in": 0.055,
+            "edge_fade": True,
+            "shadow_crush": 0.045,
+            "highlight_rolloff": 0.012,
+            "flicker_strength": 0.003,
+            "flicker_period_seconds": 4.8,
+            "detail_strength": 0.16,
+            "vignette_angle": "PI/5.8",
         },
     },
     "loop": {
@@ -198,9 +210,9 @@ def validate_canonical_manifest(manifest: dict[str, Any], *, source_label: str =
     if differences:
         preview = "; ".join(differences[:8])
         suffix = f" (+{len(differences) - 8} more)" if len(differences) > 8 else ""
-        raise CanonicalConfigError(f"{source_label} deviates from the V7.2 profile: {preview}{suffix}")
+        raise CanonicalConfigError(f"{source_label} deviates from the V7.3.1 profile: {preview}{suffix}")
     return {
-        "status": "CANONICAL_CONFIG_V7_2_PASS",
+        "status": "CANONICAL_CONFIG_V7_3_1_PASS",
         "profile_id": CANONICAL_PROFILE_ID,
         "engine_version": CANONICAL_ENGINE_VERSION,
         "schema_id": CANONICAL_SCHEMA_ID,

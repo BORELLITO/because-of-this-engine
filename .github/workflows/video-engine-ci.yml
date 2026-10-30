@@ -1,4 +1,4 @@
-name: Because Of This V7.3 Charon engine CI
+name: Because Of This V7.3.1 Charon cinematic-dread engine CI
 
 on:
   push:
@@ -24,24 +24,26 @@ jobs:
           python-version: "3.12"
       - name: Install locked dependencies
         run: python -m pip install -r requirements.lock.txt
-      - name: Compile the active V7.3 production surface
+      - name: Compile the active V7.3.1 production surface
         run: python -m py_compile production/*.py
       - name: Enforce one active Charon engine
         run: PYTHONPATH=. python production/v7_singleton_guard.py --repo-root .
-      - name: Validate Charon prompt, schema and final manifest
+      - name: Execute cinematic-dread unit contract
+        run: PYTHONPATH=. python -m unittest tests/test_visual_effects_v73.py -v
+      - name: Validate Charon prompt, schema, visual effects and final manifest
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/v7_contract.py --repo-root . \
             --manifest examples/video-only-episode-manifest-v7.template.json
           PYTHONPATH=. python production/v7_contract.py --repo-root . \
             --manifest episodes/video-001/manifest.json --require-production
-      - name: Validate canonical Charon profile fingerprints
+      - name: Validate canonical Charon cinematic-dread profile fingerprints
         run: |
           PYTHONPATH=. python production/canonical_config.py \
             --manifest examples/video-only-episode-manifest-v7.template.json
           PYTHONPATH=. python production/canonical_config.py \
             --manifest episodes/video-001/manifest.json
-      - name: Re-run executable Charon dry-run contract
+      - name: Re-run executable Charon cinematic-dread dry-run contract
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/v7_orchestrator.py \
@@ -55,13 +57,22 @@ jobs:
           from pathlib import Path
           policy=json.loads(Path('production/active_engine_policy.json').read_text())
           manifest=json.loads(Path('episodes/video-001/manifest.json').read_text())
+          from production.canonical_config import CANONICAL_PROFILE_FINGERPRINT, CANONICAL_PROFILE_ID
+          from production.visual_effects_v73 import PROFILE_ID, PROFILE_VERSION, validate_visual_effects
+          assert policy['active_engine_profile'] == CANONICAL_PROFILE_ID
+          assert policy['active_engine_fingerprint'] == CANONICAL_PROFILE_FINGERPRINT
           assert policy['voice_provider'] == 'gemini_tts'
           assert policy['voice_policy']['voice_name'] == 'Charon'
+          assert manifest['engine_profile'] == CANONICAL_PROFILE_ID
+          assert manifest['engine_profile_fingerprint'] == CANONICAL_PROFILE_FINGERPRINT
           assert manifest['lifecycle_status'] == 'FINAL_APPROVED'
           assert manifest['human_approval']['status'] == 'PASS'
           assert manifest['editorial_qa']['status'] == 'PASS'
           assert manifest['music']['license_status'] == 'APPROVED'
-          print('CHARON_FINAL_IDENTITY_PASS')
+          effects = validate_visual_effects(manifest, require_active_profile=True)
+          assert effects['profile'] == PROFILE_ID
+          assert effects['profile_version'] == PROFILE_VERSION
+          print('CHARON_CINEMATIC_DREAD_FINAL_IDENTITY_PASS')
           PY
       - name: Parse the production-record schema
         run: python -m json.tool production/schemas/production-record-3.0.0.json >/dev/null

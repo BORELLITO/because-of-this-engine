@@ -14,6 +14,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from production.video_asset_contract import VideoContractError, ffprobe, load_manifest, validate_manifest
+from production.visual_effects_v73 import VisualEffectsError, validate_cinematic_suspense
 
 FPS = 60
 # draft-preview is deliberately separate from preview: it can carry explicit
@@ -72,17 +73,16 @@ def scene_filter(
     duration: float = 8.0,
 ) -> str:
     grade = color_grade or {}
-    suspense = grade.get("cinematic_suspense") or {}
+    try:
+        suspense = validate_cinematic_suspense(grade)
+    except VisualEffectsError as exc:
+        raise RenderError(str(exc)) from exc
     suspense_enabled = suspense.get("enabled") is True
-    motion_strength = float(suspense.get("motion_strength", 0.035)) if suspense_enabled else 0.0
-    push_in = float(suspense.get("push_in", 0.045)) if suspense_enabled else 0.0
-    if not 0.0 <= motion_strength <= 0.08:
-        raise RenderError("Cinematic suspense motion_strength is outside the safe editorial range.")
-    if not 0.0 <= push_in <= 0.10:
-        raise RenderError("Cinematic suspense push_in is outside the safe editorial range.")
+    motion_strength = float(suspense.get("motion_strength", 0.0)) if suspense_enabled else 0.0
+    push_in = float(suspense.get("push_in", 0.0)) if suspense_enabled else 0.0
     if suspense_enabled:
-        # A restrained, deterministic push-in and lateral drift create the
-        # investigative-cinema feel without inventing content or adding text.
+        # Deterministic push-in and micro-drift preserve the source evidence while
+        # adding the calibrated investigative-dread movement from the reference.
         zoom = 1.0 + push_in
         crop_x = (
             f"max(0,min(iw-ow,(iw-ow)*{focus_x:.4f}+"
@@ -102,6 +102,7 @@ def scene_filter(
             f"scale={width}:{height}:force_original_aspect_ratio=increase",
             f"crop={width}:{height}:x='(iw-ow)*{focus_x:.4f}':y='(ih-oh)*{focus_y:.4f}'",
         ]
+
     if grade.get("enabled") is True:
         brightness = float(grade.get("brightness", -0.03))
         contrast = float(grade.get("contrast", 1.08))
@@ -111,31 +112,55 @@ def scene_filter(
             raise RenderError("Color grade brightness/contrast is outside the safe editorial range.")
         if not 0.65 <= saturation <= 1.15 or not 0.80 <= gamma <= 1.15:
             raise RenderError("Color grade saturation/gamma is outside the safe editorial range.")
+
+        flicker_strength = float(suspense.get("flicker_strength", 0.0)) if suspense_enabled else 0.0
+        flicker_period = float(suspense.get("flicker_period_seconds", 4.8)) if suspense_enabled else 4.8
+        if suspense_enabled and flicker_strength > 0:
+            brightness_expr = (
+                f"'{brightness:.4f}+{flicker_strength:.4f}*"
+                f"sin(2*PI*t/{flicker_period:.3f})'"
+            )
+            eq_eval = ":eval=frame"
+        else:
+            brightness_expr = f"{brightness:.4f}"
+            eq_eval = ""
         filters.append(
-            f"eq=brightness={brightness:.4f}:contrast={contrast:.4f}:"
-            f"saturation={saturation:.4f}:gamma={gamma:.4f}"
+            f"eq=brightness={brightness_expr}:contrast={contrast:.4f}:"
+            f"saturation={saturation:.4f}:gamma={gamma:.4f}{eq_eval}"
         )
 
-        suspense = grade.get("cinematic_suspense") or {}
-        suspense_enabled = suspense.get("enabled") is True
         if suspense_enabled:
+            shadow_crush = float(suspense.get("shadow_crush", 0.0))
+            highlight_rolloff = float(suspense.get("highlight_rolloff", 0.0))
             cool_shadows = float(suspense.get("cool_shadows", 0.025))
             warm_highlights = float(suspense.get("warm_highlights", 0.010))
-            if not 0.0 <= cool_shadows <= 0.10:
-                raise RenderError("Cinematic suspense cool_shadows is outside the safe editorial range.")
-            if not 0.0 <= warm_highlights <= 0.06:
-                raise RenderError("Cinematic suspense warm_highlights is outside the safe editorial range.")
-            # Cool, slightly desaturated shadows plus restrained warm highlights
-            # create the channel's investigative-noir suspense signature.
+            # Shape the blacks and roll off hot highlights to match the approved
+            # before/after calibration without erasing source-native evidence.
+            if shadow_crush > 0 or highlight_rolloff > 0:
+                black = shadow_crush
+                white = max(0.86, 1.0 - highlight_rolloff)
+                filters.append(
+                    "colorlevels="
+                    f"rimin={black:.4f}:gimin={black:.4f}:bimin={black:.4f}:"
+                    f"rimax={white:.4f}:gimax={white:.4f}:bimax={white:.4f}"
+                )
+            # Cool shadows and restrained warm highlights define the channel's
+            # investigative-noir signature.
             filters.append(
                 "colorbalance="
                 f"rs={-cool_shadows:.4f}:gs={-(cool_shadows * 0.45):.4f}:"
                 f"bs={cool_shadows:.4f}:rh={warm_highlights:.4f}:"
                 f"gh={(warm_highlights * 0.55):.4f}:bh={-warm_highlights:.4f}"
             )
+            detail_strength = float(suspense.get("detail_strength", 0.0))
+            if detail_strength > 0:
+                filters.append(
+                    f"unsharp=5:5:{detail_strength:.4f}:5:5:0.0"
+                )
 
         if grade.get("vignette", True) is True:
-            filters.append("vignette=PI/5")
+            vignette_angle = suspense.get("vignette_angle", "PI/5") if suspense_enabled else "PI/5"
+            filters.append(f"vignette=angle={vignette_angle}:eval=frame")
     filters.extend([f"fps={FPS}", "setpts=PTS-STARTPTS", "format=yuv420p", "setsar=1"])
     return ",".join(filters)
 
