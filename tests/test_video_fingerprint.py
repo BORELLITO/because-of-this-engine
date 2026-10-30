@@ -88,6 +88,15 @@ class VideoFingerprintTests(unittest.TestCase):
         self.assertEqual(chunks[0]["words"][0]["end"], 1.8)
         self.assertEqual(chunks[1]["words"][0]["start"], 1.8)
 
+    def test_alignment_handles_nested_short_word_overlap(self) -> None:
+        chunks = [
+            {"text": "long", "words": [{"canonical": "long", "start": 1.0, "end": 3.0}]},
+            {"text": "short", "words": [{"canonical": "short", "start": 2.0, "end": 2.2}]},
+        ]
+        self.assertEqual(_normalize_sidecar_word_timeline(chunks, 4.0), 1)
+        self.assertEqual(chunks[0]["words"][0]["end"], 2.1)
+        self.assertEqual(chunks[1]["words"][0]["start"], 2.1)
+
 
 if __name__ == "__main__":
     unittest.main()
