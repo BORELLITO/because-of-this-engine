@@ -75,5 +75,15 @@
       "bytes": 3605,
       "md5": "6a8410193810a582a4258f1f064ddfb2"
     }
-  ]
+  ],
+  "code_git_blob_shas": {
+    "production/piper_tts.py": "74265387d11977ce5fa67ee4db1f00e7af8002a7",
+    "production/canonical_config.py": "6f3f44cebe2ddbcccd7061f324e80354ff82663b",
+    "production/align_captions.py": "c94821686a64d3502866884cad46eeb1ba1379a3",
+    "production/render_video_episode.py": "8392a1fbee8c08072b66eecf2944289252a14769",
+    "production/caption_quality.py": "bd328dc3145fb5bd52e8ef698ad38ecb867ca5fa",
+    "production/story_intelligence.py": "aae5650c145d4a69beb8e9781f03252f64496491",
+    "production/visual_story_qa.py": "e6cf73b67b3db51c6cbb92f08b83913181a33d9f",
+    "production/video_asset_contract.py": "0842407ef57e8955130b2d0c5ebec61da7280b7c"
+  }
 }

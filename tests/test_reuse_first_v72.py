@@ -16,6 +16,7 @@ class ReuseFirstTests(unittest.TestCase):
         self.assertFalse(report["rerender_requested"])
         self.assertFalse(report["tts_called"])
         self.assertFalse(report["release_approved"])
+        self.assertTrue(report["media_code_pins_verified"])
         self.assertFalse(report["drive_byte_hashes_verified_in_this_plan"])
         self.assertIn("MISSING_DELIVERED",report["stages"]["caption_alignment"])
     def test_script_change_invalidates(self):

@@ -67,7 +67,18 @@ def plan(manifest_path: Path, script_path: Path, catalog_path: Path) -> dict[str
                  "golden_layout_report", "v7_gates_report"}
     if not necessary.issubset(found):
         raise ReuseFirstError("An expected delivered preview evidence file is absent")
-    same_input = manifest_match and script_match
+    # Pin all media-producing code, not just the script: otherwise a newer
+    # renderer/aligner/voice implementation could silently reuse stale output.
+    code_root = Path(__file__).resolve().parents[2]
+    code_mismatches = []
+    for relative, expected in sorted((catalog.get("code_git_blob_shas") or {}).items()):
+        target = (code_root / relative).resolve()
+        if code_root not in target.parents or not target.is_file():
+            code_mismatches.append(relative)
+            continue
+        if git_blob_sha(target.read_bytes()) != expected:
+            code_mismatches.append(relative)
+    same_input = manifest_match and script_match and bool(catalog.get("code_git_blob_shas")) and not code_mismatches
     stages = {
         "narration": "REMOTE_CANDIDATE_REQUIRE_SHA_AND_QA" if same_input else "INVALIDATE_AND_REASSESS",
         "caption_alignment": "MISSING_DELIVERED_ASS_ALIGNMENT_REBUILD_IF_NEEDED",
@@ -82,6 +93,8 @@ def plan(manifest_path: Path, script_path: Path, catalog_path: Path) -> dict[str
         "current_episode_id": video_id,
         "manifest_git_blob_match": manifest_match,
         "script_git_blob_match": script_match,
+        "media_code_pins_verified": not code_mismatches,
+        "media_code_mismatches": code_mismatches,
         "existing_drive_folder_id": catalog["drive_folder_id"],
         "existing_mp4_drive_file_id": next(a["drive_file_id"] for a in artifacts if a["kind"]=="preview_mp4"),
         "existing_wav_drive_file_id": next(a["drive_file_id"] for a in artifacts if a["kind"]=="narration_wav"),
