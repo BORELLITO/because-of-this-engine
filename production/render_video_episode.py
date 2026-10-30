@@ -60,7 +60,11 @@ def audio_duration(path: Path) -> float:
         raise RenderError(f"Could not read narration duration: {path}") from exc
 
 
-def _escape_filter_path(path: Path) -> def scene_filter(
+def _escape_filter_path(path: Path) -> str:
+    return str(path).replace("\\", "\\\\").replace(":", r"\:").replace("'", r"\'")
+
+
+def scene_filter(
     width: int,
     height: int,
     focus_x: float,
