@@ -14,7 +14,7 @@
   },
   "target_runtime_seconds": 69.5,
   "engine_profile": "because-of-this-v7-piper-tts-2026-10",
-  "engine_profile_fingerprint": "5b3b61ce198c7e5fbda1a1844ec91cc3d3529337c02d4a8d625c8880bf357ddb",
+  "engine_profile_fingerprint": "0c2793e8f0a722674f03788021eaa74093cbe0fcf77375d2ddfb5041657ec910",
   "master_prompt_version": "7.1",
   "master_prompt_sha256": "82db772fdff0dfd2e8e9bebe7d8a537d8ee9934192f36c1193baffa12503e17b",
   "production_schema": "because-of-this://schemas/production-record/3.0.0",
@@ -352,7 +352,7 @@
     "ssml_gender": "MALE",
     "sample_rate_hz": 24000,
     "encoding": "LINEAR16",
-    "speaking_rate": 0.70,
+    "speaking_rate": 0.68,
     "pitch": 0,
     "volume_gain_db": 0,
     "style": "Grave American English narration. Controlled cinematic suspense, clear diction, restrained intensity, intimate consequence, never theatrical."

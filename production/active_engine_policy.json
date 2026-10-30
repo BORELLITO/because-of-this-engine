@@ -1,7 +1,7 @@
 {
   "policy_version": "3.0",
   "active_engine_profile": "because-of-this-v7-piper-tts-2026-10",
-  "active_engine_fingerprint": "5b3b61ce198c7e5fbda1a1844ec91cc3d3529337c02d4a8d625c8880bf357ddb",
+  "active_engine_fingerprint": "0c2793e8f0a722674f03788021eaa74093cbe0fcf77375d2ddfb5041657ec910",
   "active_engine_version": "7.1",
   "update_rule": "approved_update_supersedes_previous_active_engine",
   "retired_versions": "must_not_remain_executable_in_active_tree",
@@ -13,7 +13,7 @@
   "voice_policy": {
     "language_code": "en-US",
     "voice_name": "en_US-ryan-high",
-    "rate": 0.70,
+    "rate": 0.68,
     "pitch": 0.0,
     "ssml_required": false,
     "provider_fallback": "forbidden",

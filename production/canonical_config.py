@@ -37,7 +37,7 @@ CANONICAL_PROFILE: dict[str, Any] = {
         "ssml_gender": "MALE",
         "sample_rate_hz": 24000,
         "encoding": "LINEAR16",
-        "speaking_rate": 0.70,
+        "speaking_rate": 0.68,
         "pitch": 0.0,
         "volume_gain_db": 0.0,
         "style": (
