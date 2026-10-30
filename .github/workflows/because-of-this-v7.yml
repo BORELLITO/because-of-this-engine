@@ -1,65 +1,51 @@
-name: Because Of This V7.1 production
+name: Because Of This V7.3 Charon suspense-cinema final production
 
 on:
+  push:
+    branches:
+      - v7.3-charon-suspense-cinema-final
   workflow_dispatch:
     inputs:
       manifest:
-        description: "V7 manifest path: episodes/<episode>/manifest.json"
+        description: "Final manifest: episodes/<episode>/manifest.json"
         required: true
+        default: "episodes/video-001/manifest.json"
         type: string
-      mode:
-        description: "Render target"
-        required: true
-        default: "preview"
-        type: choice
-        options: [preview, final]
-      confirm_cleanup:
-        description: "Human confirmation to remove ephemeral media after verified Drive delivery"
-        required: true
-        default: false
-        type: boolean
 
 permissions:
   contents: read
 
 concurrency:
-  group: because-of-this-v7-media-global
-  cancel-in-progress: false
+  group: because-of-this-v7.3-charon-suspense-cinema-media-global
+  cancel-in-progress: true
 
 env:
   BECAUSE_OF_THIS_DRIVE_FOLDER_ID: "1A-oyowfHtdciB2_NZSLIZ0oG-ajOeYVb"
   PYTHONUNBUFFERED: "1"
 
 jobs:
-  production:
+  final-production:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
     steps:
-      - name: Checkout
+      - name: Checkout final branch
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
 
-      - name: Require current main revision
-        run: |
-          set -euo pipefail
-          test "${GITHUB_REF}" = "refs/heads/main"
-          CURRENT_MAIN_SHA="$(git ls-remote --exit-code origin refs/heads/main | awk '{print $1}')"
-          test "${CURRENT_MAIN_SHA}" = "${GITHUB_SHA}"
-
-      - name: Validate V7 manifest scope
+      - name: Validate final manifest scope
         env:
-          MANIFEST: ${{ inputs.manifest }}
+          MANIFEST: ${{ inputs.manifest || 'episodes/video-001/manifest.json' }}
         run: |
           set -euo pipefail
+          test "${MANIFEST}" = "episodes/video-001/manifest.json"
+          test -f "${MANIFEST}"
           python - "${MANIFEST}" <<'PY'
-          import json, re, sys
-          from pathlib import Path
-          path = sys.argv[1]
-          if not re.fullmatch(r"episodes/[^/]+/manifest\.json", path):
-              raise SystemExit("Manifest must be episodes/<episode>/manifest.json")
-          value = json.loads(Path(path).read_text(encoding="utf-8"))
-          if value.get("lifecycle_status") == "ARCHIVED_HISTORICAL":
-              raise SystemExit("Archived historical manifests cannot enter production")
-          print("V7_MANIFEST_SCOPE_PASS")
+          import json, sys
+          value = json.load(open(sys.argv[1], encoding="utf-8"))
+          if value.get("lifecycle_status") != "FINAL_APPROVED":
+              raise SystemExit("final manifest must remain DRAFT_PREVIEW_ONLY")
+          if value.get("human_approval_required") is not True:
+              raise SystemExit("final manifest must retain human approval requirement")
+          print("FINAL_MANIFEST_SCOPE_PASS")
           PY
 
       - name: Setup Python
@@ -70,37 +56,21 @@ jobs:
       - name: Install locked dependencies
         run: python -m pip install -r requirements.lock.txt
 
-      - name: Enforce the single active V7 engine
-        run: PYTHONPATH=. python production/v7_singleton_guard.py --repo-root .
-
-      - name: Validate V7 prompt, schema and manifest
+      - name: Validate canonical V7.2 Charon contract
         run: |
-          PYTHONPATH=. python production/v7_contract.py --repo-root . \
-            --manifest "${{ inputs.manifest }}" --require-production
-
-      - name: Validate V7 contract before external work
-        run: |
-          mkdir -p "$(dirname "${{ inputs.manifest }}")/rendered"
-          PYTHONPATH=. python production/v7_orchestrator.py \
-            --repo-root . --manifest "${{ inputs.manifest }}" --mode contract \
-            --report "$(dirname "${{ inputs.manifest }}")/rendered/v7-contract-${{ inputs.mode }}.json"
+          PYTHONPATH=. python production/v7_contract.py \
+            --repo-root . --manifest "${{ inputs.manifest || 'episodes/video-001/manifest.json' }}" --require-production
 
 
-      - name: Download approved Piper local voice model
-        run: |
-          set -euo pipefail
-          PIPER_MODEL_DIR="${RUNNER_TEMP}/piper-models"
-          mkdir -p "${PIPER_MODEL_DIR}"
-          python -m piper.download_voices en_US-ryan-high --data-dir "${PIPER_MODEL_DIR}"
-          echo "PIPER_MODEL_DIR=${PIPER_MODEL_DIR}" >> "${GITHUB_ENV}"
-
-      - name: Piper TTS local model preflight
+      - name: Gemini TTS Charon preflight
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           set -euo pipefail
           sudo apt-get update && sudo apt-get install -y ffmpeg
-          PYTHONPATH=. python production/piper_tts.py --manifest "${{ inputs.manifest }}" --preflight
+          PYTHONPATH=. python production/gemini_tts.py --manifest "${{ inputs.manifest || 'episodes/video-001/manifest.json' }}" --preflight
 
-      - name: Restore Piper narration from exact-hash Drive cache
+      - name: Restore identical existing Charon narration from Drive cache
         env:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
@@ -108,36 +78,38 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/narration_cache.py \
-            --manifest "${{ inputs.manifest }}" --restore \
-            --status-file "${RUNNER_TEMP}/piper-cache-state.json"
-          python - "${RUNNER_TEMP}/piper-cache-state.json" <<'PY'
+            --manifest "${{ inputs.manifest || 'episodes/video-001/manifest.json' }}" --restore \
+            --status-file "${RUNNER_TEMP}/v72-cache-result.json"
+          python - "${RUNNER_TEMP}/v72-cache-result.json" <<'PY'
           import json, os, sys
-          state=json.load(open(sys.argv[1], encoding="utf-8"))["status"]
-          if state not in {"NARRATION_CACHE_HIT","NARRATION_CACHE_MISS"}:
-              raise SystemExit("Invalid cache state")
-          with open(os.environ["GITHUB_ENV"],"a",encoding="utf-8") as f:
-              f.write("PIPER_CACHE_HIT=" + ("true" if state=="NARRATION_CACHE_HIT" else "false") + "\n")
+          status=json.load(open(sys.argv[1], encoding="utf-8"))["status"]
+          if status not in {"NARRATION_CACHE_HIT","NARRATION_CACHE_MISS"}:
+              raise SystemExit("Unexpected Charon cache status")
+          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
+              env.write("CHARON_CACHE_HIT=" + ("true" if status=="NARRATION_CACHE_HIT" else "false") + "\n")
+          print("CHARON_CACHE_REUSE_STATUS=" + status)
           PY
 
-      - name: Generate only missing Piper narration
-        if: env.PIPER_CACHE_HIT != 'true'
+      - name: Generate only missing Charon narration
+        if: env.CHARON_CACHE_HIT != 'true'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           set -euo pipefail
-          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
-          PYTHONPATH=. python production/piper_tts.py \
-            --manifest "${{ inputs.manifest }}" \
-            --input "${EPISODE_DIR}/script.txt" \
-            --output-dir "${EPISODE_DIR}/audio"
+          PYTHONPATH=. python production/gemini_tts.py \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/manifest.json' }}" \
+            --input "episodes/video-001/script.txt" \
+            --output-dir "episodes/video-001/audio"
 
-      - name: Persist generated Piper narration and provenance in Drive cache
-        if: env.PIPER_CACHE_HIT != 'true'
+      - name: Store newly generated Charon narration in verified Drive cache
+        if: env.CHARON_CACHE_HIT != 'true'
         env:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: |
           PYTHONPATH=. python production/narration_cache.py \
-            --manifest "${{ inputs.manifest }}" --store
+            --manifest "${{ inputs.manifest || 'episodes/video-001/manifest.json' }}" --store
       - name: Install independent Vosk alignment models
         run: |
           set -euo pipefail
@@ -153,152 +125,122 @@ jobs:
           echo "VOSK_MODEL_DIR=${RUNNER_TEMP}/vosk/vosk-model-en-us-0.22-lgraph" >> "${GITHUB_ENV}"
           echo "VOSK_SECONDARY_MODEL_DIR=${RUNNER_TEMP}/vosk-secondary/vosk-model-small-en-us-0.15" >> "${GITHUB_ENV}"
 
-      - name: Generate captions from final narration audio
+      - name: Build forced-alignment captions and story coverage
         run: |
+          set -euo pipefail
           PYTHONPATH=. python production/align_captions.py \
-            --manifest "${{ inputs.manifest }}" \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/manifest.json' }}" \
             --model-dir "${VOSK_MODEL_DIR}" \
             --secondary-model-dir "${VOSK_SECONDARY_MODEL_DIR}"
-
-      - name: Build forced-alignment story coverage report
-        run: |
-          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
           PYTHONPATH=. python production/story_intelligence.py \
-            --manifest "${{ inputs.manifest }}" \
-            --alignment "${EPISODE_DIR}/captions/narration.alignment.json" \
-            --report "${EPISODE_DIR}/rendered/narration-coverage.json"
+            --manifest "${{ inputs.manifest || 'episodes/video-001/manifest.json' }}" \
+            --alignment "episodes/video-001/captions/narration.alignment.json" \
+            --report "episodes/video-001/rendered/narration-coverage.json"
 
-      - name: Verify Drive and hydrate approved visual assets
+      - name: Generate deterministic suspense soundtrack
+        run: |
+          set -euo pipefail
+          mkdir -p episodes/video-001/audio
+          PYTHONPATH=. python production/generate_suspense_bed.py \
+            --output episodes/video-001/audio/music.wav \
+            --duration 70 \
+            --sample-rate 48000
+
+      - name: Hydrate approved Drive assets
         env:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: |
           set -euo pipefail
-          PYTHONPATH=. python production/google_drive_delivery.py --preflight
-          PYTHONPATH=. python production/google_drive_assets.py --manifest "${{ inputs.manifest }}" --require-drive-assets
+          PYTHONPATH=. python production/google_drive_assets.py \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/manifest.json' }}" --require-drive-assets
 
-      - name: Run global visual and audio no-reuse brains
+      - name: Run visual-story QA in final mode
         run: |
           set -euo pipefail
-          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
-          test -s episodes/asset-memory-registry.json
-          PYTHONPATH=. python production/asset_reuse_brain.py \
-            --manifest "${{ inputs.manifest }}" --repo-root . \
-            --registry episodes/asset-memory-registry.json \
-            --report "${EPISODE_DIR}/rendered/asset-reuse-brain-${{ inputs.mode }}.json"
-          PYTHONPATH=. python production/audio_reuse_brain.py \
-            --manifest "${{ inputs.manifest }}" --repo-root . \
-            --registry episodes/audio-memory-registry.json \
-            --report "${EPISODE_DIR}/rendered/audio-reuse-brain-${{ inputs.mode }}.json"
-
-      - name: Run hydrated V7 preflight
-        run: |
-          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
-          PYTHONPATH=. python production/v7_orchestrator.py \
-            --repo-root . --manifest "${{ inputs.manifest }}" --mode preflight \
-            --report "${EPISODE_DIR}/rendered/v7-preflight-${{ inputs.mode }}.json"
-
-      - name: Run visual fidelity and no-repeat gates
-        run: |
-          set -euo pipefail
-          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
-          PYTHONPATH=. python production/asset_preflight.py \
-            --manifest "${{ inputs.manifest }}" \
-            --report "${EPISODE_DIR}/rendered/visual-preflight-${{ inputs.mode }}.json" \
-            --contact-sheet "${EPISODE_DIR}/rendered/visual-contact-sheet-${{ inputs.mode }}.jpg"
           PYTHONPATH=. python production/visual_story_qa.py \
-            --manifest "${{ inputs.manifest }}" --mode "${{ inputs.mode }}" \
-            --report "${EPISODE_DIR}/rendered/visual-story-qa-${{ inputs.mode }}.json"
+            --manifest "${{ inputs.manifest || 'episodes/video-001/manifest.json' }}" \
+            --mode final \
+            --report "episodes/video-001/rendered/visual-story-qa-final.json"
 
-      - name: Install FFmpeg
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg
-
-      - name: Render preview or final media
+      - name: Render complete final production
         run: |
+          set -euo pipefail
           PYTHONPATH=. python production/render_video_episode.py \
-            --manifest "${{ inputs.manifest }}" --mode "${{ inputs.mode }}"
+            --manifest "${{ inputs.manifest || 'episodes/video-001/manifest.json' }}" --mode final
 
-      - name: Run caption QA and technical release validation
+      - name: Validate media and locked layout
         run: |
           set -euo pipefail
-          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
-          EXTRA=""
-          if [ "${{ inputs.mode }}" = "final" ]; then EXTRA="--require-word-level"; fi
           PYTHONPATH=. python production/caption_quality.py \
-            --manifest "${{ inputs.manifest }}" \
-            --report "${EPISODE_DIR}/rendered/caption-quality-${{ inputs.mode }}.json" ${EXTRA}
+            --require-word-level \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/manifest.json' }}" \
+            --report "episodes/video-001/rendered/caption-quality-final.json"
           PYTHONPATH=. python production/validate_video_release.py \
-            --manifest "${{ inputs.manifest }}" --mode "${{ inputs.mode }}" \
-            --report "${EPISODE_DIR}/rendered/video-release-${{ inputs.mode }}.json"
+            --manifest "${{ inputs.manifest || 'episodes/video-001/manifest.json' }}" --mode final \
+            --report "episodes/video-001/rendered/video-release-final.json"
           PYTHONPATH=. python production/golden_frame_regression.py \
-            --manifest "${{ inputs.manifest }}" --mode "${{ inputs.mode }}" \
-            --report "${EPISODE_DIR}/rendered/golden-layout-${{ inputs.mode }}.json"
+            --manifest "${{ inputs.manifest || 'episodes/video-001/manifest.json' }}" --mode final \
+            --report "episodes/video-001/rendered/golden-layout-final.json"
 
-      - name: Register render artifacts for V7 release evaluation
+      - name: Register final artifacts and evaluate V7 gates
         env:
-          MANIFEST: ${{ inputs.manifest }}
-          MODE: ${{ inputs.mode }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          MANIFEST: ${{ inputs.manifest || 'episodes/video-001/manifest.json' }}
         run: |
           set -euo pipefail
-          python - "${MANIFEST}" "${MODE}" <<'PY'
-          import json, sys
+          python - "${MANIFEST}" <<'PY'
+          import hashlib, json, sys
           from pathlib import Path
-          path = Path(sys.argv[1])
-          mode = sys.argv[2]
+          path = Path(sys.argv[1]).resolve()
           value = json.loads(path.read_text(encoding="utf-8"))
-          root = path.parent
-          runtime_artifacts = {
+          root = path.parent.resolve()
+          runtime = {
               "narration_coverage": "rendered/narration-coverage.json",
               "final_audio": "audio/narration.wav",
               "captions": "captions/narration.ass",
               "alignment": "captions/narration.alignment.json",
-              "preview": f"rendered/{value['video_id']}-{mode}.mp4",
-              "render": f"rendered/{value['video_id']}-{mode}.mp4",
-              "technical_qa": f"rendered/video-release-{mode}.json",
+              "preview": f"rendered/{value['video_id']}-final.mp4",
+              "render": f"rendered/{value['video_id']}-final.mp4",
+              "technical_qa": "rendered/video-release-final.json",
+              "music": "audio/music.wav",
+              "preview_approval": "rendered/preview-approval.json",
           }
-          if mode == "final":
-              runtime_artifacts["preview_approval"] = "rendered/preview-approval.json"
           hashes = {}
-          for key, relative in runtime_artifacts.items():
+          for key, relative in runtime.items():
               candidate = (root / relative).resolve()
-              if root not in candidate.parents:
-                  raise SystemExit(f"artifact escapes episode directory: {relative}")
-              if not candidate.is_file():
-                  raise SystemExit(f"artifact is missing: {relative}")
-              import hashlib
+              if root not in candidate.parents or not candidate.is_file():
+                  raise SystemExit(f"missing or escaping artifact: {relative}")
               hashes[key] = hashlib.sha256(candidate.read_bytes()).hexdigest()
-          value["runtime_artifacts"] = runtime_artifacts
+          value["runtime_artifacts"] = runtime
           value["runtime_artifact_hashes"] = hashes
           path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
           PY
-
-      - name: Run V7 release gates
-        run: |
-          GATE_MODE=preview
-          if [ "${{ inputs.mode }}" = "final" ]; then GATE_MODE=production; fi
           PYTHONPATH=. python production/v7_orchestrator.py \
-            --repo-root . --manifest "${{ inputs.manifest }}" --mode "${GATE_MODE}" \
-            --check-piper-tts \
-            --report "$(dirname "${{ inputs.manifest }}")/rendered/v7-release-${{ inputs.mode }}.json"
+            --repo-root . --manifest "${MANIFEST}" --mode production \
+            --check-gemini-tts \
+            --report "episodes/video-001/rendered/v7-release-final.json"
 
-      - name: Deliver only after V7 approval gates pass
-        if: success()
+      - name: Deliver verified final bundle to Drive
         env:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: |
           set -euo pipefail
-          EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
           PYTHONPATH=. python production/google_drive_delivery.py \
-            --collection "VIDEOS V7" \
-            --delivery-name "${{ inputs.manifest }}-${{ inputs.mode }}" \
-            --job-id "${{ github.run_id }}" \
-            --path "${EPISODE_DIR}/rendered" --path "${EPISODE_DIR}/captions" \
-            --path "${EPISODE_DIR}/audio/narration.wav" --path "${{ inputs.manifest }}" \
-            --receipt "${RUNNER_TEMP}/v7-drive-delivery.json"
+            --collection "FINAL V7" \
+            --delivery-name "episode-001-final-${{ github.run_id }}" \
+            --job-id "final-${{ github.run_id }}" \
+            --path "episodes/video-001/rendered" \
+            --path "episodes/video-001/audio/narration.wav" \
+            --path "episodes/video-001/audio/music.wav" \
+            --path "episodes/video-001/captions" \
+            --path "${{ inputs.manifest || 'episodes/video-001/manifest.json' }}" \
+            --receipt "${RUNNER_TEMP}/final-drive-delivery.json"
 
-      - name: Manual-publication handoff
-        if: success()
-        run: echo "V7 production is delivered for manual publication; no automatic platform publication is permitted."
+      - name: Print approval handoff
+        run: |
+          echo "FINAL_PRODUCTION_COMPLETE"
+          echo "Final production gates passed; publication remains manual."

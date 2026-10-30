@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""V7.1 canonical Piper TTS production profile for Because Of This.
+"""V7.2 canonical Gemini TTS Charon production profile for Because Of This.
 
 This module is the only active configuration authority.  The former Gemini
 profile is retained only in Git history/rollback documentation and is not
@@ -14,8 +14,8 @@ import json
 from pathlib import Path
 from typing import Any
 
-CANONICAL_PROFILE_ID = "because-of-this-v7-piper-tts-2026-10"
-CANONICAL_ENGINE_VERSION = "7.1"
+CANONICAL_PROFILE_ID = "because-of-this-v7.2-charon-gemini-tts-2026-10"
+CANONICAL_ENGINE_VERSION = "7.2"
 CANONICAL_SCHEMA_ID = "because-of-this://schemas/production-record/3.0.0"
 
 CANONICAL_PROFILE: dict[str, Any] = {
@@ -28,21 +28,21 @@ CANONICAL_PROFILE: dict[str, Any] = {
         "duration_max_seconds": 75,
     },
     "voice": {
-        "provider": "piper_tts_local",
+        "provider": "gemini_tts",
         "language": "en-US",
         "language_code": "en-US",
-        "voice_name": "en_US-ryan-high",
-        "voice": "en_US-ryan-high",
-        "model_or_voice_type": "piper_neural_high",
+        "voice_name": "Charon",
+        "voice": "Charon",
+        "model_or_voice_type": "gemini-3.8-flash-tts",
         "ssml_gender": "MALE",
         "sample_rate_hz": 24000,
-        "encoding": "LINEAR16",
-        "speaking_rate": 0.68,
+        "encoding": "AUDIO_WAV",
+        "speaking_rate": 0.88,
         "pitch": 0.0,
         "volume_gain_db": 0.0,
         "style": (
-            "Grave American English narration. Controlled cinematic suspense, "
-            "clear diction, restrained intensity, intimate consequence, never theatrical."
+            "Low, controlled American English narration with informative clarity, "
+            "restrained cinematic suspense, intimate consequence, never theatrical."
         ),
     },
     "brand": {
@@ -189,8 +189,8 @@ def validate_canonical_manifest(manifest: dict[str, Any], *, source_label: str =
         raise CanonicalConfigError(f"{source_label} must declare engine_profile={CANONICAL_PROFILE_ID!r}.")
     if manifest.get("engine_profile_fingerprint") != CANONICAL_PROFILE_FINGERPRINT:
         raise CanonicalConfigError(f"{source_label} has a non-canonical profile fingerprint.")
-    if manifest.get("master_prompt_version") != "7.1":
-        raise CanonicalConfigError(f"{source_label} must declare master_prompt_version='7.1'.")
+    if manifest.get("master_prompt_version") != "7.2":
+        raise CanonicalConfigError(f"{source_label} must declare master_prompt_version='7.2'.")
     if manifest.get("production_schema") != CANONICAL_SCHEMA_ID:
         raise CanonicalConfigError(f"{source_label} must declare production_schema={CANONICAL_SCHEMA_ID!r}.")
 
@@ -198,9 +198,9 @@ def validate_canonical_manifest(manifest: dict[str, Any], *, source_label: str =
     if differences:
         preview = "; ".join(differences[:8])
         suffix = f" (+{len(differences) - 8} more)" if len(differences) > 8 else ""
-        raise CanonicalConfigError(f"{source_label} deviates from the V7.1 profile: {preview}{suffix}")
+        raise CanonicalConfigError(f"{source_label} deviates from the V7.2 profile: {preview}{suffix}")
     return {
-        "status": "CANONICAL_CONFIG_V7_PASS",
+        "status": "CANONICAL_CONFIG_V7_2_PASS",
         "profile_id": CANONICAL_PROFILE_ID,
         "engine_version": CANONICAL_ENGINE_VERSION,
         "schema_id": CANONICAL_SCHEMA_ID,

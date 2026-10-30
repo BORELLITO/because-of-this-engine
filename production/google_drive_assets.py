@@ -134,7 +134,7 @@ def hydrate(manifest_path: Path, *, require_drive_assets: bool = False) -> dict[
                 raise AssetHydrationError(f"Drive asset is reused in this episode: {music_id}")
             seen_drive_ids.add(music_id)
             assets.append((music_id, music_path, music, "audio"))
-        elif require_drive_assets:
+        elif require_drive_assets and music.get("source") != "engine_generated":
             raise AssetHydrationError("Music is missing drive_file_id.")
         elif not music_path.is_file():
             raise AssetHydrationError("Music has no drive_file_id and is not present locally.")

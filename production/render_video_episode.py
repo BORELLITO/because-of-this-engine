@@ -69,12 +69,39 @@ def scene_filter(
     focus_x: float,
     focus_y: float,
     color_grade: dict[str, Any] | None = None,
+    duration: float = 8.0,
 ) -> str:
     grade = color_grade or {}
-    filters = [
-        f"scale={width}:{height}:force_original_aspect_ratio=increase",
-        f"crop={width}:{height}:x='(iw-ow)*{focus_x:.4f}':y='(ih-oh)*{focus_y:.4f}'",
-    ]
+    suspense = grade.get("cinematic_suspense") or {}
+    suspense_enabled = suspense.get("enabled") is True
+    motion_strength = float(suspense.get("motion_strength", 0.035)) if suspense_enabled else 0.0
+    push_in = float(suspense.get("push_in", 0.045)) if suspense_enabled else 0.0
+    if not 0.0 <= motion_strength <= 0.08:
+        raise RenderError("Cinematic suspense motion_strength is outside the safe editorial range.")
+    if not 0.0 <= push_in <= 0.10:
+        raise RenderError("Cinematic suspense push_in is outside the safe editorial range.")
+    if suspense_enabled:
+        # A restrained, deterministic push-in and lateral drift create the
+        # investigative-cinema feel without inventing content or adding text.
+        zoom = 1.0 + push_in
+        crop_x = (
+            f"max(0,min(iw-ow,(iw-ow)*{focus_x:.4f}+"
+            f"(iw-ow)*{motion_strength:.4f}*sin(2*PI*t/{max(duration, 1.0):.3f})))"
+        )
+        crop_y = (
+            f"max(0,min(ih-oh,(ih-oh)*{focus_y:.4f}+"
+            f"(ih-oh)*{motion_strength * 0.65:.4f}*cos(2*PI*t/{max(duration, 1.0):.3f})))"
+        )
+        filters = [
+            f"scale={width}:{height}:force_original_aspect_ratio=increase",
+            f"scale=ceil(iw*{zoom:.4f}/2)*2:ceil(ih*{zoom:.4f}/2)*2",
+            f"crop={width}:{height}:x='{crop_x}':y='{crop_y}'",
+        ]
+    else:
+        filters = [
+            f"scale={width}:{height}:force_original_aspect_ratio=increase",
+            f"crop={width}:{height}:x='(iw-ow)*{focus_x:.4f}':y='(ih-oh)*{focus_y:.4f}'",
+        ]
     if grade.get("enabled") is True:
         brightness = float(grade.get("brightness", -0.03))
         contrast = float(grade.get("contrast", 1.08))
@@ -148,8 +175,17 @@ def render_scene(
     # Keep the clip duration deterministic even when a source file has sparse
     # timestamps or an early EOF. The contract still rejects genuinely short
     # sources; tpad only makes the encoded scene clock explicit for xfade.
-    filters = scene_filter(width, height, focus_x, focus_y, color_grade)
+    filters = scene_filter(width, height, focus_x, focus_y, color_grade, requested)
     filters += f",tpad=stop_mode=clone:stop_duration={requested:.3f},trim=duration={requested:.3f},setpts=PTS-STARTPTS"
+    if (color_grade or {}).get("cinematic_suspense", {}).get("edge_fade") is True:
+        # Micro-fades keep the suspense montage cinematic while preserving the
+        # exact scene clock and leaving captions as the only editorial text.
+        fade_in = 0.12
+        fade_out = 0.18
+        filters += (
+            f",fade=t=in:st=0:d={fade_in:.3f},"
+            f"fade=t=out:st={max(0.0, requested - fade_out):.3f}:d={fade_out:.3f}"
+        )
     input_args = ["-ss", f"{source_in:.3f}"]
     if loop_source:
         input_args = ["-stream_loop", str(loop_count), *input_args]
@@ -383,7 +419,8 @@ def mux_audio(
     narration_duration: float,
     music: Path | None,
     music_volume: float,
-        logo_path: Path | None,
+    music_gain_db: float,
+    logo_path: Path | None,
     brand: dict[str, Any],
     width: int = 1080,
     height: int = 1920,
@@ -505,8 +542,11 @@ def mux_audio(
     voice_pad = f",apad=pad_dur={outro_seconds:.3f}" if outro_seconds > 0 else ""
     filters.extend([
         f"[1:a]aresample=48000{voice_pad},asplit=2[voice_sc][voice_mix]",
-        f"[{music_input_index}:a]aresample=48000,volume={music_volume:.4f}[music]",
-        "[music][voice_sc]sidechaincompress=threshold=0.050:ratio=8:attack=20:release=400:makeup=1[ducked]",
+        f"[{music_input_index}:a]aresample=48000,volume={music_volume:.4f},"
+        f"volume={music_gain_db:.3f}dB,afade=t=in:st=0:d=1.40,"
+        f"atrim=duration={total_duration:.3f},"
+        "asetpts=PTS-STARTPTS[music]",
+        "[music][voice_sc]sidechaincompress=threshold=0.060:ratio=10:attack=20:release=420:makeup=1[ducked]",
         "[voice_mix][ducked]amix=inputs=2:duration=first:dropout_transition=0:normalize=0[mixed]",
         f"[mixed]loudnorm=I=-15:TP=-1.0:LRA=11,alimiter=limit=0.95"
         + (f",afade=t=out:st={max(0.0, total_duration - audio_fade):.3f}:d={audio_fade:.3f}" if outro_seconds > 0 else "")
@@ -564,6 +604,9 @@ def render(manifest_path: Path, mode: str) -> Path:
         if not music_path.is_file():
             raise RenderError(f"Licensed suspense music file is missing: {music_path}")
         music_volume = float(music_spec.get("volume", 0.12))
+        music_gain_db = float(music_spec.get("gain_db", 0.0))
+        if not 0.0 <= music_gain_db <= 6.0:
+            raise RenderError("Music gain_db must remain between 0 and 6 dB.")
         logo_path = spec.get("brand_logo_path")
         if logo_path is not None and spec["brand"].get("logo_enabled", False) is True:
             logo_path = prepare_logo(
@@ -581,6 +624,7 @@ def render(manifest_path: Path, mode: str) -> Path:
             narration_seconds,
             music_path,
             music_volume,
+            music_gain_db,
             logo_path,
             spec["brand"],
             width,

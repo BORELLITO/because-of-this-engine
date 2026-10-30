@@ -1,6 +1,9 @@
-name: Because Of This V7.1 draft preview
+name: Because Of This V7.3 Charon suspense-cinema draft preview
 
 on:
+  push:
+    branches:
+      - v7.3-charon-suspense-cinema-preview
   workflow_dispatch:
     inputs:
       manifest:
@@ -13,7 +16,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: because-of-this-v7-media-global
+  group: because-of-this-v7.3-charon-suspense-cinema-media-global
   cancel-in-progress: false
 
 env:
@@ -36,28 +39,11 @@ jobs:
       - name: Install lightweight Drive metadata dependencies
         run: |
           python -m pip install google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib
-      - name: Reuse existing MP4 and WAV if every code/input SHA and Drive receipt matches
+      - name: Disable legacy preview reuse for V7.2 Charon
         id: reuse_check
-        env:
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: |
-          set -euo pipefail
-          if PYTHONPATH=. python experimental/v72/reuse_first.py \
-            --manifest episodes/video-001/preview-manifest.json \
-            --script episodes/video-001/script.txt \
-            --catalog experimental/v72/verified_preview_001.json \
-            --report "${RUNNER_TEMP}/v72-reuse-plan.json"; then
-            PYTHONPATH=. python experimental/v72/verify_drive_receipt.py \
-              --catalog experimental/v72/verified_preview_001.json
-            echo "reuse=true" >> "${GITHUB_OUTPUT}"
-            echo "EXISTING_PREVIEW_REUSED_WITHOUT_TTS_OR_RENDER"
-            echo "https://drive.google.com/file/d/1C3mkxkKy1uZh8pBKlDOmaaRr4Gk_DDVR/view"
-          else
-            echo "reuse=false" >> "${GITHUB_OUTPUT}"
-            echo "Inputs changed: canonical draft render job will run with cache checks"
-          fi
+          echo "reuse=false" >> "${GITHUB_OUTPUT}"
+          echo "V7.2_REUSE_DISABLED_PREVIOUS_PREVIEW_NOT_ELIGIBLE"
 
   draft-preview:
     needs: preflight-reuse
@@ -70,7 +56,7 @@ jobs:
 
       - name: Validate preview manifest scope
         env:
-          MANIFEST: ${{ inputs.manifest }}
+          MANIFEST: ${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}
         run: |
           set -euo pipefail
           test "${MANIFEST}" = "episodes/video-001/preview-manifest.json"
@@ -93,27 +79,21 @@ jobs:
       - name: Install locked dependencies
         run: python -m pip install -r requirements.lock.txt
 
-      - name: Validate canonical V7.1 contract
+      - name: Validate canonical V7.2 Charon contract
         run: |
           PYTHONPATH=. python production/v7_contract.py \
-            --repo-root . --manifest "${{ inputs.manifest }}" --require-production
+            --repo-root . --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --require-production
 
 
-      - name: Download approved Piper local voice model
-        run: |
-          set -euo pipefail
-          PIPER_MODEL_DIR="${RUNNER_TEMP}/piper-models"
-          mkdir -p "${PIPER_MODEL_DIR}"
-          python -m piper.download_voices en_US-ryan-high --data-dir "${PIPER_MODEL_DIR}"
-          echo "PIPER_MODEL_DIR=${PIPER_MODEL_DIR}" >> "${GITHUB_ENV}"
-
-      - name: Piper TTS local model preflight
+      - name: Gemini TTS Charon preflight
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           set -euo pipefail
           sudo apt-get update && sudo apt-get install -y ffmpeg
-          PYTHONPATH=. python production/piper_tts.py --manifest "${{ inputs.manifest }}" --preflight
+          PYTHONPATH=. python production/gemini_tts.py --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --preflight
 
-      - name: Restore identical existing Piper narration from Drive cache
+      - name: Restore identical existing Charon narration from Drive cache
         env:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
@@ -121,36 +101,38 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/narration_cache.py \
-            --manifest "${{ inputs.manifest }}" --restore \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --restore \
             --status-file "${RUNNER_TEMP}/v72-cache-result.json"
           python - "${RUNNER_TEMP}/v72-cache-result.json" <<'PY'
           import json, os, sys
           status=json.load(open(sys.argv[1], encoding="utf-8"))["status"]
           if status not in {"NARRATION_CACHE_HIT","NARRATION_CACHE_MISS"}:
-              raise SystemExit("Unexpected Piper cache status")
+              raise SystemExit("Unexpected Charon cache status")
           with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
-              env.write("PIPER_CACHE_HIT=" + ("true" if status=="NARRATION_CACHE_HIT" else "false") + "\n")
-          print("PIPER_CACHE_REUSE_STATUS=" + status)
+              env.write("CHARON_CACHE_HIT=" + ("true" if status=="NARRATION_CACHE_HIT" else "false") + "\n")
+          print("CHARON_CACHE_REUSE_STATUS=" + status)
           PY
 
-      - name: Generate only missing Piper narration
-        if: env.PIPER_CACHE_HIT != 'true'
+      - name: Generate only missing Charon narration
+        if: env.CHARON_CACHE_HIT != 'true'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           set -euo pipefail
-          PYTHONPATH=. python production/piper_tts.py \
-            --manifest "${{ inputs.manifest }}" \
+          PYTHONPATH=. python production/gemini_tts.py \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" \
             --input "episodes/video-001/script.txt" \
             --output-dir "episodes/video-001/audio"
 
-      - name: Store newly generated Piper narration in verified Drive cache
-        if: env.PIPER_CACHE_HIT != 'true'
+      - name: Store newly generated Charon narration in verified Drive cache
+        if: env.CHARON_CACHE_HIT != 'true'
         env:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: |
           PYTHONPATH=. python production/narration_cache.py \
-            --manifest "${{ inputs.manifest }}" --store
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --store
       - name: Install independent Vosk alignment models
         run: |
           set -euo pipefail
@@ -170,13 +152,22 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/align_captions.py \
-            --manifest "${{ inputs.manifest }}" \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" \
             --model-dir "${VOSK_MODEL_DIR}" \
             --secondary-model-dir "${VOSK_SECONDARY_MODEL_DIR}"
           PYTHONPATH=. python production/story_intelligence.py \
-            --manifest "${{ inputs.manifest }}" \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" \
             --alignment "episodes/video-001/captions/narration.alignment.json" \
             --report "episodes/video-001/rendered/narration-coverage.json"
+
+      - name: Generate deterministic suspense soundtrack
+        run: |
+          set -euo pipefail
+          mkdir -p episodes/video-001/audio
+          PYTHONPATH=. python production/generate_suspense_bed.py \
+            --output episodes/video-001/audio/music.wav \
+            --duration 70 \
+            --sample-rate 48000
 
       - name: Hydrate preview-only Drive assets
         env:
@@ -186,13 +177,13 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/google_drive_assets.py \
-            --manifest "${{ inputs.manifest }}" --require-drive-assets
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --require-drive-assets
 
       - name: Run visual-story QA in draft-preview mode
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/visual_story_qa.py \
-            --manifest "${{ inputs.manifest }}" \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" \
             --mode draft-preview \
             --report "episodes/video-001/rendered/visual-story-qa-draft-preview.json"
 
@@ -200,24 +191,25 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/render_video_episode.py \
-            --manifest "${{ inputs.manifest }}" --mode draft-preview
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --mode draft-preview
 
       - name: Validate media and locked layout
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/caption_quality.py \
-            --manifest "${{ inputs.manifest }}" \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" \
             --report "episodes/video-001/rendered/caption-quality-draft-preview.json"
           PYTHONPATH=. python production/validate_video_release.py \
-            --manifest "${{ inputs.manifest }}" --mode draft-preview \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --mode draft-preview \
             --report "episodes/video-001/rendered/video-release-draft-preview.json"
           PYTHONPATH=. python production/golden_frame_regression.py \
-            --manifest "${{ inputs.manifest }}" --mode draft-preview \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --mode draft-preview \
             --report "episodes/video-001/rendered/golden-layout-draft-preview.json"
 
       - name: Register preview artifacts and evaluate V7 gates
         env:
-          MANIFEST: ${{ inputs.manifest }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          MANIFEST: ${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}
         run: |
           set -euo pipefail
           python - "${MANIFEST}" <<'PY'
@@ -234,6 +226,7 @@ jobs:
               "preview": f"rendered/{value['video_id']}-draft-preview.mp4",
               "render": f"rendered/{value['video_id']}-draft-preview.mp4",
               "technical_qa": "rendered/video-release-draft-preview.json",
+              "music": "audio/music.wav",
           }
           hashes = {}
           for key, relative in runtime.items():
@@ -247,7 +240,7 @@ jobs:
           PY
           PYTHONPATH=. python production/v7_orchestrator.py \
             --repo-root . --manifest "${MANIFEST}" --mode draft-preview \
-            --check-piper-tts \
+            --check-gemini-tts \
             --report "episodes/video-001/rendered/v7-release-draft-preview.json"
 
       - name: Deliver verified preview bundle to Drive
@@ -263,8 +256,9 @@ jobs:
             --job-id "draft-preview-${{ github.run_id }}" \
             --path "episodes/video-001/rendered" \
             --path "episodes/video-001/audio/narration.wav" \
+            --path "episodes/video-001/audio/music.wav" \
             --path "episodes/video-001/captions" \
-            --path "${{ inputs.manifest }}" \
+            --path "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" \
             --receipt "${RUNNER_TEMP}/draft-preview-drive-delivery.json"
 
       - name: Print approval handoff

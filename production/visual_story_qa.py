@@ -22,6 +22,7 @@ def _scene_report(scene: dict, mode: str) -> dict:
         "narration_excerpt": scene.get("narration_excerpt"),
         "story_beat": scene.get("story_beat"),
         "visual_match": scene.get("visual_match"),
+        "editorial_text_policy": "captions_only",
     }
     try:
         if not str(scene.get("narration_excerpt", "")).strip():
@@ -29,6 +30,21 @@ def _scene_report(scene: dict, mode: str) -> dict:
         candidate = scene.get("asset")
         if not isinstance(candidate, dict):
             raise ValueError("scene asset is missing")
+        visual_evidence = candidate.get("visual_evidence") or {}
+        pixel_qc = visual_evidence.get("pixel_qc") or {}
+        if (
+            pixel_qc.get("text_overlay_present") is True
+            or pixel_qc.get("authored_graphics_present") is True
+            or pixel_qc.get("compositor_layers_disclosed") is True
+        ):
+            raise ValueError(
+                "asset contains authored text/graphic/compositor layers; captions must be the only editorial text layer"
+            )
+        embedded_text_status = str(pixel_qc.get("embedded_text_status", "")).strip().upper()
+        if embedded_text_status not in {"NONE", "NATURAL_SOURCE_ONLY"}:
+            raise ValueError(
+                "asset embedded_text_status must be NONE or NATURAL_SOURCE_ONLY"
+            )
         visual_semantics = scene.get("visual_semantics") or {}
         narrative_anchors = visual_semantics.get("narrative_anchors")
         direct_required = narrative_anchors.get("direct_required") if isinstance(narrative_anchors, dict) else None
