@@ -1,51 +1,42 @@
-# Cinematic Dread — camada de atmosfera por cena (V7.3 visual)
+# Cinematic Dread — versão visual para aprovação
 
-## Compatibilidade
-O motor principal atual **já é V7.3 Charon/Gemini TTS**. Este pacote é
-**um recurso visual opcional** (`cinematic_dread_v1`), não outra engine,
-nem troca de voz, esquema, hash, HUD, legendas, direitos ou master prompt.
+A branch V7.3 Atmosphere acrescenta um **diretor de atmosfera por cena**
+sem alterar `Charon`, `Gemini TTS`, as legendas, o logotipo, a licença
+do material, os vídeos de Drive ou o motor canônico.
 
-Até existir preview editorial aprovado, manter `director_review=PENDING` e
-não modificar `production/active_engine_policy.json` nem `episodes/video-001/manifest.json`.
+## Fluxo técnico já ligado
 
-## Função
-- O roteiro determina as batidas de suspense; as cenas recebem níveis de 1 a 4.
-- Presets graduais: inquietação, suspeita, ameaça, impacto.
-- A gradação é realizada **no clipe** antes das legendas e da HUD: frio,
-  dessaturação contida, sombras densas, vinheta e granulação mínima.
-- Nada de inventar portas, neblina, silhuetas, reflexos ou luzes vermelhas.
-- A trilha licenciada atual continua intacta; só o nível do **mix de fundo**
-  acompanha cada segmento da história, sob o sidechain da voz.
-- QA mede luminosidade na área central da imagem e exige aprovação editorial.
-- Clipes usados em um episódio **nunca** são reciclados em outro, mesmo com
-  novas cores ou textura; Reuse First reutiliza cache apenas no MESMO episódio.
+`production.cinematic_dread.plan` interpreta story_beat e overrides →
+`grade_for_scene` fornece cor, contraste e textura por cena →
+`production.render_video_episode.render_scene` grava clipes tratados →
+`music_filter` acompanha a tensão sem deixar a trilha dominar a narração →
+`production.atmosphere_qa.inspect` extrai evidência real do MP4 →
+`validate_video_release` só aceita relatório íntegro com SHA-256.
 
-## Manifesto opt-in
-Adicione somente quando houver autorização de teste:
+As alterações de cor/grão ocorrem **antes** das legendas e do logo.
+Isso evita manchar os textos ou adicionar grafismos estranhos aos clipes.
 
-```json
-"atmosphere": {
-  "enabled": true,
-  "profile": "cinematic_dread_v1",
-  "director_review": "PENDING",
-  "scene_overrides": {
-    "S04": {"intensity": 3, "reason": "A chegada ao andar impossível muda a ameaça"}
-  }
-}
+## Gates
+
+- **Opt-in e rollback:** `atmosphere` ausente = render absolutamente idêntico
+  ao contrato anterior.
+- **Planejamento:** preset aprovado, IDs existentes, motivos para overrides,
+  intensidade inteira 1–4 e nenhum efeito de objeto inventado.
+- **Luminância:** samples reais de dentro do quadro; pontos escuros e
+  highlights excessivos bloqueiam. O gate preserva visibilidade, mas
+  **não certifica sozinho que o vídeo ficou assustador**.
+- **Áudio:** os ganhos do bed variam de 0,84 a 1,12 vezes o volume
+  já existente, com sidechain intacto e sem alterar a voz.
+- **Aprovação:** `director_review=PENDING` só permite provas técnicas;
+  para `final` precisa ser `APPROVED` e apresentar o relatório da mídia
+  exata. Publicação continua manual, sob os gates anteriores.
+
+## Testes sem vídeo novo
+
+```bash
+PYTHONPATH=. python -m unittest -v tests.test_cinematic_dread_v73 tests.test_cinematic_dread_render_v73 tests.test_dread_ffmpeg_smoke
 ```
 
-A intensidade não é uma luminância absoluta e não controla publicação.
-Valores inválidos bloqueiam. Níveis não informados derivam de story_beat;
-batidas desconhecidas recebem progressão temporal sinalizada para revisão.
-
-## Gates e testes
-1. Contrato da cena (IDs únicos, preset aprovado, override documentado).
-2. Preservação da narração/legenda/logo; sem texto adicional.
-3. Limites técnicos de exposição/contraste, duração e sincronização.
-4. Comparação lado a lado aprovada por pessoa; QA automático não valida
-   emoção, direção de fotografia nem direitos dos clipes.
-5. Produção comercial permanece condicionada aos gates V7 existentes.
-
-**Rollback:** ausência de `atmosphere` = filtro e mix originais inalterados,
-sem fallback silencioso. Rejeitar publicação se a estética nova não tiver
-aprovação.
+O storyboard do elevador será avaliado antes de habilitar a atmosfera no
+manifesto ativo. Renderizar novamente um vídeo inteiro **não é necessário**
+para os testes da arquitetura, apenas para a aprovação visual posterior.

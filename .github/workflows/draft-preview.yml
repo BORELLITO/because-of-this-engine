@@ -193,6 +193,12 @@ jobs:
           PYTHONPATH=. python production/render_video_episode.py \
             --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --mode draft-preview
 
+      - name: Cinematic Dread scene-specific exposure QA (opt-in only)
+        run: |
+          PYTHONPATH=. python production/atmosphere_qa.py \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" \
+            --mode draft-preview
+
       - name: Validate media and locked layout
         run: |
           set -euo pipefail
