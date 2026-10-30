@@ -1,7 +1,11 @@
-# BECAUSE OF THIS — Engine V7.1
+# BECAUSE OF THIS — V7.1 Piper Canonical Engine + Active V7.2 Reuse-First Add-ons
 
 This repository contains the single canonical production engine for the
-Because Of This channel. V7.1 is driven by the pinned master prompt
+Because Of This channel. The approved V7.2 Reuse-First optimization layer is
+ACTIVE on top of the locked Piper V7.1 core, without changing the canonical
+voice model, profile fingerprint or human-controlled publication policy.
+The active feature bundle is declared in `production/active_engine_policy.json`.
+V7.1 is driven by the pinned master prompt
 `docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V7_1_PIPER_TTS_LOCAL.txt` and schema
 `because-of-this://schemas/production-record/3.0.0`.
 
@@ -39,8 +43,15 @@ approved assets/music and narration coverage are hydrated, `--mode preview`
 for a render candidate, and `--mode production` only after final artifacts,
 preview approval and human approval are registered. A blocked gate is an intentional stop, not an implicit fallback.
 
-The current first episode is a V7 story/scene package but remains blocked at
-visual asset approval until unique licensed or original clips are registered.
+The Episode 001 draft preview completed successfully with Piper narration,
+Vosk-aligned captions, FFmpeg render and Drive delivery:
+https://github.com/BORELLITO/because-of-this-engine/actions/runs/40986385249
+
+**The already completed MP4 must be reused rather than rendered again when the
+verified source script, manifest and code fingerprints match.** Its original
+Drive folder is https://drive.google.com/drive/folders/1HkjYfLf4vXJuJ1XjE-pQWVdjPGho6NDh.
+This file is DRAFT_PREVIEW_ONLY: do not confuse technical success with commercial
+rights review, editorial approval or permission to publish.
 
 ## Rollback
 
@@ -57,3 +68,15 @@ PYTHONPATH=. python production/v7_singleton_guard.py --repo-root .
 PYTHONPATH=. python production/v7_orchestrator.py --repo-root . \
   --manifest episodes/video-001/manifest.json --mode dry-run
 ```
+
+## Active V7.2 Reuse First
+
+- `production/narration_cache.py`: Piper model/config SHA-256, all voice settings, beat list and pronunciation-aware cache keys; Drive checksum-verified reuse.
+- `production/asset_reuse_brain.py`: archived footage stays retired and cannot be silently recycled across episodes.
+- `production/audio_reuse_brain.py`: track IDs, audio hashes, Drive IDs and historical music records checked.
+- `production/release_integrity_v72.py`: read-only registry-backed release integrity checks in place of unconditional PASS metadata.
+- `experimental/v72/reuse_first.py`: exact original media code and input fingerprints, original nine Drive delivery receipts and zero-media rerun planning.
+- `experimental/v72/verify_drive_receipt.py`: read-only Drive receipt size/hash metadata verification.
+- Two manual production/preview workflows share a media lock and preserve newly generated audio/caption artifacts on Drive. No automatic channel publishing.
+- The ordinary main-branch CI now runs both the V7.1 canonical and extended V7.2 guard/regression suites. Full audiovisual second-run validation remains outstanding by design; do not waste production resources to recreate the approved preview.
+
