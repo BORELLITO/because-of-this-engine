@@ -1,9 +1,10 @@
-name: Because Of This V7.3 Charon suspense-cinema final production
+name: Because Of This V7.3.1 Charon cinematic-dread final production
 
 on:
   push:
     branches:
       - v7.3-charon-suspense-cinema-final
+      - v7.3.1-charon-cinematic-dread-final
   workflow_dispatch:
     inputs:
       manifest:
@@ -16,7 +17,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: because-of-this-v7.3-charon-suspense-cinema-media-global
+  group: because-of-this-v7.3.1-charon-cinematic-dread-media-global
   cancel-in-progress: true
 
 env:
@@ -28,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
-      - name: Checkout final branch
+      - name: Checkout V7.3.1 final branch
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
 
       - name: Validate final manifest scope
@@ -56,7 +57,7 @@ jobs:
       - name: Install locked dependencies
         run: python -m pip install -r requirements.lock.txt
 
-      - name: Validate canonical V7.2 Charon contract
+      - name: Validate canonical V7.3.1 Charon cinematic-dread contract
         run: |
           PYTHONPATH=. python production/v7_contract.py \
             --repo-root . --manifest "${{ inputs.manifest || 'episodes/video-001/manifest.json' }}" --require-production
@@ -79,7 +80,7 @@ jobs:
           set -euo pipefail
           PYTHONPATH=. python production/narration_cache.py \
             --manifest "${{ inputs.manifest || 'episodes/video-001/manifest.json' }}" --restore \
-            --status-file "${RUNNER_TEMP}/v72-cache-result.json"
+            --status-file "${RUNNER_TEMP}/v731-cache-result.json"
           python - "${RUNNER_TEMP}/v72-cache-result.json" <<'PY'
           import json, os, sys
           status=json.load(open(sys.argv[1], encoding="utf-8"))["status"]
@@ -230,7 +231,7 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/google_drive_delivery.py \
-            --collection "FINAL V7" \
+            --collection "FINAL V7.3.1 CINEMATIC DREAD" \
             --delivery-name "episode-001-final-${{ github.run_id }}" \
             --job-id "final-${{ github.run_id }}" \
             --path "episodes/video-001/rendered" \
@@ -242,5 +243,5 @@ jobs:
 
       - name: Print approval handoff
         run: |
-          echo "FINAL_PRODUCTION_COMPLETE"
+          echo "V731_FINAL_PRODUCTION_COMPLETE"
           echo "Final production gates passed; publication remains manual."
