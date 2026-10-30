@@ -1,0 +1,354 @@
+{
+  "schema_version": "1.0.0",
+  "episode_id": "episode-002-archive-tape-draft",
+  "title": "The Tape That Added One More Minute",
+  "status": "PENDING_RESEARCH",
+  "truth_mode": "DECLARED_FICTION",
+  "reuse_policy": {
+    "fresh_assets_required": true,
+    "excluded_episode_ids": [
+      "episode-001-preview-v72-charon-clean"
+    ],
+    "excluded_asset_prefixes": [
+      "V72-"
+    ],
+    "derived_clip_reuse": false,
+    "source_clip_text_overlays": false
+  },
+  "caption_contract": {
+    "style": "Corte Fino approved master",
+    "margin_l": 90,
+    "margin_r": 140,
+    "margin_v": 340,
+    "max_line_chars": 38,
+    "right_clearance_purpose": "keep captions a few pixels before the YouTube Shorts comment/share interaction rail"
+  },
+  "scenes": [
+    {
+      "scene_id": "S01",
+      "beat_id": "beat-001",
+      "duration_seconds": 4,
+      "required_visuals": [
+        "archivist",
+        "digitizer",
+        "security tape"
+      ],
+      "required_actions": [
+        "loading",
+        "digitizing"
+      ],
+      "environments": [
+        "archive room",
+        "interior"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office"
+      ],
+      "clean_clip_requirement": true,
+      "research_priority": "high",
+      "asset_status": "PENDING"
+    },
+    {
+      "scene_id": "S02",
+      "beat_id": "beat-002",
+      "duration_seconds": 4,
+      "required_visuals": [
+        "security tape",
+        "reel",
+        "station archive"
+      ],
+      "required_actions": [
+        "spinning"
+      ],
+      "environments": [
+        "archive room",
+        "interior"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office"
+      ],
+      "clean_clip_requirement": true,
+      "research_priority": "high",
+      "asset_status": "PENDING"
+    },
+    {
+      "scene_id": "S03",
+      "beat_id": "beat-003",
+      "duration_seconds": 6,
+      "required_visuals": [
+        "monitor",
+        "timeline",
+        "timecode"
+      ],
+      "required_actions": [
+        "stopping"
+      ],
+      "environments": [
+        "archive room",
+        "interior"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office"
+      ],
+      "clean_clip_requirement": true,
+      "research_priority": "normal",
+      "asset_status": "PENDING"
+    },
+    {
+      "scene_id": "S04",
+      "beat_id": "beat-004",
+      "duration_seconds": 5,
+      "required_visuals": [
+        "monitor",
+        "timeline",
+        "waveform"
+      ],
+      "required_actions": [
+        "extending"
+      ],
+      "environments": [
+        "archive room",
+        "interior"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office"
+      ],
+      "clean_clip_requirement": true,
+      "research_priority": "normal",
+      "asset_status": "PENDING"
+    },
+    {
+      "scene_id": "S05",
+      "beat_id": "beat-005",
+      "duration_seconds": 5,
+      "required_visuals": [
+        "platform clocks",
+        "train platform"
+      ],
+      "required_actions": [
+        "stopping"
+      ],
+      "environments": [
+        "train platform",
+        "night"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office"
+      ],
+      "clean_clip_requirement": true,
+      "research_priority": "high",
+      "asset_status": "PENDING"
+    },
+    {
+      "scene_id": "S06",
+      "beat_id": "beat-006",
+      "duration_seconds": 6,
+      "required_visuals": [
+        "maintenance door",
+        "metal frame"
+      ],
+      "required_actions": [
+        "opening"
+      ],
+      "environments": [
+        "train station",
+        "interior"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office"
+      ],
+      "clean_clip_requirement": true,
+      "research_priority": "normal",
+      "asset_status": "PENDING"
+    },
+    {
+      "scene_id": "S07",
+      "beat_id": "beat-007",
+      "duration_seconds": 6,
+      "required_visuals": [
+        "blueprint",
+        "sealed wall",
+        "doorway"
+      ],
+      "required_actions": [
+        "unfolding",
+        "revealing"
+      ],
+      "environments": [
+        "archive room",
+        "interior"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office"
+      ],
+      "clean_clip_requirement": true,
+      "research_priority": "normal",
+      "asset_status": "PENDING"
+    },
+    {
+      "scene_id": "S08",
+      "beat_id": "beat-008",
+      "duration_seconds": 6,
+      "required_visuals": [
+        "lamp",
+        "figure",
+        "platform"
+      ],
+      "required_actions": [
+        "crossing",
+        "carrying"
+      ],
+      "environments": [
+        "train platform",
+        "night"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office"
+      ],
+      "clean_clip_requirement": true,
+      "research_priority": "high",
+      "asset_status": "PENDING"
+    },
+    {
+      "scene_id": "S09",
+      "beat_id": "beat-009",
+      "duration_seconds": 5,
+      "required_visuals": [
+        "security camera",
+        "figure",
+        "lens"
+      ],
+      "required_actions": [
+        "stopping",
+        "looking"
+      ],
+      "environments": [
+        "train platform",
+        "night"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office"
+      ],
+      "clean_clip_requirement": true,
+      "research_priority": "high",
+      "asset_status": "PENDING"
+    },
+    {
+      "scene_id": "S10",
+      "beat_id": "beat-010",
+      "duration_seconds": 5,
+      "required_visuals": [
+        "figure",
+        "shadow",
+        "camera"
+      ],
+      "required_actions": [
+        "standing",
+        "freezing"
+      ],
+      "environments": [
+        "train platform",
+        "night"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office"
+      ],
+      "clean_clip_requirement": true,
+      "research_priority": "normal",
+      "asset_status": "PENDING"
+    },
+    {
+      "scene_id": "S11",
+      "beat_id": "beat-011",
+      "duration_seconds": 7,
+      "required_visuals": [
+        "live monitor",
+        "lamp",
+        "sealed wall"
+      ],
+      "required_actions": [
+        "glowing"
+      ],
+      "environments": [
+        "control room",
+        "interior"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office"
+      ],
+      "clean_clip_requirement": true,
+      "research_priority": "high",
+      "asset_status": "PENDING"
+    },
+    {
+      "scene_id": "S12",
+      "beat_id": "beat-012",
+      "duration_seconds": 5,
+      "required_visuals": [
+        "camera",
+        "lens",
+        "hand"
+      ],
+      "required_actions": [
+        "holding"
+      ],
+      "environments": [
+        "train platform",
+        "night"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office"
+      ],
+      "clean_clip_requirement": true,
+      "research_priority": "high",
+      "asset_status": "PENDING"
+    }
+  ],
+  "scene_count": 12,
+  "duration_seconds": 64,
+  "scene_refresh_strategy": {
+    "mode": "meaningful_story_cuts",
+    "target_scenes": 12,
+    "average_scene_seconds": 5.33,
+    "min_scene_seconds": 4,
+    "max_scene_seconds": 7,
+    "preserve_caption_readability": true,
+    "rationale": "Increase visual refresh only at narrative evidence changes; never split a shot without a story or retention function."
+  }
+}
