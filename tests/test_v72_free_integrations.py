@@ -2,10 +2,13 @@ from __future__ import annotations
 
 import json
 import unittest
+import tempfile
+import wave
 from copy import deepcopy
 from pathlib import Path
 
 from experimental.v72.shot_review import review, ReviewError
+from experimental.v72.audio_boundary import inspect_final_audio, AudioBoundaryError
 from experimental.v72.whisperx_optional import validate_candidate, CandidateAlignmentError
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -67,6 +70,45 @@ class ExperimentalFreeIntegrationTests(unittest.TestCase):
     def test_whisperx_overlap_rejected(self):
         with self.assertRaises(CandidateAlignmentError):
             validate_candidate("The door.", [{"word":"The","start":0.0,"end":0.3},{"word":"door","start":0.2,"end":0.5}],1.0)
+
+    def test_final_audio_boundary_accepts_only_technical_format_and_active_provider(self):
+        with tempfile.TemporaryDirectory() as td:
+            wav_path = Path(td) / "narration.wav"
+            with wave.open(str(wav_path), "wb") as w:
+                w.setnchannels(1)
+                w.setsampwidth(2)
+                w.setframerate(24000)
+                w.writeframes(b"\\x00\\x00" * (24000 * 65))
+            m = {"voice": {"provider": "piper_tts_local"}}
+            policy = {"voice_provider": "piper_tts_local"}
+            outcome = inspect_final_audio(wav_path, m, policy)
+            self.assertEqual(outcome["status"], "TECHNICAL_AUDIO_PASS_ONLY")
+            self.assertFalse(outcome["speech_content_verified"])
+            self.assertFalse(outcome["captions_verified"])
+            self.assertEqual(outcome["duration_seconds"], 65)
+
+    def test_short_piper_audio_is_blocked_even_with_valid_wav(self):
+        with tempfile.TemporaryDirectory() as td:
+            wav_path = Path(td) / "short.wav"
+            with wave.open(str(wav_path), "wb") as w:
+                w.setnchannels(1)
+                w.setsampwidth(2)
+                w.setframerate(24000)
+                w.writeframes(b"\\x00\\x00" * (24000 * 46))
+            with self.assertRaisesRegex(AudioBoundaryError, "duration"):
+                inspect_final_audio(wav_path, {"voice":{"provider":"piper_tts_local"}},{"voice_provider":"piper_tts_local"})
+
+    def test_provider_mismatch_is_blocked_instead_of_fallback(self):
+        with self.assertRaisesRegex(AudioBoundaryError, "provider"):
+            inspect_final_audio(Path("/does/not/exist.wav"),
+                {"voice":{"provider":"microsoft_edge_tts"}},
+                {"voice_provider":"piper_tts_local"})
+
+    def test_missing_audio_is_blocked(self):
+        with self.assertRaises(AudioBoundaryError):
+            inspect_final_audio(Path("/does/not/exist.wav"),
+                {"voice":{"provider":"piper_tts_local"}},
+                {"voice_provider":"piper_tts_local"})
 
 if __name__ == "__main__":
     unittest.main()

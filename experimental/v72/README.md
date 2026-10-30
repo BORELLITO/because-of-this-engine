@@ -1,51 +1,69 @@
-# Because Of This — V7.2 Free Integrations (experimental only)
+# Because Of This — V7.2 Free Add-ons (experimental only)
 
-This directory is **not** a new canonical engine. The original V7.1 production
-orchestrator, SSML Cloud TTS, Vosk word alignment, FFmpeg renderer, manual
-publication rule, audiovisual layout, SHA-256 archive and global no-repeat policy
-remain unmodified. The branch is isolated from main.
+## Authority and anti-conflict policy
 
-## Free software evaluated
+**The other, primary Because Of This conversation controls the canonical engine.**
+During 2026-10-29 the primary conversation moved Google Cloud TTS -> Edge TTS ->
+**Piper local neural TTS (in progress)**. The main branch currently contains
+`production/piper_tts.py`, but its active policy and workflow may temporarily
+remain Edge-based while migration continues. Never try to "fix" the primary
+branch here; do not revert its profile, prompts, manifests or runtimes.
 
-- [AI Shorts Generator](https://github.com/AbdullahNaveed/ai-shorts-generator)
-  — MIT. Its human-reviewable clip candidate concept inspired the independent
-  metadata audit in `shot_review.py`. No external code or assets were copied.
-  Its clip-reuse behavior must **not** be imported: this channel forbids a reused
-  source across episodes.
-- [WhisperX](https://github.com/m-bain/whisperX) — BSD-2-Clause. Optional
-  **candidate-only** word alignment in `whisperx_optional.py` (separate
-  installation and model weights). Never silently replaces Vosk or writes final
-  subtitles. Tests run without downloading WhisperX.
-- [ClipFactory](https://github.com/feyzilim/clipfactory) —
-  Elastic License 2.0, **design reference only**; no code copied.
-- [ZeroCost Shorts](https://github.com/igennova/ZeroCost-Shorts) —
-  no license identified during review; **no code copied**.
+This experimental branch was forked from an **older V7.1 Cloud snapshot**.
+Its source modules have **no TTS generation dependency**. Do not merge the
+branch wholesale: cherry-pick/review just experimental/v72 code **after** the
+primary branch has a single tested canonical Piper profile.
 
-## Experimental commands
+The previous experimental workflow incorrectly invoked old Cloud TTS and failed
+HTTP 403. It is now REPLACED with a **pure tests-only workflow**. No TTS
+service, media download, render, automatic preview, publication or merge may
+be initiated by the experiment.
+
+## Read-only free add-ons
+
+- `shot_review.py`: scene metadata, source-level duplication *within the
+  candidate*, anchors and Drive reference checks. **Not** image verification,
+  global source-memory proof or license approval.
+- `whisperx_optional.py`: WhisperX candidate timestamp evaluator. Runs only
+  with manually installed optional BSD-licensed WhisperX. Never modifies
+  canonical Vosk captions or inserts estimated timestamps.
+- `audio_boundary.py`: checks an **existing** canonical final WAV supplied by
+  the primary engine against the manifest, active policy, 24 kHz PCM mono and
+  mandatory 60–75s. Explicitly rejects 46.5s Piper audio. Checks only technical
+  format and duration — it does not prove spoken text, voice, copyright,
+  caption synchronization or provenance.
+
+## License assessment
+
+- AI Shorts Generator MIT: clip candidate review concept only, **no code copied**
+  and no cross-episode clip reuse accepted.
+- WhisperX BSD-2-Clause: optional adapter; no mandatory download/models.
+- ClipFactory Elastic License 2.0: conceptual UI only; no source copied.
+- ZeroCost Shorts: no license identified; no code copied.
+
+## Run static tests
 
 ```bash
 PYTHONPATH=. python -m unittest tests.test_v72_free_integrations -v
 PYTHONPATH=. python experimental/v72/shot_review.py \
   --manifest episodes/video-001/preview-manifest.json \
   --report /tmp/v72-shot-review.json
-# Optional, runs on local hardware with separate WhisperX installation:
-PYTHONPATH=. python experimental/v72/whisperx_optional.py \
-  --wav episodes/video-001/audio/narration.wav \
-  --script episodes/video-001/script.txt \
-  --report /tmp/v72-whisperx-candidate.json
 ```
 
-The shot audit checks scene-level source duplication and metadata **only**.
-Canonical cross-episode asset registry checks, actual scene footage, source
-rights, frame approval and the final MP4 require the existing V7 gates.
-`METADATA_READY` does not mean video is ready or rights-cleared.
+## Run audio boundary AFTER the main pipeline completes Piper audio
 
-## Preview attempt
+```bash
+PYTHONPATH=. python experimental/v72/audio_boundary.py \
+  --wav episodes/video-001/audio/narration.wav \
+  --manifest episodes/video-001/manifest.json \
+  --policy production/active_engine_policy.json \
+  --report /tmp/v72-audio-boundary.json
+```
 
-The isolated branch workflow tests V7.1 and V7.2, then attempts an editorial
-draft preview using the existing V7.1 rendering pipeline and only previously
-referenced Drive preview assets. It checks Drive access **before** any TTS
-call. If secrets, source media, quota or validation are missing, it stops
-without representing a static storyboard as a rendered video.
+The above only works when the **main** canonical profile matches its own
+manifest. It must not be used to override, migrate or test the old experimental
+Cloud-only snapshot. The real preview continues to be owned by the primary
+conversation's V7 workflow.
 
-No publication, merge, deletion, or automatic approval is permitted.
+**No user preview has been generated by V7.2. No merge or release allowed
+without explicit approval and full audiovisual QA.**
