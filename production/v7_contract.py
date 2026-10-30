@@ -27,7 +27,7 @@ from production.production_record_v7 import (
 PROMPT_VERSION = "7.2"
 PROMPT_PATH = Path("docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V7_2_CHARON_CLEAN_CLIPS.txt")
 SCHEMA_PATH = Path("production/schemas/production-record-3.0.0.json")
-PROMPT_SHA256 = "f27797423fb055c214beeafe8f2973bceaf739c76b7ce53eea2790bfe9f40c0c"
+PROMPT_SHA256 = "496abd63bcc47cbd0168186edbf986c125bad878b40b7b5fb12ec0e3692fbd3b"
 
 
 class V7ContractError(ValueError):
