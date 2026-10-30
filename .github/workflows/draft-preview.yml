@@ -196,6 +196,7 @@ jobs:
 
       - name: Register preview artifacts and evaluate V7 gates
         env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           MANIFEST: ${{ inputs.manifest }}
         run: |
           set -euo pipefail
