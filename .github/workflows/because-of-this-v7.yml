@@ -82,7 +82,7 @@ jobs:
           PYTHONPATH=. python production/narration_cache.py \
             --manifest "${{ inputs.manifest || 'episodes/video-001/manifest.json' }}" --restore \
             --status-file "${RUNNER_TEMP}/v732-cache-result.json"
-          python - "${RUNNER_TEMP}/v731-cache-result.json" <<'PY'
+          python - "${RUNNER_TEMP}/v732-cache-result.json" <<'PY'
           import json, os, sys
           status=json.load(open(sys.argv[1], encoding="utf-8"))["status"]
           if status not in {"NARRATION_CACHE_HIT","NARRATION_CACHE_MISS"}:
