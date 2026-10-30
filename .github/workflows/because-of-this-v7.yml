@@ -43,7 +43,7 @@ jobs:
           import json, sys
           value = json.load(open(sys.argv[1], encoding="utf-8"))
           if value.get("lifecycle_status") != "FINAL_APPROVED":
-              raise SystemExit("final manifest must remain DRAFT_PREVIEW_ONLY")
+              raise SystemExit("final manifest must remain FINAL_APPROVED")
           if value.get("human_approval_required") is not True:
               raise SystemExit("final manifest must retain human approval requirement")
           print("FINAL_MANIFEST_SCOPE_PASS")
