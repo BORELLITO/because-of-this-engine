@@ -11,8 +11,8 @@
     "duration_min_seconds": 60,
     "duration_max_seconds": 75
   },
-  "engine_profile": "because-of-this-v7.3.1-charon-cinematic-dread-2026-10",
-  "engine_profile_fingerprint": "308638b58df3ad96efe04df6ad3bad2643826db9ca082215220e709881d2d385",
+  "engine_profile": "because-of-this-v7.3.2-charon-cinematic-dread-smooth-2026-10",
+  "engine_profile_fingerprint": "c9f6c10765b65a447fb010008f64b302315ff189e257b927d47c9c8e2a427c8e",
   "master_prompt_version": "7.2",
   "master_prompt_sha256": "c0bd045da0898848ff11aaba9ff2de9e27be8041f559b37a80f3f99ada1127c8",
   "production_schema": "because-of-this://schemas/production-record/3.0.0",
@@ -132,7 +132,7 @@
     "alignment_source": "vosk_word_timestamps",
     "word_level_available": true,
     "max_lines": 2,
-    "max_line_chars": 42,
+    "max_line_chars": 38,
     "target_cps": 20,
     "max_cps": 28,
     "end_tolerance_seconds": 0.1,
@@ -159,9 +159,9 @@
       "outline": 3,
       "shadow": 1,
       "alignment": 2,
-      "margin_l": 100,
-      "margin_r": 100,
-      "margin_v": 320,
+      "margin_l": 90,
+      "margin_r": 140,
+      "margin_v": 340,
       "encoding": 1
     }
   },
@@ -234,7 +234,7 @@
     "cinematic_suspense": {
       "enabled": true,
       "profile": "cinematic_dread_v73",
-      "profile_version": "7.3.1",
+      "profile_version": "7.3.2",
       "reference_basis": "cinematic_dread_v73_before_after_comparison",
       "cool_shadows": 0.04,
       "warm_highlights": 0.014,
@@ -246,6 +246,8 @@
       "flicker_strength": 0.003,
       "flicker_period_seconds": 4.8,
       "detail_strength": 0.16,
+      "motion_smoothing": true,
+      "interpolation_fps": 60,
       "vignette_angle": "PI/5.8"
     }
   },
@@ -263,5 +265,5 @@
     "audio_fade_seconds": 0.6,
     "restart_safe": true
   },
-  "engine_version": "7.3.1"
+  "engine_version": "7.3.2"
 }
