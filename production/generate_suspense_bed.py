@@ -10,6 +10,8 @@ same bytes for the same duration and sample rate.
 from __future__ import annotations
 
 import argparse
+import hashlib
+import json
 import math
 import struct
 import wave
@@ -71,9 +73,32 @@ def render_sample(t: float, duration: float, channel: int) -> float:
     return max(-0.78, min(0.78, sample * envelope_fade(t, duration)))
 
 
-def generate(output: Path, duration: float, sample_rate: int = DEFAULT_SAMPLE_RATE) -> None:
+def _episode_variant(episode_id: str) -> tuple[float, float]:
+    digest = hashlib.sha256(episode_id.encode("utf-8")).digest()
+    # Two bounded sub-bass parameters derived from the exact episode ID:
+    # deterministic across retries, different across unrelated stories.
+    frequency_shift = int.from_bytes(digest[:8], "big") / 2**64 * 1.5
+    phase = int.from_bytes(digest[8:16], "big") / 2**64 * math.pi
+    return frequency_shift, phase
+
+
+def generate(output: Path, duration: float, sample_rate: int = DEFAULT_SAMPLE_RATE,
+             atmosphere_manifest: dict | None = None) -> None:
     if duration < 10:
         raise ValueError("Suspense bed duration must be at least 10 seconds.")
+    # The original deterministic soundtrack bytes remain unchanged when the
+    # atmosphere module is absent. This is a reversible, opt-in sound design.
+    schedule = []
+    variant = (0.0, 0.0)
+    if atmosphere_manifest is not None:
+        from production.cinematic_dread import plan as dread_plan, timeline as dread_timeline
+        direction = dread_plan(atmosphere_manifest)
+        if direction.get("enabled"):
+            episode_id = str(atmosphere_manifest.get("video_id") or "").strip()
+            if not episode_id:
+                raise ValueError("Atmospheric music needs a stable episode ID")
+            schedule = dread_timeline(direction, atmosphere_manifest["scenes"], duration)
+            variant = _episode_variant(episode_id)
     output.parent.mkdir(parents=True, exist_ok=True)
     total_frames = int(round(duration * sample_rate))
     with wave.open(str(output), "wb") as handle:
@@ -81,10 +106,30 @@ def generate(output: Path, duration: float, sample_rate: int = DEFAULT_SAMPLE_RA
         handle.setsampwidth(2)
         handle.setframerate(sample_rate)
         block: list[bytes] = []
+        active_index = 0
         for frame in range(total_frames):
             t = frame / sample_rate
-            left = int(round(render_sample(t, duration, 0) * 32767))
-            right = int(round(render_sample(t, duration, 1) * 32767))
+            if schedule:
+                while active_index < len(schedule) - 1 and t >= schedule[active_index]["end"]:
+                    active_index += 1
+                intensity = schedule[active_index]["intensity"]
+                # Slow, dissonant pressure is an ORIGINAL oscillator layer, not
+                # a stock sound effect or repeated soundtrack between videos.
+                # Keep it weak enough for the existing voice-first ducking.
+                pressure = (
+                    (0.008 + (intensity - 1) * 0.005)
+                    * math.sin(2 * math.pi * (39.0 + variant[0]) * t + variant[1])
+                    + (0.003 * intensity)
+                    * math.sin(2 * math.pi * 80.5 * t + variant[1] * 0.42)
+                ) * envelope_fade(t, duration)
+                mix_scale = 0.935 + 0.038 * intensity
+                left_f = max(-0.78, min(0.78, render_sample(t, duration, 0) * mix_scale + pressure))
+                right_f = max(-0.78, min(0.78, render_sample(t, duration, 1) * mix_scale - pressure * 0.85))
+            else:
+                left_f = render_sample(t, duration, 0)
+                right_f = render_sample(t, duration, 1)
+            left = int(round(left_f * 32767))
+            right = int(round(right_f * 32767))
             block.append(struct.pack("<hh", left, right))
             if len(block) >= 4096:
                 handle.writeframes(b"".join(block))
@@ -98,8 +143,13 @@ def main() -> int:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--duration", type=float, default=DEFAULT_DURATION)
     parser.add_argument("--sample-rate", type=int, default=DEFAULT_SAMPLE_RATE)
+    parser.add_argument("--atmosphere-manifest", type=Path,
+                        help="Optional approved manifest; absent or disabled reproduces the legacy bed")
     args = parser.parse_args()
-    generate(args.output, args.duration, args.sample_rate)
+    atmosphere_manifest = None
+    if args.atmosphere_manifest:
+        atmosphere_manifest = json.loads(args.atmosphere_manifest.read_text(encoding="utf-8"))
+    generate(args.output, args.duration, args.sample_rate, atmosphere_manifest)
     print(f"SUSPENSE_BED_GENERATED path={args.output} duration={args.duration:.3f}s sample_rate={args.sample_rate}")
     return 0
 

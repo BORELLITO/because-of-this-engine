@@ -167,7 +167,8 @@ jobs:
           PYTHONPATH=. python production/generate_suspense_bed.py \
             --output episodes/video-001/audio/music.wav \
             --duration 70 \
-            --sample-rate 48000
+            --sample-rate 48000 \
+            --atmosphere-manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}"
 
       - name: Hydrate preview-only Drive assets
         env:
@@ -192,6 +193,12 @@ jobs:
           set -euo pipefail
           PYTHONPATH=. python production/render_video_episode.py \
             --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --mode draft-preview
+
+      - name: Cinematic Dread scene-specific exposure QA (opt-in only)
+        run: |
+          PYTHONPATH=. python production/atmosphere_qa.py \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" \
+            --mode draft-preview
 
       - name: Validate media and locked layout
         run: |
