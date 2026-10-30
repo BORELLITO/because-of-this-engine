@@ -272,59 +272,70 @@ def _combine_wavs(items: list[tuple[bytes, int]], sample_rate: int) -> bytes:
 
 
 def synthesize_chunks(chunks: list[dict[str, Any]], output_dir: Path, profile: dict[str, Any], *, dry_run: bool = False) -> dict[str, Any]:
+    """Synthesize one full-script request to respect Gemini Free Tier rate limits.
+
+    Beat boundaries remain in the manifest for alignment and editorial coverage,
+    while the provider receives one exact narration transcript. This avoids
+    eight near-simultaneous API calls and makes the operation idempotent.
+    """
     if not chunks:
         raise GeminiTTSError("at least one narration beat is required")
     output_dir.mkdir(parents=True, exist_ok=True)
-    records: list[dict[str, Any]] = []
-    wavs: list[tuple[bytes, int]] = []
+    normalized: list[dict[str, Any]] = []
     for index, chunk in enumerate(chunks, start=1):
         beat_id = str(chunk.get("beat_id") or f"beat-{index:03d}")
         text = build_ssml(str(chunk.get("text") or ""), substitutions=chunk.get("substitutions"))
-        break_before_ms = int(chunk.get("break_before_ms", 0) or 0)
-        if dry_run:
-            records.append({"beat_id": beat_id, "state": "pending_validation", "text": text, "text_sha256": _sha256_bytes(text.encode("utf-8"))})
-            continue
-        safe_id = re.sub(r"[^A-Za-z0-9._-]+", "-", beat_id).strip("-") or f"beat-{index:03d}"
-        path = output_dir / f"{index:03d}-{safe_id}.wav"
-        metadata_path = output_dir / f"{index:03d}-{safe_id}.json"
-        request_key = _sha256_bytes(json.dumps({"text": text, "profile": profile}, sort_keys=True).encode("utf-8"))
-        cached = None
-        if path.is_file() and metadata_path.is_file():
-            try:
-                cached = json.loads(metadata_path.read_text(encoding="utf-8"))
-            except (OSError, UnicodeError, json.JSONDecodeError):
-                cached = None
-        if cached and cached.get("request_id") == request_key and cached.get("audio_sha256") == _sha256_file(path):
-            audio = path.read_bytes()
-            metadata = {**cached, "state": "cached", "audio_path": str(path)}
-        elif path.exists() or metadata_path.exists():
-            raise GeminiTTSError(f"existing Gemini TTS chunk does not match this request; refusing overwrite: {path.name}")
-        else:
-            audio, metadata = synthesize_text(text, profile)
-            path.write_bytes(audio)
-            metadata.update({"beat_id": beat_id, "text": text, "audio_path": str(path), "audio_sha256": _sha256_file(path), "state": "generated"})
-            metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        records.append(metadata)
-        wavs.append((audio, break_before_ms))
-    combined_info: dict[str, Any]
-    if not dry_run:
-        combined = _combine_wavs(wavs, profile["sample_rate_hz"])
-        combined_path = output_dir / "narration.wav"
-        combined_path.write_bytes(combined)
-        combined_duration = _wav_info(combined)[3]
-        if not MIN_NARRATION_SECONDS <= combined_duration <= MAX_NARRATION_SECONDS:
-            raise GeminiTTSError(f"combined narration duration {combined_duration:.3f}s is outside the 60–75s contract")
-        combined_info = {"path": str(combined_path), "sha256": _sha256_file(combined_path), "duration_seconds": combined_duration}
+        normalized.append({"beat_id": beat_id, "text": text, "break_before_ms": int(chunk.get("break_before_ms", 0) or 0)})
+    full_text = " ".join(item["text"] for item in normalized)
+    if dry_run:
+        return {
+            "status": "GEMINI_TTS_DRY_RUN",
+            "provider": PROVIDER,
+            "profile": profile,
+            "request_count": 1,
+            "chunks": [
+                {"beat_id": item["beat_id"], "state": "pending_validation", "text": item["text"], "text_sha256": _sha256_bytes(item["text"].encode("utf-8"))}
+                for item in normalized
+            ],
+            "combined": {"path": str(output_dir / "narration.wav"), "state": "pending_validation"},
+        }
+    combined_path = output_dir / "narration.wav"
+    metadata_path = output_dir / "narration.json"
+    request_key = _sha256_bytes(json.dumps({"text": full_text, "profile": profile}, sort_keys=True).encode("utf-8"))
+    cached = None
+    if combined_path.is_file() and metadata_path.is_file():
+        try:
+            cached = json.loads(metadata_path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError):
+            cached = None
+    if cached and cached.get("request_id") == request_key and cached.get("audio_sha256") == _sha256_file(combined_path):
+        audio = combined_path.read_bytes()
+        metadata = {**cached, "state": "cached", "audio_path": str(combined_path)}
+    elif combined_path.exists() or metadata_path.exists():
+        raise GeminiTTSError("existing Gemini TTS narration does not match this request; refusing overwrite")
     else:
-        combined_info = {"path": str(output_dir / "narration.wav"), "state": "pending_validation"}
+        audio, metadata = synthesize_text(full_text, profile)
+        combined_path.write_bytes(audio)
+        metadata.update({
+            "beat_ids": [item["beat_id"] for item in normalized],
+            "text": full_text,
+            "audio_path": str(combined_path),
+            "audio_sha256": _sha256_file(combined_path),
+            "state": "generated",
+            "request_count": 1,
+        })
+        metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    duration = _wav_info(audio)[3]
+    if not MIN_NARRATION_SECONDS <= duration <= MAX_NARRATION_SECONDS:
+        raise GeminiTTSError(f"combined narration duration {duration:.3f}s is outside the 60–75s contract")
     return {
-        "status": "GEMINI_TTS_DRY_RUN" if dry_run else "GEMINI_TTS_GENERATED",
+        "status": "GEMINI_TTS_GENERATED",
         "provider": PROVIDER,
         "profile": profile,
-        "chunks": records,
-        "combined": combined_info,
+        "request_count": 1,
+        "chunks": [{"beat_id": item["beat_id"], "state": metadata.get("state"), "text": item["text"]} for item in normalized],
+        "combined": {"path": str(combined_path), "sha256": _sha256_file(combined_path), "duration_seconds": duration},
     }
-
 
 def chunks_from_manifest(manifest: dict[str, Any], script_text: str) -> list[dict[str, Any]]:
     narration = manifest.get("narration") if isinstance(manifest.get("narration"), dict) else {}
