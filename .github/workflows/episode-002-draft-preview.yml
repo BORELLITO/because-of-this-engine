@@ -141,11 +141,14 @@ jobs:
           PY
 
       - name: Arm one provider request or fail closed
-        if: env.CHARON_CACHE_HIT != 'true'
         env:
           TTS_REQUEST: ${{ inputs.tts_request || 'CACHE_ONLY' }}
         run: |
           set -euo pipefail
+          if [ "${CHARON_CACHE_HIT:-false}" = "true" ]; then
+            echo "CHARON_PROVIDER_REQUEST_SKIPPED_CACHE_HIT"
+            exit 0
+          fi
           if [ "${TTS_REQUEST}" != "RUN_ONCE" ]; then
             echo "CHARON_PROVIDER_REQUEST_BLOCKED_CACHE_ONLY"
             echo "No verified Drive cache exists; select RUN_ONCE explicitly to authorize one Gemini request."
@@ -170,7 +173,7 @@ jobs:
             --output-dir "episodes/video-002/audio"
 
       - name: Store newly generated Charon narration in verified Drive cache
-        if: env.CHARON_CACHE_HIT != 'true'
+        if: env.CHARON_CACHE_HIT != 'true' && env.CHARON_PROVIDER_REQUEST_ALLOWED == 'true'
         env:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
