@@ -80,6 +80,8 @@ def scene_filter(
     suspense_enabled = suspense.get("enabled") is True
     motion_strength = float(suspense.get("motion_strength", 0.0)) if suspense_enabled else 0.0
     push_in = float(suspense.get("push_in", 0.0)) if suspense_enabled else 0.0
+    motion_smoothing = suspense.get("motion_smoothing", False) if suspense_enabled else False
+    interpolation_fps = int(suspense.get("interpolation_fps", FPS)) if suspense_enabled else FPS
     if suspense_enabled:
         # Deterministic push-in and micro-drift preserve the source evidence while
         # adding the calibrated investigative-dread movement from the reference.
@@ -161,6 +163,15 @@ def scene_filter(
         if grade.get("vignette", True) is True:
             vignette_angle = suspense.get("vignette_angle", "PI/5") if suspense_enabled else "PI/5"
             filters.append(f"vignette=angle={vignette_angle}:eval=frame")
+
+    if motion_smoothing:
+        # Interpolate between native source frames before the final CFR pass.
+        # This removes duplicate-frame judder from slow pans without changing
+        # the approved crop, color grade, captions or audio timeline.
+        filters.append(
+            f"minterpolate=fps={interpolation_fps}:mi_mode=mci:"
+            "mc_mode=aobmc:me_mode=bidir:vsbmc=1:scd=fdiff"
+        )
     filters.extend([f"fps={FPS}", "setpts=PTS-STARTPTS", "format=yuv420p", "setsar=1"])
     return ",".join(filters)
 
