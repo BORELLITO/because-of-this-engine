@@ -20,11 +20,11 @@ from pathlib import Path
 from typing import Any
 
 from production.canonical_config import CANONICAL_PROFILE_FINGERPRINT, CANONICAL_PROFILE_ID
-from production.cloud_tts import (
-    CloudTTSError,
+from production.gemini_tts import (
+    GeminiTTSError,
     build_ssml,
     chunks_from_manifest,
-    cloud_credentials_configured,
+    gemini_credentials_configured,
     profile_from_manifest,
 )
 from production.production_record_v7 import (
@@ -39,7 +39,7 @@ from production.production_record_v7 import (
 )
 from production.v7_contract import V7ContractError, load_json, validate_manifest, validate_prompt_and_schema
 
-ENGINE_BUNDLE_ID = "because-of-this-v7.2-charon-cloud-tts-7.2"
+ENGINE_BUNDLE_ID = "because-of-this-v7.2-charon-gemini-tts-7.2"
 SAFE_MANIFEST = re.compile(r"^episodes/[^/]+/(?:manifest|preview-manifest)\.json$")
 REQUIRED_STORY_FIELDS = (
     "person",
@@ -220,7 +220,7 @@ def _tts_gate(manifest: dict[str, Any], *, dry_run: bool) -> dict[str, Any]:
         profile = profile_from_manifest(manifest)
         beats = chunks_from_manifest(manifest, "")
         if not beats or any(not str(beat.get("text", "")).strip() for beat in beats):
-            raise CloudTTSError("narration beats must contain non-empty text")
+            raise GeminiTTSError("narration beats must contain non-empty text")
         for beat in beats:
             build_ssml(
                 str(beat["text"]),
@@ -230,18 +230,18 @@ def _tts_gate(manifest: dict[str, Any], *, dry_run: bool) -> dict[str, Any]:
         if dry_run:
             return _status(
                 True,
-                f"Google Cloud TTS Charon SSML dry-run passed for {len(beats)} beat(s), voice={profile['voice_name']}",
+                f"Gemini TTS Charon text dry-run passed for {len(beats)} beat(s), voice={profile['voice_name']}",
             )
-        if not cloud_credentials_configured():
+        if not gemini_credentials_configured():
             return _status(
                 False,
-                "Google Cloud TTS credentials are not configured; provide OAuth refresh-token or ADC credentials",
+                "Gemini TTS credentials are not configured; provide GEMINI_API_KEY",
             )
         return _status(
             True,
-            f"Google Cloud TTS Charon credentials are configured for {profile['voice_name']}; preflight must verify voice availability",
+            f"Gemini TTS Charon API key is configured for {profile['voice_name']}; preflight must verify the model and voice contract",
         )
-    except (CloudTTSError, ValueError, TypeError) as exc:
+    except (GeminiTTSError, ValueError, TypeError) as exc:
         return _status(False, str(exc))
 
 
