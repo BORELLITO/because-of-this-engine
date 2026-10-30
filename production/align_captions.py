@@ -592,13 +592,22 @@ def _normalize_sidecar_word_timeline(
                 raise AlignmentError("Aligned word has no positive audio interval.")
             if previous is not None and start < float(previous["end"]) - 0.001:
                 overlap_count += 1
-                boundary = round((float(previous["end"]) + start) / 2.0, 3)
-                if boundary <= float(previous["start"]):
-                    boundary = round(float(previous["start"]) + 0.001, 3)
-                if boundary >= end:
+                # Occasionally Vosk returns a short word nested almost
+                # entirely inside the preceding word.  Split the actual
+                # intersection, rather than averaging the two outer edges;
+                # the latter can land at/after the short word's end and would
+                # collapse its interval.  Both resulting intervals remain
+                # bounded by timestamps emitted for the final WAV.
+                overlap_start = max(float(previous["start"]), start)
+                overlap_end = min(float(previous["end"]), end)
+                boundary = round((overlap_start + overlap_end) / 2.0, 3)
+                minimum = round(float(previous["start"]) + 0.001, 3)
+                maximum = round(end - 0.001, 3)
+                if maximum <= minimum:
                     raise AlignmentError(
                         "Aligned word overlap cannot be normalized without collapsing a word."
                     )
+                boundary = max(minimum, min(boundary, maximum))
                 previous["end"] = boundary
                 start = boundary
             word["start"] = round(start, 3)
