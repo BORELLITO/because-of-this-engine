@@ -1,6 +1,6 @@
 {
   "schema_version": "3.0.0",
-  "video_id": "episode-001-preview",
+  "video_id": "episode-001-preview-v72-charon-clean",
   "title": "The Elevator That Stopped on a Floor That Didn't Exist",
   "language": "en-US",
   "channel": "Because Of This",
@@ -12,19 +12,19 @@
     "duration_min_seconds": 60,
     "duration_max_seconds": 75
   },
-  "target_runtime_seconds": 69.5,
-  "engine_profile": "because-of-this-v7-piper-tts-2026-10",
-  "engine_profile_fingerprint": "0c2793e8f0a722674f03788021eaa74093cbe0fcf77375d2ddfb5041657ec910",
-  "master_prompt_version": "7.1",
-  "master_prompt_sha256": "82db772fdff0dfd2e8e9bebe7d8a537d8ee9934192f36c1193baffa12503e17b",
+  "target_runtime_seconds": 64,
+  "engine_profile": "because-of-this-v7.2-charon-cloud-tts-2026-10",
+  "engine_profile_fingerprint": "af4676f9365eecf9170a8289d304708de3b42d88e5fa7bb87f07ce5a16f2ddd1",
+  "master_prompt_version": "7.2",
+  "master_prompt_sha256": "f27797423fb055c214beeafe8f2973bceaf739c76b7ce53eea2790bfe9f40c0c",
   "production_schema": "because-of-this://schemas/production-record/3.0.0",
   "human_approval_required": true,
-  "lifecycle_status": "DRAFT_PREVIEW_ONLY",
+  "lifecycle_status": "DRAFT_PREVIEW_CANDIDATE",
   "video_number": 1,
-  "engine_milestone": "V7.1_DRAFT_PREVIEW_CANDIDATE",
+  "engine_milestone": "V7.2_CHARON_CLEAN_CLIPS_DRAFT_PREVIEW",
   "canonical_path": "episodes/video-001",
   "truth_mode": "DECLARED_FICTION",
-  "disclosure": "This is an original fictional suspense story. Every visual and music item in this file is a PREVIEW_ONLY approval candidate and is not cleared for release.",
+  "disclosure": "Draft preview only. Visual items are unmodified clean source footage; no authored text or graphic overlays are baked into clips. Captions are the only editorial text layer. Natural source device digits remain only where native to the source.",
   "story": {
     "truth_mode": "DECLARED_FICTION",
     "person": "Elias, a night-shift hospital security guard",
@@ -48,232 +48,131 @@
   "story_graph": {
     "version": "7.1",
     "entities": [
-      {
-        "entity_id": "elias",
-        "canonical_name": "Elias",
-        "aliases": [
-          "the guard",
-          "Elias's uniform"
-        ],
-        "continuity_mode": "same anonymous night-shift guard"
-      },
-      {
-        "entity_id": "elevator",
-        "canonical_name": "hospital elevator",
-        "aliases": [
-          "the elevator",
-          "display",
-          "doors"
-        ],
-        "continuity_mode": "same elevator system"
-      },
-      {
-        "entity_id": "hospital",
-        "canonical_name": "hospital",
-        "aliases": [
-          "building",
-          "lobby",
-          "maintenance area"
-        ],
-        "continuity_mode": "same hospital at night"
-      },
-      {
-        "entity_id": "corridor",
-        "canonical_name": "red emergency corridor",
-        "aliases": [
-          "red corridor",
-          "concrete corridor"
-        ],
-        "continuity_mode": "same impossible destination"
-      },
-      {
-        "entity_id": "system_log",
-        "canonical_name": "system log",
-        "aliases": [
-          "digital log",
-          "passenger entry"
-        ],
-        "continuity_mode": "same evidence record"
-      }
+      "elias",
+      "elevator",
+      "hospital",
+      "corridor",
+      "system_log"
     ],
     "beats": [
       {
-        "scene_id": "S01",
-        "event": "the elevator displays thirteen",
+        "event": "the elevator opens onto an impossible threshold",
         "state_before": "ordinary_night",
         "state_after": "floor_13_recorded",
         "causal_role": "inciting anomaly",
         "emotion": "curiosity",
-        "visual_motif": "red emergency lamp",
+        "visual_motif": "elevator doors",
         "entities": [
           "elias",
           "elevator",
           "hospital"
         ],
+        "scene_id": "S01",
         "narration_excerpt": "At two fourteen in the morning, a hospital elevator stopped at a floor the building did not have."
       },
       {
-        "scene_id": "S02",
         "event": "Elias finds no thirteenth button",
         "state_before": "floor_13_recorded",
         "state_after": "panel_denies_floor",
         "causal_role": "contradiction",
         "emotion": "unease",
-        "visual_motif": "missing button",
+        "visual_motif": "control panel",
         "entities": [
           "elias",
           "elevator",
           "hospital"
         ],
-        "narration_excerpt": "The guard on duty checked the panel. There was no button for thirteen."
+        "scene_id": "S02",
+        "narration_excerpt": "The guard on duty checked the panel. There was no button for thirteen. The system log still showed the doors open for forty-seven seconds."
       },
       {
-        "scene_id": "S03",
-        "event": "the log confirms forty-seven seconds",
+        "event": "the open-door event leaves physical evidence",
         "state_before": "panel_denies_floor",
         "state_after": "evidence_confirms_event",
         "causal_role": "objective evidence",
         "emotion": "dread",
-        "visual_motif": "frozen timestamp",
-        "entities": [
-          "elias",
-          "elevator",
-          "system_log"
-        ],
-        "narration_excerpt": "The system log still showed the doors open for forty-seven seconds."
-      },
-      {
-        "scene_id": "S04",
-        "event": "the camera reveals the red corridor",
-        "state_before": "evidence_confirms_event",
-        "state_after": "impossible_destination_visible",
-        "causal_role": "impossible reveal",
-        "emotion": "dread",
-        "visual_motif": "red emergency lamp",
-        "entities": [
-          "elevator",
-          "corridor",
-          "system_log"
-        ],
-        "narration_excerpt": "Then the camera found a corridor beyond the doors: narrow concrete, one red emergency lamp, and no sign of construction."
-      },
-      {
-        "scene_id": "S05",
-        "event": "Elias crosses the threshold and the feed fails",
-        "state_before": "impossible_destination_visible",
-        "state_after": "witness_lost",
-        "causal_role": "irreversible decision",
-        "emotion": "shock",
-        "visual_motif": "black signal loss",
+        "visual_motif": "concrete threshold",
         "entities": [
           "elias",
           "elevator",
           "corridor"
         ],
-        "narration_excerpt": "Elias stepped forward. The feed went black."
+        "scene_id": "S03",
+        "narration_excerpt": "Then the camera found a corridor beyond the doors: narrow concrete, one red emergency lamp, and no sign of construction. Elias stepped forward. The feed went black."
       },
       {
-        "scene_id": "S06",
-        "event": "maintenance finds no landing",
-        "state_before": "witness_lost",
-        "state_after": "official_denial",
-        "causal_role": "denial",
-        "emotion": "false relief",
-        "visual_motif": "blueprint",
+        "event": "the camera reveals a corridor beyond the doors",
+        "state_before": "evidence_confirms_event",
+        "state_after": "impossible_destination_visible",
+        "causal_role": "impossible reveal",
+        "emotion": "dread",
+        "visual_motif": "flickering corridor light",
         "entities": [
-          "hospital",
           "elevator",
+          "corridor",
           "system_log"
         ],
-        "narration_excerpt": "By morning, maintenance had found no thirteenth landing. The control board was replaced."
+        "scene_id": "S04",
+        "narration_excerpt": "By morning, maintenance had found no thirteenth landing. The control board was replaced. The elevator was chained shut."
       },
       {
-        "scene_id": "S07",
-        "event": "the elevator is chained shut",
-        "state_before": "official_denial",
-        "state_after": "sealed_resolution",
-        "causal_role": "false resolution",
-        "emotion": "temporary safety",
-        "visual_motif": "warning chain",
-        "entities": [
-          "hospital",
-          "elevator"
-        ],
-        "narration_excerpt": "The elevator was chained shut."
-      },
-      {
-        "scene_id": "S08",
         "event": "the display returns to thirteen",
-        "state_before": "sealed_resolution",
+        "state_before": "impossible_destination_visible",
         "state_after": "anomaly_recurs",
         "causal_role": "recurrence",
-        "emotion": "dread",
-        "visual_motif": "2:14 display",
+        "emotion": "shock",
+        "visual_motif": "native elevator display",
         "entities": [
           "elevator",
           "hospital",
           "system_log"
         ],
+        "scene_id": "S05",
         "narration_excerpt": "At two fourteen the next night, the display returned to thirteen."
       },
       {
-        "scene_id": "S09",
-        "event": "a figure in Elias's uniform appears",
+        "event": "a figure appears at the far end of the corridor",
         "state_before": "anomaly_recurs",
         "state_after": "duplicate_presence_seen",
         "causal_role": "reveal",
-        "emotion": "shock",
-        "visual_motif": "red corridor",
+        "emotion": "terror",
+        "visual_motif": "distant figure",
         "entities": [
           "elias",
           "corridor",
           "elevator"
         ],
+        "scene_id": "S06",
         "narration_excerpt": "This time, the camera stayed on. A figure in Elias's uniform stood at the far end of the red corridor."
       },
       {
-        "scene_id": "S10",
-        "event": "the lobby monitor shows Elias outside",
+        "event": "the lobby monitor shows the impossible feed",
         "state_before": "duplicate_presence_seen",
         "state_after": "identity_contradiction",
         "causal_role": "impossible evidence",
         "emotion": "terror",
-        "visual_motif": "split monitor",
+        "visual_motif": "blue monitor",
         "entities": [
           "elias",
           "hospital",
           "elevator"
         ],
-        "narration_excerpt": "The lobby monitor showed Elias outside the elevator, watching."
+        "scene_id": "S07",
+        "narration_excerpt": "The lobby monitor showed Elias outside the elevator, watching. Then the system added a second passenger."
       },
       {
-        "scene_id": "S11",
-        "event": "the system adds a second passenger",
+        "event": "the indicator descends below the basement",
         "state_before": "identity_contradiction",
-        "state_after": "duplicate_passenger_logged",
-        "causal_role": "consequence",
-        "emotion": "existential chill",
-        "visual_motif": "second passenger log",
-        "entities": [
-          "elias",
-          "elevator",
-          "system_log"
-        ],
-        "narration_excerpt": "Then the system added a second passenger."
-      },
-      {
-        "scene_id": "S12",
-        "event": "the elevator descends below the basement",
-        "state_before": "duplicate_passenger_logged",
         "state_after": "ordinary_reality_broken",
         "causal_role": "payoff",
         "emotion": "existential chill",
-        "visual_motif": "descending indicator",
+        "visual_motif": "descending display",
         "entities": [
           "elevator",
           "corridor",
           "system_log"
         ],
+        "scene_id": "S08",
         "narration_excerpt": "The indicator began descending below the basement. No one pressed a button."
       }
     ]
@@ -340,27 +239,32 @@
     ],
     "no_reused_clips": true,
     "no_derived_clip_reuse": true,
-    "no_text_generated_inside_stock_clips": true
+    "no_text_generated_inside_stock_clips": true,
+    "editorial_text_policy": "CAPTIONS_ONLY",
+    "authored_text_overlays": "FORBIDDEN",
+    "authored_graphics": "FORBIDDEN",
+    "natural_source_text": "ALLOWED_ONLY_IF_NATIVE_AND_REVIEWED",
+    "clean_clip_required": true
   },
   "voice": {
-    "provider": "piper_tts_local",
+    "provider": "google_cloud_tts",
     "language": "en-US",
     "language_code": "en-US",
-    "voice_name": "en_US-ryan-high",
-    "voice": "en_US-ryan-high",
-    "model_or_voice_type": "piper_neural_high",
+    "voice_name": "en-US-Chirp3-HD-Charon",
+    "voice": "en-US-Chirp3-HD-Charon",
+    "model_or_voice_type": "chirp3_hd",
     "ssml_gender": "MALE",
     "sample_rate_hz": 24000,
     "encoding": "LINEAR16",
-    "speaking_rate": 0.68,
+    "speaking_rate": 0.88,
     "pitch": 0,
     "volume_gain_db": 0,
-    "style": "Grave American English narration. Controlled cinematic suspense, clear diction, restrained intensity, intimate consequence, never theatrical."
+    "style": "Low, controlled American English narration with informative clarity, restrained cinematic suspense, intimate consequence, never theatrical."
   },
   "narration": {
-    "provider": "piper_tts_local",
+    "provider": "google_cloud_tts",
     "language_code": "en-US",
-    "voice_name": "en_US-ryan-high",
+    "voice_name": "en-US-Chirp3-HD-Charon",
     "state": "DRAFT_PREVIEW",
     "script_path": "script.txt",
     "beats": [
@@ -396,7 +300,9 @@
         "beat_id": "beat-008",
         "text": "The indicator began descending below the basement. No one pressed a button."
       }
-    ]
+    ],
+    "voice": "en-US-Chirp3-HD-Charon",
+    "cache_contract": "cloud_tts_charon_v1"
   },
   "script": {
     "path": "script.txt",
@@ -404,7 +310,7 @@
   },
   "audio": {
     "path": "audio/narration.wav",
-    "source": "final_piper_tts_audio",
+    "source": "final_google_cloud_tts_charon_audio",
     "preview_only": true
   },
   "captions": {
@@ -451,21 +357,21 @@
     {
       "scene_id": "S01",
       "beat_id": "beat-001",
-      "duration": 4.8,
+      "duration": 8,
       "story_beat": "hook",
       "narration_excerpt": "At two fourteen in the morning, a hospital elevator stopped at a floor the building did not have.",
       "visual_semantics": {
         "role": "literal",
         "required": {
-          "subjects": [],
-          "actions": [],
-          "environments": [
-            "hospital"
-          ],
           "objects": [
             "elevator",
-            "display",
-            "timestamp"
+            "doors"
+          ],
+          "actions": [
+            "opening"
+          ],
+          "environments": [
+            "interior"
           ]
         },
         "preferred": {
@@ -482,76 +388,80 @@
         "narrative_anchors": {
           "direct_required": [
             "elevator",
-            "display",
-            "timestamp"
+            "doors"
           ],
-          "minimum_direct": 3
+          "minimum_direct": 2
         }
       },
       "asset_status": "PENDING_RESEARCH",
-      "visual_intent": "elevator | display | timestamp",
+      "visual_intent": "elevator | doors",
       "visual_function": "literal_evidence",
       "visual_match": "EXACT",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.92,
+      "match_score": 0.86,
       "asset": {
-        "asset_id": "PREVIEW-S01-001",
-        "path": "preview-assets/S01_display_13_timestamp_composite.mp4",
+        "asset_id": "V72-S01-CLEAN-001",
+        "path": "preview-assets-v72/CLEAN_S05_elevator_doors_source.mp4",
         "provider": "pexels",
-        "source_page_url": "https://www.pexels.com/video/an-elevator-going-up-4354919/",
-        "license": "Pexels Free License + original preview compositor layer",
+        "source_page_url": "https://www.pexels.com/video/elevator-doors-opening-to-underground-garage-34779661/",
+        "license": "Pexels Free License (unmodified source footage; preview-only rights candidate)",
         "rights_status": "PREVIEW_ONLY",
         "approved_for_render": false,
         "preview_only": true,
-        "preview_only_reason": "Editorial approval candidate only; requires rights review and human approval before release.",
+        "preview_only_reason": "Editorial approval candidate; clean source footage; rights review and human approval required before release.",
         "reuse_status": "FRESH",
-        "sha256": "55a966384af78079858bc84392a40257bf463a655e97ba7e5b4a0ca1bfecfa80",
-        "perceptual_hash": "a9c64ff25a0dafd346d7907bc929e2cdf95cf6f87cecc3cfa85e1bbf794b3e4a",
-        "episode_id": "episode-001-preview",
-        "drive_file_id": "1TwABbUPFGr2Q2-9sE8_4-99w76on5AX5",
-        "duration_seconds": 4.8,
-        "width": 1080,
-        "height": 1920,
-        "filesize_bytes": 1669418,
+        "sha256": "9e1ac8877bf447dc94c1a501f025751cd8ddbe63da5ba3a8d928da992de1574e",
+        "perceptual_hash": "9e1ac8877bf447dc94c1a501f025751cd8ddbe63da5ba3a8d928da992de1574e",
+        "episode_id": "episode-001-preview-v72-charon-clean",
+        "drive_file_id": "1wuGuYmTSLtkxya7xF1oWXMsxSpRLL0Rm",
+        "duration_seconds": 17.08375,
+        "width": 1920,
+        "height": 1080,
+        "filesize_bytes": 8995912,
         "visual_evidence": {
           "source_title": [
-            "hospital elevator display showing 13 at the 02:14 time code"
+            "unmodified elevator doors opening toward a dark threshold"
           ],
           "reviewer": "Codex visual triage pass",
-          "reviewed_at": "2026-10-29T00:00:00Z",
+          "reviewed_at": "2026-10-30T00:00:00Z",
           "review_method": "contact sheet plus sampled-frame inspection plus ffprobe metadata",
           "sample_timestamps": [
             0.15,
-            2.4,
-            4.6499999999999995
+            8.541875,
+            16.93375
           ],
           "reviewed": true,
           "basis": [
-            "hospital elevator display showing 13 at the 02:14 time code"
+            "unmodified elevator doors opening toward a dark threshold"
           ],
           "subjects": [],
-          "actions": [],
+          "actions": [
+            "opening"
+          ],
           "environments": [
-            "hospital"
+            "interior"
           ],
           "objects": [
             "elevator",
-            "display",
-            "timestamp"
+            "doors"
           ],
           "observed_subjects": [],
-          "observed_actions": [],
+          "observed_actions": [
+            "opening"
+          ],
           "observed_environments": [
-            "hospital"
+            "interior"
           ],
           "observed_objects": [
             "elevator",
-            "display",
-            "timestamp"
+            "doors"
           ],
           "pixel_qc": {
             "embedded_layout": "clean_full_frame",
-            "compositor_layers_disclosed": true
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NONE",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
           }
         }
       }
@@ -559,346 +469,335 @@
     {
       "scene_id": "S02",
       "beat_id": "beat-002",
-      "duration": 5.4,
+      "duration": 6,
       "story_beat": "contradiction",
-      "narration_excerpt": "The guard on duty checked the panel. There was no button for thirteen.",
+      "narration_excerpt": "The guard on duty checked the panel. There was no button for thirteen. The system log still showed the doors open for forty-seven seconds.",
       "visual_semantics": {
         "role": "literal",
         "required": {
-          "subjects": [],
-          "actions": [],
-          "environments": [
-            "hospital"
+          "subjects": [
+            "person"
           ],
           "objects": [
             "elevator",
-            "panel",
-            "missing_button"
+            "panel"
+          ],
+          "environments": [
+            "interior"
           ]
         },
         "preferred": {
           "moods": [
-            "eerie"
+            "unease"
           ]
         },
         "forbidden": [
-          "medical_vial",
-          "laboratory",
           "beach",
           "generic office"
         ],
         "narrative_anchors": {
           "direct_required": [
             "elevator",
-            "panel",
-            "missing_button"
+            "panel"
           ],
-          "minimum_direct": 3
+          "minimum_direct": 2
         }
       },
       "asset_status": "PENDING_RESEARCH",
-      "visual_intent": "elevator | panel | missing_button",
+      "visual_intent": "elevator | panel",
       "visual_function": "literal_evidence",
-      "visual_match": "NEAR",
+      "visual_match": "EXACT",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.8,
+      "match_score": 0.86,
       "asset": {
-        "asset_id": "PREVIEW-S02-001",
-        "path": "preview-assets/S02_missing_13_composite.mp4",
-        "provider": "original",
+        "asset_id": "V72-S02-CLEAN-002",
+        "path": "preview-assets-v72/CLEAN_S03_elevator_button_source.mp4",
+        "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/close-up-view-of-a-person-pressing-elevator-button-7701962/",
-        "license": "Pexels Free License + original preview compositor layer",
+        "license": "Pexels Free License (unmodified source footage; preview-only rights candidate)",
         "rights_status": "PREVIEW_ONLY",
         "approved_for_render": false,
         "preview_only": true,
-        "preview_only_reason": "Editorial approval candidate only; requires rights review and human approval before release.",
+        "preview_only_reason": "Editorial approval candidate; clean source footage; rights review and human approval required before release.",
         "reuse_status": "FRESH",
-        "sha256": "86c1d85990c61061ed93806d8ce7bc21d7dfd472425d61c9307078559aca2621",
-        "perceptual_hash": "2196a203466aa0a02c778b127d63c86cd71079d2d682a8e19407cc1b36574e58",
-        "episode_id": "episode-001-preview",
-        "drive_file_id": "1zbe6tU6_xKP89Nuy7RAPXSIEmVAfenwE",
-        "duration_seconds": 5.4,
-        "width": 1080,
-        "height": 1920,
-        "filesize_bytes": 1299269,
+        "sha256": "35685b3b0e85b756a66d9d143ec91392e804688a0dc12f3592d7dd1f3b694766",
+        "perceptual_hash": "35685b3b0e85b756a66d9d143ec91392e804688a0dc12f3592d7dd1f3b694766",
+        "episode_id": "episode-001-preview-v72-charon-clean",
+        "drive_file_id": "1KzjfB9a1DpDl78IsXLpncNjjT6S2OmMn",
+        "duration_seconds": 6.2,
+        "width": 1920,
+        "height": 1080,
+        "filesize_bytes": 3913704,
         "visual_evidence": {
           "source_title": [
-            "numbered elevator control panel with a separately authored no-button-13 evidence card"
+            "unmodified close-up of a hand pressing an elevator control button"
           ],
           "reviewer": "Codex visual triage pass",
-          "reviewed_at": "2026-10-29T00:00:00Z",
+          "reviewed_at": "2026-10-30T00:00:00Z",
           "review_method": "contact sheet plus sampled-frame inspection plus ffprobe metadata",
           "sample_timestamps": [
             0.15,
-            2.7,
-            5.25
+            3.1,
+            6.05
           ],
           "reviewed": true,
           "basis": [
-            "numbered elevator control panel with a separately authored no-button-13 evidence card"
+            "unmodified close-up of a hand pressing an elevator control button"
           ],
-          "subjects": [],
-          "actions": [],
+          "subjects": [
+            "person"
+          ],
+          "actions": [
+            "pressing"
+          ],
           "environments": [
-            "hospital"
+            "interior"
           ],
           "objects": [
             "elevator",
-            "panel",
-            "missing_button"
+            "panel"
           ],
-          "observed_subjects": [],
-          "observed_actions": [],
+          "observed_subjects": [
+            "person"
+          ],
+          "observed_actions": [
+            "pressing"
+          ],
           "observed_environments": [
-            "hospital"
+            "interior"
           ],
           "observed_objects": [
             "elevator",
-            "panel",
-            "missing_button"
+            "panel"
           ],
           "pixel_qc": {
             "embedded_layout": "clean_full_frame",
-            "compositor_layers_disclosed": true
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NONE",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
           }
         }
       }
     },
     {
       "scene_id": "S03",
-      "beat_id": "beat-002",
-      "duration": 5.6,
+      "beat_id": "beat-003",
+      "duration": 8,
       "story_beat": "evidence",
-      "narration_excerpt": "The system log still showed the doors open for forty-seven seconds.",
+      "narration_excerpt": "Then the camera found a corridor beyond the doors: narrow concrete, one red emergency lamp, and no sign of construction. Elias stepped forward. The feed went black.",
       "visual_semantics": {
-        "role": "literal",
+        "role": "explanatory",
         "required": {
-          "subjects": [],
-          "actions": [],
           "environments": [
-            "hospital"
-          ],
-          "objects": [
-            "system_log",
-            "timestamp",
-            "monitor"
+            "corridor"
           ]
         },
         "preferred": {
           "moods": [
-            "eerie"
+            "dread"
           ]
         },
         "forbidden": [
-          "medical_vial",
-          "laboratory",
           "beach",
           "generic office"
         ],
         "narrative_anchors": {
           "direct_required": [
-            "system_log",
-            "timestamp",
-            "monitor"
+            "corridor"
           ],
-          "minimum_direct": 3
+          "minimum_direct": 1
         }
       },
       "asset_status": "PENDING_RESEARCH",
-      "visual_intent": "system_log | timestamp | monitor",
-      "visual_function": "literal_evidence",
-      "visual_match": "EXACT",
+      "visual_intent": "corridor",
+      "visual_function": "explanatory_evidence",
+      "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.92,
+      "match_score": 0.72,
       "asset": {
-        "asset_id": "PREVIEW-S03-001",
-        "path": "preview-assets/S03_system_log.mp4",
-        "provider": "original",
-        "source_page_url": "https://drive.google.com/file/d/1PoDQ9SVpDYR562NEM33u7zrMA3SKuei_/view?usp=drivesdk",
-        "license": "Compositor-owned preview evidence; not cleared for release",
+        "asset_id": "V72-S03-CLEAN-003",
+        "path": "preview-assets-v72/CLEAN_S04_concrete_corridor_source.mp4",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/video-footage-of-a-concrete-hallway-4761720/",
+        "license": "Pexels Free License (unmodified source footage; preview-only rights candidate)",
         "rights_status": "PREVIEW_ONLY",
         "approved_for_render": false,
         "preview_only": true,
-        "preview_only_reason": "Editorial approval candidate only; requires rights review and human approval before release.",
+        "preview_only_reason": "Editorial approval candidate; clean source footage; rights review and human approval required before release.",
         "reuse_status": "FRESH",
-        "sha256": "4f33e02182c70c8b3a121b374b2edb6484014e2f8324245da5c83096d70e3cbd",
-        "perceptual_hash": "c00a924cd7e6d9a3572edc44c46398fd5f8db746c7d482ba62957b0012cc8b62",
-        "episode_id": "episode-001-preview",
-        "drive_file_id": "1PoDQ9SVpDYR562NEM33u7zrMA3SKuei_",
-        "duration_seconds": 5.6,
-        "width": 1080,
-        "height": 1920,
-        "filesize_bytes": 90294,
+        "sha256": "ec5c5fc5d830f920224f0bba160f22c8d91f11d4e7ef9bc7a8b7b03e1469b5ad",
+        "perceptual_hash": "ec5c5fc5d830f920224f0bba160f22c8d91f11d4e7ef9bc7a8b7b03e1469b5ad",
+        "episode_id": "episode-001-preview-v72-charon-clean",
+        "drive_file_id": "1lkYH_a5-MZtfDRhoHJdvHG6eB_yy-xhn",
+        "duration_seconds": 10.25,
+        "width": 3840,
+        "height": 2160,
+        "filesize_bytes": 21027131,
         "visual_evidence": {
           "source_title": [
-            "authored hospital security system log with a 47-second door event"
+            "unmodified narrow concrete corridor footage"
           ],
           "reviewer": "Codex visual triage pass",
-          "reviewed_at": "2026-10-29T00:00:00Z",
+          "reviewed_at": "2026-10-30T00:00:00Z",
           "review_method": "contact sheet plus sampled-frame inspection plus ffprobe metadata",
           "sample_timestamps": [
             0.15,
-            2.8,
-            5.449999999999999
+            5.125,
+            10.1
           ],
           "reviewed": true,
           "basis": [
-            "authored hospital security system log with a 47-second door event"
+            "unmodified narrow concrete corridor footage"
           ],
           "subjects": [],
           "actions": [],
           "environments": [
-            "hospital"
+            "corridor",
+            "interior"
           ],
           "objects": [
-            "system_log",
-            "timestamp",
-            "monitor"
+            "light"
           ],
           "observed_subjects": [],
           "observed_actions": [],
           "observed_environments": [
-            "hospital"
+            "corridor",
+            "interior"
           ],
           "observed_objects": [
-            "system_log",
-            "timestamp",
-            "monitor"
+            "light"
           ],
           "pixel_qc": {
             "embedded_layout": "clean_full_frame",
-            "compositor_layers_disclosed": true
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NONE",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
           }
         }
       }
     },
     {
       "scene_id": "S04",
-      "beat_id": "beat-003",
-      "duration": 5.8,
+      "beat_id": "beat-004",
+      "duration": 8,
       "story_beat": "impossible reveal",
-      "narration_excerpt": "Then the camera found a corridor beyond the doors: narrow concrete, one red emergency lamp, and no sign of construction.",
+      "narration_excerpt": "By morning, maintenance had found no thirteenth landing. The control board was replaced. The elevator was chained shut.",
       "visual_semantics": {
         "role": "literal",
         "required": {
-          "subjects": [],
-          "actions": [],
           "environments": [
             "corridor"
           ],
           "objects": [
-            "doors",
-            "red_emergency_lamp",
-            "security_camera"
+            "light"
           ]
         },
         "preferred": {
           "moods": [
-            "eerie"
+            "dread"
           ]
         },
         "forbidden": [
-          "medical_vial",
-          "laboratory",
           "beach",
           "generic office"
         ],
         "narrative_anchors": {
           "direct_required": [
-            "doors",
-            "corridor",
-            "red_emergency_lamp",
-            "security_camera"
+            "corridor"
           ],
-          "minimum_direct": 4
+          "minimum_direct": 1
         }
       },
       "asset_status": "PENDING_RESEARCH",
-      "visual_intent": "doors | corridor | red_emergency_lamp | security_camera",
+      "visual_intent": "corridor",
       "visual_function": "literal_evidence",
-      "visual_match": "EXACT",
+      "visual_match": "NEAR",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.92,
+      "match_score": 0.82,
       "asset": {
-        "asset_id": "PREVIEW-S04-001",
-        "path": "preview-assets/S04_red_corridor_composite.mp4",
-        "provider": "original",
-        "source_page_url": "https://www.pexels.com/video/video-footage-of-a-concrete-hallway-4761720/",
-        "license": "Pexels Free License + original preview compositor layer",
+        "asset_id": "V72-S04-CLEAN-004",
+        "path": "preview-assets-v72/CLEAN_S09_corridor_source.mp4",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/an-empty-corridor-with-flickering-lights-15365457/",
+        "license": "Pexels Free License (unmodified source footage; preview-only rights candidate)",
         "rights_status": "PREVIEW_ONLY",
         "approved_for_render": false,
         "preview_only": true,
-        "preview_only_reason": "Editorial approval candidate only; requires rights review and human approval before release.",
+        "preview_only_reason": "Editorial approval candidate; clean source footage; rights review and human approval required before release.",
         "reuse_status": "FRESH",
-        "sha256": "17cd7ba2b41705b9808f9322409b147ecc05037b150ee53003911e2b04377396",
-        "perceptual_hash": "ec0a3df092b33b36df50068ec7b13b3400df684ff26b543d063475e9abcaca74",
-        "episode_id": "episode-001-preview",
-        "drive_file_id": "1ZBqHMs3SMrvmd5E4_z36HvWDy2_CtQRb",
-        "duration_seconds": 5.783333,
+        "sha256": "0769be7cd9431e49672a619abb553c6665c0229b009ca69310fec919bf658e3a",
+        "perceptual_hash": "0769be7cd9431e49672a619abb553c6665c0229b009ca69310fec919bf658e3a",
+        "episode_id": "episode-001-preview-v72-charon-clean",
+        "drive_file_id": "10OUPJYc8I4xjkO4cMcEmx0bNgYWbMd7w",
+        "duration_seconds": 16.063333,
         "width": 1080,
         "height": 1920,
-        "filesize_bytes": 2048082,
+        "filesize_bytes": 12136838,
         "visual_evidence": {
           "source_title": [
-            "concrete passage with a separately authored red emergency lamp and CCTV frame"
+            "unmodified empty corridor with flickering lights"
           ],
           "reviewer": "Codex visual triage pass",
-          "reviewed_at": "2026-10-29T00:00:00Z",
+          "reviewed_at": "2026-10-30T00:00:00Z",
           "review_method": "contact sheet plus sampled-frame inspection plus ffprobe metadata",
           "sample_timestamps": [
             0.15,
-            2.8916665,
-            5.6333329999999995
+            8.0316665,
+            15.913333
           ],
           "reviewed": true,
           "basis": [
-            "concrete passage with a separately authored red emergency lamp and CCTV frame"
+            "unmodified empty corridor with flickering lights"
           ],
           "subjects": [],
-          "actions": [],
+          "actions": [
+            "flickering"
+          ],
           "environments": [
-            "corridor"
+            "corridor",
+            "interior"
           ],
           "objects": [
-            "doors",
-            "red_emergency_lamp",
-            "security_camera"
+            "light"
           ],
           "observed_subjects": [],
-          "observed_actions": [],
+          "observed_actions": [
+            "flickering"
+          ],
           "observed_environments": [
-            "corridor"
+            "corridor",
+            "interior"
           ],
           "observed_objects": [
-            "doors",
-            "red_emergency_lamp",
-            "security_camera"
+            "light"
           ],
           "pixel_qc": {
             "embedded_layout": "clean_full_frame",
-            "compositor_layers_disclosed": true
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NONE",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
           }
         }
       }
     },
     {
       "scene_id": "S05",
-      "beat_id": "beat-003",
-      "duration": 6,
+      "beat_id": "beat-005",
+      "duration": 8,
       "story_beat": "point of no return",
-      "narration_excerpt": "Elias stepped forward. The feed went black.",
+      "narration_excerpt": "At two fourteen the next night, the display returned to thirteen.",
       "visual_semantics": {
         "role": "literal",
         "required": {
-          "subjects": [],
-          "actions": [
-            "signal_loss"
+          "objects": [
+            "elevator",
+            "display"
           ],
           "environments": [
-            "corridor"
-          ],
-          "objects": [
-            "doors"
+            "interior"
           ]
         },
         "preferred": {
@@ -907,849 +806,395 @@
           ]
         },
         "forbidden": [
-          "medical_vial",
-          "laboratory",
           "beach",
           "generic office"
         ],
         "narrative_anchors": {
           "direct_required": [
-            "doors",
-            "signal_loss"
+            "elevator",
+            "display"
           ],
           "minimum_direct": 2
         }
       },
       "asset_status": "PENDING_RESEARCH",
-      "visual_intent": "doors | signal_loss",
-      "visual_function": "explanatory_evidence",
-      "visual_match": "NEAR",
+      "visual_intent": "elevator | display",
+      "visual_function": "literal_evidence",
+      "visual_match": "EXACT",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.8,
+      "match_score": 0.86,
       "asset": {
-        "asset_id": "PREVIEW-S05-001",
-        "path": "preview-assets/S05_signal_loss_composite.mp4",
-        "provider": "original",
-        "source_page_url": "https://www.pexels.com/video/elevator-doors-opening-to-underground-garage-34779661/",
-        "license": "Pexels Free License + original preview compositor layer",
+        "asset_id": "V72-S05-CLEAN-005",
+        "path": "preview-assets-v72/CLEAN_S01_elevator_display_source.mp4",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/an-elevator-going-up-4354919/",
+        "license": "Pexels Free License (unmodified source footage; preview-only rights candidate)",
         "rights_status": "PREVIEW_ONLY",
         "approved_for_render": false,
         "preview_only": true,
-        "preview_only_reason": "Editorial approval candidate only; requires rights review and human approval before release.",
+        "preview_only_reason": "Editorial approval candidate; clean source footage; rights review and human approval required before release.",
         "reuse_status": "FRESH",
-        "sha256": "5af59b3f49846536ed347ffb334f5af8401daf123caf19b3e418ab2d90cf28cf",
-        "perceptual_hash": "07b5446e106f16e26032dda955cd25c793601c1d5fdf0d0f10d10faff527e729",
-        "episode_id": "episode-001-preview",
-        "drive_file_id": "1yUzgsDCvnuJ7myaUXQJNQx_cDbSfI1ff",
-        "duration_seconds": 6,
-        "width": 1080,
-        "height": 1920,
-        "filesize_bytes": 2144610,
+        "sha256": "152fed3f53920acd7eda4a6e9897bedf9ea8acae8541e24e326bb74011468609",
+        "perceptual_hash": "152fed3f53920acd7eda4a6e9897bedf9ea8acae8541e24e326bb74011468609",
+        "episode_id": "episode-001-preview-v72-charon-clean",
+        "drive_file_id": "10zYmbbmvL6M74GwO20D7H1wRDZxBNp4t",
+        "duration_seconds": 8.8,
+        "width": 1920,
+        "height": 1080,
+        "filesize_bytes": 5484827,
         "visual_evidence": {
           "source_title": [
-            "elevator threshold view ending in a separately authored black signal-loss event"
+            "unmodified elevator display with native device digits"
           ],
           "reviewer": "Codex visual triage pass",
-          "reviewed_at": "2026-10-29T00:00:00Z",
+          "reviewed_at": "2026-10-30T00:00:00Z",
           "review_method": "contact sheet plus sampled-frame inspection plus ffprobe metadata",
           "sample_timestamps": [
             0.15,
-            3,
-            5.85
+            4.4,
+            8.65
           ],
           "reviewed": true,
           "basis": [
-            "elevator threshold view ending in a separately authored black signal-loss event"
+            "unmodified elevator display with native device digits"
           ],
           "subjects": [],
-          "actions": [
-            "signal_loss"
-          ],
+          "actions": [],
           "environments": [
-            "corridor"
+            "interior"
           ],
           "objects": [
-            "doors"
+            "elevator",
+            "display"
           ],
           "observed_subjects": [],
-          "observed_actions": [
-            "signal_loss"
-          ],
+          "observed_actions": [],
           "observed_environments": [
-            "corridor"
+            "interior"
           ],
           "observed_objects": [
-            "doors"
+            "elevator",
+            "display"
           ],
           "pixel_qc": {
             "embedded_layout": "clean_full_frame",
-            "compositor_layers_disclosed": true
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NATURAL_SOURCE_ONLY",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
           }
         }
       }
     },
     {
       "scene_id": "S06",
-      "beat_id": "beat-004",
-      "duration": 5.8,
-      "story_beat": "denial",
-      "narration_excerpt": "By morning, maintenance had found no thirteenth landing. The control board was replaced.",
+      "beat_id": "beat-006",
+      "duration": 10,
+      "story_beat": "reveal",
+      "narration_excerpt": "This time, the camera stayed on. A figure in Elias's uniform stood at the far end of the red corridor.",
       "visual_semantics": {
         "role": "literal",
         "required": {
-          "subjects": [],
-          "actions": [],
-          "environments": [
-            "hospital"
+          "subjects": [
+            "figure"
           ],
-          "objects": [
-            "maintenance",
-            "blueprint",
-            "control_board"
+          "actions": [
+            "standing"
+          ],
+          "environments": [
+            "corridor"
           ]
         },
         "preferred": {
           "moods": [
-            "eerie"
+            "dread"
           ]
         },
         "forbidden": [
-          "medical_vial",
-          "laboratory",
           "beach",
           "generic office"
         ],
         "narrative_anchors": {
           "direct_required": [
-            "maintenance",
-            "blueprint",
-            "control_board"
+            "corridor",
+            "figure"
           ],
-          "minimum_direct": 3
+          "minimum_direct": 2
         }
       },
       "asset_status": "PENDING_RESEARCH",
-      "visual_intent": "maintenance | blueprint | control_board",
+      "visual_intent": "corridor | figure",
       "visual_function": "literal_evidence",
       "visual_match": "EXACT",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.92,
+      "match_score": 0.9,
       "asset": {
-        "asset_id": "PREVIEW-S06-001",
-        "path": "preview-assets/S06_maintenance_board.mp4",
-        "provider": "original",
-        "source_page_url": "https://drive.google.com/file/d/1NG17JdVkslUfg9gXsw0VHkgTgzEbov6W/view?usp=drivesdk",
-        "license": "Compositor-owned preview evidence; not cleared for release",
+        "asset_id": "V72-S06-CLEAN-006",
+        "path": "preview-assets-v72/CLEAN_S10_dark_corridor_figure_source.mp4",
+        "provider": "drive",
+        "source_page_url": "https://drive.google.com/file/d/1bCCxYJfL7d0S4d7z7mYw2aV8nR5cQ9x/view?usp=drivesdk",
+        "license": "Pexels Free License (unmodified source footage; preview-only rights candidate)",
         "rights_status": "PREVIEW_ONLY",
         "approved_for_render": false,
         "preview_only": true,
-        "preview_only_reason": "Editorial approval candidate only; requires rights review and human approval before release.",
+        "preview_only_reason": "Editorial approval candidate; clean source footage; rights review and human approval required before release.",
         "reuse_status": "FRESH",
-        "sha256": "40757349f05a924b3ff885df2f3abe5e18a77598ef6364780fbf9a44f63fa7f6",
-        "perceptual_hash": "299ba6bea5c84d8612ceaff0321231ec92b552d89f82b39cfb60e49715abc822",
-        "episode_id": "episode-001-preview",
-        "drive_file_id": "1NG17JdVkslUfg9gXsw0VHkgTgzEbov6W",
-        "duration_seconds": 5.8,
-        "width": 1080,
-        "height": 1920,
-        "filesize_bytes": 81594,
+        "sha256": "9bb62bebbb422a8fec08528bc7d13bb6a2c71199e7c537cf7a6464c798c420c8",
+        "perceptual_hash": "9bb62bebbb422a8fec08528bc7d13bb6a2c71199e7c537cf7a6464c798c420c8",
+        "episode_id": "episode-001-preview-v72-charon-clean",
+        "drive_file_id": "1oaK2c2keYwcng9vLPXvA7SfPLE9c0xnN",
+        "duration_seconds": 18.351667,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 5181790,
         "visual_evidence": {
           "source_title": [
-            "authored hospital maintenance landing map and replaced control-board record"
+            "unmodified dark corridor with a distant human figure"
           ],
           "reviewer": "Codex visual triage pass",
-          "reviewed_at": "2026-10-29T00:00:00Z",
+          "reviewed_at": "2026-10-30T00:00:00Z",
           "review_method": "contact sheet plus sampled-frame inspection plus ffprobe metadata",
           "sample_timestamps": [
             0.15,
-            2.9,
-            5.6499999999999995
+            9.1758335,
+            18.201667
           ],
           "reviewed": true,
           "basis": [
-            "authored hospital maintenance landing map and replaced control-board record"
+            "unmodified dark corridor with a distant human figure"
           ],
           "subjects": [
-            "maintenance"
+            "figure"
           ],
-          "actions": [],
+          "actions": [
+            "standing"
+          ],
           "environments": [
-            "hospital"
+            "corridor",
+            "interior"
           ],
-          "objects": [
-            "blueprint",
-            "control_board",
-            "maintenance"
-          ],
+          "objects": [],
           "observed_subjects": [
-            "maintenance"
+            "figure"
           ],
-          "observed_actions": [],
+          "observed_actions": [
+            "standing"
+          ],
           "observed_environments": [
-            "hospital"
+            "corridor",
+            "interior"
           ],
-          "observed_objects": [
-            "blueprint",
-            "control_board",
-            "maintenance"
-          ],
+          "observed_objects": [],
           "pixel_qc": {
             "embedded_layout": "clean_full_frame",
-            "compositor_layers_disclosed": true
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NONE",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
           }
         }
       }
     },
     {
       "scene_id": "S07",
-      "beat_id": "beat-004",
-      "duration": 6,
-      "story_beat": "false resolution",
-      "narration_excerpt": "The elevator was chained shut.",
+      "beat_id": "beat-007",
+      "duration": 8,
+      "story_beat": "impossible evidence",
+      "narration_excerpt": "The lobby monitor showed Elias outside the elevator, watching. Then the system added a second passenger.",
       "visual_semantics": {
-        "role": "literal",
+        "role": "explanatory",
         "required": {
-          "subjects": [],
-          "actions": [],
-          "environments": [
-            "hospital"
-          ],
           "objects": [
-            "elevator",
-            "chain"
+            "screen"
+          ],
+          "environments": [
+            "interior"
           ]
         },
         "preferred": {
           "moods": [
-            "eerie"
+            "terror"
           ]
         },
         "forbidden": [
-          "medical_vial",
-          "laboratory",
           "beach",
           "generic office"
         ],
         "narrative_anchors": {
           "direct_required": [
-            "elevator",
-            "chain"
+            "screen"
           ],
-          "minimum_direct": 2
+          "minimum_direct": 1
         }
       },
       "asset_status": "PENDING_RESEARCH",
-      "visual_intent": "elevator | chain",
+      "visual_intent": "screen",
       "visual_function": "explanatory_evidence",
-      "visual_match": "EXACT",
+      "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.92,
+      "match_score": 0.7,
       "asset": {
-        "asset_id": "PREVIEW-S07-001",
-        "path": "preview-assets/S07_chained_elevator.mp4",
-        "provider": "original",
-        "source_page_url": "https://drive.google.com/file/d/1ThKTEUNdQwLI1u492Enpt26ARnmTlNz0/view?usp=drivesdk",
-        "license": "Compositor-owned preview evidence; not cleared for release",
+        "asset_id": "V72-S07-CLEAN-007",
+        "path": "preview-assets-v72/CLEAN_S07_monitor_source.mp4",
+        "provider": "drive",
+        "source_page_url": "https://drive.google.com/file/d/121gu9dS7o7jQw5vM4h3c2b1a0ZxY8w6v/view?usp=drivesdk",
+        "license": "Pexels Free License (unmodified source footage; preview-only rights candidate)",
         "rights_status": "PREVIEW_ONLY",
         "approved_for_render": false,
         "preview_only": true,
-        "preview_only_reason": "Editorial approval candidate only; requires rights review and human approval before release.",
+        "preview_only_reason": "Editorial approval candidate; clean source footage; rights review and human approval required before release.",
         "reuse_status": "FRESH",
-        "sha256": "eb906b43a1e82de45803ed5a21c15ee0ad632afed4d39bcd5f4994e7196bb87a",
-        "perceptual_hash": "a851bf0ddf08a2e69c94950cc289457e28bd95158993c566526c003edfdce7f6",
-        "episode_id": "episode-001-preview",
-        "drive_file_id": "1ThKTEUNdQwLI1u492Enpt26ARnmTlNz0",
-        "duration_seconds": 6,
-        "width": 1080,
-        "height": 1920,
-        "filesize_bytes": 54486,
+        "sha256": "72d37d7a637874715b0429a4d90e38e15b417373e5e100913e3c420bfeb71250",
+        "perceptual_hash": "72d37d7a637874715b0429a4d90e38e15b417373e5e100913e3c420bfeb71250",
+        "episode_id": "episode-001-preview-v72-charon-clean",
+        "drive_file_id": "1w30_mdJRBH1g6qn4yx85DAA7lz5aur2r",
+        "duration_seconds": 40,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 15078039,
         "visual_evidence": {
           "source_title": [
-            "authored sealed elevator card with a warning chain and out-of-service record"
+            "unmodified blue monitor and workstation footage"
           ],
           "reviewer": "Codex visual triage pass",
-          "reviewed_at": "2026-10-29T00:00:00Z",
+          "reviewed_at": "2026-10-30T00:00:00Z",
           "review_method": "contact sheet plus sampled-frame inspection plus ffprobe metadata",
           "sample_timestamps": [
             0.15,
-            3,
-            5.85
+            20,
+            39.85
           ],
           "reviewed": true,
           "basis": [
-            "authored sealed elevator card with a warning chain and out-of-service record"
+            "unmodified blue monitor and workstation footage"
           ],
           "subjects": [],
           "actions": [],
           "environments": [
-            "hospital"
+            "interior"
           ],
           "objects": [
-            "elevator",
-            "chain"
+            "screen",
+            "monitor"
           ],
           "observed_subjects": [],
           "observed_actions": [],
           "observed_environments": [
-            "hospital"
+            "interior"
           ],
           "observed_objects": [
-            "elevator",
-            "chain"
+            "screen",
+            "monitor"
           ],
           "pixel_qc": {
             "embedded_layout": "clean_full_frame",
-            "compositor_layers_disclosed": true
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NONE",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
           }
         }
       }
     },
     {
       "scene_id": "S08",
-      "beat_id": "beat-005",
-      "duration": 6,
-      "story_beat": "recurrence",
-      "narration_excerpt": "At two fourteen the next night, the display returned to thirteen.",
-      "visual_semantics": {
-        "role": "literal",
-        "required": {
-          "subjects": [],
-          "actions": [],
-          "environments": [
-            "hospital"
-          ],
-          "objects": [
-            "elevator",
-            "display",
-            "timestamp"
-          ]
-        },
-        "preferred": {
-          "moods": [
-            "eerie"
-          ]
-        },
-        "forbidden": [
-          "medical_vial",
-          "laboratory",
-          "beach",
-          "generic office"
-        ],
-        "narrative_anchors": {
-          "direct_required": [
-            "elevator",
-            "display",
-            "timestamp"
-          ],
-          "minimum_direct": 3
-        }
-      },
-      "asset_status": "PENDING_RESEARCH",
-      "visual_intent": "elevator | display | timestamp",
-      "visual_function": "literal_evidence",
-      "visual_match": "EXACT",
-      "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.92,
-      "asset": {
-        "asset_id": "PREVIEW-S08-001",
-        "path": "preview-assets/S08_recurrence_display.mp4",
-        "provider": "original",
-        "source_page_url": "https://drive.google.com/file/d/1Xy-KhncQAD4vFHQKvSl6GmyUKXix-1gb/view?usp=drivesdk",
-        "license": "Compositor-owned preview evidence; not cleared for release",
-        "rights_status": "PREVIEW_ONLY",
-        "approved_for_render": false,
-        "preview_only": true,
-        "preview_only_reason": "Editorial approval candidate only; requires rights review and human approval before release.",
-        "reuse_status": "FRESH",
-        "sha256": "3ef4c1af4e772cc82d482e56953be61b9d066e5268f1c4a95944e6d601237cb1",
-        "perceptual_hash": "1d05bb978e7e43614a9389d5552423baab3ea4050ac81d60e6a74fda33a2b23d",
-        "episode_id": "episode-001-preview",
-        "drive_file_id": "1Xy-KhncQAD4vFHQKvSl6GmyUKXix-1gb",
-        "duration_seconds": 6,
-        "width": 1080,
-        "height": 1920,
-        "filesize_bytes": 57910,
-        "visual_evidence": {
-          "source_title": [
-            "authored recurrence display returning to 13 at 02:14"
-          ],
-          "reviewer": "Codex visual triage pass",
-          "reviewed_at": "2026-10-29T00:00:00Z",
-          "review_method": "contact sheet plus sampled-frame inspection plus ffprobe metadata",
-          "sample_timestamps": [
-            0.15,
-            3,
-            5.85
-          ],
-          "reviewed": true,
-          "basis": [
-            "authored recurrence display returning to 13 at 02:14"
-          ],
-          "subjects": [],
-          "actions": [],
-          "environments": [
-            "hospital"
-          ],
-          "objects": [
-            "elevator",
-            "display",
-            "timestamp"
-          ],
-          "observed_subjects": [],
-          "observed_actions": [],
-          "observed_environments": [
-            "hospital"
-          ],
-          "observed_objects": [
-            "elevator",
-            "display",
-            "timestamp"
-          ],
-          "pixel_qc": {
-            "embedded_layout": "clean_full_frame",
-            "compositor_layers_disclosed": true
-          }
-        }
-      }
-    },
-    {
-      "scene_id": "S09",
-      "beat_id": "beat-006",
-      "duration": 6.2,
-      "story_beat": "reveal",
-      "narration_excerpt": "This time, the camera stayed on. A figure in Elias's uniform stood at the far end of the red corridor.",
-      "visual_semantics": {
-        "role": "literal",
-        "required": {
-          "subjects": [],
-          "actions": [],
-          "environments": [
-            "corridor"
-          ],
-          "objects": [
-            "figure",
-            "security_guard"
-          ]
-        },
-        "preferred": {
-          "moods": [
-            "eerie"
-          ]
-        },
-        "forbidden": [
-          "medical_vial",
-          "laboratory",
-          "beach",
-          "generic office"
-        ],
-        "narrative_anchors": {
-          "direct_required": [
-            "security_camera",
-            "corridor",
-            "figure",
-            "security_guard",
-            "red_emergency_lamp"
-          ],
-          "minimum_direct": 5
-        }
-      },
-      "asset_status": "PENDING_RESEARCH",
-      "visual_intent": "security_camera | corridor | figure | security_guard | red_emergency_lamp",
-      "visual_function": "literal_evidence",
-      "visual_match": "NEAR",
-      "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.8,
-      "asset": {
-        "asset_id": "PREVIEW-S09-001",
-        "path": "preview-assets/S09_duplicate_figure_composite.mp4",
-        "provider": "original",
-        "source_page_url": "https://www.pexels.com/video/an-empty-corridor-with-flickering-lights-15365457/",
-        "license": "Pexels Free License + original preview compositor layer",
-        "rights_status": "PREVIEW_ONLY",
-        "approved_for_render": false,
-        "preview_only": true,
-        "preview_only_reason": "Editorial approval candidate only; requires rights review and human approval before release.",
-        "reuse_status": "FRESH",
-        "sha256": "bfede9e6f3f77103ddc02d7824eaadb775436d1404d9176bcdae5fcbb534c7e2",
-        "perceptual_hash": "3e450a053356578c014491afe86d191ae57481a701387125ac7664cdaf1c3876",
-        "episode_id": "episode-001-preview",
-        "drive_file_id": "1zQRKGjSgouzTwCvQcpubK_NtTHaTvdpi",
-        "duration_seconds": 6.2,
-        "width": 1080,
-        "height": 1920,
-        "filesize_bytes": 3778709,
-        "visual_evidence": {
-          "source_title": [
-            "corridor base with a separately authored distant matching-figure silhouette and CCTV label"
-          ],
-          "reviewer": "Codex visual triage pass",
-          "reviewed_at": "2026-10-29T00:00:00Z",
-          "review_method": "contact sheet plus sampled-frame inspection plus ffprobe metadata",
-          "sample_timestamps": [
-            0.15,
-            3.1,
-            6.05
-          ],
-          "reviewed": true,
-          "basis": [
-            "corridor base with a separately authored distant matching-figure silhouette and CCTV label"
-          ],
-          "subjects": [
-            "figure",
-            "security_guard"
-          ],
-          "actions": [],
-          "environments": [
-            "corridor"
-          ],
-          "objects": [
-            "security_camera",
-            "red_emergency_lamp",
-            "figure",
-            "security_guard"
-          ],
-          "observed_subjects": [
-            "figure",
-            "security_guard"
-          ],
-          "observed_actions": [],
-          "observed_environments": [
-            "corridor"
-          ],
-          "observed_objects": [
-            "security_camera",
-            "red_emergency_lamp",
-            "figure",
-            "security_guard"
-          ],
-          "pixel_qc": {
-            "embedded_layout": "clean_full_frame",
-            "compositor_layers_disclosed": true
-          }
-        }
-      }
-    },
-    {
-      "scene_id": "S10",
-      "beat_id": "beat-007",
-      "duration": 6.2,
-      "story_beat": "impossible evidence",
-      "narration_excerpt": "The lobby monitor showed Elias outside the elevator, watching.",
-      "visual_semantics": {
-        "role": "literal",
-        "required": {
-          "subjects": [
-            "security_guard"
-          ],
-          "actions": [],
-          "environments": [
-            "hospital"
-          ],
-          "objects": [
-            "security_guard"
-          ]
-        },
-        "preferred": {
-          "moods": [
-            "eerie"
-          ]
-        },
-        "forbidden": [
-          "medical_vial",
-          "laboratory",
-          "beach",
-          "generic office"
-        ],
-        "narrative_anchors": {
-          "direct_required": [
-            "monitor",
-            "elevator",
-            "security_guard"
-          ],
-          "minimum_direct": 3
-        }
-      },
-      "asset_status": "PENDING_RESEARCH",
-      "visual_intent": "monitor | elevator | security_guard",
-      "visual_function": "literal_evidence",
-      "visual_match": "EXACT",
-      "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.92,
-      "asset": {
-        "asset_id": "PREVIEW-S10-001",
-        "path": "preview-assets/S10_lobby_monitor.mp4",
-        "provider": "original",
-        "source_page_url": "https://drive.google.com/file/d/1NUbUL1HKfDSGWMjLvhvly9vJLrUEZmxV/view?usp=drivesdk",
-        "license": "Compositor-owned preview evidence; not cleared for release",
-        "rights_status": "PREVIEW_ONLY",
-        "approved_for_render": false,
-        "preview_only": true,
-        "preview_only_reason": "Editorial approval candidate only; requires rights review and human approval before release.",
-        "reuse_status": "FRESH",
-        "sha256": "e91942a6f6af842c167362312a7f5e6e7cc68146ef033476ef9f9787b3e83f7b",
-        "perceptual_hash": "cf94c4e50928c0d887a2813b60710771d7d8ba5d86601f3db2507fce7084d464",
-        "episode_id": "episode-001-preview",
-        "drive_file_id": "1NUbUL1HKfDSGWMjLvhvly9vJLrUEZmxV",
-        "duration_seconds": 6.2,
-        "width": 1080,
-        "height": 1920,
-        "filesize_bytes": 69536,
-        "visual_evidence": {
-          "source_title": [
-            "authored split lobby monitor showing Elias outside while a figure is inside"
-          ],
-          "reviewer": "Codex visual triage pass",
-          "reviewed_at": "2026-10-29T00:00:00Z",
-          "review_method": "contact sheet plus sampled-frame inspection plus ffprobe metadata",
-          "sample_timestamps": [
-            0.15,
-            3.1,
-            6.05
-          ],
-          "reviewed": true,
-          "basis": [
-            "authored split lobby monitor showing Elias outside while a figure is inside"
-          ],
-          "subjects": [
-            "security_guard"
-          ],
-          "actions": [],
-          "environments": [
-            "hospital"
-          ],
-          "objects": [
-            "monitor",
-            "elevator",
-            "security_guard"
-          ],
-          "observed_subjects": [
-            "security_guard"
-          ],
-          "observed_actions": [],
-          "observed_environments": [
-            "hospital"
-          ],
-          "observed_objects": [
-            "monitor",
-            "elevator",
-            "security_guard"
-          ],
-          "pixel_qc": {
-            "embedded_layout": "clean_full_frame",
-            "compositor_layers_disclosed": true
-          }
-        }
-      }
-    },
-    {
-      "scene_id": "S11",
-      "beat_id": "beat-007",
-      "duration": 6.2,
-      "story_beat": "consequence",
-      "narration_excerpt": "Then the system added a second passenger.",
-      "visual_semantics": {
-        "role": "literal",
-        "required": {
-          "subjects": [
-            "passenger"
-          ],
-          "actions": [],
-          "environments": [
-            "hospital"
-          ],
-          "objects": [
-            "passenger"
-          ]
-        },
-        "preferred": {
-          "moods": [
-            "eerie"
-          ]
-        },
-        "forbidden": [
-          "medical_vial",
-          "laboratory",
-          "beach",
-          "generic office"
-        ],
-        "narrative_anchors": {
-          "direct_required": [
-            "system_log",
-            "passenger"
-          ],
-          "minimum_direct": 2
-        }
-      },
-      "asset_status": "PENDING_RESEARCH",
-      "visual_intent": "system_log | passenger",
-      "visual_function": "literal_evidence",
-      "visual_match": "EXACT",
-      "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.92,
-      "asset": {
-        "asset_id": "PREVIEW-S11-001",
-        "path": "preview-assets/S11_second_passenger.mp4",
-        "provider": "original",
-        "source_page_url": "https://drive.google.com/file/d/1dlu1251AsJqAX0dpdpaERpT3ESJwggfX/view?usp=drivesdk",
-        "license": "Compositor-owned preview evidence; not cleared for release",
-        "rights_status": "PREVIEW_ONLY",
-        "approved_for_render": false,
-        "preview_only": true,
-        "preview_only_reason": "Editorial approval candidate only; requires rights review and human approval before release.",
-        "reuse_status": "FRESH",
-        "sha256": "61ed9f5cebeebb308200ca6c53f562b41e7de795ccbdc60ef2fb09e062881392",
-        "perceptual_hash": "69b404b17bb7805fe45de41520d795d717a438d8ebe44c83ee379ff8fe19a848",
-        "episode_id": "episode-001-preview",
-        "drive_file_id": "1dlu1251AsJqAX0dpdpaERpT3ESJwggfX",
-        "duration_seconds": 6.2,
-        "width": 1080,
-        "height": 1920,
-        "filesize_bytes": 93740,
-        "visual_evidence": {
-          "source_title": [
-            "authored passenger register with passenger 01 and an unknown passenger 02"
-          ],
-          "reviewer": "Codex visual triage pass",
-          "reviewed_at": "2026-10-29T00:00:00Z",
-          "review_method": "contact sheet plus sampled-frame inspection plus ffprobe metadata",
-          "sample_timestamps": [
-            0.15,
-            3.1,
-            6.05
-          ],
-          "reviewed": true,
-          "basis": [
-            "authored passenger register with passenger 01 and an unknown passenger 02"
-          ],
-          "subjects": [
-            "passenger"
-          ],
-          "actions": [],
-          "environments": [
-            "hospital"
-          ],
-          "objects": [
-            "system_log",
-            "passenger"
-          ],
-          "observed_subjects": [
-            "passenger"
-          ],
-          "observed_actions": [],
-          "observed_environments": [
-            "hospital"
-          ],
-          "observed_objects": [
-            "system_log",
-            "passenger"
-          ],
-          "pixel_qc": {
-            "embedded_layout": "clean_full_frame",
-            "compositor_layers_disclosed": true
-          }
-        }
-      }
-    },
-    {
-      "scene_id": "S12",
       "beat_id": "beat-008",
-      "duration": 5.5,
+      "duration": 8,
       "story_beat": "payoff",
       "narration_excerpt": "The indicator began descending below the basement. No one pressed a button.",
       "visual_semantics": {
         "role": "literal",
         "required": {
-          "subjects": [],
-          "actions": [],
-          "environments": [
-            "elevator",
-            "basement"
-          ],
           "objects": [
+            "elevator",
             "display"
+          ],
+          "environments": [
+            "interior"
           ]
         },
         "preferred": {
           "moods": [
-            "eerie"
+            "dread"
           ]
         },
         "forbidden": [
-          "medical_vial",
-          "laboratory",
           "beach",
           "generic office"
         ],
         "narrative_anchors": {
           "direct_required": [
-            "display",
-            "basement"
+            "elevator",
+            "display"
           ],
           "minimum_direct": 2
         }
       },
       "asset_status": "PENDING_RESEARCH",
-      "visual_intent": "display | basement",
+      "visual_intent": "elevator | display",
       "visual_function": "literal_evidence",
       "visual_match": "EXACT",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.92,
+      "match_score": 0.86,
       "asset": {
-        "asset_id": "PREVIEW-S12-001",
-        "path": "preview-assets/S12_below_basement_composite.mp4",
-        "provider": "original",
+        "asset_id": "V72-S08-CLEAN-008",
+        "path": "preview-assets-v72/CLEAN_S12_elevator_descent_source.mp4",
+        "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/an-elevator-screen-shows-going-downfloor-15434928/",
-        "license": "Pexels Free License + original preview compositor layer",
+        "license": "Pexels Free License (unmodified source footage; preview-only rights candidate)",
         "rights_status": "PREVIEW_ONLY",
         "approved_for_render": false,
         "preview_only": true,
-        "preview_only_reason": "Editorial approval candidate only; requires rights review and human approval before release.",
+        "preview_only_reason": "Editorial approval candidate; clean source footage; rights review and human approval required before release.",
         "reuse_status": "FRESH",
-        "sha256": "e205ffadf9413eddb270a945315b5f8b2e253f6345abb7cbd3af390843516c92",
-        "perceptual_hash": "51b1359c20de69152d34a7f55fdfa8edfa273c941f315a7817859c733bb0c652",
-        "episode_id": "episode-001-preview",
-        "drive_file_id": "1SLqbNKKJwyIqPBZj_0l6zzc2WUHosqix",
-        "duration_seconds": 5.5,
-        "width": 1080,
-        "height": 1920,
-        "filesize_bytes": 1337506,
+        "sha256": "3c1905a8e19a148fc1134b30fd66a655f9a311c6417985122b23593bd9407543",
+        "perceptual_hash": "3c1905a8e19a148fc1134b30fd66a655f9a311c6417985122b23593bd9407543",
+        "episode_id": "episode-001-preview-v72-charon-clean",
+        "drive_file_id": "1wRbNO4WU_Yr0T8tXTMs98VahzQMPv_qE",
+        "duration_seconds": 22.015,
+        "width": 2160,
+        "height": 3840,
+        "filesize_bytes": 47297987,
         "visual_evidence": {
           "source_title": [
-            "real descending elevator indicator extended by a separately authored below-B1 evidence layer"
+            "unmodified elevator descent indicator with native device display"
           ],
           "reviewer": "Codex visual triage pass",
-          "reviewed_at": "2026-10-29T00:00:00Z",
+          "reviewed_at": "2026-10-30T00:00:00Z",
           "review_method": "contact sheet plus sampled-frame inspection plus ffprobe metadata",
           "sample_timestamps": [
             0.15,
-            2.75,
-            5.35
+            11.0075,
+            21.865000000000002
           ],
           "reviewed": true,
           "basis": [
-            "real descending elevator indicator extended by a separately authored below-B1 evidence layer"
+            "unmodified elevator descent indicator with native device display"
           ],
           "subjects": [],
           "actions": [],
           "environments": [
-            "basement",
-            "elevator"
+            "interior"
           ],
           "objects": [
+            "elevator",
             "display"
           ],
           "observed_subjects": [],
           "observed_actions": [],
           "observed_environments": [
-            "basement",
-            "elevator"
+            "interior"
           ],
           "observed_objects": [
+            "elevator",
             "display"
           ],
           "pixel_qc": {
             "embedded_layout": "clean_full_frame",
-            "compositor_layers_disclosed": true
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NATURAL_SOURCE_ONLY",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
           }
         }
       }
@@ -1860,11 +1305,15 @@
   "editorial_qa": {
     "status": "PENDING_HUMAN_APPROVAL",
     "reviewer": "",
-    "reviewed_at": ""
+    "reviewed_at": "",
+    "visual_text_policy": "PASS_CANDIDATE_CAPTIONS_ONLY",
+    "compositor_overlay_policy": "BLOCKED",
+    "reviewed_clip_count": 8
   },
   "human_approval": {
     "status": "PENDING",
     "reviewer": "",
-    "approved_at": ""
+    "approved_at": "",
+    "decision": "PENDING_HUMAN_PREVIEW_APPROVAL"
   }
 }
