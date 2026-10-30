@@ -331,7 +331,7 @@ def _gate_record(gate_id: str, check: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def evaluate(manifest: dict[str, Any], *, repo_root: Path, manifest_dir: Path, mode: str, check_cloud_tts: bool = False) -> dict[str, Any]:
+def evaluate(manifest: dict[str, Any], *, repo_root: Path, manifest_dir: Path, mode: str, check_gemini_tts: bool = False) -> dict[str, Any]:
     if mode not in {"contract", "dry-run", "draft-preview", "preflight", "preview", "production"}:
         raise OrchestratorError(f"unsupported orchestration mode: {mode}")
     validate_prompt_and_schema(repo_root)
@@ -348,7 +348,7 @@ def evaluate(manifest: dict[str, Any], *, repo_root: Path, manifest_dir: Path, m
             manifest_dir=manifest_dir,
             allow_preview_only=allow_preview_only,
         ),
-        "G4": _tts_gate(manifest, dry_run=(mode in {"contract", "dry-run"} or not check_cloud_tts)),
+        "G4": _tts_gate(manifest, dry_run=(mode in {"contract", "dry-run"} or not check_gemini_tts)),
         "G5": _audio_gate(
             manifest,
             require_approved=mode in {"preflight", "preview", "production"},
@@ -401,7 +401,7 @@ def run(args: argparse.Namespace) -> int:
     if not SAFE_MANIFEST.fullmatch(relative):
         raise OrchestratorError("manifest must be episodes/<episode>/manifest.json")
     manifest = load_json(manifest_path)
-    report = evaluate(manifest, repo_root=repo_root, manifest_dir=manifest_path.parent, mode=args.mode, check_cloud_tts=args.check_cloud_tts)
+    report = evaluate(manifest, repo_root=repo_root, manifest_dir=manifest_path.parent, mode=args.mode, check_gemini_tts=args.check_gemini_tts)
     report_path = args.report.resolve() if args.report else manifest_path.parent / "rendered" / f"v7-{args.mode}.json"
     _write_json(report_path, {key: value for key, value in report.items() if key != "record"})
     record_path = args.record.resolve() if args.record else manifest_path.parent / ".engine" / "production-record-7.2.json"
@@ -415,7 +415,7 @@ def main() -> int:
     parser.add_argument("--repo-root", type=Path, default=Path("."))
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--mode", choices=("contract", "preflight", "dry-run", "draft-preview", "preview", "production"), default="preflight")
-    parser.add_argument("--check-cloud-tts", action="store_true")
+    parser.add_argument("--check-gemini-tts", action="store_true")
     parser.add_argument("--report", type=Path)
     parser.add_argument("--record", type=Path)
     try:
