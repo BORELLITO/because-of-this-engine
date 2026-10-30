@@ -12,7 +12,7 @@
     "duration_max_seconds": 75
   },
   "engine_profile": "because-of-this-v7.3.2-charon-cinematic-dread-smooth-2026-10",
-  "engine_profile_fingerprint": "ebf1cb98d926fcbde5bcfcee7abf1c799a224b777e1fa9f50b0c2c3f482f89c2",
+  "engine_profile_fingerprint": "c9f6c10765b65a447fb010008f64b302315ff189e257b927d47c9c8e2a427c8e",
   "master_prompt_version": "7.2",
   "master_prompt_sha256": "c0bd045da0898848ff11aaba9ff2de9e27be8041f559b37a80f3f99ada1127c8",
   "production_schema": "because-of-this://schemas/production-record/3.0.0",
@@ -132,7 +132,7 @@
     "alignment_source": "vosk_word_timestamps",
     "word_level_available": true,
     "max_lines": 2,
-    "max_line_chars": 42,
+    "max_line_chars": 38,
     "target_cps": 20,
     "max_cps": 28,
     "end_tolerance_seconds": 0.1,
@@ -159,9 +159,9 @@
       "outline": 3,
       "shadow": 1,
       "alignment": 2,
-      "margin_l": 100,
-      "margin_r": 100,
-      "margin_v": 220,
+      "margin_l": 90,
+      "margin_r": 140,
+      "margin_v": 340,
       "encoding": 1
     }
   },
