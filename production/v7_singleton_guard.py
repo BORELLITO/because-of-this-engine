@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prove that the active Because Of This entrypoint is the V7.1 engine only."""
+"""Prove that the active Because Of This entrypoint is the V7.3 Charon engine only."""
 
 from __future__ import annotations
 
@@ -18,9 +18,7 @@ class SingletonGuardError(RuntimeError):
 FORBIDDEN_ACTIVE_MARKERS = (
     "because-of-this-v2-locked-2026-10",
     "master_prompt_version: 6.0",
-    "GEMINI_API_KEY",
-    "gemini-3.8-flash-tts",
-    "elevenlabs",
+        "elevenlabs",
     "narrate.py",
 )
 
@@ -36,11 +34,11 @@ def audit(repo_root: Path) -> dict[str, object]:
     policy_path = root / "production" / "active_engine_policy.json"
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
     if policy.get("active_engine_profile") != CANONICAL_PROFILE_ID:
-        raise SingletonGuardError("active policy does not point to the V7.1 profile")
+        raise SingletonGuardError("active policy does not point to the V7.3 Charon profile")
     if policy.get("active_engine_fingerprint") != CANONICAL_PROFILE_FINGERPRINT:
-        raise SingletonGuardError("active policy fingerprint does not match canonical V7.1 config")
+        raise SingletonGuardError("active policy fingerprint does not match canonical V7.3 Charon config")
     if policy.get("master_prompt_version") != PROMPT_VERSION or policy.get("master_prompt_sha256") != PROMPT_SHA256:
-        raise SingletonGuardError("active policy does not pin the canonical V7.1 prompt")
+        raise SingletonGuardError("active policy does not pin the canonical V7.2 prompt")
     if policy.get("production_schema") != "because-of-this://schemas/production-record/3.0.0":
         raise SingletonGuardError("active policy does not pin schema 3.0.0")
     workflows = _active_workflow_paths(root)
