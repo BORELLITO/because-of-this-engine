@@ -176,7 +176,6 @@ jobs:
 
       - name: Generate at most one missing Charon narration
         if: env.CHARON_CACHE_HIT != 'true' && env.CHARON_PROVIDER_REQUEST_ALLOWED == 'true'
-        if: env.CHARON_CACHE_HIT != 'true'
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_TTS_REQUEST_BUDGET: "1"
