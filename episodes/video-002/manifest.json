@@ -35,7 +35,7 @@
     "wound": "Mara has built her identity around preserving evidence that other people want forgotten.",
     "flaw": "Her need to complete the record overrides the final safe exit.",
     "something_to_lose": "Mara's safety and her confidence that a record can remain separate from the event it describes.",
-    "hook": "At 1:06 a.m., Mara, a city archivist, digitized the last security tape from a condemned train station.",
+    "hook": "At one oh six a.m., Mara, a city archivist, digitized the last security tape from a condemned train station.",
     "reveal": "The extra minute is not only a record of the missing worker; it reaches into the present and changes Mara's copy."
   },
   "story_profile": {
@@ -117,7 +117,7 @@
           "security_tape"
         ],
         "scene_id": "S01",
-        "narration_excerpt": "At 1:06 a.m., Mara, a city archivist,"
+        "narration_excerpt": "At one oh six a.m., Mara, a city archivist,"
       },
       {
         "beat_id": "beat-002",
@@ -406,7 +406,7 @@
     "beats": [
       {
         "beat_id": "beat-001",
-        "text": "At 1:06 a.m., Mara, a city archivist,"
+        "text": "At one oh six a.m., Mara, a city archivist,"
       },
       {
         "beat_id": "beat-002",
@@ -459,7 +459,7 @@
   },
   "script": {
     "path": "script.txt",
-    "word_count_target": 160
+    "word_count_target": 162
   },
   "audio": {
     "path": "audio/narration.wav",
@@ -520,7 +520,7 @@
       "beat_id": "beat-001",
       "duration": 4,
       "story_beat": "hook setup",
-      "narration_excerpt": "At 1:06 a.m., Mara, a city archivist,",
+      "narration_excerpt": "At one oh six a.m., Mara, a city archivist,",
       "visual_semantics": {
         "role": "literal",
         "required": {
@@ -586,7 +586,7 @@
         "original_filename": "V73-S01-archive-digitizer-clean.mp4",
         "mime_type": "video/mp4",
         "job_ownership": "episode-002-archive-tape-draft",
-        "scene_usage": "S01: visual evidence for At 1:06 a.m., Mara, a city archivist,",
+        "scene_usage": "S01: visual evidence for At one oh six a.m., Mara, a city archivist,",
         "source_segment_in": 0,
         "source_segment_out": 11.156667,
         "asset_class": "evidence",
