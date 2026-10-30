@@ -75,9 +75,9 @@
   ],
   "active_addon_activation": {
     "approved": true,
-    "pr_number": null,
-    "commit": "pending-merge",
+    "pr_number": 61,
+    "commit": "0f884a4b66035f33e3f0864f4df7ed02fd36f593",
     "core_engine_version": "7.3.1",
-    "media_regeneration_required": true
+    "media_regeneration_required": false
   }
 }
