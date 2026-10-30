@@ -1317,7 +1317,7 @@
     "track_id": "V73-PROCEDURAL-SUSPENSE-BED-001",
     "commercial_use": false,
     "preview_only": true,
-    "volume": 0.15,
+    "volume": 0.12,
     "complete_track_reuse": "forbidden",
     "sidechain_enabled": true,
     "source": "engine_generated",
@@ -1332,7 +1332,8 @@
         "midband_tension",
         "restrained_transition_impacts"
       ]
-    }
+    },
+    "gain_db": 4.5
   },
   "color_grade": {
     "enabled": true,
@@ -1344,8 +1345,8 @@
     "vignette": true,
     "cinematic_suspense": {
       "enabled": true,
-      "cool_shadows": 0.035,
-      "warm_highlights": 0.012,
+      "cool_shadows": 0.025,
+      "warm_highlights": 0.01,
       "camera_motion": true,
       "motion_strength": 0.035,
       "push_in": 0.045,
