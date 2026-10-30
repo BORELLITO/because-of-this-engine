@@ -147,7 +147,7 @@ def manifest_cache_spec(manifest_path: Path) -> dict[str, Any]:
     if not isinstance(voice, dict):
         raise NarrationCacheError("Manifest voice profile is missing.")
     provider = str(voice.get("provider", "")).strip()
-    if provider != "google_cloud_tts":
+    if provider != "gemini_tts":
         raise NarrationCacheError(f"Unsupported narration provider for active V7.2 cache: {provider}")
     model = voice.get("model") or voice.get("model_or_voice_type") or provider
     voice_name = voice.get("voice_name") or voice.get("voice")
