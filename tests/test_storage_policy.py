@@ -18,11 +18,15 @@ class StoragePolicyTests(unittest.TestCase):
         self.assertEqual(offenders, [])
 
     def test_render_is_drive_first_and_fail_closed(self):
-        text = (WORKFLOWS / "render-video-episode.yml").read_text(encoding="utf-8")
-        self.assertIn("google_drive_delivery.py --preflight", text)
-        self.assertIn('--collection "VIDEOS V2"', text)
-        self.assertIn("Remove ephemeral media only after verified Drive delivery", text)
-        self.assertNotIn("actions/upload-" + "artifact", text)
+        production = (WORKFLOWS / "because-of-this-v7.yml").read_text(encoding="utf-8")
+        draft = (WORKFLOWS / "draft-preview.yml").read_text(encoding="utf-8")
+        self.assertIn("google_drive_delivery.py --preflight", production)
+        self.assertIn('--collection "VIDEOS V7"', production)
+        self.assertIn("Deliver only after V7 approval gates pass", production)
+        self.assertIn('--collection "PREVIEWS V7"', draft)
+        self.assertIn("Deliver verified preview bundle to Drive", draft)
+        for text in (production, draft):
+            self.assertNotIn("actions/upload-" + "artifact", text)
 
     def test_drive_delivery_verifies_remote_copy(self):
         text = (ROOT / "production" / "google_drive_delivery.py").read_text(encoding="utf-8")
