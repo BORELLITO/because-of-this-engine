@@ -324,6 +324,20 @@ def validate_asset_record(record: dict[str, Any], base: Path, episode_id: str, *
             raise VideoContractError(f"Asset {asset_id} sha256 does not match the downloaded file.")
         metadata = ffprobe(path)
         pixel_qc = ((record.get("visual_evidence") or {}).get("pixel_qc") or {})
+        if (
+            pixel_qc.get("text_overlay_present") is True
+            or pixel_qc.get("authored_graphics_present") is True
+            or pixel_qc.get("compositor_layers_disclosed") is True
+        ):
+            raise VideoContractError(
+                f"Asset {asset_id} contains authored text/graphic/compositor layers; "
+                "captions must be the only editorial text layer."
+            )
+        embedded_text_status = str(pixel_qc.get("embedded_text_status", "")).strip().upper()
+        if embedded_text_status not in {"NONE", "NATURAL_SOURCE_ONLY"}:
+            raise VideoContractError(
+                f"Asset {asset_id} embedded_text_status must be NONE or NATURAL_SOURCE_ONLY."
+            )
         embedded_layout = str(pixel_qc.get("embedded_layout", "")).strip().lower()
         if embedded_layout in {"letterbox", "pillarbox", "baked_captions", "embedded_logo", "precomposed", "composited"}:
             disclosed_preview_compositor = (
