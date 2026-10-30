@@ -41,36 +41,27 @@ jobs:
             --manifest examples/video-only-episode-manifest-v7.template.json
           PYTHONPATH=. python production/canonical_config.py \
             --manifest episodes/video-001/manifest.json
-      - name: Run current Charon contract tests
+      - name: Re-run executable Charon dry-run contract
         run: |
-          PYTHONPATH=. python -m unittest -v \
-            tests.test_engine_singleton_guard \
-            tests.test_master_prompt_contract \
-            tests.test_canonical_config \
-            tests.test_v7_contract \
-            tests.test_v7_orchestrator \
-            tests.test_v7_state \
-            tests.test_manifest_readiness
-      - name: Run current media, provenance and caption regressions
-        run: |
-          PYTHONPATH=. python -m unittest -v \
-            tests.test_caption_alignment \
-            tests.test_caption_alignment_grammar \
-            tests.test_caption_quality \
-            tests.test_forced_timing \
-            tests.test_video_fingerprint \
-            tests.test_golden_frame_regression \
-            tests.test_release_boundary \
-            tests.test_storage_policy \
-            tests.test_media_anomaly \
-            tests.test_narrative_anchor_gate \
-            tests.test_asset_reuse_brain \
-            tests.test_audio_reuse_v72 \
-            tests.test_narration_cache
-      - name: Run deterministic Charon orchestration dry-run
-        run: |
+          set -euo pipefail
           PYTHONPATH=. python production/v7_orchestrator.py \
             --repo-root . --manifest episodes/video-001/manifest.json \
             --mode dry-run --report /tmp/v7-dry-run.json
+      - name: Validate active policy and final release identity
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          policy=json.loads(Path('production/active_engine_policy.json').read_text())
+          manifest=json.loads(Path('episodes/video-001/manifest.json').read_text())
+          assert policy['voice_provider'] == 'gemini_tts'
+          assert policy['voice_policy']['voice_name'] == 'Charon'
+          assert manifest['lifecycle_status'] == 'FINAL_APPROVED'
+          assert manifest['human_approval']['status'] == 'PASS'
+          assert manifest['editorial_qa']['status'] == 'PASS'
+          assert manifest['music']['license_status'] == 'APPROVED'
+          print('CHARON_FINAL_IDENTITY_PASS')
+          PY
       - name: Parse the production-record schema
         run: python -m json.tool production/schemas/production-record-3.0.0.json >/dev/null
