@@ -75,6 +75,13 @@ jobs:
           print("DRAFT_PREVIEW_SCOPE_PASS")
           PY
 
+      - name: Derive episode-scoped preview paths
+        env:
+          MANIFEST: ${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}
+        run: |
+          set -euo pipefail
+          echo "EPISODE_DIR=$(dirname \"${MANIFEST}\")" >> "${GITHUB_ENV}"
+
       - name: Setup Python
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
@@ -125,8 +132,8 @@ jobs:
           set -euo pipefail
           PYTHONPATH=. python production/gemini_tts.py \
             --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" \
-            --input "episodes/video-001/script.txt" \
-            --output-dir "episodes/video-001/audio"
+            --input "${EPISODE_DIR}/script.txt" \
+            --output-dir "${EPISODE_DIR}/audio"
 
       - name: Store newly generated Charon narration in verified Drive cache
         if: env.CHARON_CACHE_HIT != 'true'
@@ -161,15 +168,15 @@ jobs:
             --secondary-model-dir "${VOSK_SECONDARY_MODEL_DIR}"
           PYTHONPATH=. python production/story_intelligence.py \
             --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" \
-            --alignment "episodes/video-001/captions/narration.alignment.json" \
+            --alignment "${EPISODE_DIR}/captions/narration.alignment.json" \
             --report "$(dirname "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}")/rendered/narration-coverage.json"
 
       - name: Generate deterministic suspense soundtrack
         run: |
           set -euo pipefail
-          mkdir -p episodes/video-001/audio
+          mkdir -p "${EPISODE_DIR}/audio"
           PYTHONPATH=. python production/generate_suspense_bed.py \
-            --output episodes/video-001/audio/music.wav \
+            --output "${EPISODE_DIR}/audio/music.wav" \
             --duration 70 \
             --sample-rate 48000
 
@@ -258,10 +265,10 @@ jobs:
             --collection "PREVIEWS V7" \
             --delivery-name "draft-preview-${{ github.run_id }}" \
             --job-id "draft-preview-${{ github.run_id }}" \
-            --path "episodes/video-001/rendered" \
-            --path "episodes/video-001/audio/narration.wav" \
-            --path "episodes/video-001/audio/music.wav" \
-            --path "episodes/video-001/captions" \
+            --path "${EPISODE_DIR}/rendered" \
+            --path "${EPISODE_DIR}/audio/narration.wav" \
+            --path "${EPISODE_DIR}/audio/music.wav" \
+            --path "${EPISODE_DIR}/captions" \
             --path "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" \
             --receipt "${RUNNER_TEMP}/draft-preview-drive-delivery.json"
 
