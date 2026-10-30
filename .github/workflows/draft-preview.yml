@@ -56,7 +56,7 @@ jobs:
 
       - name: Validate preview manifest scope
         env:
-          MANIFEST: ${{ inputs.manifest }}
+          MANIFEST: ${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}
         run: |
           set -euo pipefail
           test "${MANIFEST}" = "episodes/video-001/preview-manifest.json"
@@ -82,7 +82,7 @@ jobs:
       - name: Validate canonical V7.2 Charon contract
         run: |
           PYTHONPATH=. python production/v7_contract.py \
-            --repo-root . --manifest "${{ inputs.manifest }}" --require-production
+            --repo-root . --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --require-production
 
 
       - name: Gemini TTS Charon preflight
@@ -91,7 +91,7 @@ jobs:
         run: |
           set -euo pipefail
           sudo apt-get update && sudo apt-get install -y ffmpeg
-          PYTHONPATH=. python production/gemini_tts.py --manifest "${{ inputs.manifest }}" --preflight
+          PYTHONPATH=. python production/gemini_tts.py --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --preflight
 
       - name: Restore identical existing Charon narration from Drive cache
         env:
@@ -101,7 +101,7 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/narration_cache.py \
-            --manifest "${{ inputs.manifest }}" --restore \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --restore \
             --status-file "${RUNNER_TEMP}/v72-cache-result.json"
           python - "${RUNNER_TEMP}/v72-cache-result.json" <<'PY'
           import json, os, sys
@@ -120,7 +120,7 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/gemini_tts.py \
-            --manifest "${{ inputs.manifest }}" \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" \
             --input "episodes/video-001/script.txt" \
             --output-dir "episodes/video-001/audio"
 
@@ -132,7 +132,7 @@ jobs:
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: |
           PYTHONPATH=. python production/narration_cache.py \
-            --manifest "${{ inputs.manifest }}" --store
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --store
       - name: Install independent Vosk alignment models
         run: |
           set -euo pipefail
@@ -152,11 +152,11 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/align_captions.py \
-            --manifest "${{ inputs.manifest }}" \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" \
             --model-dir "${VOSK_MODEL_DIR}" \
             --secondary-model-dir "${VOSK_SECONDARY_MODEL_DIR}"
           PYTHONPATH=. python production/story_intelligence.py \
-            --manifest "${{ inputs.manifest }}" \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" \
             --alignment "episodes/video-001/captions/narration.alignment.json" \
             --report "episodes/video-001/rendered/narration-coverage.json"
 
@@ -177,13 +177,13 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/google_drive_assets.py \
-            --manifest "${{ inputs.manifest }}" --require-drive-assets
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --require-drive-assets
 
       - name: Run visual-story QA in draft-preview mode
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/visual_story_qa.py \
-            --manifest "${{ inputs.manifest }}" \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" \
             --mode draft-preview \
             --report "episodes/video-001/rendered/visual-story-qa-draft-preview.json"
 
@@ -191,25 +191,25 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/render_video_episode.py \
-            --manifest "${{ inputs.manifest }}" --mode draft-preview
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --mode draft-preview
 
       - name: Validate media and locked layout
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/caption_quality.py \
-            --manifest "${{ inputs.manifest }}" \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" \
             --report "episodes/video-001/rendered/caption-quality-draft-preview.json"
           PYTHONPATH=. python production/validate_video_release.py \
-            --manifest "${{ inputs.manifest }}" --mode draft-preview \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --mode draft-preview \
             --report "episodes/video-001/rendered/video-release-draft-preview.json"
           PYTHONPATH=. python production/golden_frame_regression.py \
-            --manifest "${{ inputs.manifest }}" --mode draft-preview \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --mode draft-preview \
             --report "episodes/video-001/rendered/golden-layout-draft-preview.json"
 
       - name: Register preview artifacts and evaluate V7 gates
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          MANIFEST: ${{ inputs.manifest }}
+          MANIFEST: ${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}
         run: |
           set -euo pipefail
           python - "${MANIFEST}" <<'PY'
@@ -258,7 +258,7 @@ jobs:
             --path "episodes/video-001/audio/narration.wav" \
             --path "episodes/video-001/audio/music.wav" \
             --path "episodes/video-001/captions" \
-            --path "${{ inputs.manifest }}" \
+            --path "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" \
             --receipt "${RUNNER_TEMP}/draft-preview-drive-delivery.json"
 
       - name: Print approval handoff
