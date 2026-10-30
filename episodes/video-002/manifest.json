@@ -105,59 +105,105 @@
     "beats": [
       {
         "beat_id": "beat-001",
-        "event": "Mara digitizes the last security tape from a condemned train station",
+        "event": "Mara begins digitizing the last security tape",
         "state_before": "ordinary_archive_shift",
-        "state_after": "tape_digitized",
-        "causal_role": "inciting anomaly",
+        "state_after": "archival_record_opened",
+        "causal_role": "inciting setup",
         "emotion": "curiosity",
-        "visual_motif": "archive tape and digitizer",
+        "visual_motif": "archivist and digitizer",
         "entities": [
           "mara",
           "archive",
           "security_tape"
         ],
         "scene_id": "S01",
-        "narration_excerpt": "At 1:06 a.m., Mara, a city archivist, digitized the last security tape from a condemned train station."
+        "narration_excerpt": "At 1:06 a.m., Mara, a city archivist,"
       },
       {
         "beat_id": "beat-002",
-        "event": "the recording ends, then the file adds one more minute",
+        "event": "the condemned station tape enters the digitizer",
+        "state_before": "archival_record_opened",
+        "state_after": "tape_digitized",
+        "causal_role": "inciting anomaly",
+        "emotion": "curiosity",
+        "visual_motif": "security tape and station label",
+        "entities": [
+          "mara",
+          "archive",
+          "security_tape"
+        ],
+        "scene_id": "S02",
+        "narration_excerpt": "digitized the last security tape from a condemned train station."
+      },
+      {
+        "beat_id": "beat-003",
+        "event": "the recording ends at 2:14",
         "state_before": "tape_digitized",
-        "state_after": "extra_minute_detected",
-        "causal_role": "contradiction",
-        "emotion": "unease",
-        "visual_motif": "timeline and timecode",
+        "state_after": "recording_ended",
+        "causal_role": "normal expectation",
+        "emotion": "calm",
+        "visual_motif": "timeline endpoint",
         "entities": [
           "mara",
           "security_tape",
           "digital_file"
         ],
-        "scene_id": "S02",
-        "narration_excerpt": "The recording ended at 2:14. Then the file added one more minute."
-      },
-      {
-        "beat_id": "beat-003",
-        "event": "platform clocks stop while a maintenance door opens",
-        "state_before": "extra_minute_detected",
-        "state_after": "physical_anomaly_seen",
-        "causal_role": "objective evidence",
-        "emotion": "dread",
-        "visual_motif": "stopped clocks and metal door",
-        "entities": [
-          "station",
-          "platform_clocks",
-          "maintenance_door"
-        ],
         "scene_id": "S03",
-        "narration_excerpt": "In that extra minute, every platform clock stopped at 1:07. A maintenance door opened by itself."
+        "narration_excerpt": "The recording ended at 2:14."
       },
       {
         "beat_id": "beat-004",
+        "event": "the file adds one more minute after the ending",
+        "state_before": "recording_ended",
+        "state_after": "extra_minute_detected",
+        "causal_role": "contradiction",
+        "emotion": "unease",
+        "visual_motif": "unexpected timeline extension",
+        "entities": [
+          "mara",
+          "digital_file",
+          "security_tape"
+        ],
+        "scene_id": "S04",
+        "narration_excerpt": "Then the file added one more minute."
+      },
+      {
+        "beat_id": "beat-005",
+        "event": "all platform clocks stop at 1:07",
+        "state_before": "extra_minute_detected",
+        "state_after": "time_freezes_on_platform",
+        "causal_role": "objective evidence",
+        "emotion": "dread",
+        "visual_motif": "stopped platform clocks",
+        "entities": [
+          "station",
+          "platform_clocks"
+        ],
+        "scene_id": "S05",
+        "narration_excerpt": "In that extra minute, every platform clock stopped at 1:07."
+      },
+      {
+        "beat_id": "beat-006",
+        "event": "a maintenance door opens by itself",
+        "state_before": "time_freezes_on_platform",
+        "state_after": "physical_anomaly_seen",
+        "causal_role": "escalation",
+        "emotion": "dread",
+        "visual_motif": "opening maintenance door",
+        "entities": [
+          "station",
+          "maintenance_door"
+        ],
+        "scene_id": "S06",
+        "narration_excerpt": "A maintenance door opened by itself."
+      },
+      {
+        "beat_id": "beat-007",
         "event": "the blueprint reveals the door was bricked shut after a disappearance",
         "state_before": "physical_anomaly_seen",
         "state_after": "historical_wound_exposed",
         "causal_role": "backstory evidence",
-        "emotion": "dread",
+        "emotion": "ominous",
         "visual_motif": "blueprint and sealed wall",
         "entities": [
           "mara",
@@ -165,11 +211,11 @@
           "maintenance_door",
           "missing_worker"
         ],
-        "scene_id": "S04",
+        "scene_id": "S07",
         "narration_excerpt": "Mara checked the blueprint. The door had been bricked shut after a worker disappeared there in 1989."
       },
       {
-        "beat_id": "beat-005",
+        "beat_id": "beat-008",
         "event": "the missing worker crosses the platform carrying a lamp",
         "state_before": "historical_wound_exposed",
         "state_after": "impossible_subject_recorded",
@@ -182,28 +228,43 @@
           "lamp",
           "security_camera"
         ],
-        "scene_id": "S05",
-        "narration_excerpt": "On the tape, the missing worker crossed the platform carrying a lamp. He stopped beneath the camera and looked directly into the lens."
+        "scene_id": "S08",
+        "narration_excerpt": "On the tape, the missing worker crossed the platform carrying a lamp."
       },
       {
-        "beat_id": "beat-006",
-        "event": "a second shadow appears without a visible body",
+        "beat_id": "beat-009",
+        "event": "the worker stops beneath the camera and looks into the lens",
         "state_before": "impossible_subject_recorded",
+        "state_after": "camera_acknowledged",
+        "causal_role": "direct threat",
+        "emotion": "terror",
+        "visual_motif": "figure under camera",
+        "entities": [
+          "missing_worker",
+          "security_camera"
+        ],
+        "scene_id": "S09",
+        "narration_excerpt": "He stopped beneath the camera and looked directly into the lens."
+      },
+      {
+        "beat_id": "beat-010",
+        "event": "a second shadow appears without a visible body",
+        "state_before": "camera_acknowledged",
         "state_after": "duplicate_presence_seen",
         "causal_role": "escalation",
         "emotion": "terror",
-        "visual_motif": "shadow under camera",
+        "visual_motif": "shadow without a body",
         "entities": [
           "missing_worker",
           "second_shadow",
           "security_camera"
         ],
-        "scene_id": "S06",
+        "scene_id": "S10",
         "narration_excerpt": "Mara froze the frame. Behind him, a second shadow stood where nobody was standing."
       },
       {
-        "beat_id": "beat-007",
-        "event": "the live monitor shows the platform empty except for a lamp behind the sealed wall",
+        "beat_id": "beat-011",
+        "event": "the live monitor shows the present platform and a lamp behind the sealed wall",
         "state_before": "duplicate_presence_seen",
         "state_after": "present_time_contaminated",
         "causal_role": "impossible evidence",
@@ -216,12 +277,12 @@
           "sealed_wall",
           "lamp"
         ],
-        "scene_id": "S07",
+        "scene_id": "S11",
         "narration_excerpt": "Then the timestamp jumped to the present. The station's live monitor showed the same platform—empty, except for a lamp glowing behind the sealed wall."
       },
       {
-        "beat_id": "beat-008",
-        "event": "Mara's copy changes and ends with someone holding the camera from the other side",
+        "beat_id": "beat-012",
+        "event": "the copy changes and ends with someone holding the camera from the other side",
         "state_before": "present_time_contaminated",
         "state_after": "ordinary_reality_broken",
         "causal_role": "payoff",
@@ -233,8 +294,8 @@
           "security_camera",
           "platform"
         ],
-        "scene_id": "S08",
-        "narration_excerpt": "But Mara's copy changed again. It now ends with a new frame: someone on the platform, holding the camera from the other side."
+        "scene_id": "S12",
+        "narration_excerpt": "Police found no broken door, no footprints, and no extra minute on the original tape. But Mara's copy changed again. It now ends with a new frame: someone on the platform, holding the camera from the other side."
       }
     ]
   },
@@ -345,35 +406,51 @@
     "beats": [
       {
         "beat_id": "beat-001",
-        "text": "At 1:06 a.m., Mara, a city archivist, digitized the last security tape from a condemned train station."
+        "text": "At 1:06 a.m., Mara, a city archivist,"
       },
       {
         "beat_id": "beat-002",
-        "text": "The recording ended at 2:14. Then the file added one more minute."
+        "text": "digitized the last security tape from a condemned train station."
       },
       {
         "beat_id": "beat-003",
-        "text": "In that extra minute, every platform clock stopped at 1:07. A maintenance door opened by itself."
+        "text": "The recording ended at 2:14."
       },
       {
         "beat_id": "beat-004",
-        "text": "Mara checked the blueprint. The door had been bricked shut after a worker disappeared there in 1989."
+        "text": "Then the file added one more minute."
       },
       {
         "beat_id": "beat-005",
-        "text": "On the tape, the missing worker crossed the platform carrying a lamp. He stopped beneath the camera and looked directly into the lens."
+        "text": "In that extra minute, every platform clock stopped at 1:07."
       },
       {
         "beat_id": "beat-006",
-        "text": "Mara froze the frame. Behind him, a second shadow stood where nobody was standing."
+        "text": "A maintenance door opened by itself."
       },
       {
         "beat_id": "beat-007",
-        "text": "Then the timestamp jumped to the present. The station's live monitor showed the same platform—empty, except for a lamp glowing behind the sealed wall."
+        "text": "Mara checked the blueprint. The door had been bricked shut after a worker disappeared there in 1989."
       },
       {
         "beat_id": "beat-008",
-        "text": "But Mara's copy changed again. It now ends with a new frame: someone on the platform, holding the camera from the other side."
+        "text": "On the tape, the missing worker crossed the platform carrying a lamp."
+      },
+      {
+        "beat_id": "beat-009",
+        "text": "He stopped beneath the camera and looked directly into the lens."
+      },
+      {
+        "beat_id": "beat-010",
+        "text": "Mara froze the frame. Behind him, a second shadow stood where nobody was standing."
+      },
+      {
+        "beat_id": "beat-011",
+        "text": "Then the timestamp jumped to the present. The station's live monitor showed the same platform—empty, except for a lamp glowing behind the sealed wall."
+      },
+      {
+        "beat_id": "beat-012",
+        "text": "Police found no broken door, no footprints, and no extra minute on the original tape. But Mara's copy changed again. It now ends with a new frame: someone on the platform, holding the camera from the other side."
       }
     ],
     "voice": "Charon",
@@ -441,17 +518,19 @@
     {
       "scene_id": "S01",
       "beat_id": "beat-001",
-      "duration": 8,
-      "story_beat": "hook",
-      "narration_excerpt": "At 1:06 a.m., Mara, a city archivist, digitized the last security tape from a condemned train station.",
+      "duration": 4,
+      "story_beat": "hook setup",
+      "narration_excerpt": "At 1:06 a.m., Mara, a city archivist,",
       "visual_semantics": {
         "role": "literal",
         "required": {
           "objects": [
-            "security tape",
-            "digitizer"
+            "archivist",
+            "digitizer",
+            "security tape"
           ],
           "actions": [
+            "loading",
             "digitizing"
           ],
           "environments": [
@@ -472,14 +551,14 @@
         ],
         "narrative_anchors": {
           "direct_required": [
-            "security tape",
+            "archivist",
             "digitizer"
           ],
           "minimum_direct": 2
         }
       },
       "asset_status": "PENDING_RESEARCH",
-      "visual_intent": "archive room | security tape | digitizer",
+      "visual_intent": "archivist | digitizer | tape",
       "visual_function": "literal_evidence",
       "visual_match": "EXACT",
       "visual_truth": "DECLARED_FICTION",
@@ -502,9 +581,71 @@
     {
       "scene_id": "S02",
       "beat_id": "beat-002",
-      "duration": 7,
-      "story_beat": "contradiction",
-      "narration_excerpt": "The recording ended at 2:14. Then the file added one more minute.",
+      "duration": 4,
+      "story_beat": "inciting anomaly",
+      "narration_excerpt": "digitized the last security tape from a condemned train station.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "objects": [
+            "security tape",
+            "reel",
+            "station archive"
+          ],
+          "actions": [
+            "spinning"
+          ],
+          "environments": [
+            "archive room",
+            "interior"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "ominous"
+          ]
+        },
+        "forbidden": [
+          "hospital",
+          "elevator",
+          "generic office",
+          "unrelated crowds"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "security tape",
+            "reel"
+          ],
+          "minimum_direct": 2
+        }
+      },
+      "asset_status": "PENDING_RESEARCH",
+      "visual_intent": "security tape | condemned station label | reel",
+      "visual_function": "literal_evidence",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": null,
+      "asset": {
+        "asset_id": "V73-S02-PENDING",
+        "path": "assets/pending/s02-clean-source.mp4",
+        "provider": "pending_research",
+        "source_page_url": null,
+        "license": "Pending asset research; no publication rights asserted.",
+        "rights_status": "PENDING",
+        "approved_for_render": false,
+        "preview_only": true,
+        "reuse_status": "NOT_SELECTED",
+        "episode_id": "episode-002-archive-tape-draft",
+        "visual_evidence": null,
+        "approval_basis": "Awaiting clean-clip research and human rights review."
+      }
+    },
+    {
+      "scene_id": "S03",
+      "beat_id": "beat-003",
+      "duration": 6,
+      "story_beat": "false normality",
+      "narration_excerpt": "The recording ended at 2:14.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -512,6 +653,68 @@
             "monitor",
             "timeline",
             "timecode"
+          ],
+          "actions": [
+            "stopping"
+          ],
+          "environments": [
+            "archive room",
+            "interior"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "quiet"
+          ]
+        },
+        "forbidden": [
+          "hospital",
+          "elevator",
+          "generic office",
+          "unrelated crowds"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "monitor",
+            "timeline"
+          ],
+          "minimum_direct": 2
+        }
+      },
+      "asset_status": "PENDING_RESEARCH",
+      "visual_intent": "recording timeline | endpoint | monitor",
+      "visual_function": "explanatory_evidence",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": null,
+      "asset": {
+        "asset_id": "V73-S03-PENDING",
+        "path": "assets/pending/s03-clean-source.mp4",
+        "provider": "pending_research",
+        "source_page_url": null,
+        "license": "Pending asset research; no publication rights asserted.",
+        "rights_status": "PENDING",
+        "approved_for_render": false,
+        "preview_only": true,
+        "reuse_status": "NOT_SELECTED",
+        "episode_id": "episode-002-archive-tape-draft",
+        "visual_evidence": null,
+        "approval_basis": "Awaiting clean-clip research and human rights review."
+      }
+    },
+    {
+      "scene_id": "S04",
+      "beat_id": "beat-004",
+      "duration": 5,
+      "story_beat": "contradiction",
+      "narration_excerpt": "Then the file added one more minute.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "objects": [
+            "monitor",
+            "timeline",
+            "waveform"
           ],
           "actions": [
             "extending"
@@ -541,14 +744,14 @@
         }
       },
       "asset_status": "PENDING_RESEARCH",
-      "visual_intent": "editing timeline | timecode | tape monitor",
+      "visual_intent": "timeline extension | waveform | extra minute",
       "visual_function": "explanatory_evidence",
       "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
       "match_score": null,
       "asset": {
-        "asset_id": "V73-S02-PENDING",
-        "path": "assets/pending/s02-clean-source.mp4",
+        "asset_id": "V73-S04-PENDING",
+        "path": "assets/pending/s04-clean-source.mp4",
         "provider": "pending_research",
         "source_page_url": null,
         "license": "Pending asset research; no publication rights asserted.",
@@ -562,25 +765,24 @@
       }
     },
     {
-      "scene_id": "S03",
-      "beat_id": "beat-003",
-      "duration": 8,
+      "scene_id": "S05",
+      "beat_id": "beat-005",
+      "duration": 5,
       "story_beat": "objective evidence",
-      "narration_excerpt": "In that extra minute, every platform clock stopped at 1:07. A maintenance door opened by itself.",
+      "narration_excerpt": "In that extra minute, every platform clock stopped at 1:07.",
       "visual_semantics": {
         "role": "literal",
         "required": {
           "objects": [
-            "platform clock",
-            "maintenance door"
+            "platform clocks",
+            "train platform"
           ],
           "actions": [
-            "stopped",
-            "opening"
+            "stopping"
           ],
           "environments": [
             "train platform",
-            "exterior"
+            "night"
           ]
         },
         "preferred": {
@@ -596,21 +798,21 @@
         ],
         "narrative_anchors": {
           "direct_required": [
-            "platform clock",
-            "maintenance door"
+            "platform clocks",
+            "train platform"
           ],
           "minimum_direct": 2
         }
       },
       "asset_status": "PENDING_RESEARCH",
-      "visual_intent": "train platform | stopped clocks | maintenance door",
+      "visual_intent": "train platform | stopped clocks | night",
       "visual_function": "literal_evidence",
       "visual_match": "EXACT",
       "visual_truth": "DECLARED_FICTION",
       "match_score": null,
       "asset": {
-        "asset_id": "V73-S03-PENDING",
-        "path": "assets/pending/s03-clean-source.mp4",
+        "asset_id": "V73-S05-PENDING",
+        "path": "assets/pending/s05-clean-source.mp4",
         "provider": "pending_research",
         "source_page_url": null,
         "license": "Pending asset research; no publication rights asserted.",
@@ -624,10 +826,71 @@
       }
     },
     {
-      "scene_id": "S04",
-      "beat_id": "beat-004",
-      "duration": 8,
-      "story_beat": "backstory evidence",
+      "scene_id": "S06",
+      "beat_id": "beat-006",
+      "duration": 6,
+      "story_beat": "physical escalation",
+      "narration_excerpt": "A maintenance door opened by itself.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "objects": [
+            "maintenance door",
+            "metal frame"
+          ],
+          "actions": [
+            "opening"
+          ],
+          "environments": [
+            "train station",
+            "interior"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "dread"
+          ]
+        },
+        "forbidden": [
+          "hospital",
+          "elevator",
+          "generic office",
+          "unrelated crowds"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "maintenance door",
+            "metal frame"
+          ],
+          "minimum_direct": 2
+        }
+      },
+      "asset_status": "PENDING_RESEARCH",
+      "visual_intent": "metal maintenance door | empty platform",
+      "visual_function": "literal_evidence",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": null,
+      "asset": {
+        "asset_id": "V73-S06-PENDING",
+        "path": "assets/pending/s06-clean-source.mp4",
+        "provider": "pending_research",
+        "source_page_url": null,
+        "license": "Pending asset research; no publication rights asserted.",
+        "rights_status": "PENDING",
+        "approved_for_render": false,
+        "preview_only": true,
+        "reuse_status": "NOT_SELECTED",
+        "episode_id": "episode-002-archive-tape-draft",
+        "visual_evidence": null,
+        "approval_basis": "Awaiting clean-clip research and human rights review."
+      }
+    },
+    {
+      "scene_id": "S07",
+      "beat_id": "beat-007",
+      "duration": 6,
+      "story_beat": "historical evidence",
       "narration_excerpt": "Mara checked the blueprint. The door had been bricked shut after a worker disappeared there in 1989.",
       "visual_semantics": {
         "role": "literal",
@@ -672,8 +935,8 @@
       "visual_truth": "DECLARED_FICTION",
       "match_score": null,
       "asset": {
-        "asset_id": "V73-S04-PENDING",
-        "path": "assets/pending/s04-clean-source.mp4",
+        "asset_id": "V73-S07-PENDING",
+        "path": "assets/pending/s07-clean-source.mp4",
         "provider": "pending_research",
         "source_page_url": null,
         "license": "Pending asset research; no publication rights asserted.",
@@ -687,23 +950,22 @@
       }
     },
     {
-      "scene_id": "S05",
-      "beat_id": "beat-005",
-      "duration": 9,
-      "story_beat": "impossible reveal",
-      "narration_excerpt": "On the tape, the missing worker crossed the platform carrying a lamp. He stopped beneath the camera and looked directly into the lens.",
+      "scene_id": "S08",
+      "beat_id": "beat-008",
+      "duration": 6,
+      "story_beat": "impossible subject",
+      "narration_excerpt": "On the tape, the missing worker crossed the platform carrying a lamp.",
       "visual_semantics": {
         "role": "literal",
         "required": {
           "objects": [
             "lamp",
-            "security camera",
+            "figure",
             "platform"
           ],
           "actions": [
             "crossing",
-            "stopping",
-            "looking"
+            "carrying"
           ],
           "environments": [
             "train platform",
@@ -724,7 +986,7 @@
         "narrative_anchors": {
           "direct_required": [
             "lamp",
-            "security camera"
+            "figure"
           ],
           "minimum_direct": 2
         }
@@ -736,8 +998,8 @@
       "visual_truth": "DECLARED_FICTION",
       "match_score": null,
       "asset": {
-        "asset_id": "V73-S05-PENDING",
-        "path": "assets/pending/s05-clean-source.mp4",
+        "asset_id": "V73-S08-PENDING",
+        "path": "assets/pending/s08-clean-source.mp4",
         "provider": "pending_research",
         "source_page_url": null,
         "license": "Pending asset research; no publication rights asserted.",
@@ -751,10 +1013,73 @@
       }
     },
     {
-      "scene_id": "S06",
-      "beat_id": "beat-006",
-      "duration": 8,
-      "story_beat": "escalation",
+      "scene_id": "S09",
+      "beat_id": "beat-009",
+      "duration": 5,
+      "story_beat": "direct threat",
+      "narration_excerpt": "He stopped beneath the camera and looked directly into the lens.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "objects": [
+            "security camera",
+            "figure",
+            "lens"
+          ],
+          "actions": [
+            "stopping",
+            "looking"
+          ],
+          "environments": [
+            "train platform",
+            "night"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "terror"
+          ]
+        },
+        "forbidden": [
+          "hospital",
+          "elevator",
+          "generic office",
+          "unrelated crowds"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "security camera",
+            "figure"
+          ],
+          "minimum_direct": 2
+        }
+      },
+      "asset_status": "PENDING_RESEARCH",
+      "visual_intent": "figure under security camera | lens",
+      "visual_function": "literal_evidence",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": null,
+      "asset": {
+        "asset_id": "V73-S09-PENDING",
+        "path": "assets/pending/s09-clean-source.mp4",
+        "provider": "pending_research",
+        "source_page_url": null,
+        "license": "Pending asset research; no publication rights asserted.",
+        "rights_status": "PENDING",
+        "approved_for_render": false,
+        "preview_only": true,
+        "reuse_status": "NOT_SELECTED",
+        "episode_id": "episode-002-archive-tape-draft",
+        "visual_evidence": null,
+        "approval_basis": "Awaiting clean-clip research and human rights review."
+      }
+    },
+    {
+      "scene_id": "S10",
+      "beat_id": "beat-010",
+      "duration": 5,
+      "story_beat": "second presence",
       "narration_excerpt": "Mara froze the frame. Behind him, a second shadow stood where nobody was standing.",
       "visual_semantics": {
         "role": "literal",
@@ -765,7 +1090,8 @@
             "camera"
           ],
           "actions": [
-            "standing"
+            "standing",
+            "freezing"
           ],
           "environments": [
             "train platform",
@@ -792,14 +1118,14 @@
         }
       },
       "asset_status": "PENDING_RESEARCH",
-      "visual_intent": "figure | second shadow | camera view",
+      "visual_intent": "figure | second shadow | frozen frame",
       "visual_function": "literal_evidence",
       "visual_match": "EXACT",
       "visual_truth": "DECLARED_FICTION",
       "match_score": null,
       "asset": {
-        "asset_id": "V73-S06-PENDING",
-        "path": "assets/pending/s06-clean-source.mp4",
+        "asset_id": "V73-S10-PENDING",
+        "path": "assets/pending/s10-clean-source.mp4",
         "provider": "pending_research",
         "source_page_url": null,
         "license": "Pending asset research; no publication rights asserted.",
@@ -813,16 +1139,16 @@
       }
     },
     {
-      "scene_id": "S07",
-      "beat_id": "beat-007",
-      "duration": 8,
-      "story_beat": "impossible evidence",
+      "scene_id": "S11",
+      "beat_id": "beat-011",
+      "duration": 7,
+      "story_beat": "present-time contamination",
       "narration_excerpt": "Then the timestamp jumped to the present. The station's live monitor showed the same platform—empty, except for a lamp glowing behind the sealed wall.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
           "objects": [
-            "monitor",
+            "live monitor",
             "lamp",
             "sealed wall"
           ],
@@ -847,21 +1173,21 @@
         ],
         "narrative_anchors": {
           "direct_required": [
-            "monitor",
+            "live monitor",
             "lamp"
           ],
           "minimum_direct": 2
         }
       },
       "asset_status": "PENDING_RESEARCH",
-      "visual_intent": "live monitor | empty platform | light behind wall",
+      "visual_intent": "live monitor | empty platform | lamp behind wall",
       "visual_function": "explanatory_evidence",
       "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
       "match_score": null,
       "asset": {
-        "asset_id": "V73-S07-PENDING",
-        "path": "assets/pending/s07-clean-source.mp4",
+        "asset_id": "V73-S11-PENDING",
+        "path": "assets/pending/s11-clean-source.mp4",
         "provider": "pending_research",
         "source_page_url": null,
         "license": "Pending asset research; no publication rights asserted.",
@@ -875,11 +1201,11 @@
       }
     },
     {
-      "scene_id": "S08",
-      "beat_id": "beat-008",
-      "duration": 8,
+      "scene_id": "S12",
+      "beat_id": "beat-012",
+      "duration": 5,
       "story_beat": "payoff",
-      "narration_excerpt": "But Mara's copy changed again. It now ends with a new frame: someone on the platform, holding the camera from the other side.",
+      "narration_excerpt": "Police found no broken door, no footprints, and no extra minute on the original tape. But Mara's copy changed again. It now ends with a new frame: someone on the platform, holding the camera from the other side.",
       "visual_semantics": {
         "role": "literal",
         "required": {
@@ -922,8 +1248,8 @@
       "visual_truth": "DECLARED_FICTION",
       "match_score": null,
       "asset": {
-        "asset_id": "V73-S08-PENDING",
-        "path": "assets/pending/s08-clean-source.mp4",
+        "asset_id": "V73-S12-PENDING",
+        "path": "assets/pending/s12-clean-source.mp4",
         "provider": "pending_research",
         "source_page_url": null,
         "license": "Pending asset research; no publication rights asserted.",
@@ -1085,17 +1411,26 @@
   "editing": {
     "clip_quantity": {
       "mode": "fixed",
-      "min_clips": 8,
-      "target_min": 8,
+      "min_clips": 12,
+      "target_min": 12,
       "target_max": 16,
       "max_clips": 18,
-      "min_scene_seconds": 2,
-      "max_scene_seconds": 20,
+      "min_scene_seconds": 4,
+      "max_scene_seconds": 8,
       "enforce": true
+    },
+    "scene_refresh_strategy": {
+      "mode": "meaningful_story_cuts",
+      "target_scenes": 12,
+      "average_scene_seconds": 5.33,
+      "min_scene_seconds": 4,
+      "max_scene_seconds": 7,
+      "preserve_caption_readability": true,
+      "rationale": "Increase visual refresh only at narrative evidence changes; never split a shot without a story or retention function."
     }
   },
-  "preview_revision": "v7.3.3-episode-002-story-draft",
-  "preview_revision_note": "Story and asset directives only. No narration, clips, captions, preview render or final master generated.",
+  "preview_revision": "v7.3.3-episode-002-12-scene-draft",
+  "preview_revision_note": "Approved story expanded from 8 to 12 meaningful scenes while preserving the 64-second runtime, caption safe zone and fresh-asset gate.",
   "final_revision": null,
   "final_revision_note": null,
   "runtime_artifacts": {},
