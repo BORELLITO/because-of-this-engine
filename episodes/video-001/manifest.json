@@ -517,7 +517,10 @@
         "acquisition_timestamp": "2026-10-30T00:00:00Z",
         "original_filename": "CLEAN_S05_elevator_doors_source.mp4",
         "mime_type": "video/mp4",
-        "job_ownership": "episode-001-preview-v72-charon-clean"
+        "job_ownership": "episode-001-preview-v72-charon-clean",
+        "scene_usage": "S01: literal evidence for At two fourteen in the morning, a hospital elevator stopped at a floor the building did not have.",
+        "source_segment_in": 0,
+        "source_segment_out": 17.08375
       }
     },
     {
@@ -641,7 +644,10 @@
         "acquisition_timestamp": "2026-10-30T00:00:00Z",
         "original_filename": "CLEAN_S03_elevator_button_source.mp4",
         "mime_type": "video/mp4",
-        "job_ownership": "episode-001-preview-v72-charon-clean"
+        "job_ownership": "episode-001-preview-v72-charon-clean",
+        "scene_usage": "S02: literal evidence for The guard on duty checked the panel. There was no button for thirteen. The system log still showed the doors open for forty-seven seconds.",
+        "source_segment_in": 0,
+        "source_segment_out": 6.2
       }
     },
     {
@@ -744,7 +750,10 @@
         "acquisition_timestamp": "2026-10-30T00:00:00Z",
         "original_filename": "CLEAN_S04_concrete_corridor_source.mp4",
         "mime_type": "video/mp4",
-        "job_ownership": "episode-001-preview-v72-charon-clean"
+        "job_ownership": "episode-001-preview-v72-charon-clean",
+        "scene_usage": "S03: literal evidence for Then the camera found a corridor beyond the doors: narrow concrete, one red emergency lamp, and no sign of construction. Elias stepped forward. The feed went black.",
+        "source_segment_in": 0,
+        "source_segment_out": 10.25
       }
     },
     {
@@ -859,7 +868,10 @@
         "acquisition_timestamp": "2026-10-30T00:00:00Z",
         "original_filename": "CLEAN_S09_corridor_source.mp4",
         "mime_type": "video/mp4",
-        "job_ownership": "episode-001-preview-v72-charon-clean"
+        "job_ownership": "episode-001-preview-v72-charon-clean",
+        "scene_usage": "S04: literal evidence for By morning, maintenance had found no thirteenth landing. The control board was replaced. The elevator was chained shut.",
+        "source_segment_in": 0,
+        "source_segment_out": 16.063333
       }
     },
     {
@@ -967,7 +979,10 @@
         "acquisition_timestamp": "2026-10-30T00:00:00Z",
         "original_filename": "CLEAN_S01_elevator_display_source.mp4",
         "mime_type": "video/mp4",
-        "job_ownership": "episode-001-preview-v72-charon-clean"
+        "job_ownership": "episode-001-preview-v72-charon-clean",
+        "scene_usage": "S05: literal evidence for At two fourteen the next night, the display returned to thirteen.",
+        "source_segment_in": 0,
+        "source_segment_out": 8.8
       }
     },
     {
@@ -1086,7 +1101,10 @@
         "acquisition_timestamp": "2026-10-30T00:00:00Z",
         "original_filename": "CLEAN_S10_dark_corridor_figure_source.mp4",
         "mime_type": "video/mp4",
-        "job_ownership": "episode-001-preview-v72-charon-clean"
+        "job_ownership": "episode-001-preview-v72-charon-clean",
+        "scene_usage": "S06: literal evidence for This time, the camera stayed on. A figure in Elias's uniform stood at the far end of the red corridor.",
+        "source_segment_in": 0,
+        "source_segment_out": 18.351667
       }
     },
     {
@@ -1192,7 +1210,10 @@
         "acquisition_timestamp": "2026-10-30T00:00:00Z",
         "original_filename": "CLEAN_S07_monitor_source.mp4",
         "mime_type": "video/mp4",
-        "job_ownership": "episode-001-preview-v72-charon-clean"
+        "job_ownership": "episode-001-preview-v72-charon-clean",
+        "scene_usage": "S07: literal evidence for The lobby monitor showed Elias outside the elevator, watching. Then the system added a second passenger.",
+        "source_segment_in": 0,
+        "source_segment_out": 40
       }
     },
     {
@@ -1300,7 +1321,10 @@
         "acquisition_timestamp": "2026-10-30T00:00:00Z",
         "original_filename": "CLEAN_S12_elevator_descent_source.mp4",
         "mime_type": "video/mp4",
-        "job_ownership": "episode-001-preview-v72-charon-clean"
+        "job_ownership": "episode-001-preview-v72-charon-clean",
+        "scene_usage": "S08: literal evidence for The indicator began descending below the basement. No one pressed a button.",
+        "source_segment_in": 0,
+        "source_segment_out": 22.015
       }
     }
   ],
