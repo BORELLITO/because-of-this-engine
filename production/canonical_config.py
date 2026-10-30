@@ -14,8 +14,8 @@ import json
 from pathlib import Path
 from typing import Any
 
-CANONICAL_PROFILE_ID = "because-of-this-v7.2-charon-gemini-tts-2026-10"
-CANONICAL_ENGINE_VERSION = "7.2"
+CANONICAL_PROFILE_ID = "because-of-this-v7.3.1-charon-cinematic-dread-2026-10"
+CANONICAL_ENGINE_VERSION = "7.3.1"
 CANONICAL_SCHEMA_ID = "because-of-this://schemas/production-record/3.0.0"
 
 CANONICAL_PROFILE: dict[str, Any] = {
@@ -210,9 +210,9 @@ def validate_canonical_manifest(manifest: dict[str, Any], *, source_label: str =
     if differences:
         preview = "; ".join(differences[:8])
         suffix = f" (+{len(differences) - 8} more)" if len(differences) > 8 else ""
-        raise CanonicalConfigError(f"{source_label} deviates from the V7.2 profile: {preview}{suffix}")
+        raise CanonicalConfigError(f"{source_label} deviates from the V7.3.1 profile: {preview}{suffix}")
     return {
-        "status": "CANONICAL_CONFIG_V7_2_PASS",
+        "status": "CANONICAL_CONFIG_V7_3_1_PASS",
         "profile_id": CANONICAL_PROFILE_ID,
         "engine_version": CANONICAL_ENGINE_VERSION,
         "schema_id": CANONICAL_SCHEMA_ID,
