@@ -73,7 +73,7 @@ conectada:
 3. Um schema validado pelo código.
 4. Um registro de histórias, produções, componentes e artefatos.
 5. Um registro de origem, licença, hash e reutilização de cada mídia.
-6. Um adaptador real para Google Cloud TTS Chirp 3 HD Charon.
+6. Um adaptador real para Gemini TTS Charon.
 7. Um pipeline de narração por trechos, com parâmetros de prosódia e correção localizada.
 8. Gates independentes com evidências e bloqueios.
 9. Sistema de tentativas, checkpoints, idempotência e retomada.
@@ -131,7 +131,7 @@ manual nunca podem ser liberados por prompt ou por automação.
 9. O mesmo clipe ou derivação dele nunca pode aparecer em outro vídeo.
 10. Trilhas completas nunca podem ser reutilizadas entre vídeos.
 11. Vozes não podem imitar pessoas reais identificáveis.
-12. Somente Google Cloud TTS Chirp 3 HD Charon é o provedor de voz desta versão.
+12. Somente Gemini TTS Charon é o provedor de voz desta versão.
 13. Nenhum provedor alternativo pode ser usado silenciosamente como fallback.
 14. Componentes aprovados não podem ser alterados sem nova validação.
 15. Nota geral inferior a 8/10 bloqueia a produção.
@@ -232,7 +232,7 @@ responsabilidade e a interface, não a nomenclatura.
 6. Rights Ledger: registra origem, licença, autorização e evidência.
 7. Asset Registry: controla reserva, consumo, derivação e não reutilização.
 8. Visual Director: cria batidas e escolhe mídia fiel.
-9. Google Cloud TTS Chirp 3 HD Charon Adapter: gera, testa, registra e sincroniza a narração.
+9. Gemini TTS Charon Adapter: gera, testa, registra e sincroniza a narração.
 10. Audio Director: trilha, efeitos, mixagem, loudness e testes.
 11. Caption Engine: transcrição do áudio final, alinhamento e karaokê.
 12. Packaging Engine: títulos, capas, descrição, CTA e promessa.
@@ -310,8 +310,8 @@ Antes de iniciar qualquer produção, valide:
 - integridade dos arquivos;
 - acesso ao Google Drive;
 - leitura, listagem, upload e download;
-- acesso ao Google Cloud TTS Chirp 3 HD Charon;
-- modelo Google Cloud TTS Charon local disponível;
+- acesso ao Gemini TTS Charon;
+- modelo Gemini TTS Charon local disponível;
 - modelo local carregável sem credencial;
 - modelo local disponível;
 - modelo local e dependências disponíveis;
@@ -586,7 +586,7 @@ O provedor oficial e único desta versão é:
 PIPER LOCAL NEURAL TTS
 
 Não use Google Cloud TTS, Microsoft Edge TTS, ElevenLabs, Kokoro, MeloTTS ou
-outro provedor como fallback automático nesta versão. Se o Google Cloud TTS Chirp 3 HD Charon falhar,
+outro provedor como fallback automático nesta versão. Se o Gemini TTS Charon falhar,
 tente novamente de acordo com a política e bloqueie ou solicite correção.
 Trocar de provedor exige nova versão do motor e aprovação humana.
 
@@ -628,7 +628,7 @@ aprovado, registrando o risco.
 
 14.2 EXECUÇÃO LOCAL, MODELO E CUSTO
 
-O adaptador deve carregar o modelo Google Cloud TTS Charon a partir de um diretório local
+O adaptador deve carregar o modelo Gemini TTS Charon a partir de um diretório local
 explicitamente configurado. A síntese não pode depender de API, conta de
 serviço, chave, OAuth, billing ou conexão de rede durante a produção.
 
@@ -799,7 +799,7 @@ Monte uma prévia com duração e estrutura completas, contendo:
 
 - vídeo;
 - cortes;
-- narração Google Cloud TTS Chirp 3 HD Charon;
+- narração Gemini TTS Charon;
 - trilha;
 - efeitos;
 - silêncios;
@@ -1259,7 +1259,7 @@ Preserve em cada versão:
 - mapas;
 - pesquisas;
 - clipes e origens;
-- narração e metadados Google Cloud TTS Chirp 3 HD Charon;
+- narração e metadados Gemini TTS Charon;
 - trilha e efeitos;
 - legendas;
 - prévia;
@@ -1350,7 +1350,7 @@ Crie e execute, no mínimo:
 - testes de schema;
 - testes de transição de estado;
 - testes de ID e idempotência;
-- testes do adaptador Google Cloud TTS Chirp 3 HD Charon com resposta simulada e erro simulado;
+- testes do adaptador Gemini TTS Charon com resposta simulada e erro simulado;
 - teste real de pré-voo quando o modelo local estiver disponível;
 - teste de parâmetros de prosódia inválido;
 - teste de pronúncia falha;
@@ -1387,7 +1387,7 @@ Considere o motor implementado somente se:
 [ ] Versões conflitantes foram arquivadas e desativadas.
 [ ] O schema é validado pelo código.
 [ ] Os estados e transições são controlados pelo código.
-[ ] O Google Cloud TTS Chirp 3 HD Charon está conectado por adaptador real.
+[ ] O Gemini TTS Charon está conectado por adaptador real.
 [ ] Voz, modelo, parâmetros e integridade possuem allowlist e registro.
 [ ] Não há credenciais expostas.
 [ ] O TTS usa parâmetros de prosódia, retries, geração por trechos e hashes.
@@ -1427,7 +1427,7 @@ Ao terminar cada execução, entregue:
 9. incidentes;
 10. artefatos e hashes;
 11. direitos e licenças verificadas;
-12. status Google Cloud TTS Chirp 3 HD Charon;
+12. status Gemini TTS Charon;
 13. limite operacional e disponibilidade do modelo verificados;
 14. sincronização do Drive;
 15. decisões humanas necessárias;
@@ -1453,7 +1453,7 @@ permissão, artefato ou integração essencial ausente.
 [ ] Direitos comprovados.
 [ ] Nenhum clipe usado ou derivado anteriormente.
 [ ] Fidelidade visual mínima 8/10.
-[ ] Google Cloud TTS Chirp 3 HD Charon disponível.
+[ ] Gemini TTS Charon disponível.
 [ ] Voz aprovada e allowlist validada.
 [ ] Modelo local, dependências e limite operacional verificados.
 [ ] Pronúncia e parâmetros de prosódia validados.
@@ -1493,8 +1493,8 @@ unmodified source footage and explicitly reviewed as NATURAL_SOURCE_ONLY.
 Any composite, card, screenshot, pre-composed layout, or clip with authored
 graphics/text is rejected by the visual gates.
 
-The canonical narration provider is Google Cloud Text-to-Speech Chirp 3 HD,
-voice en-US-Chirp3-HD-Charon. There is no silent fallback to Piper, Gemini,
+The canonical narration provider is Gemini TTS,
+voice Charon. There is no silent fallback to Piper, Gemini,
 ElevenLabs, or another provider.
 
-GOOGLE CLOUD TTS CHIRP 3 HD CHARON
+GEMINI TTS CHARON
