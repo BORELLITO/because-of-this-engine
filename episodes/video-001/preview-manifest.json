@@ -1,6 +1,6 @@
 {
   "schema_version": "3.0.0",
-  "video_id": "episode-001-preview-v73-charon-suspense-cinema",
+  "video_id": "episode-001-preview-v72-charon-clean",
   "title": "The Elevator That Stopped on a Floor That Didn't Exist",
   "language": "en-US",
   "channel": "Because Of This",
@@ -1412,5 +1412,7 @@
       "max_scene_seconds": 20,
       "enforce": true
     }
-  }
+  },
+  "preview_revision": "v7.3-charon-suspense-cinema",
+  "preview_revision_note": "Same episode identity retained to preserve asset provenance and no-reuse enforcement; suspense soundtrack and cinematic motion are the V7.3 candidate changes."
 }
