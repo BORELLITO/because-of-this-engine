@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""V7.2 canonical Google Cloud TTS Chirp 3 HD production profile for Because Of This.
+"""V7.2 canonical Gemini TTS Charon production profile for Because Of This.
 
 This module is the only active configuration authority.  The former Gemini
 profile is retained only in Git history/rollback documentation and is not
@@ -28,15 +28,15 @@ CANONICAL_PROFILE: dict[str, Any] = {
         "duration_max_seconds": 75,
     },
     "voice": {
-        "provider": "google_cloud_tts",
+        "provider": "gemini_tts",
         "language": "en-US",
         "language_code": "en-US",
-        "voice_name": "en-US-Chirp3-HD-Charon",
-        "voice": "en-US-Chirp3-HD-Charon",
-        "model_or_voice_type": "chirp3_hd",
+        "voice_name": "Charon",
+        "voice": "Charon",
+        "model_or_voice_type": "gemini-3.8-flash-tts",
         "ssml_gender": "MALE",
         "sample_rate_hz": 24000,
-        "encoding": "LINEAR16",
+        "encoding": "AUDIO_WAV",
         "speaking_rate": 0.88,
         "pitch": 0.0,
         "volume_gain_db": 0.0,
