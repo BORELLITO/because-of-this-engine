@@ -78,7 +78,7 @@ class ExperimentalFreeIntegrationTests(unittest.TestCase):
                 w.setnchannels(1)
                 w.setsampwidth(2)
                 w.setframerate(24000)
-                w.writeframes(b"\\x00\\x00" * (24000 * 65))
+                w.writeframes(bytes(2) * (24000 * 65))
             m = {"voice": {"provider": "piper_tts_local"}}
             policy = {"voice_provider": "piper_tts_local"}
             outcome = inspect_final_audio(wav_path, m, policy)
@@ -94,7 +94,7 @@ class ExperimentalFreeIntegrationTests(unittest.TestCase):
                 w.setnchannels(1)
                 w.setsampwidth(2)
                 w.setframerate(24000)
-                w.writeframes(b"\\x00\\x00" * (24000 * 46))
+                w.writeframes(bytes(2) * (24000 * 46))
             with self.assertRaisesRegex(AudioBoundaryError, "duration"):
                 inspect_final_audio(wav_path, {"voice":{"provider":"piper_tts_local"}},{"voice_provider":"piper_tts_local"})
 
