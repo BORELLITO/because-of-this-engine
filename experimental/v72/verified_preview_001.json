@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "source": "Verified successful GitHub Actions delivery; secondary checksum of Drive bytes is not independently retrieved here",
+  "run_id": 40986385249,
+  "origin_commit": "abd54f1f2d935f8d8c95810cc7900c646721079e",
+  "episode_id": "episode-001-preview",
+  "original_manifest_git_blob_sha": "448fdc3575133decf3b886358363f0b0af219a93",
+  "original_script_git_blob_sha": "22dd21d251213b6c674ee108f2941ec91944f5b2",
+  "reference_state": "DRAFT_PREVIEW_ONLY",
+  "publication_approved": false,
+  "human_editorial_approval": false,
+  "reviewed_source_rights_for_release": false,
+  "drive_folder_id": "1HkjYfLf4vXJuJ1XjE-pQWVdjPGho6NDh",
+  "artifacts": [
+    {
+      "kind": "preview_mp4",
+      "drive_file_id": "1C3mkxkKy1uZh8pBKlDOmaaRr4Gk_DDVR",
+      "name": "episode-001-preview-draft-preview.mp4",
+      "bytes": 9648370,
+      "md5": "4699c73f8f967088fee7ec0fca2f0d70"
+    },
+    {
+      "kind": "narration_wav",
+      "drive_file_id": "1fFI8b5RzDq3qu_T44lEh-BHCqIHl4ttH",
+      "name": "narration.wav",
+      "bytes": 2964578,
+      "md5": "473eca67d9be55ec6dd1db42a67743a9"
+    },
+    {
+      "kind": "preview_manifest",
+      "drive_file_id": "1NIGoCiJ2z4aJTyGZXGF8pMEILBvFKHz3",
+      "name": "preview-manifest.json",
+      "bytes": 67234,
+      "md5": "9d719659ee3e7b21b6882c62634c8cf4"
+    },
+    {
+      "kind": "caption_quality_report",
+      "drive_file_id": "1ouMqgckZp5HGXeiaoAL2lypEMFYwRQCI",
+      "name": "caption-quality-draft-preview.json",
+      "bytes": 5737,
+      "md5": "f0206f8083109a40b12e2ece07b65448"
+    },
+    {
+      "kind": "narration_coverage_report",
+      "drive_file_id": "1aZ_553SywdYV8_8YvODFn5Az_GsRCNXP",
+      "name": "narration-coverage.json",
+      "bytes": 12109,
+      "md5": "ad50ec242e69c48607f9f779e10d75ad"
+    },
+    {
+      "kind": "technical_release_report",
+      "drive_file_id": "1iKeXz1Nk_DG8zHDB2MtuSISNJeE750kl",
+      "name": "video-release-draft-preview.json",
+      "bytes": 3047,
+      "md5": "920fb1c7d82a128e43772dd174adbccd"
+    },
+    {
+      "kind": "visual_story_report",
+      "drive_file_id": "106-a6TRcLEJkhnmQB-cw4vLFUTJ6T2nm",
+      "name": "visual-story-qa-draft-preview.json",
+      "bytes": 27469,
+      "md5": "0f9477a57245e07a4bef9016124bdea5"
+    },
+    {
+      "kind": "golden_layout_report",
+      "drive_file_id": "1-T2_iyyvwsv7WrvBw-Q61ba9iWPXacq-",
+      "name": "golden-layout-draft-preview.json",
+      "bytes": 2847,
+      "md5": "42910d3c41a4fea31b38df875581acac"
+    },
+    {
+      "kind": "v7_gates_report",
+      "drive_file_id": "1xFmTmR3GkTWRxXhZMqRgPJq3CTrkx1M4",
+      "name": "v7-release-draft-preview.json",
+      "bytes": 3605,
+      "md5": "6a8410193810a582a4258f1f064ddfb2"
+    }
+  ]
+}
