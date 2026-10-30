@@ -1,4 +1,4 @@
-name: Because Of This V7.3.1 Charon cinematic-dread engine CI
+name: Because Of This V7.3.2 Charon cinematic-dread engine CI
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
           python-version: "3.12"
       - name: Install locked dependencies
         run: python -m pip install -r requirements.lock.txt
-      - name: Compile the active V7.3.1 production surface
+      - name: Compile the active V7.3.2 production surface
         run: python -m py_compile production/*.py
       - name: Enforce one active Charon engine
         run: PYTHONPATH=. python production/v7_singleton_guard.py --repo-root .
