@@ -1,9 +1,10 @@
-name: Because Of This V7.3 Charon suspense-cinema draft preview
+name: Because Of This V7.3.1 Charon cinematic-dread draft preview
 
 on:
   push:
     branches:
       - v7.3-charon-suspense-cinema-preview
+      - v7.3.1-cinematic-dread-effects-preview
   workflow_dispatch:
     inputs:
       manifest:
