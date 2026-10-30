@@ -1,7 +1,7 @@
 {
   "policy_version": "3.0",
   "active_engine_profile": "because-of-this-v7.3.2-charon-cinematic-dread-smooth-2026-10",
-  "active_engine_fingerprint": "ebf1cb98d926fcbde5bcfcee7abf1c799a224b777e1fa9f50b0c2c3f482f89c2",
+  "active_engine_fingerprint": "c9f6c10765b65a447fb010008f64b302315ff189e257b927d47c9c8e2a427c8e",
   "active_engine_version": "7.3.2",
   "update_rule": "approved_update_supersedes_previous_active_engine",
   "retired_versions": "must_not_remain_executable_in_active_tree",
