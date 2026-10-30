@@ -167,7 +167,8 @@ jobs:
           PYTHONPATH=. python production/generate_suspense_bed.py \
             --output episodes/video-001/audio/music.wav \
             --duration 70 \
-            --sample-rate 48000
+            --sample-rate 48000 \
+            --atmosphere-manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}"
 
       - name: Hydrate preview-only Drive assets
         env:

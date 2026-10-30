@@ -40,3 +40,12 @@ PYTHONPATH=. python -m unittest -v tests.test_cinematic_dread_v73 tests.test_cin
 O storyboard do elevador será avaliado antes de habilitar a atmosfera no
 manifesto ativo. Renderizar novamente um vídeo inteiro **não é necessário**
 para os testes da arquitetura, apenas para a aprovação visual posterior.
+
+## Nova camada de suspense sonoro
+
+`generate_suspense_bed.py --atmosphere-manifest <manifest>` gera
+uma **variação procedural, exclusiva por episódio e determinística**,
+com drone subgrave e dissonância muito discreta por intensidade da narrativa.
+O antigo áudio não é alterado quando `atmosphere` estiver ausente/desligada.
+A nova cama é mixada com volume controlado e mantém o compressor sidechain
+da voz. Não usar este recurso para reciclar uma trilha completa em outro vídeo.

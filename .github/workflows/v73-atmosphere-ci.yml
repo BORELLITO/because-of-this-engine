@@ -37,6 +37,7 @@ jobs:
           PYTHONPATH=. python -m unittest -v \
             tests.test_cinematic_dread_v73 \
             tests.test_cinematic_dread_render_v73 \
+            tests.test_dread_soundscape_v73 \
             tests.test_dread_ffmpeg_smoke
       - name: Verify source Charon contract remains exactly unchanged
         run: |
