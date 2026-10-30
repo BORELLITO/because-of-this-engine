@@ -485,6 +485,28 @@ def _recover_with_phrase_vocabulary(
         try:
             _start, end, _next_cursor, _positions = _align_chunk(chunk, merged, cursor)
         except AlignmentError:
+            # First retry the failed caption as a single ordered grammar
+            # phrase.  The broad pass can legally spend acoustic probability
+            # on neighboring words, while a phrase-only grammar makes Vosk
+            # preserve weak content words (especially at the beginning of a
+            # Piper beat) without fabricating any timing.  All accepted
+            # timestamps still come from the final WAV recognizer result.
+            phrase_only = _grammar_phrase(chunk)
+            if phrase_only:
+                phrase_words = _recognize_passes(
+                    audio_path,
+                    model_paths,
+                    grammar_phrases=[phrase_only],
+                )
+                merged = _merge_word_timings(merged, phrase_words)
+                cursor = _cursor_for_time(merged, cursor_time)
+                try:
+                    _start, end, _next_cursor, _positions = _align_chunk(chunk, merged, cursor)
+                except AlignmentError:
+                    pass
+                else:
+                    cursor_time = float(end)
+                    continue
             # Keep the retry scoped to the failed phrase, but include one
             # neighboring phrase on each side. Short function words at a
             # caption boundary are often acoustically realized together with
