@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""V7.2 canonical Gemini TTS Charon production profile for Because Of This.
+"""V7.3 Charon production profile with canonical cinematic-dread visual effects for Because Of This.
 
 This module is the only active configuration authority.  The former Gemini
 profile is retained only in Git history/rollback documentation and is not
@@ -102,16 +102,28 @@ CANONICAL_PROFILE: dict[str, Any] = {
     },
     "color_grade": {
         "enabled": True,
-        "preset": "investigative_noir_suspense",
-        "brightness": -0.03,
-        "contrast": 1.08,
-        "saturation": 0.9,
-        "gamma": 0.96,
+        "preset": "cinematic_dread_v73",
+        "brightness": -0.05,
+        "contrast": 1.14,
+        "saturation": 0.84,
+        "gamma": 0.92,
         "vignette": True,
         "cinematic_suspense": {
             "enabled": True,
-            "cool_shadows": 0.025,
-            "warm_highlights": 0.01,
+            "profile": "cinematic_dread_v73",
+            "profile_version": "7.3.1",
+            "reference_basis": "cinematic_dread_v73_before_after_comparison",
+            "cool_shadows": 0.04,
+            "warm_highlights": 0.014,
+            "motion_strength": 0.045,
+            "push_in": 0.055,
+            "edge_fade": True,
+            "shadow_crush": 0.045,
+            "highlight_rolloff": 0.012,
+            "flicker_strength": 0.003,
+            "flicker_period_seconds": 4.8,
+            "detail_strength": 0.16,
+            "vignette_angle": "PI/5.8",
         },
     },
     "loop": {
