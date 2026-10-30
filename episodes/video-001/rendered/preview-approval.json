@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "video_id": "episode-001-preview-v72-charon-clean",
+  "status": "PASS",
+  "reviewer": "User approval recorded in conversation",
+  "approved_at": "2026-10-30T00:00:00Z",
+  "decision": "APPROVED_FOR_FINAL_RENDER_AND_RELEASE",
+  "visual_text_policy": "CAPTIONS_ONLY",
+  "note": "The approved master contains no authored text baked into source clips; captions remain the only editorial text layer."
+}
