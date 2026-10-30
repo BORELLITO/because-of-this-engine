@@ -13,15 +13,15 @@
     "duration_max_seconds": 75
   },
   "target_runtime_seconds": 64,
-  "engine_profile": "because-of-this-v7.2-charon-cloud-tts-2026-10",
-  "engine_profile_fingerprint": "af4676f9365eecf9170a8289d304708de3b42d88e5fa7bb87f07ce5a16f2ddd1",
+  "engine_profile": "because-of-this-v7.2-charon-gemini-tts-2026-10",
+  "engine_profile_fingerprint": "71be97defce1764a8d008af69b71fa4e8065ff90fb40e0b97ad46a6231d5f242",
   "master_prompt_version": "7.2",
   "master_prompt_sha256": "496abd63bcc47cbd0168186edbf986c125bad878b40b7b5fb12ec0e3692fbd3b",
   "production_schema": "because-of-this://schemas/production-record/3.0.0",
   "human_approval_required": true,
   "lifecycle_status": "DRAFT_PREVIEW_ONLY",
   "video_number": 1,
-  "engine_milestone": "V7.2_CHARON_CLEAN_CLIPS_DRAFT_PREVIEW",
+  "engine_milestone": "V7.2_GEMINI_CHARON_CLEAN_CLIPS_DRAFT_PREVIEW",
   "canonical_path": "episodes/video-001",
   "truth_mode": "DECLARED_FICTION",
   "disclosure": "Draft preview only. Visual items are unmodified clean source footage; no authored text or graphic overlays are baked into clips. Captions are the only editorial text layer. Natural source device digits remain only where native to the source.",
@@ -247,24 +247,24 @@
     "clean_clip_required": true
   },
   "voice": {
-    "provider": "google_cloud_tts",
+    "provider": "gemini_tts",
     "language": "en-US",
     "language_code": "en-US",
-    "voice_name": "en-US-Chirp3-HD-Charon",
-    "voice": "en-US-Chirp3-HD-Charon",
-    "model_or_voice_type": "chirp3_hd",
+    "voice_name": "Charon",
+    "voice": "Charon",
+    "model_or_voice_type": "gemini-3.8-flash-tts",
     "ssml_gender": "MALE",
     "sample_rate_hz": 24000,
-    "encoding": "LINEAR16",
+    "encoding": "AUDIO_WAV",
     "speaking_rate": 0.88,
     "pitch": 0,
     "volume_gain_db": 0,
     "style": "Low, controlled American English narration with informative clarity, restrained cinematic suspense, intimate consequence, never theatrical."
   },
   "narration": {
-    "provider": "google_cloud_tts",
+    "provider": "gemini_tts",
     "language_code": "en-US",
-    "voice_name": "en-US-Chirp3-HD-Charon",
+    "voice_name": "Charon",
     "state": "DRAFT_PREVIEW",
     "script_path": "script.txt",
     "beats": [
@@ -301,8 +301,9 @@
         "text": "The indicator began descending below the basement. No one pressed a button."
       }
     ],
-    "voice": "en-US-Chirp3-HD-Charon",
-    "cache_contract": "cloud_tts_charon_v1"
+    "voice": "Charon",
+    "cache_contract": "cloud_tts_charon_v1",
+    "model": "gemini-3.8-flash-tts"
   },
   "script": {
     "path": "script.txt",
@@ -310,7 +311,7 @@
   },
   "audio": {
     "path": "audio/narration.wav",
-    "source": "final_google_cloud_tts_charon_audio",
+    "source": "final_gemini_tts_charon_audio",
     "preview_only": true
   },
   "captions": {
