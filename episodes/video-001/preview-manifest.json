@@ -1085,7 +1085,7 @@
         ],
         "narrative_anchors": {
           "direct_required": [
-            "screen"
+            "monitor"
           ],
           "minimum_direct": 1
         }
