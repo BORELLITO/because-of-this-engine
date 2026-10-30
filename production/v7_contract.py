@@ -27,7 +27,7 @@ from production.production_record_v7 import (
 PROMPT_VERSION = "7.2"
 PROMPT_PATH = Path("docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V7_2_CHARON_CLEAN_CLIPS.txt")
 SCHEMA_PATH = Path("production/schemas/production-record-3.0.0.json")
-PROMPT_SHA256 = "496abd63bcc47cbd0168186edbf986c125bad878b40b7b5fb12ec0e3692fbd3b"
+PROMPT_SHA256 = "c0bd045da0898848ff11aaba9ff2de9e27be8041f559b37a80f3f99ada1127c8"
 
 
 class V7ContractError(ValueError):
@@ -66,7 +66,7 @@ def validate_prompt_and_schema(repo_root: Path) -> dict[str, Any]:
         raise V7ContractError("schema is not version 3.0.0")
     text = prompt.read_text(encoding="utf-8")
     markers = (
-        "GOOGLE CLOUD TTS CHIRP 3 HD CHARON",
+        "GEMINI TTS CHARON",
         "because-of-this://schemas/production-record/3.0.0",
         "G0 preflight",
         "G11 post_publication",
@@ -121,8 +121,8 @@ def validate_manifest(manifest: dict[str, Any], *, source_label: str = "manifest
         raise V7ContractError(f"{source_label} cannot enter production without visual scenes")
     narrative = manifest.get("narration") or {}
     if require_production:
-        if narrative.get("provider") != "google_cloud_tts":
-            raise V7ContractError("production narration provider must be google_cloud_tts")
+        if narrative.get("provider") != "gemini_tts":
+            raise V7ContractError("production narration provider must be gemini_tts")
         if not isinstance(narrative.get("beats"), list) or not narrative["beats"]:
             raise V7ContractError("production narration requires recoverable beat chunks")
         story_graph = manifest.get("story_graph")
