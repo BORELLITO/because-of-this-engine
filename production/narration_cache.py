@@ -147,45 +147,24 @@ def manifest_cache_spec(manifest_path: Path) -> dict[str, Any]:
     if not isinstance(voice, dict):
         raise NarrationCacheError("Manifest voice profile is missing.")
     provider = str(voice.get("provider", "")).strip()
-    is_piper = provider == "piper_tts_local"
+    if provider != "google_cloud_tts":
+        raise NarrationCacheError(f"Unsupported narration provider for active V7.2 cache: {provider}")
     model = voice.get("model") or voice.get("model_or_voice_type") or provider
     voice_name = voice.get("voice_name") or voice.get("voice")
     language = voice.get("language_code") or voice.get("language")
     style = voice.get("style")
     if not all(isinstance(v, str) and v.strip() for v in (model, voice_name, language, style)):
         raise NarrationCacheError("Manifest cache voice identity is incomplete")
-    if provider != "google_cloud_tts" and not is_piper:
-        raise NarrationCacheError(f"Unsupported narration provider for cache: {provider}")
     text = _script_text(manifest_path, manifest)
     tts_text = _tts_script_text(manifest_path, manifest, text)
-    generation_context = None
-    if is_piper:
-        # NEVER accept a Piper Drive cache key without hashing the actual local
-        # model and config. A label such as ryan-high alone is insufficient.
-        directory = os.environ.get("PIPER_MODEL_DIR", "").strip()
-        if not directory:
-            raise NarrationCacheError("PIPER_MODEL_DIR is required to fingerprint Piper cache inputs")
-        model_path = Path(directory) / (str(voice_name) + ".onnx")
-        config_path = Path(directory) / (str(voice_name) + ".onnx.json")
-        if not model_path.is_file() or not config_path.is_file():
-            raise NarrationCacheError("Piper model and config must exist before cache restore")
-        generation_context = {
-            "provider": voice["provider"],
-            "model_sha256": sha256_file(model_path),
-            "model_config_sha256": sha256_file(config_path),
-            "voice": voice,
-            "narration_beats": (manifest.get("narration") or {}).get("beats", []),
-            "piper_cache_contract": 2,
-        }
-    else:
-        # Cloud synthesis has no local model bytes. The complete canonical
-        # voice/prosody configuration and beat chunking remain part of the key.
-        generation_context = {
-            "provider": provider,
-            "voice": voice,
-            "narration_beats": (manifest.get("narration") or {}).get("beats", []),
-            "cloud_tts_cache_contract": 1,
-        }
+    # Cloud synthesis has no local model bytes. The complete canonical
+    # voice/prosody configuration and beat chunking remain part of the key.
+    generation_context = {
+        "provider": provider,
+        "voice": voice,
+        "narration_beats": (manifest.get("narration") or {}).get("beats", []),
+        "cloud_tts_cache_contract": 1,
+    }
     key = cache_key(
         text,
         model=str(model),
