@@ -53,6 +53,7 @@ class VisualEffectsV731Tests(unittest.TestCase):
         self.assertIn("colorlevels=", graph)
         self.assertIn("colorbalance=", graph)
         self.assertIn("unsharp=", graph)
+        self.assertNotIn("preserve=lum", graph)
         self.assertIn("vignette=angle=PI/5.8", graph)
         self.assertIn("scale=1080:1920", graph)
 
