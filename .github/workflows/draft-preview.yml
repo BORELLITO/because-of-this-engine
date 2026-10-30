@@ -40,7 +40,7 @@ jobs:
         id: reuse_check
         run: |
           echo "reuse=false" >> "${GITHUB_OUTPUT}"
-          echo "V7.2_REUSE_DISABLED_LEGACY_PIPER_PREVIEW_NOT_ELIGIBLE"
+          echo "V7.2_REUSE_DISABLED_PREVIOUS_PREVIEW_NOT_ELIGIBLE"
 
   draft-preview:
     needs: preflight-reuse
