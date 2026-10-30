@@ -69,6 +69,25 @@ jobs:
           PYTHONPATH=. python experimental/v72/shot_review.py \
             --manifest episodes/video-001/preview-manifest.json \
             --report "${RUNNER_TEMP}/shot-review-001.json"
+      - name: Verify existing original Drive receipts (metadata-only)
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          PYTHONPATH=. python experimental/v72/verify_drive_receipt.py \
+            --catalog experimental/v72/verified_preview_001.json
+
+      - name: Audit existing draft release identities without rendering
+        run: |
+          PYTHONPATH=. python - <<'PY'
+          from pathlib import Path
+          from production.release_integrity_v72 import audit_release_identities
+          result = audit_release_identities(Path("episodes/video-001/preview-manifest.json"))
+          assert result["status"] == "IDENTITY_REGISTRIES_CHECKED", result
+          print(result)
+          PY
+
       - name: Confirm no costly media workflow was invoked
         run: |
           echo "NO_TTS_OR_RENDER_OR_DRIVE_WRITE"
