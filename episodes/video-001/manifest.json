@@ -1463,5 +1463,6 @@
   "final_revision_note": "Creative preview approved by the user; final production gates and provenance were explicitly recorded for the approved master.",
   "runtime_artifacts": {
     "preview_approval": "rendered/preview-approval.json"
-  }
+  },
+  "final_validation_revision": "2026-10-30T09:30:00Z"
 }
