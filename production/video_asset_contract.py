@@ -23,6 +23,7 @@ from production.editorial_policy import (
 )
 from production.visual_semantics import require_visual_fit
 from production.canonical_config import CanonicalConfigError, validate_canonical_manifest
+from production.visual_effects_v73 import VisualEffectsError, validate_visual_effects
 
 SCHEMA_VERSION = "2.0"
 SUPPORTED_SCHEMA_VERSIONS = {"2.0", "3.0.0"}
@@ -385,36 +386,20 @@ def validate_asset_record(record: dict[str, Any], base: Path, episode_id: str, *
 
 
 def _validate_cinematic_grade(manifest: dict[str, Any], mode: str) -> None:
-    """Fail closed when final output does not use the approved suspense look."""
+    """Fail closed when final output does not use the active V7.3.1 suspense look."""
     if mode != "final":
         return
     grade = manifest.get("color_grade")
     if not isinstance(grade, dict) or grade.get("enabled") is not True:
         raise VideoContractError("Final release requires an enabled color_grade.")
-    if grade.get("preset") != "investigative_noir_suspense":
-        raise VideoContractError("Final release requires the investigative_noir_suspense preset.")
-    suspense = grade.get("cinematic_suspense")
-    if not isinstance(suspense, dict) or suspense.get("enabled") is not True:
-        raise VideoContractError("Final release requires the cinematic_suspense layer.")
-    for key, lower, upper in (
-        ("cool_shadows", 0.0, 0.10),
-        ("warm_highlights", 0.0, 0.06),
-    ):
-        value = suspense.get(key)
-        if isinstance(value, bool) or not isinstance(value, (int, float)) or not lower <= float(value) <= upper:
-            raise VideoContractError(f"color_grade.cinematic_suspense.{key} is outside the safe range.")
+    if grade.get("preset") != "cinematic_dread_v73":
+        raise VideoContractError("Final release requires the active cinematic_dread_v73 preset.")
     if grade.get("vignette") is not True:
         raise VideoContractError("Final release requires the suspense vignette.")
-    for key, lower, upper in (
-        ("brightness", -0.20, 0.20),
-        ("contrast", 0.80, 1.30),
-        ("saturation", 0.65, 1.15),
-        ("gamma", 0.80, 1.15),
-    ):
-        value = grade.get(key)
-        if isinstance(value, bool) or not isinstance(value, (int, float)) or not lower <= float(value) <= upper:
-            raise VideoContractError(f"color_grade.{key} is outside the safe range.")
-
+    try:
+        validate_visual_effects(manifest, require_active_profile=True)
+    except VisualEffectsError as exc:
+        raise VideoContractError(f"Final release visual-effects contract failed: {exc}") from exc
 
 def _validate_loop(manifest: dict[str, Any], mode: str) -> None:
     """Require a continuity fade so the branded close never hard-cuts."""
