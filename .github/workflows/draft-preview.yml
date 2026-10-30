@@ -82,17 +82,13 @@ jobs:
             --repo-root . --manifest "${{ inputs.manifest }}" --require-production
 
 
-      - name: Cloud TTS Charon preflight
+      - name: Gemini TTS Charon preflight
         env:
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
-          GOOGLE_TTS_PROJECT_ID: ${{ secrets.GOOGLE_TTS_PROJECT_ID }}
-          GOOGLE_CLOUD_PROJECT: ${{ secrets.GOOGLE_CLOUD_PROJECT }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           set -euo pipefail
           sudo apt-get update && sudo apt-get install -y ffmpeg
-          PYTHONPATH=. python production/cloud_tts.py --manifest "${{ inputs.manifest }}" --preflight
+          PYTHONPATH=. python production/gemini_tts.py --manifest "${{ inputs.manifest }}" --preflight
 
       - name: Restore identical existing Charon narration from Drive cache
         env:
@@ -117,14 +113,10 @@ jobs:
       - name: Generate only missing Charon narration
         if: env.CHARON_CACHE_HIT != 'true'
         env:
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
-          GOOGLE_TTS_PROJECT_ID: ${{ secrets.GOOGLE_TTS_PROJECT_ID }}
-          GOOGLE_CLOUD_PROJECT: ${{ secrets.GOOGLE_CLOUD_PROJECT }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           set -euo pipefail
-          PYTHONPATH=. python production/cloud_tts.py \
+          PYTHONPATH=. python production/gemini_tts.py \
             --manifest "${{ inputs.manifest }}" \
             --input "episodes/video-001/script.txt" \
             --output-dir "episodes/video-001/audio"
