@@ -543,6 +543,47 @@ def _align_chunks(
         sidecar_chunks.append({"text": chunk, "words": positions})
     return events, sidecar_chunks
 
+
+def _normalize_sidecar_word_timeline(
+    sidecar_chunks: list[dict[str, Any]],
+    audio_seconds: float,
+) -> int:
+    """Close small cross-chunk ASR overlaps without inventing word order.
+
+    Vosk can emit adjacent real words whose acoustic intervals overlap at a
+    phrase boundary. The canonical word sequence is already fixed by the
+    script; split only the overlapping boundary at its midpoint so captions,
+    scene spans and the final renderer share one monotonic timeline.
+    """
+    previous: dict[str, Any] | None = None
+    overlap_count = 0
+    for chunk in sidecar_chunks:
+        words = chunk.get("words") if isinstance(chunk, dict) else None
+        if not isinstance(words, list) or not words:
+            raise AlignmentError("Aligned caption chunk has no word timeline.")
+        for word in words:
+            if not isinstance(word, dict):
+                raise AlignmentError("Aligned caption chunk contains an invalid word.")
+            start = max(0.0, min(float(word["start"]), audio_seconds))
+            end = max(start, min(float(word["end"]), audio_seconds))
+            if end <= start:
+                raise AlignmentError("Aligned word has no positive audio interval.")
+            if previous is not None and start < float(previous["end"]) - 0.001:
+                overlap_count += 1
+                boundary = round((float(previous["end"]) + start) / 2.0, 3)
+                if boundary <= float(previous["start"]):
+                    boundary = round(float(previous["start"]) + 0.001, 3)
+                if boundary >= end:
+                    raise AlignmentError(
+                        "Aligned word overlap cannot be normalized without collapsing a word."
+                    )
+                previous["end"] = boundary
+                start = boundary
+            word["start"] = round(start, 3)
+            word["end"] = round(end, 3)
+            previous = word
+    return overlap_count
+
 def _ass_color(value: str) -> str:
     raw = str(value or "#FF7777").lstrip("#")
     if len(raw) != 6 or any(char not in "0123456789abcdefABCDEF" for char in raw):
@@ -710,9 +751,17 @@ def generate(
                         f"Grammar-constrained retry also failed: {constrained_error} "
                         f"Phrase-scoped acoustic retry also failed: {phrase_error}"
                     ) from phrase_error
-    # Keep each phrase anchored to its real first word. If independent
-    # acoustic passes leave a tiny boundary overlap, close it at the next
-    # phrase's real start so ASS events never overlap on screen.
+    overlap_count = _normalize_sidecar_word_timeline(sidecar_chunks, audio_seconds)
+    # Rebuild phrase events from the normalized canonical word boundaries so
+    # ASS captions and the story-timing report cannot disagree.
+    events = [
+        {
+            "start": chunk["words"][0]["start"],
+            "end": chunk["words"][-1]["end"],
+            "text": chunk["text"],
+        }
+        for chunk in sidecar_chunks
+    ]
     events[0]["start"] = 0.0
     for previous, current in zip(events, events[1:]):
         if float(current["start"]) < float(previous["end"]):
@@ -737,6 +786,10 @@ def generate(
         "word_count": len(asr_words),
         "words": asr_words,
         "captions": sidecar_chunks,
+        "word_timing_normalization": {
+            "overlap_boundaries_closed": overlap_count,
+            "timeline_monotonic": True,
+        },
         "timing_mode": (
             "vosk_multi_model_word_timestamps"
             if secondary_model_path is not None else "vosk_word_timestamps"

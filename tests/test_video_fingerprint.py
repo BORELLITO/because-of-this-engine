@@ -12,6 +12,7 @@ from production.video_asset_contract import (
     sha256_file,
     validate_asset_record,
 )
+from production.align_captions import _normalize_sidecar_word_timeline
 
 
 class VideoFingerprintTests(unittest.TestCase):
@@ -77,6 +78,15 @@ class VideoFingerprintTests(unittest.TestCase):
                 6.0,
                 allow_disclosed_preview_compositor=True,
             )
+
+    def test_alignment_closes_cross_chunk_word_overlap(self) -> None:
+        chunks = [
+            {"text": "first", "words": [{"canonical": "first", "start": 1.0, "end": 2.0}]},
+            {"text": "second", "words": [{"canonical": "second", "start": 1.6, "end": 2.4}]},
+        ]
+        self.assertEqual(_normalize_sidecar_word_timeline(chunks, 3.0), 1)
+        self.assertEqual(chunks[0]["words"][0]["end"], 1.8)
+        self.assertEqual(chunks[1]["words"][0]["start"], 1.8)
 
 
 if __name__ == "__main__":
