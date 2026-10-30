@@ -142,8 +142,7 @@ def scene_filter(
                 filters.append(
                     "colorlevels="
                     f"rimin={black:.4f}:gimin={black:.4f}:bimin={black:.4f}:"
-                    f"rimax={white:.4f}:gimax={white:.4f}:bimax={white:.4f}:"
-                    "preserve=lum"
+                    f"rimax={white:.4f}:gimax={white:.4f}:bimax={white:.4f}"
                 )
             # Cool shadows and restrained warm highlights define the channel's
             # investigative-noir signature.
