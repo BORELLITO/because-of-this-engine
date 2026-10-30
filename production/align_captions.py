@@ -766,7 +766,16 @@ def generate(
     for previous, current in zip(events, events[1:]):
         if float(current["start"]) < float(previous["end"]):
             previous["end"] = float(current["start"])
-    events[-1]["end"] = audio_seconds
+    # ASS stores centiseconds while the WAV duration is frame-precise.  A
+    # normal round(audio_seconds * 100) can therefore place the final caption
+    # a few milliseconds beyond the actual audio (for example 54.507s ->
+    # 54.51s).  Keep the caption inside the measured WAV after serialization;
+    # this leaves at most one centisecond of intentional tail gap and avoids a
+    # false release-gate failure caused by timestamp quantization.
+    safe_ass_end = int(audio_seconds * 100) / 100.0
+    if safe_ass_end <= float(events[-1]["start"]):
+        raise AlignmentError("Narration is too short to close the final caption at ASS precision.")
+    events[-1]["end"] = safe_ass_end
     for event in events:
         if event["end"] - event["start"] < 0.08:
             raise AlignmentError("Forced-aligned caption phrase became too short.")
