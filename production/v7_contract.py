@@ -23,6 +23,7 @@ from production.production_record_v7 import (
     ProductionRecordError,
     validate_record,
 )
+from production.visual_effects_v73 import VisualEffectsError, validate_visual_effects
 
 PROMPT_VERSION = "7.2"
 PROMPT_PATH = Path("docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V7_2_CHARON_CLEAN_CLIPS.txt")
@@ -111,6 +112,13 @@ def validate_manifest(manifest: dict[str, Any], *, source_label: str = "manifest
         canonical = validate_canonical_manifest(manifest, source_label=source_label)
     except CanonicalConfigError as exc:
         raise V7ContractError(str(exc)) from exc
+    try:
+        visual_effects = validate_visual_effects(
+            manifest,
+            require_active_profile=require_production,
+        )
+    except VisualEffectsError as exc:
+        raise V7ContractError(str(exc)) from exc
     story = manifest.get("story") or manifest.get("story_profile")
     if not isinstance(story, dict):
         raise V7ContractError(f"{source_label} requires a structured story object")
@@ -140,7 +148,7 @@ def validate_manifest(manifest: dict[str, Any], *, source_label: str = "manifest
                 raise V7ContractError(f"production music requires {key}")
         if not isinstance(music.get("commercial_use"), bool):
             raise V7ContractError("production music requires a boolean commercial_use field")
-    return {"status": "V7_MANIFEST_PASS", "source": source_label, "canonical": canonical, "scene_count": len(scenes), "gates": list(GATE_NAMES.values())}
+    return {"status": "V7_MANIFEST_PASS", "source": source_label, "canonical": canonical, "visual_effects": visual_effects, "scene_count": len(scenes), "gates": list(GATE_NAMES.values())}
 
 
 def validate_production_record_file(path: Path) -> dict[str, Any]:
