@@ -61,6 +61,8 @@ class VisualEffectsV732Tests(unittest.TestCase):
         self.assertIn("vignette=angle=PI/5.8", graph)
         self.assertIn("scale=1080:1920", graph)
         self.assertIn("minterpolate=fps=60", graph)
+        native_60_graph = scene_filter(1080, 1920, 0.5, 0.5, PROFILE, duration=8.0, source_fps=60.0)
+        self.assertNotIn("minterpolate=", native_60_graph)
 
     def test_legacy_profile_cannot_enter_active_production(self) -> None:
         legacy = {
