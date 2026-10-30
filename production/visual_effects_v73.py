@@ -101,8 +101,6 @@ def validate_cinematic_suspense(
         "flicker_strength": _number(suspense, "flicker_strength", 0.003),
         "flicker_period_seconds": _number(suspense, "flicker_period_seconds", 4.8),
         "detail_strength": _number(suspense, "detail_strength", 0.16),
-        "motion_smoothing": motion_smoothing,
-        "interpolation_fps": int(interpolation_fps),
         "vignette_angle": str(suspense.get("vignette_angle", "PI/5.8")),
         "edge_fade": suspense.get("edge_fade") is True,
     }
