@@ -245,7 +245,10 @@ def _validate_clean_frame_layout(
         top = _sample_strip_luma(path, timestamp, "0")
         center = _sample_strip_luma(path, timestamp, "ih*0.46")
         bottom = _sample_strip_luma(path, timestamp, "ih-ih*0.08")
-        # A genuine horizontal letterbox normally darkens both horizontal edges.\n        # A single dark edge can be native footage (for example a close-up of an\n        # elevator display), so it must not be misclassified as a baked band.\n        if center >= 45 and top <= 8 and bottom <= 8:
+        # A genuine horizontal letterbox normally darkens both horizontal edges.
+        # A single dark edge can be native footage (for example a close-up of an
+        # elevator display), so it must not be misclassified as a baked band.
+        if center >= 45 and top <= 8 and bottom <= 8:
             suspect_samples += 1
     if suspect_samples >= 2:
         raise VideoContractError(
