@@ -14,7 +14,7 @@
     "language_code": "en-US",
     "voice_name": "en_US-ryan-high",
     "rate": 0.68,
-    "pitch": 0.0,
+    "pitch": 0,
     "ssml_required": false,
     "provider_fallback": "forbidden",
     "service_mode": "local_neural_model_no_network"
@@ -58,5 +58,24 @@
     "G11"
   ],
   "active_runtime": "production/piper_tts.py",
-  "archived_runtime": "archive/edge-tts-v7/edge_tts.py"
+  "archived_runtime": "archive/edge-tts-v7/edge_tts.py",
+  "active_addon_version": "7.2",
+  "active_addon_profile": "reuse-first-piper",
+  "active_addon_capabilities": [
+    "verified_same_episode_preview_reuse",
+    "piper_tts_content_hash_cache",
+    "historical_source_no_repeat",
+    "historical_soundtrack_no_repeat",
+    "shared_media_job_lock",
+    "evidence_backed_release_identity_gates",
+    "drive_first_caption_recovery",
+    "manual_release_only"
+  ],
+  "active_addon_activation": {
+    "approved": true,
+    "pr_number": 56,
+    "commit": "6fe49f96fe9c67d1af53f6cad9f9323fa8c687cf",
+    "core_engine_version": "7.1",
+    "media_regeneration_required": false
+  }
 }

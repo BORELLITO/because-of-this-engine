@@ -1,115 +1,63 @@
-# BECAUSE OF THIS — Motor v2 definitivo
+# BECAUSE OF THIS — Motor oficial V7.1 Piper + melhorias V7.2 Reuse First
 
-Este é o único motor oficial do canal Because of This. Ele é independente do
-Corte Fino, Rajada 011, CaptaPronto, Publisher e de todos os outros projetos.
+Este é o **único motor oficial** de produção do canal. O núcleo canônico V7.1 permanece com o modelo de voz **Piper TTS local**, em inglês. A **V7.2 Reuse First** foi aprovada e ativada como uma camada de economia, segurança, memória de mídias e validação incremental, sem substituir a voz, o roteiro ou a estética validados.
 
-## Motor canônico único — HARD LOCK
+## Estado e autoridade
 
-A configuração abaixo é a única autorizada para novas produções:
+- Branch oficial: `main`. Apenas o código desta branch pode executar produção canônica.
+- Política ativa: `production/active_engine_policy.json`: `active_engine_version=7.1`, `active_addon_version=7.2`.
+- Perfil de voz: `because-of-this-v7-piper-tts-2026-10`, `en_US-ryan-high`, local, mono 24 kHz PCM. **Sem Google Cloud TTS, Edge TTS ou fallback automático.**
+- Publicação **sempre manual**. Nenhum preview técnico, relatório ou cache autoriza postagem.
+- Material histórico de outros projetos (Corte Fino, Rajada, CaptaPronto) não tem rota de execução para este motor.
 
-- **Perfil:** `because-of-this-v2-locked-2026-10`
-- **Versão:** `2.0`
-- **Fingerprint:** `c0af39cd3962415a29ab03687dacab9c432128abc892a72f7422095e0b56bf64`
-- **Fonte única da verdade:** `production/canonical_config.py`
-- **Rota oficial:** branch `main` → GitHub Actions → Google Drive
+## Vídeo 001 — preview já entregue e preservado
 
-Todo manifesto precisa declarar exatamente o perfil e o fingerprint acima.
-Qualquer configuração ausente, antiga ou divergente é bloqueada
-automaticamente pelo contrato fail-closed e pelo CI. O manifesto histórico do
-episódio 002 permanece apenas para auditoria e não é uma fonte alternativa de
-produção.
+Título: **The Elevator That Stopped on a Floor That Didn't Exist**.
 
-## Arquitetura oficial
+- Execução bem-sucedida do núcleo Piper: https://github.com/BORELLITO/because-of-this-engine/actions/runs/40986385249
+- MP4 existente: https://drive.google.com/file/d/1C3mkxkKy1uZh8pBKlDOmaaRr4Gk_DDVR/view
+- WAV de narração existente: https://drive.google.com/file/d/1fFI8b5RzDq3qu_T44lEh-BHCqIHl4ttH/view
+- Pasta completa com relatórios e manifesto: https://drive.google.com/drive/folders/1HkjYfLf4vXJuJ1XjE-pQWVdjPGho6NDh
 
-O pipeline v2 é exclusivamente baseado em vídeo:
+A V7.2 **não criou outro MP4 nem regravou a voz**. Ela compara a assinatura exata do roteiro, manifesto e código produtor de mídia com o registro da entrega. Também compara os 9 recibos de Drive (nome, tamanho, MD5) antes de indicar reutilização. Esses metadados não substituem a conferência dos bytes e a revisão editorial para o lançamento.
 
-1. A história e a narração definem o relógio principal.
-2. O Cloud Browser pesquisa Mixkit, Pixabay e Pexels e cria uma fila de
-   revisão.
-3. O clipe exato e a licença são aprovados.
-4. O arquivo aprovado é colocado no Google Drive.
-5. O GitHub Actions baixa o asset, confirma que é vídeo, verifica o SHA-256 e
-   renderiza com FFmpeg.
-6. Legendas, verdade visual, reutilização e mídia final passam pelos gates.
-7. O resultado validado é enviado ao Drive e a mídia temporária é removida do
-   runner.
+## Arquitetura vigente
 
-Imagens narrativas estáticas não são aceitas. Se o vídeo exato não estiver
-disponível, o manifest precisa declarar um fallback semântico: NEAR,
-EXPLANATORY, SYMBOLIC ou ATMOSPHERE. Preenchimento aleatório e fallback para
-imagem são proibidos.
+1. **Roteiro e intenção visual.** O motor organiza cenas, âncoras narrativas e material licenciado antes do processamento.
+2. **Piper TTS / cache inteligente.** O cache reconhece roteiro, trechos narrados, pronúncia, parâmetros de voz, configuração e SHA-256 do modelo real. WAV fora de 60–75 segundos, com checksum ou perfil divergente, não pode ser reutilizado.
+3. **Legenda a partir do áudio final.** Vosk gera timestamps reais. Legendas karaoke ficam sincronizadas com a voz; não aceitar estimativas inventadas.
+4. **Materiais de Drive.** Cada clipe tem ID, origem, direitos, SHA-256 e identidade visual. Fonte inteira consumida **não pode aparecer em outros episódios**, mesmo se foi usada numa história arquivada ou recortada de outra forma.
+5. **Músicas e efeitos.** Trilhas completas não podem ser repetidas entre histórias; histórico antigo conta. A semelhança acústica e o intervalo mínimo de reutilização dos efeitos ainda exigem verificações específicas e não são presumidos a partir da igualdade do nome.
+6. **FFmpeg e gates.** Saída 1080×1920, 60 fps, 60–75 segundos; narrativa, suspense, logo, transições e legenda conforme o perfil canônico. Validação de reutilização e proveniência agora depende de auditorias reais, não de marcadores estáticos.
+7. **Reutilizar antes de produzir.** Ao iniciar o episódio 001 com roteiro, manifesto e código idênticos, o preview original pode ser reconhecido e sua produção é pulada. Para episódios diferentes, a política de não repetir clipes prevalece.
+8. **Entrega e publicação.** O Drive guarda os resultados; previews são candidatos e nunca equivalem à aprovação editorial. Publicação somente após aprovação humana e validação de licença.
 
-## Gates de qualidade
+## Controles operacionais
 
-- Episódio entre 60 e 75 segundos.
-- Formato 9:16: preview 1080×1920 ou final 2160×3840.
-- H.264/AAC, 25 fps, faststart e nenhuma deformação.
-- Duração das cenas travada na narração.
-- Legendas ASS externas geradas a partir da narração final.
-- HUD travada: Arial 48px, negrito, posição inferior central, outline 3px,
-  sombra 1px e margens 100/100/320.
-- Karaokê travado em timestamps reais por palavra: branco → vermelho de marca
-  (#FF7777) durante a palavra → branco.
-- Logo superior travado no centro em 540px; encerramento travado no logo
-  transparente centralizado em 820px com fade suave. Fallback textual é proibido.
-- Duas linhas no máximo, safe zone mobile e limite de CPS.
-- Música de suspense licenciada abaixo da voz, com ducking e controle de
-  loudness/true peak.
-- Nenhum asset narrativo repetido no mesmo episódio.
-- Nenhum clipe reutilizado entre episódios quando estiver PERMANENTLY_RETIRED.
-- URL, licença, ID do Drive, SHA-256 e aprovação são obrigatórios.
-- O relatório canônico G0–G12 é gerado em fases e não permite declarar produção completa com gate bloqueado.
-- A QA técnica executa blackdetect, freezedetect e silencedetect; preto contínuo inesperado bloqueia a entrega e freeze/silêncio prolongado ficam registrados como alertas.
+- `.github/workflows/draft-preview.yml`: preview manual e verificação do episódio 001 antes de qualquer síntese/re-render; não publicar.
+- `.github/workflows/because-of-this-v7.yml`: produção manual canônica; restaura cache Piper válido ou gera apenas áudio ausente e arquiva a narração resultante para futuros reinícios.
+- Ambos usam **uma trava de concorrência compartilhada** para evitar execução de mídia simultânea.
+- `.github/workflows/video-engine-ci.yml`: valida a V7.1 e os novos componentes V7.2 automaticamente, **sem renderização ou voz gerada**.
+- `experimental/v72/`: inclui verificações auxiliares, incluindo avaliador opcional do WhisperX. **A instalação do WhisperX não é obrigatória** e não troca o Vosk aprovado.
 
-## Arquivos principais
+## Limitações explicitamente mantidas
 
-- narrate.py: adaptador isolado de TTS Gemini.
-- production/canonical_config.py: perfil único, fingerprint e bloqueio fail-closed.
-- production/video_asset_research.py: fila de pesquisa e fallback semântico.
-- production/google_drive_assets.py: ponte Drive para o runner.
-- production/video_asset_contract.py: contrato v2 fail-closed.
-- production/render_video_episode.py: renderizador FFmpeg determinístico.
-- production/validate_video_release.py: gate final independente de mídia e legendas.
-- production/quality_gates.py: matriz canônica G0–G12 por fase.
-- production/media_anomaly.py: detecção técnica de preto, freeze e silêncio.
-- production/pipeline_state.py: identidade estável do job e máquina de estados explícita.
-- production/finalize_manifest.py: manifest final reproduzível e registro de cleanup.
-- production/caption_quality.py: sincronização e legibilidade das legendas.
-- production/google_drive_delivery.py: entrega verificada no Drive.
-- examples/video-only-episode-manifest-v2.template.json: template de episódio.
-- production/VIDEO_ENGINE_V2.md: contrato detalhado de produção.
+- O modelo de voz `en_US-ryan-high` requer avaliação documental de licença adequada a conteúdo monetizado antes de divulgação comercial. A existência do modelo não prova autorização de qualquer uso.
+- O primeiro MP4 foi entregue como `DRAFT_PREVIEW_ONLY`: sua finalização/publicação depende de revisão e aprovação editorial.
+- Restauração e retomada do fluxo novo foram cobertas por testes de unidade/contrato, mas **ainda não houve uma segunda produção audiovisual ponta a ponta** com a V7.2. Não acionar processamento pesado só para provar economia.
+- Os arquivos ASS/alinhamento **não** estavam no pacote anterior; os workflows atualizados passam a entregá-los nas produções futuras.
+- Sem regras de proteção de branch garantidas por API: permissões do GitHub devem ser configuradas na plataforma caso se deseje obrigatoriedade de PR.
 
-## Verificações locais
+## Diagnóstico sem gastar créditos
 
-    python -m pip install -r requirements.txt
-    python -m unittest discover -s tests -v
-    python -m py_compile production/*.py
+```bash
+PYTHONPATH=. python -m unittest discover -s tests -p 'test_v7*.py' -v
+PYTHONPATH=. python -m unittest -v tests.test_reuse_first_v72 tests.test_asset_reuse_brain tests.test_audio_reuse_v72 tests.test_narration_cache
+PYTHONPATH=. python experimental/v72/reuse_first.py \
+  --manifest episodes/video-001/preview-manifest.json \
+  --script episodes/video-001/script.txt \
+  --catalog experimental/v72/verified_preview_001.json \
+  --report /tmp/reuse-plan-001.json
+```
 
-## GitHub Actions
-
-- Video engine v2 CI executa compilação, regressão e testes de contrato.
-- Render video-only episode v2 recebe um manifest v2 preenchido e oferece
-  preview ou final.
-
-O template possui placeholders de propósito. Um episódio real precisa receber
-narração, legendas word-level, música licenciada, pesquisa verificada, IDs/checksums
-dos vídeos aprovados no Drive e QA editorial humano antes do modo final.
-O modo final é fail-closed enquanto esses gates não existirem.
-
-O preview é somente validação: o recibo termina em `PREVIEW_COMPLETE` e nunca é uma publicação de produção. Apenas uma execução `final` com aprovação editorial humana pode chegar a `PRODUCTION_COMPLETE`.
-
-
-## Contrato mestre V6 integrado
-
-O arquivo `docs/PROMPT_MESTRE_BECAUSE_OF_THIS_FINAL_V6_EXECUTAVEL.txt` é o contrato operacional canônico do motor.
-
-- Versão do prompt: `6.0`
-- SHA-256: `6792a1b3a85b4069c100f9b49cc04b7a169e92cc3a54d9abdf690c78efad74ed`
-- Schema de produção: `because-of-this://schemas/production-record/2.1.0`
-- Gates obrigatórios: G0–G11, em ordem
-- Publicação: somente manual
-- Dependências ausentes: bloqueio fail-closed
-- Versões aposentadas: somente histórico de auditoria, nunca fonte de execução
-
-O CI e o workflow de renderização validam o hash do prompt, o schema, os estados,
-os gates e a vinculação de cada manifesto antes de qualquer render.
+**Princípio permanente:** evitar retrabalho, mas nunca reutilizar um arquivo de outra história, com direitos desconhecidos, alterado ou incompatível.
