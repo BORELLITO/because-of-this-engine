@@ -98,7 +98,7 @@
     "model_or_voice_type": "gemini-3.8-flash-tts",
     "ssml_gender": "MALE",
     "sample_rate_hz": 24000,
-    "encoding": "LINEAR16",
+    "encoding": "AUDIO_WAV",
     "speaking_rate": 0.88,
     "pitch": 0,
     "volume_gain_db": 0,
