@@ -226,7 +226,7 @@ jobs:
           PY
           PYTHONPATH=. python production/v7_orchestrator.py \
             --repo-root . --manifest "${MANIFEST}" --mode draft-preview \
-            --check-cloud-tts \
+            --check-gemini-tts \
             --report "episodes/video-001/rendered/v7-release-draft-preview.json"
 
       - name: Deliver verified preview bundle to Drive
