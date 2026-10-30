@@ -14,7 +14,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-CANONICAL_PROFILE_ID = "because-of-this-v7.2-charon-cloud-tts-2026-10"
+CANONICAL_PROFILE_ID = "because-of-this-v7.2-charon-gemini-tts-2026-10"
 CANONICAL_ENGINE_VERSION = "7.2"
 CANONICAL_SCHEMA_ID = "because-of-this://schemas/production-record/3.0.0"
 
