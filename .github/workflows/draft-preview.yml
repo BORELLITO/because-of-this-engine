@@ -1,4 +1,4 @@
-name: Because Of This V7.2 Charon clean-clip draft preview
+name: Because Of This V7.3 Charon suspense-cinema draft preview
 
 on:
   workflow_dispatch:
@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: because-of-this-v7.2-charon-media-global
+  group: because-of-this-v7.3-charon-suspense-cinema-media-global
   cancel-in-progress: false
 
 env:
@@ -157,6 +157,15 @@ jobs:
             --alignment "episodes/video-001/captions/narration.alignment.json" \
             --report "episodes/video-001/rendered/narration-coverage.json"
 
+      - name: Generate deterministic suspense soundtrack
+        run: |
+          set -euo pipefail
+          mkdir -p episodes/video-001/audio
+          PYTHONPATH=. python production/generate_suspense_bed.py \
+            --output episodes/video-001/audio/music.wav \
+            --duration 70 \
+            --sample-rate 48000
+
       - name: Hydrate preview-only Drive assets
         env:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
@@ -214,6 +223,7 @@ jobs:
               "preview": f"rendered/{value['video_id']}-draft-preview.mp4",
               "render": f"rendered/{value['video_id']}-draft-preview.mp4",
               "technical_qa": "rendered/video-release-draft-preview.json",
+              "music": "audio/music.wav",
           }
           hashes = {}
           for key, relative in runtime.items():
@@ -243,6 +253,7 @@ jobs:
             --job-id "draft-preview-${{ github.run_id }}" \
             --path "episodes/video-001/rendered" \
             --path "episodes/video-001/audio/narration.wav" \
+            --path "episodes/video-001/audio/music.wav" \
             --path "episodes/video-001/captions" \
             --path "${{ inputs.manifest }}" \
             --receipt "${RUNNER_TEMP}/draft-preview-drive-delivery.json"
