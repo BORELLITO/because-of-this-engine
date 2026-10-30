@@ -1,8 +1,8 @@
 {
   "policy_version": "3.0",
-  "active_engine_profile": "because-of-this-v7.3.1-charon-cinematic-dread-2026-10",
-  "active_engine_fingerprint": "308638b58df3ad96efe04df6ad3bad2643826db9ca082215220e709881d2d385",
-  "active_engine_version": "7.3.1",
+  "active_engine_profile": "because-of-this-v7.3.2-charon-cinematic-dread-smooth-2026-10",
+  "active_engine_fingerprint": "ebf1cb98d926fcbde5bcfcee7abf1c799a224b777e1fa9f50b0c2c3f482f89c2",
+  "active_engine_version": "7.3.2",
   "update_rule": "approved_update_supersedes_previous_active_engine",
   "retired_versions": "must_not_remain_executable_in_active_tree",
   "history_rule": "git_history_and_archive_are_retained_for_audit_but_are_never_an_execution_source",
@@ -60,8 +60,8 @@
   ],
   "active_runtime": "production/gemini_tts.py",
   "archived_runtime": "production/piper_tts.py (rollback-only; not an active execution source)",
-  "active_addon_version": "7.3.1",
-  "active_addon_profile": "cinematic-dread",
+  "active_addon_version": "7.3.2",
+  "active_addon_profile": "cinematic-dread-caption-smooth",
   "active_addon_capabilities": [
     "gemini_tts_charon",
     "captions_only_editorial_text",
@@ -71,7 +71,8 @@
     "controlled_luminance_pulse",
     "clean_clip_no_reuse",
     "final_provenance_gates",
-    "manual_release_only"
+    "manual_release_only",
+    "motion_interpolation"
   ],
   "active_addon_activation": {
     "approved": true,
