@@ -290,6 +290,11 @@ def audit(
         for key in record["keys"]:
             previous = seen.get(key)
             if previous:
+                # Final and draft-preview manifests may share one video_id and
+                # scene identities. Those are snapshots of one episode, not
+                # repeated source usage. A collision remains real across scenes.
+                if previous["scene_id"] == record["scene_id"]:
+                    continue
                 within_episode.append({
                     "key_type": key[0],
                     "key": key[1],
