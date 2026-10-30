@@ -17,7 +17,7 @@ permissions:
 
 concurrency:
   group: because-of-this-v7.3-charon-suspense-cinema-media-global
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 env:
   BECAUSE_OF_THIS_DRIVE_FOLDER_ID: "1A-oyowfHtdciB2_NZSLIZ0oG-ajOeYVb"
@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
-      - name: Checkout selected preview branch
+      - name: Checkout final branch
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
 
       - name: Validate final manifest scope
@@ -184,7 +184,7 @@ jobs:
             --manifest "${{ inputs.manifest || 'episodes/video-001/manifest.json' }}" --mode final \
             --report "episodes/video-001/rendered/golden-layout-final.json"
 
-      - name: Register preview artifacts and evaluate V7 gates
+      - name: Register final artifacts and evaluate V7 gates
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           MANIFEST: ${{ inputs.manifest || 'episodes/video-001/manifest.json' }}
@@ -222,7 +222,7 @@ jobs:
             --check-gemini-tts \
             --report "episodes/video-001/rendered/v7-release-final.json"
 
-      - name: Deliver verified preview bundle to Drive
+      - name: Deliver verified final bundle to Drive
         env:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
