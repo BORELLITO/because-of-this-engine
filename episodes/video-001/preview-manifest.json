@@ -1378,5 +1378,17 @@
     "reviewer": "",
     "approved_at": "",
     "decision": "PENDING_HUMAN_PREVIEW_APPROVAL"
+  },
+  "editing": {
+    "clip_quantity": {
+      "mode": "fixed",
+      "min_clips": 8,
+      "target_min": 8,
+      "target_max": 16,
+      "max_clips": 18,
+      "min_scene_seconds": 2,
+      "max_scene_seconds": 20,
+      "enforce": true
+    }
   }
 }
