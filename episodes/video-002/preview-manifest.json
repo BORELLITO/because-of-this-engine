@@ -295,7 +295,7 @@
           "platform"
         ],
         "scene_id": "S12",
-        "narration_excerpt": "Police found no broken door, no footprints, and no extra minute on the original tape. But Mara's copy changed again. It now ends with a new frame: someone on the platform, holding the camera from the other side."
+        "narration_excerpt": "Police found no broken door, footprints, or extra minute on the original tape. Mara's copy changed again, ending with a new frame: someone on the platform holding the camera from the other side."
       }
     ]
   },
@@ -450,7 +450,7 @@
       },
       {
         "beat_id": "beat-012",
-        "text": "Police found no broken door, no footprints, and no extra minute on the original tape. But Mara's copy changed again. It now ends with a new frame: someone on the platform, holding the camera from the other side."
+        "text": "Police found no broken door, footprints, or extra minute on the original tape. Mara's copy changed again, ending with a new frame: someone on the platform holding the camera from the other side."
       }
     ],
     "voice": "Charon",
@@ -459,7 +459,7 @@
   },
   "script": {
     "path": "script.txt",
-    "word_count_target": 162
+    "word_count_target": 157
   },
   "audio": {
     "path": "audio/narration.wav",
@@ -2000,7 +2000,7 @@
       "beat_id": "beat-012",
       "duration": 5,
       "story_beat": "payoff",
-      "narration_excerpt": "Police found no broken door, no footprints, and no extra minute on the original tape. But Mara's copy changed again. It now ends with a new frame: someone on the platform, holding the camera from the other side.",
+      "narration_excerpt": "Police found no broken door, footprints, or extra minute on the original tape. Mara's copy changed again, ending with a new frame: someone on the platform holding the camera from the other side.",
       "visual_semantics": {
         "role": "literal",
         "required": {
@@ -2065,7 +2065,7 @@
         "original_filename": "V73-S12-camera-from-other-side-clean.mp4",
         "mime_type": "video/mp4",
         "job_ownership": "episode-002-archive-tape-draft",
-        "scene_usage": "S12: visual evidence for Police found no broken door, no footprints, and no extra minute on the original tape. But Mara's copy changed again. It now ends with a new frame: someone on the platform, holding the camera from the other side.",
+        "scene_usage": "S12: visual evidence for Police found no broken door, footprints, or extra minute on the original tape. Mara's copy changed again, ending with a new frame: someone on the platform holding the camera from the other side.",
         "source_segment_in": 0,
         "source_segment_out": 4.4,
         "asset_class": "evidence",
