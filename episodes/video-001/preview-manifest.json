@@ -16,7 +16,7 @@
   "engine_profile": "because-of-this-v7.2-charon-cloud-tts-2026-10",
   "engine_profile_fingerprint": "af4676f9365eecf9170a8289d304708de3b42d88e5fa7bb87f07ce5a16f2ddd1",
   "master_prompt_version": "7.2",
-  "master_prompt_sha256": "f27797423fb055c214beeafe8f2973bceaf739c76b7ce53eea2790bfe9f40c0c",
+  "master_prompt_sha256": "496abd63bcc47cbd0168186edbf986c125bad878b40b7b5fb12ec0e3692fbd3b",
   "production_schema": "because-of-this://schemas/production-record/3.0.0",
   "human_approval_required": true,
   "lifecycle_status": "DRAFT_PREVIEW_ONLY",
