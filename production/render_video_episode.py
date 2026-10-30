@@ -542,7 +542,8 @@ def mux_audio(
     filters.extend([
         f"[1:a]aresample=48000{voice_pad},asplit=2[voice_sc][voice_mix]",
         f"[{music_input_index}:a]aresample=48000,volume={music_volume:.4f},"
-        f"afade=t=in:st=0:d=1.40,atrim=duration={total_duration:.3f},"
+        f"volume={music_gain_db:.3f}dB,afade=t=in:st=0:d=1.40,"
+        f"atrim=duration={total_duration:.3f},"
         "asetpts=PTS-STARTPTS[music]",
         "[music][voice_sc]sidechaincompress=threshold=0.060:ratio=10:attack=20:release=420:makeup=1[ducked]",
         "[voice_mix][ducked]amix=inputs=2:duration=first:dropout_transition=0:normalize=0[mixed]",
@@ -601,7 +602,10 @@ def render(manifest_path: Path, mode: str) -> Path:
         music_path = (manifest_path.parent / str(music_spec["path"])).resolve()
         if not music_path.is_file():
             raise RenderError(f"Licensed suspense music file is missing: {music_path}")
-        music_volume = float(music_spec.get("volume", 0.15))
+        music_volume = float(music_spec.get("volume", 0.12))
+        music_gain_db = float(music_spec.get("gain_db", 0.0))
+        if not 0.0 <= music_gain_db <= 6.0:
+            raise RenderError("Music gain_db must remain between 0 and 6 dB.")
         logo_path = spec.get("brand_logo_path")
         if logo_path is not None and spec["brand"].get("logo_enabled", False) is True:
             logo_path = prepare_logo(
