@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""V7.1 canonical Edge TTS production profile for Because Of This.
+"""V7.1 canonical Piper TTS production profile for Because Of This.
 
 This module is the only active configuration authority.  The former Gemini
 profile is retained only in Git history/rollback documentation and is not
@@ -14,7 +14,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-CANONICAL_PROFILE_ID = "because-of-this-v7-edge-tts-2026-10"
+CANONICAL_PROFILE_ID = "because-of-this-v7-piper-tts-2026-10"
 CANONICAL_ENGINE_VERSION = "7.1"
 CANONICAL_SCHEMA_ID = "because-of-this://schemas/production-record/3.0.0"
 
@@ -28,12 +28,12 @@ CANONICAL_PROFILE: dict[str, Any] = {
         "duration_max_seconds": 75,
     },
     "voice": {
-        "provider": "microsoft_edge_tts",
+        "provider": "piper_tts_local",
         "language": "en-US",
         "language_code": "en-US",
-        "voice_name": "en-US-GuyNeural",
-        "voice": "en-US-GuyNeural",
-        "model_or_voice_type": "neural",
+        "voice_name": "en_US-ryan-high",
+        "voice": "en_US-ryan-high",
+        "model_or_voice_type": "piper_neural_high",
         "ssml_gender": "MALE",
         "sample_rate_hz": 24000,
         "encoding": "LINEAR16",
