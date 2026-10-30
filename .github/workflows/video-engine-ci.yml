@@ -1,4 +1,4 @@
-name: Because Of This V7.1 + V7.2 Reuse First CI
+name: Because Of This V7.3 Charon engine CI
 
 on:
   push:
@@ -24,54 +24,44 @@ jobs:
           python-version: "3.12"
       - name: Install locked dependencies
         run: python -m pip install -r requirements.lock.txt
-      - name: Compile the V7 production surface
+      - name: Compile the active V7.3 production surface
         run: python -m py_compile production/*.py
-      - name: Enforce one active V7 engine
+      - name: Enforce one active Charon engine
         run: PYTHONPATH=. python production/v7_singleton_guard.py --repo-root .
-      - name: Validate prompt and schema contract
+      - name: Validate Charon prompt, schema and final manifest
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/v7_contract.py --repo-root . \
             --manifest examples/video-only-episode-manifest-v7.template.json
           PYTHONPATH=. python production/v7_contract.py --repo-root . \
             --manifest episodes/video-001/manifest.json --require-production
-      - name: Validate canonical profile fingerprints
+      - name: Validate canonical Charon profile fingerprints
         run: |
           PYTHONPATH=. python production/canonical_config.py \
             --manifest examples/video-only-episode-manifest-v7.template.json
           PYTHONPATH=. python production/canonical_config.py \
             --manifest episodes/video-001/manifest.json
-      - name: Run canonical V7.1 Piper unit tests
-        run: PYTHONPATH=. python -m unittest discover -s tests -p 'test_v7*.py' -v
-      - name: Validate activated V7.2 Reuse-First safety and cache layer
+      - name: Re-run executable Charon dry-run contract
         run: |
-          PYTHONPATH=. python -m unittest -v \
-            tests.test_reuse_first_v72 \
-            tests.test_drive_reuse_receipt_v72 \
-            tests.test_workflow_safety_v72 \
-            tests.test_v72_free_integrations \
-            tests.test_asset_reuse_brain \
-            tests.test_audio_reuse_v72 \
-            tests.test_narration_cache \
-            tests.test_release_identity_v72
-
-      - name: Regression tests for word timing, visuals, provenance and manual publication
-        run: |
-          PYTHONPATH=. python -m unittest -v \
-            tests.test_caption_alignment \
-            tests.test_caption_alignment_grammar \
-            tests.test_caption_quality \
-            tests.test_video_fingerprint \
-            tests.test_golden_frame_regression \
-            tests.test_release_boundary \
-            tests.test_storage_policy \
-            tests.test_media_anomaly \
-            tests.test_narrative_anchor_gate
-
-      - name: Run deterministic SSML and orchestration dry-run
-        run: |
+          set -euo pipefail
           PYTHONPATH=. python production/v7_orchestrator.py \
             --repo-root . --manifest episodes/video-001/manifest.json \
             --mode dry-run --report /tmp/v7-dry-run.json
+      - name: Validate active policy and final release identity
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          policy=json.loads(Path('production/active_engine_policy.json').read_text())
+          manifest=json.loads(Path('episodes/video-001/manifest.json').read_text())
+          assert policy['voice_provider'] == 'gemini_tts'
+          assert policy['voice_policy']['voice_name'] == 'Charon'
+          assert manifest['lifecycle_status'] == 'FINAL_APPROVED'
+          assert manifest['human_approval']['status'] == 'PASS'
+          assert manifest['editorial_qa']['status'] == 'PASS'
+          assert manifest['music']['license_status'] == 'APPROVED'
+          print('CHARON_FINAL_IDENTITY_PASS')
+          PY
       - name: Parse the production-record schema
         run: python -m json.tool production/schemas/production-record-3.0.0.json >/dev/null

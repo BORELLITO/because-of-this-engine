@@ -11,10 +11,10 @@
     "duration_min_seconds": 60,
     "duration_max_seconds": 75
   },
-  "engine_profile": "because-of-this-v7-piper-tts-2026-10",
-  "engine_profile_fingerprint": "0c2793e8f0a722674f03788021eaa74093cbe0fcf77375d2ddfb5041657ec910",
-  "master_prompt_version": "7.1",
-  "master_prompt_sha256": "82db772fdff0dfd2e8e9bebe7d8a537d8ee9934192f36c1193baffa12503e17b",
+  "engine_profile": "because-of-this-v7.2-charon-gemini-tts-2026-10",
+  "engine_profile_fingerprint": "71be97defce1764a8d008af69b71fa4e8065ff90fb40e0b97ad46a6231d5f242",
+  "master_prompt_version": "7.2",
+  "master_prompt_sha256": "c0bd045da0898848ff11aaba9ff2de9e27be8041f559b37a80f3f99ada1127c8",
   "production_schema": "because-of-this://schemas/production-record/3.0.0",
   "human_approval_required": true,
   "lifecycle_status": "DRAFT",
@@ -90,31 +90,32 @@
     "no_text_generated_inside_stock_clips": true
   },
   "voice": {
-    "provider": "piper_tts_local",
+    "provider": "gemini_tts",
     "language": "en-US",
     "language_code": "en-US",
-    "voice_name": "en_US-ryan-high",
-    "voice": "en_US-ryan-high",
-    "model_or_voice_type": "piper_neural_high",
+    "voice_name": "Charon",
+    "voice": "Charon",
+    "model_or_voice_type": "gemini-3.8-flash-tts",
     "ssml_gender": "MALE",
     "sample_rate_hz": 24000,
-    "encoding": "LINEAR16",
-    "speaking_rate": 0.68,
+    "encoding": "AUDIO_WAV",
+    "speaking_rate": 0.88,
     "pitch": 0,
     "volume_gain_db": 0,
-    "style": "Grave American English narration. Controlled cinematic suspense, clear diction, restrained intensity, intimate consequence, never theatrical."
+    "style": "Low, controlled American English narration with informative clarity, restrained cinematic suspense, intimate consequence, never theatrical."
   },
   "narration": {
-    "provider": "piper_tts_local",
+    "provider": "gemini_tts",
     "language_code": "en-US",
-    "voice_name": "en_US-ryan-high",
+    "voice_name": "Charon",
     "state": "DRAFT",
     "beats": [
       {
         "beat_id": "beat-001",
         "text": "At the exact moment the building should have been silent, the system recorded a movement that no camera could explain."
       }
-    ]
+    ],
+    "model": "gemini-3.8-flash-tts"
   },
   "script": {
     "path": "script.txt",

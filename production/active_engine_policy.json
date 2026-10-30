@@ -1,23 +1,24 @@
 {
   "policy_version": "3.0",
-  "active_engine_profile": "because-of-this-v7-piper-tts-2026-10",
-  "active_engine_fingerprint": "0c2793e8f0a722674f03788021eaa74093cbe0fcf77375d2ddfb5041657ec910",
-  "active_engine_version": "7.1",
+  "active_engine_profile": "because-of-this-v7.2-charon-gemini-tts-2026-10",
+  "active_engine_fingerprint": "71be97defce1764a8d008af69b71fa4e8065ff90fb40e0b97ad46a6231d5f242",
+  "active_engine_version": "7.3",
   "update_rule": "approved_update_supersedes_previous_active_engine",
   "retired_versions": "must_not_remain_executable_in_active_tree",
   "history_rule": "git_history_and_archive_are_retained_for_audit_but_are_never_an_execution_source",
-  "master_prompt_version": "7.1",
-  "master_prompt_sha256": "82db772fdff0dfd2e8e9bebe7d8a537d8ee9934192f36c1193baffa12503e17b",
+  "master_prompt_version": "7.2",
+  "master_prompt_sha256": "c0bd045da0898848ff11aaba9ff2de9e27be8041f559b37a80f3f99ada1127c8",
   "production_schema": "because-of-this://schemas/production-record/3.0.0",
-  "voice_provider": "piper_tts_local",
+  "voice_provider": "gemini_tts",
   "voice_policy": {
     "language_code": "en-US",
-    "voice_name": "en_US-ryan-high",
-    "rate": 0.68,
+    "voice_name": "Charon",
+    "model": "gemini-3.8-flash-tts",
+    "rate": 0.88,
     "pitch": 0,
-    "ssml_required": false,
+    "ssml_required": true,
     "provider_fallback": "forbidden",
-    "service_mode": "local_neural_model_no_network"
+    "service_mode": "remote_api_with_drive_cache"
   },
   "publication_policy": "manual_only",
   "render_contract": {
@@ -34,8 +35,8 @@
     "alternate_engine_profiles_executable": false,
     "retired_versions": "audit_only_non_executable",
     "last_stable_v6_commit": "66d51c6b6da2ba5639fea3c2eb7e2b566bbd1542",
-    "active_runtime": "production/piper_tts.py",
-    "rollback_runtime": "archive/edge-tts-v7/edge_tts.py"
+    "active_runtime": "production/gemini_tts.py",
+    "rollback_runtime": "branch:v7.2-charon-clean-clips-preview/production/piper_tts.py"
   },
   "audit_policy": {
     "drive_archive": "append_only",
@@ -57,25 +58,24 @@
     "G10",
     "G11"
   ],
-  "active_runtime": "production/piper_tts.py",
-  "archived_runtime": "archive/edge-tts-v7/edge_tts.py",
-  "active_addon_version": "7.2",
-  "active_addon_profile": "reuse-first-piper",
+  "active_runtime": "production/gemini_tts.py",
+  "archived_runtime": "production/piper_tts.py (rollback-only; not an active execution source)",
+  "active_addon_version": "7.3",
+  "active_addon_profile": "charon-suspense-cinema",
   "active_addon_capabilities": [
-    "verified_same_episode_preview_reuse",
-    "piper_tts_content_hash_cache",
-    "historical_source_no_repeat",
-    "historical_soundtrack_no_repeat",
-    "shared_media_job_lock",
-    "evidence_backed_release_identity_gates",
-    "drive_first_caption_recovery",
+    "gemini_tts_charon",
+    "captions_only_editorial_text",
+    "deterministic_suspense_bed",
+    "cinematic_suspense_motion",
+    "clean_clip_no_reuse",
+    "final_provenance_gates",
     "manual_release_only"
   ],
   "active_addon_activation": {
     "approved": true,
-    "pr_number": 56,
-    "commit": "6fe49f96fe9c67d1af53f6cad9f9323fa8c687cf",
-    "core_engine_version": "7.1",
+    "pr_number": 58,
+    "commit": "170edc33759ef9d026757dd4f8bb0656681db627",
+    "core_engine_version": "7.3",
     "media_regeneration_required": false
   }
 }
