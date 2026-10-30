@@ -6,6 +6,8 @@ from unittest.mock import patch
 
 from production.video_asset_contract import (
     FINGERPRINT_FRAME_BYTES,
+    VideoContractError,
+    _validate_clean_frame_layout,
     perceptual_hash,
     sha256_file,
     validate_asset_record,
@@ -61,6 +63,20 @@ class VideoFingerprintTests(unittest.TestCase):
                  patch("production.video_asset_contract.perceptual_hash", return_value="b" * 64):
                 result = validate_asset_record(record, path.parent, "because-of-this-video-001", mode="draft-preview")
             self.assertEqual(result["animation_fingerprint"], "b" * 64)
+
+    def test_disclosed_preview_compositor_does_not_relax_clean_final_path(self) -> None:
+        with patch(
+            "production.video_asset_contract._sample_strip_luma",
+            side_effect=[0, 50, 0] * 3,
+        ):
+            with self.assertRaises(VideoContractError):
+                _validate_clean_frame_layout(Path("composite.mp4"), "asset", 6.0)
+            _validate_clean_frame_layout(
+                Path("composite.mp4"),
+                "asset",
+                6.0,
+                allow_disclosed_preview_compositor=True,
+            )
 
 
 if __name__ == "__main__":

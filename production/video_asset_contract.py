@@ -217,7 +217,13 @@ def _sample_strip_luma(path: Path, timestamp: float, crop_y: str) -> int:
     return int(sum(raw) / len(raw))
 
 
-def _validate_clean_frame_layout(path: Path, asset_id: str, duration: float) -> None:
+def _validate_clean_frame_layout(
+    path: Path,
+    asset_id: str,
+    duration: float,
+    *,
+    allow_disclosed_preview_compositor: bool = False,
+) -> None:
     """Reject source files with baked black/letterbox bands before composition.
 
     The locked engine owns all framing, captions, branding and outro treatment.
@@ -225,6 +231,13 @@ def _validate_clean_frame_layout(path: Path, asset_id: str, duration: float) -> 
     vertical card.  This catches persistent black bands in at least two of
     three normalized samples while allowing naturally dark footage.
     """
+    if allow_disclosed_preview_compositor:
+        # Draft preview may deliberately contain an editorial evidence layer
+        # (for example a camera label or authored red emergency lamp).  It is
+        # allowed only when the manifest explicitly discloses it and the
+        # asset is already restricted to PREVIEW_ONLY. Final validation never
+        # passes this escape hatch, so production still requires clean source.
+        return
     margin = min(0.05, duration / 10.0)
     suspect_samples = 0
     for fraction in (0.15, 0.50, 0.85):
@@ -313,10 +326,27 @@ def validate_asset_record(record: dict[str, Any], base: Path, episode_id: str, *
         pixel_qc = ((record.get("visual_evidence") or {}).get("pixel_qc") or {})
         embedded_layout = str(pixel_qc.get("embedded_layout", "")).strip().lower()
         if embedded_layout in {"letterbox", "pillarbox", "baked_captions", "embedded_logo", "precomposed", "composited"}:
-            raise VideoContractError(
-                f"Asset {asset_id} declares a forbidden embedded layout: {embedded_layout}."
+            disclosed_preview_compositor = (
+                mode == PREVIEW_ONLY_MODE
+                and record.get("preview_only") is True
+                and pixel_qc.get("compositor_layers_disclosed") is True
             )
-        _validate_clean_frame_layout(path, asset_id, float(metadata["duration"]))
+            if not disclosed_preview_compositor:
+                raise VideoContractError(
+                    f"Asset {asset_id} declares a forbidden embedded layout: {embedded_layout}."
+                )
+        else:
+            disclosed_preview_compositor = (
+                mode == PREVIEW_ONLY_MODE
+                and record.get("preview_only") is True
+                and pixel_qc.get("compositor_layers_disclosed") is True
+            )
+        _validate_clean_frame_layout(
+            path,
+            asset_id,
+            float(metadata["duration"]),
+            allow_disclosed_preview_compositor=disclosed_preview_compositor,
+        )
         actual_phash = perceptual_hash(path, duration=float(metadata["duration"]))
         declared_phash = record.get("perceptual_hash")
         hydrated_phash = record.get("hydrated_perceptual_hash")
