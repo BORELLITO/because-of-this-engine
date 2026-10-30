@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Google Cloud Text-to-Speech adapter for the Because Of This V7.1 engine.
+"""Google Cloud Text-to-Speech Chirp 3 HD adapter for the Because Of This V7.2 engine.
 
 The adapter deliberately uses the documented REST `text:synthesize` contract
 with SSML and Application Default Credentials/OAuth.  Gemini, ElevenLabs and
@@ -163,9 +163,16 @@ def cloud_credentials_configured() -> bool:
         for name in ("GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "GOOGLE_REFRESH_TOKEN")
     )
 def _project_id() -> str:
+    """Return an optional quota project without inventing one.
+
+    OAuth refresh-token credentials can authenticate Cloud TTS without a
+    user-project header. If the connected Google project is supplied, validate
+    it and use it for quota/billing attribution; otherwise omit the header and
+    let Google return the precise API/quota diagnostic.
+    """
     value = (os.environ.get("GOOGLE_TTS_PROJECT_ID") or os.environ.get("GOOGLE_CLOUD_PROJECT") or "").strip()
     if not value:
-        raise CloudTTSError("GOOGLE_TTS_PROJECT_ID or GOOGLE_CLOUD_PROJECT is required")
+        return ""
     if not re.fullmatch(r"[a-z][a-z0-9-]{4,28}[a-z0-9]", value):
         raise CloudTTSError("Google Cloud project id has an invalid shape")
     return value
@@ -174,16 +181,19 @@ def _project_id() -> str:
 def _request_json(method: str, url: str, *, body: dict[str, Any] | None = None) -> dict[str, Any]:
     token = _access_token()
     raw = json.dumps(body, ensure_ascii=False).encode("utf-8") if body is not None else None
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json; charset=utf-8",
+        "Accept": "application/json",
+    }
+    project_id = _project_id()
+    if project_id:
+        headers["x-goog-user-project"] = project_id
     request = urllib.request.Request(
         url,
         data=raw,
         method=method,
-        headers={
-            "Authorization": f"Bearer {token}",
-            "Content-Type": "application/json; charset=utf-8",
-            "Accept": "application/json",
-            "x-goog-user-project": _project_id(),
-        },
+        headers=headers,
     )
     last_error: Exception | None = None
     for attempt in range(1, MAX_ATTEMPTS + 1):
