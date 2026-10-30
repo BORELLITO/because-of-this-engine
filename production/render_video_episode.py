@@ -71,6 +71,7 @@ def scene_filter(
     focus_y: float,
     color_grade: dict[str, Any] | None = None,
     duration: float = 8.0,
+    source_fps: float | None = None,
 ) -> str:
     grade = color_grade or {}
     try:
@@ -164,8 +165,11 @@ def scene_filter(
             vignette_angle = suspense.get("vignette_angle", "PI/5") if suspense_enabled else "PI/5"
             filters.append(f"vignette=angle={vignette_angle}:eval=frame")
 
-    if motion_smoothing:
-        # Interpolate between native source frames before the final CFR pass.
+    if motion_smoothing and (
+        source_fps is None or source_fps < interpolation_fps - 0.01
+    ):
+        # Interpolate only when native source cadence is below the target CFR.
+        # Native 60 fps clips bypass the expensive motion-compensation pass.
         # This removes duplicate-frame judder from slow pans without changing
         # the approved crop, color grade, captions or audio timeline.
         filters.append(
@@ -211,7 +215,10 @@ def render_scene(
     # Keep the clip duration deterministic even when a source file has sparse
     # timestamps or an early EOF. The contract still rejects genuinely short
     # sources; tpad only makes the encoded scene clock explicit for xfade.
-    filters = scene_filter(width, height, focus_x, focus_y, color_grade, requested)
+    filters = scene_filter(
+        width, height, focus_x, focus_y, color_grade, requested,
+        source_fps=info.get("fps"),
+    )
     filters += f",tpad=stop_mode=clone:stop_duration={requested:.3f},trim=duration={requested:.3f},setpts=PTS-STARTPTS"
     if (color_grade or {}).get("cinematic_suspense", {}).get("edge_fade") is True:
         # Micro-fades keep the suspense montage cinematic while preserving the
