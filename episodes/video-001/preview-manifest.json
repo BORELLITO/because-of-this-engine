@@ -48,11 +48,53 @@
   "story_graph": {
     "version": "7.1",
     "entities": [
-      "elias",
-      "elevator",
-      "hospital",
-      "corridor",
-      "system_log"
+      {
+        "entity_id": "elias",
+        "canonical_name": "Elias",
+        "aliases": [
+          "the guard",
+          "Elias's uniform"
+        ],
+        "continuity_mode": "same anonymous night-shift guard"
+      },
+      {
+        "entity_id": "elevator",
+        "canonical_name": "hospital elevator",
+        "aliases": [
+          "the elevator",
+          "display",
+          "doors"
+        ],
+        "continuity_mode": "same elevator system"
+      },
+      {
+        "entity_id": "hospital",
+        "canonical_name": "hospital",
+        "aliases": [
+          "building",
+          "lobby",
+          "maintenance area"
+        ],
+        "continuity_mode": "same hospital at night"
+      },
+      {
+        "entity_id": "corridor",
+        "canonical_name": "red emergency corridor",
+        "aliases": [
+          "red corridor",
+          "concrete corridor"
+        ],
+        "continuity_mode": "same impossible destination"
+      },
+      {
+        "entity_id": "system_log",
+        "canonical_name": "system log",
+        "aliases": [
+          "digital log",
+          "passenger entry"
+        ],
+        "continuity_mode": "same evidence record"
+      }
     ],
     "beats": [
       {
