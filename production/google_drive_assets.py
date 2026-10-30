@@ -23,7 +23,14 @@ from googleapiclient.http import MediaIoBaseDownload
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from production.video_asset_contract import VideoContractError, load_manifest, resolve_inside
+from production.video_asset_contract import (
+    FINGERPRINT_VERSION,
+    VideoContractError,
+    ffprobe,
+    load_manifest,
+    perceptual_hash,
+    resolve_inside,
+)
 
 
 class AssetHydrationError(RuntimeError):
@@ -103,6 +110,7 @@ def download(drive, file_id: str, target: Path, expected_prefix: str) -> dict[st
 def hydrate(manifest_path: Path, *, require_drive_assets: bool = False) -> dict[str, Any]:
     manifest = load_manifest(manifest_path)
     assets = []
+    fingerprint_refreshes: list[dict[str, Any]] = []
     seen_drive_ids: set[str] = set()
     for scene in manifest.get("scenes", []):
         asset = scene.get("asset", {})
@@ -150,7 +158,41 @@ def hydrate(manifest_path: Path, *, require_drive_assets: bool = False) -> dict[
             expected = str(record.get("sha256", "")).lower()
             if expected and result["sha256"].lower() != expected:
                 raise AssetHydrationError(f"Drive asset {record.get('asset_id')} checksum mismatch after download.")
-    return {"status": "DRIVE_ASSETS_HYDRATED", "video_id": manifest.get("video_id"), "asset_count": len(manifest.get("scenes", [])), "downloaded": len(assets), "downloaded_videos": sum(1 for item in assets if item[3] == "video"), "downloaded_audio": sum(1 for item in assets if item[3] == "audio")}
+            # The SHA-256 is the immutable source identity.  The perceptual
+            # fingerprint is a decoded-pixel evidence signal and can drift
+            # when GitHub's FFmpeg major version changes.  Recompute it over
+            # the bytes that this runner actually hydrated, while retaining
+            # the manifest value for provenance and audit comparison.
+            if kind == "video":
+                metadata = ffprobe(path)
+                runtime_phash = perceptual_hash(path, duration=float(metadata["duration"]))
+                record["hydrated_perceptual_hash"] = runtime_phash
+                fingerprint_refreshes.append({
+                    "asset_id": record.get("asset_id"),
+                    "sha256": result["sha256"],
+                    "declared_perceptual_hash": record.get("perceptual_hash"),
+                    "hydrated_perceptual_hash": runtime_phash,
+                    "fingerprint_version": FINGERPRINT_VERSION,
+                })
+    if fingerprint_refreshes:
+        manifest["runtime_asset_hydration"] = {
+            "fingerprint_version": FINGERPRINT_VERSION,
+            "fingerprint_scope": "downloaded_bytes",
+            "ffmpeg_runtime_recalculated": True,
+            "assets": fingerprint_refreshes,
+        }
+        temporary = manifest_path.with_name(manifest_path.name + ".hydrated.part")
+        temporary.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        os.replace(temporary, manifest_path)
+    return {
+        "status": "DRIVE_ASSETS_HYDRATED",
+        "video_id": manifest.get("video_id"),
+        "asset_count": len(manifest.get("scenes", [])),
+        "downloaded": len(assets),
+        "downloaded_videos": sum(1 for item in assets if item[3] == "video"),
+        "downloaded_audio": sum(1 for item in assets if item[3] == "audio"),
+        "runtime_fingerprint_refreshes": len(fingerprint_refreshes),
+    }
 
 
 def main() -> int:
