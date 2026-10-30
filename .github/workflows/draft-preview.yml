@@ -1,6 +1,9 @@
 name: Because Of This V7.3 Charon suspense-cinema draft preview
 
 on:
+  push:
+    branches:
+      - v7.3-charon-suspense-cinema-preview
   workflow_dispatch:
     inputs:
       manifest:
