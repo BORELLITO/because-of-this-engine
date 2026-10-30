@@ -148,9 +148,9 @@ jobs:
           python - "${MANIFEST}" <<'PY'
           import hashlib, json, sys
           from pathlib import Path
-          path = Path(sys.argv[1])
+          path = Path(sys.argv[1]).resolve()
           value = json.loads(path.read_text(encoding="utf-8"))
-          root = path.parent
+          root = path.parent.resolve()
           runtime = {
               "narration_coverage": "rendered/narration-coverage.json",
               "final_audio": "audio/narration.wav",
