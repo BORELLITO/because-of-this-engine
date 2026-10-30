@@ -33,6 +33,12 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
     if output.stat().st_size <= 0:
         raise VideoContractError("Rendered release is empty.")
     media = ffprobe(output)
+    # Check the actual graded MP4 and its report, never a static PASS marker.
+    from production.atmosphere_qa import verify_report_against_media
+    try:
+        atmosphere_qa = verify_report_against_media(manifest_path, output, mode)
+    except ValueError as exc:
+        raise VideoContractError("Atmosphere QA blocked release: " + str(exc)) from exc
     expected_width, expected_height = SIZES[mode]
     if (media["width"], media["height"]) != (expected_width, expected_height):
         raise VideoContractError(
@@ -94,6 +100,7 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
     asset_hashes = [str(scene["asset"]["sha256"]).lower() for scene in manifest["scenes"]]
     editorial_pass = editorial_status == "PASS"
     return {
+        "atmosphere_qa": atmosphere_qa,
         "status": "VIDEO_RELEASE_VALIDATED",
         "job_id": spec.get("job_id"),
         "video_id": spec["video_id"],

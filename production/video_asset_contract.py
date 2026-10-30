@@ -489,6 +489,15 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
     if not isinstance(scenes, list) or not scenes:
         raise VideoContractError("Manifest requires at least one video scene.")
     _validate_cinematic_grade(manifest, mode)
+    # This is an additive, opt-in scene director; the Charon canonical profile
+    # and its fingerprint remain immutable. Fail closed on invalid scene mood.
+    from production.cinematic_dread import AtmosphereError, plan as dread_plan
+    try:
+        atmosphere = dread_plan(manifest)
+        if mode == "final" and atmosphere.get("enabled") and atmosphere["director_review"] != "APPROVED":
+            raise AtmosphereError("Final release needs approved Cinematic Dread direction")
+    except AtmosphereError as exc:
+        raise VideoContractError("Atmosphere contract: " + str(exc)) from exc
     _validate_loop(manifest, mode)
     try:
         clip_policy = clip_quantity_policy(manifest)

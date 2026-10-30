@@ -14,6 +14,10 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from production.video_asset_contract import VideoContractError, ffprobe, load_manifest, validate_manifest
+from production.cinematic_dread import (
+    AtmosphereError, plan as dread_plan, grade_for_scene,
+    timeline as dread_timeline, music_filter as dread_music_filter,
+)
 
 FPS = 60
 # draft-preview is deliberately separate from preview: it can carry explicit
@@ -135,7 +139,17 @@ def scene_filter(
             )
 
         if grade.get("vignette", True) is True:
-            filters.append("vignette=PI/5")
+            angle = grade.get("_dread_vignette_angle", "PI/5")
+            if angle not in {"PI/5", "PI/5.3", "PI/5.0", "PI/4.8", "PI/4.6"}:
+                raise RenderError("Unapproved cinematic vignette profile.")
+            filters.append(f"vignette={angle}")
+        grain = grade.get("_dread_grain_strength", 0)
+        if type(grain) is not int or not 0 <= grain <= 4:
+            raise RenderError("Unsafe cinematic grain intensity.")
+        if grain:
+            # Apply to picture only. Captions and logo are composed later and
+            # must remain sharp, stable and fully independent from source FX.
+            filters.append(f"noise=alls={grain}:allf=t")
     filters.extend([f"fps={FPS}", "setpts=PTS-STARTPTS", "format=yuv420p", "setsar=1"])
     return ",".join(filters)
 
@@ -426,6 +440,7 @@ def mux_audio(
     height: int = 1920,
     loop: dict[str, Any] | None = None,
     loop_logo_path: Path | None = None,
+    atmosphere_timeline: list[dict[str, Any]] | None = None,
 ) -> None:
     loop = loop or {}
     outro_seconds = loop_outro_seconds({"loop": loop})
@@ -540,10 +555,12 @@ def mux_audio(
     music_input_index = 2 + int(logo_enabled) + int(loop_logo_enabled)
     command.extend(["-stream_loop", "-1", "-i", str(music)])
     voice_pad = f",apad=pad_dur={outro_seconds:.3f}" if outro_seconds > 0 else ""
+    dynamic_music = dread_music_filter(atmosphere_timeline or [])
     filters.extend([
         f"[1:a]aresample=48000{voice_pad},asplit=2[voice_sc][voice_mix]",
         f"[{music_input_index}:a]aresample=48000,volume={music_volume:.4f},"
-        f"volume={music_gain_db:.3f}dB,afade=t=in:st=0:d=1.40,"
+        + (dynamic_music + "," if dynamic_music else "")
+        + f"volume={music_gain_db:.3f}dB,afade=t=in:st=0:d=1.40,"
         f"atrim=duration={total_duration:.3f},"
         "asetpts=PTS-STARTPTS[music]",
         "[music][voice_sc]sidechaincompress=threshold=0.060:ratio=10:attack=20:release=420:makeup=1[ducked]",
@@ -585,6 +602,12 @@ def render(manifest_path: Path, mode: str) -> Path:
         clip_policy=spec.get("clip_policy"),
         narration_spans=coverage["scenes"],
     )
+    try:
+        atmosphere_direction = dread_plan(manifest)
+        if mode == "final" and atmosphere_direction.get("enabled") and atmosphere_direction["director_review"] != "APPROVED":
+            raise AtmosphereError("Final Cinematic Dread render requires explicit director approval")
+    except AtmosphereError as exc:
+        raise RenderError(f"Atmosphere contract blocked render: {exc}") from exc
     width, height = SIZES[mode]
     output_template = str(manifest.get("output", {}).get("path", "rendered/{video_id}-{mode}.mp4"))
     output = (manifest_path.parent / output_template.format(video_id=spec["video_id"], mode=mode)).resolve()
@@ -593,7 +616,10 @@ def render(manifest_path: Path, mode: str) -> Path:
         scene_files: list[Path] = []
         for index, scene in enumerate(locked_scenes, start=1):
             target = Path(temp) / f"scene-{index:02d}.mp4"
-            render_scene(scene, width, height, target, manifest.get("color_grade"))
+            render_scene(
+                scene, width, height, target,
+                grade_for_scene(manifest.get("color_grade") or {}, scene, atmosphere_direction),
+            )
             scene_files.append(target)
         assembled = Path(temp) / "assembled.mp4"
         assemble(scene_files, locked_scenes, assembled)
@@ -631,6 +657,10 @@ def render(manifest_path: Path, mode: str) -> Path:
             height,
             manifest.get("loop") or {},
             loop_logo_path=(spec.get("brand_logo_path") if (manifest.get("loop") or {}).get("logo_source") == "brand_logo_transparent" else spec.get("loop_logo_path")),
+            atmosphere_timeline=(
+                dread_timeline(atmosphere_direction, locked_scenes, narration_seconds)
+                if atmosphere_direction.get("enabled") else None
+            ),
         )
     return output
 
