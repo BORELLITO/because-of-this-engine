@@ -35,7 +35,7 @@
     "wound": "Elias has spent years trusting systems that keep people safe, so the system's contradiction attacks his identity.",
     "flaw": "His professional curiosity overrides the final safe exit.",
     "something_to_lose": "Elias's safety, identity and claim to know where he is.",
-    "hook": "At 2:14 a.m., a hospital elevator stops at Floor 13 even though the building has only twelve floors.",
+    "hook": "At two fourteen in the morning, a hospital elevator stops at Floor 13 even though the building has only twelve floors.",
     "reveal": "The second passenger exists in the log while Elias is visibly still outside, changing the anomaly from a broken elevator into a duplicate presence."
   },
   "story_profile": {
@@ -110,7 +110,7 @@
           "elevator",
           "hospital"
         ],
-        "narration_excerpt": "At 2:14 a.m., a hospital elevator stopped at a floor the building did not have."
+        "narration_excerpt": "At two fourteen in the morning, a hospital elevator stopped at a floor the building did not have."
       },
       {
         "scene_id": "S02",
@@ -214,7 +214,7 @@
           "hospital",
           "system_log"
         ],
-        "narration_excerpt": "At 2:14 the next night, the display returned to thirteen."
+        "narration_excerpt": "At two fourteen the next night, the display returned to thirteen."
       },
       {
         "scene_id": "S09",
@@ -366,7 +366,7 @@
     "beats": [
       {
         "beat_id": "beat-001",
-        "text": "At 2:14 a.m., a hospital elevator stopped at a floor the building did not have."
+        "text": "At two fourteen in the morning, a hospital elevator stopped at a floor the building did not have."
       },
       {
         "beat_id": "beat-002",
@@ -382,7 +382,7 @@
       },
       {
         "beat_id": "beat-005",
-        "text": "At 2:14 the next night, the display returned to thirteen."
+        "text": "At two fourteen the next night, the display returned to thirteen."
       },
       {
         "beat_id": "beat-006",
@@ -453,7 +453,7 @@
       "beat_id": "beat-001",
       "duration": 4.8,
       "story_beat": "hook",
-      "narration_excerpt": "At 2:14 a.m., a hospital elevator stopped at a floor the building did not have.",
+      "narration_excerpt": "At two fourteen in the morning, a hospital elevator stopped at a floor the building did not have.",
       "visual_semantics": {
         "role": "literal",
         "required": {
@@ -1209,7 +1209,7 @@
       "beat_id": "beat-005",
       "duration": 6,
       "story_beat": "recurrence",
-      "narration_excerpt": "At 2:14 the next night, the display returned to thirteen.",
+      "narration_excerpt": "At two fourteen the next night, the display returned to thirteen.",
       "visual_semantics": {
         "role": "literal",
         "required": {
