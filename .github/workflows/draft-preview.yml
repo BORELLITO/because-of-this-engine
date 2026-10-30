@@ -60,7 +60,10 @@ jobs:
           MANIFEST: ${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}
         run: |
           set -euo pipefail
-          test "${MANIFEST}" = "episodes/video-001/preview-manifest.json"
+          case "${MANIFEST}" in
+            episodes/video-*/preview-manifest.json) ;;
+            *) echo "preview manifest must be episode-scoped"; exit 1 ;;
+          esac
           test -f "${MANIFEST}"
           python - "${MANIFEST}" <<'PY'
           import json, sys
@@ -159,7 +162,7 @@ jobs:
           PYTHONPATH=. python production/story_intelligence.py \
             --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" \
             --alignment "episodes/video-001/captions/narration.alignment.json" \
-            --report "episodes/video-001/rendered/narration-coverage.json"
+            --report "$(dirname "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}")/rendered/narration-coverage.json"
 
       - name: Generate deterministic suspense soundtrack
         run: |
@@ -186,7 +189,7 @@ jobs:
           PYTHONPATH=. python production/visual_story_qa.py \
             --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" \
             --mode draft-preview \
-            --report "episodes/video-001/rendered/visual-story-qa-draft-preview.json"
+            --report "$(dirname "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}")/rendered/visual-story-qa-draft-preview.json"
 
       - name: Render complete draft preview
         run: |
@@ -199,13 +202,13 @@ jobs:
           set -euo pipefail
           PYTHONPATH=. python production/caption_quality.py \
             --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" \
-            --report "episodes/video-001/rendered/caption-quality-draft-preview.json"
+            --report "$(dirname "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}")/rendered/caption-quality-draft-preview.json"
           PYTHONPATH=. python production/validate_video_release.py \
             --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --mode draft-preview \
-            --report "episodes/video-001/rendered/video-release-draft-preview.json"
+            --report "$(dirname "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}")/rendered/video-release-draft-preview.json"
           PYTHONPATH=. python production/golden_frame_regression.py \
             --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --mode draft-preview \
-            --report "episodes/video-001/rendered/golden-layout-draft-preview.json"
+            --report "$(dirname "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}")/rendered/golden-layout-draft-preview.json"
 
       - name: Register preview artifacts and evaluate V7 gates
         env:
@@ -242,7 +245,7 @@ jobs:
           PYTHONPATH=. python production/v7_orchestrator.py \
             --repo-root . --manifest "${MANIFEST}" --mode draft-preview \
             --check-gemini-tts \
-            --report "episodes/video-001/rendered/v7-release-draft-preview.json"
+            --report "$(dirname "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}")/rendered/v7-release-draft-preview.json"
 
       - name: Deliver verified preview bundle to Drive
         env:
@@ -253,7 +256,7 @@ jobs:
           set -euo pipefail
           PYTHONPATH=. python production/google_drive_delivery.py \
             --collection "PREVIEWS V7" \
-            --delivery-name "episode-001-draft-preview-${{ github.run_id }}" \
+            --delivery-name "draft-preview-${{ github.run_id }}" \
             --job-id "draft-preview-${{ github.run_id }}" \
             --path "episodes/video-001/rendered" \
             --path "episodes/video-001/audio/narration.wav" \
