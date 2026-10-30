@@ -77,8 +77,8 @@ def _episode_variant(episode_id: str) -> tuple[float, float]:
     digest = hashlib.sha256(episode_id.encode("utf-8")).digest()
     # Two bounded sub-bass parameters derived from the exact episode ID:
     # deterministic across retries, different across unrelated stories.
-    frequency_shift = digest[0] / 255.0 * 1.5
-    phase = digest[1] / 255.0 * math.pi
+    frequency_shift = int.from_bytes(digest[:8], "big") / 2**64 * 1.5
+    phase = int.from_bytes(digest[8:16], "big") / 2**64 * math.pi
     return frequency_shift, phase
 
 

@@ -1,0 +1,54 @@
+{
+  "kind": "CINEMATIC_DREAD_ATMOSPHERE_CANDIDATE",
+  "status": "PROPOSED_UNAPPROVED",
+  "episode_id": "episode-001-preview-v72-charon-clean",
+  "based_on": "episodes/video-001/preview-manifest.json",
+  "not_a_manifest_replacement": true,
+  "canonical_voice_unchanged": "Gemini TTS Charon",
+  "not_authorized_for_production": true,
+  "atmosphere": {
+    "enabled": true,
+    "profile": "cinematic_dread_v1",
+    "director_review": "PENDING",
+    "scene_overrides": {
+      "S01": {
+        "intensity": 1,
+        "reason": "Uma anomalia sutil no elevador, antes de o perigo ser reconhecido"
+      },
+      "S02": {
+        "intensity": 2,
+        "reason": "O painel contradiz o registro; sombras mais frias ampliam a suspeita"
+      },
+      "S03": {
+        "intensity": 3,
+        "reason": "Corredor impossível e lâmpada vermelha JÁ PRESENTES no material autorizado; ameaças concretas"
+      },
+      "S04": {
+        "intensity": 2,
+        "reason": "Falsa segurança durante a manutenção; breve recuo da pressão psicológica"
+      },
+      "S05": {
+        "intensity": 3,
+        "reason": "Retorno da anomalia elimina a sensação de controle"
+      },
+      "S06": {
+        "intensity": 4,
+        "reason": "Figura duplicada: clímax com pressão máxima e detalhe visual preservado"
+      },
+      "S07": {
+        "intensity": 4,
+        "reason": "O monitor contradiz a identidade de Elias, prolongando o ápice da tensão"
+      },
+      "S08": {
+        "intensity": 3,
+        "reason": "Desfecho inquietante; final mantém ameaça e espaço para o loop"
+      }
+    }
+  },
+  "source_asset_rule": "NO_NEW_CLIPS_OR_ASSET_REUSE_OTHER_EPISODES",
+  "additional_on_screen_text": "FORBIDDEN; captions and approved HUD only",
+  "visual_director_note": "Paleta fria/verde-sujo, vermelhos apenas quando já existentes; clareza de figuras e texto nativo do material preservadas",
+  "rights_check": "No new external assets introduced",
+  "rollback": "Remove optional top-level atmosphere field and original renderer behavior is restored",
+  "approval_gate": "Human review of a real graded preview required before copying atmosphere into approved manifest"
+}

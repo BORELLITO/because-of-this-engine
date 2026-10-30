@@ -65,6 +65,17 @@ class CinematicDreadV73Tests(unittest.TestCase):
         self.assertIn("if(lt(t",music_filter(result))
         self.assertIn("eval=frame",music_filter(result))
         with self.assertRaises(AtmosphereError): timeline(d,m["scenes"],float("nan"))
+    def test_scene_transition_subtracted_at_same_clock_as_video(self):
+        m=make()
+        m["scenes"][1]["transition"]={"type":"crossfade","duration":0.25}
+        m["scenes"][2]["transition"]={"type":"hard_cut","duration":0.0}
+        result=timeline(plan(m),m["scenes"],18.75)
+        self.assertAlmostEqual(result[0]["end"],5.75,places=2)
+        self.assertAlmostEqual(result[1]["end"],12.75,places=2)
+        self.assertEqual(result[-1]["end"],18.75)
+        m["scenes"][1]["transition"]["duration"]=80
+        with self.assertRaises(AtmosphereError):timeline(plan(m),m["scenes"],18.75)
+
     def test_plan_does_not_approve_pixel_evidence_or_publishing(self):
         d=plan(make())
         self.assertEqual(d["director_review"],"PENDING")

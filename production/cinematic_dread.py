@@ -143,14 +143,30 @@ def timeline(direction: dict[str, Any], scenes: list[dict[str, Any]], duration: 
     duration = _positive_finite(duration, "narration duration")
     by_id = {s["scene_id"]: s for s in direction["scenes"]}
     raw = [_positive_finite(s.get("duration"), "scene duration") for s in scenes]
-    total = sum(raw)
+    # The renderer reserves the following scene's transition from the current
+    # scene's duration. Follow the SAME clock, not the untrimmed source sum.
+    kept = []
+    for index, seconds in enumerate(raw):
+        overlap = 0.0
+        if index < len(scenes) - 1:
+            next_transition = scenes[index + 1].get("transition") or {}
+            if not isinstance(next_transition, dict):
+                raise AtmosphereError("Malformed scene transition")
+            if str(next_transition.get("type", "crossfade")) != "hard_cut":
+                raw_overlap = next_transition.get("duration", 0.25)
+                if isinstance(raw_overlap, bool) or not isinstance(raw_overlap, (float, int)):
+                    raise AtmosphereError("Invalid scene transition duration")
+                overlap = max(float(raw_overlap), 1 / 60)
+            if overlap >= seconds:
+                raise AtmosphereError("Scene transition consumes the scene")
+        kept.append(seconds - overlap)
+    total = sum(kept)
     if total <= 0:
-        raise AtmosphereError("Empty timeline")
-    # Use proportional scene boundaries; alignment-locked scene spans can have
-    # small overlap budgets. All segment boundaries remain in the WAV duration.
+        raise AtmosphereError("Empty scene timeline")
+    # Small final rescaling is bounded to the actual audio master duration.
     t = 0.0
     result = []
-    for scene, seconds in zip(scenes, raw):
+    for scene, seconds in zip(scenes, kept):
         end = min(duration, t + duration * (seconds / total))
         level = by_id[scene["scene_id"]]["intensity"]
         result.append({"scene_id": scene["scene_id"], "start": round(t, 3),
