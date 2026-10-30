@@ -189,8 +189,8 @@ def validate_canonical_manifest(manifest: dict[str, Any], *, source_label: str =
         raise CanonicalConfigError(f"{source_label} must declare engine_profile={CANONICAL_PROFILE_ID!r}.")
     if manifest.get("engine_profile_fingerprint") != CANONICAL_PROFILE_FINGERPRINT:
         raise CanonicalConfigError(f"{source_label} has a non-canonical profile fingerprint.")
-    if manifest.get("master_prompt_version") != "7.1":
-        raise CanonicalConfigError(f"{source_label} must declare master_prompt_version='7.1'.")
+    if manifest.get("master_prompt_version") != "7.2":
+        raise CanonicalConfigError(f"{source_label} must declare master_prompt_version='7.2'.")
     if manifest.get("production_schema") != CANONICAL_SCHEMA_ID:
         raise CanonicalConfigError(f"{source_label} must declare production_schema={CANONICAL_SCHEMA_ID!r}.")
 
@@ -198,9 +198,9 @@ def validate_canonical_manifest(manifest: dict[str, Any], *, source_label: str =
     if differences:
         preview = "; ".join(differences[:8])
         suffix = f" (+{len(differences) - 8} more)" if len(differences) > 8 else ""
-        raise CanonicalConfigError(f"{source_label} deviates from the V7.1 profile: {preview}{suffix}")
+        raise CanonicalConfigError(f"{source_label} deviates from the V7.2 profile: {preview}{suffix}")
     return {
-        "status": "CANONICAL_CONFIG_V7_PASS",
+        "status": "CANONICAL_CONFIG_V7_2_PASS",
         "profile_id": CANONICAL_PROFILE_ID,
         "engine_version": CANONICAL_ENGINE_VERSION,
         "schema_id": CANONICAL_SCHEMA_ID,
