@@ -73,7 +73,7 @@ conectada:
 3. Um schema validado pelo código.
 4. Um registro de histórias, produções, componentes e artefatos.
 5. Um registro de origem, licença, hash e reutilização de cada mídia.
-6. Um adaptador real para Microsoft Edge online TTS.
+6. Um adaptador real para Piper local neural TTS.
 7. Um pipeline de narração por trechos, com parâmetros de prosódia e correção localizada.
 8. Gates independentes com evidências e bloqueios.
 9. Sistema de tentativas, checkpoints, idempotência e retomada.
@@ -131,7 +131,7 @@ manual nunca podem ser liberados por prompt ou por automação.
 9. O mesmo clipe ou derivação dele nunca pode aparecer em outro vídeo.
 10. Trilhas completas nunca podem ser reutilizadas entre vídeos.
 11. Vozes não podem imitar pessoas reais identificáveis.
-12. Somente Microsoft Edge online TTS é o provedor de voz desta versão.
+12. Somente Piper local neural TTS é o provedor de voz desta versão.
 13. Nenhum provedor alternativo pode ser usado silenciosamente como fallback.
 14. Componentes aprovados não podem ser alterados sem nova validação.
 15. Nota geral inferior a 8/10 bloqueia a produção.
@@ -232,7 +232,7 @@ responsabilidade e a interface, não a nomenclatura.
 6. Rights Ledger: registra origem, licença, autorização e evidência.
 7. Asset Registry: controla reserva, consumo, derivação e não reutilização.
 8. Visual Director: cria batidas e escolhe mídia fiel.
-9. Edge TTS Adapter: gera, testa, registra e sincroniza a narração.
+9. Piper TTS Adapter: gera, testa, registra e sincroniza a narração.
 10. Audio Director: trilha, efeitos, mixagem, loudness e testes.
 11. Caption Engine: transcrição do áudio final, alinhamento e karaokê.
 12. Packaging Engine: títulos, capas, descrição, CTA e promessa.
@@ -310,11 +310,11 @@ Antes de iniciar qualquer produção, valide:
 - integridade dos arquivos;
 - acesso ao Google Drive;
 - leitura, listagem, upload e download;
-- acesso ao Microsoft Edge online TTS;
-- endpoint Edge online TTS acessível;
-- conectividade válida sem expor segredo;
-- serviço online acessível;
-- limite operacional e disponibilidade do serviço;
+- acesso ao Piper local neural TTS;
+- modelo Piper local disponível;
+- modelo local carregável sem credencial;
+- modelo local disponível;
+- modelo local e dependências disponíveis;
 - limite operacional configurado;
 - modelos e voz aprovados disponíveis;
 - espaço local e remoto;
@@ -578,15 +578,15 @@ Ativo consumido não retorna ao banco operacional, mesmo que o vídeo nunca seja
 publicado depois da aprovação final.
 
 ======================================================================
-14. G4 — NARRAÇÃO COM MICROSOFT EDGE ONLINE TTS
+14. G4 — NARRAÇÃO COM PIPER LOCAL NEURAL TTS
 ======================================================================
 
 O provedor oficial e único desta versão é:
 
-MICROSOFT EDGE ONLINE TTS
+PIPER LOCAL NEURAL TTS
 
 Não use Google Cloud TTS, ElevenLabs, Kokoro, Piper, MeloTTS ou outro provedor como
-fallback automático nesta versão. Se o Edge TTS falhar, tente novamente de
+fallback automático nesta versão. Se o Piper TTS falhar, tente novamente de
 acordo com a política e bloqueie ou solicite reconexão. Trocar de provedor
 exige nova versão do motor e aprovação humana.
 
@@ -633,10 +633,10 @@ chave exposta no prompt, no código, no Drive ou no log.
 
 No pré-voo, confirme:
 
-- projeto Edge online TTS;
+- projeto Piper local TTS;
 - API Text-to-Speech habilitada;
 - credencial válida;
-- limite operacional e disponibilidade do serviço;
+- modelo local e dependências disponíveis;
 - limite de caracteres da produção;
 - limite financeiro configurado;
 - estimativa de custo;
@@ -796,7 +796,7 @@ Monte uma prévia com duração e estrutura completas, contendo:
 
 - vídeo;
 - cortes;
-- narração Edge TTS;
+- narração Piper TTS;
 - trilha;
 - efeitos;
 - silêncios;
@@ -1077,7 +1077,7 @@ G0 preflight;
 G1 story;
 G2 rights_originality_fiction;
 G3 visual_fidelity;
-G4 edge_tts_narration;
+G4 piper_tts_narration;
 G5 audio_mix;
 G6 captions_sync;
 G7 packaging;
@@ -1256,7 +1256,7 @@ Preserve em cada versão:
 - mapas;
 - pesquisas;
 - clipes e origens;
-- narração e metadados Edge TTS;
+- narração e metadados Piper TTS;
 - trilha e efeitos;
 - legendas;
 - prévia;
@@ -1347,7 +1347,7 @@ Crie e execute, no mínimo:
 - testes de schema;
 - testes de transição de estado;
 - testes de ID e idempotência;
-- testes do adaptador Edge TTS com resposta simulada e erro simulado;
+- testes do adaptador Piper TTS com resposta simulada e erro simulado;
 - teste real de pré-voo quando credencial estiver autorizada;
 - teste de parâmetros de prosódia inválido;
 - teste de pronúncia falha;
@@ -1384,7 +1384,7 @@ Considere o motor implementado somente se:
 [ ] Versões conflitantes foram arquivadas e desativadas.
 [ ] O schema é validado pelo código.
 [ ] Os estados e transições são controlados pelo código.
-[ ] O Edge TTS está conectado por adaptador real.
+[ ] O Piper TTS está conectado por adaptador real.
 [ ] Voz, modelo, parâmetros e custo possuem allowlist e registro.
 [ ] Não há credenciais expostas.
 [ ] O TTS usa parâmetros de prosódia, retries, geração por trechos e hashes.
@@ -1424,7 +1424,7 @@ Ao terminar cada execução, entregue:
 9. incidentes;
 10. artefatos e hashes;
 11. direitos e licenças verificadas;
-12. status Edge TTS;
+12. status Piper TTS;
 13. custo/quota verificados;
 14. sincronização do Drive;
 15. decisões humanas necessárias;
@@ -1450,7 +1450,7 @@ permissão, artefato ou integração essencial ausente.
 [ ] Direitos comprovados.
 [ ] Nenhum clipe usado ou derivado anteriormente.
 [ ] Fidelidade visual mínima 8/10.
-[ ] Edge TTS disponível.
+[ ] Piper TTS disponível.
 [ ] Voz aprovada e allowlist validada.
 [ ] Cota, billing e limite de custo verificados.
 [ ] Pronúncia e parâmetros de prosódia validados.
