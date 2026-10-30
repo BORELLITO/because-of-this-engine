@@ -34,17 +34,21 @@ PROFILE = {
         "flicker_strength": 0.003,
         "flicker_period_seconds": 4.8,
         "detail_strength": 0.16,
+        "motion_smoothing": True,
+        "interpolation_fps": 60,
         "vignette_angle": "PI/5.8",
     },
 }
 
 
-class VisualEffectsV731Tests(unittest.TestCase):
+class VisualEffectsV732Tests(unittest.TestCase):
     def test_active_profile_is_validated_and_normalized(self) -> None:
         value = validate_cinematic_suspense(PROFILE, require_active_profile=True)
         self.assertEqual(value["profile"], PROFILE_ID)
         self.assertEqual(value["profile_version"], PROFILE_VERSION)
         self.assertEqual(value["shadow_crush"], 0.045)
+        self.assertTrue(value["motion_smoothing"])
+        self.assertEqual(value["interpolation_fps"], 60)
 
     def test_renderer_contains_all_calibrated_dread_layers(self) -> None:
         graph = scene_filter(1080, 1920, 0.5, 0.5, PROFILE, duration=8.0)
@@ -56,6 +60,7 @@ class VisualEffectsV731Tests(unittest.TestCase):
         self.assertNotIn("preserve=lum", graph)
         self.assertIn("vignette=angle=PI/5.8", graph)
         self.assertIn("scale=1080:1920", graph)
+        self.assertIn("minterpolate=fps=60", graph)
 
     def test_legacy_profile_cannot_enter_active_production(self) -> None:
         legacy = {
