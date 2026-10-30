@@ -68,7 +68,7 @@ class AssetReuseBrainTests(unittest.TestCase):
             self.assertTrue(report["release_blocked"])
             self.assertTrue(report["legacy_baseline"])
 
-    def test_archived_historical_episode_is_ignored_for_new_episode(self) -> None:
+    def test_archived_historical_episode_still_blocks_new_episode(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             archived = write_manifest(
@@ -81,11 +81,10 @@ class AssetReuseBrainTests(unittest.TestCase):
             archived.write_text(json.dumps(value), encoding="utf-8")
             target = write_manifest(root, "because-of-this-episode-003", "h" * 64)
             report = audit(target, root)
-            self.assertEqual(report["status"], "ASSET_REUSE_PASS")
-            self.assertEqual(
-                report["ignored_historical_episode_ids"],
-                ["because-of-this-episode-002"],
-            )
+            self.assertEqual(report["status"], "BLOCKED")
+            self.assertTrue(report["release_blocked"])
+            self.assertEqual(report["ignored_historical_episode_ids"], [])
+            self.assertIn("because-of-this-episode-002", report["audited_historical_episode_ids"])
 
     def test_same_source_different_segment_is_blocked(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
