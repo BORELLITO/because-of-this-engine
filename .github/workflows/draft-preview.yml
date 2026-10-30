@@ -12,12 +12,20 @@ on:
         required: true
         default: "episodes/video-001/preview-manifest.json"
         type: string
+      tts_request:
+        description: "TTS request mode: RUN_ONCE permits one Gemini call; CACHE_ONLY never calls Gemini"
+        required: true
+        default: "CACHE_ONLY"
+        type: choice
+        options:
+          - RUN_ONCE
+          - CACHE_ONLY
 
 permissions:
   contents: read
 
 concurrency:
-  group: because-of-this-v7.3-charon-suspense-cinema-media-global
+  group: because-of-this-v7.3-charon-preview-${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}
   cancel-in-progress: true
 
 env:
@@ -125,10 +133,50 @@ jobs:
           print("CHARON_CACHE_REUSE_STATUS=" + status)
           PY
 
-      - name: Generate only missing Charon narration
+      - name: Recheck Charon cache immediately before provider request
+        if: env.CHARON_CACHE_HIT != 'true'
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python production/narration_cache.py \
+            --manifest "${{ inputs.manifest || 'episodes/video-001/preview-manifest.json' }}" --restore \
+            --status-file "${RUNNER_TEMP}/v731-cache-recheck.json"
+          python - "${RUNNER_TEMP}/v731-cache-recheck.json" <<'PY'
+          import json, os, sys
+          status=json.load(open(sys.argv[1], encoding="utf-8"))["status"]
+          if status not in {"NARRATION_CACHE_HIT","NARRATION_CACHE_MISS"}:
+              raise SystemExit("Unexpected Charon cache recheck status")
+          if status == "NARRATION_CACHE_HIT":
+              with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
+                  env.write("CHARON_CACHE_HIT=true\n")
+          print("CHARON_CACHE_RECHECK_STATUS=" + status)
+          PY
+
+      - name: Arm one provider request or fail closed
+        if: env.CHARON_CACHE_HIT != 'true'
+        env:
+          TTS_REQUEST: ${{ inputs.tts_request || 'CACHE_ONLY' }}
+        run: |
+          set -euo pipefail
+          if [ "${TTS_REQUEST}" != "RUN_ONCE" ]; then
+            echo "CHARON_PROVIDER_REQUEST_BLOCKED_CACHE_ONLY"
+            echo "No verified Drive cache exists; select RUN_ONCE explicitly to authorize one Gemini request."
+            exit 1
+          fi
+          echo "CHARON_PROVIDER_REQUEST_ALLOWED=true" >> "${GITHUB_ENV}"
+          echo "CHARON_PROVIDER_REQUEST_BUDGET=1" >> "${GITHUB_ENV}"
+          echo "CHARON_PROVIDER_REQUEST_ARMED=one"
+          echo "CHARON_PROVIDER_REQUEST_MODE=RUN_ONCE"
+
+      - name: Generate at most one missing Charon narration
+        if: env.CHARON_CACHE_HIT != 'true' && env.CHARON_PROVIDER_REQUEST_ALLOWED == 'true'
         if: env.CHARON_CACHE_HIT != 'true'
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_TTS_REQUEST_BUDGET: "1"
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/gemini_tts.py \
