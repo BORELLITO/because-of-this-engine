@@ -1496,3 +1496,5 @@ graphics/text is rejected by the visual gates.
 The canonical narration provider is Google Cloud Text-to-Speech Chirp 3 HD,
 voice en-US-Chirp3-HD-Charon. There is no silent fallback to Piper, Gemini,
 ElevenLabs, or another provider.
+
+GOOGLE CLOUD TTS CHIRP 3 HD CHARON
