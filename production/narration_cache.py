@@ -116,6 +116,7 @@ def cache_key(
     style: str,
     tts_script_text: str | None = None,
     normalization_version: str = NORMALIZATION_VERSION,
+    generation_context: dict[str, Any] | None = None,
 ) -> str:
     payload = {
         "schema_version": CACHE_SCHEMA_VERSION,
@@ -126,6 +127,10 @@ def cache_key(
         "style": str(style).strip(),
         "normalization_version": str(normalization_version).strip(),
     }
+    if generation_context is not None:
+        payload["generation_context_sha256"] = hashlib.sha256(
+            json.dumps(generation_context, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+        ).hexdigest()
     if tts_script_text is not None and tts_script_text != script_text:
         payload["tts_script_sha256"] = hashlib.sha256(
             tts_script_text.encode("utf-8")
@@ -141,19 +146,42 @@ def manifest_cache_spec(manifest_path: Path) -> dict[str, Any]:
     voice = manifest.get("voice")
     if not isinstance(voice, dict):
         raise NarrationCacheError("Manifest voice profile is missing.")
-    required = ("model", "voice", "language", "style")
-    missing = [key for key in required if not str(voice.get(key, "")).strip()]
-    if missing:
-        raise NarrationCacheError("Manifest voice is missing: " + ", ".join(missing))
+    is_piper = voice.get("provider") == "piper_tts_local"
+    model = voice.get("model") or (voice.get("model_or_voice_type") if is_piper else None)
+    voice_name = voice.get("voice_name") if is_piper else voice.get("voice")
+    language = voice.get("language_code") if is_piper else voice.get("language")
+    style = voice.get("style")
+    if not all(isinstance(v, str) and v.strip() for v in (model, voice_name, language, style)):
+        raise NarrationCacheError("Manifest cache voice identity is incomplete")
     text = _script_text(manifest_path, manifest)
     tts_text = _tts_script_text(manifest_path, manifest, text)
+    generation_context = None
+    if is_piper:
+        # NEVER accept a Piper Drive cache key without hashing the actual local
+        # model and config. A label such as ryan-high alone is insufficient.
+        directory = os.environ.get("PIPER_MODEL_DIR", "").strip()
+        if not directory:
+            raise NarrationCacheError("PIPER_MODEL_DIR is required to fingerprint Piper cache inputs")
+        model_path = Path(directory) / (str(voice_name) + ".onnx")
+        config_path = Path(directory) / (str(voice_name) + ".onnx.json")
+        if not model_path.is_file() or not config_path.is_file():
+            raise NarrationCacheError("Piper model and config must exist before cache restore")
+        generation_context = {
+            "provider": voice["provider"],
+            "model_sha256": sha256_file(model_path),
+            "model_config_sha256": sha256_file(config_path),
+            "voice": voice,
+            "narration_beats": (manifest.get("narration") or {}).get("beats", []),
+            "piper_cache_contract": 2,
+        }
     key = cache_key(
         text,
-        model=str(voice["model"]),
-        voice=str(voice["voice"]),
-        language=str(voice["language"]),
-        style=str(voice["style"]),
+        model=str(model),
+        voice=str(voice_name),
+        language=str(language),
+        style=str(style),
         tts_script_text=tts_text,
+        generation_context=generation_context,
     )
     audio = manifest.get("audio") or {}
     audio_value = audio.get("path")
@@ -169,10 +197,14 @@ def manifest_cache_spec(manifest_path: Path) -> dict[str, Any]:
         "tts_script_text": tts_text,
         "script_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
         "tts_script_sha256": (hashlib.sha256(tts_text.encode("utf-8")).hexdigest() if tts_text != text else None),
-        "model": str(voice["model"]),
-        "voice": str(voice["voice"]),
-        "language": str(voice["language"]),
-        "style": str(voice["style"]),
+        "model": str(model),
+        "voice": str(voice_name),
+        "language": str(language),
+        "style": str(style),
+        "generation_context_sha256": (
+            hashlib.sha256(json.dumps(generation_context, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")).hexdigest()
+            if generation_context is not None else None
+        ),
         "normalization_version": NORMALIZATION_VERSION,
         "cache_key": key,
         "audio_path": audio_path,
@@ -208,6 +240,8 @@ def validate_entry(spec: dict[str, Any], audio_path: Path, sidecar_path: Path) -
         "normalization_version": spec["normalization_version"],
         "cache_schema_version": CACHE_SCHEMA_VERSION,
     }
+    if spec.get("generation_context_sha256"):
+        expected["generation_context_sha256"] = spec["generation_context_sha256"]
     if spec.get("tts_script_sha256"):
         expected["tts_script_sha256"] = spec["tts_script_sha256"]
     mismatches = [
@@ -254,6 +288,8 @@ def annotate_local(spec: dict[str, Any]) -> dict[str, Any]:
         "sha256": sha256_file(audio_path),
         "cache_status": "VERIFIED",
     })
+    if spec.get("generation_context_sha256"):
+        metadata["generation_context_sha256"] = spec["generation_context_sha256"]
     if spec.get("tts_script_sha256"):
         metadata["tts_script_sha256"] = spec["tts_script_sha256"]
     spec["sidecar_path"].parent.mkdir(parents=True, exist_ok=True)
@@ -366,7 +402,12 @@ def store_to_drive(spec: dict[str, Any], root_folder_id: str | None = None) -> d
         if existing:
             if int(existing.get("size", -1)) != path.stat().st_size:
                 raise NarrationCacheError(f"Refusing to overwrite a different cache entry: {name}")
-            uploaded.append({"id": existing["id"], "name": name, "status": "EXISTS"})
+            # A same-sized corrupted object must not be treated as an exact cache
+            # match. This is an immutable content-addressed record, not a name.
+            expected_md5 = __import__("hashlib").md5(path.read_bytes()).hexdigest()
+            if str(existing.get("md5Checksum") or "").lower() != expected_md5:
+                raise NarrationCacheError(f"Drive cache MD5 mismatch: {name}")
+            uploaded.append({"id": existing["id"], "name": name, "status": "EXISTS_VERIFIED"})
             continue
         media = MediaFileUpload(str(path), mimetype=mime_type, resumable=True)
         remote = drive.files().create(

@@ -23,7 +23,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: because-of-this-v7-${{ inputs.manifest }}-${{ inputs.mode }}
+  group: because-of-this-v7-media-global
   cancel-in-progress: false
 
 env:
@@ -100,7 +100,27 @@ jobs:
           sudo apt-get update && sudo apt-get install -y ffmpeg
           PYTHONPATH=. python production/piper_tts.py --manifest "${{ inputs.manifest }}" --preflight
 
-      - name: Generate narration with Piper TTS
+      - name: Restore Piper narration from exact-hash Drive cache
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python production/narration_cache.py \
+            --manifest "${{ inputs.manifest }}" --restore \
+            --status-file "${RUNNER_TEMP}/piper-cache-state.json"
+          python - "${RUNNER_TEMP}/piper-cache-state.json" <<'PY'
+          import json, os, sys
+          state=json.load(open(sys.argv[1], encoding="utf-8"))["status"]
+          if state not in {"NARRATION_CACHE_HIT","NARRATION_CACHE_MISS"}:
+              raise SystemExit("Invalid cache state")
+          with open(os.environ["GITHUB_ENV"],"a",encoding="utf-8") as f:
+              f.write("PIPER_CACHE_HIT=" + ("true" if state=="NARRATION_CACHE_HIT" else "false") + "\n")
+          PY
+
+      - name: Generate only missing Piper narration
+        if: env.PIPER_CACHE_HIT != 'true'
         run: |
           set -euo pipefail
           EPISODE_DIR="$(dirname "${{ inputs.manifest }}")"
@@ -108,6 +128,16 @@ jobs:
             --manifest "${{ inputs.manifest }}" \
             --input "${EPISODE_DIR}/script.txt" \
             --output-dir "${EPISODE_DIR}/audio"
+
+      - name: Persist generated Piper narration and provenance in Drive cache
+        if: env.PIPER_CACHE_HIT != 'true'
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          PYTHONPATH=. python production/narration_cache.py \
+            --manifest "${{ inputs.manifest }}" --store
       - name: Install independent Vosk alignment models
         run: |
           set -euo pipefail
@@ -244,7 +274,6 @@ jobs:
           PY
 
       - name: Run V7 release gates
-        env:
         run: |
           GATE_MODE=preview
           if [ "${{ inputs.mode }}" = "final" ]; then GATE_MODE=production; fi
@@ -266,7 +295,8 @@ jobs:
             --collection "VIDEOS V7" \
             --delivery-name "${{ inputs.manifest }}-${{ inputs.mode }}" \
             --job-id "${{ github.run_id }}" \
-            --path "${EPISODE_DIR}/rendered" --path "${{ inputs.manifest }}" \
+            --path "${EPISODE_DIR}/rendered" --path "${EPISODE_DIR}/captions" \
+            --path "${EPISODE_DIR}/audio/narration.wav" --path "${{ inputs.manifest }}" \
             --receipt "${RUNNER_TEMP}/v7-drive-delivery.json"
 
       - name: Manual-publication handoff

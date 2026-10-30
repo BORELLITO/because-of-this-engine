@@ -276,12 +276,10 @@ def audit(
         for path in manifests
         if _norm(_manifest(path).get("lifecycle_status")) == "archived_historical"
     }
-    all_records = [
-        record
-        for record in manifest_records + registry_records
-        if record["episode_id"] == target_id
-        or record["episode_id"] not in archived_episode_ids
-    ]
+    # An archived story is not permission to reuse a previously consumed source.
+    # Keep even archival records in the global source history. Legacy baseline
+    # collisions remain explicitly recorded and release-blocked below.
+    all_records = manifest_records + registry_records
     target_records = [record for record in manifest_records if record["episode_id"] == target_id]
     if not target_records:
         raise AssetReuseBrainError("Target manifest contains no usable video assets.")
@@ -376,7 +374,8 @@ def audit(
         "within_episode_duplicates": within_episode,
         "cross_episode_duplicates": unique_cross,
         "legacy_baseline": legacy_baseline,
-        "ignored_historical_episode_ids": sorted(archived_episode_ids - {target_id}),
+        "ignored_historical_episode_ids": [],
+        "audited_historical_episode_ids": sorted(archived_episode_ids - {target_id}),
         "retired_source_assets": sorted({
             item["key"] for item in unique_cross if item["key_type"] == "source_asset"
         }),
