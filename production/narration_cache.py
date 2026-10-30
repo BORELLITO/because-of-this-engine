@@ -402,7 +402,12 @@ def store_to_drive(spec: dict[str, Any], root_folder_id: str | None = None) -> d
         if existing:
             if int(existing.get("size", -1)) != path.stat().st_size:
                 raise NarrationCacheError(f"Refusing to overwrite a different cache entry: {name}")
-            uploaded.append({"id": existing["id"], "name": name, "status": "EXISTS"})
+            # A same-sized corrupted object must not be treated as an exact cache
+            # match. This is an immutable content-addressed record, not a name.
+            expected_md5 = __import__("hashlib").md5(path.read_bytes()).hexdigest()
+            if str(existing.get("md5Checksum") or "").lower() != expected_md5:
+                raise NarrationCacheError(f"Drive cache MD5 mismatch: {name}")
+            uploaded.append({"id": existing["id"], "name": name, "status": "EXISTS_VERIFIED"})
             continue
         media = MediaFileUpload(str(path), mimetype=mime_type, resumable=True)
         remote = drive.files().create(

@@ -274,7 +274,6 @@ jobs:
           PY
 
       - name: Run V7 release gates
-        env:
         run: |
           GATE_MODE=preview
           if [ "${{ inputs.mode }}" = "final" ]; then GATE_MODE=production; fi

@@ -37,10 +37,24 @@ jobs:
             tests.test_reuse_first_v72 \
             tests.test_drive_reuse_receipt_v72 \
             tests.test_workflow_safety_v72 \
+            tests.test_release_identity_v72 \
             tests.test_v72_free_integrations \
             tests.test_asset_reuse_brain \
             tests.test_audio_reuse_v72 \
             tests.test_narration_cache
+      - name: Broader caption, fingerprint, release and safety regressions
+        run: |
+          PYTHONPATH=. python -m unittest -v \
+            tests.test_caption_alignment \
+            tests.test_caption_alignment_grammar \
+            tests.test_caption_quality \
+            tests.test_video_fingerprint \
+            tests.test_golden_frame_regression \
+            tests.test_release_boundary \
+            tests.test_storage_policy \
+            tests.test_media_anomaly \
+            tests.test_narrative_anchor_gate
+
       - name: V7.1 canonical tests (do not downgrade)
         run: PYTHONPATH=. python -m unittest discover -s tests -p 'test_v7*.py' -v
       - name: Existing preview reuse-first plan, no regeneration

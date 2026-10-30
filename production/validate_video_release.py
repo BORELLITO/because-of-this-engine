@@ -86,6 +86,11 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
     editorial_status = editorial.get("status", "NOT_DECLARED")
     if mode == "final" and editorial_status != "PASS":
         raise VideoContractError("Final release requires editorial_qa.status=PASS.")
+    from production.release_integrity_v72 import audit_release_identities
+    try:
+        identity = audit_release_identities(manifest_path)
+    except ValueError as exc:
+        raise VideoContractError(f"Release identity gates failed: {exc}") from exc
     asset_hashes = [str(scene["asset"]["sha256"]).lower() for scene in manifest["scenes"]]
     editorial_pass = editorial_status == "PASS"
     return {
@@ -113,8 +118,10 @@ def validate(manifest_path: Path, mode: str) -> dict[str, Any]:
         "caption_source": str(spec["caption_path"]),
         "caption_gate": caption_report["status"],
         "caption_timing_claim": caption_report["timing_claim"],
-        "asset_reuse_gate": "PASS",
-        "provenance_gate": "PASS",
+        "asset_reuse_gate": identity["asset_reuse_gate"],
+        "audio_reuse_gate": identity["audio_reuse_gate"],
+        "identity_gate_evidence": identity,
+        "provenance_gate": "METADATA_ONLY_RELEASE_NOT_CLEARED" if mode == "draft-preview" else "MANIFEST_PROVENANCE_CHECKED",
         "visual_truth_gate": "PASS" if editorial_pass else "CONTRACT_ONLY",
         "semantic_match_gate": "PASS" if editorial_pass else "ADVISORY",
         "transition_gate": "PASS",
