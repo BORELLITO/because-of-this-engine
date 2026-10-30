@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""V7.1 canonical Piper TTS production profile for Because Of This.
+"""V7.2 canonical Google Cloud TTS Chirp 3 HD production profile for Because Of This.
 
 This module is the only active configuration authority.  The former Gemini
 profile is retained only in Git history/rollback documentation and is not
@@ -14,8 +14,8 @@ import json
 from pathlib import Path
 from typing import Any
 
-CANONICAL_PROFILE_ID = "because-of-this-v7-piper-tts-2026-10"
-CANONICAL_ENGINE_VERSION = "7.1"
+CANONICAL_PROFILE_ID = "because-of-this-v7.2-charon-cloud-tts-2026-10"
+CANONICAL_ENGINE_VERSION = "7.2"
 CANONICAL_SCHEMA_ID = "because-of-this://schemas/production-record/3.0.0"
 
 CANONICAL_PROFILE: dict[str, Any] = {
@@ -28,21 +28,21 @@ CANONICAL_PROFILE: dict[str, Any] = {
         "duration_max_seconds": 75,
     },
     "voice": {
-        "provider": "piper_tts_local",
+        "provider": "google_cloud_tts",
         "language": "en-US",
         "language_code": "en-US",
-        "voice_name": "en_US-ryan-high",
-        "voice": "en_US-ryan-high",
-        "model_or_voice_type": "piper_neural_high",
+        "voice_name": "en-US-Chirp3-HD-Charon",
+        "voice": "en-US-Chirp3-HD-Charon",
+        "model_or_voice_type": "chirp3_hd",
         "ssml_gender": "MALE",
         "sample_rate_hz": 24000,
         "encoding": "LINEAR16",
-        "speaking_rate": 0.68,
+        "speaking_rate": 0.88,
         "pitch": 0.0,
         "volume_gain_db": 0.0,
         "style": (
-            "Grave American English narration. Controlled cinematic suspense, "
-            "clear diction, restrained intensity, intimate consequence, never theatrical."
+            "Low, controlled American English narration with informative clarity, "
+            "restrained cinematic suspense, intimate consequence, never theatrical."
         ),
     },
     "brand": {
