@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: because-of-this-draft-preview-${{ inputs.manifest }}
+  group: because-of-this-v7-media-global
   cancel-in-progress: false
 
 env:
@@ -21,7 +21,47 @@ env:
   PYTHONUNBUFFERED: "1"
 
 jobs:
+  preflight-reuse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      existing_preview: ${{ steps.reuse_check.outputs.reuse }}
+    steps:
+      - name: Checkout for read-only reuse check
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Install lightweight Drive metadata dependencies
+        run: |
+          python -m pip install google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib
+      - name: Reuse existing MP4 and WAV if every code/input SHA and Drive receipt matches
+        id: reuse_check
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+          if PYTHONPATH=. python experimental/v72/reuse_first.py \
+            --manifest episodes/video-001/preview-manifest.json \
+            --script episodes/video-001/script.txt \
+            --catalog experimental/v72/verified_preview_001.json \
+            --report "${RUNNER_TEMP}/v72-reuse-plan.json"; then
+            PYTHONPATH=. python experimental/v72/verify_drive_receipt.py \
+              --catalog experimental/v72/verified_preview_001.json
+            echo "reuse=true" >> "${GITHUB_OUTPUT}"
+            echo "EXISTING_PREVIEW_REUSED_WITHOUT_TTS_OR_RENDER"
+            echo "https://drive.google.com/file/d/1C3mkxkKy1uZh8pBKlDOmaaRr4Gk_DDVR/view"
+          else
+            echo "reuse=false" >> "${GITHUB_OUTPUT}"
+            echo "Inputs changed: canonical draft render job will run with cache checks"
+          fi
+
   draft-preview:
+    needs: preflight-reuse
+    if: needs.preflight-reuse.outputs.existing_preview != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -67,15 +107,50 @@ jobs:
           python -m piper.download_voices en_US-ryan-high --data-dir "${PIPER_MODEL_DIR}"
           echo "PIPER_MODEL_DIR=${PIPER_MODEL_DIR}" >> "${GITHUB_ENV}"
 
-      - name: Piper TTS local model preflight and narration
+      - name: Piper TTS local model preflight
         run: |
           set -euo pipefail
           sudo apt-get update && sudo apt-get install -y ffmpeg
           PYTHONPATH=. python production/piper_tts.py --manifest "${{ inputs.manifest }}" --preflight
+
+      - name: Restore identical existing Piper narration from Drive cache
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python production/narration_cache.py \
+            --manifest "${{ inputs.manifest }}" --restore \
+            --status-file "${RUNNER_TEMP}/v72-cache-result.json"
+          python - "${RUNNER_TEMP}/v72-cache-result.json" <<'PY'
+          import json, os, sys
+          status=json.load(open(sys.argv[1], encoding="utf-8"))["status"]
+          if status not in {"NARRATION_CACHE_HIT","NARRATION_CACHE_MISS"}:
+              raise SystemExit("Unexpected Piper cache status")
+          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
+              env.write("PIPER_CACHE_HIT=" + ("true" if status=="NARRATION_CACHE_HIT" else "false") + "\n")
+          print("PIPER_CACHE_REUSE_STATUS=" + status)
+          PY
+
+      - name: Generate only missing Piper narration
+        if: env.PIPER_CACHE_HIT != 'true'
+        run: |
+          set -euo pipefail
           PYTHONPATH=. python production/piper_tts.py \
             --manifest "${{ inputs.manifest }}" \
             --input "episodes/video-001/script.txt" \
             --output-dir "episodes/video-001/audio"
+
+      - name: Store newly generated Piper narration in verified Drive cache
+        if: env.PIPER_CACHE_HIT != 'true'
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          PYTHONPATH=. python production/narration_cache.py \
+            --manifest "${{ inputs.manifest }}" --store
       - name: Install independent Vosk alignment models
         run: |
           set -euo pipefail
@@ -188,6 +263,7 @@ jobs:
             --job-id "draft-preview-${{ github.run_id }}" \
             --path "episodes/video-001/rendered" \
             --path "episodes/video-001/audio/narration.wav" \
+            --path "episodes/video-001/captions" \
             --path "${{ inputs.manifest }}" \
             --receipt "${RUNNER_TEMP}/draft-preview-drive-delivery.json"
 

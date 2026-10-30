@@ -35,6 +35,8 @@ jobs:
         run: |
           PYTHONPATH=. python -m unittest -v \
             tests.test_reuse_first_v72 \
+            tests.test_drive_reuse_receipt_v72 \
+            tests.test_workflow_safety_v72 \
             tests.test_v72_free_integrations \
             tests.test_asset_reuse_brain \
             tests.test_audio_reuse_v72 \
