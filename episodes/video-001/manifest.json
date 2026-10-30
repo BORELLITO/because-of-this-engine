@@ -13,8 +13,8 @@
     "duration_max_seconds": 75
   },
   "target_runtime_seconds": 64,
-  "engine_profile": "because-of-this-v7.3.1-charon-cinematic-dread-2026-10",
-  "engine_profile_fingerprint": "308638b58df3ad96efe04df6ad3bad2643826db9ca082215220e709881d2d385",
+  "engine_profile": "because-of-this-v7.3.2-charon-cinematic-dread-smooth-2026-10",
+  "engine_profile_fingerprint": "ebf1cb98d926fcbde5bcfcee7abf1c799a224b777e1fa9f50b0c2c3f482f89c2",
   "master_prompt_version": "7.2",
   "master_prompt_sha256": "c0bd045da0898848ff11aaba9ff2de9e27be8041f559b37a80f3f99ada1127c8",
   "production_schema": "because-of-this://schemas/production-record/3.0.0",
@@ -393,7 +393,7 @@
       "alignment": 2,
       "margin_l": 100,
       "margin_r": 100,
-      "margin_v": 320,
+      "margin_v": 220,
       "encoding": 1
     }
   },
@@ -1412,7 +1412,7 @@
     "cinematic_suspense": {
       "enabled": true,
       "profile": "cinematic_dread_v73",
-      "profile_version": "7.3.1",
+      "profile_version": "7.3.2",
       "reference_basis": "cinematic_dread_v73_before_after_comparison",
       "cool_shadows": 0.04,
       "warm_highlights": 0.014,
@@ -1424,6 +1424,8 @@
       "flicker_strength": 0.003,
       "flicker_period_seconds": 4.8,
       "detail_strength": 0.16,
+      "motion_smoothing": true,
+      "interpolation_fps": 60,
       "vignette_angle": "PI/5.8"
     }
   },
@@ -1489,9 +1491,9 @@
     }
   },
   "preview_revision": "v7.3.1-charon-cinematic-dread-effects",
-  "preview_revision_note": "Same episode identity retained to preserve asset provenance and no-reuse enforcement; suspense soundtrack and cinematic motion are the V7.3 candidate changes.",
+  "preview_revision_note": "Technical revision only: restored the fine-cut caption anchor and added motion interpolation for fluid pans; voice, music, story, clips and visual grade remain unchanged.",
   "final_revision": "v7.3.1-charon-cinematic-dread-effects",
-  "final_revision_note": "Creative preview approved by the user; final production gates and provenance were explicitly recorded for the approved master.",
+  "final_revision_note": "Technical revision of the approved master: fine-cut caption position restored and source-motion interpolation added; voice, music, story, clips and visual grade are preserved.",
   "runtime_artifacts": {
     "preview_approval": "rendered/preview-approval.json"
   },
