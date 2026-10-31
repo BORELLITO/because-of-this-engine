@@ -613,16 +613,14 @@
         "role": "literal",
         "required": {
           "objects": [
-            "archivist",
-            "digitizer",
-            "security tape"
+            "security tape",
+            "digitizer"
           ],
           "actions": [
             "loading",
             "digitizing"
           ],
           "environments": [
-            "archive room",
             "interior"
           ]
         },
@@ -639,8 +637,8 @@
         ],
         "narrative_anchors": {
           "direct_required": [
-            "archivist",
-            "digitizer"
+            "digitizer",
+            "security_tape"
           ],
           "minimum_direct": 2
         }
@@ -746,15 +744,13 @@
         "role": "literal",
         "required": {
           "objects": [
-            "security tape",
-            "reel",
-            "station archive"
+            "film reel",
+            "tape reel"
           ],
           "actions": [
-            "spinning"
+            "rotating"
           ],
           "environments": [
-            "archive room",
             "interior"
           ]
         },
@@ -771,7 +767,7 @@
         ],
         "narrative_anchors": {
           "direct_required": [
-            "security tape",
+            "security_tape",
             "reel"
           ],
           "minimum_direct": 2
@@ -877,14 +873,14 @@
         "required": {
           "objects": [
             "monitor",
-            "timeline",
-            "timecode"
+            "editing timeline",
+            "waveform"
           ],
           "actions": [
-            "stopping"
+            "editing",
+            "playback"
           ],
           "environments": [
-            "archive room",
             "interior"
           ]
         },
@@ -1011,14 +1007,14 @@
         "required": {
           "objects": [
             "monitor",
-            "timeline",
+            "editing timeline",
             "waveform"
           ],
           "actions": [
-            "extending"
+            "extending",
+            "scrubbing"
           ],
           "environments": [
-            "archive room",
             "interior"
           ]
         },
@@ -1144,15 +1140,15 @@
         "role": "literal",
         "required": {
           "objects": [
-            "platform clocks",
-            "train platform"
+            "station clock",
+            "information sign"
           ],
           "actions": [
-            "stopping"
+            "stationary"
           ],
           "environments": [
-            "train platform",
-            "night"
+            "train station",
+            "interior"
           ]
         },
         "preferred": {
@@ -1168,8 +1164,8 @@
         ],
         "narrative_anchors": {
           "direct_required": [
-            "platform clocks",
-            "train platform"
+            "platform_clocks",
+            "train_platform"
           ],
           "minimum_direct": 2
         }
@@ -1273,15 +1269,15 @@
         "role": "literal",
         "required": {
           "objects": [
-            "maintenance door",
-            "metal frame"
+            "door",
+            "doorway"
           ],
           "actions": [
             "opening"
           ],
           "environments": [
-            "train station",
-            "interior"
+            "interior",
+            "doorway"
           ]
         },
         "preferred": {
@@ -1297,8 +1293,8 @@
         ],
         "narrative_anchors": {
           "direct_required": [
-            "maintenance door",
-            "metal frame"
+            "maintenance_door",
+            "metal_frame"
           ],
           "minimum_direct": 2
         }
@@ -1407,16 +1403,15 @@
         "required": {
           "objects": [
             "blueprint",
-            "sealed wall",
-            "doorway"
+            "architectural drawings"
           ],
           "actions": [
             "unfolding",
-            "revealing"
+            "marking"
           ],
           "environments": [
-            "archive room",
-            "interior"
+            "interior",
+            "desk"
           ]
         },
         "preferred": {
@@ -1432,10 +1427,9 @@
         ],
         "narrative_anchors": {
           "direct_required": [
-            "blueprint",
-            "sealed wall"
+            "blueprint"
           ],
-          "minimum_direct": 2
+          "minimum_direct": 1
         }
       },
       "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
@@ -1539,16 +1533,15 @@
         "role": "literal",
         "required": {
           "objects": [
-            "lamp",
-            "figure",
-            "platform"
+            "flashlight",
+            "person"
           ],
           "actions": [
-            "crossing",
-            "carrying"
+            "holding",
+            "looking"
           ],
           "environments": [
-            "train platform",
+            "dark interior",
             "night"
           ]
         },
@@ -1566,7 +1559,7 @@
         "narrative_anchors": {
           "direct_required": [
             "lamp",
-            "figure"
+            "person"
           ],
           "minimum_direct": 2
         }
@@ -1676,17 +1669,17 @@
         "role": "literal",
         "required": {
           "objects": [
-            "security camera",
-            "figure",
-            "lens"
+            "camcorder",
+            "person",
+            "doorway"
           ],
           "actions": [
-            "stopping",
+            "filming",
             "looking"
           ],
           "environments": [
-            "train platform",
-            "night"
+            "night exterior",
+            "doorway"
           ]
         },
         "preferred": {
@@ -1702,8 +1695,8 @@
         ],
         "narrative_anchors": {
           "direct_required": [
-            "security camera",
-            "figure"
+            "security_camera",
+            "person"
           ],
           "minimum_direct": 2
         }
@@ -1818,17 +1811,16 @@
         "role": "literal",
         "required": {
           "objects": [
-            "figure",
-            "shadow",
-            "camera"
+            "shadows",
+            "wall"
           ],
           "actions": [
-            "standing",
-            "freezing"
+            "moving",
+            "crossing"
           ],
           "environments": [
-            "train platform",
-            "night"
+            "exterior",
+            "daylight"
           ]
         },
         "preferred": {
@@ -1957,12 +1949,12 @@
         "role": "explanatory",
         "required": {
           "objects": [
-            "live monitor",
-            "lamp",
-            "sealed wall"
+            "monitors",
+            "control room",
+            "screens"
           ],
           "actions": [
-            "glowing"
+            "monitoring"
           ],
           "environments": [
             "control room",
@@ -1982,8 +1974,8 @@
         ],
         "narrative_anchors": {
           "direct_required": [
-            "live monitor",
-            "lamp"
+            "live_monitor",
+            "interior"
           ],
           "minimum_direct": 2
         }
@@ -2098,11 +2090,12 @@
             "hand"
           ],
           "actions": [
-            "holding"
+            "holding",
+            "adjusting"
           ],
           "environments": [
-            "train platform",
-            "night"
+            "interior",
+            "camera close-up"
           ]
         },
         "preferred": {
