@@ -30,7 +30,8 @@ PROVIDER = "gemini_tts"
 VOICE_NAME = "Charon"
 DEFAULT_MODEL = "gemini-3.8-flash-tts"
 DEFAULT_SAMPLE_RATE = 24000
-MAX_ATTEMPTS = 2
+# One provider request per workflow run: retries can consume daily Gemini quota.
+MAX_ATTEMPTS = 1
 TRANSIENT_HTTP = {408, 429, 500, 502, 503, 504}
 MIN_NARRATION_SECONDS = 60.0
 MAX_NARRATION_SECONDS = 75.0
@@ -132,11 +133,11 @@ def _request_json(url: str, body: dict[str, Any]) -> dict[str, Any]:
             return payload
         except urllib.error.HTTPError as exc:
             detail = exc.read(4096).decode("utf-8", errors="replace")
-            last_error = GeminiTTSError(f"Gemini TTS HTTP {exc.code}: {detail[:600]}")
+            last_error = GeminiTTSError(f"Gemini TTS HTTP {exc.code}: {detail[:600]} (automatic retry disabled to protect provider quota)")
             if exc.code not in TRANSIENT_HTTP or attempt == MAX_ATTEMPTS:
                 raise last_error from exc
         except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
-            last_error = GeminiTTSError(f"Gemini TTS request failed: {exc}")
+            last_error = GeminiTTSError(f"Gemini TTS request failed (single-attempt policy): {exc}")
             if attempt == MAX_ATTEMPTS:
                 raise last_error from exc
         time.sleep(2 ** (attempt - 1))
@@ -280,6 +281,11 @@ def synthesize_chunks(chunks: list[dict[str, Any]], output_dir: Path, profile: d
     """
     if not chunks:
         raise GeminiTTSError("at least one narration beat is required")
+    request_budget = os.environ.get("GEMINI_TTS_REQUEST_BUDGET", "1").strip()
+    if request_budget != "1":
+        raise GeminiTTSError(
+            "GEMINI_TTS_REQUEST_BUDGET must be exactly 1; refusing to issue multiple provider requests"
+        )
     output_dir.mkdir(parents=True, exist_ok=True)
     normalized: list[dict[str, Any]] = []
     for index, chunk in enumerate(chunks, start=1):

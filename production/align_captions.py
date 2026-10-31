@@ -33,13 +33,22 @@ ONES = [
     "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
     "sixteen", "seventeen", "eighteen", "nineteen",
 ]
-TENS = ["", "", "twenty", "thirty", "forty", "fifty"]
+TENS = [
+    "", "", "twenty", "thirty", "forty", "fifty",
+    "sixty", "seventy", "eighty", "ninety",
+]
 
 
 def _number_words(value: int) -> list[str]:
+    # Years are commonly spoken as two natural pairs (for example,
+    # 1989 -> "nineteen eighty nine"). Keep the canonical number in the
+    # caption while matching the real Vosk tokens emitted by the WAV.
+    if 1000 <= value <= 2099:
+        century, remainder = divmod(value, 100)
+        return _number_words(century) + ([] if remainder == 0 else _number_words(remainder))
     if 0 <= value < len(ONES):
         return [ONES[value]]
-    if 20 <= value < 60:
+    if 20 <= value < 100:
         return [TENS[value // 10]] + ([] if value % 10 == 0 else [ONES[value % 10]])
     return [str(value)]
 
@@ -68,16 +77,26 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
             index += 3
             continue
         token = _normalise(raw[index])
+        if token.isdigit() and len(token) == 4 and 1000 <= int(token) <= 2099:
+            year_words = _number_words(int(token))
+            result.append((raw[index], [
+                [token],
+                year_words,
+                ["and"] + year_words,
+            ]))
+            index += 1
+            continue
         if token:
             short_word_variants = {
                 "a": [["a"], ["uh"], ["ah"]],
                 "an": [["an"], ["un"]],
                 "the": [["the"], ["uh"], ["thuh"], ["thee"]],
+                "then": [["then"], ["than"]],
                 "to": [["to"], ["two"], ["tuh"]],
                 "of": [["of"], ["uhv"], ["ov"]],
                 "and": [["and"], ["n"], ["ənd"]],
                 "for": [["for"], ["fer"]],
-                "in": [["in"], ["ən"]],
+                "in": [["in"], ["ən"], ["and"]],
                 "on": [["on"], ["awn"]],
                 "at": [["at"], ["ət"]],
                 "is": [["is"], ["iz"]],
@@ -93,7 +112,14 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 "went": [["went"], ["when"]],
                 "pointed": [["pointed"], ["point"], ["pointing"]],
                 "directly": [["directly"], ["direct"]],
+                "worker": [["worker"], ["work"]],
                 "camera": [["camera"], ["cameras"]],
+                "froze": [["froze"], ["roast"]],
+                "lens": [["lens"], ["lands"]],
+                "checked": [["checked"], ["check"]],
+                "blueprint": [["blueprint"], ["blue", "print"]],
+                "someone": [["someone"], ["some", "one"]],
+                "timestamp": [["timestamp"], ["time", "stamp"]],
                 "it": [["it"], ["ət"]],
                 # Compound words and possessives can be emitted by ASR with a
                 # different token boundary. These alternatives still require
@@ -178,51 +204,90 @@ def _align_chunk(
     units = _units(chunk)
     if not units:
         raise AlignmentError("Caption chunk contains no spoken words.")
-    matched = 0
-    matched_units: list[dict[str, Any] | None] = []
-    search_cursor = cursor
-    for original, alternatives in units:
-        found: tuple[int, int, float, float] | None = None
-        # Speech recognizers finalize audio in natural pauses. A caption can
-        # therefore begin several recognized tokens after the previous one,
-        # especially when Vosk emits segment results. Search a generous,
-        # bounded lookahead but still keep the timeline strictly monotonic.
-        window_end = min(len(asr_words), search_cursor + 48)
-        for candidate in range(search_cursor, window_end):
-            match = _match_at(asr_words, candidate, alternatives)
-            if not match:
-                continue
-            size, score = match
-            gap = candidate - search_cursor
-            rank = score - min(gap, 24) * 0.003
-            if found is None or rank > found[3]:
-                found = (candidate, size, score, rank)
-        if found is None:
-            matched_units.append(None)
-            continue
-        candidate, size, score, _rank = found
-        matched += 1
-        matched_units.append({
-            "canonical": original,
-            "asr": " ".join(word["word"] for word in asr_words[candidate:candidate + size]),
-            "start": asr_words[candidate]["start"],
-            "end": asr_words[candidate + size - 1]["end"],
-            "confidence": round(score, 3),
-            "recovered": False,
-            "timestamp_source": "vosk_word_timestamp",
-            "_asr_index": candidate,
-        })
-        search_cursor = candidate + size
+    # Solve each caption chunk as a monotonic sequence instead of greedily
+    # committing the first plausible short-word match. This lets the recognizer
+    # choose “and nineteen eighty nine” for canonical “in 1989” while keeping
+    # every accepted span tied to a real Vosk word timestamp.
+    states: dict[int, tuple[int, float, list[tuple[int, int, float] | None]]] = {
+        cursor: (0, 0.0, [])
+    }
+    for unit_index, (original, alternatives) in enumerate(units):
+        next_states: dict[int, tuple[int, float, list[tuple[int, int, float] | None]]] = {}
+        for search_cursor, (matched_count, total_score, path) in states.items():
+            # Keep a skipped unit in the best partial path for diagnostics and
+            # for the existing bounded function-word recovery mode. Strict
+            # callers still fail closed when any canonical unit is missing.
+            skip_penalty = 0.65 if _normalise(original) in _RECOVERY_DURATIONS else 2.0
+            skipped = (matched_count, total_score - skip_penalty, path + [None])
+            previous = next_states.get(search_cursor)
+            if previous is None or (skipped[0], skipped[1]) > (previous[0], previous[1]):
+                next_states[search_cursor] = skipped
 
+            window_end = min(len(asr_words), search_cursor + 48)
+            for candidate in range(search_cursor, window_end):
+                match = _match_at(asr_words, candidate, alternatives)
+                if not match:
+                    continue
+                size, score = match
+                gap = candidate - search_cursor
+                matched = (
+                    matched_count + 1,
+                    total_score + score - min(gap, 24) * 0.003,
+                    path + [(candidate, size, score)],
+                )
+                next_cursor = candidate + size
+                previous = next_states.get(next_cursor)
+                if previous is None or (matched[0], matched[1]) > (previous[0], previous[1]):
+                    next_states[next_cursor] = matched
+        # Bound the state set while preserving every possible matched-count
+        # tier and the strongest score for each next ASR cursor.
+        states = next_states
+        if not states:
+            break
+
+    if not states:
+        matched = 0
+        matched_units = [None] * len(units)
+        search_cursor = cursor
+    else:
+        best_cursor, best_state = max(
+            states.items(),
+            key=lambda item: (item[1][0], item[1][1], -item[0]),
+        )
+        matched = best_state[0]
+        search_cursor = best_cursor
+        path = best_state[2]
+        matched_units = []
+        for (original, _alternatives), match in zip(units, path):
+            if match is None:
+                matched_units.append(None)
+                continue
+            candidate, size, score = match
+            matched_units.append({
+                "canonical": original,
+                "asr": " ".join(word["word"] for word in asr_words[candidate:candidate + size]),
+                "start": asr_words[candidate]["start"],
+                "end": asr_words[candidate + size - 1]["end"],
+                "confidence": round(score, 3),
+                "recovered": False,
+                "timestamp_source": "vosk_word_timestamp",
+                "_asr_index": candidate,
+            })
     if matched < len(units):
         if not recover_missing:
             missing = len(units) - matched
             matched_canonical = [
                 item["canonical"] for item in matched_units if item is not None
             ]
+            observed_start = max(0, min(len(asr_words), cursor))
+            observed_end = min(len(asr_words), observed_start + 80)
+            observed_asr = " ".join(
+                str(word.get("word", "")) for word in asr_words[observed_start:observed_end]
+            )
             raise AlignmentError(
                 f"Could not align caption phrase {chunk!r}: matched {matched}/{len(units)} "
                 f"spoken units ({missing} missing). Matched canonical units: {matched_canonical}. "
+                f"Observed ASR window: {observed_asr!r}. "
                 "Strict word-highlight alignment requires every canonical word to have a real timestamp."
             )
         if matched == 0:
@@ -423,6 +488,18 @@ def _merge_word_timings(*passes: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 for existing in merged
             ):
                 continue
+            if any(overlaps(candidate, existing) for existing in merged):
+                # A secondary model can recover a short function word inside
+                # the broader span emitted by the first model (for example
+                # “a” inside “condemned”). Preserve that real timestamp so the
+                # canonical word can still be aligned; the later normalization
+                # pass closes the overlap monotonically.
+                short_function_words = {
+                    "a", "an", "the", "to", "of", "and", "for",
+                    "in", "on", "at", "is", "was", "it", "uh", "ah",
+                }
+                if _normalise(word) not in short_function_words:
+                    continue
             seen_exact.add(key)
             merged.append(candidate)
 
@@ -456,6 +533,30 @@ def _grammar_phrase(value: str) -> str:
         str(value).replace(r"\N", " "),
     )
     return " ".join(_normalise(token) for token in tokens if _normalise(token))
+
+
+_WEAK_GRAMMAR_WORDS = {
+    "a", "an", "the", "to", "of", "and", "for", "in", "on",
+    "at", "is", "was", "it", "uh", "ah",
+}
+
+
+def _grammar_phrases_with_weak_word_context(value: str) -> list[str]:
+    """Build narrow grammar entries that keep weak words acoustically visible."""
+    tokens = _grammar_phrase(value).split()
+    if not tokens:
+        return []
+    entries = [" ".join(tokens)]
+    for index, token in enumerate(tokens):
+        if token not in _WEAK_GRAMMAR_WORDS:
+            continue
+        for left, right in ((1, 2), (2, 2), (2, 3), (3, 3)):
+            start = max(0, index - left)
+            end = min(len(tokens), index + right + 1)
+            candidate = " ".join(tokens[start:end])
+            if token in candidate.split():
+                entries.append(candidate)
+    return list(dict.fromkeys(entries))
 
 
 def _cursor_for_time(asr_words: list[dict[str, Any]], timestamp: float) -> int:
@@ -496,7 +597,7 @@ def _recover_with_phrase_vocabulary(
                 phrase_words = _recognize_passes(
                     audio_path,
                     model_paths,
-                    grammar_phrases=[phrase_only],
+                    grammar_phrases=_grammar_phrases_with_weak_word_context(chunk),
                 )
                 merged = _merge_word_timings(merged, phrase_words)
                 cursor = _cursor_for_time(merged, cursor_time)
@@ -533,10 +634,12 @@ def _recover_with_phrase_vocabulary(
                 # Retry with the failed phrase and its immediate context as
                 # multi-word grammar entries. Any accepted token must still be
                 # emitted by Vosk with a real start/end timestamp.
-                grammar_phrases = [
-                    _grammar_phrase(value)
-                    for value in chunks[context_start:context_end]
-                ]
+                grammar_phrases = []
+                for value in chunks[context_start:context_end]:
+                    grammar_phrases.extend(
+                        _grammar_phrases_with_weak_word_context(value)
+                    )
+                grammar_phrases = list(dict.fromkeys(grammar_phrases))
                 sequence_words = _recognize_passes(
                     audio_path,
                     model_paths,

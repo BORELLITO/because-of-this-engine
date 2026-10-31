@@ -1,0 +1,2328 @@
+{
+  "schema_version": "3.0.0",
+  "video_id": "episode-002-archive-tape-draft",
+  "title": "The Tape That Added One More Minute",
+  "language": "en-US",
+  "channel": "Because Of This",
+  "fps": 60,
+  "render": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 60,
+    "duration_min_seconds": 60,
+    "duration_max_seconds": 75
+  },
+  "target_runtime_seconds": 64,
+  "engine_profile": "because-of-this-v7.3.2-charon-cinematic-dread-smooth-2026-10",
+  "engine_profile_fingerprint": "c9f6c10765b65a447fb010008f64b302315ff189e257b927d47c9c8e2a427c8e",
+  "master_prompt_version": "7.2",
+  "master_prompt_sha256": "c0bd045da0898848ff11aaba9ff2de9e27be8041f559b37a80f3f99ada1127c8",
+  "production_schema": "because-of-this://schemas/production-record/3.0.0",
+  "human_approval_required": true,
+  "lifecycle_status": "DRAFT_PREVIEW_ONLY",
+  "video_number": 2,
+  "engine_milestone": "V7.3.3_EPISODE_002_STORY_DRAFT",
+  "canonical_path": "episodes/video-002",
+  "truth_mode": "DECLARED_FICTION",
+  "disclosure": "Original declared-fiction story draft. No final audio, clips, or render artifacts are approved. Captions inherit the locked mobile safe-zone contract from the approved master.",
+  "story": {
+    "truth_mode": "DECLARED_FICTION",
+    "person": "Mara, a city archivist",
+    "central_question": "Who added the extra minute—and why is the camera now on the other side?",
+    "risk": "If Mara preserves the anomaly instead of erasing it, the archive may stop recording the past and start recording her.",
+    "irreversible_decision": "Mara duplicates the corrupted tape rather than deleting the impossible minute.",
+    "consequence": "The copy changes again and ends with someone on the platform holding the camera from the other side.",
+    "wound": "Mara has built her identity around preserving evidence that other people want forgotten.",
+    "flaw": "Her need to complete the record overrides the final safe exit.",
+    "something_to_lose": "Mara's safety and her confidence that a record can remain separate from the event it describes.",
+    "hook": "At six past one a.m., Mara, a city archivist, digitized the last security tape from a condemned train station.",
+    "reveal": "The extra minute is not only a record of the missing worker; it reaches into the present and changes Mara's copy."
+  },
+  "story_profile": {
+    "truth_mode": "DECLARED_FICTION",
+    "primary_emotion": "dread",
+    "secondary_emotion": "curiosity",
+    "central_question": "Who added the extra minute—and why is the camera now on the other side?",
+    "visual_symbol": "the extra minute"
+  },
+  "story_graph": {
+    "version": "7.3",
+    "entities": [
+      {
+        "entity_id": "mara",
+        "canonical_name": "Mara",
+        "aliases": [
+          "the archivist",
+          "Mara's copy"
+        ],
+        "continuity_mode": "same anonymous city archivist"
+      },
+      {
+        "entity_id": "archive",
+        "canonical_name": "city archive",
+        "aliases": [
+          "archive room",
+          "digitizer"
+        ],
+        "continuity_mode": "same municipal archive"
+      },
+      {
+        "entity_id": "security_tape",
+        "canonical_name": "condemned station security tape",
+        "aliases": [
+          "the recording",
+          "the copy"
+        ],
+        "continuity_mode": "same anomalous tape"
+      },
+      {
+        "entity_id": "station",
+        "canonical_name": "condemned train station",
+        "aliases": [
+          "platform",
+          "sealed wall"
+        ],
+        "continuity_mode": "same abandoned station"
+      },
+      {
+        "entity_id": "missing_worker",
+        "canonical_name": "missing maintenance worker",
+        "aliases": [
+          "the worker",
+          "the figure"
+        ],
+        "continuity_mode": "same lamp-bearing figure"
+      },
+      {
+        "entity_id": "second_shadow",
+        "canonical_name": "second shadow",
+        "aliases": [
+          "the shadow"
+        ],
+        "continuity_mode": "same unexplained presence"
+      }
+    ],
+    "beats": [
+      {
+        "beat_id": "beat-001",
+        "event": "Mara begins digitizing the last security tape",
+        "state_before": "ordinary_archive_shift",
+        "state_after": "archival_record_opened",
+        "causal_role": "inciting setup",
+        "emotion": "curiosity",
+        "visual_motif": "archivist and digitizer",
+        "entities": [
+          "mara",
+          "archive",
+          "security_tape"
+        ],
+        "scene_id": "S01",
+        "narration_excerpt": "At six past one a.m., Mara, a city archivist,"
+      },
+      {
+        "beat_id": "beat-002",
+        "event": "the condemned station tape enters the digitizer",
+        "state_before": "archival_record_opened",
+        "state_after": "tape_digitized",
+        "causal_role": "inciting anomaly",
+        "emotion": "curiosity",
+        "visual_motif": "security tape and station label",
+        "entities": [
+          "mara",
+          "archive",
+          "security_tape"
+        ],
+        "scene_id": "S02",
+        "narration_excerpt": "digitized the last security tape from a condemned train station."
+      },
+      {
+        "beat_id": "beat-003",
+        "event": "the recording ends at fourteen past two",
+        "state_before": "tape_digitized",
+        "state_after": "recording_ended",
+        "causal_role": "normal expectation",
+        "emotion": "calm",
+        "visual_motif": "timeline endpoint",
+        "entities": [
+          "mara",
+          "security_tape",
+          "digital_file"
+        ],
+        "scene_id": "S03",
+        "narration_excerpt": "The recording ended at fourteen past two."
+      },
+      {
+        "beat_id": "beat-004",
+        "event": "the file adds one more minute after the ending",
+        "state_before": "recording_ended",
+        "state_after": "extra_minute_detected",
+        "causal_role": "contradiction",
+        "emotion": "unease",
+        "visual_motif": "unexpected timeline extension",
+        "entities": [
+          "mara",
+          "digital_file",
+          "security_tape"
+        ],
+        "scene_id": "S04",
+        "narration_excerpt": "Then the file added one more minute."
+      },
+      {
+        "beat_id": "beat-005",
+        "event": "all platform clocks stop at seven past one",
+        "state_before": "extra_minute_detected",
+        "state_after": "time_freezes_on_platform",
+        "causal_role": "objective evidence",
+        "emotion": "dread",
+        "visual_motif": "stopped platform clocks",
+        "entities": [
+          "station",
+          "platform_clocks"
+        ],
+        "scene_id": "S05",
+        "narration_excerpt": "In that extra minute, every platform clock stopped at seven past one."
+      },
+      {
+        "beat_id": "beat-006",
+        "event": "a maintenance door opens by itself",
+        "state_before": "time_freezes_on_platform",
+        "state_after": "physical_anomaly_seen",
+        "causal_role": "escalation",
+        "emotion": "dread",
+        "visual_motif": "opening maintenance door",
+        "entities": [
+          "station",
+          "maintenance_door"
+        ],
+        "scene_id": "S06",
+        "narration_excerpt": "A maintenance door opened by itself."
+      },
+      {
+        "beat_id": "beat-007",
+        "event": "the blueprint reveals the door was bricked shut after a disappearance",
+        "state_before": "physical_anomaly_seen",
+        "state_after": "historical_wound_exposed",
+        "causal_role": "backstory evidence",
+        "emotion": "ominous",
+        "visual_motif": "blueprint and sealed wall",
+        "entities": [
+          "mara",
+          "blueprint",
+          "maintenance_door",
+          "missing_worker"
+        ],
+        "scene_id": "S07",
+        "narration_excerpt": "Mara checked the blueprint. The door had been bricked shut after a worker disappeared there in 1989."
+      },
+      {
+        "beat_id": "beat-008",
+        "event": "the missing worker crosses the platform carrying a lamp",
+        "state_before": "historical_wound_exposed",
+        "state_after": "impossible_subject_recorded",
+        "causal_role": "impossible reveal",
+        "emotion": "terror",
+        "visual_motif": "lamp-bearing figure",
+        "entities": [
+          "missing_worker",
+          "platform",
+          "lamp",
+          "security_camera"
+        ],
+        "scene_id": "S08",
+        "narration_excerpt": "On the tape, the missing worker crossed the platform carrying a lamp."
+      },
+      {
+        "beat_id": "beat-009",
+        "event": "the worker stops beneath the camera and looks into the lens",
+        "state_before": "impossible_subject_recorded",
+        "state_after": "camera_acknowledged",
+        "causal_role": "direct threat",
+        "emotion": "terror",
+        "visual_motif": "figure under camera",
+        "entities": [
+          "missing_worker",
+          "security_camera"
+        ],
+        "scene_id": "S09",
+        "narration_excerpt": "He stopped beneath the camera and looked directly into the lens."
+      },
+      {
+        "beat_id": "beat-010",
+        "event": "a second shadow appears without a visible body",
+        "state_before": "camera_acknowledged",
+        "state_after": "duplicate_presence_seen",
+        "causal_role": "escalation",
+        "emotion": "terror",
+        "visual_motif": "shadow without a body",
+        "entities": [
+          "missing_worker",
+          "second_shadow",
+          "security_camera"
+        ],
+        "scene_id": "S10",
+        "narration_excerpt": "Mara froze the frame. Behind him, a second shadow stood where nobody was standing."
+      },
+      {
+        "beat_id": "beat-011",
+        "event": "the live monitor shows the present platform and a lamp behind the sealed wall",
+        "state_before": "duplicate_presence_seen",
+        "state_after": "present_time_contaminated",
+        "causal_role": "impossible evidence",
+        "emotion": "shock",
+        "visual_motif": "live monitor and hidden lamp",
+        "entities": [
+          "mara",
+          "live_monitor",
+          "platform",
+          "sealed_wall",
+          "lamp"
+        ],
+        "scene_id": "S11",
+        "narration_excerpt": "Then the timestamp jumped to the present. The station's live monitor showed the same platform—empty, except for a lamp glowing behind the sealed wall."
+      },
+      {
+        "beat_id": "beat-012",
+        "event": "the copy changes and ends with someone holding the camera from the other side",
+        "state_before": "present_time_contaminated",
+        "state_after": "ordinary_reality_broken",
+        "causal_role": "payoff",
+        "emotion": "existential chill",
+        "visual_motif": "camera held from the other side",
+        "entities": [
+          "mara",
+          "copy",
+          "security_camera",
+          "platform"
+        ],
+        "scene_id": "S12",
+        "narration_excerpt": "Police found no broken door, footprints, or extra minute on the original tape. Mara's copy changed again, ending with a new frame: someone on the platform holding the camera from the other side."
+      }
+    ]
+  },
+  "emotional_map": {
+    "status": "DRAFT",
+    "beats": [
+      {
+        "position": 0.08,
+        "emotion": "curiosity",
+        "intensity": 0.28
+      },
+      {
+        "position": 0.3,
+        "emotion": "unease",
+        "intensity": 0.46
+      },
+      {
+        "position": 0.53,
+        "emotion": "dread",
+        "intensity": 0.68
+      },
+      {
+        "position": 0.76,
+        "emotion": "terror",
+        "intensity": 0.93
+      },
+      {
+        "position": 1,
+        "emotion": "existential chill",
+        "intensity": 0.88
+      }
+    ]
+  },
+  "reveal_map": {
+    "status": "DRAFT",
+    "known": [
+      "Mara is digitizing a condemned station's last security tape",
+      "the file appears to contain an extra minute"
+    ],
+    "hidden": [
+      "the stopped clocks",
+      "the bricked door",
+      "the missing worker",
+      "the second shadow",
+      "the camera held from the other side"
+    ],
+    "reveal": "The anomaly crosses from the archived tape into the present and changes Mara's duplicate."
+  },
+  "visual_rules": {
+    "primary_language": "literal evidence representation",
+    "source_style": "archival video, railway platform, blueprints, security monitor and camera-lens evidence",
+    "avoid": [
+      "hospital",
+      "elevator",
+      "red emergency corridor",
+      "generic office",
+      "medical imagery",
+      "unrelated crowds",
+      "fantasy spectacle"
+    ],
+    "continuity": [
+      "same anonymous archivist Mara",
+      "same condemned train station",
+      "lamp as recurring motif",
+      "the extra minute as recurring evidence"
+    ],
+    "no_reused_clips": true,
+    "no_derived_clip_reuse": true,
+    "no_text_generated_inside_stock_clips": true,
+    "editorial_text_policy": "CAPTIONS_ONLY",
+    "authored_text_overlays": "FORBIDDEN",
+    "authored_graphics": "FORBIDDEN",
+    "natural_source_text": "ALLOWED_ONLY_IF_NATIVE_AND_REVIEWED",
+    "clean_clip_required": true,
+    "reuse_exclusions": [
+      "episode-001-preview-v72-charon-clean",
+      "V72-S01-CLEAN-001",
+      "V72-S02-CLEAN-002",
+      "V72-S03-CLEAN-003",
+      "V72-S04-CLEAN-004",
+      "V72-S05-CLEAN-005",
+      "V72-S06-CLEAN-006",
+      "V72-S07-CLEAN-007",
+      "V72-S08-CLEAN-008"
+    ]
+  },
+  "voice": {
+    "provider": "gemini_tts",
+    "language": "en-US",
+    "language_code": "en-US",
+    "voice_name": "Charon",
+    "voice": "Charon",
+    "model_or_voice_type": "gemini-3.8-flash-tts",
+    "ssml_gender": "MALE",
+    "sample_rate_hz": 24000,
+    "encoding": "AUDIO_WAV",
+    "speaking_rate": 0.88,
+    "pitch": 0,
+    "volume_gain_db": 0,
+    "style": "Low, controlled American English narration with informative clarity, restrained cinematic suspense, intimate consequence, never theatrical."
+  },
+  "narration": {
+    "provider": "gemini_tts",
+    "language_code": "en-US",
+    "voice_name": "Charon",
+    "state": "DRAFT_PREVIEW",
+    "script_path": "script.txt",
+    "beats": [
+      {
+        "beat_id": "beat-001",
+        "text": "At six past one a.m., Mara, a city archivist,"
+      },
+      {
+        "beat_id": "beat-002",
+        "text": "digitized the last security tape from a condemned train station."
+      },
+      {
+        "beat_id": "beat-003",
+        "text": "The recording ended at fourteen past two."
+      },
+      {
+        "beat_id": "beat-004",
+        "text": "Then the file added one more minute."
+      },
+      {
+        "beat_id": "beat-005",
+        "text": "In that extra minute, every platform clock stopped at seven past one."
+      },
+      {
+        "beat_id": "beat-006",
+        "text": "A maintenance door opened by itself."
+      },
+      {
+        "beat_id": "beat-007",
+        "text": "Mara checked the blueprint. The door had been bricked shut after a worker disappeared there in 1989."
+      },
+      {
+        "beat_id": "beat-008",
+        "text": "On the tape, the missing worker crossed the platform carrying a lamp."
+      },
+      {
+        "beat_id": "beat-009",
+        "text": "He stopped beneath the camera and looked directly into the lens."
+      },
+      {
+        "beat_id": "beat-010",
+        "text": "Mara froze the frame. Behind him, a second shadow stood where nobody was standing."
+      },
+      {
+        "beat_id": "beat-011",
+        "text": "Then the timestamp jumped to the present. The station's live monitor showed that platform—empty, except for a lamp glowing behind the sealed wall."
+      },
+      {
+        "beat_id": "beat-012",
+        "text": "Police found no broken door, footprints, or extra minute on the original tape. Mara's copy changed again, ending with a new frame: someone on the platform holding the camera from the other side."
+      }
+    ],
+    "voice": "Charon",
+    "cache_contract": "cloud_tts_charon_v1",
+    "model": "gemini-3.8-flash-tts"
+  },
+  "script": {
+    "path": "script.txt",
+    "word_count_target": 161
+  },
+  "audio": {
+    "path": "audio/narration.wav",
+    "source": "pending_final_gemini_tts_charon_audio",
+    "preview_only": true,
+    "state": "DRAFT_PREVIEW"
+  },
+  "captions": {
+    "path": "captions/narration.ass",
+    "alignment_sidecar": "captions/narration.alignment.json",
+    "alignment_mode": "audio_final_forced_alignment",
+    "alignment_source": "vosk_word_timestamps",
+    "word_level_available": true,
+    "max_lines": 2,
+    "max_line_chars": 38,
+    "target_cps": 20,
+    "max_cps": 28,
+    "end_tolerance_seconds": 0.1,
+    "word_highlight_enabled": true,
+    "word_highlight_mode": "timestamp_color_transform",
+    "active_word_color": "#FF7777",
+    "word_highlight_tolerance_ms": 35,
+    "style": {
+      "font_name": "Arial",
+      "font_size": 48,
+      "primary_color": "&H00FFFFFF&",
+      "secondary_color": "&H00FFFFFF&",
+      "outline_color": "&H00000000&",
+      "back_color": "&H80000000&",
+      "bold": 1,
+      "italic": 0,
+      "underline": 0,
+      "strike_out": 0,
+      "scale_x": 100,
+      "scale_y": 100,
+      "spacing": 0,
+      "angle": 0,
+      "border_style": 1,
+      "outline": 3,
+      "shadow": 1,
+      "alignment": 2,
+      "margin_l": 90,
+      "margin_r": 140,
+      "margin_v": 340,
+      "encoding": 1
+    },
+    "mobile_safe_zone": {
+      "right_clearance_px": 140,
+      "bottom_clearance_px": 340,
+      "interaction_rail_clearance": "comment-share-remix rail",
+      "status": "LOCKED_FROM_APPROVED_MASTER"
+    },
+    "state": "DRAFT_PREVIEW"
+  },
+  "scenes": [
+    {
+      "scene_id": "S01",
+      "beat_id": "beat-001",
+      "duration": 4,
+      "story_beat": "hook setup",
+      "narration_excerpt": "At six past one a.m., Mara, a city archivist,",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "objects": [
+            "archivist",
+            "digitizer",
+            "security tape"
+          ],
+          "actions": [
+            "loading",
+            "digitizing"
+          ],
+          "environments": [
+            "archive room",
+            "interior"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "eerie"
+          ]
+        },
+        "forbidden": [
+          "hospital",
+          "elevator",
+          "generic office",
+          "unrelated crowds"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "archivist",
+            "digitizer"
+          ],
+          "minimum_direct": 2
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "archivist | digitizer | tape",
+      "visual_function": "literal_evidence",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.86,
+      "asset": {
+        "asset_id": "V73-S01-PEXELS-20503026",
+        "path": "assets/V73-S01-archive-digitizer-clean.mp4",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/20503026/",
+        "license": "Pexels Free License; clean source retained for audit.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "reuse_status": "FRESH",
+        "sha256": "a4f8aefe35b79055d6e9c9eab1d278ecdbc7f98de6b8c8d708a75e45ccb5600c",
+        "episode_id": "episode-002-archive-tape-draft",
+        "drive_file_id": "1SC5dccvm4RLBiRVHtYlJ3uTMOOXQiJYz",
+        "duration_seconds": 11.156667,
+        "width": 1920,
+        "height": 1080,
+        "filesize_bytes": 7816241,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-10-30T00:00:00Z",
+        "original_filename": "V73-S01-archive-digitizer-clean.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-002-archive-tape-draft",
+        "scene_usage": "S01: visual evidence for At six past one a.m., Mara, a city archivist,",
+        "source_segment_in": 0,
+        "source_segment_out": 11.156667,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "security tape and digitizer clean source footage"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-10-30T00:00:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "sample_timestamps": [
+            0.15,
+            5.578,
+            11.007
+          ],
+          "reviewed": true,
+          "basis": [
+            "Observed security tape, digitizer with loading, digitizing."
+          ],
+          "subjects": [],
+          "actions": [
+            "loading",
+            "digitizing"
+          ],
+          "environments": [
+            "interior",
+            "archive-like workbench"
+          ],
+          "objects": [
+            "security tape",
+            "digitizer"
+          ],
+          "observed_subjects": [],
+          "observed_actions": [
+            "loading",
+            "digitizing"
+          ],
+          "observed_environments": [
+            "interior",
+            "archive-like workbench"
+          ],
+          "observed_objects": [
+            "security tape",
+            "digitizer"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NATURAL_SOURCE_ONLY",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 11.007,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "S02",
+      "beat_id": "beat-002",
+      "duration": 4,
+      "story_beat": "inciting anomaly",
+      "narration_excerpt": "digitized the last security tape from a condemned train station.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "objects": [
+            "security tape",
+            "reel",
+            "station archive"
+          ],
+          "actions": [
+            "spinning"
+          ],
+          "environments": [
+            "archive room",
+            "interior"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "ominous"
+          ]
+        },
+        "forbidden": [
+          "hospital",
+          "elevator",
+          "generic office",
+          "unrelated crowds"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "security tape",
+            "reel"
+          ],
+          "minimum_direct": 2
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "security tape | condemned station label | reel",
+      "visual_function": "literal_evidence",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.82,
+      "asset": {
+        "asset_id": "V73-S02-PEXELS-11124042",
+        "path": "assets/V73-S02-security-tape-reel-clean.mp4",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/11124042/",
+        "license": "Pexels Free License; clean source retained for audit.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "reuse_status": "FRESH",
+        "sha256": "4d58437c386c9fc7f26d169abdb6844e4a64d366c39aa4a9f72085729097964a",
+        "episode_id": "episode-002-archive-tape-draft",
+        "drive_file_id": "1tO3Rml1d8cLYXkzO1bOwneMYOi5pAW0j",
+        "duration_seconds": 20.138333,
+        "width": 1920,
+        "height": 1080,
+        "filesize_bytes": 10823807,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-10-30T00:00:00Z",
+        "original_filename": "V73-S02-security-tape-reel-clean.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-002-archive-tape-draft",
+        "scene_usage": "S02: visual evidence for digitized the last security tape from a condemned train station.",
+        "source_segment_in": 0,
+        "source_segment_out": 20.138333,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "film reel and tape reel clean source footage"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-10-30T00:00:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "sample_timestamps": [
+            0.15,
+            10.069,
+            19.988
+          ],
+          "reviewed": true,
+          "basis": [
+            "Observed film reel, tape reel with rotating."
+          ],
+          "subjects": [],
+          "actions": [
+            "rotating"
+          ],
+          "environments": [
+            "interior",
+            "archive-like workbench"
+          ],
+          "objects": [
+            "film reel",
+            "tape reel"
+          ],
+          "observed_subjects": [],
+          "observed_actions": [
+            "rotating"
+          ],
+          "observed_environments": [
+            "interior",
+            "archive-like workbench"
+          ],
+          "observed_objects": [
+            "film reel",
+            "tape reel"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NONE",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 19.988,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "S03",
+      "beat_id": "beat-003",
+      "duration": 6,
+      "story_beat": "false normality",
+      "narration_excerpt": "The recording ended at fourteen past two.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "objects": [
+            "monitor",
+            "timeline",
+            "timecode"
+          ],
+          "actions": [
+            "stopping"
+          ],
+          "environments": [
+            "archive room",
+            "interior"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "quiet"
+          ]
+        },
+        "forbidden": [
+          "hospital",
+          "elevator",
+          "generic office",
+          "unrelated crowds"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "monitor",
+            "timeline"
+          ],
+          "minimum_direct": 2
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "recording timeline | endpoint | monitor",
+      "visual_function": "explanatory_evidence",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.76,
+      "asset": {
+        "asset_id": "V73-S03-PEXELS-10935424",
+        "path": "assets/V73-S03-recording-endpoint-clean.mp4",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/10935424/",
+        "license": "Pexels Free License; clean source retained for audit.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "reuse_status": "FRESH",
+        "sha256": "09c92068529b3f67b80f78c383968507db874c9f2e88d1a810e10acaf96f7330",
+        "episode_id": "episode-002-archive-tape-draft",
+        "drive_file_id": "1j3ArDgGjrH6AWWX8IgkTNeJzV6Nixw9K",
+        "duration_seconds": 19.2,
+        "width": 1920,
+        "height": 1080,
+        "filesize_bytes": 7908686,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-10-30T00:00:00Z",
+        "original_filename": "V73-S03-recording-endpoint-clean.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-002-archive-tape-draft",
+        "scene_usage": "S03: visual evidence for The recording ended at fourteen past two.",
+        "source_segment_in": 0,
+        "source_segment_out": 19.2,
+        "asset_class": "explanatory",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "monitor and editing timeline and waveform clean source footage"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-10-30T00:00:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "sample_timestamps": [
+            0.15,
+            9.6,
+            19.05
+          ],
+          "reviewed": true,
+          "basis": [
+            "Observed monitor, editing timeline, waveform with editing, playback."
+          ],
+          "subjects": [],
+          "actions": [
+            "editing",
+            "playback"
+          ],
+          "environments": [
+            "interior",
+            "editing room"
+          ],
+          "objects": [
+            "monitor",
+            "editing timeline",
+            "waveform"
+          ],
+          "observed_subjects": [],
+          "observed_actions": [
+            "editing",
+            "playback"
+          ],
+          "observed_environments": [
+            "interior",
+            "editing room"
+          ],
+          "observed_objects": [
+            "monitor",
+            "editing timeline",
+            "waveform"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NATURAL_SOURCE_ONLY",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 19.05,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "S04",
+      "beat_id": "beat-004",
+      "duration": 5,
+      "story_beat": "contradiction",
+      "narration_excerpt": "Then the file added one more minute.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "objects": [
+            "monitor",
+            "timeline",
+            "waveform"
+          ],
+          "actions": [
+            "extending"
+          ],
+          "environments": [
+            "archive room",
+            "interior"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "uneasy"
+          ]
+        },
+        "forbidden": [
+          "hospital",
+          "elevator",
+          "generic office",
+          "unrelated crowds"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "monitor",
+            "timeline"
+          ],
+          "minimum_direct": 2
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "timeline extension | waveform | extra minute",
+      "visual_function": "explanatory_evidence",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.76,
+      "asset": {
+        "asset_id": "V73-S04-PEXELS-12358562",
+        "path": "assets/V73-S04-extra-minute-timeline-clean.mp4",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/12358562/",
+        "license": "Pexels Free License; clean source retained for audit.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "reuse_status": "FRESH",
+        "sha256": "4cc74a81a8d8a1443eba2dde066f3b6542b3c6a1f184256db3859ee0fc294405",
+        "episode_id": "episode-002-archive-tape-draft",
+        "drive_file_id": "1qY2oGJ2Y7II_Rpw0TlDl9eYG2gkqo6ON",
+        "duration_seconds": 15.486667,
+        "width": 1920,
+        "height": 1080,
+        "filesize_bytes": 5784491,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-10-30T00:00:00Z",
+        "original_filename": "V73-S04-extra-minute-timeline-clean.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-002-archive-tape-draft",
+        "scene_usage": "S04: visual evidence for Then the file added one more minute.",
+        "source_segment_in": 0,
+        "source_segment_out": 15.486667,
+        "asset_class": "explanatory",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "monitor and editing timeline and waveform clean source footage"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-10-30T00:00:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "sample_timestamps": [
+            0.15,
+            7.743,
+            15.337
+          ],
+          "reviewed": true,
+          "basis": [
+            "Observed monitor, editing timeline, waveform with extending, scrubbing."
+          ],
+          "subjects": [],
+          "actions": [
+            "extending",
+            "scrubbing"
+          ],
+          "environments": [
+            "interior",
+            "editing room"
+          ],
+          "objects": [
+            "monitor",
+            "editing timeline",
+            "waveform"
+          ],
+          "observed_subjects": [],
+          "observed_actions": [
+            "extending",
+            "scrubbing"
+          ],
+          "observed_environments": [
+            "interior",
+            "editing room"
+          ],
+          "observed_objects": [
+            "monitor",
+            "editing timeline",
+            "waveform"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NATURAL_SOURCE_ONLY",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 15.337,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "S05",
+      "beat_id": "beat-005",
+      "duration": 5,
+      "story_beat": "objective evidence",
+      "narration_excerpt": "In that extra minute, every platform clock stopped at seven past one.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "objects": [
+            "platform clocks",
+            "train platform"
+          ],
+          "actions": [
+            "stopping"
+          ],
+          "environments": [
+            "train platform",
+            "night"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "dread"
+          ]
+        },
+        "forbidden": [
+          "hospital",
+          "elevator",
+          "generic office",
+          "unrelated crowds"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "platform clocks",
+            "train platform"
+          ],
+          "minimum_direct": 2
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "train platform | stopped clocks | night",
+      "visual_function": "literal_evidence",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.88,
+      "asset": {
+        "asset_id": "V73-S05-PEXELS-5220707",
+        "path": "assets/V73-S05-train-station-clock-clean.mp4",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/5220707/",
+        "license": "Pexels Free License; clean source retained for audit.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "reuse_status": "FRESH",
+        "sha256": "c43512de1e465778ea76c6e650d4a16d623711c568766363e008d08c4121777e",
+        "episode_id": "episode-002-archive-tape-draft",
+        "drive_file_id": "115eGh2yaS6bx95ziG8Rd8BQILolVKrrq",
+        "duration_seconds": 10.076733,
+        "width": 3840,
+        "height": 2160,
+        "filesize_bytes": 17028784,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-10-30T00:00:00Z",
+        "original_filename": "V73-S05-train-station-clock-clean.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-002-archive-tape-draft",
+        "scene_usage": "S05: visual evidence for In that extra minute, every platform clock stopped at seven past one.",
+        "source_segment_in": 0,
+        "source_segment_out": 10.076733,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "station clock and information sign clean source footage"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-10-30T00:00:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "sample_timestamps": [
+            0.15,
+            5.038,
+            9.927
+          ],
+          "reviewed": true,
+          "basis": [
+            "Observed station clock, information sign with stationary."
+          ],
+          "subjects": [],
+          "actions": [
+            "stationary"
+          ],
+          "environments": [
+            "train station",
+            "interior"
+          ],
+          "objects": [
+            "station clock",
+            "information sign"
+          ],
+          "observed_subjects": [],
+          "observed_actions": [
+            "stationary"
+          ],
+          "observed_environments": [
+            "train station",
+            "interior"
+          ],
+          "observed_objects": [
+            "station clock",
+            "information sign"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NATURAL_SOURCE_ONLY",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 9.927,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "S06",
+      "beat_id": "beat-006",
+      "duration": 6,
+      "story_beat": "physical escalation",
+      "narration_excerpt": "A maintenance door opened by itself.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "objects": [
+            "maintenance door",
+            "metal frame"
+          ],
+          "actions": [
+            "opening"
+          ],
+          "environments": [
+            "train station",
+            "interior"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "dread"
+          ]
+        },
+        "forbidden": [
+          "hospital",
+          "elevator",
+          "generic office",
+          "unrelated crowds"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "maintenance door",
+            "metal frame"
+          ],
+          "minimum_direct": 2
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "metal maintenance door | empty platform",
+      "visual_function": "literal_evidence",
+      "visual_match": "NEAR",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.72,
+      "asset": {
+        "asset_id": "V73-S06-PEXELS-10577431",
+        "path": "assets/V73-S06-maintenance-door-clean.mp4",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/10577431/",
+        "license": "Pexels Free License; clean source retained for audit.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "reuse_status": "FRESH",
+        "sha256": "ae82bc594504bef84e04b08489f36262f6b6fd81bce7475a5de53025b5f5f805",
+        "episode_id": "episode-002-archive-tape-draft",
+        "drive_file_id": "1WETYoMUwQuCLEtnt90o7gm05CfcvRNT1",
+        "duration_seconds": 107.2,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 28910418,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-10-30T00:00:00Z",
+        "original_filename": "V73-S06-maintenance-door-clean.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-002-archive-tape-draft",
+        "scene_usage": "S06: visual evidence for A maintenance door opened by itself.",
+        "source_segment_in": 0,
+        "source_segment_out": 107.2,
+        "asset_class": "reconstruction",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "door and doorway clean source footage"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-10-30T00:00:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "sample_timestamps": [
+            0.15,
+            53.6,
+            107.05
+          ],
+          "reviewed": true,
+          "basis": [
+            "Observed door, doorway with opening."
+          ],
+          "subjects": [
+            "person"
+          ],
+          "actions": [
+            "opening"
+          ],
+          "environments": [
+            "interior",
+            "doorway"
+          ],
+          "objects": [
+            "door",
+            "doorway"
+          ],
+          "observed_subjects": [
+            "person"
+          ],
+          "observed_actions": [
+            "opening"
+          ],
+          "observed_environments": [
+            "interior",
+            "doorway"
+          ],
+          "observed_objects": [
+            "door",
+            "doorway"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NONE",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 107.05,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "S07",
+      "beat_id": "beat-007",
+      "duration": 6,
+      "story_beat": "historical evidence",
+      "narration_excerpt": "Mara checked the blueprint. The door had been bricked shut after a worker disappeared there in 1989.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "objects": [
+            "blueprint",
+            "sealed wall",
+            "doorway"
+          ],
+          "actions": [
+            "unfolding",
+            "revealing"
+          ],
+          "environments": [
+            "archive room",
+            "interior"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "ominous"
+          ]
+        },
+        "forbidden": [
+          "hospital",
+          "elevator",
+          "generic office",
+          "unrelated crowds"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "blueprint",
+            "sealed wall"
+          ],
+          "minimum_direct": 2
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "blueprint | bricked doorway | archive desk",
+      "visual_function": "literal_evidence",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.86,
+      "asset": {
+        "asset_id": "V73-S07-PEXELS-14377594",
+        "path": "assets/V73-S07-blueprint-sealed-wall-clean.mp4",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/14377594/",
+        "license": "Pexels Free License; clean source retained for audit.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "reuse_status": "FRESH",
+        "sha256": "31a92fd4b7746c1f61d4e8ff1f9cd9fe6da91fa2238e885c7242d93e2c2d1279",
+        "episode_id": "episode-002-archive-tape-draft",
+        "drive_file_id": "1Wcc40PvvgWqXUutAq1EYn60vQ1P8Pv65",
+        "duration_seconds": 4.351667,
+        "width": 1920,
+        "height": 1080,
+        "filesize_bytes": 3596297,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-10-30T00:00:00Z",
+        "original_filename": "V73-S07-blueprint-sealed-wall-clean.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-002-archive-tape-draft",
+        "scene_usage": "S07: visual evidence for Mara checked the blueprint. The door had been bricked shut after a worker disappeared there in 1989.",
+        "source_segment_in": 0,
+        "source_segment_out": 4.351667,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "blueprint and architectural drawings clean source footage"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-10-30T00:00:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "sample_timestamps": [
+            0.15,
+            2.176,
+            4.202
+          ],
+          "reviewed": true,
+          "basis": [
+            "Observed blueprint, architectural drawings with unfolding, marking."
+          ],
+          "subjects": [],
+          "actions": [
+            "unfolding",
+            "marking"
+          ],
+          "environments": [
+            "interior",
+            "desk"
+          ],
+          "objects": [
+            "blueprint",
+            "architectural drawings"
+          ],
+          "observed_subjects": [],
+          "observed_actions": [
+            "unfolding",
+            "marking"
+          ],
+          "observed_environments": [
+            "interior",
+            "desk"
+          ],
+          "observed_objects": [
+            "blueprint",
+            "architectural drawings"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NATURAL_SOURCE_ONLY",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 4.202,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "S08",
+      "beat_id": "beat-008",
+      "duration": 6,
+      "story_beat": "impossible subject",
+      "narration_excerpt": "On the tape, the missing worker crossed the platform carrying a lamp.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "objects": [
+            "lamp",
+            "figure",
+            "platform"
+          ],
+          "actions": [
+            "crossing",
+            "carrying"
+          ],
+          "environments": [
+            "train platform",
+            "night"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "terrifying"
+          ]
+        },
+        "forbidden": [
+          "hospital",
+          "elevator",
+          "generic office",
+          "unrelated crowds"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "lamp",
+            "figure"
+          ],
+          "minimum_direct": 2
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "silhouette | lamp | empty platform",
+      "visual_function": "literal_evidence",
+      "visual_match": "NEAR",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.74,
+      "asset": {
+        "asset_id": "V73-S08-PEXELS-10482449",
+        "path": "assets/V73-S08-worker-flashlight-clean.mp4",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/10482449/",
+        "license": "Pexels Free License; clean source retained for audit.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "reuse_status": "FRESH",
+        "sha256": "92d1de6746c52c36eacf18944c7a2a32e84a953592559fe205ac9512fcc1ec76",
+        "episode_id": "episode-002-archive-tape-draft",
+        "drive_file_id": "1TjmZ5dVkpV-axLfy8xIAHXdaAt_aeCOS",
+        "duration_seconds": 19.8,
+        "width": 4096,
+        "height": 2160,
+        "filesize_bytes": 59009371,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-10-30T00:00:00Z",
+        "original_filename": "V73-S08-worker-flashlight-clean.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-002-archive-tape-draft",
+        "scene_usage": "S08: visual evidence for On the tape, the missing worker crossed the platform carrying a lamp.",
+        "source_segment_in": 0,
+        "source_segment_out": 19.8,
+        "asset_class": "reconstruction",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "flashlight and person clean source footage"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-10-30T00:00:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "sample_timestamps": [
+            0.15,
+            9.9,
+            19.65
+          ],
+          "reviewed": true,
+          "basis": [
+            "Observed flashlight, person with holding, looking."
+          ],
+          "subjects": [
+            "person"
+          ],
+          "actions": [
+            "holding",
+            "looking"
+          ],
+          "environments": [
+            "dark interior",
+            "night"
+          ],
+          "objects": [
+            "flashlight",
+            "person"
+          ],
+          "observed_subjects": [
+            "person"
+          ],
+          "observed_actions": [
+            "holding",
+            "looking"
+          ],
+          "observed_environments": [
+            "dark interior",
+            "night"
+          ],
+          "observed_objects": [
+            "flashlight",
+            "person"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NONE",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 19.65,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "S09",
+      "beat_id": "beat-009",
+      "duration": 5,
+      "story_beat": "direct threat",
+      "narration_excerpt": "He stopped beneath the camera and looked directly into the lens.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "objects": [
+            "security camera",
+            "figure",
+            "lens"
+          ],
+          "actions": [
+            "stopping",
+            "looking"
+          ],
+          "environments": [
+            "train platform",
+            "night"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "terror"
+          ]
+        },
+        "forbidden": [
+          "hospital",
+          "elevator",
+          "generic office",
+          "unrelated crowds"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "security camera",
+            "figure"
+          ],
+          "minimum_direct": 2
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "figure under security camera | lens",
+      "visual_function": "literal_evidence",
+      "visual_match": "NEAR",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.7,
+      "asset": {
+        "asset_id": "V73-S09-PEXELS-10480739",
+        "path": "assets/V73-S09-figure-camera-clean-proxy.mp4",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/10480739/",
+        "license": "Pexels Free License; clean source retained for audit.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "reuse_status": "FRESH",
+        "sha256": "167360de7c3a737b735444076349ecee09b901ae03c7c3d12ecde2ac6f5339f9",
+        "episode_id": "episode-002-archive-tape-draft",
+        "drive_file_id": "13k7Ev4BZwye_BUBFwf1S6xmrMDhGnL68",
+        "duration_seconds": 60.28,
+        "width": 1920,
+        "height": 1012,
+        "filesize_bytes": 16978484,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-10-30T00:00:00Z",
+        "original_filename": "V73-S09-figure-camera-clean-proxy.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-002-archive-tape-draft",
+        "scene_usage": "S09: visual evidence for He stopped beneath the camera and looked directly into the lens.",
+        "source_segment_in": 0,
+        "source_segment_out": 60.28,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "camcorder and person and doorway clean source footage"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-10-30T00:00:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "sample_timestamps": [
+            0.15,
+            30.14,
+            60.13
+          ],
+          "reviewed": true,
+          "basis": [
+            "Observed camcorder, person, doorway with filming, looking."
+          ],
+          "subjects": [
+            "person"
+          ],
+          "actions": [
+            "filming",
+            "looking"
+          ],
+          "environments": [
+            "night exterior",
+            "doorway"
+          ],
+          "objects": [
+            "camcorder",
+            "person",
+            "doorway"
+          ],
+          "observed_subjects": [
+            "person"
+          ],
+          "observed_actions": [
+            "filming",
+            "looking"
+          ],
+          "observed_environments": [
+            "night exterior",
+            "doorway"
+          ],
+          "observed_objects": [
+            "camcorder",
+            "person",
+            "doorway"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NONE",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 60.13,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        },
+        "proxy_disclosure": "Drive file is a technical 1920px proxy re-encode of the downloaded Pexels source; visual content is unchanged and original source hash is retained locally for audit.",
+        "proxy_source_filename": "asset-s09-look-camera.mp4",
+        "proxy_source_sha256": ""
+      }
+    },
+    {
+      "scene_id": "S10",
+      "beat_id": "beat-010",
+      "duration": 5,
+      "story_beat": "second presence",
+      "narration_excerpt": "Mara froze the frame. Behind him, a second shadow stood where nobody was standing.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "objects": [
+            "figure",
+            "shadow",
+            "camera"
+          ],
+          "actions": [
+            "standing",
+            "freezing"
+          ],
+          "environments": [
+            "train platform",
+            "night"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "terror"
+          ]
+        },
+        "forbidden": [
+          "hospital",
+          "elevator",
+          "generic office",
+          "unrelated crowds"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "figure",
+            "shadow"
+          ],
+          "minimum_direct": 2
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "figure | second shadow | frozen frame",
+      "visual_function": "literal_evidence",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.84,
+      "asset": {
+        "asset_id": "V73-S10-PEXELS-10240527",
+        "path": "assets/V73-S10-second-shadow-clean.mp4",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/10240527/",
+        "license": "Pexels Free License; clean source retained for audit.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "reuse_status": "FRESH",
+        "sha256": "096ebbd72fe65c322f9fb7ad19cac37dd78d49ed084fa0606eb7541b6a3597dc",
+        "episode_id": "episode-002-archive-tape-draft",
+        "drive_file_id": "1L4rSfjOYWAu1jQh8bpEY4xONGCrGXTiH",
+        "duration_seconds": 8.92,
+        "width": 2160,
+        "height": 4096,
+        "filesize_bytes": 25530431,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-10-30T00:00:00Z",
+        "original_filename": "V73-S10-second-shadow-clean.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-002-archive-tape-draft",
+        "scene_usage": "S10: visual evidence for Mara froze the frame. Behind him, a second shadow stood where nobody was standing.",
+        "source_segment_in": 0,
+        "source_segment_out": 8.92,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "shadows and wall clean source footage"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-10-30T00:00:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "sample_timestamps": [
+            0.15,
+            4.46,
+            8.77
+          ],
+          "reviewed": true,
+          "basis": [
+            "Observed shadows, wall with moving, crossing."
+          ],
+          "subjects": [
+            "person",
+            "shadow"
+          ],
+          "actions": [
+            "moving",
+            "crossing"
+          ],
+          "environments": [
+            "exterior wall",
+            "daylight"
+          ],
+          "objects": [
+            "shadows",
+            "wall"
+          ],
+          "observed_subjects": [
+            "person",
+            "shadow"
+          ],
+          "observed_actions": [
+            "moving",
+            "crossing"
+          ],
+          "observed_environments": [
+            "exterior wall",
+            "daylight"
+          ],
+          "observed_objects": [
+            "shadows",
+            "wall"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NONE",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 8.77,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "S11",
+      "beat_id": "beat-011",
+      "duration": 7,
+      "story_beat": "present-time contamination",
+      "narration_excerpt": "Then the timestamp jumped to the present. The station's live monitor showed the same platform—empty, except for a lamp glowing behind the sealed wall.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "objects": [
+            "live monitor",
+            "lamp",
+            "sealed wall"
+          ],
+          "actions": [
+            "glowing"
+          ],
+          "environments": [
+            "control room",
+            "interior"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "shock"
+          ]
+        },
+        "forbidden": [
+          "hospital",
+          "elevator",
+          "generic office",
+          "unrelated crowds"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "live monitor",
+            "lamp"
+          ],
+          "minimum_direct": 2
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "live monitor | empty platform | lamp behind wall",
+      "visual_function": "explanatory_evidence",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.78,
+      "asset": {
+        "asset_id": "V73-S11-PEXELS-2842988",
+        "path": "assets/V73-S11-live-monitor-clean.mp4",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/2842988/",
+        "license": "Pexels Free License; clean source retained for audit.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "reuse_status": "FRESH",
+        "sha256": "e493b0cd16cf40f31f0a739b9fcc229782d4ba03898d516e37a2b7375a33cb0f",
+        "episode_id": "episode-002-archive-tape-draft",
+        "drive_file_id": "1FcfyRHzcp8yWwFJvI8l2QlqM0gRWfjmu",
+        "duration_seconds": 18.068333,
+        "width": 1920,
+        "height": 1080,
+        "filesize_bytes": 13142889,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-10-30T00:00:00Z",
+        "original_filename": "V73-S11-live-monitor-clean.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-002-archive-tape-draft",
+        "scene_usage": "S11: visual evidence for Then the timestamp jumped to the present. The station's live monitor showed the same platform—empty, except for a lamp glowing behind the sealed wall.",
+        "source_segment_in": 0,
+        "source_segment_out": 18.068333,
+        "asset_class": "explanatory",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "monitors and control room and screens clean source footage"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-10-30T00:00:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "sample_timestamps": [
+            0.15,
+            9.034,
+            17.918
+          ],
+          "reviewed": true,
+          "basis": [
+            "Observed monitors, control room, screens with monitoring."
+          ],
+          "subjects": [
+            "operators"
+          ],
+          "actions": [
+            "monitoring"
+          ],
+          "environments": [
+            "interior",
+            "control room"
+          ],
+          "objects": [
+            "monitors",
+            "control room",
+            "screens"
+          ],
+          "observed_subjects": [
+            "operators"
+          ],
+          "observed_actions": [
+            "monitoring"
+          ],
+          "observed_environments": [
+            "interior",
+            "control room"
+          ],
+          "observed_objects": [
+            "monitors",
+            "control room",
+            "screens"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NATURAL_SOURCE_ONLY",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 17.918,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "S12",
+      "beat_id": "beat-012",
+      "duration": 5,
+      "story_beat": "payoff",
+      "narration_excerpt": "Police found no broken door, footprints, or extra minute on the original tape. Mara's copy changed again, ending with a new frame: someone on the platform holding the camera from the other side.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "objects": [
+            "camera",
+            "lens",
+            "hand"
+          ],
+          "actions": [
+            "holding"
+          ],
+          "environments": [
+            "train platform",
+            "night"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "existential chill"
+          ]
+        },
+        "forbidden": [
+          "hospital",
+          "elevator",
+          "generic office",
+          "unrelated crowds"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "camera",
+            "lens"
+          ],
+          "minimum_direct": 2
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "camera lens | hand holding camera | platform",
+      "visual_function": "literal_evidence",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.88,
+      "asset": {
+        "asset_id": "V73-S12-PEXELS-10253357",
+        "path": "assets/V73-S12-camera-from-other-side-clean.mp4",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/10253357/",
+        "license": "Pexels Free License; clean source retained for audit.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "reuse_status": "FRESH",
+        "sha256": "2511bccb68675951194e26d2fab410c5cfb9689aee513a81fffd663905462dec",
+        "episode_id": "episode-002-archive-tape-draft",
+        "drive_file_id": "1mZCPIqJF06LebkxQYDtjgbRIMTkqnKEM",
+        "duration_seconds": 4.4,
+        "width": 4096,
+        "height": 2160,
+        "filesize_bytes": 12340927,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-10-30T00:00:00Z",
+        "original_filename": "V73-S12-camera-from-other-side-clean.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-002-archive-tape-draft",
+        "scene_usage": "S12: visual evidence for Police found no broken door, footprints, or extra minute on the original tape. Mara's copy changed again, ending with a new frame: someone on the platform holding the camera from the other side.",
+        "source_segment_in": 0,
+        "source_segment_out": 4.4,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "camera and lens and hand clean source footage"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-10-30T00:00:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "sample_timestamps": [
+            0.15,
+            2.2,
+            4.25
+          ],
+          "reviewed": true,
+          "basis": [
+            "Observed camera, lens, hand with holding, adjusting."
+          ],
+          "subjects": [
+            "hand"
+          ],
+          "actions": [
+            "holding",
+            "adjusting"
+          ],
+          "environments": [
+            "interior",
+            "camera close-up"
+          ],
+          "objects": [
+            "camera",
+            "lens",
+            "hand"
+          ],
+          "observed_subjects": [
+            "hand"
+          ],
+          "observed_actions": [
+            "holding",
+            "adjusting"
+          ],
+          "observed_environments": [
+            "interior",
+            "camera close-up"
+          ],
+          "observed_objects": [
+            "camera",
+            "lens",
+            "hand"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NATURAL_SOURCE_ONLY",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 4.25,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      }
+    }
+  ],
+  "packaging": {
+    "candidates": [
+      {
+        "candidate_id": "PKG-01",
+        "title": "THE TAPE ADDED ONE MORE MINUTE",
+        "thumbnail_text": "ONE MORE MINUTE",
+        "promise": "A condemned station tape records sixty seconds that never existed.",
+        "mystery": "What happened inside the extra minute?",
+        "spoiler_risk": "LOW"
+      },
+      {
+        "candidate_id": "PKG-02",
+        "title": "THE CAMERA WAS HELD FROM THE OTHER SIDE",
+        "thumbnail_text": "FROM THE OTHER SIDE",
+        "promise": "A copied security tape ends with an impossible point of view.",
+        "mystery": "Who is holding the camera?",
+        "spoiler_risk": "LOW"
+      },
+      {
+        "candidate_id": "PKG-03",
+        "title": "THE SHADOW WITH NO BODY",
+        "thumbnail_text": "NO BODY",
+        "promise": "An archived frame captures a second presence on an empty platform.",
+        "mystery": "Where did the second shadow come from?",
+        "spoiler_risk": "MEDIUM"
+      }
+    ],
+    "selection_status": "PENDING_HUMAN_APPROVAL",
+    "description": "This episode is an original fictional suspense story. Clean visual representations will be researched as fresh assets and may not reuse episode 001 clips.",
+    "cta": {
+      "text": "Follow for the next unexplained story.",
+      "placement": "after_consequence_with_final_logo",
+      "before_consequence": false
+    }
+  },
+  "brand": {
+    "watermark_enabled": false,
+    "watermark_text": "|B",
+    "accent_color": "#E3262E",
+    "logo_enabled": true,
+    "logo_path": "brand/because-of-this-logo.png",
+    "logo_width": 540,
+    "logo_opacity": 0.82,
+    "logo_margin": 54,
+    "logo_top": 72,
+    "logo_anchor": "center_top"
+  },
+  "music": {
+    "path": "audio/music.wav",
+    "license": "Original deterministic procedural suspense bed generated by the engine; no third-party recording or composition used for this master.",
+    "license_status": "APPROVED",
+    "track_id": "V73-PROCEDURAL-SUSPENSE-BED-002-DRAFT",
+    "commercial_use": true,
+    "preview_only": true,
+    "volume": 0.12,
+    "complete_track_reuse": "forbidden",
+    "sidechain_enabled": true,
+    "source": "engine_generated",
+    "generation": {
+      "script": "production/generate_suspense_bed.py",
+      "duration_seconds": 70,
+      "sample_rate_hz": 48000,
+      "deterministic": true,
+      "layers": [
+        "low_drone",
+        "heartbeat_pulse",
+        "midband_tension",
+        "restrained_transition_impacts"
+      ]
+    },
+    "gain_db": 4.5,
+    "approval_basis": "Pending final story approval and fresh render."
+  },
+  "color_grade": {
+    "enabled": true,
+    "preset": "cinematic_dread_v73",
+    "brightness": -0.05,
+    "contrast": 1.14,
+    "saturation": 0.84,
+    "gamma": 0.92,
+    "vignette": true,
+    "cinematic_suspense": {
+      "enabled": true,
+      "profile": "cinematic_dread_v73",
+      "profile_version": "7.3.2",
+      "reference_basis": "cinematic_dread_v73_before_after_comparison",
+      "cool_shadows": 0.04,
+      "warm_highlights": 0.014,
+      "motion_strength": 0.045,
+      "push_in": 0.055,
+      "edge_fade": true,
+      "shadow_crush": 0.045,
+      "highlight_rolloff": 0.012,
+      "flicker_strength": 0.003,
+      "flicker_period_seconds": 4.8,
+      "detail_strength": 0.16,
+      "motion_smoothing": true,
+      "interpolation_fps": 60,
+      "vignette_angle": "PI/5.8"
+    }
+  },
+  "loop": {
+    "enabled": true,
+    "title": "BECAUSE OF THIS",
+    "transition": "continuity_fade",
+    "logo_source": "brand_logo_transparent",
+    "logo_width": 820,
+    "logo_anchor": "center_center",
+    "outro_seconds": 1.2,
+    "tail_fade_seconds": 0.55,
+    "card_fade_in_seconds": 0.24,
+    "card_fade_out_seconds": 0.36,
+    "audio_fade_seconds": 0.6,
+    "restart_safe": true
+  },
+  "output": {
+    "path": "rendered/{video_id}-{mode}.mp4"
+  },
+  "research": {
+    "confidence": "HIGH",
+    "accessed_at": "2026-10-30T00:00:00Z",
+    "sources": [
+      {
+        "source_id": "asset-research-brief-v2",
+        "url": "episodes/video-002/asset-research-brief.json",
+        "role": "scene-specific visual research and provenance record"
+      },
+      {
+        "source_id": "pexels-free-license",
+        "url": "https://www.pexels.com/license/",
+        "role": "preview source license policy"
+      },
+      {
+        "source_id": "drive-folder-episode-002",
+        "url": "https://drive.google.com/drive/folders/1JJP-XxTHWLQWMXqSILnZH9I1nTgENg_P",
+        "role": "hydrated preview assets"
+      }
+    ],
+    "final_release_basis": "Preview assets are hydrated and individually scene-approved for draft preview; final publication remains gated by final rights record and human release approval."
+  },
+  "editorial_qa": {
+    "status": "PENDING_ASSET_PREVIEW_RENDER",
+    "reviewer": null,
+    "reviewed_at": null,
+    "visual_text_policy": "PENDING_CAPTIONS_ONLY",
+    "compositor_overlay_policy": "BLOCKED",
+    "reviewed_clip_count": 0,
+    "decision": "STORY_DRAFT_REVIEW"
+  },
+  "human_approval": {
+    "status": "PASS",
+    "reviewer": "User approval recorded in conversation",
+    "approved_at": "2026-10-30T00:00:00Z",
+    "decision": "APPROVED_FOR_DRAFT_PREVIEW"
+  },
+  "editing": {
+    "clip_quantity": {
+      "mode": "fixed",
+      "min_clips": 12,
+      "target_min": 12,
+      "target_max": 16,
+      "max_clips": 18,
+      "min_scene_seconds": 4,
+      "max_scene_seconds": 8,
+      "enforce": true
+    },
+    "scene_refresh_strategy": {
+      "mode": "meaningful_story_cuts",
+      "target_scenes": 12,
+      "average_scene_seconds": 5.33,
+      "min_scene_seconds": 4,
+      "max_scene_seconds": 7,
+      "preserve_caption_readability": true,
+      "rationale": "Increase visual refresh only at narrative evidence changes; never split a shot without a story or retention function."
+    }
+  },
+  "preview_revision": "v7.3.3-episode-002-assets-hydrated",
+  "preview_revision_note": "Approved story expanded to 12 scenes and hydrated with 12 unique Pexels preview assets in Drive. Caption safe zone remains L90/R140/V340.",
+  "final_revision": null,
+  "final_revision_note": null,
+  "runtime_artifacts": {},
+  "final_validation_revision": null,
+  "asset_registry": {
+    "status": "PREVIEW_ASSETS_HYDRATED",
+    "folder_id": "1JJP-XxTHWLQWMXqSILnZH9I1nTgENg_P",
+    "folder_url": "https://drive.google.com/drive/folders/1JJP-XxTHWLQWMXqSILnZH9I1nTgENg_P",
+    "asset_count": 12,
+    "unique_drive_ids": true,
+    "unique_source_ids": true,
+    "no_episode_001_reuse": true
+  }
+}
