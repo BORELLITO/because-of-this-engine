@@ -74,6 +74,13 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
             index += 3
             continue
         token = _normalise(raw[index])
+        if token.isdigit() and len(token) == 4 and 1000 <= int(token) <= 2099:
+            result.append((raw[index], [
+                [token],
+                _number_words(int(token)),
+            ]))
+            index += 1
+            continue
         if token:
             short_word_variants = {
                 "a": [["a"], ["uh"], ["ah"]],
@@ -450,6 +457,18 @@ def _merge_word_timings(*passes: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 for existing in merged
             ):
                 continue
+            if any(overlaps(candidate, existing) for existing in merged):
+                # A secondary model can recover a short function word inside
+                # the broader span emitted by the first model (for example
+                # “a” inside “condemned”). Preserve that real timestamp so the
+                # canonical word can still be aligned; the later normalization
+                # pass closes the overlap monotonically.
+                short_function_words = {
+                    "a", "an", "the", "to", "of", "and", "for",
+                    "in", "on", "at", "is", "was", "it", "uh", "ah",
+                }
+                if _normalise(word) not in short_function_words:
+                    continue
             seen_exact.add(key)
             merged.append(candidate)
 
