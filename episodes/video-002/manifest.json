@@ -2367,13 +2367,13 @@
     "final_release_basis": "Preview assets are hydrated and individually scene-approved for draft preview; final publication remains gated by final rights record and human release approval."
   },
   "editorial_qa": {
-    "status": "PENDING_ASSET_PREVIEW_RENDER",
-    "reviewer": null,
-    "reviewed_at": null,
-    "visual_text_policy": "PENDING_CAPTIONS_ONLY",
+    "status": "PASS",
+    "reviewer": "User approval recorded in conversation",
+    "reviewed_at": "2026-10-31T00:00:00Z",
+    "visual_text_policy": "PASS_CAPTIONS_ONLY",
     "compositor_overlay_policy": "BLOCKED",
-    "reviewed_clip_count": 0,
-    "decision": "STORY_DRAFT_REVIEW"
+    "reviewed_clip_count": 12,
+    "decision": "APPROVED_FINAL_MASTER"
   },
   "human_approval": {
     "status": "PASS",
