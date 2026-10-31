@@ -100,6 +100,94 @@
           "the shadow"
         ],
         "continuity_mode": "same unexplained presence"
+      },
+      {
+        "entity_id": "digital_file",
+        "canonical_name": "digitized archive file",
+        "aliases": [
+          "the file",
+          "digital copy"
+        ],
+        "continuity_mode": "same digitized tape file"
+      },
+      {
+        "entity_id": "platform_clocks",
+        "canonical_name": "platform clocks",
+        "aliases": [
+          "every platform clock",
+          "the clocks"
+        ],
+        "continuity_mode": "same stopped station clocks"
+      },
+      {
+        "entity_id": "maintenance_door",
+        "canonical_name": "maintenance door",
+        "aliases": [
+          "the door",
+          "sealed door"
+        ],
+        "continuity_mode": "same anomalous maintenance door"
+      },
+      {
+        "entity_id": "blueprint",
+        "canonical_name": "station blueprint",
+        "aliases": [
+          "the blueprint"
+        ],
+        "continuity_mode": "same archival blueprint"
+      },
+      {
+        "entity_id": "platform",
+        "canonical_name": "train platform",
+        "aliases": [
+          "the platform"
+        ],
+        "continuity_mode": "same condemned platform"
+      },
+      {
+        "entity_id": "lamp",
+        "canonical_name": "maintenance lamp",
+        "aliases": [
+          "a lamp",
+          "the lamp"
+        ],
+        "continuity_mode": "same recurring lamp"
+      },
+      {
+        "entity_id": "security_camera",
+        "canonical_name": "security camera",
+        "aliases": [
+          "the camera",
+          "camera"
+        ],
+        "continuity_mode": "same station camera"
+      },
+      {
+        "entity_id": "live_monitor",
+        "canonical_name": "station live monitor",
+        "aliases": [
+          "the live monitor",
+          "monitor"
+        ],
+        "continuity_mode": "same present-time monitor"
+      },
+      {
+        "entity_id": "sealed_wall",
+        "canonical_name": "sealed station wall",
+        "aliases": [
+          "the sealed wall",
+          "bricked wall"
+        ],
+        "continuity_mode": "same bricked wall"
+      },
+      {
+        "entity_id": "copy",
+        "canonical_name": "Mara's duplicated tape",
+        "aliases": [
+          "Mara's copy",
+          "the copy"
+        ],
+        "continuity_mode": "same corrupted duplicate"
       }
     ],
     "beats": [
