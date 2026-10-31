@@ -183,7 +183,14 @@ def _visual_gate(
                     seen_assets.add(asset_id)
                 if not re.fullmatch(r"[0-9a-fA-F]{64}", str(asset.get("sha256", ""))):
                     problems.append(f"{scene_id}: asset.sha256 must be a 64-character digest")
-                if not str(asset.get("perceptual_hash", "")).strip():
+                preview_candidate = (
+                    allow_preview_only
+                    and asset.get("rights_status") == "PREVIEW_ONLY"
+                    and asset.get("approved_for_render") is False
+                    and asset.get("preview_only") is True
+                    and str(asset.get("preview_only_reason", "")).strip()
+                )
+                if not str(asset.get("perceptual_hash", "")).strip() and not preview_candidate:
                     problems.append(f"{scene_id}: asset.perceptual_hash missing")
                 if manifest_dir is not None:
                     asset_path = (manifest_dir / str(asset.get("path", ""))).resolve()
@@ -192,13 +199,6 @@ def _visual_gate(
                     elif not asset_path.is_file():
                         problems.append(f"{scene_id}: hydrated asset file is missing")
                 approved = asset.get("rights_status") == "APPROVED" and asset.get("approved_for_render") is True
-                preview_candidate = (
-                    allow_preview_only
-                    and asset.get("rights_status") == "PREVIEW_ONLY"
-                    and asset.get("approved_for_render") is False
-                    and asset.get("preview_only") is True
-                    and str(asset.get("preview_only_reason", "")).strip()
-                )
                 if not approved and not preview_candidate:
                     problems.append(f"{scene_id}: asset rights approval missing for this mode")
                 if asset.get("reuse_status", "FRESH") not in {"FRESH", "RESERVED"}:
