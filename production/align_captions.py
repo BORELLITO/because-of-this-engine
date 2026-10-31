@@ -37,6 +37,12 @@ TENS = ["", "", "twenty", "thirty", "forty", "fifty"]
 
 
 def _number_words(value: int) -> list[str]:
+    # Years are commonly spoken as two natural pairs (for example,
+    # 1989 -> "nineteen eighty nine"). Keep the canonical number in the
+    # caption while matching the real Vosk tokens emitted by the WAV.
+    if 1000 <= value <= 2099:
+        century, remainder = divmod(value, 100)
+        return _number_words(century) + ([] if remainder == 0 else _number_words(remainder))
     if 0 <= value < len(ONES):
         return [ONES[value]]
     if 20 <= value < 60:
@@ -73,11 +79,12 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 "a": [["a"], ["uh"], ["ah"]],
                 "an": [["an"], ["un"]],
                 "the": [["the"], ["uh"], ["thuh"], ["thee"]],
+                "then": [["then"], ["than"]],
                 "to": [["to"], ["two"], ["tuh"]],
                 "of": [["of"], ["uhv"], ["ov"]],
                 "and": [["and"], ["n"], ["ənd"]],
                 "for": [["for"], ["fer"]],
-                "in": [["in"], ["ən"]],
+                "in": [["in"], ["ən"], ["and"]],
                 "on": [["on"], ["awn"]],
                 "at": [["at"], ["ət"]],
                 "is": [["is"], ["iz"]],
@@ -93,6 +100,7 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 "went": [["went"], ["when"]],
                 "pointed": [["pointed"], ["point"], ["pointing"]],
                 "directly": [["directly"], ["direct"]],
+                "worker": [["worker"], ["work"]],
                 "camera": [["camera"], ["cameras"]],
                 "it": [["it"], ["ət"]],
                 # Compound words and possessives can be emitted by ASR with a
@@ -181,7 +189,7 @@ def _align_chunk(
     matched = 0
     matched_units: list[dict[str, Any] | None] = []
     search_cursor = cursor
-    for original, alternatives in units:
+    for unit_index, (original, alternatives) in enumerate(units):
         found: tuple[int, int, float, float] | None = None
         # Speech recognizers finalize audio in natural pauses. A caption can
         # therefore begin several recognized tokens after the previous one,
@@ -193,6 +201,19 @@ def _align_chunk(
             if not match:
                 continue
             size, score = match
+            # If a candidate for the current word appears after a valid
+            # candidate for the next canonical word, the current candidate
+            # is a false jump caused by an omitted short word or an ASR
+            # insertion. Preserve monotonic alignment by refusing that jump.
+            if unit_index + 1 < len(units) and candidate > search_cursor:
+                next_alternatives = units[unit_index + 1][1]
+                next_limit = min(candidate, len(asr_words))
+                next_before_current = any(
+                    _match_at(asr_words, next_candidate, next_alternatives)
+                    for next_candidate in range(search_cursor, next_limit)
+                )
+                if next_before_current:
+                    continue
             gap = candidate - search_cursor
             rank = score - min(gap, 24) * 0.003
             if found is None or rank > found[3]:
