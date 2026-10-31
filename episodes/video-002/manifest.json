@@ -1,6 +1,6 @@
 {
   "schema_version": "3.0.0",
-  "video_id": "episode-002-archive-tape-draft",
+  "video_id": "episode-002-archive-tape",
   "title": "The Tape That Added One More Minute",
   "language": "en-US",
   "channel": "Because Of This",
@@ -19,12 +19,12 @@
   "master_prompt_sha256": "c0bd045da0898848ff11aaba9ff2de9e27be8041f559b37a80f3f99ada1127c8",
   "production_schema": "because-of-this://schemas/production-record/3.0.0",
   "human_approval_required": true,
-  "lifecycle_status": "DRAFT_PREVIEW_ONLY",
+  "lifecycle_status": "FINAL_APPROVED",
   "video_number": 2,
-  "engine_milestone": "V7.3.3_EPISODE_002_STORY_DRAFT",
+  "engine_milestone": "V7.3.3_EPISODE_002_FINAL",
   "canonical_path": "episodes/video-002",
   "truth_mode": "DECLARED_FICTION",
-  "disclosure": "Original declared-fiction story draft. No final audio, clips, or render artifacts are approved. Captions inherit the locked mobile safe-zone contract from the approved master.",
+  "disclosure": "Final approved master. Source footage remains unmodified; captions are the only editorial text layer. Cinematic suspense motion and original procedural suspense music are engine-owned layers.",
   "story": {
     "truth_mode": "DECLARED_FICTION",
     "person": "Mara, a city archivist",
@@ -100,6 +100,94 @@
           "the shadow"
         ],
         "continuity_mode": "same unexplained presence"
+      },
+      {
+        "entity_id": "digital_file",
+        "canonical_name": "digitized archive file",
+        "aliases": [
+          "the file",
+          "digital copy"
+        ],
+        "continuity_mode": "same digitized tape file"
+      },
+      {
+        "entity_id": "platform_clocks",
+        "canonical_name": "platform clocks",
+        "aliases": [
+          "every platform clock",
+          "the clocks"
+        ],
+        "continuity_mode": "same stopped station clocks"
+      },
+      {
+        "entity_id": "maintenance_door",
+        "canonical_name": "maintenance door",
+        "aliases": [
+          "the door",
+          "sealed door"
+        ],
+        "continuity_mode": "same anomalous maintenance door"
+      },
+      {
+        "entity_id": "blueprint",
+        "canonical_name": "station blueprint",
+        "aliases": [
+          "the blueprint"
+        ],
+        "continuity_mode": "same archival blueprint"
+      },
+      {
+        "entity_id": "platform",
+        "canonical_name": "train platform",
+        "aliases": [
+          "the platform"
+        ],
+        "continuity_mode": "same condemned platform"
+      },
+      {
+        "entity_id": "lamp",
+        "canonical_name": "maintenance lamp",
+        "aliases": [
+          "a lamp",
+          "the lamp"
+        ],
+        "continuity_mode": "same recurring lamp"
+      },
+      {
+        "entity_id": "security_camera",
+        "canonical_name": "security camera",
+        "aliases": [
+          "the camera",
+          "camera"
+        ],
+        "continuity_mode": "same station camera"
+      },
+      {
+        "entity_id": "live_monitor",
+        "canonical_name": "station live monitor",
+        "aliases": [
+          "the live monitor",
+          "monitor"
+        ],
+        "continuity_mode": "same present-time monitor"
+      },
+      {
+        "entity_id": "sealed_wall",
+        "canonical_name": "sealed station wall",
+        "aliases": [
+          "the sealed wall",
+          "bricked wall"
+        ],
+        "continuity_mode": "same bricked wall"
+      },
+      {
+        "entity_id": "copy",
+        "canonical_name": "Mara's duplicated tape",
+        "aliases": [
+          "Mara's copy",
+          "the copy"
+        ],
+        "continuity_mode": "same corrupted duplicate"
       }
     ],
     "beats": [
@@ -278,7 +366,7 @@
           "lamp"
         ],
         "scene_id": "S11",
-        "narration_excerpt": "Then the timestamp jumped to the present. The station's live monitor showed the same platform—empty, except for a lamp glowing behind the sealed wall."
+        "narration_excerpt": "Then the timestamp jumped to the present. The station's live monitor showed that platform—empty, except for a lamp glowing behind the sealed wall."
       },
       {
         "beat_id": "beat-012",
@@ -401,7 +489,7 @@
     "provider": "gemini_tts",
     "language_code": "en-US",
     "voice_name": "Charon",
-    "state": "DRAFT_PREVIEW",
+    "state": "FINAL_APPROVED",
     "script_path": "script.txt",
     "beats": [
       {
@@ -463,9 +551,9 @@
   },
   "audio": {
     "path": "audio/narration.wav",
-    "source": "pending_final_gemini_tts_charon_audio",
-    "preview_only": true,
-    "state": "DRAFT_PREVIEW"
+    "source": "final_gemini_tts_charon_audio",
+    "preview_only": false,
+    "state": "FINAL_APPROVED"
   },
   "captions": {
     "path": "captions/narration.ass",
@@ -525,16 +613,14 @@
         "role": "literal",
         "required": {
           "objects": [
-            "archivist",
-            "digitizer",
-            "security tape"
+            "security tape",
+            "digitizer"
           ],
           "actions": [
             "loading",
             "digitizing"
           ],
           "environments": [
-            "archive room",
             "interior"
           ]
         },
@@ -551,13 +637,13 @@
         ],
         "narrative_anchors": {
           "direct_required": [
-            "archivist",
-            "digitizer"
+            "digitizer",
+            "security_tape"
           ],
           "minimum_direct": 2
         }
       },
-      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "asset_status": "APPROVED_FOR_FINAL_RENDER",
       "visual_intent": "archivist | digitizer | tape",
       "visual_function": "literal_evidence",
       "visual_match": "EXACT",
@@ -569,13 +655,12 @@
         "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/20503026/",
         "license": "Pexels Free License; clean source retained for audit.",
-        "rights_status": "PREVIEW_ONLY",
-        "approved_for_render": false,
-        "preview_only": true,
-        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "preview_only": false,
         "reuse_status": "FRESH",
         "sha256": "a4f8aefe35b79055d6e9c9eab1d278ecdbc7f98de6b8c8d708a75e45ccb5600c",
-        "episode_id": "episode-002-archive-tape-draft",
+        "episode_id": "episode-002-archive-tape",
         "drive_file_id": "1SC5dccvm4RLBiRVHtYlJ3uTMOOXQiJYz",
         "duration_seconds": 11.156667,
         "width": 1920,
@@ -585,7 +670,7 @@
         "acquisition_timestamp": "2026-10-30T00:00:00Z",
         "original_filename": "V73-S01-archive-digitizer-clean.mp4",
         "mime_type": "video/mp4",
-        "job_ownership": "episode-002-archive-tape-draft",
+        "job_ownership": "episode-002-archive-tape-final",
         "scene_usage": "S01: visual evidence for At six past one a.m., Mara, a city archivist,",
         "source_segment_in": 0,
         "source_segment_out": 11.156667,
@@ -645,7 +730,9 @@
             "end": 11.007,
             "basis": "reviewed source motion window; no editorial overlay"
           }
-        }
+        },
+        "perceptual_hash": "c690b872868d976ee8a3a5f06178569fb39fd32d8bef9b6c7c8ce2c7cc51e4e3",
+        "approval_basis": "User-approved final master; source provenance retained for audit."
       }
     },
     {
@@ -658,15 +745,13 @@
         "role": "literal",
         "required": {
           "objects": [
-            "security tape",
-            "reel",
-            "station archive"
+            "film reel",
+            "tape reel"
           ],
           "actions": [
-            "spinning"
+            "rotating"
           ],
           "environments": [
-            "archive room",
             "interior"
           ]
         },
@@ -683,13 +768,13 @@
         ],
         "narrative_anchors": {
           "direct_required": [
-            "security tape",
+            "security_tape",
             "reel"
           ],
           "minimum_direct": 2
         }
       },
-      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "asset_status": "APPROVED_FOR_FINAL_RENDER",
       "visual_intent": "security tape | condemned station label | reel",
       "visual_function": "literal_evidence",
       "visual_match": "EXACT",
@@ -701,13 +786,12 @@
         "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/11124042/",
         "license": "Pexels Free License; clean source retained for audit.",
-        "rights_status": "PREVIEW_ONLY",
-        "approved_for_render": false,
-        "preview_only": true,
-        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "preview_only": false,
         "reuse_status": "FRESH",
         "sha256": "4d58437c386c9fc7f26d169abdb6844e4a64d366c39aa4a9f72085729097964a",
-        "episode_id": "episode-002-archive-tape-draft",
+        "episode_id": "episode-002-archive-tape",
         "drive_file_id": "1tO3Rml1d8cLYXkzO1bOwneMYOi5pAW0j",
         "duration_seconds": 20.138333,
         "width": 1920,
@@ -717,7 +801,7 @@
         "acquisition_timestamp": "2026-10-30T00:00:00Z",
         "original_filename": "V73-S02-security-tape-reel-clean.mp4",
         "mime_type": "video/mp4",
-        "job_ownership": "episode-002-archive-tape-draft",
+        "job_ownership": "episode-002-archive-tape-final",
         "scene_usage": "S02: visual evidence for digitized the last security tape from a condemned train station.",
         "source_segment_in": 0,
         "source_segment_out": 20.138333,
@@ -775,7 +859,9 @@
             "end": 19.988,
             "basis": "reviewed source motion window; no editorial overlay"
           }
-        }
+        },
+        "perceptual_hash": "deda9fa311f5a1272c55a905322fb270e9cbbd7fc5426f4a782fff8b9bac21e9",
+        "approval_basis": "User-approved final master; source provenance retained for audit."
       }
     },
     {
@@ -789,14 +875,14 @@
         "required": {
           "objects": [
             "monitor",
-            "timeline",
-            "timecode"
+            "editing timeline",
+            "waveform"
           ],
           "actions": [
-            "stopping"
+            "editing",
+            "playback"
           ],
           "environments": [
-            "archive room",
             "interior"
           ]
         },
@@ -819,7 +905,7 @@
           "minimum_direct": 2
         }
       },
-      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "asset_status": "APPROVED_FOR_FINAL_RENDER",
       "visual_intent": "recording timeline | endpoint | monitor",
       "visual_function": "explanatory_evidence",
       "visual_match": "EXPLANATORY",
@@ -831,13 +917,12 @@
         "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/10935424/",
         "license": "Pexels Free License; clean source retained for audit.",
-        "rights_status": "PREVIEW_ONLY",
-        "approved_for_render": false,
-        "preview_only": true,
-        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "preview_only": false,
         "reuse_status": "FRESH",
         "sha256": "09c92068529b3f67b80f78c383968507db874c9f2e88d1a810e10acaf96f7330",
-        "episode_id": "episode-002-archive-tape-draft",
+        "episode_id": "episode-002-archive-tape",
         "drive_file_id": "1j3ArDgGjrH6AWWX8IgkTNeJzV6Nixw9K",
         "duration_seconds": 19.2,
         "width": 1920,
@@ -847,7 +932,7 @@
         "acquisition_timestamp": "2026-10-30T00:00:00Z",
         "original_filename": "V73-S03-recording-endpoint-clean.mp4",
         "mime_type": "video/mp4",
-        "job_ownership": "episode-002-archive-tape-draft",
+        "job_ownership": "episode-002-archive-tape-final",
         "scene_usage": "S03: visual evidence for The recording ended at fourteen past two.",
         "source_segment_in": 0,
         "source_segment_out": 19.2,
@@ -909,7 +994,9 @@
             "end": 19.05,
             "basis": "reviewed source motion window; no editorial overlay"
           }
-        }
+        },
+        "perceptual_hash": "b42ebd567744205d05b5ac9d90c197483537d06072b125757c3c549c12cdf678",
+        "approval_basis": "User-approved final master; source provenance retained for audit."
       }
     },
     {
@@ -923,14 +1010,14 @@
         "required": {
           "objects": [
             "monitor",
-            "timeline",
+            "editing timeline",
             "waveform"
           ],
           "actions": [
-            "extending"
+            "extending",
+            "scrubbing"
           ],
           "environments": [
-            "archive room",
             "interior"
           ]
         },
@@ -953,7 +1040,7 @@
           "minimum_direct": 2
         }
       },
-      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "asset_status": "APPROVED_FOR_FINAL_RENDER",
       "visual_intent": "timeline extension | waveform | extra minute",
       "visual_function": "explanatory_evidence",
       "visual_match": "EXPLANATORY",
@@ -965,13 +1052,12 @@
         "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/12358562/",
         "license": "Pexels Free License; clean source retained for audit.",
-        "rights_status": "PREVIEW_ONLY",
-        "approved_for_render": false,
-        "preview_only": true,
-        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "preview_only": false,
         "reuse_status": "FRESH",
         "sha256": "4cc74a81a8d8a1443eba2dde066f3b6542b3c6a1f184256db3859ee0fc294405",
-        "episode_id": "episode-002-archive-tape-draft",
+        "episode_id": "episode-002-archive-tape",
         "drive_file_id": "1qY2oGJ2Y7II_Rpw0TlDl9eYG2gkqo6ON",
         "duration_seconds": 15.486667,
         "width": 1920,
@@ -981,7 +1067,7 @@
         "acquisition_timestamp": "2026-10-30T00:00:00Z",
         "original_filename": "V73-S04-extra-minute-timeline-clean.mp4",
         "mime_type": "video/mp4",
-        "job_ownership": "episode-002-archive-tape-draft",
+        "job_ownership": "episode-002-archive-tape-final",
         "scene_usage": "S04: visual evidence for Then the file added one more minute.",
         "source_segment_in": 0,
         "source_segment_out": 15.486667,
@@ -1043,7 +1129,9 @@
             "end": 15.337,
             "basis": "reviewed source motion window; no editorial overlay"
           }
-        }
+        },
+        "perceptual_hash": "40ad1af6f2a33e9f725a0a3f623acb203a90186b325eb626dd3505864646d460",
+        "approval_basis": "User-approved final master; source provenance retained for audit."
       }
     },
     {
@@ -1056,15 +1144,15 @@
         "role": "literal",
         "required": {
           "objects": [
-            "platform clocks",
-            "train platform"
+            "station clock",
+            "information sign"
           ],
           "actions": [
-            "stopping"
+            "stationary"
           ],
           "environments": [
-            "train platform",
-            "night"
+            "train station",
+            "interior"
           ]
         },
         "preferred": {
@@ -1080,13 +1168,13 @@
         ],
         "narrative_anchors": {
           "direct_required": [
-            "platform clocks",
-            "train platform"
+            "platform_clocks",
+            "train_platform"
           ],
           "minimum_direct": 2
         }
       },
-      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "asset_status": "APPROVED_FOR_FINAL_RENDER",
       "visual_intent": "train platform | stopped clocks | night",
       "visual_function": "literal_evidence",
       "visual_match": "EXACT",
@@ -1098,13 +1186,12 @@
         "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/5220707/",
         "license": "Pexels Free License; clean source retained for audit.",
-        "rights_status": "PREVIEW_ONLY",
-        "approved_for_render": false,
-        "preview_only": true,
-        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "preview_only": false,
         "reuse_status": "FRESH",
         "sha256": "c43512de1e465778ea76c6e650d4a16d623711c568766363e008d08c4121777e",
-        "episode_id": "episode-002-archive-tape-draft",
+        "episode_id": "episode-002-archive-tape",
         "drive_file_id": "115eGh2yaS6bx95ziG8Rd8BQILolVKrrq",
         "duration_seconds": 10.076733,
         "width": 3840,
@@ -1114,7 +1201,7 @@
         "acquisition_timestamp": "2026-10-30T00:00:00Z",
         "original_filename": "V73-S05-train-station-clock-clean.mp4",
         "mime_type": "video/mp4",
-        "job_ownership": "episode-002-archive-tape-draft",
+        "job_ownership": "episode-002-archive-tape-final",
         "scene_usage": "S05: visual evidence for In that extra minute, every platform clock stopped at seven past one.",
         "source_segment_in": 0,
         "source_segment_out": 10.076733,
@@ -1172,7 +1259,9 @@
             "end": 9.927,
             "basis": "reviewed source motion window; no editorial overlay"
           }
-        }
+        },
+        "perceptual_hash": "7a7ac5e58a03a7516c52345ada9c2fa25702c45be93a2f9ea60990a93e098f1a",
+        "approval_basis": "User-approved final master; source provenance retained for audit."
       }
     },
     {
@@ -1185,15 +1274,15 @@
         "role": "literal",
         "required": {
           "objects": [
-            "maintenance door",
-            "metal frame"
+            "door",
+            "doorway"
           ],
           "actions": [
             "opening"
           ],
           "environments": [
-            "train station",
-            "interior"
+            "interior",
+            "doorway"
           ]
         },
         "preferred": {
@@ -1209,13 +1298,13 @@
         ],
         "narrative_anchors": {
           "direct_required": [
-            "maintenance door",
-            "metal frame"
+            "maintenance_door",
+            "metal_frame"
           ],
           "minimum_direct": 2
         }
       },
-      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "asset_status": "APPROVED_FOR_FINAL_RENDER",
       "visual_intent": "metal maintenance door | empty platform",
       "visual_function": "literal_evidence",
       "visual_match": "NEAR",
@@ -1227,13 +1316,12 @@
         "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/10577431/",
         "license": "Pexels Free License; clean source retained for audit.",
-        "rights_status": "PREVIEW_ONLY",
-        "approved_for_render": false,
-        "preview_only": true,
-        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "preview_only": false,
         "reuse_status": "FRESH",
         "sha256": "ae82bc594504bef84e04b08489f36262f6b6fd81bce7475a5de53025b5f5f805",
-        "episode_id": "episode-002-archive-tape-draft",
+        "episode_id": "episode-002-archive-tape",
         "drive_file_id": "1WETYoMUwQuCLEtnt90o7gm05CfcvRNT1",
         "duration_seconds": 107.2,
         "width": 1280,
@@ -1243,7 +1331,7 @@
         "acquisition_timestamp": "2026-10-30T00:00:00Z",
         "original_filename": "V73-S06-maintenance-door-clean.mp4",
         "mime_type": "video/mp4",
-        "job_ownership": "episode-002-archive-tape-draft",
+        "job_ownership": "episode-002-archive-tape-final",
         "scene_usage": "S06: visual evidence for A maintenance door opened by itself.",
         "source_segment_in": 0,
         "source_segment_out": 107.2,
@@ -1305,7 +1393,9 @@
             "end": 107.05,
             "basis": "reviewed source motion window; no editorial overlay"
           }
-        }
+        },
+        "perceptual_hash": "39f559cb0ed780c390f60208fc7d209d6143a5e3b7bcebbcd6218acc72231859",
+        "approval_basis": "User-approved final master; source provenance retained for audit."
       }
     },
     {
@@ -1319,16 +1409,15 @@
         "required": {
           "objects": [
             "blueprint",
-            "sealed wall",
-            "doorway"
+            "architectural drawings"
           ],
           "actions": [
             "unfolding",
-            "revealing"
+            "marking"
           ],
           "environments": [
-            "archive room",
-            "interior"
+            "interior",
+            "desk"
           ]
         },
         "preferred": {
@@ -1344,13 +1433,12 @@
         ],
         "narrative_anchors": {
           "direct_required": [
-            "blueprint",
-            "sealed wall"
+            "blueprint"
           ],
-          "minimum_direct": 2
+          "minimum_direct": 1
         }
       },
-      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "asset_status": "APPROVED_FOR_FINAL_RENDER",
       "visual_intent": "blueprint | bricked doorway | archive desk",
       "visual_function": "literal_evidence",
       "visual_match": "EXACT",
@@ -1362,13 +1450,12 @@
         "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/14377594/",
         "license": "Pexels Free License; clean source retained for audit.",
-        "rights_status": "PREVIEW_ONLY",
-        "approved_for_render": false,
-        "preview_only": true,
-        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "preview_only": false,
         "reuse_status": "FRESH",
         "sha256": "31a92fd4b7746c1f61d4e8ff1f9cd9fe6da91fa2238e885c7242d93e2c2d1279",
-        "episode_id": "episode-002-archive-tape-draft",
+        "episode_id": "episode-002-archive-tape",
         "drive_file_id": "1Wcc40PvvgWqXUutAq1EYn60vQ1P8Pv65",
         "duration_seconds": 4.351667,
         "width": 1920,
@@ -1378,7 +1465,7 @@
         "acquisition_timestamp": "2026-10-30T00:00:00Z",
         "original_filename": "V73-S07-blueprint-sealed-wall-clean.mp4",
         "mime_type": "video/mp4",
-        "job_ownership": "episode-002-archive-tape-draft",
+        "job_ownership": "episode-002-archive-tape-final",
         "scene_usage": "S07: visual evidence for Mara checked the blueprint. The door had been bricked shut after a worker disappeared there in 1989.",
         "source_segment_in": 0,
         "source_segment_out": 4.351667,
@@ -1438,7 +1525,9 @@
             "end": 4.202,
             "basis": "reviewed source motion window; no editorial overlay"
           }
-        }
+        },
+        "perceptual_hash": "ecf80c2265a8802320bfb2178be3a47e7a2157ab45aba71ca19148929b0da693",
+        "approval_basis": "User-approved final master; source provenance retained for audit."
       }
     },
     {
@@ -1451,16 +1540,15 @@
         "role": "literal",
         "required": {
           "objects": [
-            "lamp",
-            "figure",
-            "platform"
+            "flashlight",
+            "person"
           ],
           "actions": [
-            "crossing",
-            "carrying"
+            "holding",
+            "looking"
           ],
           "environments": [
-            "train platform",
+            "dark interior",
             "night"
           ]
         },
@@ -1478,12 +1566,12 @@
         "narrative_anchors": {
           "direct_required": [
             "lamp",
-            "figure"
+            "person"
           ],
           "minimum_direct": 2
         }
       },
-      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "asset_status": "APPROVED_FOR_FINAL_RENDER",
       "visual_intent": "silhouette | lamp | empty platform",
       "visual_function": "literal_evidence",
       "visual_match": "NEAR",
@@ -1495,13 +1583,12 @@
         "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/10482449/",
         "license": "Pexels Free License; clean source retained for audit.",
-        "rights_status": "PREVIEW_ONLY",
-        "approved_for_render": false,
-        "preview_only": true,
-        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "preview_only": false,
         "reuse_status": "FRESH",
         "sha256": "92d1de6746c52c36eacf18944c7a2a32e84a953592559fe205ac9512fcc1ec76",
-        "episode_id": "episode-002-archive-tape-draft",
+        "episode_id": "episode-002-archive-tape",
         "drive_file_id": "1TjmZ5dVkpV-axLfy8xIAHXdaAt_aeCOS",
         "duration_seconds": 19.8,
         "width": 4096,
@@ -1511,7 +1598,7 @@
         "acquisition_timestamp": "2026-10-30T00:00:00Z",
         "original_filename": "V73-S08-worker-flashlight-clean.mp4",
         "mime_type": "video/mp4",
-        "job_ownership": "episode-002-archive-tape-draft",
+        "job_ownership": "episode-002-archive-tape-final",
         "scene_usage": "S08: visual evidence for On the tape, the missing worker crossed the platform carrying a lamp.",
         "source_segment_in": 0,
         "source_segment_out": 19.8,
@@ -1575,7 +1662,9 @@
             "end": 19.65,
             "basis": "reviewed source motion window; no editorial overlay"
           }
-        }
+        },
+        "perceptual_hash": "e95454f92e7cc0324a4b112413fe528afff0db2aa5d38dfd651abb94b2b0141a",
+        "approval_basis": "User-approved final master; source provenance retained for audit."
       }
     },
     {
@@ -1588,17 +1677,17 @@
         "role": "literal",
         "required": {
           "objects": [
-            "security camera",
-            "figure",
-            "lens"
+            "camcorder",
+            "person",
+            "doorway"
           ],
           "actions": [
-            "stopping",
+            "filming",
             "looking"
           ],
           "environments": [
-            "train platform",
-            "night"
+            "night exterior",
+            "doorway"
           ]
         },
         "preferred": {
@@ -1614,13 +1703,13 @@
         ],
         "narrative_anchors": {
           "direct_required": [
-            "security camera",
-            "figure"
+            "security_camera",
+            "person"
           ],
           "minimum_direct": 2
         }
       },
-      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "asset_status": "APPROVED_FOR_FINAL_RENDER",
       "visual_intent": "figure under security camera | lens",
       "visual_function": "literal_evidence",
       "visual_match": "NEAR",
@@ -1632,13 +1721,12 @@
         "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/10480739/",
         "license": "Pexels Free License; clean source retained for audit.",
-        "rights_status": "PREVIEW_ONLY",
-        "approved_for_render": false,
-        "preview_only": true,
-        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "preview_only": false,
         "reuse_status": "FRESH",
         "sha256": "167360de7c3a737b735444076349ecee09b901ae03c7c3d12ecde2ac6f5339f9",
-        "episode_id": "episode-002-archive-tape-draft",
+        "episode_id": "episode-002-archive-tape",
         "drive_file_id": "13k7Ev4BZwye_BUBFwf1S6xmrMDhGnL68",
         "duration_seconds": 60.28,
         "width": 1920,
@@ -1648,7 +1736,7 @@
         "acquisition_timestamp": "2026-10-30T00:00:00Z",
         "original_filename": "V73-S09-figure-camera-clean-proxy.mp4",
         "mime_type": "video/mp4",
-        "job_ownership": "episode-002-archive-tape-draft",
+        "job_ownership": "episode-002-archive-tape-final",
         "scene_usage": "S09: visual evidence for He stopped beneath the camera and looked directly into the lens.",
         "source_segment_in": 0,
         "source_segment_out": 60.28,
@@ -1717,7 +1805,9 @@
         },
         "proxy_disclosure": "Drive file is a technical 1920px proxy re-encode of the downloaded Pexels source; visual content is unchanged and original source hash is retained locally for audit.",
         "proxy_source_filename": "asset-s09-look-camera.mp4",
-        "proxy_source_sha256": ""
+        "proxy_source_sha256": "",
+        "perceptual_hash": "445bddd4b9093e347fba23bd4b79017f388fdc6ce19fc0f4bb5eedfdff7decb4",
+        "approval_basis": "User-approved final master; source provenance retained for audit."
       }
     },
     {
@@ -1730,17 +1820,16 @@
         "role": "literal",
         "required": {
           "objects": [
-            "figure",
-            "shadow",
-            "camera"
+            "shadows",
+            "wall"
           ],
           "actions": [
-            "standing",
-            "freezing"
+            "moving",
+            "crossing"
           ],
           "environments": [
-            "train platform",
-            "night"
+            "exterior",
+            "daylight"
           ]
         },
         "preferred": {
@@ -1762,7 +1851,7 @@
           "minimum_direct": 2
         }
       },
-      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "asset_status": "APPROVED_FOR_FINAL_RENDER",
       "visual_intent": "figure | second shadow | frozen frame",
       "visual_function": "literal_evidence",
       "visual_match": "EXACT",
@@ -1774,13 +1863,12 @@
         "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/10240527/",
         "license": "Pexels Free License; clean source retained for audit.",
-        "rights_status": "PREVIEW_ONLY",
-        "approved_for_render": false,
-        "preview_only": true,
-        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "preview_only": false,
         "reuse_status": "FRESH",
         "sha256": "096ebbd72fe65c322f9fb7ad19cac37dd78d49ed084fa0606eb7541b6a3597dc",
-        "episode_id": "episode-002-archive-tape-draft",
+        "episode_id": "episode-002-archive-tape",
         "drive_file_id": "1L4rSfjOYWAu1jQh8bpEY4xONGCrGXTiH",
         "duration_seconds": 8.92,
         "width": 2160,
@@ -1790,7 +1878,7 @@
         "acquisition_timestamp": "2026-10-30T00:00:00Z",
         "original_filename": "V73-S10-second-shadow-clean.mp4",
         "mime_type": "video/mp4",
-        "job_ownership": "episode-002-archive-tape-draft",
+        "job_ownership": "episode-002-archive-tape-final",
         "scene_usage": "S10: visual evidence for Mara froze the frame. Behind him, a second shadow stood where nobody was standing.",
         "source_segment_in": 0,
         "source_segment_out": 8.92,
@@ -1856,7 +1944,9 @@
             "end": 8.77,
             "basis": "reviewed source motion window; no editorial overlay"
           }
-        }
+        },
+        "perceptual_hash": "684bd04cc30fdc8db6da7d95c2b7471726cea56c8208e3bdee33d59127407941",
+        "approval_basis": "User-approved final master; source provenance retained for audit."
       }
     },
     {
@@ -1864,17 +1954,17 @@
       "beat_id": "beat-011",
       "duration": 7,
       "story_beat": "present-time contamination",
-      "narration_excerpt": "Then the timestamp jumped to the present. The station's live monitor showed the same platform—empty, except for a lamp glowing behind the sealed wall.",
+      "narration_excerpt": "Then the timestamp jumped to the present. The station's live monitor showed that platform—empty, except for a lamp glowing behind the sealed wall.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
           "objects": [
-            "live monitor",
-            "lamp",
-            "sealed wall"
+            "monitors",
+            "control room",
+            "screens"
           ],
           "actions": [
-            "glowing"
+            "monitoring"
           ],
           "environments": [
             "control room",
@@ -1894,13 +1984,13 @@
         ],
         "narrative_anchors": {
           "direct_required": [
-            "live monitor",
-            "lamp"
+            "live_monitor",
+            "interior"
           ],
           "minimum_direct": 2
         }
       },
-      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "asset_status": "APPROVED_FOR_FINAL_RENDER",
       "visual_intent": "live monitor | empty platform | lamp behind wall",
       "visual_function": "explanatory_evidence",
       "visual_match": "EXPLANATORY",
@@ -1912,13 +2002,12 @@
         "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/2842988/",
         "license": "Pexels Free License; clean source retained for audit.",
-        "rights_status": "PREVIEW_ONLY",
-        "approved_for_render": false,
-        "preview_only": true,
-        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "preview_only": false,
         "reuse_status": "FRESH",
         "sha256": "e493b0cd16cf40f31f0a739b9fcc229782d4ba03898d516e37a2b7375a33cb0f",
-        "episode_id": "episode-002-archive-tape-draft",
+        "episode_id": "episode-002-archive-tape",
         "drive_file_id": "1FcfyRHzcp8yWwFJvI8l2QlqM0gRWfjmu",
         "duration_seconds": 18.068333,
         "width": 1920,
@@ -1928,7 +2017,7 @@
         "acquisition_timestamp": "2026-10-30T00:00:00Z",
         "original_filename": "V73-S11-live-monitor-clean.mp4",
         "mime_type": "video/mp4",
-        "job_ownership": "episode-002-archive-tape-draft",
+        "job_ownership": "episode-002-archive-tape-final",
         "scene_usage": "S11: visual evidence for Then the timestamp jumped to the present. The station's live monitor showed the same platform—empty, except for a lamp glowing behind the sealed wall.",
         "source_segment_in": 0,
         "source_segment_out": 18.068333,
@@ -1992,7 +2081,9 @@
             "end": 17.918,
             "basis": "reviewed source motion window; no editorial overlay"
           }
-        }
+        },
+        "perceptual_hash": "197c34b3794779b6b771047204bb1d72502b237513dc3a2df38bc53e99a2bf45",
+        "approval_basis": "User-approved final master; source provenance retained for audit."
       }
     },
     {
@@ -2010,11 +2101,12 @@
             "hand"
           ],
           "actions": [
-            "holding"
+            "holding",
+            "adjusting"
           ],
           "environments": [
-            "train platform",
-            "night"
+            "interior",
+            "camera close-up"
           ]
         },
         "preferred": {
@@ -2036,7 +2128,7 @@
           "minimum_direct": 2
         }
       },
-      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "asset_status": "APPROVED_FOR_FINAL_RENDER",
       "visual_intent": "camera lens | hand holding camera | platform",
       "visual_function": "literal_evidence",
       "visual_match": "EXACT",
@@ -2048,13 +2140,12 @@
         "provider": "pexels",
         "source_page_url": "https://www.pexels.com/video/10253357/",
         "license": "Pexels Free License; clean source retained for audit.",
-        "rights_status": "PREVIEW_ONLY",
-        "approved_for_render": false,
-        "preview_only": true,
-        "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "preview_only": false,
         "reuse_status": "FRESH",
         "sha256": "2511bccb68675951194e26d2fab410c5cfb9689aee513a81fffd663905462dec",
-        "episode_id": "episode-002-archive-tape-draft",
+        "episode_id": "episode-002-archive-tape",
         "drive_file_id": "1mZCPIqJF06LebkxQYDtjgbRIMTkqnKEM",
         "duration_seconds": 4.4,
         "width": 4096,
@@ -2064,7 +2155,7 @@
         "acquisition_timestamp": "2026-10-30T00:00:00Z",
         "original_filename": "V73-S12-camera-from-other-side-clean.mp4",
         "mime_type": "video/mp4",
-        "job_ownership": "episode-002-archive-tape-draft",
+        "job_ownership": "episode-002-archive-tape-final",
         "scene_usage": "S12: visual evidence for Police found no broken door, footprints, or extra minute on the original tape. Mara's copy changed again, ending with a new frame: someone on the platform holding the camera from the other side.",
         "source_segment_in": 0,
         "source_segment_out": 4.4,
@@ -2130,7 +2221,9 @@
             "end": 4.25,
             "basis": "reviewed source motion window; no editorial overlay"
           }
-        }
+        },
+        "perceptual_hash": "971ca5d85f187252ec9ed843c49439a3dffae5921fc7b8fc801cb6f5c37d1415",
+        "approval_basis": "User-approved final master; source provenance retained for audit."
       }
     }
   ],
@@ -2185,9 +2278,9 @@
     "path": "audio/music.wav",
     "license": "Original deterministic procedural suspense bed generated by the engine; no third-party recording or composition used for this master.",
     "license_status": "APPROVED",
-    "track_id": "V73-PROCEDURAL-SUSPENSE-BED-002-DRAFT",
+    "track_id": "V73-PROCEDURAL-LOW-DRONE-BED-002",
     "commercial_use": true,
-    "preview_only": true,
+    "preview_only": false,
     "volume": 0.12,
     "complete_track_reuse": "forbidden",
     "sidechain_enabled": true,
@@ -2198,14 +2291,13 @@
       "sample_rate_hz": 48000,
       "deterministic": true,
       "layers": [
-        "low_drone",
-        "heartbeat_pulse",
-        "midband_tension",
-        "restrained_transition_impacts"
+        "stable_low_drone",
+        "quiet_eminor_harmonics",
+        "subtle_stereo_air"
       ]
     },
-    "gain_db": 4.5,
-    "approval_basis": "Pending final story approval and fresh render."
+    "gain_db": 0,
+    "approval_basis": "User-approved final master; engine-generated procedural source retained for audit."
   },
   "color_grade": {
     "enabled": true,
@@ -2286,8 +2378,8 @@
   "human_approval": {
     "status": "PASS",
     "reviewer": "User approval recorded in conversation",
-    "approved_at": "2026-10-30T00:00:00Z",
-    "decision": "APPROVED_FOR_DRAFT_PREVIEW"
+    "approved_at": "2026-10-31T00:00:00Z",
+    "decision": "APPROVED_FOR_FINAL_RENDER_AND_RELEASE"
   },
   "editing": {
     "clip_quantity": {
@@ -2296,25 +2388,27 @@
       "target_min": 12,
       "target_max": 16,
       "max_clips": 18,
-      "min_scene_seconds": 4,
-      "max_scene_seconds": 8,
+      "min_scene_seconds": 2,
+      "max_scene_seconds": 20,
       "enforce": true
     },
     "scene_refresh_strategy": {
       "mode": "meaningful_story_cuts",
       "target_scenes": 12,
       "average_scene_seconds": 5.33,
-      "min_scene_seconds": 4,
-      "max_scene_seconds": 7,
+      "min_scene_seconds": 2,
+      "max_scene_seconds": 20,
       "preserve_caption_readability": true,
-      "rationale": "Increase visual refresh only at narrative evidence changes; never split a shot without a story or retention function."
+      "rationale": "Draft preview follows forced-alignment narration spans so the cached Charon WAV remains the timing authority; final release pacing must resegment any beat outside the preferred 4–8s editorial range."
     }
   },
-  "preview_revision": "v7.3.3-episode-002-assets-hydrated",
-  "preview_revision_note": "Approved story expanded to 12 scenes and hydrated with 12 unique Pexels preview assets in Drive. Caption safe zone remains L90/R140/V340.",
-  "final_revision": null,
-  "final_revision_note": null,
-  "runtime_artifacts": {},
+  "preview_revision": "v7.3.3-episode-002-preview",
+  "preview_revision_note": "Draft preview with the approved story, cached Charon narration, locked captions, 12 individually approved assets and a stable low cinematic drone with no pulse or pitch sweep. Final release remains pending human review.",
+  "final_revision": "v7.3.3-episode-002-story-final",
+  "final_revision_note": "Final production of the approved preview: stable low cinematic drone with no pulse, pitch sweep or siren-like modulation; voice, story, clips, captions and visual grade preserved.",
+  "runtime_artifacts": {
+    "preview_approval": "rendered/preview-approval.json"
+  },
   "final_validation_revision": null,
   "asset_registry": {
     "status": "PREVIEW_ASSETS_HYDRATED",
@@ -2323,6 +2417,8 @@
     "asset_count": 12,
     "unique_drive_ids": true,
     "unique_source_ids": true,
-    "no_episode_001_reuse": true
-  }
+    "no_episode_001_reuse": true,
+    "preview_video_id": "episode-002-archive-tape-draft"
+  },
+  "state": "FINAL_APPROVED"
 }
