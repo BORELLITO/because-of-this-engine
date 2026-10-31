@@ -78,9 +78,11 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
             continue
         token = _normalise(raw[index])
         if token.isdigit() and len(token) == 4 and 1000 <= int(token) <= 2099:
+            year_words = _number_words(int(token))
             result.append((raw[index], [
                 [token],
-                _number_words(int(token)),
+                year_words,
+                ["and"] + year_words,
             ]))
             index += 1
             continue
@@ -116,6 +118,7 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 "lens": [["lens"], ["lands"]],
                 "checked": [["checked"], ["check"]],
                 "blueprint": [["blueprint"], ["blue", "print"]],
+                "someone": [["someone"], ["some", "one"]],
                 "timestamp": [["timestamp"], ["time", "stamp"]],
                 "it": [["it"], ["ət"]],
                 # Compound words and possessives can be emitted by ASR with a
@@ -532,6 +535,30 @@ def _grammar_phrase(value: str) -> str:
     return " ".join(_normalise(token) for token in tokens if _normalise(token))
 
 
+_WEAK_GRAMMAR_WORDS = {
+    "a", "an", "the", "to", "of", "and", "for", "in", "on",
+    "at", "is", "was", "it", "uh", "ah",
+}
+
+
+def _grammar_phrases_with_weak_word_context(value: str) -> list[str]:
+    """Build narrow grammar entries that keep weak words acoustically visible."""
+    tokens = _grammar_phrase(value).split()
+    if not tokens:
+        return []
+    entries = [" ".join(tokens)]
+    for index, token in enumerate(tokens):
+        if token not in _WEAK_GRAMMAR_WORDS:
+            continue
+        for left, right in ((1, 2), (2, 2), (2, 3), (3, 3)):
+            start = max(0, index - left)
+            end = min(len(tokens), index + right + 1)
+            candidate = " ".join(tokens[start:end])
+            if token in candidate.split():
+                entries.append(candidate)
+    return list(dict.fromkeys(entries))
+
+
 def _cursor_for_time(asr_words: list[dict[str, Any]], timestamp: float) -> int:
     for index, item in enumerate(asr_words):
         if float(item["start"]) >= max(0.0, timestamp - 0.02):
@@ -570,7 +597,7 @@ def _recover_with_phrase_vocabulary(
                 phrase_words = _recognize_passes(
                     audio_path,
                     model_paths,
-                    grammar_phrases=[phrase_only],
+                    grammar_phrases=_grammar_phrases_with_weak_word_context(chunk),
                 )
                 merged = _merge_word_timings(merged, phrase_words)
                 cursor = _cursor_for_time(merged, cursor_time)
@@ -607,10 +634,12 @@ def _recover_with_phrase_vocabulary(
                 # Retry with the failed phrase and its immediate context as
                 # multi-word grammar entries. Any accepted token must still be
                 # emitted by Vosk with a real start/end timestamp.
-                grammar_phrases = [
-                    _grammar_phrase(value)
-                    for value in chunks[context_start:context_end]
-                ]
+                grammar_phrases = []
+                for value in chunks[context_start:context_end]:
+                    grammar_phrases.extend(
+                        _grammar_phrases_with_weak_word_context(value)
+                    )
+                grammar_phrases = list(dict.fromkeys(grammar_phrases))
                 sequence_words = _recognize_passes(
                     audio_path,
                     model_paths,
