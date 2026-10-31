@@ -33,7 +33,10 @@ ONES = [
     "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
     "sixteen", "seventeen", "eighteen", "nineteen",
 ]
-TENS = ["", "", "twenty", "thirty", "forty", "fifty"]
+TENS = [
+    "", "", "twenty", "thirty", "forty", "fifty",
+    "sixty", "seventy", "eighty", "ninety",
+]
 
 
 def _number_words(value: int) -> list[str]:
@@ -45,7 +48,7 @@ def _number_words(value: int) -> list[str]:
         return _number_words(century) + ([] if remainder == 0 else _number_words(remainder))
     if 0 <= value < len(ONES):
         return [ONES[value]]
-    if 20 <= value < 60:
+    if 20 <= value < 100:
         return [TENS[value // 10]] + ([] if value % 10 == 0 else [ONES[value % 10]])
     return [str(value)]
 
