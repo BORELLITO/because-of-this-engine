@@ -366,7 +366,7 @@
           "lamp"
         ],
         "scene_id": "S11",
-        "narration_excerpt": "Then the timestamp jumped to the present. The station's live monitor showed the same platform—empty, except for a lamp glowing behind the sealed wall."
+        "narration_excerpt": "Then the timestamp jumped to the present. The station's live monitor showed that platform—empty, except for a lamp glowing behind the sealed wall."
       },
       {
         "beat_id": "beat-012",
@@ -1952,7 +1952,7 @@
       "beat_id": "beat-011",
       "duration": 7,
       "story_beat": "present-time contamination",
-      "narration_excerpt": "Then the timestamp jumped to the present. The station's live monitor showed the same platform—empty, except for a lamp glowing behind the sealed wall.",
+      "narration_excerpt": "Then the timestamp jumped to the present. The station's live monitor showed that platform—empty, except for a lamp glowing behind the sealed wall.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
