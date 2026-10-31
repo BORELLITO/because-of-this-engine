@@ -112,6 +112,11 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 "directly": [["directly"], ["direct"]],
                 "worker": [["worker"], ["work"]],
                 "camera": [["camera"], ["cameras"]],
+                "froze": [["froze"], ["roast"]],
+                "lens": [["lens"], ["lands"]],
+                "checked": [["checked"], ["check"]],
+                "blueprint": [["blueprint"], ["blue", "print"]],
+                "timestamp": [["timestamp"], ["time", "stamp"]],
                 "it": [["it"], ["ət"]],
                 # Compound words and possessives can be emitted by ASR with a
                 # different token boundary. These alternatives still require
