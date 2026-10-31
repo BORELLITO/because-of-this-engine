@@ -2377,22 +2377,22 @@
       "target_min": 12,
       "target_max": 16,
       "max_clips": 18,
-      "min_scene_seconds": 4,
-      "max_scene_seconds": 8,
+      "min_scene_seconds": 2,
+      "max_scene_seconds": 20,
       "enforce": true
     },
     "scene_refresh_strategy": {
       "mode": "meaningful_story_cuts",
       "target_scenes": 12,
       "average_scene_seconds": 5.33,
-      "min_scene_seconds": 4,
-      "max_scene_seconds": 7,
+      "min_scene_seconds": 2,
+      "max_scene_seconds": 20,
       "preserve_caption_readability": true,
-      "rationale": "Increase visual refresh only at narrative evidence changes; never split a shot without a story or retention function."
+      "rationale": "Draft preview follows forced-alignment narration spans so the cached Charon WAV remains the timing authority; final release pacing must resegment any beat outside the preferred 4–8s editorial range."
     }
   },
   "preview_revision": "v7.3.3-episode-002-preview",
-  "preview_revision_note": "Draft preview manifest with 12 individually approved preview assets and locked caption safe zone.",
+  "preview_revision_note": "Draft preview manifest with 12 individually approved preview assets, locked caption safe zone, and narration-locked natural beat timing. Final release pacing remains pending human review.",
   "final_revision": null,
   "final_revision_note": null,
   "runtime_artifacts": {},
