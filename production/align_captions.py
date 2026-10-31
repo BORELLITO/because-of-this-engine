@@ -193,55 +193,75 @@ def _align_chunk(
     units = _units(chunk)
     if not units:
         raise AlignmentError("Caption chunk contains no spoken words.")
-    matched = 0
-    matched_units: list[dict[str, Any] | None] = []
-    search_cursor = cursor
+    # Solve each caption chunk as a monotonic sequence instead of greedily
+    # committing the first plausible short-word match. This lets the recognizer
+    # choose “and nineteen eighty nine” for canonical “in 1989” while keeping
+    # every accepted span tied to a real Vosk word timestamp.
+    states: dict[int, tuple[int, float, list[tuple[int, int, float] | None]]] = {
+        cursor: (0, 0.0, [])
+    }
     for unit_index, (original, alternatives) in enumerate(units):
-        found: tuple[int, int, float, float] | None = None
-        # Speech recognizers finalize audio in natural pauses. A caption can
-        # therefore begin several recognized tokens after the previous one,
-        # especially when Vosk emits segment results. Search a generous,
-        # bounded lookahead but still keep the timeline strictly monotonic.
-        window_end = min(len(asr_words), search_cursor + 48)
-        for candidate in range(search_cursor, window_end):
-            match = _match_at(asr_words, candidate, alternatives)
-            if not match:
-                continue
-            size, score = match
-            # If a candidate for the current word appears after a valid
-            # candidate for the next canonical word, the current candidate
-            # is a false jump caused by an omitted short word or an ASR
-            # insertion. Preserve monotonic alignment by refusing that jump.
-            if unit_index + 1 < len(units) and candidate > search_cursor:
-                next_alternatives = units[unit_index + 1][1]
-                next_limit = min(candidate, len(asr_words))
-                next_before_current = any(
-                    _match_at(asr_words, next_candidate, next_alternatives)
-                    for next_candidate in range(search_cursor, next_limit)
-                )
-                if next_before_current:
-                    continue
-            gap = candidate - search_cursor
-            rank = score - min(gap, 24) * 0.003
-            if found is None or rank > found[3]:
-                found = (candidate, size, score, rank)
-        if found is None:
-            matched_units.append(None)
-            continue
-        candidate, size, score, _rank = found
-        matched += 1
-        matched_units.append({
-            "canonical": original,
-            "asr": " ".join(word["word"] for word in asr_words[candidate:candidate + size]),
-            "start": asr_words[candidate]["start"],
-            "end": asr_words[candidate + size - 1]["end"],
-            "confidence": round(score, 3),
-            "recovered": False,
-            "timestamp_source": "vosk_word_timestamp",
-            "_asr_index": candidate,
-        })
-        search_cursor = candidate + size
+        next_states: dict[int, tuple[int, float, list[tuple[int, int, float] | None]]] = {}
+        for search_cursor, (matched_count, total_score, path) in states.items():
+            # Keep a skipped unit in the best partial path for diagnostics and
+            # for the existing bounded function-word recovery mode. Strict
+            # callers still fail closed when any canonical unit is missing.
+            skip_penalty = 0.65 if _normalise(original) in _RECOVERY_DURATIONS else 2.0
+            skipped = (matched_count, total_score - skip_penalty, path + [None])
+            previous = next_states.get(search_cursor)
+            if previous is None or (skipped[0], skipped[1]) > (previous[0], previous[1]):
+                next_states[search_cursor] = skipped
 
+            window_end = min(len(asr_words), search_cursor + 48)
+            for candidate in range(search_cursor, window_end):
+                match = _match_at(asr_words, candidate, alternatives)
+                if not match:
+                    continue
+                size, score = match
+                gap = candidate - search_cursor
+                matched = (
+                    matched_count + 1,
+                    total_score + score - min(gap, 24) * 0.003,
+                    path + [(candidate, size, score)],
+                )
+                next_cursor = candidate + size
+                previous = next_states.get(next_cursor)
+                if previous is None or (matched[0], matched[1]) > (previous[0], previous[1]):
+                    next_states[next_cursor] = matched
+        # Bound the state set while preserving every possible matched-count
+        # tier and the strongest score for each next ASR cursor.
+        states = next_states
+        if not states:
+            break
+
+    if not states:
+        matched = 0
+        matched_units = [None] * len(units)
+        search_cursor = cursor
+    else:
+        best_cursor, best_state = max(
+            states.items(),
+            key=lambda item: (item[1][0], item[1][1], -item[0]),
+        )
+        matched = best_state[0]
+        search_cursor = best_cursor
+        path = best_state[2]
+        matched_units = []
+        for (original, _alternatives), match in zip(units, path):
+            if match is None:
+                matched_units.append(None)
+                continue
+            candidate, size, score = match
+            matched_units.append({
+                "canonical": original,
+                "asr": " ".join(word["word"] for word in asr_words[candidate:candidate + size]),
+                "start": asr_words[candidate]["start"],
+                "end": asr_words[candidate + size - 1]["end"],
+                "confidence": round(score, 3),
+                "recovered": False,
+                "timestamp_source": "vosk_word_timestamp",
+                "_asr_index": candidate,
+            })
     if matched < len(units):
         if not recover_missing:
             missing = len(units) - matched
