@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "episode_id": "episode-002-archive-tape-draft",
   "title": "The Tape That Added One More Minute",
-  "status": "PENDING_RESEARCH",
+  "status": "CONTEXT_CORRECTION_RESEARCH_REQUIRED",
   "truth_mode": "DECLARED_FICTION",
   "reuse_policy": {
     "fresh_assets_required": true,
@@ -27,14 +27,12 @@
     {
       "scene_id": "S01",
       "beat_id": "beat-001",
-      "duration_seconds": 4,
+      "narration_excerpt": "At six past one a.m., Mara, a city archivist,",
+      "duration_seconds": 3,
       "required_visuals": [
-        "archivist",
-        "digitizer",
-        "security tape"
+        "archivist"
       ],
       "required_actions": [
-        "loading",
         "digitizing"
       ],
       "environments": [
@@ -45,23 +43,25 @@
         "hospital",
         "elevator",
         "red emergency corridor",
-        "generic office"
+        "generic office",
+        "unrelated crowds"
       ],
       "clean_clip_requirement": true,
+      "no_loop_required": true,
       "research_priority": "high",
       "asset_status": "PENDING"
     },
     {
       "scene_id": "S02",
       "beat_id": "beat-002",
-      "duration_seconds": 4,
+      "narration_excerpt": "digitized the last security tape from a condemned train station.",
+      "duration_seconds": 3,
       "required_visuals": [
-        "security tape",
-        "reel",
-        "station archive"
+        "security",
+        "tape"
       ],
       "required_actions": [
-        "spinning"
+        "loading"
       ],
       "environments": [
         "archive room",
@@ -71,16 +71,19 @@
         "hospital",
         "elevator",
         "red emergency corridor",
-        "generic office"
+        "generic office",
+        "unrelated crowds"
       ],
       "clean_clip_requirement": true,
+      "no_loop_required": true,
       "research_priority": "high",
       "asset_status": "PENDING"
     },
     {
       "scene_id": "S03",
       "beat_id": "beat-003",
-      "duration_seconds": 6,
+      "narration_excerpt": "The recording ended at fourteen past two.",
+      "duration_seconds": 3,
       "required_visuals": [
         "monitor",
         "timeline",
@@ -97,16 +100,19 @@
         "hospital",
         "elevator",
         "red emergency corridor",
-        "generic office"
+        "generic office",
+        "unrelated crowds"
       ],
       "clean_clip_requirement": true,
+      "no_loop_required": true,
       "research_priority": "normal",
       "asset_status": "PENDING"
     },
     {
       "scene_id": "S04",
       "beat_id": "beat-004",
-      "duration_seconds": 5,
+      "narration_excerpt": "Then the file added one more minute.",
+      "duration_seconds": 3,
       "required_visuals": [
         "monitor",
         "timeline",
@@ -123,44 +129,83 @@
         "hospital",
         "elevator",
         "red emergency corridor",
-        "generic office"
+        "generic office",
+        "unrelated crowds"
       ],
       "clean_clip_requirement": true,
-      "research_priority": "normal",
+      "no_loop_required": true,
+      "research_priority": "high",
       "asset_status": "PENDING"
     },
     {
       "scene_id": "S05",
       "beat_id": "beat-005",
-      "duration_seconds": 5,
+      "narration_excerpt": "In that extra minute, every platform clock stopped",
+      "duration_seconds": 4,
       "required_visuals": [
-        "platform clocks",
-        "train platform"
+        "platform",
+        "clocks",
+        "train",
+        "platform"
       ],
       "required_actions": [
         "stopping"
       ],
       "environments": [
         "train platform",
-        "night"
+        "interior"
       ],
       "forbidden_visuals": [
         "hospital",
         "elevator",
         "red emergency corridor",
-        "generic office"
+        "generic office",
+        "unrelated crowds"
       ],
       "clean_clip_requirement": true,
+      "no_loop_required": true,
       "research_priority": "high",
       "asset_status": "PENDING"
     },
     {
       "scene_id": "S06",
       "beat_id": "beat-006",
-      "duration_seconds": 6,
+      "narration_excerpt": "at seven past one.",
+      "duration_seconds": 3,
       "required_visuals": [
-        "maintenance door",
-        "metal frame"
+        "platform",
+        "clock",
+        "timecode"
+      ],
+      "required_actions": [
+        "stopping"
+      ],
+      "environments": [
+        "train platform",
+        "interior"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office",
+        "unrelated crowds"
+      ],
+      "clean_clip_requirement": true,
+      "no_loop_required": true,
+      "research_priority": "high",
+      "asset_status": "PENDING"
+    },
+    {
+      "scene_id": "S07",
+      "beat_id": "beat-007",
+      "narration_excerpt": "A maintenance door opened",
+      "duration_seconds": 3,
+      "required_visuals": [
+        "maintenance",
+        "door",
+        "metal",
+        "frame"
       ],
       "required_actions": [
         "opening"
@@ -173,23 +218,83 @@
         "hospital",
         "elevator",
         "red emergency corridor",
-        "generic office"
+        "generic office",
+        "unrelated crowds"
       ],
       "clean_clip_requirement": true,
+      "no_loop_required": true,
+      "research_priority": "high",
+      "asset_status": "PENDING"
+    },
+    {
+      "scene_id": "S08",
+      "beat_id": "beat-008",
+      "narration_excerpt": "by itself.",
+      "duration_seconds": 3,
+      "required_visuals": [
+        "maintenance",
+        "door",
+        "gap"
+      ],
+      "required_actions": [
+        "opening"
+      ],
+      "environments": [
+        "train station",
+        "interior"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office",
+        "unrelated crowds"
+      ],
+      "clean_clip_requirement": true,
+      "no_loop_required": true,
+      "research_priority": "high",
+      "asset_status": "PENDING"
+    },
+    {
+      "scene_id": "S09",
+      "beat_id": "beat-009",
+      "narration_excerpt": "Mara checked the blueprint.",
+      "duration_seconds": 3,
+      "required_visuals": [
+        "blueprint",
+        "hand"
+      ],
+      "required_actions": [
+        "unfolding"
+      ],
+      "environments": [
+        "archive room",
+        "interior"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office",
+        "unrelated crowds"
+      ],
+      "clean_clip_requirement": true,
+      "no_loop_required": true,
       "research_priority": "normal",
       "asset_status": "PENDING"
     },
     {
-      "scene_id": "S07",
-      "beat_id": "beat-007",
-      "duration_seconds": 6,
+      "scene_id": "S10",
+      "beat_id": "beat-010",
+      "narration_excerpt": "The door had been bricked shut after a worker disappeared there in 1989.",
+      "duration_seconds": 4,
       "required_visuals": [
         "blueprint",
-        "sealed wall",
+        "sealed",
+        "wall",
         "doorway"
       ],
       "required_actions": [
-        "unfolding",
         "revealing"
       ],
       "environments": [
@@ -200,101 +305,227 @@
         "hospital",
         "elevator",
         "red emergency corridor",
-        "generic office"
+        "generic office",
+        "unrelated crowds"
       ],
       "clean_clip_requirement": true,
-      "research_priority": "normal",
-      "asset_status": "PENDING"
-    },
-    {
-      "scene_id": "S08",
-      "beat_id": "beat-008",
-      "duration_seconds": 6,
-      "required_visuals": [
-        "lamp",
-        "figure",
-        "platform"
-      ],
-      "required_actions": [
-        "crossing",
-        "carrying"
-      ],
-      "environments": [
-        "train platform",
-        "night"
-      ],
-      "forbidden_visuals": [
-        "hospital",
-        "elevator",
-        "red emergency corridor",
-        "generic office"
-      ],
-      "clean_clip_requirement": true,
+      "no_loop_required": true,
       "research_priority": "high",
-      "asset_status": "PENDING"
-    },
-    {
-      "scene_id": "S09",
-      "beat_id": "beat-009",
-      "duration_seconds": 5,
-      "required_visuals": [
-        "security camera",
-        "figure",
-        "lens"
-      ],
-      "required_actions": [
-        "stopping",
-        "looking"
-      ],
-      "environments": [
-        "train platform",
-        "night"
-      ],
-      "forbidden_visuals": [
-        "hospital",
-        "elevator",
-        "red emergency corridor",
-        "generic office"
-      ],
-      "clean_clip_requirement": true,
-      "research_priority": "high",
-      "asset_status": "PENDING"
-    },
-    {
-      "scene_id": "S10",
-      "beat_id": "beat-010",
-      "duration_seconds": 5,
-      "required_visuals": [
-        "figure",
-        "shadow",
-        "camera"
-      ],
-      "required_actions": [
-        "standing",
-        "freezing"
-      ],
-      "environments": [
-        "train platform",
-        "night"
-      ],
-      "forbidden_visuals": [
-        "hospital",
-        "elevator",
-        "red emergency corridor",
-        "generic office"
-      ],
-      "clean_clip_requirement": true,
-      "research_priority": "normal",
       "asset_status": "PENDING"
     },
     {
       "scene_id": "S11",
       "beat_id": "beat-011",
-      "duration_seconds": 7,
+      "narration_excerpt": "On the tape, the missing worker crossed the platform",
+      "duration_seconds": 4,
       "required_visuals": [
-        "live monitor",
+        "figure",
+        "platform"
+      ],
+      "required_actions": [
+        "crossing"
+      ],
+      "environments": [
+        "train platform",
+        "interior"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office",
+        "unrelated crowds"
+      ],
+      "clean_clip_requirement": true,
+      "no_loop_required": true,
+      "research_priority": "high",
+      "asset_status": "PENDING"
+    },
+    {
+      "scene_id": "S12",
+      "beat_id": "beat-012",
+      "narration_excerpt": "carrying a lamp.",
+      "duration_seconds": 3,
+      "required_visuals": [
+        "figure",
+        "lamp"
+      ],
+      "required_actions": [
+        "carrying"
+      ],
+      "environments": [
+        "train platform",
+        "interior"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office",
+        "unrelated crowds"
+      ],
+      "clean_clip_requirement": true,
+      "no_loop_required": true,
+      "research_priority": "high",
+      "asset_status": "PENDING"
+    },
+    {
+      "scene_id": "S13",
+      "beat_id": "beat-013",
+      "narration_excerpt": "He stopped beneath the camera",
+      "duration_seconds": 3,
+      "required_visuals": [
+        "security",
+        "camera",
+        "figure"
+      ],
+      "required_actions": [
+        "stopping"
+      ],
+      "environments": [
+        "train platform",
+        "interior"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office",
+        "unrelated crowds"
+      ],
+      "clean_clip_requirement": true,
+      "no_loop_required": true,
+      "research_priority": "high",
+      "asset_status": "PENDING"
+    },
+    {
+      "scene_id": "S14",
+      "beat_id": "beat-014",
+      "narration_excerpt": "and looked directly into the lens.",
+      "duration_seconds": 3,
+      "required_visuals": [
+        "figure",
+        "lens"
+      ],
+      "required_actions": [
+        "looking"
+      ],
+      "environments": [
+        "train platform",
+        "interior"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office",
+        "unrelated crowds"
+      ],
+      "clean_clip_requirement": true,
+      "no_loop_required": true,
+      "research_priority": "high",
+      "asset_status": "PENDING"
+    },
+    {
+      "scene_id": "S15",
+      "beat_id": "beat-015",
+      "narration_excerpt": "Mara froze the frame.",
+      "duration_seconds": 3,
+      "required_visuals": [
+        "frame",
+        "shadow",
+        "camera"
+      ],
+      "required_actions": [
+        "freezing"
+      ],
+      "environments": [
+        "train platform",
+        "interior"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office",
+        "unrelated crowds"
+      ],
+      "clean_clip_requirement": true,
+      "no_loop_required": true,
+      "research_priority": "high",
+      "asset_status": "PENDING"
+    },
+    {
+      "scene_id": "S16",
+      "beat_id": "beat-016",
+      "narration_excerpt": "Behind him, a second shadow stood where nobody was standing.",
+      "duration_seconds": 4,
+      "required_visuals": [
+        "second",
+        "shadow",
+        "empty",
+        "platform"
+      ],
+      "required_actions": [
+        "standing"
+      ],
+      "environments": [
+        "train platform",
+        "interior"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office",
+        "unrelated crowds"
+      ],
+      "clean_clip_requirement": true,
+      "no_loop_required": true,
+      "research_priority": "high",
+      "asset_status": "PENDING"
+    },
+    {
+      "scene_id": "S17",
+      "beat_id": "beat-017",
+      "narration_excerpt": "Then the timestamp jumped to the present.",
+      "duration_seconds": 3,
+      "required_visuals": [
+        "timestamp",
+        "live",
+        "monitor"
+      ],
+      "required_actions": [
+        "jumping"
+      ],
+      "environments": [
+        "control room",
+        "interior"
+      ],
+      "forbidden_visuals": [
+        "hospital",
+        "elevator",
+        "red emergency corridor",
+        "generic office",
+        "unrelated crowds"
+      ],
+      "clean_clip_requirement": true,
+      "no_loop_required": true,
+      "research_priority": "high",
+      "asset_status": "PENDING"
+    },
+    {
+      "scene_id": "S18",
+      "beat_id": "beat-018",
+      "narration_excerpt": "The station's live monitor showed that platform—empty, except for a lamp glowing behind the sealed wall. Police found no broken door, footprints, or extra minute on the original tape. Mara's copy changed again, ending with a new frame: someone on the platform holding the camera from the other side.",
+      "duration_seconds": 3,
+      "required_visuals": [
+        "live",
+        "monitor",
         "lamp",
-        "sealed wall"
+        "sealed",
+        "wall",
+        "camera"
       ],
       "required_actions": [
         "glowing"
@@ -307,48 +538,32 @@
         "hospital",
         "elevator",
         "red emergency corridor",
-        "generic office"
+        "generic office",
+        "unrelated crowds"
       ],
       "clean_clip_requirement": true,
-      "research_priority": "high",
-      "asset_status": "PENDING"
-    },
-    {
-      "scene_id": "S12",
-      "beat_id": "beat-012",
-      "duration_seconds": 5,
-      "required_visuals": [
-        "camera",
-        "lens",
-        "hand"
-      ],
-      "required_actions": [
-        "holding"
-      ],
-      "environments": [
-        "train platform",
-        "night"
-      ],
-      "forbidden_visuals": [
-        "hospital",
-        "elevator",
-        "red emergency corridor",
-        "generic office"
-      ],
-      "clean_clip_requirement": true,
+      "no_loop_required": true,
       "research_priority": "high",
       "asset_status": "PENDING"
     }
   ],
-  "scene_count": 12,
-  "duration_seconds": 64,
+  "scene_count": 18,
+  "duration_seconds": 58,
   "scene_refresh_strategy": {
-    "mode": "meaningful_story_cuts",
-    "target_scenes": 12,
-    "average_scene_seconds": 5.33,
-    "min_scene_seconds": 4,
-    "max_scene_seconds": 7,
+    "mode": "micro_beat_literal_evidence",
+    "target_scenes": 18,
+    "average_scene_seconds": 3.22,
+    "min_scene_seconds": 3,
+    "max_scene_seconds": 4,
     "preserve_caption_readability": true,
-    "rationale": "Increase visual refresh only at narrative evidence changes; never split a shot without a story or retention function."
+    "no_same_scene_loop": true,
+    "rationale": "Every visual change follows a concrete narrated evidence change; clips shorter than their assigned beat are rejected instead of looped."
+  },
+  "revision": "v7.3.3-episode-002-visual-correction",
+  "editorial_request": {
+    "source": "user_feedback",
+    "requirement": "Use 12-18 distinct clips, preferably 18 for this 64-second story, with each clip representing the exact narrated object/action/environment.",
+    "forbid": "Generic filler, unrelated footage, repeated source takes, and same-scene loops used only to fill time.",
+    "preserve": "Approved narration, captions, music bed, color grade, logo and overall channel pattern."
   }
 }
