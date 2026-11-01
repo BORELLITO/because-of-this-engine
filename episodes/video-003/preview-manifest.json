@@ -135,7 +135,7 @@
           "dead_ward"
         ],
         "scene_id": "S01",
-        "narration_excerpt": "At 2:17 a.m., Daniel was alone in the hospital switchboard when an impossible extension rang."
+        "narration_excerpt": "At 2:17 a.m., Daniel was alone in the hospital switchboard when a dead extension rang."
       },
       {
         "beat_id": "beat-002",
@@ -167,7 +167,7 @@
           "dead_ward"
         ],
         "scene_id": "S03",
-        "narration_excerpt": "He answered. No voice spoke, only breathing, and three words repeated: Don't send the elevator."
+        "narration_excerpt": "He answered. No voice spoke, only breathing, then three words: Don't send the elevator."
       },
       {
         "beat_id": "beat-004",
@@ -182,7 +182,7 @@
           "emergency_log"
         ],
         "scene_id": "S04",
-        "narration_excerpt": "The call ended, but the switchboard printed tomorrow's emergency log, already signed with Daniel's name."
+        "narration_excerpt": "The call ended. The switchboard printed tomorrow's emergency log, signed with Daniel's name."
       },
       {
         "beat_id": "beat-005",
@@ -197,7 +197,7 @@
           "elevator"
         ],
         "scene_id": "S05",
-        "narration_excerpt": "He checked the fourth floor. The hospital had thirteen floors, yet one elevator button was warm."
+        "narration_excerpt": "On the fourth floor, one elevator button was warm."
       },
       {
         "beat_id": "beat-006",
@@ -228,7 +228,7 @@
           "emergency_log"
         ],
         "scene_id": "S07",
-        "narration_excerpt": "Daniel had spent eleven years filing his sister's death as an accident."
+        "narration_excerpt": "Daniel had filed his sister's death as an accident."
       },
       {
         "beat_id": "beat-008",
@@ -243,7 +243,7 @@
           "receiver"
         ],
         "scene_id": "S08",
-        "narration_excerpt": "Now the missing call was replaying the exact minute he had refused to remember."
+        "narration_excerpt": "Now the call replayed the minute he refused to remember."
       },
       {
         "beat_id": "beat-009",
@@ -259,7 +259,7 @@
           "records_room"
         ],
         "scene_id": "S09",
-        "narration_excerpt": "He found the original log—and saw the rule: every answered call demanded a witness."
+        "narration_excerpt": "In the original log, he found the rule: every answered call demanded a witness."
       },
       {
         "beat_id": "beat-010",
@@ -275,7 +275,7 @@
           "emergency_log"
         ],
         "scene_id": "S10",
-        "narration_excerpt": "If he destroyed the page, the past would stay buried. If he routed it, someone tomorrow might live."
+        "narration_excerpt": "Destroy the page, and the past stayed buried. Route it, and someone tomorrow might live."
       },
       {
         "beat_id": "beat-011",
@@ -291,7 +291,7 @@
           "receiver"
         ],
         "scene_id": "S11",
-        "narration_excerpt": "Daniel connected the line. The hospital went dark, and the receiver began ringing from inside the sealed room."
+        "narration_excerpt": "Daniel connected the line. The hospital went dark; the receiver rang from inside the sealed room."
       },
       {
         "beat_id": "beat-012",
@@ -307,7 +307,7 @@
           "receiver"
         ],
         "scene_id": "S12",
-        "narration_excerpt": "At dawn, the new log contained one completed call: Daniel's name—followed by the word home."
+        "narration_excerpt": "At dawn, the new log held one completed call: Daniel's name—followed by home."
       }
     ]
   },
@@ -408,7 +408,7 @@
     "beats": [
       {
         "beat_id": "beat-001",
-        "text": "At 2:17 a.m., Daniel was alone in the hospital switchboard when an impossible extension rang.",
+        "text": "At 2:17 a.m., Daniel was alone in the hospital switchboard when a dead extension rang.",
         "pause_before_ms": 0
       },
       {
@@ -418,17 +418,17 @@
       },
       {
         "beat_id": "beat-003",
-        "text": "He answered. No voice spoke, only breathing, and three words repeated: Don't send the elevator.",
+        "text": "He answered. No voice spoke, only breathing, then three words: Don't send the elevator.",
         "pause_before_ms": 120
       },
       {
         "beat_id": "beat-004",
-        "text": "The call ended, but the switchboard printed tomorrow's emergency log, already signed with Daniel's name.",
+        "text": "The call ended. The switchboard printed tomorrow's emergency log, signed with Daniel's name.",
         "pause_before_ms": 120
       },
       {
         "beat_id": "beat-005",
-        "text": "He checked the fourth floor. The hospital had thirteen floors, yet one elevator button was warm.",
+        "text": "On the fourth floor, one elevator button was warm.",
         "pause_before_ms": 120
       },
       {
@@ -438,39 +438,39 @@
       },
       {
         "beat_id": "beat-007",
-        "text": "Daniel had spent eleven years filing his sister's death as an accident.",
+        "text": "Daniel had filed his sister's death as an accident.",
         "pause_before_ms": 120
       },
       {
         "beat_id": "beat-008",
-        "text": "Now the missing call was replaying the exact minute he had refused to remember.",
+        "text": "Now the call replayed the minute he refused to remember.",
         "pause_before_ms": 120
       },
       {
         "beat_id": "beat-009",
-        "text": "He found the original log—and saw the rule: every answered call demanded a witness.",
+        "text": "In the original log, he found the rule: every answered call demanded a witness.",
         "pause_before_ms": 120
       },
       {
         "beat_id": "beat-010",
-        "text": "If he destroyed the page, the past would stay buried. If he routed it, someone tomorrow might live.",
+        "text": "Destroy the page, and the past stayed buried. Route it, and someone tomorrow might live.",
         "pause_before_ms": 120
       },
       {
         "beat_id": "beat-011",
-        "text": "Daniel connected the line. The hospital went dark, and the receiver began ringing from inside the sealed room.",
+        "text": "Daniel connected the line. The hospital went dark; the receiver rang from inside the sealed room.",
         "pause_before_ms": 120
       },
       {
         "beat_id": "beat-012",
-        "text": "At dawn, the new log contained one completed call: Daniel's name—followed by the word home.",
+        "text": "At dawn, the new log held one completed call: Daniel's name—followed by home.",
         "pause_before_ms": 120
       }
     ]
   },
   "script": {
     "path": "script.txt",
-    "word_count_target": 177
+    "word_count_target": 153
   },
   "audio": {
     "path": "audio/narration.wav",
@@ -531,7 +531,7 @@
       "beat_id": "beat-001",
       "duration": 6,
       "story_beat": "the dead ward extension rings",
-      "narration_excerpt": "At 2:17 a.m., Daniel was alone in the hospital switchboard when an impossible extension rang.",
+      "narration_excerpt": "At 2:17 a.m., Daniel was alone in the hospital switchboard when a dead extension rang.",
       "visual_semantics": {
         "role": "literal",
         "required": {
@@ -796,7 +796,7 @@
       "beat_id": "beat-003",
       "duration": 6,
       "story_beat": "the caller gives the elevator warning",
-      "narration_excerpt": "He answered. No voice spoke, only breathing, and three words repeated: Don't send the elevator.",
+      "narration_excerpt": "He answered. No voice spoke, only breathing, then three words: Don't send the elevator.",
       "visual_semantics": {
         "role": "literal",
         "required": {
@@ -930,7 +930,7 @@
       "beat_id": "beat-004",
       "duration": 6,
       "story_beat": "tomorrow's log prints with Daniel's signature",
-      "narration_excerpt": "The call ended, but the switchboard printed tomorrow's emergency log, already signed with Daniel's name.",
+      "narration_excerpt": "The call ended. The switchboard printed tomorrow's emergency log, signed with Daniel's name.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1061,7 +1061,7 @@
       "beat_id": "beat-005",
       "duration": 6,
       "story_beat": "the warm button appears above the normal floors",
-      "narration_excerpt": "He checked the fourth floor. The hospital had thirteen floors, yet one elevator button was warm.",
+      "narration_excerpt": "On the fourth floor, one elevator button was warm.",
       "visual_semantics": {
         "role": "literal",
         "required": {
@@ -1325,7 +1325,7 @@
       "beat_id": "beat-007",
       "duration": 6,
       "story_beat": "Daniel confronts the accident report",
-      "narration_excerpt": "Daniel had spent eleven years filing his sister's death as an accident.",
+      "narration_excerpt": "Daniel had filed his sister's death as an accident.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1454,7 +1454,7 @@
       "beat_id": "beat-008",
       "duration": 6,
       "story_beat": "the missing minute replays his refusal",
-      "narration_excerpt": "Now the missing call was replaying the exact minute he had refused to remember.",
+      "narration_excerpt": "Now the call replayed the minute he refused to remember.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1582,7 +1582,7 @@
       "beat_id": "beat-009",
       "duration": 6,
       "story_beat": "the original log states the witness rule",
-      "narration_excerpt": "He found the original log—and saw the rule: every answered call demanded a witness.",
+      "narration_excerpt": "In the original log, he found the rule: every answered call demanded a witness.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1711,7 +1711,7 @@
       "beat_id": "beat-010",
       "duration": 6,
       "story_beat": "Daniel chooses the cable over the shredder",
-      "narration_excerpt": "If he destroyed the page, the past would stay buried. If he routed it, someone tomorrow might live.",
+      "narration_excerpt": "Destroy the page, and the past stayed buried. Route it, and someone tomorrow might live.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1840,7 +1840,7 @@
       "beat_id": "beat-011",
       "duration": 6,
       "story_beat": "the hospital goes dark and the sealed room rings",
-      "narration_excerpt": "Daniel connected the line. The hospital went dark, and the receiver began ringing from inside the sealed room.",
+      "narration_excerpt": "Daniel connected the line. The hospital went dark; the receiver rang from inside the sealed room.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1972,7 +1972,7 @@
       "beat_id": "beat-012",
       "duration": 6,
       "story_beat": "the final log calls Daniel home",
-      "narration_excerpt": "At dawn, the new log contained one completed call: Daniel's name—followed by the word home.",
+      "narration_excerpt": "At dawn, the new log held one completed call: Daniel's name—followed by home.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
