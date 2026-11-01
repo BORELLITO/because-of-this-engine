@@ -114,7 +114,7 @@ def scene_filter(
         crop_y = f"max(0,min(ih-oh,(ih-oh)*{focus_y:.4f}))"
         filters = [
             f"scale={width}:{height}:force_original_aspect_ratio=increase",
-            f"scale=ceil(iw*{zoom_expression}/2)*2:ceil(ih*{zoom_expression}/2)*2:eval=frame",
+            f"scale='ceil(iw*{zoom_expression}/2)*2':'ceil(ih*{zoom_expression}/2)*2':eval=frame",
             f"crop={width}:{height}:x='{crop_x}':y='{crop_y}'",
         ]
     else:
