@@ -42,7 +42,7 @@ EXCERPTS = [
     "Now the call replayed the minute he refused to remember.",
     "In the original log, he found the rule: every answered call demanded a witness.",
     "Destroy the page, and the past stayed buried. Route it, and someone tomorrow might live.",
-    "Daniel connected the line. The hospital went dark; the receiver rang from inside the sealed room.",
+    "Daniel connected the line. Hospital went dark. The receiver rang from inside the sealed room.",
     "At dawn, the new log held one completed call: Daniel's name—followed by home.",
 ]
 
