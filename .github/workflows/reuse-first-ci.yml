@@ -10,6 +10,7 @@ on:
       - "production/render_video_episode.py"
       - "production/google_drive_delivery.py"
       - "production/narration_cache.py"
+      - "production/asset_reuse_brain.py"
       - "production/v7_orchestrator.py"
       - "production/quality_gates.py"
       - "production/canonical_config.py"
@@ -67,6 +68,7 @@ jobs:
             production/render_video_episode.py \
             production/google_drive_delivery.py \
             production/narration_cache.py \
+            production/asset_reuse_brain.py \
             production/v7_orchestrator.py \
             production/quality_gates.py \
             production/canonical_config.py \
