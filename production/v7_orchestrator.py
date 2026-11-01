@@ -315,7 +315,7 @@ def _gate_record(gate_id: str, check: dict[str, Any]) -> dict[str, Any]:
     return {
         "gate_id": gate_id,
         "name": GATE_NAMES[gate_id],
-        "rule_version": "7.1",
+        "rule_version": "7.2",
         "state": state,
         "severity": "critical_blocking" if check["blocking"] else "informational",
         "score": 1.0 if state == "passed" else 0.0 if state == "blocked" else None,
