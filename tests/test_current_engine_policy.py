@@ -29,7 +29,7 @@ class CurrentEnginePolicyTests(unittest.TestCase):
     def test_singleton_guard_accepts_current_engine_only(self):
         result = audit(ROOT)
         self.assertEqual(result["status"], "V7_SINGLE_ACTIVE_ENGINE_PASS")
-        self.assertEqual(result["workflow"], ".github/workflows/episode-003-draft-preview.yml")
+        self.assertEqual(result["workflow"], ".github/workflows/episode-002-draft-preview.yml")
 
     def test_current_voice_and_schema_are_gemini_charon(self):
         policy = json.loads(
