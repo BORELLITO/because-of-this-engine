@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Canonical V7.3.2 cinematic-dread visual-effects contract.
 
-The effect profile is intentionally deterministic and conservative: it increases
-perceived dread through shadow shaping, restrained color separation, a controlled
-luminance pulse and vignette without adding authored text, objects or narrative
-content to source clips.
+The effect profile is deterministic and conservative: it increases perceived
+dread through shadow shaping, restrained color separation, a controlled
+luminance pulse and vignette while using a semantic, anchored push-in. Generated
+lateral sway and vertical oscillation are forbidden because they distract from
+the narrated evidence and damage suspense continuity.
 """
 
 from __future__ import annotations
@@ -14,6 +15,7 @@ from typing import Any
 PROFILE_ID = "cinematic_dread_v73"
 PROFILE_VERSION = "7.3.2"
 REFERENCE_BASIS = "cinematic_dread_v73_before_after_comparison"
+MOTION_MODEL = "semantic_push_in_v2"
 
 
 class VisualEffectsError(ValueError):
@@ -90,6 +92,9 @@ def validate_cinematic_suspense(
         "profile": profile,
         "profile_version": PROFILE_VERSION,
         "reference_basis": REFERENCE_BASIS,
+        "motion_model": MOTION_MODEL,
+        "lateral_drift_enabled": False,
+        "vertical_drift_enabled": False,
         "motion_smoothing": motion_smoothing,
         "interpolation_fps": int(interpolation_fps),
         "motion_strength": _number(suspense, "motion_strength", 0.045),
