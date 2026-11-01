@@ -424,10 +424,13 @@ def _audio_timed_scene_durations(
                 f"Scene {scene.get('scene_id')} narration span is {base_duration:.3f}s, "
                 f"below the {scene_min_seconds:.2f}s visual-beat minimum."
             )
-        if base_duration > max_seconds + 0.02:
+        # Forced-alignment boundaries are midpoint-derived and can drift by a
+        # few hundredths of a second because of TTS pause quantization. Keep
+        # the editorial maximum strict while allowing that bounded jitter.
+        if base_duration > max_seconds + 0.10:
             raise RenderError(
                 f"Scene {scene.get('scene_id')} narration span is {base_duration:.3f}s, "
-                f"above the {max_seconds:.2f}s visual-beat maximum; split the beat."
+                f"above the {max_seconds + 0.10:.2f}s alignment-tolerant visual-beat maximum; split the beat."
             )
         source_duration = (scene.get("asset") or {}).get("metadata", {}).get("duration")
         if source_duration is None:
