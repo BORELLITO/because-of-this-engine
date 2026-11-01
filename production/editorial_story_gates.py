@@ -35,6 +35,10 @@ def _number(value: Any) -> bool:
     return isinstance(value, (int, float)) and not isinstance(value, bool)
 
 
+def _integer(value: Any) -> bool:
+    return isinstance(value, int) and not isinstance(value, bool)
+
+
 def _gate(code: str, name: str, passed: bool, evidence: Iterable[str]) -> dict[str, Any]:
     return {
         "code": code,
@@ -171,6 +175,13 @@ def _causal_gate(manifest: Mapping[str, Any], sc: Mapping[str, Any]) -> dict[str
                     failures.append(f"link {index} references unknown {key}={item.get(key)}")
             if item.get("from_scene") == item.get("to_scene"):
                 failures.append(f"link {index} does not move to a new scene")
+        for index, (previous, current) in enumerate(zip(escalation_items, escalation_items[1:]), start=1):
+            if (
+                isinstance(previous, Mapping)
+                and isinstance(current, Mapping)
+                and previous.get("to_scene") != current.get("from_scene")
+            ):
+                failures.append(f"links {index} and {index + 1} are not continuous")
     passed = not failures
     evidence = [
         f"causal links={len(escalation_items)}",
@@ -183,17 +194,19 @@ def _causal_gate(manifest: Mapping[str, Any], sc: Mapping[str, Any]) -> dict[str
 def _rule_gate(manifest: Mapping[str, Any], sc: Mapping[str, Any]) -> dict[str, Any]:
     rule = _contract(sc).get("anomaly_rule")
     known = set(_scene_ids(manifest)) | set(_beat_ids(manifest))
-    required = ("rule", "violation", "cost", "rule_scene_id", "cost_scene_id")
+    required = ("rule", "violation", "cost", "rule_scene_id", "violation_scene_id", "cost_scene_id")
     missing = [key for key in required if not isinstance(rule, Mapping) or not _text(rule.get(key))]
     passed = (
         not missing
         and str(rule.get("rule_scene_id")) in known
+        and str(rule.get("violation_scene_id")) in known
         and str(rule.get("cost_scene_id")) in known
-        and str(rule.get("rule_scene_id")) != str(rule.get("cost_scene_id"))
+        and len({str(rule.get("rule_scene_id")), str(rule.get("violation_scene_id")), str(rule.get("cost_scene_id"))}) == 3
     )
     evidence = [
         "the supernatural or investigative mechanism has a stated rule, violation and price",
         f"rule_scene_id={rule.get('rule_scene_id') if isinstance(rule, Mapping) else None}",
+        f"violation_scene_id={rule.get('violation_scene_id') if isinstance(rule, Mapping) else None}",
         f"cost_scene_id={rule.get('cost_scene_id') if isinstance(rule, Mapping) else None}",
     ]
     if not passed:
@@ -377,11 +390,13 @@ def _narration_gate(sc: Mapping[str, Any]) -> dict[str, Any]:
         and narration.get("naturalness_status") == "PASS"
         and narration.get("generic_line_count") == 0
         and narration.get("orphan_line_count") == 0
-        and isinstance(narration.get("causal_link_count"), int)
+        and _integer(narration.get("generic_line_count"))
+        and _integer(narration.get("orphan_line_count"))
+        and _integer(narration.get("causal_link_count"))
         and narration.get("causal_link_count") >= 3
         and _number(ratio)
         and float(ratio) >= 0.70
-        and isinstance(narration.get("reviewed_sentence_count"), int)
+        and _integer(narration.get("reviewed_sentence_count"))
         and narration.get("reviewed_sentence_count") >= 8
         and isinstance(evidence_lines, list)
         and len(evidence_lines) >= 3
