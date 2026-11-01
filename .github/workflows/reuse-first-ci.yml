@@ -1,0 +1,44 @@
+name: Because Of This reuse-first CI
+
+on:
+  push:
+    branches:
+      - v7.3.4-reuse-first-performance
+    paths:
+      - "production/reuse_first.py"
+      - "production/google_drive_assets.py"
+      - "production/render_video_episode.py"
+      - "tests/**"
+      - ".github/workflows/episode-002-draft-preview.yml"
+      - ".github/workflows/reuse-first-ci.yml"
+  pull_request:
+    paths:
+      - "production/reuse_first.py"
+      - "production/google_drive_assets.py"
+      - "production/render_video_episode.py"
+      - "tests/**"
+      - ".github/workflows/episode-002-draft-preview.yml"
+      - ".github/workflows/reuse-first-ci.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  static-and-reuse-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Compile changed production modules
+        run: |
+          python -m py_compile             production/reuse_first.py             production/google_drive_assets.py             production/render_video_episode.py
+
+      - name: Run reuse-first unit tests
+        run: python -m unittest discover -s tests -p "test_*.py" -v
