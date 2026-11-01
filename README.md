@@ -1,9 +1,9 @@
-# BECAUSE OF THIS — V7.1 Piper Canonical Engine + Active V7.2 Reuse-First Add-ons
+# BECAUSE OF THIS — V7.3.2 Gemini Charon Engine + V7.4 Editorial Layer
 
 This repository contains the single canonical production engine for the
-Because Of This channel. The approved V7.2 Reuse-First optimization layer is
-ACTIVE on top of the locked Piper V7.1 core, without changing the canonical
-voice model, profile fingerprint or human-controlled publication policy.
+Because Of This channel. The approved reuse-first optimization layer and the
+V7.4 editorial story layer are ACTIVE on top of the locked V7.3.2 core.
+There is one executable voice route: direct Gemini TTS with the Charon voice.
 The active feature bundle is declared in `production/active_engine_policy.json`.
 V7.1 is driven by the pinned master prompt
 `docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V7_1_PIPER_TTS_LOCAL.txt` and schema
@@ -11,9 +11,9 @@ V7.1 is driven by the pinned master prompt
 
 ## Active engine contract
 
-- Video-only vertical output: 1080×1920, 60 fps, 60–75 seconds.
-- Narration provider: local Piper neural TTS only, `en_US-ryan-high`,
-  LINEAR16 at 24 kHz, with no API key, billing account, network synthesis or silent fallback.
+- Video-only vertical output: 1080×1920, 60 fps, 60–80 seconds.
+- Narration provider: Gemini TTS only, `gemini-3.8-flash-tts`, voice `Charon`,
+  American English at 24 kHz, with no provider fallback.
 - Audio is the master clock. Captions are generated from final audio using
   forced alignment; estimated timings are not accepted.
 - Every visual beat requires direct semantic anchors, rights evidence,
@@ -29,8 +29,8 @@ V7.1 is driven by the pinned master prompt
   are V7.1 and rejects retired execution markers.
 - `production/v7_orchestrator.py` — G0–G11 evaluation, idempotency and
   production-record generation.
-- `production/piper_tts.py` — Piper local model preflight, chunk synthesis,
-  provenance, hashes and real-duration metadata; Edge and Google Cloud adapters are archived.
+- `production/gemini_tts.py` — Gemini Charon preflight, one-request synthesis,
+  provenance, hashes and real-duration metadata; Piper is rollback-only archive material.
 - `production/v7_post_publication.py` — manual-only G11 verifier.
 - `.github/workflows/because-of-this-v7.yml` — manually dispatched production
   workflow; it stops on missing evidence and never publishes automatically.
@@ -38,12 +38,12 @@ V7.1 is driven by the pinned master prompt
 ## Lifecycle
 
 Use `--mode contract` for structural validation before external work, `--mode
-dry-run` for local Piper TTS prosody and orchestration checks, `--mode preflight` after
+dry-run` for orchestration checks, `--mode preflight` after
 approved assets/music and narration coverage are hydrated, `--mode preview`
 for a render candidate, and `--mode production` only after final artifacts,
 preview approval and human approval are registered. A blocked gate is an intentional stop, not an implicit fallback.
 
-The Episode 001 draft preview completed successfully with Piper narration,
+The approved preview workflow uses Gemini Charon narration,
 Vosk-aligned captions, FFmpeg render and Drive delivery:
 https://github.com/BORELLITO/because-of-this-engine/actions/runs/40986385249
 
@@ -71,7 +71,7 @@ PYTHONPATH=. python production/v7_orchestrator.py --repo-root . \
 
 ## Active V7.2 Reuse First
 
-- `production/narration_cache.py`: Piper model/config SHA-256, all voice settings, beat list and pronunciation-aware cache keys; Drive checksum-verified reuse.
+- `production/narration_cache.py`: Gemini model/config SHA-256, all voice settings, beat list and pronunciation-aware cache keys; Drive checksum-verified reuse.
 - `production/asset_reuse_brain.py`: archived footage stays retired and cannot be silently recycled across episodes.
 - `production/audio_reuse_brain.py`: track IDs, audio hashes, Drive IDs and historical music records checked.
 - `production/release_integrity_v72.py`: read-only registry-backed release integrity checks in place of unconditional PASS metadata.
