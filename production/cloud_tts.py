@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Google Cloud Text-to-Speech Chirp 3 HD adapter for the Because Of This V7.2 engine.
+"""Archived Google Cloud Text-to-Speech adapter; not an active engine route.
 
 The adapter deliberately uses the documented REST `text:synthesize` contract
 with SSML and Application Default Credentials/OAuth.  Gemini, ElevenLabs and
