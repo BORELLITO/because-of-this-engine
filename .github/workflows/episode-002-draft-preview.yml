@@ -1,4 +1,4 @@
-name: Because Of This V7.3.4 reuse-first Episode 002 draft preview
+name: Because Of This V7.4 reuse-first Episode 002 draft preview
 
 on:
   workflow_dispatch:
@@ -26,8 +26,6 @@ concurrency:
 
 env:
   BECAUSE_OF_THIS_DRIVE_FOLDER_ID: "1A-oyowfHtdciB2_NZSLIZ0oG-ajOeYVb"
-  # The visual correction resegments narration but reuses the same verified Charon WAV.
-  BECAUSE_OF_THIS_LEGACY_NARRATION_CACHE_KEYS: "3e4c98b6f3acf16515b7a7539cd415d02f20d65b9d365fd2c101393d745cf6ed"
   PYTHONUNBUFFERED: "1"
 
 jobs:
@@ -147,11 +145,10 @@ jobs:
           path: episodes/video-002/assets
           key: because-of-this-assets-${{ steps.fingerprint.outputs.asset_key }}
 
-      - name: Validate canonical V7.3.3 EPISODE 002 Charon contract
+      - name: Validate canonical Charon contract
         run: |
           PYTHONPATH=. python production/v7_contract.py \
             --repo-root . --manifest "${{ inputs.manifest || 'episodes/video-002/preview-manifest.json' }}" --require-production
-
 
       - name: Gemini TTS Charon preflight
         env:
@@ -162,7 +159,8 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y ffmpeg
           fi
-          PYTHONPATH=. python production/gemini_tts.py --manifest "${{ inputs.manifest || 'episodes/video-002/preview-manifest.json' }}" --preflight
+          PYTHONPATH=. python production/gemini_tts.py \
+            --manifest "${{ inputs.manifest || 'episodes/video-002/preview-manifest.json' }}" --preflight
 
       - name: Restore identical existing Charon narration from Drive cache
         env:
@@ -173,14 +171,14 @@ jobs:
           set -euo pipefail
           PYTHONPATH=. python production/narration_cache.py \
             --manifest "${{ inputs.manifest || 'episodes/video-002/preview-manifest.json' }}" --restore \
-            --status-file "${RUNNER_TEMP}/v731-cache-result.json"
-          python - "${RUNNER_TEMP}/v731-cache-result.json" <<'PY'
+            --status-file "${RUNNER_TEMP}/charon-cache-result.json"
+          python - "${RUNNER_TEMP}/charon-cache-result.json" <<'PY'
           import json, os, sys
-          status=json.load(open(sys.argv[1], encoding="utf-8"))["status"]
-          if status not in {"NARRATION_CACHE_HIT","NARRATION_CACHE_MISS"}:
+          status = json.load(open(sys.argv[1], encoding="utf-8"))["status"]
+          if status not in {"NARRATION_CACHE_HIT", "NARRATION_CACHE_MISS"}:
               raise SystemExit("Unexpected Charon cache status")
           with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
-              env.write("CHARON_CACHE_HIT=" + ("true" if status=="NARRATION_CACHE_HIT" else "false") + "\n")
+              env.write("CHARON_CACHE_HIT=" + ("true" if status == "NARRATION_CACHE_HIT" else "false") + "\n")
           print("CHARON_CACHE_REUSE_STATUS=" + status)
           PY
 
@@ -194,11 +192,11 @@ jobs:
           set -euo pipefail
           PYTHONPATH=. python production/narration_cache.py \
             --manifest "${{ inputs.manifest || 'episodes/video-002/preview-manifest.json' }}" --restore \
-            --status-file "${RUNNER_TEMP}/v731-cache-recheck.json"
-          python - "${RUNNER_TEMP}/v731-cache-recheck.json" <<'PY'
+            --status-file "${RUNNER_TEMP}/charon-cache-recheck.json"
+          python - "${RUNNER_TEMP}/charon-cache-recheck.json" <<'PY'
           import json, os, sys
-          status=json.load(open(sys.argv[1], encoding="utf-8"))["status"]
-          if status not in {"NARRATION_CACHE_HIT","NARRATION_CACHE_MISS"}:
+          status = json.load(open(sys.argv[1], encoding="utf-8"))["status"]
+          if status not in {"NARRATION_CACHE_HIT", "NARRATION_CACHE_MISS"}:
               raise SystemExit("Unexpected Charon cache recheck status")
           if status == "NARRATION_CACHE_HIT":
               with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
@@ -223,7 +221,6 @@ jobs:
           echo "CHARON_PROVIDER_REQUEST_ALLOWED=true" >> "${GITHUB_ENV}"
           echo "CHARON_PROVIDER_REQUEST_BUDGET=1" >> "${GITHUB_ENV}"
           echo "CHARON_PROVIDER_REQUEST_ARMED=one"
-          echo "CHARON_PROVIDER_REQUEST_MODE=RUN_ONCE"
 
       - name: Generate at most one missing Charon narration
         if: env.CHARON_CACHE_HIT != 'true' && env.CHARON_PROVIDER_REQUEST_ALLOWED == 'true'
@@ -246,6 +243,7 @@ jobs:
         run: |
           PYTHONPATH=. python production/narration_cache.py \
             --manifest "${{ inputs.manifest || 'episodes/video-002/preview-manifest.json' }}" --store
+
       - name: Prepare Vosk cache directory
         run: |
           set -euo pipefail
@@ -267,7 +265,25 @@ jobs:
           set -euo pipefail
           if [ ! -d "${VOSK_MODEL_DIR}" ]; then
             curl --fail --location --retry 5 --retry-all-errors \
-              "h      - name: Restore alignment and caption cache
+              "https://alphacephei.com/vosk/models/vosk-model-en-us-0.22-lgraph.zip" \
+              --output "${VOSK_CACHE_ROOT}/primary/model.zip"
+            unzip -q "${VOSK_CACHE_ROOT}/primary/model.zip" -d "${VOSK_CACHE_ROOT}/primary"
+          fi
+          if [ ! -d "${VOSK_SECONDARY_MODEL_DIR}" ]; then
+            curl --fail --location --retry 5 --retry-all-errors \
+              "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip" \
+              --output "${VOSK_CACHE_ROOT}/secondary/model.zip"
+            unzip -q "${VOSK_CACHE_ROOT}/secondary/model.zip" -d "${VOSK_CACHE_ROOT}/secondary"
+          fi
+
+      - name: Save Vosk alignment model cache
+        if: steps.vosk_cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: ${{ runner.temp }}/because-of-this-vosk
+          key: because-of-this-vosk-${{ runner.os }}-v1
+
+      - name: Restore alignment and caption cache
         id: alignment_cache
         uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684
         with:
@@ -277,15 +293,16 @@ jobs:
       - name: Build or reuse forced-alignment captions and story coverage
         run: |
           set -euo pipefail
-          mkdir -p episodes/video-002/.cache/alignment
-          if [ -f episodes/video-002/.cache/alignment/narration.alignment.json ] &&              [ -f episodes/video-002/.cache/alignment/narration.ass ] &&              [ -f episodes/video-002/.cache/alignment/narration-coverage.json ]; then
+          mkdir -p episodes/video-002/.cache/alignment episodes/video-002/captions episodes/video-002/rendered
+          if [ -f episodes/video-002/.cache/alignment/narration.alignment.json ] && \
+             [ -f episodes/video-002/.cache/alignment/narration.ass ] && \
+             [ -f episodes/video-002/.cache/alignment/narration-coverage.json ]; then
             cp episodes/video-002/.cache/alignment/narration.alignment.json episodes/video-002/captions/narration.alignment.json
             cp episodes/video-002/.cache/alignment/narration.ass episodes/video-002/captions/narration.ass
             cp episodes/video-002/.cache/alignment/narration-coverage.json episodes/video-002/rendered/narration-coverage.json
             echo "ALIGNMENT_CACHE_HIT=true" >> "${GITHUB_ENV}"
             echo "ALIGNMENT_REUSE_HIT"
           else
-            mkdir -p episodes/video-002/captions episodes/video-002/rendered
             PYTHONPATH=. python production/align_captions.py \
               --manifest "${{ inputs.manifest || 'episodes/video-002/preview-manifest.json' }}" \
               --model-dir "${VOSK_MODEL_DIR}" \
@@ -308,15 +325,14 @@ jobs:
           path: episodes/video-002/.cache/alignment
           key: because-of-this-alignment-${{ steps.fingerprint.outputs.alignment_key }}-${{ steps.fingerprint.outputs.caption_key }}
 
-      - name: Generate deterministic suspense soundtrack
-        run: |
-          set -euo pipefail
-          mkdir -p episodes/video-002/audio
-          PYTHONPATH=. python production/generate_suspense_bed.py \
-            --output episodes/video-002/audio/music.wav \
-            --duration 70 \
-            --sample-rate 48000
+      - name: Restore deterministic suspense music cache
+        id: music_cache
+        uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: episodes/video-002/.cache/music
+          key: because-of-this-music-${{ steps.fingerprint.outputs.music_key }}
 
+      - name: Build or reuse deterministic suspense soundtrack
         run: |
           set -euo pipefail
           mkdir -p episodes/video-002/audio episodes/video-002/.cache/music
@@ -350,6 +366,13 @@ jobs:
           set -euo pipefail
           PYTHONPATH=. python production/google_drive_assets.py \
             --manifest "${{ inputs.manifest || 'episodes/video-002/preview-manifest.json' }}" --require-drive-assets
+
+      - name: Save verified Drive asset cache
+        if: steps.asset_cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: episodes/video-002/assets
+          key: because-of-this-assets-${{ steps.fingerprint.outputs.asset_key }}
 
       - name: Run visual-story QA in draft-preview mode
         run: |
@@ -390,10 +413,12 @@ jobs:
             --manifest "${{ inputs.manifest || 'episodes/video-002/preview-manifest.json' }}" \
             --report "episodes/video-002/rendered/caption-quality-draft-preview.json"
           PYTHONPATH=. python production/validate_video_release.py \
-            --manifest "${{ inputs.manifest || 'episodes/video-002/preview-manifest.json' }}" --mode draft-preview \
+            --manifest "${{ inputs.manifest || 'episodes/video-002/preview-manifest.json' }}" \
+            --mode draft-preview \
             --report "episodes/video-002/rendered/video-release-draft-preview.json"
           PYTHONPATH=. python production/golden_frame_regression.py \
-            --manifest "${{ inputs.manifest || 'episodes/video-002/preview-manifest.json' }}" --mode draft-preview \
+            --manifest "${{ inputs.manifest || 'episodes/video-002/preview-manifest.json' }}" \
+            --mode draft-preview \
             --report "episodes/video-002/rendered/golden-layout-draft-preview.json"
 
       - name: Register preview artifacts and evaluate V7 gates
@@ -429,7 +454,9 @@ jobs:
           path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
           PY
           PYTHONPATH=. python production/v7_orchestrator.py \
-            --repo-root . --manifest "${MANIFEST}" --mode draft-preview \
+            --repo-root . \
+            --manifest "${MANIFEST}" \
+            --mode draft-preview \
             --check-gemini-tts \
             --report "episodes/video-002/rendered/v7-release-draft-preview.json"
 
@@ -473,5 +500,3 @@ jobs:
         run: |
           echo "DRAFT_PREVIEW_COMPLETE"
           echo "No production approval or publication was recorded."
-# Heavy rendering is explicit via workflow_dispatch. Repository pushes only
-# change source state; they never start a 90-minute render implicitly.
