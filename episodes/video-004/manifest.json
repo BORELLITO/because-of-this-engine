@@ -667,7 +667,8 @@
             "embedded_layout": "NONE",
             "full_frame": "PASS",
             "external_branding": "NONE",
-            "crop_safety": "PASS"
+            "crop_safety": "PASS",
+            "embedded_text_status": "NONE"
           }
         },
         "source_segment_in": 0,
@@ -815,7 +816,8 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS",
             "external_branding": "NONE",
-            "crop_safety": "PASS"
+            "crop_safety": "PASS",
+            "embedded_text_status": "NONE"
           }
         },
         "source_segment_in": 0,
@@ -966,7 +968,8 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS",
             "external_branding": "NONE",
-            "crop_safety": "PASS"
+            "crop_safety": "PASS",
+            "embedded_text_status": "NONE"
           }
         },
         "source_segment_in": 0,
@@ -1122,7 +1125,8 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS",
             "external_branding": "NONE",
-            "crop_safety": "PASS"
+            "crop_safety": "PASS",
+            "embedded_text_status": "NONE"
           }
         },
         "source_segment_in": 0,
@@ -1282,7 +1286,8 @@
             "embedded_layout": "NONE",
             "full_frame": "PASS",
             "external_branding": "NONE",
-            "crop_safety": "PASS"
+            "crop_safety": "PASS",
+            "embedded_text_status": "NONE"
           }
         },
         "source_segment_in": 0,
@@ -1438,7 +1443,8 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS",
             "external_branding": "NONE",
-            "crop_safety": "PASS"
+            "crop_safety": "PASS",
+            "embedded_text_status": "NONE"
           }
         },
         "source_segment_in": 0,
@@ -1596,7 +1602,8 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS",
             "external_branding": "NONE",
-            "crop_safety": "PASS"
+            "crop_safety": "PASS",
+            "embedded_text_status": "NONE"
           }
         },
         "source_segment_in": 0,
@@ -1741,7 +1748,8 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS",
             "external_branding": "NONE",
-            "crop_safety": "PASS"
+            "crop_safety": "PASS",
+            "embedded_text_status": "NONE"
           }
         },
         "source_segment_in": 0,
@@ -1892,7 +1900,8 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS",
             "external_branding": "NONE",
-            "crop_safety": "PASS"
+            "crop_safety": "PASS",
+            "embedded_text_status": "NONE"
           }
         },
         "source_segment_in": 0,
@@ -2040,7 +2049,8 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS",
             "external_branding": "NONE",
-            "crop_safety": "PASS"
+            "crop_safety": "PASS",
+            "embedded_text_status": "NONE"
           }
         },
         "source_segment_in": 0,
@@ -2200,7 +2210,8 @@
             "embedded_layout": "NONE",
             "full_frame": "PASS",
             "external_branding": "NONE",
-            "crop_safety": "PASS"
+            "crop_safety": "PASS",
+            "embedded_text_status": "NONE"
           }
         },
         "source_segment_in": 0,
@@ -2348,7 +2359,8 @@
             "stability_check": "PASS",
             "semantic_consistency": "PASS",
             "external_branding": "NONE",
-            "crop_safety": "PASS"
+            "crop_safety": "PASS",
+            "embedded_text_status": "NONE"
           }
         },
         "source_segment_in": 0,
