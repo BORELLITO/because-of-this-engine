@@ -372,13 +372,14 @@ def validate_asset_record(record: dict[str, Any], base: Path, episode_id: str, *
             if candidate and not re.fullmatch(r"[0-9a-fA-F]{64}", str(candidate)):
                 raise VideoContractError(f"Asset {asset_id} {label} must be 64 hexadecimal characters.")
         # Hydration recalculates decoded-pixel evidence with the runner's
-        # actual FFmpeg.  SHA-256 remains the immutable source check; this
-        # runtime value prevents harmless FFmpeg-version drift from blocking
-        # an otherwise byte-identical approved asset.
-        expected_phash = hydrated_phash or declared_phash
-        if expected_phash and actual_phash.lower() != str(expected_phash).lower():
-            field = "hydrated_perceptual_hash" if hydrated_phash else "perceptual_hash"
-            raise VideoContractError(f"Asset {asset_id} {field} does not match the downloaded file.")
+        # actual FFmpeg. SHA-256 remains the immutable source check. A
+        # manifest perceptual_hash may have been produced by another FFmpeg
+        # build, so it is advisory after the byte identity has already passed;
+        # a same-run hydrated_perceptual_hash remains strict.
+        if hydrated_phash and actual_phash.lower() != str(hydrated_phash).lower():
+            raise VideoContractError(
+                f"Asset {asset_id} hydrated_perceptual_hash does not match the downloaded file."
+            )
     else:
         metadata = {}
         actual_phash = None
