@@ -1,0 +1,2664 @@
+{
+  "schema_version": "3.0.0",
+  "video_id": "episode-003-call-tomorrow",
+  "title": "The Call That Arrived Tomorrow",
+  "language": "en-US",
+  "channel": "Because Of This",
+  "fps": 60,
+  "render": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 60,
+    "duration_min_seconds": 60,
+    "duration_max_seconds": 75,
+    "runtime_max_seconds": 80
+  },
+  "target_runtime_seconds": 72,
+  "engine_profile": "because-of-this-v7.3.2-charon-cinematic-dread-smooth-2026-10",
+  "engine_profile_fingerprint": "c9f6c10765b65a447fb010008f64b302315ff189e257b927d47c9c8e2a427c8e",
+  "master_prompt_version": "7.2",
+  "master_prompt_sha256": "f393ca8891b6e254adfd252a8df031fbe878b0f1d395b67f15f9b0abf4bcc5af",
+  "production_schema": "because-of-this://schemas/production-record/3.0.0",
+  "human_approval_required": true,
+  "lifecycle_status": "DRAFT_PREVIEW_ONLY",
+  "video_number": 3,
+  "engine_milestone": "V7.4.0_EPISODE_003_EDITORIAL_GATED",
+  "canonical_path": "episodes/video-003",
+  "truth_mode": "DECLARED_FICTION",
+  "disclosure": "Original declared fiction. Fresh stock footage is retained with source, license, hash and Drive evidence; final publication remains subject to human approval.",
+  "story": {
+    "truth_mode": "DECLARED_FICTION",
+    "person": "Daniel, an overnight hospital switchboard operator",
+    "central_question": "Why is a disconnected ward calling from tomorrow, and what will Daniel sacrifice to answer it?",
+    "risk": "If Daniel routes the warning, the sealed records room may claim him as its witness; if he destroys it, someone tomorrow may die.",
+    "irreversible_decision": "Daniel connects the line and routes the impossible warning instead of destroying the log.",
+    "consequence": "The hospital goes dark and the final record addresses Daniel with the word home.",
+    "wound": "Daniel has spent eleven years hiding his sister's death inside an official accident report.",
+    "flaw": "He treats burial of evidence as protection from responsibility.",
+    "something_to_lose": "His safety, his self-forgiveness and the possibility of remaining outside the story.",
+    "hook": "At 2:17 a.m., an extension from a dead hospital ward rings for Daniel.",
+    "reveal": "The warning was not only about tomorrow; answering it makes Daniel the next address in the record."
+  },
+  "story_profile": {
+    "truth_mode": "DECLARED_FICTION",
+    "primary_emotion": "dread",
+    "secondary_emotion": "grief",
+    "central_question": "Why is a disconnected ward calling from tomorrow, and what will Daniel sacrifice to answer it?",
+    "visual_symbol": "the warm elevator button"
+  },
+  "story_graph": {
+    "version": "7.4.0",
+    "entities": [
+      {
+        "entity_id": "daniel",
+        "canonical_name": "Daniel",
+        "aliases": [
+          "the operator",
+          "the witness"
+        ],
+        "continuity_mode": "same overnight switchboard operator"
+      },
+      {
+        "entity_id": "dead_ward",
+        "canonical_name": "disconnected hospital ward",
+        "aliases": [
+          "dead ward",
+          "old ward"
+        ],
+        "continuity_mode": "same disconnected ward"
+      },
+      {
+        "entity_id": "switchboard",
+        "canonical_name": "hospital switchboard",
+        "aliases": [
+          "the board",
+          "telephone station"
+        ],
+        "continuity_mode": "same switchboard"
+      },
+      {
+        "entity_id": "sister",
+        "canonical_name": "Daniel's sister",
+        "aliases": [
+          "his sister"
+        ],
+        "continuity_mode": "same unresolved death"
+      },
+      {
+        "entity_id": "emergency_log",
+        "canonical_name": "tomorrow's emergency log",
+        "aliases": [
+          "the log",
+          "original log"
+        ],
+        "continuity_mode": "same future record"
+      },
+      {
+        "entity_id": "elevator",
+        "canonical_name": "warm elevator button",
+        "aliases": [
+          "the elevator",
+          "button"
+        ],
+        "continuity_mode": "same anomalous elevator control"
+      },
+      {
+        "entity_id": "records_room",
+        "canonical_name": "sealed records room",
+        "aliases": [
+          "sealed room",
+          "sealed door"
+        ],
+        "continuity_mode": "same hidden room"
+      },
+      {
+        "entity_id": "receiver",
+        "canonical_name": "receiver inside the sealed room",
+        "aliases": [
+          "the ringing receiver"
+        ],
+        "continuity_mode": "same impossible source"
+      }
+    ],
+    "beats": [
+      {
+        "beat_id": "beat-001",
+        "event": "the dead ward extension rings",
+        "state_before": "routine_shift",
+        "state_after": "impossible_call",
+        "causal_role": "hook",
+        "emotion": "curiosity",
+        "visual_motif": "ringing phone",
+        "entities": [
+          "daniel",
+          "switchboard",
+          "dead_ward"
+        ],
+        "scene_id": "S01",
+        "narration_excerpt": "At 2:17 a.m., Daniel was alone in the hospital switchboard when an impossible extension rang."
+      },
+      {
+        "beat_id": "beat-002",
+        "event": "Daniel recognizes the ward from his sister's death",
+        "state_before": "impossible_call",
+        "state_after": "buried_grief_reopened",
+        "causal_role": "context",
+        "emotion": "empathy",
+        "visual_motif": "disconnected extension",
+        "entities": [
+          "daniel",
+          "dead_ward",
+          "sister"
+        ],
+        "scene_id": "S02",
+        "narration_excerpt": "The number belonged to a ward disconnected eleven years earlier—the night his sister died."
+      },
+      {
+        "beat_id": "beat-003",
+        "event": "the caller gives the elevator warning",
+        "state_before": "buried_grief_reopened",
+        "state_after": "future_warning_received",
+        "causal_role": "contradiction",
+        "emotion": "unease",
+        "visual_motif": "receiver",
+        "entities": [
+          "daniel",
+          "receiver",
+          "dead_ward"
+        ],
+        "scene_id": "S03",
+        "narration_excerpt": "He answered. No voice spoke, only breathing, and three words repeated: Don't send the elevator."
+      },
+      {
+        "beat_id": "beat-004",
+        "event": "tomorrow's log prints with Daniel's signature",
+        "state_before": "future_warning_received",
+        "state_after": "future_record_created",
+        "causal_role": "escalation",
+        "emotion": "dread",
+        "visual_motif": "printing log",
+        "entities": [
+          "daniel",
+          "emergency_log"
+        ],
+        "scene_id": "S04",
+        "narration_excerpt": "The call ended, but the switchboard printed tomorrow's emergency log, already signed with Daniel's name."
+      },
+      {
+        "beat_id": "beat-005",
+        "event": "the warm button appears above the normal floors",
+        "state_before": "future_record_created",
+        "state_after": "physical_anomaly_found",
+        "causal_role": "investigation",
+        "emotion": "anticipation",
+        "visual_motif": "elevator button",
+        "entities": [
+          "daniel",
+          "elevator"
+        ],
+        "scene_id": "S05",
+        "narration_excerpt": "He checked the fourth floor. The hospital had thirteen floors, yet one elevator button was warm."
+      },
+      {
+        "beat_id": "beat-006",
+        "event": "the red light pulses behind the sealed door",
+        "state_before": "physical_anomaly_found",
+        "state_after": "sealed_room_active",
+        "causal_role": "escalation",
+        "emotion": "fear",
+        "visual_motif": "red light",
+        "entities": [
+          "daniel",
+          "records_room"
+        ],
+        "scene_id": "S06",
+        "narration_excerpt": "Beneath it, a red light pulsed behind a sealed records door."
+      },
+      {
+        "beat_id": "beat-007",
+        "event": "Daniel confronts the accident report",
+        "state_before": "sealed_room_active",
+        "state_after": "personal_guilt_exposed",
+        "causal_role": "evidence",
+        "emotion": "empathy",
+        "visual_motif": "archive file",
+        "entities": [
+          "daniel",
+          "sister",
+          "emergency_log"
+        ],
+        "scene_id": "S07",
+        "narration_excerpt": "Daniel had spent eleven years filing his sister's death as an accident."
+      },
+      {
+        "beat_id": "beat-008",
+        "event": "the missing minute replays his refusal",
+        "state_before": "personal_guilt_exposed",
+        "state_after": "memory_becomes_evidence",
+        "causal_role": "complication",
+        "emotion": "dread",
+        "visual_motif": "replayed minute",
+        "entities": [
+          "daniel",
+          "receiver"
+        ],
+        "scene_id": "S08",
+        "narration_excerpt": "Now the missing call was replaying the exact minute he had refused to remember."
+      },
+      {
+        "beat_id": "beat-009",
+        "event": "the original log states the witness rule",
+        "state_before": "memory_becomes_evidence",
+        "state_after": "choice_condition_revealed",
+        "causal_role": "reveal",
+        "emotion": "shock",
+        "visual_motif": "original log",
+        "entities": [
+          "daniel",
+          "emergency_log",
+          "records_room"
+        ],
+        "scene_id": "S09",
+        "narration_excerpt": "He found the original log—and saw the rule: every answered call demanded a witness."
+      },
+      {
+        "beat_id": "beat-010",
+        "event": "Daniel chooses the cable over the shredder",
+        "state_before": "choice_condition_revealed",
+        "state_after": "warning_routed",
+        "causal_role": "reversal",
+        "emotion": "urgency",
+        "visual_motif": "cable and page",
+        "entities": [
+          "daniel",
+          "switchboard",
+          "emergency_log"
+        ],
+        "scene_id": "S10",
+        "narration_excerpt": "If he destroyed the page, the past would stay buried. If he routed it, someone tomorrow might live."
+      },
+      {
+        "beat_id": "beat-011",
+        "event": "the hospital goes dark and the sealed room rings",
+        "state_before": "warning_routed",
+        "state_after": "witness_claimed",
+        "causal_role": "consequence",
+        "emotion": "fear",
+        "visual_motif": "dark corridor",
+        "entities": [
+          "daniel",
+          "records_room",
+          "receiver"
+        ],
+        "scene_id": "S11",
+        "narration_excerpt": "Daniel connected the line. The hospital went dark, and the receiver began ringing from inside the sealed room."
+      },
+      {
+        "beat_id": "beat-012",
+        "event": "the final log calls Daniel home",
+        "state_before": "witness_claimed",
+        "state_after": "Daniel_becomes_record",
+        "causal_role": "payoff",
+        "emotion": "chill",
+        "visual_motif": "dawn log",
+        "entities": [
+          "daniel",
+          "emergency_log",
+          "receiver"
+        ],
+        "scene_id": "S12",
+        "narration_excerpt": "At dawn, the new log contained one completed call: Daniel's name—followed by the word home."
+      }
+    ]
+  },
+  "emotional_map": {
+    "status": "PASS",
+    "beats": [
+      {
+        "position": 0.08,
+        "emotion": "curiosity",
+        "intensity": 0.3
+      },
+      {
+        "position": 0.32,
+        "emotion": "grief",
+        "intensity": 0.48
+      },
+      {
+        "position": 0.58,
+        "emotion": "dread",
+        "intensity": 0.72
+      },
+      {
+        "position": 0.78,
+        "emotion": "urgency",
+        "intensity": 0.9
+      },
+      {
+        "position": 1.0,
+        "emotion": "existential chill",
+        "intensity": 0.88
+      }
+    ]
+  },
+  "reveal_map": {
+    "status": "PASS",
+    "known": [
+      "the extension is disconnected",
+      "the call warns about the elevator"
+    ],
+    "hidden": [
+      "the future log",
+      "the witness rule",
+      "the sealed receiver",
+      "Daniel's final address"
+    ],
+    "reveal": "Answering the call makes Daniel the witness and destination of the record."
+  },
+  "visual_rules": {
+    "primary_language": "literal evidence representation",
+    "source_style": "found-footage hospital, switchboard, elevator and archival evidence",
+    "avoid": [
+      "generic office",
+      "fantasy creature",
+      "random camera shake",
+      "generated text",
+      "logos inside stock clips"
+    ],
+    "continuity": [
+      "same Daniel",
+      "same hospital",
+      "same sealed records room",
+      "same warm button and receiver"
+    ],
+    "no_reused_clips": true,
+    "no_derived_clip_reuse": true,
+    "no_text_generated_inside_stock_clips": true,
+    "editorial_text_policy": "CAPTIONS_ONLY",
+    "authored_text_overlays": "FORBIDDEN",
+    "authored_graphics": "FORBIDDEN",
+    "natural_source_text": "ALLOWED_ONLY_IF_NATIVE_AND_REVIEWED",
+    "clean_clip_required": true,
+    "reuse_exclusions": [
+      "episode-001",
+      "episode-002"
+    ]
+  },
+  "voice": {
+    "provider": "gemini_tts",
+    "language": "en-US",
+    "language_code": "en-US",
+    "voice_name": "Charon",
+    "voice": "Charon",
+    "model_or_voice_type": "gemini-3.8-flash-tts",
+    "ssml_gender": "MALE",
+    "sample_rate_hz": 24000,
+    "encoding": "AUDIO_WAV",
+    "speaking_rate": 0.88,
+    "pitch": 0,
+    "volume_gain_db": 0,
+    "style": "Low, controlled American English narration with informative clarity, restrained cinematic suspense, intimate consequence, never theatrical."
+  },
+  "narration": {
+    "provider": "gemini_tts",
+    "language": "en-US",
+    "language_code": "en-US",
+    "voice_name": "Charon",
+    "model": "gemini-3.8-flash-tts",
+    "beats": [
+      {
+        "beat_id": "beat-001",
+        "text": "At 2:17 a.m., Daniel was alone in the hospital switchboard when an impossible extension rang.",
+        "pause_before_ms": 0
+      },
+      {
+        "beat_id": "beat-002",
+        "text": "The number belonged to a ward disconnected eleven years earlier—the night his sister died.",
+        "pause_before_ms": 120
+      },
+      {
+        "beat_id": "beat-003",
+        "text": "He answered. No voice spoke, only breathing, and three words repeated: Don't send the elevator.",
+        "pause_before_ms": 120
+      },
+      {
+        "beat_id": "beat-004",
+        "text": "The call ended, but the switchboard printed tomorrow's emergency log, already signed with Daniel's name.",
+        "pause_before_ms": 120
+      },
+      {
+        "beat_id": "beat-005",
+        "text": "He checked the fourth floor. The hospital had thirteen floors, yet one elevator button was warm.",
+        "pause_before_ms": 120
+      },
+      {
+        "beat_id": "beat-006",
+        "text": "Beneath it, a red light pulsed behind a sealed records door.",
+        "pause_before_ms": 120
+      },
+      {
+        "beat_id": "beat-007",
+        "text": "Daniel had spent eleven years filing his sister's death as an accident.",
+        "pause_before_ms": 120
+      },
+      {
+        "beat_id": "beat-008",
+        "text": "Now the missing call was replaying the exact minute he had refused to remember.",
+        "pause_before_ms": 120
+      },
+      {
+        "beat_id": "beat-009",
+        "text": "He found the original log—and saw the rule: every answered call demanded a witness.",
+        "pause_before_ms": 120
+      },
+      {
+        "beat_id": "beat-010",
+        "text": "If he destroyed the page, the past would stay buried. If he routed it, someone tomorrow might live.",
+        "pause_before_ms": 120
+      },
+      {
+        "beat_id": "beat-011",
+        "text": "Daniel connected the line. The hospital went dark, and the receiver began ringing from inside the sealed room.",
+        "pause_before_ms": 120
+      },
+      {
+        "beat_id": "beat-012",
+        "text": "At dawn, the new log contained one completed call: Daniel's name—followed by the word home.",
+        "pause_before_ms": 120
+      }
+    ]
+  },
+  "script": {
+    "path": "script.txt",
+    "word_count_target": 177
+  },
+  "audio": {
+    "path": "audio/narration.wav",
+    "source": "pending_final_gemini_tts_charon_audio",
+    "preview_only": true,
+    "state": "DRAFT_PREVIEW"
+  },
+  "captions": {
+    "path": "captions/narration.ass",
+    "alignment_sidecar": "captions/narration.alignment.json",
+    "alignment_mode": "audio_final_forced_alignment",
+    "alignment_source": "vosk_word_timestamps",
+    "word_level_available": true,
+    "max_lines": 2,
+    "max_line_chars": 38,
+    "target_cps": 20,
+    "max_cps": 28,
+    "end_tolerance_seconds": 0.1,
+    "word_highlight_enabled": true,
+    "word_highlight_mode": "timestamp_color_transform",
+    "active_word_color": "#FF7777",
+    "word_highlight_tolerance_ms": 35,
+    "style": {
+      "font_name": "Arial",
+      "font_size": 48,
+      "primary_color": "&H00FFFFFF&",
+      "secondary_color": "&H00FFFFFF&",
+      "outline_color": "&H00000000&",
+      "back_color": "&H80000000&",
+      "bold": 1,
+      "italic": 0,
+      "underline": 0,
+      "strike_out": 0,
+      "scale_x": 100,
+      "scale_y": 100,
+      "spacing": 0,
+      "angle": 0,
+      "border_style": 1,
+      "outline": 3,
+      "shadow": 1,
+      "alignment": 2,
+      "margin_l": 90,
+      "margin_r": 140,
+      "margin_v": 340,
+      "encoding": 1
+    },
+    "mobile_safe_zone": {
+      "right_clearance_px": 140,
+      "bottom_clearance_px": 340,
+      "interaction_rail_clearance": "comment-share-remix rail",
+      "status": "LOCKED_FROM_APPROVED_MASTER"
+    },
+    "state": "DRAFT_PREVIEW"
+  },
+  "scenes": [
+    {
+      "scene_id": "S01",
+      "beat_id": "beat-001",
+      "duration": 6,
+      "story_beat": "the dead ward extension rings",
+      "narration_excerpt": "At 2:17 a.m., Daniel was alone in the hospital switchboard when an impossible extension rang.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "objects": [
+            "telephone"
+          ],
+          "actions": [
+            "ringing",
+            "standing"
+          ],
+          "environments": [
+            "hospital",
+            "interior"
+          ],
+          "subjects": [
+            "phone",
+            "hospital",
+            "interior"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "dread",
+            "unease"
+          ]
+        },
+        "forbidden": [
+          "generic office",
+          "random shake",
+          "generated text"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "telephone",
+            "hospital",
+            "interior"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "ringing hospital switchboard phone",
+      "visual_function": "literal_evidence",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.9,
+      "asset": {
+        "asset_id": "V74-S01-PEXELS-1721320",
+        "path": "assets/video-003-shot-01.mp4",
+        "provider": "pexels",
+        "provider_asset_id": "1721320",
+        "source_page_url": "https://www.pexels.com/video/1721320/",
+        "license": "Pexels Free License; source page and acquisition record retained.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Fresh commercial-use review record is retained; final publication approval remains gated.",
+        "reuse_status": "FRESH",
+        "sha256": "2b9cf55e29424c24e7e1b20218612d31dc92cf4b115e89af084456a1757a3a9e",
+        "perceptual_hash": "c94eb5de57ee492c984fc1c8c016a43c0bf5f6ce55b2ef25ec9d91988a798370",
+        "episode_id": "episode-003-call-tomorrow",
+        "drive_file_id": "1jPrQk5jqAiyii91Cz3pFaYq9Vllw47w2",
+        "duration_seconds": 5.93,
+        "width": 1920,
+        "height": 1080,
+        "filesize_bytes": 3827683,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-11-01T15:45:00Z",
+        "original_filename": "video-003-shot-01.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-003-call-tomorrow",
+        "scene_usage": "S01: reviewed fresh visual evidence for switchboard phone rings.",
+        "source_segment_in": 0.0,
+        "source_segment_out": 5.93,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "ringing hospital switchboard phone"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-11-01T15:45:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "reviewed": true,
+          "basis": [
+            "Observed ringing hospital switchboard phone"
+          ],
+          "observed_subjects": [
+            "phone",
+            "hospital",
+            "interior"
+          ],
+          "observed_actions": [
+            "ringing",
+            "standing"
+          ],
+          "observed_environments": [
+            "hospital",
+            "interior"
+          ],
+          "observed_objects": [
+            "telephone"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NATURAL_SOURCE_ONLY",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 5.779999999999999,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.18
+      }
+    },
+    {
+      "scene_id": "S02",
+      "beat_id": "beat-002",
+      "duration": 6,
+      "story_beat": "Daniel recognizes the ward from his sister's death",
+      "narration_excerpt": "The number belonged to a ward disconnected eleven years earlier—the night his sister died.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "objects": [
+            "desk",
+            "paper"
+          ],
+          "actions": [
+            "watching"
+          ],
+          "environments": [
+            "hospital",
+            "interior"
+          ],
+          "subjects": [
+            "hospital",
+            "interior"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "dread",
+            "unease"
+          ]
+        },
+        "forbidden": [
+          "generic office",
+          "random shake",
+          "generated text"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "desk",
+            "paper",
+            "hospital",
+            "interior"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "old disconnected extension and abandoned desk",
+      "visual_function": "literal_evidence",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.72,
+      "asset": {
+        "asset_id": "V74-S02-PEXELS-8869991",
+        "path": "assets/video-003-shot-02.mp4",
+        "provider": "pexels",
+        "provider_asset_id": "8869991",
+        "source_page_url": "https://www.pexels.com/video/8869991/",
+        "license": "Pexels Free License; source page and acquisition record retained.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Fresh commercial-use review record is retained; final publication approval remains gated.",
+        "reuse_status": "FRESH",
+        "sha256": "334de1ed815bf7b7f130c91a1b0c972168031bbadd68ae618a6bd737bf9e9844",
+        "perceptual_hash": "6ee7b0340f6625cd94e6ad6d6002668f532d67a5b49a1e32d7f49753fa1ecedb",
+        "episode_id": "episode-003-call-tomorrow",
+        "drive_file_id": "1cgssBVNGMpKozWCkJxirCN4C1Xs0Zu_6",
+        "duration_seconds": 11.44,
+        "width": 1440,
+        "height": 2732,
+        "filesize_bytes": 5535420,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-11-01T15:45:00Z",
+        "original_filename": "video-003-shot-02.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-003-call-tomorrow",
+        "scene_usage": "S02: reviewed fresh visual evidence for disconnected ward is remembered.",
+        "source_segment_in": 0.0,
+        "source_segment_out": 11.44,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "old disconnected extension and abandoned desk"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-11-01T15:45:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "reviewed": true,
+          "basis": [
+            "Observed old disconnected extension and abandoned desk"
+          ],
+          "observed_subjects": [
+            "hospital",
+            "interior"
+          ],
+          "observed_actions": [
+            "watching"
+          ],
+          "observed_environments": [
+            "hospital",
+            "interior"
+          ],
+          "observed_objects": [
+            "desk",
+            "paper"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NATURAL_SOURCE_ONLY",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 11.29,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.18
+      }
+    },
+    {
+      "scene_id": "S03",
+      "beat_id": "beat-003",
+      "duration": 6,
+      "story_beat": "the caller gives the elevator warning",
+      "narration_excerpt": "He answered. No voice spoke, only breathing, and three words repeated: Don't send the elevator.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "objects": [
+            "telephone",
+            "hand"
+          ],
+          "actions": [
+            "answering",
+            "standing"
+          ],
+          "environments": [
+            "hospital",
+            "interior"
+          ],
+          "subjects": [
+            "person",
+            "hospital"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "dread",
+            "unease"
+          ]
+        },
+        "forbidden": [
+          "generic office",
+          "random shake",
+          "generated text"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "telephone",
+            "hand",
+            "hospital",
+            "interior"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "hand lifts a phone receiver in a dark hospital station",
+      "visual_function": "literal_evidence",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.86,
+      "asset": {
+        "asset_id": "V74-S03-PEXELS-5985881",
+        "path": "assets/video-003-shot-03.mp4",
+        "provider": "pexels",
+        "provider_asset_id": "5985881",
+        "source_page_url": "https://www.pexels.com/video/5985881/",
+        "license": "Pexels Free License; source page and acquisition record retained.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Fresh commercial-use review record is retained; final publication approval remains gated.",
+        "reuse_status": "FRESH",
+        "sha256": "b3871660dfa20f570ecd338174632fea5f7ca71284bc3921f4d154b8960ba2f0",
+        "perceptual_hash": "3efcc2ccf2f76a8018623aa72ea2fcffd20135352a1617317b26f6339b4362c7",
+        "episode_id": "episode-003-call-tomorrow",
+        "drive_file_id": "15umNFyu9cCmDsiNP3cYz4hu5qpm86Axk",
+        "duration_seconds": 10.815,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 3492674,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-11-01T15:45:00Z",
+        "original_filename": "video-003-shot-03.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-003-call-tomorrow",
+        "scene_usage": "S03: reviewed fresh visual evidence for Daniel answers the impossible call.",
+        "source_segment_in": 0.0,
+        "source_segment_out": 10.815,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "hand lifts a phone receiver in a dark hospital station"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-11-01T15:45:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "reviewed": true,
+          "basis": [
+            "Observed hand lifts a phone receiver in a dark hospital station"
+          ],
+          "observed_subjects": [
+            "person",
+            "hospital"
+          ],
+          "observed_actions": [
+            "answering",
+            "standing"
+          ],
+          "observed_environments": [
+            "hospital",
+            "interior"
+          ],
+          "observed_objects": [
+            "telephone",
+            "hand"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NATURAL_SOURCE_ONLY",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 10.665,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.18
+      }
+    },
+    {
+      "scene_id": "S04",
+      "beat_id": "beat-004",
+      "duration": 6,
+      "story_beat": "tomorrow's log prints with Daniel's signature",
+      "narration_excerpt": "The call ended, but the switchboard printed tomorrow's emergency log, already signed with Daniel's name.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "objects": [
+            "paper",
+            "printer"
+          ],
+          "actions": [
+            "printing",
+            "standing"
+          ],
+          "environments": [
+            "interior"
+          ],
+          "subjects": [
+            "person",
+            "interior"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "dread",
+            "unease"
+          ]
+        },
+        "forbidden": [
+          "generic office",
+          "random shake",
+          "generated text"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "paper",
+            "printer",
+            "interior"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "paper feeds from a printer as the hand freezes",
+      "visual_function": "literal_evidence",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.78,
+      "asset": {
+        "asset_id": "V74-S04-PEXELS-6962434",
+        "path": "assets/video-003-shot-04.mp4",
+        "provider": "pexels",
+        "provider_asset_id": "6962434",
+        "source_page_url": "https://www.pexels.com/video/6962434/",
+        "license": "Pexels Free License; source page and acquisition record retained.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Fresh commercial-use review record is retained; final publication approval remains gated.",
+        "reuse_status": "FRESH",
+        "sha256": "e599c35d32b4d8978e9da2f2d83910b27c2f5a420838bd9f359ab876c6f60b69",
+        "perceptual_hash": "05843857cca9774dc328e70a8b69fbe46d910daa8d7246329cc73f39a5268887",
+        "episode_id": "episode-003-call-tomorrow",
+        "drive_file_id": "1SodRp01BzPNdZJInxtILx6nULLCZg7ID",
+        "duration_seconds": 9.023333,
+        "width": 1080,
+        "height": 1920,
+        "filesize_bytes": 5617665,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-11-01T15:45:00Z",
+        "original_filename": "video-003-shot-04.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-003-call-tomorrow",
+        "scene_usage": "S04: reviewed fresh visual evidence for tomorrow's log prints itself.",
+        "source_segment_in": 0.0,
+        "source_segment_out": 9.023333,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "paper feeds from a printer as the hand freezes"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-11-01T15:45:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "reviewed": true,
+          "basis": [
+            "Observed paper feeds from a printer as the hand freezes"
+          ],
+          "observed_subjects": [
+            "person",
+            "interior"
+          ],
+          "observed_actions": [
+            "printing",
+            "standing"
+          ],
+          "observed_environments": [
+            "interior"
+          ],
+          "observed_objects": [
+            "paper",
+            "printer"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NATURAL_SOURCE_ONLY",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 8.873332999999999,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.18
+      }
+    },
+    {
+      "scene_id": "S05",
+      "beat_id": "beat-005",
+      "duration": 6,
+      "story_beat": "the warm button appears above the normal floors",
+      "narration_excerpt": "He checked the fourth floor. The hospital had thirteen floors, yet one elevator button was warm.",
+      "visual_semantics": {
+        "role": "literal",
+        "required": {
+          "objects": [
+            "elevator",
+            "panel",
+            "button"
+          ],
+          "actions": [
+            "pressing",
+            "standing"
+          ],
+          "environments": [
+            "interior"
+          ],
+          "subjects": [
+            "person"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "dread",
+            "unease"
+          ]
+        },
+        "forbidden": [
+          "generic office",
+          "random shake",
+          "generated text"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "elevator",
+            "panel",
+            "button",
+            "interior"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "close elevator panel and hand hovering over a button",
+      "visual_function": "literal_evidence",
+      "visual_match": "EXACT",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.92,
+      "asset": {
+        "asset_id": "V74-S05-PEXELS-4354917",
+        "path": "assets/video-003-shot-05.mp4",
+        "provider": "pexels",
+        "provider_asset_id": "4354917",
+        "source_page_url": "https://www.pexels.com/video/4354917/",
+        "license": "Pexels Free License; source page and acquisition record retained.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Fresh commercial-use review record is retained; final publication approval remains gated.",
+        "reuse_status": "FRESH",
+        "sha256": "42d4089aaddb6c5fca8414bfd62858474968daeb88b10b915855b4ee2b798b80",
+        "perceptual_hash": "4534b3a13d09d113b36f2c05b3a85abeaa798d1d66ef770f4b28aa1fe7ade8fe",
+        "episode_id": "episode-003-call-tomorrow",
+        "drive_file_id": "17Zx14q4ksounwzC_8XlnaHDj9XsSNzYD",
+        "duration_seconds": 6.68,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 2063535,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-11-01T15:45:00Z",
+        "original_filename": "video-003-shot-05.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-003-call-tomorrow",
+        "scene_usage": "S05: reviewed fresh visual evidence for the warm elevator button.",
+        "source_segment_in": 0.0,
+        "source_segment_out": 6.68,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "close elevator panel and hand hovering over a button"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-11-01T15:45:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "reviewed": true,
+          "basis": [
+            "Observed close elevator panel and hand hovering over a button"
+          ],
+          "observed_subjects": [
+            "person"
+          ],
+          "observed_actions": [
+            "pressing",
+            "standing"
+          ],
+          "observed_environments": [
+            "interior"
+          ],
+          "observed_objects": [
+            "elevator",
+            "panel",
+            "button"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NATURAL_SOURCE_ONLY",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 6.529999999999999,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.18
+      }
+    },
+    {
+      "scene_id": "S06",
+      "beat_id": "beat-006",
+      "duration": 6,
+      "story_beat": "the red light pulses behind the sealed door",
+      "narration_excerpt": "Beneath it, a red light pulsed behind a sealed records door.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "objects": [
+            "red emergency lamp",
+            "door"
+          ],
+          "actions": [
+            "walking",
+            "standing"
+          ],
+          "environments": [
+            "corridor",
+            "interior"
+          ],
+          "subjects": [
+            "person"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "dread",
+            "unease"
+          ]
+        },
+        "forbidden": [
+          "generic office",
+          "random shake",
+          "generated text"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "red emergency lamp",
+            "door",
+            "corridor",
+            "interior"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "red light pulses in a dark corridor",
+      "visual_function": "literal_evidence",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.78,
+      "asset": {
+        "asset_id": "V74-S06-PEXELS-7206543",
+        "path": "assets/video-003-shot-06.mp4",
+        "provider": "pexels",
+        "provider_asset_id": "7206543",
+        "source_page_url": "https://www.pexels.com/video/7206543/",
+        "license": "Pexels Free License; source page and acquisition record retained.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Fresh commercial-use review record is retained; final publication approval remains gated.",
+        "reuse_status": "FRESH",
+        "sha256": "0413168323490bbec1b20fbfd64c5f4ae540f3441baa808232bd25aa5ca97176",
+        "perceptual_hash": "aa4abe656a96e3a2bee3583c0aff44b04595340b81bf1e5bc2ae35b5d75d67d3",
+        "episode_id": "episode-003-call-tomorrow",
+        "drive_file_id": "17tptL4WtK0-exfYS529xZtSidNDl7uz0",
+        "duration_seconds": 20.2,
+        "width": 1920,
+        "height": 1080,
+        "filesize_bytes": 2520934,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-11-01T15:45:00Z",
+        "original_filename": "video-003-shot-06.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-003-call-tomorrow",
+        "scene_usage": "S06: reviewed fresh visual evidence for red light behind sealed records door.",
+        "source_segment_in": 0.0,
+        "source_segment_out": 20.2,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "red light pulses in a dark corridor"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-11-01T15:45:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "reviewed": true,
+          "basis": [
+            "Observed red light pulses in a dark corridor"
+          ],
+          "observed_subjects": [
+            "person"
+          ],
+          "observed_actions": [
+            "walking",
+            "standing"
+          ],
+          "observed_environments": [
+            "corridor",
+            "interior"
+          ],
+          "observed_objects": [
+            "red emergency lamp",
+            "door"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NATURAL_SOURCE_ONLY",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 20.05,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.18
+      }
+    },
+    {
+      "scene_id": "S07",
+      "beat_id": "beat-007",
+      "duration": 6,
+      "story_beat": "Daniel confronts the accident report",
+      "narration_excerpt": "Daniel had spent eleven years filing his sister's death as an accident.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "objects": [
+            "hallway"
+          ],
+          "actions": [
+            "walking",
+            "standing"
+          ],
+          "environments": [
+            "hospital",
+            "corridor"
+          ],
+          "subjects": [
+            "person"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "dread",
+            "urgency"
+          ]
+        },
+        "forbidden": [
+          "generic office",
+          "random shake",
+          "generated text"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "hallway",
+            "hospital",
+            "corridor"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "medical worker pauses in a cold hallway, carrying private grief",
+      "visual_function": "literal_evidence",
+      "visual_match": "SYMBOLIC",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.7,
+      "asset": {
+        "asset_id": "V74-S07-PEXELS-8381605",
+        "path": "assets/video-003-shot-07.mp4",
+        "provider": "pexels",
+        "provider_asset_id": "8381605",
+        "source_page_url": "https://www.pexels.com/video/8381605/",
+        "license": "Pexels Free License; source page and acquisition record retained.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Fresh commercial-use review record is retained; final publication approval remains gated.",
+        "reuse_status": "FRESH",
+        "sha256": "c9f500acdebf06f5cd5c4a7f9ef61749a62fb097ad435c746c535507fd7e1455",
+        "perceptual_hash": "af714ab2cc3cd7c4b372012aac69cd6a20a748a03ea26e13e1ca833302e9c6a3",
+        "episode_id": "episode-003-call-tomorrow",
+        "drive_file_id": "1F3A3It556lbWGyGEFGlkV4ihZerUBMjt",
+        "duration_seconds": 14.48,
+        "width": 1920,
+        "height": 1080,
+        "filesize_bytes": 5974612,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-11-01T15:45:00Z",
+        "original_filename": "video-003-shot-07.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-003-call-tomorrow",
+        "scene_usage": "S07: reviewed fresh visual evidence for Daniel's buried guilt.",
+        "source_segment_in": 0.0,
+        "source_segment_out": 14.48,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "medical worker pauses in a cold hallway, carrying private grief"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-11-01T15:45:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "reviewed": true,
+          "basis": [
+            "Observed medical worker pauses in a cold hallway, carrying private grief"
+          ],
+          "observed_subjects": [
+            "person"
+          ],
+          "observed_actions": [
+            "walking",
+            "standing"
+          ],
+          "observed_environments": [
+            "hospital",
+            "corridor"
+          ],
+          "observed_objects": [
+            "hallway"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NATURAL_SOURCE_ONLY",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 14.33,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.18
+      }
+    },
+    {
+      "scene_id": "S08",
+      "beat_id": "beat-008",
+      "duration": 6,
+      "story_beat": "the missing minute replays his refusal",
+      "narration_excerpt": "Now the missing call was replaying the exact minute he had refused to remember.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "objects": [
+            "hallway",
+            "light"
+          ],
+          "actions": [
+            "watching",
+            "walking"
+          ],
+          "environments": [
+            "hospital",
+            "corridor"
+          ],
+          "subjects": []
+        },
+        "preferred": {
+          "moods": [
+            "dread",
+            "urgency"
+          ]
+        },
+        "forbidden": [
+          "generic office",
+          "random shake",
+          "generated text"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "hallway",
+            "light",
+            "hospital",
+            "corridor"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "empty hospital corridor holds the memory of a past event",
+      "visual_function": "literal_evidence",
+      "visual_match": "ATMOSPHERE",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.68,
+      "asset": {
+        "asset_id": "V74-S08-PEXELS-5203510",
+        "path": "assets/video-003-shot-08.mp4",
+        "provider": "pexels",
+        "provider_asset_id": "5203510",
+        "source_page_url": "https://www.pexels.com/video/5203510/",
+        "license": "Pexels Free License; source page and acquisition record retained.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Fresh commercial-use review record is retained; final publication approval remains gated.",
+        "reuse_status": "FRESH",
+        "sha256": "bf52f02acf210ce001638c928ba0e083d8f1a490f2c2bed7e47319031666696c",
+        "perceptual_hash": "2c0445089516b212d32363dc0caec62186f5b4d1eddd6a4da87c963f3f5e3ad7",
+        "episode_id": "episode-003-call-tomorrow",
+        "drive_file_id": "1KRQ6ATkOZ6xQSanP6mc51spEw1Bqk7ir",
+        "duration_seconds": 3.67,
+        "width": 1920,
+        "height": 1080,
+        "filesize_bytes": 2478100,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-11-01T15:45:00Z",
+        "original_filename": "video-003-shot-08.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-003-call-tomorrow",
+        "scene_usage": "S08: reviewed fresh visual evidence for the missing minute replays.",
+        "source_segment_in": 0.0,
+        "source_segment_out": 3.67,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "empty hospital corridor holds the memory of a past event"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-11-01T15:45:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "reviewed": true,
+          "basis": [
+            "Observed empty hospital corridor holds the memory of a past event"
+          ],
+          "observed_subjects": [],
+          "observed_actions": [
+            "watching",
+            "walking"
+          ],
+          "observed_environments": [
+            "hospital",
+            "corridor"
+          ],
+          "observed_objects": [
+            "hallway",
+            "light"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NATURAL_SOURCE_ONLY",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 3.52,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.18
+      }
+    },
+    {
+      "scene_id": "S09",
+      "beat_id": "beat-009",
+      "duration": 6,
+      "story_beat": "the original log states the witness rule",
+      "narration_excerpt": "He found the original log—and saw the rule: every answered call demanded a witness.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "objects": [
+            "panel",
+            "display"
+          ],
+          "actions": [
+            "watching",
+            "pressing"
+          ],
+          "environments": [
+            "interior"
+          ],
+          "subjects": [
+            "person"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "dread",
+            "urgency"
+          ]
+        },
+        "forbidden": [
+          "generic office",
+          "random shake",
+          "generated text"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "panel",
+            "display",
+            "interior"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "elevator panel and archival evidence become a warning",
+      "visual_function": "literal_evidence",
+      "visual_match": "SYMBOLIC",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.7,
+      "asset": {
+        "asset_id": "V74-S09-PEXELS-38958215",
+        "path": "assets/video-003-shot-09.mp4",
+        "provider": "pexels",
+        "provider_asset_id": "38958215",
+        "source_page_url": "https://www.pexels.com/video/38958215/",
+        "license": "Pexels Free License; source page and acquisition record retained.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Fresh commercial-use review record is retained; final publication approval remains gated.",
+        "reuse_status": "FRESH",
+        "sha256": "1fce267104335c87221c02cdd1d118b0adca19a66846ca10a3818905cd04e205",
+        "perceptual_hash": "cb4f82bbf09b9fbf116bdf6c0ee83b155d3c7a575f2557d4dc9e516a1655dafc",
+        "episode_id": "episode-003-call-tomorrow",
+        "drive_file_id": "1wse5t2pFTDCjEcWHdtvNqxVaeKP8zxVq",
+        "duration_seconds": 16.208333,
+        "width": 3840,
+        "height": 2160,
+        "filesize_bytes": 45057842,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-11-01T15:45:00Z",
+        "original_filename": "video-003-shot-09.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-003-call-tomorrow",
+        "scene_usage": "S09: reviewed fresh visual evidence for the rule is found in the log.",
+        "source_segment_in": 0.0,
+        "source_segment_out": 16.208333,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "elevator panel and archival evidence become a warning"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-11-01T15:45:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "reviewed": true,
+          "basis": [
+            "Observed elevator panel and archival evidence become a warning"
+          ],
+          "observed_subjects": [
+            "person"
+          ],
+          "observed_actions": [
+            "watching",
+            "pressing"
+          ],
+          "observed_environments": [
+            "interior"
+          ],
+          "observed_objects": [
+            "panel",
+            "display"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NATURAL_SOURCE_ONLY",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 16.058333,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.18
+      }
+    },
+    {
+      "scene_id": "S10",
+      "beat_id": "beat-010",
+      "duration": 6,
+      "story_beat": "Daniel chooses the cable over the shredder",
+      "narration_excerpt": "If he destroyed the page, the past would stay buried. If he routed it, someone tomorrow might live.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "objects": [
+            "paper",
+            "hand"
+          ],
+          "actions": [
+            "destroying",
+            "pressing"
+          ],
+          "environments": [
+            "interior"
+          ],
+          "subjects": [
+            "person"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "dread",
+            "urgency"
+          ]
+        },
+        "forbidden": [
+          "generic office",
+          "random shake",
+          "generated text"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "paper",
+            "hand",
+            "interior"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "burning page and decisive hand represent the irreversible choice",
+      "visual_function": "literal_evidence",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.76,
+      "asset": {
+        "asset_id": "V74-S10-PEXELS-6980697",
+        "path": "assets/video-003-shot-10.mp4",
+        "provider": "pexels",
+        "provider_asset_id": "6980697",
+        "source_page_url": "https://www.pexels.com/video/6980697/",
+        "license": "Pexels Free License; source page and acquisition record retained.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Fresh commercial-use review record is retained; final publication approval remains gated.",
+        "reuse_status": "FRESH",
+        "sha256": "f0823db5c21ae099838f16a57a6cde02f0a15ffa95a9bceb8eaa436735c9c296",
+        "perceptual_hash": "189722823caa7b176aa521d488e0bc1cf45d819fccc14159080c06ffa4bb4c7e",
+        "episode_id": "episode-003-call-tomorrow",
+        "drive_file_id": "1-DUEgFTbYehYEMlyuuTNSBgn8FSLTosC",
+        "duration_seconds": 29.56,
+        "width": 1920,
+        "height": 1080,
+        "filesize_bytes": 18476186,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-11-01T15:45:00Z",
+        "original_filename": "video-003-shot-10.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-003-call-tomorrow",
+        "scene_usage": "S10: reviewed fresh visual evidence for Daniel chooses the line.",
+        "source_segment_in": 0.0,
+        "source_segment_out": 29.56,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "burning page and decisive hand represent the irreversible choice"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-11-01T15:45:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "reviewed": true,
+          "basis": [
+            "Observed burning page and decisive hand represent the irreversible choice"
+          ],
+          "observed_subjects": [
+            "person"
+          ],
+          "observed_actions": [
+            "destroying",
+            "pressing"
+          ],
+          "observed_environments": [
+            "interior"
+          ],
+          "observed_objects": [
+            "paper",
+            "hand"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NATURAL_SOURCE_ONLY",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 29.41,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.18
+      }
+    },
+    {
+      "scene_id": "S11",
+      "beat_id": "beat-011",
+      "duration": 6,
+      "story_beat": "the hospital goes dark and the sealed room rings",
+      "narration_excerpt": "Daniel connected the line. The hospital went dark, and the receiver began ringing from inside the sealed room.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "objects": [
+            "door",
+            "light"
+          ],
+          "actions": [
+            "walking",
+            "flickering"
+          ],
+          "environments": [
+            "hospital",
+            "corridor"
+          ],
+          "subjects": [
+            "person"
+          ]
+        },
+        "preferred": {
+          "moods": [
+            "dread",
+            "urgency"
+          ]
+        },
+        "forbidden": [
+          "generic office",
+          "random shake",
+          "generated text"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "door",
+            "light",
+            "hospital",
+            "corridor"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "dark hospital corridor after power loss, receiver implied beyond the door",
+      "visual_function": "literal_evidence",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.8,
+      "asset": {
+        "asset_id": "V74-S11-PEXELS-29241126",
+        "path": "assets/video-003-shot-11.mp4",
+        "provider": "pexels",
+        "provider_asset_id": "29241126",
+        "source_page_url": "https://www.pexels.com/video/29241126/",
+        "license": "Pexels Free License; source page and acquisition record retained.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Fresh commercial-use review record is retained; final publication approval remains gated.",
+        "reuse_status": "FRESH",
+        "sha256": "98783ac8d4eb4d94cfdf260229a1cdf41a41069d46d7a6c1866eccbb6487f989",
+        "perceptual_hash": "48f8dfe0ce2d6a994167410195feebc336997b280e5b6b0a1468bd9924d14dbe",
+        "episode_id": "episode-003-call-tomorrow",
+        "drive_file_id": "1GdPYMO04QsJ1et_EynHY3_8JbR45acvR",
+        "duration_seconds": 9.733333,
+        "width": 2160,
+        "height": 3840,
+        "filesize_bytes": 24885223,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-11-01T15:45:00Z",
+        "original_filename": "video-003-shot-11.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-003-call-tomorrow",
+        "scene_usage": "S11: reviewed fresh visual evidence for the sealed room rings.",
+        "source_segment_in": 0.0,
+        "source_segment_out": 9.733333,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "dark hospital corridor after power loss, receiver implied beyond the door"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-11-01T15:45:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "reviewed": true,
+          "basis": [
+            "Observed dark hospital corridor after power loss, receiver implied beyond the door"
+          ],
+          "observed_subjects": [
+            "person"
+          ],
+          "observed_actions": [
+            "walking",
+            "flickering"
+          ],
+          "observed_environments": [
+            "hospital",
+            "corridor"
+          ],
+          "observed_objects": [
+            "door",
+            "light"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NATURAL_SOURCE_ONLY",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 9.583333,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.18
+      }
+    },
+    {
+      "scene_id": "S12",
+      "beat_id": "beat-012",
+      "duration": 6,
+      "story_beat": "the final log calls Daniel home",
+      "narration_excerpt": "At dawn, the new log contained one completed call: Daniel's name—followed by the word home.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "objects": [
+            "doors",
+            "light"
+          ],
+          "actions": [
+            "standing"
+          ],
+          "environments": [
+            "interior"
+          ],
+          "subjects": []
+        },
+        "preferred": {
+          "moods": [
+            "dread",
+            "urgency"
+          ]
+        },
+        "forbidden": [
+          "generic office",
+          "random shake",
+          "generated text"
+        ],
+        "narrative_anchors": {
+          "direct_required": [
+            "doors",
+            "light",
+            "interior"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "empty elevator exit at dawn after the operator disappears",
+      "visual_function": "literal_evidence",
+      "visual_match": "SYMBOLIC",
+      "visual_truth": "DECLARED_FICTION",
+      "match_score": 0.72,
+      "asset": {
+        "asset_id": "V74-S12-PEXELS-7599309",
+        "path": "assets/video-003-shot-12.mp4",
+        "provider": "pexels",
+        "provider_asset_id": "7599309",
+        "source_page_url": "https://www.pexels.com/video/7599309/",
+        "license": "Pexels Free License; source page and acquisition record retained.",
+        "rights_status": "PREVIEW_ONLY",
+        "approved_for_render": false,
+        "preview_only": true,
+        "preview_only_reason": "Fresh commercial-use review record is retained; final publication approval remains gated.",
+        "reuse_status": "FRESH",
+        "sha256": "6bb470f01c65b6ebffd2d3360e1b51d4b518c66288a9bb6f7919eb9562e17c20",
+        "perceptual_hash": "f180ae59e188c9a8e8775d0f7e99fa533d32a3096b8fc081c530c3d236893f91",
+        "episode_id": "episode-003-call-tomorrow",
+        "drive_file_id": "1mzCcA5CXNduhPc4_PMhmqwHHH6v2bwAm",
+        "duration_seconds": 30.64,
+        "width": 2160,
+        "height": 4096,
+        "filesize_bytes": 82231956,
+        "author": "Pexels contributor (attributed on source page)",
+        "acquisition_timestamp": "2026-11-01T15:45:00Z",
+        "original_filename": "video-003-shot-12.mp4",
+        "mime_type": "video/mp4",
+        "job_ownership": "episode-003-call-tomorrow",
+        "scene_usage": "S12: reviewed fresh visual evidence for dawn and the word home.",
+        "source_segment_in": 0.0,
+        "source_segment_out": 30.64,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED",
+        "visual_evidence": {
+          "source_title": [
+            "empty elevator exit at dawn after the operator disappears"
+          ],
+          "reviewer": "Codex visual triage pass",
+          "reviewed_at": "2026-11-01T15:45:00Z",
+          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "reviewed": true,
+          "basis": [
+            "Observed empty elevator exit at dawn after the operator disappears"
+          ],
+          "observed_subjects": [],
+          "observed_actions": [
+            "standing"
+          ],
+          "observed_environments": [
+            "interior"
+          ],
+          "observed_objects": [
+            "doors",
+            "light"
+          ],
+          "pixel_qc": {
+            "embedded_layout": "clean_full_frame",
+            "compositor_layers_disclosed": false,
+            "embedded_text_status": "NATURAL_SOURCE_ONLY",
+            "text_overlay_present": false,
+            "authored_graphics_present": false
+          },
+          "action_window": {
+            "start": 0.15,
+            "end": 30.490000000000002,
+            "basis": "reviewed source motion window; no editorial overlay"
+          }
+        }
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.18
+      }
+    }
+  ],
+  "packaging": {
+    "candidates": [
+      {
+        "candidate_id": "PKG-01",
+        "title": "THE TAPE ADDED ONE MORE MINUTE",
+        "thumbnail_text": "ONE MORE MINUTE",
+        "promise": "A condemned station tape records sixty seconds that never existed.",
+        "mystery": "What happened inside the extra minute?",
+        "spoiler_risk": "LOW"
+      },
+      {
+        "candidate_id": "PKG-02",
+        "title": "THE CAMERA WAS HELD FROM THE OTHER SIDE",
+        "thumbnail_text": "FROM THE OTHER SIDE",
+        "promise": "A copied security tape ends with an impossible point of view.",
+        "mystery": "Who is holding the camera?",
+        "spoiler_risk": "LOW"
+      },
+      {
+        "candidate_id": "PKG-03",
+        "title": "THE SHADOW WITH NO BODY",
+        "thumbnail_text": "NO BODY",
+        "promise": "An archived frame captures a second presence on an empty platform.",
+        "mystery": "Where did the second shadow come from?",
+        "spoiler_risk": "MEDIUM"
+      }
+    ],
+    "selection_status": "PENDING_HUMAN_APPROVAL",
+    "description": "This episode is an original fictional suspense story. Clean visual representations will be researched as fresh assets and may not reuse episode 001 clips.",
+    "cta": {
+      "text": "Follow for the next unexplained story.",
+      "placement": "after_consequence_with_final_logo",
+      "before_consequence": false
+    }
+  },
+  "brand": {
+    "watermark_enabled": false,
+    "watermark_text": "|B",
+    "accent_color": "#E3262E",
+    "logo_enabled": true,
+    "logo_path": "brand/because-of-this-logo.png",
+    "logo_width": 540,
+    "logo_opacity": 0.82,
+    "logo_margin": 54,
+    "logo_top": 72,
+    "logo_anchor": "center_top"
+  },
+  "music": {
+    "path": "audio/music.wav",
+    "license": "Original deterministic procedural suspense bed generated by the engine; no third-party recording or composition used for this master.",
+    "license_status": "PREVIEW_ONLY",
+    "track_id": "V74-PROCEDURAL-LOW-DRONE-BED-003-DRAFT",
+    "commercial_use": true,
+    "preview_only": true,
+    "volume": 0.12,
+    "complete_track_reuse": "forbidden",
+    "sidechain_enabled": true,
+    "source": "engine_generated",
+    "generation": {
+      "script": "production/generate_suspense_bed.py",
+      "duration_seconds": 72,
+      "sample_rate_hz": 48000,
+      "deterministic": true,
+      "layers": [
+        "stable_low_drone",
+        "quiet_eminor_harmonics",
+        "subtle_stereo_air"
+      ]
+    },
+    "gain_db": 0,
+    "approval_basis": "Preview-only stable low cinematic drone; no pulse, pitch sweep or siren-like modulation."
+  },
+  "color_grade": {
+    "enabled": true,
+    "preset": "cinematic_dread_v73",
+    "brightness": -0.05,
+    "contrast": 1.14,
+    "saturation": 0.84,
+    "gamma": 0.92,
+    "vignette": true,
+    "cinematic_suspense": {
+      "enabled": true,
+      "profile": "cinematic_dread_v73",
+      "profile_version": "7.3.2",
+      "reference_basis": "cinematic_dread_v73_before_after_comparison",
+      "cool_shadows": 0.04,
+      "warm_highlights": 0.014,
+      "motion_strength": 0.045,
+      "push_in": 0.055,
+      "edge_fade": true,
+      "shadow_crush": 0.045,
+      "highlight_rolloff": 0.012,
+      "flicker_strength": 0.003,
+      "flicker_period_seconds": 4.8,
+      "detail_strength": 0.16,
+      "motion_smoothing": true,
+      "interpolation_fps": 60,
+      "vignette_angle": "PI/5.8"
+    }
+  },
+  "loop": {
+    "enabled": true,
+    "title": "BECAUSE OF THIS",
+    "transition": "continuity_fade",
+    "logo_source": "brand_logo_transparent",
+    "logo_width": 820,
+    "logo_anchor": "center_center",
+    "outro_seconds": 1.2,
+    "tail_fade_seconds": 0.55,
+    "card_fade_in_seconds": 0.24,
+    "card_fade_out_seconds": 0.36,
+    "audio_fade_seconds": 0.6,
+    "restart_safe": true
+  },
+  "output": {
+    "path": "rendered/{video_id}-{mode}.mp4"
+  },
+  "research": {
+    "confidence": "HIGH",
+    "accessed_at": "2026-11-01T15:45:00Z",
+    "sources": [
+      {
+        "source_id": "pexels-1721320",
+        "url": "https://www.pexels.com/video/1721320/",
+        "role": "fresh scene-specific source footage"
+      },
+      {
+        "source_id": "pexels-8869991",
+        "url": "https://www.pexels.com/video/8869991/",
+        "role": "fresh scene-specific source footage"
+      },
+      {
+        "source_id": "pexels-5985881",
+        "url": "https://www.pexels.com/video/5985881/",
+        "role": "fresh scene-specific source footage"
+      },
+      {
+        "source_id": "pexels-6962434",
+        "url": "https://www.pexels.com/video/6962434/",
+        "role": "fresh scene-specific source footage"
+      },
+      {
+        "source_id": "pexels-4354917",
+        "url": "https://www.pexels.com/video/4354917/",
+        "role": "fresh scene-specific source footage"
+      },
+      {
+        "source_id": "pexels-7206543",
+        "url": "https://www.pexels.com/video/7206543/",
+        "role": "fresh scene-specific source footage"
+      },
+      {
+        "source_id": "pexels-8381605",
+        "url": "https://www.pexels.com/video/8381605/",
+        "role": "fresh scene-specific source footage"
+      },
+      {
+        "source_id": "pexels-5203510",
+        "url": "https://www.pexels.com/video/5203510/",
+        "role": "fresh scene-specific source footage"
+      },
+      {
+        "source_id": "pexels-38958215",
+        "url": "https://www.pexels.com/video/38958215/",
+        "role": "fresh scene-specific source footage"
+      },
+      {
+        "source_id": "pexels-6980697",
+        "url": "https://www.pexels.com/video/6980697/",
+        "role": "fresh scene-specific source footage"
+      },
+      {
+        "source_id": "pexels-29241126",
+        "url": "https://www.pexels.com/video/29241126/",
+        "role": "fresh scene-specific source footage"
+      },
+      {
+        "source_id": "pexels-7599309",
+        "url": "https://www.pexels.com/video/7599309/",
+        "role": "fresh scene-specific source footage"
+      },
+      {
+        "source_id": "video-003-drive-folder",
+        "url": "https://drive.google.com/drive/folders/1YKFNEfQoYVYjM7LsOI9w8LuPisFjSP_0",
+        "role": "hydrated preview assets"
+      }
+    ],
+    "final_release_basis": "Fresh assets have source, license, hash and Drive records; final publication remains gated by human approval."
+  },
+  "editorial_qa": {
+    "status": "PENDING_HUMAN_REVIEW",
+    "reviewer": "",
+    "reviewed_at": ""
+  },
+  "human_approval": {
+    "status": "PENDING",
+    "required": true
+  },
+  "editing": {
+    "clip_quantity": {
+      "mode": "adaptive",
+      "min_clips": 12,
+      "target_min": 12,
+      "target_max": 18,
+      "max_clips": 18,
+      "min_scene_seconds": 2,
+      "max_scene_seconds": 8,
+      "enforce": true,
+      "enforce_no_same_scene_loop": true,
+      "require_exact_literal_context": true,
+      "short_scene_min_seconds": 1.2
+    },
+    "scene_refresh_strategy": {
+      "mode": "micro_beat_literal_evidence",
+      "target_scenes": 12,
+      "average_scene_seconds": 6,
+      "min_scene_seconds": 4,
+      "max_scene_seconds": 8,
+      "preserve_caption_readability": true,
+      "no_same_scene_loop": true
+    },
+    "loop_policy": {
+      "enforce_no_same_scene_loop": true,
+      "allow_same_scene_loop": false
+    }
+  },
+  "preview_revision": "v7.3.4-episode-002-suspense-camera-correction",
+  "preview_revision_note": "18 distinct context-matched assets, no same-scene loops, no generic filler, and semantic anchored push-in motion. Generated lateral sway and vertical oscillation are forbidden; existing Charon narration, forced-alignment captions and music bed are preserved.",
+  "final_revision": null,
+  "final_revision_note": null,
+  "runtime_artifacts": {},
+  "final_validation_revision": null,
+  "asset_reuse_brain": {
+    "policy": "GLOBAL_NO_REPEAT_SOURCE_ASSET",
+    "status": "PENDING_RUNTIME_AUDIT"
+  },
+  "asset_registry": {
+    "path": "episodes/asset-memory-registry.json",
+    "status": "PENDING_RUNTIME_AUDIT"
+  },
+  "runtime_asset_hydration": {
+    "status": "PENDING_RUN"
+  },
+  "state": "DRAFT_PREVIEW",
+  "story_creation": {
+    "editorial_contract": {
+      "protagonist": {
+        "name": "Daniel",
+        "goal": "protect the person who will receive tomorrow's warning and learn what happened to his sister",
+        "wound": "he filed his sister's death as an accident because admitting the truth would make him responsible for ignoring the call",
+        "flaw": "he buries evidence when the truth threatens his ability to keep functioning",
+        "agency_action": "he routes the impossible call instead of destroying the printed log",
+        "decision_scene_id": "S10",
+        "irreversible_choice": "Daniel connects the line and sends the warning into the future",
+        "cost": "the hospital goes dark and the receiver begins ringing from inside the sealed room",
+        "change": "he stops treating the past as a closed file and accepts himself as its witness"
+      },
+      "wound": {
+        "wound_scene_ids": [
+          "S02",
+          "S07",
+          "S09"
+        ],
+        "manifestation": "Daniel recognizes the ward number but initially hides behind the official accident report",
+        "conflict": "the call forces the exact minute he buried to become evidence again",
+        "link_to_choice": "his need to bury guilt makes the decision to route the call genuinely costly"
+      },
+      "causal_escalation": [
+        {
+          "from_scene": "S02",
+          "to_scene": "S04",
+          "trigger": "the disconnected ward calls",
+          "protagonist_action": "Daniel answers instead of letting the line die",
+          "new_cost": "tomorrow's emergency log appears with his signature",
+          "state_change": "a dead record becomes a future instruction"
+        },
+        {
+          "from_scene": "S04",
+          "to_scene": "S06",
+          "trigger": "the log predicts an emergency",
+          "protagonist_action": "Daniel follows the warm elevator button",
+          "new_cost": "the sealed records room becomes physically present",
+          "state_change": "evidence becomes an active threat"
+        },
+        {
+          "from_scene": "S06",
+          "to_scene": "S10",
+          "trigger": "the sealed room forces Daniel to confront the buried memory",
+          "protagonist_action": "Daniel compares the original rule and chooses the cable",
+          "new_cost": "routing the call may make him the next witness",
+          "state_change": "investigation becomes irreversible responsibility"
+        }
+      ],
+      "anomaly_rule": {
+        "rule": "every answered call from the dead ward demands a witness",
+        "violation": "Daniel answers a call that should be physically disconnected",
+        "cost": "the witness is summoned into the sealed room when the warning is routed",
+        "rule_scene_id": "S09",
+        "violation_scene_id": "S03",
+        "cost_scene_id": "S11"
+      },
+      "emotional_turns": [
+        {
+          "scene_id": "S02",
+          "from": "routine",
+          "to": "grief",
+          "cause": "the extension belongs to the ward where his sister died"
+        },
+        {
+          "scene_id": "S06",
+          "from": "investigation",
+          "to": "dread",
+          "cause": "the red light proves the sealed records room is active"
+        },
+        {
+          "scene_id": "S10",
+          "from": "dread",
+          "to": "responsibility",
+          "cause": "Daniel must choose whether tomorrow's stranger gets a chance"
+        }
+      ],
+      "payoff": {
+        "early_clue_scene_ids": [
+          "S03",
+          "S04",
+          "S09"
+        ],
+        "final_scene_id": "S12",
+        "payoff_type": "recontextualization",
+        "final_consequence": "the completed call reveals that Daniel has become the address of the warning",
+        "emotional_aftertaste": "he saves a future stranger but cannot return to a life outside the record",
+        "recontextualizes_opening": true,
+        "central_question_resolved": true
+      },
+      "visual_dramatization": [
+        {
+          "scene_id": "S01",
+          "human_action": "answers a phone that should not ring",
+          "visual_evidence": "a dead extension visibly activates",
+          "subjective_stakes": "Daniel's next choice becomes more dangerous",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S02",
+          "human_action": "recognizes the ward number",
+          "visual_evidence": "the old station and disconnected line are examined",
+          "subjective_stakes": "Daniel's next choice becomes more dangerous",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S03",
+          "human_action": "listens instead of hanging up",
+          "visual_evidence": "his hand holds the receiver while the corridor stays empty",
+          "subjective_stakes": "Daniel's next choice becomes more dangerous",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S04",
+          "human_action": "reads the future log",
+          "visual_evidence": "a fresh page emerges under his frozen hand",
+          "subjective_stakes": "Daniel's next choice becomes more dangerous",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S05",
+          "human_action": "tests the impossible button",
+          "visual_evidence": "his fingers hover over the warm elevator control",
+          "subjective_stakes": "Daniel's next choice becomes more dangerous",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S06",
+          "human_action": "approaches the sealed room",
+          "visual_evidence": "the red light pulses behind the door",
+          "subjective_stakes": "Daniel's next choice becomes more dangerous",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S07",
+          "human_action": "opens the buried file",
+          "visual_evidence": "the archive box and photograph make guilt physical",
+          "subjective_stakes": "Daniel's next choice becomes more dangerous",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S08",
+          "human_action": "replays the missing minute",
+          "visual_evidence": "the corridor becomes a memory he cannot avoid",
+          "subjective_stakes": "Daniel's next choice becomes more dangerous",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S09",
+          "human_action": "reads the witness rule",
+          "visual_evidence": "the original log becomes a condition, not a record",
+          "subjective_stakes": "Daniel's next choice becomes more dangerous",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S10",
+          "human_action": "chooses the cable",
+          "visual_evidence": "the page is pulled away from destruction",
+          "subjective_stakes": "Daniel's next choice becomes more dangerous",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S11",
+          "human_action": "routes the warning",
+          "visual_evidence": "the corridor blacks out and the sealed room rings",
+          "subjective_stakes": "Daniel's next choice becomes more dangerous",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S12",
+          "human_action": "leaves a final record",
+          "visual_evidence": "the vacant station and fresh log reveal the cost",
+          "subjective_stakes": "Daniel's next choice becomes more dangerous",
+          "not_just_atmosphere": true
+        }
+      ],
+      "density": {
+        "meaningful_beat_count": 10,
+        "visual_shot_count": 12,
+        "micro_beat_count": 2,
+        "story_seconds": 72,
+        "padding_seconds": 0,
+        "repeated_visual_count": 0
+      },
+      "originality": {
+        "core_mechanism": "a dead hospital extension sends a future warning that requires a witness",
+        "familiar_trope": "the haunted phone call",
+        "distinctive_inversion": "the person who answers becomes the destination of the warning",
+        "comparison_set": [
+          "haunted telephone story",
+          "hospital ghost story",
+          "future-warning mystery"
+        ],
+        "similarity_score": 0.28
+      },
+      "narration": {
+        "naturalness_status": "PASS",
+        "generic_line_count": 0,
+        "orphan_line_count": 0,
+        "causal_link_count": 10,
+        "action_consequence_ratio": 0.88,
+        "reviewed_sentence_count": 19,
+        "line_evidence": [
+          "the call creates the future log",
+          "the future log forces Daniel to investigate",
+          "the choice routes the warning and changes Daniel's final record"
+        ]
+      }
+    },
+    "idea": {
+      "title": "The Call That Arrived Tomorrow",
+      "premise": "An overnight hospital operator receives a warning from a ward that died eleven years ago.",
+      "audience_promise": "A grounded suspense mystery where every visual clue changes Daniel's next choice.",
+      "central_question": "Why is a disconnected ward calling from tomorrow, and what will Daniel sacrifice to answer it?",
+      "hook_type": "impossible_call_with_personal_wound"
+    },
+    "truth": {
+      "mode": "DECLARED_FICTION",
+      "disclosure": "This is an original fictional suspense story."
+    },
+    "causal_chain": {
+      "cause": "Daniel answers a call from a disconnected ward.",
+      "escalation": [
+        "the future log appears",
+        "the sealed records room activates",
+        "the witness rule forces a choice"
+      ],
+      "consequence": "routing the call makes Daniel the destination of the warning",
+      "why_it_mattered": "he saves a future stranger at the cost of remaining outside the record"
+    },
+    "emotional_arc": {
+      "primary": "dread",
+      "secondary": "unease",
+      "target_sensations": [
+        "curiosity",
+        "unease",
+        "dread",
+        "chill"
+      ]
+    },
+    "promise_payoff": {
+      "promise": "A dead ward will reveal why it is calling and what it wants from Daniel.",
+      "payoff": "The call wants a witness, and Daniel's final record proves the warning has claimed him.",
+      "payoff_type": "recontextualization",
+      "promise_paid": true
+    },
+    "visual_feasibility": {
+      "scene_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12"
+      ],
+      "approved_scene_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12"
+      ],
+      "coverage_ratio": 1.0,
+      "checked_before_script": true
+    },
+    "channel_diversity": {
+      "similarity_score": 0.28,
+      "recent_episode_count": 2,
+      "unique_signature": "hospital-switchboard-future-warning-witness-rule",
+      "similarity_status": "PASS"
+    },
+    "original_authorship": {
+      "original_script": true,
+      "original_narration": true,
+      "editorial_transform": true,
+      "asset_provenance_complete": true,
+      "mass_production_risk": "LOW"
+    },
+    "monetization_safety": {
+      "youtube_ad_safety": "LOW_RISK",
+      "tiktok_originality": "ORIGINAL",
+      "claims_reviewed": true,
+      "disclosure_present": true,
+      "risk_flags": {
+        "graphic": "NONE",
+        "copyright": "LOW",
+        "misleading": "NONE"
+      }
+    },
+    "duration": {
+      "target_seconds": 72,
+      "planned_seconds": 72,
+      "estimated_narration_seconds": 72,
+      "padding_seconds": 0,
+      "padding_status": "PASS"
+    },
+    "red_team": {
+      "status": "PASS",
+      "editorial": {
+        "status": "PASS",
+        "blocking_issues": []
+      },
+      "factual": {
+        "status": "PASS",
+        "blocking_issues": []
+      },
+      "monetization": {
+        "status": "PASS",
+        "blocking_issues": []
+      }
+    }
+  },
+  "runtime_artifact_hashes": {}
+}
