@@ -1,0 +1,195 @@
+{
+  "schema_version": "1.0.0",
+  "revision": "v7.3.3-episode-002-visual-correction",
+  "status": "ASSET_RESEARCH_REQUIRED",
+  "purpose": "Correct the visual edit after user review: make each cut represent the exact narrated evidence and eliminate filler loops.",
+  "user_rules": {
+    "unique_clip_target": [
+      12,
+      18
+    ],
+    "recommended_scene_count": 18,
+    "same_scene_loop": "forbidden",
+    "generic_filler": "forbidden",
+    "context_match": "subject + action + environment + object must agree with the narration",
+    "preserved_layers": [
+      "existing Charon narration",
+      "existing captions",
+      "approved suspense bed",
+      "cinematic grade",
+      "logo/outro"
+    ]
+  },
+  "runtime": {
+    "target_seconds": 64,
+    "scene_count": 18,
+    "durations_seconds": [
+      3,
+      3,
+      3,
+      3,
+      4,
+      4,
+      3,
+      4,
+      4,
+      3,
+      4,
+      4,
+      3,
+      3,
+      3,
+      4,
+      3,
+      3
+    ],
+    "source_window_rule": "each source_segment_out - source_segment_in must be >= scene duration",
+    "asset_status": "six or more fresh, scene-specific assets still need to be researched and hydrated before rendering"
+  },
+  "scenes": [
+    {
+      "scene_id": "S01",
+      "duration_seconds": 3,
+      "visual_contract": "archivist digitizer",
+      "narration_excerpt": "At six past one a.m., Mara, a city archivist,",
+      "asset_status": "PENDING_FRESH_CONTEXT_ASSET",
+      "no_same_scene_loop": true
+    },
+    {
+      "scene_id": "S02",
+      "duration_seconds": 3,
+      "visual_contract": "security tape station archive",
+      "narration_excerpt": "digitized the last security tape from a condemned train station.",
+      "asset_status": "PENDING_FRESH_CONTEXT_ASSET",
+      "no_same_scene_loop": true
+    },
+    {
+      "scene_id": "S03",
+      "duration_seconds": 3,
+      "visual_contract": "monitor timeline timecode",
+      "narration_excerpt": "The recording ended at fourteen past two.",
+      "asset_status": "PENDING_FRESH_CONTEXT_ASSET",
+      "no_same_scene_loop": true
+    },
+    {
+      "scene_id": "S04",
+      "duration_seconds": 3,
+      "visual_contract": "monitor timeline waveform",
+      "narration_excerpt": "Then the file added one more minute.",
+      "asset_status": "PENDING_FRESH_CONTEXT_ASSET",
+      "no_same_scene_loop": true
+    },
+    {
+      "scene_id": "S05",
+      "duration_seconds": 4,
+      "visual_contract": "platform clocks train platform",
+      "narration_excerpt": "In that extra minute, every platform clock stopped",
+      "asset_status": "PENDING_FRESH_CONTEXT_ASSET",
+      "no_same_scene_loop": true
+    },
+    {
+      "scene_id": "S06",
+      "duration_seconds": 4,
+      "visual_contract": "platform clock maintenance door",
+      "narration_excerpt": "at seven past one. A maintenance door opened",
+      "asset_status": "PENDING_FRESH_CONTEXT_ASSET",
+      "no_same_scene_loop": true
+    },
+    {
+      "scene_id": "S07",
+      "duration_seconds": 3,
+      "visual_contract": "maintenance door blueprint hand",
+      "narration_excerpt": "by itself. Mara checked the blueprint.",
+      "asset_status": "PENDING_FRESH_CONTEXT_ASSET",
+      "no_same_scene_loop": true
+    },
+    {
+      "scene_id": "S08",
+      "duration_seconds": 4,
+      "visual_contract": "blueprint sealed wall doorway",
+      "narration_excerpt": "The door had been bricked shut after a worker disappeared there in 1989.",
+      "asset_status": "PENDING_FRESH_CONTEXT_ASSET",
+      "no_same_scene_loop": true
+    },
+    {
+      "scene_id": "S09",
+      "duration_seconds": 4,
+      "visual_contract": "missing worker platform",
+      "narration_excerpt": "On the tape, the missing worker crossed the platform",
+      "asset_status": "PENDING_FRESH_CONTEXT_ASSET",
+      "no_same_scene_loop": true
+    },
+    {
+      "scene_id": "S10",
+      "duration_seconds": 3,
+      "visual_contract": "worker lamp camera",
+      "narration_excerpt": "carrying a lamp. He stopped beneath the camera",
+      "asset_status": "PENDING_FRESH_CONTEXT_ASSET",
+      "no_same_scene_loop": true
+    },
+    {
+      "scene_id": "S11",
+      "duration_seconds": 4,
+      "visual_contract": "security camera figure lens",
+      "narration_excerpt": "and looked directly into the lens. Mara froze the frame.",
+      "asset_status": "PENDING_FRESH_CONTEXT_ASSET",
+      "no_same_scene_loop": true
+    },
+    {
+      "scene_id": "S12",
+      "duration_seconds": 4,
+      "visual_contract": "second shadow empty platform",
+      "narration_excerpt": "Behind him, a second shadow stood where nobody was standing.",
+      "asset_status": "PENDING_FRESH_CONTEXT_ASSET",
+      "no_same_scene_loop": true
+    },
+    {
+      "scene_id": "S13",
+      "duration_seconds": 3,
+      "visual_contract": "timestamp monitor",
+      "narration_excerpt": "Then the timestamp jumped to the present.",
+      "asset_status": "PENDING_FRESH_CONTEXT_ASSET",
+      "no_same_scene_loop": true
+    },
+    {
+      "scene_id": "S14",
+      "duration_seconds": 3,
+      "visual_contract": "live monitor empty platform",
+      "narration_excerpt": "The station's live monitor showed that platform—empty,",
+      "asset_status": "PENDING_FRESH_CONTEXT_ASSET",
+      "no_same_scene_loop": true
+    },
+    {
+      "scene_id": "S15",
+      "duration_seconds": 3,
+      "visual_contract": "lamp sealed wall",
+      "narration_excerpt": "except for a lamp glowing behind the sealed wall.",
+      "asset_status": "PENDING_FRESH_CONTEXT_ASSET",
+      "no_same_scene_loop": true
+    },
+    {
+      "scene_id": "S16",
+      "duration_seconds": 4,
+      "visual_contract": "police door footprints tape",
+      "narration_excerpt": "Police found no broken door, footprints, or extra minute on the original tape.",
+      "asset_status": "PENDING_FRESH_CONTEXT_ASSET",
+      "no_same_scene_loop": true
+    },
+    {
+      "scene_id": "S17",
+      "duration_seconds": 3,
+      "visual_contract": "copy new frame camera",
+      "narration_excerpt": "Mara's copy changed again, ending with a new frame:",
+      "asset_status": "PENDING_FRESH_CONTEXT_ASSET",
+      "no_same_scene_loop": true
+    },
+    {
+      "scene_id": "S18",
+      "duration_seconds": 3,
+      "visual_contract": "person platform camera",
+      "narration_excerpt": "someone on the platform holding the camera from the other side.",
+      "asset_status": "PENDING_FRESH_CONTEXT_ASSET",
+      "no_same_scene_loop": true
+    }
+  ]
+}
