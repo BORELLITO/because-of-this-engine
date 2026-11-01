@@ -10,13 +10,14 @@
     "height": 1920,
     "fps": 60,
     "duration_min_seconds": 60,
-    "duration_max_seconds": 75
+    "duration_max_seconds": 75,
+    "runtime_max_seconds": 80
   },
   "target_runtime_seconds": 64,
   "engine_profile": "because-of-this-v7.3.2-charon-cinematic-dread-smooth-2026-10",
   "engine_profile_fingerprint": "c9f6c10765b65a447fb010008f64b302315ff189e257b927d47c9c8e2a427c8e",
   "master_prompt_version": "7.2",
-  "master_prompt_sha256": "c0bd045da0898848ff11aaba9ff2de9e27be8041f559b37a80f3f99ada1127c8",
+  "master_prompt_sha256": "cc11c568413e9b39105db91523f09742a5d118b1e3fb303a1d3d6fab46c569dd",
   "production_schema": "because-of-this://schemas/production-record/3.0.0",
   "human_approval_required": true,
   "lifecycle_status": "DRAFT_PREVIEW_ONLY",
