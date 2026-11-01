@@ -1421,7 +1421,7 @@
     {
       "scene_id": "S06",
       "beat_id": "beat-006",
-      "duration": 4,
+      "duration": 5,
       "story_beat": "clock remains at seven past one",
       "narration_excerpt": "at seven past one.",
       "visual_semantics": {
@@ -1988,7 +1988,7 @@
     {
       "scene_id": "S10",
       "beat_id": "beat-010",
-      "duration": 3,
+      "duration": 2,
       "story_beat": "worker carries lamp",
       "narration_excerpt": "carrying a lamp.",
       "visual_semantics": {
