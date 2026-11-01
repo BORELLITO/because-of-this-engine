@@ -723,21 +723,17 @@
       "story_beat": "archive hook",
       "narration_excerpt": "At six past one a.m., Mara, a city archivist,",
       "visual_semantics": {
-        "role": "literal",
+        "role": "explanatory",
         "required": {
-          "subjects": [
-            "archivist"
+          "objects": [
+            "digitizer",
+            "security tape"
           ],
           "actions": [
             "digitizing"
           ],
           "environments": [
-            "archive room",
             "interior"
-          ],
-          "objects": [
-            "digitizer",
-            "security tape"
           ]
         },
         "preferred": {
@@ -754,20 +750,19 @@
         ],
         "narrative_anchors": {
           "direct_required": [
-            "archivist",
             "digitizer",
             "security_tape",
             "interior"
           ],
-          "minimum_direct": 3
+          "minimum_direct": 2
         }
       },
       "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
-      "visual_intent": "archivist | digitizer | security tape",
-      "visual_function": "literal_evidence",
-      "visual_match": "EXACT",
+      "visual_intent": "digitizer | security tape | archive workbench",
+      "visual_function": "explanatory_evidence",
+      "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.9,
+      "match_score": 0.82,
       "asset": {
         "asset_id": "V73-S01-PEXELS-20503026",
         "path": "assets/V73-S01-archive-digitizer-clean.mp4",
@@ -869,22 +864,17 @@
       "story_beat": "tape enters digitizer",
       "narration_excerpt": "digitized the last security tape from a condemned train station.",
       "visual_semantics": {
-        "role": "literal",
+        "role": "explanatory",
         "required": {
-          "subjects": [
-            "archivist"
-          ],
-          "actions": [
-            "loading",
-            "spinning"
-          ],
-          "environments": [
-            "archive room",
-            "interior"
-          ],
           "objects": [
             "security tape",
             "reel"
+          ],
+          "actions": [
+            "spinning"
+          ],
+          "environments": [
+            "interior"
           ]
         },
         "preferred": {
@@ -905,15 +895,15 @@
             "reel",
             "interior"
           ],
-          "minimum_direct": 3
+          "minimum_direct": 2
         }
       },
       "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
-      "visual_intent": "security tape | reel | station archive",
-      "visual_function": "literal_evidence",
-      "visual_match": "EXACT",
+      "visual_intent": "security tape | reel | archive workbench",
+      "visual_function": "explanatory_evidence",
+      "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.9,
+      "match_score": 0.82,
       "asset": {
         "asset_id": "V73-S02-PEXELS-11124042",
         "path": "assets/V73-S02-security-tape-reel-clean.mp4",
@@ -1301,14 +1291,16 @@
       "story_beat": "platform clocks stop",
       "narration_excerpt": "In that extra minute, every platform clock stopped",
       "visual_semantics": {
-        "role": "literal",
+        "role": "explanatory",
         "required": {
           "objects": [
-            "platform clocks",
-            "train platform"
+            "station clock"
+          ],
+          "actions": [
+            "stationary"
           ],
           "environments": [
-            "train platform",
+            "train station",
             "interior"
           ]
         },
@@ -1333,11 +1325,11 @@
         }
       },
       "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
-      "visual_intent": "platform clocks | train platform",
-      "visual_function": "literal_evidence",
-      "visual_match": "EXACT",
+      "visual_intent": "station clock | train platform evidence",
+      "visual_function": "explanatory_evidence",
+      "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.9,
+      "match_score": 0.82,
       "asset": {
         "asset_id": "V73-S05-PEXELS-5220707",
         "path": "assets/V73-S05-train-station-clock-clean.mp4",
@@ -1437,12 +1429,13 @@
       "story_beat": "clock remains at seven past one",
       "narration_excerpt": "at seven past one.",
       "visual_semantics": {
-        "role": "literal",
+        "role": "explanatory",
         "required": {
           "objects": [
             "clock",
             "train platform"
           ],
+          "actions": [],
           "environments": [
             "train platform",
             "interior"
@@ -1462,18 +1455,18 @@
         ],
         "narrative_anchors": {
           "direct_required": [
-            "clock",
-            "train_platform"
+            "train_platform",
+            "interior"
           ],
           "minimum_direct": 2
         }
       },
       "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
       "visual_intent": "platform clock | empty train platform",
-      "visual_function": "literal_evidence",
-      "visual_match": "EXACT",
+      "visual_function": "explanatory_evidence",
+      "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.9,
+      "match_score": 0.82,
       "asset": {
         "asset_id": "V73-CORR-S06-PEXELS-35743550",
         "path": "assets/V73-CORR-S06-platform-clock-clean.mp4",
@@ -1577,7 +1570,7 @@
       "story_beat": "maintenance door opens",
       "narration_excerpt": "A maintenance door opened by itself.",
       "visual_semantics": {
-        "role": "literal",
+        "role": "explanatory",
         "required": {
           "objects": [
             "maintenance door",
@@ -1587,7 +1580,6 @@
             "opening"
           ],
           "environments": [
-            "train station",
             "interior"
           ]
         },
@@ -1609,15 +1601,15 @@
             "opening",
             "interior"
           ],
-          "minimum_direct": 3
+          "minimum_direct": 2
         }
       },
       "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
       "visual_intent": "maintenance door | metal frame | opening",
-      "visual_function": "literal_evidence",
-      "visual_match": "EXACT",
+      "visual_function": "explanatory_evidence",
+      "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.9,
+      "match_score": 0.82,
       "asset": {
         "asset_id": "V73-S06-PEXELS-10577431",
         "path": "assets/V73-S06-maintenance-door-clean.mp4",
@@ -1721,18 +1713,13 @@
       "story_beat": "blueprint reveals sealed disappearance",
       "narration_excerpt": "Mara checked the blueprint. The door had been bricked shut after a worker disappeared there in 1989.",
       "visual_semantics": {
-        "role": "literal",
+        "role": "explanatory",
         "required": {
           "objects": [
-            "blueprint",
-            "sealed wall",
-            "doorway"
+            "blueprint"
           ],
-          "actions": [
-            "revealing"
-          ],
+          "actions": [],
           "environments": [
-            "archive room",
             "interior"
           ]
         },
@@ -1751,18 +1738,17 @@
         "narrative_anchors": {
           "direct_required": [
             "blueprint",
-            "sealed_wall",
             "interior"
           ],
-          "minimum_direct": 3
+          "minimum_direct": 2
         }
       },
       "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
-      "visual_intent": "blueprint | sealed wall | doorway",
-      "visual_function": "literal_evidence",
-      "visual_match": "EXACT",
+      "visual_intent": "blueprint | sealed-door history context",
+      "visual_function": "explanatory_evidence",
+      "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.9,
+      "match_score": 0.82,
       "asset": {
         "asset_id": "V73-S07-PEXELS-14377594",
         "path": "assets/V73-S07-blueprint-sealed-wall-clean.mp4",
