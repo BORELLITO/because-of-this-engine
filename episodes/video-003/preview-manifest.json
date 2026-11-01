@@ -13,7 +13,7 @@
     "duration_max_seconds": 75,
     "runtime_max_seconds": 80
   },
-  "target_runtime_seconds": 69.6,
+  "target_runtime_seconds": 70.467,
   "engine_profile": "because-of-this-v7.3.2-charon-cinematic-dread-smooth-2026-10",
   "engine_profile_fingerprint": "c9f6c10765b65a447fb010008f64b302315ff189e257b927d47c9c8e2a427c8e",
   "master_prompt_version": "7.2",
@@ -1593,7 +1593,7 @@
     {
       "scene_id": "S08",
       "beat_id": "beat-008",
-      "duration": 3.67,
+      "duration": 4.537,
       "story_beat": "the missing minute replays his refusal",
       "narration_excerpt": "Now the call replayed the minute he refused to remember.",
       "visual_semantics": {
@@ -1641,25 +1641,25 @@
       "visual_truth": "DECLARED_FICTION",
       "match_score": 0.68,
       "asset": {
-        "asset_id": "V74-S08-PEXELS-5203510",
+        "asset_id": "V74-S08-PEXELS-5203511",
         "path": "assets/video-003-shot-08.mp4",
         "provider": "pexels",
-        "provider_asset_id": "5203510",
-        "source_page_url": "https://www.pexels.com/video/5203510/",
+        "provider_asset_id": "5203511",
+        "source_page_url": "https://www.pexels.com/video/5203511/",
         "license": "Pexels Free License; source page and acquisition record retained.",
         "rights_status": "PREVIEW_ONLY",
         "approved_for_render": false,
         "preview_only": true,
         "preview_only_reason": "Fresh commercial-use review record is retained; final publication approval remains gated.",
         "reuse_status": "FRESH",
-        "sha256": "bf52f02acf210ce001638c928ba0e083d8f1a490f2c2bed7e47319031666696c",
-        "perceptual_hash": "2c0445089516b212d32363dc0caec62186f5b4d1eddd6a4da87c963f3f5e3ad7",
+        "sha256": "59e5c8429127aa5a1dc7dd026838729cbbae5428aa12c0ae88904842a3ce8e33",
+        "perceptual_hash": "b4a925d2dce2446f6cca7b4593df6db15629ebfe1d4d04507436b53c1012dd67",
         "episode_id": "episode-003-call-tomorrow",
-        "drive_file_id": "1KRQ6ATkOZ6xQSanP6mc51spEw1Bqk7ir",
-        "duration_seconds": 3.67,
+        "drive_file_id": "1Dsfd01MLessg8eAHLT8CP659oQZOeWls",
+        "duration_seconds": 4.536667,
         "width": 1920,
         "height": 1080,
-        "filesize_bytes": 2478100,
+        "filesize_bytes": 3054435,
         "author": "Pexels contributor (attributed on source page)",
         "acquisition_timestamp": "2026-11-01T15:45:00Z",
         "original_filename": "video-003-shot-08.mp4",
@@ -1667,19 +1667,19 @@
         "job_ownership": "episode-003-call-tomorrow",
         "scene_usage": "S08: reviewed fresh visual evidence for the missing minute replays.",
         "source_segment_in": 0,
-        "source_segment_out": 3.67,
+        "source_segment_out": 4.536667,
         "asset_class": "evidence",
         "scene_approval": "APPROVED",
         "visual_evidence": {
           "source_title": [
-            "empty hospital corridor holds the memory of a past event"
+            "wide-angle empty hospital hallway focusing on a nurse station"
           ],
           "reviewer": "Codex visual triage pass",
           "reviewed_at": "2026-11-01T15:45:00Z",
           "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
           "reviewed": true,
           "basis": [
-            "Observed empty hospital corridor holds the memory of a past event"
+            "Observed wide-angle empty hospital hallway focusing on a nurse station"
           ],
           "observed_subjects": [],
           "observed_actions": [
@@ -1703,7 +1703,7 @@
           },
           "action_window": {
             "start": 0.15,
-            "end": 3.52,
+            "end": 4.386667,
             "basis": "reviewed source motion window; no editorial overlay"
           },
           "subjects": [],
@@ -1721,8 +1721,8 @@
           ],
           "sample_timestamps": [
             0.15,
-            1.835,
-            3.52
+            2.268,
+            4.387
           ]
         }
       },
@@ -1734,7 +1734,16 @@
       "transition": {
         "type": "crossfade",
         "duration": 0.18
-      }
+      },
+      "asset_id": "V74-S08-PEXELS-5203511",
+      "provider_asset_id": "5203511",
+      "source_page_url": "https://www.pexels.com/video/5203511/",
+      "sha256": "59e5c8429127aa5a1dc7dd026838729cbbae5428aa12c0ae88904842a3ce8e33",
+      "perceptual_hash": "b4a925d2dce2446f6cca7b4593df6db15629ebfe1d4d04507436b53c1012dd67",
+      "drive_file_id": "1Dsfd01MLessg8eAHLT8CP659oQZOeWls",
+      "duration_seconds": 4.536667,
+      "filesize_bytes": 3054435,
+      "source_segment_out": 4.536667
     },
     {
       "scene_id": "S09",
@@ -2481,8 +2490,8 @@
         "role": "fresh scene-specific source footage"
       },
       {
-        "source_id": "pexels-5203510",
-        "url": "https://www.pexels.com/video/5203510/",
+        "source_id": "pexels-5203511",
+        "url": "https://www.pexels.com/video/5203511/",
         "role": "fresh scene-specific source footage"
       },
       {
@@ -2539,8 +2548,8 @@
     "scene_refresh_strategy": {
       "mode": "micro_beat_literal_evidence",
       "target_scenes": 12,
-      "average_scene_seconds": 5.8,
-      "min_scene_seconds": 3.67,
+      "average_scene_seconds": 5.872,
+      "min_scene_seconds": 4.537,
       "max_scene_seconds": 8,
       "preserve_caption_readability": true,
       "no_same_scene_loop": true
@@ -2871,9 +2880,9 @@
       }
     },
     "duration": {
-      "target_seconds": 69.6,
-      "planned_seconds": 69.6,
-      "estimated_narration_seconds": 69.6,
+      "target_seconds": 70.467,
+      "planned_seconds": 70.467,
+      "estimated_narration_seconds": 70.467,
       "padding_seconds": 0,
       "padding_status": "PASS"
     },
