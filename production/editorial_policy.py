@@ -12,17 +12,20 @@ from typing import Any
 
 DEFAULT_CLIP_QUANTITY_POLICY = {
     "mode": "adaptive",
-    "min_clips": 10,
+    "min_clips": 12,
     "target_min": 12,
-    "target_max": 16,
+    "target_max": 18,
     "max_clips": 18,
     "min_scene_seconds": 2.0,
-    "max_scene_seconds": 20.0,
+    "max_scene_seconds": 8.0,
     "enforce": True,
+    "enforce_no_same_scene_loop": True,
+    "require_exact_literal_context": True,
 }
 
 _ALLOWED_MODES = {"adaptive", "fixed"}
 _REQUIRED_NUMERIC = ("min_clips", "target_min", "target_max", "max_clips", "min_scene_seconds", "max_scene_seconds")
+_REQUIRED_FLAGS = ("enforce", "enforce_no_same_scene_loop", "require_exact_literal_context")
 
 
 class EditorialPolicyError(ValueError):
@@ -46,8 +49,9 @@ def clip_quantity_policy(manifest: dict[str, Any]) -> dict[str, Any]:
     policy = {**DEFAULT_CLIP_QUANTITY_POLICY, **raw}
     if policy["mode"] not in _ALLOWED_MODES:
         raise EditorialPolicyError("editing.clip_quantity.mode is invalid.")
-    if not isinstance(policy["enforce"], bool):
-        raise EditorialPolicyError("editing.clip_quantity.enforce must be boolean.")
+    for key in _REQUIRED_FLAGS:
+        if not isinstance(policy[key], bool):
+            raise EditorialPolicyError(f"editing.clip_quantity.{key} must be boolean.")
 
     for key in _REQUIRED_NUMERIC:
         value = policy[key]
@@ -70,6 +74,9 @@ def clip_quantity_policy(manifest: dict[str, Any]) -> dict[str, Any]:
         raise EditorialPolicyError("Clip quantity bounds must be min <= target_min <= target_max <= max.")
     if policy["min_scene_seconds"] > policy["max_scene_seconds"]:
         raise EditorialPolicyError("Scene duration bounds are inverted.")
+
+    if policy["enforce_no_same_scene_loop"] and policy["max_scene_seconds"] > 8.0:
+        raise EditorialPolicyError("No-loop editorial policy requires max_scene_seconds <= 8.0.")
 
     return policy
 
