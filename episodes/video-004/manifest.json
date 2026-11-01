@@ -529,7 +529,7 @@
       "beat_id": "beat-001",
       "duration": 5.5,
       "story_beat": "Howard and his son sleep in the bay as the mountain begins to move",
-      "narration_excerpt": "Howard Ulrich was asleep in a small boat in Alaska's Lituya Bay when the mountain above his seven-year-old son began to move.",
+      "narration_excerpt": "Howard Ulrich was asleep in a small boat in Alaska's Lituya Bay when",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -691,7 +691,7 @@
       "beat_id": "beat-002",
       "duration": 5,
       "story_beat": "the earthquake tears the shoreline open",
-      "narration_excerpt": "On July ninth, nineteen fifty-eight, a magnitude seven point nine earthquake tore the shoreline open.",
+      "narration_excerpt": "the mountain above his seven-year-old son began to move. On July ninth, nineteen fifty-eight,",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -840,7 +840,7 @@
       "beat_id": "beat-003",
       "duration": 5,
       "story_beat": "the rockslide collapses into Gilbert Inlet",
-      "narration_excerpt": "Howard woke to the sound of rock and ice collapsing into Gilbert Inlet.",
+      "narration_excerpt": "a magnitude seven point nine earthquake tore the shoreline open. Howard woke to the sound",
       "visual_semantics": {
         "role": "symbolic",
         "required": {
@@ -992,7 +992,7 @@
       "beat_id": "beat-004",
       "duration": 4.5,
       "story_beat": "the impact turns the bay into a launch point",
-      "narration_excerpt": "The impact did not make an ordinary wave.",
+      "narration_excerpt": "of rock and ice collapsing into Gilbert Inlet. The impact did not make an ordinary wave.",
       "visual_semantics": {
         "role": "symbolic",
         "required": {
