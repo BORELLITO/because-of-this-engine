@@ -542,7 +542,7 @@
       }
     ],
     "voice": "Charon",
-    "cache_contract": "cloud_tts_charon_v1",
+    "cache_contract": "gemini_tts_charon_v2",
     "model": "gemini-3.8-flash-tts"
   },
   "script": {
