@@ -24,8 +24,14 @@ FORBIDDEN_ACTIVE_MARKERS = (
 
 
 def _active_workflow_paths(root: Path) -> list[Path]:
-    workflow_root = root / ".github" / "workflows"
-    return sorted(path for path in workflow_root.glob("*.yml") if path.name == "because-of-this-v7.yml")
+    """Return the one canonical render workflow, excluding audit-only stubs."""
+    workflow = root / ".github" / "workflows" / "episode-002-draft-preview.yml"
+    if not workflow.is_file():
+        return []
+    text = workflow.read_text(encoding="utf-8")
+    if "workflow_dispatch:" not in text or "if: \${{ false }}" in text:
+        return []
+    return [workflow]
 
 
 def audit(repo_root: Path) -> dict[str, object]:
