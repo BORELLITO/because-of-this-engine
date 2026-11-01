@@ -1,6 +1,9 @@
 name: Because Of This V7.3.3 Episode 002 draft preview
 
 on:
+  push:
+    branches:
+      - v7.3.3-episode-002-visual-correction
   workflow_dispatch:
     inputs:
       manifest:
