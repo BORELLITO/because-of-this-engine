@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-"""V7.3 Charon production profile with canonical cinematic-dread visual effects for Because Of This.
+"""V7.3.2 Gemini Charon production profile for Because Of This.
 
-This module is the only active configuration authority.  The former Gemini
-profile is retained only in Git history/rollback documentation and is not
-accepted for active production.
+This module is the only active configuration authority. Gemini TTS Charon is
+the canonical narration route; Piper remains rollback-only archive material.
 """
 
 from __future__ import annotations
