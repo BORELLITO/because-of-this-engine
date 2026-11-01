@@ -74,11 +74,17 @@ def audit(repo_root: Path) -> dict[str, object]:
         if retired.is_file() and ("if: " + "${{ false }}") not in retired.read_text(encoding="utf-8"):
             raise SingletonGuardError(f"retired workflow was reactivated: {name}")
     offenders: list[str] = []
-    for path in [policy_path, workflows[0], root / "production" / "v7_orchestrator.py", root / "production" / "piper_tts.py"]:
+    for path in [policy_path, workflows[0], root / "production" / "v7_orchestrator.py"]:
         text = path.read_text(encoding="utf-8")
         for marker in FORBIDDEN_ACTIVE_MARKERS:
             if marker in text:
                 offenders.append(f"{path.relative_to(root)} contains forbidden active marker {marker}")
+    for legacy_path in (
+        root / "production" / "piper_tts.py",
+        root / "production" / "cloud_tts.py",
+    ):
+        if legacy_path.exists():
+            offenders.append(f"{legacy_path.relative_to(root)} remains executable in active tree")
     active_sources = (
         workflows[0],
         root / "production" / "v7_orchestrator.py",
