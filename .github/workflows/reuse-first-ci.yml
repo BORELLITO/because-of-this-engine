@@ -9,6 +9,7 @@ on:
       - "production/google_drive_assets.py"
       - "production/render_video_episode.py"
       - "production/google_drive_delivery.py"
+      - "production/narration_cache.py"
       - "production/v7_orchestrator.py"
       - "production/quality_gates.py"
       - "production/canonical_config.py"
@@ -65,6 +66,7 @@ jobs:
             production/google_drive_assets.py \
             production/render_video_episode.py \
             production/google_drive_delivery.py \
+            production/narration_cache.py \
             production/v7_orchestrator.py \
             production/quality_gates.py \
             production/canonical_config.py \
