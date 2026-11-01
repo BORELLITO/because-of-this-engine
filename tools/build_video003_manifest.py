@@ -16,7 +16,7 @@ ASSETS = EPISODE / "assets"
 TEMPLATE = ROOT / "episodes" / "video-002" / "preview-manifest.json"
 
 SCRIPT = (
-    "At 2:17 a.m., Daniel was alone in the hospital switchboard when a dead extension rang. "
+    "2:17 a.m. found Daniel alone at the hospital switchboard when a dead extension rang. "
     "The number belonged to a ward disconnected eleven years earlier—the night his sister died. "
     "He answered. No voice spoke, only breathing, then three words: Don't send the elevator. "
     "The call ended. The switchboard printed tomorrow's emergency log, signed with Daniel's name. "
@@ -32,7 +32,7 @@ SCRIPT = (
 )
 
 EXCERPTS = [
-    "At 2:17 a.m., Daniel was alone in the hospital switchboard when a dead extension rang.",
+    "2:17 a.m. found Daniel alone at the hospital switchboard when a dead extension rang.",
     "The number belonged to a ward disconnected eleven years earlier—the night his sister died.",
     "He answered. No voice spoke, only breathing, then three words: Don't send the elevator.",
     "The call ended. The switchboard printed tomorrow's emergency log, signed with Daniel's name.",
