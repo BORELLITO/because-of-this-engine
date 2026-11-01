@@ -1,0 +1,2979 @@
+{
+  "schema_version": "3.0.0",
+  "video_id": "because-of-this-episode-004",
+  "title": "The Wave That Climbed Higher Than a Skyscraper",
+  "language": "en-US",
+  "channel": "Because Of This",
+  "fps": 60,
+  "render": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 60,
+    "duration_min_seconds": 60,
+    "duration_max_seconds": 75,
+    "runtime_max_seconds": 80
+  },
+  "target_runtime_seconds": 67,
+  "engine_profile": "because-of-this-v7.3.2-charon-cinematic-dread-smooth-2026-10",
+  "engine_profile_fingerprint": "351da4ecf4ec6480b4f7634c238daf961308a33ec252a9db32f4be49834438f8",
+  "master_prompt_version": "7.2",
+  "master_prompt_sha256": "f393ca8891b6e254adfd252a8df031fbe878b0f1d395b67f15f9b0abf4bcc5af",
+  "production_schema": "because-of-this://schemas/production-record/3.0.0",
+  "human_approval_required": true,
+  "lifecycle_status": "DRAFT_PREVIEW_ONLY",
+  "video_number": 4,
+  "engine_milestone": "V7.4.0_EPISODE_004_EDITORIAL_GATED",
+  "canonical_path": "episodes/video-004",
+  "truth_mode": "VERIFIED_FACT",
+  "disclosure": "This episode recounts the verified 1958 Lituya Bay megatsunami; stock footage is representational coverage, not literal footage of the event.",
+  "story": {
+    "truth_mode": "VERIFIED_FACT",
+    "person": "Howard Ulrich, a fisherman and father aboard the Edrie",
+    "central_question": "How can a quiet bay throw water higher than a skyscraper, and what does survival look like from inside the wave?",
+    "risk": "If the Edrie cannot break free before the surge arrives, Howard and his son will be carried into the shore.",
+    "irreversible_decision": "Howard pays out the anchor chain and starts the engine instead of waiting for the wave to hit.",
+    "consequence": "The Edrie is lifted, carried toward shore and pulled back by the backwash; Howard and his son survive.",
+    "wound": "A father's helplessness becomes visible when the mountain moves faster than the boat can respond.",
+    "flaw": "He initially trusts the anchor to hold against a force no boat can control.",
+    "something_to_lose": "His son's life and the ability to leave the bay together.",
+    "hook": "Howard is asleep beside his seven-year-old son when the mountain above Lituya Bay begins to move.",
+    "reveal": "The highest recorded tsunami run-up began not in the open ocean, but when a mountainside entered a narrow inlet."
+  },
+  "story_profile": {
+    "truth_mode": "VERIFIED_FACT",
+    "primary_emotion": "awe",
+    "secondary_emotion": "dread",
+    "central_question": "How can a quiet bay throw water higher than a skyscraper, and what does survival look like from inside the wave?",
+    "visual_symbol": "a quiet bay beneath a mountainside"
+  },
+  "story_graph": {
+    "version": "7.4.0",
+    "entities": [
+      {
+        "entity_id": "howard",
+        "canonical_name": "Howard Ulrich",
+        "aliases": [
+          "Howard",
+          "the fisherman"
+        ],
+        "continuity_mode": "same eyewitness and father"
+      },
+      {
+        "entity_id": "son",
+        "canonical_name": "Howard's seven-year-old son",
+        "aliases": [
+          "his son",
+          "the boy"
+        ],
+        "continuity_mode": "same child aboard the Edrie"
+      },
+      {
+        "entity_id": "lituya_bay",
+        "canonical_name": "Lituya Bay",
+        "aliases": [
+          "the bay",
+          "the inlet"
+        ],
+        "continuity_mode": "same narrow Alaskan inlet"
+      },
+      {
+        "entity_id": "rockslide",
+        "canonical_name": "earthquake-triggered rockslide",
+        "aliases": [
+          "mountain",
+          "rock",
+          "landslide"
+        ],
+        "continuity_mode": "single impact into Gilbert Inlet"
+      },
+      {
+        "entity_id": "megatsunami",
+        "canonical_name": "1958 Lituya Bay megatsunami",
+        "aliases": [
+          "wave",
+          "surge",
+          "wall of water"
+        ],
+        "continuity_mode": "same localized surge"
+      },
+      {
+        "entity_id": "edrie",
+        "canonical_name": "the Edrie",
+        "aliases": [
+          "the boat"
+        ],
+        "continuity_mode": "same anchored fishing boat"
+      },
+      {
+        "entity_id": "forest_trimline",
+        "canonical_name": "forest trimline",
+        "aliases": [
+          "scar",
+          "cleared forest"
+        ],
+        "continuity_mode": "lasting physical evidence"
+      }
+    ],
+    "beats": [
+      {
+        "beat_id": "beat-001",
+        "event": "Howard and his son sleep in the bay as the mountain begins to move",
+        "state_before": "ordinary_bay",
+        "state_after": "state_1",
+        "causal_role": "hook",
+        "emotion": "curiosity",
+        "visual_motif": "quiet bay",
+        "entities": [
+          "howard",
+          "son",
+          "lituya_bay"
+        ],
+        "scene_id": "S01",
+        "narration_excerpt": "Howard Ulrich was asleep in a small boat in Alaska's Lituya Bay when the mountain above his seven-year-old son began to move."
+      },
+      {
+        "beat_id": "beat-002",
+        "event": "the earthquake tears the shoreline open",
+        "state_before": "state_1",
+        "state_after": "state_2",
+        "causal_role": "context",
+        "emotion": "unease",
+        "visual_motif": "earthquake",
+        "entities": [
+          "howard",
+          "son",
+          "lituya_bay"
+        ],
+        "scene_id": "S02",
+        "narration_excerpt": "On July ninth, nineteen fifty-eight, a magnitude seven point nine earthquake tore the shoreline open."
+      },
+      {
+        "beat_id": "beat-003",
+        "event": "the rockslide collapses into Gilbert Inlet",
+        "state_before": "state_2",
+        "state_after": "state_3",
+        "causal_role": "escalation",
+        "emotion": "dread",
+        "visual_motif": "collapsing mountain",
+        "entities": [
+          "lituya_bay",
+          "rockslide",
+          "megatsunami"
+        ],
+        "scene_id": "S03",
+        "narration_excerpt": "Howard woke to the sound of rock and ice collapsing into Gilbert Inlet."
+      },
+      {
+        "beat_id": "beat-004",
+        "event": "the impact turns the bay into a launch point",
+        "state_before": "state_3",
+        "state_after": "state_4",
+        "causal_role": "escalation",
+        "emotion": "tension",
+        "visual_motif": "impact",
+        "entities": [
+          "lituya_bay",
+          "rockslide",
+          "megatsunami"
+        ],
+        "scene_id": "S04",
+        "narration_excerpt": "The impact did not make an ordinary wave."
+      },
+      {
+        "beat_id": "beat-005",
+        "event": "the surge climbs 1720 feet up the opposite slope",
+        "state_before": "state_4",
+        "state_after": "state_5",
+        "causal_role": "reveal",
+        "emotion": "awe",
+        "visual_motif": "vertical surge",
+        "entities": [
+          "lituya_bay",
+          "rockslide",
+          "megatsunami"
+        ],
+        "scene_id": "S05",
+        "narration_excerpt": "It threw water up the opposite slope, one thousand seven hundred and twenty feet—higher than the Empire State Building."
+      },
+      {
+        "beat_id": "beat-006",
+        "event": "the wave strips forest and carries debris",
+        "state_before": "state_5",
+        "state_after": "state_6",
+        "causal_role": "consequence",
+        "emotion": "shock",
+        "visual_motif": "forest trimline",
+        "entities": [
+          "lituya_bay",
+          "rockslide",
+          "megatsunami"
+        ],
+        "scene_id": "S06",
+        "narration_excerpt": "The surge stripped the forest and carried debris across the land."
+      },
+      {
+        "beat_id": "beat-007",
+        "event": "Howard chooses seamanship over panic",
+        "state_before": "state_6",
+        "state_after": "state_7",
+        "causal_role": "decision",
+        "emotion": "urgency",
+        "visual_motif": "anchor chain",
+        "entities": [
+          "howard",
+          "son",
+          "edrie"
+        ],
+        "scene_id": "S07",
+        "narration_excerpt": "Howard could not free the anchor. He paid out the chain, started the engine, and waited."
+      },
+      {
+        "beat_id": "beat-008",
+        "event": "the Edrie rises with the wall of water",
+        "state_before": "state_7",
+        "state_after": "state_8",
+        "causal_role": "consequence",
+        "emotion": "fear",
+        "visual_motif": "boat rising",
+        "entities": [
+          "lituya_bay",
+          "rockslide",
+          "megatsunami"
+        ],
+        "scene_id": "S08",
+        "narration_excerpt": "The Edrie rose with the wall of water and was carried toward shore."
+      },
+      {
+        "beat_id": "beat-009",
+        "event": "the backwash drags the boat away from shore",
+        "state_before": "state_8",
+        "state_after": "state_9",
+        "causal_role": "reversal",
+        "emotion": "relief",
+        "visual_motif": "backwash",
+        "entities": [
+          "lituya_bay",
+          "rockslide",
+          "megatsunami"
+        ],
+        "scene_id": "S09",
+        "narration_excerpt": "Then the backwash pulled the boat away."
+      },
+      {
+        "beat_id": "beat-010",
+        "event": "another boat sinks and two men die",
+        "state_before": "state_9",
+        "state_after": "state_10",
+        "causal_role": "consequence",
+        "emotion": "grief",
+        "visual_motif": "sunken boat",
+        "entities": [
+          "lituya_bay",
+          "rockslide",
+          "megatsunami"
+        ],
+        "scene_id": "S10",
+        "narration_excerpt": "Another boat sank near the entrance. Two men died."
+      },
+      {
+        "beat_id": "beat-011",
+        "event": "the forest preserves the height of the wave",
+        "state_before": "state_10",
+        "state_after": "state_11",
+        "causal_role": "evidence",
+        "emotion": "wonder",
+        "visual_motif": "forest scar",
+        "entities": [
+          "lituya_bay",
+          "forest_trimline",
+          "megatsunami"
+        ],
+        "scene_id": "S11",
+        "narration_excerpt": "Howard and his son survived, but the forest kept the evidence: a clean scar thousands of feet above the tide."
+      },
+      {
+        "beat_id": "beat-012",
+        "event": "the event becomes a warning about landslide tsunamis",
+        "state_before": "state_11",
+        "state_after": "state_12",
+        "causal_role": "payoff",
+        "emotion": "chill",
+        "visual_motif": "silent mountain",
+        "entities": [
+          "lituya_bay",
+          "forest_trimline",
+          "megatsunami"
+        ],
+        "scene_id": "S12",
+        "narration_excerpt": "Lituya Bay proved a tsunami does not need an ocean. Sometimes a mountain is enough."
+      }
+    ]
+  },
+  "emotional_map": {
+    "status": "PASS",
+    "beats": [
+      {
+        "position": 0.08,
+        "emotion": "curiosity",
+        "intensity": 0.32
+      },
+      {
+        "position": 0.3,
+        "emotion": "dread",
+        "intensity": 0.62
+      },
+      {
+        "position": 0.52,
+        "emotion": "awe",
+        "intensity": 0.9
+      },
+      {
+        "position": 0.72,
+        "emotion": "urgency",
+        "intensity": 0.96
+      },
+      {
+        "position": 1,
+        "emotion": "chill",
+        "intensity": 0.86
+      }
+    ]
+  },
+  "reveal_map": {
+    "status": "PASS",
+    "known": [
+      "the bay is narrow",
+      "the mountain is unstable"
+    ],
+    "hidden": [
+      "the 1720-foot run-up",
+      "the boat's survival",
+      "the landslide-tsunami mechanism"
+    ],
+    "reveal": "The quiet bay was a containment chamber: the mountain supplied the force and the walls supplied the height."
+  },
+  "visual_rules": {
+    "primary_language": "literal evidence representation",
+    "source_style": "historical evidence, coastal survival and clean representational nature footage",
+    "avoid": [
+      "generic ocean storm",
+      "random camera shake",
+      "generated text",
+      "logos inside stock clips",
+      "graphic death"
+    ],
+    "continuity": [
+      "same Lituya Bay",
+      "same rockslide",
+      "same wave",
+      "same forest trimline"
+    ],
+    "no_reused_clips": true,
+    "no_derived_clip_reuse": true,
+    "no_text_generated_inside_stock_clips": true,
+    "editorial_text_policy": "CAPTIONS_ONLY",
+    "authored_text_overlays": "FORBIDDEN",
+    "authored_graphics": "FORBIDDEN",
+    "natural_source_text": "ALLOWED_ONLY_IF_NATIVE_AND_REVIEWED",
+    "clean_clip_required": true,
+    "reuse_exclusions": [
+      "episode-001",
+      "episode-002",
+      "episode-003"
+    ]
+  },
+  "voice": {
+    "provider": "gemini_tts",
+    "language": "en-US",
+    "language_code": "en-US",
+    "voice_name": "Charon",
+    "voice": "Charon",
+    "model_or_voice_type": "gemini-3.8-flash-tts",
+    "ssml_gender": "MALE",
+    "sample_rate_hz": 24000,
+    "encoding": "AUDIO_WAV",
+    "speaking_rate": 0.88,
+    "pitch": 0,
+    "volume_gain_db": 0,
+    "style": "Low, controlled American English narration with informative clarity, restrained cinematic suspense, intimate consequence, never theatrical."
+  },
+  "narration": {
+    "provider": "gemini_tts",
+    "language": "en-US",
+    "language_code": "en-US",
+    "voice_name": "Charon",
+    "model": "gemini-3.8-flash-tts",
+    "beats": [
+      {
+        "beat_id": "beat-001",
+        "text": "Howard Ulrich was asleep in a small boat in Alaska's Lituya Bay when the mountain above his seven-year-old son began to move.",
+        "pause_before_ms": 0
+      },
+      {
+        "beat_id": "beat-002",
+        "text": "On July ninth, nineteen fifty-eight, a magnitude seven point nine earthquake tore the shoreline open.",
+        "pause_before_ms": 120
+      },
+      {
+        "beat_id": "beat-003",
+        "text": "Howard woke to the sound of rock and ice collapsing into Gilbert Inlet.",
+        "pause_before_ms": 120
+      },
+      {
+        "beat_id": "beat-004",
+        "text": "The impact did not make an ordinary wave.",
+        "pause_before_ms": 120
+      },
+      {
+        "beat_id": "beat-005",
+        "text": "It threw water up the opposite slope, one thousand seven hundred and twenty feet—higher than the Empire State Building.",
+        "pause_before_ms": 120
+      },
+      {
+        "beat_id": "beat-006",
+        "text": "The surge stripped the forest and carried debris across the land.",
+        "pause_before_ms": 120
+      },
+      {
+        "beat_id": "beat-007",
+        "text": "Howard could not free the anchor. He paid out the chain, started the engine, and waited.",
+        "pause_before_ms": 120
+      },
+      {
+        "beat_id": "beat-008",
+        "text": "The Edrie rose with the wall of water and was carried toward shore.",
+        "pause_before_ms": 120
+      },
+      {
+        "beat_id": "beat-009",
+        "text": "Then the backwash pulled the boat away.",
+        "pause_before_ms": 120
+      },
+      {
+        "beat_id": "beat-010",
+        "text": "Another boat sank near the entrance. Two men died.",
+        "pause_before_ms": 120
+      },
+      {
+        "beat_id": "beat-011",
+        "text": "Howard and his son survived, but the forest kept the evidence: a clean scar thousands of feet above the tide.",
+        "pause_before_ms": 120
+      },
+      {
+        "beat_id": "beat-012",
+        "text": "Lituya Bay proved a tsunami does not need an ocean. Sometimes a mountain is enough.",
+        "pause_before_ms": 120
+      }
+    ]
+  },
+  "script": {
+    "path": "script.txt",
+    "word_count_target": 168
+  },
+  "audio": {
+    "path": "audio/narration.wav",
+    "source": "pending_final_gemini_tts_charon_audio",
+    "preview_only": true,
+    "state": "DRAFT_PREVIEW"
+  },
+  "captions": {
+    "path": "captions/narration.ass",
+    "alignment_sidecar": "captions/narration.alignment.json",
+    "alignment_mode": "audio_final_forced_alignment",
+    "alignment_source": "vosk_word_timestamps",
+    "word_level_available": true,
+    "max_lines": 2,
+    "max_line_chars": 38,
+    "target_cps": 20,
+    "max_cps": 28,
+    "end_tolerance_seconds": 0.1,
+    "word_highlight_enabled": true,
+    "word_highlight_mode": "timestamp_color_transform",
+    "active_word_color": "#FF7777",
+    "word_highlight_tolerance_ms": 35,
+    "style": {
+      "font_name": "Arial",
+      "font_size": 48,
+      "primary_color": "&H00FFFFFF&",
+      "secondary_color": "&H00FFFFFF&",
+      "outline_color": "&H00000000&",
+      "back_color": "&H80000000&",
+      "bold": 1,
+      "italic": 0,
+      "underline": 0,
+      "strike_out": 0,
+      "scale_x": 100,
+      "scale_y": 100,
+      "spacing": 0,
+      "angle": 0,
+      "border_style": 1,
+      "outline": 3,
+      "shadow": 1,
+      "alignment": 2,
+      "margin_l": 90,
+      "margin_r": 140,
+      "margin_v": 408,
+      "encoding": 1
+    },
+    "mobile_safe_zone": {
+      "right_clearance_px": 140,
+      "bottom_clearance_px": 408,
+      "interaction_rail_clearance": "comment-share-remix rail",
+      "status": "LOCKED_FROM_APPROVED_MASTER"
+    },
+    "state": "DRAFT_PREVIEW"
+  },
+  "scenes": [
+    {
+      "scene_id": "S01",
+      "beat_id": "beat-001",
+      "duration": 6,
+      "story_beat": "Howard and his son sleep in the bay as the mountain begins to move",
+      "narration_excerpt": "Howard Ulrich was asleep in a small boat in Alaska's Lituya Bay when the mountain above his seven-year-old son began to move.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "subjects": [
+            "bay",
+            "mountains",
+            "water"
+          ],
+          "actions": [
+            "aerial overview",
+            "aftermath"
+          ],
+          "environments": [
+            "remote",
+            "steep",
+            "quiet"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "water"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "water"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "hook",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.98,
+      "asset": {
+        "asset_id": "because-of-this-episode-004-s01",
+        "path": "assets/video-004-shot-01.mp4",
+        "drive_file_id": "1iGup_o5oiT1_3VAUYuYoZ-ygp2YE9zwC",
+        "provider": "drive",
+        "source_page_url": "https://www.usgs.gov/media/images/lituya-bay-1958",
+        "license": "Public Domain",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "c95b6818c4da846a9799c5fa8fdc6b885cb5fbd98fdab965455bee48b3cd0c0e",
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "Don J. Miller / U.S. Geological Survey",
+        "acquisition_timestamp": "2026-10-28T08:05:00Z",
+        "original_filename": "lituya-hook-clean-full-frame.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 5.52,
+        "width": 1080,
+        "height": 1920,
+        "filesize_bytes": 1147890,
+        "job_ownership": "because-of-this-episode-004",
+        "scene_usage": "S01: reviewed source evidence for the Lituya Bay narrative.",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Official USGS historical aerial evidence, converted to a clean full-frame vertical motion take; the bay, steep mountains and forest-damage trimline are directly visible without embedded bars, captions or branding.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T10:20:00Z",
+          "review_method": "source-page license/title/description plus sampled frames of the clean full-frame derivative take",
+          "source_title": "Lituya Bay, 1958",
+          "source_description": "Historical aerial photo of Lituya Bay; the light areas show forest destroyed by the giant wave.",
+          "subjects": [
+            "Lituya Bay",
+            "mountains",
+            "water",
+            "forest damage"
+          ],
+          "actions": [
+            "aerial overview",
+            "aftermath"
+          ],
+          "environments": [
+            "Alaska",
+            "narrow bay",
+            "steep mountains",
+            "historical aftermath"
+          ],
+          "objects": [
+            "forest trimline"
+          ],
+          "composition": [
+            "clean full-frame historical evidence with restrained slow push-in"
+          ],
+          "observed_subjects": [
+            "Lituya Bay",
+            "mountains",
+            "water",
+            "forest damage"
+          ],
+          "observed_actions": [
+            "aerial overview",
+            "aftermath"
+          ],
+          "observed_environments": [
+            "Alaska",
+            "narrow bay",
+            "steep mountains",
+            "historical aftermath"
+          ],
+          "observed_objects": [
+            "forest trimline"
+          ],
+          "sample_timestamps": [
+            1,
+            2.76,
+            4.52
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Clean source take. The locked engine owns the vertical framing, logo, captions, color grade and outro; no pre-composed layout is permitted.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS",
+            "embedded_layout": "NONE",
+            "full_frame": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 5.52,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED"
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "hard_cut",
+        "duration": 0
+      }
+    },
+    {
+      "scene_id": "S02",
+      "beat_id": "beat-002",
+      "duration": 5,
+      "story_beat": "the earthquake tears the shoreline open",
+      "narration_excerpt": "On July ninth, nineteen fifty-eight, a magnitude seven point nine earthquake tore the shoreline open.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "subjects": [
+            "bay",
+            "mountains",
+            "water"
+          ],
+          "actions": [
+            "aerial movement"
+          ],
+          "environments": [
+            "remote",
+            "steep",
+            "ominous"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "mountains"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "mountains"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "context",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.86,
+      "asset": {
+        "provider": "mixkit",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "Mixkit source contributor",
+        "acquisition_timestamp": "2026-10-28T07:15:00Z",
+        "mime_type": "video/mp4",
+        "job_ownership": "because-of-this-episode-004",
+        "asset_id": "because-of-this-episode-004-s02",
+        "path": "assets/video-004-shot-02.mp4",
+        "drive_file_id": "1YLbXlhEk6x0hVfS9WI9QPjyTjQq6sO8W",
+        "source_page_url": "https://mixkit.co/free-stock-video/bay-landscape-aerial-shot-1940/",
+        "sha256": "4e577b910b53103e04c8d7205b2ddec2e6cd7e768a540e2bf4c330014b3a3d19",
+        "original_filename": "bay-landscape-aerial-shot-1940.mp4",
+        "filesize_bytes": 8656484,
+        "duration_seconds": 30.071708,
+        "width": 1280,
+        "height": 720,
+        "scene_usage": "S02: reviewed source evidence for the Lituya Bay narrative.",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Source-page review plus sampled frames; footage is stable, non-black and semantically consistent with the declared representational subject and environment.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T07:15:00Z",
+          "review_method": "source-page license/title/description plus sampled frames",
+          "source_title": "Bay landscape, aerial shot",
+          "source_description": "Aerial shot view of a bay landscape with mountains and big rocks in the calm sea.",
+          "subjects": [
+            "bay",
+            "mountains",
+            "water"
+          ],
+          "actions": [
+            "aerial movement"
+          ],
+          "environments": [
+            "remote",
+            "steep",
+            "ominous"
+          ],
+          "objects": [],
+          "composition": [
+            "representational stock framing"
+          ],
+          "observed_subjects": [
+            "bay",
+            "mountains",
+            "water"
+          ],
+          "observed_actions": [
+            "aerial movement"
+          ],
+          "observed_environments": [
+            "remote",
+            "steep",
+            "ominous"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            1,
+            15.035854,
+            29.071708
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Commercial-use stock coverage of a mountainous bay; representational, not archival Lituya Bay footage.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 30.071708,
+        "asset_class": "atmosphere",
+        "scene_approval": "APPROVED"
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      }
+    },
+    {
+      "scene_id": "S03",
+      "beat_id": "beat-003",
+      "duration": 5,
+      "story_beat": "the rockslide collapses into Gilbert Inlet",
+      "narration_excerpt": "Howard woke to the sound of rock and ice collapsing into Gilbert Inlet.",
+      "visual_semantics": {
+        "role": "symbolic",
+        "required": {
+          "subjects": [
+            "mountains",
+            "rock",
+            "terrain"
+          ],
+          "actions": [
+            "rockfall",
+            "falling"
+          ],
+          "environments": [
+            "steep",
+            "unstable",
+            "ominous"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "mountains"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "mountains"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "escalation",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.94,
+      "asset": {
+        "provider": "pexels",
+        "license": "Pexels Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "Marina Leonova",
+        "acquisition_timestamp": "2026-10-28T07:15:00Z",
+        "mime_type": "video/mp4",
+        "job_ownership": "because-of-this-episode-004",
+        "asset_id": "because-of-this-episode-004-s03",
+        "path": "assets/video-004-shot-03.mp4",
+        "drive_file_id": "1sMdAhvVQdn6oZhvffn3U4yu4WONO-_5y",
+        "source_page_url": "https://www.pexels.com/video/landslide-in-a-mountain-9354609/",
+        "sha256": "d4d238c15614602836a0b39b43947f29d0ad7e9407da834806c6d2f83ad5bd00",
+        "original_filename": "landslide-in-a-mountain-pexels-9354609.mp4",
+        "filesize_bytes": 6977956,
+        "duration_seconds": 22.255567,
+        "width": 720,
+        "height": 1280,
+        "scene_usage": "S03: reviewed source evidence for the Lituya Bay narrative.",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled Drive frames; footage is stable, non-black and consistent with the declared representational subject and environment.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T08:00:00Z",
+          "review_method": "source-page license/title/description plus three sampled Drive frames",
+          "source_title": "Landslide in a Mountain",
+          "source_description": "Spectacular rockfall on a rugged mountain slope during the day.",
+          "subjects": [
+            "mountains",
+            "rock",
+            "terrain"
+          ],
+          "actions": [
+            "rockfall",
+            "falling"
+          ],
+          "environments": [
+            "steep",
+            "unstable",
+            "ominous"
+          ],
+          "objects": [],
+          "composition": [
+            "representational stock framing"
+          ],
+          "observed_subjects": [
+            "mountains",
+            "rock",
+            "terrain"
+          ],
+          "observed_actions": [
+            "rockfall",
+            "falling"
+          ],
+          "observed_environments": [
+            "steep",
+            "unstable",
+            "ominous"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            1,
+            11.1277835,
+            21.255567
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Free-use Pexels rockfall coverage directly represents the mountainside failure; it is representational stock and not literal archival footage of Lituya Bay.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 22.255567,
+        "asset_class": "reconstruction",
+        "scene_approval": "APPROVED"
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      }
+    },
+    {
+      "scene_id": "S04",
+      "beat_id": "beat-004",
+      "duration": 4.5,
+      "story_beat": "the impact turns the bay into a launch point",
+      "narration_excerpt": "The impact did not make an ordinary wave.",
+      "visual_semantics": {
+        "role": "symbolic",
+        "required": {
+          "subjects": [
+            "water",
+            "stone"
+          ],
+          "actions": [
+            "falling",
+            "impact",
+            "splashing"
+          ],
+          "environments": [
+            "contained",
+            "ominous"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "water"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "water"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "escalation",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.96,
+      "asset": {
+        "asset_id": "because-of-this-episode-004-s04",
+        "path": "assets/video-004-shot-04.mp4",
+        "drive_file_id": "1J5erwYiPp6oyP8bTlwFtwgJg3sHptXZH",
+        "provider": "pexels",
+        "source_page_url": "https://www.pexels.com/video/stone-falling-into-lake-13723991/",
+        "license": "Pexels Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "fec05a1c5e67925fcbc40577c177fe782d58ef8fa0ff37625aa9c98ab100f351",
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "Marsel Sharipov",
+        "acquisition_timestamp": "2026-10-28T07:45:00Z",
+        "original_filename": "impact-stone-falling-lake-pexels-13723991.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 15.7,
+        "width": 1440,
+        "height": 2560,
+        "filesize_bytes": 27665451,
+        "job_ownership": "because-of-this-episode-004",
+        "scene_usage": "S04: reviewed source evidence for the Lituya Bay narrative.",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Source-page review plus sampled frames; a visible stone drops into the water and produces a concentric splash/impact, with stable non-black frames.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T07:45:00Z",
+          "review_method": "source-page license/title/description plus sampled frames",
+          "source_title": "Stone Falling into Lake",
+          "source_description": "Calm ripples form on a reflective water surface in slow mo.",
+          "subjects": [
+            "water",
+            "stone",
+            "impact"
+          ],
+          "actions": [
+            "falling",
+            "impact",
+            "splashing"
+          ],
+          "environments": [
+            "contained water",
+            "inlet",
+            "ominous"
+          ],
+          "objects": [
+            "stone"
+          ],
+          "composition": [
+            "tight impact detail"
+          ],
+          "observed_subjects": [
+            "water",
+            "stone",
+            "impact"
+          ],
+          "observed_actions": [
+            "falling",
+            "impact",
+            "splashing"
+          ],
+          "observed_environments": [
+            "contained water",
+            "inlet",
+            "ominous"
+          ],
+          "observed_objects": [
+            "stone"
+          ],
+          "sample_timestamps": [
+            1,
+            7.85,
+            14.7
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational macro coverage of the rock entering confined water; it is not literal archival footage of Lituya Bay.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 45.670625,
+        "asset_class": "reconstruction",
+        "scene_approval": "APPROVED"
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      }
+    },
+    {
+      "scene_id": "S05",
+      "beat_id": "beat-005",
+      "duration": 6,
+      "story_beat": "the surge climbs 1720 feet up the opposite slope",
+      "narration_excerpt": "It threw water up the opposite slope, one thousand seven hundred and twenty feet—higher than the Empire State Building.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "subjects": [
+            "bay",
+            "mountains",
+            "water",
+            "forest damage"
+          ],
+          "actions": [
+            "aerial evidence"
+          ],
+          "environments": [
+            "steep",
+            "historical evidence"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "water"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "water"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "reveal",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.99,
+      "asset": {
+        "asset_id": "because-of-this-episode-004-s05",
+        "path": "assets/video-004-shot-05.mp4",
+        "drive_file_id": "1S38UdZnhkjXGjiEpnLcQjLBuDSh_YBxO",
+        "provider": "drive",
+        "source_page_url": "https://commons.wikimedia.org/wiki/File:Lituya-Bay-overview-with-arrows.png",
+        "license": "Public Domain",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "47cfb44561d0a91703c53e92b2eb7a79fd2c12763db51827e580b8713ad99d7c",
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "D.J. Miller / U.S. Geological Survey",
+        "acquisition_timestamp": "2026-10-28T08:05:00Z",
+        "original_filename": "lituya-reveal-clean-full-frame.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 6,
+        "width": 1080,
+        "height": 1920,
+        "filesize_bytes": 1426455,
+        "job_ownership": "because-of-this-episode-004",
+        "scene_usage": "S05: reviewed source evidence for the Lituya Bay narrative.",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Official USGS/Wikimedia public-domain aerial evidence, converted to a clean full-frame vertical motion take; the red fall-location arrow and yellow high-point arrow remain visible without embedded bars, captions or branding.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T10:20:00Z",
+          "review_method": "source-page license/title/description plus sampled frames of the clean full-frame derivative take",
+          "source_title": "Lituya Bay overview with arrows",
+          "source_description": "Lituya Bay a few weeks after the 1958 tsunami, with the fall location and high point of the wave marked.",
+          "subjects": [
+            "Lituya Bay",
+            "mountains",
+            "water",
+            "forest damage",
+            "wave path"
+          ],
+          "actions": [
+            "aerial evidence"
+          ],
+          "environments": [
+            "post-tsunami",
+            "steep bay",
+            "historical evidence"
+          ],
+          "objects": [
+            "red fall arrow",
+            "yellow high-point arrow"
+          ],
+          "composition": [
+            "clean full-frame annotated aerial evidence with restrained slow push-in"
+          ],
+          "observed_subjects": [
+            "Lituya Bay",
+            "mountains",
+            "water",
+            "forest damage",
+            "wave path"
+          ],
+          "observed_actions": [
+            "aerial evidence"
+          ],
+          "observed_environments": [
+            "post-tsunami",
+            "steep bay",
+            "historical evidence"
+          ],
+          "observed_objects": [
+            "red fall arrow",
+            "yellow high-point arrow"
+          ],
+          "sample_timestamps": [
+            1,
+            3,
+            5
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Clean source take. The public-domain arrows are source evidence; the file contains no pre-composed vertical card, captions or logo treatment.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS",
+            "embedded_layout": "NONE",
+            "full_frame": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 6,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED"
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      }
+    },
+    {
+      "scene_id": "S06",
+      "beat_id": "beat-006",
+      "duration": 5,
+      "story_beat": "the wave strips forest and carries debris",
+      "narration_excerpt": "The surge stripped the forest and carried debris across the land.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "subjects": [
+            "boat",
+            "water",
+            "waves"
+          ],
+          "actions": [
+            "crashing",
+            "surging"
+          ],
+          "environments": [
+            "stormy",
+            "ominous"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "boat"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "water"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "consequence",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.92,
+      "asset": {
+        "provider": "pexels",
+        "license": "Pexels Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "Şiyar AKBALIK",
+        "acquisition_timestamp": "2026-10-28T07:45:00Z",
+        "mime_type": "video/mp4",
+        "job_ownership": "because-of-this-episode-004",
+        "asset_id": "because-of-this-episode-004-s06",
+        "path": "assets/video-004-shot-06.mp4",
+        "drive_file_id": "1Fl2Uot3x1wTpFTOBmZi_1uAixc2-KmcK",
+        "source_page_url": "https://www.pexels.com/video/a-boat-traveling-on-the-water-with-a-cloudy-sky-20066901/",
+        "sha256": "809735a0948aad10f9a81f451309bf937371ee88e31ba8331d371e16bf9f9b0d",
+        "original_filename": "storm-waves-boat-pexels-20066901.mp4",
+        "filesize_bytes": 15254071,
+        "duration_seconds": 8.17,
+        "width": 1440,
+        "height": 2560,
+        "scene_usage": "S06: reviewed source evidence for the Lituya Bay narrative.",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Source-page review plus sampled frames; a boat is visibly exposed to breaking water under dark storm clouds.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T07:45:00Z",
+          "review_method": "source-page license/title/description plus sampled frames",
+          "source_title": "A boat traveling on the water with a cloudy sky",
+          "source_description": "Dramatic waves crashing into a boat on a stormy sea.",
+          "subjects": [
+            "boat",
+            "water",
+            "waves"
+          ],
+          "actions": [
+            "sailing",
+            "crashing",
+            "surging"
+          ],
+          "environments": [
+            "stormy sea",
+            "ominous",
+            "exposed"
+          ],
+          "objects": [
+            "boat"
+          ],
+          "composition": [
+            "vertical close coverage of boat and wake"
+          ],
+          "observed_subjects": [
+            "boat",
+            "water",
+            "waves"
+          ],
+          "observed_actions": [
+            "sailing",
+            "crashing",
+            "surging"
+          ],
+          "observed_environments": [
+            "stormy sea",
+            "ominous",
+            "exposed"
+          ],
+          "observed_objects": [
+            "boat"
+          ],
+          "sample_timestamps": [
+            1,
+            4.085,
+            7.17
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational coverage for the wave's destructive threat; it does not claim to show the historical boat being carried over land.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 30.113417,
+        "asset_class": "atmosphere",
+        "scene_approval": "APPROVED"
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      }
+    },
+    {
+      "scene_id": "S07",
+      "beat_id": "beat-007",
+      "duration": 6,
+      "story_beat": "Howard chooses seamanship over panic",
+      "narration_excerpt": "Howard could not free the anchor. He paid out the chain, started the engine, and waited.",
+      "visual_semantics": {
+        "role": "symbolic",
+        "required": {
+          "subjects": [
+            "boat",
+            "water",
+            "trees"
+          ],
+          "actions": [
+            "floating",
+            "rainfall"
+          ],
+          "environments": [
+            "storm",
+            "tense"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "boat"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "water"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "decision",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.91,
+      "asset": {
+        "provider": "pixabay",
+        "license": "Pixabay Content License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "NoCopyrightMusicFree",
+        "acquisition_timestamp": "2026-10-28T07:45:00Z",
+        "mime_type": "video/mp4",
+        "job_ownership": "because-of-this-episode-004",
+        "asset_id": "because-of-this-episode-004-s07",
+        "path": "assets/video-004-shot-07.mp4",
+        "drive_file_id": "1i1qyKA2bOd8S0NUc4oGU6xCdaCCVculc",
+        "source_page_url": "https://pixabay.com/videos/rain-trees-boat-fishing-boats-107910/",
+        "sha256": "88685a2f62cc1f14e5a942d212c18bfaa5beee7cd7c8c51fb34d8128019dad60",
+        "original_filename": "rain-trees-fishing-boat-pixabay-107910.mp4",
+        "filesize_bytes": 25996335,
+        "duration_seconds": 35.241667,
+        "width": 1920,
+        "height": 1080,
+        "scene_usage": "S07: reviewed source evidence for the Lituya Bay narrative.",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Source-page review plus sampled frames; fishing boats sit against a tree-lined bank in rain and heavy overcast, giving the eyewitness beat a visibly threatened atmosphere.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T07:45:00Z",
+          "review_method": "source-page license/title/description plus sampled frames",
+          "source_title": "Rain, trees, boat",
+          "source_description": "Rain, trees, boat free stock video. Free for use & download.",
+          "subjects": [
+            "boat",
+            "fishing boats",
+            "trees",
+            "water"
+          ],
+          "actions": [
+            "floating",
+            "rainfall"
+          ],
+          "environments": [
+            "storm",
+            "tree-lined water",
+            "overcast",
+            "tense"
+          ],
+          "objects": [
+            "fishing boat"
+          ],
+          "composition": [
+            "wide eyewitness-like view across water"
+          ],
+          "observed_subjects": [
+            "boat",
+            "fishing boats",
+            "trees",
+            "water"
+          ],
+          "observed_actions": [
+            "floating",
+            "rainfall"
+          ],
+          "observed_environments": [
+            "storm",
+            "tree-lined water",
+            "overcast",
+            "tense"
+          ],
+          "observed_objects": [
+            "fishing boat"
+          ],
+          "sample_timestamps": [
+            1,
+            17.620833,
+            34.241667
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational weather-and-boat coverage for the eyewitness beat; it is not literal footage of the 1958 fisherman.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 30.058333,
+        "asset_class": "atmosphere",
+        "scene_approval": "APPROVED"
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      }
+    },
+    {
+      "scene_id": "S08",
+      "beat_id": "beat-008",
+      "duration": 5,
+      "story_beat": "the Edrie rises with the wall of water",
+      "narration_excerpt": "The Edrie rose with the wall of water and was carried toward shore.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "subjects": [
+            "forest",
+            "trees"
+          ],
+          "actions": [
+            "aerial movement"
+          ],
+          "environments": [
+            "wilderness",
+            "empty",
+            "somber"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "forest"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "forest"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "consequence",
+      "visual_match": "SYMBOLIC",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.82,
+      "asset": {
+        "provider": "mixkit",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "Mixkit source contributor",
+        "acquisition_timestamp": "2026-10-28T07:15:00Z",
+        "mime_type": "video/mp4",
+        "job_ownership": "because-of-this-episode-004",
+        "asset_id": "because-of-this-episode-004-s08",
+        "path": "assets/video-004-shot-08.mp4",
+        "drive_file_id": "1EyULZYBCE2SHiYuYy036cij7-TgwEzbo",
+        "source_page_url": "https://mixkit.co/free-stock-video/aerial-shot-of-a-huge-forest-full-of-trees-51103/",
+        "sha256": "d4f128b93a1da12d99de36cb34b24f9596667820a89e41968a45bd34e8ffd5ae",
+        "original_filename": "aerial-shot-of-a-huge-forest-full-of-trees-51103.mp4",
+        "filesize_bytes": 8582414,
+        "duration_seconds": 27.610917,
+        "width": 1280,
+        "height": 720,
+        "scene_usage": "S08: reviewed source evidence for the Lituya Bay narrative.",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Source-page review plus sampled frames; footage is stable, non-black and semantically consistent with the declared representational subject and environment.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T07:15:00Z",
+          "review_method": "source-page license/title/description plus sampled frames",
+          "source_title": "Aerial shot of a huge forest full of trees",
+          "source_description": "An aerial perspective captures the vastness of a dense forest.",
+          "subjects": [
+            "forest",
+            "trees"
+          ],
+          "actions": [
+            "aerial movement"
+          ],
+          "environments": [
+            "wilderness",
+            "empty",
+            "somber"
+          ],
+          "objects": [],
+          "composition": [
+            "representational stock framing"
+          ],
+          "observed_subjects": [
+            "forest",
+            "trees"
+          ],
+          "observed_actions": [
+            "aerial movement"
+          ],
+          "observed_environments": [
+            "wilderness",
+            "empty",
+            "somber"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            1,
+            13.8054585,
+            26.610917
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Commercial-use stock coverage of an empty forest to support the narration's absence-of-people consequence without depicting deaths.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 27.610917,
+        "asset_class": "atmosphere",
+        "scene_approval": "APPROVED"
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      }
+    },
+    {
+      "scene_id": "S09",
+      "beat_id": "beat-009",
+      "duration": 4.5,
+      "story_beat": "the backwash drags the boat away from shore",
+      "narration_excerpt": "Then the backwash pulled the boat away.",
+      "visual_semantics": {
+        "role": "symbolic",
+        "required": {
+          "subjects": [
+            "mountains",
+            "bay",
+            "water"
+          ],
+          "actions": [
+            "aerial movement"
+          ],
+          "environments": [
+            "mountains",
+            "wilderness",
+            "contained",
+            "steep"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "mountains"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "mountains"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "reversal",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.88,
+      "asset": {
+        "provider": "mixkit",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "Mixkit source contributor",
+        "acquisition_timestamp": "2026-10-28T07:15:00Z",
+        "mime_type": "video/mp4",
+        "job_ownership": "because-of-this-episode-004",
+        "asset_id": "because-of-this-episode-004-s09",
+        "path": "assets/video-004-shot-09.mp4",
+        "drive_file_id": "13B4dVOo9MMw7_zZJbWnZj-UNCc2FLeHn",
+        "source_page_url": "https://mixkit.co/free-stock-video/speedboat-returning-to-a-beautiful-bay-seen-from-the-sky-5007/",
+        "sha256": "318f7a4f79c44cacc5ab06bb50abea3a836842c9423b9cbd688a5eb7a301b873",
+        "original_filename": "speedboat-returning-to-a-beautiful-bay-seen-from-the-sky-5007.mp4",
+        "filesize_bytes": 3423729,
+        "duration_seconds": 10.468792,
+        "width": 1280,
+        "height": 720,
+        "scene_usage": "S09: reviewed source evidence for the Lituya Bay narrative.",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Source-page review plus sampled frames; footage is stable, non-black and semantically consistent with the declared representational subject and environment.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T07:15:00Z",
+          "review_method": "source-page license/title/description plus sampled frames",
+          "source_title": "Speedboat returning to a beautiful bay seen from the sky",
+          "source_description": "A small motorboat returns to shore in a bay surrounded by hills and vegetation.",
+          "subjects": [
+            "mountains",
+            "bay",
+            "water"
+          ],
+          "actions": [
+            "aerial movement"
+          ],
+          "environments": [
+            "mountains",
+            "wilderness",
+            "contained",
+            "steep"
+          ],
+          "objects": [],
+          "composition": [
+            "representational stock framing"
+          ],
+          "observed_subjects": [
+            "mountains",
+            "bay",
+            "water"
+          ],
+          "observed_actions": [
+            "aerial movement"
+          ],
+          "observed_environments": [
+            "mountains",
+            "wilderness",
+            "contained",
+            "steep"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            1,
+            5.234396,
+            9.468792
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Commercial-use stock coverage establishes a contained bay surrounded by hills, supporting the bathtub analogy.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 10.468792,
+        "asset_class": "atmosphere",
+        "scene_approval": "APPROVED"
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      }
+    },
+    {
+      "scene_id": "S10",
+      "beat_id": "beat-010",
+      "duration": 5,
+      "story_beat": "another boat sinks and two men die",
+      "narration_excerpt": "Another boat sank near the entrance. Two men died.",
+      "visual_semantics": {
+        "role": "symbolic",
+        "required": {
+          "subjects": [
+            "mountains",
+            "terrain"
+          ],
+          "actions": [
+            "aerial movement"
+          ],
+          "environments": [
+            "mountains",
+            "wilderness",
+            "massive",
+            "threatening"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "mountains"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "mountains"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "consequence",
+      "visual_match": "SYMBOLIC",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.75,
+      "asset": {
+        "asset_id": "because-of-this-episode-004-s10",
+        "path": "assets/video-004-shot-10.mp4",
+        "drive_file_id": "1cwUm1MB2D6JzoVqmFKymhnV9wx8otxUD",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/air-tour-around-a-huge-mountain-44613/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "744b339e09598fbc6321a589f33765c216d0afb925b17087f2c6f9f1cc103721",
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "Mixkit source contributor",
+        "acquisition_timestamp": "2026-10-28T02:20:00Z",
+        "original_filename": "because-of-this-episode-004-mountain-aerial-mixkit.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 15.598917,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 4777706,
+        "job_ownership": "because-of-this-episode-004",
+        "scene_usage": "S10: reviewed source evidence for the Lituya Bay narrative.",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T02:20:00Z",
+          "review_method": "source-page license/title/description plus three sampled frames",
+          "source_title": "Air tour around a huge mountain",
+          "source_description": "Mixkit stock video used as representational coverage.",
+          "subjects": [
+            "mountains",
+            "terrain"
+          ],
+          "actions": [
+            "aerial movement"
+          ],
+          "environments": [
+            "mountains",
+            "wilderness",
+            "massive",
+            "threatening"
+          ],
+          "objects": [],
+          "composition": [
+            "representational stock framing"
+          ],
+          "observed_subjects": [
+            "mountains",
+            "terrain"
+          ],
+          "observed_actions": [
+            "aerial movement"
+          ],
+          "observed_environments": [
+            "mountains",
+            "wilderness",
+            "massive",
+            "threatening"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            1,
+            7.7994585,
+            14.598917
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 15.598917,
+        "asset_class": "atmosphere",
+        "scene_approval": "APPROVED"
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      }
+    },
+    {
+      "scene_id": "S11",
+      "beat_id": "beat-011",
+      "duration": 6,
+      "story_beat": "the forest preserves the height of the wave",
+      "narration_excerpt": "Howard and his son survived, but the forest kept the evidence: a clean scar thousands of feet above the tide.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "subjects": [
+            "forest",
+            "tree trunks",
+            "tree stumps",
+            "water"
+          ],
+          "actions": [
+            "aftermath"
+          ],
+          "environments": [
+            "wave-damaged shoreline",
+            "historical evidence"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "water"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "water"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "evidence",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.99,
+      "asset": {
+        "provider": "drive",
+        "license": "Public Domain",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "D.J. Miller / U.S. Geological Survey",
+        "acquisition_timestamp": "2026-10-28T08:05:00Z",
+        "mime_type": "video/mp4",
+        "job_ownership": "because-of-this-episode-004",
+        "asset_id": "because-of-this-episode-004-s11",
+        "path": "assets/video-004-shot-11.mp4",
+        "drive_file_id": "1IwUVfpkaPYU8oUO6KpiHiY-aEvlY4jYs",
+        "source_page_url": "https://commons.wikimedia.org/wiki/File:Lituya_Bay_spit.jpg",
+        "sha256": "38fc2b4a0d2a4fd0118411ffe82affe28797216eb44d347ec4048e2b3be37635",
+        "original_filename": "lituya-evidence-clean-full-frame.mp4",
+        "filesize_bytes": 1271073,
+        "duration_seconds": 5,
+        "width": 1080,
+        "height": 1920,
+        "scene_usage": "S11: reviewed source evidence for the Lituya Bay narrative.",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Official USGS/Wikimedia public-domain aftermath evidence, converted to a clean full-frame vertical motion take; the wave-damaged shoreline and tree evidence remain visible without embedded bars, captions or branding.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T10:20:00Z",
+          "review_method": "source-page license/title/description plus sampled frames of the clean full-frame derivative take",
+          "source_title": "Lituya Bay spit",
+          "source_description": "Wave damage on the south shore of Lituya Bay; tree trunks are in the water and tree stumps line the shore.",
+          "subjects": [
+            "forest",
+            "tree trunks",
+            "tree stumps",
+            "water",
+            "wave damage"
+          ],
+          "actions": [
+            "aftermath"
+          ],
+          "environments": [
+            "wave-damaged shoreline",
+            "historical evidence",
+            "quiet aftermath"
+          ],
+          "objects": [
+            "tree trunks",
+            "tree stumps"
+          ],
+          "composition": [
+            "clean full-frame historical aftermath evidence with restrained slow push-in"
+          ],
+          "observed_subjects": [
+            "forest",
+            "tree trunks",
+            "tree stumps",
+            "water",
+            "wave damage"
+          ],
+          "observed_actions": [
+            "aftermath"
+          ],
+          "observed_environments": [
+            "wave-damaged shoreline",
+            "historical evidence",
+            "quiet aftermath"
+          ],
+          "observed_objects": [
+            "tree trunks",
+            "tree stumps"
+          ],
+          "sample_timestamps": [
+            1,
+            2.5,
+            4
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Clean source take. The locked engine owns the vertical framing, logo, captions, color grade and outro; no pre-composed layout is permitted.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS",
+            "embedded_layout": "NONE",
+            "full_frame": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 5,
+        "asset_class": "evidence",
+        "scene_approval": "APPROVED"
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      }
+    },
+    {
+      "scene_id": "S12",
+      "beat_id": "beat-012",
+      "duration": 5,
+      "story_beat": "the event becomes a warning about landslide tsunamis",
+      "narration_excerpt": "Lituya Bay proved a tsunami does not need an ocean. Sometimes a mountain is enough.",
+      "visual_semantics": {
+        "role": "explanatory",
+        "required": {
+          "subjects": [
+            "mountains",
+            "landscape"
+          ],
+          "actions": [
+            "aerial movement"
+          ],
+          "environments": [
+            "mountains",
+            "wilderness",
+            "ominous",
+            "final warning"
+          ]
+        },
+        "preferred": {},
+        "forbidden": [
+          "graphic_death",
+          "archival_claim",
+          "medical_vial",
+          "fire"
+        ],
+        "critical": {
+          "subjects": [
+            "mountains"
+          ]
+        },
+        "narrative_anchors": {
+          "direct_required": [
+            "mountains"
+          ],
+          "minimum_direct": 1
+        }
+      },
+      "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
+      "visual_intent": "represent the narrated beat through verified, non-contradictory stock coverage",
+      "visual_function": "payoff",
+      "visual_match": "EXPLANATORY",
+      "visual_truth": "VERIFIED_FACT",
+      "match_score": 0.79,
+      "asset": {
+        "asset_id": "because-of-this-episode-004-s12",
+        "path": "assets/video-004-shot-12.mp4",
+        "drive_file_id": "1vK_H2Mba_XkL4s5vBmUwF19vvjg61pFJ",
+        "provider": "mixkit",
+        "source_page_url": "https://mixkit.co/free-stock-video/aerial-view-of-a-mountain-top-43129/",
+        "license": "Mixkit Stock Video Free License",
+        "rights_status": "APPROVED",
+        "approved_for_render": true,
+        "sha256": "80256f2c241e0b6d3f20a188952fbdbab1c754e57b09fa5fce6423e6f8b5876d",
+        "reuse_status": "NEW_ASSET_EPISODE_004",
+        "episode_id": "because-of-this-episode-004",
+        "author": "Mixkit source contributor",
+        "acquisition_timestamp": "2026-10-28T02:20:00Z",
+        "original_filename": "because-of-this-episode-004-mountain-top-mixkit.mp4",
+        "mime_type": "video/mp4",
+        "duration_seconds": 20.937583,
+        "width": 1280,
+        "height": 720,
+        "filesize_bytes": 7275810,
+        "job_ownership": "because-of-this-episode-004",
+        "scene_usage": "S12: reviewed source evidence for the Lituya Bay narrative.",
+        "visual_evidence": {
+          "reviewed": true,
+          "basis": "Source-page review plus three sampled frames; sampled frames were non-black, stable and consistent with the declared representational subject and environment.",
+          "reviewer": "OpenAI visual audit",
+          "reviewed_at": "2026-10-28T02:20:00Z",
+          "review_method": "source-page license/title/description plus three sampled frames",
+          "source_title": "Aerial view of a mountain top",
+          "source_description": "Mixkit stock video used as representational coverage.",
+          "subjects": [
+            "mountains",
+            "landscape"
+          ],
+          "actions": [
+            "aerial movement"
+          ],
+          "environments": [
+            "mountains",
+            "wilderness",
+            "ominous",
+            "final warning"
+          ],
+          "objects": [],
+          "composition": [
+            "representational stock framing"
+          ],
+          "observed_subjects": [
+            "mountains",
+            "landscape"
+          ],
+          "observed_actions": [
+            "aerial movement"
+          ],
+          "observed_environments": [
+            "mountains",
+            "wilderness",
+            "ominous",
+            "final warning"
+          ],
+          "observed_objects": [],
+          "sample_timestamps": [
+            1,
+            10.4687915,
+            19.937583
+          ],
+          "action_window": {
+            "in": 0,
+            "out": null
+          },
+          "usable_window": {
+            "in": 0,
+            "out": null
+          },
+          "notes": "Representational stock coverage; narration must not falsely identify the footage as literal archival footage of Lituya Bay.",
+          "pixel_qc": {
+            "status": "PASS",
+            "sampled_frame_count": 3,
+            "black_frame_check": "PASS",
+            "stability_check": "PASS",
+            "semantic_consistency": "PASS",
+            "external_branding": "NONE",
+            "crop_safety": "PASS"
+          }
+        },
+        "source_segment_in": 0,
+        "source_segment_out": 20.937583,
+        "asset_class": "atmosphere",
+        "scene_approval": "APPROVED"
+      },
+      "source_in": 0,
+      "focus": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.14
+      }
+    }
+  ],
+  "packaging": {
+    "candidates": [
+      {
+        "candidate_id": "PKG-01",
+        "title": "THE TAPE ADDED ONE MORE MINUTE",
+        "thumbnail_text": "ONE MORE MINUTE",
+        "promise": "A condemned station tape records sixty seconds that never existed.",
+        "mystery": "What happened inside the extra minute?",
+        "spoiler_risk": "LOW"
+      },
+      {
+        "candidate_id": "PKG-02",
+        "title": "THE CAMERA WAS HELD FROM THE OTHER SIDE",
+        "thumbnail_text": "FROM THE OTHER SIDE",
+        "promise": "A copied security tape ends with an impossible point of view.",
+        "mystery": "Who is holding the camera?",
+        "spoiler_risk": "LOW"
+      },
+      {
+        "candidate_id": "PKG-03",
+        "title": "THE SHADOW WITH NO BODY",
+        "thumbnail_text": "NO BODY",
+        "promise": "An archived frame captures a second presence on an empty platform.",
+        "mystery": "Where did the second shadow come from?",
+        "spoiler_risk": "MEDIUM"
+      }
+    ],
+    "selection_status": "PENDING_HUMAN_APPROVAL",
+    "description": "This episode is an original fictional suspense story. Clean visual representations will be researched as fresh assets and may not reuse episode 001 clips.",
+    "cta": {
+      "text": "Follow for the next unexplained story.",
+      "placement": "after_consequence_with_final_logo",
+      "before_consequence": false
+    }
+  },
+  "brand": {
+    "watermark_enabled": false,
+    "watermark_text": "|B",
+    "accent_color": "#E3262E",
+    "logo_enabled": true,
+    "logo_path": "brand/because-of-this-logo.png",
+    "logo_width": 540,
+    "logo_opacity": 0.82,
+    "logo_margin": 54,
+    "logo_top": 72,
+    "logo_anchor": "center_top"
+  },
+  "music": {
+    "path": "audio/music.wav",
+    "license": "Original deterministic procedural suspense bed generated by the engine; no third-party recording or composition used for this master.",
+    "license_status": "PREVIEW_ONLY",
+    "track_id": "V74-PROCEDURAL-LOW-DRONE-BED-004-DRAFT",
+    "commercial_use": true,
+    "preview_only": true,
+    "volume": 0.12,
+    "complete_track_reuse": "forbidden",
+    "sidechain_enabled": true,
+    "source": "engine_generated",
+    "generation": {
+      "script": "production/generate_suspense_bed.py",
+      "duration_seconds": 67,
+      "sample_rate_hz": 48000,
+      "deterministic": true,
+      "layers": [
+        "stable_low_drone",
+        "quiet_eminor_harmonics",
+        "subtle_stereo_air"
+      ]
+    },
+    "gain_db": 0,
+    "approval_basis": "Preview-only stable low cinematic drone; no pulse, pitch sweep or siren-like modulation."
+  },
+  "color_grade": {
+    "enabled": true,
+    "preset": "cinematic_dread_v73",
+    "brightness": -0.05,
+    "contrast": 1.14,
+    "saturation": 0.84,
+    "gamma": 0.92,
+    "vignette": true,
+    "cinematic_suspense": {
+      "enabled": true,
+      "profile": "cinematic_dread_v73",
+      "profile_version": "7.3.2",
+      "reference_basis": "cinematic_dread_v73_before_after_comparison",
+      "cool_shadows": 0.04,
+      "warm_highlights": 0.014,
+      "motion_strength": 0.045,
+      "push_in": 0.055,
+      "edge_fade": true,
+      "shadow_crush": 0.045,
+      "highlight_rolloff": 0.012,
+      "flicker_strength": 0.003,
+      "flicker_period_seconds": 4.8,
+      "detail_strength": 0.16,
+      "motion_smoothing": true,
+      "interpolation_fps": 60,
+      "vignette_angle": "PI/5.8"
+    }
+  },
+  "loop": {
+    "enabled": true,
+    "title": "BECAUSE OF THIS",
+    "transition": "continuity_fade",
+    "logo_source": "brand_logo_transparent",
+    "logo_width": 820,
+    "logo_anchor": "center_center",
+    "outro_seconds": 1.2,
+    "tail_fade_seconds": 0.55,
+    "card_fade_in_seconds": 0.24,
+    "card_fade_out_seconds": 0.36,
+    "audio_fade_seconds": 0.6,
+    "restart_safe": true
+  },
+  "output": {
+    "path": "rendered/{video_id}-{mode}.mp4"
+  },
+  "research": {
+    "confidence": "HIGH",
+    "accessed_at": "2026-11-01T20:00:00Z",
+    "sources": [
+      {
+        "source_id": "usgs-professional-paper-354-c",
+        "url": "https://pubs.usgs.gov/pp/0354c/report.pdf",
+        "role": "primary historical and eyewitness record"
+      },
+      {
+        "source_id": "usgs-landslide-tsunami-faq",
+        "url": "https://www.usgs.gov/faqs/how-do-landslides-cause-tsunamis",
+        "role": "mechanism and verified measurement"
+      },
+      {
+        "source_id": "noaa-landslide-tsunamis",
+        "url": "https://prod-01-alb-www.noaa.woc.noaa.gov/jetstream/tsunamis/tsunami-generation-landslides",
+        "role": "institutional tsunami context"
+      },
+      {
+        "source_id": "episode-004-s01",
+        "url": "https://www.usgs.gov/media/images/lituya-bay-1958",
+        "role": "scene-specific rights-documented representational footage"
+      },
+      {
+        "source_id": "episode-004-s02",
+        "url": "https://mixkit.co/free-stock-video/bay-landscape-aerial-shot-1940/",
+        "role": "scene-specific rights-documented representational footage"
+      },
+      {
+        "source_id": "episode-004-s03",
+        "url": "https://www.pexels.com/video/landslide-in-a-mountain-9354609/",
+        "role": "scene-specific rights-documented representational footage"
+      },
+      {
+        "source_id": "episode-004-s04",
+        "url": "https://www.pexels.com/video/stone-falling-into-lake-13723991/",
+        "role": "scene-specific rights-documented representational footage"
+      },
+      {
+        "source_id": "episode-004-s05",
+        "url": "https://commons.wikimedia.org/wiki/File:Lituya-Bay-overview-with-arrows.png",
+        "role": "scene-specific rights-documented representational footage"
+      },
+      {
+        "source_id": "episode-004-s06",
+        "url": "https://www.pexels.com/video/a-boat-traveling-on-the-water-with-a-cloudy-sky-20066901/",
+        "role": "scene-specific rights-documented representational footage"
+      },
+      {
+        "source_id": "episode-004-s07",
+        "url": "https://pixabay.com/videos/rain-trees-boat-fishing-boats-107910/",
+        "role": "scene-specific rights-documented representational footage"
+      },
+      {
+        "source_id": "episode-004-s08",
+        "url": "https://mixkit.co/free-stock-video/aerial-shot-of-a-huge-forest-full-of-trees-51103/",
+        "role": "scene-specific rights-documented representational footage"
+      },
+      {
+        "source_id": "episode-004-s09",
+        "url": "https://mixkit.co/free-stock-video/speedboat-returning-to-a-beautiful-bay-seen-from-the-sky-5007/",
+        "role": "scene-specific rights-documented representational footage"
+      },
+      {
+        "source_id": "episode-004-s10",
+        "url": "https://mixkit.co/free-stock-video/air-tour-around-a-huge-mountain-44613/",
+        "role": "scene-specific rights-documented representational footage"
+      },
+      {
+        "source_id": "episode-004-s11",
+        "url": "https://commons.wikimedia.org/wiki/File:Lituya_Bay_spit.jpg",
+        "role": "scene-specific rights-documented representational footage"
+      },
+      {
+        "source_id": "episode-004-s12",
+        "url": "https://mixkit.co/free-stock-video/aerial-view-of-a-mountain-top-43129/",
+        "role": "scene-specific rights-documented representational footage"
+      }
+    ],
+    "final_release_basis": "All clips retain source, license, hash and Drive provenance; final publication remains gated by human approval."
+  },
+  "editorial_qa": {
+    "status": "PENDING_HUMAN_REVIEW",
+    "reviewer": "",
+    "reviewed_at": ""
+  },
+  "human_approval": {
+    "status": "PENDING",
+    "required": true
+  },
+  "editing": {
+    "clip_quantity": {
+      "mode": "adaptive",
+      "min_clips": 12,
+      "target_min": 12,
+      "target_max": 18,
+      "max_clips": 18,
+      "min_scene_seconds": 2,
+      "max_scene_seconds": 8,
+      "enforce": true,
+      "enforce_no_same_scene_loop": true,
+      "require_exact_literal_context": true,
+      "short_scene_min_seconds": 1.2
+    },
+    "scene_refresh_strategy": {
+      "mode": "micro_beat_literal_evidence",
+      "target_scenes": 12,
+      "average_scene_seconds": 5.583333333333333,
+      "min_scene_seconds": 4.5,
+      "max_scene_seconds": 6,
+      "preserve_caption_readability": true,
+      "no_same_scene_loop": true
+    },
+    "loop_policy": {
+      "enforce_no_same_scene_loop": true,
+      "allow_same_scene_loop": false
+    }
+  },
+  "preview_revision": "v7.4.0-episode-004-current-engine",
+  "preview_revision_note": "Migrated into the current V7.4 editorial story engine; archived V6/V2 execution paths are not used.",
+  "final_revision": null,
+  "final_revision_note": null,
+  "runtime_artifacts": {},
+  "final_validation_revision": null,
+  "asset_reuse_brain": {
+    "policy": "GLOBAL_NO_REPEAT_SOURCE_ASSET",
+    "same_story_id": "because-of-this-episode-004",
+    "status": "PENDING_RUNTIME_AUDIT"
+  },
+  "asset_registry": {
+    "path": "episodes/asset-memory-registry.json",
+    "status": "PENDING_RUNTIME_AUDIT"
+  },
+  "runtime_asset_hydration": {
+    "status": "PENDING_RUN"
+  },
+  "state": "DRAFT_PREVIEW",
+  "story_creation": {
+    "schema_version": "1.1",
+    "idea": {
+      "title": "The Wave That Climbed Higher Than a Skyscraper",
+      "premise": "In 1958, Howard Ulrich and his seven-year-old son survived as a landslide in Alaska's Lituya Bay launched water 1,720 feet up a mountainside.",
+      "audience_promise": "Follow one father's seconds-long fight to keep a small boat alive inside the highest tsunami run-up ever recorded.",
+      "central_question": "How can a quiet bay throw water higher than a skyscraper, and what does survival look like from inside the wave?",
+      "hook_type": "impossible_scale_with_human_witness"
+    },
+    "truth": {
+      "mode": "VERIFIED_FACT",
+      "sources": [
+        "https://pubs.usgs.gov/pp/0354c/report.pdf",
+        "https://www.usgs.gov/faqs/how-do-landslides-cause-tsunamis",
+        "https://www.usgs.gov/media/images/lituya-bay-1958",
+        "https://prod-01-alb-www-noaa.woc.noaa.gov/jetstream/tsunamis/tsunami-generation-landslides"
+      ],
+      "disclosure": "This episode recounts the verified 1958 Lituya Bay megatsunami; stock footage is representational coverage, not literal footage of the event.",
+      "reconstruction_note": "The event is historical; the visual clips are rights-documented representational footage and historical public-domain evidence."
+    },
+    "causal_chain": {
+      "cause": "A magnitude 7.9 earthquake triggered a rockslide into Gilbert Inlet.",
+      "escalation": [
+        "the rockslide displaced water inside the narrow bay",
+        "the surge climbed 1,720 feet and stripped forest",
+        "boats were carried across the bay and two people died"
+      ],
+      "consequence": "Howard Ulrich and his son survived aboard the Edrie while another boat sank.",
+      "why_it_mattered": "The event showed that landslides can create catastrophic local tsunamis without an open-ocean wave."
+    },
+    "emotional_arc": {
+      "primary": "awe",
+      "secondary": "dread",
+      "target_sensations": [
+        "curiosity",
+        "unease",
+        "wonder",
+        "urgency",
+        "chill"
+      ]
+    },
+    "promise_payoff": {
+      "promise": "A quiet bay will reveal how a wave can climb higher than a skyscraper.",
+      "payoff": "The final silence is the warning: a mountainside and a narrow inlet can be enough.",
+      "payoff_type": "recontextualization",
+      "promise_paid": true
+    },
+    "visual_feasibility": {
+      "checked_before_script": true,
+      "scene_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12"
+      ],
+      "approved_scene_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12"
+      ],
+      "coverage_ratio": 1,
+      "note": "Every scene has a documented visual route, including public-domain USGS evidence and rights-documented representational stock."
+    },
+    "channel_diversity": {
+      "comparison_window": "last_20_episodes",
+      "recent_episode_count": 3,
+      "similarity_score": 0.16,
+      "similarity_status": "PASS",
+      "unique_signature": "lituya-bay-megatsunami-eyewitness-survival"
+    },
+    "original_authorship": {
+      "original_script": true,
+      "original_narration": true,
+      "editorial_transform": true,
+      "asset_provenance_complete": true,
+      "mass_production_risk": "LOW"
+    },
+    "monetization_safety": {
+      "youtube_ad_safety": "LOW_RISK",
+      "tiktok_originality": "ORIGINAL",
+      "claims_reviewed": true,
+      "disclosure_present": true,
+      "risk_flags": {
+        "graphic_content": "NONE",
+        "harmful_claims": "NONE",
+        "shocking_content": "LOW"
+      }
+    },
+    "duration": {
+      "target_seconds": 67,
+      "planned_seconds": 67,
+      "estimated_narration_seconds": 67,
+      "padding_seconds": 0,
+      "padding_status": "PASS"
+    },
+    "red_team": {
+      "status": "PASS",
+      "editorial": {
+        "status": "PASS",
+        "blocking_issues": [],
+        "notes": "Human-scale survival and factual framing passed preflight; preview review remains required."
+      },
+      "factual": {
+        "status": "PASS",
+        "blocking_issues": [],
+        "notes": "Claims are sourced to USGS and NOAA records."
+      },
+      "monetization": {
+        "status": "PASS",
+        "blocking_issues": [],
+        "notes": "No graphic imagery or harmful instructions."
+      }
+    },
+    "editorial_contract": {
+      "protagonist": {
+        "name": "Howard Ulrich",
+        "goal": "keep his seven-year-old son alive and get the Edrie through the wave",
+        "wound": "his helplessness as a father becomes unavoidable when the mountain moves faster than any human response",
+        "flaw": "he initially trusts the anchor to hold against a force no boat can control",
+        "agency_action": "he pays out the anchor chain, starts the engine and commits to riding the surge",
+        "decision_scene_id": "S07",
+        "irreversible_choice": "Howard stays with the boat and acts instead of abandoning his son to the bay",
+        "cost": "the Edrie is carried toward shore, the anchor chain snaps and survival becomes uncertain",
+        "change": "Howard stops being an observer of the earthquake and becomes the witness who carries its warning forward"
+      },
+      "wound": {
+        "wound_scene_ids": [
+          "S01",
+          "S07",
+          "S08"
+        ],
+        "manifestation": "the seven-year-old boy makes every second of Howard's response a personal responsibility",
+        "conflict": "the tools of a fisherman are tiny against a mountain falling into the bay",
+        "link_to_choice": "his responsibility for his son forces him to act when waiting would be safer but useless"
+      },
+      "causal_escalation": [
+        {
+          "from_scene": "S02",
+          "to_scene": "S03",
+          "trigger": "the earthquake destabilizes the mountainside",
+          "protagonist_action": "Howard goes on deck to identify the danger",
+          "new_cost": "he sees the collapse before the wave arrives",
+          "state_change": "a tremor becomes an approaching event"
+        },
+        {
+          "from_scene": "S03",
+          "to_scene": "S05",
+          "trigger": "the rockslide enters Gilbert Inlet",
+          "protagonist_action": "Howard keeps watching long enough to understand the wave's scale",
+          "new_cost": "the surge rises beyond any ordinary tsunami",
+          "state_change": "the bay becomes a vertical weapon"
+        },
+        {
+          "from_scene": "S05",
+          "to_scene": "S07",
+          "trigger": "the wave begins crossing the inlet",
+          "protagonist_action": "Howard pays out chain and starts the engine",
+          "new_cost": "the Edrie is committed to the surge",
+          "state_change": "observation becomes a fight for survival"
+        },
+        {
+          "from_scene": "S07",
+          "to_scene": "S09",
+          "trigger": "the Edrie is lifted by the wave",
+          "protagonist_action": "Howard keeps the boat alive through the backwash",
+          "new_cost": "the anchor is lost and shore becomes a collision path",
+          "state_change": "survival depends on motion rather than control"
+        }
+      ],
+      "anomaly_rule": {
+        "rule": "in a narrow steep inlet, a rockslide can displace water into a local tsunami",
+        "violation": "the mountain face enters Gilbert Inlet with enough force to launch the bay itself",
+        "cost": "the wave runs 1720 feet up the slope, destroys forest and kills two people",
+        "rule_scene_id": "S09",
+        "violation_scene_id": "S03",
+        "cost_scene_id": "S10"
+      },
+      "emotional_turns": [
+        {
+          "scene_id": "S01",
+          "from": "calm",
+          "to": "vulnerability",
+          "cause": "Howard's son is asleep aboard the boat when the mountain begins to move"
+        },
+        {
+          "scene_id": "S05",
+          "from": "dread",
+          "to": "awe",
+          "cause": "the wave climbs higher than a skyscraper"
+        },
+        {
+          "scene_id": "S07",
+          "from": "awe",
+          "to": "urgency",
+          "cause": "Howard must act before the wall reaches the Edrie"
+        },
+        {
+          "scene_id": "S10",
+          "from": "relief",
+          "to": "grief",
+          "cause": "another boat sinks and two people do not survive"
+        }
+      ],
+      "payoff": {
+        "early_clue_scene_ids": [
+          "S01",
+          "S04",
+          "S09"
+        ],
+        "final_scene_id": "S12",
+        "payoff_type": "recontextualization",
+        "final_consequence": "the quiet bay becomes evidence that a tsunami can begin with a mountainside rather than an ocean earthquake",
+        "emotional_aftertaste": "wonder is inseparable from the knowledge that the same mechanism can kill without warning",
+        "recontextualizes_opening": true,
+        "central_question_resolved": true
+      },
+      "visual_dramatization": [
+        {
+          "scene_id": "S01",
+          "human_action": "Howard sleeps beside his son while the bay appears harmless",
+          "visual_evidence": "The shot must show the narrated physical action or its direct evidence, with no authored text inside the source clip.",
+          "subjective_stakes": "Howard's attempt to keep his son alive becomes the human scale of the geological event.",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S02",
+          "human_action": "the earthquake turns the quiet shoreline into a threat",
+          "visual_evidence": "The shot must show the narrated physical action or its direct evidence, with no authored text inside the source clip.",
+          "subjective_stakes": "Howard's attempt to keep his son alive becomes the human scale of the geological event.",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S03",
+          "human_action": "Howard watches the mountain fail",
+          "visual_evidence": "The shot must show the narrated physical action or its direct evidence, with no authored text inside the source clip.",
+          "subjective_stakes": "Howard's attempt to keep his son alive becomes the human scale of the geological event.",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S04",
+          "human_action": "the impact enters the inlet",
+          "visual_evidence": "The shot must show the narrated physical action or its direct evidence, with no authored text inside the source clip.",
+          "subjective_stakes": "Howard's attempt to keep his son alive becomes the human scale of the geological event.",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S05",
+          "human_action": "the impossible height becomes visible",
+          "visual_evidence": "The shot must show the narrated physical action or its direct evidence, with no authored text inside the source clip.",
+          "subjective_stakes": "Howard's attempt to keep his son alive becomes the human scale of the geological event.",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S06",
+          "human_action": "the wave erases the forest edge",
+          "visual_evidence": "The shot must show the narrated physical action or its direct evidence, with no authored text inside the source clip.",
+          "subjective_stakes": "Howard's attempt to keep his son alive becomes the human scale of the geological event.",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S07",
+          "human_action": "Howard releases chain and starts the engine",
+          "visual_evidence": "The shot must show the narrated physical action or its direct evidence, with no authored text inside the source clip.",
+          "subjective_stakes": "Howard's attempt to keep his son alive becomes the human scale of the geological event.",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S08",
+          "human_action": "the Edrie climbs the moving water",
+          "visual_evidence": "The shot must show the narrated physical action or its direct evidence, with no authored text inside the source clip.",
+          "subjective_stakes": "Howard's attempt to keep his son alive becomes the human scale of the geological event.",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S09",
+          "human_action": "the boat is pulled back by the retreating surge",
+          "visual_evidence": "The shot must show the narrated physical action or its direct evidence, with no authored text inside the source clip.",
+          "subjective_stakes": "Howard's attempt to keep his son alive becomes the human scale of the geological event.",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S10",
+          "human_action": "the nearby boat disappears",
+          "visual_evidence": "The shot must show the narrated physical action or its direct evidence, with no authored text inside the source clip.",
+          "subjective_stakes": "Howard's attempt to keep his son alive becomes the human scale of the geological event.",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S11",
+          "human_action": "the forest scar becomes physical evidence",
+          "visual_evidence": "The shot must show the narrated physical action or its direct evidence, with no authored text inside the source clip.",
+          "subjective_stakes": "Howard's attempt to keep his son alive becomes the human scale of the geological event.",
+          "not_just_atmosphere": true
+        },
+        {
+          "scene_id": "S12",
+          "human_action": "the quiet mountain is reinterpreted as a warning",
+          "visual_evidence": "The shot must show the narrated physical action or its direct evidence, with no authored text inside the source clip.",
+          "subjective_stakes": "Howard's attempt to keep his son alive becomes the human scale of the geological event.",
+          "not_just_atmosphere": true
+        }
+      ],
+      "density": {
+        "meaningful_beat_count": 10,
+        "visual_shot_count": 12,
+        "micro_beat_count": 2,
+        "story_seconds": 67,
+        "padding_seconds": 0,
+        "repeated_visual_count": 0
+      },
+      "originality": {
+        "core_mechanism": "a mountain landslide creates the highest recorded tsunami run-up inside a narrow bay",
+        "familiar_trope": "disaster documentary",
+        "distinctive_inversion": "the human survival decision is smaller than the wave but determines who carries the evidence forward",
+        "comparison_set": [
+          "tsunami documentary",
+          "earthquake disaster story",
+          "survival eyewitness account"
+        ],
+        "similarity_score": 0.16
+      },
+      "narration": {
+        "naturalness_status": "PASS",
+        "generic_line_count": 0,
+        "orphan_line_count": 0,
+        "causal_link_count": 10,
+        "action_consequence_ratio": 0.87,
+        "reviewed_sentence_count": 12,
+        "line_evidence": [
+          "the earthquake causes the collapse",
+          "the impact creates the vertical surge",
+          "Howard's decision gives the event a human witness"
+        ]
+      }
+    }
+  },
+  "runtime_artifact_hashes": {}
+}
