@@ -72,6 +72,10 @@ def _code_fingerprints(manifest_path: Path) -> dict[str, str]:
         "production_record": repo_root / "production/production_record_v7.py",
         "canonical_config": repo_root / "production/canonical_config.py",
         "active_policy": repo_root / "production/active_engine_policy.json",
+        "visual_contract": repo_root / "production/video_asset_contract.py",
+        "quality_gates": repo_root / "production/quality_gates.py",
+        "singleton_guard": repo_root / "production/v7_singleton_guard.py",
+        "post_publication": repo_root / "production/v7_post_publication.py",
     }
     return {
         name: file_digest(path) if path.is_file() else "missing"
