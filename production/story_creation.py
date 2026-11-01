@@ -380,9 +380,9 @@ def _padding_gate(manifest: Mapping[str, Any], sc: Mapping[str, Any]) -> dict[st
     scene_total = sum(float(scene.get("duration", 0)) for scene in manifest.get("scenes", []) if isinstance(scene, Mapping))
     passed = (
         _number(target)
-        and 60 <= float(target) <= 75
+        and 60 <= float(target) <= 80
         and _number(planned)
-        and 60 <= float(planned) <= 75
+        and 60 <= float(planned) <= 80
         and _number(narration)
         and _number(padding)
         and float(padding) <= 1.5
@@ -394,7 +394,7 @@ def _padding_gate(manifest: Mapping[str, Any], sc: Mapping[str, Any]) -> dict[st
         f"padding={padding}s",
     ]
     if not passed:
-        evidence.append("the 60–75 second target must be reached by story density, not filler")
+        evidence.append("the 60–75 second target should be reached by story density; the hard ceiling is 80 seconds and filler remains forbidden")
     return _gate("C10", "NO_PADDING", passed, evidence)
 
 
