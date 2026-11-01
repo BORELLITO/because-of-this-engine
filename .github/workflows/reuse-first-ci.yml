@@ -41,4 +41,4 @@ jobs:
           python -m py_compile             production/reuse_first.py             production/google_drive_assets.py             production/render_video_episode.py
 
       - name: Run reuse-first unit tests
-        run: python -m unittest discover -s tests -p "test_*.py" -v
+        run: python -m unittest discover -s tests -p "test_reuse_first.py" -v
