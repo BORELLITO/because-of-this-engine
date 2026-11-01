@@ -157,6 +157,8 @@ jobs:
         with:
           path: episodes/video-002/assets
           key: because-of-this-assets-${{ steps.fingerprint.outputs.asset_key }}
+          restore-keys: |
+            because-of-this-assets-
 
       - name: Validate canonical Charon contract
         run: |
@@ -401,6 +403,8 @@ jobs:
         with:
           path: episodes/video-002/.cache/scenes
           key: because-of-this-scenes-${{ steps.fingerprint.outputs.scene_key }}
+          restore-keys: |
+            because-of-this-scenes-
 
       - name: Render draft preview using cached scenes and fast review profile
         env:
