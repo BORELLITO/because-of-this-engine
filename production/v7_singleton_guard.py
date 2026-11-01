@@ -79,6 +79,30 @@ def audit(repo_root: Path) -> dict[str, object]:
         for marker in FORBIDDEN_ACTIVE_MARKERS:
             if marker in text:
                 offenders.append(f"{path.relative_to(root)} contains forbidden active marker {marker}")
+    active_sources = (
+        workflows[0],
+        root / "production" / "v7_orchestrator.py",
+        root / "production" / "gemini_tts.py",
+        root / "production" / "production_record_v7.py",
+        root / "production" / "canonical_config.py",
+    )
+    forbidden_legacy_routes = (
+        "piper_tts",
+        "cloud_tts",
+        "elevenlabs",
+        "narrate.py",
+        "draft-preview.yml",
+        "v72-reuse-first-ci.yml",
+        "video-engine-ci.yml",
+    )
+    for path in active_sources:
+        text = path.read_text(encoding="utf-8")
+        for marker in forbidden_legacy_routes:
+            if marker in text:
+                offenders.append(f"{path.relative_to(root)} contains forbidden legacy route {marker}")
+    orchestrator_text = (root / "production" / "v7_orchestrator.py").read_text(encoding="utf-8")
+    if CANONICAL_PROFILE_ID not in orchestrator_text:
+        offenders.append("production/v7_orchestrator.py does not pin the active profile")
     if offenders:
         raise SingletonGuardError("; ".join(offenders))
     return {
