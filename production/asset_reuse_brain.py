@@ -313,7 +313,7 @@ def audit(
     for record in target_records:
         for key in record["keys"]:
             for other in by_key.get(key, []):
-                if other["episode_id"] == target_id:
+                if other["episode_id"] in same_story_episode_ids:
                     continue
                 cross_episode.append({
                     "key_type": key[0],
@@ -343,6 +343,10 @@ def audit(
             unique_cross.append(item)
 
     policy = target_manifest.get("asset_reuse_brain") or {}
+    same_story_episode_ids = {target_id}
+    same_story_id = _norm(policy.get("same_story_id"))
+    if same_story_id:
+        same_story_episode_ids.add(same_story_id)
     legacy_baseline = (
         target_id in LEGACY_BASELINE_EPISODES
         and policy.get("legacy_baseline") is True
