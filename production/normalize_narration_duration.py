@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Any
 
 TARGET_MIN_SECONDS = 60.0
-TARGET_MAX_SECONDS = 75.0
+TARGET_MAX_SECONDS = 80.0
 TARGET_NORMALIZED_SECONDS = 74.5
 
 
@@ -37,7 +37,7 @@ def _write_sidecar(path: Path, duration: float, original: float, factor: float |
     if sidecar_path.exists():
         metadata = json.loads(sidecar_path.read_text(encoding="utf-8"))
     metadata["duration_seconds"] = round(duration, 3)
-    metadata["duration_contract"] = "60-75 seconds"
+    metadata["duration_contract"] = "60-80 seconds"
     if factor is not None:
         metadata["duration_normalization"] = {
             "applied": True,
@@ -58,7 +58,7 @@ def normalize(manifest_path: Path, ffmpeg_bin: str = "ffmpeg") -> dict[str, Any]
     original = _duration(audio_path)
     if original < TARGET_MIN_SECONDS:
         raise NarrationDurationError(
-            f"Generated narration is {original:.3f}s, below the 60-75s contract; rewrite is required."
+            f"Generated narration is {original:.3f}s, below the 60-80s contract; rewrite is required."
         )
     if original <= TARGET_MAX_SECONDS:
         _write_sidecar(audio_path, original, original, None)
@@ -98,7 +98,7 @@ def normalize(manifest_path: Path, ffmpeg_bin: str = "ffmpeg") -> dict[str, Any]
         normalized = _duration(Path(temp_name))
         if not TARGET_MIN_SECONDS <= normalized <= TARGET_MAX_SECONDS:
             raise NarrationDurationError(
-                f"FFmpeg normalization produced {normalized:.3f}s, outside the 60-75s contract."
+                f"FFmpeg normalization produced {normalized:.3f}s, outside the 60-80s contract."
             )
         os.replace(temp_name, audio_path)
         temp_name = None
