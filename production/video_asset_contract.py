@@ -386,7 +386,7 @@ def validate_asset_record(record: dict[str, Any], base: Path, episode_id: str, *
 
 
 def _validate_cinematic_grade(manifest: dict[str, Any], mode: str) -> None:
-    """Fail closed when final output does not use the active V7.3.1 suspense look."""
+    """Fail closed when final output does not use the active V7.3.2 suspense look."""
     if mode != "final":
         return
     grade = manifest.get("color_grade")
@@ -512,7 +512,7 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
             )
         for key in ("story_beat", "visual_intent", "visual_function", "visual_match", "visual_truth", "narration_excerpt"):
             _required_text(scene, key, f"Scene {scene_id}")
-        # V7.1 is the canonical semantic source. The renderer still exposes
+        # V7 semantic fields are the canonical semantic source. The renderer still exposes
         # the older normalized fields internally, so derive only fields
         # that are losslessly represented by the V7 visual contract. The
         # human-approved match_score is deliberately never guessed.
