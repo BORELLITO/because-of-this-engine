@@ -569,6 +569,21 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
         if transition_duration >= duration:
             raise VideoContractError(f"Scene {scene_id} transition cannot consume the entire scene.")
         asset = validate_asset_record(scene.get("asset"), episode_dir, episode_id, mode=mode, check_file=check_files)
+        loop_policy = (manifest.get("editing") or {}).get("loop_policy") or {}
+        no_same_scene_loop = loop_policy.get("enforce_no_same_scene_loop") is True
+        if no_same_scene_loop:
+            source_in = float(scene.get("source_in", asset.get("source_segment_in", 0.0)) or 0.0)
+            source_out = float(asset.get("source_segment_out", 0.0) or 0.0)
+            source_window = source_out - source_in
+            if source_window <= 0:
+                raise VideoContractError(
+                    f"Scene {scene_id} has no positive source window for no-loop validation."
+                )
+            if float(duration) > source_window + 0.05:
+                raise VideoContractError(
+                    f"Scene {scene_id} requires {float(duration):.3f}s but its approved source "
+                    f"window is {source_window:.3f}s; same-scene looping is forbidden."
+                )
         try:
             visual_qa = require_visual_fit(scene, asset, mode=mode)
         except (ValueError, TypeError) as exc:
