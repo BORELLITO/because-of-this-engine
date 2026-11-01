@@ -286,7 +286,7 @@ def verify_delivery_receipt(receipt_path: Path) -> dict:
             drive.files()
             .get(
                 fileId=str(item["id"]),
-                fields="id,name,size,md5Checksum,trashed",
+                fields="id,name,size,md5Checksum,parents,trashed",
                 supportsAllDrives=True,
             )
             .execute(num_retries=3)
@@ -295,14 +295,16 @@ def verify_delivery_receipt(receipt_path: Path) -> dict:
             raise DeliveryError(f"Delivered file is in trash: {item.get('name', item['id'])}")
         if remote.get("name") != item.get("name"):
             raise DeliveryError(f"Delivered file name changed: {item.get('name', item['id'])}")
+        if folder_id not in (remote.get("parents") or []):
+            raise DeliveryError(f"Delivered file moved out of the verified folder: {item.get('name', item['id'])}")
         expected_size = int(item.get("size", -1))
         actual_size = int(remote.get("size", -1))
-        if expected_size >= 0 and actual_size != expected_size:
-            raise DeliveryError(f"Delivered file size changed: {item.get('name', item['id'])}")
+        if expected_size < 0 or actual_size < 0 or actual_size != expected_size:
+            raise DeliveryError(f"Delivered file size changed or missing: {item.get('name', item['id'])}")
         expected_md5 = str(item.get("md5") or "").lower()
         actual_md5 = str(remote.get("md5Checksum") or "").lower()
-        if expected_md5 and actual_md5 and expected_md5 != actual_md5:
-            raise DeliveryError(f"Delivered file checksum changed: {item.get('name', item['id'])}")
+        if not expected_md5 or not actual_md5 or expected_md5 != actual_md5:
+            raise DeliveryError(f"Delivered file checksum changed or missing: {item.get('name', item['id'])}")
         verified.append({"id": remote["id"], "name": remote["name"], "size": actual_size, "md5": actual_md5})
     return {
         "status": "DRIVE_RECEIPT_VALID",
