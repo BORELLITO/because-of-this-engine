@@ -1,4 +1,4 @@
-name: Because Of This V7.4 reuse-first Episode 002 draft preview
+name: Because Of This V7.3.2 reuse-first Episode 002 draft preview
 
 on:
   workflow_dispatch:
@@ -21,7 +21,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: because-of-this-v7.4-reuse-first-charon-preview-episode-002-${{ inputs.manifest || 'episodes/video-002/preview-manifest.json' }}
+  group: because-of-this-v7.3.2-reuse-first-charon-preview-episode-002-${{ inputs.manifest || 'episodes/video-002/preview-manifest.json' }}
   cancel-in-progress: true
 
 env:
@@ -62,17 +62,30 @@ jobs:
           path: episodes/video-002/.cache/final
           key: because-of-this-final-${{ steps.fingerprint.outputs.final_key }}
 
+      - name: Install Drive verification dependencies on exact cache hit
+        if: steps.final_cache.outputs.cache-hit == 'true'
+        run: python -m pip install google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib
+
       - name: Validate reusable preview receipt
         id: reuse_check
         env:
           CACHE_HIT: ${{ steps.final_cache.outputs.cache-hit }}
           FINGERPRINTS: ${{ runner.temp }}/reuse-fingerprints.json
           RECEIPT: episodes/video-002/.cache/final/receipt.json
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: |
           set -euo pipefail
           if [ "${CACHE_HIT}" != "true" ]; then
             echo "reuse=false" >> "${GITHUB_OUTPUT}"
             echo "REUSE_MISS_NO_VERIFIED_FINAL_RECEIPT"
+            exit 0
+          fi
+          if ! PYTHONPATH=. python production/google_drive_delivery.py \
+            --verify-receipt "${RECEIPT}"; then
+            echo "reuse=false" >> "${GITHUB_OUTPUT}"
+            echo "REUSE_REJECTED_DRIVE_RECEIPT_NOT_VERIFIED"
             exit 0
           fi
           if PYTHONPATH=. python production/reuse_first.py verify-receipt \
