@@ -117,6 +117,8 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 "lituya": [
                     ["lituya"], ["la", "to", "your"], ["la", "to", "ya"],
                     ["la", "two", "your"], ["la", "two", "ya"],
+                    ["la", "to", "e"], ["la", "to", "ee"], ["la", "two", "e"],
+                    ["la", "two", "he"],
                     ["la", "two", "to", "ya"], ["la", "two", "to", "your"],
                     ["lit", "to", "ya"], ["little", "ya"], ["little", "you"],
                     ["lee", "to", "ya"], ["lit", "you"],
