@@ -519,6 +519,22 @@ def visual_match_report(
     if required_count and anchor_hits < min_anchors:
         reasons.append(f"only {anchor_hits} narrative anchor dimension(s) matched; at least {min_anchors} required")
 
+    # Literal evidence beats are the backbone of this format.  A related
+    # atmosphere or explanatory insert may support a transition, but it cannot
+    # stand in for the narrated subject/action/environment/object event.
+    strict_literal = role in {"literal", "literal_evidence", "evidence"} or str(
+        scene.get("visual_function", "")
+    ).lower() == "literal_evidence"
+    if strict_literal:
+        if claimed_match != "EXACT":
+            reasons.append("literal evidence beats require visual_match=EXACT")
+        if required_count and coverage < 1.0:
+            reasons.append("literal evidence beats require complete required-dimension coverage")
+        if narrative_contract_declared and narrative_alignment["status"] != "PASS":
+            reasons.append("literal evidence beats require every direct narrative anchor")
+        if required_dimensions < 2:
+            reasons.append("literal evidence beats require at least two concrete visual dimensions")
+
     status = "PASS" if not reasons else "BLOCKED"
     return {
         "status": status,
