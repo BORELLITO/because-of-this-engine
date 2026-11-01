@@ -70,6 +70,7 @@ def _manifest(with_contract: bool = True) -> dict:
                 "violation": "Nora changes the timestamp after the recording has already closed",
                 "cost": "the room replaces one piece of evidence with the viewer's own memory",
                 "rule_scene_id": "S04",
+                "violation_scene_id": "S07",
                 "cost_scene_id": "S09",
             },
             "emotional_turns": [
