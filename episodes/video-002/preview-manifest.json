@@ -3493,7 +3493,8 @@
       "short_narration_scene_ids": [
         "S06",
         "S10"
-      ]
+      ],
+      "short_scene_min_seconds": 1.2
     },
     "scene_refresh_strategy": {
       "mode": "micro_beat_literal_evidence",
