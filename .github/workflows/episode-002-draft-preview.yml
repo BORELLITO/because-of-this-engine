@@ -391,11 +391,11 @@ jobs:
 
       - name: Enforce global no-repeat clip policy
         env:
-          MANIFEST: \${{ inputs.manifest || 'episodes/video-002/preview-manifest.json' }}
+          MANIFEST: ${{ inputs.manifest || 'episodes/video-002/preview-manifest.json' }}
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/asset_reuse_brain.py \
-            --manifest "\${MANIFEST}" \
+            --manifest "${MANIFEST}" \
             --repo-root . \
             --registry episodes/asset-memory-registry.json \
             --report episodes/video-002/rendered/asset-reuse-brain-draft-preview.json
