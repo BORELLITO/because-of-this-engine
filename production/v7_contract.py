@@ -28,7 +28,7 @@ from production.visual_effects_v73 import VisualEffectsError, validate_visual_ef
 PROMPT_VERSION = "7.2"
 PROMPT_PATH = Path("docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V7_2_CHARON_CLEAN_CLIPS.txt")
 SCHEMA_PATH = Path("production/schemas/production-record-3.0.0.json")
-PROMPT_SHA256 = "c0bd045da0898848ff11aaba9ff2de9e27be8041f559b37a80f3f99ada1127c8"
+PROMPT_SHA256 = "cc11c568413e9b39105db91523f09742a5d118b1e3fb303a1d3d6fab46c569dd"
 
 
 class V7ContractError(ValueError):
