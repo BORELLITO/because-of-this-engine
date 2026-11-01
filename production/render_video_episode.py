@@ -27,6 +27,10 @@ SIZES = {"draft-preview": (1080, 1920), "preview": (1080, 1920), "final": (1080,
 # narration-locked beat, the episode must return to asset selection instead of
 # hiding the shortage with duplicated frames.
 MAX_SOURCE_LOOP_MULTIPLIER = 1.0
+# Forced-alignment scene boundaries can land a few frames beyond the probed
+# source duration because the source metadata and the final WAV use different
+# clock quantization. This tolerance never enables looping or frame cloning.
+SOURCE_WINDOW_JITTER_TOLERANCE_SECONDS = 0.10
 SCENE_CACHE_VERSION = "scene-render-cache-v2"
 RENDERER_CODE_FINGERPRINT = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
 VISUAL_EFFECTS_CODE_FINGERPRINT = hashlib.sha256(
@@ -214,13 +218,13 @@ def render_scene(
             f"Asset {asset['asset_id']} has no usable source window for scene "
             f"{scene['scene_id']}."
         )
-    if requested > available * MAX_SOURCE_LOOP_MULTIPLIER + 0.05:
+    if requested > available * MAX_SOURCE_LOOP_MULTIPLIER + SOURCE_WINDOW_JITTER_TOLERANCE_SECONDS:
         raise RenderError(
             f"Asset {asset['asset_id']} is too short even for bounded same-scene looping "
             f"({available:.3f}s available, {requested:.3f}s required, "
             f"limit={MAX_SOURCE_LOOP_MULTIPLIER:.1f}x)."
         )
-    if requested > available + 0.05:
+    if requested > available + SOURCE_WINDOW_JITTER_TOLERANCE_SECONDS:
         raise RenderError(
             f"Asset {asset['asset_id']} is shorter than the narration-locked "
             f"scene beat ({available:.3f}s available, {requested:.3f}s required); "
@@ -442,7 +446,7 @@ def _audio_timed_scene_durations(
                 raise RenderError(
                     f"Scene {scene.get('scene_id')} has no usable source window."
                 )
-            if duration > available * MAX_SOURCE_LOOP_MULTIPLIER + 0.05:
+            if duration > available * MAX_SOURCE_LOOP_MULTIPLIER + SOURCE_WINDOW_JITTER_TOLERANCE_SECONDS:
                 raise RenderError(
                     f"Scene {scene.get('scene_id')} forced-alignment duration exceeds "
                     f"bounded same-scene source-loop capacity."
