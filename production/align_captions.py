@@ -92,6 +92,7 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 "an": [["an"], ["un"]],
                 "the": [["the"], ["uh"], ["thuh"], ["thee"]],
                 "then": [["then"], ["than"]],
+                "tore": [["tore"], ["tour"], ["tor"]],
                 "to": [["to"], ["two"], ["tuh"]],
                 "of": [["of"], ["uhv"], ["ov"]],
                 "and": [["and"], ["n"], ["ənd"]],
@@ -109,15 +110,21 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                     ["ulrich"], ["all", "rick"], ["old", "rick"],
                     ["ul", "rick"], ["all", "rich"], ["owl", "rick"],
                 ],
+                "alaskas": [
+                    ["alaskas"], ["alaska"], ["a", "land"], ["uh", "land"],
+                    ["land", "scar"], ["a", "laska"],
+                ],
                 "lituya": [
-                    ["lituya"], ["la", "to", "your"], ["lit", "to", "ya"],
-                    ["little", "ya"], ["little", "you"], ["lee", "to", "ya"],
-                    ["lit", "you"],
+                    ["lituya"], ["la", "to", "your"], ["la", "to", "ya"],
+                    ["la", "two", "your"], ["la", "two", "ya"],
+                    ["la", "two", "to", "ya"], ["la", "two", "to", "your"],
+                    ["lit", "to", "ya"], ["little", "ya"], ["little", "you"],
+                    ["lee", "to", "ya"], ["lit", "you"],
                 ],
                 "edrie": [
-                    ["edrie"], ["edry"], ["ed", "ree"], ["e", "dree"],
+                    ["edrie"], ["edry"], ["ed", "ree"], ["e", "dree"], ["eatery"],
                 ],
-                "gilbert": [["gilbert"], ["gill", "bert"], ["gil", "bert"], ["gil", "bird"]],
+                "gilbert": [["gilbert"], ["gill", "bert"], ["gil", "bert"], ["gil", "bird"], ["gill", "bird"]],
                 # Vosk may realize the unstressed vowel in “than” as “then”.
                 # This is an explicit lexical ASR variant only; timing still
                 # comes from the real Vosk word timestamp in the final WAV.
