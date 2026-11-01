@@ -39,7 +39,7 @@ silenciosamente pelo motor.
 O Because Of This é um canal internacional de histórias ficcionais curtas em
 inglês americano, com suspense, mistério, terror psicológico e drama humano.
 
-O motor deve criar vídeos verticais de 60 a 75 segundos, com:
+O motor deve criar vídeos verticais com alvo de 60 a 75 segundos e teto operacional rígido de 80 segundos, com:
 
 - história original e emocionalmente forte;
 - suspense progressivo e informação controlada;
@@ -832,7 +832,7 @@ Formato canônico:
 - 1080x1920;
 - 9:16;
 - 60 fps;
-- 60 a 75 segundos de duração real;
+- 60 a 75 segundos de duração real como alvo; quando a narração final naturalmente exceder 75, aceitar até 80 segundos;
 - perfil de codificação adequado à plataforma;
 - áudio compatível e reproduzível.
 
@@ -1468,7 +1468,7 @@ permissão, artefato ou integração essencial ausente.
 [ ] Prévia completa aprovada.
 [ ] Render final corresponde à prévia.
 [ ] Master 1080x1920, 9:16, 60 fps.
-[ ] Duração real entre 60 e 75 segundos.
+[ ] Duração real entre 60 e 80 segundos; alvo preferencial entre 60 e 75, sem preenchimento artificial.
 [ ] Hash final calculado.
 [ ] Drive sincronizado e hash remoto verificado.
 [ ] Nenhum incidente crítico aberto.
