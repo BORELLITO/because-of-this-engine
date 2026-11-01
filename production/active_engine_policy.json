@@ -22,9 +22,9 @@
   },
   "publication_policy": "manual_only",
   "active_test_suite": [
+    "tests/test_current_engine_policy.py",
     "tests/test_editorial_story_gates.py",
-    "tests/test_reuse_first.py",
-    "tests/test_current_engine_policy.py"
+    "tests/test_reuse_first.py"
   ],
   "legacy_test_policy": "non_executable_archived",
   "legacy_version_execution": "forbidden",
