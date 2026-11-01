@@ -19,13 +19,13 @@ Every episode manifest must contain a `story_creation` object with:
 - a 60–75 second density plan without padding;
 - editorial, factual, and monetization red-team sign-off.
 
-The block is audited by `production/story_creation.py` and reported as `C0–C11`. The canonical `quality_gates.py` report includes those results alongside the existing `G0–G12` and `S0–S2` gates.
+The block is audited by `production/story_creation.py` and reported as `C0–C11` plus the mandatory senior-editorial `E0–E10` contract. The canonical `quality_gates.py` report includes both creation layers alongside the existing `G0–G12` and `S0–S2` gates. See `docs/editorial-story-standard-v7.4.md` for the depth standard.
 
 ## Review behavior
 
 A gate is blocked when the evidence is missing or contradictory. The system does not infer that a stock clip proves a narrated claim. Symbolic or explanatory footage must be declared as such in the existing visual contract.
 
-Existing episodes can be migrated with `legacy_backfill: true`, but the reason must be recorded. New episodes must prove that visual feasibility was checked before script lock.
+Existing episodes can be migrated with `legacy_backfill: true`, but the reason must be recorded. New episodes must prove that visual feasibility was checked before script lock and must include `story_creation.editorial_contract`. Manifests without that contract are audit-only and fail closed before visual search or rendering.
 
 ## Local command
 
