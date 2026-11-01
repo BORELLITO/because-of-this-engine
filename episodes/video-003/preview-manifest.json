@@ -335,7 +335,7 @@
         "intensity": 0.9
       },
       {
-        "position": 1.0,
+        "position": 1,
         "emotion": "existential chill",
         "intensity": 0.88
       }
@@ -604,7 +604,7 @@
         "mime_type": "video/mp4",
         "job_ownership": "episode-003-call-tomorrow",
         "scene_usage": "S01: reviewed fresh visual evidence for switchboard phone rings.",
-        "source_segment_in": 0.0,
+        "source_segment_in": 0,
         "source_segment_out": 5.93,
         "asset_class": "evidence",
         "scene_approval": "APPROVED",
@@ -646,7 +646,28 @@
             "start": 0.15,
             "end": 5.779999999999999,
             "basis": "reviewed source motion window; no editorial overlay"
-          }
+          },
+          "subjects": [
+            "phone",
+            "hospital",
+            "interior"
+          ],
+          "actions": [
+            "ringing",
+            "standing"
+          ],
+          "environments": [
+            "hospital",
+            "interior"
+          ],
+          "objects": [
+            "telephone"
+          ],
+          "sample_timestamps": [
+            0.15,
+            2.965,
+            5.78
+          ]
         }
       },
       "source_in": 0,
@@ -707,7 +728,7 @@
       },
       "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
       "visual_intent": "old disconnected extension and abandoned desk",
-      "visual_function": "literal_evidence",
+      "visual_function": "supporting_visual",
       "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
       "match_score": 0.72,
@@ -737,7 +758,7 @@
         "mime_type": "video/mp4",
         "job_ownership": "episode-003-call-tomorrow",
         "scene_usage": "S02: reviewed fresh visual evidence for disconnected ward is remembered.",
-        "source_segment_in": 0.0,
+        "source_segment_in": 0,
         "source_segment_out": 11.44,
         "asset_class": "evidence",
         "scene_approval": "APPROVED",
@@ -778,7 +799,27 @@
             "start": 0.15,
             "end": 11.29,
             "basis": "reviewed source motion window; no editorial overlay"
-          }
+          },
+          "subjects": [
+            "hospital",
+            "interior"
+          ],
+          "actions": [
+            "watching"
+          ],
+          "environments": [
+            "hospital",
+            "interior"
+          ],
+          "objects": [
+            "desk",
+            "paper"
+          ],
+          "sample_timestamps": [
+            0.15,
+            5.72,
+            11.29
+          ]
         }
       },
       "source_in": 0,
@@ -870,7 +911,7 @@
         "mime_type": "video/mp4",
         "job_ownership": "episode-003-call-tomorrow",
         "scene_usage": "S03: reviewed fresh visual evidence for Daniel answers the impossible call.",
-        "source_segment_in": 0.0,
+        "source_segment_in": 0,
         "source_segment_out": 10.815,
         "asset_class": "evidence",
         "scene_approval": "APPROVED",
@@ -912,7 +953,28 @@
             "start": 0.15,
             "end": 10.665,
             "basis": "reviewed source motion window; no editorial overlay"
-          }
+          },
+          "subjects": [
+            "person",
+            "hospital"
+          ],
+          "actions": [
+            "answering",
+            "standing"
+          ],
+          "environments": [
+            "hospital",
+            "interior"
+          ],
+          "objects": [
+            "telephone",
+            "hand"
+          ],
+          "sample_timestamps": [
+            0.15,
+            5.408,
+            10.665
+          ]
         }
       },
       "source_in": 0,
@@ -972,7 +1034,7 @@
       },
       "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
       "visual_intent": "paper feeds from a printer as the hand freezes",
-      "visual_function": "literal_evidence",
+      "visual_function": "supporting_visual",
       "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
       "match_score": 0.78,
@@ -1002,7 +1064,7 @@
         "mime_type": "video/mp4",
         "job_ownership": "episode-003-call-tomorrow",
         "scene_usage": "S04: reviewed fresh visual evidence for tomorrow's log prints itself.",
-        "source_segment_in": 0.0,
+        "source_segment_in": 0,
         "source_segment_out": 9.023333,
         "asset_class": "evidence",
         "scene_approval": "APPROVED",
@@ -1043,7 +1105,27 @@
             "start": 0.15,
             "end": 8.873332999999999,
             "basis": "reviewed source motion window; no editorial overlay"
-          }
+          },
+          "subjects": [
+            "person",
+            "interior"
+          ],
+          "actions": [
+            "printing",
+            "standing"
+          ],
+          "environments": [
+            "interior"
+          ],
+          "objects": [
+            "paper",
+            "printer"
+          ],
+          "sample_timestamps": [
+            0.15,
+            4.512,
+            8.873
+          ]
         }
       },
       "source_in": 0,
@@ -1134,7 +1216,7 @@
         "mime_type": "video/mp4",
         "job_ownership": "episode-003-call-tomorrow",
         "scene_usage": "S05: reviewed fresh visual evidence for the warm elevator button.",
-        "source_segment_in": 0.0,
+        "source_segment_in": 0,
         "source_segment_out": 6.68,
         "asset_class": "evidence",
         "scene_approval": "APPROVED",
@@ -1175,7 +1257,27 @@
             "start": 0.15,
             "end": 6.529999999999999,
             "basis": "reviewed source motion window; no editorial overlay"
-          }
+          },
+          "subjects": [
+            "person"
+          ],
+          "actions": [
+            "pressing",
+            "standing"
+          ],
+          "environments": [
+            "interior"
+          ],
+          "objects": [
+            "elevator",
+            "panel",
+            "button"
+          ],
+          "sample_timestamps": [
+            0.15,
+            3.34,
+            6.53
+          ]
         }
       },
       "source_in": 0,
@@ -1236,7 +1338,7 @@
       },
       "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
       "visual_intent": "red light pulses in a dark corridor",
-      "visual_function": "literal_evidence",
+      "visual_function": "supporting_visual",
       "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
       "match_score": 0.78,
@@ -1266,7 +1368,7 @@
         "mime_type": "video/mp4",
         "job_ownership": "episode-003-call-tomorrow",
         "scene_usage": "S06: reviewed fresh visual evidence for red light behind sealed records door.",
-        "source_segment_in": 0.0,
+        "source_segment_in": 0,
         "source_segment_out": 20.2,
         "asset_class": "evidence",
         "scene_approval": "APPROVED",
@@ -1307,7 +1409,27 @@
             "start": 0.15,
             "end": 20.05,
             "basis": "reviewed source motion window; no editorial overlay"
-          }
+          },
+          "subjects": [
+            "person"
+          ],
+          "actions": [
+            "walking",
+            "standing"
+          ],
+          "environments": [
+            "corridor",
+            "interior"
+          ],
+          "objects": [
+            "red emergency lamp",
+            "door"
+          ],
+          "sample_timestamps": [
+            0.15,
+            10.1,
+            20.05
+          ]
         }
       },
       "source_in": 0,
@@ -1327,7 +1449,7 @@
       "story_beat": "Daniel confronts the accident report",
       "narration_excerpt": "Daniel had filed his sister's death as an accident.",
       "visual_semantics": {
-        "role": "explanatory",
+        "role": "symbolic",
         "required": {
           "objects": [
             "hallway"
@@ -1366,7 +1488,7 @@
       },
       "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
       "visual_intent": "medical worker pauses in a cold hallway, carrying private grief",
-      "visual_function": "literal_evidence",
+      "visual_function": "supporting_visual",
       "visual_match": "SYMBOLIC",
       "visual_truth": "DECLARED_FICTION",
       "match_score": 0.7,
@@ -1396,7 +1518,7 @@
         "mime_type": "video/mp4",
         "job_ownership": "episode-003-call-tomorrow",
         "scene_usage": "S07: reviewed fresh visual evidence for Daniel's buried guilt.",
-        "source_segment_in": 0.0,
+        "source_segment_in": 0,
         "source_segment_out": 14.48,
         "asset_class": "evidence",
         "scene_approval": "APPROVED",
@@ -1436,7 +1558,26 @@
             "start": 0.15,
             "end": 14.33,
             "basis": "reviewed source motion window; no editorial overlay"
-          }
+          },
+          "subjects": [
+            "person"
+          ],
+          "actions": [
+            "walking",
+            "standing"
+          ],
+          "environments": [
+            "hospital",
+            "corridor"
+          ],
+          "objects": [
+            "hallway"
+          ],
+          "sample_timestamps": [
+            0.15,
+            7.24,
+            14.33
+          ]
         }
       },
       "source_in": 0,
@@ -1456,7 +1597,7 @@
       "story_beat": "the missing minute replays his refusal",
       "narration_excerpt": "Now the call replayed the minute he refused to remember.",
       "visual_semantics": {
-        "role": "explanatory",
+        "role": "atmosphere",
         "required": {
           "objects": [
             "hallway",
@@ -1495,7 +1636,7 @@
       },
       "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
       "visual_intent": "empty hospital corridor holds the memory of a past event",
-      "visual_function": "literal_evidence",
+      "visual_function": "supporting_visual",
       "visual_match": "ATMOSPHERE",
       "visual_truth": "DECLARED_FICTION",
       "match_score": 0.68,
@@ -1525,7 +1666,7 @@
         "mime_type": "video/mp4",
         "job_ownership": "episode-003-call-tomorrow",
         "scene_usage": "S08: reviewed fresh visual evidence for the missing minute replays.",
-        "source_segment_in": 0.0,
+        "source_segment_in": 0,
         "source_segment_out": 3.67,
         "asset_class": "evidence",
         "scene_approval": "APPROVED",
@@ -1564,7 +1705,25 @@
             "start": 0.15,
             "end": 3.52,
             "basis": "reviewed source motion window; no editorial overlay"
-          }
+          },
+          "subjects": [],
+          "actions": [
+            "watching",
+            "walking"
+          ],
+          "environments": [
+            "hospital",
+            "corridor"
+          ],
+          "objects": [
+            "hallway",
+            "light"
+          ],
+          "sample_timestamps": [
+            0.15,
+            1.835,
+            3.52
+          ]
         }
       },
       "source_in": 0,
@@ -1584,7 +1743,7 @@
       "story_beat": "the original log states the witness rule",
       "narration_excerpt": "In the original log, he found the rule: every answered call demanded a witness.",
       "visual_semantics": {
-        "role": "explanatory",
+        "role": "symbolic",
         "required": {
           "objects": [
             "panel",
@@ -1623,7 +1782,7 @@
       },
       "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
       "visual_intent": "elevator panel and archival evidence become a warning",
-      "visual_function": "literal_evidence",
+      "visual_function": "supporting_visual",
       "visual_match": "SYMBOLIC",
       "visual_truth": "DECLARED_FICTION",
       "match_score": 0.7,
@@ -1653,7 +1812,7 @@
         "mime_type": "video/mp4",
         "job_ownership": "episode-003-call-tomorrow",
         "scene_usage": "S09: reviewed fresh visual evidence for the rule is found in the log.",
-        "source_segment_in": 0.0,
+        "source_segment_in": 0,
         "source_segment_out": 16.208333,
         "asset_class": "evidence",
         "scene_approval": "APPROVED",
@@ -1693,7 +1852,26 @@
             "start": 0.15,
             "end": 16.058333,
             "basis": "reviewed source motion window; no editorial overlay"
-          }
+          },
+          "subjects": [
+            "person"
+          ],
+          "actions": [
+            "watching",
+            "pressing"
+          ],
+          "environments": [
+            "interior"
+          ],
+          "objects": [
+            "panel",
+            "display"
+          ],
+          "sample_timestamps": [
+            0.15,
+            8.104,
+            16.058
+          ]
         }
       },
       "source_in": 0,
@@ -1752,7 +1930,7 @@
       },
       "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
       "visual_intent": "burning page and decisive hand represent the irreversible choice",
-      "visual_function": "literal_evidence",
+      "visual_function": "supporting_visual",
       "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
       "match_score": 0.76,
@@ -1782,7 +1960,7 @@
         "mime_type": "video/mp4",
         "job_ownership": "episode-003-call-tomorrow",
         "scene_usage": "S10: reviewed fresh visual evidence for Daniel chooses the line.",
-        "source_segment_in": 0.0,
+        "source_segment_in": 0,
         "source_segment_out": 29.56,
         "asset_class": "evidence",
         "scene_approval": "APPROVED",
@@ -1822,7 +2000,26 @@
             "start": 0.15,
             "end": 29.41,
             "basis": "reviewed source motion window; no editorial overlay"
-          }
+          },
+          "subjects": [
+            "person"
+          ],
+          "actions": [
+            "destroying",
+            "pressing"
+          ],
+          "environments": [
+            "interior"
+          ],
+          "objects": [
+            "paper",
+            "hand"
+          ],
+          "sample_timestamps": [
+            0.15,
+            14.78,
+            29.41
+          ]
         }
       },
       "source_in": 0,
@@ -1883,7 +2080,7 @@
       },
       "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
       "visual_intent": "dark hospital corridor after power loss, receiver implied beyond the door",
-      "visual_function": "literal_evidence",
+      "visual_function": "supporting_visual",
       "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
       "match_score": 0.8,
@@ -1913,7 +2110,7 @@
         "mime_type": "video/mp4",
         "job_ownership": "episode-003-call-tomorrow",
         "scene_usage": "S11: reviewed fresh visual evidence for the sealed room rings.",
-        "source_segment_in": 0.0,
+        "source_segment_in": 0,
         "source_segment_out": 9.733333,
         "asset_class": "evidence",
         "scene_approval": "APPROVED",
@@ -1954,7 +2151,27 @@
             "start": 0.15,
             "end": 9.583333,
             "basis": "reviewed source motion window; no editorial overlay"
-          }
+          },
+          "subjects": [
+            "person"
+          ],
+          "actions": [
+            "walking",
+            "flickering"
+          ],
+          "environments": [
+            "hospital",
+            "corridor"
+          ],
+          "objects": [
+            "door",
+            "light"
+          ],
+          "sample_timestamps": [
+            0.15,
+            4.867,
+            9.583
+          ]
         }
       },
       "source_in": 0,
@@ -1974,7 +2191,7 @@
       "story_beat": "the final log calls Daniel home",
       "narration_excerpt": "At dawn, the new log held one completed call: Daniel's name—followed by home.",
       "visual_semantics": {
-        "role": "explanatory",
+        "role": "symbolic",
         "required": {
           "objects": [
             "doors",
@@ -2010,7 +2227,7 @@
       },
       "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
       "visual_intent": "empty elevator exit at dawn after the operator disappears",
-      "visual_function": "literal_evidence",
+      "visual_function": "supporting_visual",
       "visual_match": "SYMBOLIC",
       "visual_truth": "DECLARED_FICTION",
       "match_score": 0.72,
@@ -2040,7 +2257,7 @@
         "mime_type": "video/mp4",
         "job_ownership": "episode-003-call-tomorrow",
         "scene_usage": "S12: reviewed fresh visual evidence for dawn and the word home.",
-        "source_segment_in": 0.0,
+        "source_segment_in": 0,
         "source_segment_out": 30.64,
         "asset_class": "evidence",
         "scene_approval": "APPROVED",
@@ -2077,7 +2294,23 @@
             "start": 0.15,
             "end": 30.490000000000002,
             "basis": "reviewed source motion window; no editorial overlay"
-          }
+          },
+          "subjects": [],
+          "actions": [
+            "standing"
+          ],
+          "environments": [
+            "interior"
+          ],
+          "objects": [
+            "doors",
+            "light"
+          ],
+          "sample_timestamps": [
+            0.15,
+            15.32,
+            30.49
+          ]
         }
       },
       "source_in": 0,
@@ -2610,7 +2843,7 @@
         "S11",
         "S12"
       ],
-      "coverage_ratio": 1.0,
+      "coverage_ratio": 1,
       "checked_before_script": true
     },
     "channel_diversity": {
