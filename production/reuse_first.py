@@ -58,6 +58,7 @@ def _code_fingerprints(manifest_path: Path) -> dict[str, str]:
     files = {
         "reuse_first": repo_root / "production/reuse_first.py",
         "renderer": repo_root / "production/render_video_episode.py",
+        "visual_effects": repo_root / "production/visual_effects_v73.py",
         "asset_hydration": repo_root / "production/google_drive_assets.py",
         "alignment": repo_root / "production/align_captions.py",
         "story_intelligence": repo_root / "production/story_intelligence.py",
@@ -186,6 +187,7 @@ def compute_fingerprints(manifest_path: Path, mode: str = "draft-preview") -> di
             "clip_policy": clip_policy,
             "code": {
                 "renderer": code["renderer"],
+                "visual_effects": code["visual_effects"],
                 "asset_hydration": code["asset_hydration"],
             },
         }
