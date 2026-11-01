@@ -20,6 +20,7 @@ from pathlib import Path
 from typing import Any
 
 from production.canonical_config import CANONICAL_PROFILE_FINGERPRINT, CANONICAL_PROFILE_ID
+from production.video_asset_contract import MAX_STORY_SECONDS
 from production.gemini_tts import (
     GeminiTTSError,
     build_ssml,
@@ -205,8 +206,8 @@ def _visual_gate(
                     problems.append(f"{scene_id}: asset reuse status is not fresh/reserved")
                 if asset.get("derived_from"):
                     problems.append(f"{scene_id}: derived clip reuse is forbidden")
-    if not 60.0 <= total_duration <= 75.0:
-        problems.append(f"scene duration total {total_duration:.3f}s is outside the 60–75s contract")
+    if not 60.0 <= total_duration <= MAX_STORY_SECONDS:
+        problems.append(f"scene duration total {total_duration:.3f}s is outside the 60–{MAX_STORY_SECONDS:.0f}s contract")
     message = (
         "all scene beats have direct semantic anchors and mode-valid unique assets"
         if not problems
