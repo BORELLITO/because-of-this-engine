@@ -17,7 +17,7 @@
   "engine_profile": "because-of-this-v7.3.2-charon-cinematic-dread-smooth-2026-10",
   "engine_profile_fingerprint": "c9f6c10765b65a447fb010008f64b302315ff189e257b927d47c9c8e2a427c8e",
   "master_prompt_version": "7.2",
-  "master_prompt_sha256": "cc11c568413e9b39105db91523f09742a5d118b1e3fb303a1d3d6fab46c569dd",
+  "master_prompt_sha256": "f393ca8891b6e254adfd252a8df031fbe878b0f1d395b67f15f9b0abf4bcc5af",
   "production_schema": "because-of-this://schemas/production-record/3.0.0",
   "human_approval_required": true,
   "lifecycle_status": "FINAL_APPROVED",
