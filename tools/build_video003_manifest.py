@@ -336,10 +336,14 @@ def main() -> None:
         scene_id = f"S{index:02d}"
         visual = SHOT_DATA[index - 1]
         asset = build_asset(index, scene_id, visual, DRIVE_IDS[index - 1])
+        # Keep each beat inside its approved source window. This preserves the
+        # no-loop policy while allowing genuinely short micro-beats to remain
+        # editorially intentional instead of repeating frames.
+        scene_duration = round(min(6.0, float(asset["duration_seconds"])), 3)
         scenes.append({
             "scene_id": scene_id,
             "beat_id": f"beat-{index:03d}",
-            "duration": 6,
+            "duration": scene_duration,
             "story_beat": value["story_graph"]["beats"][index - 1]["event"],
             "narration_excerpt": excerpt,
             "visual_semantics": {"role": {"EXACT": "literal", "EXPLANATORY": "explanatory", "SYMBOLIC": "symbolic", "ATMOSPHERE": "atmosphere"}.get(visual[6], "explanatory"), "required": {"objects": visual[5], "actions": visual[3], "environments": visual[4], "subjects": visual[2]}, "preferred": {"moods": ["dread", "unease" if index < 7 else "urgency"]}, "forbidden": ["generic office", "random shake", "generated text"], "narrative_anchors": {"direct_required": visual[5] + visual[4], "minimum_direct": 1}},
@@ -355,7 +359,19 @@ def main() -> None:
             "transition": {"type": "crossfade", "duration": 0.18},
         })
     value["scenes"] = scenes
-    value["target_runtime_seconds"] = 72
+    timeline_seconds = round(sum(float(scene["duration"]) for scene in scenes), 3)
+    value["target_runtime_seconds"] = timeline_seconds
+    duration_meta = value.get("story_creation", {}).get("duration", {})
+    if isinstance(duration_meta, dict):
+        duration_meta["target_seconds"] = timeline_seconds
+        duration_meta["planned_seconds"] = timeline_seconds
+    density = value.get("story_creation", {}).get("editorial_contract", {}).get("visual_dramatization", {}).get("density", {})
+    if isinstance(density, dict):
+        density["story_seconds"] = timeline_seconds
+    refresh = value.get("editing", {}).get("scene_refresh_strategy", {})
+    if isinstance(refresh, dict) and scenes:
+        refresh["average_scene_seconds"] = round(timeline_seconds / len(scenes), 3)
+        refresh["min_scene_seconds"] = min(float(scene["duration"]) for scene in scenes)
     value["runtime_artifacts"] = {}
     value["runtime_artifact_hashes"] = {}
     (EPISODE / "preview-manifest.json").write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
