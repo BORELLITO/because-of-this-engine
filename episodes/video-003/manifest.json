@@ -135,7 +135,7 @@
           "dead_ward"
         ],
         "scene_id": "S01",
-        "narration_excerpt": "At 2:17 a.m., Daniel was alone in the hospital switchboard when a dead extension rang."
+        "narration_excerpt": "2:17 a.m. found Daniel alone at the hospital switchboard when a dead extension rang."
       },
       {
         "beat_id": "beat-002",
@@ -408,7 +408,7 @@
     "beats": [
       {
         "beat_id": "beat-001",
-        "text": "At 2:17 a.m., Daniel was alone in the hospital switchboard when a dead extension rang.",
+        "text": "2:17 a.m. found Daniel alone at the hospital switchboard when a dead extension rang.",
         "pause_before_ms": 0
       },
       {
@@ -531,7 +531,7 @@
       "beat_id": "beat-001",
       "duration": 6,
       "story_beat": "the dead ward extension rings",
-      "narration_excerpt": "At 2:17 a.m., Daniel was alone in the hospital switchboard when a dead extension rang.",
+      "narration_excerpt": "2:17 a.m. found Daniel alone at the hospital switchboard when a dead extension rang.",
       "visual_semantics": {
         "role": "literal",
         "required": {
