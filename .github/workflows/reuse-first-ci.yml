@@ -8,6 +8,11 @@ on:
       - "production/reuse_first.py"
       - "production/google_drive_assets.py"
       - "production/render_video_episode.py"
+      - "production/google_drive_delivery.py"
+      - "production/v7_orchestrator.py"
+      - "production/quality_gates.py"
+      - "production/canonical_config.py"
+      - "production/active_engine_policy.json"
       - "tests/**"
       - ".github/workflows/episode-002-draft-preview.yml"
       - ".github/workflows/reuse-first-ci.yml"
@@ -16,6 +21,11 @@ on:
       - "production/reuse_first.py"
       - "production/google_drive_assets.py"
       - "production/render_video_episode.py"
+      - "production/google_drive_delivery.py"
+      - "production/v7_orchestrator.py"
+      - "production/quality_gates.py"
+      - "production/canonical_config.py"
+      - "production/active_engine_policy.json"
       - "tests/**"
       - ".github/workflows/episode-002-draft-preview.yml"
       - ".github/workflows/reuse-first-ci.yml"
@@ -38,7 +48,14 @@ jobs:
 
       - name: Compile changed production modules
         run: |
-          python -m py_compile             production/reuse_first.py             production/google_drive_assets.py             production/render_video_episode.py
+          python -m py_compile \
+            production/reuse_first.py \
+            production/google_drive_assets.py \
+            production/render_video_episode.py \
+            production/google_drive_delivery.py \
+            production/v7_orchestrator.py \
+            production/quality_gates.py \
+            production/canonical_config.py
 
       - name: Run reuse-first unit tests
         run: python -m unittest discover -s tests -p "test_reuse_first.py" -v
