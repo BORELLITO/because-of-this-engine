@@ -75,5 +75,8 @@ jobs:
             production/v7_singleton_guard.py \
             production/v7_post_publication.py
 
+      - name: Verify canonical engine singleton
+        run: PYTHONPATH=. python production/v7_singleton_guard.py --repo-root .
+
       - name: Run reuse-first unit tests
         run: python -m unittest discover -s tests -p "test_reuse_first.py" -v
