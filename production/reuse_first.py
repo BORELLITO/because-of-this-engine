@@ -67,6 +67,7 @@ def _code_fingerprints(manifest_path: Path) -> dict[str, str]:
         "golden_layout": repo_root / "production/golden_frame_regression.py",
         "orchestrator": repo_root / "production/v7_orchestrator.py",
         "drive_delivery": repo_root / "production/google_drive_delivery.py",
+        "narration_cache": repo_root / "production/narration_cache.py",
         "contract": repo_root / "production/v7_contract.py",
         "tts": repo_root / "production/gemini_tts.py",
         "production_record": repo_root / "production/production_record_v7.py",
