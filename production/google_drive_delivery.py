@@ -273,8 +273,20 @@ def verify_delivery_receipt(receipt_path: Path) -> dict:
         raise DeliveryError("Delivery receipt is not DRIVE_VERIFIED.")
     folder_id = str(delivery.get("delivery_folder_id") or "").strip()
     files = delivery.get("files")
-    if not folder_id or not isinstance(files, list) or not files:
-        raise DeliveryError("Delivery receipt lacks folder or file evidence.")
+    try:
+        declared_count = int(delivery.get("file_count", -1))
+    except (TypeError, ValueError):
+        declared_count = -1
+    declared_url = str(delivery.get("delivery_folder_url") or "").strip()
+    expected_url = f"https://drive.google.com/drive/folders/{folder_id}"
+    if (
+        not folder_id
+        or not isinstance(files, list)
+        or not files
+        or declared_count != len(files)
+        or declared_url != expected_url
+    ):
+        raise DeliveryError("Delivery receipt lacks consistent folder or file evidence.")
 
     drive = service()
     validate_folder(drive, folder_id)
