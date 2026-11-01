@@ -309,6 +309,12 @@ def audit(
         for key in record["keys"]:
             by_key.setdefault(key, []).append(record)
 
+    policy = target_manifest.get("asset_reuse_brain") or {}
+    same_story_episode_ids = {target_id}
+    same_story_id = _norm(policy.get("same_story_id"))
+    if same_story_id:
+        same_story_episode_ids.add(same_story_id)
+
     cross_episode: list[dict[str, Any]] = []
     for record in target_records:
         for key in record["keys"]:
@@ -342,11 +348,6 @@ def audit(
             seen_collisions.add(signature)
             unique_cross.append(item)
 
-    policy = target_manifest.get("asset_reuse_brain") or {}
-    same_story_episode_ids = {target_id}
-    same_story_id = _norm(policy.get("same_story_id"))
-    if same_story_id:
-        same_story_episode_ids.add(same_story_id)
     legacy_baseline = (
         target_id in LEGACY_BASELINE_EPISODES
         and policy.get("legacy_baseline") is True
