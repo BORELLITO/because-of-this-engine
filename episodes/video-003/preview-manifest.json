@@ -514,12 +514,12 @@
       "alignment": 2,
       "margin_l": 90,
       "margin_r": 140,
-      "margin_v": 340,
+      "margin_v": 408,
       "encoding": 1
     },
     "mobile_safe_zone": {
       "right_clearance_px": 140,
-      "bottom_clearance_px": 340,
+      "bottom_clearance_px": 408,
       "interaction_rail_clearance": "comment-share-remix rail",
       "status": "LOCKED_FROM_APPROVED_MASTER"
     },
