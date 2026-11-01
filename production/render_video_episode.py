@@ -319,18 +319,24 @@ def _audio_timed_scene_durations(
     durations: list[float] = []
     min_seconds = float(clip_policy.get("min_scene_seconds", 2.0))
     max_seconds = float(clip_policy.get("max_scene_seconds", 20.0))
+    short_scene_ids = {
+        str(scene_id).strip()
+        for scene_id in (clip_policy.get("short_narration_scene_ids") or [])
+        if str(scene_id).strip()
+    }
     for index, scene in enumerate(scenes):
         base_duration = boundaries[index + 1] - boundaries[index]
+        scene_min_seconds = 1.5 if str(scene.get("scene_id")) in short_scene_ids else min_seconds
         transition_after = (
             transition_duration(scenes[index + 1].get("transition", {}))
             if index < len(scenes) - 1
             else 0.0
         )
         duration = base_duration + transition_after
-        if base_duration < min_seconds - 0.02:
+        if base_duration < scene_min_seconds - 0.02:
             raise RenderError(
                 f"Scene {scene.get('scene_id')} narration span is {base_duration:.3f}s, "
-                f"below the {min_seconds:.2f}s visual-beat minimum."
+                f"below the {scene_min_seconds:.2f}s visual-beat minimum."
             )
         if base_duration > max_seconds + 0.02:
             raise RenderError(
@@ -708,5 +714,4 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
 
