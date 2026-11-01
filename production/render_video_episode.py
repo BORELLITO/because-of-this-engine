@@ -449,7 +449,9 @@ def _audio_timed_scene_durations(
             if duration > available * MAX_SOURCE_LOOP_MULTIPLIER + SOURCE_WINDOW_JITTER_TOLERANCE_SECONDS:
                 raise RenderError(
                     f"Scene {scene.get('scene_id')} forced-alignment duration exceeds "
-                    f"bounded same-scene source-loop capacity."
+                    f"bounded same-scene source-loop capacity "
+                    f"(available={available:.3f}s, required={duration:.3f}s, "
+                    f"tolerance={SOURCE_WINDOW_JITTER_TOLERANCE_SECONDS:.3f}s)."
                 )
         durations.append(duration)
     if abs(sum(durations) - sum(boundaries[-1:] or [0]) - sum(
