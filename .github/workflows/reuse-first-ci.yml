@@ -15,6 +15,9 @@ on:
       - "production/v7_contract.py"
       - "production/gemini_tts.py"
       - "production/production_record_v7.py"
+      - "production/video_asset_contract.py"
+      - "production/v7_singleton_guard.py"
+      - "production/v7_post_publication.py"
       - "production/active_engine_policy.json"
       - "tests/**"
       - ".github/workflows/episode-002-draft-preview.yml"
@@ -31,6 +34,9 @@ on:
       - "production/v7_contract.py"
       - "production/gemini_tts.py"
       - "production/production_record_v7.py"
+      - "production/video_asset_contract.py"
+      - "production/v7_singleton_guard.py"
+      - "production/v7_post_publication.py"
       - "production/active_engine_policy.json"
       - "tests/**"
       - ".github/workflows/episode-002-draft-preview.yml"
@@ -64,7 +70,10 @@ jobs:
             production/canonical_config.py \
             production/v7_contract.py \
             production/gemini_tts.py \
-            production/production_record_v7.py
+            production/production_record_v7.py \
+            production/video_asset_contract.py \
+            production/v7_singleton_guard.py \
+            production/v7_post_publication.py
 
       - name: Run reuse-first unit tests
         run: python -m unittest discover -s tests -p "test_reuse_first.py" -v
