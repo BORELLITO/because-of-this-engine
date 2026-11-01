@@ -75,9 +75,6 @@ def clip_quantity_policy(manifest: dict[str, Any]) -> dict[str, Any]:
     if policy["min_scene_seconds"] > policy["max_scene_seconds"]:
         raise EditorialPolicyError("Scene duration bounds are inverted.")
 
-    if policy["enforce_no_same_scene_loop"] and policy["max_scene_seconds"] > 8.0:
-        raise EditorialPolicyError("No-loop editorial policy requires max_scene_seconds <= 8.0.")
-
     return policy
 
 
