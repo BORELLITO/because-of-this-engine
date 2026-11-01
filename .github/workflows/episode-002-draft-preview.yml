@@ -1,6 +1,9 @@
 name: Because Of This V7.3.2 reuse-first Episode 002 draft preview
 
 on:
+  push:
+    branches:
+      - v7.3.4-reuse-first-performance
   workflow_dispatch:
     inputs:
       manifest:
@@ -30,6 +33,7 @@ env:
 
 jobs:
   preflight-reuse:
+    if: github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'EXECUTE_VIDEO_002_FULL_ENGINE'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     outputs:
@@ -221,7 +225,7 @@ jobs:
 
       - name: Arm one provider request or fail closed
         env:
-          TTS_REQUEST: ${{ inputs.tts_request || 'CACHE_ONLY' }}
+          TTS_REQUEST: ${{ inputs.tts_request || (github.event_name == 'push' && 'RUN_ONCE') || 'CACHE_ONLY' }}
         run: |
           set -euo pipefail
           if [ "${CHARON_CACHE_HIT:-false}" = "true" ]; then
