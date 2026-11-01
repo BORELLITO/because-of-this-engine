@@ -3484,7 +3484,8 @@
       "enforce_no_same_scene_loop": true,
       "require_exact_literal_context": true,
       "short_narration_scene_ids": [
-        "S06"
+        "S06",
+        "S10"
       ]
     },
     "scene_refresh_strategy": {
