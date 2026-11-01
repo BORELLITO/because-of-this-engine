@@ -217,8 +217,6 @@ def render_scene(
             f"scene beat ({available:.3f}s available, {requested:.3f}s required); "
             "same-scene looping is forbidden."
         )
-    loop_source = False
-    loop_count = 0
     focus = scene.get("focus", {"x": 0.5, "y": 0.5})
     focus_x = float(focus.get("x", 0.5))
     focus_y = float(focus.get("y", 0.5))
@@ -242,8 +240,6 @@ def render_scene(
             f"fade=t=out:st={max(0.0, requested - fade_out):.3f}:d={fade_out:.3f}"
         )
     input_args = ["-ss", f"{source_in:.3f}"]
-    if loop_source:
-        input_args = ["-stream_loop", str(loop_count), *input_args]
     run([
         "ffmpeg", "-y", *input_args, "-i", str(source), "-an",
         "-vf", filters, "-t", f"{requested:.3f}",
@@ -263,6 +259,7 @@ def scene_cache_key(
     payload = {
         "version": SCENE_CACHE_VERSION,
         "mode": mode,
+        "render_profile": os.environ.get("BECAUSE_OF_THIS_RENDER_PROFILE", "default"),
         "width": width,
         "height": height,
         "scene": scene,
