@@ -47,6 +47,19 @@ def audit(repo_root: Path) -> dict[str, object]:
         raise SingletonGuardError("active policy does not pin the canonical V7.2 prompt")
     if policy.get("production_schema") != "because-of-this://schemas/production-record/3.0.0":
         raise SingletonGuardError("active policy does not pin schema 3.0.0")
+    declared_tests = sorted(str(value) for value in (policy.get("active_test_suite") or []))
+    actual_tests = sorted(
+        path.relative_to(root).as_posix()
+        for path in (root / "tests").glob("test_*.py")
+    )
+    if declared_tests != actual_tests:
+        raise SingletonGuardError(
+            f"active test suite mismatch: declared={declared_tests}, actual={actual_tests}"
+        )
+    if policy.get("legacy_test_policy") != "non_executable_archived":
+        raise SingletonGuardError("legacy test policy is not fail-closed")
+    if policy.get("legacy_version_execution") != "forbidden":
+        raise SingletonGuardError("legacy version execution policy is not forbidden")
     workflows = _active_workflow_paths(root)
     if len(workflows) != 1:
         raise SingletonGuardError("exactly one canonical render workflow must be active")
