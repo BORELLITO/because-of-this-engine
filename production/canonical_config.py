@@ -95,7 +95,7 @@ CANONICAL_PROFILE: dict[str, Any] = {
             "alignment": 2,
             "margin_l": 90,
             "margin_r": 140,
-            "margin_v": 340,
+            "margin_v": 408,
             "encoding": 1,
         },
     },
