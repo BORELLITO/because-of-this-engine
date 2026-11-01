@@ -75,8 +75,12 @@ class ReuseFirstTests(unittest.TestCase):
                 "status": "DRIVE_VERIFIED",
                 "delivery_name": "stable-delivery",
                 "job_id": "stable-job",
-                "delivery_folder_url": "https://drive.google.com/drive/folders/test",
+                "delivery_folder_id": "folder-test",
+                "delivery_folder_url": "https://drive.google.com/drive/folders/folder-test",
                 "file_count": 1,
+                "files": [
+                    {"id": "file-test", "name": "preview.mp4", "size": 4, "md5": "098f6bcd4621d373cade4e832627b4f6"}
+                ],
             }), encoding="utf-8")
             receipt = root / "receipt.json"
             write_receipt(fingerprints, receipt, manifest, delivery)
