@@ -1007,14 +1007,10 @@
         "required": {
           "objects": [
             "monitor",
-            "timeline",
-            "timecode"
+            "timeline"
           ],
-          "actions": [
-            "stopping"
-          ],
+          "actions": [],
           "environments": [
-            "archive room",
             "interior"
           ]
         },
@@ -1039,7 +1035,7 @@
         }
       },
       "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
-      "visual_intent": "monitor | timeline | timecode",
+      "visual_intent": "monitor | editing timeline",
       "visual_function": "explanatory_evidence",
       "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
