@@ -16,7 +16,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from production.video_asset_contract import VideoContractError, ffprobe, load_manifest, validate_manifest
+from production.video_asset_contract import MAX_STORY_SECONDS, VideoContractError, ffprobe, load_manifest, validate_manifest
 from production.visual_effects_v73 import VisualEffectsError, validate_cinematic_suspense
 
 FPS = 60
@@ -455,9 +455,9 @@ def narration_locked_scenes(
 
     if not scenes:
         raise RenderError("Narration-locked rendering requires at least one scene.")
-    if not 60.0 <= narration_seconds <= 75.0:
+    if not 60.0 <= narration_seconds <= MAX_STORY_SECONDS:
         raise RenderError(
-            f"Narration duration must remain between 60s and 75s; got {narration_seconds:.3f}s."
+            f"Narration duration must remain between 60s and {MAX_STORY_SECONDS:.0f}s; got {narration_seconds:.3f}s."
         )
 
     policy = clip_policy or {
