@@ -96,20 +96,25 @@ def scene_filter(
         # the full motion-compensation profile when explicitly requested.
         motion_smoothing = False
     if suspense_enabled:
-        # Deterministic push-in and micro-drift preserve the source evidence while
-        # adding the calibrated investigative-dread movement from the reference.
-        zoom = 1.0 + push_in
-        crop_x = (
-            f"max(0,min(iw-ow,(iw-ow)*{focus_x:.4f}+"
-            f"(iw-ow)*{motion_strength:.4f}*sin(2*PI*t/{max(duration, 1.0):.3f})))"
+        # Semantic push-in v2: the subject stays anchored to the declared focus
+        # point while the frame advances through two eased zoom stages. There is
+        # deliberately no generated x/y sway; any movement must come from the
+        # source footage itself or from a scene-specific focus point.
+        total_push = min(0.10, push_in + motion_strength * 0.35)
+        scene_duration = max(duration, 1.0)
+        phase = f"min(max(t/{scene_duration:.3f},0),1)"
+        first_phase = f"min(max({phase}/0.38,0),1)"
+        second_phase = f"min(max(({phase}-0.38)/0.62,0),1)"
+        eased = (
+            f"(0.30*{first_phase}*{first_phase}*(3-2*{first_phase})+"
+            f"0.70*{second_phase}*{second_phase}*(3-2*{second_phase}))"
         )
-        crop_y = (
-            f"max(0,min(ih-oh,(ih-oh)*{focus_y:.4f}+"
-            f"(ih-oh)*{motion_strength * 0.65:.4f}*cos(2*PI*t/{max(duration, 1.0):.3f})))"
-        )
+        zoom_expression = f"(1+{total_push:.4f}*{eased})"
+        crop_x = f"max(0,min(iw-ow,(iw-ow)*{focus_x:.4f}))"
+        crop_y = f"max(0,min(ih-oh,(ih-oh)*{focus_y:.4f}))"
         filters = [
             f"scale={width}:{height}:force_original_aspect_ratio=increase",
-            f"scale=ceil(iw*{zoom:.4f}/2)*2:ceil(ih*{zoom:.4f}/2)*2",
+            f"scale=ceil(iw*{zoom_expression}/2)*2:ceil(ih*{zoom_expression}/2)*2:eval=frame",
             f"crop={width}:{height}:x='{crop_x}':y='{crop_y}'",
         ]
     else:
