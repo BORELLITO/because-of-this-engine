@@ -129,7 +129,7 @@
           "lituya_bay"
         ],
         "scene_id": "S01",
-        "narration_excerpt": "Howard Ulrich was asleep in a small boat in Alaska's Lituya Bay when"
+        "narration_excerpt": "Howard Ulrich was asleep in a small boat in Alaska's Lituya Bay"
       },
       {
         "beat_id": "beat-002",
@@ -145,7 +145,7 @@
           "lituya_bay"
         ],
         "scene_id": "S02",
-        "narration_excerpt": "the mountain above his seven-year-old son began to move. On July ninth, nineteen fifty-eight,"
+        "narration_excerpt": "when the mountain above his seven-year-old son began to move. On July ninth, nineteen fifty-eight,"
       },
       {
         "beat_id": "beat-003",
@@ -406,12 +406,12 @@
     "beats": [
       {
         "beat_id": "beat-001",
-        "text": "Howard Ulrich was asleep in a small boat in Alaska's Lituya Bay when",
+        "text": "Howard Ulrich was asleep in a small boat in Alaska's Lituya Bay",
         "pause_before_ms": 0
       },
       {
         "beat_id": "beat-002",
-        "text": "the mountain above his seven-year-old son began to move. On July ninth, nineteen fifty-eight,",
+        "text": "when the mountain above his seven-year-old son began to move. On July ninth, nineteen fifty-eight,",
         "pause_before_ms": 120
       },
       {
@@ -529,7 +529,7 @@
       "beat_id": "beat-001",
       "duration": 5.5,
       "story_beat": "Howard and his son sleep in the bay as the mountain begins to move",
-      "narration_excerpt": "Howard Ulrich was asleep in a small boat in Alaska's Lituya Bay when",
+      "narration_excerpt": "Howard Ulrich was asleep in a small boat in Alaska's Lituya Bay",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -691,7 +691,7 @@
       "beat_id": "beat-002",
       "duration": 5,
       "story_beat": "the earthquake tears the shoreline open",
-      "narration_excerpt": "the mountain above his seven-year-old son began to move. On July ninth, nineteen fifty-eight,",
+      "narration_excerpt": "when the mountain above his seven-year-old son began to move. On July ninth, nineteen fifty-eight,",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
