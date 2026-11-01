@@ -12,6 +12,9 @@ on:
       - "production/v7_orchestrator.py"
       - "production/quality_gates.py"
       - "production/canonical_config.py"
+      - "production/v7_contract.py"
+      - "production/gemini_tts.py"
+      - "production/production_record_v7.py"
       - "production/active_engine_policy.json"
       - "tests/**"
       - ".github/workflows/episode-002-draft-preview.yml"
@@ -25,6 +28,9 @@ on:
       - "production/v7_orchestrator.py"
       - "production/quality_gates.py"
       - "production/canonical_config.py"
+      - "production/v7_contract.py"
+      - "production/gemini_tts.py"
+      - "production/production_record_v7.py"
       - "production/active_engine_policy.json"
       - "tests/**"
       - ".github/workflows/episode-002-draft-preview.yml"
@@ -55,7 +61,10 @@ jobs:
             production/google_drive_delivery.py \
             production/v7_orchestrator.py \
             production/quality_gates.py \
-            production/canonical_config.py
+            production/canonical_config.py \
+            production/v7_contract.py \
+            production/gemini_tts.py \
+            production/production_record_v7.py
 
       - name: Run reuse-first unit tests
         run: python -m unittest discover -s tests -p "test_reuse_first.py" -v
