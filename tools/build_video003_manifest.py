@@ -245,6 +245,10 @@ def main() -> None:
     (EPISODE / "script.txt").write_text(SCRIPT + "\n", encoding="utf-8")
     template = json.loads(TEMPLATE.read_text(encoding="utf-8"))
     value = template
+    # Keep the approved episode-003 caption placement explicit so regeneration
+    # cannot silently revert the editorially approved 20% upward adjustment.
+    value.setdefault("captions", {}).setdefault("style", {})["margin_v"] = 408
+    value.setdefault("captions", {}).setdefault("mobile_safe_zone", {})["bottom_clearance_px"] = 408
     value.update({
         "video_id": "episode-003-call-tomorrow",
         "title": "The Call That Arrived Tomorrow",
