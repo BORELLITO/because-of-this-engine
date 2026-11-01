@@ -21,6 +21,12 @@
     "service_mode": "remote_api_with_drive_cache"
   },
   "publication_policy": "manual_only",
+  "active_test_suite": [
+    "tests/test_reuse_first.py",
+    "tests/test_current_engine_policy.py"
+  ],
+  "legacy_test_policy": "non_executable_archived",
+  "legacy_version_execution": "forbidden",
   "render_contract": {
     "width": 1080,
     "height": 1920,
