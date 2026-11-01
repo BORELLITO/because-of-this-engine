@@ -527,7 +527,7 @@
     {
       "scene_id": "S01",
       "beat_id": "beat-001",
-      "duration": 6,
+      "duration": 5.5,
       "story_beat": "Howard and his son sleep in the bay as the mountain begins to move",
       "narration_excerpt": "Howard Ulrich was asleep in a small boat in Alaska's Lituya Bay when the mountain above his seven-year-old son began to move.",
       "visual_semantics": {
@@ -2071,7 +2071,7 @@
     {
       "scene_id": "S11",
       "beat_id": "beat-011",
-      "duration": 6,
+      "duration": 4.9,
       "story_beat": "the forest preserves the height of the wave",
       "narration_excerpt": "Howard and his son survived, but the forest kept the evidence: a clean scar thousands of feet above the tide.",
       "visual_semantics": {
