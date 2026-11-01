@@ -61,7 +61,15 @@ def _story_creation(manifest: dict[str, Any], base: Path, mode: str) -> tuple[st
 
 
 def _story_intelligence(base: Path) -> tuple[str, dict[str, Any]]:
-    visual = _read(base / "rendered" / "visual-story-qa-preview.json", "visual story QA") if (base / "rendered" / "visual-story-qa-preview.json").is_file() else None
+    visual = None
+    for candidate in (
+        base / "rendered" / "visual-story-qa-draft-preview.json",
+        base / "rendered" / "visual-story-qa-preview.json",
+        base / "rendered" / "visual-story-qa-production.json",
+    ):
+        if candidate.is_file():
+            visual = _read(candidate, "visual story QA")
+            break
     timing = _read(base / "rendered" / "narration-coverage.json", "narration coverage") if (base / "rendered" / "narration-coverage.json").is_file() else None
     if visual and visual.get("status") != "VISUAL_STORY_QA_PASS":
         return "BLOCKED: visual story QA did not pass", {"visual": visual, "timing": timing}
