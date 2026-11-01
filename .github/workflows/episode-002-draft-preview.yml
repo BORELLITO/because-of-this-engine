@@ -30,7 +30,7 @@ concurrency:
 env:
   BECAUSE_OF_THIS_DRIVE_FOLDER_ID: "1A-oyowfHtdciB2_NZSLIZ0oG-ajOeYVb"
   # The visual correction resegments narration but reuses the same verified Charon WAV.
-  BECAUSE_OF_THIS_LEGACY_NARRATION_CACHE_KEYS: "6a54ff47576116906e661540492c1053ffc81253d1cb7dbf62b3d785c04244de"
+  BECAUSE_OF_THIS_LEGACY_NARRATION_CACHE_KEYS: "3e4c98b6f3acf16515b7a7539cd415d02f20d65b9d365fd2c101393d745cf6ed"
   PYTHONUNBUFFERED: "1"
 
 jobs:
