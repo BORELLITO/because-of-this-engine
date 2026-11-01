@@ -39,7 +39,7 @@ from production.production_record_v7 import (
 )
 from production.v7_contract import V7ContractError, load_json, validate_manifest, validate_prompt_and_schema
 
-ENGINE_BUNDLE_ID = "because-of-this-v7.2-charon-gemini-tts-7.2"
+ENGINE_BUNDLE_ID = "because-of-this-v7.3.2-charon-cinematic-dread-smooth-2026-10"
 SAFE_MANIFEST = re.compile(r"^episodes/[^/]+/(?:manifest|preview-manifest)\.json$")
 REQUIRED_STORY_FIELDS = (
     "person",
