@@ -135,7 +135,7 @@
           "dead_ward"
         ],
         "scene_id": "S01",
-        "narration_excerpt": "2:17 a.m. found Daniel alone at the hospital switchboard when a dead extension rang."
+        "narration_excerpt": "Daniel was alone at the hospital switchboard when a dead extension rang."
       },
       {
         "beat_id": "beat-002",
@@ -151,7 +151,7 @@
           "sister"
         ],
         "scene_id": "S02",
-        "narration_excerpt": "The number belonged to a ward disconnected eleven years earlier—the night his sister died."
+        "narration_excerpt": "The number belonged to the ward disconnected eleven years earlier, the night his sister died."
       },
       {
         "beat_id": "beat-003",
@@ -212,7 +212,7 @@
           "records_room"
         ],
         "scene_id": "S06",
-        "narration_excerpt": "Beneath it, a red light pulsed behind a sealed records door."
+        "narration_excerpt": "Beneath it, a red light glowed behind the sealed records room."
       },
       {
         "beat_id": "beat-007",
@@ -408,12 +408,12 @@
     "beats": [
       {
         "beat_id": "beat-001",
-        "text": "2:17 a.m. found Daniel alone at the hospital switchboard when a dead extension rang.",
+        "text": "Daniel was alone at the hospital switchboard when a dead extension rang.",
         "pause_before_ms": 0
       },
       {
         "beat_id": "beat-002",
-        "text": "The number belonged to a ward disconnected eleven years earlier—the night his sister died.",
+        "text": "The number belonged to the ward disconnected eleven years earlier, the night his sister died.",
         "pause_before_ms": 120
       },
       {
@@ -433,7 +433,7 @@
       },
       {
         "beat_id": "beat-006",
-        "text": "Beneath it, a red light pulsed behind a sealed records door.",
+        "text": "Beneath it, a red light glowed behind the sealed records room.",
         "pause_before_ms": 120
       },
       {
@@ -531,7 +531,7 @@
       "beat_id": "beat-001",
       "duration": 6,
       "story_beat": "the dead ward extension rings",
-      "narration_excerpt": "2:17 a.m. found Daniel alone at the hospital switchboard when a dead extension rang.",
+      "narration_excerpt": "Daniel was alone at the hospital switchboard when a dead extension rang.",
       "visual_semantics": {
         "role": "literal",
         "required": {
@@ -664,7 +664,7 @@
       "beat_id": "beat-002",
       "duration": 6,
       "story_beat": "Daniel recognizes the ward from his sister's death",
-      "narration_excerpt": "The number belonged to a ward disconnected eleven years earlier—the night his sister died.",
+      "narration_excerpt": "The number belonged to the ward disconnected eleven years earlier, the night his sister died.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1193,7 +1193,7 @@
       "beat_id": "beat-006",
       "duration": 6,
       "story_beat": "the red light pulses behind the sealed door",
-      "narration_excerpt": "Beneath it, a red light pulsed behind a sealed records door.",
+      "narration_excerpt": "Beneath it, a red light glowed behind the sealed records room.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
