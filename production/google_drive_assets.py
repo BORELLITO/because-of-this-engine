@@ -112,19 +112,39 @@ def hydrate(manifest_path: Path, *, require_drive_assets: bool = False) -> dict[
     assets = []
     fingerprint_refreshes: list[dict[str, Any]] = []
     seen_drive_ids: set[str] = set()
+    cache_hits = 0
+
+    def register(file_id: str, path: Path, record: dict[str, Any], kind: str) -> None:
+        nonlocal cache_hits
+        expected = str(record.get("sha256", "")).lower()
+        if path.is_file() and expected and sha256_file(path).lower() == expected:
+            # A content-addressed local asset is already verified.  Do not
+            # refresh OAuth credentials or download it again.
+            cache_hits += 1
+            assets.append((file_id, path, record, kind, True))
+            return
+        assets.append((file_id, path, record, kind, False))
+
     for scene in manifest.get("scenes", []):
         asset = scene.get("asset", {})
         file_id = str(asset.get("drive_file_id", "")).strip()
-        path = resolve_inside(manifest_path.parent, asset.get("path"), f"Asset {asset.get('asset_id', '?')} path")
+        path = resolve_inside(
+            manifest_path.parent,
+            asset.get("path"),
+            f"Asset {asset.get('asset_id', '?')} path",
+        )
         if file_id:
             if file_id in seen_drive_ids:
                 raise AssetHydrationError(f"Drive asset is reused in this episode: {file_id}")
             seen_drive_ids.add(file_id)
-            assets.append((file_id, path, asset, "video"))
+            register(file_id, path, asset, "video")
         elif require_drive_assets:
             raise AssetHydrationError(f"Asset {asset.get('asset_id', '?')} is missing drive_file_id.")
         elif not path.is_file():
-            raise AssetHydrationError(f"Asset {asset.get('asset_id', '?')} has no drive_file_id and is not present locally.")
+            raise AssetHydrationError(
+                f"Asset {asset.get('asset_id', '?')} has no drive_file_id and is not present locally."
+            )
+
     music = manifest.get("music")
     if isinstance(music, dict):
         music_id = str(music.get("drive_file_id", "")).strip()
@@ -133,11 +153,12 @@ def hydrate(manifest_path: Path, *, require_drive_assets: bool = False) -> dict[
             if music_id in seen_drive_ids:
                 raise AssetHydrationError(f"Drive asset is reused in this episode: {music_id}")
             seen_drive_ids.add(music_id)
-            assets.append((music_id, music_path, music, "audio"))
+            register(music_id, music_path, music, "audio")
         elif require_drive_assets and music.get("source") != "engine_generated":
             raise AssetHydrationError("Music is missing drive_file_id.")
         elif not music_path.is_file():
             raise AssetHydrationError("Music has no drive_file_id and is not present locally.")
+
     loop = manifest.get("loop")
     if isinstance(loop, dict) and loop.get("logo_enabled", False) is True:
         logo_id = str(loop.get("logo_drive_file_id", "")).strip()
@@ -146,23 +167,27 @@ def hydrate(manifest_path: Path, *, require_drive_assets: bool = False) -> dict[
             if logo_id in seen_drive_ids:
                 raise AssetHydrationError(f"Drive asset is reused in this episode: {logo_id}")
             seen_drive_ids.add(logo_id)
-            assets.append((logo_id, logo_path, loop, "image"))
+            register(logo_id, logo_path, loop, "image")
         elif require_drive_assets:
             raise AssetHydrationError("Loop logo is missing logo_drive_file_id.")
         elif not logo_path.is_file():
             raise AssetHydrationError("Loop logo has no logo_drive_file_id and is not present locally.")
-    if assets:
+
+    pending = [item for item in assets if not item[4]]
+    if pending:
         drive = service()
-        for file_id, path, record, kind in assets:
-            result = download(drive, file_id, path, "video/" if kind == "video" else "audio/" if kind == "audio" else "image/")
+        for file_id, path, record, kind, _ in pending:
+            result = download(
+                drive,
+                file_id,
+                path,
+                "video/" if kind == "video" else "audio/" if kind == "audio" else "image/",
+            )
             expected = str(record.get("sha256", "")).lower()
             if expected and result["sha256"].lower() != expected:
-                raise AssetHydrationError(f"Drive asset {record.get('asset_id')} checksum mismatch after download.")
-            # The SHA-256 is the immutable source identity.  The perceptual
-            # fingerprint is a decoded-pixel evidence signal and can drift
-            # when GitHub's FFmpeg major version changes.  Recompute it over
-            # the bytes that this runner actually hydrated, while retaining
-            # the manifest value for provenance and audit comparison.
+                raise AssetHydrationError(
+                    f"Drive asset {record.get('asset_id')} checksum mismatch after download."
+                )
             if kind == "video":
                 metadata = ffprobe(path)
                 runtime_phash = perceptual_hash(path, duration=float(metadata["duration"]))
@@ -173,27 +198,34 @@ def hydrate(manifest_path: Path, *, require_drive_assets: bool = False) -> dict[
                     "declared_perceptual_hash": record.get("perceptual_hash"),
                     "hydrated_perceptual_hash": runtime_phash,
                     "fingerprint_version": FINGERPRINT_VERSION,
+                    "source": "drive_download",
                 })
+
     if fingerprint_refreshes:
         manifest["runtime_asset_hydration"] = {
             "fingerprint_version": FINGERPRINT_VERSION,
             "fingerprint_scope": "downloaded_bytes",
             "ffmpeg_runtime_recalculated": True,
+            "cache_hits": cache_hits,
             "assets": fingerprint_refreshes,
         }
         temporary = manifest_path.with_name(manifest_path.name + ".hydrated.part")
-        temporary.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        temporary.write_text(
+            json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
         os.replace(temporary, manifest_path)
+
     return {
         "status": "DRIVE_ASSETS_HYDRATED",
         "video_id": manifest.get("video_id"),
         "asset_count": len(manifest.get("scenes", [])),
-        "downloaded": len(assets),
-        "downloaded_videos": sum(1 for item in assets if item[3] == "video"),
-        "downloaded_audio": sum(1 for item in assets if item[3] == "audio"),
+        "downloaded": len(pending),
+        "cache_hits": cache_hits,
+        "downloaded_videos": sum(1 for item in pending if item[3] == "video"),
+        "downloaded_audio": sum(1 for item in pending if item[3] == "audio"),
         "runtime_fingerprint_refreshes": len(fingerprint_refreshes),
     }
-
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)

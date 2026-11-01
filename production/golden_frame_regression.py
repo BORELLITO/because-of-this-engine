@@ -94,8 +94,8 @@ def run(manifest_path: Path, mode: str, report_path: Path) -> int:
         media = ffprobe(video_path)
         _assert(checks, "rendered_dimensions", [media["width"], media["height"]], expected_dimensions, errors)
         _assert(checks, "rendered_has_audio", media["has_audio"], True, errors)
-        if not 60.0 <= float(media["duration"]) <= 75.0:
-            errors.append(f"rendered duration is outside 60-75s: {media['duration']}")
+        if not 60.0 <= float(media["duration"]) <= 80.0:
+            errors.append(f"rendered duration is outside 60-80s: {media['duration']}")
 
     report = {
         "status": "PASS" if not errors else "BLOCKED",

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Canonical local Piper neural TTS adapter for Because Of This V7.1."""
+"""Rollback-only local Piper neural TTS adapter; never an active provider route."""
 from __future__ import annotations
 import argparse, hashlib, io, json, os, re, shutil, subprocess, tempfile, wave
 from datetime import datetime, timezone
@@ -103,7 +103,7 @@ def profile_from_manifest(manifest: dict) -> dict:
         if key in narration and narration.get(key) != expected:
             raise PiperTTSError(f"narration.{key} conflicts with the canonical voice profile")
     if voice.get("provider") != PROVIDER:
-        raise PiperTTSError("V7 narration provider must be piper_tts_local; no silent fallback is allowed")
+        raise PiperTTSError("Rollback-only provider must be piper_tts_local; the active engine uses Gemini TTS")
     name = str(voice.get("voice_name") or "").strip()
     language = str(voice.get("language_code") or "").strip()
     if not name or not language:

@@ -4,7 +4,10 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import os
+import shutil
 import subprocess
 import tempfile
 from pathlib import Path
@@ -13,17 +16,22 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from production.video_asset_contract import VideoContractError, ffprobe, load_manifest, validate_manifest
+from production.video_asset_contract import MAX_STORY_SECONDS, VideoContractError, ffprobe, load_manifest, validate_manifest
 from production.visual_effects_v73 import VisualEffectsError, validate_cinematic_suspense
 
 FPS = 60
 # draft-preview is deliberately separate from preview: it can carry explicit
 # PREVIEW_ONLY assets for editorial approval, but it is never a release mode.
 SIZES = {"draft-preview": (1080, 1920), "preview": (1080, 1920), "final": (1080, 1920)}
-# A single approved take may be shorter than its forced narration span. Allow
-# bounded reuse of that same take inside the same scene, but fail closed when
-# the renderer would need an excessive loop count.
-MAX_SOURCE_LOOP_MULTIPLIER = 3.0
+# Same-scene looping is forbidden. If a source window cannot cover its
+# narration-locked beat, the episode must return to asset selection instead of
+# hiding the shortage with duplicated frames.
+MAX_SOURCE_LOOP_MULTIPLIER = 1.0
+SCENE_CACHE_VERSION = "scene-render-cache-v2"
+RENDERER_CODE_FINGERPRINT = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+VISUAL_EFFECTS_CODE_FINGERPRINT = hashlib.sha256(
+    (Path(__file__).with_name("visual_effects_v73.py")).read_bytes()
+).hexdigest()
 
 
 class RenderError(RuntimeError):
@@ -83,21 +91,30 @@ def scene_filter(
     push_in = float(suspense.get("push_in", 0.0)) if suspense_enabled else 0.0
     motion_smoothing = suspense.get("motion_smoothing", False) if suspense_enabled else False
     interpolation_fps = int(suspense.get("interpolation_fps", FPS)) if suspense_enabled else FPS
+    if os.environ.get("BECAUSE_OF_THIS_RENDER_PROFILE") == "fast-preview":
+        # Editorial review prioritizes iteration speed. The final master keeps
+        # the full motion-compensation profile when explicitly requested.
+        motion_smoothing = False
     if suspense_enabled:
-        # Deterministic push-in and micro-drift preserve the source evidence while
-        # adding the calibrated investigative-dread movement from the reference.
-        zoom = 1.0 + push_in
-        crop_x = (
-            f"max(0,min(iw-ow,(iw-ow)*{focus_x:.4f}+"
-            f"(iw-ow)*{motion_strength:.4f}*sin(2*PI*t/{max(duration, 1.0):.3f})))"
+        # Semantic push-in v2: the subject stays anchored to the declared focus
+        # point while the frame advances through two eased zoom stages. There is
+        # deliberately no generated x/y sway; any movement must come from the
+        # source footage itself or from a scene-specific focus point.
+        total_push = min(0.10, push_in + motion_strength * 0.35)
+        scene_duration = max(duration, 1.0)
+        phase = f"min(max(t/{scene_duration:.3f},0),1)"
+        first_phase = f"min(max({phase}/0.38,0),1)"
+        second_phase = f"min(max(({phase}-0.38)/0.62,0),1)"
+        eased = (
+            f"(0.30*{first_phase}*{first_phase}*(3-2*{first_phase})+"
+            f"0.70*{second_phase}*{second_phase}*(3-2*{second_phase}))"
         )
-        crop_y = (
-            f"max(0,min(ih-oh,(ih-oh)*{focus_y:.4f}+"
-            f"(ih-oh)*{motion_strength * 0.65:.4f}*cos(2*PI*t/{max(duration, 1.0):.3f})))"
-        )
+        zoom_expression = f"(1+{total_push:.4f}*{eased})"
+        crop_x = f"max(0,min(iw-ow,(iw-ow)*{focus_x:.4f}))"
+        crop_y = f"max(0,min(ih-oh,(ih-oh)*{focus_y:.4f}))"
         filters = [
             f"scale={width}:{height}:force_original_aspect_ratio=increase",
-            f"scale=ceil(iw*{zoom:.4f}/2)*2:ceil(ih*{zoom:.4f}/2)*2",
+            f"scale='ceil(iw*{zoom_expression}/2)*2':'ceil(ih*{zoom_expression}/2)*2':eval=frame",
             f"crop={width}:{height}:x='{crop_x}':y='{crop_y}'",
         ]
     else:
@@ -203,23 +220,25 @@ def render_scene(
             f"({available:.3f}s available, {requested:.3f}s required, "
             f"limit={MAX_SOURCE_LOOP_MULTIPLIER:.1f}x)."
         )
-    loop_source = requested > available + 0.05
-    # Use a finite loop count. An infinite input loop can keep FFmpeg alive
-    # after the output trim has satisfied its duration on some static builds.
-    loop_count = max(0, int((requested - 0.001) // available))
+    if requested > available + 0.05:
+        raise RenderError(
+            f"Asset {asset['asset_id']} is shorter than the narration-locked "
+            f"scene beat ({available:.3f}s available, {requested:.3f}s required); "
+            "same-scene looping is forbidden."
+        )
     focus = scene.get("focus", {"x": 0.5, "y": 0.5})
     focus_x = float(focus.get("x", 0.5))
     focus_y = float(focus.get("y", 0.5))
     if not 0 <= focus_x <= 1 or not 0 <= focus_y <= 1:
         raise RenderError(f"Scene {scene['scene_id']} has an invalid focus point.")
-    # Keep the clip duration deterministic even when a source file has sparse
-    # timestamps or an early EOF. The contract still rejects genuinely short
-    # sources; tpad only makes the encoded scene clock explicit for xfade.
+    # The source window is already proven long enough. Do not clone frames or
+    # pad a short take: duplicated frames are filler and violate the visual
+    # evidence contract.
     filters = scene_filter(
         width, height, focus_x, focus_y, color_grade, requested,
         source_fps=info.get("fps"),
     )
-    filters += f",tpad=stop_mode=clone:stop_duration={requested:.3f},trim=duration={requested:.3f},setpts=PTS-STARTPTS"
+    filters += f",trim=duration={requested:.3f},setpts=PTS-STARTPTS"
     if (color_grade or {}).get("cinematic_suspense", {}).get("edge_fade") is True:
         # Micro-fades keep the suspense montage cinematic while preserving the
         # exact scene clock and leaving captions as the only editorial text.
@@ -230,14 +249,78 @@ def render_scene(
             f"fade=t=out:st={max(0.0, requested - fade_out):.3f}:d={fade_out:.3f}"
         )
     input_args = ["-ss", f"{source_in:.3f}"]
-    if loop_source:
-        input_args = ["-stream_loop", str(loop_count), *input_args]
     run([
         "ffmpeg", "-y", *input_args, "-i", str(source), "-an",
         "-vf", filters, "-t", f"{requested:.3f}",
         "-r", str(FPS), "-c:v", "libx264", "-preset", "veryfast", "-crf", "21",
         "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(output),
     ])
+
+
+
+def scene_cache_key(
+    scene: dict[str, Any],
+    width: int,
+    height: int,
+    color_grade: dict[str, Any] | None,
+    mode: str,
+) -> str:
+    payload = {
+        "version": SCENE_CACHE_VERSION,
+        "mode": mode,
+        "render_profile": os.environ.get("BECAUSE_OF_THIS_RENDER_PROFILE", "default"),
+        "renderer_code": RENDERER_CODE_FINGERPRINT,
+        "visual_effects_code": VISUAL_EFFECTS_CODE_FINGERPRINT,
+        "width": width,
+        "height": height,
+        "scene": scene,
+        "color_grade": color_grade or {},
+    }
+    return hashlib.sha256(
+        json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"), default=str).encode("utf-8")
+    ).hexdigest()
+
+
+def cached_render_scene(
+    scene: dict[str, Any],
+    width: int,
+    height: int,
+    output: Path,
+    color_grade: dict[str, Any] | None,
+    mode: str,
+    cache_root: Path | None,
+) -> str:
+    if cache_root is None:
+        render_scene(scene, width, height, output, color_grade)
+        return "SCENE_RENDERED"
+
+    key = scene_cache_key(scene, width, height, color_grade, mode)
+    cached = cache_root / f"{key}.mp4"
+    cache_root.mkdir(parents=True, exist_ok=True)
+    expected = float(scene["duration"])
+    if cached.is_file():
+        try:
+            actual = float(ffprobe(cached).get("video_duration") or 0.0)
+            if actual > 0 and abs(actual - expected) <= 0.10:
+                shutil.copy2(cached, output)
+                return "SCENE_CACHE_HIT"
+        except (VideoContractError, OSError, ValueError):
+            pass
+        cached.unlink(missing_ok=True)
+
+    temporary = cache_root / f"{key}.part.mp4"
+    temporary.unlink(missing_ok=True)
+    render_scene(scene, width, height, temporary, color_grade)
+    actual = float(ffprobe(temporary).get("video_duration") or 0.0)
+    if actual <= 0 or abs(actual - expected) > 0.10:
+        temporary.unlink(missing_ok=True)
+        raise RenderError(
+            f"Rendered scene cache clock drifted for {scene.get('scene_id')}: "
+            f"{actual:.3f}s vs {expected:.3f}s."
+        )
+    os.replace(temporary, cached)
+    shutil.copy2(cached, output)
+    return "SCENE_RENDERED"
 
 
 def xfade_filter(durations: list[float], transitions: list[dict[str, Any]]) -> str:
@@ -324,9 +407,12 @@ def _audio_timed_scene_durations(
         for scene_id in (clip_policy.get("short_narration_scene_ids") or [])
         if str(scene_id).strip()
     }
+    short_scene_min_seconds = float(clip_policy.get("short_scene_min_seconds", 1.5))
+    if not 1.0 <= short_scene_min_seconds <= 1.5:
+        raise RenderError("Short narration scene minimum must remain between 1.0s and 1.5s.")
     for index, scene in enumerate(scenes):
         base_duration = boundaries[index + 1] - boundaries[index]
-        scene_min_seconds = 1.5 if str(scene.get("scene_id")) in short_scene_ids else min_seconds
+        scene_min_seconds = short_scene_min_seconds if str(scene.get("scene_id")) in short_scene_ids else min_seconds
         transition_after = (
             transition_duration(scenes[index + 1].get("transition", {}))
             if index < len(scenes) - 1
@@ -377,9 +463,9 @@ def narration_locked_scenes(
 
     if not scenes:
         raise RenderError("Narration-locked rendering requires at least one scene.")
-    if not 60.0 <= narration_seconds <= 75.0:
+    if not 60.0 <= narration_seconds <= MAX_STORY_SECONDS:
         raise RenderError(
-            f"Narration duration must remain between 60s and 75s; got {narration_seconds:.3f}s."
+            f"Narration duration must remain between 60s and {MAX_STORY_SECONDS:.0f}s; got {narration_seconds:.3f}s."
         )
 
     policy = clip_policy or {
@@ -638,11 +724,24 @@ def render(manifest_path: Path, mode: str) -> Path:
     output_template = str(manifest.get("output", {}).get("path", "rendered/{video_id}-{mode}.mp4"))
     output = (manifest_path.parent / output_template.format(video_id=spec["video_id"], mode=mode)).resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
+    cache_value = os.environ.get("BECAUSE_OF_THIS_SCENE_CACHE_DIR", "").strip()
+    scene_cache_root = Path(cache_value).resolve() if cache_value else None
     with tempfile.TemporaryDirectory(prefix="because-of-this-scenes-") as temp:
         scene_files: list[Path] = []
+        cache_hits = 0
         for index, scene in enumerate(locked_scenes, start=1):
             target = Path(temp) / f"scene-{index:02d}.mp4"
-            render_scene(scene, width, height, target, manifest.get("color_grade"))
+            status = cached_render_scene(
+                scene,
+                width,
+                height,
+                target,
+                manifest.get("color_grade"),
+                mode,
+                scene_cache_root,
+            )
+            cache_hits += int(status == "SCENE_CACHE_HIT")
+            print(f"{scene.get('scene_id')}: {status}")
             scene_files.append(target)
         assembled = Path(temp) / "assembled.mp4"
         assemble(scene_files, locked_scenes, assembled)

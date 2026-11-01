@@ -7,7 +7,7 @@
   "retired_versions": "must_not_remain_executable_in_active_tree",
   "history_rule": "git_history_and_archive_are_retained_for_audit_but_are_never_an_execution_source",
   "master_prompt_version": "7.2",
-  "master_prompt_sha256": "c0bd045da0898848ff11aaba9ff2de9e27be8041f559b37a80f3f99ada1127c8",
+  "master_prompt_sha256": "f393ca8891b6e254adfd252a8df031fbe878b0f1d395b67f15f9b0abf4bcc5af",
   "production_schema": "because-of-this://schemas/production-record/3.0.0",
   "voice_provider": "gemini_tts",
   "voice_policy": {
@@ -21,12 +21,19 @@
     "service_mode": "remote_api_with_drive_cache"
   },
   "publication_policy": "manual_only",
+  "active_test_suite": [
+    "tests/test_reuse_first.py",
+    "tests/test_current_engine_policy.py"
+  ],
+  "legacy_test_policy": "non_executable_archived",
+  "legacy_version_execution": "forbidden",
+  "legacy_runtime_policy": "production/legacy/*.archived.txt; non-executable",
   "render_contract": {
     "width": 1080,
     "height": 1920,
     "fps": 60,
     "duration_min_seconds": 60,
-    "duration_max_seconds": 75
+    "duration_max_seconds": 80
   },
   "missing_dependency_policy": "fail_closed",
   "rollback_policy": {
@@ -59,7 +66,7 @@
     "G11"
   ],
   "active_runtime": "production/gemini_tts.py",
-  "archived_runtime": "production/piper_tts.py (rollback-only; not an active execution source)",
+  "archived_runtime": "branch:v7.2-charon-clean-clips-preview/production/piper_tts.py (external rollback reference only; absent from active tree)",
   "active_addon_version": "7.3.2",
   "active_addon_profile": "cinematic-dread-caption-smooth",
   "active_addon_capabilities": [
@@ -79,6 +86,8 @@
     "pr_number": 61,
     "commit": "0f884a4b66035f33e3f0864f4df7ed02fd36f593",
     "core_engine_version": "7.3.1",
+    "activation_scope": "historical_addon_approval",
+    "active_engine_profile_supersedes_activation": true,
     "media_regeneration_required": false
   }
 }

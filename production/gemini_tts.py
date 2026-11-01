@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Gemini TTS Charon adapter for the Because Of This V7.2 engine.
+"""Gemini TTS Charon adapter for the active Because Of This V7.3.2 engine profile.
 
 Uses the Gemini generateContent TTS REST contract with the repository's
 GEMINI_API_KEY. The active voice is the prebuilt Charon voice; there is no
@@ -34,7 +34,7 @@ DEFAULT_SAMPLE_RATE = 24000
 MAX_ATTEMPTS = 1
 TRANSIENT_HTTP = {408, 429, 500, 502, 503, 504}
 MIN_NARRATION_SECONDS = 60.0
-MAX_NARRATION_SECONDS = 75.0
+MAX_NARRATION_SECONDS = 80.0
 
 
 class GeminiTTSError(RuntimeError):
@@ -79,7 +79,7 @@ def profile_from_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
         if key in narration and narration.get(key) != expected:
             raise GeminiTTSError(f"narration.{key} conflicts with the canonical voice profile")
     if voice.get("provider") != PROVIDER:
-        raise GeminiTTSError("V7.2 narration provider must be gemini_tts; no silent fallback is allowed")
+        raise GeminiTTSError("V7.3.2 narration provider must be gemini_tts; no silent fallback is allowed")
     name = str(voice.get("voice_name") or "").strip()
     language_code = str(voice.get("language_code") or "").strip()
     model = str(voice.get("model") or voice.get("model_or_voice_type") or DEFAULT_MODEL).strip()
@@ -96,7 +96,7 @@ def profile_from_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
         "pitch": float(voice.get("pitch", 0.0)),
         "volume_gain_db": float(voice.get("volume_gain_db", 0.0)),
         "style": str(voice.get("style", "")),
-        "profile_version": "7.2",
+        "profile_version": "7.3.2",
     }
 
 
@@ -333,7 +333,7 @@ def synthesize_chunks(chunks: list[dict[str, Any]], output_dir: Path, profile: d
         metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     duration = _wav_info(audio)[3]
     if not MIN_NARRATION_SECONDS <= duration <= MAX_NARRATION_SECONDS:
-        raise GeminiTTSError(f"combined narration duration {duration:.3f}s is outside the 60–75s contract")
+        raise GeminiTTSError(f"combined narration duration {duration:.3f}s is outside the 60–80s contract")
     return {
         "status": "GEMINI_TTS_GENERATED",
         "provider": PROVIDER,

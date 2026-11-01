@@ -31,7 +31,7 @@ PROMPT_GATE_NAMES = dict(PROMPT_GATE_ORDER)
 ALLOWED_GATE_STATUSES = {"PASS", "BLOCKED", "DEFERRED", "ADVISORY", "PENDING_MANUAL"}
 FINAL_DIMENSIONS = (1080, 1920)
 FINAL_FPS = 60
-SHORTS_DURATION = (60.0, 75.0)
+SHORTS_DURATION = (60.0, 80.0)
 
 
 class PromptComplianceError(ValueError):
@@ -279,7 +279,7 @@ def validate_dimensions(report: dict[str, Any] | None) -> dict[str, Any]:
         try:
             duration = float(report.get("duration_seconds", 0))
             if not SHORTS_DURATION[0] <= duration <= SHORTS_DURATION[1]:
-                errors.append("duration must be between 60 and 75 seconds")
+                errors.append("duration must be between 60 and 80 seconds")
         except (TypeError, ValueError):
             errors.append("duration is missing or invalid")
     return {"status": "PASS" if not errors else "BLOCKED", "errors": errors}

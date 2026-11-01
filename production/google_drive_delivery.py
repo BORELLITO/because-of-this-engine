@@ -261,6 +261,71 @@ def deliver(
     }
 
 
+def verify_delivery_receipt(receipt_path: Path) -> dict:
+    """Revalidate every delivered file in Drive before a cache hit is accepted."""
+    try:
+        value = json.loads(receipt_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise DeliveryError(f"Could not read delivery receipt: {receipt_path}") from exc
+
+    delivery = value.get("delivery") if isinstance(value.get("delivery"), dict) else value
+    if delivery.get("status") != "DRIVE_VERIFIED":
+        raise DeliveryError("Delivery receipt is not DRIVE_VERIFIED.")
+    folder_id = str(delivery.get("delivery_folder_id") or "").strip()
+    files = delivery.get("files")
+    try:
+        declared_count = int(delivery.get("file_count", -1))
+    except (TypeError, ValueError):
+        declared_count = -1
+    declared_url = str(delivery.get("delivery_folder_url") or "").strip()
+    expected_url = f"https://drive.google.com/drive/folders/{folder_id}"
+    if (
+        not folder_id
+        or not isinstance(files, list)
+        or not files
+        or declared_count != len(files)
+        or declared_url != expected_url
+    ):
+        raise DeliveryError("Delivery receipt lacks consistent folder or file evidence.")
+
+    drive = service()
+    validate_folder(drive, folder_id)
+    verified = []
+    for item in files:
+        if not isinstance(item, dict) or not item.get("id"):
+            raise DeliveryError("Delivery receipt contains an invalid file record.")
+        remote = (
+            drive.files()
+            .get(
+                fileId=str(item["id"]),
+                fields="id,name,size,md5Checksum,parents,trashed",
+                supportsAllDrives=True,
+            )
+            .execute(num_retries=3)
+        )
+        if remote.get("trashed"):
+            raise DeliveryError(f"Delivered file is in trash: {item.get('name', item['id'])}")
+        if remote.get("name") != item.get("name"):
+            raise DeliveryError(f"Delivered file name changed: {item.get('name', item['id'])}")
+        if folder_id not in (remote.get("parents") or []):
+            raise DeliveryError(f"Delivered file moved out of the verified folder: {item.get('name', item['id'])}")
+        expected_size = int(item.get("size", -1))
+        actual_size = int(remote.get("size", -1))
+        if expected_size < 0 or actual_size < 0 or actual_size != expected_size:
+            raise DeliveryError(f"Delivered file size changed or missing: {item.get('name', item['id'])}")
+        expected_md5 = str(item.get("md5") or "").lower()
+        actual_md5 = str(remote.get("md5Checksum") or "").lower()
+        if not expected_md5 or not actual_md5 or expected_md5 != actual_md5:
+            raise DeliveryError(f"Delivered file checksum changed or missing: {item.get('name', item['id'])}")
+        verified.append({"id": remote["id"], "name": remote["name"], "size": actual_size, "md5": actual_md5})
+    return {
+        "status": "DRIVE_RECEIPT_VALID",
+        "delivery_folder_id": folder_id,
+        "file_count": len(verified),
+        "files": verified,
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Upload and verify production outputs in Google Drive.")
     parser.add_argument(
@@ -268,6 +333,7 @@ def main() -> int:
         default=os.environ.get("BECAUSE_OF_THIS_DRIVE_FOLDER_ID", DEFAULT_ROOT_FOLDER),
     )
     parser.add_argument("--preflight", action="store_true")
+    parser.add_argument("--verify-receipt", type=Path)
     parser.add_argument("--collection", default="PRODUCOES")
     parser.add_argument("--delivery-name", default=f"github-run-{os.environ.get('GITHUB_RUN_ID', 'local')}")
     parser.add_argument("--path", action="append", default=[])
@@ -277,6 +343,10 @@ def main() -> int:
 
     try:
         root_folder_id = normalize_folder_id(args.root_folder_id)
+        if args.verify_receipt:
+            report = verify_delivery_receipt(args.verify_receipt.resolve())
+            print(json.dumps(report, ensure_ascii=False))
+            return 0
         if args.preflight:
             drive = service()
             folder = validate_folder(drive, root_folder_id)

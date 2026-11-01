@@ -43,10 +43,10 @@ except ModuleNotFoundError as exc:
     )
 
 CACHE_SCHEMA_VERSION = 1
-NORMALIZATION_VERSION = "shorts-60-75-v1"
+NORMALIZATION_VERSION = "shorts-60-80-v2"
 CACHE_COLLECTION = "NARRATION CACHE"
 MIN_DURATION_SECONDS = 60.0
-MAX_DURATION_SECONDS = 75.0
+MAX_DURATION_SECONDS = 80.0
 
 
 class NarrationCacheError(RuntimeError):
@@ -148,7 +148,7 @@ def manifest_cache_spec(manifest_path: Path) -> dict[str, Any]:
         raise NarrationCacheError("Manifest voice profile is missing.")
     provider = str(voice.get("provider", "")).strip()
     if provider != "gemini_tts":
-        raise NarrationCacheError(f"Unsupported narration provider for active V7.2 cache: {provider}")
+        raise NarrationCacheError(f"Unsupported narration provider for active V7.3.2 cache: {provider}")
     model = voice.get("model") or voice.get("model_or_voice_type") or provider
     voice_name = voice.get("voice_name") or voice.get("voice")
     language = voice.get("language_code") or voice.get("language")
@@ -163,7 +163,7 @@ def manifest_cache_spec(manifest_path: Path) -> dict[str, Any]:
         "provider": provider,
         "voice": voice,
         "narration_beats": (manifest.get("narration") or {}).get("beats", []),
-        "cloud_tts_cache_contract": 1,
+        "tts_cache_contract": 2,
     }
     key = cache_key(
         text,
@@ -214,7 +214,7 @@ def _wav_duration(path: Path) -> float:
     except (OSError, wave.Error) as exc:
         raise NarrationCacheError(f"Could not validate cached WAV: {path}") from exc
     if not MIN_DURATION_SECONDS <= duration <= MAX_DURATION_SECONDS:
-        raise NarrationCacheError(f"Cached narration duration {duration:.3f}s is outside 60–75s.")
+        raise NarrationCacheError(f"Cached narration duration {duration:.3f}s is outside 60–80s.")
     return duration
 
 

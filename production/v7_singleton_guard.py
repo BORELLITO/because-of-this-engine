@@ -24,8 +24,14 @@ FORBIDDEN_ACTIVE_MARKERS = (
 
 
 def _active_workflow_paths(root: Path) -> list[Path]:
-    workflow_root = root / ".github" / "workflows"
-    return sorted(path for path in workflow_root.glob("*.yml") if path.name == "because-of-this-v7.yml")
+    """Return the one canonical render workflow, excluding audit-only stubs."""
+    workflow = root / ".github" / "workflows" / "episode-002-draft-preview.yml"
+    if not workflow.is_file():
+        return []
+    text = workflow.read_text(encoding="utf-8")
+    if "workflow_dispatch:" not in text or "push:" in text or "schedule:" in text or "if: " + "${{ false }}" in text:
+        return []
+    return [workflow]
 
 
 def audit(repo_root: Path) -> dict[str, object]:
@@ -41,15 +47,68 @@ def audit(repo_root: Path) -> dict[str, object]:
         raise SingletonGuardError("active policy does not pin the canonical V7.2 prompt")
     if policy.get("production_schema") != "because-of-this://schemas/production-record/3.0.0":
         raise SingletonGuardError("active policy does not pin schema 3.0.0")
+    declared_tests = sorted(str(value) for value in (policy.get("active_test_suite") or []))
+    actual_tests = sorted(
+        path.relative_to(root).as_posix()
+        for path in (root / "tests").glob("test_*.py")
+    )
+    if declared_tests != actual_tests:
+        raise SingletonGuardError(
+            f"active test suite mismatch: declared={declared_tests}, actual={actual_tests}"
+        )
+    if policy.get("legacy_test_policy") != "non_executable_archived":
+        raise SingletonGuardError("legacy test policy is not fail-closed")
+    if policy.get("legacy_version_execution") != "forbidden":
+        raise SingletonGuardError("legacy version execution policy is not forbidden")
     workflows = _active_workflow_paths(root)
     if len(workflows) != 1:
-        raise SingletonGuardError("exactly one V7 workflow must be active")
+        raise SingletonGuardError("exactly one canonical render workflow must be active")
+    retired_names = (
+        "because-of-this-v7.yml",
+        "draft-preview.yml",
+        "v72-reuse-first-ci.yml",
+        "video-engine-ci.yml",
+    )
+    for name in retired_names:
+        retired = root / ".github" / "workflows" / name
+        if retired.is_file() and ("if: " + "${{ false }}") not in retired.read_text(encoding="utf-8"):
+            raise SingletonGuardError(f"retired workflow was reactivated: {name}")
     offenders: list[str] = []
-    for path in [policy_path, workflows[0], root / "production" / "v7_orchestrator.py", root / "production" / "piper_tts.py"]:
+    for path in [policy_path, workflows[0], root / "production" / "v7_orchestrator.py"]:
         text = path.read_text(encoding="utf-8")
         for marker in FORBIDDEN_ACTIVE_MARKERS:
             if marker in text:
                 offenders.append(f"{path.relative_to(root)} contains forbidden active marker {marker}")
+    for legacy_path in (
+        root / "production" / "piper_tts.py",
+        root / "production" / "cloud_tts.py",
+    ):
+        if legacy_path.exists():
+            offenders.append(f"{legacy_path.relative_to(root)} remains executable in active tree")
+    active_sources = (
+        workflows[0],
+        root / "production" / "v7_orchestrator.py",
+        root / "production" / "gemini_tts.py",
+        root / "production" / "production_record_v7.py",
+        root / "production" / "canonical_config.py",
+    )
+    forbidden_legacy_routes = (
+        "piper_tts",
+        "cloud_tts",
+        "elevenlabs",
+        "narrate.py",
+        "draft-preview.yml",
+        "v72-reuse-first-ci.yml",
+        "video-engine-ci.yml",
+    )
+    for path in active_sources:
+        text = path.read_text(encoding="utf-8")
+        for marker in forbidden_legacy_routes:
+            if marker in text:
+                offenders.append(f"{path.relative_to(root)} contains forbidden legacy route {marker}")
+    orchestrator_text = (root / "production" / "v7_orchestrator.py").read_text(encoding="utf-8")
+    if CANONICAL_PROFILE_ID not in orchestrator_text:
+        offenders.append("production/v7_orchestrator.py does not pin the active profile")
     if offenders:
         raise SingletonGuardError("; ".join(offenders))
     return {

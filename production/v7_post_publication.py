@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Close V7.1 G11 from an explicit manual-publication receipt."""
+"""Close V7.3.2 G11 from an explicit manual-publication receipt."""
 
 from __future__ import annotations
 

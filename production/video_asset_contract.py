@@ -28,7 +28,7 @@ from production.visual_effects_v73 import VisualEffectsError, validate_visual_ef
 SCHEMA_VERSION = "2.0"
 SUPPORTED_SCHEMA_VERSIONS = {"2.0", "3.0.0"}
 MIN_STORY_SECONDS = 60.0
-MAX_STORY_SECONDS = 75.0
+MAX_STORY_SECONDS = 80.0
 ALLOWED_MATCHES = {"EXACT", "NEAR", "EXPLANATORY", "SYMBOLIC", "ATMOSPHERE"}
 ALLOWED_TRUTH = {"VERIFIED_FACT", "DOCUMENTED_RECONSTRUCTION", "EXPLAINED_PHENOMENON", "DECLARED_FICTION"}
 ALLOWED_STATUSES = {"APPROVED", "REVIEW_REQUIRED", "REJECTED"}
@@ -386,7 +386,7 @@ def validate_asset_record(record: dict[str, Any], base: Path, episode_id: str, *
 
 
 def _validate_cinematic_grade(manifest: dict[str, Any], mode: str) -> None:
-    """Fail closed when final output does not use the active V7.3.1 suspense look."""
+    """Fail closed when final output does not use the active V7.3.2 suspense look."""
     if mode != "final":
         return
     grade = manifest.get("color_grade")
@@ -512,7 +512,7 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
             )
         for key in ("story_beat", "visual_intent", "visual_function", "visual_match", "visual_truth", "narration_excerpt"):
             _required_text(scene, key, f"Scene {scene_id}")
-        # V7.1 is the canonical semantic source. The renderer still exposes
+        # V7 semantic fields are the canonical semantic source. The renderer still exposes
         # the older normalized fields internally, so derive only fields
         # that are losslessly represented by the V7 visual contract. The
         # human-approved match_score is deliberately never guessed.

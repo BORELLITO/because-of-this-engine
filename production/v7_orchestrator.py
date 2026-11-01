@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Canonical V7.2 Charon orchestration and fail-closed gate evaluation.
+"""Canonical V7.3.2 Charon orchestration and fail-closed gate evaluation.
 
 The orchestrator is intentionally small at the boundary: it owns the V7
 contract, gate evidence, idempotency and production record. Media adapters
@@ -20,6 +20,7 @@ from pathlib import Path
 from typing import Any
 
 from production.canonical_config import CANONICAL_PROFILE_FINGERPRINT, CANONICAL_PROFILE_ID
+from production.video_asset_contract import MAX_STORY_SECONDS
 from production.gemini_tts import (
     GeminiTTSError,
     build_ssml,
@@ -39,7 +40,7 @@ from production.production_record_v7 import (
 )
 from production.v7_contract import V7ContractError, load_json, validate_manifest, validate_prompt_and_schema
 
-ENGINE_BUNDLE_ID = "because-of-this-v7.2-charon-gemini-tts-7.2"
+ENGINE_BUNDLE_ID = "because-of-this-v7.3.2-charon-cinematic-dread-smooth-2026-10"
 SAFE_MANIFEST = re.compile(r"^episodes/[^/]+/(?:manifest|preview-manifest)\.json$")
 REQUIRED_STORY_FIELDS = (
     "person",
@@ -205,8 +206,8 @@ def _visual_gate(
                     problems.append(f"{scene_id}: asset reuse status is not fresh/reserved")
                 if asset.get("derived_from"):
                     problems.append(f"{scene_id}: derived clip reuse is forbidden")
-    if not 60.0 <= total_duration <= 75.0:
-        problems.append(f"scene duration total {total_duration:.3f}s is outside the 60–75s contract")
+    if not 60.0 <= total_duration <= MAX_STORY_SECONDS:
+        problems.append(f"scene duration total {total_duration:.3f}s is outside the 60–{MAX_STORY_SECONDS:.0f}s contract")
     message = (
         "all scene beats have direct semantic anchors and mode-valid unique assets"
         if not problems
@@ -315,7 +316,7 @@ def _gate_record(gate_id: str, check: dict[str, Any]) -> dict[str, Any]:
     return {
         "gate_id": gate_id,
         "name": GATE_NAMES[gate_id],
-        "rule_version": "7.1",
+        "rule_version": "7.2",
         "state": state,
         "severity": "critical_blocking" if check["blocking"] else "informational",
         "score": 1.0 if state == "passed" else 0.0 if state == "blocked" else None,
@@ -339,7 +340,7 @@ def evaluate(manifest: dict[str, Any], *, repo_root: Path, manifest_dir: Path, m
     allow_preview_only = mode == "draft-preview"
     contract = validate_manifest(manifest, source_label="manifest", require_production=require_assets)
     checks: dict[str, dict[str, Any]] = {
-        "G0": _status(True, f"V7.2 prompt/schema/profile contract passed: {CANONICAL_PROFILE_ID}"),
+        "G0": _status(True, f"V7.2 master prompt / V7.3.2 profile contract passed: {CANONICAL_PROFILE_ID}"),
         "G1": _story_gate(manifest, manifest_dir=manifest_dir, require_coverage=require_assets),
         "G2": _rights_gate(manifest),
         "G3": _visual_gate(
@@ -384,7 +385,7 @@ def evaluate(manifest: dict[str, Any], *, repo_root: Path, manifest_dir: Path, m
         "mode": mode,
         "video_id": manifest.get("video_id"),
         "engine_profile": CANONICAL_PROFILE_ID,
-        "engine_version": "7.2",
+        "engine_version": "7.3.2",
         "contract": contract,
         "gates": [{"gate_id": gate_id, "name": GATE_NAMES[gate_id], **checks[gate_id]} for gate_id in GATE_ORDER],
         "blocking_gates": blocking,
@@ -404,7 +405,7 @@ def run(args: argparse.Namespace) -> int:
     report = evaluate(manifest, repo_root=repo_root, manifest_dir=manifest_path.parent, mode=args.mode, check_gemini_tts=args.check_gemini_tts)
     report_path = args.report.resolve() if args.report else manifest_path.parent / "rendered" / f"v7-{args.mode}.json"
     _write_json(report_path, {key: value for key, value in report.items() if key != "record"})
-    record_path = args.record.resolve() if args.record else manifest_path.parent / ".engine" / "production-record-7.2.json"
+    record_path = args.record.resolve() if args.record else manifest_path.parent / ".engine" / "production-record-7.3.2.json"
     write_record(record_path, report["record"])
     print(json.dumps({"status": report["status"], "report": str(report_path), "record": str(record_path), "blocking_gates": report["blocking_gates"]}, ensure_ascii=False))
     return 0 if not report["blocking_gates"] else 1
