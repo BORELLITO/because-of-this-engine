@@ -402,9 +402,12 @@ def _audio_timed_scene_durations(
         for scene_id in (clip_policy.get("short_narration_scene_ids") or [])
         if str(scene_id).strip()
     }
+    short_scene_min_seconds = float(clip_policy.get("short_scene_min_seconds", 1.5))
+    if not 1.0 <= short_scene_min_seconds <= 1.5:
+        raise RenderError("Short narration scene minimum must remain between 1.0s and 1.5s.")
     for index, scene in enumerate(scenes):
         base_duration = boundaries[index + 1] - boundaries[index]
-        scene_min_seconds = 1.5 if str(scene.get("scene_id")) in short_scene_ids else min_seconds
+        scene_min_seconds = short_scene_min_seconds if str(scene.get("scene_id")) in short_scene_ids else min_seconds
         transition_after = (
             transition_duration(scenes[index + 1].get("transition", {}))
             if index < len(scenes) - 1
