@@ -13,7 +13,7 @@
     "duration_max_seconds": 75,
     "runtime_max_seconds": 80
   },
-  "target_runtime_seconds": 72,
+  "target_runtime_seconds": 69.6,
   "engine_profile": "because-of-this-v7.3.2-charon-cinematic-dread-smooth-2026-10",
   "engine_profile_fingerprint": "c9f6c10765b65a447fb010008f64b302315ff189e257b927d47c9c8e2a427c8e",
   "master_prompt_version": "7.2",
@@ -529,7 +529,7 @@
     {
       "scene_id": "S01",
       "beat_id": "beat-001",
-      "duration": 6,
+      "duration": 5.93,
       "story_beat": "the dead ward extension rings",
       "narration_excerpt": "Daniel was alone at the hospital switchboard when a dead extension rang.",
       "visual_semantics": {
@@ -1593,7 +1593,7 @@
     {
       "scene_id": "S08",
       "beat_id": "beat-008",
-      "duration": 6,
+      "duration": 3.67,
       "story_beat": "the missing minute replays his refusal",
       "narration_excerpt": "Now the call replayed the minute he refused to remember.",
       "visual_semantics": {
@@ -2539,8 +2539,8 @@
     "scene_refresh_strategy": {
       "mode": "micro_beat_literal_evidence",
       "target_scenes": 12,
-      "average_scene_seconds": 6,
-      "min_scene_seconds": 4,
+      "average_scene_seconds": 5.8,
+      "min_scene_seconds": 3.67,
       "max_scene_seconds": 8,
       "preserve_caption_readability": true,
       "no_same_scene_loop": true
@@ -2871,9 +2871,9 @@
       }
     },
     "duration": {
-      "target_seconds": 72,
-      "planned_seconds": 72,
-      "estimated_narration_seconds": 72,
+      "target_seconds": 69.6,
+      "planned_seconds": 69.6,
+      "estimated_narration_seconds": 69.6,
       "padding_seconds": 0,
       "padding_status": "PASS"
     },
