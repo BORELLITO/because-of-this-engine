@@ -458,7 +458,7 @@
       },
       {
         "beat_id": "beat-011",
-        "text": "Daniel connected the line. The hospital went dark; the receiver rang from inside the sealed room.",
+        "text": "Daniel connected the line. Hospital went dark. the receiver rang from inside the sealed room.",
         "pause_before_ms": 120
       },
       {
@@ -1840,7 +1840,7 @@
       "beat_id": "beat-011",
       "duration": 6,
       "story_beat": "the hospital goes dark and the sealed room rings",
-      "narration_excerpt": "Daniel connected the line. The hospital went dark; the receiver rang from inside the sealed room.",
+      "narration_excerpt": "Daniel connected the line. Hospital went dark. the receiver rang from inside the sealed room.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
