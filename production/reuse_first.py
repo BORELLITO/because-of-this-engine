@@ -66,6 +66,7 @@ def _code_fingerprints(manifest_path: Path) -> dict[str, str]:
         "release_validation": repo_root / "production/validate_video_release.py",
         "golden_layout": repo_root / "production/golden_frame_regression.py",
         "orchestrator": repo_root / "production/v7_orchestrator.py",
+        "drive_delivery": repo_root / "production/google_drive_delivery.py",
     }
     return {
         name: file_digest(path) if path.is_file() else "missing"
@@ -274,7 +275,14 @@ def verify_receipt(receipt_path: Path, fingerprints: dict[str, Any]) -> tuple[bo
         return False, "delivery_file_count_invalid"
     if file_count <= 0 or not isinstance(delivery.get("files"), list) or len(delivery["files"]) != file_count:
         return False, "delivery_files_missing"
-    if any(not item.get("id") or not item.get("name") or not item.get("md5") for item in delivery["files"] if isinstance(item, dict)):
+    if any(
+        not isinstance(item, dict)
+        or not item.get("id")
+        or not item.get("name")
+        or not item.get("size")
+        or not item.get("md5")
+        for item in delivery["files"]
+    ):
         return False, "delivery_file_evidence_incomplete"
     return True, "reuse_valid"
 
