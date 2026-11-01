@@ -18,8 +18,9 @@ class CurrentEnginePolicyTests(unittest.TestCase):
         self.assertEqual(
             policy["active_test_suite"],
             [
-                "tests/test_reuse_first.py",
                 "tests/test_current_engine_policy.py",
+                "tests/test_editorial_story_gates.py",
+                "tests/test_reuse_first.py",
             ],
         )
         self.assertEqual(policy["legacy_test_policy"], "non_executable_archived")
