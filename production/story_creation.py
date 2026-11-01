@@ -12,6 +12,8 @@ import json
 from pathlib import Path
 from typing import Any, Iterable, Mapping
 
+from production.editorial_story_gates import audit_editorial_story
+
 
 TRUTH_MODES = {
     "VERIFIED_FACT",
@@ -424,7 +426,7 @@ def audit_story_creation(
     if not isinstance(manifest, Mapping):
         raise StoryCreationError("manifest must be a mapping")
     sc = _story_block(manifest)
-    gates = [
+    legacy_gates = [
         _idea_gate(manifest, sc),
         _truth_gate(manifest, sc),
         _causality_gate(manifest, sc),
@@ -438,14 +440,17 @@ def audit_story_creation(
         _padding_gate(manifest, sc),
         _red_team_gate(manifest, sc),
     ]
+    editorial_report = audit_editorial_story(manifest, sc)
+    gates = legacy_gates + editorial_report["gates"]
     blocked = [gate["code"] for gate in gates if gate["status"] != "PASS"]
     return {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "status": "STORY_CREATION_PASS" if not blocked else "STORY_CREATION_BLOCKED",
         "video_id": manifest.get("video_id"),
         "title": manifest.get("title"),
         "gates": gates,
         "blocked_gates": blocked,
+        "editorial_story": editorial_report,
         "reviewed_dimensions": [
             "hook",
             "causal_escalation",
@@ -458,6 +463,7 @@ def audit_story_creation(
             "monetization_safety",
             "duration_density",
             "red_team",
+            *editorial_report["reviewed_dimensions"],
         ],
     }
 
