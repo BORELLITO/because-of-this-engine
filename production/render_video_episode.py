@@ -27,7 +27,11 @@ SIZES = {"draft-preview": (1080, 1920), "preview": (1080, 1920), "final": (1080,
 # narration-locked beat, the episode must return to asset selection instead of
 # hiding the shortage with duplicated frames.
 MAX_SOURCE_LOOP_MULTIPLIER = 1.0
-SCENE_CACHE_VERSION = "scene-render-cache-v1"
+SCENE_CACHE_VERSION = "scene-render-cache-v2"
+RENDERER_CODE_FINGERPRINT = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+VISUAL_EFFECTS_CODE_FINGERPRINT = hashlib.sha256(
+    (Path(__file__).with_name("visual_effects_v73.py")).read_bytes()
+).hexdigest()
 
 
 class RenderError(RuntimeError):
@@ -260,6 +264,8 @@ def scene_cache_key(
         "version": SCENE_CACHE_VERSION,
         "mode": mode,
         "render_profile": os.environ.get("BECAUSE_OF_THIS_RENDER_PROFILE", "default"),
+        "renderer_code": RENDERER_CODE_FINGERPRINT,
+        "visual_effects_code": VISUAL_EFFECTS_CODE_FINGERPRINT,
         "width": width,
         "height": height,
         "scene": scene,
