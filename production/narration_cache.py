@@ -43,10 +43,10 @@ except ModuleNotFoundError as exc:
     )
 
 CACHE_SCHEMA_VERSION = 1
-NORMALIZATION_VERSION = "shorts-60-75-v1"
+NORMALIZATION_VERSION = "shorts-60-80-v2"
 CACHE_COLLECTION = "NARRATION CACHE"
 MIN_DURATION_SECONDS = 60.0
-MAX_DURATION_SECONDS = 75.0
+MAX_DURATION_SECONDS = 80.0
 
 
 class NarrationCacheError(RuntimeError):
@@ -214,7 +214,7 @@ def _wav_duration(path: Path) -> float:
     except (OSError, wave.Error) as exc:
         raise NarrationCacheError(f"Could not validate cached WAV: {path}") from exc
     if not MIN_DURATION_SECONDS <= duration <= MAX_DURATION_SECONDS:
-        raise NarrationCacheError(f"Cached narration duration {duration:.3f}s is outside 60–75s.")
+        raise NarrationCacheError(f"Cached narration duration {duration:.3f}s is outside 60–80s.")
     return duration
 
 
