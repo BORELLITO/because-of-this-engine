@@ -101,6 +101,23 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 "at": [["at"], ["ət"]],
                 "is": [["is"], ["iz"]],
                 "was": [["was"], ["wuz"]],
+                # Factual names can be rendered phonetically by Gemini and
+                # then segmented differently by Vosk. These lexical variants
+                # still bind only to real ASR timestamps; they never invent
+                # timing or alter the canonical caption text.
+                "ulrich": [
+                    ["ulrich"], ["all", "rick"], ["old", "rick"],
+                    ["ul", "rick"], ["all", "rich"], ["owl", "rick"],
+                ],
+                "lituya": [
+                    ["lituya"], ["la", "to", "your"], ["lit", "to", "ya"],
+                    ["little", "ya"], ["little", "you"], ["lee", "to", "ya"],
+                    ["lit", "you"],
+                ],
+                "edrie": [
+                    ["edrie"], ["edry"], ["ed", "ree"], ["e", "dree"],
+                ],
+                "gilbert": [["gilbert"], ["gill", "bert"], ["gil", "bert"], ["gil", "bird"]],
                 # Vosk may realize the unstressed vowel in “than” as “then”.
                 # This is an explicit lexical ASR variant only; timing still
                 # comes from the real Vosk word timestamp in the final WAV.
