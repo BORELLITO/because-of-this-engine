@@ -1,6 +1,6 @@
 {
   "schema_version": "3.0.0",
-  "video_id": "episode-002-archive-tape-correction",
+  "video_id": "episode-002-archive-tape-draft",
   "title": "The Tape That Added One More Minute — Context Correction Preview",
   "language": "en-US",
   "channel": "Because Of This",
@@ -3531,7 +3531,7 @@
     "unique_drive_ids": true,
     "unique_source_ids": true,
     "no_episode_001_reuse": true,
-    "preview_video_id": "episode-002-archive-tape-correction"
+    "preview_video_id": "episode-002-archive-tape-draft"
   },
   "runtime_asset_hydration": {
     "status": "PENDING_RUN"
