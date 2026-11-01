@@ -147,6 +147,15 @@ NARRATIVE_ANCHOR_DIMENSIONS = {
     "glass_surface": "objects",
     "lock": "objects",
     "light": "objects",
+    # Episode-specific concrete objects. These remain fail-closed: they only
+    # count when the reviewed evidence declares the same object.
+    "telephone": "objects",
+    "phone": "objects",
+    "desk": "objects",
+    "paper": "objects",
+    "printer": "objects",
+    "button": "objects",
+    "door": "objects",
     "hourglass": "objects",
     "footprints": "objects",
     "recording": "actions",
@@ -223,7 +232,13 @@ def text_has_concept(text: str, concept: str) -> bool:
 def _dimension_values(record: dict[str, Any], dimension: str) -> list[str]:
     evidence = record.get("visual_evidence") or {}
     if isinstance(evidence, dict):
-        return values(evidence.get(dimension))
+        explicit = values(evidence.get(dimension))
+        if explicit:
+            return explicit
+        # Older manifests used the audited observed_* contract only. Treat
+        # those reviewed pixel observations as the canonical fallback so the
+        # matcher and the review schema cannot disagree.
+        return values(evidence.get(f"observed_{dimension}"))
     return []
 
 
