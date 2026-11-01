@@ -29,7 +29,7 @@ def _active_workflow_paths(root: Path) -> list[Path]:
     if not workflow.is_file():
         return []
     text = workflow.read_text(encoding="utf-8")
-    if "workflow_dispatch:" not in text or "push:" in text or "schedule:" in text or "if: \${{ false }}" in text:
+    if "workflow_dispatch:" not in text or "push:" in text or "schedule:" in text or "if: " + "${{ false }}" in text:
         return []
     return [workflow]
 
@@ -58,7 +58,7 @@ def audit(repo_root: Path) -> dict[str, object]:
     )
     for name in retired_names:
         retired = root / ".github" / "workflows" / name
-        if retired.is_file() and "if: \${{ false }}" not in retired.read_text(encoding="utf-8"):
+        if retired.is_file() and ("if: " + "${{ false }}") not in retired.read_text(encoding="utf-8"):
             raise SingletonGuardError(f"retired workflow was reactivated: {name}")
     offenders: list[str] = []
     for path in [policy_path, workflows[0], root / "production" / "v7_orchestrator.py", root / "production" / "piper_tts.py"]:
