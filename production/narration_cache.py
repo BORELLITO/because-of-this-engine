@@ -319,6 +319,37 @@ def local_hit(spec: dict[str, Any]) -> dict[str, Any] | None:
         return None
 
 
+def _legacy_cache_keys() -> list[str]:
+    raw = os.environ.get("BECAUSE_OF_THIS_LEGACY_NARRATION_CACHE_KEYS", "")
+    return list(dict.fromkeys(
+        value.strip() for value in raw.replace(",", " ").split() if value.strip()
+    ))
+
+
+def _validate_legacy_entry(spec: dict[str, Any], audio_path: Path, sidecar_path: Path) -> bool:
+    """Accept an explicitly nominated older cache key only when its content matches the current narration."""
+    metadata = _read_json(sidecar_path, "legacy narration cache sidecar")
+    expected = {
+        "script_sha256": spec["script_sha256"],
+        "tts_script_sha256": spec["tts_script_sha256"],
+        "model": spec["model"],
+        "voice": spec["voice"],
+        "language": spec["language"],
+        "style": spec["style"],
+        "cache_schema_version": CACHE_SCHEMA_VERSION,
+    }
+    if any(metadata.get(key) != value for key, value in expected.items()):
+        return False
+    if not audio_path.is_file():
+        return False
+    duration = _wav_duration(audio_path)
+    if metadata.get("sha256") != sha256_file(audio_path):
+        return False
+    if round(float(metadata.get("duration_seconds", -1)), 3) != round(duration, 3):
+        return False
+    return True
+
+
 def _download_bytes(drive: Any, file_id: str) -> bytes:
     try:
         from googleapiclient.http import MediaIoBaseDownload
