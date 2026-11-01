@@ -3464,13 +3464,13 @@
     "final_release_basis": "Preview assets are hydrated and individually scene-approved for draft preview; final publication remains gated by final rights record and human release approval."
   },
   "editorial_qa": {
-    "status": "PENDING_ASSET_PREVIEW_RENDER",
+    "status": "PENDING_SUSPENSE_CAMERA_CORRECTION_RENDER",
     "reviewer": null,
     "reviewed_at": null,
     "visual_text_policy": "PENDING_CAPTIONS_ONLY",
     "compositor_overlay_policy": "BLOCKED",
     "reviewed_clip_count": 0,
-    "decision": "CONTEXT_CORRECTION_RENDER_PENDING"
+    "decision": "SUSPENSE_CAMERA_CORRECTION_RENDER_PENDING"
   },
   "human_approval": {
     "status": "PASS",
@@ -3511,8 +3511,8 @@
       "allow_same_scene_loop": false
     }
   },
-  "preview_revision": "v7.3.3-episode-002-context-correction",
-  "preview_revision_note": "18 distinct context-matched assets, no same-scene loops, and no generic filler. Existing Charon narration, forced-alignment captions, music bed and cinematic grade preserved.",
+  "preview_revision": "v7.3.4-episode-002-suspense-camera-correction",
+  "preview_revision_note": "18 distinct context-matched assets, no same-scene loops, no generic filler, and semantic anchored push-in motion. Generated lateral sway and vertical oscillation are forbidden; existing Charon narration, forced-alignment captions and music bed are preserved.",
   "final_revision": null,
   "final_revision_note": null,
   "runtime_artifacts": {},
