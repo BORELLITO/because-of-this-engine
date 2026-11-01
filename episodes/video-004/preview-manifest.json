@@ -831,8 +831,8 @@
         "y": 0.5
       },
       "transition": {
-        "type": "crossfade",
-        "duration": 0.14
+        "type": "hard_cut",
+        "duration": 0
       }
     },
     {
@@ -1458,8 +1458,8 @@
         "y": 0.5
       },
       "transition": {
-        "type": "crossfade",
-        "duration": 0.14
+        "type": "hard_cut",
+        "duration": 0
       }
     },
     {
@@ -2374,8 +2374,8 @@
         "y": 0.5
       },
       "transition": {
-        "type": "crossfade",
-        "duration": 0.14
+        "type": "hard_cut",
+        "duration": 0
       }
     }
   ],
