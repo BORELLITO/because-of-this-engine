@@ -212,6 +212,11 @@ def _candidate_key(candidate: dict[str, Any]) -> str:
 
 
 def _prepare_candidate(candidate: dict[str, Any], provider: str, scene: dict[str, Any]) -> dict[str, Any]:
+    """Prepare a candidate and fail closed on context or duration mismatches.
+
+    A literal evidence beat cannot be satisfied by a merely related mood clip,
+    and a source shorter than the scene cannot be silently looped to fill time.
+    """
     prepared = {
         **candidate,
         "provider": provider,
@@ -221,8 +226,34 @@ def _prepare_candidate(candidate: dict[str, Any], provider: str, scene: dict[str
     }
     guard = visual_match_report(scene, prepared, require_review=False)
     prepared["visual_guard"] = guard
+    target = float(scene.get("duration", 0) or 0)
+    source_duration = float(candidate.get("duration_seconds", 0) or 0)
+    prepared["source_duration_seconds"] = source_duration
+    prepared["loop_required"] = source_duration > 0 and source_duration + 0.05 < target
     prepared["relevance_score"] = score_candidate(prepared, scene)
-    prepared["selection_status"] = "REVIEW_REQUIRED" if guard.get("status") == "PASS" else "REJECTED_SEMANTIC_MISMATCH"
+
+    spec = scene.get("visual_semantics") or {}
+    role = str(spec.get("role", "")).lower() if isinstance(spec, dict) else ""
+    visual_function = str(scene.get("visual_function", "")).lower()
+    strict_literal = role in {"literal", "literal_evidence", "evidence"} or visual_function == "literal_evidence"
+    strict_reasons: list[str] = []
+    if prepared["loop_required"]:
+        strict_reasons.append("SOURCE_SHORTER_THAN_BEAT_NO_LOOP")
+    if strict_literal:
+        if prepared["fallback_tier"] != "EXACT":
+            strict_reasons.append("LITERAL_BEAT_REQUIRES_EXACT_MATCH")
+        if guard.get("status") != "PASS":
+            strict_reasons.append("VISUAL_SEMANTIC_GATE_BLOCKED")
+        if float(guard.get("coverage", 0.0)) < 1.0:
+            strict_reasons.append("LITERAL_BEAT_REQUIRES_FULL_REQUIRED_COVERAGE")
+        alignment = guard.get("narrative_alignment") or {}
+        if alignment.get("status") == "BLOCKED":
+            strict_reasons.append("DIRECT_NARRATIVE_ANCHOR_MISSING")
+    if strict_reasons:
+        prepared["selection_status"] = "REJECTED_STRICT_CONTEXT_OR_DURATION"
+        prepared["rejection_reason"] = "; ".join(strict_reasons)
+    else:
+        prepared["selection_status"] = "REVIEW_REQUIRED" if guard.get("status") == "PASS" else "REJECTED_SEMANTIC_MISMATCH"
     return prepared
 
 
@@ -320,6 +351,8 @@ def build_queue(
             "minimum_unique_clips": policy["min_clips"],
             "maximum_unique_clips": policy["max_clips"],
             "no_repeat_animation": True,
+            "no_same_scene_loop": True,
+            "literal_beats_require_exact_context": True,
             "image_fallback": "FORBIDDEN",
             "keyword_only_matching": False,
             "semantic_dimensions": ["subjects", "actions", "environments", "objects", "moods", "composition"],
