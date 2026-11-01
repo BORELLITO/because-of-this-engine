@@ -67,6 +67,11 @@ def _code_fingerprints(manifest_path: Path) -> dict[str, str]:
         "golden_layout": repo_root / "production/golden_frame_regression.py",
         "orchestrator": repo_root / "production/v7_orchestrator.py",
         "drive_delivery": repo_root / "production/google_drive_delivery.py",
+        "contract": repo_root / "production/v7_contract.py",
+        "tts": repo_root / "production/gemini_tts.py",
+        "production_record": repo_root / "production/production_record_v7.py",
+        "canonical_config": repo_root / "production/canonical_config.py",
+        "active_policy": repo_root / "production/active_engine_policy.json",
     }
     return {
         name: file_digest(path) if path.is_file() else "missing"
@@ -162,6 +167,7 @@ def compute_fingerprints(manifest_path: Path, mode: str = "draft-preview") -> di
                 }
                 for scene in scenes
             ],
+            "code": {"asset_hydration": code["asset_hydration"]},
         }
     )
     scene_key = digest(
