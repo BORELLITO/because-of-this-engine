@@ -392,21 +392,39 @@ def restore_from_drive(spec: dict[str, Any], root_folder_id: str | None = None) 
     root_id = normalize_folder_id(root_folder_id or os.environ.get("BECAUSE_OF_THIS_DRIVE_FOLDER_ID", DEFAULT_ROOT_FOLDER))
     validate_folder(drive, root_id)
     collection_id = ensure_folder(drive, root_id, CACHE_COLLECTION)
+
+    def restore_pair(audio_remote: dict[str, Any], sidecar_remote: dict[str, Any], source: str, cache_key: str) -> dict[str, Any] | None:
+        _atomic_bytes(spec["audio_path"], _download_bytes(drive, audio_remote["id"]))
+        _atomic_bytes(spec["sidecar_path"], _download_bytes(drive, sidecar_remote["id"]))
+        try:
+            if source == "drive-legacy":
+                if not _validate_legacy_entry(spec, spec["audio_path"], spec["sidecar_path"]):
+                    raise NarrationCacheError("Explicit legacy narration cache does not match the current script/voice.")
+                result = annotate_local(spec)
+            else:
+                result = validate_entry(spec, spec["audio_path"], spec["sidecar_path"])
+        except NarrationCacheError:
+            spec["audio_path"].unlink(missing_ok=True)
+            spec["sidecar_path"].unlink(missing_ok=True)
+            return None
+        return {**result, "source": source, "drive_file_id": audio_remote["id"], "restored_cache_key": cache_key}
+
     audio_remote = child_by_name(drive, collection_id, spec["audio_name"])
     sidecar_remote = child_by_name(drive, collection_id, spec["sidecar_name"])
-    if not audio_remote or not sidecar_remote:
-        return {"status": "NARRATION_CACHE_MISS", "cache_key": spec["cache_key"], "source": "drive"}
-    audio_bytes = _download_bytes(drive, audio_remote["id"])
-    sidecar_bytes = _download_bytes(drive, sidecar_remote["id"])
-    _atomic_bytes(spec["audio_path"], audio_bytes)
-    _atomic_bytes(spec["sidecar_path"], sidecar_bytes)
-    try:
-        result = validate_entry(spec, spec["audio_path"], spec["sidecar_path"])
-    except NarrationCacheError:
-        spec["audio_path"].unlink(missing_ok=True)
-        spec["sidecar_path"].unlink(missing_ok=True)
-        raise
-    return {**result, "source": "drive", "drive_file_id": audio_remote["id"]}
+    if audio_remote and sidecar_remote:
+        result = restore_pair(audio_remote, sidecar_remote, "drive", spec["cache_key"])
+        if result:
+            return result
+
+    for legacy_key in _legacy_cache_keys():
+        legacy_audio = child_by_name(drive, collection_id, f"narration-{legacy_key}.wav")
+        legacy_sidecar = child_by_name(drive, collection_id, f"narration-{legacy_key}.json")
+        if legacy_audio and legacy_sidecar:
+            result = restore_pair(legacy_audio, legacy_sidecar, "drive-legacy", legacy_key)
+            if result:
+                return result
+
+    return {"status": "NARRATION_CACHE_MISS", "cache_key": spec["cache_key"], "source": "drive"}
 
 
 def store_to_drive(spec: dict[str, Any], root_folder_id: str | None = None) -> dict[str, Any]:
