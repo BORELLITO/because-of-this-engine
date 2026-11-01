@@ -34,7 +34,7 @@ DEFAULT_SAMPLE_RATE = 24000
 MAX_ATTEMPTS = 1
 TRANSIENT_HTTP = {408, 429, 500, 502, 503, 504}
 MIN_NARRATION_SECONDS = 60.0
-MAX_NARRATION_SECONDS = 75.0
+MAX_NARRATION_SECONDS = 80.0
 
 
 class GeminiTTSError(RuntimeError):
@@ -333,7 +333,7 @@ def synthesize_chunks(chunks: list[dict[str, Any]], output_dir: Path, profile: d
         metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     duration = _wav_info(audio)[3]
     if not MIN_NARRATION_SECONDS <= duration <= MAX_NARRATION_SECONDS:
-        raise GeminiTTSError(f"combined narration duration {duration:.3f}s is outside the 60–75s contract")
+        raise GeminiTTSError(f"combined narration duration {duration:.3f}s is outside the 60–80s contract")
     return {
         "status": "GEMINI_TTS_GENERATED",
         "provider": PROVIDER,
