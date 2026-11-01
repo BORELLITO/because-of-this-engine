@@ -389,6 +389,17 @@ jobs:
           path: episodes/video-002/assets
           key: because-of-this-assets-${{ steps.fingerprint.outputs.asset_key }}
 
+      - name: Enforce global no-repeat clip policy
+        env:
+          MANIFEST: \${{ inputs.manifest || 'episodes/video-002/preview-manifest.json' }}
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python production/asset_reuse_brain.py \
+            --manifest "\${MANIFEST}" \
+            --repo-root . \
+            --registry episodes/asset-memory-registry.json \
+            --report episodes/video-002/rendered/asset-reuse-brain-draft-preview.json
+
       - name: Run visual-story QA in draft-preview mode
         run: |
           set -euo pipefail
@@ -458,6 +469,7 @@ jobs:
               "preview": f"rendered/{value['video_id']}-draft-preview.mp4",
               "render": f"rendered/{value['video_id']}-draft-preview.mp4",
               "technical_qa": "rendered/video-release-draft-preview.json",
+              "asset_reuse": "rendered/asset-reuse-brain-draft-preview.json",
               "music": "audio/music.wav",
           }
           hashes = {}
