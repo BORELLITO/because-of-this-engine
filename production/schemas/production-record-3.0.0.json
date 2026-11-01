@@ -78,7 +78,7 @@
       "type": "object",
       "required": ["provider"],
       "properties": {
-        "provider": { "const": "piper_tts_local" },
+        "provider": { "const": "gemini_tts" },
         "language_code": { "const": "en-US" },
         "beats": { "type": "array" }
       }
