@@ -406,22 +406,22 @@
     "beats": [
       {
         "beat_id": "beat-001",
-        "text": "Howard Ulrich was asleep in a small boat in Alaska's Lituya Bay when the mountain above his seven-year-old son began to move.",
+        "text": "Howard Ulrich was asleep in a small boat in Alaska's Lituya Bay when",
         "pause_before_ms": 0
       },
       {
         "beat_id": "beat-002",
-        "text": "On July ninth, nineteen fifty-eight, a magnitude seven point nine earthquake tore the shoreline open.",
+        "text": "the mountain above his seven-year-old son began to move. On July ninth, nineteen fifty-eight,",
         "pause_before_ms": 120
       },
       {
         "beat_id": "beat-003",
-        "text": "Howard woke to the sound of rock and ice collapsing into Gilbert Inlet.",
+        "text": "a magnitude seven point nine earthquake tore the shoreline open. Howard woke to the sound",
         "pause_before_ms": 120
       },
       {
         "beat_id": "beat-004",
-        "text": "The impact did not make an ordinary wave.",
+        "text": "of rock and ice collapsing into Gilbert Inlet. The impact did not make an ordinary wave.",
         "pause_before_ms": 120
       },
       {
