@@ -53,6 +53,17 @@ def _story_creation(manifest: dict[str, Any], base: Path, mode: str) -> tuple[st
     path = base / "rendered" / f"story-creation-{mode}.json"
     try:
         report = _read(path, "story creation report") if path.is_file() else audit_story_creation(manifest)
+        # A cached report is reusable only when it contains the current editorial
+        # layer. Older C0-C11 reports must be re-audited and cannot bypass E0-E10.
+        if (
+            path.is_file()
+            and (
+                report.get("schema_version") != "1.1"
+                or not isinstance(report.get("editorial_story"), dict)
+                or report.get("editorial_story", {}).get("schema_version") != "7.4"
+            )
+        ):
+            report = audit_story_creation(manifest)
     except (OSError, RuntimeError, ValueError, TypeError, json.JSONDecodeError) as exc:
         return f"BLOCKED: {exc}", {}
     if report.get("status") != "STORY_CREATION_PASS":
