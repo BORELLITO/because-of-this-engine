@@ -1896,7 +1896,7 @@
           "direct_required": [
             "figure",
             "walking",
-            "train_platform"
+            "interior"
           ],
           "minimum_direct": 3
         }
@@ -2747,17 +2747,17 @@
       "story_beat": "lamp glows behind sealed wall",
       "narration_excerpt": "except for a lamp glowing behind the sealed wall.",
       "visual_semantics": {
-        "role": "literal",
+        "role": "explanatory",
         "required": {
           "objects": [
             "lamp",
-            "sealed wall"
+            "brick wall"
           ],
           "actions": [
             "glowing"
           ],
           "environments": [
-            "interior",
+            "exterior",
             "brick wall"
           ]
         },
@@ -2776,17 +2776,17 @@
         "narrative_anchors": {
           "direct_required": [
             "lamp",
-            "sealed_wall"
+            "exterior"
           ],
           "minimum_direct": 2
         }
       },
       "asset_status": "APPROVED_FOR_DRAFT_PREVIEW",
       "visual_intent": "lamp | sealed brick wall | glow",
-      "visual_function": "literal_evidence",
-      "visual_match": "EXACT",
+      "visual_function": "explanatory_evidence",
+      "visual_match": "EXPLANATORY",
       "visual_truth": "DECLARED_FICTION",
-      "match_score": 0.9,
+      "match_score": 0.82,
       "asset": {
         "asset_id": "V73-CORR-S15-PEXELS-5016534",
         "path": "assets/V73-CORR-S15-lamp-sealed-wall-clean.mp4",
