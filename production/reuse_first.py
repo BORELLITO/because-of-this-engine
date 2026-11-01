@@ -52,6 +52,27 @@ def _script_payload(manifest_path: Path, manifest: dict[str, Any]) -> dict[str, 
     }
 
 
+def _code_fingerprints(manifest_path: Path) -> dict[str, str]:
+    """Hash every executable stage that can affect a reusable artifact."""
+    repo_root = manifest_path.resolve().parents[1]
+    files = {
+        "reuse_first": repo_root / "production/reuse_first.py",
+        "renderer": repo_root / "production/render_video_episode.py",
+        "asset_hydration": repo_root / "production/google_drive_assets.py",
+        "alignment": repo_root / "production/align_captions.py",
+        "story_intelligence": repo_root / "production/story_intelligence.py",
+        "caption_quality": repo_root / "production/caption_quality.py",
+        "music": repo_root / "production/generate_suspense_bed.py",
+        "release_validation": repo_root / "production/validate_video_release.py",
+        "golden_layout": repo_root / "production/golden_frame_regression.py",
+        "orchestrator": repo_root / "production/v7_orchestrator.py",
+    }
+    return {
+        name: file_digest(path) if path.is_file() else "missing"
+        for name, path in files.items()
+    }
+
+
 def _scene_payload(manifest: dict[str, Any]) -> list[dict[str, Any]]:
     result = []
     for scene in manifest.get("scenes") or []:
@@ -79,6 +100,7 @@ def compute_fingerprints(manifest_path: Path, mode: str = "draft-preview") -> di
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     script = _script_payload(manifest_path, manifest)
     scenes = _scene_payload(manifest)
+    code = _code_fingerprints(manifest_path)
     grade = manifest.get("color_grade") or {}
     clip_policy = (manifest.get("editing") or {}).get("clip_quantity") or manifest.get("clip_policy") or {}
     music = manifest.get("music") or {}
@@ -100,6 +122,10 @@ def compute_fingerprints(manifest_path: Path, mode: str = "draft-preview") -> di
             "narration_key": narration_key,
             "model": "vosk-model-en-us-0.22-lgraph",
             "secondary_model": "vosk-model-small-en-us-0.15",
+            "code": {
+                "alignment": code["alignment"],
+                "story_intelligence": code["story_intelligence"],
+            },
         }
     )
     caption_key = digest(
@@ -107,6 +133,10 @@ def compute_fingerprints(manifest_path: Path, mode: str = "draft-preview") -> di
             "version": CAPTION_VERSION,
             "alignment_key": alignment_key,
             "caption_style": captions,
+            "code": {
+                "caption_quality": code["caption_quality"],
+                "alignment": code["alignment"],
+            },
         }
     )
     music_key = digest(
@@ -115,6 +145,7 @@ def compute_fingerprints(manifest_path: Path, mode: str = "draft-preview") -> di
             "music": music,
             "duration": (music.get("generation") or {}).get("duration_seconds", 70),
             "sample_rate": (music.get("generation") or {}).get("sample_rate_hz", 48000),
+            "code": code["music"],
         }
     )
     asset_key = digest(
@@ -141,6 +172,10 @@ def compute_fingerprints(manifest_path: Path, mode: str = "draft-preview") -> di
             "scenes": scenes,
             "color_grade": grade,
             "clip_policy": clip_policy,
+            "code": {
+                "renderer": code["renderer"],
+                "asset_hydration": code["asset_hydration"],
+            },
         }
     )
     final_key = digest(
@@ -154,6 +189,7 @@ def compute_fingerprints(manifest_path: Path, mode: str = "draft-preview") -> di
             "scene_key": scene_key,
             "brand": brand,
             "loop": loop,
+            "code": code,
         }
     )
     return {
@@ -161,6 +197,7 @@ def compute_fingerprints(manifest_path: Path, mode: str = "draft-preview") -> di
         "renderer_version": RENDERER_VERSION,
         "mode": mode,
         "video_id": manifest.get("video_id"),
+        "code_fingerprints": code,
         "narration_key": narration_key,
         "alignment_key": alignment_key,
         "caption_key": caption_key,
@@ -205,6 +242,7 @@ def write_receipt(
             "delivery_folder_id": delivery.get("delivery_folder_id"),
             "delivery_folder_url": delivery.get("delivery_folder_url"),
             "file_count": delivery.get("file_count"),
+            "files": delivery.get("files", []),
         }
     receipt_path.parent.mkdir(parents=True, exist_ok=True)
     temporary = receipt_path.with_name(receipt_path.name + ".part")
@@ -230,6 +268,14 @@ def verify_receipt(receipt_path: Path, fingerprints: dict[str, Any]) -> tuple[bo
         return False, "delivery_not_verified"
     if not delivery.get("delivery_folder_url"):
         return False, "delivery_link_missing"
+    try:
+        file_count = int(delivery.get("file_count") or 0)
+    except (TypeError, ValueError):
+        return False, "delivery_file_count_invalid"
+    if file_count <= 0 or not isinstance(delivery.get("files"), list) or len(delivery["files"]) != file_count:
+        return False, "delivery_files_missing"
+    if any(not item.get("id") or not item.get("name") or not item.get("md5") for item in delivery["files"] if isinstance(item, dict)):
+        return False, "delivery_file_evidence_incomplete"
     return True, "reuse_valid"
 
 
