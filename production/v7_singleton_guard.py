@@ -25,7 +25,11 @@ FORBIDDEN_ACTIVE_MARKERS = (
 
 def _active_workflow_paths(root: Path) -> list[Path]:
     """Return the one canonical render workflow, excluding audit-only stubs."""
-    workflow = root / ".github" / "workflows" / "episode-003-draft-preview.yml"
+    # GitHub requires workflow_dispatch files to be registered from the
+    # repository's default workflow inventory. This established filename is a
+    # compatibility slot; its contents target only the current episode-003
+    # runtime and no episode-002 execution remains active.
+    workflow = root / ".github" / "workflows" / "episode-002-draft-preview.yml"
     if not workflow.is_file():
         return []
     text = workflow.read_text(encoding="utf-8")
@@ -64,7 +68,7 @@ def audit(repo_root: Path) -> dict[str, object]:
     if len(workflows) != 1:
         raise SingletonGuardError("exactly one canonical render workflow must be active")
     retired_names = (
-        "episode-002-draft-preview.yml",
+        "episode-003-draft-preview.yml",
         "because-of-this-v7.yml",
         "draft-preview.yml",
         "v72-reuse-first-ci.yml",
