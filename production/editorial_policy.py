@@ -18,6 +18,7 @@ DEFAULT_CLIP_QUANTITY_POLICY = {
     "max_clips": 18,
     "min_scene_seconds": 2.0,
     "max_scene_seconds": 8.0,
+    "short_scene_min_seconds": 1.2,
     "enforce": True,
     "enforce_no_same_scene_loop": True,
     "require_exact_literal_context": True,
@@ -74,6 +75,10 @@ def clip_quantity_policy(manifest: dict[str, Any]) -> dict[str, Any]:
         raise EditorialPolicyError("Clip quantity bounds must be min <= target_min <= target_max <= max.")
     if policy["min_scene_seconds"] > policy["max_scene_seconds"]:
         raise EditorialPolicyError("Scene duration bounds are inverted.")
+    short_min = policy["short_scene_min_seconds"]
+    if isinstance(short_min, bool) or not isinstance(short_min, (int, float)) or not 1.0 <= float(short_min) <= 1.5:
+        raise EditorialPolicyError("editing.clip_quantity.short_scene_min_seconds must be between 1.0s and 1.5s.")
+    policy["short_scene_min_seconds"] = float(short_min)
 
     return policy
 
