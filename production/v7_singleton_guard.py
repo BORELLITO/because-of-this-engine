@@ -29,7 +29,7 @@ def _active_workflow_paths(root: Path) -> list[Path]:
     if not workflow.is_file():
         return []
     text = workflow.read_text(encoding="utf-8")
-    if "workflow_dispatch:" not in text or "if: \${{ false }}" in text:
+    if "workflow_dispatch:" not in text or "push:" in text or "schedule:" in text or "if: \${{ false }}" in text:
         return []
     return [workflow]
 
@@ -49,7 +49,17 @@ def audit(repo_root: Path) -> dict[str, object]:
         raise SingletonGuardError("active policy does not pin schema 3.0.0")
     workflows = _active_workflow_paths(root)
     if len(workflows) != 1:
-        raise SingletonGuardError("exactly one V7 workflow must be active")
+        raise SingletonGuardError("exactly one canonical render workflow must be active")
+    retired_names = (
+        "because-of-this-v7.yml",
+        "draft-preview.yml",
+        "v72-reuse-first-ci.yml",
+        "video-engine-ci.yml",
+    )
+    for name in retired_names:
+        retired = root / ".github" / "workflows" / name
+        if retired.is_file() and "if: \${{ false }}" not in retired.read_text(encoding="utf-8"):
+            raise SingletonGuardError(f"retired workflow was reactivated: {name}")
     offenders: list[str] = []
     for path in [policy_path, workflows[0], root / "production" / "v7_orchestrator.py", root / "production" / "piper_tts.py"]:
         text = path.read_text(encoding="utf-8")
