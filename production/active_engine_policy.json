@@ -22,6 +22,7 @@
   },
   "publication_policy": "manual_only",
   "active_test_suite": [
+    "tests/test_editorial_story_gates.py",
     "tests/test_reuse_first.py",
     "tests/test_current_engine_policy.py"
   ],
@@ -79,7 +80,12 @@
     "clean_clip_no_reuse",
     "final_provenance_gates",
     "manual_release_only",
-    "motion_interpolation"
+    "motion_interpolation",
+    "senior_editorial_story_gates",
+    "protagonist_agency_gate",
+    "causal_escalation_contract",
+    "payoff_recontextualization_gate",
+    "visual_dramatization_gate"
   ],
   "active_addon_activation": {
     "approved": true,
@@ -89,5 +95,12 @@
     "activation_scope": "historical_addon_approval",
     "active_engine_profile_supersedes_activation": true,
     "media_regeneration_required": false
+  },
+  "editorial_story_layer": {
+    "version": "7.4.0",
+    "status": "active_on_update_branch",
+    "contract": "production/story_creation.py:editorial_contract",
+    "execution": "fail_closed_before_visual_search_and_render",
+    "legacy_contracts": "non_executable_without_explicit_editorial_contract"
   }
 }
