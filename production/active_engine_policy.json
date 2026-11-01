@@ -27,6 +27,7 @@
   ],
   "legacy_test_policy": "non_executable_archived",
   "legacy_version_execution": "forbidden",
+  "legacy_runtime_policy": "production/legacy/*.archived.txt; non-executable",
   "render_contract": {
     "width": 1080,
     "height": 1920,
@@ -65,7 +66,7 @@
     "G11"
   ],
   "active_runtime": "production/gemini_tts.py",
-  "archived_runtime": "production/piper_tts.py (rollback-only; not an active execution source)",
+  "archived_runtime": "branch:v7.2-charon-clean-clips-preview/production/piper_tts.py (external rollback reference only; absent from active tree)",
   "active_addon_version": "7.3.2",
   "active_addon_profile": "cinematic-dread-caption-smooth",
   "active_addon_capabilities": [
