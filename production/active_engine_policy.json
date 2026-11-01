@@ -79,6 +79,8 @@
     "pr_number": 61,
     "commit": "0f884a4b66035f33e3f0864f4df7ed02fd36f593",
     "core_engine_version": "7.3.1",
+    "activation_scope": "historical_addon_approval",
+    "active_engine_profile_supersedes_activation": true,
     "media_regeneration_required": false
   }
 }
