@@ -249,6 +249,7 @@ def main() -> None:
     # cannot silently revert the editorially approved 20% upward adjustment.
     value.setdefault("captions", {}).setdefault("style", {})["margin_v"] = 408
     value.setdefault("captions", {}).setdefault("mobile_safe_zone", {})["bottom_clearance_px"] = 408
+    value["engine_profile_fingerprint"] = "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
     value.update({
         "video_id": "episode-003-call-tomorrow",
         "title": "The Call That Arrived Tomorrow",
