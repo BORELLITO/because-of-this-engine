@@ -1747,74 +1747,80 @@
       "visual_truth": "DECLARED_FICTION",
       "match_score": 0.82,
       "asset": {
-        "asset_id": "V73-S07-PEXELS-14377594",
-        "path": "assets/V73-S07-blueprint-sealed-wall-clean.mp4",
+        "asset_id": "V73-CORR-S08-PEXELS-9617516",
+        "path": "assets/V73-CORR-S08-blueprint-drawing-clean.mp4",
         "provider": "pexels",
-        "source_page_url": "https://www.pexels.com/video/14377594/",
-        "license": "Pexels Free License; clean source retained for audit.",
+        "source_page_url": "https://www.pexels.com/video/an-architect-drawing-a-design-using-a-compass-9617516/",
+        "license": "Pexels Free License; downloaded source retained for audit. Pexels license permits free use, modification, and commercial projects.",
         "rights_status": "PREVIEW_ONLY",
         "approved_for_render": false,
         "preview_only": true,
         "preview_only_reason": "Preview-only licensed source; final publication rights record remains subject to final release review.",
         "reuse_status": "FRESH",
-        "sha256": "31a92fd4b7746c1f61d4e8ff1f9cd9fe6da91fa2238e885c7242d93e2c2d1279",
+        "sha256": "c004d24f5beba9e91a49b76bf98db6adc70ac1b1d4777e25486edd2fba430340",
         "episode_id": "episode-002-archive-tape-draft",
-        "drive_file_id": "1Wcc40PvvgWqXUutAq1EYn60vQ1P8Pv65",
-        "duration_seconds": 4.351667,
+        "drive_file_id": "1hKvqQPGY8asqYRoaNCMsm8wAwXmDpiQ6",
+        "duration_seconds": 40.48,
         "width": 1920,
-        "height": 1080,
-        "filesize_bytes": 3596297,
-        "author": "Pexels contributor (attributed on source page)",
-        "acquisition_timestamp": "2026-10-30T00:00:00Z",
-        "original_filename": "V73-S07-blueprint-sealed-wall-clean.mp4",
+        "height": 1012,
+        "filesize_bytes": 32718122,
+        "author": "Ron Lach",
+        "acquisition_timestamp": "2026-11-01T00:00:00Z",
+        "original_filename": "V73-CORR-S08-PEXELS-9617516-blueprint-drawing.mp4",
         "mime_type": "video/mp4",
         "job_ownership": "episode-002-archive-tape-draft",
-        "scene_usage": "S08: corrected visual evidence for blueprint reveals sealed disappearance.",
+        "scene_usage": "S08: new visual evidence for Mara checking the blueprint and tracing the sealed-door history.",
         "source_segment_in": 0,
-        "source_segment_out": 4.351667,
+        "source_segment_out": 40.48,
         "asset_class": "evidence",
         "scene_approval": "APPROVED",
         "visual_evidence": {
           "source_title": [
-            "blueprint and architectural drawings clean source footage"
+            "architect hands drawing on blueprint with drafting tools"
           ],
           "reviewer": "Codex visual triage pass",
-          "reviewed_at": "2026-10-30T00:00:00Z",
-          "review_method": "ffprobe metadata plus sampled-frame contact-sheet inspection",
+          "reviewed_at": "2026-11-01T00:00:00Z",
+          "review_method": "Pexels source-page inspection plus ffprobe metadata; clean source retained for audit",
           "sample_timestamps": [
             0.15,
-            2.176,
-            4.202
+            20.24,
+            40.33
           ],
           "reviewed": true,
           "basis": [
-            "Observed blueprint, architectural drawings with unfolding, marking."
+            "Observed hands drawing directly on a blueprint with drafting tools; long clean source window supports the full narration-locked beat."
           ],
-          "subjects": [],
+          "subjects": [
+            "architect hands"
+          ],
           "actions": [
-            "unfolding",
+            "drawing",
             "marking"
           ],
           "environments": [
             "interior",
-            "desk"
+            "drafting desk"
           ],
           "objects": [
             "blueprint",
-            "architectural drawings"
+            "architectural plans",
+            "drafting tools"
           ],
-          "observed_subjects": [],
+          "observed_subjects": [
+            "architect hands"
+          ],
           "observed_actions": [
-            "unfolding",
+            "drawing",
             "marking"
           ],
           "observed_environments": [
             "interior",
-            "desk"
+            "drafting desk"
           ],
           "observed_objects": [
             "blueprint",
-            "architectural drawings"
+            "architectural plans",
+            "drafting tools"
           ],
           "pixel_qc": {
             "embedded_layout": "clean_full_frame",
@@ -1825,7 +1831,7 @@
           },
           "action_window": {
             "start": 0.15,
-            "end": 4.202,
+            "end": 40.33,
             "basis": "reviewed source motion window; no editorial overlay"
           }
         }
@@ -1982,8 +1988,8 @@
         "y": 0.5
       },
       "transition": {
-        "type": "hard_cut",
-        "duration": 0
+        "type": "crossfade",
+        "duration": 0.18
       }
     },
     {
