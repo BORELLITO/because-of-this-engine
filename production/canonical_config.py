@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""V7.3.2 Gemini Charon production profile for Because Of This.
+"""V7.4.0 Gemini Charon production profile for Because Of This.
 
 This module is the only active configuration authority. Gemini TTS Charon is
 the canonical narration route; Piper remains rollback-only archive material.
@@ -13,8 +13,8 @@ import json
 from pathlib import Path
 from typing import Any
 
-CANONICAL_PROFILE_ID = "because-of-this-v7.3.2-charon-cinematic-dread-smooth-2026-10"
-CANONICAL_ENGINE_VERSION = "7.3.2"
+CANONICAL_PROFILE_ID = "because-of-this-v7.4-editorial-story-engine-2026-11"
+CANONICAL_ENGINE_VERSION = "7.4.0"
 CANONICAL_SCHEMA_ID = "because-of-this://schemas/production-record/3.0.0"
 
 CANONICAL_PROFILE: dict[str, Any] = {
@@ -110,7 +110,7 @@ CANONICAL_PROFILE: dict[str, Any] = {
         "cinematic_suspense": {
             "enabled": True,
             "profile": "cinematic_dread_v73",
-            "profile_version": "7.3.2",
+            "profile_version": "7.4.0",
             "reference_basis": "cinematic_dread_v73_before_after_comparison",
             "cool_shadows": 0.04,
             "warm_highlights": 0.014,
@@ -211,7 +211,7 @@ def validate_canonical_manifest(manifest: dict[str, Any], *, source_label: str =
     if differences:
         preview = "; ".join(differences[:8])
         suffix = f" (+{len(differences) - 8} more)" if len(differences) > 8 else ""
-        raise CanonicalConfigError(f"{source_label} deviates from the V7.3.2 profile: {preview}{suffix}")
+        raise CanonicalConfigError(f"{source_label} deviates from the V7.4.0 profile: {preview}{suffix}")
     return {
         "status": "CANONICAL_CONFIG_V7_3_2_PASS",
         "profile_id": CANONICAL_PROFILE_ID,
