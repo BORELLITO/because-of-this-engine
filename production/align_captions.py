@@ -130,7 +130,8 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                     ["lee", "to", "ya"], ["lit", "you"],
                 ],
                 "edrie": [
-                    ["edrie"], ["edry"], ["ed", "ree"], ["e", "dree"], ["eatery"],
+                    ["edrie"], ["edry"], ["ed", "ree"], ["e", "dree"], ["a", "dree"],
+                    ["uh", "dree"], ["eatery"],
                 ],
                 "gilbert": [
                     ["gilbert"], ["gill", "bert"], ["gil", "bert"],
@@ -145,6 +146,7 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 # this production voice. They may match only a real ASR token;
                 # no timestamp is ever synthesized or estimated.
                 "figure": [["figure"], ["finger"], ["figger"]],
+                "threw": [["threw"], ["through"]],
                 "went": [["went"], ["when"]],
                 "pointed": [["pointed"], ["point"], ["pointing"]],
                 "directly": [["directly"], ["direct"]],
