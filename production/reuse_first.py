@@ -133,6 +133,23 @@ def compute_fingerprints(manifest_path: Path, mode: str = "draft-preview") -> di
         {
             "version": ALIGNMENT_VERSION,
             "narration_key": narration_key,
+            # Scene text is an alignment/story-coverage input. A clip-only
+            # edit must not invalidate audio, but a narration-excerpt edit
+            # must rebuild the scene timing cache.
+            "scene_text": [
+                {
+                    "scene_id": scene.get("scene_id"),
+                    "narration_excerpt": scene.get("narration_excerpt"),
+                }
+                for scene in (manifest.get("scenes") or [])
+            ],
+            "story_graph_text": [
+                {
+                    "scene_id": beat.get("scene_id"),
+                    "narration_excerpt": beat.get("narration_excerpt"),
+                }
+                for beat in ((manifest.get("story_graph") or {}).get("beats") or [])
+            ],
             "model": "vosk-model-en-us-0.22-lgraph",
             "secondary_model": "vosk-model-small-en-us-0.15",
             "code": {
