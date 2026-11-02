@@ -96,7 +96,7 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 "tore": [["tore"], ["tour"], ["tor"]],
                 "to": [["to"], ["two"], ["tuh"]],
                 "of": [["of"], ["uhv"], ["ov"]],
-                "and": [["and"], ["n"], ["ənd"]],
+                "and": [["and"], ["n"], ["ənd"], ["an"]],
                 "for": [["for"], ["fer"]],
                 "in": [["in"], ["ən"], ["and"]],
                 "into": [["into"], ["in"], ["in", "to"], ["in", "too"]],
@@ -132,7 +132,11 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 "edrie": [
                     ["edrie"], ["edry"], ["ed", "ree"], ["e", "dree"], ["eatery"],
                 ],
-                "gilbert": [["gilbert"], ["gill", "bert"], ["gil", "bert"], ["gil", "bird"], ["gill", "bird"]],
+                "gilbert": [
+                    ["gilbert"], ["gill", "bert"], ["gil", "bert"],
+                    ["gil", "bird"], ["gill", "bird"], ["gear", "ebert"],
+                    ["gear", "bert"], ["gair", "ebert"], ["gair", "bert"],
+                ],
                 # Vosk may realize the unstressed vowel in “than” as “then”.
                 # This is an explicit lexical ASR variant only; timing still
                 # comes from the real Vosk word timestamp in the final WAV.
