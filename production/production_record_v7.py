@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Structured V7.3.2 production record, gate and lifecycle contract."""
+"""Structured V7.4.0 production record, gate and lifecycle contract."""
 
 from __future__ import annotations
 
@@ -85,7 +85,7 @@ def _gate(gate_id: str, state: str = "pending", evidence: str = "awaiting execut
     }
 
 
-def new_record(manifest: dict[str, Any], *, engine_bundle_id: str, engine_version: str = "7.3.2") -> dict[str, Any]:
+def new_record(manifest: dict[str, Any], *, engine_bundle_id: str, engine_version: str = "7.4.0") -> dict[str, Any]:
     production_id = str(manifest.get("production_id") or manifest.get("video_id") or "").strip()
     story_id = str(manifest.get("story_id") or manifest.get("episode_id") or production_id).strip()
     if not production_id or not story_id:
