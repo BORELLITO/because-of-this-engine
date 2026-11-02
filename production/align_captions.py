@@ -89,7 +89,7 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
         if token:
             short_word_variants = {
                 "a": [["a"], ["uh"], ["ah"]],
-                "an": [["an"], ["un"]],
+                "an": [["an"], ["un"], ["and"]],
                 "the": [["the"], ["uh"], ["thuh"], ["thee"]],
                 "then": [["then"], ["than"]],
                 "bay": [["bay"], ["ebay"]],
@@ -115,6 +115,7 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 "ulrich": [
                     ["ulrich"], ["all", "rick"], ["old", "rick"],
                     ["ul", "rick"], ["all", "rich"], ["owl", "rick"],
+                    ["or", "rick"], ["or", "rich"], ["orrick"],
                 ],
                 "alaskas": [
                     ["alaskas"], ["alaska"], ["a", "land"], ["uh", "land"],
@@ -129,7 +130,7 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                     ["the", "la", "two", "ya"], ["the", "a", "to", "ya"],
                     ["la", "two", "to", "ya"], ["la", "two", "to", "your"],
                     ["la", "to", "year"], ["la", "two", "year"],
-                    ["the", "two", "year"],
+                    ["the", "two", "year"], ["latoya"],
                     ["lit", "to", "ya"], ["little", "ya"], ["little", "you"],
                     ["lee", "to", "ya"], ["lit", "you"],
                 ],
