@@ -273,7 +273,7 @@
           "megatsunami"
         ],
         "scene_id": "S10",
-        "narration_excerpt": "Another boat sank near the entrance. Two men died. Howard and his son survived, but the forest kept the evidence:"
+        "narration_excerpt": "Another boat sank near the entrance. Two men died. Howard and his son survived, but the forest"
       },
       {
         "beat_id": "beat-011",
@@ -289,7 +289,7 @@
           "megatsunami"
         ],
         "scene_id": "S11",
-        "narration_excerpt": "a clean scar thousands of feet above the tide."
+        "narration_excerpt": "kept the evidence: a clean scar thousands of feet above the tide."
       },
       {
         "beat_id": "beat-012",
@@ -1924,7 +1924,7 @@
       "beat_id": "beat-010",
       "duration": 5,
       "story_beat": "another boat sinks and two men die",
-      "narration_excerpt": "Another boat sank near the entrance. Two men died. Howard and his son survived, but the forest kept the evidence:",
+      "narration_excerpt": "Another boat sank near the entrance. Two men died. Howard and his son survived, but the forest",
       "visual_semantics": {
         "role": "symbolic",
         "required": {
@@ -2073,7 +2073,7 @@
       "beat_id": "beat-011",
       "duration": 4.9,
       "story_beat": "the forest preserves the height of the wave",
-      "narration_excerpt": "a clean scar thousands of feet above the tide.",
+      "narration_excerpt": "kept the evidence: a clean scar thousands of feet above the tide.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
