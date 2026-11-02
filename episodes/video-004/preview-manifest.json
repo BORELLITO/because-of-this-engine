@@ -193,7 +193,7 @@
           "megatsunami"
         ],
         "scene_id": "S05",
-        "narration_excerpt": "It threw water up the opposite slope, one thousand seven hundred and twenty feet—higher than the Empire State Building."
+        "narration_excerpt": "It threw water up the opposite slope, one thousand seven hundred and twenty feet—"
       },
       {
         "beat_id": "beat-006",
@@ -209,7 +209,7 @@
           "megatsunami"
         ],
         "scene_id": "S06",
-        "narration_excerpt": "The surge stripped the forest and carried debris across the land."
+        "narration_excerpt": "higher than the Empire State Building. The surge stripped the forest and carried debris across the land."
       },
       {
         "beat_id": "beat-007",
@@ -426,12 +426,12 @@
       },
       {
         "beat_id": "beat-005",
-        "text": "It threw water up the opposite slope, one thousand seven hundred and twenty feet—higher than the Empire State Building.",
+        "text": "It threw water up the opposite slope, one thousand seven hundred and twenty feet—",
         "pause_before_ms": 120
       },
       {
         "beat_id": "beat-006",
-        "text": "The surge stripped the forest and carried debris across the land.",
+        "text": "higher than the Empire State Building. The surge stripped the forest and carried debris across the land.",
         "pause_before_ms": 120
       },
       {
@@ -1149,7 +1149,7 @@
       "beat_id": "beat-005",
       "duration": 6,
       "story_beat": "the surge climbs 1720 feet up the opposite slope",
-      "narration_excerpt": "It threw water up the opposite slope, one thousand seven hundred and twenty feet—higher than the Empire State Building.",
+      "narration_excerpt": "It threw water up the opposite slope, one thousand seven hundred and twenty feet—",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
@@ -1310,7 +1310,7 @@
       "beat_id": "beat-006",
       "duration": 5,
       "story_beat": "the wave strips forest and carries debris",
-      "narration_excerpt": "The surge stripped the forest and carried debris across the land.",
+      "narration_excerpt": "higher than the Empire State Building. The surge stripped the forest and carried debris across the land.",
       "visual_semantics": {
         "role": "explanatory",
         "required": {
