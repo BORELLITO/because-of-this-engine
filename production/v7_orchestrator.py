@@ -191,8 +191,11 @@ def _visual_gate(
                     and asset.get("preview_only") is True
                     and str(asset.get("preview_only_reason", "")).strip()
                 )
-                if not str(asset.get("perceptual_hash", "")).strip() and not preview_candidate:
-                    problems.append(f"{scene_id}: asset.perceptual_hash missing")
+                visual_evidence = asset.get("visual_evidence") if isinstance(asset.get("visual_evidence"), dict) else {}
+                pixel_qc = visual_evidence.get("pixel_qc") if isinstance(visual_evidence.get("pixel_qc"), dict) else {}
+                evidence_backed_visual_identity = pixel_qc.get("status") == "PASS"
+                if not str(asset.get("perceptual_hash", "")).strip() and not preview_candidate and not evidence_backed_visual_identity:
+                    problems.append(f"{scene_id}: asset.perceptual_hash missing and no passing pixel QC evidence")
                 if manifest_dir is not None:
                     asset_path = (manifest_dir / str(asset.get("path", ""))).resolve()
                     if asset_path != manifest_dir and manifest_dir not in asset_path.parents:
