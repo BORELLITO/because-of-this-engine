@@ -2462,7 +2462,7 @@
     "cinematic_suspense": {
       "enabled": true,
       "profile": "cinematic_dread_v73",
-      "profile_version": "7.3.2",
+      "profile_version": "7.4.0",
       "reference_basis": "cinematic_dread_v73_before_after_comparison",
       "cool_shadows": 0.04,
       "warm_highlights": 0.014,
