@@ -1,8 +1,8 @@
 {
   "policy_version": "3.0",
-  "active_engine_profile": "because-of-this-v7.3.2-charon-cinematic-dread-smooth-2026-10",
+  "active_engine_profile": "because-of-this-v7.4-editorial-story-engine-2026-11",
   "active_engine_fingerprint": "c9f6c10765b65a447fb010008f64b302315ff189e257b927d47c9c8e2a427c8e",
-  "active_engine_version": "7.3.2",
+  "active_engine_version": "7.4.0",
   "update_rule": "approved_update_supersedes_previous_active_engine",
   "retired_versions": "must_not_remain_executable_in_active_tree",
   "history_rule": "git_history_and_archive_are_retained_for_audit_but_are_never_an_execution_source",
@@ -68,8 +68,8 @@
   ],
   "active_runtime": "production/gemini_tts.py",
   "archived_runtime": "branch:v7.2-charon-clean-clips-preview/production/piper_tts.py (external rollback reference only; absent from active tree)",
-  "active_addon_version": "7.3.2",
-  "active_addon_profile": "cinematic-dread-caption-smooth",
+  "active_addon_version": "7.4.0",
+  "active_addon_profile": "editorial-story-engine",
   "active_addon_capabilities": [
     "gemini_tts_charon",
     "captions_only_editorial_text",
