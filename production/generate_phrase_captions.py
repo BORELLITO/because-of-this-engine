@@ -71,13 +71,14 @@ def _balanced_lines(sentence: str, width: int) -> list[str]:
 _TRAILING_FUNCTION_WORDS = {"a", "an", "the", "to", "of", "and", "in", "on"}
 
 
-def _keep_trailing_function_word_with_next_chunk(chunks: list[str]) -> list[str]:
-    """Keep a short boundary word with the following acoustic context.
+def _keep_trailing_function_word_with_next_chunk(
+    chunks: list[str], max_line_chars: int | None = None
+) -> list[str]:
+    """Keep a boundary word only when the next caption still fits the width.
 
-    Caption segmentation may otherwise leave an unstressed article such as
-    "the" at the end of one chunk while its noun starts the next. Moving only
-    that canonical token preserves the transcript and improves strict
-    acoustic alignment at the boundary.
+    Moving an article such as ``the`` improves acoustic grouping, but it must
+    never create an overlong ASS line. If the move would exceed the active
+    width, retain the original split and let the caption remain readable.
     """
     adjusted = list(chunks)
     for index in range(len(adjusted) - 1):
@@ -89,10 +90,15 @@ def _keep_trailing_function_word_with_next_chunk(chunks: list[str]) -> list[str]
             continue
         if match.group("word").lower() not in _TRAILING_FUNCTION_WORDS:
             continue
-        adjusted[index] = match.group("prefix").rstrip()
-        adjusted[index + 1] = (
+        candidate = (
             f"{match.group('word')}{match.group('punct')} {adjusted[index + 1]}"
         ).strip()
+        if max_line_chars is not None and any(
+            len(line) > max_line_chars for line in candidate.split(r"\\N")
+        ):
+            continue
+        adjusted[index] = match.group("prefix").rstrip()
+        adjusted[index + 1] = candidate
     return [chunk for chunk in adjusted if chunk]
 
 
@@ -107,7 +113,7 @@ def phrase_chunks(script: str, max_line_chars: int = 42) -> list[str]:
                 chunks.append("\\N".join(chunk))
     if not chunks:
         raise CaptionGenerationError("Script produced no caption phrases.")
-    return _keep_trailing_function_word_with_next_chunk(chunks)
+    return _keep_trailing_function_word_with_next_chunk(chunks, max_line_chars=max_line_chars)
 
 
 def generate(manifest_path: Path) -> dict:
