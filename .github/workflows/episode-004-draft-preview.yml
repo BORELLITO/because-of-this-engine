@@ -181,6 +181,8 @@ jobs:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          # Explicitly allow reuse of the prior verified Charon audio because only beat segmentation changed.
+          BECAUSE_OF_THIS_LEGACY_NARRATION_CACHE_KEYS: d75ce6d950ba29fc0fa14aa8e303d54f23ea73cf55f7b8c4edd50d80b0644be8
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/narration_cache.py \
@@ -202,6 +204,8 @@ jobs:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          # Repeat the same explicit legacy lookup immediately before the provider gate.
+          BECAUSE_OF_THIS_LEGACY_NARRATION_CACHE_KEYS: d75ce6d950ba29fc0fa14aa8e303d54f23ea73cf55f7b8c4edd50d80b0644be8
         run: |
           set -euo pipefail
           PYTHONPATH=. python production/narration_cache.py \
