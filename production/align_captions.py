@@ -104,6 +104,9 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 "at": [["at"], ["ət"]],
                 "is": [["is"], ["iz"]],
                 "was": [["was"], ["wuz"]],
+                "could": [["could"], ["cold"], ["called"], ["call"], ["culd"]],
+                "free": [["free"], ["three"], ["tree"], ["flee"], ["fry"], ["fee"]],
+                "anchor": [["anchor"], ["anger"], ["anker"], ["ankor"], ["ankle"]],
                 # Factual names can be rendered phonetically by Gemini and
                 # then segmented differently by Vosk. These lexical variants
                 # still bind only to real ASR timestamps; they never invent
@@ -147,6 +150,7 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 # no timestamp is ever synthesized or estimated.
                 "figure": [["figure"], ["finger"], ["figger"]],
                 "threw": [["threw"], ["through"]],
+                "started": [["started"], ["start", "ed"], ["star", "did"], ["starred"], ["start"]],
                 "went": [["went"], ["when"]],
                 "pointed": [["pointed"], ["point"], ["pointing"]],
                 "directly": [["directly"], ["direct"]],
