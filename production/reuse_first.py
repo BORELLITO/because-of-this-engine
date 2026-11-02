@@ -63,6 +63,7 @@ def _code_fingerprints(manifest_path: Path) -> dict[str, str]:
         "alignment": repo_root / "production/align_captions.py",
         "story_intelligence": repo_root / "production/story_intelligence.py",
         "caption_quality": repo_root / "production/caption_quality.py",
+        "caption_generation": repo_root / "production/generate_phrase_captions.py",
         "music": repo_root / "production/generate_suspense_bed.py",
         "release_validation": repo_root / "production/validate_video_release.py",
         "golden_layout": repo_root / "production/golden_frame_regression.py",
@@ -165,6 +166,7 @@ def compute_fingerprints(manifest_path: Path, mode: str = "draft-preview") -> di
             "caption_style": captions,
             "code": {
                 "caption_quality": code["caption_quality"],
+                "caption_generation": code["caption_generation"],
                 "alignment": code["alignment"],
             },
         }
