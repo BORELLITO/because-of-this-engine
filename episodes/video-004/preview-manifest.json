@@ -2595,7 +2595,7 @@
       "target_max": 18,
       "max_clips": 18,
       "min_scene_seconds": 2,
-      "max_scene_seconds": 8,
+      "max_scene_seconds": 8.5,
       "enforce": true,
       "enforce_no_same_scene_loop": true,
       "require_exact_literal_context": true,
