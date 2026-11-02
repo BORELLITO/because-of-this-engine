@@ -93,6 +93,7 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 "the": [["the"], ["uh"], ["thuh"], ["thee"]],
                 "then": [["then"], ["than"]],
                 "bay": [["bay"], ["ebay"]],
+                "shore": [["shore"], ["sure"], ["shor"]],
                 "tore": [["tore"], ["tour"], ["tor"]],
                 "to": [["to"], ["two"], ["tuh"]],
                 "of": [["of"], ["uhv"], ["ov"]],
@@ -134,7 +135,7 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 ],
                 "edrie": [
                     ["edrie"], ["edry"], ["ed", "ree"], ["e", "dree"], ["a", "dree"],
-                    ["uh", "dree"], ["eatery"],
+                    ["uh", "dree"], ["air", "dry"], ["eatery"],
                 ],
                 "gilbert": [
                     ["gilbert"], ["gill", "bert"], ["gil", "bert"],
