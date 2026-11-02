@@ -14,7 +14,7 @@
     "runtime_max_seconds": 80
   },
   "target_runtime_seconds": 67,
-  "engine_profile": "because-of-this-v7.3.2-charon-cinematic-dread-smooth-2026-10",
+  "engine_profile": "because-of-this-v7.4-editorial-story-engine-2026-11",
   "engine_profile_fingerprint": "351da4ecf4ec6480b4f7634c238daf961308a33ec252a9db32f4be49834438f8",
   "master_prompt_version": "7.2",
   "master_prompt_sha256": "f393ca8891b6e254adfd252a8df031fbe878b0f1d395b67f15f9b0abf4bcc5af",
