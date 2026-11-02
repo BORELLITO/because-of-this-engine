@@ -151,6 +151,7 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 # no timestamp is ever synthesized or estimated.
                 "figure": [["figure"], ["finger"], ["figger"]],
                 "threw": [["threw"], ["through"]],
+                "carried": [["carried"], ["carry"]],
                 "started": [["started"], ["start", "ed"], ["star", "did"], ["starred"], ["start"]],
                 "went": [["went"], ["when"]],
                 "pointed": [["pointed"], ["point"], ["pointing"]],
