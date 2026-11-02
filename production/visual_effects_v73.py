@@ -13,7 +13,7 @@ from __future__ import annotations
 from typing import Any
 
 PROFILE_ID = "cinematic_dread_v73"
-PROFILE_VERSION = "7.3.2"
+PROFILE_VERSION = "7.4.0"
 REFERENCE_BASIS = "cinematic_dread_v73_before_after_comparison"
 MOTION_MODEL = "semantic_push_in_v2"
 
