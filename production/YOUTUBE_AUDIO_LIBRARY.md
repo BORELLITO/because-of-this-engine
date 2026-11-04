@@ -1,47 +1,47 @@
-# YouTube Audio Library workflow
+# YouTube Studio Audio Library — controlled audio intake (Because Of This V7.4 candidate)
 
-Audio Library music is selected and downloaded manually in YouTube Studio.
-The official help page says tracks can be filtered by attribution requirement,
-and tracks requiring Creative Commons attribution must be credited in the
-video description. Verify rights separately before distributing the rendered
-episode outside YouTube.
+**Current policy: YouTube + TikTok.** A track found in YouTube Studio's Audio Library is not automatically licensed for use on TikTok. YouTube's own guidance says it cannot give legal guidance for use outside its platform. Every off-platform license requires independent evidence. Do not infer clearance from the download button, royalty-free wording or a self-affirmed checkbox.
 
-Official guide: <https://support.google.com/youtube/answer/3376882>
+Official source: https://support.google.com/youtube/answer/3376882
 
-## Attach a suspense bed to a v2 episode
+## Safe process
 
-1. In YouTube Studio, open **Audio Library** and choose a suspense-appropriate
-   track. Prefer **Attribution not required** for the simplest publication
-   workflow.
-2. Download the MP3 from Studio. For attribution-required tracks, copy the
-   exact attribution text shown by Studio.
-3. Create a metadata JSON file:
+1. Choose a music track in YouTube Studio Audio Library, inspect the actual license and copy the required attribution verbatim if applicable.
+2. Record title, exact artist, license type, acquisition evidence, and the target platforms. Use a song **only after verifying its terms for each intended platform**.
+3. Inspect the actual downloaded MP3 (SHA-256, sound-quality and real listening tests on phone/headphones at low volume); compare against previously used audio. Never mark a test PASS without testing it.
+4. Register any candidate **only against the single global ledger** `episodes/audio-memory-registry.json`, not an episode-local license register.
+5. The current ingestion tool deliberately records YouTube Audio Library tracks as `license_status=REVIEW_REQUIRED` and `off_platform_rights_verified=false`. It **never** upgrades them to final-ready based on the Studio download alone.
+6. The global G5 gate independently checks SHA-256, real bytes, cross-episode music identity, SFX usage and approval; a generated report cannot override this live test.
+
+Example metadata shape (statuses shown as PASS **only after actual verified testing**):
 
 ```json
 {
-  "title": "Track title from Studio",
-  "artist": "Artist from Studio",
+  "track_id": "youtube-unique-track-title-and-artist",
+  "title": "Exact track title from Studio",
+  "artist": "Exact artist name",
   "attribution_required": false,
   "attribution_text": "",
-  "volume": 0.08
+  "volume": 0.08,
+  "similarity_review": {"status": "PASS", "evidence": "real listening and comparison record"},
+  "device_tests": {"phone": "PASS", "headphones": "PASS", "low_volume": "PASS"}
 }
 ```
-4. Run the ingestion tool from the repository root, replacing the placeholders
-   with the target episode paths:
+
+Tool invocation in an authorized local working branch:
 
 ```sh
-python production/ingest_youtube_audio_library.py <download>/track.mp3 <metadata>/track.json \
+python production/ingest_youtube_audio_library.py /local/track.mp3 /local/metadata.json \
   --confirm-audio-library-download \
-  --episode-dir <episode> \
-  --manifest <episode>/manifest.json \
-  --register <episode>/music-license-register.json
+  --episode-dir episodes/new-episode \
+  --manifest episodes/new-episode/manifest.json \
+  --register episodes/audio-memory-registry.json
 ```
 
-The tool stages the file at
-`<episode>/assets/music/youtube-audio-library.mp3`, updates the v2 manifest
-and writes the license record. The renderer then applies voice-first mixing,
-sidechain ducking and loudness/true-peak validation.
+This command is illustrative; do not run against the main production branch or an existing episode without specific approval. The tool checks global track ID and actual SHA collisions **before copying** and refuses to replace an existing soundtrack master or a previous episode's registry entry. It still cannot independently grant commercial rights on TikTok.
 
-The tool never logs into Studio, downloads tracks automatically or infers
-rights. Supply the exact title, artist, attribution status and required credit
-copied from the Audio Library interface.
+For **Mixkit Stock Music**, confirm the specific music track's Free License (not only the mood/category page); Mixkit allows web/social use within the Stock Music Free License restrictions: https://mixkit.co/license/modal/musicFree/
+
+For **Pixabay music**, a valid Content License does not prevent a Content ID claim; preserve the original licensing page and contributor name: https://pixabay.com/service/license-summary/ and https://pixabay.com/service/faq/
+
+**No automated publication, no TTS, no synthetic music generation and no modification of historical episodes are part of this audit.**
