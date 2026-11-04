@@ -1,0 +1,42 @@
+name: Because Of This V1.1 Git branch-history audit (read-only)
+on:
+  pull_request:
+    branches: [v7.4-editorial-story-engine]
+    paths:
+      - "audits/branch_history_audit_v11.py"
+      - "audits/tests/test_branch_history_audit_v11.py"
+      - ".github/workflows/audit-v11-git-history.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  branch-history:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout with history (no media synthesis)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - name: Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Fetch remote branch manifests read only
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin '+refs/heads/*:refs/remotes/origin/*'
+          echo "FETCHED_ORIGIN_BRANCHES=$(git for-each-ref refs/remotes/origin --format='%(refname)' | wc -l)"
+      - name: Validate offline test fixtures
+        run: python -m unittest discover -s audits/tests -p 'test_branch_history_audit_v11.py' -v
+      - name: Reconcile Git branch source metadata with current inventory
+        run: |
+          set -euo pipefail
+          python audits/branch_history_audit_v11.py --root . --output "$RUNNER_TEMP/branch-history-v11.json"
+      - name: Upload metadata-only read-only evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: because-of-this-branch-history-v11
+          path: ${{ runner.temp }}/branch-history-v11.json
+          if-no-files-found: error
+          retention-days: 30
