@@ -417,10 +417,19 @@ def evaluate(
         if post:
             from production.prompt_compliance import validate_post_publication
             post_report = validate_post_publication(post, release)
-            g11_status = post_report["status"]
-            g11_evidence = "; ".join(post_report["errors"]) if post_report["errors"] else f"manual publication verified on {post.get('platform')}"
+            # A syntactically valid receipt is not independent proof that a
+            # video exists at a real YouTube/TikTok URL. Offline CI must not
+            # claim publication complete or verified based on JSON alone.
+            if post_report["status"] == "PASS":
+                g11_status, g11_evidence = "DEFERRED", (
+                    "receipt syntax accepted; external URL, platform and posted media not verified"
+                )
+            else:
+                g11_status, g11_evidence = "BLOCKED", "; ".join(post_report["errors"])
         else:
-            g11_status, g11_evidence = "DEFERRED", "publication is manual; submit a post-publication receipt to close G11"
+            g11_status, g11_evidence = "DEFERRED", (
+                "publication is manual; external platform verification is not yet available"
+            )
     else:
         g11_status, g11_evidence = "DEFERRED", f"phase {phase} runs before post-publication verification"
     gates.append(_gate("G11", "POST_PUBLICATION", g11_status, g11_evidence))
@@ -433,7 +442,7 @@ def evaluate(
     elif publication_verified:
         next_action = "POST_PUBLICATION_VALIDATED"
     elif phase == "final":
-        next_action = "MANUAL_PUBLICATION_AND_G11_RECEIPT"
+        next_action = "VERIFY_PUBLISHED_URLS_EXTERNAL" if post else "MANUAL_PUBLICATION_AND_G11_RECEIPT"
     else:
         next_action = "ADVANCE_TO_NEXT_REVIEW_PHASE"
     return {
