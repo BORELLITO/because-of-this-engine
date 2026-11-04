@@ -104,7 +104,17 @@ def _story_intelligence(base: Path, mode: str = "final") -> tuple[str, dict[str,
 
 
 def _provenance(manifest: dict[str, Any], mode: str) -> tuple[str, str]:
-    truth = (manifest.get("story_profile") or {}).get("truth_mode") or (manifest.get("story_creation") or {}).get("truth", {}).get("mode")
+    """G2: distinguish basic provenance from final per-platform human rights proof.
+
+    Metadata is a *claim*, not an independent license check. Final release
+    additionally requires an evidence attestation bound to a specific source
+    URL and verified asset digest. External license validity is still human QA.
+    """
+    import re
+    from urllib.parse import urlsplit
+
+    truth = ((manifest.get("story_profile") or {}).get("truth_mode")
+             or (manifest.get("story_creation") or {}).get("truth", {}).get("mode"))
     errors: list[str] = []
     if not str(truth or "").strip():
         errors.append("truth_mode is missing")
@@ -112,20 +122,61 @@ def _provenance(manifest: dict[str, Any], mode: str) -> tuple[str, str]:
     if not str(story_truth.get("disclosure") or "").strip():
         errors.append("story truth disclosure is missing")
     required = ("source_page_url", "license", "sha256", "rights_status", "approved_for_render", "drive_file_id")
-    for scene in manifest.get("scenes", []):
+    scenes = manifest.get("scenes")
+    if not isinstance(scenes, list) or not scenes:
+        errors.append("scenes must be a nonempty list")
+        scenes = []
+    for scene in scenes:
+        if not isinstance(scene, dict):
+            errors.append("invalid scene")
+            continue
+        scene_id = scene.get("scene_id", "?")
         asset = scene.get("asset") or {}
+        if not isinstance(asset, dict):
+            errors.append(f"{scene_id}.asset")
+            continue
         for key in required:
-            if not asset.get(key):
-                errors.append(f"{scene.get('scene_id', '?')}.{key}")
+            if asset.get(key) in (None, "", False):
+                errors.append(f"{scene_id}.{key}")
         if mode == "final":
+            digest = str(asset.get("sha256") or "").strip().lower()
+            if not re.fullmatch(r"[0-9a-f]{64}", digest):
+                errors.append(f"{scene_id}.sha256_malformed")
             if asset.get("rights_status") != "APPROVED" or asset.get("approved_for_render") is not True:
-                errors.append(f"{scene.get('scene_id', '?')}.approved_rights")
-            for key in ("author", "acquisition_timestamp", "original_filename", "mime_type", "duration_seconds", "width", "height", "filesize_bytes", "job_ownership", "scene_usage"):
+                errors.append(f"{scene_id}.approved_rights")
+            for key in ("author", "acquisition_timestamp", "original_filename",
+                        "mime_type", "duration_seconds", "width", "height",
+                        "filesize_bytes", "job_ownership", "scene_usage"):
                 if asset.get(key) in (None, ""):
-                    errors.append(f"{scene.get('scene_id', '?')}.{key}")
-    return ("BLOCKED: missing rights/originality evidence: " + ", ".join(errors[:10]), "") if errors else (
-        "PASS: rights, provenance, declared truth mode and originality evidence are complete", ""
-    )
+                    errors.append(f"{scene_id}.{key}")
+            review = asset.get("rights_review")
+            if not isinstance(review, dict):
+                errors.append(f"{scene_id}.human_rights_review_missing")
+                continue
+            # An attestation must be tied to the exact origin and media identity.
+            source = str(asset.get("source_page_url") or "").strip()
+            source_host = urlsplit(source).hostname
+            evidence = str(review.get("evidence_url") or "").strip()
+            evidence_host = urlsplit(evidence).hostname
+            if (review.get("status") != "PASS"
+                    or not str(review.get("reviewer") or "").strip()
+                    or not str(review.get("reviewed_at_utc") or "").strip()
+                    or review.get("asset_sha256") != digest
+                    or review.get("source_page_url") != source
+                    or not source_host or not evidence_host):
+                errors.append(f"{scene_id}.rights_evidence_invalid")
+            platforms = review.get("authorized_platforms")
+            if not isinstance(platforms, list) or not {"youtube", "tiktok"}.issubset(set(
+                str(x).lower() for x in platforms if isinstance(x, str)
+            )):
+                errors.append(f"{scene_id}.cross_platform_rights_unverified")
+    if errors:
+        return "BLOCKED", "rights/originality evidence incomplete: " + ", ".join(errors[:12])
+    if mode == "final":
+        return "PASS", ("origin, digest and two-platform human review attestation present; "
+                        "external rights are not independently certified by metadata")
+    return "PASS", "basic source and fiction disclosure metadata present; commercial rights still unverified"
+
 
 
 def _visual(manifest_path: Path, base: Path, mode: str) -> tuple[str, str]:
@@ -318,8 +369,23 @@ def evaluate(
     gates.append(_gate("G11", "POST_PUBLICATION", g11_status, g11_evidence))
 
     blocking = [gate for gate in gates if gate["status"] == "BLOCKED"]
+    g11 = next((gate for gate in gates if gate["code"] == "G11"), None)
+    publication_verified = bool(g11 and g11["status"] == "PASS" and not blocking)
+    if blocking:
+        next_action = "RESOLVE_GATES:" + ",".join(gate["code"] for gate in blocking)
+    elif publication_verified:
+        next_action = "POST_PUBLICATION_VALIDATED"
+    elif phase == "final":
+        next_action = "MANUAL_PUBLICATION_AND_G11_RECEIPT"
+    else:
+        next_action = "ADVANCE_TO_NEXT_REVIEW_PHASE"
     return {
         "status": "GATES_BLOCKED" if blocking else "GATES_PASS",
+        "publication_verified": publication_verified,
+        "release_readiness": "BLOCKED" if blocking else (
+            "POST_PUBLICATION_VALIDATED" if publication_verified else
+            "READY_FOR_MANUAL_PUBLICATION" if phase == "final" else "PHASE_PASS"
+        ),
         "phase": phase,
         "job_id": manifest.get("job_id") or (manifest.get("job") or {}).get("job_id"),
         "video_id": manifest.get("video_id"),
@@ -331,7 +397,7 @@ def evaluate(
         "final_manifest": final_manifest,
         "delivery": _read(delivery_receipt_path, "delivery receipt"),
         "cleanup": _read(cleanup_receipt_path, "cleanup receipt"),
-        "next_action": "MANUAL_PUBLICATION_AND_G11_RECEIPT" if not post else "COMPLETE",
+        "next_action": next_action,
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
     }
 
