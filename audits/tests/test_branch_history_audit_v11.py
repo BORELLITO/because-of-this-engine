@@ -64,6 +64,25 @@ class BranchHistoryV11Tests(unittest.TestCase):
         self.assertEqual(report["historical_extra_by_lifecycle"]["final_approved"], 1)
         self.assertEqual(report["malformed_snapshot_count"], 0)
 
+    def test_history_preserves_case_sensitive_drive_id(self):
+        self.commit(source="111")
+        legacy = json.loads(self.manifest.read_text())
+        legacy["scenes"][0]["asset"] = {
+            "provider": "original",
+            "source_page_url": "https://drive.google.com/file/d/AbC_Xy9/view?usp=drivesdk",
+        }
+        self.manifest.write_text(json.dumps(legacy))
+        self.git("add", ".")
+        self.git("commit", "-qm", "historical mixed-case drive ID")
+        old_ref = self.git("rev-parse", "HEAD")
+        new_ref = self.commit(source="222")
+        self.git("update-ref", "refs/remotes/origin/historical", old_ref)
+        self.git("update-ref", "refs/remotes/origin/main", new_ref)
+        report = audit(self.root)
+        keys = [x["source_key"] for x in report["historical_extra_examples"]]
+        self.assertIn("drive_file:AbC_Xy9", keys)
+        self.assertNotIn("drive_file:abc_xy9", keys)
+
     def test_without_remote_refs_fails_closed(self):
         self.commit(source="111")
         with self.assertRaises(GitHistoryAuditError):
