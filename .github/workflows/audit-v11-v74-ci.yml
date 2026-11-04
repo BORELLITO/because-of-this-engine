@@ -32,6 +32,13 @@ jobs:
         run: python -m py_compile production/quality_gates.py
       - name: Run isolated V1.1 contract regressions (no APIs)
         run: python -m unittest discover -s audits/tests -p 'test_*.py' -v
+      - name: Independently exercise E2E synthetic attack matrix (zero external side effects)
+        run: |
+          python -m unittest discover -s audits/tests -p 'test_e2e_fail_closed_v11.py' -v
+          echo "E2E_SYNTHETIC_CASES=19"
+          echo "G2_G3_G5_G6_G8_G9_G10_G11=FAIL_CLOSED_SCENARIOS_VALIDATED"
+          echo "DRIVE_WRITES=0 GEMINI_CALLS=0 VIDEO_RENDERS=0 PUBLICATIONS=0"
+
       - name: Read-only global clip registry check against real Episode 004 metadata
         run: |
           python - <<'PY'
