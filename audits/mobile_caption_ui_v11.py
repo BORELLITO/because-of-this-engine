@@ -12,6 +12,7 @@ import argparse
 import hashlib
 import json
 import re
+import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -44,8 +45,24 @@ def _sha(path: Path) -> str:
 def _binary_image(path: Path) -> bool:
     with path.open("rb") as f:
         header=f.read(16)
-    # Real image file magic only; screenshot origin/subject is still manual proof.
-    return header.startswith(b"\x89PNG\r\n\x1a\n") or header.startswith(b"\xff\xd8\xff")
+    if not (header.startswith(b"\x89PNG\r\n\x1a\n") or header.startswith(b"\xff\xd8\xff")):
+        return False
+    # Decode actual screenshot dimensions. Reject a 1-pixel placeholder or
+    # arbitrary bytes with PNG magic. This still does not establish provenance.
+    try:
+        proc = subprocess.run(
+            ["ffprobe", "-v", "error", "-select_streams", "v:0",
+             "-show_entries", "stream=width,height", "-of", "json", str(path)],
+            capture_output=True, check=True, timeout=30,
+        )
+        streams = json.loads(proc.stdout).get("streams") or []
+        if not streams:
+            return False
+        width, height = int(streams[0].get("width") or 0), int(streams[0].get("height") or 0)
+        return (720 <= width <= 4000 and 1280 <= height <= 9000
+                and 0.30 <= width / height <= 0.85)
+    except (OSError, ValueError, TypeError, subprocess.SubprocessError):
+        return False
 
 
 def inspect(manifest_path: Path, review_path: Path | None = None) -> dict[str, Any]:
