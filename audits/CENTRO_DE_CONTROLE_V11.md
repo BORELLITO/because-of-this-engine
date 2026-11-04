@@ -92,6 +92,38 @@ NÃO emitir READY enquanto houver P0/P1 sem evidência E3–E5, direitos e hist�
 
 **VOCAL LOCK: preservar Gemini TTS / voz Charon**, a mesma rota aprovada no Because Of This. Não trocar para Google Cloud TTS Chirp3 HD Charon, pois o mesmo nome não garante a mesma identidade vocal. Preservar parâmetros e referência sonora do motor histórico; nenhum teste ou gasto Cloud TTS é necessário. O módulo `experimental/v11/chirp3_cloud_tts_contract.py` permanece não ativado e sem rota para produção; não o promover. A adaptação TTS não é pré-requisito para nova história. Próxima etapa: revalidar segurança, proveniência e geração da nova história mantendo o Gemini Charon e aprovação humana dos resultados.
 
+## Execução incremental — segurança da memória de clipes e continuidade vocal (04/11/2026)
+
+**PR #66 sobre V7.4 — duas vulnerabilidades confirmadas e corrigidas:**
+
+- Fonte já usada em um **rascunho sem manifesto final** agora entra no histórico da verificação. Antes, `_all_manifests()` lia apenas `manifest.json`.
+- `same_story_id` deixou de poder disfarçar outro `video_id` para dispensar a checagem global. Rascunho e final futuros devem usar o mesmo ID canônico. Rascunhos históricos não foram reescritos.
+- O gate G3 agora executa uma **nova consulta ao catálogo de fontes a cada validação**, independentemente de existir relatório JSON antigo marcado PASS. Bloqueios reais não podem ser ocultados por cache obsoleto.
+- A execução offline passou ao cruzar os **12 manifestos locais presentes no ramo e 13 registros de mídia do registry** para o episódio 004 usado como referência, com **zero colisões novas para aquele candidato**. Isso não equivale a pesquisar todas as branches do GitHub e todo o acervo no Drive.
+- Preservado exclusivamente `gemini_tts` / `Charon`: o experimento Cloud TTS, criado somente pela auditoria e nunca ligado ao motor, foi **retirado da PR #66**. As configurações reais da voz não foram alteradas.
+- O verificador da **PR #65** agora reconhece Gemini TTS Charon como voz aprovada e **bloqueia trocas para outra voz ou provedor**. Removeu-se o falso P0 de obrigação de migração para Cloud.
+
+**Evidências da revisão pós-correção:**
+
+- [PR #66 V7.4 (rascunho)](https://github.com/BORELLITO/because-of-this-engine/pull/66)
+- [CI de hardening da V7.4 (21 novos testes + 9 testes existentes, sucesso)](https://github.com/BORELLITO/because-of-this-engine/actions/runs/41891080369)
+- [CI de reuso da V7.4 (sucesso)](https://github.com/BORELLITO/because-of-this-engine/actions/runs/41891080161)
+- [PR #65 (rascunho)](https://github.com/BORELLITO/because-of-this-engine/pull/65)
+- [CI do verificador V1.1 (9 testes, sucesso)](https://github.com/BORELLITO/because-of-this-engine/actions/runs/41891050953)
+- [Regressão do motor principal V7.3.1 (sucesso)](https://github.com/BORELLITO/because-of-this-engine/actions/runs/41891051065)
+
+**Limitações e bloqueios ainda reais:**
+
+1. **P0**: catálogo de ativos ainda não reconciliado com *todas* as branches e arquivos antigos do Drive; os 13 registros do registry não cobrem integralmente o histórico de 12 manifestos examinados. Existem sobreposições entre identificadores de episódios históricos; não modificar esses vídeos, mas impedir repetição futura.
+2. **P0**: validade jurídica das licenças e as evidências pixel-a-pixel não foram verificadas de maneira independente; metadados `rights_status=APPROVED` isoladamente não bastam.
+3. **P1**: a segurança visual de legendas sobre a interface real do TikTok/Shorts não foi testada em aparelho; tempos por palavra dependem de amostra real do áudio final.
+4. **P1**: etapa do Work/navegação visual não executada nesta sessão; ausência de prova de ponta a ponta de nova produção, portanto **não promover READY**.
+
+**Integridade e reversibilidade:** `main` não recebeu merge, os PRs permanecem draft, nenhum TTS foi consumido, nenhum vídeo antigo foi modificado, nenhum render/publicação nova foi realizado. Testes de CI são evidência de código, não de licença, áudio ou experiência de publicação.
+
+---
 ## ÚNICO PRÓXIMO PASSO
 
-**Revalidar a cadeia de produção V7.4 com a voz Gemini TTS Charon existente, sem trocar de provedor:** confirmar o perfil vocal aprovado, as evidências de licenciamento e não repetição de mídia, o alinhamento de narração/legendas e os gates técnicos/editoriais. Somente depois preparar a primeira história nova e submetê-la ao usuário para aprovação prévia a qualquer render final/publicação. Sem consumir créditos desnecessariamente, sem alterações na `main` e sem tocar em One Extra Minute.
+**Auditar a procedência, licenças e identidade de mídia no histórico Git + Drive com relatório de evidências, preservando o acervo existente e a voz Gemini TTS Charon.** Concluir os P0 de inventário e revisão de fontes antes de emitir o sinal READY para uma história e, apenas depois, preparar o primeiro roteiro novo de terror com aprovação editorial prévia. Não acionar Gemini TTS, geração de mídia, render, despesas, publicação ou merge sem as aprovações e gates necessários.
+
+Critério de avanço: catálogo reconciliado e sem fonte reutilizada não autorizada para novos episódios; documentos de licença ligados aos itens; lacunas explicitamente bloqueadas. A impossibilidade de inspeção independente não deve ser transformada em aprovação automática.
