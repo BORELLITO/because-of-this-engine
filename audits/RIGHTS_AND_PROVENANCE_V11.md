@@ -37,7 +37,11 @@ URLs:
 ## Drive — resultado de metadados
 
 - IDs de vídeo de episódios de estado `FINAL_APPROVED` presentes nos manifestos atuais: **32 / 32** localizados via metadados Google Drive, tipo `video/mp4`, com tamanho conhecido.
+- IDs únicos dos episódios arquivados 001/002 (grupo piloto com sobreposições entre episódios): **13 / 13** localizados, todos `video/mp4`.
+- IDs do episódio arquivado 003: **12 / 12** localizados, todos `video/mp4`.
+- Episódio arquivado 004 reutiliza os 12 IDs já verificados na categoria `FINAL_APPROVED` e **não** é contado novamente.
 - IDs históricos da prévia V7.2 verificados com **maiúsculas/minúsculas originais**: **6 / 6** localizados, todos nomeados `PREVIEW_ONLY`.
+- **Total: 63 identificadores distintos de vídeo acessíveis entre os grupos consultados (32 + 13 + 12 + 6)**. Essa contagem não significa que todo o acervo do Drive foi enumerado.
 - Nenhum desses resultados verifica bytes SHA-256, o conteúdo real de todos os frames, autoria ou publicação. **Não promover E2 a E4.**
 - Outros diretórios do Drive contêm prévias e versões antigas; o acervo inteiro ainda não foi enumerado.
 
@@ -45,7 +49,8 @@ URLs:
 
 - Varredura executada sobre **74 branches** remotas, **251 ocorrências de manifestos**, **47 blobs de manifesto distintos**, sem erro de parsing.
 - **95 fontes distintas normalizadas** por origem (79 no catálogo atual + 16 vistas somente em branches antigos). A contagem anterior de 100 foi corrigida após identificar cinco aliases da mesma origem Pexels.
-- As **16** fontes adicionais foram documentadas em `audits/git_history_review_queue_v11.json` com status `PENDING_REVIEW_NOT_RETIRED`.
+- As **16** fontes adicionais foram documentadas em `audits/git_history_review_queue_v11.json` com status `PENDING_REVIEW_NOT_RETIRED`; seis delas são arquivos de prévia V7.2 com presença confirmada e IDs com caixa preservada.
+- O gate `asset_reuse_brain.audit` foi reforçado para retornar `HISTORY_REVIEW_REQUIRED` se uma nova produção tentar usar uma dessas 16 fontes, sem aposentadoria automática ou aprovação tácita.
 - Uma fonte registrada apenas em um rascunho **não é automaticamente consumida nem aposentada**. Se um episódio novo tentar utilizá-la, o motor responde `HISTORY_REVIEW_REQUIRED` para análise humana.
 
 ## Bloqueios remanescentes
