@@ -74,6 +74,7 @@ def _story_creation(manifest: dict[str, Any], base: Path, mode: str) -> tuple[st
 def _story_intelligence(base: Path) -> tuple[str, dict[str, Any]]:
     visual = None
     for candidate in (
+        base / "rendered" / "visual-story-qa-final.json",
         base / "rendered" / "visual-story-qa-draft-preview.json",
         base / "rendered" / "visual-story-qa-preview.json",
         base / "rendered" / "visual-story-qa-production.json",
@@ -82,13 +83,20 @@ def _story_intelligence(base: Path) -> tuple[str, dict[str, Any]]:
             visual = _read(candidate, "visual story QA")
             break
     timing = _read(base / "rendered" / "narration-coverage.json", "narration coverage") if (base / "rendered" / "narration-coverage.json").is_file() else None
-    if visual and visual.get("status") != "VISUAL_STORY_QA_PASS":
-        return "BLOCKED: visual story QA did not pass", {"visual": visual, "timing": timing}
-    if timing:
-        coverage = timing.get("narration_coverage") or {}
-        if timing.get("status") != "STORY_INTELLIGENCE_PASS" or coverage.get("timing_status") != "FORCED_ALIGNMENT_SCENE_TIMES_PASS":
-            return "BLOCKED: forced-alignment narration coverage did not pass", {"visual": visual, "timing": timing}
-    return "PASS: semantic visual review, continuity and forced timing are available", {"visual": visual, "timing": timing}
+    evidence = {"visual": visual, "timing": timing}
+    # Missing reports must never be promoted to PASS merely because the
+    # optional pre-existing files were not found. The previous implementation
+    # silently passed precisely this case, masking absent QA.
+    if visual is None:
+        return "BLOCKED: visual story QA report is missing", evidence
+    if visual.get("status") != "VISUAL_STORY_QA_PASS":
+        return "BLOCKED: visual story QA did not pass", evidence
+    if timing is None:
+        return "BLOCKED: narration coverage report is missing", evidence
+    coverage = timing.get("narration_coverage") or {}
+    if timing.get("status") != "STORY_INTELLIGENCE_PASS" or coverage.get("timing_status") != "FORCED_ALIGNMENT_SCENE_TIMES_PASS":
+        return "BLOCKED: forced-alignment narration coverage did not pass", evidence
+    return "PASS: semantic visual review, continuity and forced timing verified", evidence
 
 
 def _provenance(manifest: dict[str, Any], mode: str) -> tuple[str, str]:
@@ -106,6 +114,8 @@ def _provenance(manifest: dict[str, Any], mode: str) -> tuple[str, str]:
             if not asset.get(key):
                 errors.append(f"{scene.get('scene_id', '?')}.{key}")
         if mode == "final":
+            if asset.get("rights_status") != "APPROVED" or asset.get("approved_for_render") is not True:
+                errors.append(f"{scene.get('scene_id', '?')}.approved_rights")
             for key in ("author", "acquisition_timestamp", "original_filename", "mime_type", "duration_seconds", "width", "height", "filesize_bytes", "job_ownership", "scene_usage"):
                 if asset.get(key) in (None, ""):
                     errors.append(f"{scene.get('scene_id', '?')}.{key}")
@@ -134,7 +144,10 @@ def _visual(manifest_path: Path, base: Path, mode: str) -> tuple[str, str]:
 def _narration(manifest: dict[str, Any], base: Path) -> tuple[str, str]:
     audio = manifest.get("audio") or {}
     voice = manifest.get("voice") or {}
-    if not all(str(voice.get(key, "")).strip() for key in ("provider", "model", "voice", "language", "style")):
+    # Match the actual 7.4 canonical voice contract, not retired V6 field names.
+    if not all(str(voice.get(key, "")).strip() for key in (
+        "provider", "model_or_voice_type", "voice_name", "language_code", "style"
+    )):
         return "BLOCKED", "canonical narration profile is incomplete"
     path = base / str(audio.get("path", ""))
     if not path.is_file():
@@ -147,7 +160,7 @@ def _captions(manifest_path: Path, mode: str) -> tuple[str, str]:
         report = quality_report(manifest_path, require_word_level=mode == "final")
     except (CaptionQualityError, OSError, ValueError, json.JSONDecodeError) as exc:
         return "BLOCKED", str(exc)
-    if report.get("status") != "PASS":
+    if report.get("status") != "CAPTION_QA_PASS":
         return "BLOCKED", "caption quality report did not pass"
     return "PASS", f"{report.get('event_count', '?')} forced-aligned events; karaoke timing verified"
 
