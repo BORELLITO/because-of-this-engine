@@ -15,6 +15,7 @@ if str(Path(__file__).resolve().parents[1]) not in sys.path:
 from production.asset_reuse_brain import AssetReuseBrainError, audit as audit_asset_reuse
 from production.audio_reuse_brain import AudioReuseError, audit as audit_audio_reuse
 from production.caption_quality import CaptionQualityError, quality_report
+from audits.mobile_caption_ui_v11 import MobileUIReviewError, inspect as inspect_mobile_caption_ui
 from production.canonical_config import CanonicalConfigError, validate_canonical_manifest
 from production.prompt_compliance import (
     PROMPT_GATE_ORDER,
@@ -255,6 +256,21 @@ def evaluate(
     packaging = validate_packaging(manifest, strict=mode == "final")
 
     caption_status, caption_evidence = _captions(manifest_path, mode)
+    if phase == "final":
+        # Real interface evidence is required separately from ASS validity.
+        # No automatic "PASS" from fixed style or safe-zone metadata alone.
+        try:
+            ui_review = inspect_mobile_caption_ui(manifest_path)
+            if ui_review.get("status") != "UI_EVIDENCE_ATTESTED":
+                caption_status = "BLOCKED"
+                caption_evidence += "; TikTok/YouTube mobile evidence pending: " + ", ".join(
+                    ui_review.get("issues") or ["manual UI review missing"]
+                )
+            else:
+                caption_evidence += "; platform-specific UI screenshot hashes and final render binding checked"
+        except (MobileUIReviewError, OSError, ValueError, TypeError, json.JSONDecodeError) as exc:
+            caption_status = "BLOCKED"
+            caption_evidence += f"; mobile UI review could not be validated: {exc}"
     gates.append(_gate("G6", "CAPTIONS_KARAOKE", caption_status, caption_evidence))
     if 7 in active or phase == "final":
         gates.append(_gate("G7", "PACKAGING", packaging["status"], "; ".join(packaging["errors"]) if packaging["errors"] else "three title/thumbnail directions, fiction disclosure and consequence-safe CTA verified"))
