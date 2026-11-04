@@ -43,6 +43,12 @@ class V74EvidenceContractTests(unittest.TestCase):
         self.good_visual()
         self.assertIn("narration coverage", _story_intelligence(self.root)[0])
 
+    def test_draft_visual_does_not_certify_final(self):
+        self.good_visual("visual-story-qa-draft-preview.json")
+        self.good_timing()
+        self.assertIn("BLOCKED", _story_intelligence(self.root, "final")[0])
+        self.assertTrue(_story_intelligence(self.root, "preview")[0].startswith("PASS"))
+
     def test_bad_visual_status_blocks(self):
         self.write("visual-story-qa-final.json", {"status": "BLOCKED"})
         self.good_timing()
