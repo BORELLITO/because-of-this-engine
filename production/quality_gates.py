@@ -131,16 +131,25 @@ def _visual(manifest_path: Path, base: Path, mode: str) -> tuple[str, str]:
         spec = validate_manifest(manifest_path, base, mode=mode, check_files=True, enforce_canonical=True)
     except (VideoContractError, OSError, ValueError) as exc:
         return "BLOCKED", str(exc)
-    reuse_path = base / "rendered" / f"asset-reuse-brain-{mode}.json"
+    # Cached JSON is diagnostic history, not live proof of a clean source.
+    # Re-evaluate against the current manifest, every episode snapshot and the
+    # registry on every gate execution. Otherwise a stale PASS can be replayed
+    # after the source or asset ledger changes.
     try:
-        reuse = _read(reuse_path, "asset reuse report") if reuse_path.is_file() else audit_asset_reuse(
-            manifest_path, base.parents[1], registry_path=base.parents[1] / "episodes" / "asset-memory-registry.json"
+        reuse = audit_asset_reuse(
+            manifest_path, base.parents[1],
+            registry_path=base.parents[1] / "episodes" / "asset-memory-registry.json",
         )
     except (AssetReuseBrainError, OSError, RuntimeError, ValueError, TypeError, json.JSONDecodeError) as exc:
         return "BLOCKED", str(exc)
     if reuse.get("status") != "ASSET_REUSE_PASS":
-        return "BLOCKED", "global asset brain found a reused or ambiguous clip"
-    return "PASS", f"{len(spec['scenes'])} approved semantic scenes with global no-repeat protection"
+        return "BLOCKED", f"fresh source-ledger audit failed: {reuse.get('reason', 'ambiguous or reused clip')}"
+    return "PASS", (
+        f"{len(spec['scenes'])} approved semantic scenes; fresh ledger scan of "
+        f"{reuse.get('scanned_manifest_count', '?')} manifests / "
+        f"{reuse.get('registry_asset_count', '?')} registered assets; "
+        "historical Git refs and external Drive sources still need independent audit"
+    )
 
 
 def _narration(manifest: dict[str, Any], base: Path) -> tuple[str, str]:
