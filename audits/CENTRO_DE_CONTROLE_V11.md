@@ -147,8 +147,30 @@ A PR #66 ganhou `audits/inventory_audit_v11.py`, sem qualquer consulta externa o
 **Segurança:** comparação entre V7.4 e PR #66 confirma que NENHUM arquivo dentro de `episodes/` foi modificado; só módulos de validação, testes e auditorias. `main` mantém SHA `d35d78cd4a92d12375f54076e3e21b56cbe25fad`. One Extra Minute preservado.
 
 ---
+## Reconciliação GitHub + Drive — 04/11/2026 | PR #66
+
+**Execução comprovada e não destrutiva:**
+- Auditor `audits/branch_history_audit_v11.py` percorreu **74 branches remotas**, **251 ocorrências** e **47 versões distintas** de manifestos. Todos os blobs escaneados puderam ser interpretados.
+- A primeira contagem de 100 fontes tinha **5 aliases equivalentes de Pexels**. Após correção de identidade (inclusive IDs Drive sensíveis a caixa), o histórico registra **95 fontes distintas**: 79 presentes na árvore V7.4 atual + 16 adicionais encontrados somente em branches antigos.
+- Os **16** adicionais foram preservados em `audits/git_history_review_queue_v11.json` como `PENDING_REVIEW_NOT_RETIRED`, sem proibição permanente nem prova de consumo. O guard de reutilização bloqueia um novo episódio que coincida com eles, sinalizando `HISTORY_REVIEW_REQUIRED`, até revisão humana específica.
+- **Google Drive confirmou presença de 63 IDs de vídeos distintos:** 32 de manifestos FINAL_APPROVED; 13 dos dois episódios piloto arquivados; 12 do episódio arquivado 003; e 6 antigos vídeos somente de prévia. Os IDs do arquivado 004 coincidem com os 12 já contados nos finais e não foram duplicados. Nenhum download, alteração de vídeo ou verificação byte a byte foi realizado.
+- A análise das páginas originais registrou **cinco evidências por item** (2 Mixkit Stock Video Free; 1 USGS Public Domain; 2 Wikimedia Commons Public Domain) em `audits/RIGHTS_AND_PROVENANCE_V11.md`. Licenças gerais Pexels/Pixabay/Mixkit foram revisadas, incluindo cautelas de imagem de pessoas, marcas e conteúdo de terror. As páginas não certificam a identidade dos arquivos derivados.
+- O registro central original continua com **66 das 79 fontes atuais ainda sem entrada** (32 presentes em `FINAL_APPROVED`, 12 somente em arquivo histórico, 22 somente em drafts/outros estados); **13 registros sem fingerprint visual**. O novo gate lê a árvore de manifestos e a fila histórica, mas o registro persistente completo ainda não foi homologado.
+
+**Evidências e testes:** 
+- [PR #66 — hardening em V7.4 (draft)](https://github.com/BORELLITO/because-of-this-engine/pull/66).
+- [Git history scanner: 74 branches, 95 fontes após normalização](https://github.com/BORELLITO/because-of-this-engine/actions/runs/41899774117).
+- [CI V7.4 — 39 testes de auditoria + 9 existentes, todos PASS](https://github.com/BORELLITO/because-of-this-engine/actions/runs/41900806957).
+- [CI de não-repetição existente — 6 testes PASS](https://github.com/BORELLITO/because-of-this-engine/actions/runs/41900806908).
+- [Evidência de páginas de licença](https://github.com/BORELLITO/because-of-this-engine/blob/audit/v74-v11-hardening-20261104/audits/RIGHTS_AND_PROVENANCE_V11.md).
+
+**Bloqueios P0/P1 restantes:** verificação real de checksums e quadros de derivados no Drive; verificação individualizada de direitos/autorizações para mídias escolhidas futuramente (inclusive terceiros identificáveis); reconciliação final de áudio e trilhas históricas; preview real de legendas na interface de TikTok e Shorts; integração ponta a ponta no Work e aprovação humana da nova direção. **Não declarar o motor READY.**
+
+**Não executado:** nenhum TTS, nenhum render novo, nenhuma postagem, nenhum merge, nenhum arquivo `episodes/` modificado, nenhum vídeo histórico alterado. Gemini TTS Charon mantém a configuração originalmente aprovada.
+
+---
 ## ÚNICO PRÓXIMO PASSO
 
-**Reconciliar o catálogo de 79 fontes com uma proposta de ledger categorizado e verificável, sem aposentadoria automática dos 22 rascunhos, e confrontar os 32 finalizados e 12 históricos com evidências do Git/Drive e seus direitos de uso.** Concluir a reconciliação de aliases/draft da mesma história e registrar os 11 conflitos históricos potenciais. Só depois marcar os gates P0 de proveniência como resolvidos, seguindo para pré-produção da primeira história nova.
+**Validar a integridade e direitos E4 das fontes candidatas a uma nova produção**: cruzar checksum real, origem/licença específica e direitos de terceiros dos arquivos selecionados; documentar qualquer exceção como bloqueio. Em paralelo, fechar a revisão das trilhas históricas e prova de layout da legenda, sem reconstruir vídeos passados. Somente após esses gates elaborar a primeira história original e apresentar roteiro/storyboard para aprovação, antes de qualquer gasto em Gemini, render final ou publicação. Continuar isolado na PR #66 e manter `main` / One Extra Minute intactos.
 
-Não fazer merge, não alterar One Extra Minute, não acionar Gemini nem publicar. A voz aprovada continua Gemini TTS Charon. **Status geral = auditoria parcial / nova produção bloqueada.**
+Estado: **AUDITORIA PARCIAL — NOVO VÍDEO BLOQUEADO POR E4/E5**, sem nenhuma intervenção do usuário neste momento.
