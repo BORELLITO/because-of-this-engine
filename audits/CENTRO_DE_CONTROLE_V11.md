@@ -192,8 +192,23 @@ A PR #66 ganhou `audits/inventory_audit_v11.py`, sem qualquer consulta externa o
 **Estado:** AUDITORIA PARCIAL / PRIMEIRA PRODUÇÃO NOVA BLOQUEADA.
 
 ---
+## V1.1 — auditoria de áudio e legendas mobile | 04/11/2026
+
+**Áudio (PR #66; testado):** investigação da memória central `episodes/audio-memory-registry.json` encontrou ledger com **zero entradas**, apesar de diversos episódios históricos. Dois arquivos `music.wav` distintos do Drive (derivados de episódios antigos 002 e 004) foram baixados em modo somente leitura: tinham **13.440.044 bytes cada**, 70s, PCM stereo, SHA-256 idêntico `4a84629bdd611489b49f28187c70f2fc6d4a48b11347ef5c05cf301e1cd1fa24`. O registro `audits/audio_verified_history_v11.json` conserva esse achado; nenhum áudio antigo foi substituído.
+
+**Causa-raiz:** `generate_suspense_bed.py` é determinístico; `track_id` distinto não prova uma trilha nova. `production/audio_reuse_brain.py` não lia snapshots de prévia e não estava conectado aos caminhos G5 reais. Corrigido na branch isolada: validação por IDs/URLs específicos, Drive ID case-sensitive, hashes, leitura do histórico final/rascunhos, prova de arquivo no modo final, falha fechada para efeitos com intervalo de três vídeos autodeclarado, e ligação no `quality_gates.py` **e** `v7_orchestrator.py`. A ingestão de MP3 do YouTube Audio Library exige ledger global e bloqueia overwrite; licença para TikTok permanece `REVIEW_REQUIRED` sem prova independente. O ledger histórico de produção não foi preenchido artificialmente: **lacuna ainda existe**.
+
+**Legenda (PR #66; testado):** a posição canônica aprovada `1080x1920 / Arial 48 / alinhamento central / margens 90-140-408 / destaque #FF7777` está intacta. Foi corrigida a brecha em `caption_quality.py` que permitia margens, estilos e comandos ASS de deslocamento por evento mesmo quando o estilo default estava certo. Karaokê colorido e timestamps reais continuam permitidos.
+
+**Proteção nova G6 final:** `audits/mobile_caption_ui_v11.py` exige revisão real e separada de TikTok e YouTube Shorts, duas capturas distintas de smartphone decodificáveis, identificador do vídeo e SHA-256 dos bytes de vídeo, legenda e capturas. Relatórios vazios, evidência reaproveitada, screenshot de mockup, caminho inválido ou captura antiga bloqueiam. A atestação humana não comprova segurança em todas as versões e modelos, e as capturas em testes são **sintéticas**, não são prova de UI real. A revisão efetiva de aparelho de episódio novo ainda está **PENDENTE**.
+
+**Teste confirmado:** [GitHub Actions V7.4 #41927798744](https://github.com/BORELLITO/because-of-this-engine/actions/runs/41927798744): **94 testes de auditoria e 9 testes existentes PASS**. [Documentação de safe-zone](https://github.com/BORELLITO/because-of-this-engine/blob/audit/v74-v11-hardening-20261104/audits/CAPTION_MOBILE_SAFEZONE_V11.md). Proteção de identidade audiovisual e de direitos segue como antes.
+
+**Pendências reais:** registro histórico de áudio ainda vazio (sem regularização artificial), verificação de licenças individualizadas e terceiros para futuros clipes e áudios, avaliação visual de layouts em aparelhos reais de um candidato novo, prova de execução E2E e aprovação editorial. **Nenhum READY ou aprovação de mídia atribuídos.** Gemini TTS Charon travada; `main`, One Extra Minute e todas as produções anteriores intactos. PRs 65/66 mantidos em draft.
+
+---
 ## ÚNICO PRÓXIMO PASSO
 
-**Auditar e fechar o contrato de trilhas musicais, efeitos sonoros e a memória global de áudio na V7.4, sem gerar nem trocar músicas existentes.** Confirmar proveniência, licenças, integridade e identidade sem repetição; bloquear ambiguidade no motor experimental. Depois revisar segurança de legenda e realizar aprovação editorial da primeira nova história. Não gerar TTS, render, mesclar branches, alterar One Extra Minute ou publicar.
+**Executar um dry-run de integração ponta a ponta da V7.4 sem TTS nem render, usando dados e arquivos descartáveis para tentar furar os gates de direitos, reuso, áudio, legendas, aprovação e publicação.** Corrigir falhas seguras só na branch da PR #66, repetir testes e atualizar o Centro de Controle. Com os bloqueios essenciais identificados e contidos, a próxima atividade editorial será preparar a **primeira história original**, em inglês, para aprovação do roteiro e storyboard antes de selecionar mídia ou consumir créditos. **Não alterar One Extra Minute, não fazer merge em main, não publicar.**
 
-**Ação do usuário agora:** nenhuma. O avanço ocorrerá apenas após evidências e gates, não por autodeclaração.
+**Ação exigida do usuário agora:** nenhuma. **Status: AUDITORIA E5 PENDENTE / NOVA PRODUÇÃO AINDA BLOQUEADA.**
