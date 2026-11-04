@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import math
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -25,7 +28,7 @@ from production.prompt_compliance import (
     validate_packaging,
 )
 from production.story_creation import audit_story_creation
-from production.video_asset_contract import VideoContractError, load_manifest, validate_manifest
+from production.video_asset_contract import VideoContractError, ffprobe as inspect_video_media, load_manifest, validate_manifest
 
 GATES = PROMPT_GATE_ORDER
 ACTIVE_BY_PHASE = {
@@ -269,6 +272,50 @@ def _output(manifest: dict[str, Any], base: Path, mode: str) -> Path:
     return (base / template.format(video_id=manifest["video_id"], mode=mode)).resolve()
 
 
+def _release_media_integrity(
+    manifest: dict[str, Any], base: Path, mode: str, release: dict[str, Any] | None
+) -> tuple[str, str, dict[str, Any] | None]:
+    """Verify the actual rendered bytes, not just a signed-looking JSON report."""
+    if not release or release.get("status") != "VIDEO_RELEASE_VALIDATED":
+        return "BLOCKED", "validated release report missing", None
+    template = (manifest.get("output") or {}).get("path")
+    if not isinstance(template, str) or not template.strip():
+        return "BLOCKED", "output.path is missing from manifest", None
+    try:
+        rel = template.format(video_id=manifest["video_id"], mode=mode)
+    except (KeyError, ValueError) as exc:
+        return "BLOCKED", f"output.path cannot be resolved: {exc}", None
+    root = base.resolve()
+    video = (root / rel).resolve()
+    if root not in video.parents or not video.is_file():
+        return "BLOCKED", "rendered output missing or escaping episode directory", None
+    declared = str(release.get("output_sha256") or "").strip().lower()
+    if not re.fullmatch(r"[0-9a-f]{64}", declared):
+        return "BLOCKED", "release report missing valid output_sha256", None
+    digest = hashlib.sha256()
+    with video.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1 << 20), b""):
+            digest.update(chunk)
+    if digest.hexdigest() != declared:
+        return "BLOCKED", "release report SHA256 mismatches actual final MP4", None
+    try:
+        probe = inspect_video_media(video)
+        duration, fps = float(probe["duration"]), float(probe["fps"])
+        if not math.isfinite(duration) or not math.isfinite(fps):
+            raise ValueError("non-finite media metrics")
+        if (probe["width"] != 1080 or probe["height"] != 1920 or
+                abs(fps - 60.0) > 0.01 or not 60 <= duration <= 80 or
+                probe["has_audio"] is not True):
+            return "BLOCKED", "actual MP4 fails 1080x1920 / 60fps / 60-80s / audio contract", probe
+        if (release.get("dimensions") != "1080x1920" or
+                abs(float(release.get("fps", 0)) - fps) > 0.01 or
+                abs(float(release.get("duration_seconds", 0)) - duration) > 0.15):
+            return "BLOCKED", "release metadata differs from actual MP4", probe
+    except (VideoContractError, ValueError, TypeError, KeyError, OSError, OverflowError) as exc:
+        return "BLOCKED", f"cannot independently verify MP4: {exc}", None
+    return "PASS", "real MP4, SHA-256, fps, duration, audio stream and dimensions verified", probe
+
+
 def evaluate(
     manifest_path: Path,
     mode: str,
@@ -330,22 +377,32 @@ def evaluate(
     else:
         gates.append(_gate("G7", "PACKAGING", "DEFERRED", f"phase {phase} runs before packaging validation"))
 
+    release_status, release_evidence, measured_media = ("DEFERRED", "not post-render", None)
+    if 8 in active or 9 in active:
+        release_status, release_evidence, measured_media = _release_media_integrity(manifest, base, mode, release)
+
     if 8 in active:
-        if release and release.get("status") == "VIDEO_RELEASE_VALIDATED":
-            if mode == "final" and (manifest.get("preview_approval") or {}).get("status") != "PASS":
-                g8_status, g8_evidence = "BLOCKED", "final mode requires an approved preview record"
-            else:
-                g8_status, g8_evidence = "PASS", "rendered preview/final preserves the approved fixed HUD, logo, karaoke and outro"
+        approved = manifest.get("preview_approval") or {}
+        if release_status != "PASS":
+            g8_status, g8_evidence = "BLOCKED", release_evidence
+        elif (mode == "final" and (
+                approved.get("status") != "PASS"
+                or approved.get("approved_video_sha256") != release.get("output_sha256")
+                or not approved.get("reviewer")
+                or not approved.get("approved_at"))):
+            g8_status, g8_evidence = "BLOCKED", "approved preview identity/reviewer/time missing or mismatched"
         else:
-            g8_status, g8_evidence = "BLOCKED", "validated release report is missing"
+            g8_status, g8_evidence = "PASS", release_evidence + "; preview record bound to final SHA"
     else:
         g8_status, g8_evidence = "DEFERRED", f"phase {phase} runs before preview/render"
     gates.append(_gate("G8", "PREVIEW", g8_status, g8_evidence))
 
     if 9 in active:
         dims = validate_dimensions(release)
-        g9_status = "PASS" if release and release.get("technical_qa") == "PASS" and dims["status"] == "PASS" else "BLOCKED"
-        g9_evidence = "; ".join(dims["errors"]) if dims["errors"] else f"{release.get('dimensions') if release else 'missing'} at {release.get('fps') if release else 'missing'} fps; anomaly and technical QA required"
+        g9_status = ("PASS" if release_status == "PASS" and release
+                     and release.get("technical_qa") == "PASS"
+                     and dims["status"] == "PASS" else "BLOCKED")
+        g9_evidence = release_evidence + "; " + "; ".join(dims["errors"])
     else:
         g9_status, g9_evidence = "DEFERRED", f"phase {phase} runs before render QA"
     gates.append(_gate("G9", "RENDER_TECHNICAL", g9_status, g9_evidence))
