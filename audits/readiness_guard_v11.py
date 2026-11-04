@@ -6,7 +6,8 @@ import json
 import re
 from pathlib import Path
 
-TARGET_PROVIDER = "google_cloud_tts"
+TARGET_PROVIDER = "gemini_tts"
+TARGET_VOICE = "Charon"
 TARGET_DURATION = (50, 70)
 ASSET_FIELDS = ("source_page_url", "license", "sha256", "rights_status", "drive_file_id")
 
@@ -33,7 +34,10 @@ def inspect(root: Path, candidate: Path | None = None) -> dict:
 
     provider = policy.get("voice_provider")
     if provider != TARGET_PROVIDER:
-        add("VOICE_PROVIDER_CONFLICT", "P0", f"target={TARGET_PROVIDER}; active={provider!r}")
+        add("VOICE_PROVIDER_CONFLICT", "P0", f"approved={TARGET_PROVIDER}; active={provider!r}")
+    configured_voice = (policy.get("voice_policy") or {}).get("voice_name")
+    if configured_voice != TARGET_VOICE:
+        add("VOICE_LOCK_CONFLICT", "P0", f"approved={TARGET_VOICE}; active={configured_voice!r}")
     if policy.get("publication_policy") != "manual_only":
         add("AUTOMATIC_PUBLICATION_RISK", "P0", "manual_only is required")
     render = policy.get("render_contract") or {}
@@ -77,7 +81,7 @@ def inspect(root: Path, candidate: Path | None = None) -> dict:
     result = "BLOCKED" if any(i["priority"] in ("P0", "P1") for i in issues) else ("PARTIAL" if issues else "PASS")
     return {"audit_version": "1.1", "mode": "READ_ONLY", "status": result,
             "active_engine": policy.get("active_engine_version", "UNKNOWN"),
-            "active_provider": provider or "UNKNOWN", "issues": issues}
+            "active_provider": provider or "UNKNOWN", "approved_voice": TARGET_VOICE, "issues": issues}
 
 
 def main() -> int:
