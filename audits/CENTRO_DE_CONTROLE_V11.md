@@ -169,8 +169,31 @@ A PR #66 ganhou `audits/inventory_audit_v11.py`, sem qualquer consulta externa o
 **Não executado:** nenhum TTS, nenhum render novo, nenhuma postagem, nenhum merge, nenhum arquivo `episodes/` modificado, nenhum vídeo histórico alterado. Gemini TTS Charon mantém a configuração originalmente aprovada.
 
 ---
+## E4: integridade real de arquivos e direitos de origem — 04/11/2026
+
+**Resultado técnico real:** 12 arquivos `MP4` históricos do Episode 004 foram baixados exclusivamente para auditoria read-only pelo conector Google Drive. Comparados diretamente com o manifesto de produção V7.4:
+- **12/12 SHA-256 idênticos** ao valor registrado no manifesto;
+- **12/12 tamanhos em bytes idênticos**;
+- **12/12 streams de vídeo lidos** por `ffprobe`;
+- **36/36 quadros extraídos** por `ffmpeg` (25%, 50%, 75%);
+- Originais intactos, sem qualquer alteração nas pastas de episódios, render, TTS, música ou publicação.
+
+**Achado visual crítico:** S01 e S05 utilizam a **mesma fotografia histórica de Lituya Bay** em derivações diferentes (S05 inclui setas); correlação dos quadros centrais 0,972. Hashes de arquivos distintos **não** detectavam essa reutilização de imagem. S02/S10 tiveram alarme por dHash, mas inspeção visual verificou cenas diferentes (correlação 0,8769): não bloquear apenas por dHash. S04 página Pexels refere ondulações, sem prova suficiente nos quadros de queda da pedra.
+
+**Correção isolada na PR #66:** novo `audits/e4_media_integrity_v11.py` verifica bytes, tamanho, metadados e quadros reais de candidatos, sem tocar nos arquivos. Semelhança forte ou incerta gera `E4_TECHNICAL_PASS_WITH_REVIEW` **com exit code 2** (bloqueio até revisão humana), não `PASS` automático. Checksum/tamanho incorreto ou arquivo ausente causa `BLOCKED`. O script jamais aprova direitos comerciais ou um novo episódio sozinho. Foram introduzidos testes com vídeos sintéticos para evitar depender de créditos ou material já consumido.
+
+**Evidência técnica e documentação:** 
+- [Relatório E4 no GitHub](https://github.com/BORELLITO/because-of-this-engine/blob/audit/v74-v11-hardening-20261104/audits/E4_REAL_MEDIA_INTEGRITY_V11.md)
+- [Suíte V7.4 após instalação FFmpeg no runner](https://github.com/BORELLITO/because-of-this-engine/actions/runs/41915419803) — 46 testes novos e 9 testes existentes; última execução deverá manter o mesmo perfil.
+- Páginas específicas de origem e termos consultados: 5 clips Mixkit Free, 3 Pexels Free, 1 Pixabay sob licença de conteúdo e 3 itens USGS/Wikimedia em domínio público nos EUA. **Ainda não comprovado**: autorização integral dos derivados para novos episódios, direitos de terceiros, música, segurança em interfaces reais e seleção editorial da próxima história.
+
+**Escopo e limites:** E4 técnico concluído **somente para amostra histórica Episode 004** como ensaio de verificação. Não foi certificada a totalidade do acervo nem selecionadas mídias de episódio novo. One Extra Minute não foi editado, refiltrado, renarrado nem recuperado para reuso. `main` permanece intocada; voz Gemini TTS Charon preservada.
+
+**Estado:** AUDITORIA PARCIAL / PRIMEIRA PRODUÇÃO NOVA BLOQUEADA.
+
+---
 ## ÚNICO PRÓXIMO PASSO
 
-**Validar a integridade e direitos E4 das fontes candidatas a uma nova produção**: cruzar checksum real, origem/licença específica e direitos de terceiros dos arquivos selecionados; documentar qualquer exceção como bloqueio. Em paralelo, fechar a revisão das trilhas históricas e prova de layout da legenda, sem reconstruir vídeos passados. Somente após esses gates elaborar a primeira história original e apresentar roteiro/storyboard para aprovação, antes de qualquer gasto em Gemini, render final ou publicação. Continuar isolado na PR #66 e manter `main` / One Extra Minute intactos.
+**Auditar e fechar o contrato de trilhas musicais, efeitos sonoros e a memória global de áudio na V7.4, sem gerar nem trocar músicas existentes.** Confirmar proveniência, licenças, integridade e identidade sem repetição; bloquear ambiguidade no motor experimental. Depois revisar segurança de legenda e realizar aprovação editorial da primeira nova história. Não gerar TTS, render, mesclar branches, alterar One Extra Minute ou publicar.
 
-Estado: **AUDITORIA PARCIAL — NOVO VÍDEO BLOQUEADO POR E4/E5**, sem nenhuma intervenção do usuário neste momento.
+**Ação do usuário agora:** nenhuma. O avanço ocorrerá apenas após evidências e gates, não por autodeclaração.
