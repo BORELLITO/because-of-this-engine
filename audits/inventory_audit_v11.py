@@ -46,6 +46,7 @@ def inspect(root: Path) -> dict[str, Any]:
 
     paths = _all_manifests(root)
     all_uses: list[dict[str, Any]] = []
+    known_snapshot_aliases: set[tuple[str, str]] = set()
     unidentifiable = []
     missing_declarations = []
     for path in paths:
@@ -56,6 +57,11 @@ def inspect(root: Path) -> dict[str, Any]:
         episode_id = str(manifest.get("video_id") or "").strip()
         if not episode_id:
             raise InventoryAuditError(f"Manifest video_id absent: {path}")
+        lifecycle = str(manifest.get("lifecycle_status") or "UNKNOWN").strip().upper()
+        declared_alias = str((manifest.get("asset_reuse_brain") or {}).get("same_story_id") or "").strip()
+        # Classification only, NEVER a runtime whitelist for source reuse.
+        if declared_alias and declared_alias != episode_id:
+            known_snapshot_aliases.add(tuple(sorted((episode_id, declared_alias))))
         for scene in manifest.get("scenes") or []:
             if not isinstance(scene, dict):
                 continue
@@ -64,7 +70,8 @@ def inspect(root: Path) -> dict[str, Any]:
                 continue
             key = source_asset_key(asset)
             ref = {"episode_id": episode_id, "scene_id": str(scene.get("scene_id") or ""),
-                   "manifest": path.relative_to(root).as_posix(), "source_key": key}
+                   "manifest": path.relative_to(root).as_posix(), "source_key": key,
+                   "lifecycle": lifecycle}
             all_uses.append(ref)
             if not key:
                 unidentifiable.append(ref)
@@ -73,15 +80,36 @@ def inspect(root: Path) -> dict[str, Any]:
                     missing_declarations.append({**ref, "missing_field": field})
 
     source_users = defaultdict(set)
+    lifecycle_by_source: dict[str, set[str]] = defaultdict(set)
     for use in all_uses:
         if use["source_key"]:
-            source_users[use["source_key"].lower()].add(use["episode_id"])
+            key = use["source_key"].lower()
+            source_users[key].add(use["episode_id"])
+            lifecycle_by_source[key].add(use["lifecycle"])
     used_keys = set(source_users)
     absent = sorted(used_keys - record_keys)
+    missing_by_state = {
+        "final_approved": 0,
+        "archived_historical": 0,
+        "draft_or_other_only": 0,
+    }
+    for key in absent:
+        states = lifecycle_by_source.get(key, set())
+        if "FINAL_APPROVED" in states:
+            missing_by_state["final_approved"] += 1
+        elif "ARCHIVED_HISTORICAL" in states:
+            missing_by_state["archived_historical"] += 1
+        else:
+            missing_by_state["draft_or_other_only"] += 1
     cross_ep = sorted(
         [{"source_key": key, "episode_ids": sorted(ids)}
          for key, ids in source_users.items() if len(ids) > 1],
         key=lambda r: r["source_key"],
+    )
+    alias_pair_count = sum(
+        1 for item in cross_ep
+        if len(item["episode_ids"]) == 2
+        and tuple(item["episode_ids"]) in known_snapshot_aliases
     )
     complete = (not absent and not unidentifiable and not missing_declarations
                 and not missing_registry_identity and not missing_registry_visual_fingerprint)
@@ -98,6 +126,7 @@ def inspect(root: Path) -> dict[str, Any]:
         "registry_entry_count": len(registered),
         "registry_unique_source_keys": len(record_keys),
         "sources_without_registry_entries": len(absent),
+        "missing_registry_by_lifecycle": missing_by_state,
         "missing_source_key_examples": absent[:15],
         "manifest_assets_without_identity": len(unidentifiable),
         "manifest_missing_declaration_count": len(missing_declarations),
@@ -105,6 +134,8 @@ def inspect(root: Path) -> dict[str, Any]:
         "registry_missing_perceptual_hash_count": missing_registry_visual_fingerprint,
         "cross_episode_source_aliases": cross_ep[:40],
         "cross_episode_source_alias_count": len(cross_ep),
+        "cross_id_explicit_draft_snapshot_alias_count": alias_pair_count,
+        "cross_id_other_overlap_count": len(cross_ep) - alias_pair_count,
         "notes": [
             "Draft/final snapshots with differing episode IDs may be the same narrative: review manually.",
             "Historical pilot reuse is evidence for the archive, not a license for future reuse.",
