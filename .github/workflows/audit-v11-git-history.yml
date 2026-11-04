@@ -32,7 +32,7 @@ jobs:
       - name: Reconcile Git branch source metadata with current inventory
         run: |
           set -euo pipefail
-          python audits/branch_history_audit_v11.py --root . --output "$RUNNER_TEMP/branch-history-v11.json"
+          PYTHONPATH=. python audits/branch_history_audit_v11.py --root . --output "$RUNNER_TEMP/branch-history-v11.json"
       - name: Upload metadata-only read-only evidence
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
