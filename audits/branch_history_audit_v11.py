@@ -45,6 +45,14 @@ def _remote_refs(root: Path) -> list[str]:
     return refs
 
 
+def _history_key(asset: dict[str, Any]) -> str | None:
+    """Preserve the exact, case-sensitive suffix of Drive file IDs."""
+    key = source_asset_key(asset)
+    if not key:
+        return None
+    return key if key.startswith("drive_file:") else key.lower()
+
+
 def _get_local_sources(root: Path) -> set[str]:
     sources: set[str] = set()
     episodes = root / "episodes"
@@ -55,9 +63,9 @@ def _get_local_sources(root: Path) -> set[str]:
             raise GitHistoryAuditError(f"Local manifest unreadable: {path}") from exc
         for scene in manifest.get("scenes") or []:
             if isinstance(scene, dict) and isinstance(scene.get("asset"), dict):
-                key = source_asset_key(scene["asset"])
+                key = _history_key(scene["asset"])
                 if key:
-                    sources.add(key.lower())
+                    sources.add(key)
     return sources
 
 
@@ -116,10 +124,9 @@ def audit(root: Path, *, refs: list[str] | None = None) -> dict[str, Any]:
             for scene in manifest.get("scenes") or []:
                 if not isinstance(scene, dict) or not isinstance(scene.get("asset"), dict):
                     continue
-                key = source_asset_key(scene["asset"])
+                key = _history_key(scene["asset"])
                 if not key:
                     continue
-                key = key.lower()
                 source_states[key].add(lifecycle)
                 source_episodes[key].add(episode)
                 source_branches[key].add(ref)
