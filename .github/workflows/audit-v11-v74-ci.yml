@@ -42,6 +42,23 @@ jobs:
           print("REUSE_AUDIT=" + report["status"])
           assert report["status"] == "ASSET_REUSE_PASS", report["reason"]
           PY
+      - name: Inventory snapshot coverage (explicitly non-certifying)
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from audits.inventory_audit_v11 import inspect
+          x=inspect(Path.cwd())
+          print("CATALOG_STATUS=" + x["status"])
+          print("INVENTORY_MANIFESTS=" + str(x["manifest_count"]))
+          print("INVENTORY_UNIQUE_SOURCES=" + str(x["unique_source_keys"]))
+          print("INVENTORY_MISSING_LEDGER=" + str(x["sources_without_registry_entries"]))
+          print("INVENTORY_MISSING_FINGERPRINT=" + str(x["registry_missing_perceptual_hash_count"]))
+          print("INVENTORY_LEGACY_CROSS_ID=" + str(x["cross_episode_source_alias_count"]))
+          assert x["status"] in ("LOCAL_METADATA_COVERAGE_PARTIAL","LOCAL_METADATA_COVERAGE_PASS")
+          assert x["independent_licensing_verified"] is False
+          assert x["drive_inventory_verified"] is False
+          assert x["git_history_across_branches_verified"] is False
+          PY
       - name: Inspect effective engine fingerprint
         run: |
           python - <<'PY'
