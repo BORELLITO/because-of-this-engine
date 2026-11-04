@@ -23,6 +23,25 @@ jobs:
         run: python -m py_compile production/quality_gates.py
       - name: Run isolated V1.1 contract regressions (no APIs)
         run: python -m unittest discover -s audits/tests -p 'test_*.py' -v
+      - name: Read-only global clip registry check against real Episode 004 metadata
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from production.asset_reuse_brain import audit
+          from production.canonical_config import CANONICAL_PROFILE
+          root = Path.cwd()
+          assert CANONICAL_PROFILE["voice"]["provider"] == "gemini_tts"
+          assert CANONICAL_PROFILE["voice"]["voice_name"] == "Charon"
+          target = root / "episodes/video-004/preview-manifest.json"
+          registry = root / "episodes/asset-memory-registry.json"
+          report = audit(target, root, registry_path=registry)
+          print("VOICE_LOCK=GEMINI_TTS_CHARON")
+          print("MANIFESTS_SCANNED=" + str(report["scanned_manifest_count"]))
+          print("REGISTRY_ASSETS_SCANNED=" + str(report["registry_asset_count"]))
+          print("CROSS_EPISODE_COLLISIONS=" + str(len(report["cross_episode_duplicates"])))
+          print("REUSE_AUDIT=" + report["status"])
+          assert report["status"] == "ASSET_REUSE_PASS", report["reason"]
+          PY
       - name: Inspect effective engine fingerprint
         run: |
           python - <<'PY'
