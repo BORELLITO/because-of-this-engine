@@ -84,8 +84,43 @@ def _provider_asset_id(asset: dict[str, Any]) -> str:
     return ""
 
 
+def canonical_provider_source_url(value: Any) -> str | None:
+    """Independent source identity, even if a wrapper declares provider=drive/original.
+
+    The visible stock page is the origin. Provider-local numeric IDs may be
+    parsed from that URL regardless of the stored copy's provider label.
+    Google Drive file IDs are CASE SENSITIVE and must remain unchanged.
+    """
+    source = canonicalize_source_url(value)
+    if not source:
+        return None
+    parsed = urlsplit(source)
+    host = (parsed.hostname or "").lower()
+    path = parsed.path
+    if host in {"pexels.com", "www.pexels.com"}:
+        match = re.search(r"/video/(?:[^/]+-)?(\d+)/?$", path, re.I)
+        if match:
+            return f"pexels:{match.group(1)}"
+    if host in {"mixkit.co", "www.mixkit.co"}:
+        match = re.search(r"/free-stock-video/[^/]*-(\d+)/?$", path, re.I)
+        if match:
+            return f"mixkit:{match.group(1)}"
+    if host in {"pixabay.com", "www.pixabay.com"}:
+        match = re.search(r"/videos/(?:[^/]+-)?(\d+)/?$", path, re.I)
+        if match:
+            return f"pixabay:{match.group(1)}"
+    if host == "drive.google.com":
+        match = re.search(r"/file/d/([A-Za-z0-9_-]+)", path)
+        if match:
+            return f"drive_file:{match.group(1)}"
+    return None
+
+
 def source_asset_key(asset: dict[str, Any]) -> str | None:
-    """Return a segment-independent identity for the provider source video."""
+    """Return a segment-independent identity, irrespective of wrapper provider."""
+    from_url = canonical_provider_source_url(asset.get("source_page_url"))
+    if from_url:
+        return from_url
     provider = _norm(asset.get("provider")) or "unknown"
     provider_id = _provider_asset_id(asset)
     if provider_id:
@@ -121,16 +156,21 @@ def _manifest(path: Path) -> dict[str, Any]:
 def _asset_keys(asset: dict[str, Any]) -> list[tuple[str, str]]:
     keys: list[tuple[str, str]] = []
     for field in IDENTITY_FIELDS:
-        value = _norm(asset.get(field))
+        raw = str(asset.get(field) or "").strip()
+        # Google Drive file IDs are case sensitive. Hashes are hexadecimal.
+        value = raw if field == "drive_file_id" else raw.lower()
         if value:
             keys.append((field, value))
-    source = _norm(asset.get("source_asset_key")) or source_asset_key(asset)
-    if source:
+    declared_source = str(asset.get("source_asset_key") or "").strip()
+    if declared_source:
+        keys.append(("source_asset", declared_source))
+    source = source_asset_key(asset)
+    if source and source != declared_source:
         keys.append(("source_asset", source))
     canonical_url = canonicalize_source_url(asset.get("source_page_url"))
     if canonical_url:
         keys.append(("canonical_source_url", canonical_url))
-    return keys
+    return list(dict.fromkeys(keys))
 
 
 def _episode_records(path: Path) -> list[dict[str, Any]]:
