@@ -13,6 +13,7 @@ if str(Path(__file__).resolve().parents[1]) not in sys.path:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from production.asset_reuse_brain import AssetReuseBrainError, audit as audit_asset_reuse
+from production.audio_reuse_brain import AudioReuseError, audit as audit_audio_reuse
 from production.caption_quality import CaptionQualityError, quality_report
 from production.canonical_config import CanonicalConfigError, validate_canonical_manifest
 from production.prompt_compliance import (
@@ -176,6 +177,24 @@ def _captions(manifest_path: Path, mode: str) -> tuple[str, str]:
     return "PASS", f"{report.get('event_count', '?')} forced-aligned events; karaoke timing verified"
 
 
+def _audio_history(manifest_path: Path, mode: str) -> tuple[str, str]:
+    """Fresh global audio history check: never trust a cached PASS file."""
+    try:
+        report = audit_audio_reuse(
+            manifest_path, manifest_path.parent.parents[1],
+            strict=mode == "final",
+        )
+    except (AudioReuseError, OSError, ValueError, TypeError, json.JSONDecodeError) as exc:
+        return "BLOCKED", f"audio memory unavailable or malformed: {exc}"
+    if report.get("status") != "PASS":
+        return "BLOCKED", "; ".join(report.get("errors") or ["global audio history blocked"])
+    return "PASS", (
+        f"audio ledger freshly checked across {report.get('scanned_manifest_count')} "
+        f"manifest snapshots; {report.get('ledger_track_count')} tracks registered; "
+        "rights/actual listening remain independent gates"
+    )
+
+
 def _output(manifest: dict[str, Any], base: Path, mode: str) -> Path:
     template = str((manifest.get("output") or {}).get("path", "rendered/{video_id}-{mode}.mp4"))
     return (base / template.format(video_id=manifest["video_id"], mode=mode)).resolve()
@@ -226,7 +245,10 @@ def evaluate(
     from production.prompt_compliance import validate_audio
     if 5 in active or release:
         audio = validate_audio(manifest, release, strict=mode == "final")
-        gates.append(_gate("G5", "AUDIO_MIX", audio["status"], "; ".join(audio["errors"]) if audio["errors"] else audio["track_reuse_policy"]))
+        memory_status, memory_evidence = _audio_history(manifest_path, mode)
+        audio_status = "PASS" if audio["status"] == "PASS" and memory_status == "PASS" else "BLOCKED"
+        audio_evidence = "; ".join(audio["errors"]) if audio["errors"] else audio["track_reuse_policy"]
+        gates.append(_gate("G5", "AUDIO_MIX", audio_status, audio_evidence + "; " + memory_evidence))
     else:
         gates.append(_gate("G5", "AUDIO_MIX", "DEFERRED", f"phase {phase} runs before audio mix validation"))
 
