@@ -73,6 +73,9 @@ def _events_format(path: Path) -> list[str]:
 def parse_events(path: Path) -> list[dict[str, Any]]:
     fields = _events_format(path)
     start_index, end_index, text_index = fields.index("start"), fields.index("end"), fields.index("text")
+    style_index = fields.index("style") if "style" in fields else None
+    override_fields = [fields.index(name) for name in ("marginl", "marginr", "marginv") if name in fields]
+    effect_index = fields.index("effect") if "effect" in fields else None
     events: list[dict[str, Any]] = []
     for raw in path.read_text(encoding="utf-8").splitlines():
         if not raw.strip().startswith("Dialogue:"):
@@ -80,10 +83,24 @@ def parse_events(path: Path) -> list[dict[str, Any]]:
         values = raw.split(",", len(fields) - 1)
         if len(values) != len(fields):
             raise CaptionQualityError(f"Malformed ASS Dialogue line: {raw}")
+        # Dialogue can override safe styling even when Default style margins are
+        # correct. Only the locked Default style and inherited (zero) margins
+        # are allowed. ASS Effect/positioning overrides may move words under UI.
+        if style_index is not None and values[style_index].strip().lower() != "default":
+            raise CaptionQualityError("Caption dialogue must use the locked Default ASS style.")
+        if any(values[i].strip() not in {"", "0", "0000"} for i in override_fields):
+            raise CaptionQualityError("Per-event ASS margin overrides bypass mobile safe-zone bounds.")
+        if effect_index is not None and values[effect_index].strip():
+            raise CaptionQualityError("ASS dialogue effects/scrolling are not permitted.")
+        text = values[text_index]
+        if re.search(
+            r"\\(?:pos|move|org|an[1-9]|fs|fscx|fscy|fsp|fax|fay|frx|fry|frz|clip|iclip|p[1-9])(?=[^a-zA-Z_]|$)",
+            text, re.I,
+        ):
+            raise CaptionQualityError("ASS event contains a geometry/style override that bypasses the locked caption layout.")
         start, end = parse_ass_time(values[start_index]), parse_ass_time(values[end_index])
         if end <= start:
             raise CaptionQualityError(f"Caption interval is not positive: {raw}")
-        text = values[text_index]
         events.append({
             "start": start,
             "end": end,
