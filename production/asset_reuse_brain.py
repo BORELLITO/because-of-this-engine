@@ -84,8 +84,43 @@ def _provider_asset_id(asset: dict[str, Any]) -> str:
     return ""
 
 
+def canonical_provider_source_url(value: Any) -> str | None:
+    """Independent source identity, even if a wrapper declares provider=drive/original.
+
+    The visible stock page is the origin. Provider-local numeric IDs may be
+    parsed from that URL regardless of the stored copy's provider label.
+    Google Drive file IDs are CASE SENSITIVE and must remain unchanged.
+    """
+    source = canonicalize_source_url(value)
+    if not source:
+        return None
+    parsed = urlsplit(source)
+    host = (parsed.hostname or "").lower()
+    path = parsed.path
+    if host in {"pexels.com", "www.pexels.com"}:
+        match = re.search(r"/video/(?:[^/]+-)?(\d+)/?$", path, re.I)
+        if match:
+            return f"pexels:{match.group(1)}"
+    if host in {"mixkit.co", "www.mixkit.co"}:
+        match = re.search(r"/free-stock-video/[^/]*-(\d+)/?$", path, re.I)
+        if match:
+            return f"mixkit:{match.group(1)}"
+    if host in {"pixabay.com", "www.pixabay.com"}:
+        match = re.search(r"/videos/(?:[^/]+-)?(\d+)/?$", path, re.I)
+        if match:
+            return f"pixabay:{match.group(1)}"
+    if host == "drive.google.com":
+        match = re.search(r"/file/d/([A-Za-z0-9_-]+)", path)
+        if match:
+            return f"drive_file:{match.group(1)}"
+    return None
+
+
 def source_asset_key(asset: dict[str, Any]) -> str | None:
-    """Return a segment-independent identity for the provider source video."""
+    """Return a segment-independent identity, irrespective of wrapper provider."""
+    from_url = canonical_provider_source_url(asset.get("source_page_url"))
+    if from_url:
+        return from_url
     provider = _norm(asset.get("provider")) or "unknown"
     provider_id = _provider_asset_id(asset)
     if provider_id:
@@ -121,16 +156,21 @@ def _manifest(path: Path) -> dict[str, Any]:
 def _asset_keys(asset: dict[str, Any]) -> list[tuple[str, str]]:
     keys: list[tuple[str, str]] = []
     for field in IDENTITY_FIELDS:
-        value = _norm(asset.get(field))
+        raw = str(asset.get(field) or "").strip()
+        # Google Drive file IDs are case sensitive. Hashes are hexadecimal.
+        value = raw if field == "drive_file_id" else raw.lower()
         if value:
             keys.append((field, value))
-    source = _norm(asset.get("source_asset_key")) or source_asset_key(asset)
-    if source:
+    declared_source = str(asset.get("source_asset_key") or "").strip()
+    if declared_source:
+        keys.append(("source_asset", declared_source))
+    source = source_asset_key(asset)
+    if source and source != declared_source:
         keys.append(("source_asset", source))
     canonical_url = canonicalize_source_url(asset.get("source_page_url"))
     if canonical_url:
         keys.append(("canonical_source_url", canonical_url))
-    return keys
+    return list(dict.fromkeys(keys))
 
 
 def _episode_records(path: Path) -> list[dict[str, Any]]:
@@ -164,7 +204,15 @@ def _all_manifests(repo_root: Path) -> list[Path]:
     episodes = repo_root / "episodes"
     if not episodes.is_dir():
         raise AssetReuseBrainError(f"Episode root is missing: {episodes}")
-    return sorted(path for path in episodes.glob("*/manifest.json") if path.is_file())
+    # A source previously allocated in a draft is still a historical source
+    # even when the episode never acquired a final manifest. Excluding previews
+    # allowed future productions to silently recycle those source videos.
+    return sorted(
+        path
+        for name in ("manifest.json", "preview-manifest.json")
+        for path in episodes.glob(f"*/{name}")
+        if path.is_file()
+    )
 
 
 def _registry_records(path: Path) -> list[dict[str, Any]]:
@@ -244,6 +292,45 @@ def _registry_snapshot(repo_root: Path, registry_path: Path | None = None) -> di
     }
 
 
+def _history_review_candidates(repo_root: Path) -> tuple[set[str], str]:
+    """Review queue is NOT a retired-assets ledger.
+
+    Historical-only media must be reviewed before a new episode reuses them,
+    but is never automatically labelled consumed or permanently retired.
+    """
+    queue = repo_root / "audits" / "git_history_review_queue_v11.json"
+    if not queue.is_file():
+        return set(), "NOT_PRESENT"
+    try:
+        payload = json.loads(queue.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise AssetReuseBrainError("Historical review queue is unreadable") from exc
+    if (
+        not isinstance(payload, dict)
+        or payload.get("schema_version") != "1.1"
+        or payload.get("purpose") != "REVIEW_QUEUE_ONLY_NEVER_AUTORETIRE"
+        or payload.get("automatic_retirement") is not False
+        or not isinstance(payload.get("entries"), list)
+    ):
+        raise AssetReuseBrainError("Historical review queue violates the no-auto-retirement contract")
+    entries = payload["entries"]
+    if payload.get("source_count") != len(entries):
+        raise AssetReuseBrainError("Historical review queue count does not match entries")
+    keys: set[str] = set()
+    for entry in entries:
+        if (
+            not isinstance(entry, dict)
+            or entry.get("status") != "PENDING_REVIEW_NOT_RETIRED"
+            or not isinstance(entry.get("source_key"), str)
+            or not entry["source_key"].strip()
+        ):
+            raise AssetReuseBrainError("Historical review queue contains an unapproved or malformed entry")
+        keys.add(entry["source_key"].strip())
+    if len(keys) != len(entries):
+        raise AssetReuseBrainError("Historical review queue has duplicate source identities")
+    return keys, "REVIEW_ONLY"
+
+
 def audit(
     manifest_path: Path,
     repo_root: Path,
@@ -280,6 +367,7 @@ def audit(
     # Keep even archival records in the global source history. Legacy baseline
     # collisions remain explicitly recorded and release-blocked below.
     all_records = manifest_records + registry_records
+    historical_review_keys, history_review_status = _history_review_candidates(repo_root)
     target_records = [record for record in manifest_records if record["episode_id"] == target_id]
     if not target_records:
         raise AssetReuseBrainError("Target manifest contains no usable video assets.")
@@ -310,10 +398,13 @@ def audit(
             by_key.setdefault(key, []).append(record)
 
     policy = target_manifest.get("asset_reuse_brain") or {}
+    # Never trust a free-form manifest alias to exclude another episode from
+    # the global reuse ledger. Preview and final snapshots of ONE new episode
+    # must share the identical video_id. Legacy aliases remain in read-only
+    # history, but are not a valid bypass for any new rendering.
     same_story_episode_ids = {target_id}
     same_story_id = _norm(policy.get("same_story_id"))
-    if same_story_id:
-        same_story_episode_ids.add(same_story_id)
+    invalid_same_story_alias = bool(same_story_id and same_story_id != target_id)
 
     cross_episode: list[dict[str, Any]] = []
     for record in target_records:
@@ -354,10 +445,18 @@ def audit(
         and _norm(policy.get("policy")) == "global_no_repeat"
     )
     invalid_legacy_flag = policy.get("legacy_baseline") is True and not legacy_baseline
+    target_source_keys = {
+        key[1] for record in target_records
+        for key in record["keys"] if key[0] == "source_asset"
+    }
+    pending_history_review = sorted(target_source_keys & historical_review_keys)
 
     if invalid_legacy_flag:
         status = "BLOCKED"
         reason = "legacy_baseline is only valid for the locked pilot manifests."
+    elif invalid_same_story_alias:
+        status = "BLOCKED"
+        reason = "same_story_id may not alias a different video_id: shared-source snapshots must keep one canonical ID."
     elif within_episode:
         status = "BLOCKED"
         reason = "the same source or asset identity appears more than once in this episode."
@@ -367,18 +466,28 @@ def audit(
     elif unique_cross:
         status = "BLOCKED"
         reason = "a new episode reuses a source asset already assigned to another story."
+    elif pending_history_review:
+        status = "HISTORY_REVIEW_REQUIRED"
+        reason = "source appears in historical branch metadata; usage is unverified and must be reviewed before allocation."
     else:
         status = "ASSET_REUSE_PASS"
-        reason = "no source asset identity overlaps another episode."
+        reason = "no source asset identity overlaps another episode in the configured local/archival ledgers."
 
     return {
         "status": status,
-        "release_blocked": status in {"BLOCKED", "HISTORICAL_COLLISION_RECORDED"},
+        "release_blocked": status in {"BLOCKED", "HISTORICAL_COLLISION_RECORDED", "HISTORY_REVIEW_REQUIRED"},
+        "history_review_queue_status": history_review_status,
+        "history_review_queue_asset_count": len(historical_review_keys),
+        "history_review_required_source_keys": pending_history_review,
+        "historical_sources_auto_retired": False,
         "policy": "GLOBAL_NO_REPEAT_SOURCE_ASSET",
         "video_id": target_id,
         "manifest": str(manifest_path),
         "registry_status": "AVAILABLE" if registry_path else "MANIFEST_BACKED",
         "scanned_episode_count": len(manifests),
+        "scanned_manifest_count": len(manifests),
+        "registry_asset_count": len(registry_records),
+        "source_history_scope": "local_episode_manifests_and_preview_manifests_plus_registry_not_all_drive_or_git_history",
         "scanned_episode_ids": sorted({_norm(_manifest(path).get("video_id")) for path in manifests}),
         "candidate_asset_count": len(target_records),
         "within_episode_duplicates": within_episode,

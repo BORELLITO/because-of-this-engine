@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import math
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -13,7 +16,9 @@ if str(Path(__file__).resolve().parents[1]) not in sys.path:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from production.asset_reuse_brain import AssetReuseBrainError, audit as audit_asset_reuse
+from production.audio_reuse_brain import AudioReuseError, audit as audit_audio_reuse
 from production.caption_quality import CaptionQualityError, quality_report
+from audits.mobile_caption_ui_v11 import MobileUIReviewError, inspect as inspect_mobile_caption_ui
 from production.canonical_config import CanonicalConfigError, validate_canonical_manifest
 from production.prompt_compliance import (
     PROMPT_GATE_ORDER,
@@ -23,7 +28,7 @@ from production.prompt_compliance import (
     validate_packaging,
 )
 from production.story_creation import audit_story_creation
-from production.video_asset_contract import VideoContractError, load_manifest, validate_manifest
+from production.video_asset_contract import VideoContractError, ffprobe as inspect_video_media, load_manifest, validate_manifest
 
 GATES = PROMPT_GATE_ORDER
 ACTIVE_BY_PHASE = {
@@ -71,28 +76,48 @@ def _story_creation(manifest: dict[str, Any], base: Path, mode: str) -> tuple[st
     return "PASS: original story, hook, escalation and payoff gates passed", report
 
 
-def _story_intelligence(base: Path) -> tuple[str, dict[str, Any]]:
+def _story_intelligence(base: Path, mode: str = "final") -> tuple[str, dict[str, Any]]:
     visual = None
-    for candidate in (
-        base / "rendered" / "visual-story-qa-draft-preview.json",
-        base / "rendered" / "visual-story-qa-preview.json",
-        base / "rendered" / "visual-story-qa-production.json",
-    ):
+    # Never accept a draft report as evidence for a final release.
+    candidates = (
+        ("visual-story-qa-final.json",)
+        if mode == "final" else
+        ("visual-story-qa-preview.json", "visual-story-qa-draft-preview.json", "visual-story-qa-production.json")
+    )
+    for name in candidates:
+        candidate = base / "rendered" / name
         if candidate.is_file():
             visual = _read(candidate, "visual story QA")
             break
     timing = _read(base / "rendered" / "narration-coverage.json", "narration coverage") if (base / "rendered" / "narration-coverage.json").is_file() else None
-    if visual and visual.get("status") != "VISUAL_STORY_QA_PASS":
-        return "BLOCKED: visual story QA did not pass", {"visual": visual, "timing": timing}
-    if timing:
-        coverage = timing.get("narration_coverage") or {}
-        if timing.get("status") != "STORY_INTELLIGENCE_PASS" or coverage.get("timing_status") != "FORCED_ALIGNMENT_SCENE_TIMES_PASS":
-            return "BLOCKED: forced-alignment narration coverage did not pass", {"visual": visual, "timing": timing}
-    return "PASS: semantic visual review, continuity and forced timing are available", {"visual": visual, "timing": timing}
+    evidence = {"visual": visual, "timing": timing}
+    # Missing reports must never be promoted to PASS merely because the
+    # optional pre-existing files were not found. The previous implementation
+    # silently passed precisely this case, masking absent QA.
+    if visual is None:
+        return "BLOCKED: visual story QA report is missing", evidence
+    if visual.get("status") != "VISUAL_STORY_QA_PASS":
+        return "BLOCKED: visual story QA did not pass", evidence
+    if timing is None:
+        return "BLOCKED: narration coverage report is missing", evidence
+    coverage = timing.get("narration_coverage") or {}
+    if timing.get("status") != "STORY_INTELLIGENCE_PASS" or coverage.get("timing_status") != "FORCED_ALIGNMENT_SCENE_TIMES_PASS":
+        return "BLOCKED: forced-alignment narration coverage did not pass", evidence
+    return "PASS: semantic visual review, continuity and forced timing verified", evidence
 
 
 def _provenance(manifest: dict[str, Any], mode: str) -> tuple[str, str]:
-    truth = (manifest.get("story_profile") or {}).get("truth_mode") or (manifest.get("story_creation") or {}).get("truth", {}).get("mode")
+    """G2: distinguish basic provenance from final per-platform human rights proof.
+
+    Metadata is a *claim*, not an independent license check. Final release
+    additionally requires an evidence attestation bound to a specific source
+    URL and verified asset digest. External license validity is still human QA.
+    """
+    import re
+    from urllib.parse import urlsplit
+
+    truth = ((manifest.get("story_profile") or {}).get("truth_mode")
+             or (manifest.get("story_creation") or {}).get("truth", {}).get("mode"))
     errors: list[str] = []
     if not str(truth or "").strip():
         errors.append("truth_mode is missing")
@@ -100,18 +125,61 @@ def _provenance(manifest: dict[str, Any], mode: str) -> tuple[str, str]:
     if not str(story_truth.get("disclosure") or "").strip():
         errors.append("story truth disclosure is missing")
     required = ("source_page_url", "license", "sha256", "rights_status", "approved_for_render", "drive_file_id")
-    for scene in manifest.get("scenes", []):
+    scenes = manifest.get("scenes")
+    if not isinstance(scenes, list) or not scenes:
+        errors.append("scenes must be a nonempty list")
+        scenes = []
+    for scene in scenes:
+        if not isinstance(scene, dict):
+            errors.append("invalid scene")
+            continue
+        scene_id = scene.get("scene_id", "?")
         asset = scene.get("asset") or {}
+        if not isinstance(asset, dict):
+            errors.append(f"{scene_id}.asset")
+            continue
         for key in required:
-            if not asset.get(key):
-                errors.append(f"{scene.get('scene_id', '?')}.{key}")
+            if asset.get(key) in (None, "", False):
+                errors.append(f"{scene_id}.{key}")
         if mode == "final":
-            for key in ("author", "acquisition_timestamp", "original_filename", "mime_type", "duration_seconds", "width", "height", "filesize_bytes", "job_ownership", "scene_usage"):
+            digest = str(asset.get("sha256") or "").strip().lower()
+            if not re.fullmatch(r"[0-9a-f]{64}", digest):
+                errors.append(f"{scene_id}.sha256_malformed")
+            if asset.get("rights_status") != "APPROVED" or asset.get("approved_for_render") is not True:
+                errors.append(f"{scene_id}.approved_rights")
+            for key in ("author", "acquisition_timestamp", "original_filename",
+                        "mime_type", "duration_seconds", "width", "height",
+                        "filesize_bytes", "job_ownership", "scene_usage"):
                 if asset.get(key) in (None, ""):
-                    errors.append(f"{scene.get('scene_id', '?')}.{key}")
-    return ("BLOCKED: missing rights/originality evidence: " + ", ".join(errors[:10]), "") if errors else (
-        "PASS: rights, provenance, declared truth mode and originality evidence are complete", ""
-    )
+                    errors.append(f"{scene_id}.{key}")
+            review = asset.get("rights_review")
+            if not isinstance(review, dict):
+                errors.append(f"{scene_id}.human_rights_review_missing")
+                continue
+            # An attestation must be tied to the exact origin and media identity.
+            source = str(asset.get("source_page_url") or "").strip()
+            source_host = urlsplit(source).hostname
+            evidence = str(review.get("evidence_url") or "").strip()
+            evidence_host = urlsplit(evidence).hostname
+            if (review.get("status") != "PASS"
+                    or not str(review.get("reviewer") or "").strip()
+                    or not str(review.get("reviewed_at_utc") or "").strip()
+                    or review.get("asset_sha256") != digest
+                    or review.get("source_page_url") != source
+                    or not source_host or not evidence_host):
+                errors.append(f"{scene_id}.rights_evidence_invalid")
+            platforms = review.get("authorized_platforms")
+            if not isinstance(platforms, list) or not {"youtube", "tiktok"}.issubset(set(
+                str(x).lower() for x in platforms if isinstance(x, str)
+            )):
+                errors.append(f"{scene_id}.cross_platform_rights_unverified")
+    if errors:
+        return "BLOCKED", "rights/originality evidence incomplete: " + ", ".join(errors[:12])
+    if mode == "final":
+        return "PASS", ("origin, digest and two-platform human review attestation present; "
+                        "external rights are not independently certified by metadata")
+    return "PASS", "basic source and fiction disclosure metadata present; commercial rights still unverified"
+
 
 
 def _visual(manifest_path: Path, base: Path, mode: str) -> tuple[str, str]:
@@ -119,22 +187,34 @@ def _visual(manifest_path: Path, base: Path, mode: str) -> tuple[str, str]:
         spec = validate_manifest(manifest_path, base, mode=mode, check_files=True, enforce_canonical=True)
     except (VideoContractError, OSError, ValueError) as exc:
         return "BLOCKED", str(exc)
-    reuse_path = base / "rendered" / f"asset-reuse-brain-{mode}.json"
+    # Cached JSON is diagnostic history, not live proof of a clean source.
+    # Re-evaluate against the current manifest, every episode snapshot and the
+    # registry on every gate execution. Otherwise a stale PASS can be replayed
+    # after the source or asset ledger changes.
     try:
-        reuse = _read(reuse_path, "asset reuse report") if reuse_path.is_file() else audit_asset_reuse(
-            manifest_path, base.parents[1], registry_path=base.parents[1] / "episodes" / "asset-memory-registry.json"
+        reuse = audit_asset_reuse(
+            manifest_path, base.parents[1],
+            registry_path=base.parents[1] / "episodes" / "asset-memory-registry.json",
         )
     except (AssetReuseBrainError, OSError, RuntimeError, ValueError, TypeError, json.JSONDecodeError) as exc:
         return "BLOCKED", str(exc)
     if reuse.get("status") != "ASSET_REUSE_PASS":
-        return "BLOCKED", "global asset brain found a reused or ambiguous clip"
-    return "PASS", f"{len(spec['scenes'])} approved semantic scenes with global no-repeat protection"
+        return "BLOCKED", f"fresh source-ledger audit failed: {reuse.get('reason', 'ambiguous or reused clip')}"
+    return "PASS", (
+        f"{len(spec['scenes'])} approved semantic scenes; fresh ledger scan of "
+        f"{reuse.get('scanned_manifest_count', '?')} manifests / "
+        f"{reuse.get('registry_asset_count', '?')} registered assets; "
+        "historical Git refs and external Drive sources still need independent audit"
+    )
 
 
 def _narration(manifest: dict[str, Any], base: Path) -> tuple[str, str]:
     audio = manifest.get("audio") or {}
     voice = manifest.get("voice") or {}
-    if not all(str(voice.get(key, "")).strip() for key in ("provider", "model", "voice", "language", "style")):
+    # Match the actual 7.4 canonical voice contract, not retired V6 field names.
+    if not all(str(voice.get(key, "")).strip() for key in (
+        "provider", "model_or_voice_type", "voice_name", "language_code", "style"
+    )):
         return "BLOCKED", "canonical narration profile is incomplete"
     path = base / str(audio.get("path", ""))
     if not path.is_file():
@@ -147,14 +227,93 @@ def _captions(manifest_path: Path, mode: str) -> tuple[str, str]:
         report = quality_report(manifest_path, require_word_level=mode == "final")
     except (CaptionQualityError, OSError, ValueError, json.JSONDecodeError) as exc:
         return "BLOCKED", str(exc)
-    if report.get("status") != "PASS":
+    if report.get("status") != "CAPTION_QA_PASS":
         return "BLOCKED", "caption quality report did not pass"
     return "PASS", f"{report.get('event_count', '?')} forced-aligned events; karaoke timing verified"
+
+
+def _captions_with_platform_ui(manifest_path: Path, mode: str, phase: str) -> tuple[str, str]:
+    caption_status, caption_evidence = _captions(manifest_path, mode)
+    if phase != "final":
+        return caption_status, caption_evidence
+    # Real interface evidence is separate from ASS validity. Never trust
+    # a static margin or ASS-file declaration as device-side approval.
+    try:
+        ui_review = inspect_mobile_caption_ui(manifest_path)
+    except (MobileUIReviewError, OSError, ValueError, TypeError, json.JSONDecodeError) as exc:
+        return "BLOCKED", caption_evidence + f"; mobile UI review could not be validated: {exc}"
+    if ui_review.get("status") != "UI_EVIDENCE_ATTESTED":
+        return "BLOCKED", caption_evidence + "; TikTok/YouTube mobile evidence pending: " + ", ".join(
+            ui_review.get("issues") or ["manual UI review missing"]
+        )
+    return caption_status, caption_evidence + "; independent platform screenshots and reviewed render/caption SHA binding checked"
+
+
+def _audio_history(manifest_path: Path, mode: str) -> tuple[str, str]:
+    """Fresh global audio history check: never trust a cached PASS file."""
+    try:
+        report = audit_audio_reuse(
+            manifest_path, manifest_path.parent.parents[1],
+            strict=mode == "final",
+        )
+    except (AudioReuseError, OSError, ValueError, TypeError, json.JSONDecodeError) as exc:
+        return "BLOCKED", f"audio memory unavailable or malformed: {exc}"
+    if report.get("status") != "PASS":
+        return "BLOCKED", "; ".join(report.get("errors") or ["global audio history blocked"])
+    return "PASS", (
+        f"audio ledger freshly checked across {report.get('scanned_manifest_count')} "
+        f"manifest snapshots; {report.get('ledger_track_count')} tracks registered; "
+        "rights/actual listening remain independent gates"
+    )
 
 
 def _output(manifest: dict[str, Any], base: Path, mode: str) -> Path:
     template = str((manifest.get("output") or {}).get("path", "rendered/{video_id}-{mode}.mp4"))
     return (base / template.format(video_id=manifest["video_id"], mode=mode)).resolve()
+
+
+def _release_media_integrity(
+    manifest: dict[str, Any], base: Path, mode: str, release: dict[str, Any] | None
+) -> tuple[str, str, dict[str, Any] | None]:
+    """Verify the actual rendered bytes, not just a signed-looking JSON report."""
+    if not release or release.get("status") != "VIDEO_RELEASE_VALIDATED":
+        return "BLOCKED", "validated release report missing", None
+    template = (manifest.get("output") or {}).get("path")
+    if not isinstance(template, str) or not template.strip():
+        return "BLOCKED", "output.path is missing from manifest", None
+    try:
+        rel = template.format(video_id=manifest["video_id"], mode=mode)
+    except (KeyError, ValueError) as exc:
+        return "BLOCKED", f"output.path cannot be resolved: {exc}", None
+    root = base.resolve()
+    video = (root / rel).resolve()
+    if root not in video.parents or not video.is_file():
+        return "BLOCKED", "rendered output missing or escaping episode directory", None
+    declared = str(release.get("output_sha256") or "").strip().lower()
+    if not re.fullmatch(r"[0-9a-f]{64}", declared):
+        return "BLOCKED", "release report missing valid output_sha256", None
+    digest = hashlib.sha256()
+    with video.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1 << 20), b""):
+            digest.update(chunk)
+    if digest.hexdigest() != declared:
+        return "BLOCKED", "release report SHA256 mismatches actual final MP4", None
+    try:
+        probe = inspect_video_media(video)
+        duration, fps = float(probe["duration"]), float(probe["fps"])
+        if not math.isfinite(duration) or not math.isfinite(fps):
+            raise ValueError("non-finite media metrics")
+        if (probe["width"] != 1080 or probe["height"] != 1920 or
+                abs(fps - 60.0) > 0.01 or not 60 <= duration <= 80 or
+                probe["has_audio"] is not True):
+            return "BLOCKED", "actual MP4 fails 1080x1920 / 60fps / 60-80s / audio contract", probe
+        if (release.get("dimensions") != "1080x1920" or
+                abs(float(release.get("fps", 0)) - fps) > 0.01 or
+                abs(float(release.get("duration_seconds", 0)) - duration) > 0.15):
+            return "BLOCKED", "release metadata differs from actual MP4", probe
+    except (VideoContractError, ValueError, TypeError, KeyError, OSError, OverflowError) as exc:
+        return "BLOCKED", f"cannot independently verify MP4: {exc}", None
+    return "PASS", "real MP4, SHA-256, fps, duration, audio stream and dimensions verified", probe
 
 
 def evaluate(
@@ -187,7 +346,7 @@ def evaluate(
     gates.append(_gate("G0", "PRE_FLIGHT", g0_status, g0_evidence))
 
     creation_status, creation = _story_creation(manifest, base, mode)
-    intel_status, intelligence = _story_intelligence(base)
+    intel_status, intelligence = _story_intelligence(base, mode)
     g1_status = "PASS" if creation_status.startswith("PASS") else "BLOCKED"
     gates.append(_gate("G1", "SCRIPT_SUSPENSE", g1_status, creation_status + "; central question, consequence and suspense arc required"))
     g2_status, g2_evidence = _provenance(manifest, mode)
@@ -202,35 +361,48 @@ def evaluate(
     from production.prompt_compliance import validate_audio
     if 5 in active or release:
         audio = validate_audio(manifest, release, strict=mode == "final")
-        gates.append(_gate("G5", "AUDIO_MIX", audio["status"], "; ".join(audio["errors"]) if audio["errors"] else audio["track_reuse_policy"]))
+        memory_status, memory_evidence = _audio_history(manifest_path, mode)
+        audio_status = "PASS" if audio["status"] == "PASS" and memory_status == "PASS" else "BLOCKED"
+        audio_evidence = "; ".join(audio["errors"]) if audio["errors"] else audio["track_reuse_policy"]
+        gates.append(_gate("G5", "AUDIO_MIX", audio_status, audio_evidence + "; " + memory_evidence))
     else:
         gates.append(_gate("G5", "AUDIO_MIX", "DEFERRED", f"phase {phase} runs before audio mix validation"))
 
     packaging = validate_packaging(manifest, strict=mode == "final")
 
-    caption_status, caption_evidence = _captions(manifest_path, mode)
+    caption_status, caption_evidence = _captions_with_platform_ui(manifest_path, mode, phase)
     gates.append(_gate("G6", "CAPTIONS_KARAOKE", caption_status, caption_evidence))
     if 7 in active or phase == "final":
         gates.append(_gate("G7", "PACKAGING", packaging["status"], "; ".join(packaging["errors"]) if packaging["errors"] else "three title/thumbnail directions, fiction disclosure and consequence-safe CTA verified"))
     else:
         gates.append(_gate("G7", "PACKAGING", "DEFERRED", f"phase {phase} runs before packaging validation"))
 
+    release_status, release_evidence, measured_media = ("DEFERRED", "not post-render", None)
+    if 8 in active or 9 in active:
+        release_status, release_evidence, measured_media = _release_media_integrity(manifest, base, mode, release)
+
     if 8 in active:
-        if release and release.get("status") == "VIDEO_RELEASE_VALIDATED":
-            if mode == "final" and (manifest.get("preview_approval") or {}).get("status") != "PASS":
-                g8_status, g8_evidence = "BLOCKED", "final mode requires an approved preview record"
-            else:
-                g8_status, g8_evidence = "PASS", "rendered preview/final preserves the approved fixed HUD, logo, karaoke and outro"
+        approved = manifest.get("preview_approval") or {}
+        if release_status != "PASS":
+            g8_status, g8_evidence = "BLOCKED", release_evidence
+        elif (mode == "final" and (
+                approved.get("status") != "PASS"
+                or approved.get("approved_video_sha256") != release.get("output_sha256")
+                or not approved.get("reviewer")
+                or not approved.get("approved_at"))):
+            g8_status, g8_evidence = "BLOCKED", "approved preview identity/reviewer/time missing or mismatched"
         else:
-            g8_status, g8_evidence = "BLOCKED", "validated release report is missing"
+            g8_status, g8_evidence = "PASS", release_evidence + "; preview record bound to final SHA"
     else:
         g8_status, g8_evidence = "DEFERRED", f"phase {phase} runs before preview/render"
     gates.append(_gate("G8", "PREVIEW", g8_status, g8_evidence))
 
     if 9 in active:
         dims = validate_dimensions(release)
-        g9_status = "PASS" if release and release.get("technical_qa") == "PASS" and dims["status"] == "PASS" else "BLOCKED"
-        g9_evidence = "; ".join(dims["errors"]) if dims["errors"] else f"{release.get('dimensions') if release else 'missing'} at {release.get('fps') if release else 'missing'} fps; anomaly and technical QA required"
+        g9_status = ("PASS" if release_status == "PASS" and release
+                     and release.get("technical_qa") == "PASS"
+                     and dims["status"] == "PASS" else "BLOCKED")
+        g9_evidence = release_evidence + "; " + "; ".join(dims["errors"])
     else:
         g9_status, g9_evidence = "DEFERRED", f"phase {phase} runs before render QA"
     gates.append(_gate("G9", "RENDER_TECHNICAL", g9_status, g9_evidence))
@@ -245,17 +417,41 @@ def evaluate(
         if post:
             from production.prompt_compliance import validate_post_publication
             post_report = validate_post_publication(post, release)
-            g11_status = post_report["status"]
-            g11_evidence = "; ".join(post_report["errors"]) if post_report["errors"] else f"manual publication verified on {post.get('platform')}"
+            # A syntactically valid receipt is not independent proof that a
+            # video exists at a real YouTube/TikTok URL. Offline CI must not
+            # claim publication complete or verified based on JSON alone.
+            if post_report["status"] == "PASS":
+                g11_status, g11_evidence = "DEFERRED", (
+                    "receipt syntax accepted; external URL, platform and posted media not verified"
+                )
+            else:
+                g11_status, g11_evidence = "BLOCKED", "; ".join(post_report["errors"])
         else:
-            g11_status, g11_evidence = "DEFERRED", "publication is manual; submit a post-publication receipt to close G11"
+            g11_status, g11_evidence = "DEFERRED", (
+                "publication is manual; external platform verification is not yet available"
+            )
     else:
         g11_status, g11_evidence = "DEFERRED", f"phase {phase} runs before post-publication verification"
     gates.append(_gate("G11", "POST_PUBLICATION", g11_status, g11_evidence))
 
     blocking = [gate for gate in gates if gate["status"] == "BLOCKED"]
+    g11 = next((gate for gate in gates if gate["code"] == "G11"), None)
+    publication_verified = bool(g11 and g11["status"] == "PASS" and not blocking)
+    if blocking:
+        next_action = "RESOLVE_GATES:" + ",".join(gate["code"] for gate in blocking)
+    elif publication_verified:
+        next_action = "POST_PUBLICATION_VALIDATED"
+    elif phase == "final":
+        next_action = "VERIFY_PUBLISHED_URLS_EXTERNAL" if post else "MANUAL_PUBLICATION_AND_G11_RECEIPT"
+    else:
+        next_action = "ADVANCE_TO_NEXT_REVIEW_PHASE"
     return {
         "status": "GATES_BLOCKED" if blocking else "GATES_PASS",
+        "publication_verified": publication_verified,
+        "release_readiness": "BLOCKED" if blocking else (
+            "POST_PUBLICATION_VALIDATED" if publication_verified else
+            "READY_FOR_MANUAL_PUBLICATION" if phase == "final" else "PHASE_PASS"
+        ),
         "phase": phase,
         "job_id": manifest.get("job_id") or (manifest.get("job") or {}).get("job_id"),
         "video_id": manifest.get("video_id"),
@@ -267,7 +463,7 @@ def evaluate(
         "final_manifest": final_manifest,
         "delivery": _read(delivery_receipt_path, "delivery receipt"),
         "cleanup": _read(cleanup_receipt_path, "cleanup receipt"),
-        "next_action": "MANUAL_PUBLICATION_AND_G11_RECEIPT" if not post else "COMPLETE",
+        "next_action": next_action,
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
     }
 

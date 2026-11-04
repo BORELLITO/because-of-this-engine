@@ -50,45 +50,76 @@ def ingest(source: Path, metadata_path: Path, episode_dir: Path, manifest_path: 
         raise ValueError("volume must be between 0 and 0.20.")
     track_id = str(metadata.get("track_id") or f"youtube-audio-{title.lower().replace(' ', '-')}")
     episode_dir = episode_dir.resolve()
-    target = episode_dir / "assets" / "music" / "youtube-audio-library.mp3"
-    target.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(source, target)
-    file_hash = sha256_file(target)
-    relpath = target.relative_to(episode_dir).as_posix()
-
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    episode_id = str(manifest.get("video_id") or "").strip()
+    if not episode_id:
+        raise ValueError("Episode video_id required before audio ingestion")
+    file_hash = sha256_file(source)
+    target = episode_dir / "assets" / "music" / "youtube-audio-library.mp3"
+    if target.is_file() and sha256_file(target) != file_hash:
+        raise ValueError("Refusing to overwrite an existing soundtrack master")
+    if register_path.name != "audio-memory-registry.json" or register_path.parent.name != "episodes":
+        raise ValueError("The global episodes/audio-memory-registry.json is required, not an episode-local ledger")
+    if not register_path.is_file():
+        raise ValueError("Global audio registry missing. Do not create a new empty ledger.")
+    register = json.loads(register_path.read_text(encoding="utf-8"))
+    if register.get("schema_version") != "2.0" or not isinstance(register.get("tracks"), list):
+        raise ValueError("Global audio registry must be schema 2.0 with tracks list")
+    own_track = False
+    for item in register["tracks"]:
+        if not isinstance(item, dict) or not item.get("episode_id"):
+            raise ValueError("Malformed global audio registry entry")
+        other_episode = str(item["episode_id"]) != episode_id
+        same_hash = str(item.get("sha256") or "").lower() == file_hash.lower()
+        same_track_id = str(item.get("track_id") or "").casefold() == track_id.casefold()
+        if other_episode and (same_hash or same_track_id):
+            raise ValueError("Cannot reuse a complete soundtrack previously registered to another episode")
+        if not other_episode:
+            if not (same_hash and same_track_id):
+                raise ValueError("Refusing to replace already registered episode soundtrack")
+            own_track = True
+
+    relpath = target.relative_to(episode_dir).as_posix()
+    # YouTube Audio Library provenance alone is not a cross-platform license.
+    # The Because Of This channel distributes to both YouTube and TikTok.
     manifest["music"] = {
         "path": relpath, "track_id": track_id, "title": title, "artist": artist,
         "source_url": SOURCE_URL, "license": "youtube_audio_library",
-        "commercial_use": True, "usage_scope": "YouTube videos; verify separately before off-platform use",
+        "commercial_use": True,
+        "usage_scope": "YouTube only until off-platform permissions are verified",
+        "license_status": "REVIEW_REQUIRED", "preview_only": True,
+        "off_platform_rights_verified": False,
+        "complete_track_reuse": "forbidden", "sidechain_enabled": True,
         "attribution_required": metadata["attribution_required"], "attribution": attribution,
         "volume": float(volume), "sha256": file_hash, "reuse_status": "FRESH",
         "origin_recorded_at": datetime.now(timezone.utc).isoformat(),
         "similarity_review": metadata["similarity_review"],
         "device_tests": tests,
     }
-    manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    if not own_track:
+        register["tracks"].append({
+            "role": "suspense_bed", "track_id": track_id, "episode_id": episode_id,
+            "path": relpath, "title": title, "artist": artist, "source_url": SOURCE_URL,
+            "license": "youtube_audio_library", "commercial_use": True,
+            "off_platform_rights_verified": False,
+            "attribution_required": metadata["attribution_required"], "attribution_text": attribution,
+            "sha256": file_hash, "similarity_review": metadata["similarity_review"],
+            "device_tests": tests, "used_at_utc": datetime.now(timezone.utc).isoformat(),
+        })
 
-    register = json.loads(register_path.read_text(encoding="utf-8")) if register_path.exists() else {
-        "schema_version": "2.0", "status": "attached",
-        "policy": "Complete tracks are never reused between episodes; reusable SFX require a three-video cooldown.",
-        "tracks": []
-    }
-    for existing in register.get("tracks", []):
-        if existing.get("track_id") == track_id and existing.get("episode_id") != manifest.get("video_id"):
-            raise ValueError(f"complete track {track_id!r} is already registered to another episode")
-    register.setdefault("tracks", [])
-    register["tracks"] = [track for track in register["tracks"] if track.get("episode_id") != manifest.get("video_id")]
-    register["tracks"].append({
-        "role": "suspense_bed", "track_id": track_id, "episode_id": manifest.get("video_id"),
-        "path": relpath, "title": title, "artist": artist, "source_url": SOURCE_URL,
-        "license": "youtube_audio_library", "commercial_use": True,
-        "attribution_required": metadata["attribution_required"], "attribution_text": attribution,
-        "sha256": file_hash, "similarity_review": metadata["similarity_review"],
-        "device_tests": tests, "used_at_utc": datetime.now(timezone.utc).isoformat(),
-    })
-    register_path.write_text(json.dumps(register, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    return {"status": "AUDIO_REGISTERED", "track_id": track_id, "path": relpath, "sha256": file_hash}
+    # Validate both records and the intended destination BEFORE altering files.
+    manifest_bytes = (json.dumps(manifest, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
+    ledger_bytes = (json.dumps(register, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
+    if target.exists() and not target.is_file():
+        raise ValueError("Soundtrack target exists but is not a regular file")
+    target.parent.mkdir(parents=True, exist_ok=True)
+    if not target.exists():
+        shutil.copy2(source, target)
+    manifest_path.write_bytes(manifest_bytes)
+    register_path.write_bytes(ledger_bytes)
+    return {"status": "AUDIO_REGISTERED_PENDING_OFFPLATFORM_RIGHTS",
+            "track_id": track_id, "path": relpath, "sha256": file_hash}
+
 
 
 def main() -> None:

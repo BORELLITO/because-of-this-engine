@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.1",
+  "status": "READ_ONLY_VERIFIED_HISTORICAL_BYTES",
+  "note": "Two distinct Drive WAV file IDs were downloaded sequentially on 2026-11-04 and compared via sha256sum and cmp -s. This proves exact identity of these two archived masters, not rights clearance. No source media changed.",
+  "sha256_scope": "full_file_bytes",
+  "entries": [
+    {
+      "sha256": "4a84629bdd611489b49f28187c70f2fc6d4a48b11347ef5c05cf301e1cd1fa24",
+      "size_bytes": 13440044,
+      "duration_seconds": 70,
+      "codec": "pcm_s16le",
+      "channels": 2,
+      "sample_rate_hz": 48000,
+      "drive_file_ids": [
+        "1P7NlvP50-V2Y8CaZQXPE2EhU99t_Zy9X",
+        "19dFe9lPreCmDh5Ubb29YN9AyF4O6yuxO"
+      ],
+      "observed_folder_labels": [
+        "episode-002-final",
+        "episode-004-final"
+      ],
+      "classification": "VERIFIED_SAME_BYTES_HISTORICAL_NEVER_AUTORETIRE",
+      "review_required": true,
+      "commercial_rights_verified": false
+    }
+  ],
+  "automatic_archive_modifications": false,
+  "approval_for_new_episodes": false
+}

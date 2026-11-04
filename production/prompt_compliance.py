@@ -187,11 +187,21 @@ def validate_audio(manifest: dict[str, Any], release: dict[str, Any] | None = No
     if music.get("attribution_required") is True and not _is_nonempty(music.get("attribution")):
         errors.append("music.attribution is required when attribution_required=true")
     if strict:
-        for key in ("track_id", "source_url", "sha256", "reuse_status", "origin_recorded_at"):
+        for key in ("track_id", "sha256", "reuse_status", "origin_recorded_at"):
             if not _is_nonempty(music.get(key)):
                 errors.append(f"music.{key} is required for final production")
-        if music.get("reuse_status") not in {"FRESH", "APPROVED_REUSE"}:
-            errors.append("complete music tracks must be fresh or explicitly approved")
+        # A generator cannot have a stock source_url; require script provenance instead.
+        if music.get("source") == "engine_generated":
+            if not _is_nonempty((music.get("generation") or {}).get("script")):
+                errors.append("procedural music requires generation.script")
+        elif not _is_nonempty(music.get("source_url") or music.get("source_page_url")):
+            errors.append("third-party music source_url is required for final production")
+        if music.get("reuse_status") != "FRESH":
+            errors.append("complete music tracks must be fresh: APPROVED_REUSE never bypasses global SHA history")
+        if music.get("license_status") != "APPROVED" or music.get("preview_only") is True:
+            errors.append("music requires final approved rights and preview_only=false")
+        if music.get("complete_track_reuse") != "forbidden":
+            errors.append("complete_track_reuse must be forbidden")
         similarity = music.get("similarity_review") or {}
         if similarity.get("status") != "PASS":
             errors.append("music similarity review must be PASS")
@@ -208,8 +218,10 @@ def validate_audio(manifest: dict[str, Any], release: dict[str, Any] | None = No
                 continue
             if effect.get("reuse_status") not in {"FRESH", "APPROVED_REUSE"}:
                 errors.append(f"effects[{index}].reuse_status must be explicit")
-            if effect.get("cooldown_videos", 0) < 3 and effect.get("reuse_status") == "APPROVED_REUSE":
-                errors.append(f"effects[{index}] violates the three-video cooldown")
+            if effect.get("reuse_status") == "APPROVED_REUSE":
+                # Metadata says how many episodes elapsed, not what was
+                # published. Actual chronology needs independent evidence.
+                errors.append(f"effects[{index}] needs independently verified three-published-video cooldown")
     if release:
         mix = release.get("audio_mix_profile") or {}
         if mix.get("master") != "narration_locked" or mix.get("music_ducking") != "sidechain_compress":

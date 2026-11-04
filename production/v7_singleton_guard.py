@@ -112,8 +112,11 @@ def audit(repo_root: Path) -> dict[str, object]:
             if marker in text:
                 offenders.append(f"{path.relative_to(root)} contains forbidden legacy route {marker}")
     orchestrator_text = (root / "production" / "v7_orchestrator.py").read_text(encoding="utf-8")
-    if CANONICAL_PROFILE_ID not in orchestrator_text:
-        offenders.append("production/v7_orchestrator.py does not pin the active profile")
+    # The orchestrator binds the imported canonical constant rather than
+    # repeating a version literal in source. Require that binding explicitly.
+    # Searching for the literal value would falsely reject a correct upgrade.
+    if "ENGINE_BUNDLE_ID = CANONICAL_PROFILE_ID" not in orchestrator_text:
+        offenders.append("production/v7_orchestrator.py does not bind the canonical profile constant")
     if offenders:
         raise SingletonGuardError("; ".join(offenders))
     return {

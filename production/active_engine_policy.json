@@ -1,7 +1,7 @@
 {
   "policy_version": "3.0",
   "active_engine_profile": "because-of-this-v7.4-editorial-story-engine-2026-11",
-  "active_engine_fingerprint": "c9f6c10765b65a447fb010008f64b302315ff189e257b927d47c9c8e2a427c8e",
+  "active_engine_fingerprint": "52d6202bea79c4677a243676868d715a785331bcfb04766a4ba0a37073405a41",
   "active_engine_version": "7.4.0",
   "update_rule": "approved_update_supersedes_previous_active_engine",
   "retired_versions": "must_not_remain_executable_in_active_tree",

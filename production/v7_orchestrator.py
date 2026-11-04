@@ -20,6 +20,7 @@ from pathlib import Path
 from typing import Any
 
 from production.canonical_config import CANONICAL_ENGINE_VERSION, CANONICAL_PROFILE_FINGERPRINT, CANONICAL_PROFILE_ID
+from production.audio_reuse_brain import AudioReuseError, audit as audit_audio_reuse
 from production.video_asset_contract import MAX_STORY_SECONDS
 from production.gemini_tts import (
     GeminiTTSError,
@@ -259,7 +260,8 @@ def _packaging_gate(manifest: dict[str, Any]) -> dict[str, Any]:
     return _status(True, "three non-spoiler packaging candidates and post-consequence CTA are registered")
 
 
-def _audio_gate(manifest: dict[str, Any], *, require_approved: bool, manifest_dir: Path | None = None) -> dict[str, Any]:
+def _audio_gate(manifest: dict[str, Any], *, require_approved: bool, manifest_dir: Path | None = None,
+                manifest_path: Path | None = None, repo_root: Path | None = None) -> dict[str, Any]:
     music = manifest.get("music")
     if not isinstance(music, dict):
         return _status(False, "music object is missing")
@@ -279,7 +281,17 @@ def _audio_gate(manifest: dict[str, Any], *, require_approved: bool, manifest_di
             missing.append("music file is missing")
     if require_approved and (music.get("commercial_use") is not True or str(music.get("license_status", "")).upper() != "APPROVED"):
         missing.append("approved commercial-use music license")
-    return _status(not missing, "voice-first mix, sidechain, licensed music and non-reuse policy are complete" if not missing else f"audio mix blockers: {', '.join(missing)}")
+    if manifest_path is None or repo_root is None:
+        if require_approved:
+            missing.append("missing canonical manifest path for live audio-memory audit")
+    else:
+        try:
+            memory = audit_audio_reuse(manifest_path, repo_root, strict=require_approved)
+            if memory.get("status") != "PASS":
+                missing.extend(memory.get("errors") or ["global music/SFX memory blocked"])
+        except (AudioReuseError, OSError, ValueError, TypeError) as exc:
+            missing.append("global audio-memory validation failed: " + str(exc))
+    return _status(not missing, "voice-first mix and fresh audio-memory evidence checked" if not missing else f"audio mix blockers: {', '.join(missing)}")
 
 
 def _artifact_gate(manifest: dict[str, Any], manifest_dir: Path, keys: tuple[str, ...], label: str, *, blocking: bool) -> dict[str, Any]:
@@ -335,7 +347,8 @@ def _gate_record(gate_id: str, check: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def evaluate(manifest: dict[str, Any], *, repo_root: Path, manifest_dir: Path, mode: str, check_gemini_tts: bool = False) -> dict[str, Any]:
+def evaluate(manifest: dict[str, Any], *, repo_root: Path, manifest_dir: Path, mode: str,
+             check_gemini_tts: bool = False, manifest_path: Path | None = None) -> dict[str, Any]:
     if mode not in {"contract", "dry-run", "draft-preview", "preflight", "preview", "production"}:
         raise OrchestratorError(f"unsupported orchestration mode: {mode}")
     validate_prompt_and_schema(repo_root)
@@ -357,6 +370,8 @@ def evaluate(manifest: dict[str, Any], *, repo_root: Path, manifest_dir: Path, m
             manifest,
             require_approved=mode in {"preflight", "preview", "production"},
             manifest_dir=manifest_dir,
+            manifest_path=manifest_path,
+            repo_root=repo_root,
         ),
         "G6": _artifact_gate(manifest, manifest_dir, ("final_audio", "captions", "alignment"), "final audio/caption/alignment", blocking=(mode in {"draft-preview", "preview", "production"})),
         "G7": _packaging_gate(manifest),
@@ -405,7 +420,7 @@ def run(args: argparse.Namespace) -> int:
     if not SAFE_MANIFEST.fullmatch(relative):
         raise OrchestratorError("manifest must be episodes/<episode>/manifest.json")
     manifest = load_json(manifest_path)
-    report = evaluate(manifest, repo_root=repo_root, manifest_dir=manifest_path.parent, mode=args.mode, check_gemini_tts=args.check_gemini_tts)
+    report = evaluate(manifest, repo_root=repo_root, manifest_dir=manifest_path.parent, mode=args.mode, check_gemini_tts=args.check_gemini_tts, manifest_path=manifest_path)
     report_path = args.report.resolve() if args.report else manifest_path.parent / "rendered" / f"v7-{args.mode}.json"
     _write_json(report_path, {key: value for key, value in report.items() if key != "record"})
     record_path = args.record.resolve() if args.record else manifest_path.parent / ".engine" / "production-record-7.4.0.json"
