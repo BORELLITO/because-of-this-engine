@@ -122,8 +122,33 @@ NÃO emitir READY enquanto houver P0/P1 sem evidência E3–E5, direitos e hist�
 **Integridade e reversibilidade:** `main` não recebeu merge, os PRs permanecem draft, nenhum TTS foi consumido, nenhum vídeo antigo foi modificado, nenhum render/publicação nova foi realizado. Testes de CI são evidência de código, não de licença, áudio ou experiência de publicação.
 
 ---
+## Resultado quantitativo da auditoria do catálogo — 04/11/2026
+
+A PR #66 ganhou `audits/inventory_audit_v11.py`, sem qualquer consulta externa ou modificação de mídias. Os números foram gerados pelo próprio workflow no GitHub Actions:
+
+| Indicador | Evidência |
+|---|---:|
+| Manifests locais analisados | 12 |
+| Fontes únicas por chave de origem | 79 |
+| Fontes ainda não representadas no registry central | **66** |
+| Destas: vistas em manifesto com `FINAL_APPROVED` | **32** |
+| Destas: apenas `ARCHIVED_HISTORICAL`, sem final atual | **12** |
+| Destas: apenas rascunho/outro estado | **22** |
+| Entradas atuais no registry | 13 |
+| Entradas atuais no registry sem fingerprint visual | 13 |
+| Chaves compartilhadas entre distintos `video_id` | 19 |
+| Dessas com alias explícito de rascunho/final da mesma história | 8 |
+| Demais sobreposições entre IDs, a revisar historicamente | 11 |
+
+**Leitura técnica:** as 66 fontes não estão invisíveis para o gate local atualizado: ele lê também os 12 manifestos. Porém, **não estão consolidadas no registro persistente** para sobreviver a reorganizações, exclusões de branches ou futuras migrações. Não adicionar todas cegamente: 22 são somente drafts ou estados não finais e a aposentadoria automática gastaria material potencialmente reutilizável sem prova de uso público. Separar `CONSUMED_FINAL`, `ARCHIVED_CONSUMED` e `RESERVED_DRAFT` exige evidência de uso real e de direitos, não só metadados. O verificador permanece `LOCAL_METADATA_COVERAGE_PARTIAL`.
+
+**CI de ponta a ponta desta auditoria offline:** [GitHub Actions #41892197120](https://github.com/BORELLITO/because-of-this-engine/actions/runs/41892197120), **26 testes novos + 9 testes existentes PASS**; [CI de reutilização #41892196873](https://github.com/BORELLITO/because-of-this-engine/actions/runs/41892196873), PASS. O CI de auditoria em `main` [#41891610891](https://github.com/BORELLITO/because-of-this-engine/actions/runs/41891610891) também passou no ramo isolado da PR #65.
+
+**Segurança:** comparação entre V7.4 e PR #66 confirma que NENHUM arquivo dentro de `episodes/` foi modificado; só módulos de validação, testes e auditorias. `main` mantém SHA `d35d78cd4a92d12375f54076e3e21b56cbe25fad`. One Extra Minute preservado.
+
+---
 ## ÚNICO PRÓXIMO PASSO
 
-**Auditar a procedência, licenças e identidade de mídia no histórico Git + Drive com relatório de evidências, preservando o acervo existente e a voz Gemini TTS Charon.** Concluir os P0 de inventário e revisão de fontes antes de emitir o sinal READY para uma história e, apenas depois, preparar o primeiro roteiro novo de terror com aprovação editorial prévia. Não acionar Gemini TTS, geração de mídia, render, despesas, publicação ou merge sem as aprovações e gates necessários.
+**Reconciliar o catálogo de 79 fontes com uma proposta de ledger categorizado e verificável, sem aposentadoria automática dos 22 rascunhos, e confrontar os 32 finalizados e 12 históricos com evidências do Git/Drive e seus direitos de uso.** Concluir a reconciliação de aliases/draft da mesma história e registrar os 11 conflitos históricos potenciais. Só depois marcar os gates P0 de proveniência como resolvidos, seguindo para pré-produção da primeira história nova.
 
-Critério de avanço: catálogo reconciliado e sem fonte reutilizada não autorizada para novos episódios; documentos de licença ligados aos itens; lacunas explicitamente bloqueadas. A impossibilidade de inspeção independente não deve ser transformada em aprovação automática.
+Não fazer merge, não alterar One Extra Minute, não acionar Gemini nem publicar. A voz aprovada continua Gemini TTS Charon. **Status geral = auditoria parcial / nova produção bloqueada.**
