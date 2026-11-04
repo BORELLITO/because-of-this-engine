@@ -164,7 +164,15 @@ def _all_manifests(repo_root: Path) -> list[Path]:
     episodes = repo_root / "episodes"
     if not episodes.is_dir():
         raise AssetReuseBrainError(f"Episode root is missing: {episodes}")
-    return sorted(path for path in episodes.glob("*/manifest.json") if path.is_file())
+    # A source previously allocated in a draft is still a historical source
+    # even when the episode never acquired a final manifest. Excluding previews
+    # allowed future productions to silently recycle those source videos.
+    return sorted(
+        path
+        for name in ("manifest.json", "preview-manifest.json")
+        for path in episodes.glob(f"*/{name}")
+        if path.is_file()
+    )
 
 
 def _registry_records(path: Path) -> list[dict[str, Any]]:
@@ -310,10 +318,13 @@ def audit(
             by_key.setdefault(key, []).append(record)
 
     policy = target_manifest.get("asset_reuse_brain") or {}
+    # Never trust a free-form manifest alias to exclude another episode from
+    # the global reuse ledger. Preview and final snapshots of ONE new episode
+    # must share the identical video_id. Legacy aliases remain in read-only
+    # history, but are not a valid bypass for any new rendering.
     same_story_episode_ids = {target_id}
     same_story_id = _norm(policy.get("same_story_id"))
-    if same_story_id:
-        same_story_episode_ids.add(same_story_id)
+    invalid_same_story_alias = bool(same_story_id and same_story_id != target_id)
 
     cross_episode: list[dict[str, Any]] = []
     for record in target_records:
@@ -358,6 +369,9 @@ def audit(
     if invalid_legacy_flag:
         status = "BLOCKED"
         reason = "legacy_baseline is only valid for the locked pilot manifests."
+    elif invalid_same_story_alias:
+        status = "BLOCKED"
+        reason = "same_story_id may not alias a different video_id: shared-source snapshots must keep one canonical ID."
     elif within_episode:
         status = "BLOCKED"
         reason = "the same source or asset identity appears more than once in this episode."
@@ -379,6 +393,9 @@ def audit(
         "manifest": str(manifest_path),
         "registry_status": "AVAILABLE" if registry_path else "MANIFEST_BACKED",
         "scanned_episode_count": len(manifests),
+        "scanned_manifest_count": len(manifests),
+        "registry_asset_count": len(registry_records),
+        "source_history_scope": "local_episode_manifests_and_preview_manifests_plus_registry_not_all_drive_or_git_history",
         "scanned_episode_ids": sorted({_norm(_manifest(path).get("video_id")) for path in manifests}),
         "candidate_asset_count": len(target_records),
         "within_episode_duplicates": within_episode,
