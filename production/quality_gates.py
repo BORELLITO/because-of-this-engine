@@ -178,6 +178,23 @@ def _captions(manifest_path: Path, mode: str) -> tuple[str, str]:
     return "PASS", f"{report.get('event_count', '?')} forced-aligned events; karaoke timing verified"
 
 
+def _captions_with_platform_ui(manifest_path: Path, mode: str, phase: str) -> tuple[str, str]:
+    caption_status, caption_evidence = _captions(manifest_path, mode)
+    if phase != "final":
+        return caption_status, caption_evidence
+    # Real interface evidence is separate from ASS validity. Never trust
+    # a static margin or ASS-file declaration as device-side approval.
+    try:
+        ui_review = inspect_mobile_caption_ui(manifest_path)
+    except (MobileUIReviewError, OSError, ValueError, TypeError, json.JSONDecodeError) as exc:
+        return "BLOCKED", caption_evidence + f"; mobile UI review could not be validated: {exc}"
+    if ui_review.get("status") != "UI_EVIDENCE_ATTESTED":
+        return "BLOCKED", caption_evidence + "; TikTok/YouTube mobile evidence pending: " + ", ".join(
+            ui_review.get("issues") or ["manual UI review missing"]
+        )
+    return caption_status, caption_evidence + "; independent platform screenshots and reviewed render/caption SHA binding checked"
+
+
 def _audio_history(manifest_path: Path, mode: str) -> tuple[str, str]:
     """Fresh global audio history check: never trust a cached PASS file."""
     try:
@@ -255,22 +272,7 @@ def evaluate(
 
     packaging = validate_packaging(manifest, strict=mode == "final")
 
-    caption_status, caption_evidence = _captions(manifest_path, mode)
-    if phase == "final":
-        # Real interface evidence is required separately from ASS validity.
-        # No automatic "PASS" from fixed style or safe-zone metadata alone.
-        try:
-            ui_review = inspect_mobile_caption_ui(manifest_path)
-            if ui_review.get("status") != "UI_EVIDENCE_ATTESTED":
-                caption_status = "BLOCKED"
-                caption_evidence += "; TikTok/YouTube mobile evidence pending: " + ", ".join(
-                    ui_review.get("issues") or ["manual UI review missing"]
-                )
-            else:
-                caption_evidence += "; platform-specific UI screenshot hashes and final render binding checked"
-        except (MobileUIReviewError, OSError, ValueError, TypeError, json.JSONDecodeError) as exc:
-            caption_status = "BLOCKED"
-            caption_evidence += f"; mobile UI review could not be validated: {exc}"
+    caption_status, caption_evidence = _captions_with_platform_ui(manifest_path, mode, phase)
     gates.append(_gate("G6", "CAPTIONS_KARAOKE", caption_status, caption_evidence))
     if 7 in active or phase == "final":
         gates.append(_gate("G7", "PACKAGING", packaging["status"], "; ".join(packaging["errors"]) if packaging["errors"] else "three title/thumbnail directions, fiction disclosure and consequence-safe CTA verified"))
