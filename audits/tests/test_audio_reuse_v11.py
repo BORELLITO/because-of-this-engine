@@ -168,6 +168,63 @@ class AudioReuseV11Tests(unittest.TestCase):
             self.assertIn("2", evidence)
             self.assertTrue(live.call_args.kwargs["strict"])
 
+    def test_orchestrator_g5_blocks_missing_registry_proof(self):
+        from production.v7_orchestrator import _audio_gate
+        target = json.loads(self.target.read_text())
+        target["music"].update({
+            "license_status": "APPROVED",
+            "complete_track_reuse": "forbidden",
+            "sidechain_enabled": True,
+        })
+        result = _audio_gate(
+            target, require_approved=True, manifest_dir=self.dest,
+            manifest_path=self.target, repo_root=self.root,
+        )
+        self.assertEqual(result["status"], "BLOCKED")
+        self.assertTrue(result["blocking"])
+        self.assertIn("durable", result["evidence"])
+
+    def test_procedural_audio_final_contract_accepts_generator_not_fake_stock_url(self):
+        from production.prompt_compliance import validate_audio
+        m = json.loads(self.target.read_text())
+        m["music"].update({
+            "reuse_status": "FRESH", "origin_recorded_at": "2026-11-04T18:00:00Z",
+            "complete_track_reuse": "forbidden", "device_tests": {
+                "phone": "PASS", "headphones": "PASS", "low_volume": "PASS",
+            },
+        })
+        result = validate_audio(m, strict=True)
+        self.assertEqual(result["status"], "PASS", result["errors"])
+
+    def test_procedural_audio_final_contract_rejects_track_reuse_flag(self):
+        from production.prompt_compliance import validate_audio
+        m = json.loads(self.target.read_text())
+        m["music"].update({
+            "reuse_status": "APPROVED_REUSE",
+            "origin_recorded_at": "2026-11-04T18:00:00Z",
+            "complete_track_reuse": "forbidden",
+            "device_tests": {"phone": "PASS", "headphones": "PASS", "low_volume": "PASS"},
+        })
+        result = validate_audio(m, strict=True)
+        self.assertEqual(result["status"], "BLOCKED")
+        self.assertTrue(any("fresh" in e for e in result["errors"]))
+
+    def test_self_reported_sfx_cooldown_is_never_sufficient_final(self):
+        from production.prompt_compliance import validate_audio
+        m = json.loads(self.target.read_text())
+        m["music"].update({
+            "reuse_status": "FRESH", "origin_recorded_at": "2026-11-04T18:00:00Z",
+            "complete_track_reuse": "forbidden",
+            "device_tests": {"phone": "PASS", "headphones": "PASS", "low_volume": "PASS"},
+        })
+        m["effects"] = [{
+            "effect_id": "door-slam", "sha256": "b"*64,
+            "reuse_status": "APPROVED_REUSE", "cooldown_videos": 999,
+        }]
+        result = validate_audio(m, strict=True)
+        self.assertEqual(result["status"], "BLOCKED")
+        self.assertTrue(any("independently verified" in e for e in result["errors"]))
+
     def test_actual_historical_evidence_file_contains_verified_identical_wavs(self):
         root = Path(__file__).resolve().parents[2]
         data = json.loads((root / "audits/audio_verified_history_v11.json").read_text())
