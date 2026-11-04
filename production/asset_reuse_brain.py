@@ -292,6 +292,45 @@ def _registry_snapshot(repo_root: Path, registry_path: Path | None = None) -> di
     }
 
 
+def _history_review_candidates(repo_root: Path) -> tuple[set[str], str]:
+    """Review queue is NOT a retired-assets ledger.
+
+    Historical-only media must be reviewed before a new episode reuses them,
+    but is never automatically labelled consumed or permanently retired.
+    """
+    queue = repo_root / "audits" / "git_history_review_queue_v11.json"
+    if not queue.is_file():
+        return set(), "NOT_PRESENT"
+    try:
+        payload = json.loads(queue.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise AssetReuseBrainError("Historical review queue is unreadable") from exc
+    if (
+        not isinstance(payload, dict)
+        or payload.get("schema_version") != "1.1"
+        or payload.get("purpose") != "REVIEW_QUEUE_ONLY_NEVER_AUTORETIRE"
+        or payload.get("automatic_retirement") is not False
+        or not isinstance(payload.get("entries"), list)
+    ):
+        raise AssetReuseBrainError("Historical review queue violates the no-auto-retirement contract")
+    entries = payload["entries"]
+    if payload.get("source_count") != len(entries):
+        raise AssetReuseBrainError("Historical review queue count does not match entries")
+    keys: set[str] = set()
+    for entry in entries:
+        if (
+            not isinstance(entry, dict)
+            or entry.get("status") != "PENDING_REVIEW_NOT_RETIRED"
+            or not isinstance(entry.get("source_key"), str)
+            or not entry["source_key"].strip()
+        ):
+            raise AssetReuseBrainError("Historical review queue contains an unapproved or malformed entry")
+        keys.add(entry["source_key"].strip())
+    if len(keys) != len(entries):
+        raise AssetReuseBrainError("Historical review queue has duplicate source identities")
+    return keys, "REVIEW_ONLY"
+
+
 def audit(
     manifest_path: Path,
     repo_root: Path,
@@ -328,6 +367,7 @@ def audit(
     # Keep even archival records in the global source history. Legacy baseline
     # collisions remain explicitly recorded and release-blocked below.
     all_records = manifest_records + registry_records
+    historical_review_keys, history_review_status = _history_review_candidates(repo_root)
     target_records = [record for record in manifest_records if record["episode_id"] == target_id]
     if not target_records:
         raise AssetReuseBrainError("Target manifest contains no usable video assets.")
@@ -405,6 +445,11 @@ def audit(
         and _norm(policy.get("policy")) == "global_no_repeat"
     )
     invalid_legacy_flag = policy.get("legacy_baseline") is True and not legacy_baseline
+    target_source_keys = {
+        key[1] for record in target_records
+        for key in record["keys"] if key[0] == "source_asset"
+    }
+    pending_history_review = sorted(target_source_keys & historical_review_keys)
 
     if invalid_legacy_flag:
         status = "BLOCKED"
@@ -421,13 +466,20 @@ def audit(
     elif unique_cross:
         status = "BLOCKED"
         reason = "a new episode reuses a source asset already assigned to another story."
+    elif pending_history_review:
+        status = "HISTORY_REVIEW_REQUIRED"
+        reason = "source appears in historical branch metadata; usage is unverified and must be reviewed before allocation."
     else:
         status = "ASSET_REUSE_PASS"
-        reason = "no source asset identity overlaps another episode."
+        reason = "no source asset identity overlaps another episode in the configured local/archival ledgers."
 
     return {
         "status": status,
-        "release_blocked": status in {"BLOCKED", "HISTORICAL_COLLISION_RECORDED"},
+        "release_blocked": status in {"BLOCKED", "HISTORICAL_COLLISION_RECORDED", "HISTORY_REVIEW_REQUIRED"},
+        "history_review_queue_status": history_review_status,
+        "history_review_queue_asset_count": len(historical_review_keys),
+        "history_review_required_source_keys": pending_history_review,
+        "historical_sources_auto_retired": False,
         "policy": "GLOBAL_NO_REPEAT_SOURCE_ASSET",
         "video_id": target_id,
         "manifest": str(manifest_path),
