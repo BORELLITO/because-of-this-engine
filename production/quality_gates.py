@@ -71,14 +71,16 @@ def _story_creation(manifest: dict[str, Any], base: Path, mode: str) -> tuple[st
     return "PASS: original story, hook, escalation and payoff gates passed", report
 
 
-def _story_intelligence(base: Path) -> tuple[str, dict[str, Any]]:
+def _story_intelligence(base: Path, mode: str = "final") -> tuple[str, dict[str, Any]]:
     visual = None
-    for candidate in (
-        base / "rendered" / "visual-story-qa-final.json",
-        base / "rendered" / "visual-story-qa-draft-preview.json",
-        base / "rendered" / "visual-story-qa-preview.json",
-        base / "rendered" / "visual-story-qa-production.json",
-    ):
+    # Never accept a draft report as evidence for a final release.
+    candidates = (
+        ("visual-story-qa-final.json",)
+        if mode == "final" else
+        ("visual-story-qa-preview.json", "visual-story-qa-draft-preview.json", "visual-story-qa-production.json")
+    )
+    for name in candidates:
+        candidate = base / "rendered" / name
         if candidate.is_file():
             visual = _read(candidate, "visual story QA")
             break
@@ -200,7 +202,7 @@ def evaluate(
     gates.append(_gate("G0", "PRE_FLIGHT", g0_status, g0_evidence))
 
     creation_status, creation = _story_creation(manifest, base, mode)
-    intel_status, intelligence = _story_intelligence(base)
+    intel_status, intelligence = _story_intelligence(base, mode)
     g1_status = "PASS" if creation_status.startswith("PASS") else "BLOCKED"
     gates.append(_gate("G1", "SCRIPT_SUSPENSE", g1_status, creation_status + "; central question, consequence and suspense arc required"))
     g2_status, g2_evidence = _provenance(manifest, mode)
