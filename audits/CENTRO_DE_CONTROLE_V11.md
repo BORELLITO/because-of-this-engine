@@ -66,8 +66,32 @@
 
 NÃO emitir READY enquanto houver P0/P1 sem evidência E3–E5, direitos e histórico global não aprovados, Work não testado ou prévia da nova direção não aprovada. Manter publicação manual. Nenhum novo roteiro/mídia/render será iniciado antes da autorização prevista pelo prompt mestre.
 
+## Atualização técnica da auditoria — 04/11/2026
+
+**Correções reais implementadas em isolamento (PR #66, sobre V7.4):**
+
+1. G3 bloqueia ausência de relatórios reais de visual/story QA e alinhamento da narração; relatório de draft não vale para o master final.
+2. G6 reconhece o status real `CAPTION_QA_PASS` em vez de procurar `PASS` incorretamente.
+3. G4 valida nomes reais de campos da V7.4 para TTS, sem alterar a voz.
+4. G2 exige direitos aprovados para releases finais.
+5. Corrigida a divergência entre a impressão digital computada pela configuração V7.4 (`52d6202bea79...`) e o valor da política V7.4 (`c9f6c107...`). O manifesto original de episódio 004 já usava o fingerprint computado.
+6. Corrigido o singleton guard, que exigia um nome literal mesmo quando o orquestrador ligava o perfil por constante canônica.
+7. Adicionado um contrato offline para uma futura integração Google Cloud TTS Chirp3 HD Charon: **não conectado, não autenticado, não ativado, sem API/SSML/voz gerada**.
+
+**Evidências de regressão:**
+
+- [PR #66 — Hardening V7.4](https://github.com/BORELLITO/because-of-this-engine/pull/66), **draft**.
+- [Run de auditoria em V7.4 — 17 testes novos + 9 testes originais PASS](https://github.com/BORELLITO/because-of-this-engine/actions/runs/41872148850).
+- [CI de reuso existente — PASS](https://github.com/BORELLITO/because-of-this-engine/actions/runs/41872148988).
+- `main` continua no commit `d35d78cd4a92d12375f54076e3e21b56cbe25fad` sem merge.
+
+**O que NÃO foi demonstrado:** render de nova história; teste real faturável do Cloud TTS; licenças independentes de todo histórico; comparação perceptual entre mídia de todos os branches/Drive; análise visual humana de cada clipe futuro; UI safe zones do TikTok/Shorts; execução em sessão real do Work; validação ponta a ponta com história nova. Por isso status geral permanece **BLOCKED PARA NOVA PRODUÇÃO / PARTIAL NA AUDITORIA**.
+
+---
 ## ÚNICO PRÓXIMO PASSO
 
-**Resolver o conflito de identidade e provedor de voz em ambiente isolado**, conciliando V7.3.1↔V7.4 e validando o contrato do adaptador Cloud TTS Charon com testes gratuitos/não destrutivos. Não trocar o provedor ativo, consumir créditos, promover branch ou iniciar vídeo sem aprovação e gates. **Critério de conclusão:** contrato coerente, regressões verdes, plano de migração reversível e evidências arquivadas; se dependências externas bloquearem, manter BLOCKED.
+**Validar o Google Cloud Text-to-Speech Charon como provedor futuro com uma amostra isolada e orçamento controlado, após autorização específica para eventuais custos e credenciais adequadas.** Usar o contrato offline já testado na PR #66, conferir requisitos atuais da API, comparar interpretação/ritmo/inteligibilidade com a voz Charon histórica, e arquivar logs sem segredos. Não trocar o provedor ativo nem avançar com a primeira história enquanto o TTS e os demais P0/P1 não estiverem aprovados.
 
-> Notas: PASS técnico de um histórico não implica aprovação editorial; todos os resultados no painel indicam o nível de evidência disponível em 04/11/2026.
+Critério de conclusão: uma síntese real com amostra identificada, custo/quota registrados, áudio reproduzível e decisão de aprovação explícita; no fracasso, rollback preservado. Depois serão retomados, no mesmo programa de auditoria, os bloqueios de direitos, vídeo e Work.
+
+> Teste unitário/CI verde não significa vídeo aprovado. One Extra Minute continua preservado como histórico, sem qualquer alteração.
