@@ -199,7 +199,11 @@ def main() -> int:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(content, encoding="utf-8")
     print(content)
-    return int(report["status"] == "BLOCKED")
+    # Strong/inconclusive similarity is a mandatory review gate. Never
+    # treat "E4_TECHNICAL_PASS_WITH_REVIEW" as a release-ready exit=0.
+    return 0 if report["status"] == "E4_TECHNICAL_PASS" else (
+        2 if report["status"] == "E4_TECHNICAL_PASS_WITH_REVIEW" else 1
+    )
 
 
 if __name__ == "__main__":
