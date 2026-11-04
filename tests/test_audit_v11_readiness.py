@@ -15,6 +15,7 @@ class AuditV11ReadOnlyTests(unittest.TestCase):
         (self.root / "production/canonical_config.py").write_text('CANONICAL_ENGINE_VERSION = "7.3.1"\n')
         self.policy = {
             "voice_provider": "gemini_tts",
+            "voice_policy": {"voice_name": "Charon"},
             "active_engine_version": "7.3.1",
             "publication_policy": "manual_only",
             "render_contract": {"duration_min_seconds": 60, "duration_max_seconds": 75}
@@ -28,10 +29,22 @@ class AuditV11ReadOnlyTests(unittest.TestCase):
     def codes(result):
         return {i["code"] for i in result["issues"]}
 
-    def test_cloud_provider_conflict_blocks(self):
+    def test_approved_gemini_charon_is_not_a_conflict(self):
         result = inspect(self.root)
-        self.assertEqual(result["status"], "BLOCKED")
-        self.assertIn("VOICE_PROVIDER_CONFLICT", self.codes(result))
+        self.assertEqual(result["status"], "BLOCKED")  # real catalog/UI gaps remain
+        self.assertNotIn("VOICE_PROVIDER_CONFLICT", self.codes(result))
+        self.assertNotIn("VOICE_LOCK_CONFLICT", self.codes(result))
+        self.assertEqual(result["approved_voice"], "Charon")
+
+    def test_provider_change_is_blocked(self):
+        self.policy["voice_provider"] = "google_cloud_tts"
+        self.save()
+        self.assertIn("VOICE_PROVIDER_CONFLICT", self.codes(inspect(self.root)))
+
+    def test_different_voice_is_blocked(self):
+        self.policy["voice_policy"]["voice_name"] = "OtherVoice"
+        self.save()
+        self.assertIn("VOICE_LOCK_CONFLICT", self.codes(inspect(self.root)))
 
     def test_no_automatic_publication(self):
         self.policy["publication_policy"] = "auto"
