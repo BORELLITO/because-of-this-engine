@@ -82,6 +82,20 @@ class E4MediaIntegrityV11Tests(unittest.TestCase):
         report = verify(self.manifest, self.root)
         self.assertEqual(report["status"], "BLOCKED")
 
+    def test_cli_requires_review_when_copies_are_visually_identical(self):
+        twin = self.root / "copy.mp4"
+        shutil.copyfile(self.video, twin)
+        self.save([self.scene("S01", self.video), self.scene("S02", twin)])
+        cli = Path(__file__).resolve().parents[1] / "e4_media_integrity_v11.py"
+        import sys
+        result = subprocess.run(
+            [sys.executable, str(cli), "--manifest", str(self.manifest),
+             "--media-root", str(self.root)],
+            capture_output=True, text=True, timeout=80,
+        )
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("E4_TECHNICAL_PASS_WITH_REVIEW", result.stdout)
+
     def test_blank_frames_do_not_prove_visual_identity(self):
         self.assertEqual(_correlation(bytes(4096), bytes(4096)), 0.0)
 
