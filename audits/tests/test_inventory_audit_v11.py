@@ -20,9 +20,10 @@ class InventoryV11Tests(unittest.TestCase):
     def write_registry(self, items):
         self.registry_path.write_text(json.dumps({"schema_version": 1, "assets": items}), encoding="utf-8")
 
-    def write_manifest(self, ids=("101",)):
+    def write_manifest(self, ids=("101",), lifecycle="DRAFT_PREVIEW_ONLY"):
         self.manifest_path.write_text(json.dumps({
             "video_id": "new-story",
+            "lifecycle_status": lifecycle,
             "scenes": [{"scene_id": f"S{i:02d}", "asset": {
                 "provider": "mixkit",
                 "provider_asset_id": value,
@@ -54,6 +55,14 @@ class InventoryV11Tests(unittest.TestCase):
         result = inspect(self.root)
         self.assertEqual(result["manifest_count"], 1)
         self.assertEqual(result["sources_without_registry_entries"], 1)
+
+    def test_unregistered_final_source_is_separate_from_draft(self):
+        self.write_manifest(("101", "102"), lifecycle="FINAL_APPROVED")
+        self.write_registry([{"source_asset_key": "mixkit:101", "perceptual_hash": "a"}])
+        result = inspect(self.root)
+        self.assertEqual(result["sources_without_registry_entries"], 1)
+        self.assertEqual(result["missing_registry_by_lifecycle"]["final_approved"], 1)
+        self.assertEqual(result["missing_registry_by_lifecycle"]["draft_or_other_only"], 0)
 
     def test_missing_registry_blocks_readability(self):
         self.write_manifest()
