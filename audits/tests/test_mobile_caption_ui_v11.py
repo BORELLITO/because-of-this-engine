@@ -9,8 +9,10 @@ import subprocess
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from audits.mobile_caption_ui_v11 import inspect, MobileUIReviewError
+from production.quality_gates import _captions_with_platform_ui
 
 
 def sha(path):
@@ -111,6 +113,30 @@ class MobilePlatformUIV11Tests(unittest.TestCase):
         data["platforms"]["tiktok"]["screenshot_sha256"]=sha(self.screens[0])
         self.write(data)
         self.assertEqual(inspect(self.manifest)["status"],"MANUAL_UI_REVIEW_REQUIRED")
+
+    def test_final_g6_blocks_even_when_caption_qa_alone_passed(self):
+        with patch("production.quality_gates._captions", return_value=("PASS", "word alignment valid")):
+            status, reason=_captions_with_platform_ui(self.manifest, "final", "final")
+        self.assertEqual(status,"BLOCKED")
+        self.assertIn("TikTok/YouTube",reason)
+
+    def test_pre_render_is_not_blocked_by_future_device_proof(self):
+        with patch("production.quality_gates._captions", return_value=("PASS", "alignment QA pass")):
+            status, _=_captions_with_platform_ui(self.manifest, "final", "pre-render")
+        self.assertEqual(status,"PASS")
+
+    def test_final_g6_with_human_device_proof_is_structurally_attested(self):
+        self.write(self.payload())
+        with patch("production.quality_gates._captions", return_value=("PASS", "word alignment valid")):
+            status, evidence=_captions_with_platform_ui(self.manifest, "final", "final")
+        self.assertEqual(status,"PASS")
+        self.assertIn("reviewed render/caption SHA", evidence)
+
+    def test_final_g6_does_not_ignore_caption_engine_failure(self):
+        self.write(self.payload())
+        with patch("production.quality_gates._captions", return_value=("BLOCKED", "ASR timestamps missing")):
+            status,_=_captions_with_platform_ui(self.manifest,"final","final")
+        self.assertEqual(status,"BLOCKED")
 
     def test_path_traversal_rejected(self):
         data=self.payload()
