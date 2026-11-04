@@ -23,6 +23,17 @@ jobs:
         run: python -m py_compile production/quality_gates.py
       - name: Run isolated V1.1 contract regressions (no APIs)
         run: python -m unittest discover -s audits/tests -p 'test_*.py' -v
+      - name: Inspect effective engine fingerprint
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from production.canonical_config import CANONICAL_PROFILE_FINGERPRINT, CANONICAL_PROFILE_ID
+          policy=json.loads(Path("production/active_engine_policy.json").read_text())
+          print("EFFECTIVE_FINGERPRINT=" + CANONICAL_PROFILE_FINGERPRINT)
+          print("DECLARED_FINGERPRINT=" + policy["active_engine_fingerprint"])
+          print("ACTIVE_PROFILE=" + CANONICAL_PROFILE_ID)
+          PY
       - name: Run existing current-engine policy and editorial tests
         run: |
           python -m unittest tests/test_current_engine_policy.py tests/test_editorial_story_gates.py tests/test_reuse_first.py -v
