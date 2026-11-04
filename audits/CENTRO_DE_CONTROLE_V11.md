@@ -88,10 +88,10 @@ NÃO emitir READY enquanto houver P0/P1 sem evidência E3–E5, direitos e hist�
 **O que NÃO foi demonstrado:** render de nova história; teste real faturável do Cloud TTS; licenças independentes de todo histórico; comparação perceptual entre mídia de todos os branches/Drive; análise visual humana de cada clipe futuro; UI safe zones do TikTok/Shorts; execução em sessão real do Work; validação ponta a ponta com história nova. Por isso status geral permanece **BLOCKED PARA NOVA PRODUÇÃO / PARTIAL NA AUDITORIA**.
 
 ---
+## Decisão do usuário — continuidade da voz aprovada (04/11/2026)
+
+**VOCAL LOCK: preservar Gemini TTS / voz Charon**, a mesma rota aprovada no Because Of This. Não trocar para Google Cloud TTS Chirp3 HD Charon, pois o mesmo nome não garante a mesma identidade vocal. Preservar parâmetros e referência sonora do motor histórico; nenhum teste ou gasto Cloud TTS é necessário. O módulo `experimental/v11/chirp3_cloud_tts_contract.py` permanece não ativado e sem rota para produção; não o promover. A adaptação TTS não é pré-requisito para nova história. Próxima etapa: revalidar segurança, proveniência e geração da nova história mantendo o Gemini Charon e aprovação humana dos resultados.
+
 ## ÚNICO PRÓXIMO PASSO
 
-**Validar o Google Cloud Text-to-Speech Charon como provedor futuro com uma amostra isolada e orçamento controlado, após autorização específica para eventuais custos e credenciais adequadas.** Usar o contrato offline já testado na PR #66, conferir requisitos atuais da API, comparar interpretação/ritmo/inteligibilidade com a voz Charon histórica, e arquivar logs sem segredos. Não trocar o provedor ativo nem avançar com a primeira história enquanto o TTS e os demais P0/P1 não estiverem aprovados.
-
-Critério de conclusão: uma síntese real com amostra identificada, custo/quota registrados, áudio reproduzível e decisão de aprovação explícita; no fracasso, rollback preservado. Depois serão retomados, no mesmo programa de auditoria, os bloqueios de direitos, vídeo e Work.
-
-> Teste unitário/CI verde não significa vídeo aprovado. One Extra Minute continua preservado como histórico, sem qualquer alteração.
+**Revalidar a cadeia de produção V7.4 com a voz Gemini TTS Charon existente, sem trocar de provedor:** confirmar o perfil vocal aprovado, as evidências de licenciamento e não repetição de mídia, o alinhamento de narração/legendas e os gates técnicos/editoriais. Somente depois preparar a primeira história nova e submetê-la ao usuário para aprovação prévia a qualquer render final/publicação. Sem consumir créditos desnecessariamente, sem alterações na `main` e sem tocar em One Extra Minute.
