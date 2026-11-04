@@ -52,8 +52,12 @@ jobs:
           print("INVENTORY_MANIFESTS=" + str(x["manifest_count"]))
           print("INVENTORY_UNIQUE_SOURCES=" + str(x["unique_source_keys"]))
           print("INVENTORY_MISSING_LEDGER=" + str(x["sources_without_registry_entries"]))
+          print("INVENTORY_MISSING_FINAL=" + str(x["missing_registry_by_lifecycle"]["final_approved"]))
+          print("INVENTORY_MISSING_ARCHIVED=" + str(x["missing_registry_by_lifecycle"]["archived_historical"]))
+          print("INVENTORY_MISSING_DRAFT=" + str(x["missing_registry_by_lifecycle"]["draft_or_other_only"]))
           print("INVENTORY_MISSING_FINGERPRINT=" + str(x["registry_missing_perceptual_hash_count"]))
           print("INVENTORY_LEGACY_CROSS_ID=" + str(x["cross_episode_source_alias_count"]))
+          print("INVENTORY_DECLARED_DRAFT_FINAL_ALIAS=" + str(x["cross_id_explicit_draft_snapshot_alias_count"]))
           assert x["status"] in ("LOCAL_METADATA_COVERAGE_PARTIAL","LOCAL_METADATA_COVERAGE_PASS")
           assert x["independent_licensing_verified"] is False
           assert x["drive_inventory_verified"] is False
