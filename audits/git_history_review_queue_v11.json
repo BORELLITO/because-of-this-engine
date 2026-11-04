@@ -1,0 +1,194 @@
+{
+  "schema_version": "1.1",
+  "purpose": "REVIEW_QUEUE_ONLY_NEVER_AUTORETIRE",
+  "source_git_actions_run_id": 41899813688,
+  "branch_ref_count": 74,
+  "unique_source_keys_across_git_history": 95,
+  "source_count": 16,
+  "candidate_status": "PENDING_MANUAL_USE_AND_RIGHTS_EVIDENCE",
+  "media_consumption_confirmed": false,
+  "commercial_rights_independently_verified": false,
+  "pixel_content_verified": false,
+  "google_drive_identity_verified_count": 6,
+  "automatic_retirement": false,
+  "approved_for_reuse": false,
+  "approval_for_production": false,
+  "entries": [
+    {
+      "source_key": "drive_file:1NG17JdVkslUfg9gXsw0VHkgTgzEbov6W",
+      "episode_ids": [
+        "episode-001-preview"
+      ],
+      "lifecycle_states": [
+        "OTHER"
+      ],
+      "branch_example": "refs/remotes/origin/activation/v72-post-merge-ci-docs",
+      "status": "PENDING_REVIEW_NOT_RETIRED"
+    },
+    {
+      "source_key": "drive_file:1NUbUL1HKfDSGWMjLvhvly9vJLrUEZmxV",
+      "episode_ids": [
+        "episode-001-preview"
+      ],
+      "lifecycle_states": [
+        "OTHER"
+      ],
+      "branch_example": "refs/remotes/origin/activation/v72-post-merge-ci-docs",
+      "status": "PENDING_REVIEW_NOT_RETIRED"
+    },
+    {
+      "source_key": "drive_file:1PoDQ9SVpDYR562NEM33u7zrMA3SKuei_",
+      "episode_ids": [
+        "episode-001-preview"
+      ],
+      "lifecycle_states": [
+        "OTHER"
+      ],
+      "branch_example": "refs/remotes/origin/activation/v72-post-merge-ci-docs",
+      "status": "PENDING_REVIEW_NOT_RETIRED"
+    },
+    {
+      "source_key": "drive_file:1ThKTEUNdQwLI1u492Enpt26ARnmTlNz0",
+      "episode_ids": [
+        "episode-001-preview"
+      ],
+      "lifecycle_states": [
+        "OTHER"
+      ],
+      "branch_example": "refs/remotes/origin/activation/v72-post-merge-ci-docs",
+      "status": "PENDING_REVIEW_NOT_RETIRED"
+    },
+    {
+      "source_key": "drive_file:1Xy-KhncQAD4vFHQKvSl6GmyUKXix-1gb",
+      "episode_ids": [
+        "episode-001-preview"
+      ],
+      "lifecycle_states": [
+        "OTHER"
+      ],
+      "branch_example": "refs/remotes/origin/activation/v72-post-merge-ci-docs",
+      "status": "PENDING_REVIEW_NOT_RETIRED"
+    },
+    {
+      "source_key": "drive_file:1dlu1251AsJqAX0dpdpaERpT3ESJwggfX",
+      "episode_ids": [
+        "episode-001-preview"
+      ],
+      "lifecycle_states": [
+        "OTHER"
+      ],
+      "branch_example": "refs/remotes/origin/activation/v72-post-merge-ci-docs",
+      "status": "PENDING_REVIEW_NOT_RETIRED"
+    },
+    {
+      "source_key": "mixkit:100576",
+      "episode_ids": [
+        "because-of-this-episode-001"
+      ],
+      "lifecycle_states": [
+        "OTHER"
+      ],
+      "branch_example": "refs/remotes/origin/audit-hardening-2026-10-24",
+      "status": "PENDING_REVIEW_NOT_RETIRED"
+    },
+    {
+      "source_key": "mixkit:100577",
+      "episode_ids": [
+        "because-of-this-episode-001"
+      ],
+      "lifecycle_states": [
+        "OTHER"
+      ],
+      "branch_example": "refs/remotes/origin/audit-hardening-2026-10-24",
+      "status": "PENDING_REVIEW_NOT_RETIRED"
+    },
+    {
+      "source_key": "mixkit:100578",
+      "episode_ids": [
+        "because-of-this-episode-001"
+      ],
+      "lifecycle_states": [
+        "OTHER"
+      ],
+      "branch_example": "refs/remotes/origin/fix/align-caption-bootstrap",
+      "status": "PENDING_REVIEW_NOT_RETIRED"
+    },
+    {
+      "source_key": "mixkit:100580",
+      "episode_ids": [
+        "because-of-this-episode-001"
+      ],
+      "lifecycle_states": [
+        "OTHER"
+      ],
+      "branch_example": "refs/remotes/origin/audit-hardening-2026-10-24",
+      "status": "PENDING_REVIEW_NOT_RETIRED"
+    },
+    {
+      "source_key": "mixkit:17430",
+      "episode_ids": [
+        "because-of-this-episode-001"
+      ],
+      "lifecycle_states": [
+        "OTHER"
+      ],
+      "branch_example": "refs/remotes/origin/fix/align-caption-bootstrap",
+      "status": "PENDING_REVIEW_NOT_RETIRED"
+    },
+    {
+      "source_key": "mixkit:17450",
+      "episode_ids": [
+        "because-of-this-episode-001"
+      ],
+      "lifecycle_states": [
+        "OTHER"
+      ],
+      "branch_example": "refs/remotes/origin/fix/align-caption-bootstrap",
+      "status": "PENDING_REVIEW_NOT_RETIRED"
+    },
+    {
+      "source_key": "mixkit:1986",
+      "episode_ids": [
+        "because-of-this-episode-001"
+      ],
+      "lifecycle_states": [
+        "OTHER"
+      ],
+      "branch_example": "refs/remotes/origin/fix/align-caption-bootstrap",
+      "status": "PENDING_REVIEW_NOT_RETIRED"
+    },
+    {
+      "source_key": "mixkit:28886",
+      "episode_ids": [
+        "because-of-this-episode-001"
+      ],
+      "lifecycle_states": [
+        "OTHER"
+      ],
+      "branch_example": "refs/remotes/origin/fix/align-caption-bootstrap",
+      "status": "PENDING_REVIEW_NOT_RETIRED"
+    },
+    {
+      "source_key": "mixkit:28901",
+      "episode_ids": [
+        "because-of-this-episode-001"
+      ],
+      "lifecycle_states": [
+        "OTHER"
+      ],
+      "branch_example": "refs/remotes/origin/fix/align-caption-bootstrap",
+      "status": "PENDING_REVIEW_NOT_RETIRED"
+    },
+    {
+      "source_key": "mixkit:50950",
+      "episode_ids": [
+        "because-of-this-episode-001"
+      ],
+      "lifecycle_states": [
+        "OTHER"
+      ],
+      "branch_example": "refs/remotes/origin/audit-hardening-2026-10-24",
+      "status": "PENDING_REVIEW_NOT_RETIRED"
+    }
+  ]
+}
