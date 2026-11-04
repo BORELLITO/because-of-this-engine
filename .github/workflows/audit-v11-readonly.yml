@@ -31,6 +31,10 @@ jobs:
           assert report["mode"] == "READ_ONLY"
           assert report["status"] == "BLOCKED"
           issues = {item["code"] for item in report["issues"]}
-          assert "VOICE_PROVIDER_CONFLICT" in issues
-          print("READ_ONLY_AUDIT_RAN; launch BLOCKED until all gates validated")
+          assert "VOICE_PROVIDER_CONFLICT" not in issues
+          assert "VOICE_LOCK_CONFLICT" not in issues
+          assert report["active_provider"] == "gemini_tts"
+          assert report["approved_voice"] == "Charon"
+          assert "HISTORICAL_MEDIA_CATALOG_NOT_EVIDENCED" in issues
+          print("GEMINI_CHARON_LOCK_PASS; other launch gates remain BLOCKED")
           PY
