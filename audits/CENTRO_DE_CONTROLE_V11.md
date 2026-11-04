@@ -207,8 +207,24 @@ A PR #66 ganhou `audits/inventory_audit_v11.py`, sem qualquer consulta externa o
 **Pendências reais:** registro histórico de áudio ainda vazio (sem regularização artificial), verificação de licenças individualizadas e terceiros para futuros clipes e áudios, avaliação visual de layouts em aparelhos reais de um candidato novo, prova de execução E2E e aprovação editorial. **Nenhum READY ou aprovação de mídia atribuídos.** Gemini TTS Charon travada; `main`, One Extra Minute e todas as produções anteriores intactos. PRs 65/66 mantidos em draft.
 
 ---
+## Teste integrado E2E — cenários fictícios | 04/11/2026
+
+**Resultado confirmado na PR #66 (branch experimental isolada):**
+- **19 cenários de ataque** executados sobre arquivos e manifestos descartáveis, cobrindo a composição real de G2, G3, G5, G6, G8, G9, G10 e G11. Os sistemas de TTS, renderização, publicação e Google Drive não foram acionados; a suíte simula algumas fronteiras pesadas de G0/G1/codec/alinhamento, portanto **não é um E2E físico de vídeo pronto**.
+- **113 testes de auditoria PASS + 9 testes atuais existentes PASS** na CI, total **122 casos distintos**. Os 19 cenários E2E foram repetidos em step independente para facilitar a verificação (não somá-los duas vezes).
+- **Erro P0 corrigido:** G2 sempre bloqueava porque a função retornava `PASS:...` e o controlador comparava `== "PASS"`. Agora status e evidência são separados.
+- **Direitos:** G2 final exige revisão humana por mídia com hash, origem e autorização declarada para YouTube/TikTok; um manifesto que marca a licença `APPROVED` sem evidência vinculada é bloqueado. A validade legal real **não é atestada** por esse arquivo.
+- **Render:** G8/G9 não confiam mais apenas em JSON; fazem hash do MP4 realmente existente e verificam características com ffprobe (1080×1920, 60fps, 60–80s, áudio) e a identidade do arquivo aprovado.
+- **Publicação:** G11 não declara `COMPLETE` a partir de recibo escrito pelo próprio motor; sem verificação externa do link, permanece `DEFERRED`. O próximo passo operacional é calculado a partir dos gates efetivamente bloqueados.
+- **Integridade operacional:** `main` e episódios históricos intocados, sem consumo Gemini, sem narração, sem render, sem upload, sem publicação e sem merge.
+
+**Provas:** [Workflow E2E e suíte completa](https://github.com/BORELLITO/because-of-this-engine/actions/runs/41930008415) · [Relatório técnico](https://github.com/BORELLITO/because-of-this-engine/blob/audit/v74-v11-hardening-20261104/audits/E2E_INTEGRATION_ATTACK_MATRIX_V11.md).
+
+**Pendências atuais:** prova de licenças específicas e terceiros de mídia/áudio para um episódio novo; revisão humana de sincronização, segurança visual em interface real; prova E2E física de um novo render final; registro histórico do áudio ainda tem cobertura insuficiente. **Motor não foi promovido para produção**, mesmo com as regressões aprovadas.
+
+---
 ## ÚNICO PRÓXIMO PASSO
 
-**Executar um dry-run de integração ponta a ponta da V7.4 sem TTS nem render, usando dados e arquivos descartáveis para tentar furar os gates de direitos, reuso, áudio, legendas, aprovação e publicação.** Corrigir falhas seguras só na branch da PR #66, repetir testes e atualizar o Centro de Controle. Com os bloqueios essenciais identificados e contidos, a próxima atividade editorial será preparar a **primeira história original**, em inglês, para aprovação do roteiro e storyboard antes de selecionar mídia ou consumir créditos. **Não alterar One Extra Minute, não fazer merge em main, não publicar.**
+**Elaborar a proposta editorial da primeira história inédita pós-auditoria**: título e gancho originais, protagonista e ferida emocional, decisão irreversível, escalada, consequência, roteiro em inglês de 60–80 segundos, storyboard detalhado com 12–18 cenas sem reutilizar material, além de riscos e critérios de aprovação. Entregar o pacote apenas para revisão humana, sem TTS, download de clipes, renderização ou publicação.
 
-**Ação exigida do usuário agora:** nenhuma. **Status: AUDITORIA E5 PENDENTE / NOVA PRODUÇÃO AINDA BLOQUEADA.**
+**Estado:** GATES SINTÉTICOS INTEGRADOS TESTADOS / NOVA PRODUÇÃO AINDA BLOQUEADA EM EVIDÊNCIAS REAIS. **Nenhuma ação do usuário necessária para preparar a proposta editorial.**
