@@ -126,6 +126,9 @@ def inspect(manifest_path: Path, review_path: Path | None = None) -> dict[str, A
             evidence[platform]={"device":p.get("device_model"),"screenshot_sha256":actual_snap_sha}
         except MobileUIReviewError as exc:
             issues.append(f"{platform}: {exc}")
+    if len(evidence) == len(PLATFORMS):
+        if evidence["tiktok"]["screenshot_sha256"] == evidence["youtube_shorts"]["screenshot_sha256"]:
+            issues.append("TikTok and YouTube Shorts must have distinct device/UI screenshots")
     return {
         "schema_version":"1.1","status":"UI_EVIDENCE_ATTESTED" if not issues else "MANUAL_UI_REVIEW_REQUIRED",
         "video_id":video_id,"issues":issues,"platforms":evidence,
