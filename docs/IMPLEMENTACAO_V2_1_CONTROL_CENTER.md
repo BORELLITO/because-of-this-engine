@@ -38,14 +38,14 @@
 | Legacy workflows | ARCHIVED | Definitions retained under archive/v7/workflows/, outside .github/workflows |
 | Drive | NOT RUN | No Drive write or media generation authorized |
 | Work | UNKNOWN | No independent Work execution log |
-| Edge TTS real preview | NOT RUN | No real Edge request executed |
+| Edge TTS real preview | GENERATED_AND_VALIDATED | GitHub Actions run 41954211512; 79.704 s; ChristopherNeural; artifact 13382850131 |
 | First new production | BLOCKED | Implementation stage does not authorize automatic production |
 
 ## Remaining blockers
 
 - The 13 historical registry assets were fingerprinted from their verified Drive MP4s with the versioned video-phash-v1 algorithm; future assets must use the same catalog contract.
 - Real thumbnail files and platform cover records are not yet available for a V2.1 episode.
-- Offline contracts for TTS, audio, captions, render and Drive are integrated; the canonical entrypoint verifies the real adapter files and symbols. No real call, media generation, Drive write or publication has been executed.
+- Offline contracts for TTS, audio, captions, render and Drive are integrated; the canonical entrypoint verifies the real adapter files and symbols. Real Edge TTS preview generated and validated; downstream transcription/captions, media generation, Drive write and publication remain unexecuted.
 - Promotion to main still requires explicit approval and post-merge audit.
 
 READY remains forbidden while any P0/P1 is open.
