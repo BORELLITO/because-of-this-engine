@@ -220,6 +220,12 @@ class V21IntegrationTests(unittest.TestCase):
         self.assertEqual(report["status"], "PACKAGE_GATE_PASS")
         self.assertEqual(report["score"], 10)
 
+    def test_approved_thumbnail_remains_package_gate_compatible(self):
+        manifest = valid_manifest()
+        manifest["thumbnail_status"] = "APPROVED"
+        report = evaluate_package_gate(manifest)
+        self.assertEqual(report["status"], "PACKAGE_GATE_PASS")
+
     def test_full_contract_is_schema_valid_and_read_only(self):
         report = evaluate(valid_manifest(), registry=historical_registry())
         self.assertEqual(report["status"], "PASS", report)

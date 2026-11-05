@@ -34,7 +34,7 @@
 | V2.1 contracts | TESTED | Candidate CI must pass unit, schema, adapter, singleton and clean-checkout gates |
 | Canonical adapter | IMPLEMENTED | v7_orchestrator.py delegates to canonical_entrypoint.py under active V2.1 policy |
 | Global no-reuse | VALIDATED_FOR_MANIFEST / BLOCKED_FOR_CATALOG | 16 assigned assets, 16 unique sources, no source/SHA/perceptual collisions in the latest fingerprint evidence; global catalog mutation remains false |
-| Thumbnail | CANDIDATE_READY / FINAL_BLOCKED | Replacement candidate registered with SHA-256 and Library evidence; final human review, QA and delivery paths remain pending |
+| Thumbnail | FINAL_APPROVED / DELIVERY_PACKAGED | `THE MACHINE LIED` approved by user; technical QA passed; PNG/JPG master, source frame, mobile preview and platform record versioned |
 | Legacy workflows | ARCHIVED | Definitions retained under archive/v7/workflows/, outside .github/workflows |
 | Drive | NOT RUN | No Drive write or media generation authorized |
 | Work | UNKNOWN | No independent Work execution log |
@@ -47,10 +47,10 @@
 
 - The visual plan and partial scene manifest are structurally validated: 42 active candidates, 22 approved for manifest, 16 assets, 16/16 shots assigned, 0 unresolved, and no duplicate source/SHA/perceptual collision detected. This does not authorize render or catalog mutation.
 - All 16 assignments remain APPROVED_FOR_MANIFEST_ONLY; every asset keeps approved_for_render=false, global_catalog_updated=false and drive_written=false.
-- The previous thumbnail candidate was removed. A replacement candidate is now registered as CANDIDATE_READY_FOR_HUMAN_REVIEW; it is not final and cannot authorize render.
+- The previous thumbnail candidate was removed. The replacement `THE MACHINE LIED` is now final-approved with technical QA and delivery files; this approval does not authorize render or publication.
 - The canonical entrypoint is intentionally read-only. production_enablement=false, publication is manual-only, and there is no active V2.1 final-render workflow. The archived legacy renderer is not an acceptable fallback.
 - Edge TTS and provider-native captions are validated and aligned to the frozen audio SHA-256; the 79.704-second duration is within the explicit 80-second exception, but the target window remains 60–75 seconds.
-- Global catalog update, Drive write, render, delivery bundle and publication remain unexecuted. The PR is still draft and requires explicit review/post-merge audit.
+- Global catalog update, Drive write, render and publication remain unexecuted. The delivery bundle is versioned, but the PR is still draft and requires explicit review/post-merge audit.
 
 READY remains forbidden while any P0/P1 is open.
 
@@ -310,3 +310,13 @@ READY remains forbidden while any P0/P1 is open.
 - Estado: `CANDIDATE_READY_FOR_HUMAN_REVIEW`; margens, legibilidade, direitos finais e delivery ainda não foram aprovados.
 - O registro de produção continua bloqueado por direitos visuais manifest-only e thumbnail não finalizada. Render e publicação não foram executados.
 - Próximo passo único: revisar visualmente esta nova candidata e decidir se ela deve avançar para QA final.
+
+
+## Atualização — thumbnail final aprovada e delivery empacotado — 2026-11-05
+
+- O usuário aprovou a candidata `THE MACHINE LIED` como thumbnail final do Episódio 005.
+- QA técnico aprovado: master PNG/JPG e source frame em 1080×1920; preview mobile em 540×960; registro de aplicação por plataforma presente.
+- Master PNG: SHA-256 `60264e880f1260083241f34846322caf1262c992911a5f15557dd27877dec96`; Library file id `libfile_6be06bdc4d04819183b0742de464c9cd`.
+- `thumbnail_manifest`: `APPROVED`; `THUMBNAIL_QA`: PASS; `THUMBNAIL_FILES`: PASS. O validador foi corrigido para reconhecer corretamente o preview mobile 540×960, sem enfraquecer o requisito do master 1080×1920.
+- O canonical entrypoint continua BLOCKED somente por `rights_ledger` manifest-only; os 16 assets visuais seguem `approved_for_render=false`. `production_enablement=false`, render NOT_RUN e publicação MANUAL_ONLY_NOT_RUN permanecem inalterados.
+- Próximo passo único: revisar e aprovar formalmente os direitos dos 16 assets visuais antes de qualquer promoção para render; não habilitar publicação automática.

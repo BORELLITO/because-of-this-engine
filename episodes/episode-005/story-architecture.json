@@ -233,8 +233,8 @@
     "text": "THE MACHINE LIED",
     "hero_visual": "Dark command bunker with a red abstract warning radar, empty stormy sky and an anonymous operator silhouette.",
     "visual_truth_class": "MAP_OR_DIAGRAM",
-    "rights_status": "ORIGINAL_GENERATED_ASSET_PENDING_FINAL_HUMAN_REVIEW",
-    "final_status": "CANDIDATE_READY_FOR_HUMAN_REVIEW",
+    "rights_status": "ORIGINAL_GENERATED_ASSET_APPROVED",
+    "final_status": "APPROVED",
     "dimensions": [
       1080,
       1920
@@ -251,7 +251,14 @@
     "candidate_text": "THE MACHINE LIED",
     "candidate_composition": "Red abstract warning radar beside an empty stormy sky, anonymous operator silhouette, Because Of This logo upper-right.",
     "candidate_truth_note": "Original symbolic representational artwork; no archival claim and no literal Soviet interface.",
-    "human_review_required": true
+    "human_review_required": false,
+    "final_approval_record": {
+      "approved_at_utc": "2026-11-05T00:00:00Z",
+      "decision": "USER_APPROVED_FINAL_THUMBNAIL_CANDIDATE",
+      "scope": "THUMBNAIL_FINAL_AND_DELIVERY_ONLY",
+      "render_authorized": false,
+      "publication_authorized": false
+    }
   },
   "asset_policy": {
     "global_catalog_required": true,
@@ -267,7 +274,7 @@
     "real_tts": "PASS_WITH_DURATION_EXCEPTION",
     "captions": "NATIVE_PROVIDER_TIMING_VALIDATED_GROUPED_BOUNDARIES",
     "render": "BLOCKED_UNTIL_APPROVED_ASSETS_AND_THUMBNAIL",
-    "thumbnail_final": "BLOCKED_UNTIL_RENDER_OR_APPROVED_FRAME",
+    "thumbnail_final": "APPROVED_MASTER_PENDING_RENDER",
     "drive_write": "NOT_AUTHORIZED",
     "publication": "MANUAL_ONLY",
     "creative_claw": "DISALLOWED"

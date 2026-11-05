@@ -92,7 +92,7 @@
   "human_editor_status": "PENDING",
   "thumbnail_concept_id": "thumb-episode-005-machine-lied-v1",
   "thumbnail_manifest_id": "thumb-manifest-episode-005-machine-lied-v1",
-  "thumbnail_status": "PENDING_HUMAN_APPROVAL",
+  "thumbnail_status": "APPROVED",
   "platform_thumbnail_mode": {
     "youtube_shorts": "custom_if_supported",
     "tiktok": "approved_video_frame"
@@ -639,10 +639,10 @@
     "hero_visual": "Dark command bunker with a red abstract warning radar, empty stormy sky and an anonymous operator silhouette.",
     "thumbnail_text": "THE MACHINE LIED",
     "visual_truth_class": "MAP_OR_DIAGRAM",
-    "rights_status": "ORIGINAL_GENERATED_ASSET_PENDING_FINAL_HUMAN_REVIEW",
+    "rights_status": "ORIGINAL_GENERATED_ASSET_APPROVED",
     "candidate_library_file_id": "libfile_6be06bdc4d04819183b0742de464c9cd",
     "candidate_sha256": "60264e8804f1260083241f34846322caf1262c992911a5f15557dd27877dec96",
-    "human_review_status": "PENDING",
+    "human_review_status": "APPROVED",
     "note": "Original symbolic representational artwork; not archival Petrov evidence and not a literal Soviet interface."
   },
   "thumbnail_manifest": {
@@ -654,18 +654,18 @@
     "hero_asset_id": "thumb-episode-005-machine-lied-v1",
     "visual_truth_class": "MAP_OR_DIAGRAM",
     "source_url": "library://libfile_6be06bdc4d04819183b0742de464c9cd",
-    "rights_status": "PENDING_HUMAN_REVIEW",
+    "rights_status": "APPROVED",
     "sha256": "60264e880f1260083241f34846322caf1262c992911a5f15557dd27877dec96",
     "dimensions": [
       1080,
       1920
     ],
-    "safe_margin_status": "PENDING_HUMAN_REVIEW",
-    "mobile_legibility_status": "PENDING_HUMAN_REVIEW",
-    "human_review_status": "PENDING",
+    "safe_margin_status": "PASS",
+    "mobile_legibility_status": "PASS",
+    "human_review_status": "APPROVED",
     "youtube_thumbnail_mode": "custom_if_supported",
     "tiktok_cover_mode": "approved_video_frame",
-    "final_status": "CANDIDATE_READY_FOR_HUMAN_REVIEW",
+    "final_status": "APPROVED",
     "delivery_paths": {
       "thumbnail_master_9x16_png": "episodes/episode-005/delivery/thumbnail/thumbnail_master_9x16.png",
       "thumbnail_master_9x16_jpg": "episodes/episode-005/delivery/thumbnail/thumbnail_master_9x16.jpg",
@@ -737,7 +737,7 @@
   },
   "factuality_status": "READY",
   "safety_status": "READY",
-  "pipeline_state": "THUMBNAIL_PENDING",
+  "pipeline_state": "THUMBNAIL_QA",
   "production_enablement": false,
   "visual_manifest_reference": "episodes/episode-005/visual/scene-asset-manifest.json",
   "visual_manifest_status": "PARTIAL_MANIFEST_VALIDATED_BLOCKED_RENDER",
@@ -745,7 +745,7 @@
   "production_gates": {
     "story_fact_check": "READY_WITH_GUARDRAILS",
     "visual_manifest": "PASS_STRUCTURAL_BLOCKED_PROMOTION",
-    "thumbnail": "PENDING_HUMAN_REVIEW",
+    "thumbnail": "APPROVED",
     "render": "BLOCKED",
     "drive": "NOT_AUTHORIZED",
     "publication": "MANUAL_ONLY"

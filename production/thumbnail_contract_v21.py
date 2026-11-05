@@ -59,7 +59,12 @@ def validate_thumbnail_files(manifest: Mapping[str, Any], repo_root: Path) -> di
             continue
         if not candidate.is_file():
             failures.append(f"{key} file does not exist:{raw}")
-    for key in ("thumbnail_master_9x16_png", "thumbnail_master_9x16_jpg", "thumbnail_preview_mobile"):
+    expected_dimensions = {
+        "thumbnail_master_9x16_png": (1080, 1920),
+        "thumbnail_master_9x16_jpg": (1080, 1920),
+        "thumbnail_preview_mobile": (540, 960),
+    }
+    for key, expected_size in expected_dimensions.items():
         raw = paths.get(key)
         if not raw:
             continue
@@ -69,8 +74,8 @@ def validate_thumbnail_files(manifest: Mapping[str, Any], repo_root: Path) -> di
         try:
             from PIL import Image
             with Image.open(candidate) as image:
-                if image.size != (1080, 1920):
-                    failures.append(f"{key} dimensions are {image.size}, expected (1080, 1920)")
+                if image.size != expected_size:
+                    failures.append(f"{key} dimensions are {image.size}, expected {expected_size}")
         except Exception as exc:
             failures.append(f"{key} cannot be inspected:{exc}")
     return {"gate": "THUMBNAIL_FILES", "status": "PASS" if not failures else "BLOCKED", "failures": failures}
