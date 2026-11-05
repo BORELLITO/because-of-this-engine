@@ -8,7 +8,7 @@
 - Base: main at d35d78cd4a92d12375f54076e3e21b56cbe25fad
 - Candidate branch: integration/because-of-this-v2.1-20261105
 - Draft PR: 67
-- Candidate commit: 9f3d87e767774e2b1b9b1fa800ca0fdc298c450a
+- Candidate commit: b4f2d958ed4d93562d024b6159d1ef7aac950719
 - Status: PARTIAL / BLOCKED_FOR_PRODUCTION
 - Canonical entrypoint: production/canonical_entrypoint.py
 - Canonical voice: Microsoft Edge TTS / ChristopherNeural active for zero-billing preview; Cloud/Gemini are not active routes
@@ -38,14 +38,14 @@
 | Legacy workflows | ARCHIVED | Definitions retained under archive/v7/workflows/, outside .github/workflows |
 | Drive | NOT RUN | No Drive write or media generation authorized |
 | Work | UNKNOWN | No independent Work execution log |
-| Edge TTS + captions preview | GENERATED_AND_VALIDATED | GitHub Actions run 41961055314; 79.704 s; ChristopherNeural; native Edge timing; artifact 13384688114 |
+| Edge TTS + captions preview | GENERATED_AND_VALIDATED | GitHub Actions run 41961294784; 79.704 s; ChristopherNeural; native Edge timing; artifact 13384643514 |
 | First new production | BLOCKED | Implementation stage does not authorize automatic production |
 
 ## Remaining blockers
 
 - The 13 historical registry assets were fingerprinted from their verified Drive MP4s with the versioned video-phash-v1 algorithm; future assets must use the same catalog contract.
 - Real thumbnail files and platform cover records are not yet available for a V2.1 episode.
-- Offline contracts for TTS, audio, captions, render and Drive are integrated; the canonical entrypoint verifies the real adapter files and symbols. Real Edge TTS audio and native Edge word-timed captions are generated and validated. Visual asset acquisition, thumbnail, render, Drive write and publication remain unexecuted.
+- Offline contracts for TTS, audio, captions, render and Drive are integrated; the canonical entrypoint verifies the real adapter files and symbols. Real Edge TTS audio and native Edge word-timed captions are generated and validated. The approved artifact is frozen; the synthesis workflow is manual-only because independent runs can produce different audio hashes. Visual asset acquisition, thumbnail, render, Drive write and publication remain unexecuted.
 - Promotion to main still requires explicit approval and post-merge audit.
 
 READY remains forbidden while any P0/P1 is open.
