@@ -65,7 +65,7 @@ jobs:
         env:
           CANDIDATE_ID: ${{ github.event.inputs.candidate_id || 'mixkit-worker-industrial-lathe-2244' }}
           SOURCE_PAGE_URL: ${{ github.event.inputs.source_page_url || 'https://mixkit.co/free-stock-video/worker-operating-an-industrial-lathe-2244/' }}
-          MEDIA_URL: ${{ github.event.inputs.media_url || 'https://assets.mixkit.co/videos/29991/29991-720.mp4' }}
+          MEDIA_URL: ${{ github.event.inputs.media_url || 'https://assets.mixkit.co/videos/2244/2244-720.mp4' }}
           LICENSE_NAME: ${{ github.event.inputs.license_name || 'Mixkit Stock Video Free License' }}
         run: |
           python - <<'PY'
