@@ -1,0 +1,133 @@
+name: Because Of This Episode 005 Visual Candidate Intake
+
+# Manual-only and fail-closed: this workflow creates an auditable candidate artifact.
+# It never promotes an asset to the render manifest, never mutates the global catalog,
+# and never writes to Drive or publishes media.
+on:
+  workflow_dispatch:
+    inputs:
+      candidate_id:
+        description: "Candidate identifier from asset-acquisition-plan.json"
+        required: true
+        default: "mixkit-slowly-approaching-clock-28897"
+        type: string
+      source_page_url:
+        description: "Verified provider page URL"
+        required: true
+        default: "https://mixkit.co/free-stock-video/slowly-approaching-a-clock-on-a-black-background-28897/"
+        type: string
+      media_url:
+        description: "Direct media URL observed on the verified provider page"
+        required: true
+        default: "https://assets.mixkit.co/videos/28897/28897-720.mp4"
+        type: string
+      license_name:
+        description: "License visibly stated on the provider page"
+        required: true
+        default: "Mixkit Stock Video Free License"
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  intake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout candidate branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Verify media tools
+        run: |
+          ffmpeg -version | head -n 1
+          ffprobe -version | head -n 1
+
+      - name: Download candidate without promotion
+        env:
+          MEDIA_URL: ${{ inputs.media_url }}
+        run: |
+          mkdir -p artifacts/episode005-visual-intake
+          curl --fail --location --retry 2 --retry-delay 2 --connect-timeout 20 --max-time 180 "$MEDIA_URL"             --output artifacts/episode005-visual-intake/candidate.mp4
+          test -s artifacts/episode005-visual-intake/candidate.mp4
+
+      - name: Validate video and create intake evidence
+        env:
+          CANDIDATE_ID: ${{ inputs.candidate_id }}
+          SOURCE_PAGE_URL: ${{ inputs.source_page_url }}
+          MEDIA_URL: ${{ inputs.media_url }}
+          LICENSE_NAME: ${{ inputs.license_name }}
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          import subprocess
+          from pathlib import Path
+
+          root = Path("artifacts/episode005-visual-intake")
+          media = root / "candidate.mp4"
+          probe = subprocess.run(
+              [
+                  "ffprobe", "-v", "error", "-show_entries",
+                  "format=duration,size:stream=codec_type,codec_name,width,height,r_frame_rate",
+                  "-of", "json", str(media)
+              ],
+              check=True, capture_output=True, text=True
+          )
+          data = json.loads(probe.stdout)
+          streams = [s for s in data.get("streams", []) if s.get("codec_type") == "video"]
+          assert len(streams) == 1, data
+          video = streams[0]
+          duration = float(data["format"]["duration"])
+          width = int(video["width"])
+          height = int(video["height"])
+          assert duration > 0, duration
+          assert width >= 720 and height >= 720, (width, height)
+          sha256 = hashlib.sha256(media.read_bytes()).hexdigest()
+          report = {
+              "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+              "candidate_id": os.environ["CANDIDATE_ID"],
+              "provider": "mixkit",
+              "source_page_url": os.environ["SOURCE_PAGE_URL"],
+              "media_url": os.environ["MEDIA_URL"],
+              "license_name": os.environ["LICENSE_NAME"],
+              "sha256": sha256,
+              "metadata": {
+                  "duration_seconds": round(duration, 3),
+                  "width": width,
+                  "height": height,
+                  "frame_rate": video.get("r_frame_rate"),
+                  "codec": video.get("codec_name"),
+              },
+              "promotion": {
+                  "approved_for_render": False,
+                  "global_catalog_updated": False,
+                  "thumbnail_eligible": False,
+                  "drive_written": False,
+              },
+              "qa_required": [
+                  "clean-frame visual inspection",
+                  "no baked captions or authored graphics",
+                  "no embedded logo or letterbox",
+                  "semantic fit against assigned story beats",
+                  "global reuse fingerprint check",
+                  "human approval"
+              ],
+          }
+          (root / "candidate-intake.json").write_text(
+              json.dumps(report, indent=2) + "\n", encoding="utf-8"
+          )
+          print(json.dumps(report, indent=2))
+          PY
+
+      - name: Generate human-QA frames
+        run: |
+          ffmpeg -v error -y -i artifacts/episode005-visual-intake/candidate.mp4             -vf "select='eq(n,0)+eq(n,round(N/2))+eq(n,N-1)',scale=540:-2,tile=3x1:padding=8:margin=8:color=black"             -frames:v 1 -q:v 2 artifacts/episode005-visual-intake/qa-frames.jpg
+
+      - name: Upload isolated candidate evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: episode005-visual-intake-${{ inputs.candidate_id }}
+          path: artifacts/episode005-visual-intake
+          if-no-files-found: error
