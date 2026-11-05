@@ -630,7 +630,7 @@
     {
       "candidate_id": "mixkit-large-satellite-antenna-2650",
       "status": "APPROVED_FOR_MANIFEST_ONLY",
-      "approved_at_utc": "2026-11-05T11:15:00Z",
+      "approved_at_utc": "2026-11-05T11:20:47Z",
       "decision": "Approve the satellite antenna as representational early-warning infrastructure for S02 only.",
       "constraints": [
         "do not assign the same source to any other shot",
