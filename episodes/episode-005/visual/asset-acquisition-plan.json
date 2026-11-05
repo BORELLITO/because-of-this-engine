@@ -272,6 +272,15 @@
         "visual_qa_evidence": "artifact 13403209885 / qa-frames.jpg",
         "third_party_risk": "NONE_VISIBLE",
         "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
+      },
+      "author": "Mixkit",
+      "contributor_url": "https://mixkit.co/@mixkit/",
+      "author_status": "CONFIRMED_FROM_MIXKIT_ITEM_PAGE",
+      "license_confirmation": {
+        "status": "CONFIRMED_ITEM_PAGE",
+        "license_name": "Mixkit Stock Video Free License",
+        "evidence_url": "https://mixkit.co/free-stock-video/abstract-red-glow-101432/",
+        "checked_at": "2026-11-05"
       }
     },
     {
@@ -322,6 +331,15 @@
         "visual_qa_evidence": "artifact 13403188677 / qa-frames.jpg",
         "third_party_risk": "GENERIC_CLOCK_FACE_ONLY",
         "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
+      },
+      "author": "Arvizum",
+      "contributor_url": "https://mixkit.co/@arvizum/",
+      "author_status": "CONFIRMED_FROM_MIXKIT_ITEM_PAGE",
+      "license_confirmation": {
+        "status": "CONFIRMED_ITEM_PAGE",
+        "license_name": "Mixkit Stock Video Free License",
+        "evidence_url": "https://mixkit.co/free-stock-video/slowly-approaching-a-clock-on-a-black-background-28897/",
+        "checked_at": "2026-11-05"
       }
     },
     {
@@ -382,6 +400,15 @@
         "visual_qa_evidence": "artifact 13404636511 / qa-frames.jpg",
         "third_party_risk": "NONE_VISIBLE",
         "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
+      },
+      "author": "Edgar Fernandez",
+      "contributor_url": "https://mixkit.co/@edgarfernandez/",
+      "author_status": "CONFIRMED_FROM_MIXKIT_ITEM_PAGE",
+      "license_confirmation": {
+        "status": "CONFIRMED_ITEM_PAGE",
+        "license_name": "Mixkit Stock Video Free License",
+        "evidence_url": "https://mixkit.co/free-stock-video/cloudy-sky-118/",
+        "checked_at": "2026-11-05"
       }
     },
     {
@@ -446,6 +473,15 @@
         "visual_qa_evidence": "artifact 13406364533 / qa-frames.jpg",
         "third_party_risk": "GENERIC_CLOCK_TEXT_ONLY",
         "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
+      },
+      "author": "Edgar Fernandez",
+      "contributor_url": "https://mixkit.co/@edgarfernandez/",
+      "author_status": "CONFIRMED_FROM_MIXKIT_ITEM_PAGE",
+      "license_confirmation": {
+        "status": "CONFIRMED_ITEM_PAGE",
+        "license_name": "Mixkit Stock Video Free License",
+        "evidence_url": "https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/",
+        "checked_at": "2026-11-05"
       }
     },
     {
@@ -508,6 +544,15 @@
         "visual_qa_evidence": "artifact 13409661379 / qa-frames.jpg",
         "third_party_risk": "NONE_VISIBLE",
         "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
+      },
+      "author": "Matthias Groeneveld",
+      "contributor_url": "https://mixkit.co/@matthiasgroeneveld/",
+      "author_status": "CONFIRMED_FROM_MIXKIT_ITEM_PAGE",
+      "license_confirmation": {
+        "status": "CONFIRMED_ITEM_PAGE",
+        "license_name": "Mixkit Stock Video Free License",
+        "evidence_url": "https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/",
+        "checked_at": "2026-11-05"
       }
     },
     {
@@ -3144,6 +3189,6 @@
     "validator": "production/visual_plan_contract.py",
     "checkout_commit": "d371da0ad7c72576bcd3e9f664baa6b03f89a5e4"
   },
-  "last_adjustment": "Completed direct-media visual QA for all 16 active manifest assets on 2026-11-05; no active asset shows a recognizable person or brand, with editorial guardrails recorded for generic text/labels.",
-  "next_gate": "Complete Mixkit author/license confirmation and obtain explicit render approval per asset."
+  "last_adjustment": "Direct-media visual QA completed for all 16 active assets; Mixkit contributor profiles and item-page Free License were confirmed for the five previously incomplete ledger entries on 2026-11-05. Render approval remains separate and closed.",
+  "next_gate": "Complete explicit per-asset render approval only after rights ledger reconciliation; do not enable production, catalog, Drive or publication automatically."
 }
