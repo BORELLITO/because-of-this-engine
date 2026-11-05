@@ -1444,7 +1444,7 @@
       }
     }
   ],
-  "next_action": "Run controlled intake and fingerprint for pixabay-antenna-astronomy-communication-40041. If clean and semantically coherent in full-duration QA, request explicit human approval for S12. Keep the LED candidate pending explicit approval and keep render, catalog, Drive and publication blocked.",
+  "next_action": "Realizar QA visual e aprovação humana explícita do candidato S14; manter promoção, render, catálogo global, Drive e publicação bloqueados até aprovação e validação final do manifesto.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
