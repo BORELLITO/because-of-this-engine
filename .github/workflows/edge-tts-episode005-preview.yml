@@ -2,6 +2,13 @@ name: Because Of This Edge TTS Episode 005 Preview
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - "production/edge_tts.py"
+      - "episodes/episode-005/**"
+      - "requirements.txt"
+      - ".github/workflows/edge-tts-episode005-preview.yml"
 
 permissions:
   contents: read
