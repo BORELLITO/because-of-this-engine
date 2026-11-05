@@ -14,17 +14,17 @@ on:
       candidate_id:
         description: "Candidate identifier from asset-acquisition-plan.json"
         required: true
-        default: "mixkit-large-satellite-antenna-2650"
+        default: "mixkit-man-using-computer-2965"
         type: string
       source_page_url:
         description: "Verified provider page URL"
         required: true
-        default: "https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/"
+        default: "https://mixkit.co/free-stock-video/man-using-a-computer-2965/"
         type: string
       media_url:
         description: "Direct media URL observed on the verified provider page"
         required: true
-        default: "https://assets.mixkit.co/videos/2650/2650-720.mp4"
+        default: "https://assets.mixkit.co/videos/2965/2965-720.mp4"
         type: string
       license_name:
         description: "License visibly stated on the provider page"
@@ -55,7 +55,7 @@ jobs:
 
       - name: Download candidate without promotion
         env:
-          MEDIA_URL: ${{ github.event.inputs.media_url || 'https://assets.mixkit.co/videos/2650/2650-720.mp4' }}
+          MEDIA_URL: ${{ github.event.inputs.media_url || 'https://assets.mixkit.co/videos/2965/2965-720.mp4' }}
         run: |
           mkdir -p artifacts/episode005-visual-intake
           curl --fail --location --retry 2 --retry-delay 2 --connect-timeout 20 --max-time 180 "$MEDIA_URL"             --output artifacts/episode005-visual-intake/candidate.mp4
@@ -63,9 +63,9 @@ jobs:
 
       - name: Validate video and create intake evidence
         env:
-          CANDIDATE_ID: ${{ github.event.inputs.candidate_id || 'mixkit-large-satellite-antenna-2650' }}
-          SOURCE_PAGE_URL: ${{ github.event.inputs.source_page_url || 'https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/' }}
-          MEDIA_URL: ${{ github.event.inputs.media_url || 'https://assets.mixkit.co/videos/2650/2650-720.mp4' }}
+          CANDIDATE_ID: ${{ github.event.inputs.candidate_id || 'mixkit-man-using-computer-2965' }}
+          SOURCE_PAGE_URL: ${{ github.event.inputs.source_page_url || 'https://mixkit.co/free-stock-video/man-using-a-computer-2965/' }}
+          MEDIA_URL: ${{ github.event.inputs.media_url || 'https://assets.mixkit.co/videos/2965/2965-720.mp4' }}
           LICENSE_NAME: ${{ github.event.inputs.license_name || 'Mixkit Stock Video Free License' }}
         run: |
           python - <<'PY'
@@ -89,6 +89,10 @@ jobs:
               "mixkit-large-satellite-antenna-2650": {
                   "source_page_url": "https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/",
                   "media_url": "https://assets.mixkit.co/videos/2650/2650-720.mp4",
+              },
+              "mixkit-man-using-computer-2965": {
+                  "source_page_url": "https://mixkit.co/free-stock-video/man-using-a-computer-2965/",
+                  "media_url": "https://assets.mixkit.co/videos/2965/2965-720.mp4",
               },
               "mixkit-clock-mechanism-3651": {
                   "source_page_url": "https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/",
