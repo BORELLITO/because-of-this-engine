@@ -161,3 +161,14 @@ READY remains forbidden while any P0/P1 is open.
 - S14 continua como candidato representacional para corredor institucional vazio, não como evidência literal de Petrov. `human_approval=PENDING`, `approved_for_render=false`, `global_catalog_updated=false`, `drive_written=false`, `render_allowed=false`.
 - O plano canônico registrou a evidência no commit `dbb4396b9178314b1e1da047e82e6666386d7dca`. O manifesto permanece sem promoção de S14; seguem sete shots não resolvidos: S05, S08, S09, S13, S14, S15 e S16.
 - Próximo passo único: realizar QA visual e aprovação humana explícita do candidato S14; depois disso, manter a decisão de promoção separada da autorização de render, catálogo, Drive e publicação.
+
+
+## Addendum — aprovação manifest-only do S14 — 2026-11-05
+
+- Recebida aprovação humana explícita para `pixabay-hallway-dark-corridor-20837`.
+- O candidato foi promovido somente para `APPROVED_FOR_MANIFEST_ONLY` e atribuído exclusivamente ao shot S14. A regra de fonte única foi preservada.
+- Evidências: intake run `42056121022`, artifact `13428247933`; fingerprint pass run `42059893725`, artifact `13431651011`, sem colisões de fonte, SHA-256 ou fingerprint perceptual.
+- O manifesto foi atualizado no commit `daa671382fd0a3b56ddfc0e6f8d4587fe6813aca`. S14 deixou de estar bloqueado; permanecem S05, S08, S09, S13, S15 e S16.
+- O plano foi atualizado no commit `04adbb76cb7e70cd362c426a0482e3cc00a5dbaf`.
+- Mantidos bloqueados: validação final do manifesto, renderização, atualização do catálogo global, escrita no Drive e publicação.
+- Próximo passo único: formar shortlist distinta e page-verified para S05, S08, S09, S13, S15 e S16.
