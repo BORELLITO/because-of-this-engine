@@ -194,7 +194,20 @@
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "mixkit",
       "license_name": "Mixkit Stock Video Free License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "media_url": "https://assets.mixkit.co/bohe8920pfehyvq7p1hk5r699s7g",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Mixkit Stock Video Free License",
+        "visible_duration_seconds": 11,
+        "visible_resolution_options": [
+          "720x1080",
+          "1080x1920"
+        ],
+        "semantic_note": "Vertical red glow/light texture; candidate for S01/S06/S09 warning escalation, subject to semantic QA because it is abstract rather than a literal console."
+      }
     },
     {
       "candidate_id": "mixkit-slowly-approaching-clock-28897",
@@ -294,7 +307,7 @@
       "rights_status": "CANDIDATE_NOT_DOWNLOADED"
     }
   ],
-  "next_action": "Perform the human approval and global perceptual-fingerprint checks for the clock and cloudy-sky candidates. If approved, add both to the final per-asset rights ledger and global catalog, then continue acquisition for red-light/control-room coverage. Do not render or generate the final thumbnail yet.",
+  "next_action": "Run the fail-closed intake for mixkit-abstract-red-glow-101432, inspect identity, metadata and crop, then keep it symbolic unless the visual QA confirms it supports the warning beat without being mistaken for literal archival evidence.",
   "acquisition_route": {
     "status": "ALTERNATIVE_ROUTE_PREPARED_NOT_DOWNLOADED",
     "preferred_provider": "mixkit",
