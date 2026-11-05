@@ -33,7 +33,7 @@ jobs:
           import os
           from pathlib import Path
 
-          raw = os.environ["CANDIDATE_IDS"].replace("\\n", ",")
+          raw = os.environ["CANDIDATE_IDS"].replace("\n", ",")
           requested_ids = [item.strip() for item in raw.split(",") if item.strip()]
           assert requested_ids, "candidate_ids must contain at least one ID"
           assert len(requested_ids) == len(set(requested_ids)), "duplicate candidate IDs are not allowed"
@@ -222,11 +222,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: episode005-visual-intake-${{ github.run_id }}
-          path: artifacts/episode005-visual-intake
-          if-no-files-found: error
-      - name: Upload isolated candidate evidence
-        uses: actions/upload-artifact@v4
-        with:
-          name: episode005-visual-intake-${{ inputs.candidate_id }}
           path: artifacts/episode005-visual-intake
           if-no-files-found: error
