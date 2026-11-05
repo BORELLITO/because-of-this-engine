@@ -16,7 +16,7 @@ permissions:
 jobs:
   edge-tts-preview:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - name: Checkout candidate
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -71,6 +71,86 @@ jobs:
           assert data["provider"] == "microsoft_edge_tts"
           assert data["profile"]["voice_name"] == "en-US-ChristopherNeural"
           print({"duration_seconds": round(duration, 3), "voice": data["profile"]["voice_name"]})
+          PY
+
+      - name: Prepare Vosk alignment models
+        run: |
+          set -euo pipefail
+          root="${RUNNER_TEMP}/because-of-this-vosk"
+          echo "VOSK_CACHE_ROOT=${root}" >> "${GITHUB_ENV}"
+          echo "VOSK_MODEL_DIR=${root}/primary/vosk-model-en-us-0.22-lgraph" >> "${GITHUB_ENV}"
+          echo "VOSK_SECONDARY_MODEL_DIR=${root}/secondary/vosk-model-small-en-us-0.15" >> "${GITHUB_ENV}"
+          mkdir -p "${root}/primary" "${root}/secondary"
+
+      - name: Restore Vosk model cache
+        id: vosk_cache
+        uses: actions/cache/restore@5a3ec84ff668545956fd18022155c47e93e2684
+        with:
+          path: ${{ runner.temp }}/because-of-this-vosk
+          key: because-of-this-vosk-${{ runner.os }}-v1
+
+      - name: Download Vosk models when absent
+        run: |
+          set -euo pipefail
+          if [ ! -d "${VOSK_MODEL_DIR}" ]; then
+            curl --fail --location --retry 4 --retry-all-errors               "https://alphacephei.com/vosk/models/vosk-model-en-us-0.22-lgraph.zip"               --output "${VOSK_CACHE_ROOT}/primary/model.zip"
+            unzip -q "${VOSK_CACHE_ROOT}/primary/model.zip" -d "${VOSK_CACHE_ROOT}/primary"
+          fi
+          if [ ! -d "${VOSK_SECONDARY_MODEL_DIR}" ]; then
+            curl --fail --location --retry 4 --retry-all-errors               "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip"               --output "${VOSK_CACHE_ROOT}/secondary/model.zip"
+            unzip -q "${VOSK_CACHE_ROOT}/secondary/model.zip" -d "${VOSK_CACHE_ROOT}/secondary"
+          fi
+
+      - name: Save Vosk model cache
+        if: steps.vosk_cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@5a3ec84ff668545956fd18022155c47e93e2684
+        with:
+          path: ${{ runner.temp }}/because-of-this-vosk
+          key: because-of-this-vosk-${{ runner.os }}-v1
+
+      - name: Build caption manifest for validated audio
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          manifest = {
+              "audio": {"path": "narration.wav"},
+              "script": {"path": "../../episodes/episode-005/narration/en-US-charon-v1.txt"},
+              "captions": {
+                  "path": "narration.ass",
+                  "alignment_sidecar": "narration.alignment.json",
+                  "max_line_chars": 42,
+                  "active_word_color": "#FF7777"
+              }
+          }
+          Path("artifacts/episode005-edge/caption-manifest.json").write_text(
+              json.dumps(manifest, ensure_ascii=False, indent=2) + "\\n",
+              encoding="utf-8",
+          )
+          PY
+
+      - name: Generate forced-alignment captions
+        run: |
+          PYTHONPATH=. python production/align_captions.py             --manifest artifacts/episode005-edge/caption-manifest.json             --model-dir "${VOSK_MODEL_DIR}"             --secondary-model-dir "${VOSK_SECONDARY_MODEL_DIR}"
+
+      - name: Validate forced-alignment captions
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path("artifacts/episode005-edge")
+          ass = root / "narration.ass"
+          sidecar = root / "narration.alignment.json"
+          assert ass.is_file() and ass.stat().st_size > 0, ass
+          data = json.loads(sidecar.read_text(encoding="utf-8"))
+          assert data["status"] == "FORCED_ALIGNMENT_PASS"
+          assert data["word_count"] > 0
+          assert data["word_timing_normalization"]["timeline_monotonic"] is True
+          print({
+              "caption_status": data["status"],
+              "word_count": data["word_count"],
+              "caption_file": str(ass),
+          })
           PY
 
       - name: Upload isolated preview artifact
