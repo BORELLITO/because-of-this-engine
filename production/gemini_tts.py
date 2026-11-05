@@ -99,6 +99,30 @@ def profile_from_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def profile_from_v21_contract(contract: dict[str, Any], policy: dict[str, Any]) -> dict[str, Any]:
+    """Build the V2.1 profile through the existing Gemini adapter without making a request."""
+    voice_policy = policy.get("voice_policy") if isinstance(policy.get("voice_policy"), dict) else {}
+    expected = {
+        "provider": policy.get("voice_provider", PROVIDER),
+        "voice_name": voice_policy.get("voice_name", VOICE_NAME),
+        "language_code": voice_policy.get("language_code", "en-US"),
+        "model": voice_policy.get("model", DEFAULT_MODEL),
+        "provider_fallback": voice_policy.get("provider_fallback", "forbidden"),
+    }
+    for field, value in expected.items():
+        if contract.get(field) != value:
+            raise GeminiTTSError(f"V2.1 TTS contract mismatch for {field}: expected {value}")
+    if contract.get("status") != "OFFLINE_CONTRACT_VERIFIED":
+        raise GeminiTTSError("V2.1 TTS contract must be offline-verified before any request")
+    return {
+        **expected,
+        "sample_rate_hz": DEFAULT_SAMPLE_RATE,
+        "encoding": "AUDIO_WAV",
+        "real_call_authorized": contract.get("real_call_authorized") is True,
+        "request_count": int(contract.get("request_count", 0)),
+    }
+
+
 def gemini_credentials_configured() -> bool:
     return bool(os.environ.get("GEMINI_API_KEY", "").strip())
 

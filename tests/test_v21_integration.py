@@ -71,6 +71,7 @@ def valid_manifest() -> dict:
             "real_audio_generated": False,
             "final_transcription_required": True,
             "target_duration_seconds": 65,
+            "adapter": "production/gemini_tts.py",
         },
         "captions_contract": {
             "source": "final_audio_transcription",
@@ -79,6 +80,7 @@ def valid_manifest() -> dict:
             "real_caption_generated": False,
             "safe_zone_status": "PENDING_REAL_CAPTURE",
             "source_audio_sha256": "d" * 64,
+            "adapter": "production/align_captions.py",
         },
         "render_contract": {
             "width": 1080,
@@ -87,12 +89,15 @@ def valid_manifest() -> dict:
             "status": "OFFLINE_CONTRACT_VERIFIED",
             "render_executed": False,
             "duration_target_seconds": 65,
+            "adapter": "production/render_video_episode.py",
         },
         "drive_contract": {
             "mode": "read_only",
             "write_authorized": False,
             "status": "OFFLINE_CONTRACT_VERIFIED",
             "receipt_status": "NOT_RUN",
+            "assets_adapter": "production/google_drive_assets.py",
+            "delivery_adapter": "production/google_drive_delivery.py",
         },
         "tts_contract": {
             "provider": "gemini_tts",
@@ -249,6 +254,10 @@ class V21IntegrationTests(unittest.TestCase):
         manifest.pop("incident_id")
         report = evaluate(manifest, registry=historical_registry())
         self.assertIn("PRODUCTION_RECORD_SCHEMA", report["blocking_gates"])
+
+    def test_existing_runtime_adapters_are_wired(self):
+        report = evaluate(valid_manifest(), registry=historical_registry())
+        self.assertNotIn("ADAPTER_WIRING", report["blocking_gates"])
 
     def test_tts_contract_rejects_provider_drift(self):
         manifest = valid_manifest()

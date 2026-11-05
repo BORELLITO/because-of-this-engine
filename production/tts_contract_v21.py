@@ -6,7 +6,7 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-from production.gemini_tts import DEFAULT_MODEL, MAX_NARRATION_SECONDS, MIN_NARRATION_SECONDS, PROVIDER, VOICE_NAME
+from production.gemini_tts import DEFAULT_MODEL, MAX_NARRATION_SECONDS, MIN_NARRATION_SECONDS, PROVIDER, VOICE_NAME, GeminiTTSError, profile_from_v21_contract
 
 SHA256 = re.compile(r"^[0-9a-f]{64}$", re.IGNORECASE)
 POLICY_PATH = Path(__file__).resolve().parent / "active_engine_policy.json"
@@ -54,6 +54,11 @@ def validate_tts_contract(record: Mapping[str, Any], policy_path: Path = POLICY_
         failures.append("tts_contract.estimated_duration_seconds is required")
     elif not MIN_NARRATION_SECONDS <= float(duration) <= 80.0:
         failures.append("estimated narration duration must be between 60 and 80 seconds")
+
+    try:
+        profile_from_v21_contract(dict(contract), policy)
+    except GeminiTTSError as exc:
+        failures.append(str(exc))
 
     return {
         "gate": "TTS_CONTRACT",

@@ -2,9 +2,43 @@
 from __future__ import annotations
 import re
 from collections.abc import Mapping
+from pathlib import Path
 from typing import Any
 
 SHA256 = re.compile(r"^[0-9a-f]{64}$", re.IGNORECASE)
+
+ADAPTERS = {
+    "audio_contract.adapter": ("production/gemini_tts.py", "synthesize_chunks"),
+    "captions_contract.adapter": ("production/align_captions.py", "main"),
+    "render_contract.adapter": ("production/render_video_episode.py", "main"),
+    "drive_contract.assets_adapter": ("production/google_drive_assets.py", "main"),
+    "drive_contract.delivery_adapter": ("production/google_drive_delivery.py", "main"),
+}
+
+def validate_adapter_wiring(record: Mapping[str, Any], repo_root: Path | None = None) -> dict[str, Any]:
+    root = repo_root or Path(__file__).resolve().parents[1]
+    failures: list[str] = []
+    for field, (relative_path, symbol) in ADAPTERS.items():
+        parts = field.split(".")
+        value: Any = record
+        for part in parts:
+            value = value.get(part) if isinstance(value, Mapping) else None
+        if value != relative_path:
+            failures.append(f"{field} must equal {relative_path}")
+            continue
+        path = root / relative_path
+        if not path.is_file():
+            failures.append(f"adapter file does not exist:{relative_path}")
+            continue
+        try:
+            source = path.read_text(encoding="utf-8")
+        except OSError as exc:
+            failures.append(f"adapter cannot be read:{relative_path}:{exc}")
+            continue
+        if f"def {symbol}" not in source:
+            failures.append(f"adapter symbol missing:{relative_path}:{symbol}")
+    return _result("ADAPTER_WIRING", failures, execution="STATIC_WIRING_VERIFIED" if not failures else "BLOCKED")
+
 
 def _result(gate: str, failures: list[str], **extra: Any) -> dict[str, Any]:
     return {"gate": gate, "status": "PASS" if not failures else "BLOCKED", "failures": failures, **extra}

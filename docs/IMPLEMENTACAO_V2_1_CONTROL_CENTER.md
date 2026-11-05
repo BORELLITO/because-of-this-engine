@@ -45,7 +45,7 @@
 
 - The 13 historical registry assets were fingerprinted from their verified Drive MP4s with the versioned video-phash-v1 algorithm; future assets must use the same catalog contract.
 - Real thumbnail files and platform cover records are not yet available for a V2.1 episode.
-- TTS, audio, captions, render, Drive and publication remain intentionally unintegrated.
+- Offline contracts for TTS, audio, captions, render and Drive are integrated; the canonical entrypoint verifies the real adapter files and symbols. No real call, media generation, Drive write or publication has been executed.
 - Promotion to main still requires explicit approval and post-merge audit.
 
 READY remains forbidden while any P0/P1 is open.
