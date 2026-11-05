@@ -252,7 +252,7 @@ jobs:
                           "frames": "qa-frames.jpg",
                           "crop_9x16": "qa-crop-9x16.jpg",
                       },
-                  }, indent=2) + "\\n",
+                  }, indent=2) + "\n",
                   encoding="utf-8",
               )
 
@@ -296,7 +296,7 @@ jobs:
                   ],
               }
               (candidate_root / "candidate-intake.json").write_text(
-                  json.dumps(report, indent=2) + "\\n", encoding="utf-8"
+                  json.dumps(report, indent=2) + "\n", encoding="utf-8"
               )
               reports.append(report)
 
@@ -311,7 +311,7 @@ jobs:
               "drive_written": False,
           }
           (root / "batch-intake-report.json").write_text(
-              json.dumps(batch_report, indent=2) + "\\n",
+              json.dumps(batch_report, indent=2) + "\n",
               encoding="utf-8",
           )
           print(json.dumps(batch_report, indent=2))
