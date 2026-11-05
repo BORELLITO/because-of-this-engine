@@ -510,9 +510,40 @@
         "global_catalog_updated": false,
         "rejection_reason": "Modern casual headphone/computer scene does not credibly represent a Soviet command-bunker decision-maker and would weaken the factual reconstruction."
       }
+    },
+    {
+      "candidate_id": "mixkit-deep-thinking-man-5572",
+      "source_page_url": "https://mixkit.co/free-stock-video/deep-thinking-man-working-on-laptop-from-home-5572/",
+      "role": "S03",
+      "visual_match": "NEAR",
+      "visual_intent": "human presence under technical decision pressure",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "mixkit",
+      "license_name": "Mixkit Restricted License",
+      "rights_status": "REJECTED_LICENSE_RESTRICTED",
+      "media_url": "https://assets.mixkit.co/videos/5572/5572-720.mp4",
+      "media_url_observed_in_browser": true,
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Mixkit Restricted License — Free Download: 720p Version for Personal Use only",
+        "visible_duration_seconds": 10.427,
+        "visible_resolution_options": [
+          "1280x720"
+        ],
+        "visible_frame_rate": "24 fps",
+        "semantic_note": "Modern man at laptop could provide a human anchor, but the page's free asset is explicitly restricted to personal use and cannot enter the commercial production route."
+      },
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "qa": {
+        "clean_frame_visual_review": "NOT_RUN_LICENSE_REJECTED",
+        "semantic_fit": "NOT_ADVANCED_BEYOND_LICENSE_GATE",
+        "human_approval": "NOT_APPLICABLE",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     }
   ],
-  "next_action": "Find a distinct, commercially licensed candidate with a sober technical/control-room human context for unresolved S03; the rejected casual-computer candidate cannot enter the manifest or global catalog.",
+  "next_action": "Find a distinct, commercially licensed candidate with a sober technical/control-room human context for unresolved S03; the casual-computer candidate was rejected semantically and the 5572 candidate was rejected at the license gate. Neither may enter the manifest or global catalog.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -721,6 +752,15 @@
       "reason": "SEMANTICALLY_WEAK_FOR_S03",
       "evidence_artifact_id": 13409549619,
       "sha256": "0e2efa26bacc172973f2c06c3a401b3fb9e92d8d6b47c5ec68c4d9e41b7b8084"
+    },
+    {
+      "candidate_id": "mixkit-deep-thinking-man-5572",
+      "rejected_at_utc": "2026-11-05T11:45:00Z",
+      "reason": "LICENSE_RESTRICTED_PERSONAL_USE_ONLY",
+      "source_page_url": "https://mixkit.co/free-stock-video/deep-thinking-man-working-on-laptop-from-home-5572/",
+      "license_observed": "Mixkit Restricted License",
+      "evidence_note": "Browser-visible page states that the free 720p download is for personal use only; commercial route is premium Envato.",
+      "media_url": "https://assets.mixkit.co/videos/5572/5572-720.mp4"
     }
   ]
 }
