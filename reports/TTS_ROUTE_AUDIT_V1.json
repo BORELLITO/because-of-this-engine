@@ -2,7 +2,7 @@
   "audit_id": "AUDIT-TTS-ROUTES-20261105-01",
   "episode_id": "episode-005",
   "checked_at_utc": "2026-11-05T01:30:00Z",
-  "conclusion": "The Creative Claw credit gate is separate from the direct Google Gemini API quota/billing account.",
+  "conclusion": "Production will not use Creative Claw. The only permitted production route is the direct Google Gemini API adapter.",
   "routes": [
     {
       "route_id": "direct_google_gemini_api",
@@ -13,7 +13,8 @@
       "status": "AVAILABLE_IN_PRINCIPLE_NOT_CONNECTED_IN_THIS_RUNTIME",
       "attempted": false,
       "required_configuration": "GEMINI_API_KEY in the direct production execution environment",
-      "project_adapter": "production/gemini_tts.py"
+      "project_adapter": "production/gemini_tts.py",
+      "production_allowed": true
     },
     {
       "route_id": "creative_claw_gemini_flash",
@@ -23,8 +24,9 @@
       "estimated_credits": 21,
       "available_credits": 0,
       "charged_credits": 0,
-      "status": "BLOCKED_BEFORE_GENERATION",
-      "attempted": true
+      "status": "HISTORICAL_DIAGNOSTIC_ONLY_BLOCKED",
+      "attempted": true,
+      "production_allowed": false
     },
     {
       "route_id": "creative_claw_gemini_flash_lite",
@@ -34,8 +36,9 @@
       "estimated_credits": 13,
       "available_credits": 0,
       "charged_credits": 0,
-      "status": "BLOCKED_BY_SAME_SHARED_BALANCE",
-      "attempted": false
+      "status": "DISALLOWED_PRODUCTION_ROUTE",
+      "attempted": false,
+      "production_allowed": false
     },
     {
       "route_id": "creative_claw_kokoro",
@@ -45,8 +48,9 @@
       "estimated_credits": 5,
       "available_credits": 0,
       "charged_credits": 0,
-      "status": "BLOCKED_BY_SAME_SHARED_BALANCE",
-      "compatibility": "not_the_approved_Charon_voice"
+      "status": "DISALLOWED_PRODUCTION_ROUTE",
+      "compatibility": "not_the_approved_Charon_voice",
+      "production_allowed": false
     },
     {
       "route_id": "creative_claw_elevenlabs",
@@ -55,8 +59,9 @@
       "estimated_credits": 22,
       "available_credits": 0,
       "charged_credits": 0,
-      "status": "BLOCKED_BY_SAME_SHARED_BALANCE",
-      "compatibility": "different_provider_and_voice_identity"
+      "status": "DISALLOWED_PRODUCTION_ROUTE",
+      "compatibility": "different_provider_and_voice_identity",
+      "production_allowed": false
     },
     {
       "route_id": "local_open_source",
@@ -90,7 +95,9 @@
     "keep_voice": "Charon",
     "do_not_silently_fallback": true,
     "direct_api_is_preferred_cost_route": "provided_free_tier_is_available_for_the_connected_Google_project",
-    "creative_claw_balance_is_not_google_api_balance": true
+    "creative_claw_balance_is_not_google_api_balance": true,
+    "creative_claw_production_allowed": false,
+    "only_permitted_route": "direct_google_gemini_api"
   },
-  "next_action": "Connect a funded or eligible Google Gemini API project to the direct adapter, then perform one request for the frozen script hash."
+  "next_action": "Connect GEMINI_API_KEY to the direct adapter execution environment, run direct preflight, then submit exactly one request for the frozen script hash."
 }
