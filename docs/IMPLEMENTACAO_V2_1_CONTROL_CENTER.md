@@ -7,8 +7,7 @@
 - Repository: BORELLITO/because-of-this-engine
 - Base: main at d35d78cd4a92d12375f54076e3e21b56cbe25fad
 - Candidate branch: integration/because-of-this-v2.1-20261105
-- Draft PR: 67
-- Candidate commit: def6978e5245d217bb7bddb2c235a5069cd3b3cf
+- Draft PR: 67 (branch head is authoritative; commit history is tracked by GitHub)
 - Status: PARTIAL / BLOCKED_FOR_PRODUCTION
 - Canonical entrypoint: production/canonical_entrypoint.py
 - Canonical voice: Microsoft Edge TTS / ChristopherNeural active for zero-billing preview; Cloud/Gemini are not active routes
