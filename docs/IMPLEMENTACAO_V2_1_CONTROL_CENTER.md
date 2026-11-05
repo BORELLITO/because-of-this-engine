@@ -234,3 +234,12 @@ READY remains forbidden while any P0/P1 is open.
 - Evidência da validação: 42 candidatos ativos, 22 aprovados para manifesto, 16 assets no manifesto, 16/16 shots atribuídos, 0 shots pendentes, promotion_allowed=false, render_allowed=false e global_catalog_updated=false.
 - O bloqueio de reutilização foi resolvido sem apagar o histórico de rejeição e sem promover mídia para render.
 - Próximo gate único: auditoria final de direitos/semântica e autorização separada para render; catálogo global, Drive e publicação permanecem bloqueados.
+
+
+## Atualização — contrato visual final validado (2026-11-05)
+
+- A validação oficial production/visual_plan_contract.py foi registrada como VISUAL_PLAN_CONTRACT_PASS.
+- Evidência: 42 candidatos ativos, 22 aprovados para manifesto, 16 assets no manifesto, 16/16 shots atribuídos e 0 pendências.
+- O plano foi atualizado no commit d2157a9e9bd7f15f8ff4b2f7a636323707f21f16 e o manifesto no commit 4d29b0fc4e75e9c5abc98b9d4bc283c8998e7524.
+- Estado atual: PARTIAL_MANIFEST_VALIDATED_BLOCKED_RENDER; final_visual_manifest_validated=true, render_authorized=false, global_catalog_update_authorized=false, drive_write_authorized=false e publication_authorized=false.
+- Próximo gate único: autorização explícita para render; a exigência de thumbnail final continua ativa antes de qualquer produção.
