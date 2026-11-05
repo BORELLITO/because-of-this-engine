@@ -1,0 +1,752 @@
+{
+  "implementation_id": "IMPL-V21-20261105-01",
+  "audit_id": "AUDIT-EP005-V21-20261105-01",
+  "episode_id": "episode-005",
+  "story_id": "story-stanislav-petrov-false-alarm-1983",
+  "editorial_mode": "factual_documentary",
+  "pillar": "human_or_system_failure",
+  "series_id": "because-of-this-stories",
+  "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+  "central_question": "Would one officer trust the machine, or the evidence that the machine was wrong?",
+  "audience_promise": "A real nuclear false alarm, one human judgment under impossible pressure, and the quiet consequence of refusing to escalate uncertainty.",
+  "impossible_event": "A Soviet early-warning system reported five American missiles even though no missiles were launched.",
+  "human_anchor": "Lieutenant Colonel Stanislav Petrov had minutes to decide whether to trust the warning or the evidence that contradicted it.",
+  "causal_hinge": "Petrov reported the alert as false instead of passing it forward as a confirmed attack.",
+  "causal_chain": [
+    "The Soviet early-warning system reports an American missile launch.",
+    "The system escalates the report from one missile to five.",
+    "Ground radar does not confirm the satellite warning.",
+    "Petrov reports the alarm as false.",
+    "No missiles arrive.",
+    "The signal is traced to sunlight reflected from high clouds.",
+    "The system failure is exposed and Petrov's career suffers."
+  ],
+  "proof_level": "primary_plus_corroboration",
+  "proof_assets": [
+    "National Security Archive document OCR",
+    "National Park Service historical account",
+    "Podvig technical false-alarm analysis"
+  ],
+  "visual_truth_classes": [
+    "BRAND_OUTRO",
+    "DOCUMENTARY_EVIDENCE",
+    "MAP_OR_DIAGRAM",
+    "REPRESENTATIONAL"
+  ],
+  "visual_representation_by_stage": [
+    "Dark bunker panel; red warning indicator comes alive.",
+    "Night-side Earth and early-warning satellite.",
+    "Representational command-bunker portrait/composition of Petrov; no false archival claim.",
+    "Alert moves through a command-chain diagram.",
+    "One launch indicator becomes two, then three.",
+    "Counter reaches five; alarm intensity rises.",
+    "Petrov studies the panel, telephone and clock.",
+    "Ground radar remains empty while satellite alert flashes.",
+    "False-alarm classification is entered; no celebratory interface.",
+    "Bunker waits; clock advances through silence.",
+    "Empty night sky; expected impact never occurs.",
+    "Sunlight geometry over high clouds and satellite sensor.",
+    "Declassified report/logbook treatment with readable evidence cues.",
+    "Petrov's later obscurity represented through empty military corridor.",
+    "Red warning fades into neutral black; no victory imagery.",
+    "Final branded logo lockup with restrained red pulse."
+  ],
+  "escalation_beats": [
+    "one reported launch",
+    "five reported launches",
+    "ground radar contradiction",
+    "false-alarm decision",
+    "no impact",
+    "sunlight/cloud mechanism",
+    "quiet consequence"
+  ],
+  "irreversible_choice": "Report the alert as false instead of passing it forward as a confirmed attack.",
+  "payoff": "He refused to turn uncertainty into a catastrophe; the historically accurate payoff is quieter than the later mythology.",
+  "title_candidates": [
+    "THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
+    "THE NIGHT THE MACHINE LIED",
+    "FIVE MISSILES"
+  ],
+  "opening_frame": "A dark warning console shows five red indicators while the bunker remains silent.",
+  "opening_sentence": "Just after midnight on September 26, 1983, a Soviet early-warning system reported five American nuclear missiles in the air.",
+  "package_variants": [
+    {
+      "title": "THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
+      "thumbnail_text": "FIVE MISSILES"
+    },
+    {
+      "title": "THE NIGHT THE MACHINE LIED",
+      "thumbnail_text": "THE MACHINE LIED"
+    },
+    {
+      "title": "FIVE MISSILES",
+      "thumbnail_text": "FIVE MISSILES"
+    }
+  ],
+  "next_video_bridge": "A related story about a warning that looked impossible until one person trusted the contradiction.",
+  "source_ledger_id": "episodes/episode-005/research/source-ledger.json",
+  "rights_ledger_id": "episodes/episode-005/visual/scene-asset-manifest.json",
+  "reuse_scope": "global",
+  "story_score": 10,
+  "package_status": "PENDING_HUMAN_APPROVAL",
+  "human_editor_status": "PENDING",
+  "thumbnail_concept_id": "thumb-episode-005-five-missiles-v1",
+  "thumbnail_manifest_id": "thumb-manifest-episode-005-v1",
+  "thumbnail_status": "PENDING_HUMAN_APPROVAL",
+  "platform_thumbnail_mode": {
+    "youtube_shorts": "custom_if_supported",
+    "tiktok": "approved_video_frame"
+  },
+  "question_answers": {
+    "what_happened": "The Soviet early-warning system reported five missiles that were not actually launched.",
+    "why_it_happened": "Sunlight reflecting from high clouds was misread by the satellite warning system.",
+    "who_was_affected": "Petrov, the Soviet command chain and the wider world exposed to the danger of escalation.",
+    "what_changed_everything": "Petrov classified the alert as false instead of escalating it as a confirmed attack.",
+    "why_it_seems_impossible": "A machine reported a nuclear attack while the physical evidence did not support one.",
+    "proof_or_source_note": "The account is anchored in institutional history, an archival document record and technical false-alarm analysis.",
+    "how_danger_grows": "The system escalates from one reported launch to five, while the decision window narrows.",
+    "irreversible_consequence": "Passing the alert forward as real could have moved the command toward retaliation; the exact counterfactual is not claimed as certain.",
+    "visual_representation_by_stage": "Each narrative stage has a distinct representational, diagrammatic or documentary-treatment shot assignment.",
+    "first_frame_promise": "The viewer immediately sees a warning system report five missiles before learning why the report was wrong."
+  },
+  "source_ledger": [
+    {
+      "claim_id": "C1",
+      "claim_text": "On September 26, 1983, the Soviet Oko early-warning system reported five missiles launched from the United States.",
+      "source_url": "https://home.nps.gov/people/stanislav_petrov.htm",
+      "source_type": "institutional_history",
+      "publisher_or_author": "National Park Service",
+      "publication_date": "not listed on accessed page",
+      "primary_or_secondary": "secondary",
+      "corroboration_source": "National Security Archive document OCR",
+      "reliability_notes": "The NPS account is corroborated by the archival document record.",
+      "accessed_at": "2026-11-05",
+      "evidence_excerpt_or_note": "The five-missile false-alert event is documented in both sources.",
+      "visual_support": "S01,S05,S06",
+      "fact_check_status": "VERIFIED"
+    },
+    {
+      "claim_id": "C1",
+      "claim_text": "On September 26, 1983, the Soviet Oko early-warning system reported five missiles launched from the United States.",
+      "source_url": "https://nsarchive.gwu.edu/media/28890/ocr",
+      "source_type": "archival_document",
+      "publisher_or_author": "National Security Archive document OCR",
+      "publication_date": "not listed on accessed page",
+      "primary_or_secondary": "primary",
+      "corroboration_source": "National Park Service",
+      "reliability_notes": "The document record is the primary corroborating source for the alert account.",
+      "accessed_at": "2026-11-05",
+      "evidence_excerpt_or_note": "The five-missile report is cross-checked against the NPS account.",
+      "visual_support": "S01,S05,S06",
+      "fact_check_status": "VERIFIED"
+    },
+    {
+      "claim_id": "C2",
+      "claim_text": "Petrov was the duty officer who judged the report to be a false alarm.",
+      "source_url": "https://nsarchive.gwu.edu/media/28890/ocr",
+      "source_type": "archival_document",
+      "publisher_or_author": "National Security Archive document OCR",
+      "publication_date": "not listed on accessed page",
+      "primary_or_secondary": "primary",
+      "corroboration_source": "National Park Service",
+      "reliability_notes": "The archival record supports the duty-officer decision.",
+      "accessed_at": "2026-11-05",
+      "evidence_excerpt_or_note": "Petrov's role and decision are corroborated by the NPS account.",
+      "visual_support": "S03,S07,S09",
+      "fact_check_status": "VERIFIED"
+    },
+    {
+      "claim_id": "C2",
+      "claim_text": "Petrov was the duty officer who judged the report to be a false alarm.",
+      "source_url": "https://home.nps.gov/people/stanislav_petrov.htm",
+      "source_type": "institutional_history",
+      "publisher_or_author": "National Park Service",
+      "publication_date": "not listed on accessed page",
+      "primary_or_secondary": "secondary",
+      "corroboration_source": "National Security Archive document OCR",
+      "reliability_notes": "The public historical account corroborates the archival record.",
+      "accessed_at": "2026-11-05",
+      "evidence_excerpt_or_note": "The duty-officer decision is cross-checked against the document OCR.",
+      "visual_support": "S03,S07,S09",
+      "fact_check_status": "VERIFIED"
+    },
+    {
+      "claim_id": "C3",
+      "claim_text": "The alert was later attributed to sunlight reflecting from cloud tops and being misread by the satellite system.",
+      "source_url": "https://www.smithsonianmag.com/smart-news/man-who-saved-world-from-nuclear-annihilation-dies-77-180964934/",
+      "source_type": "institutional_history",
+      "publisher_or_author": "Smithsonian Magazine",
+      "publication_date": "not listed on accessed page",
+      "primary_or_secondary": "secondary",
+      "corroboration_source": "Podvig nuclear false-alarm analysis",
+      "reliability_notes": "The mechanism is described as the later explanation for the alert.",
+      "accessed_at": "2026-11-05",
+      "evidence_excerpt_or_note": "The sunlight/cloud explanation is cross-checked against technical analysis.",
+      "visual_support": "S12",
+      "fact_check_status": "VERIFIED"
+    },
+    {
+      "claim_id": "C3",
+      "claim_text": "The alert was later attributed to sunlight reflecting from cloud tops and being misread by the satellite system.",
+      "source_url": "https://russianforces.org/podvig/Podvig-False_alarms_and_incidents-2025.pdf",
+      "source_type": "technical_analysis",
+      "publisher_or_author": "Podvig nuclear false-alarm analysis",
+      "publication_date": "not listed on accessed page",
+      "primary_or_secondary": "secondary",
+      "corroboration_source": "Smithsonian Magazine",
+      "reliability_notes": "The technical analysis corroborates the mechanism with a cautious framing.",
+      "accessed_at": "2026-11-05",
+      "evidence_excerpt_or_note": "The mechanism is cross-checked against the Smithsonian account.",
+      "visual_support": "S12",
+      "fact_check_status": "VERIFIED"
+    },
+    {
+      "claim_id": "C4",
+      "claim_text": "The historical significance must be framed cautiously; available analysis does not establish that a retaliatory launch was definitely imminent.",
+      "source_url": "https://russianforces.org/podvig/Podvig-False_alarms_and_incidents-2025.pdf",
+      "source_type": "technical_analysis",
+      "publisher_or_author": "Podvig nuclear false-alarm analysis",
+      "publication_date": "not listed on accessed page",
+      "primary_or_secondary": "secondary",
+      "corroboration_source": "National Park Service",
+      "reliability_notes": "Technical analysis supplies the caution against overstating the counterfactual.",
+      "accessed_at": "2026-11-05",
+      "evidence_excerpt_or_note": "The guardrail is retained alongside the public historical account.",
+      "visual_support": "S16",
+      "fact_check_status": "VERIFIED"
+    },
+    {
+      "claim_id": "C4",
+      "claim_text": "The historical significance must be framed cautiously; available analysis does not establish that a retaliatory launch was definitely imminent.",
+      "source_url": "https://home.nps.gov/people/stanislav_petrov.htm",
+      "source_type": "institutional_history",
+      "publisher_or_author": "National Park Service",
+      "publication_date": "not listed on accessed page",
+      "primary_or_secondary": "secondary",
+      "corroboration_source": "Podvig nuclear false-alarm analysis",
+      "reliability_notes": "The public account is used only as corroboration, not as proof of imminent retaliation.",
+      "accessed_at": "2026-11-05",
+      "evidence_excerpt_or_note": "The caution is preserved against the later mythology.",
+      "visual_support": "S16",
+      "fact_check_status": "VERIFIED"
+    }
+  ],
+  "rights_ledger": [
+    {
+      "asset_id": "mixkit-abstract-red-glow-101432",
+      "source_url": "https://mixkit.co/free-stock-video/abstract-red-glow-101432/",
+      "provider": "mixkit",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Mixkit Stock Video Free License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://mixkit.co/free-stock-video/abstract-red-glow-101432/",
+      "sha256": "f5c6866db294ab7489e581d08d3ae5480496b42d43df8a4a6152bcc6e4d97774",
+      "perceptual_fingerprint": "835461ff7f59472fc9efe33bd35dc83d65f475f22c999ee4d4df70cb139cfc3e",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_for_render": false,
+      "approval_scope": "manifest_only",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+    },
+    {
+      "asset_id": "mixkit-slowly-approaching-clock-28897",
+      "source_url": "https://mixkit.co/free-stock-video/slowly-approaching-a-clock-on-a-black-background-28897/",
+      "provider": "mixkit",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Mixkit Stock Video Free License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://mixkit.co/free-stock-video/slowly-approaching-a-clock-on-a-black-background-28897/",
+      "sha256": "d254063cd2f4ceeaf186f68c71c905fb8b27d9e94397aa0a794e93827208b505",
+      "perceptual_fingerprint": "9c8a21443b162c8a16f99d0876c8910cde48548fc525fc8c00c159dbc9db6f64",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_for_render": false,
+      "approval_scope": "manifest_only",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+    },
+    {
+      "asset_id": "mixkit-cloudy-sky-118",
+      "source_url": "https://mixkit.co/free-stock-video/cloudy-sky-118/",
+      "provider": "mixkit",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Mixkit Stock Video Free License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://mixkit.co/free-stock-video/cloudy-sky-118/",
+      "sha256": "7b18e0c66a2eb1a55df0532d3bf346f1e1d193eaa805403cc39fc835e8454432",
+      "perceptual_fingerprint": "75bd02cf43583033aee2f7659350e477ff56bd126380157b845433def983964a",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_for_render": false,
+      "approval_scope": "manifest_only",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+    },
+    {
+      "asset_id": "mixkit-clock-mechanism-3651",
+      "source_url": "https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/",
+      "provider": "mixkit",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Mixkit Stock Video Free License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/",
+      "sha256": "575ec01ae49bad9f5e5d634d51c1d78c31856e2171ca799065d9750dce3de5fd",
+      "perceptual_fingerprint": "8d01acb640e75c70ee0d46ceaabeec546bbcc70f24d7a4a4d0c9e1cd46a3f72",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_for_render": false,
+      "approval_scope": "manifest_only",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+    },
+    {
+      "asset_id": "mixkit-large-satellite-antenna-2650",
+      "source_url": "https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/",
+      "provider": "mixkit",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Mixkit Stock Video Free License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/",
+      "sha256": "1bfa05d75d9295ff3a08dda7017927f638292895f1c2c376667175c279813807",
+      "perceptual_fingerprint": "f10ae48c3a770e23246f7fda15feccd3c4b37e1db48b9d71c6fb1511a1ee1b7c",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_for_render": false,
+      "approval_scope": "manifest_only",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+    },
+    {
+      "asset_id": "mixkit-young-engineer-29991",
+      "source_url": "https://mixkit.co/free-stock-video/young-engineer-programming-in-his-workshop-seen-up-close-29991/",
+      "provider": "mixkit",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Mixkit Stock Video Free License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://mixkit.co/free-stock-video/young-engineer-programming-in-his-workshop-seen-up-close-29991/",
+      "sha256": "f1474daed5b97009063ca692859fdca1e91044ad62a9cd1f1f3009b2609b3478",
+      "perceptual_fingerprint": "a4e5ac59afbd71e65a7b8eaccba06c5c62ac7e169a6dceea4deae4cb15b5842a",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_for_render": false,
+      "approval_scope": "manifest_only",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+    },
+    {
+      "asset_id": "mixkit-worker-industrial-lathe-2244",
+      "source_url": "https://mixkit.co/free-stock-video/worker-operating-an-industrial-lathe-2244/",
+      "provider": "mixkit",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Mixkit Stock Video Free License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://mixkit.co/free-stock-video/worker-operating-an-industrial-lathe-2244/",
+      "sha256": "a30c4294c60190b75e2f49c076dccc7f86692a99e4bed42ae002f8094936a45d",
+      "perceptual_fingerprint": "e7c8758b9f770b817e9d5ef14b7a78bceaad1dcff716a7e7d3c1aff7e63cb8d7",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_for_render": false,
+      "approval_scope": "manifest_only",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+    },
+    {
+      "asset_id": "pixabay-led-indicator-lights-316712",
+      "source_url": "https://pixabay.com/videos/led-indicator-lights-electronics-316712/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/led-indicator-lights-electronics-316712/",
+      "sha256": "e4d3d281bab5ffb6808a6ad0b20dd03e3857112cf309ee86d1dec234d4ac928e",
+      "perceptual_fingerprint": "d70c666953675401e001265ef4d80b66b8da2a8034488305320c0a12633c0395",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_for_render": false,
+      "approval_scope": "manifest_only",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+    },
+    {
+      "asset_id": "pixabay-antenna-astronomy-communication-40041",
+      "source_url": "https://pixabay.com/videos/antenna-astronomy-communication-40041/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/antenna-astronomy-communication-40041/",
+      "sha256": "e0a5b6cbf90c31c7f79c8cf6d9eaa515a83d4e986927a90a3840d7d36303e9b4",
+      "perceptual_fingerprint": "720e0b55776ac929e3c7f5be259dcaa7c848fe1cefb4fc2ffd501c6b2ee1059d",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_for_render": false,
+      "approval_scope": "manifest_only",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+    },
+    {
+      "asset_id": "pixabay-hallway-dark-corridor-20837",
+      "source_url": "https://pixabay.com/videos/hallway-dark-corridor-dim-mystery-20837/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/hallway-dark-corridor-dim-mystery-20837/",
+      "sha256": "e6c20511f889daa57834ddf5f97ea076ffffedc0a321850a4ea8fa295479d72d",
+      "perceptual_fingerprint": "40df89d9d2edf33d5a94509be3c9f3abb6073dd28ff1914aba8307eb1055aafd",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_for_render": false,
+      "approval_scope": "manifest_only",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+    },
+    {
+      "asset_id": "pixabay-alert-alarm-war-danger-risk-205519",
+      "source_url": "https://pixabay.com/videos/alert-alarm-war-danger-risk-205519/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/alert-alarm-war-danger-risk-205519/",
+      "sha256": "5a2031e934028fb6c13ba07dd176092507303db83f4decc8b79acb2263ecbf8d",
+      "perceptual_fingerprint": "f2bb56d11027b73124649c52ecb1018ec945a8e1c02da9312e1ac958f733fbb6",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_for_render": false,
+      "approval_scope": "manifest_only",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+    },
+    {
+      "asset_id": "pixabay-radar-radar-screen-rotation-circles-4511",
+      "source_url": "https://pixabay.com/videos/radar-radar-screen-rotation-circles-4511/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/radar-radar-screen-rotation-circles-4511/",
+      "sha256": "8185f8459b80df5c5eaa95d4a66ac58edef34fc7f790ca4e5f74fc10a70742d6",
+      "perceptual_fingerprint": "6818a74392e5f6ef8d3ded092f6c1ce791afd3d710e0acd30e7cf78a60b12242",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_for_render": false,
+      "approval_scope": "manifest_only",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+    },
+    {
+      "asset_id": "pixabay-button-press-red-business-click-502",
+      "source_url": "https://pixabay.com/videos/button-press-red-business-click-502/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/button-press-red-business-click-502/",
+      "sha256": "e6eaeddadbda7f8fdf9e4106ad09e0c25e0139f0212dce20a29d34cd8eb77b16",
+      "perceptual_fingerprint": "155c325b4b0c121d7add2c16eea0d86efa5379f7bcec66dc52bec0073972e884",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_for_render": false,
+      "approval_scope": "manifest_only",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+    },
+    {
+      "asset_id": "pixabay-typewriter-typing-writing-author-1335",
+      "source_url": "https://pixabay.com/videos/typewriter-typing-writing-author-1335/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/typewriter-typing-writing-author-1335/",
+      "sha256": "2df86b63f6f05398b44ac2c4b28e9f370036e552b20d0b30e2842e2e71aabd23",
+      "perceptual_fingerprint": "e42ec360a46a9ef093c7055f72d0bb39ebffb9a8e7ce3acb6ee96902f70673fe",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_for_render": false,
+      "approval_scope": "manifest_only",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+    },
+    {
+      "asset_id": "pixabay-dark-light-lens-flare-abstract-250413",
+      "source_url": "https://pixabay.com/videos/dark-light-lens-flare-abstract-250413/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/dark-light-lens-flare-abstract-250413/",
+      "sha256": "bc173bee51dd0dd3120d2cfbfc2884f5681849b384bc661af7f2721d92a2c8ad",
+      "perceptual_fingerprint": "57bce8d11491f760dbeea11a0b9925a6d0085ae70c32966ef3a62cb887a16026",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_for_render": false,
+      "approval_scope": "manifest_only",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+    },
+    {
+      "asset_id": "pixabay-particles-orange-red-dust-effect-7957",
+      "source_url": "https://pixabay.com/videos/particles-orange-red-dust-effect-7957/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/particles-orange-red-dust-effect-7957/",
+      "sha256": "00cb906c22484217646c6aeedc90f725941f4aa25e0df64378c1b0ecfe267282",
+      "perceptual_fingerprint": "423fdfd63cdb0a3bd7cb7c798b1dc532e41d0d98234fad78e2cba05b49f97911",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_for_render": false,
+      "approval_scope": "manifest_only",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+    }
+  ],
+  "thumbnail_concept": {
+    "concept_id": "thumb-episode-005-five-missiles-v1",
+    "title_alignment": "The five-missile warning is the central visual hook; no claim that Petrov literally saved the world.",
+    "hero_visual": "Red early-warning console with five indicators and a dark human silhouette.",
+    "thumbnail_text": "FIVE MISSILES",
+    "visual_truth_class": "MAP_OR_DIAGRAM",
+    "rights_status": "ORIGINAL_GENERATED_ASSET_PENDING_FINAL_HUMAN_REVIEW",
+    "candidate_library_file_id": "libfile_0a269bde796c81919bd777795b907361",
+    "candidate_sha256": "84fbac028247995943aa5c9e4fcfc698526215e83c2017edc225dbcebe307276",
+    "human_review_status": "PENDING"
+  },
+  "thumbnail_manifest": {
+    "episode_id": "episode-005",
+    "story_id": "story-stanislav-petrov-false-alarm-1983",
+    "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+    "title_variant": "THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
+    "thumbnail_text": "FIVE MISSILES",
+    "hero_asset_id": "thumb-episode-005-five-missiles-v1",
+    "visual_truth_class": "MAP_OR_DIAGRAM",
+    "source_url": "library://libfile_0a269bde796c81919bd777795b907361",
+    "rights_status": "PENDING_HUMAN_REVIEW",
+    "sha256": "84fbac028247995943aa5c9e4fcfc698526215e83c2017edc225dbcebe307276",
+    "dimensions": [
+      1080,
+      1920
+    ],
+    "safe_margin_status": "PENDING_HUMAN_REVIEW",
+    "mobile_legibility_status": "PENDING_HUMAN_REVIEW",
+    "human_review_status": "PENDING",
+    "youtube_thumbnail_mode": "custom_if_supported",
+    "tiktok_cover_mode": "approved_video_frame",
+    "final_status": "CANDIDATE_READY_FOR_HUMAN_REVIEW",
+    "delivery_paths": {
+      "thumbnail_master_9x16_png": "episodes/episode-005/delivery/thumbnail/thumbnail_master_9x16.png",
+      "thumbnail_master_9x16_jpg": "episodes/episode-005/delivery/thumbnail/thumbnail_master_9x16.jpg",
+      "thumbnail_source_frame": "episodes/episode-005/delivery/thumbnail/source-frame.png",
+      "thumbnail_preview_mobile": "episodes/episode-005/delivery/thumbnail/thumbnail_preview_mobile.png",
+      "platform_cover_record": "episodes/episode-005/delivery/thumbnail/platform-cover-record.json"
+    }
+  },
+  "tts_contract": {
+    "provider": "microsoft_edge_tts",
+    "voice_name": "en-US-ChristopherNeural",
+    "language_code": "en-US",
+    "model": "edge_neural",
+    "provider_fallback": "forbidden",
+    "status": "OFFLINE_CONTRACT_VERIFIED",
+    "real_call_authorized": false,
+    "request_count": 0,
+    "script_sha256": "6462ef83ae90e68c60cdf9c3628be85617b94930e01e66a2eb8119130ad6c94c",
+    "estimated_characters": 1067,
+    "character_budget": 10000,
+    "estimated_duration_seconds": 79.704,
+    "evidence": {
+      "workflow_run_id": 41961294784,
+      "artifact_id": 13384643514,
+      "audio_sha256": "bfa297c85e6de0c1a9dee5fbc74a8f7e75a6cd287bd47ecf6d97f16dd045831a",
+      "caption_artifact_id": 13388585044
+    }
+  },
+  "audio_contract": {
+    "source": "final_audio",
+    "status": "OFFLINE_CONTRACT_VERIFIED",
+    "real_audio_generated": false,
+    "final_transcription_required": true,
+    "target_duration_seconds": 79.704,
+    "adapter": "production/microsoft_edge_tts.py",
+    "frozen_audio_sha256": "bfa297c85e6de0c1a9dee5fbc74a8f7e75a6cd287bd47ecf6d97f16dd045831a",
+    "frozen_audio_artifact_id": 13384643514
+  },
+  "captions_contract": {
+    "source": "final_audio_transcription",
+    "word_level": true,
+    "status": "OFFLINE_CONTRACT_VERIFIED",
+    "real_caption_generated": false,
+    "safe_zone_status": "PENDING_REAL_CAPTURE",
+    "source_audio_sha256": "bfa297c85e6de0c1a9dee5fbc74a8f7e75a6cd287bd47ecf6d97f16dd045831a",
+    "adapter": "production/align_captions.py",
+    "timing_mode": "edge_tts_native_word_boundaries_with_provider_groups",
+    "provider_group_count": 2
+  },
+  "render_contract": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 60,
+    "status": "OFFLINE_CONTRACT_VERIFIED",
+    "render_executed": false,
+    "duration_target_seconds": 79.704,
+    "adapter": "production/render_v21_manual.py",
+    "render_mode": "preview_then_final",
+    "render_authorization": "PENDING",
+    "thumbnail_final_required": true
+  },
+  "drive_contract": {
+    "mode": "read_only",
+    "write_authorized": false,
+    "status": "OFFLINE_CONTRACT_VERIFIED",
+    "receipt_status": "NOT_RUN",
+    "assets_adapter": "production/google_drive_assets.py",
+    "delivery_adapter": "production/google_drive_delivery.py"
+  },
+  "factuality_status": "READY",
+  "safety_status": "READY",
+  "pipeline_state": "THUMBNAIL_PENDING",
+  "production_enablement": false,
+  "visual_manifest_reference": "episodes/episode-005/visual/scene-asset-manifest.json",
+  "visual_manifest_status": "PARTIAL_MANIFEST_VALIDATED_BLOCKED_RENDER",
+  "visual_manifest_contract_status": "VISUAL_PLAN_CONTRACT_PASS",
+  "production_gates": {
+    "story_fact_check": "READY_WITH_GUARDRAILS",
+    "visual_manifest": "PASS_STRUCTURAL_BLOCKED_PROMOTION",
+    "thumbnail": "PENDING_HUMAN_REVIEW",
+    "render": "BLOCKED",
+    "drive": "NOT_AUTHORIZED",
+    "publication": "MANUAL_ONLY"
+  }
+}
