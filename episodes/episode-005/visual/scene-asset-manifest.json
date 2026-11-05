@@ -11,7 +11,7 @@
   "approval_record": {
     "status": "APPROVED_FOR_MANIFEST_ONLY",
     "approved_at_utc": "2026-11-05T11:02:38Z",
-    "decision": "Approve six downloaded candidates for the Episode 005 partial visual manifest; the S03 engineer candidate is representational modern reconstruction only.",
+    "decision": "Approve seven downloaded candidates for the Episode 005 partial visual manifest; S03 and S04 remain representational reconstructions only.",
     "constraints": [
       "red-light candidate remains symbolic and must not be presented as literal Petrov archival evidence",
       "approval does not authorize global catalog mutation",
@@ -19,14 +19,15 @@
       "all unresolved story shots remain blocked",
       "clock-mechanism candidate is a symbolic mechanical-time reconstruction, assigned to S10 only and never treated as Petrov archival evidence",
       "satellite antenna candidate is representational infrastructure for S02 only and must not be presented as literal Petrov archival evidence",
-      "young-engineer candidate is assigned to S03 only and must not be presented as literal Petrov archival evidence"
+      "young-engineer candidate is assigned to S03 only and must not be presented as literal Petrov archival evidence",
+      "worker-industrial-lathe candidate is assigned to S04 only and must not be presented as literal Petrov archival evidence"
     ]
   },
   "global_reuse_audit": {
     "status": "PASS_NO_COLLISION",
-    "workflow_run_id": 42021523387,
-    "artifact_id": 13411692548,
-    "artifact_digest": "sha256:60d3a8c2b25a355f2415b9b83ead93e036727ae373ad587c8ae7e7f3b9b046f7",
+    "workflow_run_id": 42025128372,
+    "artifact_id": 13413646379,
+    "artifact_digest": "sha256:a4450ebff3562383b0b8c731bc810f810850eab1fa476737233279724c18fc69",
     "algorithm": "video-fingerprint-v2-rgb24-q4"
   },
   "assets": [
@@ -183,6 +184,35 @@
       "thumbnail_eligible": false,
       "drive_written": false,
       "editorial_caveat": "Modern tablet/code/workshop reconstruction; never literal Petrov archival evidence."
+    },
+    {
+      "candidate_id": "mixkit-worker-industrial-lathe-2244",
+      "provider": "mixkit",
+      "source_page_url": "https://mixkit.co/free-stock-video/worker-operating-an-industrial-lathe-2244/",
+      "media_url": "https://assets.mixkit.co/videos/2244/2244-720.mp4",
+      "license_name": "Mixkit Stock Video Free License",
+      "source_role": "S04",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "sha256": "a30c4294c60190b75e2f49c076dccc7f86692a99e4bed42ae002f8094936a45d",
+      "perceptual_hash": "e7c8758b9f770b817e9d5ef14b7a78bceaad1dcff716a7e7d3c1aff7e63cb8d7",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42024921610,
+        "artifact_id": 13412703858,
+        "artifact_digest": "sha256:0cdd282c423100d8df4732dd542238a4ac8e5f46a67c40ee008e51ec1f73d742"
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 42025128372,
+        "artifact_id": 13413646379,
+        "artifact_digest": "sha256:a4450ebff3562383b0b8c731bc810f810850eab1fa476737233279724c18fc69"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "editorial_caveat": "Industrial control panel is representational reconstruction for S04, never literal Petrov archival evidence."
     }
   ],
   "shot_assignments": [
@@ -241,9 +271,16 @@
       "role": "escalation",
       "requested_visual": "Alert moves through a command-chain diagram.",
       "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
-      "assignment": null,
-      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "assignment": {
+        "candidate_id": "mixkit-worker-industrial-lathe-2244",
+        "usage": "technical control-panel reconstruction of alert propagation; not literal Petrov archival evidence",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "editorial_caveat": "Natural panel labels are scene content; do not present as the actual Soviet system."
+      },
+      "blocking_reason": null
     },
     {
       "shot_id": "S05",
@@ -385,7 +422,6 @@
     }
   ],
   "unresolved_shots": [
-    "S04",
     "S05",
     "S06",
     "S08",
@@ -405,7 +441,7 @@
     "drive_write_authorized": false,
     "publication_authorized": false
   },
-  "next_action": "Acquire and QA distinct candidates for unresolved shots S04,S05,S06,S08,S09,S12,S13,S14,S15,S16, then re-run final visual manifest validation. Render, global catalog, Drive and publication remain blocked.",
+  "next_action": "Acquire and QA distinct candidates for unresolved shots S05,S06,S08,S09,S12,S13,S14,S15,S16, then re-run final visual manifest validation. Render, global catalog, Drive and publication remain blocked.",
   "reuse_policy": {
     "source_reuse_scope": "global",
     "distinct_source_required_per_shot": true,
@@ -425,6 +461,20 @@
         "intake_artifact_id": 13411851653,
         "fingerprint_workflow_run_id": 42021523387,
         "fingerprint_artifact_id": 13411692548
+      }
+    },
+    {
+      "candidate_id": "mixkit-worker-industrial-lathe-2244",
+      "shot_ids": [
+        "S04"
+      ],
+      "decision": "APPROVED_FOR_MANIFEST_ONLY",
+      "scope": "Representational technical control-panel reconstruction",
+      "evidence": {
+        "intake_workflow_run_id": 42024921610,
+        "intake_artifact_id": 13412703858,
+        "fingerprint_workflow_run_id": 42025128372,
+        "fingerprint_artifact_id": 13413646379
       }
     }
   ]
