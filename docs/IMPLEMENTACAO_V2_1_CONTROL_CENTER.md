@@ -358,3 +358,12 @@ READY remains forbidden while any P0/P1 is open.
 - Evidência final: CI canônico run `42119507950` — success; integração V2.1 run `42119507933` — success; captions congeladas run `42119507986` — success. No relatório: `THUMBNAIL_QA=PASS`, `THUMBNAIL_FILES=PASS`, `rights_ledger=BLOCKED`, render `NOT_RUN`, publicação `MANUAL_ONLY_NOT_RUN`.
 - Estado preservado: `production_enablement=false`, todos os assets ainda `approved_for_render=false`, catálogo global não atualizado, Drive não escrito e publicação não autorizada.
 - Próximo passo único: substituir o candidato S05 reprovado e concluir QA direta dos arquivos pendentes; não promover direitos para render antes desses gates.
+
+## Addendum — substituição segura do S05 e revalidação final — 2026-11-05
+
+- O candidato S05 `pixabay-alert-alarm-war-danger-risk-205519` foi removido da promoção após QA direta confirmar rosto reconhecível. Ele permanece apenas como histórico rejeitado no plano, com razão e artifact preservados.
+- A alternativa já intakeada `pixabay-radar-black-green-target-symbol-57670` foi inspecionada nas cinco amostras normalizadas: radar/target genérico, sem pessoa reconhecível, marca ou texto de terceiros. Ela foi promovida somente para `APPROVED_FOR_MANIFEST_ONLY` em S05.
+- Plano, manifesto e ficha de direitos foram atualizados em sequência para evitar commits órfãos. O manifesto mantém 16 assets, 16/16 shots atribuídos, 21 candidatos aprovados para manifesto, `promotion_allowed=false` e `render_allowed=false`.
+- Revalidação final no head `d220fdead9c25170a22227ae50bbb84247f1b871`: CI canônico run `42120350391` — success; integração V2.1 run `42120350465` — success; captions congeladas run `42120350398` — success. O PR 67 está `mergeable=true`, aberto e draft.
+- Direitos continuam sem promoção: todos os 16 assets permanecem `approved_for_render=false`; catálogo global, Drive, render e publicação seguem bloqueados. A ficha de direitos permanece globalmente bloqueada por QA/licença final pendente e aprovação explícita por asset.
+- Próximo passo único: concluir a QA direta dos Mixkit S01/S02/S03/S04/S07/S10/S11 e dos Pixabay S06/S12; só depois avaliar aprovação explícita de render por asset.
