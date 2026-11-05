@@ -10,7 +10,7 @@ SHA256 = re.compile(r"^[0-9a-f]{64}$", re.IGNORECASE)
 ADAPTERS = {
     "audio_contract.adapter": ("production/microsoft_edge_tts.py", "synthesize_chunks"),
     "captions_contract.adapter": ("production/align_captions.py", "main"),
-    "render_contract.adapter": ("production/render_video_episode.py", "main"),
+    "render_contract.adapter": ("production/render_v21_manual.py", "main"),
     "drive_contract.assets_adapter": ("production/google_drive_assets.py", "main"),
     "drive_contract.delivery_adapter": ("production/google_drive_delivery.py", "main"),
 }
