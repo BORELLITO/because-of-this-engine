@@ -612,7 +612,7 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "mixkit",
       "license_name": "Mixkit Stock Video Free License",
-      "rights_status": "CANDIDATE_PAGE_VERIFIED_AWAITING_INTAKE",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_FINGERPRINT_AND_HUMAN_QA",
       "media_url": "https://assets.mixkit.co/videos/2244/2244-720.mp4",
       "media_url_observed_in_browser": true,
       "browser_verification": {
@@ -628,19 +628,36 @@
       },
       "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
       "qa": {
-        "clean_frame_visual_review": "PENDING_INTAKE",
-        "baked_captions_or_authored_graphics": "PENDING_INTAKE",
-        "embedded_logo_or_letterbox": "PENDING_INTAKE",
-        "semantic_fit": "PRELIMINARY_PASS_PENDING_CLEAN_FRAME_QA",
-        "locked_9x16_crop": "PENDING_INTAKE",
-        "global_reuse_fingerprint": "PENDING_INTAKE",
+        "clean_frame_visual_review": "PRELIMINARY_PASS",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED; PANEL LABELS ARE NATURAL SCENE CONTENT",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
+        "semantic_fit": "PRELIMINARY_PASS_AS_TECHNICAL_CONTROL_PANEL_RECONSTRUCTION",
+        "locked_9x16_crop": "PRELIMINARY_PASS_ACTION_AND_EMERGENCY_CONTROL_RETAINED",
+        "global_reuse_fingerprint": "PENDING_FRESH_AUDIT",
         "human_approval": "PENDING",
         "approved_for_render": false,
-        "global_catalog_updated": false
+        "global_catalog_updated": false,
+        "editorial_caveat": "Industrial control panel is representational reconstruction for S04, never literal Petrov archival evidence."
+      },
+      "intake_artifact": {
+        "workflow_run_id": 42024921610,
+        "artifact_id": 13412703858,
+        "artifact_digest": "sha256:0cdd282c423100d8df4732dd542238a4ac8e5f46a67c40ee008e51ec1f73d742",
+        "artifact_name": "episode005-visual-intake-mixkit-worker-industrial-lathe-2244",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "a30c4294c60190b75e2f49c076dccc7f86692a99e4bed42ae002f8094936a45d",
+        "duration_seconds": 10.01,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "frame_rate": "24000/1001",
+        "codec": "h264",
+        "automated_promotion": false
       }
     }
   ],
-  "next_action": "Run intake and frame/fingerprint QA for mixkit-worker-industrial-lathe-2244 as the S04 candidate. If clean and semantically coherent, request explicit manifest-only approval; otherwise reject without catalog or render promotion.",
+  "next_action": "Await fresh global fingerprint audit for mixkit-worker-industrial-lathe-2244. If PASS, request explicit manifest-only approval for S04; otherwise reject without catalog or render promotion.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
