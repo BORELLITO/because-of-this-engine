@@ -13,6 +13,7 @@ from typing import Any
 
 from production.ledgers_v21 import RegistryError, load_registry, validate_no_reuse, validate_rights_ledger, validate_source_ledger
 from production.package_gate_pre import evaluate_package_gate
+from production.tts_contract_v21 import validate_tts_contract
 from production.thumbnail_contract_v21 import validate_thumbnail_concept, validate_thumbnail_files, validate_thumbnail_manifest
 
 SCHEMA_PATH = Path(__file__).resolve().parent / "schemas" / "production-record-3.1.0.json"
@@ -60,9 +61,10 @@ def evaluate(manifest: dict[str, Any], *, registry: list[dict[str, Any]] | None 
     rights = validate_rights_ledger(manifest)
     reuse = validate_no_reuse(manifest, registry)
     concept = validate_thumbnail_concept(manifest)
+    tts = validate_tts_contract(manifest)
     thumbnail_manifest = manifest.get("thumbnail_manifest")
     thumbnail = validate_thumbnail_manifest(thumbnail_manifest) if isinstance(thumbnail_manifest, dict) else {"gate": "THUMBNAIL_QA", "status": "BLOCKED", "failures": ["thumbnail_manifest is mandatory"]}
-    checks = [schema, package, source, rights, reuse, concept, thumbnail]
+    checks = [schema, package, source, rights, reuse, concept, tts, thumbnail]
     if repo_root is not None and thumbnail["status"] == "PASS":
         checks.append(validate_thumbnail_files(thumbnail_manifest, repo_root))
     blocking = [item.get("gate") or item.get("ledger") for item in checks if item["status"] not in {"PASS", "PACKAGE_GATE_PASS"}]

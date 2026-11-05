@@ -9,7 +9,7 @@
     "reuse_scope", "story_score", "package_status", "human_editor_status",
     "thumbnail_concept_id", "thumbnail_manifest_id", "thumbnail_status",
     "platform_thumbnail_mode", "question_answers", "source_ledger", "rights_ledger",
-    "thumbnail_concept", "thumbnail_manifest", "pipeline_state", "production_enablement"
+    "thumbnail_concept", "thumbnail_manifest", "tts_contract", "pipeline_state", "production_enablement"
   ],
   "properties": {
     "implementation_id": {"type": "string", "minLength": 1},
@@ -35,6 +35,7 @@
     "rights_ledger": {"type": "array"},
     "thumbnail_concept": {"type": "object"},
     "thumbnail_manifest": {"type": "object"},
+    "tts_contract": {"type": "object"},
     "pipeline_state": {"enum": ["DRAFT", "PACKAGE_PENDING", "FACT_CHECK_PENDING", "STORY_PENDING", "ASSETS_PENDING", "RIGHTS_PENDING", "REUSE_PENDING", "VOICE_PENDING", "AUDIO_PENDING", "CAPTIONS_PENDING", "PREVIEW_PENDING", "THUMBNAIL_PENDING", "THUMBNAIL_QA", "HUMAN_REVIEW", "TECHNICAL_QA", "NEEDS_CORRECTION", "BLOCKED", "APPROVED_FOR_MANUAL_PUBLICATION", "MANUALLY_PUBLISHED", "METRICS_PENDING", "ARCHIVED"]},
     "production_enablement": {"const": false}
   },

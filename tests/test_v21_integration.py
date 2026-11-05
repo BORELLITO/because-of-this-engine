@@ -65,6 +65,20 @@ def valid_manifest() -> dict:
         "platform_thumbnail_mode": {"youtube_shorts": "custom_if_supported", "tiktok": "approved_video_frame"},
         "pipeline_state": "DRAFT",
         "production_enablement": False,
+        "tts_contract": {
+            "provider": "gemini_tts",
+            "voice_name": "Charon",
+            "language_code": "en-US",
+            "model": "gemini-3.8-flash-tts",
+            "provider_fallback": "forbidden",
+            "status": "OFFLINE_CONTRACT_VERIFIED",
+            "real_call_authorized": False,
+            "request_count": 0,
+            "script_sha256": "c" * 64,
+            "estimated_characters": 900,
+            "character_budget": 10000,
+            "estimated_duration_seconds": 65,
+        },
         "factuality_status": "PENDING",
         "safety_status": "READY",
         "thumbnail_concept": {
@@ -206,6 +220,12 @@ class V21IntegrationTests(unittest.TestCase):
         manifest.pop("incident_id")
         report = evaluate(manifest, registry=historical_registry())
         self.assertIn("PRODUCTION_RECORD_SCHEMA", report["blocking_gates"])
+
+    def test_tts_contract_rejects_provider_drift(self):
+        manifest = valid_manifest()
+        manifest["tts_contract"]["provider"] = "google_cloud_tts"
+        report = evaluate(manifest, registry=historical_registry())
+        self.assertIn("TTS_CONTRACT", report["blocking_gates"])
 
     def test_commercial_rights_are_hard_blocking(self):
         manifest = valid_manifest()
