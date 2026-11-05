@@ -114,5 +114,19 @@
     "creative_claw_production_allowed": false,
     "only_permitted_route": "microsoft_edge_tts"
   },
-  "next_action": "Install/verify edge-tts and ffmpeg in the execution environment, run voice preflight, then request explicit authorization for one complete Episode 005 preview."
+  "next_action": "Run the same adapter in an execution environment with trusted access to speech.platform.bing.com, keep SSL verification enabled, then authorize one complete Episode 005 preview.",
+  "operational_preflight": {
+    "status": "BLOCKED_ENVIRONMENT_TLS",
+    "adapter": "production/edge_tts.py",
+    "dependency": "edge-tts==7.3.1",
+    "dependency_installed": true,
+    "ffmpeg_available": true,
+    "voice_requested": "en-US-ChristopherNeural",
+    "endpoint": "speech.platform.bing.com:443",
+    "audio_produced": false,
+    "charged_credits": 0,
+    "ssl_verification_disabled": false,
+    "diagnostic": "environment proxy returned self-signed certificate in certificate chain",
+    "checked_at_utc": "2026-11-05T00:00:00Z"
+  }
 }
