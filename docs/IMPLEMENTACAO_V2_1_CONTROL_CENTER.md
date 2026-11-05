@@ -150,3 +150,14 @@ READY remains forbidden while any P0/P1 is open.
 - O fingerprint foi reexecutado explicitamente para `pixabay-hallway-dark-corridor-20837` no run `42056934162`, job `127347760300`, branch `integration/because-of-this-v2.1-20261105`. No momento deste registro, a etapa de instalação do FFmpeg está em andamento; o workflow permanece fail-closed.
 - O plano foi atualizado para refletir `FINGERPRINT_AUDIT_RUNNING` no commit `3408330ba1380857a52ada76ece0ce185c438311`. Aprovação humana, promoção, manifesto, catálogo global, render, Drive e publicação continuam bloqueados.
 - Próximo passo único: aguardar o término do run `42056934162`; se passar, registrar a evidência e manter S14 pendente apenas de QA/aprovação humana.
+
+
+## Addendum — fingerprint S14 concluído com sucesso — 2026-11-05
+
+- O run anterior `42056934162` ficou preso na instalação do FFmpeg no runner `ubuntu-latest`, durante a migração para Ubuntu 26.04. O fluxo não promoveu nenhum arquivo.
+- O workflow foi corrigido para usar `ubuntu-24.04` enquanto a migração do runner estiver instável. Commit da correção: `44240bfd04eb9b61778a5a3c088a63e44cc16ee0`.
+- A nova execução explícita para `pixabay-hallway-dark-corridor-20837` passou: run `42059893725`, job `127358312867`, artifact `13431651011`, digest `sha256:71428db1a7810ba8074da7c85139ff0a6720a06ea06aab169b5dd539f3ed7e8d`.
+- Resultado técnico: `FINGERPRINT_AUDIT_PASS`, sem colisão de fonte, SHA-256 ou fingerprint perceptual. SHA do arquivo: `e6c20511f889daa57834ddf5f97ea076ffffedc0a321850a4ea8fa295479d72d`; perceptual hash: `40df89d9d2edf33d5a94509be3c9f3abb6073dd28ff1914aba8307eb1055aafd`.
+- S14 continua como candidato representacional para corredor institucional vazio, não como evidência literal de Petrov. `human_approval=PENDING`, `approved_for_render=false`, `global_catalog_updated=false`, `drive_written=false`, `render_allowed=false`.
+- O plano canônico registrou a evidência no commit `dbb4396b9178314b1e1da047e82e6666386d7dca`. O manifesto permanece sem promoção de S14; seguem sete shots não resolvidos: S05, S08, S09, S13, S14, S15 e S16.
+- Próximo passo único: realizar QA visual e aprovação humana explícita do candidato S14; depois disso, manter a decisão de promoção separada da autorização de render, catálogo, Drive e publicação.
