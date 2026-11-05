@@ -400,11 +400,36 @@
         "approved_for_render": false,
         "global_catalog_updated": false
       }
+    },
+    {
+      "candidate_id": "mixkit-large-satellite-antenna-2650",
+      "source_page_url": "https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/",
+      "role": "S02",
+      "visual_match": "NEAR",
+      "visual_intent": "early-warning satellite/ground-station context without claiming literal Petrov archival footage",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "provider": "mixkit",
+      "license_name": "Mixkit Stock Video Free License",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "media_url": "https://assets.mixkit.co/videos/2650/2650-720.mp4",
+      "media_url_observed_in_browser": true,
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Mixkit Stock Video Free License",
+        "visible_duration_seconds": 15,
+        "visible_resolution_options": [
+          "1080x720",
+          "1920x1080"
+        ],
+        "visible_frame_rate": "60 fps",
+        "semantic_note": "Large satellite antenna in a forest; suitable as representational early-warning infrastructure for S02, not literal Petrov evidence."
+      },
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
     }
   ],
-  "next_action": "Acquire and QA distinct candidates for unresolved shots S02,S03,S04,S05,S06,S08,S09,S12,S13,S14,S15,S16, then re-run final visual manifest validation.",
+  "next_action": "Run fail-closed intake for mixkit-large-satellite-antenna-2650, inspect its clean frame/crop, then fingerprint it; human approval remains pending.",
   "acquisition_route": {
-    "status": "FOURTH_CANDIDATE_APPROVED_FOR_MANIFEST_ONLY_REMAINING_SHOTS_BLOCKED",
+    "status": "FIFTH_CANDIDATE_PAGE_VERIFIED_AWAITING_INTAKE",
     "preferred_provider": "mixkit",
     "fallback_provider": "pexels",
     "browser_download_status": "PEXELS_DIRECT_MEDIA_BLOCKED",
@@ -508,6 +533,24 @@
         "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "APPROVED_FOR_MANIFEST"
+      },
+      {
+        "candidate_id": "mixkit-large-satellite-antenna-2650",
+        "source_page_verified": true,
+        "license_visible_on_page": "Mixkit Stock Video Free License",
+        "visible_duration_seconds": 15,
+        "visible_resolution_options": [
+          "1080x720",
+          "1920x1080"
+        ],
+        "visible_frame_rate": "60 fps",
+        "browser_download_event": "NOT_USED_FOR_WORKSPACE_IMPORT",
+        "workspace_import": "PENDING_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE",
+        "clean_frame_qa": "PENDING",
+        "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+        "semantic_fit": "PRELIMINARY_PAGE_PASS_FOR_S02",
+        "media_url": "https://assets.mixkit.co/videos/2650/2650-720.mp4",
+        "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
       }
     ],
     "workspace_import": "REPLACED_BY_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE"
