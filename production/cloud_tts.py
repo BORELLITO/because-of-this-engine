@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Google Cloud Text-to-Speech Chirp 3 HD adapter for the Because Of This V7.2 engine.
+"""Google Cloud Text-to-Speech adapter for the Because Of This V7.2/V2.1 engine.
 
 The adapter deliberately uses the documented REST `text:synthesize` contract
 with SSML and Application Default Credentials/OAuth.  Gemini, ElevenLabs and
@@ -30,7 +30,10 @@ from production.canonical_config import CANONICAL_PROFILE, CanonicalConfigError,
 API_ROOT = "https://texttospeech.googleapis.com/v1"
 PROVIDER = "google_cloud_tts"
 DEFAULT_SAMPLE_RATE = 24000
-MAX_ATTEMPTS = 2
+MAX_ATTEMPTS = 1  # one submission only; prevents duplicate billed synthesis requests
+V21_MODEL = "chirp3_hd"
+V21_VOICE_NAME = "en-US-Chirp3-HD-Charon"
+V21_PROFILE_VERSION = "2.1"
 TRANSIENT_HTTP = {408, 429, 500, 502, 503, 504}
 MIN_NARRATION_SECONDS = 60.0
 MAX_NARRATION_SECONDS = 75.0
@@ -97,6 +100,39 @@ def profile_from_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
         "profile_version": "7.1",
     }
 
+
+
+def profile_from_v21_contract(contract: dict[str, Any], policy: dict[str, Any]) -> dict[str, Any]:
+    """Validate and normalize the V2.1 Cloud TTS profile without making a request."""
+    voice_policy = policy.get("voice_policy") if isinstance(policy.get("voice_policy"), dict) else {}
+    if not isinstance(contract, dict):
+        raise CloudTTSError("V2.1 TTS contract must be an object")
+    expected = {
+        "provider": policy.get("voice_provider", PROVIDER),
+        "voice_name": voice_policy.get("voice_name", V21_VOICE_NAME),
+        "language_code": voice_policy.get("language_code", "en-US"),
+        "model": voice_policy.get("model", V21_MODEL),
+        "provider_fallback": voice_policy.get("provider_fallback", "forbidden"),
+    }
+    for field, value in expected.items():
+        if contract.get(field) != value:
+            raise CloudTTSError(f"V2.1 TTS contract.{field} must equal {value}")
+    if expected["provider"] != PROVIDER:
+        raise CloudTTSError("V2.1 Cloud TTS profile is not the active provider")
+    if expected["voice_name"] != V21_VOICE_NAME:
+        raise CloudTTSError(f"V2.1 voice must be {V21_VOICE_NAME}")
+    return {
+        "provider": PROVIDER,
+        "language_code": expected["language_code"],
+        "voice_name": expected["voice_name"],
+        "model": expected["model"],
+        "sample_rate_hz": int(voice_policy.get("sample_rate_hz", DEFAULT_SAMPLE_RATE)),
+        "encoding": str(voice_policy.get("encoding", "LINEAR16")),
+        "speaking_rate": float(voice_policy.get("speaking_rate", 0.88)),
+        "pitch": float(voice_policy.get("pitch", 0.0)),
+        "volume_gain_db": float(voice_policy.get("volume_gain_db", 0.0)),
+        "profile_version": V21_PROFILE_VERSION,
+    }
 
 def _access_token() -> str:
     direct = os.environ.get("GOOGLE_TTS_ACCESS_TOKEN", "").strip()
@@ -297,7 +333,24 @@ def _wav_info(audio: bytes) -> tuple[int, int, int, float]:
 
 
 def synthesize_ssml(ssml: str, profile: dict[str, Any]) -> tuple[bytes, dict[str, Any]]:
-    request_body = {
+    if profile.get("profile_version") == V21_PROFILE_VERSION:
+        # Chirp 3 HD V2.1 uses plain text in the synchronous REST request.
+        plain_text = html.unescape(re.sub(r"<[^>]+>", " ", ssml))
+        plain_text = " ".join(plain_text.split()).strip()
+        request_body = {
+            "input": {"text": plain_text},
+            "voice": {
+                "languageCode": profile["language_code"],
+                "name": profile["voice_name"],
+            },
+            "audioConfig": {
+                "audioEncoding": profile["encoding"],
+                "sampleRateHertz": profile["sample_rate_hz"],
+                "speakingRate": profile["speaking_rate"],
+            },
+        }
+    else:
+            request_body = {
         "input": {"ssml": ssml},
         "voice": {
             "languageCode": profile["language_code"],
