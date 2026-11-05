@@ -98,7 +98,7 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
         token = _normalise(raw[index])
         if token:
             short_word_variants = {
-                "a": [["a"], ["uh"], ["ah"]],
+                "a": [["a"], ["uh"], ["ah"], ["as"]],
                 "an": [["an"], ["un"]],
                 "the": [["the"], ["uh"], ["thuh"], ["thee"]],
                 "to": [["to"], ["two"], ["tuh"]],
