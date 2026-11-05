@@ -782,98 +782,6 @@
       }
     },
     {
-      "candidate_id": "pixabay-radar-screen-4511",
-      "source_page_url": "https://pixabay.com/videos/radar-radar-screen-rotation-circles-4511/",
-      "provider": "pixabay",
-      "license_name": "Pixabay Content License",
-      "media_url": "https://cdn.pixabay.com/video/2016/08/16/4511-179376471_large.mp4",
-      "media_url_observed_in_browser": true,
-      "rights_status": "REJECTED_DUPLICATE_SOURCE_ALIAS",
-      "role": "S08",
-      "visual_match": "NEAR",
-      "visual_intent": "Clean rotating radar-screen abstraction for the empty-ground-radar beat; not literal archival evidence.",
-      "truth_class": "MAP_OR_DIAGRAM",
-      "browser_verification": {
-        "source_page_verified": true,
-        "provider_license_visible": "Free for use under the Pixabay Content License",
-        "license_evidence_url": "https://pixabay.com/service/license-summary/",
-        "media_url_observed": true,
-        "observed_duration": "00:07"
-      },
-      "score": null,
-      "score_breakdown": {},
-      "disqualifiers": [],
-      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
-      "intake_artifact": {
-        "workflow_run_id": 42043152146,
-        "artifact_id": 13422407818,
-        "artifact_name": "episode005-visual-intake-42043152146",
-        "artifact_digest": "sha256:2c518303ddeab0806300fe1eb4e8e1c3a01b7d0de92f1118ccbe0e77b5c7381f",
-        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
-        "sha256": "8185f8459b80df5c5eaa95d4a66ac58edef34fc7f790ca4e5f74fc10a70742d6",
-        "duration_seconds": 7.2,
-        "dimensions": [
-          1920,
-          1080
-        ],
-        "frame_rate": "25/1",
-        "codec": "h264",
-        "automated_promotion": false,
-        "fingerprint_audit": {
-          "workflow_run_id": 42039523926,
-          "job_id": 127286341600,
-          "artifact_id": 13420042319,
-          "artifact_name": "episode005-visual-fingerprint-audit",
-          "artifact_digest": "sha256:f29e75ce9c73ea465dbbd6450fdf5d9a2ff37c463b30e0e6749aa27e4c3c63d2",
-          "status": "FINGERPRINT_AUDIT_PASS",
-          "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
-          "automated_promotion": false,
-          "human_approval": "PENDING",
-          "approved_for_render": false,
-          "global_catalog_updated": false,
-          "perceptual_hash": "d701d4cfcee501cfc40d6430600736c8bf6c0da659b929c3910df776f8eb0c56",
-          "duration_seconds": 7.2,
-          "width": 1920,
-          "height": 1080,
-          "fps": 25,
-          "codec": "h264",
-          "size_bytes": 4073672,
-          "global_source_collision": false,
-          "global_sha256_collision": false,
-          "global_perceptual_collision": false
-        },
-        "job_id": 127298967914
-      },
-      "qa": {
-        "clean_frame_visual_review": "PENDING_HUMAN_QA",
-        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
-        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
-        "semantic_fit": "PENDING_HUMAN_QA",
-        "locked_9x16_crop": "PENDING_HUMAN_QA",
-        "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "REJECTED",
-        "approved_for_render": false,
-        "global_catalog_updated": false,
-        "preliminary_visual_review": {
-          "reviewer": "assistant_visual_audit_v1",
-          "status": "PRELIMINARY_CONDITIONAL_SYMBOLIC_DIAGRAM",
-          "evidence": [
-            "qa-frames.jpg",
-            "qa-crop-9x16.jpg",
-            "qa-sampling.json"
-          ],
-          "observation": "No third-party logo, letterbox or source-page watermark observed in normalized samples. The intrinsic rotating radar graphic survives the center crop, but the large sweep wedge and black negative space make it a low-information symbolic insert.",
-          "recommendation": "Keep blocked pending explicit human approval; use only as a short S08 symbolic beat if the final story edit benefits from the abstraction.",
-          "human_approval_unchanged": "PENDING",
-          "approved_for_render": false,
-          "global_catalog_updated": false,
-          "drive_written": false
-        }
-      },
-      "rejection_reason": "Duplicate source page/media URL already represented by pixabay-radar-radar-screen-rotation-circles-4511; retained as rejected audit history and excluded from approval/manifest.",
-      "rejected_at_utc": "2026-11-05T18:03:21.444Z"
-    },
-    {
       "candidate_id": "pixabay-television-broadcasting-satellite-29483",
       "source_page_url": "https://pixabay.com/videos/television-broadcasting-satellite-29483/",
       "provider": "pixabay",
@@ -963,100 +871,6 @@
           "drive_written": false
         }
       }
-    },
-    {
-      "candidate_id": "pixabay-alert-alarm-war-205519",
-      "source_page_url": "https://pixabay.com/videos/alert-alarm-war-danger-risk-205519/",
-      "provider": "pixabay",
-      "license_name": "Pixabay Content License",
-      "media_url": "https://cdn.pixabay.com/video/2024/03/24/205519-927335684_large.mp4",
-      "media_url_observed_in_browser": true,
-      "rights_status": "REJECTED_DUPLICATE_SOURCE_ALIAS",
-      "role": "S06,S09",
-      "visual_match": "NEAR",
-      "visual_intent": "Representational alarm-on-screen escalation and panic response; not literal Soviet archival evidence.",
-      "truth_class": "REPRESENTATIONAL",
-      "browser_verification": {
-        "source_page_verified": true,
-        "provider_license_visible": "Free for use under the Pixabay Content License",
-        "license_evidence_url": "https://pixabay.com/service/license-summary/",
-        "media_url_observed": true,
-        "observed_duration": "00:16",
-        "creator": "conte_public",
-        "editorial_note": "Use only as a short representational escalation/classification cue; do not imply the actual 1983 system interface."
-      },
-      "score": null,
-      "score_breakdown": {},
-      "disqualifiers": [],
-      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
-      "intake_artifact": {
-        "workflow_run_id": 42043152146,
-        "artifact_id": 13422407818,
-        "artifact_name": "episode005-visual-intake-42043152146",
-        "artifact_digest": "sha256:2c518303ddeab0806300fe1eb4e8e1c3a01b7d0de92f1118ccbe0e77b5c7381f",
-        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
-        "sha256": "5a2031e934028fb6c13ba07dd176092507303db83f4decc8b79acb2263ecbf8d",
-        "duration_seconds": 16.362,
-        "dimensions": [
-          3840,
-          2160
-        ],
-        "frame_rate": "50/1",
-        "codec": "h264",
-        "automated_promotion": false,
-        "fingerprint_audit": {
-          "workflow_run_id": 42039523926,
-          "job_id": 127286341600,
-          "artifact_id": 13420042319,
-          "artifact_name": "episode005-visual-fingerprint-audit",
-          "artifact_digest": "sha256:f29e75ce9c73ea465dbbd6450fdf5d9a2ff37c463b30e0e6749aa27e4c3c63d2",
-          "status": "FINGERPRINT_AUDIT_PASS",
-          "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
-          "automated_promotion": false,
-          "human_approval": "PENDING",
-          "approved_for_render": false,
-          "global_catalog_updated": false,
-          "perceptual_hash": "22a8250fdee2da644d66189f6056443069a3d5729e7dfa291454fae2f2af438d",
-          "duration_seconds": 16.362,
-          "width": 3840,
-          "height": 2160,
-          "fps": 50,
-          "codec": "h264",
-          "size_bytes": 45349960,
-          "global_source_collision": false,
-          "global_sha256_collision": false,
-          "global_perceptual_collision": false
-        },
-        "job_id": 127298967914
-      },
-      "qa": {
-        "clean_frame_visual_review": "PENDING_HUMAN_QA",
-        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
-        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
-        "semantic_fit": "PENDING_HUMAN_QA",
-        "locked_9x16_crop": "PENDING_HUMAN_QA",
-        "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "REJECTED",
-        "approved_for_render": false,
-        "global_catalog_updated": false,
-        "preliminary_visual_review": {
-          "reviewer": "assistant_visual_audit_v1",
-          "status": "PRELIMINARY_REJECT_NON_DIEGETIC_GRAPHICS",
-          "evidence": [
-            "qa-frames.jpg",
-            "qa-crop-9x16.jpg",
-            "qa-sampling.json"
-          ],
-          "observation": "Persistent green HUD treatment, warning icon and scan-line overlays remain visible across normalized samples; the crop is technically readable but does not satisfy the clean-source gate for a neutral representational insert.",
-          "recommendation": "Do not approve for manifest or render unless the visual policy is explicitly relaxed for authored HUD graphics; prefer a clean warning/control-panel source for S06/S09.",
-          "human_approval_unchanged": "PENDING",
-          "approved_for_render": false,
-          "global_catalog_updated": false,
-          "drive_written": false
-        }
-      },
-      "rejection_reason": "Duplicate source page/media URL already represented by pixabay-alert-alarm-war-danger-risk-205519; retained as rejected audit history and excluded from approval/manifest.",
-      "rejected_at_utc": "2026-11-05T18:03:21.444Z"
     },
     {
       "candidate_id": "pixabay-led-indicator-lights-316712",
@@ -2428,7 +2242,7 @@
       "selection": "ALTERNATIVE_APPROVED_FOR_MANIFEST_ONLY"
     }
   ],
-  "next_action": "Re-run the official read-only visual plan contract after removing duplicate source aliases; keep render, global catalog, Drive and publication blocked.",
+  "next_action": "Run the official read-only visual plan contract after removing duplicate aliases from the active candidate list; keep render, global catalog, Drive and publication blocked.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -3252,6 +3066,11 @@
       "pixabay-radar-screen-4511",
       "pixabay-alert-alarm-war-205519"
     ],
-    "duplicate_fix_at_utc": "2026-11-05T18:03:21.444Z"
+    "duplicate_fix_at_utc": "2026-11-05T18:03:21.444Z",
+    "active_duplicate_aliases_removed": [
+      "pixabay-radar-screen-4511",
+      "pixabay-alert-alarm-war-205519"
+    ],
+    "active_candidate_count": 42
   }
 }
