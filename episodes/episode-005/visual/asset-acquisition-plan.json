@@ -1368,7 +1368,7 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "media_url": "https://cdn.pixabay.com/video/2019/01/19/20837-312432073_large.mp4",
       "media_url_observed_in_browser": true,
       "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
@@ -1416,13 +1416,13 @@
         "fingerprint_artifact_digest": "sha256:71428db1a7810ba8074da7c85139ff0a6720a06ea06aab169b5dd539f3ed7e8d"
       },
       "qa": {
-        "clean_frame_visual_review": "PENDING_HUMAN_QA",
-        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
-        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
-        "semantic_fit": "SHORTLIST_NEAR_PENDING_FINGERPRINT_AND_HUMAN_QA",
-        "locked_9x16_crop": "PENDING_HUMAN_QA",
+        "clean_frame_visual_review": "PRELIMINARY_PASS_BROWSER_QA",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_BROWSER_QA",
+        "embedded_logo_or_letterbox": "NO_VISIBLE_WATERMARK_OR_LETTERBOX; SMALL_UNREADABLE_WALL_ELEMENT_RETAINS_SCENE_CONTEXT",
+        "semantic_fit": "PRELIMINARY_PASS_FOR_S14_EMPTY_INSTITUTIONAL_CORRIDOR",
+        "locked_9x16_crop": "PRELIMINARY_PASS_CENTERED_CORRIDOR_FINAL_CROP_GATE_PENDING",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "drive_written": false
@@ -1441,10 +1441,24 @@
         "global_source_collision": false,
         "global_sha256_collision": false,
         "global_perceptual_collision": false
+      },
+      "browser_qa": {
+        "inspected_source_page_url": "https://pixabay.com/videos/hallway-dark-corridor-dim-mystery-20837/",
+        "inspected_media_url": "https://cdn.pixabay.com/video/2019/01/19/20837-312432073_large.mp4",
+        "source_license_visible": "Pixabay Content License",
+        "observed_duration_seconds": 6.933,
+        "visual_findings": [
+          "empty institutional corridor with centered vanishing point",
+          "no people, captions, visible watermark or letterbox observed",
+          "small unreadable wall element retained as scene context",
+          "native 16:9 framing; centered corridor supports a restrained 9:16 crop"
+        ],
+        "qa_result": "PRELIMINARY_PASS_APPROVED_FOR_MANIFEST_ONLY",
+        "automated_promotion": false
       }
     }
   ],
-  "next_action": "Realizar QA visual e aprovação humana explícita do candidato S14; manter promoção, render, catálogo global, Drive e publicação bloqueados até aprovação e validação final do manifesto.",
+  "next_action": "Formar shortlist distinta para S05, S08, S09, S13, S15 e S16 e depois executar a validação final do manifesto; render, catálogo global, Drive e publicação permanecem bloqueados.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -1728,6 +1742,30 @@
         "intake_artifact_id": 13427442382,
         "fingerprint_workflow_run_id": 42053792993,
         "fingerprint_artifact_id": 13427769060
+      }
+    },
+    {
+      "candidate_id": "pixabay-hallway-dark-corridor-20837",
+      "shot_ids": [
+        "S14"
+      ],
+      "status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_at_utc": "2026-11-05T00:00:00Z",
+      "decision": "Approve the Pixabay hallway as a representational empty institutional corridor for S14 only.",
+      "constraints": [
+        "not literal Petrov archival evidence",
+        "no reuse in another shot of Episode 005",
+        "does not authorize render",
+        "does not authorize global catalog mutation",
+        "does not authorize Drive write or publication"
+      ],
+      "evidence": {
+        "intake_workflow_run_id": 42056121022,
+        "intake_artifact_id": 13428247933,
+        "fingerprint_workflow_run_id": 42059893725,
+        "fingerprint_artifact_id": 13431651011,
+        "fingerprint_artifact_digest": "sha256:71428db1a7810ba8074da7c85139ff0a6720a06ea06aab169b5dd539f3ed7e8d",
+        "sha256": "e6c20511f889daa57834ddf5f97ea076ffffedc0a321850a4ea8fa295479d72d"
       }
     }
   ],
