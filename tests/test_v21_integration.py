@@ -11,7 +11,7 @@ class V21IntegrationTests(unittest.TestCase):
     def test_package_gate_scores_and_passes(self):
         report=evaluate_package_gate(valid_manifest()); self.assertEqual(report["status"],"PACKAGE_GATE_PASS"); self.assertEqual(report["score"],10)
     def test_full_contract_is_read_only_and_passes(self):
-        report=evaluate(valid_manifest(),registry=[]); self.assertEqual(report["status"],"PASS"); self.assertFalse(report["production_enablement"]); self.assertEqual(report["media_generation"],"NOT_RUN"); self.assertEqual(report["publication"],"MANUAL_ONLY_NOT_RUN")
+        report=evaluate(valid_manifest(),registry=[]); self.assertEqual(report["status"],"PASS", report); self.assertFalse(report["production_enablement"]); self.assertEqual(report["media_generation"],"NOT_RUN"); self.assertEqual(report["publication"],"MANUAL_ONLY_NOT_RUN")
     def test_factual_mode_is_hard_locked(self):
         manifest=valid_manifest(); manifest["editorial_mode"]="fiction"; self.assertEqual(evaluate_package_gate(manifest)["status"],"PACKAGE_GATE_BLOCKED")
     def test_global_reuse_blocks_incident_collision(self):
