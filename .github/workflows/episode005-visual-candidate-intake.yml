@@ -105,13 +105,13 @@ jobs:
           print(json.dumps(manifest, indent=2))
           PY
 
-      - name: Install media tools
+      - name: Verify preinstalled media tools
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends ffmpeg
-
-      - name: Verify media tools
-        run: |
+          # ubuntu-latest normally ships with ffmpeg/ffprobe. Do not run apt-get
+          # during a bounded intake job: package-manager stalls must fail closed
+          # before any media download rather than consume the whole timeout.
+          command -v ffmpeg
+          command -v ffprobe
           ffmpeg -version | head -n 1
           ffprobe -version | head -n 1
 
