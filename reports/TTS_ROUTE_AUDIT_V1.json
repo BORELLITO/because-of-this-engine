@@ -2,7 +2,7 @@
   "audit_id": "AUDIT-TTS-ROUTES-20261105-01",
   "episode_id": "episode-005",
   "checked_at_utc": "2026-11-05T03:23:45Z",
-  "conclusion": "Microsoft Edge online TTS is the active zero-billing V2.1 route for Episode 005. Real audio and deterministic native Edge word-timed captions were generated and validated; Creative Claw remains prohibited.",
+  "conclusion": "Microsoft Edge online TTS is the active zero-billing V2.1 route for Episode 005. Real audio and provider-native Edge caption timing were generated and validated; two provider boundary groups remain intentionally unsplit, and the Whisper acoustic audit is not a release authority. Creative Claw remains prohibited.",
   "routes": [
     {
       "route_id": "microsoft_edge_tts",
@@ -139,6 +139,9 @@
     "caption_word_count": 175,
     "caption_event_count": 23,
     "grouped_provider_boundaries": 2,
+    "final_word_level_ready": false,
+    "caption_authority": "provider_native_edge_boundaries",
+    "acoustic_whisper_audit": "BLOCKED_ON_ASR_LEXICAL_VARIANTS",
     "caption_sidecar": "narration.alignment.json",
     "request_count": 2,
     "retry_count": 0,
