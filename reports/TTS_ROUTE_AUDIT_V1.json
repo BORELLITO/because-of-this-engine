@@ -1,7 +1,7 @@
 {
   "audit_id": "AUDIT-TTS-ROUTES-20261105-01",
   "episode_id": "episode-005",
-  "checked_at_utc": "2026-11-05T03:21:28Z",
+  "checked_at_utc": "2026-11-05T03:23:45Z",
   "conclusion": "Microsoft Edge online TTS is the active zero-billing V2.1 route for Episode 005. Real audio and deterministic native Edge word-timed captions were generated and validated; Creative Claw remains prohibited.",
   "routes": [
     {
@@ -114,7 +114,7 @@
     "creative_claw_production_allowed": false,
     "only_permitted_route": "microsoft_edge_tts"
   },
-  "next_action": "Use the validated Edge audio and native Edge timing sidecar as the sole inputs for visual asset selection and render; do not regenerate or switch providers.",
+  "next_action": "Freeze artifact 13384643514 as the sole downstream source for visual asset selection and render; do not dispatch Edge TTS again unless the script or voice is intentionally changed.",
   "operational_preflight": {
     "status": "EDGE_TTS_AND_CAPTIONS_PREVIEW_VALIDATED",
     "adapter": "production/microsoft_edge_tts.py",
@@ -127,18 +127,21 @@
     "charged_credits": 0,
     "ssl_verification_disabled": false,
     "diagnostic": "Real Edge TTS synthesis succeeded in GitHub Actions; local Work proxy TLS limitation remains isolated to the local environment.",
-    "checked_at_utc": "2026-11-05T03:21:28Z",
+    "checked_at_utc": "2026-11-05T03:23:45Z",
     "duration_seconds": 79.704,
-    "audio_sha256": "4e021c52ea57835525b144ecfc08ed6abe41c99dca326866e63c7176cc45f40f",
-    "workflow_run_id": 41961055314,
-    "artifact_id": 13384688114,
+    "audio_sha256": "bfa297c85e6de0c1a9dee5fbc74a8f7e75a6cd287bd47ecf6d97f16dd045831a",
+    "workflow_run_id": 41961294784,
+    "artifact_id": 13384643514,
     "artifact_name": "episode005-edge-tts-preview",
-    "artifact_digest": "sha256:1e55744910f2aba6f81f4c84f6acfb6ea7e8726f85bcdf97dece571efe47fe77",
+    "artifact_digest": "sha256:37afddf1b196b0750418cbcf0484087832eee967f475f7acd1c95c1c4cb8d81c",
     "captions_status": "EDGE_TTS_NATIVE_ALIGNMENT_PASS",
     "caption_timing_mode": "edge_tts_native_word_boundaries_with_provider_groups",
     "caption_word_count": 175,
     "caption_event_count": 23,
     "grouped_provider_boundaries": 2,
-    "caption_sidecar": "narration.alignment.json"
+    "caption_sidecar": "narration.alignment.json",
+    "request_count": 2,
+    "retry_count": 0,
+    "note": "Edge synthesis is non-deterministic across independent workflow runs; this latest validated artifact is frozen as the downstream source."
   }
 }
