@@ -230,7 +230,7 @@
       "rights_status": "CANDIDATE_NOT_DOWNLOADED"
     }
   ],
-  "next_action": "Acquire Mixkit candidates through the approved browser path, beginning with the four Free-License pages listed in acquisition_route; record downloaded-file SHA-256, clean-frame QA, semantic fit, rights evidence and global-reuse fingerprints. Keep all Pexels items as fallback only. Do not render from this candidate plan.",
+  "next_action": "Import the browser-downloaded Mixkit file into the repository acquisition workspace, then compute SHA-256, inspect clean frames and metadata, verify no baked text/logo/letterbox, register the rights evidence and perceptual fingerprint. Until import is available, keep every candidate blocked and do not render.",
   "acquisition_route": {
     "status": "ALTERNATIVE_ROUTE_PREPARED_NOT_DOWNLOADED",
     "preferred_provider": "mixkit",
@@ -243,6 +243,24 @@
       "https://mixkit.co/free-stock-video/discover/clock/?orientation=vertical",
       "https://mixkit.co/free-stock-video/clouds/"
     ],
-    "license_checked_at_utc": "2026-11-05T00:00:00Z"
+    "license_checked_at_utc": "2026-11-05T00:00:00Z",
+    "download_attempts": [
+      {
+        "candidate_id": "mixkit-slowly-approaching-clock-28897",
+        "source_page_verified": true,
+        "license_visible_on_page": "Mixkit Stock Video Free License",
+        "visible_duration_seconds": 9,
+        "visible_resolution_options": [
+          "1080x720",
+          "1920x1080"
+        ],
+        "browser_download_event": "OBSERVED",
+        "workspace_import": "PENDING",
+        "sha256": null,
+        "clean_frame_qa": "NOT_RUN",
+        "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+        "note": "Browser download completed in the isolated browser environment, but the resulting file is not exposed to the repository workspace for hashing and QA."
+      }
+    ]
   }
 }
