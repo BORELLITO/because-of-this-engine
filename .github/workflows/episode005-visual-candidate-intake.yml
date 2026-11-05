@@ -35,22 +35,7 @@ jobs:
           from pathlib import Path
           from urllib.parse import urlparse
 
-          PROVIDER_POLICIES = {
-              "mixkit": {
-                  "license_name": "Mixkit Stock Video Free License",
-                  "page_hosts": {"mixkit.co"},
-                  "media_hosts": {"mixkit.co"},
-              },
-              "pixabay": {
-                  "license_name": "Pixabay Content License",
-                  "page_hosts": {"pixabay.com"},
-                  "media_hosts": {"pixabay.com"},
-              },
-          }
-
-          def host_allowed(hostname, allowed_bases):
-              hostname = str(hostname or "").lower().rstrip(".")
-              return any(hostname == base or hostname.endswith("." + base) for base in allowed_bases)
+          from production.visual_provider_policy import host_allowed, policy_for
 
           raw = os.environ["CANDIDATE_IDS"].replace("\n", ",")
           requested_ids = [item.strip() for item in raw.split(",") if item.strip()]
@@ -73,7 +58,7 @@ jobs:
               status = str(candidate.get("rights_status", ""))
               assert not status.startswith("REJECTED"), (candidate_id, status)
               provider = str(candidate.get("provider", ""))
-              policy = PROVIDER_POLICIES.get(provider)
+              policy = policy_for(provider)
               assert policy is not None, f"unsupported provider: {provider}"
               assert candidate.get("source_page_url"), f"source_page_url missing: {candidate_id}"
               assert candidate.get("media_url"), f"media_url missing: {candidate_id}"
