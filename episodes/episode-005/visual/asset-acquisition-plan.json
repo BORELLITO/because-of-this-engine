@@ -351,7 +351,7 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "mixkit",
       "license_name": "Mixkit Stock Video Free License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "media_url": "https://assets.mixkit.co/videos/3651/3651-720.mp4",
       "media_url_observed_in_browser": true,
       "browser_verification": {
@@ -366,12 +366,40 @@
         "visible_frame_rate": "24 fps",
         "semantic_note": "Macro clock mechanism; distinct source candidate for S10 decision pressure or S12 mechanism, subject to clean-frame and semantic QA."
       },
-      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42009940548,
+        "artifact_id": 13405808887,
+        "artifact_digest": "sha256:0f55288b9f948d65bf356256c745019b31c62cc3e632895a763d13689bd445a2",
+        "artifact_name": "episode005-visual-intake-mixkit-abstract-red-glow-101432",
+        "artifact_label_correction": "Workflow fallback label was corrected in commit cfa9cd6eb7bbe2a2b8e3a280026987dd507af067; rerun required for canonical artifact name.",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "575ec01ae49bad9f5e5d634d51c1d78c31856e2171ca799065d9750dce3de5fd",
+        "duration_seconds": 11.011,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "frame_rate": "24000/1001",
+        "codec": "h264",
+        "automated_promotion": false
+      },
+      "qa": {
+        "clean_frame_visual_review": "PRELIMINARY_PASS",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_QA_FRAMES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
+        "semantic_fit": "PRELIMINARY_PASS_FOR_S10_MECHANICAL_TIME_PRESSURE",
+        "locked_9x16_crop": "PRELIMINARY_PASS_CENTER_CROP_WITHOUT_LETTERBOX",
+        "global_reuse_fingerprint": "PENDING",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     }
   ],
-  "next_action": "Run fail-closed intake for mixkit-clock-mechanism-3651, inspect its clean frame/crop, then fingerprint it; human approval remains pending.",
+  "next_action": "Run fail-closed global fingerprint audit for mixkit-clock-mechanism-3651, then wait for explicit human approval before any manifest promotion.",
   "acquisition_route": {
-    "status": "THREE_CANDIDATES_DOWNLOADED_FINGERPRINT_PASS_AWAITING_HUMAN_QA",
+    "status": "FOURTH_CANDIDATE_DOWNLOADED_AWAITING_FINGERPRINT_AND_HUMAN_QA",
     "preferred_provider": "mixkit",
     "fallback_provider": "pexels",
     "browser_download_status": "PEXELS_DIRECT_MEDIA_BLOCKED",
@@ -444,6 +472,30 @@
         "fingerprint_workflow_run_id": 42007386261,
         "fingerprint_artifact_id": 13405087460,
         "fingerprint_artifact_digest": "sha256:66c98c055ec1a3e2da7c861cb367cd6761f18bf205a2f05329720da6d39ebf72"
+      },
+      {
+        "candidate_id": "mixkit-clock-mechanism-3651",
+        "source_page_verified": true,
+        "license_visible_on_page": "Mixkit Stock Video Free License",
+        "visible_duration_seconds": 11,
+        "visible_resolution_options": [
+          "1080x720",
+          "1920x1080",
+          "4096x2160"
+        ],
+        "browser_download_event": "OBSERVED",
+        "workspace_import": "REPLACED_BY_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE",
+        "sha256": "575ec01ae49bad9f5e5d634d51c1d78c31856e2171ca799065d9750dce3de5fd",
+        "clean_frame_qa": "PRELIMINARY_PASS",
+        "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "semantic_fit": "PRELIMINARY_PASS_FOR_S10_MECHANICAL_TIME_PRESSURE",
+        "locked_9x16_crop": "PRELIMINARY_PASS_CENTER_CROP_WITHOUT_LETTERBOX",
+        "media_url": "https://assets.mixkit.co/videos/3651/3651-720.mp4",
+        "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+        "workflow_run_id": 42009940548,
+        "artifact_id": 13405808887,
+        "artifact_digest": "sha256:0f55288b9f948d65bf356256c745019b31c62cc3e632895a763d13689bd445a2",
+        "artifact_label_correction": "Rerun required after CI artifact naming fix."
       }
     ],
     "workspace_import": "REPLACED_BY_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE"
