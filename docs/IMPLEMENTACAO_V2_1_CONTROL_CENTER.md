@@ -243,3 +243,13 @@ READY remains forbidden while any P0/P1 is open.
 - O plano foi atualizado no commit d2157a9e9bd7f15f8ff4b2f7a636323707f21f16 e o manifesto no commit 4d29b0fc4e75e9c5abc98b9d4bc283c8998e7524.
 - Estado atual: PARTIAL_MANIFEST_VALIDATED_BLOCKED_RENDER; final_visual_manifest_validated=true, render_authorized=false, global_catalog_update_authorized=false, drive_write_authorized=false e publication_authorized=false.
 - Próximo gate único: autorização explícita para render; a exigência de thumbnail final continua ativa antes de qualquer produção.
+
+
+## Atualização — pré-voo de produção e thumbnail candidata (2026-11-05)
+
+- Autorização do usuário para avançar registrada como autorização de render, sem autorização automática de publicação.
+- Pré-voo técnico local passou: py_compile de production, 13 testes V2.1 e V21_SINGLETON_PASS.
+- O motor canônico permanece deliberadamente read-only: production/canonical_entrypoint.py valida contratos, mas não chama TTS, geração de mídia, render, Drive ou publicação; active_engine_policy.json mantém production_enablement=false.
+- Não existe workflow V2.1 de render final ativo na branch; nenhum render foi iniciado por essa limitação estrutural.
+- Foi preparada uma thumbnail candidata original, simbólica e sem alegação de imagem histórica, com cinco indicadores vermelhos, radar e o texto FIVE MISSILES. Ela ainda requer aprovação visual humana e não foi integrada como thumbnail final.
+- Próximo gate único: aprovar a thumbnail candidata e, em seguida, implementar/ativar a rota manual de render V2.1 sem contornar o entrypoint canônico e mantendo publicação manual.
