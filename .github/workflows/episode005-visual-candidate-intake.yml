@@ -65,7 +65,7 @@ jobs:
         env:
           CANDIDATE_ID: ${{ github.event.inputs.candidate_id || 'mixkit-young-engineer-29991' }}
           SOURCE_PAGE_URL: ${{ github.event.inputs.source_page_url || 'https://mixkit.co/free-stock-video/young-engineer-programming-in-his-workshop-seen-up-close-29991/' }}
-          MEDIA_URL: ${{ github.event.inputs.media_url || 'https://assets.mixkit.co/videos/3651/3651-720.mp4' }}
+          MEDIA_URL: ${{ github.event.inputs.media_url || 'https://assets.mixkit.co/videos/29991/29991-720.mp4' }}
           LICENSE_NAME: ${{ github.event.inputs.license_name || 'Mixkit Stock Video Free License' }}
         run: |
           python - <<'PY'
@@ -169,6 +169,6 @@ jobs:
       - name: Upload isolated candidate evidence
         uses: actions/upload-artifact@v4
         with:
-          name: episode005-visual-intake-${{ github.event.inputs.candidate_id || 'mixkit-clock-mechanism-3651' }}
+          name: episode005-visual-intake-${{ github.event.inputs.candidate_id || 'mixkit-young-engineer-29991' }}
           path: artifacts/episode005-visual-intake
           if-no-files-found: error
