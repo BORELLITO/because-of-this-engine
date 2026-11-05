@@ -142,3 +142,11 @@ READY remains forbidden while any P0/P1 is open.
 - O candidato `pixabay-red-light-blur-flare-250419` foi rejeitado antes da intake: é um gradiente vermelho abstrato, sem ação visual distinta de pulso de alerta e com sobreposição à família visual já usada em S01.
 - Nenhum download, fingerprint, promoção, atualização de catálogo, escrita no Drive, renderização ou publicação ocorreu nesta triagem.
 - Próximo passo único: formar uma nova shortlist page-verified para S05, S08, S09, S13, S15 e S16; S14 só poderá avançar para intake após manter a verificação técnica e a regra de fonte única.
+
+## Addendum — correção do SHA e fingerprint S14 em andamento — 2026-11-05
+
+- A primeira execução do fingerprint do corredor S14 falhou de forma fail-closed no run `42056451177`: o arquivo baixado tinha SHA-256 real, mas o campo correspondente no plano estava vazio. Não houve colisão visual aprovada nem promoção.
+- A evidência foi corrigida no plano: SHA-256 `e6c20511f889daa57834ddf5f97ea076ffffedc0a321850a4ea8fa295479d72d`, duração 6,933 s, 1920×1080, H.264, 29,97 fps. Commit da correção: `829d8dfd35e1a87d00e95d852825b4a728fab4e8`.
+- O fingerprint foi reexecutado explicitamente para `pixabay-hallway-dark-corridor-20837` no run `42056934162`, job `127347760300`, branch `integration/because-of-this-v2.1-20261105`. No momento deste registro, a etapa de instalação do FFmpeg está em andamento; o workflow permanece fail-closed.
+- O plano foi atualizado para refletir `FINGERPRINT_AUDIT_RUNNING` no commit `3408330ba1380857a52ada76ece0ce185c438311`. Aprovação humana, promoção, manifesto, catálogo global, render, Drive e publicação continuam bloqueados.
+- Próximo passo único: aguardar o término do run `42056934162`; se passar, registrar a evidência e manter S14 pendente apenas de QA/aprovação humana.
