@@ -5,7 +5,7 @@
   "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
   "editorial_mode": "factual_documentary",
   "title": "THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
-  "status": "PARTIAL_MANIFEST_APPROVED_VALIDATION_PENDING",
+  "status": "PARTIAL_MANIFEST_VALIDATED_BLOCKED_RENDER",
   "purpose": "Human-approved candidate-to-shot assignments before final production promotion.",
   "source_plan": "episodes/episode-005/visual/asset-acquisition-plan.json",
   "approval_record": {
@@ -772,14 +772,14 @@
   "unresolved_shots": [],
   "promotion_gates": {
     "every_shot_assigned": true,
-    "final_visual_manifest_validated": false,
+    "final_visual_manifest_validated": true,
     "global_catalog_update_authorized": false,
     "thumbnail_final_required": true,
     "render_authorized": false,
     "drive_write_authorized": false,
     "publication_authorized": false
   },
-  "next_action": "Run final read-only visual manifest validation and structural/rights audit. Render, global catalog, Drive and publication remain blocked until validation and explicit render approval.",
+  "next_action": "Await explicit render authorization; thumbnail final remains required before any production render. Global catalog, Drive and publication remain blocked.",
   "reuse_policy": {
     "source_reuse_scope": "global",
     "distinct_source_required_per_shot": true,
@@ -902,5 +902,18 @@
         "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
       }
     }
-  ]
+  ],
+  "final_visual_manifest_validation": {
+    "validated_at_utc": "2026-11-05T18:05:19.534Z",
+    "status": "VISUAL_PLAN_CONTRACT_PASS",
+    "validator": "production/visual_plan_contract.py",
+    "checkout_commit": "d371da0ad7c72576bcd3e9f664baa6b03f89a5e4",
+    "candidate_count": 42,
+    "approved_manifest_candidate_count": 22,
+    "manifest_asset_count": 16,
+    "assigned_shot_count": 16,
+    "unresolved_shot_count": 0,
+    "promotion_allowed": false,
+    "render_allowed": false
+  }
 }
