@@ -101,5 +101,17 @@
     "ARCHIVE"
   ],
   "no_reuse_scope": "global",
-  "status": "BLOCKED_FOR_PRODUCTION"
+  "status": "BLOCKED_FOR_PRODUCTION",
+  "manual_render_entrypoint": "production/render_v21_manual.py",
+  "render_route_status": "MANUAL_GATE_IMPLEMENTED_BLOCKED",
+  "render_route_policy": {
+    "mode": "manual_only",
+    "preflight_required": true,
+    "explicit_human_authorization_required": true,
+    "production_enablement_required": true,
+    "automatic_execution": false,
+    "legacy_renderer_fallback": false,
+    "drive_write": false,
+    "publication": "manual_only"
+  }
 }
