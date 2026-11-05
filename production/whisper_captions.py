@@ -44,7 +44,13 @@ def _model(model_name: str):
         raise AlignmentError(f"Whisper model could not be loaded: {exc}") from exc
 
 
-def _recognize_waveform(model: Any, waveform: Any, sample_rate: int, offset_seconds: float = 0.0) -> list[dict[str, Any]]:
+def _recognize_waveform(
+    model: Any,
+    waveform: Any,
+    sample_rate: int,
+    offset_seconds: float = 0.0,
+    initial_prompt: str | None = None,
+) -> list[dict[str, Any]]:
     try:
         segments, _info = model.transcribe(
             waveform,
@@ -55,6 +61,7 @@ def _recognize_waveform(model: Any, waveform: Any, sample_rate: int, offset_seco
             beam_size=5,
             condition_on_previous_text=False,
             temperature=0.0,
+            initial_prompt=initial_prompt,
         )
         words: list[dict[str, Any]] = []
         for segment in segments:
@@ -96,8 +103,11 @@ def _recognize_phrase_windows(
         native_words = chunk.get("words") or []
         if not native_words:
             raise AlignmentError("Native timing window has no words.")
-        start = max(0.0, float(native_words[0]["start"]) - 0.20)
-        end = min(audio_seconds, float(native_words[-1]["end"]) + 0.20)
+        # Give Whisper acoustic context around the provider window. The
+        # provider boundaries choose the phrase; padding supplies coarticulation
+        # and avoids dropping short numerals/articles at the edges.
+        start = max(0.0, float(native_words[0]["start"]) - 0.75)
+        end = min(audio_seconds, float(native_words[-1]["end"]) + 0.75)
         start_frame = max(0, int(round(start * sample_rate)))
         end_frame = min(len(waveform), int(round(end * sample_rate)))
         if end_frame <= start_frame:
@@ -107,6 +117,7 @@ def _recognize_phrase_windows(
             waveform[start_frame:end_frame],
             sample_rate,
             offset_seconds=start_frame / sample_rate,
+            initial_prompt=str(chunk.get("text", "")).replace(r"\\N", " "),
         )
         words.extend(window_words)
     if not words:
