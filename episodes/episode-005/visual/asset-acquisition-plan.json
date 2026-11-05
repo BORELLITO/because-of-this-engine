@@ -457,11 +457,36 @@
         "approved_for_render": false,
         "global_catalog_updated": false
       }
+    },
+    {
+      "candidate_id": "mixkit-man-using-computer-2965",
+      "source_page_url": "https://mixkit.co/free-stock-video/man-using-a-computer-2965/",
+      "role": "S03",
+      "visual_match": "NEAR",
+      "visual_intent": "human decision-maker at a technical workstation; representational Petrov reconstruction only",
+      "truth_class": "REPRESENTATIONAL",
+      "provider": "mixkit",
+      "license_name": "Mixkit Stock Video Free License",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "media_url": "https://assets.mixkit.co/videos/2965/2965-720.mp4",
+      "media_url_observed_in_browser": true,
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Mixkit Stock Video Free License",
+        "visible_duration_seconds": 10,
+        "visible_resolution_options": [
+          "1080x720",
+          "1920x1080"
+        ],
+        "visible_frame_rate": "24 fps",
+        "semantic_note": "Man using a computer with screen light; suitable as a human-anchor reconstruction for S03, never as literal Petrov archival footage."
+      },
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
     }
   ],
-  "next_action": "Acquire and QA distinct candidates for unresolved shots S03,S04,S05,S06,S08,S09,S12,S13,S14,S15,S16, then re-run final visual manifest validation.",
+  "next_action": "Run fail-closed intake for mixkit-man-using-computer-2965, inspect its clean frame/crop, then fingerprint it; human approval remains pending.",
   "acquisition_route": {
-    "status": "FIFTH_CANDIDATE_APPROVED_FOR_MANIFEST_ONLY_REMAINING_SHOTS_BLOCKED",
+    "status": "SIXTH_CANDIDATE_PAGE_VERIFIED_AWAITING_INTAKE",
     "preferred_provider": "mixkit",
     "fallback_provider": "pexels",
     "browser_download_status": "PEXELS_DIRECT_MEDIA_BLOCKED",
@@ -593,6 +618,24 @@
         "perceptual_hash": "f10ae48c3a770e23246f7fda15feccd3c4b37e1db48b9d71c6fb1511a1ee1b7c",
         "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
         "global_reuse_fingerprint": "PASS_NO_COLLISION"
+      },
+      {
+        "candidate_id": "mixkit-man-using-computer-2965",
+        "source_page_verified": true,
+        "license_visible_on_page": "Mixkit Stock Video Free License",
+        "visible_duration_seconds": 10,
+        "visible_resolution_options": [
+          "1080x720",
+          "1920x1080"
+        ],
+        "visible_frame_rate": "24 fps",
+        "browser_download_event": "NOT_USED_FOR_WORKSPACE_IMPORT",
+        "workspace_import": "PENDING_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE",
+        "clean_frame_qa": "PENDING",
+        "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+        "semantic_fit": "PRELIMINARY_PAGE_PASS_FOR_S03",
+        "media_url": "https://assets.mixkit.co/videos/2965/2965-720.mp4",
+        "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
       }
     ],
     "workspace_import": "REPLACED_BY_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE"
