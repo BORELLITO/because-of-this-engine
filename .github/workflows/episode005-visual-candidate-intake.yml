@@ -31,13 +31,16 @@ jobs:
           python - <<'PY'
           import json
           import os
+          import re
           from pathlib import Path
+          from urllib.parse import urlparse
 
           raw = os.environ["CANDIDATE_IDS"].replace("\n", ",")
           requested_ids = [item.strip() for item in raw.split(",") if item.strip()]
           assert requested_ids, "candidate_ids must contain at least one ID"
           assert len(requested_ids) == len(set(requested_ids)), "duplicate candidate IDs are not allowed"
           assert len(requested_ids) <= 12, "batch is capped at 12 candidates; split larger searches into separate batches"
+          assert all(re.fullmatch(r"[A-Za-z0-9._-]+", item) for item in requested_ids), "candidate IDs contain unsafe characters"
 
           plan_path = Path("episodes/episode-005/visual/asset-acquisition-plan.json")
           plan = json.loads(plan_path.read_text(encoding="utf-8"))
@@ -56,6 +59,10 @@ jobs:
               assert candidate.get("source_page_url"), f"source_page_url missing: {candidate_id}"
               assert candidate.get("media_url"), f"media_url missing: {candidate_id}"
               assert candidate.get("license_name") == "Mixkit Stock Video Free License", candidate.get("license_name")
+              source_page = urlparse(candidate["source_page_url"])
+              media_url = urlparse(candidate["media_url"])
+              assert source_page.scheme == "https" and source_page.hostname == "mixkit.co", candidate["source_page_url"]
+              assert media_url.scheme == "https" and str(media_url.hostname or "").endswith("mixkit.co"), candidate["media_url"]
               assert not candidate.get("intake_artifact"), f"candidate already has intake evidence: {candidate_id}"
               selected.append({
                   "candidate_id": candidate_id,
@@ -110,7 +117,8 @@ jobs:
                   [
                       "curl", "--fail", "--location", "--retry", "2",
                       "--retry-delay", "2", "--connect-timeout", "20",
-                      "--max-time", "180", candidate["media_url"],
+                      "--max-time", "180", "--max-filesize", "200M",
+                      candidate["media_url"],
                       "--output", str(media),
                   ],
                   check=True,
@@ -148,7 +156,7 @@ jobs:
               duration = float(data["format"]["duration"])
               width = int(video["width"])
               height = int(video["height"])
-              assert duration > 0, duration
+              assert 0 < duration <= 180, duration
               assert width >= 720 and height >= 720, (width, height)
               sha256 = hashlib.sha256(media.read_bytes()).hexdigest()
               subprocess.run(
