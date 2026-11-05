@@ -13,14 +13,15 @@
   "rights_policy": {
     "preferred_provider": "mixkit",
     "fallback_provider": "pexels",
-    "license": "Mixkit Video Free License",
+    "license": "Mixkit Stock Video Free License",
     "license_evidence_url": "https://mixkit.co/license/modal/videoFree/",
     "commercial_use_allowed_by_provider": true,
     "attribution_required": false,
     "verification_required": "Per-asset page and downloaded-file QA remain mandatory; depicted trademarks, logos, identifiable people and third-party rights are not automatically cleared.",
     "no_archival_claim": "All representational footage must remain unlabeled as literal Petrov archival footage.",
     "route_decision": "Mixkit is preferred after the Pexels page was reachable but its direct media download was blocked by the browser; existing Pexels candidates remain fallback candidates only.",
-    "avoid_ai_generated_sources": true
+    "avoid_ai_generated_sources": true,
+    "license_evidence_note": "Provider pages display Mixkit Stock Video Free License; the official license modal is retained as evidence."
   },
   "selection_gates": [
     "source_page_exists",
@@ -337,7 +338,7 @@
     "preferred_provider": "mixkit",
     "fallback_provider": "pexels",
     "browser_download_status": "PEXELS_DIRECT_MEDIA_BLOCKED",
-    "candidate_policy": "Only pages explicitly carrying the Mixkit Video Free License may advance. Restricted-license, AI-generated, watermark, baked-graphics, letterboxed or semantically weak clips are rejected.",
+    "candidate_policy": "Only pages explicitly carrying the Mixkit Stock Video Free License may advance. Restricted-license, AI-generated, watermark, baked-graphics, letterboxed or semantically weak clips are rejected.",
     "collection_pages": [
       "https://mixkit.co/free-stock-video/red-light/",
       "https://mixkit.co/free-stock-video/security/",
