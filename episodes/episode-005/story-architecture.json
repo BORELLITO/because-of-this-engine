@@ -1,0 +1,201 @@
+{
+  "schema_version": "story-architecture-1.0",
+  "episode_id": "episode-005",
+  "story_id": "story-stanislav-petrov-false-alarm-1983",
+  "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+  "status": "STORY_ARCHITECTURE_READY",
+  "editorial_mode": "factual_documentary",
+  "pillar": "human_or_system_failure",
+  "title": {
+    "working": "THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
+    "alternate": [
+      "THE NIGHT THE MACHINE LIED",
+      "FIVE MISSILES"
+    ],
+    "title_risk_note": "Avoid stating that Petrov certainly saved the world; the historical record supports credited or potentially prevented wording."
+  },
+  "premise": "A Soviet early-warning system reported five incoming American nuclear missiles. Stanislav Petrov refused to convert an unconfirmed signal into a confirmed attack.",
+  "central_question": "Would one officer trust the machine, or the evidence that the machine was wrong?",
+  "audience_promise": "A real nuclear false alarm, one human judgment under impossible pressure, and the quiet consequence of refusing to escalate uncertainty.",
+  "human_anchor": "Lieutenant Colonel Stanislav Petrov",
+  "irreversible_choice": "Report the alert as false instead of passing it forward as a confirmed attack.",
+  "causal_chain": [
+    "The Soviet early-warning system reports an American missile launch.",
+    "The system escalates the report from one missile to five.",
+    "Ground radar does not confirm the satellite warning.",
+    "Petrov reports the alarm as false.",
+    "No missiles arrive.",
+    "The signal is traced to sunlight reflected from high clouds.",
+    "The system failure is exposed and Petrov's career suffers."
+  ],
+  "factual_guardrails": [
+    "Use 'reported' or 'indicated' for the missiles; do not present the false alert as a real launch.",
+    "Use 'could have moved the command toward retaliation', not 'Petrov definitely stopped a nuclear war'.",
+    "The episode must distinguish Petrov's documented decision from later public mythology.",
+    "Representational visuals must not be labeled as literal archival footage."
+  ],
+  "narration": {
+    "language": "en-US",
+    "voice_provider": "gemini_tts",
+    "voice_name": "Charon",
+    "model": "gemini-3.8-flash-tts",
+    "script_file": "episodes/episode-005/narration/en-US-charon-v1.txt",
+    "script_sha256": "5693634db8e9f9028df826131ed3e58c2eb8e109c2ab27324c3bf97a278f8fc2",
+    "character_count": 1143,
+    "word_count": 185,
+    "estimated_duration_seconds": {
+      "min": 70,
+      "max": 78
+    },
+    "real_call_authorized": true,
+    "request_count": 0,
+    "execution_status": "PENDING_SINGLE_REAL_CALL",
+    "retry_policy": "NO_AUTOMATIC_RETRY_AFTER_SUBMISSION"
+  },
+  "shot_plan": [
+    {
+      "shot_id": "S01",
+      "range": "00:00-00:04",
+      "role": "hook",
+      "visual": "Dark bunker panel; red warning indicator comes alive.",
+      "truth_class": "MAP_OR_DIAGRAM"
+    },
+    {
+      "shot_id": "S02",
+      "range": "00:04-00:09",
+      "role": "context",
+      "visual": "Night-side Earth and early-warning satellite.",
+      "truth_class": "MAP_OR_DIAGRAM"
+    },
+    {
+      "shot_id": "S03",
+      "range": "00:09-00:14",
+      "role": "human_anchor",
+      "visual": "Representational command-bunker portrait/composition of Petrov; no false archival claim.",
+      "truth_class": "REPRESENTATIONAL"
+    },
+    {
+      "shot_id": "S04",
+      "range": "00:14-00:18",
+      "role": "escalation",
+      "visual": "Alert moves through a command-chain diagram.",
+      "truth_class": "MAP_OR_DIAGRAM"
+    },
+    {
+      "shot_id": "S05",
+      "range": "00:18-00:23",
+      "role": "escalation",
+      "visual": "One launch indicator becomes two, then three.",
+      "truth_class": "MAP_OR_DIAGRAM"
+    },
+    {
+      "shot_id": "S06",
+      "range": "00:23-00:27",
+      "role": "escalation",
+      "visual": "Counter reaches five; alarm intensity rises.",
+      "truth_class": "MAP_OR_DIAGRAM"
+    },
+    {
+      "shot_id": "S07",
+      "range": "00:27-00:32",
+      "role": "decision_pressure",
+      "visual": "Petrov studies the panel, telephone and clock.",
+      "truth_class": "REPRESENTATIONAL"
+    },
+    {
+      "shot_id": "S08",
+      "range": "00:32-00:37",
+      "role": "contradiction",
+      "visual": "Ground radar remains empty while satellite alert flashes.",
+      "truth_class": "MAP_OR_DIAGRAM"
+    },
+    {
+      "shot_id": "S09",
+      "range": "00:37-00:41",
+      "role": "irreversible_choice",
+      "visual": "False-alarm classification is entered; no celebratory interface.",
+      "truth_class": "MAP_OR_DIAGRAM"
+    },
+    {
+      "shot_id": "S10",
+      "range": "00:41-00:46",
+      "role": "suspense",
+      "visual": "Bunker waits; clock advances through silence.",
+      "truth_class": "REPRESENTATIONAL"
+    },
+    {
+      "shot_id": "S11",
+      "range": "00:46-00:51",
+      "role": "non_event",
+      "visual": "Empty night sky; expected impact never occurs.",
+      "truth_class": "REPRESENTATIONAL"
+    },
+    {
+      "shot_id": "S12",
+      "range": "00:51-00:56",
+      "role": "mechanism",
+      "visual": "Sunlight geometry over high clouds and satellite sensor.",
+      "truth_class": "MAP_OR_DIAGRAM"
+    },
+    {
+      "shot_id": "S13",
+      "range": "00:56-01:01",
+      "role": "proof",
+      "visual": "Declassified report/logbook treatment with readable evidence cues.",
+      "truth_class": "DOCUMENTARY_EVIDENCE"
+    },
+    {
+      "shot_id": "S14",
+      "range": "01:01-01:06",
+      "role": "consequence",
+      "visual": "Petrov's later obscurity represented through empty military corridor.",
+      "truth_class": "REPRESENTATIONAL"
+    },
+    {
+      "shot_id": "S15",
+      "range": "01:06-01:12",
+      "role": "reframe",
+      "visual": "Red warning fades into neutral black; no victory imagery.",
+      "truth_class": "MAP_OR_DIAGRAM"
+    },
+    {
+      "shot_id": "S16",
+      "range": "01:12-01:18",
+      "role": "payoff",
+      "visual": "Final branded logo lockup with restrained red pulse.",
+      "truth_class": "BRAND_OUTRO"
+    }
+  ],
+  "thumbnail_concept": {
+    "concept_id": "thumb-episode-005-five-missiles-v1",
+    "text": "FIVE MISSILES",
+    "hero_visual": "Red early-warning console with five indicators and a dark human silhouette.",
+    "visual_truth_class": "MAP_OR_DIAGRAM",
+    "rights_status": "PENDING_ASSET_SELECTION",
+    "final_status": "NOT_READY",
+    "dimensions": [
+      1080,
+      1920
+    ],
+    "no_reuse_required": true,
+    "note": "Do not fabricate a documentary portrait or use the phrase SAVED THE WORLD as a factual assertion."
+  },
+  "asset_policy": {
+    "global_catalog_required": true,
+    "reuse_scope": "global",
+    "episode_004_assets_reusable": false,
+    "one_extra_minute_assets_reusable": false,
+    "no_clip_reuse_across_episodes": true,
+    "new_asset_fingerprints_required": true
+  },
+  "production_gates": {
+    "story_fact_check": "READY_WITH_GUARDRAILS",
+    "script_lock": "READY_FOR_TTS",
+    "real_tts": "PENDING_SINGLE_CALL",
+    "captions": "BLOCKED_UNTIL_AUDIO",
+    "render": "BLOCKED_UNTIL_CAPTIONS_AND_ASSETS",
+    "thumbnail_final": "BLOCKED_UNTIL_RENDER_OR_APPROVED_FRAME",
+    "drive_write": "NOT_AUTHORIZED",
+    "publication": "MANUAL_ONLY"
+  }
+}
