@@ -728,7 +728,30 @@
         ],
         "frame_rate": "25/1",
         "codec": "h264",
-        "automated_promotion": false
+        "automated_promotion": false,
+        "fingerprint_audit": {
+          "workflow_run_id": 42039523926,
+          "job_id": 127286341600,
+          "artifact_id": 13420042319,
+          "artifact_name": "episode005-visual-fingerprint-audit",
+          "artifact_digest": "sha256:f29e75ce9c73ea465dbbd6450fdf5d9a2ff37c463b30e0e6749aa27e4c3c63d2",
+          "status": "FINGERPRINT_AUDIT_PASS",
+          "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+          "automated_promotion": false,
+          "human_approval": "PENDING",
+          "approved_for_render": false,
+          "global_catalog_updated": false,
+          "perceptual_hash": "db1c4e31762f889ebf7d12ea18065b1938f416a3768c8bcf4fee854cdf2edf67",
+          "duration_seconds": 10,
+          "width": 1920,
+          "height": 1080,
+          "fps": 25,
+          "codec": "h264",
+          "size_bytes": 3228701,
+          "global_source_collision": false,
+          "global_sha256_collision": false,
+          "global_perceptual_collision": false
+        }
       },
       "qa": {
         "clean_frame_visual_review": "PENDING_HUMAN_QA",
@@ -736,7 +759,7 @@
         "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
         "semantic_fit": "PENDING_HUMAN_QA",
         "locked_9x16_crop": "PENDING_HUMAN_QA",
-        "global_reuse_fingerprint": "PENDING_FINGERPRINT_AUDIT",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "PENDING",
         "approved_for_render": false,
         "global_catalog_updated": false
@@ -779,7 +802,30 @@
         ],
         "frame_rate": "25/1",
         "codec": "h264",
-        "automated_promotion": false
+        "automated_promotion": false,
+        "fingerprint_audit": {
+          "workflow_run_id": 42039523926,
+          "job_id": 127286341600,
+          "artifact_id": 13420042319,
+          "artifact_name": "episode005-visual-fingerprint-audit",
+          "artifact_digest": "sha256:f29e75ce9c73ea465dbbd6450fdf5d9a2ff37c463b30e0e6749aa27e4c3c63d2",
+          "status": "FINGERPRINT_AUDIT_PASS",
+          "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+          "automated_promotion": false,
+          "human_approval": "PENDING",
+          "approved_for_render": false,
+          "global_catalog_updated": false,
+          "perceptual_hash": "d701d4cfcee501cfc40d6430600736c8bf6c0da659b929c3910df776f8eb0c56",
+          "duration_seconds": 7.2,
+          "width": 1920,
+          "height": 1080,
+          "fps": 25,
+          "codec": "h264",
+          "size_bytes": 4073672,
+          "global_source_collision": false,
+          "global_sha256_collision": false,
+          "global_perceptual_collision": false
+        }
       },
       "qa": {
         "clean_frame_visual_review": "PENDING_HUMAN_QA",
@@ -787,7 +833,7 @@
         "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
         "semantic_fit": "PENDING_HUMAN_QA",
         "locked_9x16_crop": "PENDING_HUMAN_QA",
-        "global_reuse_fingerprint": "PENDING_FINGERPRINT_AUDIT",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "PENDING",
         "approved_for_render": false,
         "global_catalog_updated": false
@@ -831,7 +877,30 @@
         ],
         "frame_rate": "25/1",
         "codec": "h264",
-        "automated_promotion": false
+        "automated_promotion": false,
+        "fingerprint_audit": {
+          "workflow_run_id": 42039523926,
+          "job_id": 127286341600,
+          "artifact_id": 13420042319,
+          "artifact_name": "episode005-visual-fingerprint-audit",
+          "artifact_digest": "sha256:f29e75ce9c73ea465dbbd6450fdf5d9a2ff37c463b30e0e6749aa27e4c3c63d2",
+          "status": "FINGERPRINT_AUDIT_PASS",
+          "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+          "automated_promotion": false,
+          "human_approval": "PENDING",
+          "approved_for_render": false,
+          "global_catalog_updated": false,
+          "perceptual_hash": "7e2c6604c38f8aeba7e0cd5f6ba35085f7967c8d223824d0b30ae96fe74c0fdc",
+          "duration_seconds": 29.567,
+          "width": 3840,
+          "height": 2160,
+          "fps": 25,
+          "codec": "h264",
+          "size_bytes": 73865099,
+          "global_source_collision": false,
+          "global_sha256_collision": false,
+          "global_perceptual_collision": false
+        }
       },
       "qa": {
         "clean_frame_visual_review": "PENDING_HUMAN_QA",
@@ -839,7 +908,7 @@
         "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
         "semantic_fit": "PENDING_HUMAN_QA",
         "locked_9x16_crop": "PENDING_HUMAN_QA",
-        "global_reuse_fingerprint": "PENDING_FINGERPRINT_AUDIT",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "PENDING",
         "approved_for_render": false,
         "global_catalog_updated": false
@@ -884,7 +953,30 @@
         ],
         "frame_rate": "50/1",
         "codec": "h264",
-        "automated_promotion": false
+        "automated_promotion": false,
+        "fingerprint_audit": {
+          "workflow_run_id": 42039523926,
+          "job_id": 127286341600,
+          "artifact_id": 13420042319,
+          "artifact_name": "episode005-visual-fingerprint-audit",
+          "artifact_digest": "sha256:f29e75ce9c73ea465dbbd6450fdf5d9a2ff37c463b30e0e6749aa27e4c3c63d2",
+          "status": "FINGERPRINT_AUDIT_PASS",
+          "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+          "automated_promotion": false,
+          "human_approval": "PENDING",
+          "approved_for_render": false,
+          "global_catalog_updated": false,
+          "perceptual_hash": "22a8250fdee2da644d66189f6056443069a3d5729e7dfa291454fae2f2af438d",
+          "duration_seconds": 16.362,
+          "width": 3840,
+          "height": 2160,
+          "fps": 50,
+          "codec": "h264",
+          "size_bytes": 45349960,
+          "global_source_collision": false,
+          "global_sha256_collision": false,
+          "global_perceptual_collision": false
+        }
       },
       "qa": {
         "clean_frame_visual_review": "PENDING_HUMAN_QA",
@@ -892,14 +984,14 @@
         "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
         "semantic_fit": "PENDING_HUMAN_QA",
         "locked_9x16_crop": "PENDING_HUMAN_QA",
-        "global_reuse_fingerprint": "PENDING_FINGERPRINT_AUDIT",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "PENDING",
         "approved_for_render": false,
         "global_catalog_updated": false
       }
     }
   ],
-  "next_action": "Run the manual global fingerprint audit for the four downloaded Pixabay candidates, then perform clean-frame/9:16/semantic human QA. Keep all four blocked from render, global catalog, Drive and publication until those gates pass.",
+  "next_action": "Perform clean-frame, baked-graphics, 9:16-crop and semantic human QA on the four downloaded Pixabay candidates. Keep all four blocked from render, global catalog, Drive and publication until those gates and explicit approval pass.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -1407,5 +1499,28 @@
     "global_catalog_updated": false,
     "drive_written": false,
     "publication_allowed": false
+  },
+  "last_manual_fingerprint": {
+    "workflow_run_id": 42039523926,
+    "job_id": 127286341600,
+    "artifact_id": 13420042319,
+    "artifact_name": "episode005-visual-fingerprint-audit",
+    "artifact_digest": "sha256:f29e75ce9c73ea465dbbd6450fdf5d9a2ff37c463b30e0e6749aa27e4c3c63d2",
+    "status": "FINGERPRINT_AUDIT_PASS",
+    "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+    "automated_promotion": false,
+    "human_approval": "PENDING",
+    "approved_for_render": false,
+    "global_catalog_updated": false,
+    "candidate_ids": [
+      "pixabay-alert-alarm-war-205519",
+      "pixabay-radar-sonar-ping-2420",
+      "pixabay-radar-screen-4511",
+      "pixabay-television-broadcasting-satellite-29483"
+    ],
+    "blockers": [],
+    "promotion_allowed": false,
+    "render_allowed": false,
+    "drive_written": false
   }
 }
