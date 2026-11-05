@@ -205,7 +205,10 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "mixkit",
       "license_name": "Mixkit Stock Video Free License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "media_url": "https://assets.mixkit.co/videos/28897/28897-720.mp4",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
     },
     {
       "candidate_id": "mixkit-cloudy-sky-118",
@@ -230,7 +233,7 @@
       "rights_status": "CANDIDATE_NOT_DOWNLOADED"
     }
   ],
-  "next_action": "Import the browser-downloaded Mixkit file into the repository acquisition workspace, then compute SHA-256, inspect clean frames and metadata, verify no baked text/logo/letterbox, register the rights evidence and perceptual fingerprint. Until import is available, keep every candidate blocked and do not render.",
+  "next_action": "Dispatch episode005-visual-candidate-intake.yml for the verified Mixkit clock candidate, inspect the uploaded candidate-intake.json and qa-frames.jpg, then register SHA-256 and perceptual fingerprint only after human approval. Repeat the same intake for the remaining approved Mixkit pages. Do not render or update the global catalog before those gates pass.",
   "acquisition_route": {
     "status": "ALTERNATIVE_ROUTE_PREPARED_NOT_DOWNLOADED",
     "preferred_provider": "mixkit",
@@ -259,8 +262,11 @@
         "sha256": null,
         "clean_frame_qa": "NOT_RUN",
         "rights_status": "CANDIDATE_NOT_DOWNLOADED",
-        "note": "Browser download completed in the isolated browser environment, but the resulting file is not exposed to the repository workspace for hashing and QA."
+        "note": "Browser download completed in the isolated browser environment, but the resulting file is not exposed to the repository workspace for hashing and QA.",
+        "media_url": "https://assets.mixkit.co/videos/28897/28897-720.mp4",
+        "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
       }
-    ]
+    ],
+    "workspace_import": "REPLACED_BY_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE"
   }
 }
