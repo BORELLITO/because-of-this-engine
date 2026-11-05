@@ -87,3 +87,15 @@ READY remains forbidden while any P0/P1 is open.
 - Resultado de segurança: `promotion_allowed=false`, `render_allowed=false`, `global_catalog_updated=false` e `drive_written=false`.
 - Os dois descartes preliminares permanecem: alerta/HUD para S06/S09 e televisão vintage para S12. Radar/sonar e radar-screen continuam condicionais, pendentes de aprovação humana explícita.
 - Próximo único passo: substituir os dois descartes por candidatos semanticamente adequados; nenhuma integração de render, catálogo ou Drive deve avançar antes disso.
+
+
+## Addendum — substitutos Pixabay, correção de JSON e fingerprint — 2026-11-05
+
+- A intake corrigida foi executada no commit `af15b0bb20738b6ddcdfee098f992e958f006651`, run `42049521282`, artifact `13426556747`, digest `sha256:81604ae674a11d6e4c7b27769ab80b6b9a7aaa486260edae9c280220a9750e60`.
+- Foi corrigido um defeito real no workflow: três relatórios eram gravados com os caracteres literais `\\n`, o que invalidava o JSON. A correção substituiu essas sequências por quebras de linha reais. Os três artefatos foram rebaixados e validados com parser JSON.
+- Os dois candidatos receberam cinco amostras normalizadas, crops 9:16 e contact sheets de duração integral. Nenhuma promoção ocorreu: `promotion_allowed=false`, `render_allowed=false`, `global_catalog_updated=false`, `drive_written=false`.
+- O fingerprint global passou no run `42049952757`, artifact `13424799852`, digest `sha256:c561091d1c94a2ef93b5e5d34b194e54c9990490da56dde60c9fedfa3921e99b`, usando `video-fingerprint-v2-rgb24-q4`: 2/2 sem colisões de SHA-256, fonte ou fingerprint perceptual.
+- `pixabay-led-indicator-lights-316712`: revisão visual preliminar positiva, porém condicional; é uma textura abstrata de barras luminosas, adequada apenas como representação de indicadores em S06/S09, nunca como console soviético literal. Aprovação humana continua pendente.
+- `pixabay-sky-clouds-satellite-95686`: rejeitado semanticamente para S12; é um céu/nuvem azul limpo, mas não mostra satélite, sensor ou geometria de luz suficiente para representar o mecanismo narrado.
+- O plano canônico foi atualizado com as evidências, mantendo a distinção entre validação técnica e aprovação humana. O manifesto não foi promovido, o catálogo global não foi atualizado e render/Drive/publicação continuam bloqueados.
+- Próximo passo único: obter sua decisão sobre o candidato LED e buscar um novo candidato distinto, visualmente coerente com o mecanismo sol/nuvens/satélite de S12.
