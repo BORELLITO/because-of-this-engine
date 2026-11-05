@@ -339,3 +339,13 @@ READY remains forbidden while any P0/P1 is open.
 
 - QA integral dos 14 assets restantes executada por inspeção de páginas: os 5 Mixkit restantes exibem preview/licença; os 9 Pixabay exibem licença e página do item, porém o preview de mídia não foi renderizado neste navegador. Regra aplicada: licença de provedor não equivale a QA visual; nenhum asset foi promovido.
 - Estado ajustado na ficha: Pixabay = `BLOCKED_BROWSER_PREVIEW_NOT_RENDERED`; Mixkit sem S03/S04 = `PENDING_FULL_FILE_QA`; S03/S04 = preview sem rosto, mas arquivo completo ainda pendente.
+
+## Addendum — QA visual direta dos arquivos e correção de candidato — 2026-11-05
+
+- A inspeção direta das amostras integrais foi concluída para S05, S08, S09, S13, S14, S15 e S16 usando os artifacts de intake 13437466569 e 13428247933, com contact sheets de cinco posições normalizadas e crop 9:16.
+- S05 (pixabay-alert-alarm-war-danger-risk-205519) foi reprovado: o arquivo mostra um rosto adulto claramente reconhecível. A página do provedor também exibe alerta contra uso de imagens com pessoas reconhecíveis. O candidato foi marcado como REJECTED_CANDIDATE_REQUIRES_REPLACEMENT e não pode avançar.
+- S08 radar, S09 botão vermelho, S13 máquina de escrever, S14 corredor, S15 flare abstrato e S16 partículas passaram a inspeção visual direta sem marca/logotipo identificável; S13 ficou registrado com guardrail de mecanismo genérico.
+- S06 LED e S12 antena continuam sem QA direta do arquivo completo nesta etapa; não foram promovidos por licença de provedor ou inspeção de página.
+- A ficha episodes/episode-005/rights/rights-audit-v21.json foi atualizada no commit 1e54e021ee2ca70125acb26505a532451a37b42a, mantendo approved_for_render=false, global_catalog_updated=false, drive_written=false e publication_authorized=false.
+- O bloqueio correto agora é composto por: substituição do S05, QA integral pendente de S03/S04/S06/S12, confirmação final dos itens Mixkit pendentes e aprovação explícita de render por asset. A licença não foi tratada como autorização de render.
+- Próximo passo único: substituir o candidato reprovado de S05 e completar a QA direta dos arquivos ainda pendentes; render, catálogo global, Drive e publicação permanecem bloqueados.
