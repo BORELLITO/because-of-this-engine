@@ -788,7 +788,7 @@
       "license_name": "Pixabay Content License",
       "media_url": "https://cdn.pixabay.com/video/2016/08/16/4511-179376471_large.mp4",
       "media_url_observed_in_browser": true,
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "REJECTED_DUPLICATE_SOURCE_ALIAS",
       "role": "S08",
       "visual_match": "NEAR",
       "visual_intent": "Clean rotating radar-screen abstraction for the empty-ground-radar beat; not literal archival evidence.",
@@ -851,7 +851,7 @@
         "semantic_fit": "PENDING_HUMAN_QA",
         "locked_9x16_crop": "PENDING_HUMAN_QA",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING",
+        "human_approval": "REJECTED",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "preliminary_visual_review": {
@@ -869,7 +869,9 @@
           "global_catalog_updated": false,
           "drive_written": false
         }
-      }
+      },
+      "rejection_reason": "Duplicate source page/media URL already represented by pixabay-radar-radar-screen-rotation-circles-4511; retained as rejected audit history and excluded from approval/manifest.",
+      "rejected_at_utc": "2026-11-05T18:03:21.444Z"
     },
     {
       "candidate_id": "pixabay-television-broadcasting-satellite-29483",
@@ -969,7 +971,7 @@
       "license_name": "Pixabay Content License",
       "media_url": "https://cdn.pixabay.com/video/2024/03/24/205519-927335684_large.mp4",
       "media_url_observed_in_browser": true,
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "REJECTED_DUPLICATE_SOURCE_ALIAS",
       "role": "S06,S09",
       "visual_match": "NEAR",
       "visual_intent": "Representational alarm-on-screen escalation and panic response; not literal Soviet archival evidence.",
@@ -1034,7 +1036,7 @@
         "semantic_fit": "PENDING_HUMAN_QA",
         "locked_9x16_crop": "PENDING_HUMAN_QA",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING",
+        "human_approval": "REJECTED",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "preliminary_visual_review": {
@@ -1052,7 +1054,9 @@
           "global_catalog_updated": false,
           "drive_written": false
         }
-      }
+      },
+      "rejection_reason": "Duplicate source page/media URL already represented by pixabay-alert-alarm-war-danger-risk-205519; retained as rejected audit history and excluded from approval/manifest.",
+      "rejected_at_utc": "2026-11-05T18:03:21.444Z"
     },
     {
       "candidate_id": "pixabay-led-indicator-lights-316712",
@@ -2424,7 +2428,7 @@
       "selection": "ALTERNATIVE_APPROVED_FOR_MANIFEST_ONLY"
     }
   ],
-  "next_action": "Run final read-only visual manifest validation and structural/rights audit for the six primary assignments; keep render, global catalog, Drive and publication blocked.",
+  "next_action": "Re-run the official read-only visual plan contract after removing duplicate source aliases; keep render, global catalog, Drive and publication blocked.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -2828,6 +2832,24 @@
       "source_page_url": "https://pixabay.com/videos/red-light-blur-flare-gradient-250419/",
       "license_observed": "Pixabay Content License",
       "evidence_note": "Browser page describes an abstract red blur/flare/gradient; it lacks a distinct warning-pulse action and overlaps the existing S01 red-glow visual family, so it is rejected for S15."
+    },
+    {
+      "candidate_id": "pixabay-radar-screen-4511",
+      "rejected_at_utc": "2026-11-05T18:03:21.444Z",
+      "reason": "DUPLICATE_SOURCE_ALIAS",
+      "duplicate_of": "pixabay-radar-radar-screen-rotation-circles-4511",
+      "source_page_url": "https://pixabay.com/videos/radar-radar-screen-rotation-circles-4511/",
+      "media_url": "https://cdn.pixabay.com/video/2016/08/16/4511-179376471_large.mp4",
+      "evidence_note": "Same provider source page and direct media URL already exist under the canonical candidate ID; excluded to preserve unique source identity."
+    },
+    {
+      "candidate_id": "pixabay-alert-alarm-war-205519",
+      "rejected_at_utc": "2026-11-05T18:03:21.444Z",
+      "reason": "DUPLICATE_SOURCE_ALIAS",
+      "duplicate_of": "pixabay-alert-alarm-war-danger-risk-205519",
+      "source_page_url": "https://pixabay.com/videos/alert-alarm-war-danger-risk-205519/",
+      "media_url": "https://cdn.pixabay.com/video/2024/03/24/205519-927335684_large.mp4",
+      "evidence_note": "Same provider source page and direct media URL already exist under the canonical candidate ID; excluded to preserve unique source identity."
     }
   ],
   "search_strategy": {
@@ -3225,6 +3247,11 @@
       "fingerprint_workflow_run_id": 42074599454,
       "fingerprint_artifact_id": 13438400127,
       "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
-    }
+    },
+    "duplicate_source_aliases_rejected": [
+      "pixabay-radar-screen-4511",
+      "pixabay-alert-alarm-war-205519"
+    ],
+    "duplicate_fix_at_utc": "2026-11-05T18:03:21.444Z"
   }
 }
