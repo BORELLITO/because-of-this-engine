@@ -34,7 +34,7 @@
 | V2.1 contracts | TESTED | Candidate CI must pass unit, schema, adapter, singleton and clean-checkout gates |
 | Canonical adapter | IMPLEMENTED | v7_orchestrator.py delegates to canonical_entrypoint.py under active V2.1 policy |
 | Global no-reuse | VALIDATED_FOR_MANIFEST / BLOCKED_FOR_CATALOG | 16 assigned assets, 16 unique sources, no source/SHA/perceptual collisions in the latest fingerprint evidence; global catalog mutation remains false |
-| Thumbnail | CANDIDATE_READY / FINAL_BLOCKED | Original symbolic candidate registered with SHA-256 and Library evidence; final human review, final manifest and delivery paths are still missing |
+| Thumbnail | REMOVED / REPLACEMENT_REQUIRED | Previous candidate removed by user request; thumbnail gate remains mandatory and no active thumbnail asset exists |
 | Legacy workflows | ARCHIVED | Definitions retained under archive/v7/workflows/, outside .github/workflows |
 | Drive | NOT RUN | No Drive write or media generation authorized |
 | Work | UNKNOWN | No independent Work execution log |
@@ -47,7 +47,7 @@
 
 - The visual plan and partial scene manifest are structurally validated: 42 active candidates, 22 approved for manifest, 16 assets, 16/16 shots assigned, 0 unresolved, and no duplicate source/SHA/perceptual collision detected. This does not authorize render or catalog mutation.
 - All 16 assignments remain APPROVED_FOR_MANIFEST_ONLY; every asset keeps approved_for_render=false, global_catalog_updated=false and drive_written=false.
-- The thumbnail is an original symbolic candidate (CANDIDATE_READY_FOR_HUMAN_REVIEW), not a final thumbnail manifest. Final human review, delivery files and platform cover records are still absent.
+- The previous thumbnail candidate was removed by user request. The thumbnail gate remains mandatory, but no thumbnail asset or final manifest is active; a replacement must be selected and reviewed.
 - The canonical entrypoint is intentionally read-only. production_enablement=false, publication is manual-only, and there is no active V2.1 final-render workflow. The archived legacy renderer is not an acceptable fallback.
 - Edge TTS and provider-native captions are validated and aligned to the frozen audio SHA-256; the 79.704-second duration is within the explicit 80-second exception, but the target window remains 60–75 seconds.
 - Global catalog update, Drive write, render, delivery bundle and publication remain unexecuted. The PR is still draft and requires explicit review/post-merge audit.
@@ -291,3 +291,12 @@ READY remains forbidden while any P0/P1 is open.
 - O novo preflight manual confirmou `V21_MANUAL_RENDER_BLOCKED`, `production_enablement=false`, render NOT_RUN e publicação MANUAL_ONLY_NOT_RUN.
 - O CI agora verifica automaticamente que o production record do Episódio 005 continue fail-closed.
 - Próximo passo único: finalizar a aprovação/entrega da thumbnail e promover os direitos visuais de manifest-only para render somente após a revisão final; ainda não liberar produção automaticamente.
+
+
+## Atualização — remoção da thumbnail candidata — 2026-11-05
+
+- A thumbnail candidata `Cinco luzes vermelhas no bunker.png` foi removida do estado ativo do projeto a pedido do usuário.
+- As referências ativas ao conceito, Library file id, SHA-256 e `FIVE MISSILES` foram retiradas de `story-architecture.json` e `production-record.json`; o registro agora usa `PENDING_REPLACEMENT`.
+- O gate de thumbnail não foi removido: schema, QA, margens, legibilidade, direitos, delivery e aprovação continuam obrigatórios antes de qualquer render.
+- O histórico de auditoria foi preservado nos addenda anteriores, mas a thumbnail antiga não é mais candidata utilizável.
+- Próximo passo único: selecionar uma nova thumbnail candidata ou manter o episódio sem thumbnail até nova decisão editorial.
