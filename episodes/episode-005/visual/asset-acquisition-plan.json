@@ -1053,6 +1053,56 @@
           "drive_written": false
         }
       }
+    },
+    {
+      "candidate_id": "pixabay-led-indicator-lights-316712",
+      "source_page_url": "https://pixabay.com/videos/led-indicator-lights-electronics-316712/",
+      "role": "S06,S09",
+      "visual_match": "NEAR",
+      "visual_intent": "Abstract indicator/electronics insert for warning escalation; symbolic technical texture, not a literal Soviet alert interface.",
+      "truth_class": "REPRESENTATIONAL",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "PAGE_VERIFIED_AWAITING_INTAKE",
+      "media_url": "https://cdn.pixabay.com/video/2025/11/18/316712_large.mp4",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "browser_verification": {
+        "source_page_verified": true,
+        "provider_license_visible": "Pixabay Content License",
+        "license_evidence_url": "https://pixabay.com/service/license-summary/",
+        "media_url_observed": true,
+        "creator": "Solarselle77",
+        "editorial_note": "Abstract LED/electronics loop. It must not be presented as the actual Soviet alert interface or as literal Petrov archival evidence."
+      },
+      "score": null,
+      "score_breakdown": {},
+      "disqualifiers": []
+    },
+    {
+      "candidate_id": "pixabay-sky-clouds-satellite-95686",
+      "source_page_url": "https://pixabay.com/videos/sky-clouds-satellite-sea-weather-95686/",
+      "role": "S12",
+      "visual_match": "STRONG",
+      "visual_intent": "Clouds, sunlight and satellite visual for the sensor-geometry beat; representational, not literal Petrov evidence.",
+      "truth_class": "REPRESENTATIONAL",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "PAGE_VERIFIED_AWAITING_INTAKE",
+      "media_url": "https://cdn.pixabay.com/video/2021/11/12/95686-645712467_large.mp4",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "browser_verification": {
+        "source_page_verified": true,
+        "provider_license_visible": "Pixabay Content License",
+        "license_evidence_url": "https://pixabay.com/service/license-summary/",
+        "media_url_observed": true,
+        "creator": "tommyvideo",
+        "editorial_note": "Clouds/sunlight/satellite candidate for S12. It must not be presented as literal Petrov evidence."
+      },
+      "score": null,
+      "score_breakdown": {},
+      "disqualifiers": []
     }
   ],
   "next_action": "Replace the two preliminary rejects (S06/S09 warning-control source and S12 cloud-sunlight-satellite source), then obtain explicit human approval only for candidates that pass the clean-source, semantic-fit and crop gates. Keep all render, catalog, Drive and publication gates blocked.",
@@ -1560,7 +1610,16 @@
           "unlicensed templates"
         ]
       }
-    ]
+    ],
+    "last_candidate_addition": {
+      "added_at_utc": "2026-11-05T00:00:00Z",
+      "candidate_ids": [
+        "pixabay-led-indicator-lights-316712",
+        "pixabay-sky-clouds-satellite-95686"
+      ],
+      "rationale": "Replace the preliminary non-diegetic warning/control source and the semantically weak blank-screen satellite source with page-verified Pixabay candidates.",
+      "source_page_and_license_verification": "Completed in browser before intake; media URLs observed on provider pages."
+    }
   },
   "last_manual_intake": {
     "workflow_run_id": 42043152146,
@@ -1594,7 +1653,12 @@
         "end_minus_0_1_seconds"
       ],
       "note": "Full-duration QA contact sheets regenerated successfully; all four candidates contain five samples plus vertical crops."
-    }
+    },
+    "next_candidate_batch": [
+      "pixabay-led-indicator-lights-316712",
+      "pixabay-sky-clouds-satellite-95686"
+    ],
+    "next_action": "Dispatch manual intake for the two newly page-verified candidates; keep promotion, render, catalog, Drive and publication blocked."
   },
   "last_manual_fingerprint": {
     "workflow_run_id": 42039523926,
