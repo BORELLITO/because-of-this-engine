@@ -44,14 +44,19 @@ jobs:
         run: PYTHONPATH=. python production/v21_singleton_guard.py --repo-root .
       - name: Test legacy adapter delegates to canonical entrypoint
         run: |
+          set +e
           PYTHONPATH=. python production/v7_orchestrator.py \
             --repo-root . \
             --manifest examples/video-only-episode-manifest-v7.template.json \
             --mode dry-run \
             --report /tmp/v21-adapter-report.json
+          code=$?
+          set -e
+          test "$code" -eq 1
           python - <<'PY'
           import json
-          report = json.load(open("/tmp/v21-adapter-report.json", encoding="utf-8"))
+          with open("/tmp/v21-adapter-report.json", encoding="utf-8") as handle:
+              report = json.load(handle)
           assert report["status"] == "BLOCKED"
           assert "PRODUCTION_RECORD_SCHEMA" in report["blocking_gates"]
           assert report["render"] == "NOT_RUN"
