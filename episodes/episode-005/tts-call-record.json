@@ -14,5 +14,7 @@
   "audio_produced": false,
   "request_count": 0,
   "retry_policy": "no automatic retry",
-  "next_action": "Add credits or configure a funded direct Gemini API route, then submit exactly one request for this script hash."
+  "next_action": "Configure Google Cloud TTS credentials and project context, run preflight, then request explicit authorization for exactly one real synthesis of this frozen script hash.",
+  "active_route_after_diagnostic": "google_cloud_tts_chirp3_hd",
+  "active_route_adapter": "production/cloud_tts.py"
 }
