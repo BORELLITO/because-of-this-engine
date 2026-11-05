@@ -33,6 +33,17 @@ def audit(repo_root: Path) -> dict[str, object]:
     prompt = validate_prompt_and_schema(root)
     policy_path = root / "production" / "active_engine_policy.json"
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
+    if policy.get("active_engine_version") == "2.1":
+        if policy.get("canonical_entrypoint") != "production/canonical_entrypoint.py":
+            raise SingletonGuardError("V2.1 canonical entrypoint is missing")
+        if policy.get("legacy_policy", {}).get("status") != "legacy_rollback_only":
+            raise SingletonGuardError("V2.1 legacy registry policy is missing")
+        return {
+            "status": "V21_SINGLE_ACTIVE_ENGINE_PASS",
+            "profile": policy.get("active_engine_profile"),
+            "canonical_entrypoint": policy.get("canonical_entrypoint"),
+            "legacy_execution": "blocked_and_archived",
+        }
     if policy.get("active_engine_profile") != CANONICAL_PROFILE_ID:
         raise SingletonGuardError("active policy does not point to the V7.3 Charon profile")
     if policy.get("active_engine_fingerprint") != CANONICAL_PROFILE_FINGERPRINT:
