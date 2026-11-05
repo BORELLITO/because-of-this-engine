@@ -1,7 +1,7 @@
 {
   "plan_id": "episode-005-visual-asset-acquisition-v1",
   "episode_id": "episode-005",
-  "status": "TWO_CANDIDATES_DOWNLOADED_HUMAN_QA_REQUIRED",
+  "status": "THREE_CANDIDATES_DOWNLOADED_HUMAN_QA_REQUIRED",
   "purpose": "Pre-download candidate pool for Episode 005. No candidate is approved for render until downloaded, SHA-256ed, visually inspected, checked for embedded text/logos/letterbox, fingerprinted, and entered into the final video manifest.",
   "frozen_audio_source": {
     "workflow_run_id": 41961294784,
@@ -194,7 +194,7 @@
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "mixkit",
       "license_name": "Mixkit Stock Video Free License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "media_url": "https://assets.mixkit.co/bohe8920pfehyvq7p1hk5r699s7g",
       "media_url_observed_in_browser": true,
       "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
@@ -207,6 +207,30 @@
           "1080x1920"
         ],
         "semantic_note": "Vertical red glow/light texture; candidate for S01/S06/S09 warning escalation, subject to semantic QA because it is abstract rather than a literal console."
+      },
+      "intake_artifact": {
+        "workflow_run_id": 42005588495,
+        "artifact_id": 13403209885,
+        "artifact_digest": "sha256:e97bc6b2c2e7cac51c10a1af55a35570f5df044ac80bece0478292992ce0c78b",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "f5c6866db294ab7489e581d08d3ae5480496b42d43df8a4a6152bcc6e4d97774",
+        "duration_seconds": 10.761,
+        "dimensions": [
+          720,
+          1280
+        ],
+        "frame_rate": "24000/1001",
+        "codec": "h264",
+        "automated_promotion": false
+      },
+      "qa": {
+        "clean_frame_visual_review": "PRELIMINARY_PASS",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_QA_FRAMES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
+        "semantic_fit": "PRELIMINARY_PASS_FOR_S01_S06_S09_AS_SYMBOLIC_WARNING_TEXTURE",
+        "locked_9x16_crop": "PRELIMINARY_PASS_NATIVE_VERTICAL",
+        "global_reuse_fingerprint": "PENDING",
+        "human_approval": "PENDING"
       }
     },
     {
@@ -307,9 +331,9 @@
       "rights_status": "CANDIDATE_NOT_DOWNLOADED"
     }
   ],
-  "next_action": "Run the fail-closed intake for mixkit-abstract-red-glow-101432, inspect identity, metadata and crop, then keep it symbolic unless the visual QA confirms it supports the warning beat without being mistaken for literal archival evidence.",
+  "next_action": "Run global perceptual fingerprint checks and human QA on the three downloaded Mixkit candidates; only then create the final visual manifest. Do not promote any candidate or render yet.",
   "acquisition_route": {
-    "status": "ALTERNATIVE_ROUTE_PREPARED_NOT_DOWNLOADED",
+    "status": "THREE_CANDIDATES_DOWNLOADED_AWAITING_GLOBAL_FINGERPRINT_AND_HUMAN_QA",
     "preferred_provider": "mixkit",
     "fallback_provider": "pexels",
     "browser_download_status": "PEXELS_DIRECT_MEDIA_BLOCKED",
@@ -341,6 +365,27 @@
         "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
         "workflow_run_id": 42003907636,
         "artifact_id": 13403188677
+      },
+      {
+        "candidate_id": "mixkit-abstract-red-glow-101432",
+        "source_page_verified": true,
+        "license_visible_on_page": "Mixkit Stock Video Free License",
+        "visible_duration_seconds": 11,
+        "visible_resolution_options": [
+          "720x1080",
+          "1080x1920"
+        ],
+        "browser_download_event": "NOT_USED_FOR_WORKSPACE_IMPORT",
+        "workspace_import": "REPLACED_BY_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE",
+        "sha256": "f5c6866db294ab7489e581d08d3ae5480496b42d43df8a4a6152bcc6e4d97774",
+        "clean_frame_qa": "PRELIMINARY_PASS",
+        "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "note": "Official Mixkit page verified in browser; opaque direct media URL was allowlisted and downloaded by the fail-closed GitHub intake workflow.",
+        "media_url": "https://assets.mixkit.co/bohe8920pfehyvq7p1hk5r699s7g",
+        "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+        "workflow_run_id": 42005588495,
+        "artifact_id": 13403209885,
+        "artifact_digest": "sha256:e97bc6b2c2e7cac51c10a1af55a35570f5df044ac80bece0478292992ce0c78b"
       }
     ],
     "workspace_import": "REPLACED_BY_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE"
