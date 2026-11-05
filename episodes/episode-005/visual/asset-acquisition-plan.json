@@ -1284,7 +1284,7 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "rights_status": "REJECTED_RECOGNIZABLE_PERSON",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -1338,14 +1338,15 @@
       },
       "qa": {
         "technical_validation": "PASS",
-        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "clean_frame_visual_review": "REJECTED_RECOGNIZABLE_PERSON",
         "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
         "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
         "semantic_fit": "HUMAN_APPROVED",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "APPROVED_FOR_MANIFEST",
+        "human_approval": "REJECTED_AFTER_DIRECT_MEDIA_QA",
         "approved_for_render": false,
-        "global_catalog_updated": false
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "FAIL_RECOGNIZABLE_PERSON_VISIBLE"
       },
       "human_approval_record": {
         "approved_at_utc": "2026-11-05T17:59:24.004Z",
@@ -1353,8 +1354,12 @@
         "scope": "MANIFEST_ONLY",
         "selected_as_primary_for_shot": "S05"
       },
-      "selection": "PRIMARY_APPROVED_FOR_PARTIAL_MANIFEST",
-      "selected_shot_id": "S05"
+      "selection": "REJECTED_AFTER_DIRECT_MEDIA_QA",
+      "rejection_evidence": {
+        "artifact_id": 13437466569,
+        "qa_contact_sheet": "pixabay-alert-alarm-war-danger-risk-205519/qa-frames.jpg",
+        "reason": "Recognizable adult face visible in direct-media frame sheet; provider page warning also observed."
+      }
     },
     {
       "candidate_id": "pixabay-radar-black-green-target-symbol-57670",
@@ -1426,7 +1431,8 @@
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
-        "global_catalog_updated": false
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "PASS_GENERIC_RADAR_NO_PERSON_BRAND_OR_READABLE_TEXT"
       },
       "human_approval_record": {
         "approved_at_utc": "2026-11-05T17:59:24.004Z",
@@ -1434,7 +1440,13 @@
         "scope": "MANIFEST_ONLY",
         "selected_as_primary_for_shot": null
       },
-      "selection": "ALTERNATIVE_APPROVED_FOR_MANIFEST_ONLY"
+      "selection": "PRIMARY_REPLACEMENT_APPROVED_FOR_PARTIAL_MANIFEST",
+      "selected_shot_id": "S05",
+      "replacement_evidence": {
+        "artifact_id": 13437466569,
+        "qa_contact_sheet": "pixabay-radar-black-green-target-symbol-57670/qa-frames.jpg",
+        "result": "PASS_NO_RECOGNIZABLE_PERSON_NO_BRAND_NO_READABLE_THIRD_PARTY_TEXT"
+      }
     },
     {
       "candidate_id": "pixabay-radar-radar-screen-rotation-circles-4511",
@@ -3086,5 +3098,7 @@
     "global_catalog_updated": false,
     "validator": "production/visual_plan_contract.py",
     "checkout_commit": "d371da0ad7c72576bcd3e9f664baa6b03f89a5e4"
-  }
+  },
+  "last_adjustment": "Replaced S05 primary after direct-media QA rejected recognizable-person candidate on 2026-11-05",
+  "next_gate": "Revalidate visual manifest after S05 replacement; complete rights QA before render."
 }
