@@ -4,7 +4,7 @@
   "story_id": "story-stanislav-petrov-false-alarm-1983",
   "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
   "editorial_mode": "factual_documentary",
-  "title": "THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
+  "title": "THE NIGHT THE MACHINE LIED",
   "status": "PARTIAL_MANIFEST_VALIDATED_BLOCKED_RENDER",
   "purpose": "Human-approved candidate-to-shot assignments before final production promotion.",
   "source_plan": "episodes/episode-005/visual/asset-acquisition-plan.json",
@@ -940,5 +940,6 @@
     "global_catalog_updated": false,
     "revalidation_required": false,
     "replacement_note": "S05 primary replaced after direct-media QA rejected recognizable-person candidate."
-  }
+  },
+  "last_adjustment": "Editorial package title reconciled to the approved variant THE NIGHT THE MACHINE LIED; visual manifest remains blocked for manual preflight."
 }
