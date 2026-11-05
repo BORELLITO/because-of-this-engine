@@ -16,6 +16,6 @@
   "retry_policy": "no automatic retry",
   "next_action": "Verify edge-tts and FFmpeg in the execution environment, run voice preflight, then request explicit authorization for one complete Episode 005 preview.",
   "active_route_after_diagnostic": "microsoft_edge_tts",
-  "active_route_adapter": "production/edge_tts.py",
+  "active_route_adapter": "production/microsoft_edge_tts.py",
   "active_voice": "en-US-ChristopherNeural"
 }
