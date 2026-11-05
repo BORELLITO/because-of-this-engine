@@ -239,7 +239,7 @@ def _align_chunk(
         # therefore begin several recognized tokens after the previous one,
         # especially when Vosk emits segment results. Search a generous,
         # bounded lookahead but still keep the timeline strictly monotonic.
-        window_end = min(len(asr_words), search_cursor + 48)
+        window_end = min(len(asr_words), search_cursor + 12)
         for candidate in range(search_cursor, window_end):
             match = _match_at(asr_words, candidate, alternatives)
             if not match:
@@ -272,14 +272,9 @@ def _align_chunk(
             matched_canonical = [
                 item["canonical"] for item in matched_units if item is not None
             ]
-            observed_window = [
-                str(item.get("word", ""))
-                for item in asr_words[cursor:min(len(asr_words), cursor + 40)]
-            ]
             raise AlignmentError(
                 f"Could not align caption phrase {chunk!r}: matched {matched}/{len(units)} "
                 f"spoken units ({missing} missing). Matched canonical units: {matched_canonical}. "
-                f"Observed ASR window: {observed_window}. "
                 "Strict word-highlight alignment requires every canonical word to have a real timestamp."
             )
         if matched == 0:
