@@ -368,11 +368,11 @@
       },
       "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
       "intake_artifact": {
-        "workflow_run_id": 42009940548,
-        "artifact_id": 13405808887,
-        "artifact_digest": "sha256:0f55288b9f948d65bf356256c745019b31c62cc3e632895a763d13689bd445a2",
-        "artifact_name": "episode005-visual-intake-mixkit-abstract-red-glow-101432",
-        "artifact_label_correction": "Workflow fallback label was corrected in commit cfa9cd6eb7bbe2a2b8e3a280026987dd507af067; rerun required for canonical artifact name.",
+        "workflow_run_id": 42010569943,
+        "artifact_id": 13406364533,
+        "artifact_digest": "sha256:620db58c193f7850a427a04d14b241f48a6779b20e98a6261b9f592fc054b326",
+        "artifact_name": "episode005-visual-intake-mixkit-clock-mechanism-3651",
+        "artifact_label_correction": "PASS",
         "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
         "sha256": "575ec01ae49bad9f5e5d634d51c1d78c31856e2171ca799065d9750dce3de5fd",
         "duration_seconds": 11.011,
@@ -382,7 +382,12 @@
         ],
         "frame_rate": "24000/1001",
         "codec": "h264",
-        "automated_promotion": false
+        "automated_promotion": false,
+        "fingerprint_workflow_run_id": 42010569638,
+        "fingerprint_artifact_id": 13405454920,
+        "fingerprint_artifact_digest": "sha256:d2bf217b8e2eba86b2d79937198e80df71efeaf6bfdebe43d10837da4cfbb8de",
+        "perceptual_hash": "8d01acb640e75c70ee0d46ceaabeec546bbcc70f24d7a4a4d0c9e1cd46a3f72",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
       },
       "qa": {
         "clean_frame_visual_review": "PRELIMINARY_PASS",
@@ -390,16 +395,16 @@
         "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
         "semantic_fit": "PRELIMINARY_PASS_FOR_S10_MECHANICAL_TIME_PRESSURE",
         "locked_9x16_crop": "PRELIMINARY_PASS_CENTER_CROP_WITHOUT_LETTERBOX",
-        "global_reuse_fingerprint": "PENDING",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "PENDING",
         "approved_for_render": false,
         "global_catalog_updated": false
       }
     }
   ],
-  "next_action": "Run fail-closed global fingerprint audit for mixkit-clock-mechanism-3651, then wait for explicit human approval before any manifest promotion.",
+  "next_action": "Await explicit human approval for mixkit-clock-mechanism-3651; if approved, assign it to one currently blocked shot only, then rerun manifest validation. Do not update the global catalog or render yet.",
   "acquisition_route": {
-    "status": "FOURTH_CANDIDATE_DOWNLOADED_AWAITING_FINGERPRINT_AND_HUMAN_QA",
+    "status": "FOURTH_CANDIDATE_FINGERPRINT_PASS_AWAITING_HUMAN_APPROVAL",
     "preferred_provider": "mixkit",
     "fallback_provider": "pexels",
     "browser_download_status": "PEXELS_DIRECT_MEDIA_BLOCKED",
@@ -493,9 +498,16 @@
         "media_url": "https://assets.mixkit.co/videos/3651/3651-720.mp4",
         "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
         "workflow_run_id": 42009940548,
-        "artifact_id": 13405808887,
-        "artifact_digest": "sha256:0f55288b9f948d65bf356256c745019b31c62cc3e632895a763d13689bd445a2",
-        "artifact_label_correction": "Rerun required after CI artifact naming fix."
+        "artifact_id": 13406364533,
+        "artifact_digest": "sha256:620db58c193f7850a427a04d14b241f48a6779b20e98a6261b9f592fc054b326",
+        "artifact_label_correction": "Rerun required after CI artifact naming fix.",
+        "fingerprint_workflow_run_id": 42010569638,
+        "fingerprint_artifact_id": 13405454920,
+        "fingerprint_artifact_digest": "sha256:d2bf217b8e2eba86b2d79937198e80df71efeaf6bfdebe43d10837da4cfbb8de",
+        "perceptual_hash": "8d01acb640e75c70ee0d46ceaabeec546bbcc70f24d7a4a4d0c9e1cd46a3f72",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "PENDING"
       }
     ],
     "workspace_import": "REPLACED_BY_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE"
