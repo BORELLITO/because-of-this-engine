@@ -351,10 +351,25 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "mixkit",
       "license_name": "Mixkit Stock Video Free License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "media_url": "https://assets.mixkit.co/videos/3651/3651-720.mp4",
+      "media_url_observed_in_browser": true,
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Mixkit Stock Video Free License",
+        "visible_duration_seconds": 11,
+        "visible_resolution_options": [
+          "1080x720",
+          "1920x1080",
+          "4096x2160"
+        ],
+        "visible_frame_rate": "24 fps",
+        "semantic_note": "Macro clock mechanism; distinct source candidate for S10 decision pressure or S12 mechanism, subject to clean-frame and semantic QA."
+      },
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
     }
   ],
-  "next_action": "Fill unresolved visual beats with additional verified candidates, then run final visual manifest validation. Do not update the global catalog or render until every shot has a fresh asset assignment and final promotion gates pass.",
+  "next_action": "Run fail-closed intake for mixkit-clock-mechanism-3651, inspect its clean frame/crop, then fingerprint it; human approval remains pending.",
   "acquisition_route": {
     "status": "THREE_CANDIDATES_DOWNLOADED_FINGERPRINT_PASS_AWAITING_HUMAN_QA",
     "preferred_provider": "mixkit",
