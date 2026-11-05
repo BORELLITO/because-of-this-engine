@@ -1249,9 +1249,29 @@
         "sha256": "908dceb3cf0d3c703a0fd6d64181fbcbf7a4760fcaa6744fc03279293897a61a",
         "perceptual_hash": "75e16b841a18f3c242a18a836e7bb9516d2cc94de281931745c7f47a78690c77"
       }
+    },
+    {
+      "candidate_id": "pixabay-antenna-astronomy-communication-40041",
+      "source_page_url": "https://pixabay.com/videos/antenna-astronomy-communication-40041/",
+      "role": "S12",
+      "visual_match": "NEAR",
+      "visual_intent": "real satellite/radio antenna under open sky; physical sensor geometry and cloud/light context",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "media_url": "https://cdn.pixabay.com/video/2020/05/24/40041-424371544_large.mp4",
+      "media_url_observed_in_browser": true,
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "visible_duration_seconds": 22,
+        "visible_resolution": "1920x1080",
+        "semantic_note": "Real parabolic antenna/earth-station infrastructure with sky and clouds; stronger S12 mechanism candidate than a generic cloud texture, pending intake and frame QA."
+      }
     }
   ],
-  "next_action": "Obtain explicit human approval only for pixabay-led-indicator-lights-316712 if the abstract indicator treatment is acceptable for S06/S09; replace pixabay-sky-clouds-satellite-95686 with a distinct S12 candidate that visibly supports the sunlight/satellite mechanism. Keep render, catalog, Drive and publication blocked.",
+  "next_action": "Run controlled intake and fingerprint for pixabay-antenna-astronomy-communication-40041. If clean and semantically coherent in full-duration QA, request explicit human approval for S12. Keep the LED candidate pending explicit approval and keep render, catalog, Drive and publication blocked.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
