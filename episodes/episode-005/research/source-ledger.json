@@ -1,0 +1,35 @@
+{
+  "episode_id": "episode-005",
+  "story_id": "story-stanislav-petrov-false-alarm-1983",
+  "accessed_at": "2026-11-05",
+  "sources": [
+    {
+      "claim_id": "C1",
+      "claim": "On September 26, 1983, the Soviet Oko early-warning system reported five missiles launched from the United States.",
+      "url": "https://home.nps.gov/people/stanislav_petrov.htm",
+      "source_type": "National Park Service",
+      "status": "VERIFIED"
+    },
+    {
+      "claim_id": "C2",
+      "claim": "Petrov was the duty officer who judged the report to be a false alarm.",
+      "url": "https://nsarchive.gwu.edu/media/28890/ocr",
+      "source_type": "National Security Archive document OCR",
+      "status": "VERIFIED"
+    },
+    {
+      "claim_id": "C3",
+      "claim": "The alert was later attributed to sunlight reflecting from cloud tops and being misread by the satellite system.",
+      "url": "https://www.smithsonianmag.com/smart-news/man-who-saved-world-from-nuclear-annihilation-dies-77-180964934/",
+      "source_type": "Smithsonian Magazine",
+      "status": "CORROBORATED"
+    },
+    {
+      "claim_id": "C4",
+      "claim": "The event's historical significance must be framed cautiously; available analysis does not establish that a retaliatory launch was definitely imminent.",
+      "url": "https://russianforces.org/podvig/Podvig-False_alarms_and_incidents-2025.pdf",
+      "source_type": "Podvig nuclear false-alarm analysis",
+      "status": "EDITORIAL_GUARDRAIL"
+    }
+  ]
+}
