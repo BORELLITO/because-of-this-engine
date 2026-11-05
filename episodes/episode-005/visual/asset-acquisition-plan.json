@@ -664,7 +664,7 @@
       }
     }
   ],
-  "next_action": "Use search_strategy.search-v2: collect six page-verified candidates per unresolved shot, shortlist two, then manually dispatch plan-driven intake and fingerprint in batch. Do not trigger visual workflows from ordinary PR/documentation updates.",
+  "next_action": "Fill the six page-verified candidate records for each unresolved shot, shortlist two per shot, dispatch one manual intake batch for the selected IDs, then dispatch fingerprint for that same batch; keep render blocked until human semantic QA, thumbnail and final gates pass.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -937,7 +937,9 @@
       "shortlist_size_per_shot": 2,
       "intake_only_after_shortlist": true,
       "fingerprint_after_batch": true,
-      "human_approval_after_technical_gates": true
+      "human_approval_after_technical_gates": true,
+      "intake_scope": "Selected shortlist IDs are dispatched as one manual batch (maximum 12 candidates); no candidate is downloaded on ordinary PR/documentation changes.",
+      "fingerprint_scope": "Fingerprint audit receives the same explicit candidate_ids batch and never scans the entire plan implicitly."
     },
     "preflight_filters": [
       "provider_page_verified",
@@ -966,7 +968,10 @@
       "visual_candidate_intake": "MANUAL_DISPATCH_ONLY",
       "global_fingerprint_audit": "MANUAL_DISPATCH_ONLY",
       "source_of_truth_for_urls": "asset-acquisition-plan.json",
-      "duplicate_workflow_allowlists": "PROHIBITED"
+      "duplicate_workflow_allowlists": "PROHIBITED",
+      "batch_input_required": true,
+      "batch_input_format": "Comma- or newline-separated candidate IDs already present in asset-acquisition-plan.json.",
+      "ordinary_pr_media_downloads": false
     },
     "unresolved_shot_queue": [
       {
