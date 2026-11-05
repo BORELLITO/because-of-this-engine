@@ -14,17 +14,17 @@ on:
       candidate_id:
         description: "Candidate identifier from asset-acquisition-plan.json"
         required: true
-        default: "mixkit-slowly-approaching-clock-28897"
+        default: "mixkit-clock-mechanism-3651"
         type: string
       source_page_url:
         description: "Verified provider page URL"
         required: true
-        default: "https://mixkit.co/free-stock-video/slowly-approaching-a-clock-on-a-black-background-28897/"
+        default: "https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/"
         type: string
       media_url:
         description: "Direct media URL observed on the verified provider page"
         required: true
-        default: "https://assets.mixkit.co/videos/28897/28897-720.mp4"
+        default: "https://assets.mixkit.co/videos/3651/3651-720.mp4"
         type: string
       license_name:
         description: "License visibly stated on the provider page"
@@ -55,7 +55,7 @@ jobs:
 
       - name: Download candidate without promotion
         env:
-          MEDIA_URL: ${{ github.event.inputs.media_url || 'https://assets.mixkit.co/bohe8920pfehyvq7p1hk5r699s7g' }}
+          MEDIA_URL: ${{ github.event.inputs.media_url || 'https://assets.mixkit.co/videos/3651/3651-720.mp4' }}
         run: |
           mkdir -p artifacts/episode005-visual-intake
           curl --fail --location --retry 2 --retry-delay 2 --connect-timeout 20 --max-time 180 "$MEDIA_URL"             --output artifacts/episode005-visual-intake/candidate.mp4
@@ -63,9 +63,9 @@ jobs:
 
       - name: Validate video and create intake evidence
         env:
-          CANDIDATE_ID: ${{ github.event.inputs.candidate_id || 'mixkit-abstract-red-glow-101432' }}
-          SOURCE_PAGE_URL: ${{ github.event.inputs.source_page_url || 'https://mixkit.co/free-stock-video/abstract-red-glow-101432/' }}
-          MEDIA_URL: ${{ github.event.inputs.media_url || 'https://assets.mixkit.co/bohe8920pfehyvq7p1hk5r699s7g' }}
+          CANDIDATE_ID: ${{ github.event.inputs.candidate_id || 'mixkit-clock-mechanism-3651' }}
+          SOURCE_PAGE_URL: ${{ github.event.inputs.source_page_url || 'https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/' }}
+          MEDIA_URL: ${{ github.event.inputs.media_url || 'https://assets.mixkit.co/videos/3651/3651-720.mp4' }}
           LICENSE_NAME: ${{ github.event.inputs.license_name || 'Mixkit Stock Video Free License' }}
         run: |
           python - <<'PY'
@@ -85,6 +85,10 @@ jobs:
               "mixkit-cloudy-sky-118": {
                   "source_page_url": "https://mixkit.co/free-stock-video/cloudy-sky-118/",
                   "media_url": "https://assets.mixkit.co/videos/118/118-720.mp4",
+              },
+              "mixkit-clock-mechanism-3651": {
+                  "source_page_url": "https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/",
+                  "media_url": "https://assets.mixkit.co/videos/3651/3651-720.mp4",
               },
               "mixkit-abstract-red-glow-101432": {
                   "source_page_url": "https://mixkit.co/free-stock-video/abstract-red-glow-101432/",
