@@ -178,10 +178,15 @@ async def _save_mp3(text: str, profile: dict, destination: Path) -> None:
 
 
 def _convert_mp3_to_wav(mp3_path: Path, wav_path: Path, sample_rate: int) -> None:
-    if shutil.which("ffmpeg") is None:
-        raise EdgeTTSError("ffmpeg is required to convert Edge TTS audio to canonical WAV")
+    ffmpeg_bin = shutil.which("ffmpeg")
+    if ffmpeg_bin is None:
+        try:
+            import imageio_ffmpeg
+            ffmpeg_bin = imageio_ffmpeg.get_ffmpeg_exe()
+        except Exception as exc:
+            raise EdgeTTSError("ffmpeg or imageio-ffmpeg is required to convert Edge TTS audio to canonical WAV") from exc
     command = [
-        "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
+        ffmpeg_bin, "-y", "-hide_banner", "-loglevel", "error",
         "-i", str(mp3_path), "-ac", "1", "-ar", str(sample_rate),
         "-sample_fmt", "s16", str(wav_path),
     ]
@@ -358,26 +363,3 @@ def main() -> int:
     parser.add_argument("--preflight", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
-    try:
-        manifest = _load_manifest(args.manifest.resolve())
-        if args.preflight:
-            print(json.dumps(preflight(manifest), ensure_ascii=False, indent=2))
-            return 0
-        if not args.input:
-            raise EdgeTTSError("--input is required unless --preflight is used")
-        source = args.input.read_text(encoding="utf-8").strip()
-        if not source:
-            raise EdgeTTSError("narration input is empty")
-        profile = profile_from_manifest(manifest)
-        output = (args.output_dir or args.manifest.parent / "audio").resolve()
-        report = synthesize_chunks(chunks_from_manifest(manifest, source), output, profile, dry_run=args.dry_run)
-        (output / "edge-tts-report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        print(json.dumps(report, ensure_ascii=False))
-        return 0
-    except (OSError, ValueError, EdgeTTSError, json.JSONDecodeError) as exc:
-        print(f"EDGE TTS BLOCKED: {exc}")
-        return 1
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
