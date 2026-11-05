@@ -8,7 +8,7 @@
 - Base: main at d35d78cd4a92d12375f54076e3e21b56cbe25fad
 - Candidate branch: integration/because-of-this-v2.1-20261105
 - Draft PR: 67 (branch head is authoritative; commit history is tracked by GitHub)
-- Status: PARTIAL / BLOCKED_FOR_PRODUCTION
+- Status: PARTIAL_MANIFEST_VALIDATED_BLOCKED_RENDER
 - Canonical entrypoint: production/canonical_entrypoint.py
 - Canonical voice: Microsoft Edge TTS / ChristopherNeural active for zero-billing preview; Cloud/Gemini are not active routes
 - Publication: manual only
@@ -33,22 +33,24 @@
 | Main / refs / PRs | FOUND | GitHub API; main d35d78c; PR 67 |
 | V2.1 contracts | TESTED | Candidate CI must pass unit, schema, adapter, singleton and clean-checkout gates |
 | Canonical adapter | IMPLEMENTED | v7_orchestrator.py delegates to canonical_entrypoint.py under active V2.1 policy |
-| Global no-reuse | BLOCKED when incomplete | Registry is required and independent perceptual hashes are required |
-| Thumbnail | BLOCKED when incomplete | Final manifest, delivery paths and strict file checks are required |
+| Global no-reuse | VALIDATED_FOR_MANIFEST / BLOCKED_FOR_CATALOG | 16 assigned assets, 16 unique sources, no source/SHA/perceptual collisions in the latest fingerprint evidence; global catalog mutation remains false |
+| Thumbnail | CANDIDATE_READY / FINAL_BLOCKED | Original symbolic candidate registered with SHA-256 and Library evidence; final human review, final manifest and delivery paths are still missing |
 | Legacy workflows | ARCHIVED | Definitions retained under archive/v7/workflows/, outside .github/workflows |
 | Drive | NOT RUN | No Drive write or media generation authorized |
 | Work | UNKNOWN | No independent Work execution log |
-| Edge TTS + captions preview | NATIVE_PROVIDER_TIMING_VALIDATED_GROUPED_BOUNDARIES | Audio run 41961294784 + frozen caption run 42027607644; 79.704 s; ChristopherNeural; 175 provider tokens; 2 grouped boundaries; caption artifact 13388300361 |
-| Visual asset acquisition | BATCH_SEARCH_V2_READY | 15 Pexels fallback candidates plus 7 Mixkit candidates mapped to Episode 005 beats; seven are approved for manifest-only use and seven shots remain blocked. Intake/fingerprint are now manual-only and resolve URLs from the acquisition plan, eliminating duplicated defaults/allowlists and accidental downloads during PR updates |
+| Edge TTS + captions preview | VALIDATED | Microsoft Edge / en-US-ChristopherNeural; 79.704 s; audio SHA-256 and provider-native caption record aligned; Whisper remains diagnostic only |
+| Visual asset acquisition | PARTIAL_MANIFEST_VALIDATED_BLOCKED_RENDER | 42 active candidates, 22 approved for manifest, 16 assets assigned to 16 shots, 0 unresolved; intake/fingerprint are manual-only and no asset is approved for render/catalog/Drive |
+| Canonical render route | NOT IMPLEMENTED | production/canonical_entrypoint.py is intentionally read-only, production_enablement=false, and no final V2.1 render workflow is active |
 | First new production | BLOCKED | Implementation stage does not authorize automatic production |
 
-## Remaining blockers
+## Current blockers
 
-- The 13 historical registry assets were fingerprinted from their verified Drive MP4s with the versioned video-phash-v1 algorithm; future assets must use the same catalog contract.
-- Real thumbnail files and platform cover records are not yet available for a V2.1 episode.
-- Renderer accepts provider-native grouped boundaries as synchronized units; no provider interval is subdivided synthetically. Final render remains blocked only by missing approved assets, thumbnail and the remaining release gates.
-- Offline contracts for TTS, audio, captions, render and Drive are integrated; the canonical entrypoint verifies the real adapter files and symbols. Real Edge TTS audio and provider-native caption timing are generated and validated. Two provider boundary groups remain intentionally unsplit; the Whisper acoustic audit is retained as diagnostic and is not allowed to replace provider timing. The approved artifact is frozen; the synthesis workflow is manual-only because independent runs can produce different audio hashes. Visual asset acquisition is partially executed: seven Mixkit candidates have technical intake artifacts and explicit manifest-only approval; the mechanism is assigned to S10 only, the satellite antenna to S02 only, the young-engineer reconstruction to S03 only and the worker control-panel reconstruction to S04 only. The casual computer candidate for S03 was rejected for weak semantic fit, and Mixkit 5572 was rejected before intake because the free download is restricted to personal use. The S03 and S04 candidates are explicitly representational reconstructions, never literal Petrov archival evidence. The partial scene manifest still blocks repeated-source reuse within the episode, with seven shots unresolved. Thumbnail, render, Drive write and publication remain unexecuted. Pexels direct media download was blocked by the browser; Mixkit remains the preferred acquisition route, with license-page verification and per-file QA mandatory. The GitHub intake workflow resolves browser-verified media URLs from the plan, records SHA-256/metadata and emits QA frames without promotion. Search-v2 requires six page-verified candidates per unresolved shot, shortlists two, then runs one manual intake batch followed by one fingerprint audit for the same explicit candidate IDs. Batch inputs are comma- or newline-separated plan IDs, capped at 12 per dispatch; IDs, Mixkit domains, license, file size and duration are revalidated; there are no implicit full-plan scans.
-- Promotion to main still requires explicit approval and post-merge audit.
+- The visual plan and partial scene manifest are structurally validated: 42 active candidates, 22 approved for manifest, 16 assets, 16/16 shots assigned, 0 unresolved, and no duplicate source/SHA/perceptual collision detected. This does not authorize render or catalog mutation.
+- All 16 assignments remain APPROVED_FOR_MANIFEST_ONLY; every asset keeps approved_for_render=false, global_catalog_updated=false and drive_written=false.
+- The thumbnail is an original symbolic candidate (CANDIDATE_READY_FOR_HUMAN_REVIEW), not a final thumbnail manifest. Final human review, delivery files and platform cover records are still absent.
+- The canonical entrypoint is intentionally read-only. production_enablement=false, publication is manual-only, and there is no active V2.1 final-render workflow. The archived legacy renderer is not an acceptable fallback.
+- Edge TTS and provider-native captions are validated and aligned to the frozen audio SHA-256; the 79.704-second duration is within the explicit 80-second exception, but the target window remains 60–75 seconds.
+- Global catalog update, Drive write, render, delivery bundle and publication remain unexecuted. The PR is still draft and requires explicit review/post-merge audit.
 
 READY remains forbidden while any P0/P1 is open.
 
@@ -263,3 +265,14 @@ READY remains forbidden while any P0/P1 is open.
 - O status permanece CANDIDATE_READY_FOR_HUMAN_REVIEW; ainda não é thumbnail final aprovada para publicação.
 - A rota de render V2.1 continua o único bloqueio estrutural: o entrypoint canônico é read-only, production_enablement=false e não existe workflow final ativo. Nenhuma rota legada foi reativada.
 - Próximo passo técnico seguro: implementar uma rota manual V2.1 de render com contrato próprio, preservando o entrypoint canônico read-only, publicação manual e fail-closed.
+
+
+## Atualização — auditoria profunda de integração e organização — 2026-11-05
+
+- Checkout auditado no head 0303e549c4aaa008dfe4db647781957d9fbe98dd; branch correta, sem alterações locais e sem erro em git diff --check.
+- Validação oficial VISUAL_PLAN_CONTRACT_PASS: 42 candidatos ativos, 22 aprovados para manifesto, 16 assets, 16/16 assignments e 0 shots pendentes; promotion_allowed=false, render_allowed=false e global_catalog_updated=false.
+- Auditoria cruzada confirmou episode_id, story_id, cobertura S01–S16, 16 fontes únicas, SHA-256/fingerprint/licença presentes e flags de promoção fechadas.
+- Pré-voo repetido com sucesso: py_compile de production/*.py, 13 testes V2.1 passando e V21_SINGLETON_PASS; nenhuma rota legada foi reativada.
+- Conflito documental corrigido neste Centro de Controle: o resumo superior agora reflete o estado real atual; os addenda históricos foram preservados.
+- Conclusão: a integração de contratos, TTS/captions, plano visual, manifesto, fingerprint e gates está implementada/testada como candidata V2.1. A integração operacional de render final ainda não está implementada e permanece corretamente bloqueada.
+- Próximo passo único: implementar e testar uma rota manual de render V2.1, separada do entrypoint read-only, com contrato de thumbnail final, preview, QA técnico/visual e rollback; publicação continuará manual e não será acionada automaticamente.
