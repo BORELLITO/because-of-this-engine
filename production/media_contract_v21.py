@@ -8,7 +8,7 @@ from typing import Any
 SHA256 = re.compile(r"^[0-9a-f]{64}$", re.IGNORECASE)
 
 ADAPTERS = {
-    "audio_contract.adapter": ("production/cloud_tts.py", "synthesize_chunks"),
+    "audio_contract.adapter": ("production/edge_tts.py", "synthesize_chunks"),
     "captions_contract.adapter": ("production/align_captions.py", "main"),
     "render_contract.adapter": ("production/render_video_episode.py", "main"),
     "drive_contract.assets_adapter": ("production/google_drive_assets.py", "main"),
