@@ -11,21 +11,22 @@
   "approval_record": {
     "status": "APPROVED_FOR_MANIFEST_ONLY",
     "approved_at_utc": "2026-11-05T11:02:38Z",
-    "decision": "Approve the five downloaded candidates for the Episode 005 partial visual manifest.",
+    "decision": "Approve six downloaded candidates for the Episode 005 partial visual manifest; the S03 engineer candidate is representational modern reconstruction only.",
     "constraints": [
       "red-light candidate remains symbolic and must not be presented as literal Petrov archival evidence",
       "approval does not authorize global catalog mutation",
       "approval does not authorize render, Drive write or publication",
       "all unresolved story shots remain blocked",
       "clock-mechanism candidate is a symbolic mechanical-time reconstruction, assigned to S10 only and never treated as Petrov archival evidence",
-      "satellite antenna candidate is representational infrastructure for S02 only and must not be presented as literal Petrov archival evidence"
+      "satellite antenna candidate is representational infrastructure for S02 only and must not be presented as literal Petrov archival evidence",
+      "young-engineer candidate is assigned to S03 only and must not be presented as literal Petrov archival evidence"
     ]
   },
   "global_reuse_audit": {
     "status": "PASS_NO_COLLISION",
-    "workflow_run_id": 42016725778,
-    "artifact_id": 13409611998,
-    "artifact_digest": "sha256:30f39d5255b086062c6e01e7576c9cd9f5371476b795a1736d48579bbc2474c4",
+    "workflow_run_id": 42021523387,
+    "artifact_id": 13411692548,
+    "artifact_digest": "sha256:60d3a8c2b25a355f2415b9b83ead93e036727ae373ad587c8ae7e7f3b9b046f7",
     "algorithm": "video-fingerprint-v2-rgb24-q4"
   },
   "assets": [
@@ -153,6 +154,35 @@
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false
+    },
+    {
+      "candidate_id": "mixkit-young-engineer-29991",
+      "provider": "mixkit",
+      "source_page_url": "https://mixkit.co/free-stock-video/young-engineer-programming-in-his-workshop-seen-up-close-29991/",
+      "media_url": "https://assets.mixkit.co/videos/29991/29991-720.mp4",
+      "license_name": "Mixkit Stock Video Free License",
+      "source_role": "S03",
+      "truth_class": "REPRESENTATIONAL",
+      "sha256": "f1474daed5b97009063ca692859fdca1e91044ad62a9cd1f1f3009b2609b3478",
+      "perceptual_hash": "a4e5ac59afbd71e65a7b8eaccba06c5c62ac7e169a6dceea4deae4cb15b5842a",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42021165782,
+        "artifact_id": 13411851653,
+        "artifact_digest": "sha256:b18104580e4f089e496f203e65c25cd11d68bb599673a7e1e2243ec53d8ae015"
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 42021523387,
+        "artifact_id": 13411692548,
+        "artifact_digest": "sha256:60d3a8c2b25a355f2415b9b83ead93e036727ae373ad587c8ae7e7f3b9b046f7"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "editorial_caveat": "Modern tablet/code/workshop reconstruction; never literal Petrov archival evidence."
     }
   ],
   "shot_assignments": [
@@ -194,9 +224,16 @@
       "role": "human_anchor",
       "requested_visual": "Representational command-bunker portrait/composition of Petrov; no false archival claim.",
       "requested_truth_class": "REPRESENTATIONAL",
-      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
-      "assignment": null,
-      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "assignment": {
+        "candidate_id": "mixkit-young-engineer-29991",
+        "usage": "modern technical human-anchor reconstruction in workshop; not literal Petrov archival evidence",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "editorial_caveat": "Use only as representational reconstruction; do not imply the 1983 bunker looked like a modern tablet workstation."
+      },
+      "blocking_reason": null
     },
     {
       "shot_id": "S04",
@@ -348,7 +385,6 @@
     }
   ],
   "unresolved_shots": [
-    "S03",
     "S04",
     "S05",
     "S06",
@@ -369,11 +405,27 @@
     "drive_write_authorized": false,
     "publication_authorized": false
   },
-  "next_action": "Acquire and QA distinct candidates for unresolved shots S03,S04,S05,S06,S08,S09,S12,S13,S14,S15,S16, then re-run final visual manifest validation.",
+  "next_action": "Acquire and QA distinct candidates for unresolved shots S04,S05,S06,S08,S09,S12,S13,S14,S15,S16, then re-run final visual manifest validation. Render, global catalog, Drive and publication remain blocked.",
   "reuse_policy": {
     "source_reuse_scope": "global",
     "distinct_source_required_per_shot": true,
     "duplicate_source_within_episode": "BLOCK",
     "duplicate_source_across_episodes": "BLOCK"
-  }
+  },
+  "additional_human_approval_records": [
+    {
+      "candidate_id": "mixkit-young-engineer-29991",
+      "shot_ids": [
+        "S03"
+      ],
+      "decision": "APPROVED_FOR_MANIFEST_ONLY",
+      "scope": "Representational modern technical reconstruction",
+      "evidence": {
+        "intake_workflow_run_id": 42021165782,
+        "intake_artifact_id": 13411851653,
+        "fingerprint_workflow_run_id": 42021523387,
+        "fingerprint_artifact_id": 13411692548
+      }
+    }
+  ]
 }
