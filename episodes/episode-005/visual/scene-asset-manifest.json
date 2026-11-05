@@ -5,33 +5,38 @@
   "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
   "editorial_mode": "factual_documentary",
   "title": "THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
-  "status": "PARTIAL_MANIFEST_APPROVED_BLOCKED",
+  "status": "PARTIAL_MANIFEST_APPROVED_VALIDATION_PENDING",
   "purpose": "Human-approved candidate-to-shot assignments before final production promotion.",
   "source_plan": "episodes/episode-005/visual/asset-acquisition-plan.json",
   "approval_record": {
     "status": "APPROVED_FOR_MANIFEST_ONLY",
-    "approved_at_utc": "2026-11-05T11:02:38Z",
-    "decision": "Approve seven downloaded candidates for the Episode 005 partial visual manifest; S03 and S04 remain representational reconstructions only.",
+    "approved_at_utc": "2026-11-05T17:59:24.004Z",
+    "decision": "User approved all 12 candidates; six highest-scoring candidates were assigned as primary assets for S05, S08, S09, S13, S15 and S16.",
     "constraints": [
       "red-light candidate remains symbolic and must not be presented as literal Petrov archival evidence",
       "approval does not authorize global catalog mutation",
       "approval does not authorize render, Drive write or publication",
-      "all unresolved story shots remain blocked",
       "clock-mechanism candidate is a symbolic mechanical-time reconstruction, assigned to S10 only and never treated as Petrov archival evidence",
       "satellite antenna candidate is representational infrastructure for S02 only and must not be presented as literal Petrov archival evidence",
       "young-engineer candidate is assigned to S03 only and must not be presented as literal Petrov archival evidence",
       "worker-industrial-lathe candidate is assigned to S04 only and must not be presented as literal Petrov archival evidence",
       "LED indicator candidate is approved for S06 only as abstract representational texture; not a literal Soviet interface",
       "Pixabay antenna candidate is approved for S12 only as representational sensor/early-warning infrastructure",
-      "these approvals do not authorize render, global catalog mutation, Drive write or publication"
+      "these approvals do not authorize render, global catalog mutation, Drive write or publication",
+      "all six previously unresolved shots now have distinct primary manifest assignments",
+      "representational footage is not literal Petrov archival evidence",
+      "approval does not authorize render, global catalog mutation, Drive write or publication",
+      "final visual manifest validation remains required"
     ]
   },
   "global_reuse_audit": {
     "status": "PASS_NO_COLLISION",
-    "workflow_run_id": 42025128372,
-    "artifact_id": 13413646379,
-    "artifact_digest": "sha256:a4450ebff3562383b0b8c731bc810f810850eab1fa476737233279724c18fc69",
-    "algorithm": "video-fingerprint-v2-rgb24-q4"
+    "workflow_run_id": 42074599454,
+    "artifact_id": 13438400127,
+    "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1",
+    "algorithm": "video-fingerprint-v2-rgb24-q4",
+    "candidate_count": 12,
+    "blockers": []
   },
   "assets": [
     {
@@ -313,6 +318,186 @@
       "thumbnail_eligible": false,
       "drive_written": false,
       "editorial_caveat": "Representational empty institutional corridor for S14 only; never literal Petrov archival evidence and never reused in another shot."
+    },
+    {
+      "candidate_id": "pixabay-alert-alarm-war-danger-risk-205519",
+      "provider": "pixabay",
+      "source_page_url": "https://pixabay.com/videos/alert-alarm-war-danger-risk-205519/",
+      "media_url": "https://cdn.pixabay.com/video/2024/03/24/205519-927335684_large.mp4",
+      "license_name": "Pixabay Content License",
+      "source_role": "S05",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "sha256": "5a2031e934028fb6c13ba07dd176092507303db83f4decc8b79acb2263ecbf8d",
+      "perceptual_hash": "f2bb56d11027b73124649c52ecb1018ec945a8e1c02da9312e1ac958f733fbb6",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "artifact_id": 13437466569,
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057"
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 42074599454,
+        "artifact_id": 13438400127,
+        "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "editorial_caveat": "Representational reconstruction/symbolic visual only; never literal Petrov archival evidence.",
+      "selection_basis": "Primary selection for S05: highest scored candidate in the approved two-candidate shortlist."
+    },
+    {
+      "candidate_id": "pixabay-radar-radar-screen-rotation-circles-4511",
+      "provider": "pixabay",
+      "source_page_url": "https://pixabay.com/videos/radar-radar-screen-rotation-circles-4511/",
+      "media_url": "https://cdn.pixabay.com/video/2016/08/16/4511-179376471_large.mp4",
+      "license_name": "Pixabay Content License",
+      "source_role": "S08",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "sha256": "8185f8459b80df5c5eaa95d4a66ac58edef34fc7f790ca4e5f74fc10a70742d6",
+      "perceptual_hash": "6818a74392e5f6ef8d3ded092f6c1ce791afd3d710e0acd30e7cf78a60b12242",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "artifact_id": 13437466569,
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057"
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 42074599454,
+        "artifact_id": 13438400127,
+        "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "editorial_caveat": "Representational reconstruction/symbolic visual only; never literal Petrov archival evidence.",
+      "selection_basis": "Primary selection for S08: highest scored candidate in the approved two-candidate shortlist."
+    },
+    {
+      "candidate_id": "pixabay-button-press-red-business-click-502",
+      "provider": "pixabay",
+      "source_page_url": "https://pixabay.com/videos/button-press-red-business-click-502/",
+      "media_url": "https://cdn.pixabay.com/video/2015/08/22/502-137078153_large.mp4",
+      "license_name": "Pixabay Content License",
+      "source_role": "S09",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "sha256": "e6eaeddadbda7f8fdf9e4106ad09e0c25e0139f0212dce20a29d34cd8eb77b16",
+      "perceptual_hash": "155c325b4b0c121d7add2c16eea0d86efa5379f7bcec66dc52bec0073972e884",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "artifact_id": 13437466569,
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057"
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 42074599454,
+        "artifact_id": 13438400127,
+        "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "editorial_caveat": "Representational reconstruction/symbolic visual only; never literal Petrov archival evidence.",
+      "selection_basis": "Primary selection for S09: highest scored candidate in the approved two-candidate shortlist."
+    },
+    {
+      "candidate_id": "pixabay-typewriter-typing-writing-author-1335",
+      "provider": "pixabay",
+      "source_page_url": "https://pixabay.com/videos/typewriter-typing-writing-author-1335/",
+      "media_url": "https://cdn.pixabay.com/video/2015/11/12/1335-145564309_large.mp4",
+      "license_name": "Pixabay Content License",
+      "source_role": "S13",
+      "truth_class": "DOCUMENTARY_EVIDENCE",
+      "sha256": "2df86b63f6f05398b44ac2c4b28e9f370036e552b20d0b30e2842e2e71aabd23",
+      "perceptual_hash": "e42ec360a46a9ef093c7055f72d0bb39ebffb9a8e7ce3acb6ee96902f70673fe",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "artifact_id": 13437466569,
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057"
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 42074599454,
+        "artifact_id": 13438400127,
+        "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "editorial_caveat": "Representational reconstruction/symbolic visual only; never literal Petrov archival evidence.",
+      "selection_basis": "Primary selection for S13: highest scored candidate in the approved two-candidate shortlist."
+    },
+    {
+      "candidate_id": "pixabay-dark-light-lens-flare-abstract-250413",
+      "provider": "pixabay",
+      "source_page_url": "https://pixabay.com/videos/dark-light-lens-flare-abstract-250413/",
+      "media_url": "https://cdn.pixabay.com/video/2025/01/03/250413_large.mp4",
+      "license_name": "Pixabay Content License",
+      "source_role": "S15",
+      "truth_class": "REPRESENTATIONAL",
+      "sha256": "bc173bee51dd0dd3120d2cfbfc2884f5681849b384bc661af7f2721d92a2c8ad",
+      "perceptual_hash": "57bce8d11491f760dbeea11a0b9925a6d0085ae70c32966ef3a62cb887a16026",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "artifact_id": 13437466569,
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057"
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 42074599454,
+        "artifact_id": 13438400127,
+        "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "editorial_caveat": "Representational reconstruction/symbolic visual only; never literal Petrov archival evidence.",
+      "selection_basis": "Primary selection for S15: highest scored candidate in the approved two-candidate shortlist."
+    },
+    {
+      "candidate_id": "pixabay-particles-orange-red-dust-effect-7957",
+      "provider": "pixabay",
+      "source_page_url": "https://pixabay.com/videos/particles-orange-red-dust-effect-7957/",
+      "media_url": "https://cdn.pixabay.com/video/2017/02/26/7957-205810637_large.mp4",
+      "license_name": "Pixabay Content License",
+      "source_role": "S16",
+      "truth_class": "BRAND_OUTRO",
+      "sha256": "00cb906c22484217646c6aeedc90f725941f4aa25e0df64378c1b0ecfe267282",
+      "perceptual_hash": "423fdfd63cdb0a3bd7cb7c798b1dc532e41d0d98234fad78e2cba05b49f97911",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "artifact_id": 13437466569,
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057"
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 42074599454,
+        "artifact_id": 13438400127,
+        "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "editorial_caveat": "Representational reconstruction/symbolic visual only; never literal Petrov archival evidence.",
+      "selection_basis": "Primary selection for S16: highest scored candidate in the approved two-candidate shortlist."
     }
   ],
   "shot_assignments": [
@@ -388,9 +573,16 @@
       "role": "escalation",
       "requested_visual": "One launch indicator becomes two, then three.",
       "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
-      "assignment": null,
-      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "assignment": {
+        "candidate_id": "pixabay-alert-alarm-war-danger-risk-205519",
+        "usage": "Distinct escalation insert for multiple launch-warning indicators; use as representational alarm evidence, not literal Soviet interface.",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
+      },
+      "blocking_reason": null
     },
     {
       "shot_id": "S06",
@@ -431,9 +623,16 @@
       "role": "contradiction",
       "requested_visual": "Ground radar remains empty while satellite alert flashes.",
       "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
-      "assignment": null,
-      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "assignment": {
+        "candidate_id": "pixabay-radar-radar-screen-rotation-circles-4511",
+        "usage": "Empty ground-radar/monitoring insert contrasting with the satellite alert.",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
+      },
+      "blocking_reason": null
     },
     {
       "shot_id": "S09",
@@ -441,9 +640,16 @@
       "role": "irreversible_choice",
       "requested_visual": "False-alarm classification is entered; no celebratory interface.",
       "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
-      "assignment": null,
-      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "assignment": {
+        "candidate_id": "pixabay-button-press-red-business-click-502",
+        "usage": "Technical input insert representing the operator entering the false-alarm classification.",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
+      },
+      "blocking_reason": null
     },
     {
       "shot_id": "S10",
@@ -500,9 +706,16 @@
       "role": "proof",
       "requested_visual": "Declassified report/logbook treatment with readable evidence cues.",
       "requested_truth_class": "DOCUMENTARY_EVIDENCE",
-      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
-      "assignment": null,
-      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "assignment": {
+        "candidate_id": "pixabay-typewriter-typing-writing-author-1335",
+        "usage": "Typewritten evidence treatment for a declassified report/logbook beat without inventing readable historical text.",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
+      },
+      "blocking_reason": null
     },
     {
       "shot_id": "S14",
@@ -527,9 +740,16 @@
       "role": "reframe",
       "requested_visual": "Red warning fades into neutral black; no victory imagery.",
       "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
-      "assignment": null,
-      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "assignment": {
+        "candidate_id": "pixabay-dark-light-lens-flare-abstract-250413",
+        "usage": "Restrained transition from warning pulse into neutral black; no victory imagery.",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
+      },
+      "blocking_reason": null
     },
     {
       "shot_id": "S16",
@@ -537,21 +757,21 @@
       "role": "payoff",
       "requested_visual": "Final branded logo lockup with restrained red pulse.",
       "requested_truth_class": "BRAND_OUTRO",
-      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
-      "assignment": null,
-      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "assignment": {
+        "candidate_id": "pixabay-particles-orange-red-dust-effect-7957",
+        "usage": "Restrained branded outro texture with a controlled red/orange pulse behind the final logo lockup.",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
+      },
+      "blocking_reason": null
     }
   ],
-  "unresolved_shots": [
-    "S05",
-    "S08",
-    "S09",
-    "S13",
-    "S15",
-    "S16"
-  ],
+  "unresolved_shots": [],
   "promotion_gates": {
-    "every_shot_assigned": false,
+    "every_shot_assigned": true,
     "final_visual_manifest_validated": false,
     "global_catalog_update_authorized": false,
     "thumbnail_final_required": true,
@@ -559,7 +779,7 @@
     "drive_write_authorized": false,
     "publication_authorized": false
   },
-  "next_action": "Acquire and QA distinct candidates for unresolved shots S05,S08,S09,S13,S15,S16; then re-run final visual manifest validation. Render, global catalog, Drive and publication remain blocked.",
+  "next_action": "Run final read-only visual manifest validation and structural/rights audit. Render, global catalog, Drive and publication remain blocked until validation and explicit render approval.",
   "reuse_policy": {
     "source_reuse_scope": "global",
     "distinct_source_required_per_shot": true,
@@ -646,6 +866,40 @@
         "intake_artifact_id": 13428247933,
         "fingerprint_workflow_run_id": 42059893725,
         "fingerprint_artifact_id": 13431651011
+      }
+    },
+    {
+      "candidate_ids": [
+        "pixabay-alert-alarm-war-danger-risk-205519",
+        "pixabay-radar-black-green-target-symbol-57670",
+        "pixabay-radar-radar-screen-rotation-circles-4511",
+        "pixabay-radar-communication-military-261518",
+        "pixabay-button-press-red-business-click-502",
+        "pixabay-button-press-push-start-launching-221746",
+        "pixabay-typewriter-typing-writing-author-1335",
+        "pixabay-typewriter-type-antique-writing-38626",
+        "pixabay-dark-light-lens-flare-abstract-250413",
+        "pixabay-abstract-light-streaks-motion-250417",
+        "pixabay-particles-orange-red-dust-effect-7957",
+        "pixabay-colors-lines-lights-abstract-video-5072"
+      ],
+      "selected_primary_by_shot": {
+        "S05": "pixabay-alert-alarm-war-danger-risk-205519",
+        "S08": "pixabay-radar-radar-screen-rotation-circles-4511",
+        "S09": "pixabay-button-press-red-business-click-502",
+        "S13": "pixabay-typewriter-typing-writing-author-1335",
+        "S15": "pixabay-dark-light-lens-flare-abstract-250413",
+        "S16": "pixabay-particles-orange-red-dust-effect-7957"
+      },
+      "approved_at_utc": "2026-11-05T17:59:24.004Z",
+      "decision": "APPROVED_FOR_MANIFEST_ONLY",
+      "evidence": {
+        "intake_workflow_run_id": 42073828513,
+        "intake_artifact_id": 13437466569,
+        "intake_artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "fingerprint_workflow_run_id": 42074599454,
+        "fingerprint_artifact_id": 13438400127,
+        "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
       }
     }
   ]
