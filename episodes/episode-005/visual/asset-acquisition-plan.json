@@ -1,7 +1,7 @@
 {
   "plan_id": "episode-005-visual-asset-acquisition-v1",
   "episode_id": "episode-005",
-  "status": "THREE_CANDIDATES_DOWNLOADED_HUMAN_QA_REQUIRED",
+  "status": "THREE_CANDIDATES_DOWNLOADED_FINGERPRINT_PASS_HUMAN_QA_REQUIRED",
   "purpose": "Pre-download candidate pool for Episode 005. No candidate is approved for render until downloaded, SHA-256ed, visually inspected, checked for embedded text/logos/letterbox, fingerprinted, and entered into the final video manifest.",
   "frozen_audio_source": {
     "workflow_run_id": 41961294784,
@@ -222,7 +222,11 @@
         ],
         "frame_rate": "24000/1001",
         "codec": "h264",
-        "automated_promotion": false
+        "automated_promotion": false,
+        "perceptual_hash": "835461ff7f59472fc9efe33bd35dc83d65f475f22c999ee4d4df70cb139cfc3e",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42006712937,
+        "fingerprint_artifact_id": 13405101225
       },
       "qa": {
         "clean_frame_visual_review": "PRELIMINARY_PASS",
@@ -230,7 +234,7 @@
         "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
         "semantic_fit": "PRELIMINARY_PASS_FOR_S01_S06_S09_AS_SYMBOLIC_WARNING_TEXTURE",
         "locked_9x16_crop": "PRELIMINARY_PASS_NATIVE_VERTICAL",
-        "global_reuse_fingerprint": "PENDING",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "PENDING"
       }
     },
@@ -260,7 +264,11 @@
         ],
         "frame_rate": "24/1",
         "codec": "h264",
-        "automated_promotion": false
+        "automated_promotion": false,
+        "perceptual_hash": "9c8a21443b162c8a16f99d0876c8910cde48548fc525fc8c00c159dbc9db6f64",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42006712937,
+        "fingerprint_artifact_id": 13405101225
       },
       "qa": {
         "clean_frame_visual_review": "PRELIMINARY_PASS",
@@ -268,7 +276,7 @@
         "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
         "semantic_fit": "PRELIMINARY_PASS_FOR_S07_S10",
         "locked_9x16_crop": "PENDING",
-        "global_reuse_fingerprint": "PENDING",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "PENDING"
       }
     },
@@ -308,7 +316,11 @@
         ],
         "frame_rate": "24000/1001",
         "codec": "h264",
-        "automated_promotion": false
+        "automated_promotion": false,
+        "perceptual_hash": "75bd02cf43583033aee2f7659350e477ff56bd126380157b845433def983964a",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42006712937,
+        "fingerprint_artifact_id": 13405101225
       },
       "qa": {
         "clean_frame_visual_review": "PRELIMINARY_PASS",
@@ -316,7 +328,7 @@
         "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
         "semantic_fit": "PRELIMINARY_PASS_FOR_S11_S12",
         "locked_9x16_crop": "PRELIMINARY_PASS",
-        "global_reuse_fingerprint": "PENDING",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "PENDING"
       }
     },
@@ -332,9 +344,9 @@
       "rights_status": "CANDIDATE_NOT_DOWNLOADED"
     }
   ],
-  "next_action": "Run global perceptual fingerprint checks and human QA on the three downloaded Mixkit candidates; only then create the final visual manifest. Do not promote any candidate or render yet.",
+  "next_action": "Perform human visual QA and approval on the three candidates; after approval, create the final scene-to-asset manifest. Do not update the global catalog or render before the final promotion gate.",
   "acquisition_route": {
-    "status": "THREE_CANDIDATES_DOWNLOADED_AWAITING_GLOBAL_FINGERPRINT_AND_HUMAN_QA",
+    "status": "THREE_CANDIDATES_DOWNLOADED_FINGERPRINT_PASS_AWAITING_HUMAN_QA",
     "preferred_provider": "mixkit",
     "fallback_provider": "pexels",
     "browser_download_status": "PEXELS_DIRECT_MEDIA_BLOCKED",
@@ -387,6 +399,25 @@
         "workflow_run_id": 42005588495,
         "artifact_id": 13403209885,
         "artifact_digest": "sha256:e97bc6b2c2e7cac51c10a1af55a35570f5df044ac80bece0478292992ce0c78b"
+      },
+      {
+        "candidate_id": "mixkit-cloudy-sky-118",
+        "source_page_verified": true,
+        "license_visible_on_page": "Mixkit Stock Video Free License",
+        "browser_download_event": "NOT_USED_FOR_WORKSPACE_IMPORT",
+        "workspace_import": "REPLACED_BY_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE",
+        "sha256": "7b18e0c66a2eb1a55df0532d3bf346f1e1d193eaa805403cc39fc835e8454432",
+        "perceptual_hash": "75bd02cf43583033aee2f7659350e477ff56bd126380157b845433def983964a",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "clean_frame_qa": "PRELIMINARY_PASS",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "media_url": "https://assets.mixkit.co/videos/118/118-720.mp4",
+        "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+        "workflow_run_id": 42004883836,
+        "artifact_id": 13404636511,
+        "fingerprint_workflow_run_id": 42006712937,
+        "fingerprint_artifact_id": 13405101225
       }
     ],
     "workspace_import": "REPLACED_BY_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE"
