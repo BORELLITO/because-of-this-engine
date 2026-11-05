@@ -72,3 +72,18 @@ READY remains forbidden while any P0/P1 is open.
   - `pixabay-television-broadcasting-satellite-29483`: rejeição preliminar por aderência semântica fraca ao S12; mostra apenas uma televisão com tela branca.
 - A intake dos quatro candidatos precisa ser rerodada para gerar a nova evidência antes de qualquer decisão humana. Nenhum candidato foi promovido; render, catálogo global, thumbnail, Drive e publicação continuam bloqueados.
 - Próximo passo único atualizado: rerodar a intake Pixabay com a amostragem corrigida, substituir os dois rejeitados e então buscar aprovação humana explícita somente para os candidatos que passarem nos gates.
+
+## Addendum — refresh explícito de QA visual concluído — 2026-11-05
+
+- A primeira reexecução (#87, run `42042484037`) falhou de forma fail-closed porque o intake existente não podia ser sobrescrito implicitamente.
+- Foi criada a entrada manual `refresh_existing`, desativada por padrão, que somente regenera evidência isolada de QA e não altera catálogo, manifesto aprovado, render, Drive ou publicação.
+- A reexecução autorizada com `refresh_existing=true` foi concluída com sucesso:
+  - run: `42043152146`
+  - job: `127298967914`
+  - commit do workflow: `61d1f3613e2a065aad3d1ccd931e027f597ea9f9`
+  - artifact: `13422407818`
+  - digest: `sha256:2c518303ddeab0806300fe1eb4e8e1c3a01b7d0de92f1118ccbe0e77b5c7381f`
+- Evidência confirmada nos logs: quatro candidatos, cinco amostras normalizadas por candidato (início, 25%, 50%, 75% e fim menos 0,1 s), crops 9:16 e contact sheets de duração integral.
+- Resultado de segurança: `promotion_allowed=false`, `render_allowed=false`, `global_catalog_updated=false` e `drive_written=false`.
+- Os dois descartes preliminares permanecem: alerta/HUD para S06/S09 e televisão vintage para S12. Radar/sonar e radar-screen continuam condicionais, pendentes de aprovação humana explícita.
+- Próximo único passo: substituir os dois descartes por candidatos semanticamente adequados; nenhuma integração de render, catálogo ou Drive deve avançar antes disso.
