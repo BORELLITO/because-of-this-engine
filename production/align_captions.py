@@ -822,14 +822,10 @@ def generate(
                         f" Secondary acoustic retry also failed: {secondary_error}"
                         if secondary_error is not None else ""
                     )
-                    observed = " ".join(
-                        str(item.get("word", "")) for item in asr_words[:80]
-                    )
                     raise AlignmentError(
                         f"{first_error}{secondary_note} "
                         f"Grammar-constrained retry also failed: {constrained_error} "
-                        f"Phrase-scoped acoustic retry also failed: {phrase_error} "
-                        f"Observed acoustic words: {observed}"
+                        f"Phrase-scoped acoustic retry also failed: {phrase_error}"
                     ) from phrase_error
     overlap_count = _normalize_sidecar_word_timeline(sidecar_chunks, audio_seconds)
     # Rebuild phrase events from the normalized canonical word boundaries so
