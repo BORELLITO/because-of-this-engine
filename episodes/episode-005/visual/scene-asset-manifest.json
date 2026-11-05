@@ -1,0 +1,325 @@
+{
+  "manifest_schema_version": "episode-visual-manifest-v1",
+  "episode_id": "episode-005",
+  "story_id": "story-stanislav-petrov-false-alarm-1983",
+  "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+  "editorial_mode": "factual_documentary",
+  "title": "THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
+  "status": "PARTIAL_MANIFEST_APPROVED_BLOCKED",
+  "purpose": "Human-approved candidate-to-shot assignments before final production promotion.",
+  "source_plan": "episodes/episode-005/visual/asset-acquisition-plan.json",
+  "approval_record": {
+    "status": "APPROVED_FOR_MANIFEST_ONLY",
+    "approved_at_utc": "2026-11-05T10:10:00Z",
+    "decision": "Approve the three downloaded candidates for the Episode 005 visual manifest.",
+    "constraints": [
+      "red-light candidate remains symbolic and must not be presented as literal Petrov archival evidence",
+      "approval does not authorize global catalog mutation",
+      "approval does not authorize render, Drive write or publication",
+      "all unresolved story shots remain blocked"
+    ]
+  },
+  "global_reuse_audit": {
+    "status": "PASS_NO_COLLISION",
+    "workflow_run_id": 42007386261,
+    "artifact_id": 13405087460,
+    "artifact_digest": "sha256:66c98c055ec1a3e2da7c861cb367cd6761f18bf205a2f05329720da6d39ebf72",
+    "algorithm": "video-fingerprint-v2-rgb24-q4"
+  },
+  "assets": [
+    {
+      "candidate_id": "mixkit-abstract-red-glow-101432",
+      "provider": "mixkit",
+      "source_page_url": "https://mixkit.co/free-stock-video/abstract-red-glow-101432/",
+      "media_url": "https://assets.mixkit.co/bohe8920pfehyvq7p1hk5r699s7g",
+      "license_name": "Mixkit Stock Video Free License",
+      "source_role": "S01,S06,S09",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "sha256": "f5c6866db294ab7489e581d08d3ae5480496b42d43df8a4a6152bcc6e4d97774",
+      "perceptual_hash": "835461ff7f59472fc9efe33bd35dc83d65f475f22c999ee4d4df70cb139cfc3e",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42005588495,
+        "artifact_id": 13403209885,
+        "artifact_digest": "sha256:e97bc6b2c2e7cac51c10a1af55a35570f5df044ac80bece0478292992ce0c78b"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false
+    },
+    {
+      "candidate_id": "mixkit-slowly-approaching-clock-28897",
+      "provider": "mixkit",
+      "source_page_url": "https://mixkit.co/free-stock-video/slowly-approaching-a-clock-on-a-black-background-28897/",
+      "media_url": "https://assets.mixkit.co/videos/28897/28897-720.mp4",
+      "license_name": "Mixkit Stock Video Free License",
+      "source_role": "S07,S10",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "sha256": "d254063cd2f4ceeaf186f68c71c905fb8b27d9e94397aa0a794e93827208b505",
+      "perceptual_hash": "9c8a21443b162c8a16f99d0876c8910cde48548fc525fc8c00c159dbc9db6f64",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42003907636,
+        "artifact_id": 13403188677,
+        "artifact_digest": "sha256:3d1a8b60b24cede0ebb3b99d14f8ee9fcdc508040320498ec80f8f8d5bf78299"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false
+    },
+    {
+      "candidate_id": "mixkit-cloudy-sky-118",
+      "provider": "mixkit",
+      "source_page_url": "https://mixkit.co/free-stock-video/cloudy-sky-118/",
+      "media_url": "https://assets.mixkit.co/videos/118/118-720.mp4",
+      "license_name": "Mixkit Stock Video Free License",
+      "source_role": "S11,S12",
+      "truth_class": "EXPLAINED_PHENOMENON",
+      "sha256": "7b18e0c66a2eb1a55df0532d3bf346f1e1d193eaa805403cc39fc835e8454432",
+      "perceptual_hash": "75bd02cf43583033aee2f7659350e477ff56bd126380157b845433def983964a",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42004883836,
+        "artifact_id": 13404636511,
+        "artifact_digest": "sha256:12313afbe106a2dfdff4d9e8543b57f7e7312797620c227fae2c73291f5f2514"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false
+    }
+  ],
+  "shot_assignments": [
+    {
+      "shot_id": "S01",
+      "range": "00:00-00:04",
+      "role": "hook",
+      "requested_visual": "Dark bunker panel; red warning indicator comes alive.",
+      "requested_truth_class": "MAP_OR_DIAGRAM",
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "assignment": {
+        "candidate_id": "mixkit-abstract-red-glow-101432",
+        "usage": "symbolic red warning pulse; never literal archival evidence",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST"
+      },
+      "blocking_reason": null
+    },
+    {
+      "shot_id": "S02",
+      "range": "00:04-00:09",
+      "role": "context",
+      "requested_visual": "Night-side Earth and early-warning satellite.",
+      "requested_truth_class": "MAP_OR_DIAGRAM",
+      "status": "BLOCKED_NO_APPROVED_ASSET",
+      "assignment": null,
+      "blocking_reason": "No downloaded, fingerprinted and human-approved candidate currently covers this beat without inventing documentary evidence."
+    },
+    {
+      "shot_id": "S03",
+      "range": "00:09-00:14",
+      "role": "human_anchor",
+      "requested_visual": "Representational command-bunker portrait/composition of Petrov; no false archival claim.",
+      "requested_truth_class": "REPRESENTATIONAL",
+      "status": "BLOCKED_NO_APPROVED_ASSET",
+      "assignment": null,
+      "blocking_reason": "No downloaded, fingerprinted and human-approved candidate currently covers this beat without inventing documentary evidence."
+    },
+    {
+      "shot_id": "S04",
+      "range": "00:14-00:18",
+      "role": "escalation",
+      "requested_visual": "Alert moves through a command-chain diagram.",
+      "requested_truth_class": "MAP_OR_DIAGRAM",
+      "status": "BLOCKED_NO_APPROVED_ASSET",
+      "assignment": null,
+      "blocking_reason": "No downloaded, fingerprinted and human-approved candidate currently covers this beat without inventing documentary evidence."
+    },
+    {
+      "shot_id": "S05",
+      "range": "00:18-00:23",
+      "role": "escalation",
+      "requested_visual": "One launch indicator becomes two, then three.",
+      "requested_truth_class": "MAP_OR_DIAGRAM",
+      "status": "BLOCKED_NO_APPROVED_ASSET",
+      "assignment": null,
+      "blocking_reason": "No downloaded, fingerprinted and human-approved candidate currently covers this beat without inventing documentary evidence."
+    },
+    {
+      "shot_id": "S06",
+      "range": "00:23-00:27",
+      "role": "escalation",
+      "requested_visual": "Counter reaches five; alarm intensity rises.",
+      "requested_truth_class": "MAP_OR_DIAGRAM",
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "assignment": {
+        "candidate_id": "mixkit-abstract-red-glow-101432",
+        "usage": "symbolic escalation texture; no literal missile-console claim",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST"
+      },
+      "blocking_reason": null
+    },
+    {
+      "shot_id": "S07",
+      "range": "00:27-00:32",
+      "role": "decision_pressure",
+      "requested_visual": "Petrov studies the panel, telephone and clock.",
+      "requested_truth_class": "REPRESENTATIONAL",
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "assignment": {
+        "candidate_id": "mixkit-slowly-approaching-clock-28897",
+        "usage": "clock pressure and decision window",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST"
+      },
+      "blocking_reason": null
+    },
+    {
+      "shot_id": "S08",
+      "range": "00:32-00:37",
+      "role": "contradiction",
+      "requested_visual": "Ground radar remains empty while satellite alert flashes.",
+      "requested_truth_class": "MAP_OR_DIAGRAM",
+      "status": "BLOCKED_NO_APPROVED_ASSET",
+      "assignment": null,
+      "blocking_reason": "No downloaded, fingerprinted and human-approved candidate currently covers this beat without inventing documentary evidence."
+    },
+    {
+      "shot_id": "S09",
+      "range": "00:37-00:41",
+      "role": "irreversible_choice",
+      "requested_visual": "False-alarm classification is entered; no celebratory interface.",
+      "requested_truth_class": "MAP_OR_DIAGRAM",
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "assignment": {
+        "candidate_id": "mixkit-abstract-red-glow-101432",
+        "usage": "symbolic false-alarm classification transition",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST"
+      },
+      "blocking_reason": null
+    },
+    {
+      "shot_id": "S10",
+      "range": "00:41-00:46",
+      "role": "suspense",
+      "requested_visual": "Bunker waits; clock advances through silence.",
+      "requested_truth_class": "REPRESENTATIONAL",
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "assignment": {
+        "candidate_id": "mixkit-slowly-approaching-clock-28897",
+        "usage": "bunker waiting and time passage",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST"
+      },
+      "blocking_reason": null
+    },
+    {
+      "shot_id": "S11",
+      "range": "00:46-00:51",
+      "role": "non_event",
+      "requested_visual": "Empty night sky; expected impact never occurs.",
+      "requested_truth_class": "REPRESENTATIONAL",
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "assignment": {
+        "candidate_id": "mixkit-cloudy-sky-118",
+        "usage": "empty sky/non-event atmosphere",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST"
+      },
+      "blocking_reason": null
+    },
+    {
+      "shot_id": "S12",
+      "range": "00:51-00:56",
+      "role": "mechanism",
+      "requested_visual": "Sunlight geometry over high clouds and satellite sensor.",
+      "requested_truth_class": "MAP_OR_DIAGRAM",
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "assignment": {
+        "candidate_id": "mixkit-cloudy-sky-118",
+        "usage": "cloud mechanism atmosphere; diagram layer still required",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST"
+      },
+      "blocking_reason": null
+    },
+    {
+      "shot_id": "S13",
+      "range": "00:56-01:01",
+      "role": "proof",
+      "requested_visual": "Declassified report/logbook treatment with readable evidence cues.",
+      "requested_truth_class": "DOCUMENTARY_EVIDENCE",
+      "status": "BLOCKED_NO_APPROVED_ASSET",
+      "assignment": null,
+      "blocking_reason": "No downloaded, fingerprinted and human-approved candidate currently covers this beat without inventing documentary evidence."
+    },
+    {
+      "shot_id": "S14",
+      "range": "01:01-01:06",
+      "role": "consequence",
+      "requested_visual": "Petrov's later obscurity represented through empty military corridor.",
+      "requested_truth_class": "REPRESENTATIONAL",
+      "status": "BLOCKED_NO_APPROVED_ASSET",
+      "assignment": null,
+      "blocking_reason": "No downloaded, fingerprinted and human-approved candidate currently covers this beat without inventing documentary evidence."
+    },
+    {
+      "shot_id": "S15",
+      "range": "01:06-01:12",
+      "role": "reframe",
+      "requested_visual": "Red warning fades into neutral black; no victory imagery.",
+      "requested_truth_class": "MAP_OR_DIAGRAM",
+      "status": "BLOCKED_NO_APPROVED_ASSET",
+      "assignment": null,
+      "blocking_reason": "No downloaded, fingerprinted and human-approved candidate currently covers this beat without inventing documentary evidence."
+    },
+    {
+      "shot_id": "S16",
+      "range": "01:12-01:18",
+      "role": "payoff",
+      "requested_visual": "Final branded logo lockup with restrained red pulse.",
+      "requested_truth_class": "BRAND_OUTRO",
+      "status": "BLOCKED_NO_APPROVED_ASSET",
+      "assignment": null,
+      "blocking_reason": "No downloaded, fingerprinted and human-approved candidate currently covers this beat without inventing documentary evidence."
+    }
+  ],
+  "unresolved_shots": [
+    "S02",
+    "S03",
+    "S04",
+    "S05",
+    "S08",
+    "S13",
+    "S14",
+    "S15",
+    "S16"
+  ],
+  "promotion_gates": {
+    "every_shot_assigned": false,
+    "final_visual_manifest_validated": false,
+    "global_catalog_update_authorized": false,
+    "thumbnail_final_required": true,
+    "render_authorized": false,
+    "drive_write_authorized": false,
+    "publication_authorized": false
+  },
+  "next_action": "Acquire and QA candidates for unresolved shots S02,S03,S04,S05,S08,S13,S14,S15,S16, then re-run final visual manifest validation."
+}
