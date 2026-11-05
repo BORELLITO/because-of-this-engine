@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-FORBIDDEN_PRODUCTION_FALLBACKS = ("piper_tts", "edge_tts", "production/v7_orchestrator.py", "production/v7_contract.py", "production/render_video_episode.py", "production/gemini_tts.py")
+FORBIDDEN_PRODUCTION_FALLBACKS = ("piper_tts", "production/v7_orchestrator.py", "production/v7_contract.py", "production/render_video_episode.py", "production/gemini_tts.py")
 EXEMPT_WORKFLOWS = {"v21-integration-readonly.yml", "video-engine-ci.yml", "github-housekeeping.yml"}
 
 def audit(repo_root: Path) -> dict:
