@@ -9,7 +9,7 @@ from typing import Iterable
 PROVIDER = "microsoft_edge_tts"
 DEFAULT_SAMPLE_RATE = 24000
 MIN_NARRATION_SECONDS = 60.0
-MAX_NARRATION_SECONDS = 75.0
+MAX_NARRATION_SECONDS = 80.0
 MAX_ATTEMPTS = 1  # one synthesis submission; no automatic retry or duplicate request
 V21_MODEL = "edge_neural"
 V21_VOICE_NAME = "en-US-ChristopherNeural"
