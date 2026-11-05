@@ -7,7 +7,7 @@
     "mixkit": "https://mixkit.co/license/modal/videoFree/",
     "pixabay": "https://pixabay.com/service/license-summary/"
   },
-  "global_status": "BLOCKED_PENDING_DIRECT_MEDIA_PREVIEW_AND_PER_ASSET_RENDER_APPROVAL",
+  "global_status": "BLOCKED_PENDING_DIRECT_MEDIA_PREVIEW_AND_ASSET_REPLACEMENT_AND_PER_ASSET_RENDER_APPROVAL",
   "promotion_policy": {
     "approved_for_manifest_only": true,
     "approved_for_render": false,
@@ -251,10 +251,13 @@
         "S14"
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
-      "visual_rights_review": "PENDING_DIRECT_MEDIA_PREVIEW",
+      "visual_rights_review": "PASS_GENERIC_CORRIDOR_NO_PERSON_OR_BRAND_VISIBLE",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
-      "full_asset_review_status": "BLOCKED_BROWSER_PREVIEW_NOT_RENDERED"
+      "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
+      "visual_qa_status": "PASS",
+      "visual_qa_evidence": "artifact 13428247933 / pixabay-hallway-dark-corridor-20837/qa-frames.jpg",
+      "third_party_risk": "NONE_VISIBLE"
     },
     {
       "asset_id": "pixabay-alert-alarm-war-danger-risk-205519",
@@ -275,10 +278,14 @@
         "S05"
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
-      "visual_rights_review": "PENDING_DIRECT_MEDIA_PREVIEW",
+      "visual_rights_review": "FAIL_RECOGNIZABLE_PERSON_VISIBLE",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
-      "full_asset_review_status": "BLOCKED_BROWSER_PREVIEW_NOT_RENDERED"
+      "full_asset_review_status": "REJECTED_CANDIDATE_REQUIRES_REPLACEMENT",
+      "visual_qa_status": "FAIL",
+      "visual_qa_evidence": "artifact 13437466569 / pixabay-alert-alarm-war-danger-risk-205519/qa-frames.jpg",
+      "third_party_risk": "RECOGNIZABLE_PERSON_AND_PROVIDER_CREATOR_WARNING",
+      "qa_note": "Direct frame sheet shows a clearly recognizable adult face; provider page also warns against use with recognizable people."
     },
     {
       "asset_id": "pixabay-radar-radar-screen-rotation-circles-4511",
@@ -299,10 +306,13 @@
         "S08"
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
-      "visual_rights_review": "PENDING_DIRECT_MEDIA_PREVIEW",
+      "visual_rights_review": "PASS_GENERIC_GRAPHIC_NO_BRAND_OR_TEXT_VISIBLE",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
-      "full_asset_review_status": "BLOCKED_BROWSER_PREVIEW_NOT_RENDERED"
+      "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
+      "visual_qa_status": "PASS",
+      "visual_qa_evidence": "artifact 13437466569 / pixabay-radar-radar-screen-rotation-circles-4511/qa-frames.jpg",
+      "third_party_risk": "NONE_VISIBLE"
     },
     {
       "asset_id": "pixabay-button-press-red-business-click-502",
@@ -323,10 +333,13 @@
         "S09"
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
-      "visual_rights_review": "PENDING_DIRECT_MEDIA_PREVIEW",
+      "visual_rights_review": "PASS_GENERIC_3D_OBJECT_NO_BRAND_OR_TEXT_VISIBLE",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
-      "full_asset_review_status": "BLOCKED_BROWSER_PREVIEW_NOT_RENDERED"
+      "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
+      "visual_qa_status": "PASS",
+      "visual_qa_evidence": "artifact 13437466569 / pixabay-button-press-red-business-click-502/qa-frames.jpg",
+      "third_party_risk": "NONE_VISIBLE"
     },
     {
       "asset_id": "pixabay-typewriter-typing-writing-author-1335",
@@ -347,10 +360,13 @@
         "S13"
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
-      "visual_rights_review": "PENDING_DIRECT_MEDIA_PREVIEW",
+      "visual_rights_review": "PASS_GENERIC_TYPEWRITER_NO_BRAND_OR_READABLE_TEXT_VISIBLE",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
-      "full_asset_review_status": "BLOCKED_BROWSER_PREVIEW_NOT_RENDERED"
+      "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
+      "visual_qa_status": "PASS_WITH_GENERIC_MECHANISM_GUARDRAIL",
+      "visual_qa_evidence": "artifact 13437466569 / pixabay-typewriter-typing-writing-author-1335/qa-frames.jpg",
+      "third_party_risk": "GENERIC_MECHANISM_ONLY"
     },
     {
       "asset_id": "pixabay-dark-light-lens-flare-abstract-250413",
@@ -371,10 +387,13 @@
         "S15"
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
-      "visual_rights_review": "PENDING_DIRECT_MEDIA_PREVIEW",
+      "visual_rights_review": "PASS_ABSTRACT_NO_IDENTIFIABLE_ELEMENTS",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
-      "full_asset_review_status": "BLOCKED_BROWSER_PREVIEW_NOT_RENDERED"
+      "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
+      "visual_qa_status": "PASS",
+      "visual_qa_evidence": "artifact 13437466569 / pixabay-dark-light-lens-flare-abstract-250413/qa-frames.jpg",
+      "third_party_risk": "NONE_VISIBLE"
     },
     {
       "asset_id": "pixabay-particles-orange-red-dust-effect-7957",
@@ -395,12 +414,15 @@
         "S16"
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
-      "visual_rights_review": "PENDING_DIRECT_MEDIA_PREVIEW",
+      "visual_rights_review": "PASS_ABSTRACT_NO_IDENTIFIABLE_ELEMENTS",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
-      "full_asset_review_status": "BLOCKED_BROWSER_PREVIEW_NOT_RENDERED"
+      "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
+      "visual_qa_status": "PASS",
+      "visual_qa_evidence": "artifact 13437466569 / pixabay-particles-orange-red-dust-effect-7957/qa-frames.jpg",
+      "third_party_risk": "NONE_VISIBLE"
     }
   ],
-  "last_adjustment": "Differentiated Mixkit preview availability from Pixabay page-only evidence on 2026-11-05",
-  "qa_rule": "License page evidence is not equivalent to visual QA; no asset is promoted from manifest-only based on provider license alone."
+  "last_adjustment": "Completed direct-media visual QA for S05, S08, S09, S13, S14, S15 and S16 on 2026-11-05; rejected S05 due to recognizable person and retained render approval gate.",
+  "qa_rule": "Provider license evidence is not equivalent to visual QA. Any recognizable person, brand, logo, readable third-party text, or unresolved media preview blocks promotion; render approval remains explicit per asset."
 }
