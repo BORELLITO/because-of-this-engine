@@ -50,8 +50,31 @@ def _number_variants(value: int) -> list[list[str]]:
     """Map a written number to bounded spoken forms without inventing timing."""
     variants: list[list[str]] = [[_normalise(str(value))]]
     words = _number_words(value)
+    # Dates are commonly spoken with ordinal day numbers even when the
+    # canonical script uses digits (for example, "September 26, 1983").
+    # These are lexical recognition variants only; alignment still requires a
+    # real Whisper/Vosk timestamp for every accepted unit.
+    ordinal_ones = {
+        1: "first", 2: "second", 3: "third", 4: "fourth", 5: "fifth",
+        6: "sixth", 7: "seventh", 8: "eighth", 9: "ninth", 10: "tenth",
+        11: "eleventh", 12: "twelfth", 13: "thirteenth", 14: "fourteenth",
+        15: "fifteenth", 16: "sixteenth", 17: "seventeenth", 18: "eighteenth",
+        19: "nineteenth", 20: "twentieth", 21: "twenty-first", 22: "twenty-second",
+        23: "twenty-third", 24: "twenty-fourth", 25: "twenty-fifth",
+        26: "twenty-sixth", 27: "twenty-seventh", 28: "twenty-eighth",
+        29: "twenty-ninth", 30: "thirtieth", 31: "thirty-first",
+    }
+    if value in ordinal_ones:
+        ordinal = ordinal_ones[value].split("-")
+        words = words + [ordinal[-1]] if len(words) > 1 else [ordinal[0]]
+        # Keep the ordinal form as an additional variant below.
+        ordinal_words = [_normalise(token) for token in ordinal]
+    else:
+        ordinal_words = []
     if words != [str(value)]:
         variants.append(words)
+        if ordinal_words:
+            variants.append(ordinal_words)
         if len(words) > 1:
             variants.append(["".join(words)])
     if 1000 <= value <= 2099:
