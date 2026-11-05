@@ -1,7 +1,7 @@
 {
   "plan_id": "episode-005-visual-asset-acquisition-v1",
   "episode_id": "episode-005",
-  "status": "PARTIAL_MANIFEST_APPROVED_REMAINING_SHOTS_BLOCKED",
+  "status": "PARTIAL_MANIFEST_APPROVED_VALIDATION_PENDING",
   "purpose": "Pre-download candidate pool for Episode 005. No candidate is approved for render until downloaded, SHA-256ed, visually inspected, checked for embedded text/logos/letterbox, fingerprinted, and entered into the final video manifest.",
   "frozen_audio_source": {
     "workflow_run_id": 41961294784,
@@ -1466,7 +1466,7 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -1520,15 +1520,23 @@
       },
       "qa": {
         "technical_validation": "PASS",
-        "clean_frame_visual_review": "PENDING_HUMAN_QA",
-        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
-        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
-        "semantic_fit": "PENDING_HUMAN_QA",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false
-      }
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": "S05"
+      },
+      "selection": "PRIMARY_APPROVED_FOR_PARTIAL_MANIFEST",
+      "selected_shot_id": "S05"
     },
     {
       "candidate_id": "pixabay-radar-black-green-target-symbol-57670",
@@ -1539,7 +1547,7 @@
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -1593,15 +1601,22 @@
       },
       "qa": {
         "technical_validation": "PASS",
-        "clean_frame_visual_review": "PENDING_HUMAN_QA",
-        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
-        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
-        "semantic_fit": "PENDING_HUMAN_QA",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false
-      }
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": null
+      },
+      "selection": "ALTERNATIVE_APPROVED_FOR_MANIFEST_ONLY"
     },
     {
       "candidate_id": "pixabay-radar-radar-screen-rotation-circles-4511",
@@ -1612,7 +1627,7 @@
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -1666,15 +1681,23 @@
       },
       "qa": {
         "technical_validation": "PASS",
-        "clean_frame_visual_review": "PENDING_HUMAN_QA",
-        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
-        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
-        "semantic_fit": "PENDING_HUMAN_QA",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false
-      }
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": "S08"
+      },
+      "selection": "PRIMARY_APPROVED_FOR_PARTIAL_MANIFEST",
+      "selected_shot_id": "S08"
     },
     {
       "candidate_id": "pixabay-radar-communication-military-261518",
@@ -1685,7 +1708,7 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -1739,15 +1762,22 @@
       },
       "qa": {
         "technical_validation": "PASS",
-        "clean_frame_visual_review": "PENDING_HUMAN_QA",
-        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
-        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
-        "semantic_fit": "PENDING_HUMAN_QA",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false
-      }
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": null
+      },
+      "selection": "ALTERNATIVE_APPROVED_FOR_MANIFEST_ONLY"
     },
     {
       "candidate_id": "pixabay-button-press-red-business-click-502",
@@ -1758,7 +1788,7 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -1812,15 +1842,23 @@
       },
       "qa": {
         "technical_validation": "PASS",
-        "clean_frame_visual_review": "PENDING_HUMAN_QA",
-        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
-        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
-        "semantic_fit": "PENDING_HUMAN_QA",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false
-      }
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": "S09"
+      },
+      "selection": "PRIMARY_APPROVED_FOR_PARTIAL_MANIFEST",
+      "selected_shot_id": "S09"
     },
     {
       "candidate_id": "pixabay-button-press-push-start-launching-221746",
@@ -1831,7 +1869,7 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -1885,15 +1923,22 @@
       },
       "qa": {
         "technical_validation": "PASS",
-        "clean_frame_visual_review": "PENDING_HUMAN_QA",
-        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
-        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
-        "semantic_fit": "PENDING_HUMAN_QA",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false
-      }
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": null
+      },
+      "selection": "ALTERNATIVE_APPROVED_FOR_MANIFEST_ONLY"
     },
     {
       "candidate_id": "pixabay-typewriter-typing-writing-author-1335",
@@ -1904,7 +1949,7 @@
       "truth_class": "DOCUMENTARY_EVIDENCE",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -1958,15 +2003,23 @@
       },
       "qa": {
         "technical_validation": "PASS",
-        "clean_frame_visual_review": "PENDING_HUMAN_QA",
-        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
-        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
-        "semantic_fit": "PENDING_HUMAN_QA",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false
-      }
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": "S13"
+      },
+      "selection": "PRIMARY_APPROVED_FOR_PARTIAL_MANIFEST",
+      "selected_shot_id": "S13"
     },
     {
       "candidate_id": "pixabay-typewriter-type-antique-writing-38626",
@@ -1977,7 +2030,7 @@
       "truth_class": "DOCUMENTARY_EVIDENCE",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -2031,15 +2084,22 @@
       },
       "qa": {
         "technical_validation": "PASS",
-        "clean_frame_visual_review": "PENDING_HUMAN_QA",
-        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
-        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
-        "semantic_fit": "PENDING_HUMAN_QA",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false
-      }
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": null
+      },
+      "selection": "ALTERNATIVE_APPROVED_FOR_MANIFEST_ONLY"
     },
     {
       "candidate_id": "pixabay-dark-light-lens-flare-abstract-250413",
@@ -2050,7 +2110,7 @@
       "truth_class": "REPRESENTATIONAL",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -2104,15 +2164,23 @@
       },
       "qa": {
         "technical_validation": "PASS",
-        "clean_frame_visual_review": "PENDING_HUMAN_QA",
-        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
-        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
-        "semantic_fit": "PENDING_HUMAN_QA",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false
-      }
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": "S15"
+      },
+      "selection": "PRIMARY_APPROVED_FOR_PARTIAL_MANIFEST",
+      "selected_shot_id": "S15"
     },
     {
       "candidate_id": "pixabay-abstract-light-streaks-motion-250417",
@@ -2123,7 +2191,7 @@
       "truth_class": "REPRESENTATIONAL",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -2177,15 +2245,22 @@
       },
       "qa": {
         "technical_validation": "PASS",
-        "clean_frame_visual_review": "PENDING_HUMAN_QA",
-        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
-        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
-        "semantic_fit": "PENDING_HUMAN_QA",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false
-      }
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": null
+      },
+      "selection": "ALTERNATIVE_APPROVED_FOR_MANIFEST_ONLY"
     },
     {
       "candidate_id": "pixabay-particles-orange-red-dust-effect-7957",
@@ -2196,7 +2271,7 @@
       "truth_class": "BRAND_OUTRO",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -2250,15 +2325,23 @@
       },
       "qa": {
         "technical_validation": "PASS",
-        "clean_frame_visual_review": "PENDING_HUMAN_QA",
-        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
-        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
-        "semantic_fit": "PENDING_HUMAN_QA",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false
-      }
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": "S16"
+      },
+      "selection": "PRIMARY_APPROVED_FOR_PARTIAL_MANIFEST",
+      "selected_shot_id": "S16"
     },
     {
       "candidate_id": "pixabay-colors-lines-lights-abstract-video-5072",
@@ -2269,7 +2352,7 @@
       "truth_class": "BRAND_OUTRO",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -2323,18 +2406,25 @@
       },
       "qa": {
         "technical_validation": "PASS",
-        "clean_frame_visual_review": "PENDING_HUMAN_QA",
-        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
-        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
-        "semantic_fit": "PENDING_HUMAN_QA",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false
-      }
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": null
+      },
+      "selection": "ALTERNATIVE_APPROVED_FOR_MANIFEST_ONLY"
     }
   ],
-  "next_action": "Dispatch the explicit 12-candidate intake batch after media URL verification; keep download, fingerprint, approval, manifest promotion, render, catalog, Drive and publication gated.",
+  "next_action": "Run final read-only visual manifest validation and structural/rights audit for the six primary assignments; keep render, global catalog, Drive and publication blocked.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -2642,6 +2732,49 @@
         "fingerprint_artifact_id": 13431651011,
         "fingerprint_artifact_digest": "sha256:71428db1a7810ba8074da7c85139ff0a6720a06ea06aab169b5dd539f3ed7e8d",
         "sha256": "e6c20511f889daa57834ddf5f97ea076ffffedc0a321850a4ea8fa295479d72d"
+      }
+    },
+    {
+      "candidate_ids": [
+        "pixabay-alert-alarm-war-danger-risk-205519",
+        "pixabay-radar-black-green-target-symbol-57670",
+        "pixabay-radar-radar-screen-rotation-circles-4511",
+        "pixabay-radar-communication-military-261518",
+        "pixabay-button-press-red-business-click-502",
+        "pixabay-button-press-push-start-launching-221746",
+        "pixabay-typewriter-typing-writing-author-1335",
+        "pixabay-typewriter-type-antique-writing-38626",
+        "pixabay-dark-light-lens-flare-abstract-250413",
+        "pixabay-abstract-light-streaks-motion-250417",
+        "pixabay-particles-orange-red-dust-effect-7957",
+        "pixabay-colors-lines-lights-abstract-video-5072"
+      ],
+      "approved_at_utc": "2026-11-05T17:59:24.004Z",
+      "decision": "User approved all 12 downloaded and fingerprinted candidates; the highest-scoring candidate in each unresolved shot pair was selected as the primary partial-manifest assignment.",
+      "selected_primary_by_shot": {
+        "S05": "pixabay-alert-alarm-war-danger-risk-205519",
+        "S08": "pixabay-radar-radar-screen-rotation-circles-4511",
+        "S09": "pixabay-button-press-red-business-click-502",
+        "S13": "pixabay-typewriter-typing-writing-author-1335",
+        "S15": "pixabay-dark-light-lens-flare-abstract-250413",
+        "S16": "pixabay-particles-orange-red-dust-effect-7957"
+      },
+      "scope": "APPROVED_FOR_MANIFEST_ONLY",
+      "constraints": [
+        "representational footage is not literal Petrov archival evidence",
+        "one distinct source per shot; no source reuse within or across episodes",
+        "approval does not authorize render",
+        "approval does not authorize global catalog mutation",
+        "approval does not authorize Drive write or publication",
+        "final visual manifest validation remains required"
+      ],
+      "evidence": {
+        "intake_workflow_run_id": 42073828513,
+        "intake_artifact_id": 13437466569,
+        "intake_artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "fingerprint_workflow_run_id": 42074599454,
+        "fingerprint_artifact_id": 13438400127,
+        "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
       }
     }
   ],
@@ -3004,13 +3137,23 @@
     "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
     "candidate_count": 12,
     "blockers": [],
-    "human_approval": "PENDING",
+    "human_approval": "APPROVED_FOR_MANIFEST_ONLY",
     "approved_for_render": false,
     "global_catalog_updated": false,
     "render_allowed": false,
     "drive_written": false,
     "publication_allowed": false,
-    "next_action": "Perform human visual QA on the 12 contact sheets and approve/reject candidates shot by shot; do not promote, render, update the global catalog, write to Drive or publish."
+    "next_action": "Run final read-only visual manifest validation for the six primary assignments; do not render or publish.",
+    "approved_at_utc": "2026-11-05T17:59:24.004Z",
+    "selected_primary_by_shot": {
+      "S05": "pixabay-alert-alarm-war-danger-risk-205519",
+      "S08": "pixabay-radar-radar-screen-rotation-circles-4511",
+      "S09": "pixabay-button-press-red-business-click-502",
+      "S13": "pixabay-typewriter-typing-writing-author-1335",
+      "S15": "pixabay-dark-light-lens-flare-abstract-250413",
+      "S16": "pixabay-particles-orange-red-dust-effect-7957"
+    },
+    "promotion_allowed": false
   },
   "last_candidate_addition": {
     "added_at_utc": "2026-11-05T00:00:00Z",
@@ -3029,6 +3172,59 @@
       "pixabay-colors-lines-lights-abstract-video-5072"
     ],
     "rationale": "Add a page-verified Pixabay fallback shortlist with two distinct candidates per unresolved shot; exclude AI-generated, readable-personal-document, reused and watermarked routes before intake.",
-    "source_page_and_license_verification": "Completed in browser for all 12 pages; each page visibly exposed Pixabay Content License, no AI-generated marker was observed, and the direct CDN media URL was observed in the page player."
+    "source_page_and_license_verification": "Completed in browser for all 12 pages; each page visibly exposed Pixabay Content License, no AI-generated marker was observed, and the direct CDN media URL was observed in the page player.",
+    "human_approval_at_utc": "2026-11-05T17:59:24.004Z",
+    "human_approval": "APPROVED_FOR_MANIFEST_ONLY",
+    "selected_primary_by_shot": {
+      "S05": "pixabay-alert-alarm-war-danger-risk-205519",
+      "S08": "pixabay-radar-radar-screen-rotation-circles-4511",
+      "S09": "pixabay-button-press-red-business-click-502",
+      "S13": "pixabay-typewriter-typing-writing-author-1335",
+      "S15": "pixabay-dark-light-lens-flare-abstract-250413",
+      "S16": "pixabay-particles-orange-red-dust-effect-7957"
+    }
+  },
+  "last_human_approval": {
+    "candidate_ids": [
+      "pixabay-alert-alarm-war-danger-risk-205519",
+      "pixabay-radar-black-green-target-symbol-57670",
+      "pixabay-radar-radar-screen-rotation-circles-4511",
+      "pixabay-radar-communication-military-261518",
+      "pixabay-button-press-red-business-click-502",
+      "pixabay-button-press-push-start-launching-221746",
+      "pixabay-typewriter-typing-writing-author-1335",
+      "pixabay-typewriter-type-antique-writing-38626",
+      "pixabay-dark-light-lens-flare-abstract-250413",
+      "pixabay-abstract-light-streaks-motion-250417",
+      "pixabay-particles-orange-red-dust-effect-7957",
+      "pixabay-colors-lines-lights-abstract-video-5072"
+    ],
+    "approved_at_utc": "2026-11-05T17:59:24.004Z",
+    "decision": "User approved all 12 downloaded and fingerprinted candidates; the highest-scoring candidate in each unresolved shot pair was selected as the primary partial-manifest assignment.",
+    "selected_primary_by_shot": {
+      "S05": "pixabay-alert-alarm-war-danger-risk-205519",
+      "S08": "pixabay-radar-radar-screen-rotation-circles-4511",
+      "S09": "pixabay-button-press-red-business-click-502",
+      "S13": "pixabay-typewriter-typing-writing-author-1335",
+      "S15": "pixabay-dark-light-lens-flare-abstract-250413",
+      "S16": "pixabay-particles-orange-red-dust-effect-7957"
+    },
+    "scope": "APPROVED_FOR_MANIFEST_ONLY",
+    "constraints": [
+      "representational footage is not literal Petrov archival evidence",
+      "one distinct source per shot; no source reuse within or across episodes",
+      "approval does not authorize render",
+      "approval does not authorize global catalog mutation",
+      "approval does not authorize Drive write or publication",
+      "final visual manifest validation remains required"
+    ],
+    "evidence": {
+      "intake_workflow_run_id": 42073828513,
+      "intake_artifact_id": 13437466569,
+      "intake_artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+      "fingerprint_workflow_run_id": 42074599454,
+      "fingerprint_artifact_id": 13438400127,
+      "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+    }
   }
 }
