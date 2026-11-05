@@ -762,7 +762,22 @@
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "PENDING",
         "approved_for_render": false,
-        "global_catalog_updated": false
+        "global_catalog_updated": false,
+        "preliminary_visual_review": {
+          "reviewer": "assistant_visual_audit_v1",
+          "status": "PRELIMINARY_CONDITIONAL_SYMBOLIC_DIAGRAM",
+          "evidence": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg",
+            "qa-sampling.json"
+          ],
+          "observation": "No third-party logo, letterbox or source-page watermark observed in normalized samples. The asset is an intrinsic radar diagram with numeric markings and grid; the vertical crop remains legible but must be treated as symbolic/map-or-diagram evidence, not archival footage.",
+          "recommendation": "Keep blocked pending explicit human approval and a decision that native instrument markings are acceptable under the visual policy for S08.",
+          "human_approval_unchanged": "PENDING",
+          "approved_for_render": false,
+          "global_catalog_updated": false,
+          "drive_written": false
+        }
       }
     },
     {
@@ -836,7 +851,22 @@
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "PENDING",
         "approved_for_render": false,
-        "global_catalog_updated": false
+        "global_catalog_updated": false,
+        "preliminary_visual_review": {
+          "reviewer": "assistant_visual_audit_v1",
+          "status": "PRELIMINARY_CONDITIONAL_SYMBOLIC_DIAGRAM",
+          "evidence": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg",
+            "qa-sampling.json"
+          ],
+          "observation": "No third-party logo, letterbox or source-page watermark observed in normalized samples. The intrinsic rotating radar graphic survives the center crop, but the large sweep wedge and black negative space make it a low-information symbolic insert.",
+          "recommendation": "Keep blocked pending explicit human approval; use only as a short S08 symbolic beat if the final story edit benefits from the abstraction.",
+          "human_approval_unchanged": "PENDING",
+          "approved_for_render": false,
+          "global_catalog_updated": false,
+          "drive_written": false
+        }
       }
     },
     {
@@ -911,7 +941,22 @@
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "PENDING",
         "approved_for_render": false,
-        "global_catalog_updated": false
+        "global_catalog_updated": false,
+        "preliminary_visual_review": {
+          "reviewer": "assistant_visual_audit_v1",
+          "status": "PRELIMINARY_REJECT_SEMANTICALLY_WEAK",
+          "evidence": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg",
+            "qa-sampling.json"
+          ],
+          "observation": "The full duration is visually stable and free of a third-party logo or letterbox, but the asset depicts only a vintage television with a blank white screen. The center crop is technically viable yet does not represent sunlight geometry, high clouds or a satellite sensor.",
+          "recommendation": "Do not assign to S12. Replace with a distinct cloud/sunlight/satellite-instrument candidate; retain only as a possible broadcast/signal insert if a future shot explicitly needs that meaning.",
+          "human_approval_unchanged": "PENDING",
+          "approved_for_render": false,
+          "global_catalog_updated": false,
+          "drive_written": false
+        }
       }
     },
     {
@@ -987,11 +1032,26 @@
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "PENDING",
         "approved_for_render": false,
-        "global_catalog_updated": false
+        "global_catalog_updated": false,
+        "preliminary_visual_review": {
+          "reviewer": "assistant_visual_audit_v1",
+          "status": "PRELIMINARY_REJECT_NON_DIEGETIC_GRAPHICS",
+          "evidence": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg",
+            "qa-sampling.json"
+          ],
+          "observation": "Persistent green HUD treatment, warning icon and scan-line overlays remain visible across normalized samples; the crop is technically readable but does not satisfy the clean-source gate for a neutral representational insert.",
+          "recommendation": "Do not approve for manifest or render unless the visual policy is explicitly relaxed for authored HUD graphics; prefer a clean warning/control-panel source for S06/S09.",
+          "human_approval_unchanged": "PENDING",
+          "approved_for_render": false,
+          "global_catalog_updated": false,
+          "drive_written": false
+        }
       }
     }
   ],
-  "next_action": "Perform clean-frame, baked-graphics, 9:16-crop and semantic human QA on the four downloaded Pixabay candidates. Keep all four blocked from render, global catalog, Drive and publication until those gates and explicit approval pass.",
+  "next_action": "Rerun the four-candidate Pixabay intake with full-duration normalized QA sampling, then replace the two preliminary rejects and obtain explicit human approval only for candidates that pass the clean-source, semantic-fit and crop gates. Keep all render, catalog, Drive and publication gates blocked.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -1299,7 +1359,23 @@
         "score",
         "score_breakdown",
         "disqualifiers"
-      ]
+      ],
+      "qa_sampling": {
+        "method": "five_normalized_timestamps",
+        "positions": [
+          "start",
+          "quarter",
+          "middle",
+          "three_quarter",
+          "end_minus_0_1_seconds"
+        ],
+        "required_artifacts": [
+          "qa-frames.jpg",
+          "qa-crop-9x16.jpg",
+          "qa-sampling.json"
+        ],
+        "rationale": "The previous first-frame/first-three-seconds sampling could miss late baked graphics or semantic drift."
+      }
     },
     "preflight_filters": [
       "provider_page_verified",
@@ -1498,7 +1574,12 @@
     "render_allowed": false,
     "global_catalog_updated": false,
     "drive_written": false,
-    "publication_allowed": false
+    "publication_allowed": false,
+    "qa_sampling_revision": {
+      "status": "WORKFLOW_UPDATED_NOT_YET_RERUN",
+      "workflow_commit": "9108c622adc0ab95d97be846e6294213a0056a6a",
+      "note": "The next manual intake must be rerun to regenerate full-duration QA contact sheets before any human approval decision."
+    }
   },
   "last_manual_fingerprint": {
     "workflow_run_id": 42039523926,
