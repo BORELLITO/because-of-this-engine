@@ -4,6 +4,11 @@ name: Because Of This Episode 005 Visual Candidate Intake
 # It never promotes an asset to the render manifest, never mutates the global catalog,
 # and never writes to Drive or publishes media.
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/episode005-visual-candidate-intake.yml"
+      - "episodes/episode-005/visual/asset-acquisition-plan.json"
   workflow_dispatch:
     inputs:
       candidate_id:
@@ -45,7 +50,7 @@ jobs:
 
       - name: Download candidate without promotion
         env:
-          MEDIA_URL: ${{ inputs.media_url }}
+          MEDIA_URL: ${{ github.event.inputs.media_url || 'https://assets.mixkit.co/videos/28897/28897-720.mp4' }}
         run: |
           mkdir -p artifacts/episode005-visual-intake
           curl --fail --location --retry 2 --retry-delay 2 --connect-timeout 20 --max-time 180 "$MEDIA_URL"             --output artifacts/episode005-visual-intake/candidate.mp4
@@ -53,10 +58,10 @@ jobs:
 
       - name: Validate video and create intake evidence
         env:
-          CANDIDATE_ID: ${{ inputs.candidate_id }}
-          SOURCE_PAGE_URL: ${{ inputs.source_page_url }}
-          MEDIA_URL: ${{ inputs.media_url }}
-          LICENSE_NAME: ${{ inputs.license_name }}
+          CANDIDATE_ID: ${{ github.event.inputs.candidate_id || 'mixkit-slowly-approaching-clock-28897' }}
+          SOURCE_PAGE_URL: ${{ github.event.inputs.source_page_url || 'https://mixkit.co/free-stock-video/slowly-approaching-a-clock-on-a-black-background-28897/' }}
+          MEDIA_URL: ${{ github.event.inputs.media_url || 'https://assets.mixkit.co/videos/28897/28897-720.mp4' }}
+          LICENSE_NAME: ${{ github.event.inputs.license_name || 'Mixkit Stock Video Free License' }}
         run: |
           python - <<'PY'
           import hashlib
@@ -128,6 +133,6 @@ jobs:
       - name: Upload isolated candidate evidence
         uses: actions/upload-artifact@v4
         with:
-          name: episode005-visual-intake-${{ inputs.candidate_id }}
+          name: episode005-visual-intake-${{ github.event.inputs.candidate_id || 'mixkit-slowly-approaching-clock-28897' }}
           path: artifacts/episode005-visual-intake
           if-no-files-found: error
