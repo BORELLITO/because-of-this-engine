@@ -120,9 +120,9 @@
       "role": "context",
       "requested_visual": "Night-side Earth and early-warning satellite.",
       "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "BLOCKED_NO_APPROVED_ASSET",
+      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
       "assignment": null,
-      "blocking_reason": "No downloaded, fingerprinted and human-approved candidate currently covers this beat without inventing documentary evidence."
+      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
     },
     {
       "shot_id": "S03",
@@ -130,9 +130,9 @@
       "role": "human_anchor",
       "requested_visual": "Representational command-bunker portrait/composition of Petrov; no false archival claim.",
       "requested_truth_class": "REPRESENTATIONAL",
-      "status": "BLOCKED_NO_APPROVED_ASSET",
+      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
       "assignment": null,
-      "blocking_reason": "No downloaded, fingerprinted and human-approved candidate currently covers this beat without inventing documentary evidence."
+      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
     },
     {
       "shot_id": "S04",
@@ -140,9 +140,9 @@
       "role": "escalation",
       "requested_visual": "Alert moves through a command-chain diagram.",
       "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "BLOCKED_NO_APPROVED_ASSET",
+      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
       "assignment": null,
-      "blocking_reason": "No downloaded, fingerprinted and human-approved candidate currently covers this beat without inventing documentary evidence."
+      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
     },
     {
       "shot_id": "S05",
@@ -150,9 +150,9 @@
       "role": "escalation",
       "requested_visual": "One launch indicator becomes two, then three.",
       "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "BLOCKED_NO_APPROVED_ASSET",
+      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
       "assignment": null,
-      "blocking_reason": "No downloaded, fingerprinted and human-approved candidate currently covers this beat without inventing documentary evidence."
+      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
     },
     {
       "shot_id": "S06",
@@ -160,15 +160,9 @@
       "role": "escalation",
       "requested_visual": "Counter reaches five; alarm intensity rises.",
       "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
-      "assignment": {
-        "candidate_id": "mixkit-abstract-red-glow-101432",
-        "usage": "symbolic escalation texture; no literal missile-console claim",
-        "approved_for_render": false,
-        "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_MANIFEST"
-      },
-      "blocking_reason": null
+      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
+      "assignment": null,
+      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
     },
     {
       "shot_id": "S07",
@@ -192,9 +186,9 @@
       "role": "contradiction",
       "requested_visual": "Ground radar remains empty while satellite alert flashes.",
       "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "BLOCKED_NO_APPROVED_ASSET",
+      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
       "assignment": null,
-      "blocking_reason": "No downloaded, fingerprinted and human-approved candidate currently covers this beat without inventing documentary evidence."
+      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
     },
     {
       "shot_id": "S09",
@@ -202,15 +196,9 @@
       "role": "irreversible_choice",
       "requested_visual": "False-alarm classification is entered; no celebratory interface.",
       "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
-      "assignment": {
-        "candidate_id": "mixkit-abstract-red-glow-101432",
-        "usage": "symbolic false-alarm classification transition",
-        "approved_for_render": false,
-        "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_MANIFEST"
-      },
-      "blocking_reason": null
+      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
+      "assignment": null,
+      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
     },
     {
       "shot_id": "S10",
@@ -218,15 +206,9 @@
       "role": "suspense",
       "requested_visual": "Bunker waits; clock advances through silence.",
       "requested_truth_class": "REPRESENTATIONAL",
-      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
-      "assignment": {
-        "candidate_id": "mixkit-slowly-approaching-clock-28897",
-        "usage": "bunker waiting and time passage",
-        "approved_for_render": false,
-        "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_MANIFEST"
-      },
-      "blocking_reason": null
+      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
+      "assignment": null,
+      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
     },
     {
       "shot_id": "S11",
@@ -250,15 +232,9 @@
       "role": "mechanism",
       "requested_visual": "Sunlight geometry over high clouds and satellite sensor.",
       "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
-      "assignment": {
-        "candidate_id": "mixkit-cloudy-sky-118",
-        "usage": "cloud mechanism atmosphere; diagram layer still required",
-        "approved_for_render": false,
-        "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_MANIFEST"
-      },
-      "blocking_reason": null
+      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
+      "assignment": null,
+      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
     },
     {
       "shot_id": "S13",
@@ -266,9 +242,9 @@
       "role": "proof",
       "requested_visual": "Declassified report/logbook treatment with readable evidence cues.",
       "requested_truth_class": "DOCUMENTARY_EVIDENCE",
-      "status": "BLOCKED_NO_APPROVED_ASSET",
+      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
       "assignment": null,
-      "blocking_reason": "No downloaded, fingerprinted and human-approved candidate currently covers this beat without inventing documentary evidence."
+      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
     },
     {
       "shot_id": "S14",
@@ -276,9 +252,9 @@
       "role": "consequence",
       "requested_visual": "Petrov's later obscurity represented through empty military corridor.",
       "requested_truth_class": "REPRESENTATIONAL",
-      "status": "BLOCKED_NO_APPROVED_ASSET",
+      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
       "assignment": null,
-      "blocking_reason": "No downloaded, fingerprinted and human-approved candidate currently covers this beat without inventing documentary evidence."
+      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
     },
     {
       "shot_id": "S15",
@@ -286,9 +262,9 @@
       "role": "reframe",
       "requested_visual": "Red warning fades into neutral black; no victory imagery.",
       "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "BLOCKED_NO_APPROVED_ASSET",
+      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
       "assignment": null,
-      "blocking_reason": "No downloaded, fingerprinted and human-approved candidate currently covers this beat without inventing documentary evidence."
+      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
     },
     {
       "shot_id": "S16",
@@ -296,9 +272,9 @@
       "role": "payoff",
       "requested_visual": "Final branded logo lockup with restrained red pulse.",
       "requested_truth_class": "BRAND_OUTRO",
-      "status": "BLOCKED_NO_APPROVED_ASSET",
+      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
       "assignment": null,
-      "blocking_reason": "No downloaded, fingerprinted and human-approved candidate currently covers this beat without inventing documentary evidence."
+      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
     }
   ],
   "unresolved_shots": [
@@ -306,7 +282,11 @@
     "S03",
     "S04",
     "S05",
+    "S06",
     "S08",
+    "S09",
+    "S10",
+    "S12",
     "S13",
     "S14",
     "S15",
@@ -321,5 +301,11 @@
     "drive_write_authorized": false,
     "publication_authorized": false
   },
-  "next_action": "Acquire and QA candidates for unresolved shots S02,S03,S04,S05,S08,S13,S14,S15,S16, then re-run final visual manifest validation."
+  "next_action": "Acquire and QA distinct candidates for unresolved shots S02,S03,S04,S05,S06,S08,S09,S10,S12,S13,S14,S15,S16, then re-run final visual manifest validation.",
+  "reuse_policy": {
+    "source_reuse_scope": "global",
+    "distinct_source_required_per_shot": true,
+    "duplicate_source_within_episode": "BLOCK",
+    "duplicate_source_across_episodes": "BLOCK"
+  }
 }
