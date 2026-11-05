@@ -23,8 +23,11 @@ jobs:
 
       - name: Install media tools
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends ffmpeg
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends ffmpeg
+          fi
+          ffmpeg -version | head -n 1
 
       - name: Compute and compare fingerprints
         env:
@@ -43,7 +46,7 @@ jobs:
           from urllib.parse import urlparse
 
           from production.asset_reuse_brain import source_asset_key
-          from production.visual_provider_policy import host_allowed, policy_for
+          from production.visual_provider_policy import PROVIDER_POLICIES, host_allowed, policy_for
           from production.video_asset_contract import FINGERPRINT_ALGORITHM, ffprobe, perceptual_hash, sha256_file
 
           root = Path("artifacts/episode005-visual-fingerprint")
