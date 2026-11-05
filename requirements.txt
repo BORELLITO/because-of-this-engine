@@ -5,3 +5,4 @@ google-auth-httplib2==0.4.4
 vosk==0.3.45
 piper-tts==1.8.0
 edge-tts==7.3.1
+imageio-ffmpeg==0.8.1
