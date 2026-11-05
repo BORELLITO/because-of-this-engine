@@ -36,9 +36,8 @@ def _recognize(audio_path: Path, model_name: str, prompt: str = "") -> list[dict
             task="transcribe",
             word_timestamps=True,
             vad_filter=False,
-            beam_size=5,
-            condition_on_previous_text=False,
-            initial_prompt=prompt or None,
+            beam_size=10,
+            condition_on_previous_text=True,
         )
         words: list[dict[str, Any]] = []
         for segment in segments:
@@ -78,7 +77,7 @@ def generate(manifest_path: Path, model_name: str) -> dict[str, Any]:
 
     script = (base / manifest["script"]["path"]).read_text(encoding="utf-8").strip()
     chunks = phrase_chunks(script, max_line_chars=int(caption_config.get("max_line_chars", 42)))
-    words = _recognize(audio_path, model_name, script)
+    words = _recognize(audio_path, model_name)
     try:
         events, sidecar_chunks = _align_chunks(chunks, words)
     except AlignmentError as first_error:
