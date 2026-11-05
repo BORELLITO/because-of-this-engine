@@ -27,7 +27,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install Edge TTS
-        run: python -m pip install --disable-pip-version-check --no-cache-dir edge-tts==7.3.1 imageio-ffmpeg==0.8.1 faster-whisper==1.2.1 huggingface_hub==0.35.3
+        run: python -m pip install --disable-pip-version-check --no-cache-dir edge-tts==7.3.1 imageio-ffmpeg==0.8.1
 
       - name: Verify portable FFmpeg
         run: |
@@ -73,13 +73,6 @@ jobs:
           print({"duration_seconds": round(duration, 3), "voice": data["profile"]["voice_name"]})
           PY
 
-      - name: Restore Whisper model cache
-        id: whisper_cache
-        uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684
-        with:
-          path: ~/.cache/huggingface
-          key: because-of-this-whisper-base-en-v1
-
       - name: Build caption manifest for validated audio
         run: |
           python - <<'PY'
@@ -101,9 +94,11 @@ jobs:
           )
           PY
 
-      - name: Generate forced-alignment captions
+      - name: Generate native Edge word-timed captions
         run: |
-          PYTHONPATH=. python production/whisper_captions.py --manifest artifacts/episode005-edge/caption-manifest.json --model base.en
+          PYTHONPATH=. python production/align_edge_captions.py \
+            --manifest artifacts/episode005-edge/caption-manifest.json \
+            --word-boundaries artifacts/episode005-edge/edge-word-boundaries.json
 
       - name: Validate forced-alignment captions
         run: |
@@ -115,11 +110,13 @@ jobs:
           sidecar = root / "narration.alignment.json"
           assert ass.is_file() and ass.stat().st_size > 0, ass
           data = json.loads(sidecar.read_text(encoding="utf-8"))
-          assert data["status"] == "WHISPER_FORCED_ALIGNMENT_PASS"
+          assert data["status"] == "EDGE_TTS_NATIVE_ALIGNMENT_PASS"
           assert data["word_count"] > 0
           assert data["word_timing_normalization"]["timeline_monotonic"] is True
           print({
               "caption_status": data["status"],
+              "timing_mode": data["timing_mode"],
+              "grouped_provider_boundaries_preserved": data["word_timing_normalization"].get("grouped_provider_boundaries_preserved", False),
               "word_count": data["word_count"],
               "caption_file": str(ass),
           })
