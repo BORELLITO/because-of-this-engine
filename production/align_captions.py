@@ -33,15 +33,39 @@ ONES = [
     "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
     "sixteen", "seventeen", "eighteen", "nineteen",
 ]
-TENS = ["", "", "twenty", "thirty", "forty", "fifty"]
-
+TENS = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
 
 def _number_words(value: int) -> list[str]:
     if 0 <= value < len(ONES):
         return [ONES[value]]
-    if 20 <= value < 60:
+    if 20 <= value < 100:
         return [TENS[value // 10]] + ([] if value % 10 == 0 else [ONES[value % 10]])
+    if 100 <= value < 1000:
+        hundreds, remainder = divmod(value, 100)
+        return _number_words(hundreds) + ["hundred"] + ([] if remainder == 0 else _number_words(remainder))
     return [str(value)]
+
+
+def _number_variants(value: int) -> list[list[str]]:
+    """Map a written number to bounded spoken forms without inventing timing."""
+    variants: list[list[str]] = [[_normalise(str(value))]]
+    words = _number_words(value)
+    if words != [str(value)]:
+        variants.append(words)
+        if len(words) > 1:
+            variants.append(["".join(words)])
+    if 1000 <= value <= 2099:
+        century, remainder = divmod(value, 100)
+        if remainder:
+            variants.append(_number_words(century) + _number_words(remainder))
+            variants.append(_number_words(century) + ["hundred"] + _number_words(remainder))
+            variants.append(["one", "thousand"] + _number_words(value % 1000))
+    unique: list[list[str]] = []
+    for variant in variants:
+        normalized = [_normalise(token) for token in variant if _normalise(token)]
+        if normalized and normalized not in unique:
+            unique.append(normalized)
+    return unique
 
 
 def _normalise(value: str) -> str:
@@ -66,6 +90,10 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 _number_words(left) + _number_words(right),
             ]))
             index += 3
+            continue
+        if raw[index].isdigit():
+            result.append((raw[index], _number_variants(int(raw[index]))))
+            index += 1
             continue
         token = _normalise(raw[index])
         if token:
