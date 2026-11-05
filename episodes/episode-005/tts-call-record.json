@@ -1,0 +1,18 @@
+{
+  "episode_id": "episode-005",
+  "story_id": "story-stanislav-petrov-false-alarm-1983",
+  "script_sha256": "4d1691d4c00d2e8e2ea7c93f31dfbd62c0f9007875a63f2626e62944300489a8",
+  "provider": "creativeclaw_google_gemini",
+  "model": "speech/gemini-3.8-flash-tts",
+  "voice_id": "charon",
+  "attempted_at_utc": "2026-11-05T01:00:00Z",
+  "status": "BLOCKED_BEFORE_GENERATION",
+  "reason": "zero_balance",
+  "required_credits": 21,
+  "available_credits": 0,
+  "charged_credits": 0,
+  "audio_produced": false,
+  "request_count": 0,
+  "retry_policy": "no automatic retry",
+  "next_action": "Add credits or configure a funded direct Gemini API route, then submit exactly one request for this script hash."
+}
