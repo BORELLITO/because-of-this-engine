@@ -91,7 +91,7 @@ def _validate_registry_completeness(value: Any) -> list[Mapping[str, Any]]:
     assets = value.get("assets")
     if not isinstance(assets, list) or not assets:
         raise RegistryError("global asset registry is absent or empty")
-    required_keys = ("asset_id", "provider", "provider_asset_id", "canonical_source_url", "sha256", "perceptual_hash")
+    required_keys = ("asset_id", "provider", "provider_asset_id", "canonical_source_url", "sha256", "perceptual_hash", "animation_fingerprint", "fingerprint_algorithm")
     normalized: list[Mapping[str, Any]] = []
     for index, item in enumerate(assets):
         if not isinstance(item, Mapping):
@@ -105,6 +105,10 @@ def _validate_registry_completeness(value: Any) -> list[Mapping[str, Any]]:
             raise RegistryError(f"global asset registry entry[{index}] has invalid sha256")
         if not _text(item.get("perceptual_hash")):
             raise RegistryError(f"global asset registry entry[{index}] lacks an independent perceptual_hash")
+        if not str(item.get("perceptual_hash")).startswith("vphash-v1:"):
+            raise RegistryError(f"global asset registry entry[{index}] uses an unknown perceptual hash algorithm")
+        if not _text(item.get("animation_fingerprint")):
+            raise RegistryError(f"global asset registry entry[{index}] lacks an animation_fingerprint")
         normalized.append(_normal_record(item))
     return normalized
 

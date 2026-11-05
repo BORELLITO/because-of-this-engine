@@ -43,7 +43,7 @@
 
 ## Remaining blockers
 
-- The historical registry currently contains assets without independent perceptual hashes; production must remain blocked until reconciliation.
+- The 13 historical registry assets were fingerprinted from their verified Drive MP4s with the versioned video-phash-v1 algorithm; future assets must use the same catalog contract.
 - Real thumbnail files and platform cover records are not yet available for a V2.1 episode.
 - TTS, audio, captions, render, Drive and publication remain intentionally unintegrated.
 - Promotion to main still requires explicit approval and post-merge audit.

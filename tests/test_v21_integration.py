@@ -2,9 +2,11 @@ from __future__ import annotations
 
 import copy
 import unittest
+from pathlib import Path
 
 from production.canonical_entrypoint import evaluate
 from production.package_gate_pre import evaluate_package_gate
+from production.ledgers_v21 import load_registry
 from production.pipeline_state_v21 import StateTransitionError, advance
 
 
@@ -176,6 +178,12 @@ class V21IntegrationTests(unittest.TestCase):
         self.assertFalse(report["production_enablement"])
         self.assertEqual(report["media_generation"], "NOT_RUN")
         self.assertEqual(report["publication"], "MANUAL_ONLY_NOT_RUN")
+
+    def test_repository_registry_is_complete_and_loadable(self):
+        root = Path(__file__).resolve().parents[1]
+        registry = load_registry(root / "episodes" / "asset-memory-registry.json")
+        self.assertEqual(len(registry), 13)
+        self.assertTrue(all(item.get("perceptual_fingerprint") for item in registry))
 
     def test_missing_registry_is_blocked(self):
         report = evaluate(valid_manifest(), registry=[])
