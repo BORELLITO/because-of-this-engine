@@ -783,6 +783,19 @@ def generate(
                 secondary_error = error
 
         if not secondary_aligned:
+            # The two real acoustic passes may contain every content word but
+            # miss one unstressed function word at a phrase boundary. The
+            # existing bounded recovery is allowed only for that lexical class;
+            # it never estimates timestamps for dates, names, or other content.
+            try:
+                events, sidecar_chunks = _align_chunks(
+                    chunks, asr_words, recover_missing=True
+                )
+                secondary_aligned = True
+            except AlignmentError:
+                pass
+
+        if not secondary_aligned:
             constrained_vocabulary = _canonical_vocabulary(script)
             try:
                 asr_words = _recognize_passes(
