@@ -45,10 +45,14 @@ def _recognize(audio_path: Path, model_name: str, prompt: str = "") -> list[dict
                 text = str(item.word or "").strip()
                 if not text:
                     continue
+                start = float(item.start)
+                end = float(item.end)
+                if end <= start:
+                    continue
                 words.append({
                     "word": text,
-                    "start": float(item.start),
-                    "end": float(item.end),
+                    "start": start,
+                    "end": end,
                     "confidence": float(getattr(item, "probability", 1.0)),
                     "timestamp_source": "faster_whisper_word_timestamp",
                 })
