@@ -82,6 +82,15 @@ def generate(manifest_path: Path, model_name: str) -> dict[str, Any]:
     script = (base / manifest["script"]["path"]).read_text(encoding="utf-8").strip()
     chunks = phrase_chunks(script, max_line_chars=int(caption_config.get("max_line_chars", 42)))
     words = _recognize(audio_path, model_name)
+    bounded_words: list[dict[str, Any]] = []
+    for word in words:
+        start = max(0.0, float(word["start"]))
+        end = min(audio_seconds, float(word["end"]))
+        if start < audio_seconds and end - start >= 0.02:
+            bounded_words.append({**word, "start": start, "end": end})
+    words = bounded_words
+    if not words:
+        raise AlignmentError("Whisper produced no timestamps inside the WAV duration")
     try:
         events, sidecar_chunks = _align_chunks(chunks, words)
     except AlignmentError as first_error:
