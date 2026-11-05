@@ -71,7 +71,7 @@ def valid_manifest() -> dict:
             "real_audio_generated": False,
             "final_transcription_required": True,
             "target_duration_seconds": 65,
-            "adapter": "production/cloud_tts.py",
+            "adapter": "production/edge_tts.py",
         },
         "captions_contract": {
             "source": "final_audio_transcription",
@@ -100,10 +100,10 @@ def valid_manifest() -> dict:
             "delivery_adapter": "production/google_drive_delivery.py",
         },
         "tts_contract": {
-            "provider": "google_cloud_tts",
-            "voice_name": "en-US-Chirp3-HD-Charon",
+            "provider": "microsoft_edge_tts",
+            "voice_name": "en-US-ChristopherNeural",
             "language_code": "en-US",
-            "model": "chirp3_hd",
+            "model": "edge_neural",
             "provider_fallback": "forbidden",
             "status": "OFFLINE_CONTRACT_VERIFIED",
             "real_call_authorized": False,
