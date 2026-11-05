@@ -1,0 +1,40 @@
+name: Because Of This V1.1 READ_ONLY audit
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - "audits/**"
+      - "tests/test_audit_v11_readiness.py"
+      - ".github/workflows/audit-v11-readonly.yml"
+permissions:
+  contents: read
+jobs:
+  non_destructive_audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout isolated candidate
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Run no-media regression tests
+        run: python -m unittest discover -s tests -p 'test_audit_v11_readiness.py' -v
+      - name: Inspect actual policy without editing it
+        run: |
+          python audits/readiness_guard_v11.py --root . --output /tmp/bot-v11-readiness.json
+          python - <<'PY'
+          import json
+          report = json.load(open("/tmp/bot-v11-readiness.json", encoding="utf-8"))
+          assert report["mode"] == "READ_ONLY"
+          assert report["status"] == "BLOCKED"
+          issues = {item["code"] for item in report["issues"]}
+          assert "VOICE_PROVIDER_CONFLICT" not in issues
+          assert "VOICE_LOCK_CONFLICT" not in issues
+          assert report["active_provider"] == "gemini_tts"
+          assert report["approved_voice"] == "Charon"
+          assert "HISTORICAL_MEDIA_CATALOG_NOT_EVIDENCED" in issues
+          print("GEMINI_CHARON_LOCK_PASS; other launch gates remain BLOCKED")
+          PY
