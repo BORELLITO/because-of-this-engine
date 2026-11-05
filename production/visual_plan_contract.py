@@ -13,15 +13,32 @@ import json
 import re
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse
 
 
-MIXKIT_LICENSE = "Mixkit Stock Video Free License"
+PROVIDER_POLICIES = {
+    "mixkit": {
+        "license_name": "Mixkit Stock Video Free License",
+        "page_hosts": {"mixkit.co"},
+        "media_hosts": {"mixkit.co"},
+    },
+    "pixabay": {
+        "license_name": "Pixabay Content License",
+        "page_hosts": {"pixabay.com"},
+        "media_hosts": {"pixabay.com"},
+    },
+}
 CANDIDATE_ID_PATTERN = re.compile(r"^[A-Za-z0-9._-]+$")
 SHOT_ID_PATTERN = re.compile(r"^S[0-9]{2}$")
 
 
 class VisualPlanContractError(ValueError):
     """Raised when the visual plan or manifest is structurally inconsistent."""
+
+
+def _host_allowed(hostname: str | None, allowed_bases: set[str]) -> bool:
+    normalized = str(hostname or "").lower().rstrip(".")
+    return any(normalized == base or normalized.endswith("." + base) for base in allowed_bases)
 
 
 def _duplicates(values: list[str]) -> list[str]:
@@ -57,7 +74,11 @@ def validate_visual_plan(plan: dict[str, Any], manifest: dict[str, Any]) -> dict
         errors.append("shortlist_size_per_shot cannot exceed candidates_per_unresolved_shot")
 
     weights = strategy.get("scoring_weights")
-    if not isinstance(weights, dict) or sum(weights.values()) != 100:
+    if (
+        not isinstance(weights, dict)
+        or not all(isinstance(value, (int, float)) for value in weights.values())
+        or sum(weights.values()) != 100
+    ):
         errors.append("scoring_weights must be numeric and sum to 100")
 
     thresholds = strategy.get("score_thresholds")
@@ -118,21 +139,33 @@ def validate_visual_plan(plan: dict[str, Any], manifest: dict[str, Any]) -> dict
             for field in required:
                 if not candidate.get(field):
                     errors.append(f"{candidate_id}: approved candidate missing {field}")
-            if candidate.get("provider") == "mixkit" and candidate.get("license_name") != MIXKIT_LICENSE:
-                errors.append(f"{candidate_id}: Mixkit license is not the approved commercial license")
             if candidate.get("approved_for_render") is True:
                 errors.append(f"{candidate_id}: approved manifest candidate cannot approve render")
             if candidate.get("global_catalog_updated") is True:
                 errors.append(f"{candidate_id}: plan candidate cannot mutate global catalog")
 
-        if (
-            candidate.get("provider") == "mixkit"
-            and candidate.get("media_url")
-            and not status.startswith("REJECTED")
-        ):
-            license_name = candidate.get("license_name")
-            if license_name != MIXKIT_LICENSE:
-                errors.append(f"{candidate_id}: Mixkit media candidate has invalid or missing license")
+        if candidate.get("media_url") and not status.startswith("REJECTED"):
+            provider = str(candidate.get("provider", ""))
+            policy = PROVIDER_POLICIES.get(provider)
+            if policy is None:
+                errors.append(f"{candidate_id}: unsupported provider for media candidate: {provider}")
+            elif candidate.get("license_name") != policy["license_name"]:
+                errors.append(f"{candidate_id}: {provider} candidate has invalid or missing license")
+            else:
+                source_page_url = str(candidate.get("source_page_url", ""))
+                media_url = str(candidate.get("media_url", ""))
+                source_page = urlparse(source_page_url)
+                media = urlparse(media_url)
+                source_ok = (
+                    source_page.scheme == "https"
+                    and _host_allowed(source_page.hostname, policy["page_hosts"])
+                )
+                media_ok = (
+                    media.scheme == "https"
+                    and _host_allowed(media.hostname, policy["media_hosts"])
+                )
+                if not source_ok or not media_ok:
+                    errors.append(f"{candidate_id}: {provider} source/media host is not allowlisted")
 
     if manifest.get("episode_id") != plan.get("episode_id"):
         errors.append("manifest episode_id does not match plan episode_id")
