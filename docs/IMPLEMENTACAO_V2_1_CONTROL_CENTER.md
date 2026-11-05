@@ -111,3 +111,15 @@ READY remains forbidden while any P0/P1 is open.
 - Estado: `CANDIDATE_NOT_DOWNLOADED`. Ainda não houve intake, fingerprint, aprovação humana ou promoção.
 - O candidato foi registrado no plano canônico. Próximo gate: intake controlada, amostragem integral, verificação 9:16 e fingerprint global.
 - O LED permanece pendente de aprovação explícita; render, catálogo global, Drive e publicação continuam bloqueados.
+
+
+## Addendum — intake e fingerprint do candidato S12 — 2026-11-05
+
+- A intake controlada foi concluída com sucesso no run `42052509193`, job `127332058958`, artifact `13427442382`, digest `sha256:122fee7648e166d0eea6bce8920486107922b7c64a6c892e975dec535f65d87`, no commit `efd7a0e40545b9400d14c90977253a9c73992bdc`.
+- O arquivo baixado foi validado com SHA-256 `e0a5b6cbf90c31c7f79c8cf6d9eaa515a83d4e986927a90a3840d7d36303e9b4`; metadata: 22,548 s, 1920×1080, H.264, 30 fps. A amostragem produziu cinco frames e crops 9:16.
+- A inspeção visual preliminar passou: não foram observados textos queimados, logos de terceiros ou letterbox; a antena parabólica permanece legível no recorte vertical. A classificação é representacional/mapa-diagrama, nunca evidência literal de Petrov. Aprovação humana continua pendente.
+- A primeira tentativa de fingerprint (`42052937565`) falhou de forma fail-closed com `candidate_missing_intake_artifact`, porque o plano ainda não continha o artifact recém-produzido. Nenhum arquivo foi promovido.
+- A causa foi corrigida registrando a intake no plano no commit `7d3867d9fa72ca43068e72b550fd3fb0b4f28541`; a nova execução passou no run `42053792993`, job `127336595316`, artifact `13427769060`, digest `sha256:f92cb4eed9bfc2fbaf518540413f5ab363578156f7c58d947e69c692219e0c87`.
+- Fingerprint: `FINGERPRINT_AUDIT_PASS`, algoritmo `video-fingerprint-v2-rgb24-q4`, sem colisão de fonte, SHA-256 ou fingerprint perceptual; perceptual hash `720e0b55776ac929e3c7f5be259dcaa7c848fe1cefb4fc2ffd501c6b2ee1059d`.
+- Estado atual: candidato tecnicamente apto e semanticamente promissor para S12, mas `human_approval=PENDING`, `approved_for_render=false`, `global_catalog_updated=false`, `drive_written=false`. O LED também permanece pendente.
+- Próximo passo único: aguardar sua aprovação explícita para o candidato S12 e, separadamente, para o LED antes de qualquer promoção ao manifesto ou renderização.
