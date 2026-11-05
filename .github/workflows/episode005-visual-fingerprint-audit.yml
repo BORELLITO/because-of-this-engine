@@ -42,24 +42,8 @@ jobs:
           from pathlib import Path
           from urllib.parse import urlparse
 
-          PROVIDER_POLICIES = {
-              "mixkit": {
-                  "license_name": "Mixkit Stock Video Free License",
-                  "page_hosts": {"mixkit.co"},
-                  "media_hosts": {"mixkit.co"},
-              },
-              "pixabay": {
-                  "license_name": "Pixabay Content License",
-                  "page_hosts": {"pixabay.com"},
-                  "media_hosts": {"pixabay.com"},
-              },
-          }
-
-          def host_allowed(hostname, allowed_bases):
-              hostname = str(hostname or "").lower().rstrip(".")
-              return any(hostname == base or hostname.endswith("." + base) for base in allowed_bases)
-
           from production.asset_reuse_brain import source_asset_key
+          from production.visual_provider_policy import host_allowed, policy_for
           from production.video_asset_contract import FINGERPRINT_ALGORITHM, ffprobe, perceptual_hash, sha256_file
 
           root = Path("artifacts/episode005-visual-fingerprint")
@@ -113,7 +97,7 @@ jobs:
                   })
                   continue
               provider = str(candidate.get("provider", ""))
-              policy = PROVIDER_POLICIES.get(provider)
+              policy = policy_for(provider)
               if policy is None or candidate.get("license_name") != policy["license_name"]:
                   blockers.append({
                       "type": "candidate_rights_drift",
