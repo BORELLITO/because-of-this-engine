@@ -1,0 +1,218 @@
+name: Because Of This Episode 005 Global Visual Fingerprint Audit
+
+# This audit is read-only and fail-closed. It verifies downloaded candidates
+# against the immutable global registry without promoting or mutating anything.
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/episode005-visual-fingerprint-audit.yml"
+      - "episodes/episode-005/visual/asset-acquisition-plan.json"
+      - "episodes/asset-memory-registry.json"
+      - "production/asset_reuse_brain.py"
+      - "production/video_asset_contract.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fingerprint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout candidate branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Install media tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ffmpeg
+
+      - name: Compute and compare fingerprints
+        run: |
+          mkdir -p artifacts/episode005-visual-fingerprint
+          python - <<'PY'
+          from __future__ import annotations
+
+          import hashlib
+          import json
+          import shutil
+          import urllib.request
+          from pathlib import Path
+
+          from production.asset_reuse_brain import source_asset_key
+          from production.video_asset_contract import FINGERPRINT_VERSION, ffprobe, perceptual_hash, sha256_file
+
+          root = Path("artifacts/episode005-visual-fingerprint")
+          plan = json.loads(Path("episodes/episode-005/visual/asset-acquisition-plan.json").read_text(encoding="utf-8"))
+          registry = json.loads(Path("episodes/asset-memory-registry.json").read_text(encoding="utf-8"))
+
+          allowed = {
+              "mixkit-slowly-approaching-clock-28897": {
+                  "source_page_url": "https://mixkit.co/free-stock-video/slowly-approaching-a-clock-on-a-black-background-28897/",
+                  "media_url": "https://assets.mixkit.co/videos/28897/28897-720.mp4",
+              },
+              "mixkit-cloudy-sky-118": {
+                  "source_page_url": "https://mixkit.co/free-stock-video/cloudy-sky-118/",
+                  "media_url": "https://assets.mixkit.co/videos/118/118-720.mp4",
+              },
+              "mixkit-abstract-red-glow-101432": {
+                  "source_page_url": "https://mixkit.co/free-stock-video/abstract-red-glow-101432/",
+                  "media_url": "https://assets.mixkit.co/bohe8920pfehyvq7p1hk5r699s7g",
+              },
+          }
+
+          candidates = [
+              item for item in plan.get("candidates", [])
+              if isinstance(item, dict) and item.get("intake_artifact")
+          ]
+          expected_ids = set(allowed)
+          actual_ids = {item.get("candidate_id") for item in candidates}
+          blockers = []
+          if actual_ids != expected_ids:
+              blockers.append({
+                  "type": "candidate_set",
+                  "expected": sorted(expected_ids),
+                  "actual": sorted(item for item in actual_ids if item),
+              })
+
+          registry_schema = registry.get("schema_version")
+          if registry_schema not in {1, 2}:
+              blockers.append({"type": "registry_schema", "value": registry_schema})
+          registry_assets = registry.get("assets")
+          if not isinstance(registry_assets, list):
+              blockers.append({"type": "registry_assets", "value": "not_a_list"})
+              registry_assets = []
+
+          def values(field: str) -> set[str]:
+              return {
+                  str(asset.get(field, "")).strip().lower()
+                  for asset in registry_assets
+                  if isinstance(asset, dict) and str(asset.get(field, "")).strip()
+              }
+
+          registry_sha = values("sha256")
+          registry_phash = values("perceptual_hash") | values("animation_fingerprint")
+          registry_sources = values("source_asset_key")
+          reports = []
+          seen = {
+              "sha256": set(),
+              "perceptual_hash": set(),
+              "source_asset_key": set(),
+          }
+
+          for candidate in candidates:
+              candidate_id = str(candidate.get("candidate_id", ""))
+              expected = allowed.get(candidate_id)
+              if expected is None:
+                  blockers.append({"type": "candidate_not_allowlisted", "candidate_id": candidate_id})
+                  continue
+              if candidate.get("source_page_url") != expected["source_page_url"]:
+                  blockers.append({"type": "source_page_mismatch", "candidate_id": candidate_id})
+              if candidate.get("media_url") != expected["media_url"]:
+                  blockers.append({"type": "media_url_mismatch", "candidate_id": candidate_id})
+
+              intake = candidate.get("intake_artifact") or {}
+              expected_sha = str(intake.get("sha256", "")).lower()
+              media_path = root / f"{candidate_id}.mp4"
+              request = urllib.request.Request(
+                  expected["media_url"],
+                  headers={"User-Agent": "because-of-this-fingerprint-audit/1.0"},
+              )
+              with urllib.request.urlopen(request, timeout=180) as response, media_path.open("wb") as handle:
+                  shutil.copyfileobj(response, handle)
+              actual_sha = sha256_file(media_path)
+              if actual_sha != expected_sha:
+                  blockers.append({
+                      "type": "sha256_drift",
+                      "candidate_id": candidate_id,
+                      "expected": expected_sha,
+                      "actual": actual_sha,
+                  })
+
+              metadata = ffprobe(media_path)
+              phash = perceptual_hash(media_path, duration=float(metadata["duration"]))
+              identity = {
+                  "provider": candidate.get("provider"),
+                  "provider_asset_id": candidate_id.rsplit("-", 1)[-1],
+                  "source_page_url": expected["source_page_url"],
+                  "source_asset_key": source_asset_key({
+                      "provider": candidate.get("provider"),
+                      "source_page_url": expected["source_page_url"],
+                      "provider_asset_id": candidate_id.rsplit("-", 1)[-1],
+                  }),
+                  "sha256": actual_sha,
+                  "perceptual_hash": phash,
+              }
+              for field, seen_field in (
+                  ("sha256", "sha256"),
+                  ("perceptual_hash", "perceptual_hash"),
+                  ("source_asset_key", "source_asset_key"),
+              ):
+                  value = identity[field].lower()
+                  if value in seen[seen_field]:
+                      blockers.append({"type": "candidate_collision", "field": field, "value": value})
+                  seen[seen_field].add(value)
+              if actual_sha in registry_sha:
+                  blockers.append({"type": "global_sha256_collision", "candidate_id": candidate_id, "value": actual_sha})
+              if phash in registry_phash:
+                  blockers.append({"type": "global_perceptual_collision", "candidate_id": candidate_id, "value": phash})
+              if identity["source_asset_key"] in registry_sources:
+                  blockers.append({
+                      "type": "global_source_collision",
+                      "candidate_id": candidate_id,
+                      "value": identity["source_asset_key"],
+                  })
+              reports.append({
+                  "candidate_id": candidate_id,
+                  "source_page_url": expected["source_page_url"],
+                  "media_url": expected["media_url"],
+                  "sha256": actual_sha,
+                  "perceptual_hash": phash,
+                  "fingerprint_algorithm": f"video-phash-v{FINGERPRINT_VERSION}-dct32-low8",
+                  "metadata": {
+                      "duration_seconds": round(float(metadata["duration"]), 3),
+                      "width": metadata["width"],
+                      "height": metadata["height"],
+                      "fps": metadata["fps"],
+                      "codec": metadata["codec"],
+                      "size_bytes": metadata["size"],
+                  },
+                  "global_source_collision": identity["source_asset_key"] in registry_sources,
+                  "global_sha256_collision": actual_sha in registry_sha,
+                  "global_perceptual_collision": phash in registry_phash,
+                  "human_approval": "PENDING",
+                  "approved_for_render": False,
+                  "global_catalog_updated": False,
+              })
+
+          report = {
+              "status": "FINGERPRINT_AUDIT_PASS" if not blockers else "FINGERPRINT_AUDIT_BLOCKED",
+              "episode_id": "episode-005",
+              "registry_schema_version": registry_schema,
+              "fingerprint_algorithm": f"video-phash-v{FINGERPRINT_VERSION}-dct32-low8",
+              "candidate_count": len(reports),
+              "candidates": reports,
+              "blockers": blockers,
+              "human_approval_pending": True,
+              "promotion_allowed": False,
+              "global_catalog_updated": False,
+              "render_allowed": False,
+              "drive_written": False,
+          }
+          (root / "fingerprint-audit.json").write_text(
+              json.dumps(report, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          print(json.dumps(report, indent=2))
+          if blockers:
+              raise SystemExit(1)
+          PY
+
+      - name: Upload fingerprint evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: episode005-visual-fingerprint-audit
+          path: artifacts/episode005-visual-fingerprint
+          if-no-files-found: error
