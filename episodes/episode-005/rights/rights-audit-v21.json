@@ -7,7 +7,7 @@
     "mixkit": "https://mixkit.co/license/modal/videoFree/",
     "pixabay": "https://pixabay.com/service/license-summary/"
   },
-  "global_status": "BLOCKED_PENDING_MIXKIT_AUTHOR_LICENSE_CONFIRMATION_AND_PER_ASSET_RENDER_APPROVAL",
+  "global_status": "BLOCKED_PENDING_EXPLICIT_RENDER_APPROVAL_PER_ASSET",
   "promotion_policy": {
     "approved_for_manifest_only": true,
     "approved_for_render": false,
@@ -34,7 +34,7 @@
       "assigned_shots": [
         "S01"
       ],
-      "author_status": "MISSING_FROM_LEDGER",
+      "author_status": "CONFIRMED_MIXKIT",
       "visual_rights_review": "PASS_ABSTRACT_RED_GLOW_NO_IDENTIFIABLE_ELEMENTS",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "page_license_status": "PASS_ITEM_PAGE_FREE_LICENSE_VISIBLE",
@@ -42,7 +42,11 @@
       "visual_qa_status": "PASS",
       "visual_qa_evidence": "artifact 13403209885 / qa-frames.jpg",
       "third_party_risk": "NONE_VISIBLE",
-      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION"
+      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION",
+      "contributor_url": "https://mixkit.co/@mixkit/",
+      "author_evidence": "https://mixkit.co/free-stock-video/abstract-red-glow-101432/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE",
+      "license_confirmation_checked_at": "2026-11-05"
     },
     {
       "asset_id": "mixkit-slowly-approaching-clock-28897",
@@ -62,7 +66,7 @@
       "assigned_shots": [
         "S07"
       ],
-      "author_status": "MISSING_FROM_LEDGER",
+      "author_status": "CONFIRMED_ARVIZUM",
       "visual_rights_review": "PASS_GENERIC_CLOCK_NO_BRAND_VISIBLE",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "page_license_status": "PASS_ITEM_PAGE_FREE_LICENSE_VISIBLE",
@@ -70,7 +74,11 @@
       "visual_qa_status": "PASS",
       "visual_qa_evidence": "artifact 13403188677 / qa-frames.jpg",
       "third_party_risk": "GENERIC_CLOCK_FACE_ONLY",
-      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION"
+      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION",
+      "contributor_url": "https://mixkit.co/@arvizum/",
+      "author_evidence": "https://mixkit.co/free-stock-video/slowly-approaching-a-clock-on-a-black-background-28897/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE",
+      "license_confirmation_checked_at": "2026-11-05"
     },
     {
       "asset_id": "mixkit-cloudy-sky-118",
@@ -90,7 +98,7 @@
       "assigned_shots": [
         "S11"
       ],
-      "author_status": "MISSING_FROM_LEDGER",
+      "author_status": "CONFIRMED_EDGAR_FERNANDEZ",
       "visual_rights_review": "PASS_GENERIC_CLOUDY_SKY_NO_IDENTIFIABLE_ELEMENTS",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "page_license_status": "PASS_ITEM_PAGE_FREE_LICENSE_VISIBLE",
@@ -98,7 +106,11 @@
       "visual_qa_status": "PASS",
       "visual_qa_evidence": "artifact 13404636511 / qa-frames.jpg",
       "third_party_risk": "NONE_VISIBLE",
-      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION"
+      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION",
+      "contributor_url": "https://mixkit.co/@edgarfernandez/",
+      "author_evidence": "https://mixkit.co/free-stock-video/cloudy-sky-118/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE",
+      "license_confirmation_checked_at": "2026-11-05"
     },
     {
       "asset_id": "mixkit-clock-mechanism-3651",
@@ -118,7 +130,7 @@
       "assigned_shots": [
         "S10"
       ],
-      "author_status": "MISSING_FROM_LEDGER",
+      "author_status": "CONFIRMED_EDGAR_FERNANDEZ",
       "visual_rights_review": "PASS_GENERIC_CLOCK_MECHANISM_WITH_NONBRAND_DATE_TEXT",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "page_license_status": "PASS_ITEM_PAGE_FREE_LICENSE_VISIBLE",
@@ -126,7 +138,11 @@
       "visual_qa_status": "PASS",
       "visual_qa_evidence": "artifact 13406364533 / qa-frames.jpg",
       "third_party_risk": "GENERIC_CLOCK_TEXT_ONLY",
-      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION"
+      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION",
+      "contributor_url": "https://mixkit.co/@edgarfernandez/",
+      "author_evidence": "https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE",
+      "license_confirmation_checked_at": "2026-11-05"
     },
     {
       "asset_id": "mixkit-large-satellite-antenna-2650",
@@ -146,7 +162,7 @@
       "assigned_shots": [
         "S02"
       ],
-      "author_status": "MISSING_FROM_LEDGER",
+      "author_status": "CONFIRMED_MATTHIAS_GROENEVELD",
       "visual_rights_review": "PASS_SATELLITE_ANTENNA_NO_PERSON_OR_BRAND_VISIBLE",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "page_license_status": "PASS_ITEM_PAGE_FREE_LICENSE_VISIBLE",
@@ -154,7 +170,11 @@
       "visual_qa_status": "PASS",
       "visual_qa_evidence": "artifact 13409661379 / qa-frames.jpg",
       "third_party_risk": "NONE_VISIBLE",
-      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION"
+      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION",
+      "contributor_url": "https://mixkit.co/@matthiasgroeneveld/",
+      "author_evidence": "https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE",
+      "license_confirmation_checked_at": "2026-11-05"
     },
     {
       "asset_id": "mixkit-young-engineer-29991",
@@ -459,6 +479,6 @@
       "third_party_risk": "NONE_VISIBLE"
     }
   ],
-  "last_adjustment": "Direct-media visual QA completed for all 16 active assets on 2026-11-05; all active assets pass visual safety review, while Mixkit author/license confirmation and explicit render approval remain pending.",
+  "last_adjustment": "Direct-media visual QA passed for all 16 active assets. All seven Mixkit contributors and item-page Free License evidence are now recorded; explicit per-asset render approval remains pending.",
   "qa_rule": "Direct-media visual QA is separate from provider license evidence. Generic text/labels, representational infrastructure and symbolic graphics pass only with editorial guardrails; no asset is promoted to render without explicit per-asset approval."
 }
