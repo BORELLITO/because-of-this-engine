@@ -13,6 +13,14 @@ on:
         required: true
         default: "episode005-edge-tts-preview"
         type: string
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/frozen-episode005-captions.yml"
+      - "production/whisper_captions.py"
+      - "production/align_captions.py"
+      - "production/generate_phrase_captions.py"
+      - "episodes/episode-005/narration/en-US-charon-v1.txt"
 
 permissions:
   actions: read
@@ -43,9 +51,9 @@ jobs:
       - name: Download frozen Edge artifact
         uses: actions/download-artifact@v4
         with:
-          name: ${{ inputs.source_artifact_name }}
+          name: ${{ inputs.source_artifact_name || 'episode005-edge-tts-preview' }}
           github-token: ${{ github.token }}
-          run-id: ${{ inputs.source_run_id }}
+          run-id: ${{ inputs.source_run_id || '41961294784' }}
           path: artifacts/episode005-frozen
 
       - name: Verify frozen audio identity
