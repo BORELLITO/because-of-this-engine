@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "policy": "legacy_rollback_only",
+  "rollback_instruction": "revert main to the last verified commit or tag; do not select a legacy engine at runtime",
+  "engines": [
+    {
+      "engine_id": "because-of-this-v7.3.1-charon-cinematic-dread",
+      "version": "7.3.1",
+      "location": "main before v2.1 integration",
+      "replacement": "because-of-this-v2.1-canonical",
+      "status": "legacy_rollback_only",
+      "last_verified_commit": "d35d78cd4a92d12375f54076e3e21b56cbe25fad"
+    },
+    {
+      "engine_id": "because-of-this-v7.4-editorial-story-candidate",
+      "version": "7.4",
+      "location": "branch:v7.4-editorial-story-engine",
+      "replacement": "because-of-this-v2.1-canonical",
+      "status": "legacy_rollback_only",
+      "last_verified_commit": "877e2e72073c77cd0f68d2bc277b0ef9ffbdaad4"
+    },
+    {
+      "engine_id": "because-of-this-v7.2-piper",
+      "version": "7.2",
+      "location": "archive/v6 and historical branches",
+      "replacement": "because-of-this-v2.1-canonical",
+      "status": "legacy_rollback_only",
+      "last_verified_commit": "0b4240ff7a7ad914ba1cbe6d931c4eb967c64f4f"
+    }
+  ]
+}
