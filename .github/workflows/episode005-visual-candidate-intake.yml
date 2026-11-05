@@ -1,6 +1,6 @@
 name: Because Of This Episode 005 Visual Candidate Intake
 
-# Manual-only and fail-closed: this workflow creates an auditable candidate artifact.
+# Pull-request and manual intake are fail-closed: this workflow creates an auditable candidate artifact.
 # It never promotes an asset to the render manifest, never mutates the global catalog,
 # and never writes to Drive or publishes media.
 on:
@@ -128,7 +128,7 @@ jobs:
 
       - name: Generate human-QA frames
         run: |
-          ffmpeg -v error -y -i artifacts/episode005-visual-intake/candidate.mp4             -vf "select='eq(n,0)+eq(n,round(N/2))+eq(n,N-1)',scale=540:-2,tile=3x1:padding=8:margin=8:color=black"             -frames:v 1 -q:v 2 artifacts/episode005-visual-intake/qa-frames.jpg
+          ffmpeg -v error -y -i artifacts/episode005-visual-intake/candidate.mp4             -vf "fps=1,scale=540:-2,tile=3x1:padding=8:margin=8:color=black"             -frames:v 1 -q:v 2 artifacts/episode005-visual-intake/qa-frames.jpg
 
       - name: Upload isolated candidate evidence
         uses: actions/upload-artifact@v4
