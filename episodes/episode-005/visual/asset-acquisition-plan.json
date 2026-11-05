@@ -1,7 +1,7 @@
 {
   "plan_id": "episode-005-visual-asset-acquisition-v1",
   "episode_id": "episode-005",
-  "status": "CANDIDATE_DOWNLOADED_HUMAN_QA_REQUIRED",
+  "status": "TWO_CANDIDATES_DOWNLOADED_HUMAN_QA_REQUIRED",
   "purpose": "Pre-download candidate pool for Episode 005. No candidate is approved for render until downloaded, SHA-256ed, visually inspected, checked for embedded text/logos/letterbox, fingerprinted, and entered into the final video manifest.",
   "frozen_audio_source": {
     "workflow_run_id": 41961294784,
@@ -243,7 +243,7 @@
       "truth_class": "EXPLAINED_PHENOMENON",
       "provider": "mixkit",
       "license_name": "Mixkit Stock Video Free License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "media_url": "https://assets.mixkit.co/videos/118/118-720.mp4",
       "media_url_observed_in_browser": true,
       "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
@@ -256,6 +256,30 @@
           "4096x2160"
         ],
         "semantic_note": "Clouds darken over time; candidate for S11/S12 mechanism and non-event atmosphere."
+      },
+      "intake_artifact": {
+        "workflow_run_id": 42004883836,
+        "artifact_id": 13404636511,
+        "artifact_digest": "sha256:12313afbe106a2dfdff4d9e8543b57f7e7312797620c227fae2c73291f5f2514",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "7b18e0c66a2eb1a55df0532d3bf346f1e1d193eaa805403cc39fc835e8454432",
+        "duration_seconds": 16.35,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "frame_rate": "24000/1001",
+        "codec": "h264",
+        "automated_promotion": false
+      },
+      "qa": {
+        "clean_frame_visual_review": "PRELIMINARY_PASS",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_QA_FRAMES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
+        "semantic_fit": "PRELIMINARY_PASS_FOR_S11_S12",
+        "locked_9x16_crop": "PRELIMINARY_PASS",
+        "global_reuse_fingerprint": "PENDING",
+        "human_approval": "PENDING"
       }
     },
     {
@@ -270,7 +294,7 @@
       "rights_status": "CANDIDATE_NOT_DOWNLOADED"
     }
   ],
-  "next_action": "Run the same fail-closed intake for mixkit-cloudy-sky-118, inspect technical metadata and 9x16 crop, then perform global fingerprint and human approval checks for both candidates before catalog/render promotion.",
+  "next_action": "Perform the human approval and global perceptual-fingerprint checks for the clock and cloudy-sky candidates. If approved, add both to the final per-asset rights ledger and global catalog, then continue acquisition for red-light/control-room coverage. Do not render or generate the final thumbnail yet.",
   "acquisition_route": {
     "status": "ALTERNATIVE_ROUTE_PREPARED_NOT_DOWNLOADED",
     "preferred_provider": "mixkit",
