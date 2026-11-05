@@ -332,3 +332,5 @@ READY remains forbidden while any P0/P1 is open.
 - Bloqueios remanescentes: (1) completar creator/author e confirmação da Free License nos 7 Mixkit; (2) concluir QA visual de pessoas, marcas e elementos de terceiros nos 16 assets, especialmente os shots S03, S04 e qualquer frame com conteúdo identificável; (3) somente depois registrar aprovação de direitos para render.
 - Referências oficiais de licença: https://mixkit.co/license/modal/videoFree/ e https://pixabay.com/service/license-summary/.
 - Próximo passo único: completar a ficha de direitos por asset e registrar aprovação explícita para render apenas nos itens que passarem essa verificação; não habilitar produção ou publicação automática.
+
+- Foi criada a ficha individual `episodes/episode-005/rights/rights-audit-v21.json`, com 16 assets, URLs, licença declarada, SHA-256, fingerprint, shots atribuídos e pendências de direitos por item. O arquivo é somente auditoria; não altera nenhuma autorização de render.
