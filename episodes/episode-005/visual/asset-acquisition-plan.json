@@ -1416,7 +1416,7 @@
         "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
         "semantic_fit": "SHORTLIST_NEAR_PENDING_FINGERPRINT_AND_HUMAN_QA",
         "locked_9x16_crop": "PENDING_HUMAN_QA",
-        "global_reuse_fingerprint": "PENDING_RERUN",
+        "global_reuse_fingerprint": "RUNNING",
         "human_approval": "PENDING",
         "approved_for_render": false,
         "global_catalog_updated": false,
@@ -2033,12 +2033,12 @@
     "next_action": "Run the explicit fingerprint audit for this candidate; keep approval, promotion, render, catalog, Drive and publication blocked."
   },
   "last_manual_fingerprint": {
-    "workflow_run_id": 42056451177,
-    "job_id": 127346025111,
+    "workflow_run_id": 42056934162,
+    "job_id": 127347760300,
     "artifact_id": null,
     "artifact_name": null,
     "artifact_digest": null,
-    "status": "FINGERPRINT_AUDIT_BLOCKED",
+    "status": "FINGERPRINT_AUDIT_RUNNING",
     "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
     "automated_promotion": false,
     "human_approval": "PENDING",
@@ -2047,19 +2047,12 @@
     "candidate_ids": [
       "pixabay-hallway-dark-corridor-20837"
     ],
-    "blockers": [
-      {
-        "type": "sha256_drift",
-        "candidate_id": "pixabay-hallway-dark-corridor-20837",
-        "expected_before_correction": "",
-        "actual": "e6c20511f889daa57834ddf5f97ea076ffffedc0a321850a4ea8fa295479d72d"
-      }
-    ],
+    "blockers": [],
     "promotion_allowed": false,
     "render_allowed": false,
     "drive_written": false,
     "next_candidate_batch": [],
-    "next_action": "Rerun the explicit fingerprint audit after recording the downloaded media SHA-256; keep approval, promotion, render, catalog, Drive and publication blocked."
+    "next_action": "Aguardar a conclusão do run 42056934162; não promover, renderizar, atualizar o catálogo global, escrever no Drive ou publicar."
   },
   "last_candidate_addition": {
     "added_at_utc": "2026-11-05T15:14:00Z",
