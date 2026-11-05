@@ -47,7 +47,7 @@ def _recognize(audio_path: Path, model_name: str, prompt: str = "") -> list[dict
                     continue
                 start = float(item.start)
                 end = float(item.end)
-                if end <= start:
+                if end - start < 0.02:
                     continue
                 words.append({
                     "word": text,
