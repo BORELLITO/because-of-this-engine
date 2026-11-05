@@ -1,7 +1,7 @@
 {
   "plan_id": "episode-005-visual-asset-acquisition-v1",
   "episode_id": "episode-005",
-  "status": "CANDIDATE_REVIEW_REQUIRED",
+  "status": "CANDIDATE_DOWNLOADED_HUMAN_QA_REQUIRED",
   "purpose": "Pre-download candidate pool for Episode 005. No candidate is approved for render until downloaded, SHA-256ed, visually inspected, checked for embedded text/logos/letterbox, fingerprinted, and entered into the final video manifest.",
   "frozen_audio_source": {
     "workflow_run_id": 41961294784,
@@ -205,10 +205,34 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "mixkit",
       "license_name": "Mixkit Stock Video Free License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "media_url": "https://assets.mixkit.co/videos/28897/28897-720.mp4",
       "media_url_observed_in_browser": true,
-      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42003907636,
+        "artifact_id": 13403188677,
+        "artifact_digest": "sha256:3d1a8b60b24cede0ebb3b99d14f8ee9fcdc508040320498ec80f8f8d5bf78299",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "d254063cd2f4ceeaf186f68c71c905fb8b27d9e94397aa0a794e93827208b505",
+        "duration_seconds": 9.458,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "frame_rate": "24/1",
+        "codec": "h264",
+        "automated_promotion": false
+      },
+      "qa": {
+        "clean_frame_visual_review": "PRELIMINARY_PASS",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_QA_FRAMES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
+        "semantic_fit": "PRELIMINARY_PASS_FOR_S07_S10",
+        "locked_9x16_crop": "PENDING",
+        "global_reuse_fingerprint": "PENDING",
+        "human_approval": "PENDING"
+      }
     },
     {
       "candidate_id": "mixkit-cloudy-sky-118",
@@ -233,7 +257,7 @@
       "rights_status": "CANDIDATE_NOT_DOWNLOADED"
     }
   ],
-  "next_action": "Dispatch episode005-visual-candidate-intake.yml for the verified Mixkit clock candidate, inspect the uploaded candidate-intake.json and qa-frames.jpg, then register SHA-256 and perceptual fingerprint only after human approval. Repeat the same intake for the remaining approved Mixkit pages. Do not render or update the global catalog before those gates pass.",
+  "next_action": "Approve or reject the clock candidate after locked 9:16 crop and global fingerprint checks; then repeat the browser-verified GitHub intake for the Mixkit cloud and red-light candidates. Do not update the global catalog, render manifest or thumbnail until human approval and no-reuse fingerprint gates pass.",
   "acquisition_route": {
     "status": "ALTERNATIVE_ROUTE_PREPARED_NOT_DOWNLOADED",
     "preferred_provider": "mixkit",
@@ -258,13 +282,15 @@
           "1920x1080"
         ],
         "browser_download_event": "OBSERVED",
-        "workspace_import": "PENDING",
-        "sha256": null,
-        "clean_frame_qa": "NOT_RUN",
-        "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+        "workspace_import": "REPLACED_BY_GITHUB_ACTIONS_INTAKE",
+        "sha256": "d254063cd2f4ceeaf186f68c71c905fb8b27d9e94397aa0a794e93827208b505",
+        "clean_frame_qa": "PRELIMINARY_PASS",
+        "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
         "note": "Browser download completed in the isolated browser environment, but the resulting file is not exposed to the repository workspace for hashing and QA.",
         "media_url": "https://assets.mixkit.co/videos/28897/28897-720.mp4",
-        "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
+        "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+        "workflow_run_id": 42003907636,
+        "artifact_id": 13403188677
       }
     ],
     "workspace_import": "REPLACED_BY_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE"
