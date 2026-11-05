@@ -1063,7 +1063,7 @@
       "truth_class": "REPRESENTATIONAL",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "PAGE_VERIFIED_AWAITING_INTAKE",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "media_url": "https://cdn.pixabay.com/video/2025/11/18/316712_large.mp4",
       "media_url_observed_in_browser": true,
       "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
@@ -1077,7 +1077,50 @@
       },
       "score": null,
       "score_breakdown": {},
-      "disqualifiers": []
+      "disqualifiers": [],
+      "intake_artifact": {
+        "workflow_run_id": 42044610956,
+        "job_id": 127304076065,
+        "artifact_id": 13422389208,
+        "artifact_name": "episode005-visual-intake-42044610956",
+        "artifact_digest": "sha256:6a38460d0d482e7eb75dabefdd15db9147870966a72b0ab43a698cafec2a57bc",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "e4d3d281bab5ffb6808a6ad0b20dd03e3857112cf309ee86d1dec234d4ac928e",
+        "duration_seconds": 5.208,
+        "dimensions": [
+          3872,
+          2160
+        ],
+        "frame_rate": "24/1",
+        "codec": "h264",
+        "automated_promotion": false,
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "positions": [
+            "start",
+            "quarter",
+            "middle",
+            "three_quarter",
+            "end_minus_0_1_seconds"
+          ],
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        }
+      },
+      "qa": {
+        "clean_frame_visual_review": "PENDING_HUMAN_REVIEW",
+        "baked_captions_or_authored_graphics": "PENDING_HUMAN_REVIEW",
+        "embedded_logo_or_letterbox": "PENDING_HUMAN_REVIEW",
+        "semantic_fit": "PENDING_HUMAN_REVIEW",
+        "locked_9x16_crop": "PENDING_HUMAN_REVIEW",
+        "global_reuse_fingerprint": "PENDING_FINGERPRINT_AUDIT",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     },
     {
       "candidate_id": "pixabay-sky-clouds-satellite-95686",
@@ -1088,7 +1131,7 @@
       "truth_class": "REPRESENTATIONAL",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "PAGE_VERIFIED_AWAITING_INTAKE",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "media_url": "https://cdn.pixabay.com/video/2021/11/12/95686-645712467_large.mp4",
       "media_url_observed_in_browser": true,
       "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
@@ -1102,7 +1145,50 @@
       },
       "score": null,
       "score_breakdown": {},
-      "disqualifiers": []
+      "disqualifiers": [],
+      "intake_artifact": {
+        "workflow_run_id": 42044610956,
+        "job_id": 127304076065,
+        "artifact_id": 13422389208,
+        "artifact_name": "episode005-visual-intake-42044610956",
+        "artifact_digest": "sha256:6a38460d0d482e7eb75dabefdd15db9147870966a72b0ab43a698cafec2a57bc",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "908dceb3cf0d3c703a0fd6d64181fbcbf7a4760fcaa6744fc03279293897a61a",
+        "duration_seconds": 15.018,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "30/1",
+        "codec": "h264",
+        "automated_promotion": false,
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "positions": [
+            "start",
+            "quarter",
+            "middle",
+            "three_quarter",
+            "end_minus_0_1_seconds"
+          ],
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        }
+      },
+      "qa": {
+        "clean_frame_visual_review": "PENDING_HUMAN_REVIEW",
+        "baked_captions_or_authored_graphics": "PENDING_HUMAN_REVIEW",
+        "embedded_logo_or_letterbox": "PENDING_HUMAN_REVIEW",
+        "semantic_fit": "PENDING_HUMAN_REVIEW",
+        "locked_9x16_crop": "PENDING_HUMAN_REVIEW",
+        "global_reuse_fingerprint": "PENDING_FINGERPRINT_AUDIT",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     }
   ],
   "next_action": "Replace the two preliminary rejects (S06/S09 warning-control source and S12 cloud-sunlight-satellite source), then obtain explicit human approval only for candidates that pass the clean-source, semantic-fit and crop gates. Keep all render, catalog, Drive and publication gates blocked.",
@@ -1619,46 +1705,57 @@
       ],
       "rationale": "Replace the preliminary non-diegetic warning/control source and the semantically weak blank-screen satellite source with page-verified Pixabay candidates.",
       "source_page_and_license_verification": "Completed in browser before intake; media URLs observed on provider pages."
+    },
+    "last_candidate_intake": {
+      "recorded_at_utc": "2026-11-05T00:00:00Z",
+      "workflow_run_id": 42044610956,
+      "candidate_ids": [
+        "pixabay-led-indicator-lights-316712",
+        "pixabay-sky-clouds-satellite-95686"
+      ],
+      "status": "BATCH_DOWNLOADED_AWAITING_HUMAN_QA",
+      "evidence_artifact_id": 13422389208,
+      "evidence_artifact_digest": "sha256:6a38460d0d482e7eb75dabefdd15db9147870966a72b0ab43a698cafec2a57bc",
+      "no_promotion": true,
+      "no_render": true,
+      "no_catalog_update": true,
+      "no_drive_write": true
     }
   },
   "last_manual_intake": {
-    "workflow_run_id": 42043152146,
-    "job_id": 127298967914,
+    "workflow_run_id": 42044610956,
+    "job_id": 127304076065,
     "branch": "integration/because-of-this-v2.1-20261105",
+    "commit_sha": "b97ba79f98d19802e5f8c0d06df1ea312ede1bea",
     "candidate_ids": [
-      "pixabay-alert-alarm-war-205519",
-      "pixabay-radar-sonar-ping-2420",
-      "pixabay-radar-screen-4511",
-      "pixabay-television-broadcasting-satellite-29483"
+      "pixabay-led-indicator-lights-316712",
+      "pixabay-sky-clouds-satellite-95686"
     ],
-    "refresh_existing": true,
+    "refresh_existing": false,
     "status": "BATCH_DOWNLOADED_AWAITING_HUMAN_QA",
-    "artifact_id": 13422407818,
-    "artifact_name": "episode005-visual-intake-42043152146",
-    "artifact_digest": "sha256:2c518303ddeab0806300fe1eb4e8e1c3a01b7d0de92f1118ccbe0e77b5c7381f",
+    "artifact_id": 13422389208,
+    "artifact_name": "episode005-visual-intake-42044610956",
+    "artifact_digest": "sha256:6a38460d0d482e7eb75dabefdd15db9147870966a72b0ab43a698cafec2a57bc",
     "promotion_allowed": false,
     "render_allowed": false,
     "global_catalog_updated": false,
     "drive_written": false,
     "publication_allowed": false,
+    "thumbnail_eligible": false,
     "qa_sampling_revision": {
-      "status": "RERUN_SUCCESS",
+      "status": "PASS",
       "workflow_commit": "61d1f3613e2a065aad3d1ccd931e027f597ea9f9",
       "method": "five_normalized_timestamps",
       "sample_positions": [
         "start",
         "quarter",
         "middle",
-        "three-quarter",
+        "three_quarter",
         "end_minus_0_1_seconds"
       ],
-      "note": "Full-duration QA contact sheets regenerated successfully; all four candidates contain five samples plus vertical crops."
+      "note": "Both replacement candidates contain five samples plus vertical crops."
     },
-    "next_candidate_batch": [
-      "pixabay-led-indicator-lights-316712",
-      "pixabay-sky-clouds-satellite-95686"
-    ],
-    "next_action": "Dispatch manual intake for the two newly page-verified candidates; keep promotion, render, catalog, Drive and publication blocked."
+    "next_action": "Dispatch the manual fingerprint audit for the two replacement candidates; keep promotion, render, catalog, Drive and publication blocked."
   },
   "last_manual_fingerprint": {
     "workflow_run_id": 42039523926,
@@ -1681,6 +1778,11 @@
     "blockers": [],
     "promotion_allowed": false,
     "render_allowed": false,
-    "drive_written": false
+    "drive_written": false,
+    "next_candidate_batch": [
+      "pixabay-led-indicator-lights-316712",
+      "pixabay-sky-clouds-satellite-95686"
+    ],
+    "next_action": "Dispatch manual global fingerprint audit for the two replacement candidates before semantic approval."
   }
 }
