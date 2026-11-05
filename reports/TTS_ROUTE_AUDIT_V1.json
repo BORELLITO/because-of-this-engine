@@ -14,7 +14,7 @@
       "status": "ACTIVE_PREVIEW_ROUTE_NOT_YET_SYNTHESIZED",
       "attempted": false,
       "required_configuration": "edge-tts 7.3.1 and ffmpeg available in the execution environment",
-      "project_adapter": "production/edge_tts.py",
+      "project_adapter": "production/microsoft_edge_tts.py",
       "voice_rationale": "Microsoft lists ChristopherNeural as an en-US male voice; voice metadata associates it with News/Novel and Authority.",
       "production_allowed": true,
       "automatic_retry": false
@@ -117,7 +117,7 @@
   "next_action": "Run the same adapter in an execution environment with trusted access to speech.platform.bing.com, keep SSL verification enabled, then authorize one complete Episode 005 preview.",
   "operational_preflight": {
     "status": "BLOCKED_ENVIRONMENT_TLS",
-    "adapter": "production/edge_tts.py",
+    "adapter": "production/microsoft_edge_tts.py",
     "dependency": "edge-tts==7.3.1",
     "dependency_installed": true,
     "ffmpeg_available": true,
