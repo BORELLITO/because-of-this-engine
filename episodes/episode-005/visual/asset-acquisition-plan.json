@@ -11,13 +11,16 @@
     "captions_status": "EDGE_TTS_NATIVE_ALIGNMENT_PASS"
   },
   "rights_policy": {
-    "preferred_provider": "pexels",
-    "license": "Pexels License",
-    "license_evidence_url": "https://www.pexels.com/legal-pages/license/",
+    "preferred_provider": "mixkit",
+    "fallback_provider": "pexels",
+    "license": "Mixkit Video Free License",
+    "license_evidence_url": "https://mixkit.co/license/modal/videoFree/",
     "commercial_use_allowed_by_provider": true,
     "attribution_required": false,
     "verification_required": "Per-asset page and downloaded-file QA remain mandatory; depicted trademarks, logos, identifiable people and third-party rights are not automatically cleared.",
-    "no_archival_claim": "All representational footage must remain unlabeled as literal Petrov archival footage."
+    "no_archival_claim": "All representational footage must remain unlabeled as literal Petrov archival footage.",
+    "route_decision": "Mixkit is preferred after the Pexels page was reachable but its direct media download was blocked by the browser; existing Pexels candidates remain fallback candidates only.",
+    "avoid_ai_generated_sources": true
   },
   "selection_gates": [
     "source_page_exists",
@@ -181,7 +184,65 @@
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "pexels",
       "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "mixkit-abstract-red-glow-101432",
+      "source_page_url": "https://mixkit.co/free-stock-video/abstract-red-glow-101432/",
+      "role": "S01,S06,S09",
+      "visual_match": "SYMBOLIC",
+      "visual_intent": "red warning pulse and escalation texture without literal archival claim",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "provider": "mixkit",
+      "license_name": "Mixkit Stock Video Free License",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "mixkit-slowly-approaching-clock-28897",
+      "source_page_url": "https://mixkit.co/free-stock-video/slowly-approaching-a-clock-on-a-black-background-28897/",
+      "role": "S07,S10",
+      "visual_match": "EXACT",
+      "visual_intent": "decision window and bunker clock under pressure",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "mixkit",
+      "license_name": "Mixkit Stock Video Free License",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "mixkit-cloudy-sky-118",
+      "source_page_url": "https://mixkit.co/free-stock-video/cloudy-sky-118/",
+      "role": "S11,S12",
+      "visual_match": "EXACT",
+      "visual_intent": "high-cloud reflection mechanism and empty sky after the false alarm",
+      "truth_class": "EXPLAINED_PHENOMENON",
+      "provider": "mixkit",
+      "license_name": "Mixkit Stock Video Free License",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "mixkit-clock-mechanism-3651",
+      "source_page_url": "https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/",
+      "role": "S07,S10",
+      "visual_match": "NEAR",
+      "visual_intent": "mechanical passage of time while command waits",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "mixkit",
+      "license_name": "Mixkit Stock Video Free License",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
     }
   ],
-  "next_action": "Download and inspect candidates through the approved browser acquisition path, then create the final per-asset rights/fingerprint records and narration-locked render manifest. Do not render from this candidate plan."
+  "next_action": "Acquire Mixkit candidates through the approved browser path, beginning with the four Free-License pages listed in acquisition_route; record downloaded-file SHA-256, clean-frame QA, semantic fit, rights evidence and global-reuse fingerprints. Keep all Pexels items as fallback only. Do not render from this candidate plan.",
+  "acquisition_route": {
+    "status": "ALTERNATIVE_ROUTE_PREPARED_NOT_DOWNLOADED",
+    "preferred_provider": "mixkit",
+    "fallback_provider": "pexels",
+    "browser_download_status": "PEXELS_DIRECT_MEDIA_BLOCKED",
+    "candidate_policy": "Only pages explicitly carrying the Mixkit Video Free License may advance. Restricted-license, AI-generated, watermark, baked-graphics, letterboxed or semantically weak clips are rejected.",
+    "collection_pages": [
+      "https://mixkit.co/free-stock-video/red-light/",
+      "https://mixkit.co/free-stock-video/security/",
+      "https://mixkit.co/free-stock-video/discover/clock/?orientation=vertical",
+      "https://mixkit.co/free-stock-video/clouds/"
+    ],
+    "license_checked_at_utc": "2026-11-05T00:00:00Z"
+  }
 }
