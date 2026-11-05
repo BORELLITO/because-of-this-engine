@@ -123,3 +123,14 @@ READY remains forbidden while any P0/P1 is open.
 - Fingerprint: `FINGERPRINT_AUDIT_PASS`, algoritmo `video-fingerprint-v2-rgb24-q4`, sem colisão de fonte, SHA-256 ou fingerprint perceptual; perceptual hash `720e0b55776ac929e3c7f5be259dcaa7c848fe1cefb4fc2ffd501c6b2ee1059d`.
 - Estado atual: candidato tecnicamente apto e semanticamente promissor para S12, mas `human_approval=PENDING`, `approved_for_render=false`, `global_catalog_updated=false`, `drive_written=false`. O LED também permanece pendente.
 - Próximo passo único: aguardar sua aprovação explícita para o candidato S12 e, separadamente, para o LED antes de qualquer promoção ao manifesto ou renderização.
+
+
+## Addendum — aprovação manifest-only de LED e S12 — 2026-11-05
+
+- A autorização recebida foi aplicada somente no nível `APPROVED_FOR_MANIFEST_ONLY`; não houve renderização, mutação do catálogo global, escrita no Drive ou publicação.
+- `pixabay-led-indicator-lights-316712` foi aprovado exclusivamente para S06, como textura abstrata de indicadores/electronics para a subida da intensidade do alarme. Não representa a interface soviética real. A regra de fonte única por shot foi preservada.
+- `pixabay-antenna-astronomy-communication-40041` foi aprovado exclusivamente para S12, como infraestrutura representacional de antena/sensor. Não representa footage literal do incidente de Petrov.
+- O manifesto parcial foi atualizado no commit `0d6fa696b712af04baaf87d671f30f4069db0493`. S06 e S12 deixaram de estar bloqueados; permanecem pendentes S05, S08, S09, S13, S14, S15 e S16.
+- Evidências mantidas: LED fingerprint pass no run `42049952757`; S12 fingerprint pass no run `42053792993`. Ambos continuam com `approved_for_render=false`, `global_catalog_updated=false` e `drive_written=false`.
+- Plano canônico atualizado no commit `ee24e2c01216af3e6e20e29e179c03506c3ec3a6`; a aprovação foi registrada com shot_ids explícitos para impedir reutilização acidental.
+- Próximo passo único: adquirir candidatos distintos para os shots restantes e executar a validação final do manifesto. Render e publicação continuam bloqueados.
