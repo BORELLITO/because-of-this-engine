@@ -1259,7 +1259,7 @@
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "media_url": "https://cdn.pixabay.com/video/2020/05/24/40041-424371544_large.mp4",
       "media_url_observed_in_browser": true,
       "browser_verification": {
@@ -1268,6 +1268,50 @@
         "visible_duration_seconds": 22,
         "visible_resolution": "1920x1080",
         "semantic_note": "Real parabolic antenna/earth-station infrastructure with sky and clouds; stronger S12 mechanism candidate than a generic cloud texture, pending intake and frame QA."
+      },
+      "intake_artifact": {
+        "workflow_run_id": 42052509193,
+        "job_id": 127332058958,
+        "artifact_id": 13427442382,
+        "artifact_name": "episode005-visual-intake-42052509193",
+        "artifact_digest": "sha256:122fee7648e166d0eea6bce8920486107922b7c64a6c892e975dec535f65d87c",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "e0a5b6cbf90c31c7f79c8cf6d9eaa515a83d4e986927a90a3840d7d36303e9b4",
+        "duration_seconds": 22.548,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "30/1",
+        "codec": "h264",
+        "automated_promotion": false,
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "positions": [
+            "start",
+            "quarter",
+            "middle",
+            "three_quarter",
+            "end_minus_0_1_seconds"
+          ],
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        }
+      },
+      "qa": {
+        "clean_frame_visual_review": "PASS_FULL_DURATION",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_FIVE_SAMPLES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_FIVE_SAMPLES",
+        "semantic_fit": "PRELIMINARY_PASS_FOR_S12_AS_REPRESENTATIONAL_SATELLITE_ANTENNA",
+        "locked_9x16_crop": "PASS_CENTRAL_ANTENNA_REMAINS_VISIBLE",
+        "global_reuse_fingerprint": "PENDING_FINGERPRINT_AUDIT",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "assistant_visual_review": "Clean full-duration footage; real parabolic antenna/earth-station geometry remains readable in the 9:16 center crop. Treat as representational infrastructure, not literal Petrov archival evidence."
       }
     }
   ],
@@ -1803,19 +1847,18 @@
     }
   },
   "last_manual_intake": {
-    "workflow_run_id": 42044610956,
-    "job_id": 127304076065,
+    "workflow_run_id": 42052509193,
+    "job_id": 127332058958,
     "branch": "integration/because-of-this-v2.1-20261105",
-    "commit_sha": "b97ba79f98d19802e5f8c0d06df1ea312ede1bea",
+    "commit_sha": "efd7a0e40545b9400d14c90977253a9c73992bdc",
     "candidate_ids": [
-      "pixabay-led-indicator-lights-316712",
-      "pixabay-sky-clouds-satellite-95686"
+      "pixabay-antenna-astronomy-communication-40041"
     ],
     "refresh_existing": false,
     "status": "BATCH_DOWNLOADED_AWAITING_HUMAN_QA",
-    "artifact_id": 13422389208,
-    "artifact_name": "episode005-visual-intake-42044610956",
-    "artifact_digest": "sha256:6a38460d0d482e7eb75dabefdd15db9147870966a72b0ab43a698cafec2a57bc",
+    "artifact_id": 13427442382,
+    "artifact_name": "episode005-visual-intake-42052509193",
+    "artifact_digest": "sha256:122fee7648e166d0eea6bce8920486107922b7c64a6c892e975dec535f65d87c",
     "promotion_allowed": false,
     "render_allowed": false,
     "global_catalog_updated": false,
@@ -1824,7 +1867,7 @@
     "thumbnail_eligible": false,
     "qa_sampling_revision": {
       "status": "PASS",
-      "workflow_commit": "61d1f3613e2a065aad3d1ccd931e027f597ea9f9",
+      "workflow_commit": "efd7a0e40545b9400d14c90977253a9c73992bdc",
       "method": "five_normalized_timestamps",
       "sample_positions": [
         "start",
@@ -1833,9 +1876,9 @@
         "three_quarter",
         "end_minus_0_1_seconds"
       ],
-      "note": "Both replacement candidates contain five samples plus vertical crops."
+      "note": "The candidate contains five samples plus vertical crops."
     },
-    "next_action": "Dispatch the manual fingerprint audit for the two replacement candidates; keep promotion, render, catalog, Drive and publication blocked."
+    "next_action": "The fingerprint dispatch must consume this recorded intake artifact; keep promotion, render, catalog, Drive and publication blocked."
   },
   "last_manual_fingerprint": {
     "workflow_run_id": 42039523926,
@@ -1860,9 +1903,16 @@
     "render_allowed": false,
     "drive_written": false,
     "next_candidate_batch": [
-      "pixabay-led-indicator-lights-316712",
-      "pixabay-sky-clouds-satellite-95686"
+      "pixabay-antenna-astronomy-communication-40041"
     ],
-    "next_action": "Dispatch manual global fingerprint audit for the two replacement candidates before semantic approval."
+    "next_action": "Dispatch manual global fingerprint audit for the newly recorded S12 intake candidate before semantic approval."
+  },
+  "last_candidate_addition": {
+    "added_at_utc": "2026-11-05T15:14:00Z",
+    "candidate_ids": [
+      "pixabay-antenna-astronomy-communication-40041"
+    ],
+    "rationale": "Replace the semantically weak S12 cloud/satellite candidate with a page-verified real parabolic antenna/earth-station candidate whose geometry is visible in the full frame and center crop.",
+    "source_page_and_license_verification": "Completed in browser before intake; Pixabay Content License and direct media URL were observed on the source page."
   }
 }
