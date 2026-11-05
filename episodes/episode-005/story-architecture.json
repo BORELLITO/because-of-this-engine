@@ -36,9 +36,9 @@
   ],
   "narration": {
     "language": "en-US",
-    "voice_provider": "gemini_tts",
-    "voice_name": "Charon",
-    "model": "gemini-3.8-flash-tts",
+    "voice_provider": "google_cloud_tts",
+    "voice_name": "en-US-Chirp3-HD-Charon",
+    "model": "chirp3_hd",
     "script_file": "episodes/episode-005/narration/en-US-charon-v1.txt",
     "script_sha256": "4d1691d4c00d2e8e2ea7c93f31dfbd62c0f9007875a63f2626e62944300489a8",
     "character_count": 1066,
@@ -47,9 +47,9 @@
       "min": 66,
       "max": 74
     },
-    "real_call_authorized": true,
+    "real_call_authorized": false,
     "request_count": 0,
-    "execution_status": "PENDING_SINGLE_REAL_CALL",
+    "execution_status": "PENDING_SINGLE_REAL_CLOUD_TTS_CALL",
     "retry_policy": "NO_AUTOMATIC_RETRY_AFTER_SUBMISSION",
     "last_provider_attempt": {
       "provider": "creativeclaw_google_gemini",
@@ -63,8 +63,8 @@
       "automatic_retry": false,
       "classification": "HISTORICAL_DIAGNOSTIC_ONLY_NOT_PRODUCTION"
     },
-    "execution_route": "direct_google_gemini_api_only",
-    "production_provider_policy": "Creative Claw forbidden"
+    "execution_route": "google_cloud_tts_only",
+    "production_provider_policy": "Creative Claw forbidden; no provider fallback"
   },
   "shot_plan": [
     {
@@ -205,7 +205,7 @@
   "production_gates": {
     "story_fact_check": "READY_WITH_GUARDRAILS",
     "script_lock": "READY_FOR_TTS",
-    "real_tts": "PENDING_DIRECT_GOOGLE_GEMINI_API",
+    "real_tts": "PENDING_GOOGLE_CLOUD_TTS",
     "captions": "BLOCKED_UNTIL_AUDIO",
     "render": "BLOCKED_UNTIL_CAPTIONS_AND_ASSETS",
     "thumbnail_final": "BLOCKED_UNTIL_RENDER_OR_APPROVED_FRAME",
