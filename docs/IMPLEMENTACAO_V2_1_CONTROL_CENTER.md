@@ -280,3 +280,14 @@ READY remains forbidden while any P0/P1 is open.
 - O contrato media_contract_v21.py e o fixture V2.1 agora apontam para a entrada manual; o renderer legado continua fora da rota ativa.
 - Novos testes de gate passaram: 2 casos adicionais cobrindo production_enablement, autorização humana e thumbnail final obrigatória.
 - Próximo passo único: preparar o production record e os arquivos finais de thumbnail/preview; somente após esses gates e autorização explícita será possível implementar/ativar a execução de mídia do render.
+
+
+## Atualização — production record V2.1 preparado e validado — 2026-11-05
+
+- Foi criado o registro canônico `episodes/episode-005/production-record.json`, com história, ledger factual, 16 direitos visuais, contratos TTS/áudio/captions/render/Drive e referência da thumbnail candidata.
+- A primeira validação encontrou e corrigiu um conflito de vocabulário: `REPRESENTATIONAL` e `BRAND_OUTRO` não pertenciam ao vocabulário oficial do PACKAGE_GATE_PRE. Foram normalizados para `RECONSTRUCTION` e `ABSTRACT_ATMOSPHERE`, preservando o significado editorial.
+- Validação final do registro: schema PASS, PACKAGE_GATE_PRE PASS com 10/10, source ledger PASS, global no-reuse PASS, TTS/audio/captions/render/Drive/adapters PASS.
+- O registro permanece corretamente BLOCKED por dois gates reais: direitos ainda estão `APPROVED_FOR_MANIFEST_ONLY` e a thumbnail ainda não tem aprovação final, margens/legibilidade QA nem arquivos de delivery.
+- O novo preflight manual confirmou `V21_MANUAL_RENDER_BLOCKED`, `production_enablement=false`, render NOT_RUN e publicação MANUAL_ONLY_NOT_RUN.
+- O CI agora verifica automaticamente que o production record do Episódio 005 continue fail-closed.
+- Próximo passo único: finalizar a aprovação/entrega da thumbnail e promover os direitos visuais de manifest-only para render somente após a revisão final; ainda não liberar produção automaticamente.
