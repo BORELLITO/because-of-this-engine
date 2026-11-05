@@ -20,7 +20,10 @@
       "clock-mechanism candidate is a symbolic mechanical-time reconstruction, assigned to S10 only and never treated as Petrov archival evidence",
       "satellite antenna candidate is representational infrastructure for S02 only and must not be presented as literal Petrov archival evidence",
       "young-engineer candidate is assigned to S03 only and must not be presented as literal Petrov archival evidence",
-      "worker-industrial-lathe candidate is assigned to S04 only and must not be presented as literal Petrov archival evidence"
+      "worker-industrial-lathe candidate is assigned to S04 only and must not be presented as literal Petrov archival evidence",
+      "LED indicator candidate is approved for S06 only as abstract representational texture; not a literal Soviet interface",
+      "Pixabay antenna candidate is approved for S12 only as representational sensor/early-warning infrastructure",
+      "these approvals do not authorize render, global catalog mutation, Drive write or publication"
     ]
   },
   "global_reuse_audit": {
@@ -213,6 +216,69 @@
       "thumbnail_eligible": false,
       "drive_written": false,
       "editorial_caveat": "Industrial control panel is representational reconstruction for S04, never literal Petrov archival evidence."
+    },
+    {
+      "candidate_id": "pixabay-led-indicator-lights-316712",
+      "provider": "pixabay",
+      "source_page_url": "https://pixabay.com/videos/led-indicator-lights-electronics-316712/",
+      "media_url": "https://cdn.pixabay.com/video/2025/11/18/316712_large.mp4",
+      "license_name": "Pixabay Content License",
+      "source_role": "S06",
+      "truth_class": "REPRESENTATIONAL",
+      "sha256": "e4d3d281bab5ffb6808a6ad0b20dd03e3857112cf309ee86d1dec234d4ac928e",
+      "perceptual_hash": "d70c666953675401e001265ef4d80b66b8da2a8034488305320c0a12633c0395",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42044610956,
+        "artifact_id": 13422389208,
+        "artifact_digest": "sha256:6a38460d0d482e7eb75dabefdd15db9147870966a72b0ab43a698cafec2a57bc"
+      },
+      "qa_refresh_artifact": {
+        "workflow_run_id": 42049521282,
+        "artifact_id": 13426556747,
+        "artifact_digest": "sha256:81604ae674a11d6e4c7b27769ab80b6b9a7aaa486260edae9c280220a9750e60"
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 42049952757,
+        "artifact_id": 13424799852,
+        "artifact_digest": "sha256:c561091d1c94a2ef93b5e5d34b194e54c9990490da56dde60c9fedfa3921e99b"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "editorial_caveat": "Abstract indicator/electronics texture for S06 only; never literal Soviet alert interface or Petrov archival evidence."
+    },
+    {
+      "candidate_id": "pixabay-antenna-astronomy-communication-40041",
+      "provider": "pixabay",
+      "source_page_url": "https://pixabay.com/videos/antenna-astronomy-communication-40041/",
+      "media_url": "https://cdn.pixabay.com/video/2020/05/24/40041-424371544_large.mp4",
+      "license_name": "Pixabay Content License",
+      "source_role": "S12",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "sha256": "e0a5b6cbf90c31c7f79c8cf6d9eaa515a83d4e986927a90a3840d7d36303e9b4",
+      "perceptual_hash": "720e0b55776ac929e3c7f5be259dcaa7c848fe1cefb4fc2ffd501c6b2ee1059d",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42052509193,
+        "artifact_id": 13427442382,
+        "artifact_digest": "sha256:122fee7648e166d0eea6bce8920486107922b7c64a6c892e975dec535f65d87"
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 42053792993,
+        "artifact_id": 13427769060,
+        "artifact_digest": "sha256:f92cb4eed9bfc2fbaf518540413f5ab363578156f7c58d947e69c692219e0c87"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "editorial_caveat": "Representational satellite/earth-station infrastructure for S12 only; never literal Petrov archival evidence."
     }
   ],
   "shot_assignments": [
@@ -298,9 +364,16 @@
       "role": "escalation",
       "requested_visual": "Counter reaches five; alarm intensity rises.",
       "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
-      "assignment": null,
-      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "assignment": {
+        "candidate_id": "pixabay-led-indicator-lights-316712",
+        "usage": "abstract indicator/electronics texture for rising alarm intensity; not literal archival evidence",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "editorial_caveat": "Use only as symbolic representational insert; do not imply the actual Soviet alert interface."
+      },
+      "blocking_reason": null
     },
     {
       "shot_id": "S07",
@@ -376,9 +449,16 @@
       "role": "mechanism",
       "requested_visual": "Sunlight geometry over high clouds and satellite sensor.",
       "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
-      "assignment": null,
-      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "assignment": {
+        "candidate_id": "pixabay-antenna-astronomy-communication-40041",
+        "usage": "representational parabolic antenna/sensor geometry under open sky; not archival evidence",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "editorial_caveat": "Use as mechanism visualization, not as literal footage from Petrov's 1983 incident."
+      },
+      "blocking_reason": null
     },
     {
       "shot_id": "S13",
@@ -423,10 +503,8 @@
   ],
   "unresolved_shots": [
     "S05",
-    "S06",
     "S08",
     "S09",
-    "S12",
     "S13",
     "S14",
     "S15",
@@ -441,7 +519,7 @@
     "drive_write_authorized": false,
     "publication_authorized": false
   },
-  "next_action": "Acquire and QA distinct candidates for unresolved shots S05,S06,S08,S09,S12,S13,S14,S15,S16, then re-run final visual manifest validation. Render, global catalog, Drive and publication remain blocked.",
+  "next_action": "Acquire and QA distinct candidates for unresolved shots S05,S08,S09,S13,S14,S15,S16; then re-run final visual manifest validation. Render, global catalog, Drive and publication remain blocked.",
   "reuse_policy": {
     "source_reuse_scope": "global",
     "distinct_source_required_per_shot": true,
@@ -475,6 +553,37 @@
         "intake_artifact_id": 13412703858,
         "fingerprint_workflow_run_id": 42025128372,
         "fingerprint_artifact_id": 13413646379
+      }
+    },
+    {
+      "candidate_id": "pixabay-led-indicator-lights-316712",
+      "shot_ids": [
+        "S06"
+      ],
+      "decision": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_at_utc": "2026-11-05T15:24:20Z",
+      "scope": "Abstract representational indicator/electronics texture",
+      "evidence": {
+        "intake_workflow_run_id": 42044610956,
+        "intake_artifact_id": 13422389208,
+        "qa_refresh_workflow_run_id": 42049521282,
+        "fingerprint_workflow_run_id": 42049952757,
+        "fingerprint_artifact_id": 13424799852
+      }
+    },
+    {
+      "candidate_id": "pixabay-antenna-astronomy-communication-40041",
+      "shot_ids": [
+        "S12"
+      ],
+      "decision": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_at_utc": "2026-11-05T15:24:20Z",
+      "scope": "Representational satellite/antenna mechanism",
+      "evidence": {
+        "intake_workflow_run_id": 42052509193,
+        "intake_artifact_id": 13427442382,
+        "fingerprint_workflow_run_id": 42053792993,
+        "fingerprint_artifact_id": 13427769060
       }
     }
   ]
