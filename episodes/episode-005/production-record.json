@@ -72,15 +72,15 @@
   "package_variants": [
     {
       "title": "THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
-      "thumbnail_text": "FIVE MISSILES"
+      "thumbnail_text": "PENDING"
     },
     {
       "title": "THE NIGHT THE MACHINE LIED",
-      "thumbnail_text": "THE MACHINE LIED"
+      "thumbnail_text": "PENDING"
     },
     {
       "title": "FIVE MISSILES",
-      "thumbnail_text": "FIVE MISSILES"
+      "thumbnail_text": "PENDING"
     }
   ],
   "next_video_bridge": "A related story about a warning that looked impossible until one person trusted the contradiction.",
@@ -90,8 +90,8 @@
   "story_score": 10,
   "package_status": "PENDING_HUMAN_APPROVAL",
   "human_editor_status": "PENDING",
-  "thumbnail_concept_id": "thumb-episode-005-five-missiles-v1",
-  "thumbnail_manifest_id": "thumb-manifest-episode-005-v1",
+  "thumbnail_concept_id": "thumb-episode-005-pending-v1",
+  "thumbnail_manifest_id": "thumb-manifest-episode-005-pending-v1",
   "thumbnail_status": "PENDING_HUMAN_APPROVAL",
   "platform_thumbnail_mode": {
     "youtube_shorts": "custom_if_supported",
@@ -634,37 +634,36 @@
     }
   ],
   "thumbnail_concept": {
-    "concept_id": "thumb-episode-005-five-missiles-v1",
-    "title_alignment": "The five-missile warning is the central visual hook; no claim that Petrov literally saved the world.",
-    "hero_visual": "Red early-warning console with five indicators and a dark human silhouette.",
-    "thumbnail_text": "FIVE MISSILES",
+    "concept_id": "thumb-episode-005-pending-v1",
+    "title_alignment": "Pending replacement thumbnail; no candidate asset is active.",
+    "hero_visual": "Final thumbnail concept not selected.",
+    "thumbnail_text": "PENDING",
     "visual_truth_class": "MAP_OR_DIAGRAM",
-    "rights_status": "ORIGINAL_GENERATED_ASSET_PENDING_FINAL_HUMAN_REVIEW",
-    "candidate_library_file_id": "libfile_0a269bde796c81919bd777795b907361",
-    "candidate_sha256": "84fbac028247995943aa5c9e4fcfc698526215e83c2017edc225dbcebe307276",
-    "human_review_status": "PENDING"
+    "rights_status": "PENDING_SELECTION",
+    "human_review_status": "PENDING",
+    "note": "Previous thumbnail candidate removed by user request."
   },
   "thumbnail_manifest": {
     "episode_id": "episode-005",
     "story_id": "story-stanislav-petrov-false-alarm-1983",
     "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
     "title_variant": "THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
-    "thumbnail_text": "FIVE MISSILES",
-    "hero_asset_id": "thumb-episode-005-five-missiles-v1",
+    "thumbnail_text": "PENDING",
+    "hero_asset_id": "PENDING_FINAL_THUMBNAIL",
     "visual_truth_class": "MAP_OR_DIAGRAM",
-    "source_url": "library://libfile_0a269bde796c81919bd777795b907361",
-    "rights_status": "PENDING_HUMAN_REVIEW",
-    "sha256": "84fbac028247995943aa5c9e4fcfc698526215e83c2017edc225dbcebe307276",
+    "source_url": "pending://thumbnail",
+    "rights_status": "PENDING_SELECTION",
+    "sha256": "",
     "dimensions": [
       1080,
       1920
     ],
-    "safe_margin_status": "PENDING_HUMAN_REVIEW",
-    "mobile_legibility_status": "PENDING_HUMAN_REVIEW",
+    "safe_margin_status": "PENDING",
+    "mobile_legibility_status": "PENDING",
     "human_review_status": "PENDING",
     "youtube_thumbnail_mode": "custom_if_supported",
     "tiktok_cover_mode": "approved_video_frame",
-    "final_status": "CANDIDATE_READY_FOR_HUMAN_REVIEW",
+    "final_status": "PENDING_REPLACEMENT",
     "delivery_paths": {
       "thumbnail_master_9x16_png": "episodes/episode-005/delivery/thumbnail/thumbnail_master_9x16.png",
       "thumbnail_master_9x16_jpg": "episodes/episode-005/delivery/thumbnail/thumbnail_master_9x16.jpg",
@@ -744,13 +743,9 @@
   "production_gates": {
     "story_fact_check": "READY_WITH_GUARDRAILS",
     "visual_manifest": "PASS_STRUCTURAL_BLOCKED_PROMOTION",
-    "thumbnail": "PENDING_HUMAN_REVIEW",
+    "thumbnail": "PENDING_REPLACEMENT",
     "render": "BLOCKED",
     "drive": "NOT_AUTHORIZED",
-    "publication": "MANUAL_ONLY",
-    "visual_truth_class_normalization": {
-      "REPRESENTATIONAL": "RECONSTRUCTION",
-      "BRAND_OUTRO": "ABSTRACT_ATMOSPHERE"
-    }
+    "publication": "MANUAL_ONLY"
   }
 }
