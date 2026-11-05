@@ -165,7 +165,8 @@ def _prepend_silence(audio: bytes, milliseconds: int, sample_rate: int) -> bytes
         raise EdgeTTSError("Edge TTS output is not a valid WAV") from exc
 
 
-async def _save_mp3(text: str, profile: dict, destination: Path) -> None:
+async def _save_mp3(text: str, profile: dict, destination: Path) -> list[dict]:
+    """Persist Edge audio and its provider-emitted word boundaries."""
     edge_tts = _edge_module()
     communicator = edge_tts.Communicate(
         text,
@@ -174,7 +175,27 @@ async def _save_mp3(text: str, profile: dict, destination: Path) -> None:
         pitch=profile["pitch"],
         volume=profile["volume"],
     )
-    await communicator.save(str(destination))
+    boundaries: list[dict] = []
+    with destination.open("wb") as handle:
+        async for message in communicator.stream():
+            kind = message.get("type")
+            if kind == "audio":
+                handle.write(message.get("data", b""))
+            elif kind == "WordBoundary":
+                boundaries.append({
+                    "text": str(message.get("text", "")),
+                    "offset_100ns": int(message.get("offset", 0)),
+                    "duration_100ns": int(message.get("duration", 0)),
+                    "start_seconds": round(float(message.get("offset", 0)) / 10_000_000, 6),
+                    "end_seconds": round(
+                        float(message.get("offset", 0) + message.get("duration", 0)) / 10_000_000,
+                        6,
+                    ),
+                    "timestamp_source": "edge_tts_word_boundary",
+                })
+    if not destination.is_file() or destination.stat().st_size == 0:
+        raise EdgeTTSError("Edge TTS returned no audio bytes")
+    return boundaries
 
 
 def _convert_mp3_to_wav(mp3_path: Path, wav_path: Path, sample_rate: int) -> None:
@@ -207,7 +228,7 @@ def synthesize_text(text: str, profile: dict, *, break_before_ms: int = 0):
         wav_path = Path(directory) / "chunk.wav"
         for attempt in range(1, MAX_ATTEMPTS + 1):
             try:
-                asyncio.run(_save_mp3(clean, profile, mp3_path))
+                word_boundaries = asyncio.run(_save_mp3(clean, profile, mp3_path))
                 last_error = None
                 break
             except Exception as exc:
@@ -233,6 +254,7 @@ def synthesize_text(text: str, profile: dict, *, break_before_ms: int = 0):
         "sample_width_bytes": width,
         "duration_seconds": round(duration, 3),
         "generated_at_utc": _now(),
+        "word_boundaries": word_boundaries,
     }
 
 
@@ -288,6 +310,8 @@ def synthesize_chunks(chunks: list[dict], output_dir: Path, profile: dict, *, dr
     output_dir.mkdir(parents=True, exist_ok=True)
     records = []
     wavs = []
+    combined_boundaries: list[dict] = []
+    elapsed_seconds = 0.0
     for index, chunk in enumerate(chunks, start=1):
         beat_id = str(chunk.get("beat_id") or f"beat-{index:03d}")
         clean = build_text(str(chunk.get("text") or ""), substitutions=chunk.get("substitutions"))
@@ -322,7 +346,16 @@ def synthesize_chunks(chunks: list[dict], output_dir: Path, profile: dict, *, dr
             })
             metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         records.append(metadata)
+        pause_seconds = pause / 1000.0
+        for boundary in metadata.get("word_boundaries", []):
+            combined_boundaries.append({
+                **boundary,
+                "start_seconds": round(elapsed_seconds + pause_seconds + float(boundary["start_seconds"]), 6),
+                "end_seconds": round(elapsed_seconds + pause_seconds + float(boundary["end_seconds"]), 6),
+                "beat_id": beat_id,
+            })
         wavs.append(audio)
+        elapsed_seconds += _wav_info(audio)[3]
     if dry_run:
         combined = {"path": str(output_dir / "narration.wav"), "state": "pending_validation"}
     else:
@@ -332,7 +365,22 @@ def synthesize_chunks(chunks: list[dict], output_dir: Path, profile: dict, *, dr
         duration = _wav_info(data)[3]
         if not MIN_NARRATION_SECONDS <= duration <= MAX_NARRATION_SECONDS:
             raise EdgeTTSError(f"combined narration duration {duration:.3f}s is outside the 60–75s contract")
-        combined = {"path": str(combined_path), "sha256": _sha256_file(combined_path), "duration_seconds": round(duration, 3)}
+        boundaries_path = output_dir / "edge-word-boundaries.json"
+        boundaries_path.write_text(json.dumps({
+            "status": "EDGE_TTS_WORD_BOUNDARIES",
+            "provider": PROVIDER,
+            "voice_name": profile["voice_name"],
+            "audio_path": str(combined_path),
+            "audio_duration_seconds": round(duration, 3),
+            "words": combined_boundaries,
+        }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        combined = {
+            "path": str(combined_path),
+            "sha256": _sha256_file(combined_path),
+            "duration_seconds": round(duration, 3),
+            "word_boundaries_path": str(boundaries_path),
+            "word_boundary_count": len(combined_boundaries),
+        }
     return {
         "status": "EDGE_TTS_DRY_RUN" if dry_run else "EDGE_TTS_GENERATED",
         "provider": PROVIDER, "profile": profile, "chunks": records, "combined": combined,
