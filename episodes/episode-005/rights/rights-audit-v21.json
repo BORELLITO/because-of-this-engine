@@ -7,7 +7,7 @@
     "mixkit": "https://mixkit.co/license/modal/videoFree/",
     "pixabay": "https://pixabay.com/service/license-summary/"
   },
-  "global_status": "BLOCKED_PENDING_DIRECT_MEDIA_PREVIEW_AND_PER_ASSET_RENDER_APPROVAL",
+  "global_status": "BLOCKED_PENDING_MIXKIT_AUTHOR_LICENSE_CONFIRMATION_AND_PER_ASSET_RENDER_APPROVAL",
   "promotion_policy": {
     "approved_for_manifest_only": true,
     "approved_for_render": false,
@@ -35,10 +35,14 @@
         "S01"
       ],
       "author_status": "MISSING_FROM_LEDGER",
-      "visual_rights_review": "REQUIRED_BRAND_LOGO_AND_THIRD_PARTY_CHECK",
+      "visual_rights_review": "PASS_ABSTRACT_RED_GLOW_NO_IDENTIFIABLE_ELEMENTS",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "page_license_status": "PASS_ITEM_PAGE_FREE_LICENSE_VISIBLE",
-      "full_asset_review_status": "PENDING_FULL_FILE_QA"
+      "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
+      "visual_qa_status": "PASS",
+      "visual_qa_evidence": "artifact 13403209885 / qa-frames.jpg",
+      "third_party_risk": "NONE_VISIBLE",
+      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION"
     },
     {
       "asset_id": "mixkit-slowly-approaching-clock-28897",
@@ -59,10 +63,14 @@
         "S07"
       ],
       "author_status": "MISSING_FROM_LEDGER",
-      "visual_rights_review": "REQUIRED_BRAND_LOGO_AND_THIRD_PARTY_CHECK",
+      "visual_rights_review": "PASS_GENERIC_CLOCK_NO_BRAND_VISIBLE",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "page_license_status": "PASS_ITEM_PAGE_FREE_LICENSE_VISIBLE",
-      "full_asset_review_status": "PENDING_FULL_FILE_QA"
+      "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
+      "visual_qa_status": "PASS",
+      "visual_qa_evidence": "artifact 13403188677 / qa-frames.jpg",
+      "third_party_risk": "GENERIC_CLOCK_FACE_ONLY",
+      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION"
     },
     {
       "asset_id": "mixkit-cloudy-sky-118",
@@ -83,10 +91,14 @@
         "S11"
       ],
       "author_status": "MISSING_FROM_LEDGER",
-      "visual_rights_review": "REQUIRED_BRAND_LOGO_AND_THIRD_PARTY_CHECK",
+      "visual_rights_review": "PASS_GENERIC_CLOUDY_SKY_NO_IDENTIFIABLE_ELEMENTS",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "page_license_status": "PASS_ITEM_PAGE_FREE_LICENSE_VISIBLE",
-      "full_asset_review_status": "PENDING_FULL_FILE_QA"
+      "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
+      "visual_qa_status": "PASS",
+      "visual_qa_evidence": "artifact 13404636511 / qa-frames.jpg",
+      "third_party_risk": "NONE_VISIBLE",
+      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION"
     },
     {
       "asset_id": "mixkit-clock-mechanism-3651",
@@ -107,10 +119,14 @@
         "S10"
       ],
       "author_status": "MISSING_FROM_LEDGER",
-      "visual_rights_review": "REQUIRED_BRAND_LOGO_AND_THIRD_PARTY_CHECK",
+      "visual_rights_review": "PASS_GENERIC_CLOCK_MECHANISM_WITH_NONBRAND_DATE_TEXT",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "page_license_status": "PASS_ITEM_PAGE_FREE_LICENSE_VISIBLE",
-      "full_asset_review_status": "PENDING_FULL_FILE_QA"
+      "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
+      "visual_qa_status": "PASS",
+      "visual_qa_evidence": "artifact 13406364533 / qa-frames.jpg",
+      "third_party_risk": "GENERIC_CLOCK_TEXT_ONLY",
+      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION"
     },
     {
       "asset_id": "mixkit-large-satellite-antenna-2650",
@@ -131,10 +147,14 @@
         "S02"
       ],
       "author_status": "MISSING_FROM_LEDGER",
-      "visual_rights_review": "REQUIRED_BRAND_LOGO_AND_THIRD_PARTY_CHECK",
+      "visual_rights_review": "PASS_SATELLITE_ANTENNA_NO_PERSON_OR_BRAND_VISIBLE",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "page_license_status": "PASS_ITEM_PAGE_FREE_LICENSE_VISIBLE",
-      "full_asset_review_status": "PENDING_FULL_FILE_QA"
+      "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
+      "visual_qa_status": "PASS",
+      "visual_qa_evidence": "artifact 13409661379 / qa-frames.jpg",
+      "third_party_risk": "NONE_VISIBLE",
+      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION"
     },
     {
       "asset_id": "mixkit-young-engineer-29991",
@@ -155,10 +175,14 @@
         "S03"
       ],
       "author_status": "CONFIRMED_EDGAR_FERNANDEZ",
-      "visual_rights_review": "PREVIEW_PASS_NO_FACE_OR_RECOGNIZABLE_PERSON_VISIBLE",
+      "visual_rights_review": "PASS_NO_FACE_GENERIC_TABLET_WITH_GENERIC_CODE_TEXT",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "contributor_url": "https://mixkit.co/@edgarfernandez/",
-      "full_asset_review_status": "PENDING_FULL_FILE_QA"
+      "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
+      "visual_qa_status": "PASS",
+      "visual_qa_evidence": "artifact 13411851653 / qa-frames.jpg",
+      "third_party_risk": "GENERIC_SCREEN_TEXT_ONLY",
+      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION"
     },
     {
       "asset_id": "mixkit-worker-industrial-lathe-2244",
@@ -179,10 +203,14 @@
         "S04"
       ],
       "author_status": "CONFIRMED_EDGAR_FERNANDEZ",
-      "visual_rights_review": "PREVIEW_PASS_HAND_ONLY_GENERIC_EMERGENCY_LABEL_NO_BRAND_VISIBLE",
+      "visual_rights_review": "PASS_HAND_ONLY_GENERIC_EMERGENCY_STOP_LABEL",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "contributor_url": "https://mixkit.co/@edgarfernandez/",
-      "full_asset_review_status": "PENDING_FULL_FILE_QA"
+      "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
+      "visual_qa_status": "PASS",
+      "visual_qa_evidence": "artifact 13412703858 / qa-frames.jpg",
+      "third_party_risk": "GENERIC_LABEL_ONLY",
+      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION"
     },
     {
       "asset_id": "pixabay-led-indicator-lights-316712",
@@ -203,10 +231,14 @@
         "S06"
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
-      "visual_rights_review": "PENDING_DIRECT_MEDIA_PREVIEW",
+      "visual_rights_review": "PASS_ABSTRACT_LED_INDICATORS_NO_IDENTIFIABLE_ELEMENTS",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
-      "full_asset_review_status": "BLOCKED_BROWSER_PREVIEW_NOT_RENDERED"
+      "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
+      "visual_qa_status": "PASS",
+      "visual_qa_evidence": "artifact 13426556747 / pixabay-led-indicator-lights-316712/qa-frames.jpg",
+      "third_party_risk": "NONE_VISIBLE",
+      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION"
     },
     {
       "asset_id": "pixabay-antenna-astronomy-communication-40041",
@@ -227,10 +259,14 @@
         "S12"
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
-      "visual_rights_review": "PENDING_DIRECT_MEDIA_PREVIEW",
+      "visual_rights_review": "PASS_SATELLITE_ARRAY_NO_PERSON_OR_BRAND_VISIBLE",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
-      "full_asset_review_status": "BLOCKED_BROWSER_PREVIEW_NOT_RENDERED"
+      "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
+      "visual_qa_status": "PASS",
+      "visual_qa_evidence": "artifact 13427442382 / pixabay-antenna-astronomy-communication-40041/qa-frames.jpg",
+      "third_party_risk": "GENERIC_INFRASTRUCTURE_ONLY",
+      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION"
     },
     {
       "asset_id": "pixabay-hallway-dark-corridor-20837",
@@ -423,6 +459,6 @@
       "third_party_risk": "NONE_VISIBLE"
     }
   ],
-  "last_adjustment": "S05 primary replaced by directly inspected generic radar/target candidate after recognizable-person rejection on 2026-11-05",
-  "qa_rule": "Provider license evidence is not equivalent to visual QA. Any recognizable person, brand, logo, readable third-party text, or unresolved media preview blocks promotion; render approval remains explicit per asset."
+  "last_adjustment": "Direct-media visual QA completed for all 16 active assets on 2026-11-05; all active assets pass visual safety review, while Mixkit author/license confirmation and explicit render approval remain pending.",
+  "qa_rule": "Direct-media visual QA is separate from provider license evidence. Generic text/labels, representational infrastructure and symbolic graphics pass only with editorial guardrails; no asset is promoted to render without explicit per-asset approval."
 }
