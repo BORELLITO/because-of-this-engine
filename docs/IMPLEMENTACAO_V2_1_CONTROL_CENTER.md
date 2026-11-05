@@ -396,3 +396,18 @@ READY remains forbidden while any P0/P1 is open.
 - CI após a reconciliação, head `ae26491d7858e26e2719d33cfec5e951a35d831f`: Canonical engine CI run `42124873659` — success; Frozen Episode 005 Captions run `42124873702` — success; V2.1 canonical integration run `42124873737` — success.
 - Estado de promoção permanece fechado: `production_enablement=false`, `approved_for_render=0/16`, `global_catalog_updated=false`, `drive_written=false`, render `NOT_RUN` e publicação `MANUAL_ONLY_NOT_RUN`.
 - Próximo gate único: obter/registrar aprovação explícita de render por asset e só então executar o preflight manual fail-closed; nenhuma publicação automática será habilitada.
+
+## Addendum — aprovação explícita de render e correção do contrato canônico — 2026-11-05
+
+- O usuário aprovou explicitamente a utilização dos 16 assets ativos no render do Episódio 005.
+- A aprovação foi registrada no ledger de direitos e no production record com escopo `episode-005-render`, mantendo as restrições: `production_enablement=false`, sem catálogo global, sem Drive e com publicação manual-only.
+- O arquivo `scene-asset-manifest.json` permanece deliberadamente `APPROVED_FOR_MANIFEST_ONLY`. Isso não é conflito: o validador estrutural exige que o manifesto visual não autorize render; a autorização de render fica no rights ledger e no production record.
+- O primeiro preflight CI encontrou dois conflitos reais:
+  - o vocabulário canônico do production record exige `rights_status=APPROVED`, enquanto o ledger de auditoria usa `APPROVED_FOR_RENDER`;
+  - `RENDER_PREFLIGHT` não é um estado válido do `pipeline_state_v21`.
+- Ambos foram corrigidos: o production record usa `rights_status=APPROVED`, `approved_for_render=true` e o estado válido `THUMBNAIL_QA`.
+- O workflow canônico foi ajustado para validar um production record completo e aprovado sem confundir validação contratual com execução: o resultado esperado agora é `status=PASS`, `production_enablement=false`, `media_generation=NOT_RUN`, `render=NOT_RUN` e `publication=MANUAL_ONLY_NOT_RUN`.
+- CI após a correção: Canonical engine CI run `42126150010` — success; V2.1 canonical integration run `42126150092` — success; Frozen Episode 005 Captions run `42126149955` — success.
+- O preflight manual de render não foi executado: a workflow `.github/workflows/episode005-v21-manual-render.yml` existe somente na branch candidata e ainda não está exposta pelo Actions da revisão-base. Nenhum merge foi realizado para disponibilizá-la.
+- Estado atual: direitos aprovados para render, contrato canônico validado, produção ainda desabilitada, render `NOT_RUN`, Drive não escrito e publicação não executada.
+- Próximo gate único: decisão explícita sobre tornar a workflow manual disponível na revisão-base; somente depois executar o preflight `preview`, que deve permanecer fail-closed enquanto `production_enablement=false`.
