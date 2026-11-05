@@ -763,6 +763,32 @@
       "score_breakdown": {},
       "disqualifiers": [],
       "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
+    },
+    {
+      "candidate_id": "pixabay-alert-alarm-war-205519",
+      "source_page_url": "https://pixabay.com/videos/alert-alarm-war-danger-risk-205519/",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "media_url": "https://cdn.pixabay.com/video/2024/03/24/205519-927335684_large.mp4",
+      "media_url_observed_in_browser": true,
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "role": "S06,S09",
+      "visual_match": "NEAR",
+      "visual_intent": "Representational alarm-on-screen escalation and panic response; not literal Soviet archival evidence.",
+      "truth_class": "REPRESENTATIONAL",
+      "browser_verification": {
+        "source_page_verified": true,
+        "provider_license_visible": "Free for use under the Pixabay Content License",
+        "license_evidence_url": "https://pixabay.com/service/license-summary/",
+        "media_url_observed": true,
+        "observed_duration": "00:16",
+        "creator": "conte_public",
+        "editorial_note": "Use only as a short representational escalation/classification cue; do not imply the actual 1983 system interface."
+      },
+      "score": null,
+      "score_breakdown": {},
+      "disqualifiers": [],
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
     }
   ],
   "next_action": "Continue provider-aware discovery for unresolved shots S05,S06,S08,S09,S12,S13,S14,S15,S16. Pixabay candidates are recorded but not downloaded; shortlist, manual intake, fingerprint, human QA, thumbnail and final manifest gates remain mandatory. Render, global catalog, Drive and publication remain blocked.",
