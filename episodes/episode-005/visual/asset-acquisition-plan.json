@@ -1471,7 +1471,7 @@
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
         "ai_generated": false,
-        "media_url_observed_in_browser": false,
+        "media_url_observed_in_browser": true,
         "semantic_note": "Page-verified alarm/warning visual; final suitability depends on full-duration intake QA and clean-frame review."
       },
       "score": 74,
@@ -1483,7 +1483,9 @@
         "clean_frame_quality": 6,
         "source_distinctness": 4
       },
-      "disqualifiers": []
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2024/03/24/205519-927335684_large.mp4",
+      "media_url_observed_in_browser": true
     },
     {
       "candidate_id": "pixabay-radar-black-green-target-symbol-57670",
@@ -1499,7 +1501,7 @@
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
         "ai_generated": false,
-        "media_url_observed_in_browser": false,
+        "media_url_observed_in_browser": true,
         "semantic_note": "Page-verified radar/target visual; symbolic rather than literal launch-indicator hardware, pending full-duration QA."
       },
       "score": 71,
@@ -1511,7 +1513,9 @@
         "clean_frame_quality": 6,
         "source_distinctness": 4
       },
-      "disqualifiers": []
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2020/11/28/57670-486125393_large.mp4",
+      "media_url_observed_in_browser": true
     },
     {
       "candidate_id": "pixabay-radar-radar-screen-rotation-circles-4511",
@@ -1527,7 +1531,7 @@
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
         "ai_generated": false,
-        "media_url_observed_in_browser": false,
+        "media_url_observed_in_browser": true,
         "semantic_note": "Page-verified radar-screen rotation; intended as contradictory monitoring evidence, not literal 1983 Soviet footage."
       },
       "score": 76,
@@ -1539,7 +1543,9 @@
         "clean_frame_quality": 6,
         "source_distinctness": 4
       },
-      "disqualifiers": []
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2016/08/16/4511-179376471_large.mp4",
+      "media_url_observed_in_browser": true
     },
     {
       "candidate_id": "pixabay-radar-communication-military-261518",
@@ -1555,7 +1561,7 @@
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
         "ai_generated": false,
-        "media_url_observed_in_browser": false,
+        "media_url_observed_in_browser": true,
         "semantic_note": "Page-verified military/radar monitoring visual; candidate remains subject to full-duration semantic and crop QA."
       },
       "score": 73,
@@ -1567,7 +1573,9 @@
         "clean_frame_quality": 5,
         "source_distinctness": 4
       },
-      "disqualifiers": []
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2025/02/28/261518_large.mp4",
+      "media_url_observed_in_browser": true
     },
     {
       "candidate_id": "pixabay-button-press-red-business-click-502",
@@ -1583,7 +1591,7 @@
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
         "ai_generated": false,
-        "media_url_observed_in_browser": false,
+        "media_url_observed_in_browser": true,
         "semantic_note": "Page-verified button-press action; intentionally treated as representational input rather than a celebratory interface."
       },
       "score": 72,
@@ -1595,7 +1603,9 @@
         "clean_frame_quality": 7,
         "source_distinctness": 5
       },
-      "disqualifiers": []
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2015/08/22/502-137078153_large.mp4",
+      "media_url_observed_in_browser": true
     },
     {
       "candidate_id": "pixabay-button-press-push-start-launching-221746",
@@ -1611,7 +1621,7 @@
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
         "ai_generated": false,
-        "media_url_observed_in_browser": false,
+        "media_url_observed_in_browser": true,
         "semantic_note": "Page-verified push/start action; use only if full-duration QA confirms no distracting launch-promo or branded context."
       },
       "score": 70,
@@ -1623,7 +1633,9 @@
         "clean_frame_quality": 6,
         "source_distinctness": 5
       },
-      "disqualifiers": []
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2024/07/17/221746_large.mp4",
+      "media_url_observed_in_browser": true
     },
     {
       "candidate_id": "pixabay-typewriter-typing-writing-author-1335",
@@ -1639,7 +1651,7 @@
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
         "ai_generated": false,
-        "media_url_observed_in_browser": false,
+        "media_url_observed_in_browser": true,
         "semantic_note": "Page-verified typewriter action; intended for evidence atmosphere, not as a literal readable Petrov document."
       },
       "score": 82,
@@ -1651,7 +1663,9 @@
         "clean_frame_quality": 7,
         "source_distinctness": 4
       },
-      "disqualifiers": []
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2015/11/12/1335-145564309_large.mp4",
+      "media_url_observed_in_browser": true
     },
     {
       "candidate_id": "pixabay-typewriter-type-antique-writing-38626",
@@ -1667,7 +1681,7 @@
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
         "ai_generated": false,
-        "media_url_observed_in_browser": false,
+        "media_url_observed_in_browser": true,
         "semantic_note": "Page-verified antique typewriter visual; any readable content must be rejected or obscured during intake QA."
       },
       "score": 79,
@@ -1679,7 +1693,9 @@
         "clean_frame_quality": 6,
         "source_distinctness": 4
       },
-      "disqualifiers": []
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2020/05/10/38626-418875137_large.mp4",
+      "media_url_observed_in_browser": true
     },
     {
       "candidate_id": "pixabay-dark-light-lens-flare-abstract-250413",
@@ -1695,7 +1711,7 @@
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
         "ai_generated": false,
-        "media_url_observed_in_browser": false,
+        "media_url_observed_in_browser": true,
         "semantic_note": "Page-verified dark/light abstract transition; symbolic fallback only and distinct from the previously rejected S15 red-blur candidate."
       },
       "score": 74,
@@ -1707,7 +1723,9 @@
         "clean_frame_quality": 7,
         "source_distinctness": 4
       },
-      "disqualifiers": []
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2025/01/03/250413_large.mp4",
+      "media_url_observed_in_browser": true
     },
     {
       "candidate_id": "pixabay-abstract-light-streaks-motion-250417",
@@ -1723,7 +1741,7 @@
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
         "ai_generated": false,
-        "media_url_observed_in_browser": false,
+        "media_url_observed_in_browser": true,
         "semantic_note": "Page-verified abstract light-motion visual; final use depends on confirming it resolves toward neutral black without branded graphics."
       },
       "score": 72,
@@ -1735,7 +1753,9 @@
         "clean_frame_quality": 7,
         "source_distinctness": 4
       },
-      "disqualifiers": []
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2025/01/03/250417_large.mp4",
+      "media_url_observed_in_browser": true
     },
     {
       "candidate_id": "pixabay-particles-orange-red-dust-effect-7957",
@@ -1751,7 +1771,7 @@
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
         "ai_generated": false,
-        "media_url_observed_in_browser": false,
+        "media_url_observed_in_browser": true,
         "semantic_note": "Page-verified particle texture; branding will be added only by the approved renderer, never downloaded from the source."
       },
       "score": 73,
@@ -1763,7 +1783,9 @@
         "clean_frame_quality": 7,
         "source_distinctness": 4
       },
-      "disqualifiers": []
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2017/02/26/7957-205810637_large.mp4",
+      "media_url_observed_in_browser": true
     },
     {
       "candidate_id": "pixabay-colors-lines-lights-abstract-video-5072",
@@ -1779,7 +1801,7 @@
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
         "ai_generated": false,
-        "media_url_observed_in_browser": false,
+        "media_url_observed_in_browser": true,
         "semantic_note": "Page-verified abstract lines/lights visual; candidate remains blocked pending full-duration clean-frame and branding-safety QA."
       },
       "score": 70,
@@ -1791,10 +1813,12 @@
         "clean_frame_quality": 7,
         "source_distinctness": 4
       },
-      "disqualifiers": []
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2016/09/13/5072-183299851_large.mp4",
+      "media_url_observed_in_browser": true
     }
   ],
-  "next_action": "Dispatch the explicit 12-candidate intake batch after final shortlist review; keep download, fingerprint, approval, manifest promotion, render, catalog, Drive and publication gated.",
+  "next_action": "Dispatch the explicit 12-candidate intake batch after media URL verification; keep download, fingerprint, approval, manifest promotion, render, catalog, Drive and publication gated.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -2465,6 +2489,6 @@
       "pixabay-colors-lines-lights-abstract-video-5072"
     ],
     "rationale": "Add a page-verified Pixabay fallback shortlist with two distinct candidates per unresolved shot; exclude AI-generated, readable-personal-document, reused and watermarked routes before intake.",
-    "source_page_and_license_verification": "Completed in browser for all 12 pages; each page visibly exposed Pixabay Content License; no AI-generated marker was observed."
+    "source_page_and_license_verification": "Completed in browser for all 12 pages; each page visibly exposed Pixabay Content License, no AI-generated marker was observed, and the direct CDN media URL was observed in the page player."
   }
 }
