@@ -27,7 +27,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install Edge TTS
-        run: python -m pip install --disable-pip-version-check --no-cache-dir edge-tts==7.3.1 imageio-ffmpeg==0.8.1 vosk==0.3.45
+        run: python -m pip install --disable-pip-version-check --no-cache-dir edge-tts==7.3.1 imageio-ffmpeg==0.8.1 faster-whisper==1.2.1
 
       - name: Verify portable FFmpeg
         run: |
@@ -73,40 +73,12 @@ jobs:
           print({"duration_seconds": round(duration, 3), "voice": data["profile"]["voice_name"]})
           PY
 
-      - name: Prepare Vosk alignment models
-        run: |
-          set -euo pipefail
-          root="${RUNNER_TEMP}/because-of-this-vosk"
-          echo "VOSK_CACHE_ROOT=${root}" >> "${GITHUB_ENV}"
-          echo "VOSK_MODEL_DIR=${root}/primary/vosk-model-en-us-0.22-lgraph" >> "${GITHUB_ENV}"
-          echo "VOSK_SECONDARY_MODEL_DIR=${root}/secondary/vosk-model-small-en-us-0.15" >> "${GITHUB_ENV}"
-          mkdir -p "${root}/primary" "${root}/secondary"
-
-      - name: Restore Vosk model cache
-        id: vosk_cache
+      - name: Restore Whisper model cache
+        id: whisper_cache
         uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684
         with:
-          path: ${{ runner.temp }}/because-of-this-vosk
-          key: because-of-this-vosk-${{ runner.os }}-v1
-
-      - name: Download Vosk models when absent
-        run: |
-          set -euo pipefail
-          if [ ! -d "${VOSK_MODEL_DIR}" ]; then
-            curl --fail --location --retry 4 --retry-all-errors "https://alphacephei.com/vosk/models/vosk-model-en-us-0.22-lgraph.zip" --output "${VOSK_CACHE_ROOT}/primary/model.zip"
-            unzip -q "${VOSK_CACHE_ROOT}/primary/model.zip" -d "${VOSK_CACHE_ROOT}/primary"
-          fi
-          if [ ! -d "${VOSK_SECONDARY_MODEL_DIR}" ]; then
-            curl --fail --location --retry 4 --retry-all-errors "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip" --output "${VOSK_CACHE_ROOT}/secondary/model.zip"
-            unzip -q "${VOSK_CACHE_ROOT}/secondary/model.zip" -d "${VOSK_CACHE_ROOT}/secondary"
-          fi
-
-      - name: Save Vosk model cache
-        if: steps.vosk_cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
-        with:
-          path: ${{ runner.temp }}/because-of-this-vosk
-          key: because-of-this-vosk-${{ runner.os }}-v1
+          path: ~/.cache/huggingface
+          key: because-of-this-whisper-tiny-en-v1
 
       - name: Build caption manifest for validated audio
         run: |
@@ -131,7 +103,7 @@ jobs:
 
       - name: Generate forced-alignment captions
         run: |
-          PYTHONPATH=. python production/align_captions.py --manifest artifacts/episode005-edge/caption-manifest.json --model-dir "${VOSK_MODEL_DIR}" --secondary-model-dir "${VOSK_SECONDARY_MODEL_DIR}"
+          PYTHONPATH=. python production/whisper_captions.py --manifest artifacts/episode005-edge/caption-manifest.json --model tiny.en
 
       - name: Validate forced-alignment captions
         run: |
@@ -143,7 +115,7 @@ jobs:
           sidecar = root / "narration.alignment.json"
           assert ass.is_file() and ass.stat().st_size > 0, ass
           data = json.loads(sidecar.read_text(encoding="utf-8"))
-          assert data["status"] == "FORCED_ALIGNMENT_PASS"
+          assert data["status"] == "WHISPER_FORCED_ALIGNMENT_PASS"
           assert data["word_count"] > 0
           assert data["word_timing_normalization"]["timeline_monotonic"] is True
           print({
