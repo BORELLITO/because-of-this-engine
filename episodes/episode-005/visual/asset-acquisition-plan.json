@@ -664,7 +664,7 @@
       }
     }
   ],
-  "next_action": "Acquire and QA distinct candidates for unresolved shots S05,S06,S08,S09,S12,S13,S14,S15,S16, then re-run final visual manifest validation. S03 and S04 are assigned only to their approved representational reconstructions.",
+  "next_action": "Use search_strategy.search-v2: collect six page-verified candidates per unresolved shot, shortlist two, then manually dispatch plan-driven intake and fingerprint in batch. Do not trigger visual workflows from ordinary PR/documentation updates.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -927,5 +927,183 @@
       "evidence_note": "Browser-visible page states that the free 720p download is for personal use only; commercial route is premium Envato.",
       "media_url": "https://assets.mixkit.co/videos/5572/5572-720.mp4"
     }
-  ]
+  ],
+  "search_strategy": {
+    "mode": "BATCH_SHORTLIST_THEN_INTAKE",
+    "version": "search-v2",
+    "objective": "Find coherent, commercially usable, distinct visual candidates before any media download.",
+    "discovery_batch": {
+      "candidates_per_unresolved_shot": 6,
+      "shortlist_size_per_shot": 2,
+      "intake_only_after_shortlist": true,
+      "fingerprint_after_batch": true,
+      "human_approval_after_technical_gates": true
+    },
+    "preflight_filters": [
+      "provider_page_verified",
+      "commercial_license_visible_on_free_download",
+      "reject_personal_use_only_or_restricted_license",
+      "reject_ai_generated_or_watermarked_media",
+      "reject_baked_captions_logos_or_letterbox",
+      "reject_anachronistic_or_semantically_generic_visuals",
+      "reject_source_or_fingerprint_reuse",
+      "verify_9x16_crop_before_approval"
+    ],
+    "scoring_weights": {
+      "semantic_fit": 35,
+      "license_confidence": 20,
+      "visual_truth_and_period_coherence": 15,
+      "vertical_crop_quality": 10,
+      "clean_frame_quality": 10,
+      "source_distinctness": 10
+    },
+    "score_thresholds": {
+      "shortlist_for_intake": 70,
+      "request_manifest_approval": 80,
+      "hard_reject_below": 55
+    },
+    "ci_policy": {
+      "visual_candidate_intake": "MANUAL_DISPATCH_ONLY",
+      "global_fingerprint_audit": "MANUAL_DISPATCH_ONLY",
+      "source_of_truth_for_urls": "asset-acquisition-plan.json",
+      "duplicate_workflow_allowlists": "PROHIBITED"
+    },
+    "unresolved_shot_queue": [
+      {
+        "shot_id": "S05",
+        "requested_visual": "Distinct progression of multiple launch-warning indicators",
+        "preferred_queries": [
+          "warning indicator panel",
+          "alarm indicator lights",
+          "technical alert display",
+          "control panel lights"
+        ],
+        "avoid": [
+          "police-only imagery",
+          "personal-use-only Mixkit pages",
+          "generic neon",
+          "reusing S01 red glow"
+        ]
+      },
+      {
+        "shot_id": "S06",
+        "requested_visual": "Escalating alarm intensity without literal archival claim",
+        "preferred_queries": [
+          "alarm panel escalation",
+          "industrial warning lights",
+          "technical warning display",
+          "emergency indicator panel"
+        ],
+        "avoid": [
+          "generic nightclub lights",
+          "watermarked footage",
+          "duplicate control-panel source"
+        ]
+      },
+      {
+        "shot_id": "S08",
+        "requested_visual": "Empty ground radar or contradictory monitoring evidence",
+        "preferred_queries": [
+          "radar screen",
+          "monitoring screen",
+          "control room radar",
+          "empty surveillance display"
+        ],
+        "avoid": [
+          "literal modern police branding",
+          "personal-use-only pages",
+          "generic computer stock"
+        ]
+      },
+      {
+        "shot_id": "S09",
+        "requested_visual": "False-alarm classification entered into a technical system",
+        "preferred_queries": [
+          "operator pressing control panel",
+          "technical classification interface",
+          "button panel operator",
+          "machine control input"
+        ],
+        "avoid": [
+          "generic laptop close-up",
+          "visible personal data",
+          "reusing S04 panel source"
+        ]
+      },
+      {
+        "shot_id": "S12",
+        "requested_visual": "Sunlight geometry over high clouds and sensor reflection",
+        "preferred_queries": [
+          "sun rays clouds",
+          "high clouds sunlight",
+          "satellite sensor reflection",
+          "atmospheric light geometry"
+        ],
+        "avoid": [
+          "reusing S11 cloud source",
+          "AI-generated sky",
+          "literal missile imagery"
+        ]
+      },
+      {
+        "shot_id": "S13",
+        "requested_visual": "Declassified report or logbook evidence treatment",
+        "preferred_queries": [
+          "declassified document",
+          "archive report pages",
+          "military logbook",
+          "typewritten report"
+        ],
+        "avoid": [
+          "unlicensed readable documents",
+          "invented historical text",
+          "modern personal information"
+        ]
+      },
+      {
+        "shot_id": "S14",
+        "requested_visual": "Empty military corridor representing later obscurity",
+        "preferred_queries": [
+          "empty military corridor",
+          "institutional hallway",
+          "bunker corridor",
+          "dark official hallway"
+        ],
+        "avoid": [
+          "horror gore",
+          "literal identifiable military facility claim",
+          "reusing S10 clock source"
+        ]
+      },
+      {
+        "shot_id": "S15",
+        "requested_visual": "Warning pulse fading into neutral black",
+        "preferred_queries": [
+          "red light fade black",
+          "warning glow fade",
+          "minimal red pulse",
+          "dark transition light"
+        ],
+        "avoid": [
+          "reusing S01 red glow",
+          "generic copyrighted graphics",
+          "watermarked transitions"
+        ]
+      },
+      {
+        "shot_id": "S16",
+        "requested_visual": "Restrained branded outro with red pulse",
+        "preferred_queries": [
+          "minimal red pulse background",
+          "dark logo outro background",
+          "subtle red light fade"
+        ],
+        "avoid": [
+          "third-party logos",
+          "reusing any story asset",
+          "unlicensed templates"
+        ]
+      }
+    ]
+  }
 }
