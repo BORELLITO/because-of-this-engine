@@ -11,20 +11,21 @@
   "approval_record": {
     "status": "APPROVED_FOR_MANIFEST_ONLY",
     "approved_at_utc": "2026-11-05T11:02:38Z",
-    "decision": "Approve the four downloaded candidates for the Episode 005 partial visual manifest.",
+    "decision": "Approve the five downloaded candidates for the Episode 005 partial visual manifest.",
     "constraints": [
       "red-light candidate remains symbolic and must not be presented as literal Petrov archival evidence",
       "approval does not authorize global catalog mutation",
       "approval does not authorize render, Drive write or publication",
       "all unresolved story shots remain blocked",
-      "clock-mechanism candidate is a symbolic mechanical-time reconstruction, assigned to S10 only and never treated as Petrov archival evidence"
+      "clock-mechanism candidate is a symbolic mechanical-time reconstruction, assigned to S10 only and never treated as Petrov archival evidence",
+      "satellite antenna candidate is representational infrastructure for S02 only and must not be presented as literal Petrov archival evidence"
     ]
   },
   "global_reuse_audit": {
     "status": "PASS_NO_COLLISION",
-    "workflow_run_id": 42014828184,
-    "artifact_id": 13408966434,
-    "artifact_digest": "sha256:d9d4adbc09e85d5aea9370a3c7045125afe04ac81ac43cfb5dfa6b18677e2199",
+    "workflow_run_id": 42016725778,
+    "artifact_id": 13409611998,
+    "artifact_digest": "sha256:30f39d5255b086062c6e01e7576c9cd9f5371476b795a1736d48579bbc2474c4",
     "algorithm": "video-fingerprint-v2-rgb24-q4"
   },
   "assets": [
@@ -124,6 +125,34 @@
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false
+    },
+    {
+      "candidate_id": "mixkit-large-satellite-antenna-2650",
+      "provider": "mixkit",
+      "source_page_url": "https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/",
+      "media_url": "https://assets.mixkit.co/videos/2650/2650-720.mp4",
+      "license_name": "Mixkit Stock Video Free License",
+      "source_role": "S02",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "sha256": "1bfa05d75d9295ff3a08dda7017927f638292895f1c2c376667175c279813807",
+      "perceptual_hash": "f10ae48c3a770e23246f7fda15feccd3c4b37e1db48b9d71c6fb1511a1ee1b7c",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42016296608,
+        "artifact_id": 13409661379,
+        "artifact_digest": "sha256:f15336756e9e32900ff07ee7666492032887a883d923266ff2d5651ba862d5c0"
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 42016725778,
+        "artifact_id": 13409611998,
+        "artifact_digest": "sha256:30f39d5255b086062c6e01e7576c9cd9f5371476b795a1736d48579bbc2474c4"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false
     }
   ],
   "shot_assignments": [
@@ -149,9 +178,15 @@
       "role": "context",
       "requested_visual": "Night-side Earth and early-warning satellite.",
       "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
-      "assignment": null,
-      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "assignment": {
+        "candidate_id": "mixkit-large-satellite-antenna-2650",
+        "usage": "representational early-warning satellite infrastructure; not archival evidence",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST"
+      },
+      "blocking_reason": null
     },
     {
       "shot_id": "S03",
@@ -313,7 +348,6 @@
     }
   ],
   "unresolved_shots": [
-    "S02",
     "S03",
     "S04",
     "S05",
@@ -335,7 +369,7 @@
     "drive_write_authorized": false,
     "publication_authorized": false
   },
-  "next_action": "Acquire and QA distinct candidates for unresolved shots S02,S03,S04,S05,S06,S08,S09,S12,S13,S14,S15,S16, then re-run final visual manifest validation.",
+  "next_action": "Acquire and QA distinct candidates for unresolved shots S03,S04,S05,S06,S08,S09,S12,S13,S14,S15,S16, then re-run final visual manifest validation.",
   "reuse_policy": {
     "source_reuse_scope": "global",
     "distinct_source_required_per_shot": true,
