@@ -185,6 +185,12 @@ class V21IntegrationTests(unittest.TestCase):
         self.assertEqual(len(registry), 13)
         self.assertTrue(all(item.get("perceptual_fingerprint") for item in registry))
 
+    def test_canonical_contract_accepts_verified_repository_catalog(self):
+        root = Path(__file__).resolve().parents[1]
+        registry = load_registry(root / "episodes" / "asset-memory-registry.json")
+        report = evaluate(valid_manifest(), registry=registry)
+        self.assertEqual(report["status"], "PASS", report)
+
     def test_missing_registry_is_blocked(self):
         report = evaluate(valid_manifest(), registry=[])
         self.assertIn("global_no_reuse", report["blocking_gates"])
