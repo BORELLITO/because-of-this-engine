@@ -15,21 +15,37 @@ from production.align_captions import (
     _normalize_sidecar_word_timeline,
     _write_ass,
 )
+from production.align_edge_captions import _load_boundaries
 from production.generate_phrase_captions import phrase_chunks
 
 
-def _recognize(audio_path: Path, model_name: str, prompt: str = "") -> list[dict[str, Any]]:
+def _load_audio(audio_path: Path) -> tuple[Any, int, float]:
+    try:
+        import numpy as np
+
+        with wave.open(str(audio_path), "rb") as audio:
+            sample_rate = audio.getframerate()
+            frame_count = audio.getnframes()
+            pcm = audio.readframes(frame_count)
+        waveform = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768.0
+        return waveform, sample_rate, frame_count / sample_rate
+    except Exception as exc:
+        raise AlignmentError(f"Could not read narration PCM: {audio_path}: {exc}") from exc
+
+
+def _model(model_name: str):
     try:
         from faster_whisper import WhisperModel
     except ImportError as exc:
         raise AlignmentError("faster-whisper is required for local forced alignment") from exc
     try:
-        import numpy as np
+        return WhisperModel(model_name, device="cpu", compute_type="int8")
+    except Exception as exc:
+        raise AlignmentError(f"Whisper model could not be loaded: {exc}") from exc
 
-        with wave.open(str(audio_path), "rb") as audio:
-            pcm = audio.readframes(audio.getnframes())
-        waveform = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768.0
-        model = WhisperModel(model_name, device="cpu", compute_type="int8")
+
+def _recognize_waveform(model: Any, waveform: Any, sample_rate: int, offset_seconds: float = 0.0) -> list[dict[str, Any]]:
+    try:
         segments, _info = model.transcribe(
             waveform,
             language="en",
@@ -37,7 +53,7 @@ def _recognize(audio_path: Path, model_name: str, prompt: str = "") -> list[dict
             word_timestamps=True,
             vad_filter=False,
             beam_size=5,
-            condition_on_previous_text=True,
+            condition_on_previous_text=False,
             temperature=0.0,
         )
         words: list[dict[str, Any]] = []
@@ -46,8 +62,8 @@ def _recognize(audio_path: Path, model_name: str, prompt: str = "") -> list[dict
                 text = str(item.word or "").strip()
                 if not text:
                     continue
-                start = float(item.start)
-                end = float(item.end)
+                start = offset_seconds + float(item.start)
+                end = offset_seconds + float(item.end)
                 if end - start < 0.02:
                     continue
                 words.append({
@@ -55,16 +71,89 @@ def _recognize(audio_path: Path, model_name: str, prompt: str = "") -> list[dict
                     "start": start,
                     "end": end,
                     "confidence": float(getattr(item, "probability", 1.0)),
-                    "timestamp_source": "faster_whisper_word_timestamp",
+                    "timestamp_source": "faster_whisper_phrase_window_word_timestamp",
                 })
+        return words
     except Exception as exc:
         raise AlignmentError(f"Whisper recognition failed: {exc}") from exc
+
+
+def _recognize(audio_path: Path, model_name: str) -> list[dict[str, Any]]:
+    waveform, sample_rate, _duration = _load_audio(audio_path)
+    return _recognize_waveform(_model(model_name), waveform, sample_rate)
+
+
+def _recognize_phrase_windows(
+    audio_path: Path,
+    model_name: str,
+    native_chunks: list[dict[str, Any]],
+    audio_seconds: float,
+) -> list[dict[str, Any]]:
+    waveform, sample_rate, _duration = _load_audio(audio_path)
+    model = _model(model_name)
+    words: list[dict[str, Any]] = []
+    for chunk in native_chunks:
+        native_words = chunk.get("words") or []
+        if not native_words:
+            raise AlignmentError("Native timing window has no words.")
+        start = max(0.0, float(native_words[0]["start"]) - 0.20)
+        end = min(audio_seconds, float(native_words[-1]["end"]) + 0.20)
+        start_frame = max(0, int(round(start * sample_rate)))
+        end_frame = min(len(waveform), int(round(end * sample_rate)))
+        if end_frame <= start_frame:
+            raise AlignmentError(f"Invalid acoustic window for caption phrase {chunk.get('text')!r}.")
+        window_words = _recognize_waveform(
+            model,
+            waveform[start_frame:end_frame],
+            sample_rate,
+            offset_seconds=start_frame / sample_rate,
+        )
+        words.extend(window_words)
     if not words:
-        raise AlignmentError("Whisper returned no word timestamps")
+        raise AlignmentError("Whisper returned no phrase-window word timestamps.")
     return words
 
 
-def generate(manifest_path: Path, model_name: str) -> dict[str, Any]:
+def _bounded_words(words: list[dict[str, Any]], audio_seconds: float) -> list[dict[str, Any]]:
+    bounded: list[dict[str, Any]] = []
+    for word in words:
+        start = max(0.0, float(word["start"]))
+        end = min(audio_seconds, float(word["end"]))
+        if start < audio_seconds and end - start >= 0.02:
+            bounded.append({**word, "start": start, "end": end})
+    if not bounded:
+        raise AlignmentError("Whisper produced no timestamps inside the WAV duration")
+    return bounded
+
+
+def _events_from_chunks(sidecar_chunks: list[dict[str, Any]], audio_seconds: float) -> list[dict[str, Any]]:
+    events = [
+        {
+            "start": chunk["words"][0]["start"],
+            "end": chunk["words"][-1]["end"],
+            "text": chunk["text"],
+        }
+        for chunk in sidecar_chunks
+    ]
+    if not events:
+        raise AlignmentError("No caption events were produced.")
+    events[0]["start"] = 0.0
+    for previous, current in zip(events, events[1:]):
+        if float(current["start"]) < float(previous["end"]):
+            previous["end"] = float(current["start"])
+    safe_ass_end = int(audio_seconds * 100) / 100.0
+    if safe_ass_end <= float(events[-1]["start"]):
+        raise AlignmentError("Narration is too short to close the final caption at ASS precision.")
+    events[-1]["end"] = safe_ass_end
+    for event in events:
+        if event["end"] - event["start"] < 0.08:
+            raise AlignmentError("Whisper caption phrase became too short.")
+        event["start"] = round(max(0.0, event["start"]), 3)
+        event["end"] = round(min(audio_seconds, event["end"]), 3)
+    return events
+
+
+def generate(manifest_path: Path, model_name: str, native_boundaries_path: Path | None = None) -> dict[str, Any]:
     manifest_path = manifest_path.resolve()
     base = manifest_path.parent
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -82,49 +171,29 @@ def generate(manifest_path: Path, model_name: str) -> dict[str, Any]:
 
     script = (base / manifest["script"]["path"]).read_text(encoding="utf-8").strip()
     chunks = phrase_chunks(script, max_line_chars=int(caption_config.get("max_line_chars", 42)))
-    words = _recognize(audio_path, model_name)
-    bounded_words: list[dict[str, Any]] = []
-    for word in words:
-        start = max(0.0, float(word["start"]))
-        end = min(audio_seconds, float(word["end"]))
-        if start < audio_seconds and end - start >= 0.02:
-            bounded_words.append({**word, "start": start, "end": end})
-    words = bounded_words
-    if not words:
-        raise AlignmentError("Whisper produced no timestamps inside the WAV duration")
+    words = _bounded_words(_recognize(audio_path, model_name), audio_seconds)
+    alignment_mode = "whisper_full_audio_word_timestamps"
     try:
-        events, sidecar_chunks = _align_chunks(chunks, words)
-    except AlignmentError as first_error:
+        _events, sidecar_chunks = _align_chunks(chunks, words)
+    except AlignmentError as full_error:
+        if native_boundaries_path is None:
+            raise
+        native_words = _load_boundaries(native_boundaries_path.resolve())
+        _native_events, native_chunks = _align_chunks(chunks, native_words)
+        window_words = _bounded_words(
+            _recognize_phrase_windows(audio_path, model_name, native_chunks, audio_seconds),
+            audio_seconds,
+        )
         try:
-            events, sidecar_chunks = _align_chunks(chunks, words, recover_missing=True)
-        except AlignmentError as recovery_error:
+            _events, sidecar_chunks = _align_chunks(chunks, window_words)
+        except AlignmentError as window_error:
             raise AlignmentError(
-                f"{first_error} Bounded function-word recovery also failed: {recovery_error}"
-            ) from recovery_error
+                f"{full_error} Phrase-window acoustic retry also failed: {window_error}"
+            ) from window_error
+        alignment_mode = "whisper_phrase_window_word_timestamps"
 
     overlap_count = _normalize_sidecar_word_timeline(sidecar_chunks, audio_seconds)
-    events = [
-        {
-            "start": chunk["words"][0]["start"],
-            "end": chunk["words"][-1]["end"],
-            "text": chunk["text"],
-        }
-        for chunk in sidecar_chunks
-    ]
-    events[0]["start"] = 0.0
-    for previous, current in zip(events, events[1:]):
-        if float(current["start"]) < float(previous["end"]):
-            previous["end"] = float(current["start"])
-    safe_ass_end = int(audio_seconds * 100) / 100.0
-    if safe_ass_end <= float(events[-1]["start"]):
-        raise AlignmentError("Narration is too short to close the final caption at ASS precision.")
-    events[-1]["end"] = safe_ass_end
-    for event in events:
-        if event["end"] - event["start"] < 0.08:
-            raise AlignmentError("Whisper caption phrase became too short.")
-        event["start"] = round(max(0.0, event["start"]), 3)
-        event["end"] = round(min(audio_seconds, event["end"]), 3)
-
+    events = _events_from_chunks(sidecar_chunks, audio_seconds)
     active_word_color = str(caption_config.get("active_word_color", "#FF7777"))
     _write_ass(caption_path, events, sidecar_chunks, active_word_color)
     sidecar_path.parent.mkdir(parents=True, exist_ok=True)
@@ -132,14 +201,17 @@ def generate(manifest_path: Path, model_name: str) -> dict[str, Any]:
         "status": "WHISPER_FORCED_ALIGNMENT_PASS",
         "provider": "faster-whisper",
         "model": model_name,
-        "timing_mode": "whisper_word_timestamps",
+        "timing_mode": alignment_mode,
         "audio_duration_seconds": round(audio_seconds, 3),
         "word_count": len(words),
-        "words": words,
+        "words": sidecar_chunks and [
+            word for chunk in sidecar_chunks for word in chunk.get("words", [])
+        ] or words,
         "captions": sidecar_chunks,
         "word_timing_normalization": {
             "overlap_boundaries_closed": overlap_count,
             "timeline_monotonic": True,
+            "native_edge_windows_used": alignment_mode == "whisper_phrase_window_word_timestamps",
         },
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return {
@@ -151,7 +223,7 @@ def generate(manifest_path: Path, model_name: str) -> dict[str, Any]:
         "recognized_words": len(words),
         "word_highlight_mode": "timestamp_color_transform",
         "active_word_color": active_word_color,
-        "model": model_name,
+        "timing_mode": alignment_mode,
     }
 
 
@@ -159,9 +231,13 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--model", default="tiny.en")
+    parser.add_argument("--native-boundaries", type=Path, default=None)
     args = parser.parse_args()
     try:
-        print(json.dumps(generate(args.manifest, args.model), ensure_ascii=False))
+        print(json.dumps(
+            generate(args.manifest, args.model, args.native_boundaries),
+            ensure_ascii=False,
+        ))
         return 0
     except (AlignmentError, OSError, KeyError, json.JSONDecodeError, ValueError) as exc:
         print(f"WHISPER CAPTION ALIGNMENT BLOCKED: {exc}")
