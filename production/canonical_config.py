@@ -14,8 +14,8 @@ import json
 from pathlib import Path
 from typing import Any
 
-CANONICAL_PROFILE_ID = "because-of-this-v7.3.1-charon-cinematic-dread-2026-10"
-CANONICAL_ENGINE_VERSION = "7.3.1"
+CANONICAL_PROFILE_ID = "because-of-this-v7.3.2-charon-cinematic-dread-smooth-2026-10"
+CANONICAL_ENGINE_VERSION = "7.3.2"
 CANONICAL_SCHEMA_ID = "because-of-this://schemas/production-record/3.0.0"
 
 CANONICAL_PROFILE: dict[str, Any] = {
@@ -67,7 +67,7 @@ CANONICAL_PROFILE: dict[str, Any] = {
         "alignment_source": "vosk_word_timestamps",
         "word_level_available": True,
         "max_lines": 2,
-        "max_line_chars": 42,
+        "max_line_chars": 38,
         "target_cps": 20,
         "max_cps": 28,
         "end_tolerance_seconds": 0.1,
@@ -94,9 +94,9 @@ CANONICAL_PROFILE: dict[str, Any] = {
             "outline": 3,
             "shadow": 1,
             "alignment": 2,
-            "margin_l": 100,
-            "margin_r": 100,
-            "margin_v": 320,
+            "margin_l": 90,
+            "margin_r": 140,
+            "margin_v": 340,
             "encoding": 1,
         },
     },
@@ -111,7 +111,7 @@ CANONICAL_PROFILE: dict[str, Any] = {
         "cinematic_suspense": {
             "enabled": True,
             "profile": "cinematic_dread_v73",
-            "profile_version": "7.3.1",
+            "profile_version": "7.3.2",
             "reference_basis": "cinematic_dread_v73_before_after_comparison",
             "cool_shadows": 0.04,
             "warm_highlights": 0.014,
@@ -123,6 +123,8 @@ CANONICAL_PROFILE: dict[str, Any] = {
             "flicker_strength": 0.003,
             "flicker_period_seconds": 4.8,
             "detail_strength": 0.16,
+            "motion_smoothing": True,
+            "interpolation_fps": 60,
             "vignette_angle": "PI/5.8",
         },
     },
@@ -210,9 +212,9 @@ def validate_canonical_manifest(manifest: dict[str, Any], *, source_label: str =
     if differences:
         preview = "; ".join(differences[:8])
         suffix = f" (+{len(differences) - 8} more)" if len(differences) > 8 else ""
-        raise CanonicalConfigError(f"{source_label} deviates from the V7.3.1 profile: {preview}{suffix}")
+        raise CanonicalConfigError(f"{source_label} deviates from the V7.3.2 profile: {preview}{suffix}")
     return {
-        "status": "CANONICAL_CONFIG_V7_3_1_PASS",
+        "status": "CANONICAL_CONFIG_V7_3_2_PASS",
         "profile_id": CANONICAL_PROFILE_ID,
         "engine_version": CANONICAL_ENGINE_VERSION,
         "schema_id": CANONICAL_SCHEMA_ID,

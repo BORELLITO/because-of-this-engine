@@ -26,7 +26,7 @@ EXPECTED = {
     },
     "captions": {
         "alignment": 2,
-        "margin_v": 320,
+        "margin_v": 340,
         "word_highlight_enabled": True,
         "word_highlight_mode": "timestamp_color_transform",
     },

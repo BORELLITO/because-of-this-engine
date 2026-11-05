@@ -360,8 +360,8 @@ def quality_report(manifest_path: Path, require_word_level: bool = False) -> dic
     style = _default_style(caption_path)
     if style["alignment"] != 2:
         raise CaptionQualityError("Captions must use centered lower-third alignment=2.")
-    if style["marginl"] < 80 or style["marginr"] < 80 or style["marginv"] < 280:
-        raise CaptionQualityError("Captions do not meet the mobile safe-zone margins.")
+    if style["marginl"] < 90 or style["marginr"] < 140 or style["marginv"] < 320:
+        raise CaptionQualityError("Captions do not meet the locked mobile safe-zone margins (L90/R140/V320).")
     if not 42 <= style["fontsize"] <= 56:
         raise CaptionQualityError("Caption font size is outside the approved mobile range.")
     if style["outline"] < 2 or style["outline"] > 5 or style["shadow"] > 3:
