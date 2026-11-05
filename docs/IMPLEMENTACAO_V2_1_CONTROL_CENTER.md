@@ -11,7 +11,7 @@
 - Candidate commit: authoritative PR head
 - Status: PARTIAL / BLOCKED_FOR_PRODUCTION
 - Canonical entrypoint: production/canonical_entrypoint.py
-- Canonical voice: Gemini TTS / Charon preserved; Cloud Charon is OFFLINE_CONTRACT_ONLY
+- Canonical voice: Google Cloud TTS / Chirp 3 HD Charon active; Gemini is not the active route
 - Publication: manual only
 - Historical protection: One Extra Minute is excluded from execution and reuse
 
@@ -38,7 +38,7 @@
 | Legacy workflows | ARCHIVED | Definitions retained under archive/v7/workflows/, outside .github/workflows |
 | Drive | NOT RUN | No Drive write or media generation authorized |
 | Work | UNKNOWN | No independent Work execution log |
-| Gemini TTS real call | NOT RUN | No credits consumed |
+| Google Cloud TTS real call | NOT RUN | No real Cloud request executed |
 | First new production | BLOCKED | Implementation stage does not authorize automatic production |
 
 ## Remaining blockers
