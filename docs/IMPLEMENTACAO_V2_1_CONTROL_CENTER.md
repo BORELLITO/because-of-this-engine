@@ -99,3 +99,15 @@ READY remains forbidden while any P0/P1 is open.
 - `pixabay-sky-clouds-satellite-95686`: rejeitado semanticamente para S12; é um céu/nuvem azul limpo, mas não mostra satélite, sensor ou geometria de luz suficiente para representar o mecanismo narrado.
 - O plano canônico foi atualizado com as evidências, mantendo a distinção entre validação técnica e aprovação humana. O manifesto não foi promovido, o catálogo global não foi atualizado e render/Drive/publicação continuam bloqueados.
 - Próximo passo único: obter sua decisão sobre o candidato LED e buscar um novo candidato distinto, visualmente coerente com o mecanismo sol/nuvens/satélite de S12.
+
+
+## Addendum — novo candidato page-verified para S12 — 2026-11-05
+
+- Foi identificado e verificado no navegador o candidato `pixabay-antenna-astronomy-communication-40041`.
+- Página: https://pixabay.com/videos/antenna-astronomy-communication-40041/
+- Mídia observada: `https://cdn.pixabay.com/video/2020/05/24/40041-424371544_large.mp4`
+- Evidências da página: Pixabay Content License visível, duração indicada de 22 s e resolução 1920×1080.
+- Leitura editorial: antena parabólica/estação terrestre real sob céu aberto, visualmente mais coerente com o mecanismo sensor–céu de S12 do que a textura genérica de nuvens rejeitada.
+- Estado: `CANDIDATE_NOT_DOWNLOADED`. Ainda não houve intake, fingerprint, aprovação humana ou promoção.
+- O candidato foi registrado no plano canônico. Próximo gate: intake controlada, amostragem integral, verificação 9:16 e fingerprint global.
+- O LED permanece pendente de aprovação explícita; render, catálogo global, Drive e publicação continuam bloqueados.
