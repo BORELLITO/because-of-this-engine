@@ -320,3 +320,15 @@ READY remains forbidden while any P0/P1 is open.
 - `thumbnail_manifest`: `APPROVED`; `THUMBNAIL_QA`: PASS; `THUMBNAIL_FILES`: PASS. O validador foi corrigido para reconhecer corretamente o preview mobile 540×960, sem enfraquecer o requisito do master 1080×1920.
 - O canonical entrypoint continua BLOCKED somente por `rights_ledger` manifest-only; os 16 assets visuais seguem `approved_for_render=false`. `production_enablement=false`, render NOT_RUN e publicação MANUAL_ONLY_NOT_RUN permanecem inalterados.
 - Próximo passo único: revisar e aprovar formalmente os direitos dos 16 assets visuais antes de qualquer promoção para render; não habilitar publicação automática.
+
+
+## Atualização — auditoria remota de direitos dos 16 assets — 2026-11-05
+
+- As 16 páginas de origem foram reabertas e permaneceram acessíveis: 7 assets Mixkit e 9 assets Pixabay. Os títulos das páginas continuam identificando os itens como vídeos gratuitos.
+- A licença oficial do Mixkit confirma uso comercial para itens sob a Free License, mas o próprio provedor mantém também uma Restricted License. Por isso, cada item precisa manter a evidência específica da página e o creator/author registrado; o ledger atual ainda tem o campo de autor não registrado para os 7 Mixkit.
+- A licença oficial do Pixabay permite uso comercial e adaptação, mas ressalva conteúdo em estado standalone, marcas, pessoas reconhecíveis, direitos de imagem/privacidade e uso enganoso. Os assets com pessoas ou elementos potencialmente identificáveis não podem ser promovidos automaticamente sem QA visual e checagem de terceiros.
+- O ledger mantém SHA-256, fingerprint perceptual, URL da fonte, URL da evidência, escopo de plataforma e uso único por episódio para os 16 assets. Não foi alterada nenhuma flag de promoção.
+- Estado preservado: 16/16 APPROVED_FOR_MANIFEST_ONLY, 0/16 approved_for_render, catálogo global não atualizado, Drive não escrito, render não executado e publicação manual-only.
+- Bloqueios remanescentes: (1) completar creator/author e confirmação da Free License nos 7 Mixkit; (2) concluir QA visual de pessoas, marcas e elementos de terceiros nos 16 assets, especialmente os shots S03, S04 e qualquer frame com conteúdo identificável; (3) somente depois registrar aprovação de direitos para render.
+- Referências oficiais de licença: https://mixkit.co/license/modal/videoFree/ e https://pixabay.com/service/license-summary/.
+- Próximo passo único: completar a ficha de direitos por asset e registrar aprovação explícita para render apenas nos itens que passarem essa verificação; não habilitar produção ou publicação automática.
