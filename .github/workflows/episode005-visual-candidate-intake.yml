@@ -142,6 +142,41 @@ jobs:
           root = Path("artifacts/episode005-visual-intake")
           manifest = json.loads((root / "batch-manifest.json").read_text(encoding="utf-8"))
           reports = []
+
+          def run_frame(media: Path, timestamp: float, output: Path, vertical: bool) -> None:
+              vf = (
+                  "crop=ih*9/16:ih:(iw-ih*9/16)/2:0,scale=540:960"
+                  if vertical
+                  else "scale=540:-2"
+              )
+              subprocess.run(
+                  [
+                      "ffmpeg", "-v", "error", "-y",
+                      "-ss", f"{timestamp:.3f}",
+                      "-i", str(media),
+                      "-frames:v", "1",
+                      "-vf", vf,
+                      "-q:v", "2",
+                      str(output),
+                  ],
+                  check=True,
+              )
+
+          def make_contact_sheet(pattern: Path, output: Path) -> None:
+              subprocess.run(
+                  [
+                      "ffmpeg", "-v", "error", "-y",
+                      "-framerate", "1",
+                      "-start_number", "0",
+                      "-i", str(pattern),
+                      "-vf", "tile=3x2:padding=8:margin=8:color=black",
+                      "-frames:v", "1",
+                      "-q:v", "2",
+                      str(output),
+                  ],
+                  check=True,
+              )
+
           for candidate in manifest["candidates"]:
               candidate_id = candidate["candidate_id"]
               candidate_root = root / candidate_id
@@ -164,22 +199,53 @@ jobs:
               assert 0 < duration <= 180, duration
               assert width >= 720 and height >= 720, (width, height)
               sha256 = hashlib.sha256(media.read_bytes()).hexdigest()
-              subprocess.run(
-                  [
-                      "ffmpeg", "-v", "error", "-y", "-i", str(media),
-                      "-vf", "fps=1,scale=540:-2,tile=3x1:padding=8:margin=8:color=black",
-                      "-frames:v", "1", "-q:v", "2", str(candidate_root / "qa-frames.jpg"),
-                  ],
-                  check=True,
+
+              raw_timestamps = [
+                  0.0,
+                  duration * 0.25,
+                  duration * 0.50,
+                  duration * 0.75,
+                  max(0.0, duration - 0.10),
+              ]
+              timestamps = []
+              for timestamp in raw_timestamps:
+                  bounded = min(max(timestamp, 0.0), max(0.0, duration - 0.01))
+                  if not timestamps or abs(bounded - timestamps[-1]) > 0.01:
+                      timestamps.append(bounded)
+
+              sample_records = []
+              for index, timestamp in enumerate(timestamps):
+                  frame_path = candidate_root / f"qa-sample-{index:02d}.jpg"
+                  crop_path = candidate_root / f"qa-crop-9x16-sample-{index:02d}.jpg"
+                  run_frame(media, timestamp, frame_path, vertical=False)
+                  run_frame(media, timestamp, crop_path, vertical=True)
+                  sample_records.append({
+                      "index": index,
+                      "timestamp_seconds": round(timestamp, 3),
+                      "frame": frame_path.name,
+                      "crop_9x16": crop_path.name,
+                  })
+
+              make_contact_sheet(
+                  candidate_root / "qa-sample-%02d.jpg",
+                  candidate_root / "qa-frames.jpg",
               )
-              subprocess.run(
-                  [
-                      "ffmpeg", "-v", "error", "-y", "-i", str(media),
-                      "-vf", "crop=ih*9/16:ih:(iw-ih*9/16)/2:0,scale=540:960",
-                      "-frames:v", "1", "-q:v", "2", str(candidate_root / "qa-crop-9x16.jpg"),
-                  ],
-                  check=True,
+              make_contact_sheet(
+                  candidate_root / "qa-crop-9x16-sample-%02d.jpg",
+                  candidate_root / "qa-crop-9x16.jpg",
               )
+              (candidate_root / "qa-sampling.json").write_text(
+                  json.dumps({
+                      "method": "five_normalized_timestamps",
+                      "timestamps": sample_records,
+                      "contact_sheets": {
+                          "frames": "qa-frames.jpg",
+                          "crop_9x16": "qa-crop-9x16.jpg",
+                      },
+                  }, indent=2) + "\\n",
+                  encoding="utf-8",
+              )
+
               report = {
                   "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
                   "candidate_id": candidate_id,
@@ -195,6 +261,15 @@ jobs:
                       "frame_rate": video.get("r_frame_rate"),
                       "codec": video.get("codec_name"),
                   },
+                  "qa_sampling": {
+                      "method": "five_normalized_timestamps",
+                      "sample_count": len(sample_records),
+                      "samples": sample_records,
+                      "contact_sheets": {
+                          "frames": "qa-frames.jpg",
+                          "crop_9x16": "qa-crop-9x16.jpg",
+                      },
+                  },
                   "promotion": {
                       "approved_for_render": False,
                       "global_catalog_updated": False,
@@ -202,7 +277,7 @@ jobs:
                       "drive_written": False,
                   },
                   "qa_required": [
-                      "clean-frame visual inspection",
+                      "clean-frame visual inspection across start, quarter, middle, three-quarter and end samples",
                       "no baked captions or authored graphics",
                       "no embedded logo or letterbox",
                       "semantic fit against assigned story beats",
@@ -211,7 +286,7 @@ jobs:
                   ],
               }
               (candidate_root / "candidate-intake.json").write_text(
-                  json.dumps(report, indent=2) + "\n", encoding="utf-8"
+                  json.dumps(report, indent=2) + "\\n", encoding="utf-8"
               )
               reports.append(report)
 
@@ -226,7 +301,8 @@ jobs:
               "drive_written": False,
           }
           (root / "batch-intake-report.json").write_text(
-              json.dumps(batch_report, indent=2) + "\n", encoding="utf-8"
+              json.dumps(batch_report, indent=2) + "\\n",
+              encoding="utf-8",
           )
           print(json.dumps(batch_report, indent=2))
           PY
