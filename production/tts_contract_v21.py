@@ -6,7 +6,7 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-from production.cloud_tts import MAX_NARRATION_SECONDS, MIN_NARRATION_SECONDS, PROVIDER, V21_MODEL, V21_VOICE_NAME, CloudTTSError, profile_from_v21_contract
+from production.edge_tts import MAX_NARRATION_SECONDS, MIN_NARRATION_SECONDS, PROVIDER, V21_MODEL, V21_VOICE_NAME, EdgeTTSError, profile_from_v21_contract
 
 SHA256 = re.compile(r"^[0-9a-f]{64}$", re.IGNORECASE)
 POLICY_PATH = Path(__file__).resolve().parent / "active_engine_policy.json"
@@ -57,7 +57,7 @@ def validate_tts_contract(record: Mapping[str, Any], policy_path: Path = POLICY_
 
     try:
         profile_from_v21_contract(dict(contract), policy)
-    except CloudTTSError as exc:
+    except EdgeTTSError as exc:
         failures.append(str(exc))
 
     return {
