@@ -66,8 +66,9 @@ jobs:
           assert report["production_enablement"] is False
           assert report["render"] == "NOT_RUN"
           assert report["publication"] == "MANUAL_ONLY_NOT_RUN"
-          assert "rights_ledger" in report["blocking_gates"]
-          assert "THUMBNAIL_QA" in report["blocking_gates"]
+          assert report["blocking_gates"] == ["rights_ledger"]
+          assert "THUMBNAIL_QA" not in report["blocking_gates"]
+          assert "THUMBNAIL_FILES" not in report["blocking_gates"]
           print("EPISODE005_PRODUCTION_RECORD_FAIL_CLOSED_PASS")
           PY
 
