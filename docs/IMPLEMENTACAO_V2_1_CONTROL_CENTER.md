@@ -269,7 +269,7 @@ READY remains forbidden while any P0/P1 is open.
 
 ## Atualização — auditoria profunda de integração e organização — 2026-11-05
 
-- Checkout auditado no head 0303e549c4aaa008dfe4db647781957d9fbe98dd; branch correta, sem alterações locais e sem erro em git diff --check.
+- Checkout auditado no head a7d1836b32a5e02dc92c3046c13c8f68cca1a86f; branch correta, sem alterações locais e sem erro em git diff --check.
 - Validação oficial VISUAL_PLAN_CONTRACT_PASS: 42 candidatos ativos, 22 aprovados para manifesto, 16 assets, 16/16 assignments e 0 shots pendentes; promotion_allowed=false, render_allowed=false e global_catalog_updated=false.
 - Auditoria cruzada confirmou episode_id, story_id, cobertura S01–S16, 16 fontes únicas, SHA-256/fingerprint/licença presentes e flags de promoção fechadas.
 - Pré-voo repetido com sucesso: py_compile de production/*.py, 13 testes V2.1 passando e V21_SINGLETON_PASS; nenhuma rota legada foi reativada.
