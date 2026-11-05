@@ -243,7 +243,20 @@
       "truth_class": "EXPLAINED_PHENOMENON",
       "provider": "mixkit",
       "license_name": "Mixkit Stock Video Free License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "media_url": "https://assets.mixkit.co/videos/118/118-720.mp4",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Mixkit Stock Video Free License",
+        "visible_duration_seconds": 16,
+        "visible_resolution_options": [
+          "1080x720",
+          "4096x2160"
+        ],
+        "semantic_note": "Clouds darken over time; candidate for S11/S12 mechanism and non-event atmosphere."
+      }
     },
     {
       "candidate_id": "mixkit-clock-mechanism-3651",
@@ -257,7 +270,7 @@
       "rights_status": "CANDIDATE_NOT_DOWNLOADED"
     }
   ],
-  "next_action": "Approve or reject the clock candidate after locked 9:16 crop and global fingerprint checks; then repeat the browser-verified GitHub intake for the Mixkit cloud and red-light candidates. Do not update the global catalog, render manifest or thumbnail until human approval and no-reuse fingerprint gates pass.",
+  "next_action": "Run the same fail-closed intake for mixkit-cloudy-sky-118, inspect technical metadata and 9x16 crop, then perform global fingerprint and human approval checks for both candidates before catalog/render promotion.",
   "acquisition_route": {
     "status": "ALTERNATIVE_ROUTE_PREPARED_NOT_DOWNLOADED",
     "preferred_provider": "mixkit",
