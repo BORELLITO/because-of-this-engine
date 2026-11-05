@@ -12,7 +12,7 @@ def evaluate(manifest: dict[str,Any],*,registry: list[dict[str,Any]]|None=None) 
     package=evaluate_package_gate(manifest); source=validate_source_ledger(manifest); rights=validate_rights_ledger(manifest); reuse=validate_no_reuse(manifest,registry or []); concept=validate_thumbnail_concept(manifest)
     checks=[package,source,rights,reuse,concept]
     if manifest.get("thumbnail_manifest"): checks.append(validate_thumbnail_manifest(manifest["thumbnail_manifest"]))
-    blocking=[item["gate"] if "gate" in item else item["ledger"] for item in checks if item["status"]!="PASS"]
+    blocking=[item["gate"] if "gate" in item else item["ledger"] for item in checks if not (item["status"] == "PASS" or (item.get("gate") == "PACKAGE_GATE_PRE" and item["status"] == "PACKAGE_GATE_PASS"))]
     return {"implementation_id":manifest.get("implementation_id"),"audit_id":manifest.get("audit_id"),"status":"PASS" if not blocking else "BLOCKED","production_enablement":False,"media_generation":"NOT_RUN","tts":"NOT_RUN","render":"NOT_RUN","publication":"MANUAL_ONLY_NOT_RUN","checks":checks,"blocking_gates":blocking,"next_action":"human_story_approval" if not blocking else "resolve:"+",".join(blocking)}
 
 def main() -> int:
