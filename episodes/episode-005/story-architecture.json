@@ -78,9 +78,9 @@
       "final_word_level_ready": false,
       "caption_authority": "provider_native_edge_boundaries",
       "acoustic_whisper_audit": "BLOCKED_ON_ASR_LEXICAL_VARIANTS",
-      "frozen_caption_workflow_run_id": 41966616833,
-      "frozen_caption_artifact_id": 13387473739,
-      "frozen_caption_artifact_digest": "sha256:e263bb13371b642646f91968431644637df1b55bdda2d0f1d18a073501074b24",
+      "frozen_caption_workflow_run_id": 41966915074,
+      "frozen_caption_artifact_id": 13388300361,
+      "frozen_caption_artifact_digest": "sha256:7a8f15a9dba1118d3aa736271077b4cf49271d467f753967ec1cedd2db381618",
       "sidecar": "narration.alignment.json"
     },
     "last_production_attempt": {
