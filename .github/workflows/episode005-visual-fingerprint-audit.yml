@@ -191,7 +191,7 @@ jobs:
               "status": "FINGERPRINT_AUDIT_PASS" if not blockers else "FINGERPRINT_AUDIT_BLOCKED",
               "episode_id": "episode-005",
               "registry_schema_version": registry_schema,
-              "fingerprint_algorithm": f"video-phash-v{FINGERPRINT_VERSION}-dct32-low8",
+              "fingerprint_algorithm": FINGERPRINT_ALGORITHM,
               "candidate_count": len(reports),
               "candidates": reports,
               "blockers": blockers,
