@@ -9,15 +9,15 @@
   "purpose": "Human-approved candidate-to-shot assignments before final production promotion.",
   "source_plan": "episodes/episode-005/visual/asset-acquisition-plan.json",
   "approval_record": {
-    "status": "APPROVED_FOR_RENDER_PREFLIGHT",
+    "status": "APPROVED_FOR_MANIFEST_ONLY",
     "approved_at_utc": "2026-11-05T17:59:24.004Z",
-    "decision": "User approved all 12 candidates and approved render use for the complete active Episode 005 asset set; final execution remains subject to manual preflight.",
+    "decision": "User approved the active Episode 005 candidate set for the visual manifest; episode-level render authorization is recorded separately in production-record.json and remains subject to manual preflight.",
     "constraints": [
       "representational footage must not be presented as literal Petrov archival evidence",
       "global catalog mutation remains disabled",
       "Drive write remains disabled",
       "publication remains manual-only",
-      "manual preflight must pass before any preview render",
+      "the visual manifest remains manifest-only; render authorization is controlled by production-record.json",
       "no automatic render execution or silent fallback"
     ]
   },
@@ -47,9 +47,9 @@
         "artifact_id": 13403209885,
         "artifact_digest": "sha256:e97bc6b2c2e7cac51c10a1af55a35570f5df044ac80bece0478292992ce0c78b"
       },
-      "rights_status": "APPROVED",
-      "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
-      "approved_for_render": true,
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false
@@ -70,9 +70,9 @@
         "artifact_id": 13403188677,
         "artifact_digest": "sha256:3d1a8b60b24cede0ebb3b99d14f8ee9fcdc508040320498ec80f8f8d5bf78299"
       },
-      "rights_status": "APPROVED",
-      "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
-      "approved_for_render": true,
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false
@@ -93,9 +93,9 @@
         "artifact_id": 13404636511,
         "artifact_digest": "sha256:12313afbe106a2dfdff4d9e8543b57f7e7312797620c227fae2c73291f5f2514"
       },
-      "rights_status": "APPROVED",
-      "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
-      "approved_for_render": true,
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false
@@ -121,9 +121,9 @@
         "artifact_id": 13408966434,
         "artifact_digest": "sha256:d9d4adbc09e85d5aea9370a3c7045125afe04ac81ac43cfb5dfa6b18677e2199"
       },
-      "rights_status": "APPROVED",
-      "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
-      "approved_for_render": true,
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false
@@ -149,9 +149,9 @@
         "artifact_id": 13409611998,
         "artifact_digest": "sha256:30f39d5255b086062c6e01e7576c9cd9f5371476b795a1736d48579bbc2474c4"
       },
-      "rights_status": "APPROVED",
-      "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
-      "approved_for_render": true,
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false
@@ -177,9 +177,9 @@
         "artifact_id": 13411692548,
         "artifact_digest": "sha256:60d3a8c2b25a355f2415b9b83ead93e036727ae373ad587c8ae7e7f3b9b046f7"
       },
-      "rights_status": "APPROVED",
-      "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
-      "approved_for_render": true,
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
@@ -206,9 +206,9 @@
         "artifact_id": 13413646379,
         "artifact_digest": "sha256:a4450ebff3562383b0b8c731bc810f810850eab1fa476737233279724c18fc69"
       },
-      "rights_status": "APPROVED",
-      "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
-      "approved_for_render": true,
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
@@ -240,9 +240,9 @@
         "artifact_id": 13424799852,
         "artifact_digest": "sha256:c561091d1c94a2ef93b5e5d34b194e54c9990490da56dde60c9fedfa3921e99b"
       },
-      "rights_status": "APPROVED",
-      "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
-      "approved_for_render": true,
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
@@ -269,9 +269,9 @@
         "artifact_id": 13427769060,
         "artifact_digest": "sha256:f92cb4eed9bfc2fbaf518540413f5ab363578156f7c58d947e69c692219e0c87"
       },
-      "rights_status": "APPROVED",
-      "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
-      "approved_for_render": true,
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
@@ -303,9 +303,9 @@
         "global_sha256_collision": false,
         "global_perceptual_collision": false
       },
-      "rights_status": "APPROVED",
-      "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
-      "approved_for_render": true,
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
@@ -333,9 +333,9 @@
         "artifact_id": 13438400127,
         "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
       },
-      "rights_status": "APPROVED",
-      "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
-      "approved_for_render": true,
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
@@ -363,9 +363,9 @@
         "artifact_id": 13438400127,
         "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
       },
-      "rights_status": "APPROVED",
-      "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
-      "approved_for_render": true,
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
@@ -393,9 +393,9 @@
         "artifact_id": 13438400127,
         "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
       },
-      "rights_status": "APPROVED",
-      "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
-      "approved_for_render": true,
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
@@ -423,9 +423,9 @@
         "artifact_id": 13438400127,
         "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
       },
-      "rights_status": "APPROVED",
-      "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
-      "approved_for_render": true,
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
@@ -453,9 +453,9 @@
         "artifact_id": 13438400127,
         "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
       },
-      "rights_status": "APPROVED",
-      "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
-      "approved_for_render": true,
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
@@ -483,9 +483,9 @@
         "artifact_id": 13438400127,
         "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
       },
-      "rights_status": "APPROVED",
-      "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
-      "approved_for_render": true,
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
@@ -504,9 +504,9 @@
       "assignment": {
         "candidate_id": "mixkit-abstract-red-glow-101432",
         "usage": "symbolic red warning pulse; never literal archival evidence",
-        "approved_for_render": true,
+        "approved_for_render": false,
         "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT"
+        "human_approval": "APPROVED_FOR_MANIFEST"
       },
       "blocking_reason": null
     },
@@ -520,9 +520,9 @@
       "assignment": {
         "candidate_id": "mixkit-large-satellite-antenna-2650",
         "usage": "representational early-warning satellite infrastructure; not archival evidence",
-        "approved_for_render": true,
+        "approved_for_render": false,
         "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT"
+        "human_approval": "APPROVED_FOR_MANIFEST"
       },
       "blocking_reason": null
     },
@@ -536,9 +536,9 @@
       "assignment": {
         "candidate_id": "mixkit-young-engineer-29991",
         "usage": "modern technical human-anchor reconstruction in workshop; not literal Petrov archival evidence",
-        "approved_for_render": true,
+        "approved_for_render": false,
         "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Use only as representational reconstruction; do not imply the 1983 bunker looked like a modern tablet workstation."
       },
       "blocking_reason": null
@@ -553,9 +553,9 @@
       "assignment": {
         "candidate_id": "mixkit-worker-industrial-lathe-2244",
         "usage": "technical control-panel reconstruction of alert propagation; not literal Petrov archival evidence",
-        "approved_for_render": true,
+        "approved_for_render": false,
         "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Natural panel labels are scene content; do not present as the actual Soviet system."
       },
       "blocking_reason": null
@@ -570,9 +570,9 @@
       "assignment": {
         "candidate_id": "pixabay-radar-black-green-target-symbol-57670",
         "usage": "Distinct symbolic radar/target insert for the warning-count escalation; not literal Soviet interface.",
-        "approved_for_render": true,
+        "approved_for_render": false,
         "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
       },
       "blocking_reason": null
@@ -587,9 +587,9 @@
       "assignment": {
         "candidate_id": "pixabay-led-indicator-lights-316712",
         "usage": "abstract indicator/electronics texture for rising alarm intensity; not literal archival evidence",
-        "approved_for_render": true,
+        "approved_for_render": false,
         "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Use only as symbolic representational insert; do not imply the actual Soviet alert interface."
       },
       "blocking_reason": null
@@ -604,9 +604,9 @@
       "assignment": {
         "candidate_id": "mixkit-slowly-approaching-clock-28897",
         "usage": "clock pressure and decision window",
-        "approved_for_render": true,
+        "approved_for_render": false,
         "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT"
+        "human_approval": "APPROVED_FOR_MANIFEST"
       },
       "blocking_reason": null
     },
@@ -620,9 +620,9 @@
       "assignment": {
         "candidate_id": "pixabay-radar-radar-screen-rotation-circles-4511",
         "usage": "Empty ground-radar/monitoring insert contrasting with the satellite alert.",
-        "approved_for_render": true,
+        "approved_for_render": false,
         "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
       },
       "blocking_reason": null
@@ -637,9 +637,9 @@
       "assignment": {
         "candidate_id": "pixabay-button-press-red-business-click-502",
         "usage": "Technical input insert representing the operator entering the false-alarm classification.",
-        "approved_for_render": true,
+        "approved_for_render": false,
         "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
       },
       "blocking_reason": null
@@ -654,9 +654,9 @@
       "assignment": {
         "candidate_id": "mixkit-clock-mechanism-3651",
         "usage": "symbolic mechanical passage of time during the bunker wait; not archival Petrov evidence",
-        "approved_for_render": true,
+        "approved_for_render": false,
         "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT"
+        "human_approval": "APPROVED_FOR_MANIFEST"
       },
       "blocking_reason": null
     },
@@ -670,9 +670,9 @@
       "assignment": {
         "candidate_id": "mixkit-cloudy-sky-118",
         "usage": "empty sky/non-event atmosphere",
-        "approved_for_render": true,
+        "approved_for_render": false,
         "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT"
+        "human_approval": "APPROVED_FOR_MANIFEST"
       },
       "blocking_reason": null
     },
@@ -686,9 +686,9 @@
       "assignment": {
         "candidate_id": "pixabay-antenna-astronomy-communication-40041",
         "usage": "representational parabolic antenna/sensor geometry under open sky; not archival evidence",
-        "approved_for_render": true,
+        "approved_for_render": false,
         "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Use as mechanism visualization, not as literal footage from Petrov's 1983 incident."
       },
       "blocking_reason": null
@@ -703,9 +703,9 @@
       "assignment": {
         "candidate_id": "pixabay-typewriter-typing-writing-author-1335",
         "usage": "Typewritten evidence treatment for a declassified report/logbook beat without inventing readable historical text.",
-        "approved_for_render": true,
+        "approved_for_render": false,
         "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
       },
       "blocking_reason": null
@@ -720,9 +720,9 @@
       "assignment": {
         "candidate_id": "pixabay-hallway-dark-corridor-20837",
         "usage": "representational empty institutional corridor for later obscurity and quiet institutional consequence; not literal archival evidence",
-        "approved_for_render": true,
+        "approved_for_render": false,
         "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Use only as a representational reconstruction for S14; no reuse in another shot and no claim that it depicts Petrov's facility."
       },
       "blocking_reason": null
@@ -737,9 +737,9 @@
       "assignment": {
         "candidate_id": "pixabay-dark-light-lens-flare-abstract-250413",
         "usage": "Restrained transition from warning pulse into neutral black; no victory imagery.",
-        "approved_for_render": true,
+        "approved_for_render": false,
         "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
       },
       "blocking_reason": null
@@ -754,9 +754,9 @@
       "assignment": {
         "candidate_id": "pixabay-particles-orange-red-dust-effect-7957",
         "usage": "Restrained branded outro texture with a controlled red/orange pulse behind the final logo lockup.",
-        "approved_for_render": true,
+        "approved_for_render": false,
         "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_RENDER_PREFLIGHT",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
       },
       "blocking_reason": null
@@ -933,5 +933,5 @@
     "revalidation_required": false,
     "replacement_note": "S05 primary replaced after direct-media QA rejected recognizable-person candidate."
   },
-  "last_adjustment": "Render authorization reconciled after user approval: active assets are approved for the manual preview preflight; production policy, thumbnail files, Drive and publication remain fail-closed."
+  "last_adjustment": "Visual manifest kept manifest-only by contract; episode-level render authorization remains recorded in production-record.json for the manual preflight."
 }
