@@ -213,7 +213,10 @@ def synthesize_text(text: str, profile: dict, *, break_before_ms: int = 0):
             except Exception as exc:
                 last_error = exc
         if last_error is not None:
-            raise EdgeTTSError(f"Edge TTS synthesis failed after {MAX_ATTEMPTS} attempts") from last_error
+            detail = f"{type(last_error).__name__}: {last_error}" if last_error else "unknown error"
+            raise EdgeTTSError(
+                f"Edge TTS synthesis failed after {MAX_ATTEMPTS} attempts; {detail[:500]}"
+            ) from last_error
         _convert_mp3_to_wav(mp3_path, wav_path, profile["sample_rate_hz"])
         audio = _prepend_silence(wav_path.read_bytes(), break_before_ms, profile["sample_rate_hz"])
     rate, channels, width, duration = _wav_info(audio)
