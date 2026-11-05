@@ -56,23 +56,30 @@ jobs:
           import json
           from pathlib import Path
           policy=json.loads(Path('production/active_engine_policy.json').read_text())
-          manifest=json.loads(Path('episodes/video-001/manifest.json').read_text())
-          from production.canonical_config import CANONICAL_PROFILE_FINGERPRINT, CANONICAL_PROFILE_ID
-          from production.visual_effects_v73 import PROFILE_ID, PROFILE_VERSION, validate_visual_effects
-          assert policy['active_engine_profile'] == CANONICAL_PROFILE_ID
-          assert policy['active_engine_fingerprint'] == CANONICAL_PROFILE_FINGERPRINT
-          assert policy['voice_provider'] == 'gemini_tts'
-          assert policy['voice_policy']['voice_name'] == 'Charon'
-          assert manifest['engine_profile'] == CANONICAL_PROFILE_ID
-          assert manifest['engine_profile_fingerprint'] == CANONICAL_PROFILE_FINGERPRINT
-          assert manifest['lifecycle_status'] == 'FINAL_APPROVED'
-          assert manifest['human_approval']['status'] == 'PASS'
-          assert manifest['editorial_qa']['status'] == 'PASS'
-          assert manifest['music']['license_status'] == 'APPROVED'
-          effects = validate_visual_effects(manifest, require_active_profile=True)
-          assert effects['profile'] == PROFILE_ID
-          assert effects['profile_version'] == PROFILE_VERSION
-          print('CHARON_CINEMATIC_DREAD_FINAL_IDENTITY_PASS')
+          if policy.get('active_engine_version') == '2.1':
+              assert policy['canonical_entrypoint'] == 'production/canonical_entrypoint.py'
+              assert policy['production_enablement'] is False
+              assert policy['voice_provider'] == 'gemini_tts'
+              assert policy['voice_policy']['voice_name'] == 'Charon'
+              print('V21_CANONICAL_POLICY_PASS')
+          else:
+              manifest=json.loads(Path('episodes/video-001/manifest.json').read_text())
+              from production.canonical_config import CANONICAL_PROFILE_FINGERPRINT, CANONICAL_PROFILE_ID
+              from production.visual_effects_v73 import PROFILE_ID, PROFILE_VERSION, validate_visual_effects
+              assert policy['active_engine_profile'] == CANONICAL_PROFILE_ID
+              assert policy['active_engine_fingerprint'] == CANONICAL_PROFILE_FINGERPRINT
+              assert policy['voice_provider'] == 'gemini_tts'
+              assert policy['voice_policy']['voice_name'] == 'Charon'
+              assert manifest['engine_profile'] == CANONICAL_PROFILE_ID
+              assert manifest['engine_profile_fingerprint'] == CANONICAL_PROFILE_FINGERPRINT
+              assert manifest['lifecycle_status'] == 'FINAL_APPROVED'
+              assert manifest['human_approval']['status'] == 'PASS'
+              assert manifest['editorial_qa']['status'] == 'PASS'
+              assert manifest['music']['license_status'] == 'APPROVED'
+              effects = validate_visual_effects(manifest, require_active_profile=True)
+              assert effects['profile'] == PROFILE_ID
+              assert effects['profile_version'] == PROFILE_VERSION
+              print('CHARON_CINEMATIC_DREAD_FINAL_IDENTITY_PASS')
           PY
       - name: Parse the production-record schema
         run: python -m json.tool production/schemas/production-record-3.0.0.json >/dev/null
