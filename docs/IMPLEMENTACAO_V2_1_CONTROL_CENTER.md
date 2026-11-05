@@ -334,3 +334,5 @@ READY remains forbidden while any P0/P1 is open.
 - Próximo passo único: completar a ficha de direitos por asset e registrar aprovação explícita para render apenas nos itens que passarem essa verificação; não habilitar produção ou publicação automática.
 
 - Foi criada a ficha individual `episodes/episode-005/rights/rights-audit-v21.json`, com 16 assets, URLs, licença declarada, SHA-256, fingerprint, shots atribuídos e pendências de direitos por item. O arquivo é somente auditoria; não altera nenhuma autorização de render.
+
+- QA visual inicial dos shots S03 e S04 concluído no navegador: S03 mostra mãos/braço e creator identificado como Edgar Fernandez; S04 mostra apenas uma mão no painel, sem rosto e sem marca aparente. A evidência foi registrada na ficha, mas a revisão do arquivo completo e a aprovação para render continuam pendentes.
