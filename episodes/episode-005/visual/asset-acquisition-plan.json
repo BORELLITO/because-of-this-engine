@@ -715,10 +715,10 @@
       "disqualifiers": [],
       "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
       "intake_artifact": {
-        "workflow_run_id": 42038088699,
-        "artifact_id": 13418919199,
-        "artifact_name": "episode005-visual-intake-42038088699",
-        "artifact_digest": "sha256:0f0e34d502ef7ff553fad4cee3c32cecd1e3e1055d6dda9adf12ab2eb97877a1",
+        "workflow_run_id": 42043152146,
+        "artifact_id": 13422407818,
+        "artifact_name": "episode005-visual-intake-42043152146",
+        "artifact_digest": "sha256:2c518303ddeab0806300fe1eb4e8e1c3a01b7d0de92f1118ccbe0e77b5c7381f",
         "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
         "sha256": "14353cedcbf610c6f7411c657b96898d0fba8408c14ceb0b2e4cb3c14df2ebd3",
         "duration_seconds": 10,
@@ -751,7 +751,8 @@
           "global_source_collision": false,
           "global_sha256_collision": false,
           "global_perceptual_collision": false
-        }
+        },
+        "job_id": 127298967914
       },
       "qa": {
         "clean_frame_visual_review": "PENDING_HUMAN_QA",
@@ -804,10 +805,10 @@
       "disqualifiers": [],
       "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
       "intake_artifact": {
-        "workflow_run_id": 42038088699,
-        "artifact_id": 13418919199,
-        "artifact_name": "episode005-visual-intake-42038088699",
-        "artifact_digest": "sha256:0f0e34d502ef7ff553fad4cee3c32cecd1e3e1055d6dda9adf12ab2eb97877a1",
+        "workflow_run_id": 42043152146,
+        "artifact_id": 13422407818,
+        "artifact_name": "episode005-visual-intake-42043152146",
+        "artifact_digest": "sha256:2c518303ddeab0806300fe1eb4e8e1c3a01b7d0de92f1118ccbe0e77b5c7381f",
         "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
         "sha256": "8185f8459b80df5c5eaa95d4a66ac58edef34fc7f790ca4e5f74fc10a70742d6",
         "duration_seconds": 7.2,
@@ -840,7 +841,8 @@
           "global_source_collision": false,
           "global_sha256_collision": false,
           "global_perceptual_collision": false
-        }
+        },
+        "job_id": 127298967914
       },
       "qa": {
         "clean_frame_visual_review": "PENDING_HUMAN_QA",
@@ -894,10 +896,10 @@
       "disqualifiers": [],
       "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
       "intake_artifact": {
-        "workflow_run_id": 42038088699,
-        "artifact_id": 13418919199,
-        "artifact_name": "episode005-visual-intake-42038088699",
-        "artifact_digest": "sha256:0f0e34d502ef7ff553fad4cee3c32cecd1e3e1055d6dda9adf12ab2eb97877a1",
+        "workflow_run_id": 42043152146,
+        "artifact_id": 13422407818,
+        "artifact_name": "episode005-visual-intake-42043152146",
+        "artifact_digest": "sha256:2c518303ddeab0806300fe1eb4e8e1c3a01b7d0de92f1118ccbe0e77b5c7381f",
         "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
         "sha256": "3c4e681f8df4ebe45f4076ff392f3202d826d78206277796a58e235efa9909bc",
         "duration_seconds": 29.567,
@@ -930,7 +932,8 @@
           "global_source_collision": false,
           "global_sha256_collision": false,
           "global_perceptual_collision": false
-        }
+        },
+        "job_id": 127298967914
       },
       "qa": {
         "clean_frame_visual_review": "PENDING_HUMAN_QA",
@@ -985,10 +988,10 @@
       "disqualifiers": [],
       "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
       "intake_artifact": {
-        "workflow_run_id": 42038088699,
-        "artifact_id": 13418919199,
-        "artifact_name": "episode005-visual-intake-42038088699",
-        "artifact_digest": "sha256:0f0e34d502ef7ff553fad4cee3c32cecd1e3e1055d6dda9adf12ab2eb97877a1",
+        "workflow_run_id": 42043152146,
+        "artifact_id": 13422407818,
+        "artifact_name": "episode005-visual-intake-42043152146",
+        "artifact_digest": "sha256:2c518303ddeab0806300fe1eb4e8e1c3a01b7d0de92f1118ccbe0e77b5c7381f",
         "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
         "sha256": "5a2031e934028fb6c13ba07dd176092507303db83f4decc8b79acb2263ecbf8d",
         "duration_seconds": 16.362,
@@ -1021,7 +1024,8 @@
           "global_source_collision": false,
           "global_sha256_collision": false,
           "global_perceptual_collision": false
-        }
+        },
+        "job_id": 127298967914
       },
       "qa": {
         "clean_frame_visual_review": "PENDING_HUMAN_QA",
@@ -1051,7 +1055,7 @@
       }
     }
   ],
-  "next_action": "Rerun the four-candidate Pixabay intake with full-duration normalized QA sampling, then replace the two preliminary rejects and obtain explicit human approval only for candidates that pass the clean-source, semantic-fit and crop gates. Keep all render, catalog, Drive and publication gates blocked.",
+  "next_action": "Replace the two preliminary rejects (S06/S09 warning-control source and S12 cloud-sunlight-satellite source), then obtain explicit human approval only for candidates that pass the clean-source, semantic-fit and crop gates. Keep all render, catalog, Drive and publication gates blocked.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -1559,7 +1563,8 @@
     ]
   },
   "last_manual_intake": {
-    "workflow_run_id": 42038088699,
+    "workflow_run_id": 42043152146,
+    "job_id": 127298967914,
     "branch": "integration/because-of-this-v2.1-20261105",
     "candidate_ids": [
       "pixabay-alert-alarm-war-205519",
@@ -1567,18 +1572,28 @@
       "pixabay-radar-screen-4511",
       "pixabay-television-broadcasting-satellite-29483"
     ],
+    "refresh_existing": true,
     "status": "BATCH_DOWNLOADED_AWAITING_HUMAN_QA",
-    "artifact_id": 13418919199,
-    "artifact_digest": "sha256:0f0e34d502ef7ff553fad4cee3c32cecd1e3e1055d6dda9adf12ab2eb97877a1",
+    "artifact_id": 13422407818,
+    "artifact_name": "episode005-visual-intake-42043152146",
+    "artifact_digest": "sha256:2c518303ddeab0806300fe1eb4e8e1c3a01b7d0de92f1118ccbe0e77b5c7381f",
     "promotion_allowed": false,
     "render_allowed": false,
     "global_catalog_updated": false,
     "drive_written": false,
     "publication_allowed": false,
     "qa_sampling_revision": {
-      "status": "WORKFLOW_UPDATED_NOT_YET_RERUN",
-      "workflow_commit": "9108c622adc0ab95d97be846e6294213a0056a6a",
-      "note": "The next manual intake must be rerun to regenerate full-duration QA contact sheets before any human approval decision."
+      "status": "RERUN_SUCCESS",
+      "workflow_commit": "61d1f3613e2a065aad3d1ccd931e027f597ea9f9",
+      "method": "five_normalized_timestamps",
+      "sample_positions": [
+        "start",
+        "quarter",
+        "middle",
+        "three-quarter",
+        "end_minus_0_1_seconds"
+      ],
+      "note": "Full-duration QA contact sheets regenerated successfully; all four candidates contain five samples plus vertical crops."
     }
   },
   "last_manual_fingerprint": {
