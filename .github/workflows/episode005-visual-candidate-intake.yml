@@ -62,7 +62,7 @@ jobs:
               source_page = urlparse(candidate["source_page_url"])
               media_url = urlparse(candidate["media_url"])
               assert source_page.scheme == "https" and source_page.hostname == "mixkit.co", candidate["source_page_url"]
-              assert media_url.scheme == "https" and str(media_url.hostname or "").endswith("mixkit.co"), candidate["media_url"]
+              assert media_url.scheme == "https" and (media_url.hostname == "mixkit.co" or str(media_url.hostname or "").endswith(".mixkit.co")), candidate["media_url"]
               assert not candidate.get("intake_artifact"), f"candidate already has intake evidence: {candidate_id}"
               selected.append({
                   "candidate_id": candidate_id,
