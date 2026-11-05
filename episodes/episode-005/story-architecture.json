@@ -233,14 +233,25 @@
     "text": "FIVE MISSILES",
     "hero_visual": "Red early-warning console with five indicators and a dark human silhouette.",
     "visual_truth_class": "MAP_OR_DIAGRAM",
-    "rights_status": "PENDING_ASSET_SELECTION",
-    "final_status": "NOT_READY",
+    "rights_status": "ORIGINAL_GENERATED_ASSET_PENDING_FINAL_HUMAN_REVIEW",
+    "final_status": "CANDIDATE_READY_FOR_HUMAN_REVIEW",
     "dimensions": [
       1080,
       1920
     ],
     "no_reuse_required": true,
-    "note": "Do not fabricate a documentary portrait or use the phrase SAVED THE WORLD as a factual assertion."
+    "note": "Do not fabricate a documentary portrait or use the phrase SAVED THE WORLD as a factual assertion.",
+    "candidate_asset_name": "Cinco luzes vermelhas no bunker.png",
+    "candidate_library_file_id": "libfile_0a269bde796c81919bd777795b907361",
+    "candidate_sha256": "84fbac028247995943aa5c9e4fcfc698526215e83c2017edc225dbcebe307276",
+    "candidate_dimensions": [
+      1080,
+      1920
+    ],
+    "candidate_text": "FIVE MISSILES",
+    "candidate_composition": "Five red warning indicators, green radar, anonymous silhouette, dark cloud reflection, Because Of This logo in the upper-right.",
+    "candidate_truth_note": "Original symbolic representational artwork; not archival Petrov evidence and not a literal Soviet interface.",
+    "human_review_required": true
   },
   "asset_policy": {
     "global_catalog_required": true,
