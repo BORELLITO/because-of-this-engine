@@ -88,8 +88,8 @@
   "rights_ledger_id": "episodes/episode-005/visual/scene-asset-manifest.json",
   "reuse_scope": "global",
   "story_score": 10,
-  "package_status": "PENDING_HUMAN_APPROVAL",
-  "human_editor_status": "PENDING",
+  "package_status": "APPROVED",
+  "human_editor_status": "APPROVED",
   "thumbnail_concept_id": "thumb-episode-005-machine-lied-v1",
   "thumbnail_manifest_id": "thumb-manifest-episode-005-machine-lied-v1",
   "thumbnail_status": "APPROVED",
@@ -687,7 +687,7 @@
     "episode_id": "episode-005",
     "story_id": "story-stanislav-petrov-false-alarm-1983",
     "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
-    "title_variant": "THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
+    "title_variant": "THE NIGHT THE MACHINE LIED",
     "thumbnail_text": "THE MACHINE LIED",
     "hero_asset_id": "thumb-episode-005-machine-lied-v1",
     "visual_truth_class": "MAP_OR_DIAGRAM",
@@ -802,5 +802,5 @@
       "representational footage must not be presented as literal Petrov archival evidence"
     ]
   },
-  "last_adjustment": "Canonical vocabulary reconciled after preflight: rights_ledger entries use rights_status=APPROVED with approved_for_render=true; pipeline_state restored to valid THUMBNAIL_QA. Production remains disabled and manual preflight remains required."
+  "last_adjustment": "Editorial package approved by the user on 2026-11-05: selected title THE NIGHT THE MACHINE LIED with thumbnail text THE MACHINE LIED. Technical production remains fail-closed pending manual preflight."
 }
