@@ -44,9 +44,9 @@ jobs:
       - name: Audit singleton and expose unresolved legacy workflow references
         run: |
           set +e
-          python production/v21_singleton_guard.py --repo-root . > singleton-report.json
+          python production/v21_singleton_guard.py --repo-root . > /tmp/singleton-report.json
           code=$?
-          cat singleton-report.json
+          cat /tmp/singleton-report.json
           test "$code" -eq 0 || echo "SINGLETON_RECONCILIATION_REMAINS_BLOCKED"
           exit 0
       - name: Confirm test run did not mutate the checkout
