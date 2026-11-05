@@ -38,6 +38,7 @@ def _recognize(audio_path: Path, model_name: str, prompt: str = "") -> list[dict
             vad_filter=False,
             beam_size=5,
             condition_on_previous_text=True,
+            temperature=0.0,
         )
         words: list[dict[str, Any]] = []
         for segment in segments:
