@@ -37,9 +37,10 @@ jobs:
           import hashlib
           import json
           import os
-          import shutil
+          import re
           import urllib.request
           from pathlib import Path
+          from urllib.parse import urlparse
 
           from production.asset_reuse_brain import source_asset_key
           from production.video_asset_contract import FINGERPRINT_ALGORITHM, ffprobe, perceptual_hash, sha256_file
@@ -59,6 +60,11 @@ jobs:
           if len(requested_ids) != len(set(requested_ids)):
               blockers.append({
                   "type": "duplicate_requested_candidate_id",
+                  "candidate_ids": requested_ids,
+              })
+          if not all(re.fullmatch(r"[A-Za-z0-9._-]+", item) for item in requested_ids):
+              blockers.append({
+                  "type": "unsafe_candidate_id",
                   "candidate_ids": requested_ids,
               })
 
@@ -87,6 +93,14 @@ jobs:
                   blockers.append({
                       "type": "candidate_missing_intake_artifact",
                       "candidate_id": candidate_id,
+                  })
+                  continue
+              if candidate.get("provider") != "mixkit" or candidate.get("license_name") != "Mixkit Stock Video Free License":
+                  blockers.append({
+                      "type": "candidate_rights_drift",
+                      "candidate_id": candidate_id,
+                      "provider": candidate.get("provider"),
+                      "license_name": candidate.get("license_name"),
                   })
                   continue
               candidates.append(candidate)
@@ -125,6 +139,21 @@ jobs:
               if not expected["source_page_url"] or not expected["media_url"]:
                   blockers.append({"type": "candidate_source_incomplete", "candidate_id": candidate_id})
                   continue
+              source_page = urlparse(expected["source_page_url"])
+              media_url = urlparse(expected["media_url"])
+              if not (
+                  source_page.scheme == "https"
+                  and source_page.hostname == "mixkit.co"
+                  and media_url.scheme == "https"
+                  and str(media_url.hostname or "").endswith("mixkit.co")
+              ):
+                  blockers.append({
+                      "type": "candidate_domain_invalid",
+                      "candidate_id": candidate_id,
+                      "source_page_url": expected["source_page_url"],
+                      "media_url": expected["media_url"],
+                  })
+                  continue
 
               intake = candidate.get("intake_artifact") or {}
               expected_sha = str(intake.get("sha256", "")).lower()
@@ -133,8 +162,20 @@ jobs:
                   expected["media_url"],
                   headers={"User-Agent": "because-of-this-fingerprint-audit/1.0"},
               )
+              max_bytes = 200 * 1024 * 1024
               with urllib.request.urlopen(request, timeout=180) as response, media_path.open("wb") as handle:
-                  shutil.copyfileobj(response, handle)
+                  content_length = response.headers.get("Content-Length")
+                  if content_length and int(content_length) > max_bytes:
+                      raise RuntimeError(f"candidate exceeds 200 MiB: {candidate_id}")
+                  written = 0
+                  while True:
+                      chunk = response.read(1024 * 1024)
+                      if not chunk:
+                          break
+                      written += len(chunk)
+                      if written > max_bytes:
+                          raise RuntimeError(f"candidate exceeds 200 MiB: {candidate_id}")
+                      handle.write(chunk)
               actual_sha = sha256_file(media_path)
               if actual_sha != expected_sha:
                   blockers.append({
@@ -145,7 +186,15 @@ jobs:
                   })
 
               metadata = ffprobe(media_path)
-              phash = perceptual_hash(media_path, duration=float(metadata["duration"]))
+              duration = float(metadata["duration"])
+              if not 0 < duration <= 180:
+                  blockers.append({
+                      "type": "candidate_duration_out_of_bounds",
+                      "candidate_id": candidate_id,
+                      "duration_seconds": duration,
+                  })
+                  continue
+              phash = perceptual_hash(media_path, duration=duration)
               identity = {
                   "provider": candidate.get("provider"),
                   "provider_asset_id": candidate_id.rsplit("-", 1)[-1],
@@ -185,7 +234,7 @@ jobs:
                   "perceptual_hash": phash,
                   "fingerprint_algorithm": FINGERPRINT_ALGORITHM,
                   "metadata": {
-                      "duration_seconds": round(float(metadata["duration"]), 3),
+                      "duration_seconds": round(duration, 3),
                       "width": metadata["width"],
                       "height": metadata["height"],
                       "fps": metadata["fps"],
