@@ -602,9 +602,45 @@
         "fingerprint_artifact_id": 13411692548,
         "fingerprint_artifact_digest": "sha256:60d3a8c2b25a355f2415b9b83ead93e036727ae373ad587c8ae7e7f3b9b046f7"
       }
+    },
+    {
+      "candidate_id": "mixkit-worker-industrial-lathe-2244",
+      "source_page_url": "https://mixkit.co/free-stock-video/worker-operating-an-industrial-lathe-2244/",
+      "role": "S04",
+      "visual_match": "NEAR",
+      "visual_intent": "operator hand actuating a technical control panel as an alert moves through a system",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "mixkit",
+      "license_name": "Mixkit Stock Video Free License",
+      "rights_status": "CANDIDATE_PAGE_VERIFIED_AWAITING_INTAKE",
+      "media_url": "https://assets.mixkit.co/videos/2244/2244-720.mp4",
+      "media_url_observed_in_browser": true,
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Mixkit Stock Video Free License — commercial or personal use",
+        "visible_duration_seconds": 10,
+        "visible_resolution_options": [
+          "1280x720",
+          "1920x1080"
+        ],
+        "visible_frame_rate": "24 fps",
+        "semantic_note": "Close-up hand operating an industrial control panel; representational technical reconstruction for S04, never literal Petrov archival evidence."
+      },
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "qa": {
+        "clean_frame_visual_review": "PENDING_INTAKE",
+        "baked_captions_or_authored_graphics": "PENDING_INTAKE",
+        "embedded_logo_or_letterbox": "PENDING_INTAKE",
+        "semantic_fit": "PRELIMINARY_PASS_PENDING_CLEAN_FRAME_QA",
+        "locked_9x16_crop": "PENDING_INTAKE",
+        "global_reuse_fingerprint": "PENDING_INTAKE",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     }
   ],
-  "next_action": "Acquire and QA distinct candidates for unresolved shots S04,S05,S06,S08,S09,S12,S13,S14,S15,S16, then re-run final visual manifest validation. S03 is assigned to the approved modern-reconstruction candidate only.",
+  "next_action": "Run intake and frame/fingerprint QA for mixkit-worker-industrial-lathe-2244 as the S04 candidate. If clean and semantically coherent, request explicit manifest-only approval; otherwise reject without catalog or render promotion.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
