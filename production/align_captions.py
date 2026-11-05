@@ -776,7 +776,10 @@ def generate(
         if secondary_model_path is not None:
             try:
                 secondary_words = _recognize(audio_path, secondary_model_path)
-                asr_words = _merge_word_timings(asr_words, secondary_words)
+                # Keep the secondary recognizer as an independent timeline.
+                # Merging two full acoustic passes interleaves duplicate or
+                # hallucinated tokens and destroys monotonic phrase order.
+                asr_words = secondary_words
                 events, sidecar_chunks = _align_chunks(chunks, asr_words)
                 secondary_aligned = True
             except AlignmentError as error:
