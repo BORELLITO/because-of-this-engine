@@ -1368,7 +1368,7 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "media_url": "https://cdn.pixabay.com/video/2019/01/19/20837-312432073_large.mp4",
       "media_url_observed_in_browser": true,
       "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
@@ -1390,7 +1390,27 @@
       },
       "disqualifiers": [
         "generic corridor; military specificity is representational rather than literal"
-      ]
+      ],
+      "intake_artifact": {
+        "workflow_run_id": 42056121022,
+        "artifact_id": 13428247933,
+        "artifact_name": "episode005-visual-intake-42056121022",
+        "artifact_digest": "sha256:e6f1d8424a909e08ab527ff555fe359e4c9be8214990cf5b91364f80f590bb83",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "automated_promotion": false
+      },
+      "qa": {
+        "clean_frame_visual_review": "PENDING_HUMAN_QA",
+        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
+        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
+        "semantic_fit": "SHORTLIST_NEAR_PENDING_FINGERPRINT_AND_HUMAN_QA",
+        "locked_9x16_crop": "PENDING_HUMAN_QA",
+        "global_reuse_fingerprint": "PENDING",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "drive_written": false
+      }
     }
   ],
   "next_action": "Run controlled intake and fingerprint for pixabay-antenna-astronomy-communication-40041. If clean and semantically coherent in full-duration QA, request explicit human approval for S12. Keep the LED candidate pending explicit approval and keep render, catalog, Drive and publication blocked.",
@@ -1981,38 +2001,25 @@
     }
   },
   "last_manual_intake": {
-    "workflow_run_id": 42052509193,
-    "job_id": 127332058958,
+    "workflow_run_id": 42056121022,
+    "job_id": 127344872248,
     "branch": "integration/because-of-this-v2.1-20261105",
-    "commit_sha": "efd7a0e40545b9400d14c90977253a9c73992bdc",
+    "commit_sha": "f699e9b5bfcba39a37cd1b58efef2d861d965c14",
     "candidate_ids": [
-      "pixabay-antenna-astronomy-communication-40041"
+      "pixabay-hallway-dark-corridor-20837"
     ],
     "refresh_existing": false,
     "status": "BATCH_DOWNLOADED_AWAITING_HUMAN_QA",
-    "artifact_id": 13427442382,
-    "artifact_name": "episode005-visual-intake-42052509193",
-    "artifact_digest": "sha256:122fee7648e166d0eea6bce8920486107922b7c64a6c892e975dec535f65d87c",
+    "artifact_id": 13428247933,
+    "artifact_name": "episode005-visual-intake-42056121022",
+    "artifact_digest": "sha256:e6f1d8424a909e08ab527ff555fe359e4c9be8214990cf5b91364f80f590bb83",
     "promotion_allowed": false,
     "render_allowed": false,
     "global_catalog_updated": false,
     "drive_written": false,
     "publication_allowed": false,
     "thumbnail_eligible": false,
-    "qa_sampling_revision": {
-      "status": "PASS",
-      "workflow_commit": "efd7a0e40545b9400d14c90977253a9c73992bdc",
-      "method": "five_normalized_timestamps",
-      "sample_positions": [
-        "start",
-        "quarter",
-        "middle",
-        "three_quarter",
-        "end_minus_0_1_seconds"
-      ],
-      "note": "The candidate contains five samples plus vertical crops."
-    },
-    "next_action": "The fingerprint dispatch must consume this recorded intake artifact; keep promotion, render, catalog, Drive and publication blocked."
+    "next_action": "Run the explicit fingerprint audit for this candidate; keep approval, promotion, render, catalog, Drive and publication blocked."
   },
   "last_manual_fingerprint": {
     "workflow_run_id": 42053792993,
