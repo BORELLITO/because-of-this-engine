@@ -38,7 +38,7 @@
 | Legacy workflows | ARCHIVED | Definitions retained under archive/v7/workflows/, outside .github/workflows |
 | Drive | NOT RUN | No Drive write or media generation authorized |
 | Work | UNKNOWN | No independent Work execution log |
-| Edge TTS + captions preview | NATIVE_PROVIDER_TIMING_VALIDATED_GROUPED_BOUNDARIES | Frozen artifact/run 41961294784; 79.704 s; ChristopherNeural; 175 provider tokens; 2 grouped boundaries; artifact 13384643514 |\n| Visual asset acquisition | CANDIDATE_PLAN_ONLY | 15 Pexels candidates mapped to Episode 005 beats; none downloaded or approved for render |
+| Edge TTS + captions preview | NATIVE_PROVIDER_TIMING_VALIDATED_GROUPED_BOUNDARIES | Audio run 41961294784 + frozen caption run 41966616833; 79.704 s; ChristopherNeural; 175 provider tokens; 2 grouped boundaries; caption artifact 13387473739 |\n| Visual asset acquisition | CANDIDATE_PLAN_ONLY | 15 Pexels candidates mapped to Episode 005 beats; none downloaded or approved for render |
 | First new production | BLOCKED | Implementation stage does not authorize automatic production |
 
 ## Remaining blockers
