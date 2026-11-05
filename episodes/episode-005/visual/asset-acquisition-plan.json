@@ -791,7 +791,7 @@
       "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
     }
   ],
-  "next_action": "Continue provider-aware discovery for unresolved shots S05,S06,S08,S09,S12,S13,S14,S15,S16. Pixabay candidates are recorded but not downloaded; shortlist, manual intake, fingerprint, human QA, thumbnail and final manifest gates remain mandatory. Render, global catalog, Drive and publication remain blocked.",
+  "next_action": "Expose an approved manual-dispatch mechanism for the candidate-branch workflow (default-branch workflow registration or authorized API dispatch), then intake the selected Pixabay batch pixabay-alert-alarm-war-205519,pixabay-radar-sonar-ping-2420,pixabay-radar-screen-4511,pixabay-television-broadcasting-satellite-29483. Until then, no candidate is downloaded; fingerprint, human QA, thumbnail and final manifest gates remain mandatory. Render, global catalog, Drive and publication remain blocked.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -1141,7 +1141,8 @@
         "pixabay.com",
         "cdn.pixabay.com"
       ],
-      "rights_revalidation_at_fingerprint": true
+      "rights_revalidation_at_fingerprint": true,
+      "manual_dispatch_visibility": "The workflow is manual-only and present on the candidate branch; GitHub UI exposes Run workflow only when the workflow exists on the default branch or an authorized API dispatch is used. Do not add a PR trigger as a workaround."
     },
     "unresolved_shot_queue": [
       {
