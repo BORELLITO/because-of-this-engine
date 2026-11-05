@@ -102,7 +102,8 @@ jobs:
         run: |
           PYTHONPATH=. python production/whisper_captions.py \
             --manifest artifacts/episode005-frozen/caption-manifest.json \
-            --model base.en
+            --model base.en \
+            --native-boundaries artifacts/episode005-frozen/edge-word-boundaries.json
 
       - name: Validate exact acoustic word captions
         run: |
