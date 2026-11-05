@@ -1,14 +1,9 @@
 name: Because Of This Edge TTS Episode 005 Preview
 
+# Real Edge synthesis is manual-only: every run can produce a new acoustic file.
+# This prevents PR metadata changes from silently replacing the approved audio.
 on:
   workflow_dispatch:
-  pull_request:
-    branches: [main]
-    paths:
-      - "production/microsoft_edge_tts.py"
-      - "episodes/episode-005/narration/en-US-charon-v1.txt"
-      - "requirements.txt"
-      - ".github/workflows/edge-tts-episode005-preview.yml"
 
 permissions:
   contents: read
