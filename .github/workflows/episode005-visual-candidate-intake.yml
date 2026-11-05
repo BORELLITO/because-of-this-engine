@@ -35,6 +35,23 @@ jobs:
           from pathlib import Path
           from urllib.parse import urlparse
 
+          PROVIDER_POLICIES = {
+              "mixkit": {
+                  "license_name": "Mixkit Stock Video Free License",
+                  "page_hosts": {"mixkit.co"},
+                  "media_hosts": {"mixkit.co"},
+              },
+              "pixabay": {
+                  "license_name": "Pixabay Content License",
+                  "page_hosts": {"pixabay.com"},
+                  "media_hosts": {"pixabay.com"},
+              },
+          }
+
+          def host_allowed(hostname, allowed_bases):
+              hostname = str(hostname or "").lower().rstrip(".")
+              return any(hostname == base or hostname.endswith("." + base) for base in allowed_bases)
+
           raw = os.environ["CANDIDATE_IDS"].replace("\n", ",")
           requested_ids = [item.strip() for item in raw.split(",") if item.strip()]
           assert requested_ids, "candidate_ids must contain at least one ID"
@@ -55,17 +72,20 @@ jobs:
               assert candidate is not None, f"candidate must exist in plan: {candidate_id}"
               status = str(candidate.get("rights_status", ""))
               assert not status.startswith("REJECTED"), (candidate_id, status)
-              assert candidate.get("provider") == "mixkit", candidate.get("provider")
+              provider = str(candidate.get("provider", ""))
+              policy = PROVIDER_POLICIES.get(provider)
+              assert policy is not None, f"unsupported provider: {provider}"
               assert candidate.get("source_page_url"), f"source_page_url missing: {candidate_id}"
               assert candidate.get("media_url"), f"media_url missing: {candidate_id}"
-              assert candidate.get("license_name") == "Mixkit Stock Video Free License", candidate.get("license_name")
+              assert candidate.get("license_name") == policy["license_name"], candidate.get("license_name")
               source_page = urlparse(candidate["source_page_url"])
               media_url = urlparse(candidate["media_url"])
-              assert source_page.scheme == "https" and source_page.hostname == "mixkit.co", candidate["source_page_url"]
-              assert media_url.scheme == "https" and (media_url.hostname == "mixkit.co" or str(media_url.hostname or "").endswith(".mixkit.co")), candidate["media_url"]
+              assert source_page.scheme == "https" and host_allowed(source_page.hostname, policy["page_hosts"]), candidate["source_page_url"]
+              assert media_url.scheme == "https" and host_allowed(media_url.hostname, policy["media_hosts"]), candidate["media_url"]
               assert not candidate.get("intake_artifact"), f"candidate already has intake evidence: {candidate_id}"
               selected.append({
                   "candidate_id": candidate_id,
+                  "provider": provider,
                   "source_page_url": candidate["source_page_url"],
                   "media_url": candidate["media_url"],
                   "license_name": candidate["license_name"],
@@ -178,7 +198,7 @@ jobs:
               report = {
                   "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
                   "candidate_id": candidate_id,
-                  "provider": "mixkit",
+                  "provider": candidate["provider"],
                   "source_page_url": candidate["source_page_url"],
                   "media_url": candidate["media_url"],
                   "license_name": candidate["license_name"],
