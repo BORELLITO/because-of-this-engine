@@ -46,6 +46,29 @@ jobs:
             --plan episodes/episode-005/visual/asset-acquisition-plan.json \
             --manifest episodes/episode-005/visual/scene-asset-manifest.json
 
+      - name: Validate Episode 005 production record remains fail-closed
+        run: |
+          set +e
+          PYTHONPATH=. python production/canonical_entrypoint.py \
+            --repo-root . \
+            --manifest episodes/episode-005/production-record.json \
+            --report /tmp/episode005-v21-report.json
+          code=$?
+          set -e
+          test "$code" -eq 1
+          python - <<'PY'
+          import json
+          with open("/tmp/episode005-v21-report.json", encoding="utf-8") as handle:
+              report = json.load(handle)
+          assert report["status"] == "BLOCKED"
+          assert report["production_enablement"] is False
+          assert report["render"] == "NOT_RUN"
+          assert report["publication"] == "MANUAL_ONLY_NOT_RUN"
+          assert "rights_ledger" in report["blocking_gates"]
+          assert "THUMBNAIL_QA" in report["blocking_gates"]
+          print("EPISODE005_PRODUCTION_RECORD_FAIL_CLOSED_PASS")
+          PY
+
       - name: Enforce singleton runtime
         run: PYTHONPATH=. python production/v21_singleton_guard.py --repo-root .
       - name: Test legacy adapter delegates to canonical entrypoint
