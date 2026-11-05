@@ -6,7 +6,7 @@ on:
     branches: [main]
     paths:
       - "production/microsoft_edge_tts.py"
-      - "episodes/episode-005/**"
+      - "episodes/episode-005/narration/en-US-charon-v1.txt"
       - "requirements.txt"
       - ".github/workflows/edge-tts-episode005-preview.yml"
 
@@ -84,7 +84,7 @@ jobs:
 
       - name: Restore Vosk model cache
         id: vosk_cache
-        uses: actions/cache/restore@5a3ec84ff668545956fd18022155c47e93e2684
+        uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684
         with:
           path: ${{ runner.temp }}/because-of-this-vosk
           key: because-of-this-vosk-${{ runner.os }}-v1
@@ -103,7 +103,7 @@ jobs:
 
       - name: Save Vosk model cache
         if: steps.vosk_cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@5a3ec84ff668545956fd18022155c47e93e2684
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
         with:
           path: ${{ runner.temp }}/because-of-this-vosk
           key: because-of-this-vosk-${{ runner.os }}-v1
