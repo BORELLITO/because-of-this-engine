@@ -1,0 +1,53 @@
+name: Because Of This V2.1 integration read-only
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - "production/**"
+      - "tests/test_v21_integration.py"
+      - "docs/IMPLEMENTACAO_V2_1_CONTROL_CENTER.md"
+      - ".github/workflows/v21-integration-readonly.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout candidate
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Run V2.1 unit contracts
+        run: python -m unittest discover -s tests -p 'test_v21_integration.py' -v
+      - name: Verify schema and read-only behavior
+        run: |
+          python -m json.tool production/schemas/production-record-3.1.0.json >/dev/null
+          python - <<'PY'
+          from production.canonical_entrypoint import evaluate
+          from tests.test_v21_integration import valid_manifest
+          report = evaluate(valid_manifest(), registry=[])
+          assert report["status"] == "PASS"
+          assert report["production_enablement"] is False
+          assert report["media_generation"] == "NOT_RUN"
+          assert report["tts"] == "NOT_RUN"
+          assert report["render"] == "NOT_RUN"
+          assert report["publication"] == "MANUAL_ONLY_NOT_RUN"
+          print("V21_READ_ONLY_CONTRACT_PASS")
+          PY
+      - name: Audit singleton and expose unresolved legacy workflow references
+        run: |
+          set +e
+          python production/v21_singleton_guard.py --repo-root . > singleton-report.json
+          code=$?
+          cat singleton-report.json
+          test "$code" -eq 0 || echo "SINGLETON_RECONCILIATION_REMAINS_BLOCKED"
+          exit 0
+      - name: Confirm test run did not mutate the checkout
+        run: test -z "$(git status --porcelain)"
