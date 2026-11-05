@@ -65,7 +65,7 @@ jobs:
         env:
           CANDIDATE_ID: ${{ github.event.inputs.candidate_id || 'mixkit-clock-mechanism-3651' }}
           SOURCE_PAGE_URL: ${{ github.event.inputs.source_page_url || 'https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/' }}
-          MEDIA_URL: ${{ github.event.inputs.media_url || 'https://assets.mixkit.co/videos/2965/2965-720.mp4' }}
+          MEDIA_URL: ${{ github.event.inputs.media_url || 'https://assets.mixkit.co/videos/3651/3651-720.mp4' }}
           LICENSE_NAME: ${{ github.event.inputs.license_name || 'Mixkit Stock Video Free License' }}
         run: |
           python - <<'PY'
