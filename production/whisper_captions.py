@@ -51,6 +51,22 @@ def _recognize_waveform(
     offset_seconds: float = 0.0,
     initial_prompt: str | None = None,
 ) -> list[dict[str, Any]]:
+    # faster-whisper consumes PCM arrays on a 16 kHz clock. The production
+    # narration is intentionally stored as mono 24 kHz WAV, so resample only
+    # the recognition buffer while retaining offsets in the source WAV clock.
+    try:
+        import numpy as np
+
+        source = np.asarray(waveform, dtype=np.float32)
+        if sample_rate != 16000:
+            target_length = max(1, int(round(len(source) * 16000 / sample_rate)))
+            source_positions = np.linspace(0.0, 1.0, num=len(source), endpoint=False)
+            target_positions = np.linspace(0.0, 1.0, num=target_length, endpoint=False)
+            waveform = np.interp(target_positions, source_positions, source).astype(np.float32)
+        else:
+            waveform = source
+    except Exception as exc:
+        raise AlignmentError(f"Could not resample narration for Whisper: {exc}") from exc
     try:
         segments, _info = model.transcribe(
             waveform,
