@@ -51,3 +51,12 @@
 - Promotion to main still requires explicit approval and post-merge audit.
 
 READY remains forbidden while any P0/P1 is open.
+
+## Addendum operacional — 2026-11-05
+
+- O dispatch manual foi exposto no branch padrão sem habilitar execução automática: intake e fingerprint continuam `workflow_dispatch`, com IDs explícitos e sem promoção.
+- Quatro candidatos Pixabay foram baixados no intake `42038088699`, artifact `13418919199`, digest `sha256:0f0e34d502ef7ff553fad4cee3c32cecd1e3e1055d6dda9adf12ab2eb97877a1`; estado permanece `CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA`.
+- O fingerprint global corrigido passou no run `42039523926`, job `127286341600`, artifact `13420042319`, digest `sha256:f29e75ce9c73ea465dbbd6450fdf5d9a2ff37c463b30e0e6749aa27e4c3c63d2`, usando `video-fingerprint-v2-rgb24-q4`: 4/4 sem colisão de SHA-256, fonte ou fingerprint perceptual.
+- A evidência foi registrada em `episodes/episode-005/visual/asset-acquisition-plan.json`; aprovação humana, render, catálogo global, Drive e publicação continuam bloqueados.
+- O conflito do workflow `.github/workflows/episode005-visual-fingerprint-audit.yml` foi resolvido entre `main` e a branch candidata; o PR 67 está novamente `mergeable`, ainda draft.
+- Próximo gate único: QA humano dos quatro clipes e aquisição dos nove shots restantes; só depois thumbnail final, render e Drive.
