@@ -229,18 +229,28 @@
     }
   ],
   "thumbnail_concept": {
-    "concept_id": "thumb-episode-005-pending-v1",
-    "text": "PENDING",
-    "hero_visual": "Final thumbnail concept not selected.",
+    "concept_id": "thumb-episode-005-machine-lied-v1",
+    "text": "THE MACHINE LIED",
+    "hero_visual": "Dark command bunker with a red abstract warning radar, empty stormy sky and an anonymous operator silhouette.",
     "visual_truth_class": "MAP_OR_DIAGRAM",
-    "rights_status": "PENDING_SELECTION",
-    "final_status": "PENDING_REPLACEMENT",
+    "rights_status": "ORIGINAL_GENERATED_ASSET_PENDING_FINAL_HUMAN_REVIEW",
+    "final_status": "CANDIDATE_READY_FOR_HUMAN_REVIEW",
     "dimensions": [
       1080,
       1920
     ],
     "no_reuse_required": true,
-    "note": "The previous thumbnail candidate was removed by user request. Do not use a thumbnail asset until a new candidate is selected, reviewed and approved.",
+    "note": "Original symbolic representational artwork; not archival Petrov evidence, not a literal Soviet interface and not a recognizable portrait.",
+    "candidate_asset_name": "episode005-thumbnail-machine-lied-v1.png",
+    "candidate_library_file_id": "libfile_6be06bdc4d04819183b0742de464c9cd",
+    "candidate_sha256": "60264e8804f1260083241f34846322caf1262c992911a5f15557dd27877dec96",
+    "candidate_dimensions": [
+      1080,
+      1920
+    ],
+    "candidate_text": "THE MACHINE LIED",
+    "candidate_composition": "Red abstract warning radar beside an empty stormy sky, anonymous operator silhouette, Because Of This logo upper-right.",
+    "candidate_truth_note": "Original symbolic representational artwork; no archival claim and no literal Soviet interface.",
     "human_review_required": true
   },
   "asset_policy": {
