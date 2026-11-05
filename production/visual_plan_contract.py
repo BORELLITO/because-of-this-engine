@@ -125,7 +125,11 @@ def validate_visual_plan(plan: dict[str, Any], manifest: dict[str, Any]) -> dict
             if candidate.get("global_catalog_updated") is True:
                 errors.append(f"{candidate_id}: plan candidate cannot mutate global catalog")
 
-        if candidate.get("provider") == "mixkit" and candidate.get("media_url"):
+        if (
+            candidate.get("provider") == "mixkit"
+            and candidate.get("media_url")
+            and not status.startswith("REJECTED")
+        ):
             license_name = candidate.get("license_name")
             if license_name != MIXKIT_LICENSE:
                 errors.append(f"{candidate_id}: Mixkit media candidate has invalid or missing license")
