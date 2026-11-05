@@ -1,0 +1,187 @@
+{
+  "plan_id": "episode-005-visual-asset-acquisition-v1",
+  "episode_id": "episode-005",
+  "status": "CANDIDATE_REVIEW_REQUIRED",
+  "purpose": "Pre-download candidate pool for Episode 005. No candidate is approved for render until downloaded, SHA-256ed, visually inspected, checked for embedded text/logos/letterbox, fingerprinted, and entered into the final video manifest.",
+  "frozen_audio_source": {
+    "workflow_run_id": 41961294784,
+    "artifact_id": 13384643514,
+    "audio_sha256": "bfa297c85e6de0c1a9dee5fbc74a8f7e75a6cd287bd47ecf6d97f16dd045831a",
+    "duration_seconds": 79.704,
+    "captions_status": "EDGE_TTS_NATIVE_ALIGNMENT_PASS"
+  },
+  "rights_policy": {
+    "preferred_provider": "pexels",
+    "license": "Pexels License",
+    "license_evidence_url": "https://www.pexels.com/legal-pages/license/",
+    "commercial_use_allowed_by_provider": true,
+    "attribution_required": false,
+    "verification_required": "Per-asset page and downloaded-file QA remain mandatory; depicted trademarks, logos, identifiable people and third-party rights are not automatically cleared.",
+    "no_archival_claim": "All representational footage must remain unlabeled as literal Petrov archival footage."
+  },
+  "selection_gates": [
+    "source_page_exists",
+    "provider_license_visible",
+    "commercial_use_not_restricted",
+    "downloaded_file_sha256_recorded",
+    "video_only_clean_source",
+    "no_baked_captions_or_authored_graphics",
+    "no_embedded_logo_or_letterbox",
+    "semantic_match_reviewed",
+    "fresh_global_reuse_check_passed",
+    "unique_asset_and_source_page"
+  ],
+  "candidates": [
+    {
+      "candidate_id": "pexels-5523892",
+      "source_page_url": "https://www.pexels.com/video/flashing-red-light-5523892/",
+      "role": "S01,S06,S09",
+      "visual_match": "EXACT",
+      "visual_intent": "red warning indicator; escalation; false-alarm classification",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-38958215",
+      "source_page_url": "https://www.pexels.com/video/close-up-button-operation-in-dark-control-room-38958215/",
+      "role": "S03,S07",
+      "visual_match": "NEAR",
+      "visual_intent": "operator hands and control-room decision pressure",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-6442796",
+      "source_page_url": "https://www.pexels.com/video/person-operating-button-panel-6442796/",
+      "role": "S04,S09",
+      "visual_match": "NEAR",
+      "visual_intent": "alert being passed through a technical command system",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-38779097",
+      "source_page_url": "https://www.pexels.com/video/traffic-control-room-with-monitoring-screens-38779097/",
+      "role": "S02,S08",
+      "visual_match": "SYMBOLIC",
+      "visual_intent": "monitoring screens and conflicting signal evidence",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-38779107",
+      "source_page_url": "https://www.pexels.com/video/high-tech-control-room-monitoring-operations-38779107/",
+      "role": "S04,S08",
+      "visual_match": "NEAR",
+      "visual_intent": "multiple screens; system surveillance",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-38779108",
+      "source_page_url": "https://www.pexels.com/video/high-tech-control-room-in-action-38779108/",
+      "role": "S03,S07",
+      "visual_match": "NEAR",
+      "visual_intent": "operators monitoring an impossible alert",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-12291818",
+      "source_page_url": "https://www.pexels.com/video/silhouettes-of-soldiers-in-darkness-12291818/",
+      "role": "S14",
+      "visual_match": "NEAR",
+      "visual_intent": "military corridor; later obscurity and institutional consequence",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-19217894",
+      "source_page_url": "https://www.pexels.com/video/a-dark-hallway-with-a-light-on-the-wall-19217894/",
+      "role": "S10,S14",
+      "visual_match": "ATMOSPHERE",
+      "visual_intent": "bunker waiting; empty corridor; silence after the decision",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-5837931",
+      "source_page_url": "https://www.pexels.com/video/night-sky-timelapse-5837931/",
+      "role": "S02,S11",
+      "visual_match": "EXPLANATORY",
+      "visual_intent": "night-side Earth atmosphere; no missile impact",
+      "truth_class": "EXPLAINED_PHENOMENON",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-12590338",
+      "source_page_url": "https://www.pexels.com/video/time-lapse-of-moving-clouds-on-a-night-sky-12590338/",
+      "role": "S11,S12",
+      "visual_match": "EXACT",
+      "visual_intent": "high clouds and optical ambiguity",
+      "truth_class": "EXPLAINED_PHENOMENON",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-30084927",
+      "source_page_url": "https://www.pexels.com/video/vintage-alarm-clock-ticking-in-darkness-30084927/",
+      "role": "S07,S10",
+      "visual_match": "EXACT",
+      "visual_intent": "minutes to decide; bunker clock",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-7034348",
+      "source_page_url": "https://www.pexels.com/video/clock-is-ticking-7034348/",
+      "role": "S10",
+      "visual_match": "EXACT",
+      "visual_intent": "time passing while the command waits",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-33060982",
+      "source_page_url": "https://www.pexels.com/video/bright-clouds-with-sun-rays-timelapse-33060982/",
+      "role": "S12",
+      "visual_match": "EXACT",
+      "visual_intent": "sunlight reflecting from high clouds",
+      "truth_class": "EXPLAINED_PHENOMENON",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-33897223",
+      "source_page_url": "https://www.pexels.com/video/aerial-view-of-large-satellite-dish-at-sunset-33897223/",
+      "role": "S02,S12",
+      "visual_match": "EXACT",
+      "visual_intent": "satellite instrument and warning system",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-4224353",
+      "source_page_url": "https://www.pexels.com/video/time-lapse-of-sky-over-a-satellite-tower-4224353/",
+      "role": "S02",
+      "visual_match": "NEAR",
+      "visual_intent": "communications infrastructure under a changing sky",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    }
+  ],
+  "next_action": "Download and inspect candidates through the approved browser acquisition path, then create the final per-asset rights/fingerprint records and narration-locked render manifest. Do not render from this candidate plan."
+}
