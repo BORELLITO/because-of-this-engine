@@ -42,7 +42,7 @@ jobs:
           from pathlib import Path
 
           from production.asset_reuse_brain import source_asset_key
-          from production.video_asset_contract import FINGERPRINT_VERSION, ffprobe, perceptual_hash, sha256_file
+          from production.video_asset_contract import FINGERPRINT_ALGORITHM, ffprobe, perceptual_hash, sha256_file
 
           root = Path("artifacts/episode005-visual-fingerprint")
           plan = json.loads(Path("episodes/episode-005/visual/asset-acquisition-plan.json").read_text(encoding="utf-8"))
@@ -170,7 +170,7 @@ jobs:
                   "media_url": expected["media_url"],
                   "sha256": actual_sha,
                   "perceptual_hash": phash,
-                  "fingerprint_algorithm": f"video-phash-v{FINGERPRINT_VERSION}-dct32-low8",
+                  "fingerprint_algorithm": FINGERPRINT_ALGORITHM,
                   "metadata": {
                       "duration_seconds": round(float(metadata["duration"]), 3),
                       "width": metadata["width"],
