@@ -77,6 +77,20 @@ jobs:
 
           root = Path("artifacts/episode005-visual-intake")
           media = root / "candidate.mp4"
+          allowed = {
+              "mixkit-slowly-approaching-clock-28897": {
+                  "source_page_url": "https://mixkit.co/free-stock-video/slowly-approaching-a-clock-on-a-black-background-28897/",
+                  "media_url": "https://assets.mixkit.co/videos/28897/28897-720.mp4",
+              },
+              "mixkit-cloudy-sky-118": {
+                  "source_page_url": "https://mixkit.co/free-stock-video/cloudy-sky-118/",
+                  "media_url": "https://assets.mixkit.co/videos/118/118-720.mp4",
+              },
+          }
+          candidate_id = os.environ["CANDIDATE_ID"]
+          assert candidate_id in allowed, candidate_id
+          assert os.environ["SOURCE_PAGE_URL"] == allowed[candidate_id]["source_page_url"]
+          assert os.environ["MEDIA_URL"] == allowed[candidate_id]["media_url"]
           probe = subprocess.run(
               [
                   "ffprobe", "-v", "error", "-show_entries",
@@ -97,7 +111,7 @@ jobs:
           sha256 = hashlib.sha256(media.read_bytes()).hexdigest()
           report = {
               "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
-              "candidate_id": os.environ["CANDIDATE_ID"],
+              "candidate_id": candidate_id,
               "provider": "mixkit",
               "source_page_url": os.environ["SOURCE_PAGE_URL"],
               "media_url": os.environ["MEDIA_URL"],
