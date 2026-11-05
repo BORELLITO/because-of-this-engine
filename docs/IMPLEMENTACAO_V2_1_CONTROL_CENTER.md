@@ -172,3 +172,24 @@ READY remains forbidden while any P0/P1 is open.
 - O plano foi atualizado no commit `04adbb76cb7e70cd362c426a0482e3cc00a5dbaf`.
 - Mantidos bloqueados: validação final do manifesto, renderização, atualização do catálogo global, escrita no Drive e publicação.
 - Próximo passo único: formar shortlist distinta e page-verified para S05, S08, S09, S13, S15 e S16.
+
+
+## Atualização — shortlist page-verified dos seis shots restantes
+
+- Foram adicionados ao plano 12 candidatos distintos, dois por shot, para S05, S08, S09, S13, S15 e S16.
+- Todos foram verificados diretamente nas páginas do Pixabay; a licença visível foi `Pixabay Content License` e não foi observado marcador de conteúdo gerado por IA.
+- Nenhum candidato foi baixado, submetido ao intake, fingerprintado, aprovado para manifesto, promovido, catalogado, renderizado, escrito no Drive ou publicado nesta etapa.
+- O candidato `pixabay-red-light-blur-flare-250419` continua rejeitado e não foi reintroduzido; as opções S15 registradas são rotas distintas e ainda simbólicas, pendentes de QA integral.
+
+| Shot | Candidatos page-verified | Tratamento previsto |
+|---|---|---|
+| S05 | `pixabay-alert-alarm-war-danger-risk-205519`; `pixabay-radar-black-green-target-symbol-57670` | Escalada representacional de indicadores; sem alegação de interface soviética literal |
+| S08 | `pixabay-radar-radar-screen-rotation-circles-4511`; `pixabay-radar-communication-military-261518` | Contradição entre monitoramento/radar e alerta; insert simbólico |
+| S09 | `pixabay-button-press-red-business-click-502`; `pixabay-button-press-push-start-launching-221746` | Entrada técnica da classificação; sem interface celebratória |
+| S13 | `pixabay-typewriter-typing-writing-author-1335`; `pixabay-typewriter-type-antique-writing-38626` | Tratamento de relatório/logbook; nenhum texto histórico inventado será usado |
+| S15 | `pixabay-dark-light-lens-flare-abstract-250413`; `pixabay-abstract-light-streaks-motion-250417` | Pulso de aviso dissolvendo em preto; rota simbólica |
+| S16 | `pixabay-particles-orange-red-dust-effect-7957`; `pixabay-colors-lines-lights-abstract-video-5072` | Fundo abstrato para outro de marca; logo só poderá entrar no renderer aprovado |
+
+**Estado após a shortlist:** os shots não resolvidos continuam exatamente `S05,S08,S09,S13,S15,S16`; as flags `every_shot_assigned`, `final_visual_manifest_validated`, `global_catalog_update_authorized`, `render_authorized`, `drive_write_authorized` e `publication_authorized` permanecem falsas.
+
+**Próximo gate único:** despachar explicitamente o lote de intake dos 12 IDs acima, somente como aquisição técnica isolada; depois revalidar SHA-256, QA integral, fingerprint e aprovação humana antes de qualquer promoção.
