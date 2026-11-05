@@ -14,8 +14,21 @@
   "audio_produced": false,
   "request_count": 0,
   "retry_policy": "no automatic retry",
-  "next_action": "Verify edge-tts and FFmpeg in the execution environment, run voice preflight, then request explicit authorization for one complete Episode 005 preview.",
+  "next_action": "Use the validated Edge preview artifact as the sole audio input for final transcription and captions; no provider fallback.",
   "active_route_after_diagnostic": "microsoft_edge_tts",
   "active_route_adapter": "production/microsoft_edge_tts.py",
-  "active_voice": "en-US-ChristopherNeural"
+  "active_voice": "en-US-ChristopherNeural",
+  "edge_preview": {
+    "provider": "microsoft_edge_tts",
+    "voice_id": "en-US-ChristopherNeural",
+    "model": "edge_neural",
+    "status": "GENERATED_AND_VALIDATED",
+    "workflow_run_id": 41954211512,
+    "artifact_id": 13382850131,
+    "duration_seconds": 79.704,
+    "audio_sha256": "4e021c52ea57835525b144ecfc08ed6abe41c99dca326866e63c7176cc45f40f",
+    "charged_credits": 0,
+    "request_count": 1,
+    "retry_count": 0
+  }
 }
