@@ -223,3 +223,14 @@ READY remains forbidden while any P0/P1 is open.
 - Auditoria estrutural read-only após a atualização: 16/16 shots atribuídos, 0 shots pendentes, 16 fontes únicas, 16/16 assignments com aprovação de manifesto, SHA-256/fingerprint/licença presentes.
 - Estado de promoção permanece fail-closed: final_visual_manifest_validated=false, render_authorized=false, global_catalog_update_authorized=false, drive_write_authorized=false, publication_authorized=false.
 - Próximo gate único: executar a validação final read-only do manifesto visual e dos direitos/estrutura; somente depois avaliar autorização separada para render.
+
+
+## Atualização — correção de aliases duplicados e validação final estrutural (2026-11-05)
+
+- A primeira execução do contrato visual encontrou uma causa-raiz real: dois IDs antigos apontavam para as mesmas páginas e URLs de mídia dos novos candidatos Pixabay — radar 4511 e alerta 205519.
+- Correção fail-closed aplicada em duas etapas: os aliases foram marcados como REJECTED_DUPLICATE_SOURCE_ALIAS e removidos somente da lista ativa de candidatos; a evidência foi preservada em rejected_candidates.
+- Commits de correção: bdcf190c93b78e0293e039269fc3947398ee7442 e d371da0ad7c72576bcd3e9f664baa6b03f89a5e4.
+- Validação oficial executada localmente sobre o checkout da branch após o pull: VISUAL_PLAN_CONTRACT_PASS.
+- Evidência da validação: 42 candidatos ativos, 22 aprovados para manifesto, 16 assets no manifesto, 16/16 shots atribuídos, 0 shots pendentes, promotion_allowed=false, render_allowed=false e global_catalog_updated=false.
+- O bloqueio de reutilização foi resolvido sem apagar o histórico de rejeição e sem promover mídia para render.
+- Próximo gate único: auditoria final de direitos/semântica e autorização separada para render; catálogo global, Drive e publicação permanecem bloqueados.
