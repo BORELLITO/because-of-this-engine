@@ -612,7 +612,7 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "mixkit",
       "license_name": "Mixkit Stock Video Free License",
-      "rights_status": "TECHNICALLY_VALIDATED_AWAITING_HUMAN_MANIFEST_DECISION",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "media_url": "https://assets.mixkit.co/videos/2244/2244-720.mp4",
       "media_url_observed_in_browser": true,
       "browser_verification": {
@@ -634,10 +634,12 @@
         "semantic_fit": "PRELIMINARY_PASS_AS_TECHNICAL_CONTROL_PANEL_RECONSTRUCTION",
         "locked_9x16_crop": "PRELIMINARY_PASS_ACTION_AND_EMERGENCY_CONTROL_RETAINED",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING_EXPLICIT_MANIFEST_DECISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false,
-        "editorial_caveat": "Industrial control panel is representational reconstruction for S04, never literal Petrov archival evidence."
+        "editorial_caveat": "Industrial control panel is representational reconstruction for S04, never literal Petrov archival evidence.",
+        "approval_scope": "S04_ONLY",
+        "approval_caveat": "Industrial control panel is representational reconstruction; never literal Petrov archival evidence."
       },
       "intake_artifact": {
         "workflow_run_id": 42024921610,
@@ -662,7 +664,7 @@
       }
     }
   ],
-  "next_action": "Human decision required: approve or reject mixkit-worker-industrial-lathe-2244 for S04 manifest-only use. Approval would authorize only this representational control-panel reconstruction for S04; it would not authorize render, catalog promotion, Drive or publication.",
+  "next_action": "Acquire and QA distinct candidates for unresolved shots S05,S06,S08,S09,S12,S13,S14,S15,S16, then re-run final visual manifest validation. S03 and S04 are assigned only to their approved representational reconstructions.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -883,6 +885,28 @@
         "fingerprint_workflow_run_id": 42021523387,
         "fingerprint_artifact_id": 13411692548,
         "sha256": "f1474daed5b97009063ca692859fdca1e91044ad62a9cd1f1f3009b2609b3478"
+      }
+    },
+    {
+      "candidate_id": "mixkit-worker-industrial-lathe-2244",
+      "shot_ids": [
+        "S04"
+      ],
+      "decision": "APPROVED_FOR_MANIFEST_ONLY",
+      "scope": "Representational technical control-panel reconstruction",
+      "constraints": [
+        "not literal Petrov archival evidence",
+        "no reuse in another shot of Episode 005",
+        "does not authorize render",
+        "does not authorize global catalog mutation",
+        "does not authorize Drive write or publication"
+      ],
+      "evidence": {
+        "intake_workflow_run_id": 42024921610,
+        "intake_artifact_id": 13412703858,
+        "fingerprint_workflow_run_id": 42025128372,
+        "fingerprint_artifact_id": 13413646379,
+        "sha256": "a30c4294c60190b75e2f49c076dccc7f86692a99e4bed42ae002f8094936a45d"
       }
     }
   ],
