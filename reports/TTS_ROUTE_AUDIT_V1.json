@@ -2,19 +2,20 @@
   "audit_id": "AUDIT-TTS-ROUTES-20261105-01",
   "episode_id": "episode-005",
   "checked_at_utc": "2026-11-05T01:30:00Z",
-  "conclusion": "Google Cloud TTS Chirp 3 HD Charon is the active V2.1 route. Gemini direct API is no longer the active provider, and Creative Claw remains prohibited.",
+  "conclusion": "Microsoft Edge online TTS is the active zero-billing V2.1 preview route. Cloud TTS remains a documented alternative but is not active, and Creative Claw remains prohibited.",
   "routes": [
     {
-      "route_id": "google_cloud_tts_chirp3_hd",
-      "provider": "Google Cloud Text-to-Speech",
-      "model": "chirp3_hd",
-      "voice": "en-US-Chirp3-HD-Charon",
-      "billing_required": true,
-      "free_quota": "up to 1,000,000 characters/month for Chirp 3 HD, subject to Google Cloud terms and quotas",
-      "status": "ACTIVE_CONTRACT_NOT_CONNECTED_IN_THIS_RUNTIME",
+      "route_id": "microsoft_edge_tts",
+      "provider": "Microsoft Edge online TTS via edge-tts",
+      "model": "edge_neural",
+      "voice": "en-US-ChristopherNeural",
+      "billing_required": false,
+      "credential_required": false,
+      "status": "ACTIVE_PREVIEW_ROUTE_NOT_YET_SYNTHESIZED",
       "attempted": false,
-      "required_configuration": "GOOGLE_TTS_ACCESS_TOKEN, ADC or Google OAuth with cloud-platform scope, plus GOOGLE_TTS_PROJECT_ID/GOOGLE_CLOUD_PROJECT",
-      "project_adapter": "production/cloud_tts.py",
+      "required_configuration": "edge-tts 7.3.1 and ffmpeg available in the execution environment",
+      "project_adapter": "production/edge_tts.py",
+      "voice_rationale": "Microsoft lists ChristopherNeural as an en-US male voice; voice metadata associates it with News/Novel and Authority.",
       "production_allowed": true,
       "automatic_retry": false
     },
@@ -85,6 +86,18 @@
         "pyttsx3"
       ],
       "result": "no_supported_local_TTS_found"
+    },
+    {
+      "route_id": "google_cloud_tts_chirp3_hd",
+      "provider": "Google Cloud Text-to-Speech",
+      "model": "chirp3_hd",
+      "voice": "en-US-Chirp3-HD-Charon",
+      "billing_required": true,
+      "free_quota": "up to 1,000,000 characters/month",
+      "status": "ALTERNATIVE_NOT_ACTIVE",
+      "attempted": false,
+      "project_adapter": "production/cloud_tts.py",
+      "production_allowed": false
     }
   ],
   "official_reference_urls": [
@@ -93,15 +106,13 @@
     "https://ai.google.dev/gemini-api/docs/speech-generation"
   ],
   "policy_decision": {
-    "keep_provider": "google_cloud_tts",
-    "keep_voice": "en-US-Chirp3-HD-Charon",
+    "keep_provider": "microsoft_edge_tts",
+    "keep_voice": "en-US-ChristopherNeural",
     "do_not_silently_fallback": true,
-    "billing_account_required": true,
-    "free_quota_available": true,
-    "cloud_route_is_active": true,
-    "creative_claw_balance_is_not_google_cloud_billing_state": true,
+    "zero_billing_route": true,
+    "cloud_tts_retained_as_alternative": true,
     "creative_claw_production_allowed": false,
-    "only_permitted_route": "google_cloud_tts_chirp3_hd"
+    "only_permitted_route": "microsoft_edge_tts"
   },
-  "next_action": "Configure Google Cloud credentials and project billing/quota context, run Cloud TTS preflight, then request explicit authorization before the single real synthesis for the frozen script hash."
+  "next_action": "Install/verify edge-tts and ffmpeg in the execution environment, run voice preflight, then request explicit authorization for one complete Episode 005 preview."
 }
