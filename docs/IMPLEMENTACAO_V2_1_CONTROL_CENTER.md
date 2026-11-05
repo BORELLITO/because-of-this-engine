@@ -34,7 +34,7 @@
 | V2.1 contracts | TESTED | Candidate CI must pass unit, schema, adapter, singleton and clean-checkout gates |
 | Canonical adapter | IMPLEMENTED | v7_orchestrator.py delegates to canonical_entrypoint.py under active V2.1 policy |
 | Global no-reuse | VALIDATED_FOR_MANIFEST / BLOCKED_FOR_CATALOG | 16 assigned assets, 16 unique sources, no source/SHA/perceptual collisions in the latest fingerprint evidence; global catalog mutation remains false |
-| Thumbnail | REMOVED / REPLACEMENT_REQUIRED | Previous candidate removed by user request; thumbnail gate remains mandatory and no active thumbnail asset exists |
+| Thumbnail | CANDIDATE_READY / FINAL_BLOCKED | Replacement candidate registered with SHA-256 and Library evidence; final human review, QA and delivery paths remain pending |
 | Legacy workflows | ARCHIVED | Definitions retained under archive/v7/workflows/, outside .github/workflows |
 | Drive | NOT RUN | No Drive write or media generation authorized |
 | Work | UNKNOWN | No independent Work execution log |
@@ -47,7 +47,7 @@
 
 - The visual plan and partial scene manifest are structurally validated: 42 active candidates, 22 approved for manifest, 16 assets, 16/16 shots assigned, 0 unresolved, and no duplicate source/SHA/perceptual collision detected. This does not authorize render or catalog mutation.
 - All 16 assignments remain APPROVED_FOR_MANIFEST_ONLY; every asset keeps approved_for_render=false, global_catalog_updated=false and drive_written=false.
-- The previous thumbnail candidate was removed by user request. The thumbnail gate remains mandatory, but no thumbnail asset or final manifest is active; a replacement must be selected and reviewed.
+- The previous thumbnail candidate was removed. A replacement candidate is now registered as CANDIDATE_READY_FOR_HUMAN_REVIEW; it is not final and cannot authorize render.
 - The canonical entrypoint is intentionally read-only. production_enablement=false, publication is manual-only, and there is no active V2.1 final-render workflow. The archived legacy renderer is not an acceptable fallback.
 - Edge TTS and provider-native captions are validated and aligned to the frozen audio SHA-256; the 79.704-second duration is within the explicit 80-second exception, but the target window remains 60–75 seconds.
 - Global catalog update, Drive write, render, delivery bundle and publication remain unexecuted. The PR is still draft and requires explicit review/post-merge audit.
@@ -300,3 +300,13 @@ READY remains forbidden while any P0/P1 is open.
 - O gate de thumbnail não foi removido: schema, QA, margens, legibilidade, direitos, delivery e aprovação continuam obrigatórios antes de qualquer render.
 - O histórico de auditoria foi preservado nos addenda anteriores, mas a thumbnail antiga não é mais candidata utilizável.
 - Próximo passo único: selecionar uma nova thumbnail candidata ou manter o episódio sem thumbnail até nova decisão editorial.
+
+
+## Atualização — nova candidata de thumbnail registrada — 2026-11-05
+
+- Foi criada uma nova candidata original, diferente da anterior: `episode005-thumbnail-machine-lied-v1.png`, com o texto `THE MACHINE LIED`.
+- Composição: radar/alerta vermelho abstrato no bunker, céu vazio e operador anônimo; sem retrato reconhecível, sem interface soviética literal e sem alegação de imagem histórica.
+- Dimensões normalizadas: 1080×1920. SHA-256: `60264e880f1260083241f34846322caf1262c992911a5f15557dd27877dec96`. Library file id: `libfile_6be06bdc4d04819183b0742de464c9cd`.
+- Estado: `CANDIDATE_READY_FOR_HUMAN_REVIEW`; margens, legibilidade, direitos finais e delivery ainda não foram aprovados.
+- O registro de produção continua bloqueado por direitos visuais manifest-only e thumbnail não finalizada. Render e publicação não foram executados.
+- Próximo passo único: revisar visualmente esta nova candidata e decidir se ela deve avançar para QA final.
