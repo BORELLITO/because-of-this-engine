@@ -279,6 +279,40 @@
       "thumbnail_eligible": false,
       "drive_written": false,
       "editorial_caveat": "Representational satellite/earth-station infrastructure for S12 only; never literal Petrov archival evidence."
+    },
+    {
+      "candidate_id": "pixabay-hallway-dark-corridor-20837",
+      "provider": "pixabay",
+      "source_page_url": "https://pixabay.com/videos/hallway-dark-corridor-dim-mystery-20837/",
+      "media_url": "https://cdn.pixabay.com/video/2019/01/19/20837-312432073_large.mp4",
+      "license_name": "Pixabay Content License",
+      "source_role": "S14",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "sha256": "e6c20511f889daa57834ddf5f97ea076ffffedc0a321850a4ea8fa295479d72d",
+      "perceptual_hash": "40df89d9d2edf33d5a94509be3c9f3abb6073dd28ff1914aba8307eb1055aafd",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42056121022,
+        "artifact_id": 13428247933,
+        "artifact_digest": "sha256:e6f1d8424a909e08ab527ff555fe359e4c9be8214990cf5b91364f80f590bb83"
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 42059893725,
+        "job_id": 127358312867,
+        "artifact_id": 13431651011,
+        "artifact_digest": "sha256:71428db1a7810ba8074da7c85139ff0a6720a06ea06aab169b5dd539f3ed7e8d",
+        "status": "FINGERPRINT_AUDIT_PASS",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "editorial_caveat": "Representational empty institutional corridor for S14 only; never literal Petrov archival evidence and never reused in another shot."
     }
   ],
   "shot_assignments": [
@@ -476,9 +510,16 @@
       "role": "consequence",
       "requested_visual": "Petrov's later obscurity represented through empty military corridor.",
       "requested_truth_class": "REPRESENTATIONAL",
-      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
-      "assignment": null,
-      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "assignment": {
+        "candidate_id": "pixabay-hallway-dark-corridor-20837",
+        "usage": "representational empty institutional corridor for later obscurity and quiet institutional consequence; not literal archival evidence",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "editorial_caveat": "Use only as a representational reconstruction for S14; no reuse in another shot and no claim that it depicts Petrov's facility."
+      },
+      "blocking_reason": null
     },
     {
       "shot_id": "S15",
@@ -506,7 +547,6 @@
     "S08",
     "S09",
     "S13",
-    "S14",
     "S15",
     "S16"
   ],
@@ -519,7 +559,7 @@
     "drive_write_authorized": false,
     "publication_authorized": false
   },
-  "next_action": "Acquire and QA distinct candidates for unresolved shots S05,S08,S09,S13,S14,S15,S16; then re-run final visual manifest validation. Render, global catalog, Drive and publication remain blocked.",
+  "next_action": "Acquire and QA distinct candidates for unresolved shots S05,S08,S09,S13,S15,S16; then re-run final visual manifest validation. Render, global catalog, Drive and publication remain blocked.",
   "reuse_policy": {
     "source_reuse_scope": "global",
     "distinct_source_required_per_shot": true,
@@ -584,6 +624,28 @@
         "intake_artifact_id": 13427442382,
         "fingerprint_workflow_run_id": 42053792993,
         "fingerprint_artifact_id": 13427769060
+      }
+    },
+    {
+      "candidate_id": "pixabay-hallway-dark-corridor-20837",
+      "shot_ids": [
+        "S14"
+      ],
+      "status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_at_utc": "2026-11-05T00:00:00Z",
+      "decision": "Approve the Pixabay hallway as a representational empty institutional corridor for S14 only.",
+      "constraints": [
+        "not literal Petrov archival evidence",
+        "no reuse in another shot of Episode 005",
+        "does not authorize render",
+        "does not authorize global catalog mutation",
+        "does not authorize Drive write or publication"
+      ],
+      "evidence": {
+        "intake_workflow_run_id": 42056121022,
+        "intake_artifact_id": 13428247933,
+        "fingerprint_workflow_run_id": 42059893725,
+        "fingerprint_artifact_id": 13431651011
       }
     }
   ]
