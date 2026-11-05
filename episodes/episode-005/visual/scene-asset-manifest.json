@@ -5,7 +5,7 @@
   "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
   "editorial_mode": "factual_documentary",
   "title": "THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
-  "status": "PARTIAL_MANIFEST_VALIDATED_BLOCKED_RENDER",
+  "status": "PARTIAL_MANIFEST_REVALIDATION_REQUIRED_BLOCKED_RENDER",
   "purpose": "Human-approved candidate-to-shot assignments before final production promotion.",
   "source_plan": "episodes/episode-005/visual/asset-acquisition-plan.json",
   "approval_record": {
@@ -320,18 +320,19 @@
       "editorial_caveat": "Representational empty institutional corridor for S14 only; never literal Petrov archival evidence and never reused in another shot."
     },
     {
-      "candidate_id": "pixabay-alert-alarm-war-danger-risk-205519",
+      "candidate_id": "pixabay-radar-black-green-target-symbol-57670",
       "provider": "pixabay",
-      "source_page_url": "https://pixabay.com/videos/alert-alarm-war-danger-risk-205519/",
-      "media_url": "https://cdn.pixabay.com/video/2024/03/24/205519-927335684_large.mp4",
+      "source_page_url": "https://pixabay.com/videos/radar-black-green-target-symbol-57670/",
+      "media_url": "https://cdn.pixabay.com/video/2020/11/28/57670-486125393_large.mp4",
       "license_name": "Pixabay Content License",
       "source_role": "S05",
-      "truth_class": "DOCUMENTED_RECONSTRUCTION",
-      "sha256": "5a2031e934028fb6c13ba07dd176092507303db83f4decc8b79acb2263ecbf8d",
-      "perceptual_hash": "f2bb56d11027b73124649c52ecb1018ec945a8e1c02da9312e1ac958f733fbb6",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "sha256": "9293c16987da44620db4119af9fe2c776f56a2113402544e1d1bc3696f21496d",
+      "perceptual_hash": "acbd3a72cf98707eb118622b22dfd5106f5b76a550255c48f2d51727689c3e6e",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
       "intake_artifact": {
         "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
         "artifact_id": 13437466569,
         "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057"
       },
@@ -346,8 +347,8 @@
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
-      "editorial_caveat": "Representational reconstruction/symbolic visual only; never literal Petrov archival evidence.",
-      "selection_basis": "Primary selection for S05: highest scored candidate in the approved two-candidate shortlist."
+      "editorial_caveat": "Representational radar/target insert for S05 only; not literal Petrov archival evidence.",
+      "selection_basis": "Replacement after direct-media QA rejected the recognizable-person candidate; approved shortlist alternative."
     },
     {
       "candidate_id": "pixabay-radar-radar-screen-rotation-circles-4511",
@@ -575,8 +576,8 @@
       "requested_truth_class": "MAP_OR_DIAGRAM",
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
-        "candidate_id": "pixabay-alert-alarm-war-danger-risk-205519",
-        "usage": "Distinct escalation insert for multiple launch-warning indicators; use as representational alarm evidence, not literal Soviet interface.",
+        "candidate_id": "pixabay-radar-black-green-target-symbol-57670",
+        "usage": "Distinct symbolic radar/target insert for the warning-count escalation; not literal Soviet interface.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
@@ -779,7 +780,7 @@
     "drive_write_authorized": false,
     "publication_authorized": false
   },
-  "next_action": "Await explicit render authorization; thumbnail final remains required before any production render. Global catalog, Drive and publication remain blocked.",
+  "next_action": "Revalidate visual contract after S05 replacement; complete rights QA before render.",
   "reuse_policy": {
     "source_reuse_scope": "global",
     "distinct_source_required_per_shot": true,
@@ -884,7 +885,7 @@
         "pixabay-colors-lines-lights-abstract-video-5072"
       ],
       "selected_primary_by_shot": {
-        "S05": "pixabay-alert-alarm-war-danger-risk-205519",
+        "S05": "pixabay-radar-black-green-target-symbol-57670",
         "S08": "pixabay-radar-radar-screen-rotation-circles-4511",
         "S09": "pixabay-button-press-red-business-click-502",
         "S13": "pixabay-typewriter-typing-writing-author-1335",
@@ -892,7 +893,7 @@
         "S16": "pixabay-particles-orange-red-dust-effect-7957"
       },
       "approved_at_utc": "2026-11-05T17:59:24.004Z",
-      "decision": "APPROVED_FOR_MANIFEST_ONLY",
+      "decision": "APPROVED_FOR_MANIFEST_ONLY; S05 primary replaced after direct-media QA",
       "evidence": {
         "intake_workflow_run_id": 42073828513,
         "intake_artifact_id": 13437466569,
@@ -901,11 +902,32 @@
         "fingerprint_artifact_id": 13438400127,
         "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
       }
+    },
+    {
+      "candidate_id": "pixabay-radar-black-green-target-symbol-57670",
+      "shot_ids": [
+        "S05"
+      ],
+      "decision": "APPROVED_FOR_MANIFEST_ONLY",
+      "scope": "Replacement symbolic radar/target insert after direct-media safety QA",
+      "approved_at_utc": "2026-11-05T22:00:00Z",
+      "evidence": {
+        "intake_workflow_run_id": 42073828513,
+        "intake_artifact_id": 13437466569,
+        "fingerprint_workflow_run_id": 42074599454,
+        "fingerprint_artifact_id": 13438400127,
+        "visual_qa": "artifact 13437466569 / pixabay-radar-black-green-target-symbol-57670/qa-frames.jpg"
+      },
+      "constraints": [
+        "S05 only",
+        "not literal Petrov archival evidence",
+        "does not authorize render, catalog mutation, Drive write or publication"
+      ]
     }
   ],
   "final_visual_manifest_validation": {
     "validated_at_utc": "2026-11-05T18:05:19.534Z",
-    "status": "VISUAL_PLAN_CONTRACT_PASS",
+    "status": "PENDING_REVALIDATION_AFTER_S05_REPLACEMENT",
     "validator": "production/visual_plan_contract.py",
     "checkout_commit": "d371da0ad7c72576bcd3e9f664baa6b03f89a5e4",
     "candidate_count": 42,
@@ -914,6 +936,8 @@
     "assigned_shot_count": 16,
     "unresolved_shot_count": 0,
     "promotion_allowed": false,
-    "render_allowed": false
+    "render_allowed": false,
+    "revalidation_required": true,
+    "replacement_reason": "S05 recognizable-person candidate rejected after direct-media QA"
   }
 }
