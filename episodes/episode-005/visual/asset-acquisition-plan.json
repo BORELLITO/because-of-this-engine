@@ -612,7 +612,7 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "mixkit",
       "license_name": "Mixkit Stock Video Free License",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_FINGERPRINT_AND_HUMAN_QA",
+      "rights_status": "TECHNICALLY_VALIDATED_AWAITING_HUMAN_MANIFEST_DECISION",
       "media_url": "https://assets.mixkit.co/videos/2244/2244-720.mp4",
       "media_url_observed_in_browser": true,
       "browser_verification": {
@@ -633,8 +633,8 @@
         "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
         "semantic_fit": "PRELIMINARY_PASS_AS_TECHNICAL_CONTROL_PANEL_RECONSTRUCTION",
         "locked_9x16_crop": "PRELIMINARY_PASS_ACTION_AND_EMERGENCY_CONTROL_RETAINED",
-        "global_reuse_fingerprint": "PENDING_FRESH_AUDIT",
-        "human_approval": "PENDING",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "PENDING_EXPLICIT_MANIFEST_DECISION",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "editorial_caveat": "Industrial control panel is representational reconstruction for S04, never literal Petrov archival evidence."
@@ -653,11 +653,16 @@
         ],
         "frame_rate": "24000/1001",
         "codec": "h264",
-        "automated_promotion": false
+        "automated_promotion": false,
+        "perceptual_hash": "e7c8758b9f770b817e9d5ef14b7a78bceaad1dcff716a7e7d3c1aff7e63cb8d7",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42025128372,
+        "fingerprint_artifact_id": 13413646379,
+        "fingerprint_artifact_digest": "sha256:a4450ebff3562383b0b8c731bc810f810850eab1fa476737233279724c18fc69"
       }
     }
   ],
-  "next_action": "Await fresh global fingerprint audit for mixkit-worker-industrial-lathe-2244. If PASS, request explicit manifest-only approval for S04; otherwise reject without catalog or render promotion.",
+  "next_action": "Human decision required: approve or reject mixkit-worker-industrial-lathe-2244 for S04 manifest-only use. Approval would authorize only this representational control-panel reconstruction for S04; it would not authorize render, catalog promotion, Drive or publication.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
