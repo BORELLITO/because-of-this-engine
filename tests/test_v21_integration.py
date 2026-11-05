@@ -89,7 +89,7 @@ def valid_manifest() -> dict:
             "status": "OFFLINE_CONTRACT_VERIFIED",
             "render_executed": False,
             "duration_target_seconds": 65,
-            "adapter": "production/render_video_episode.py",
+            "adapter": "production/render_v21_manual.py",
         },
         "drive_contract": {
             "mode": "read_only",
