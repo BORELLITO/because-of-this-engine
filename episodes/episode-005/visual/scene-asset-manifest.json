@@ -10,20 +10,21 @@
   "source_plan": "episodes/episode-005/visual/asset-acquisition-plan.json",
   "approval_record": {
     "status": "APPROVED_FOR_MANIFEST_ONLY",
-    "approved_at_utc": "2026-11-05T10:10:00Z",
-    "decision": "Approve the three downloaded candidates for the Episode 005 visual manifest.",
+    "approved_at_utc": "2026-11-05T11:02:38Z",
+    "decision": "Approve the four downloaded candidates for the Episode 005 partial visual manifest.",
     "constraints": [
       "red-light candidate remains symbolic and must not be presented as literal Petrov archival evidence",
       "approval does not authorize global catalog mutation",
       "approval does not authorize render, Drive write or publication",
-      "all unresolved story shots remain blocked"
+      "all unresolved story shots remain blocked",
+      "clock-mechanism candidate is a symbolic mechanical-time reconstruction, assigned to S10 only and never treated as Petrov archival evidence"
     ]
   },
   "global_reuse_audit": {
     "status": "PASS_NO_COLLISION",
-    "workflow_run_id": 42007386261,
-    "artifact_id": 13405087460,
-    "artifact_digest": "sha256:66c98c055ec1a3e2da7c861cb367cd6761f18bf205a2f05329720da6d39ebf72",
+    "workflow_run_id": 42014828184,
+    "artifact_id": 13408966434,
+    "artifact_digest": "sha256:d9d4adbc09e85d5aea9370a3c7045125afe04ac81ac43cfb5dfa6b18677e2199",
     "algorithm": "video-fingerprint-v2-rgb24-q4"
   },
   "assets": [
@@ -88,6 +89,34 @@
         "workflow_run_id": 42004883836,
         "artifact_id": 13404636511,
         "artifact_digest": "sha256:12313afbe106a2dfdff4d9e8543b57f7e7312797620c227fae2c73291f5f2514"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false
+    },
+    {
+      "candidate_id": "mixkit-clock-mechanism-3651",
+      "provider": "mixkit",
+      "source_page_url": "https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/",
+      "media_url": "https://assets.mixkit.co/videos/3651/3651-720.mp4",
+      "license_name": "Mixkit Stock Video Free License",
+      "source_role": "S10",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "sha256": "575ec01ae49bad9f5e5d634d51c1d78c31856e2171ca799065d9750dce3de5fd",
+      "perceptual_hash": "8d01acb640e75c70ee0d46ceaabeec546bbcc70f24d7a4a4d0c9e1cd46a3f72",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42010569943,
+        "artifact_id": 13406364533,
+        "artifact_digest": "sha256:620db58c193f7850a427a04d14b241f48a6779b20e98a6261b9f592fc054b326"
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 42014828184,
+        "artifact_id": 13408966434,
+        "artifact_digest": "sha256:d9d4adbc09e85d5aea9370a3c7045125afe04ac81ac43cfb5dfa6b18677e2199"
       },
       "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "human_approval": "APPROVED_FOR_MANIFEST",
@@ -206,9 +235,15 @@
       "role": "suspense",
       "requested_visual": "Bunker waits; clock advances through silence.",
       "requested_truth_class": "REPRESENTATIONAL",
-      "status": "BLOCKED_NO_DISTINCT_APPROVED_ASSET",
-      "assignment": null,
-      "blocking_reason": "The approved candidate pool cannot be reused within this episode; a distinct downloaded, fingerprinted and human-approved source is required."
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "assignment": {
+        "candidate_id": "mixkit-clock-mechanism-3651",
+        "usage": "symbolic mechanical passage of time during the bunker wait; not archival Petrov evidence",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST"
+      },
+      "blocking_reason": null
     },
     {
       "shot_id": "S11",
@@ -285,7 +320,6 @@
     "S06",
     "S08",
     "S09",
-    "S10",
     "S12",
     "S13",
     "S14",
@@ -301,7 +335,7 @@
     "drive_write_authorized": false,
     "publication_authorized": false
   },
-  "next_action": "Acquire and QA distinct candidates for unresolved shots S02,S03,S04,S05,S06,S08,S09,S10,S12,S13,S14,S15,S16, then re-run final visual manifest validation.",
+  "next_action": "Acquire and QA distinct candidates for unresolved shots S02,S03,S04,S05,S06,S08,S09,S12,S13,S14,S15,S16, then re-run final visual manifest validation.",
   "reuse_policy": {
     "source_reuse_scope": "global",
     "distinct_source_required_per_shot": true,
