@@ -1307,11 +1307,30 @@
         "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_FIVE_SAMPLES",
         "semantic_fit": "PRELIMINARY_PASS_FOR_S12_AS_REPRESENTATIONAL_SATELLITE_ANTENNA",
         "locked_9x16_crop": "PASS_CENTRAL_ANTENNA_REMAINS_VISIBLE",
-        "global_reuse_fingerprint": "PENDING_FINGERPRINT_AUDIT",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "PENDING",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "assistant_visual_review": "Clean full-duration footage; real parabolic antenna/earth-station geometry remains readable in the 9:16 center crop. Treat as representational infrastructure, not literal Petrov archival evidence."
+      },
+      "fingerprint_audit": {
+        "workflow_run_id": 42053792993,
+        "job_id": 127336595316,
+        "artifact_id": 13427769060,
+        "artifact_name": "episode005-visual-fingerprint-audit",
+        "artifact_digest": "sha256:f92cb4eed9bfc2fbaf518540413f5ab363578156f7c58d947e69c692219e0c87",
+        "status": "FINGERPRINT_AUDIT_PASS",
+        "algorithm": "video-fingerprint-v2-rgb24-q4",
+        "global_sha256_collision": false,
+        "global_source_collision": false,
+        "global_perceptual_collision": false,
+        "sha256": "e0a5b6cbf90c31c7f79c8cf6d9eaa515a83d4e986927a90a3840d7d36303e9b4",
+        "perceptual_hash": "720e0b55776ac929e3c7f5be259dcaa7c848fe1cefb4fc2ffd501c6b2ee1059d",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "render_allowed": false,
+        "drive_written": false
       }
     }
   ],
@@ -1881,11 +1900,11 @@
     "next_action": "The fingerprint dispatch must consume this recorded intake artifact; keep promotion, render, catalog, Drive and publication blocked."
   },
   "last_manual_fingerprint": {
-    "workflow_run_id": 42039523926,
-    "job_id": 127286341600,
-    "artifact_id": 13420042319,
+    "workflow_run_id": 42053792993,
+    "job_id": 127336595316,
+    "artifact_id": 13427769060,
     "artifact_name": "episode005-visual-fingerprint-audit",
-    "artifact_digest": "sha256:f29e75ce9c73ea465dbbd6450fdf5d9a2ff37c463b30e0e6749aa27e4c3c63d2",
+    "artifact_digest": "sha256:f92cb4eed9bfc2fbaf518540413f5ab363578156f7c58d947e69c692219e0c87",
     "status": "FINGERPRINT_AUDIT_PASS",
     "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
     "automated_promotion": false,
@@ -1893,19 +1912,14 @@
     "approved_for_render": false,
     "global_catalog_updated": false,
     "candidate_ids": [
-      "pixabay-alert-alarm-war-205519",
-      "pixabay-radar-sonar-ping-2420",
-      "pixabay-radar-screen-4511",
-      "pixabay-television-broadcasting-satellite-29483"
+      "pixabay-antenna-astronomy-communication-40041"
     ],
     "blockers": [],
     "promotion_allowed": false,
     "render_allowed": false,
     "drive_written": false,
-    "next_candidate_batch": [
-      "pixabay-antenna-astronomy-communication-40041"
-    ],
-    "next_action": "Dispatch manual global fingerprint audit for the newly recorded S12 intake candidate before semantic approval."
+    "next_candidate_batch": [],
+    "next_action": "Await explicit human approval for the S12 antenna candidate; do not promote, render, update the global catalog, write Drive or publish."
   },
   "last_candidate_addition": {
     "added_at_utc": "2026-11-05T15:14:00Z",
