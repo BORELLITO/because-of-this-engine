@@ -1466,7 +1466,7 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -1485,7 +1485,44 @@
       },
       "disqualifiers": [],
       "media_url": "https://cdn.pixabay.com/video/2024/03/24/205519-927335684_large.mp4",
-      "media_url_observed_in_browser": true
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "5a2031e934028fb6c13ba07dd176092507303db83f4decc8b79acb2263ecbf8d",
+        "duration_seconds": 16.362,
+        "dimensions": [
+          3840,
+          2160
+        ],
+        "frame_rate": "50/1",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "PENDING_HUMAN_QA",
+        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
+        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
+        "semantic_fit": "PENDING_HUMAN_QA",
+        "global_reuse_fingerprint": "PENDING",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     },
     {
       "candidate_id": "pixabay-radar-black-green-target-symbol-57670",
@@ -1496,7 +1533,7 @@
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -1515,7 +1552,44 @@
       },
       "disqualifiers": [],
       "media_url": "https://cdn.pixabay.com/video/2020/11/28/57670-486125393_large.mp4",
-      "media_url_observed_in_browser": true
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "9293c16987da44620db4119af9fe2c776f56a2113402544e1d1bc3696f21496d",
+        "duration_seconds": 20,
+        "dimensions": [
+          3840,
+          2160
+        ],
+        "frame_rate": "25/1",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "PENDING_HUMAN_QA",
+        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
+        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
+        "semantic_fit": "PENDING_HUMAN_QA",
+        "global_reuse_fingerprint": "PENDING",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     },
     {
       "candidate_id": "pixabay-radar-radar-screen-rotation-circles-4511",
@@ -1526,7 +1600,7 @@
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -1545,7 +1619,44 @@
       },
       "disqualifiers": [],
       "media_url": "https://cdn.pixabay.com/video/2016/08/16/4511-179376471_large.mp4",
-      "media_url_observed_in_browser": true
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "8185f8459b80df5c5eaa95d4a66ac58edef34fc7f790ca4e5f74fc10a70742d6",
+        "duration_seconds": 7.2,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "25/1",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "PENDING_HUMAN_QA",
+        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
+        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
+        "semantic_fit": "PENDING_HUMAN_QA",
+        "global_reuse_fingerprint": "PENDING",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     },
     {
       "candidate_id": "pixabay-radar-communication-military-261518",
@@ -1556,7 +1667,7 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -1575,7 +1686,44 @@
       },
       "disqualifiers": [],
       "media_url": "https://cdn.pixabay.com/video/2025/02/28/261518_large.mp4",
-      "media_url_observed_in_browser": true
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "032d21331f071798b51126eb2483e37edaa6169444ddc42197ef5d7689c206f1",
+        "duration_seconds": 30,
+        "dimensions": [
+          3840,
+          2160
+        ],
+        "frame_rate": "60/1",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "PENDING_HUMAN_QA",
+        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
+        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
+        "semantic_fit": "PENDING_HUMAN_QA",
+        "global_reuse_fingerprint": "PENDING",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     },
     {
       "candidate_id": "pixabay-button-press-red-business-click-502",
@@ -1586,7 +1734,7 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -1605,7 +1753,44 @@
       },
       "disqualifiers": [],
       "media_url": "https://cdn.pixabay.com/video/2015/08/22/502-137078153_large.mp4",
-      "media_url_observed_in_browser": true
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "e6eaeddadbda7f8fdf9e4106ad09e0c25e0139f0212dce20a29d34cd8eb77b16",
+        "duration_seconds": 3.08,
+        "dimensions": [
+          1440,
+          1080
+        ],
+        "frame_rate": "25/1",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "PENDING_HUMAN_QA",
+        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
+        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
+        "semantic_fit": "PENDING_HUMAN_QA",
+        "global_reuse_fingerprint": "PENDING",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     },
     {
       "candidate_id": "pixabay-button-press-push-start-launching-221746",
@@ -1616,7 +1801,7 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -1635,7 +1820,44 @@
       },
       "disqualifiers": [],
       "media_url": "https://cdn.pixabay.com/video/2024/07/17/221746_large.mp4",
-      "media_url_observed_in_browser": true
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "1759e5e945fccab493e4ac2c084af30a58673511ee41a03bfea538471a048090",
+        "duration_seconds": 6.967,
+        "dimensions": [
+          4096,
+          2160
+        ],
+        "frame_rate": "30/1",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "PENDING_HUMAN_QA",
+        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
+        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
+        "semantic_fit": "PENDING_HUMAN_QA",
+        "global_reuse_fingerprint": "PENDING",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     },
     {
       "candidate_id": "pixabay-typewriter-typing-writing-author-1335",
@@ -1646,7 +1868,7 @@
       "truth_class": "DOCUMENTARY_EVIDENCE",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -1665,7 +1887,44 @@
       },
       "disqualifiers": [],
       "media_url": "https://cdn.pixabay.com/video/2015/11/12/1335-145564309_large.mp4",
-      "media_url_observed_in_browser": true
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "2df86b63f6f05398b44ac2c4b28e9f370036e552b20d0b30e2842e2e71aabd23",
+        "duration_seconds": 31.637,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "30000/1001",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "PENDING_HUMAN_QA",
+        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
+        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
+        "semantic_fit": "PENDING_HUMAN_QA",
+        "global_reuse_fingerprint": "PENDING",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     },
     {
       "candidate_id": "pixabay-typewriter-type-antique-writing-38626",
@@ -1676,7 +1935,7 @@
       "truth_class": "DOCUMENTARY_EVIDENCE",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -1695,7 +1954,44 @@
       },
       "disqualifiers": [],
       "media_url": "https://cdn.pixabay.com/video/2020/05/10/38626-418875137_large.mp4",
-      "media_url_observed_in_browser": true
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "de777464e8fbcf6f29d9a53786d85706db1667c50cb882690f09543fe6938416",
+        "duration_seconds": 9.543,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "30000/1001",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "PENDING_HUMAN_QA",
+        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
+        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
+        "semantic_fit": "PENDING_HUMAN_QA",
+        "global_reuse_fingerprint": "PENDING",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     },
     {
       "candidate_id": "pixabay-dark-light-lens-flare-abstract-250413",
@@ -1706,7 +2002,7 @@
       "truth_class": "REPRESENTATIONAL",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -1725,7 +2021,44 @@
       },
       "disqualifiers": [],
       "media_url": "https://cdn.pixabay.com/video/2025/01/03/250413_large.mp4",
-      "media_url_observed_in_browser": true
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "bc173bee51dd0dd3120d2cfbfc2884f5681849b384bc661af7f2721d92a2c8ad",
+        "duration_seconds": 20.103,
+        "dimensions": [
+          3838,
+          2160
+        ],
+        "frame_rate": "24000/1001",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "PENDING_HUMAN_QA",
+        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
+        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
+        "semantic_fit": "PENDING_HUMAN_QA",
+        "global_reuse_fingerprint": "PENDING",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     },
     {
       "candidate_id": "pixabay-abstract-light-streaks-motion-250417",
@@ -1736,7 +2069,7 @@
       "truth_class": "REPRESENTATIONAL",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -1755,7 +2088,44 @@
       },
       "disqualifiers": [],
       "media_url": "https://cdn.pixabay.com/video/2025/01/03/250417_large.mp4",
-      "media_url_observed_in_browser": true
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "13f0d7a85d716d6b3d4317481ad1aebda02ab6d8ae605b5c09b87d31df6e3729",
+        "duration_seconds": 20.103,
+        "dimensions": [
+          3838,
+          2160
+        ],
+        "frame_rate": "24000/1001",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "PENDING_HUMAN_QA",
+        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
+        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
+        "semantic_fit": "PENDING_HUMAN_QA",
+        "global_reuse_fingerprint": "PENDING",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     },
     {
       "candidate_id": "pixabay-particles-orange-red-dust-effect-7957",
@@ -1766,7 +2136,7 @@
       "truth_class": "BRAND_OUTRO",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -1785,7 +2155,44 @@
       },
       "disqualifiers": [],
       "media_url": "https://cdn.pixabay.com/video/2017/02/26/7957-205810637_large.mp4",
-      "media_url_observed_in_browser": true
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "00cb906c22484217646c6aeedc90f725941f4aa25e0df64378c1b0ecfe267282",
+        "duration_seconds": 29.993,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "25/1",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "PENDING_HUMAN_QA",
+        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
+        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
+        "semantic_fit": "PENDING_HUMAN_QA",
+        "global_reuse_fingerprint": "PENDING",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     },
     {
       "candidate_id": "pixabay-colors-lines-lights-abstract-video-5072",
@@ -1796,7 +2203,7 @@
       "truth_class": "BRAND_OUTRO",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "browser_verification": {
         "source_page_verified": true,
         "license_visible": "Pixabay Content License",
@@ -1815,7 +2222,44 @@
       },
       "disqualifiers": [],
       "media_url": "https://cdn.pixabay.com/video/2016/09/13/5072-183299851_large.mp4",
-      "media_url_observed_in_browser": true
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "1851cf32bb43685dad7ce61e6c5b25fd6511ebd40c5fce3a80664f78cbc50d3e",
+        "duration_seconds": 9.967,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "30/1",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "PENDING_HUMAN_QA",
+        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
+        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
+        "semantic_fit": "PENDING_HUMAN_QA",
+        "global_reuse_fingerprint": "PENDING",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     }
   ],
   "next_action": "Dispatch the explicit 12-candidate intake batch after media URL verification; keep download, fingerprint, approval, manifest promotion, render, catalog, Drive and publication gated.",
@@ -2430,25 +2874,37 @@
     }
   },
   "last_manual_intake": {
-    "workflow_run_id": 42056121022,
-    "job_id": 127344872248,
+    "workflow_run_id": 42073828513,
+    "job_id": 127408597700,
     "branch": "integration/because-of-this-v2.1-20261105",
-    "commit_sha": "f699e9b5bfcba39a37cd1b58efef2d861d965c14",
+    "commit_sha": "c51e423ccda209b21cdb79e28d2294888c84074e",
     "candidate_ids": [
-      "pixabay-hallway-dark-corridor-20837"
+      "pixabay-alert-alarm-war-danger-risk-205519",
+      "pixabay-radar-black-green-target-symbol-57670",
+      "pixabay-radar-radar-screen-rotation-circles-4511",
+      "pixabay-radar-communication-military-261518",
+      "pixabay-button-press-red-business-click-502",
+      "pixabay-button-press-push-start-launching-221746",
+      "pixabay-typewriter-typing-writing-author-1335",
+      "pixabay-typewriter-type-antique-writing-38626",
+      "pixabay-dark-light-lens-flare-abstract-250413",
+      "pixabay-abstract-light-streaks-motion-250417",
+      "pixabay-particles-orange-red-dust-effect-7957",
+      "pixabay-colors-lines-lights-abstract-video-5072"
     ],
     "refresh_existing": false,
     "status": "BATCH_DOWNLOADED_AWAITING_HUMAN_QA",
-    "artifact_id": 13428247933,
-    "artifact_name": "episode005-visual-intake-42056121022",
-    "artifact_digest": "sha256:e6f1d8424a909e08ab527ff555fe359e4c9be8214990cf5b91364f80f590bb83",
+    "artifact_id": 13437466569,
+    "artifact_name": "episode005-visual-intake-42073828513",
+    "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+    "infrastructure_fix_commit": "c51e423ccda209b21cdb79e28d2294888c84074e",
     "promotion_allowed": false,
     "render_allowed": false,
     "global_catalog_updated": false,
     "drive_written": false,
     "publication_allowed": false,
     "thumbnail_eligible": false,
-    "next_action": "Run the explicit fingerprint audit for this candidate; keep approval, promotion, render, catalog, Drive and publication blocked."
+    "next_action": "Run the explicit fingerprint audit for these same 12 candidates; keep approval, promotion, render, catalog, Drive and publication blocked."
   },
   "last_manual_fingerprint": {
     "workflow_run_id": 42059893725,
