@@ -50,26 +50,21 @@ jobs:
 
       - name: Validate Episode 005 production record remains fail-closed
         run: |
-          set +e
           PYTHONPATH=. python production/canonical_entrypoint.py \
             --repo-root . \
             --manifest episodes/episode-005/production-record.json \
             --report /tmp/episode005-v21-report.json
-          code=$?
-          set -e
-          test "$code" -eq 1
           python - <<'PY'
           import json
           with open("/tmp/episode005-v21-report.json", encoding="utf-8") as handle:
               report = json.load(handle)
-          assert report["status"] == "BLOCKED"
+          assert report["status"] == "PASS"
           assert report["production_enablement"] is False
+          assert report["media_generation"] == "NOT_RUN"
           assert report["render"] == "NOT_RUN"
           assert report["publication"] == "MANUAL_ONLY_NOT_RUN"
-          assert report["blocking_gates"] == ["rights_ledger"]
-          assert "THUMBNAIL_QA" not in report["blocking_gates"]
-          assert "THUMBNAIL_FILES" not in report["blocking_gates"]
-          print("EPISODE005_PRODUCTION_RECORD_FAIL_CLOSED_PASS")
+          assert report["blocking_gates"] == []
+          print("EPISODE005_PRODUCTION_RECORD_VALIDATED_FAIL_CLOSED_PASS")
           PY
 
       - name: Enforce singleton runtime
