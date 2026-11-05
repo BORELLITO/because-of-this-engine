@@ -145,7 +145,7 @@ jobs:
                   source_page.scheme == "https"
                   and source_page.hostname == "mixkit.co"
                   and media_url.scheme == "https"
-                  and str(media_url.hostname or "").endswith("mixkit.co")
+                  and (media_url.hostname == "mixkit.co" or str(media_url.hostname or "").endswith(".mixkit.co"))
               ):
                   blockers.append({
                       "type": "candidate_domain_invalid",
