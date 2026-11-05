@@ -110,6 +110,7 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 "at": [["at"], ["ət"]],
                 "is": [["is"], ["iz"]],
                 "was": [["was"], ["wuz"]],
+                "five": [["five"], ["5"]],
                 # Vosk may realize the unstressed vowel in “than” as “then”.
                 # This is an explicit lexical ASR variant only; timing still
                 # comes from the real Vosk word timestamp in the final WAV.
