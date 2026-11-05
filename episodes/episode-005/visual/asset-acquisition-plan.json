@@ -1404,11 +1404,16 @@
           1920,
           1080
         ],
-        "frame_rate": 29.97002997002997,
+        "frame_rate": "29.97002997002997",
         "codec": "h264",
         "size_bytes": 4347752,
-        "perceptual_hash": "ba1d947bddbb6bf48b9dbb85acf023b8d2d0c7dbbcf445c80f2db03e09e7790d",
-        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+        "perceptual_hash": "40df89d9d2edf33d5a94509be3c9f3abb6073dd28ff1914aba8307eb1055aafd",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "job_id": 127344872248,
+        "fingerprint_workflow_run_id": 42059893725,
+        "fingerprint_job_id": 127358312867,
+        "fingerprint_artifact_id": 13431651011,
+        "fingerprint_artifact_digest": "sha256:71428db1a7810ba8074da7c85139ff0a6720a06ea06aab169b5dd539f3ed7e8d"
       },
       "qa": {
         "clean_frame_visual_review": "PENDING_HUMAN_QA",
@@ -1416,11 +1421,26 @@
         "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
         "semantic_fit": "SHORTLIST_NEAR_PENDING_FINGERPRINT_AND_HUMAN_QA",
         "locked_9x16_crop": "PENDING_HUMAN_QA",
-        "global_reuse_fingerprint": "RUNNING",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "PENDING",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "drive_written": false
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 42059893725,
+        "job_id": 127358312867,
+        "artifact_id": 13431651011,
+        "artifact_name": "episode005-visual-fingerprint-audit",
+        "artifact_digest": "sha256:71428db1a7810ba8074da7c85139ff0a6720a06ea06aab169b5dd539f3ed7e8d",
+        "status": "FINGERPRINT_AUDIT_PASS",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "automated_promotion": false,
+        "sha256": "e6c20511f889daa57834ddf5f97ea076ffffedc0a321850a4ea8fa295479d72d",
+        "perceptual_hash": "40df89d9d2edf33d5a94509be3c9f3abb6073dd28ff1914aba8307eb1055aafd",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
       }
     }
   ],
@@ -2033,12 +2053,12 @@
     "next_action": "Run the explicit fingerprint audit for this candidate; keep approval, promotion, render, catalog, Drive and publication blocked."
   },
   "last_manual_fingerprint": {
-    "workflow_run_id": 42056934162,
-    "job_id": 127347760300,
-    "artifact_id": null,
-    "artifact_name": null,
-    "artifact_digest": null,
-    "status": "FINGERPRINT_AUDIT_RUNNING",
+    "workflow_run_id": 42059893725,
+    "job_id": 127358312867,
+    "artifact_id": 13431651011,
+    "artifact_name": "episode005-visual-fingerprint-audit",
+    "artifact_digest": "sha256:71428db1a7810ba8074da7c85139ff0a6720a06ea06aab169b5dd539f3ed7e8d",
+    "status": "FINGERPRINT_AUDIT_PASS",
     "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
     "automated_promotion": false,
     "human_approval": "PENDING",
@@ -2052,7 +2072,7 @@
     "render_allowed": false,
     "drive_written": false,
     "next_candidate_batch": [],
-    "next_action": "Aguardar a conclusão do run 42056934162; não promover, renderizar, atualizar o catálogo global, escrever no Drive ou publicar."
+    "next_action": "Aguardar QA visual e aprovação humana explícita para o S14; não promover, renderizar, atualizar o catálogo, escrever no Drive ou publicar."
   },
   "last_candidate_addition": {
     "added_at_utc": "2026-11-05T15:14:00Z",
