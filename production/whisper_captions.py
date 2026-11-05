@@ -36,7 +36,7 @@ def _recognize(audio_path: Path, model_name: str, prompt: str = "") -> list[dict
             task="transcribe",
             word_timestamps=True,
             vad_filter=False,
-            beam_size=10,
+            beam_size=5,
             condition_on_previous_text=True,
         )
         words: list[dict[str, Any]] = []
