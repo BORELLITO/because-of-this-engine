@@ -2,19 +2,21 @@
   "audit_id": "AUDIT-TTS-ROUTES-20261105-01",
   "episode_id": "episode-005",
   "checked_at_utc": "2026-11-05T01:30:00Z",
-  "conclusion": "Production will not use Creative Claw. The only permitted production route is the direct Google Gemini API adapter.",
+  "conclusion": "Google Cloud TTS Chirp 3 HD Charon is the active V2.1 route. Gemini direct API is no longer the active provider, and Creative Claw remains prohibited.",
   "routes": [
     {
-      "route_id": "direct_google_gemini_api",
-      "provider": "Google Gemini API",
-      "model": "gemini-3.8-flash-tts",
-      "voice": "Charon",
-      "official_free_tier": "listed_as_free_of_charge_subject_to_model_rate_limits",
-      "status": "AVAILABLE_IN_PRINCIPLE_NOT_CONNECTED_IN_THIS_RUNTIME",
+      "route_id": "google_cloud_tts_chirp3_hd",
+      "provider": "Google Cloud Text-to-Speech",
+      "model": "chirp3_hd",
+      "voice": "en-US-Chirp3-HD-Charon",
+      "billing_required": true,
+      "free_quota": "up to 1,000,000 characters/month for Chirp 3 HD, subject to Google Cloud terms and quotas",
+      "status": "ACTIVE_CONTRACT_NOT_CONNECTED_IN_THIS_RUNTIME",
       "attempted": false,
-      "required_configuration": "GEMINI_API_KEY in the direct production execution environment",
-      "project_adapter": "production/gemini_tts.py",
-      "production_allowed": true
+      "required_configuration": "GOOGLE_TTS_ACCESS_TOKEN, ADC or Google OAuth with cloud-platform scope, plus GOOGLE_TTS_PROJECT_ID/GOOGLE_CLOUD_PROJECT",
+      "project_adapter": "production/cloud_tts.py",
+      "production_allowed": true,
+      "automatic_retry": false
     },
     {
       "route_id": "creative_claw_gemini_flash",
@@ -91,13 +93,15 @@
     "https://ai.google.dev/gemini-api/docs/speech-generation"
   ],
   "policy_decision": {
-    "keep_provider": "gemini_tts",
-    "keep_voice": "Charon",
+    "keep_provider": "google_cloud_tts",
+    "keep_voice": "en-US-Chirp3-HD-Charon",
     "do_not_silently_fallback": true,
-    "direct_api_is_preferred_cost_route": "provided_free_tier_is_available_for_the_connected_Google_project",
-    "creative_claw_balance_is_not_google_api_balance": true,
+    "billing_account_required": true,
+    "free_quota_available": true,
+    "cloud_route_is_active": true,
+    "creative_claw_balance_is_not_google_cloud_billing_state": true,
     "creative_claw_production_allowed": false,
-    "only_permitted_route": "direct_google_gemini_api"
+    "only_permitted_route": "google_cloud_tts_chirp3_hd"
   },
-  "next_action": "Connect GEMINI_API_KEY to the direct adapter execution environment, run direct preflight, then submit exactly one request for the frozen script hash."
+  "next_action": "Configure Google Cloud credentials and project billing/quota context, run Cloud TTS preflight, then request explicit authorization before the single real synthesis for the frozen script hash."
 }
