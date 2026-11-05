@@ -134,3 +134,11 @@ READY remains forbidden while any P0/P1 is open.
 - Evidências mantidas: LED fingerprint pass no run `42049952757`; S12 fingerprint pass no run `42053792993`. Ambos continuam com `approved_for_render=false`, `global_catalog_updated=false` e `drive_written=false`.
 - Plano canônico atualizado no commit `ee24e2c01216af3e6e20e29e179c03506c3ec3a6`; a aprovação foi registrada com shot_ids explícitos para impedir reutilização acidental.
 - Próximo passo único: adquirir candidatos distintos para os shots restantes e executar a validação final do manifesto. Render e publicação continuam bloqueados.
+
+## Addendum — triagem de candidatos restantes — 2026-11-05
+
+- O candidato page-verified `pixabay-hallway-dark-corridor-20837` foi registrado como `CANDIDATE_NOT_DOWNLOADED`, com fonte exclusiva para S14, licença Pixabay visível e mídia direta observada no link do provedor: `https://cdn.pixabay.com/video/2019/01/19/20837-312432073_large.mp4`.
+- O candidato de documentos `pixabay-documents-papers-research-212509` foi rejeitado antes da intake: a inspeção visual mostrou documentos modernos legíveis, incluindo material semelhante a passaporte/visto e texto pessoal, incompatível com o tratamento de relatório/logbook desclassificado.
+- O candidato `pixabay-red-light-blur-flare-250419` foi rejeitado antes da intake: é um gradiente vermelho abstrato, sem ação visual distinta de pulso de alerta e com sobreposição à família visual já usada em S01.
+- Nenhum download, fingerprint, promoção, atualização de catálogo, escrita no Drive, renderização ou publicação ocorreu nesta triagem.
+- Próximo passo único: formar uma nova shortlist page-verified para S05, S08, S09, S13, S15 e S16; S14 só poderá avançar para intake após manter a verificação técnica e a regra de fonte única.
