@@ -14,17 +14,17 @@ on:
       candidate_id:
         description: "Candidate identifier from asset-acquisition-plan.json"
         required: true
-        default: "mixkit-young-engineer-29991"
+        default: "mixkit-worker-industrial-lathe-2244"
         type: string
       source_page_url:
         description: "Verified provider page URL"
         required: true
-        default: "https://mixkit.co/free-stock-video/young-engineer-programming-in-his-workshop-seen-up-close-29991/"
+        default: "https://mixkit.co/free-stock-video/worker-operating-an-industrial-lathe-2244/"
         type: string
       media_url:
         description: "Direct media URL observed on the verified provider page"
         required: true
-        default: "https://assets.mixkit.co/videos/29991/29991-720.mp4"
+        default: "https://assets.mixkit.co/videos/2244/2244-720.mp4"
         type: string
       license_name:
         description: "License visibly stated on the provider page"
@@ -55,7 +55,7 @@ jobs:
 
       - name: Download candidate without promotion
         env:
-          MEDIA_URL: ${{ github.event.inputs.media_url || 'https://assets.mixkit.co/videos/29991/29991-720.mp4' }}
+          MEDIA_URL: ${{ github.event.inputs.media_url || 'https://assets.mixkit.co/videos/2244/2244-720.mp4' }}
         run: |
           mkdir -p artifacts/episode005-visual-intake
           curl --fail --location --retry 2 --retry-delay 2 --connect-timeout 20 --max-time 180 "$MEDIA_URL"             --output artifacts/episode005-visual-intake/candidate.mp4
@@ -63,8 +63,8 @@ jobs:
 
       - name: Validate video and create intake evidence
         env:
-          CANDIDATE_ID: ${{ github.event.inputs.candidate_id || 'mixkit-young-engineer-29991' }}
-          SOURCE_PAGE_URL: ${{ github.event.inputs.source_page_url || 'https://mixkit.co/free-stock-video/young-engineer-programming-in-his-workshop-seen-up-close-29991/' }}
+          CANDIDATE_ID: ${{ github.event.inputs.candidate_id || 'mixkit-worker-industrial-lathe-2244' }}
+          SOURCE_PAGE_URL: ${{ github.event.inputs.source_page_url || 'https://mixkit.co/free-stock-video/worker-operating-an-industrial-lathe-2244/' }}
           MEDIA_URL: ${{ github.event.inputs.media_url || 'https://assets.mixkit.co/videos/29991/29991-720.mp4' }}
           LICENSE_NAME: ${{ github.event.inputs.license_name || 'Mixkit Stock Video Free License' }}
         run: |
@@ -98,6 +98,10 @@ jobs:
               "mixkit-young-engineer-29991": {
                   "source_page_url": "https://mixkit.co/free-stock-video/young-engineer-programming-in-his-workshop-seen-up-close-29991/",
                   "media_url": "https://assets.mixkit.co/videos/29991/29991-720.mp4",
+              },
+              "mixkit-worker-industrial-lathe-2244": {
+                  "source_page_url": "https://mixkit.co/free-stock-video/worker-operating-an-industrial-lathe-2244/",
+                  "media_url": "https://assets.mixkit.co/videos/2244/2244-720.mp4",
               },
               "mixkit-abstract-red-glow-101432": {
                   "source_page_url": "https://mixkit.co/free-stock-video/abstract-red-glow-101432/",
@@ -173,6 +177,6 @@ jobs:
       - name: Upload isolated candidate evidence
         uses: actions/upload-artifact@v4
         with:
-          name: episode005-visual-intake-${{ github.event.inputs.candidate_id || 'mixkit-young-engineer-29991' }}
+          name: episode005-visual-intake-${{ github.event.inputs.candidate_id || 'mixkit-worker-industrial-lathe-2244' }}
           path: artifacts/episode005-visual-intake
           if-no-files-found: error
