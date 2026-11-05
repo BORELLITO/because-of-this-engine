@@ -551,7 +551,7 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "mixkit",
       "license_name": "Mixkit Stock Video Free License",
-      "rights_status": "CANDIDATE_PAGE_VERIFIED_AWAITING_INTAKE",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_FINGERPRINT_AND_HUMAN_QA",
       "media_url": "https://assets.mixkit.co/videos/29991/29991-720.mp4",
       "media_url_observed_in_browser": true,
       "browser_verification": {
@@ -568,19 +568,36 @@
       },
       "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
       "qa": {
-        "clean_frame_visual_review": "PENDING_INTAKE",
-        "baked_captions_or_authored_graphics": "PENDING_INTAKE",
-        "embedded_logo_or_letterbox": "PENDING_INTAKE",
-        "semantic_fit": "PRELIMINARY_PASS_PENDING_CLEAN_FRAME_QA",
-        "locked_9x16_crop": "PENDING_INTAKE",
-        "global_reuse_fingerprint": "PENDING_INTAKE",
+        "clean_frame_visual_review": "PRELIMINARY_PASS",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED; NATURAL DEVICE CODE IS PART OF THE SCENE",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
+        "semantic_fit": "CONDITIONAL_PASS_AS_MODERN_DOCUMENTED_RECONSTRUCTION_ONLY",
+        "locked_9x16_crop": "PRELIMINARY_PASS_TIGHT_HANDS_TABLET_CROP",
+        "global_reuse_fingerprint": "PENDING_FRESH_AUDIT",
         "human_approval": "PENDING",
         "approved_for_render": false,
-        "global_catalog_updated": false
+        "global_catalog_updated": false,
+        "editorial_caveat": "Modern tablet/code/workshop imagery; never label as literal 1983 Petrov archival footage."
+      },
+      "intake_artifact": {
+        "workflow_run_id": 42021165782,
+        "artifact_id": 13411851653,
+        "artifact_digest": "sha256:b18104580e4f089e496f203e65c25cd11d68bb599673a7e1e2243ec53d8ae015",
+        "artifact_name": "episode005-visual-intake-mixkit-young-engineer-29991",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "f1474daed5b97009063ca692859fdca1e91044ad62a9cd1f1f3009b2609b3478",
+        "duration_seconds": 15.057,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "frame_rate": "24000/1001",
+        "codec": "h264",
+        "automated_promotion": false
       }
     }
   ],
-  "next_action": "Run intake and frame/fingerprint QA for mixkit-young-engineer-29991 as the next S03 candidate. If clean and semantically coherent, request explicit manifest-only approval; otherwise reject without catalog or render promotion.",
+  "next_action": "Await fresh global fingerprint audit for mixkit-young-engineer-29991. If PASS, request explicit manifest-only approval for S03 with the modern-reconstruction caveat; otherwise reject without catalog or render promotion.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
