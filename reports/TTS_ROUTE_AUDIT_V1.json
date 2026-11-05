@@ -1,0 +1,96 @@
+{
+  "audit_id": "AUDIT-TTS-ROUTES-20261105-01",
+  "episode_id": "episode-005",
+  "checked_at_utc": "2026-11-05T01:30:00Z",
+  "conclusion": "The Creative Claw credit gate is separate from the direct Google Gemini API quota/billing account.",
+  "routes": [
+    {
+      "route_id": "direct_google_gemini_api",
+      "provider": "Google Gemini API",
+      "model": "gemini-3.8-flash-tts",
+      "voice": "Charon",
+      "official_free_tier": "listed_as_free_of_charge_subject_to_model_rate_limits",
+      "status": "AVAILABLE_IN_PRINCIPLE_NOT_CONNECTED_IN_THIS_RUNTIME",
+      "attempted": false,
+      "required_configuration": "GEMINI_API_KEY in the direct production execution environment",
+      "project_adapter": "production/gemini_tts.py"
+    },
+    {
+      "route_id": "creative_claw_gemini_flash",
+      "provider": "Creative Claw wrapper",
+      "model": "speech/gemini-3.8-flash-tts",
+      "voice": "charon",
+      "estimated_credits": 21,
+      "available_credits": 0,
+      "charged_credits": 0,
+      "status": "BLOCKED_BEFORE_GENERATION",
+      "attempted": true
+    },
+    {
+      "route_id": "creative_claw_gemini_flash_lite",
+      "provider": "Creative Claw wrapper",
+      "model": "speech/gemini-3.8-flash-lite-tts",
+      "voice": "charon",
+      "estimated_credits": 13,
+      "available_credits": 0,
+      "charged_credits": 0,
+      "status": "BLOCKED_BY_SAME_SHARED_BALANCE",
+      "attempted": false
+    },
+    {
+      "route_id": "creative_claw_kokoro",
+      "provider": "Creative Claw wrapper",
+      "model": "speech/kokoro",
+      "voice": "af_heart",
+      "estimated_credits": 5,
+      "available_credits": 0,
+      "charged_credits": 0,
+      "status": "BLOCKED_BY_SAME_SHARED_BALANCE",
+      "compatibility": "not_the_approved_Charon_voice"
+    },
+    {
+      "route_id": "creative_claw_elevenlabs",
+      "provider": "Creative Claw wrapper",
+      "model": "speech/elevenlabs-v4",
+      "estimated_credits": 22,
+      "available_credits": 0,
+      "charged_credits": 0,
+      "status": "BLOCKED_BY_SAME_SHARED_BALANCE",
+      "compatibility": "different_provider_and_voice_identity"
+    },
+    {
+      "route_id": "local_open_source",
+      "provider": "local_runtime",
+      "status": "UNAVAILABLE",
+      "checked_binaries": [
+        "piper",
+        "kokoro",
+        "espeak",
+        "espeak-ng"
+      ],
+      "checked_python_modules": [
+        "torch",
+        "torchaudio",
+        "transformers",
+        "kokoro",
+        "piper",
+        "TTS",
+        "pyttsx3"
+      ],
+      "result": "no_supported_local_TTS_found"
+    }
+  ],
+  "official_reference_urls": [
+    "https://ai.google.dev/gemini-api/docs/pricing",
+    "https://ai.google.dev/gemini-api/docs/billing",
+    "https://ai.google.dev/gemini-api/docs/speech-generation"
+  ],
+  "policy_decision": {
+    "keep_provider": "gemini_tts",
+    "keep_voice": "Charon",
+    "do_not_silently_fallback": true,
+    "direct_api_is_preferred_cost_route": "provided_free_tier_is_available_for_the_connected_Google_project",
+    "creative_claw_balance_is_not_google_api_balance": true
+  },
+  "next_action": "Connect a funded or eligible Google Gemini API project to the direct adapter, then perform one request for the frozen script hash."
+}
