@@ -36,6 +36,7 @@ jobs:
 
           import hashlib
           import json
+          import os
           import shutil
           import urllib.request
           from pathlib import Path
@@ -49,7 +50,7 @@ jobs:
 
           requested_ids = [
               item.strip()
-              for item in os.environ.get("CANDIDATE_IDS", "").replace("\\n", ",").split(",")
+              for item in os.environ.get("CANDIDATE_IDS", "").replace("\n", ",").split(",")
               if item.strip()
           ]
           blockers = []
