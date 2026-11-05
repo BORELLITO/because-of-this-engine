@@ -1,7 +1,7 @@
 {
   "plan_id": "episode-005-visual-asset-acquisition-v1",
   "episode_id": "episode-005",
-  "status": "PARTIAL_MANIFEST_APPROVED_VALIDATION_PENDING",
+  "status": "PARTIAL_MANIFEST_VALIDATED_BLOCKED_RENDER",
   "purpose": "Pre-download candidate pool for Episode 005. No candidate is approved for render until downloaded, SHA-256ed, visually inspected, checked for embedded text/logos/letterbox, fingerprinted, and entered into the final video manifest.",
   "frozen_audio_source": {
     "workflow_run_id": 41961294784,
@@ -2242,7 +2242,7 @@
       "selection": "ALTERNATIVE_APPROVED_FOR_MANIFEST_ONLY"
     }
   ],
-  "next_action": "Run the official read-only visual plan contract after removing duplicate aliases from the active candidate list; keep render, global catalog, Drive and publication blocked.",
+  "next_action": "Await explicit render authorization; thumbnail final, render, global catalog, Drive and publication remain gated.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -3072,5 +3072,19 @@
       "pixabay-alert-alarm-war-205519"
     ],
     "active_candidate_count": 42
+  },
+  "last_contract_validation": {
+    "validated_at_utc": "2026-11-05T18:05:19.534Z",
+    "status": "VISUAL_PLAN_CONTRACT_PASS",
+    "candidate_count": 42,
+    "approved_manifest_candidate_count": 22,
+    "manifest_asset_count": 16,
+    "assigned_shot_count": 16,
+    "unresolved_shot_count": 0,
+    "promotion_allowed": false,
+    "render_allowed": false,
+    "global_catalog_updated": false,
+    "validator": "production/visual_plan_contract.py",
+    "checkout_commit": "d371da0ad7c72576bcd3e9f664baa6b03f89a5e4"
   }
 }
