@@ -1,14 +1,14 @@
 name: Because Of This Episode 005 Visual Candidate Intake
 
-# Manual-only, fail-closed intake. Candidate URLs and license metadata are
-# resolved from the checked-in acquisition plan; the operator supplies only
-# the candidate ID. This workflow never promotes, catalogs, renders, writes
-# to Drive or publishes media.
+# Manual-only, fail-closed batch intake. Candidate URLs and license metadata
+# are resolved from the checked-in acquisition plan; the operator supplies
+# only selected candidate IDs. This workflow never promotes, catalogs, renders,
+# writes to Drive or publishes media.
 on:
   workflow_dispatch:
     inputs:
-      candidate_id:
-        description: "New candidate ID already recorded in asset-acquisition-plan.json"
+      candidate_ids:
+        description: "Comma or newline separated selected IDs already recorded in asset-acquisition-plan.json"
         required: true
         type: string
 
@@ -23,43 +23,64 @@ jobs:
       - name: Checkout candidate branch
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
 
-      - name: Resolve candidate from acquisition plan
+      - name: Resolve batch candidates from acquisition plan
         env:
-          CANDIDATE_ID: ${{ inputs.candidate_id }}
+          CANDIDATE_IDS: ${{ inputs.candidate_ids }}
         run: |
+          mkdir -p artifacts/episode005-visual-intake
           python - <<'PY'
           import json
           import os
           from pathlib import Path
 
-          candidate_id = os.environ["CANDIDATE_ID"].strip()
+          raw = os.environ["CANDIDATE_IDS"].replace("\\n", ",")
+          requested_ids = [item.strip() for item in raw.split(",") if item.strip()]
+          assert requested_ids, "candidate_ids must contain at least one ID"
+          assert len(requested_ids) == len(set(requested_ids)), "duplicate candidate IDs are not allowed"
+          assert len(requested_ids) <= 12, "batch is capped at 12 candidates; split larger searches into separate batches"
+
           plan_path = Path("episodes/episode-005/visual/asset-acquisition-plan.json")
           plan = json.loads(plan_path.read_text(encoding="utf-8"))
-          matches = [
-              item for item in plan.get("candidates", [])
-              if isinstance(item, dict) and item.get("candidate_id") == candidate_id
-          ]
-          assert len(matches) == 1, f"candidate must exist exactly once: {candidate_id}"
-          candidate = matches[0]
-          status = str(candidate.get("rights_status", ""))
-          assert not status.startswith("REJECTED"), (candidate_id, status)
-          assert candidate.get("provider") == "mixkit", candidate.get("provider")
-          assert candidate.get("source_page_url"), "source_page_url missing"
-          assert candidate.get("media_url"), "media_url missing"
-          assert candidate.get("license_name") == "Mixkit Stock Video Free License", candidate.get("license_name")
-          assert not candidate.get("intake_artifact"), "candidate already has intake evidence; create a new candidate ID for reacquisition"
-          with Path(os.environ["GITHUB_ENV"]).open("a", encoding="utf-8") as env_file:
-              env_file.write(f"CANDIDATE_ID={candidate_id}\n")
-              env_file.write(f"SOURCE_PAGE_URL={candidate['source_page_url']}\n")
-              env_file.write(f"MEDIA_URL={candidate['media_url']}\n")
-              env_file.write(f"LICENSE_NAME={candidate['license_name']}\n")
-          print(json.dumps({
-              "candidate_id": candidate_id,
-              "source_page_url": candidate["source_page_url"],
-              "media_url": candidate["media_url"],
-              "license_name": candidate["license_name"],
-              "rights_status": status,
-          }, indent=2))
+          indexed = {
+              str(item.get("candidate_id")): item
+              for item in plan.get("candidates", [])
+              if isinstance(item, dict) and str(item.get("candidate_id", "")).strip()
+          }
+          selected = []
+          for candidate_id in requested_ids:
+              candidate = indexed.get(candidate_id)
+              assert candidate is not None, f"candidate must exist in plan: {candidate_id}"
+              status = str(candidate.get("rights_status", ""))
+              assert not status.startswith("REJECTED"), (candidate_id, status)
+              assert candidate.get("provider") == "mixkit", candidate.get("provider")
+              assert candidate.get("source_page_url"), f"source_page_url missing: {candidate_id}"
+              assert candidate.get("media_url"), f"media_url missing: {candidate_id}"
+              assert candidate.get("license_name") == "Mixkit Stock Video Free License", candidate.get("license_name")
+              assert not candidate.get("intake_artifact"), f"candidate already has intake evidence: {candidate_id}"
+              selected.append({
+                  "candidate_id": candidate_id,
+                  "source_page_url": candidate["source_page_url"],
+                  "media_url": candidate["media_url"],
+                  "license_name": candidate["license_name"],
+                  "role": candidate.get("role", ""),
+                  "visual_match": candidate.get("visual_match", ""),
+              })
+
+          manifest = {
+              "status": "BATCH_RESOLVED_AWAITING_DOWNLOAD",
+              "episode_id": "episode-005",
+              "candidate_ids": requested_ids,
+              "candidates": selected,
+              "promotion": {
+                  "approved_for_render": False,
+                  "global_catalog_updated": False,
+                  "drive_written": False,
+              },
+          }
+          Path("artifacts/episode005-visual-intake/batch-manifest.json").write_text(
+              json.dumps(manifest, indent=2) + "\\n", encoding="utf-8"
+          )
+          print(json.dumps(manifest, indent=2))
           PY
 
       - name: Install media tools
@@ -72,85 +93,137 @@ jobs:
           ffmpeg -version | head -n 1
           ffprobe -version | head -n 1
 
-      - name: Download candidate without promotion
-        run: |
-          mkdir -p artifacts/episode005-visual-intake
-          curl --fail --location --retry 2 --retry-delay 2 --connect-timeout 20 --max-time 180 "$MEDIA_URL" --output artifacts/episode005-visual-intake/candidate.mp4
-          test -s artifacts/episode005-visual-intake/candidate.mp4
-
-      - name: Validate video and create intake evidence
+      - name: Download selected batch without promotion
         run: |
           python - <<'PY'
-          import hashlib
           import json
-          import os
           import subprocess
           from pathlib import Path
 
           root = Path("artifacts/episode005-visual-intake")
-          media = root / "candidate.mp4"
-          probe = subprocess.run(
-              [
-                  "ffprobe", "-v", "error", "-show_entries",
-                  "format=duration,size:stream=codec_type,codec_name,width,height,r_frame_rate",
-                  "-of", "json", str(media)
-              ],
-              check=True, capture_output=True, text=True
-          )
-          data = json.loads(probe.stdout)
-          streams = [s for s in data.get("streams", []) if s.get("codec_type") == "video"]
-          assert len(streams) == 1, data
-          video = streams[0]
-          duration = float(data["format"]["duration"])
-          width = int(video["width"])
-          height = int(video["height"])
-          assert duration > 0, duration
-          assert width >= 720 and height >= 720, (width, height)
-          sha256 = hashlib.sha256(media.read_bytes()).hexdigest()
-          report = {
-              "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
-              "candidate_id": os.environ["CANDIDATE_ID"],
-              "provider": "mixkit",
-              "source_page_url": os.environ["SOURCE_PAGE_URL"],
-              "media_url": os.environ["MEDIA_URL"],
-              "license_name": os.environ["LICENSE_NAME"],
-              "sha256": sha256,
-              "metadata": {
-                  "duration_seconds": round(duration, 3),
-                  "width": width,
-                  "height": height,
-                  "frame_rate": video.get("r_frame_rate"),
-                  "codec": video.get("codec_name"),
-              },
-              "promotion": {
-                  "approved_for_render": False,
-                  "global_catalog_updated": False,
-                  "thumbnail_eligible": False,
-                  "drive_written": False,
-              },
-              "qa_required": [
-                  "clean-frame visual inspection",
-                  "no baked captions or authored graphics",
-                  "no embedded logo or letterbox",
-                  "semantic fit against assigned story beats",
-                  "global reuse fingerprint check",
-                  "human approval",
-              ],
-          }
-          (root / "candidate-intake.json").write_text(
-              json.dumps(report, indent=2) + "\n", encoding="utf-8"
-          )
-          print(json.dumps(report, indent=2))
+          manifest = json.loads((root / "batch-manifest.json").read_text(encoding="utf-8"))
+          for candidate in manifest["candidates"]:
+              candidate_root = root / candidate["candidate_id"]
+              candidate_root.mkdir(parents=True, exist_ok=True)
+              media = candidate_root / "candidate.mp4"
+              subprocess.run(
+                  [
+                      "curl", "--fail", "--location", "--retry", "2",
+                      "--retry-delay", "2", "--connect-timeout", "20",
+                      "--max-time", "180", candidate["media_url"],
+                      "--output", str(media),
+                  ],
+                  check=True,
+              )
+              assert media.is_file() and media.stat().st_size > 0, media
           PY
 
-      - name: Generate human-QA frames
+      - name: Validate batch and create intake evidence
         run: |
-          ffmpeg -v error -y -i artifacts/episode005-visual-intake/candidate.mp4 -vf "fps=1,scale=540:-2,tile=3x1:padding=8:margin=8:color=black" -frames:v 1 -q:v 2 artifacts/episode005-visual-intake/qa-frames.jpg
+          python - <<'PY'
+          import hashlib
+          import json
+          import subprocess
+          from pathlib import Path
 
-      - name: Generate locked 9x16 crop preview
-        run: |
-          ffmpeg -v error -y -i artifacts/episode005-visual-intake/candidate.mp4 -vf "crop=ih*9/16:ih:(iw-ih*9/16)/2:0,scale=540:960" -frames:v 1 -q:v 2 artifacts/episode005-visual-intake/qa-crop-9x16.jpg
+          root = Path("artifacts/episode005-visual-intake")
+          manifest = json.loads((root / "batch-manifest.json").read_text(encoding="utf-8"))
+          reports = []
+          for candidate in manifest["candidates"]:
+              candidate_id = candidate["candidate_id"]
+              candidate_root = root / candidate_id
+              media = candidate_root / "candidate.mp4"
+              probe = subprocess.run(
+                  [
+                      "ffprobe", "-v", "error", "-show_entries",
+                      "format=duration,size:stream=codec_type,codec_name,width,height,r_frame_rate",
+                      "-of", "json", str(media)
+                  ],
+                  check=True, capture_output=True, text=True
+              )
+              data = json.loads(probe.stdout)
+              streams = [s for s in data.get("streams", []) if s.get("codec_type") == "video"]
+              assert len(streams) == 1, data
+              video = streams[0]
+              duration = float(data["format"]["duration"])
+              width = int(video["width"])
+              height = int(video["height"])
+              assert duration > 0, duration
+              assert width >= 720 and height >= 720, (width, height)
+              sha256 = hashlib.sha256(media.read_bytes()).hexdigest()
+              subprocess.run(
+                  [
+                      "ffmpeg", "-v", "error", "-y", "-i", str(media),
+                      "-vf", "fps=1,scale=540:-2,tile=3x1:padding=8:margin=8:color=black",
+                      "-frames:v", "1", "-q:v", "2", str(candidate_root / "qa-frames.jpg"),
+                  ],
+                  check=True,
+              )
+              subprocess.run(
+                  [
+                      "ffmpeg", "-v", "error", "-y", "-i", str(media),
+                      "-vf", "crop=ih*9/16:ih:(iw-ih*9/16)/2:0,scale=540:960",
+                      "-frames:v", "1", "-q:v", "2", str(candidate_root / "qa-crop-9x16.jpg"),
+                  ],
+                  check=True,
+              )
+              report = {
+                  "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+                  "candidate_id": candidate_id,
+                  "provider": "mixkit",
+                  "source_page_url": candidate["source_page_url"],
+                  "media_url": candidate["media_url"],
+                  "license_name": candidate["license_name"],
+                  "sha256": sha256,
+                  "metadata": {
+                      "duration_seconds": round(duration, 3),
+                      "width": width,
+                      "height": height,
+                      "frame_rate": video.get("r_frame_rate"),
+                      "codec": video.get("codec_name"),
+                  },
+                  "promotion": {
+                      "approved_for_render": False,
+                      "global_catalog_updated": False,
+                      "thumbnail_eligible": False,
+                      "drive_written": False,
+                  },
+                  "qa_required": [
+                      "clean-frame visual inspection",
+                      "no baked captions or authored graphics",
+                      "no embedded logo or letterbox",
+                      "semantic fit against assigned story beats",
+                      "global reuse fingerprint check",
+                      "human approval",
+                  ],
+              }
+              (candidate_root / "candidate-intake.json").write_text(
+                  json.dumps(report, indent=2) + "\\n", encoding="utf-8"
+              )
+              reports.append(report)
 
+          batch_report = {
+              "status": "BATCH_DOWNLOADED_AWAITING_HUMAN_QA",
+              "episode_id": "episode-005",
+              "candidate_count": len(reports),
+              "candidates": reports,
+              "promotion_allowed": False,
+              "global_catalog_updated": False,
+              "render_allowed": False,
+              "drive_written": False,
+          }
+          (root / "batch-intake-report.json").write_text(
+              json.dumps(batch_report, indent=2) + "\\n", encoding="utf-8"
+          )
+          print(json.dumps(batch_report, indent=2))
+          PY
+
+      - name: Upload isolated batch evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: episode005-visual-intake-${{ github.run_id }}
+          path: artifacts/episode005-visual-intake
+          if-no-files-found: error
       - name: Upload isolated candidate evidence
         uses: actions/upload-artifact@v4
         with:
