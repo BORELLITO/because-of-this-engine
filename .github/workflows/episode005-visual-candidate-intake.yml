@@ -11,6 +11,11 @@ on:
         description: "Comma or newline separated selected IDs already recorded in asset-acquisition-plan.json"
         required: true
         type: string
+      refresh_existing:
+        description: "Explicitly regenerate isolated intake evidence for candidates that already have intake metadata; never promotes or mutates the plan"
+        required: true
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -26,6 +31,7 @@ jobs:
       - name: Resolve batch candidates from acquisition plan
         env:
           CANDIDATE_IDS: ${{ inputs.candidate_ids }}
+          REFRESH_EXISTING: ${{ inputs.refresh_existing }}
         run: |
           mkdir -p artifacts/episode005-visual-intake
           python - <<'PY'
@@ -67,7 +73,11 @@ jobs:
               media_url = urlparse(candidate["media_url"])
               assert source_page.scheme == "https" and host_allowed(source_page.hostname, policy["page_hosts"]), candidate["source_page_url"]
               assert media_url.scheme == "https" and host_allowed(media_url.hostname, policy["media_hosts"]), candidate["media_url"]
-              assert not candidate.get("intake_artifact"), f"candidate already has intake evidence: {candidate_id}"
+              refresh_existing = os.environ.get("REFRESH_EXISTING", "false").lower() == "true"
+              if candidate.get("intake_artifact") and not refresh_existing:
+                  raise AssertionError(
+                      f"candidate already has intake evidence; set refresh_existing=true for an explicit QA refresh: {candidate_id}"
+                  )
               selected.append({
                   "candidate_id": candidate_id,
                   "provider": provider,
