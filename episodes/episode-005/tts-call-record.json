@@ -5,16 +5,16 @@
   "provider": "microsoft_edge_tts",
   "model": "edge_neural",
   "voice_id": "en-US-ChristopherNeural",
-  "attempted_at_utc": "2026-11-05T03:21:28Z",
+  "attempted_at_utc": "2026-11-05T03:23:45Z",
   "status": "GENERATED_AND_VALIDATED",
   "audio_produced": true,
-  "request_count": 1,
+  "request_count": 2,
   "retry_policy": "no automatic retry",
   "duration_seconds": 79.704,
-  "audio_sha256": "4e021c52ea57835525b144ecfc08ed6abe41c99dca326866e63c7176cc45f40f",
+  "audio_sha256": "bfa297c85e6de0c1a9dee5fbc74a8f7e75a6cd287bd47ecf6d97f16dd045831a",
   "charged_credits": 0,
-  "workflow_run_id": 41961055314,
-  "artifact_id": 13384688114,
+  "workflow_run_id": 41961294784,
+  "artifact_id": 13384643514,
   "artifact_name": "episode005-edge-tts-preview",
   "captions": {
     "status": "EDGE_TTS_NATIVE_ALIGNMENT_PASS",
@@ -37,5 +37,21 @@
     "audio_produced": false,
     "classification": "HISTORICAL_DIAGNOSTIC_ONLY_NOT_PRODUCTION"
   },
-  "next_action": "Use this validated audio and caption sidecar as the sole inputs for visual asset selection and render; no provider switch."
+  "next_action": "Use artifact 13384643514 as the sole audio and caption input for visual asset selection and render; do not dispatch Edge TTS again unless the script or voice is intentionally changed.",
+  "artifact_digest": "sha256:37afddf1b196b0750418cbcf0484087832eee967f475f7acd1c95c1c4cb8d81c",
+  "request_history": [
+    {
+      "workflow_run_id": 41961055314,
+      "artifact_id": 13384688114,
+      "audio_sha256": "4e021c52ea57835525b144ecfc08ed6abe41c99dca326866e63c7176cc45f40f",
+      "status": "VALIDATED_BUT_SUPERSEDED"
+    },
+    {
+      "workflow_run_id": 41961294784,
+      "artifact_id": 13384643514,
+      "audio_sha256": "bfa297c85e6de0c1a9dee5fbc74a8f7e75a6cd287bd47ecf6d97f16dd045831a",
+      "status": "FROZEN_APPROVED_SOURCE"
+    }
+  ],
+  "workflow_policy": "manual_dispatch_only_after_audio_freeze"
 }
