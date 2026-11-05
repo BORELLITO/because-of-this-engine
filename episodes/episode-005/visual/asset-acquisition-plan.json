@@ -1,7 +1,7 @@
 {
   "plan_id": "episode-005-visual-asset-acquisition-v1",
   "episode_id": "episode-005",
-  "status": "THREE_CANDIDATES_DOWNLOADED_FINGERPRINT_PASS_HUMAN_QA_REQUIRED",
+  "status": "PARTIAL_MANIFEST_APPROVED_REMAINING_SHOTS_BLOCKED",
   "purpose": "Pre-download candidate pool for Episode 005. No candidate is approved for render until downloaded, SHA-256ed, visually inspected, checked for embedded text/logos/letterbox, fingerprinted, and entered into the final video manifest.",
   "frozen_audio_source": {
     "workflow_run_id": 41961294784,
@@ -195,7 +195,7 @@
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "mixkit",
       "license_name": "Mixkit Stock Video Free License",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "media_url": "https://assets.mixkit.co/bohe8920pfehyvq7p1hk5r699s7g",
       "media_url_observed_in_browser": true,
       "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
@@ -236,7 +236,9 @@
         "semantic_fit": "PRELIMINARY_PASS_FOR_S01_S06_S09_AS_SYMBOLIC_WARNING_TEXTURE",
         "locked_9x16_crop": "PRELIMINARY_PASS_NATIVE_VERTICAL",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING"
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false
       }
     },
     {
@@ -248,7 +250,7 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "mixkit",
       "license_name": "Mixkit Stock Video Free License",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "media_url": "https://assets.mixkit.co/videos/28897/28897-720.mp4",
       "media_url_observed_in_browser": true,
       "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
@@ -279,7 +281,9 @@
         "semantic_fit": "PRELIMINARY_PASS_FOR_S07_S10",
         "locked_9x16_crop": "PENDING",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING"
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false
       }
     },
     {
@@ -291,7 +295,7 @@
       "truth_class": "EXPLAINED_PHENOMENON",
       "provider": "mixkit",
       "license_name": "Mixkit Stock Video Free License",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "media_url": "https://assets.mixkit.co/videos/118/118-720.mp4",
       "media_url_observed_in_browser": true,
       "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
@@ -332,7 +336,9 @@
         "semantic_fit": "PRELIMINARY_PASS_FOR_S11_S12",
         "locked_9x16_crop": "PRELIMINARY_PASS",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING"
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false
       }
     },
     {
@@ -347,7 +353,7 @@
       "rights_status": "CANDIDATE_NOT_DOWNLOADED"
     }
   ],
-  "next_action": "Perform human visual QA and approval on the three candidates; after approval, create the final scene-to-asset manifest. Do not update the global catalog or render before the final promotion gate.",
+  "next_action": "Fill unresolved visual beats with additional verified candidates, then run final visual manifest validation. Do not update the global catalog or render until every shot has a fresh asset assignment and final promotion gates pass.",
   "acquisition_route": {
     "status": "THREE_CANDIDATES_DOWNLOADED_FINGERPRINT_PASS_AWAITING_HUMAN_QA",
     "preferred_provider": "mixkit",
@@ -425,5 +431,16 @@
       }
     ],
     "workspace_import": "REPLACED_BY_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE"
+  },
+  "human_approval_record": {
+    "status": "APPROVED_FOR_MANIFEST_ONLY",
+    "approved_at_utc": "2026-11-05T10:10:00Z",
+    "decision": "Approve the three downloaded candidates for the Episode 005 visual manifest.",
+    "constraints": [
+      "red-light candidate remains symbolic and must not be presented as literal Petrov archival evidence",
+      "approval does not authorize global catalog mutation",
+      "approval does not authorize render, Drive write or publication",
+      "all unresolved story shots remain blocked"
+    ]
   }
 }
