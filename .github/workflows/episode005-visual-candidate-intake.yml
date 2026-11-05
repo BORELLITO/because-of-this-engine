@@ -1,35 +1,15 @@
 name: Because Of This Episode 005 Visual Candidate Intake
 
-# Pull-request and manual intake are fail-closed: this workflow creates an auditable candidate artifact.
-# It never promotes an asset to the render manifest, never mutates the global catalog,
-# and never writes to Drive or publishes media.
+# Manual-only, fail-closed intake. Candidate URLs and license metadata are
+# resolved from the checked-in acquisition plan; the operator supplies only
+# the candidate ID. This workflow never promotes, catalogs, renders, writes
+# to Drive or publishes media.
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - ".github/workflows/episode005-visual-candidate-intake.yml"
-      - "episodes/episode-005/visual/asset-acquisition-plan.json"
   workflow_dispatch:
     inputs:
       candidate_id:
-        description: "Candidate identifier from asset-acquisition-plan.json"
+        description: "New candidate ID already recorded in asset-acquisition-plan.json"
         required: true
-        default: "mixkit-worker-industrial-lathe-2244"
-        type: string
-      source_page_url:
-        description: "Verified provider page URL"
-        required: true
-        default: "https://mixkit.co/free-stock-video/worker-operating-an-industrial-lathe-2244/"
-        type: string
-      media_url:
-        description: "Direct media URL observed on the verified provider page"
-        required: true
-        default: "https://assets.mixkit.co/videos/2244/2244-720.mp4"
-        type: string
-      license_name:
-        description: "License visibly stated on the provider page"
-        required: true
-        default: "Mixkit Stock Video Free License"
         type: string
 
 permissions:
@@ -43,6 +23,45 @@ jobs:
       - name: Checkout candidate branch
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
 
+      - name: Resolve candidate from acquisition plan
+        env:
+          CANDIDATE_ID: ${{ inputs.candidate_id }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          candidate_id = os.environ["CANDIDATE_ID"].strip()
+          plan_path = Path("episodes/episode-005/visual/asset-acquisition-plan.json")
+          plan = json.loads(plan_path.read_text(encoding="utf-8"))
+          matches = [
+              item for item in plan.get("candidates", [])
+              if isinstance(item, dict) and item.get("candidate_id") == candidate_id
+          ]
+          assert len(matches) == 1, f"candidate must exist exactly once: {candidate_id}"
+          candidate = matches[0]
+          status = str(candidate.get("rights_status", ""))
+          assert not status.startswith("REJECTED"), (candidate_id, status)
+          assert candidate.get("provider") == "mixkit", candidate.get("provider")
+          assert candidate.get("source_page_url"), "source_page_url missing"
+          assert candidate.get("media_url"), "media_url missing"
+          assert candidate.get("license_name") == "Mixkit Stock Video Free License", candidate.get("license_name")
+          assert not candidate.get("intake_artifact"), "candidate already has intake evidence; create a new candidate ID for reacquisition"
+          with Path(os.environ["GITHUB_ENV"]).open("a", encoding="utf-8") as env_file:
+              env_file.write(f"CANDIDATE_ID={candidate_id}\n")
+              env_file.write(f"SOURCE_PAGE_URL={candidate['source_page_url']}\n")
+              env_file.write(f"MEDIA_URL={candidate['media_url']}\n")
+              env_file.write(f"LICENSE_NAME={candidate['license_name']}\n")
+          print(json.dumps({
+              "candidate_id": candidate_id,
+              "source_page_url": candidate["source_page_url"],
+              "media_url": candidate["media_url"],
+              "license_name": candidate["license_name"],
+              "rights_status": status,
+          }, indent=2))
+          PY
+
       - name: Install media tools
         run: |
           sudo apt-get update
@@ -54,19 +73,12 @@ jobs:
           ffprobe -version | head -n 1
 
       - name: Download candidate without promotion
-        env:
-          MEDIA_URL: ${{ github.event.inputs.media_url || 'https://assets.mixkit.co/videos/2244/2244-720.mp4' }}
         run: |
           mkdir -p artifacts/episode005-visual-intake
-          curl --fail --location --retry 2 --retry-delay 2 --connect-timeout 20 --max-time 180 "$MEDIA_URL"             --output artifacts/episode005-visual-intake/candidate.mp4
+          curl --fail --location --retry 2 --retry-delay 2 --connect-timeout 20 --max-time 180 "$MEDIA_URL" --output artifacts/episode005-visual-intake/candidate.mp4
           test -s artifacts/episode005-visual-intake/candidate.mp4
 
       - name: Validate video and create intake evidence
-        env:
-          CANDIDATE_ID: ${{ github.event.inputs.candidate_id || 'mixkit-worker-industrial-lathe-2244' }}
-          SOURCE_PAGE_URL: ${{ github.event.inputs.source_page_url || 'https://mixkit.co/free-stock-video/worker-operating-an-industrial-lathe-2244/' }}
-          MEDIA_URL: ${{ github.event.inputs.media_url || 'https://assets.mixkit.co/videos/2244/2244-720.mp4' }}
-          LICENSE_NAME: ${{ github.event.inputs.license_name || 'Mixkit Stock Video Free License' }}
         run: |
           python - <<'PY'
           import hashlib
@@ -77,41 +89,6 @@ jobs:
 
           root = Path("artifacts/episode005-visual-intake")
           media = root / "candidate.mp4"
-          allowed = {
-              "mixkit-slowly-approaching-clock-28897": {
-                  "source_page_url": "https://mixkit.co/free-stock-video/slowly-approaching-a-clock-on-a-black-background-28897/",
-                  "media_url": "https://assets.mixkit.co/videos/28897/28897-720.mp4",
-              },
-              "mixkit-cloudy-sky-118": {
-                  "source_page_url": "https://mixkit.co/free-stock-video/cloudy-sky-118/",
-                  "media_url": "https://assets.mixkit.co/videos/118/118-720.mp4",
-              },
-              "mixkit-large-satellite-antenna-2650": {
-                  "source_page_url": "https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/",
-                  "media_url": "https://assets.mixkit.co/videos/2650/2650-720.mp4",
-              },
-              "mixkit-clock-mechanism-3651": {
-                  "source_page_url": "https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/",
-                  "media_url": "https://assets.mixkit.co/videos/3651/3651-720.mp4",
-              },
-
-              "mixkit-young-engineer-29991": {
-                  "source_page_url": "https://mixkit.co/free-stock-video/young-engineer-programming-in-his-workshop-seen-up-close-29991/",
-                  "media_url": "https://assets.mixkit.co/videos/29991/29991-720.mp4",
-              },
-              "mixkit-worker-industrial-lathe-2244": {
-                  "source_page_url": "https://mixkit.co/free-stock-video/worker-operating-an-industrial-lathe-2244/",
-                  "media_url": "https://assets.mixkit.co/videos/2244/2244-720.mp4",
-              },
-              "mixkit-abstract-red-glow-101432": {
-                  "source_page_url": "https://mixkit.co/free-stock-video/abstract-red-glow-101432/",
-                  "media_url": "https://assets.mixkit.co/bohe8920pfehyvq7p1hk5r699s7g",
-              },
-          }
-          candidate_id = os.environ["CANDIDATE_ID"]
-          assert candidate_id in allowed, candidate_id
-          assert os.environ["SOURCE_PAGE_URL"] == allowed[candidate_id]["source_page_url"]
-          assert os.environ["MEDIA_URL"] == allowed[candidate_id]["media_url"]
           probe = subprocess.run(
               [
                   "ffprobe", "-v", "error", "-show_entries",
@@ -132,7 +109,7 @@ jobs:
           sha256 = hashlib.sha256(media.read_bytes()).hexdigest()
           report = {
               "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
-              "candidate_id": candidate_id,
+              "candidate_id": os.environ["CANDIDATE_ID"],
               "provider": "mixkit",
               "source_page_url": os.environ["SOURCE_PAGE_URL"],
               "media_url": os.environ["MEDIA_URL"],
@@ -157,7 +134,7 @@ jobs:
                   "no embedded logo or letterbox",
                   "semantic fit against assigned story beats",
                   "global reuse fingerprint check",
-                  "human approval"
+                  "human approval",
               ],
           }
           (root / "candidate-intake.json").write_text(
@@ -168,15 +145,15 @@ jobs:
 
       - name: Generate human-QA frames
         run: |
-          ffmpeg -v error -y -i artifacts/episode005-visual-intake/candidate.mp4             -vf "fps=1,scale=540:-2,tile=3x1:padding=8:margin=8:color=black"             -frames:v 1 -q:v 2 artifacts/episode005-visual-intake/qa-frames.jpg
+          ffmpeg -v error -y -i artifacts/episode005-visual-intake/candidate.mp4 -vf "fps=1,scale=540:-2,tile=3x1:padding=8:margin=8:color=black" -frames:v 1 -q:v 2 artifacts/episode005-visual-intake/qa-frames.jpg
 
       - name: Generate locked 9x16 crop preview
         run: |
-          ffmpeg -v error -y -i artifacts/episode005-visual-intake/candidate.mp4             -vf "crop=ih*9/16:ih:(iw-ih*9/16)/2:0,scale=540:960"             -frames:v 1 -q:v 2 artifacts/episode005-visual-intake/qa-crop-9x16.jpg
+          ffmpeg -v error -y -i artifacts/episode005-visual-intake/candidate.mp4 -vf "crop=ih*9/16:ih:(iw-ih*9/16)/2:0,scale=540:960" -frames:v 1 -q:v 2 artifacts/episode005-visual-intake/qa-crop-9x16.jpg
 
       - name: Upload isolated candidate evidence
         uses: actions/upload-artifact@v4
         with:
-          name: episode005-visual-intake-${{ github.event.inputs.candidate_id || 'mixkit-worker-industrial-lathe-2244' }}
+          name: episode005-visual-intake-${{ inputs.candidate_id }}
           path: artifacts/episode005-visual-intake
           if-no-files-found: error
