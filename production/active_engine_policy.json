@@ -26,10 +26,14 @@
     "voice_name": "Charon",
     "model": "gemini-3.8-flash-tts",
     "provider_fallback": "forbidden",
-    "migration_status": "NOT_STARTED",
-    "target_provider": "google_cloud_tts",
-    "target_voice": "en-US-Chirp3-HD-Charon",
-    "real_call_required_for_ready": true
+    "migration_status": "DIRECT_GOOGLE_GEMINI_API_ONLY",
+    "target_provider": "google_gemini_api",
+    "target_voice": "Charon",
+    "real_call_required_for_ready": true,
+    "direct_api_route": "production/gemini_tts.py",
+    "endpoint": "https://generativelanguage.googleapis.com/v1beta",
+    "credential": "GEMINI_API_KEY",
+    "creative_claw_allowed": false
   },
   "publication_policy": "manual_only",
   "render_contract": {
