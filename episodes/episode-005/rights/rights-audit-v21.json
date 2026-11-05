@@ -7,7 +7,7 @@
     "mixkit": "https://mixkit.co/license/modal/videoFree/",
     "pixabay": "https://pixabay.com/service/license-summary/"
   },
-  "global_status": "BLOCKED_PENDING_FULL_FILE_QA_AND_PER_ASSET_RENDER_APPROVAL",
+  "global_status": "BLOCKED_PENDING_DIRECT_MEDIA_PREVIEW_AND_PER_ASSET_RENDER_APPROVAL",
   "promotion_policy": {
     "approved_for_manifest_only": true,
     "approved_for_render": false,
@@ -36,7 +36,9 @@
       ],
       "author_status": "MISSING_FROM_LEDGER",
       "visual_rights_review": "REQUIRED_BRAND_LOGO_AND_THIRD_PARTY_CHECK",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL"
+      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "page_license_status": "PASS_ITEM_PAGE_FREE_LICENSE_VISIBLE",
+      "full_asset_review_status": "PENDING_FULL_FILE_QA"
     },
     {
       "asset_id": "mixkit-slowly-approaching-clock-28897",
@@ -58,7 +60,9 @@
       ],
       "author_status": "MISSING_FROM_LEDGER",
       "visual_rights_review": "REQUIRED_BRAND_LOGO_AND_THIRD_PARTY_CHECK",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL"
+      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "page_license_status": "PASS_ITEM_PAGE_FREE_LICENSE_VISIBLE",
+      "full_asset_review_status": "PENDING_FULL_FILE_QA"
     },
     {
       "asset_id": "mixkit-cloudy-sky-118",
@@ -80,7 +84,9 @@
       ],
       "author_status": "MISSING_FROM_LEDGER",
       "visual_rights_review": "REQUIRED_BRAND_LOGO_AND_THIRD_PARTY_CHECK",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL"
+      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "page_license_status": "PASS_ITEM_PAGE_FREE_LICENSE_VISIBLE",
+      "full_asset_review_status": "PENDING_FULL_FILE_QA"
     },
     {
       "asset_id": "mixkit-clock-mechanism-3651",
@@ -102,7 +108,9 @@
       ],
       "author_status": "MISSING_FROM_LEDGER",
       "visual_rights_review": "REQUIRED_BRAND_LOGO_AND_THIRD_PARTY_CHECK",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL"
+      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "page_license_status": "PASS_ITEM_PAGE_FREE_LICENSE_VISIBLE",
+      "full_asset_review_status": "PENDING_FULL_FILE_QA"
     },
     {
       "asset_id": "mixkit-large-satellite-antenna-2650",
@@ -124,7 +132,9 @@
       ],
       "author_status": "MISSING_FROM_LEDGER",
       "visual_rights_review": "REQUIRED_BRAND_LOGO_AND_THIRD_PARTY_CHECK",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL"
+      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "page_license_status": "PASS_ITEM_PAGE_FREE_LICENSE_VISIBLE",
+      "full_asset_review_status": "PENDING_FULL_FILE_QA"
     },
     {
       "asset_id": "mixkit-young-engineer-29991",
@@ -193,8 +203,10 @@
         "S06"
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
-      "visual_rights_review": "REQUIRED_BRAND_LOGO_AND_THIRD_PARTY_CHECK",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL"
+      "visual_rights_review": "PENDING_DIRECT_MEDIA_PREVIEW",
+      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
+      "full_asset_review_status": "BLOCKED_BROWSER_PREVIEW_NOT_RENDERED"
     },
     {
       "asset_id": "pixabay-antenna-astronomy-communication-40041",
@@ -215,8 +227,10 @@
         "S12"
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
-      "visual_rights_review": "REQUIRED_BRAND_LOGO_AND_THIRD_PARTY_CHECK",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL"
+      "visual_rights_review": "PENDING_DIRECT_MEDIA_PREVIEW",
+      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
+      "full_asset_review_status": "BLOCKED_BROWSER_PREVIEW_NOT_RENDERED"
     },
     {
       "asset_id": "pixabay-hallway-dark-corridor-20837",
@@ -237,8 +251,10 @@
         "S14"
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
-      "visual_rights_review": "REQUIRED_BRAND_LOGO_AND_THIRD_PARTY_CHECK",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL"
+      "visual_rights_review": "PENDING_DIRECT_MEDIA_PREVIEW",
+      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
+      "full_asset_review_status": "BLOCKED_BROWSER_PREVIEW_NOT_RENDERED"
     },
     {
       "asset_id": "pixabay-alert-alarm-war-danger-risk-205519",
@@ -259,8 +275,10 @@
         "S05"
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
-      "visual_rights_review": "REQUIRED_BRAND_LOGO_AND_THIRD_PARTY_CHECK",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL"
+      "visual_rights_review": "PENDING_DIRECT_MEDIA_PREVIEW",
+      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
+      "full_asset_review_status": "BLOCKED_BROWSER_PREVIEW_NOT_RENDERED"
     },
     {
       "asset_id": "pixabay-radar-radar-screen-rotation-circles-4511",
@@ -281,8 +299,10 @@
         "S08"
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
-      "visual_rights_review": "REQUIRED_BRAND_LOGO_AND_THIRD_PARTY_CHECK",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL"
+      "visual_rights_review": "PENDING_DIRECT_MEDIA_PREVIEW",
+      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
+      "full_asset_review_status": "BLOCKED_BROWSER_PREVIEW_NOT_RENDERED"
     },
     {
       "asset_id": "pixabay-button-press-red-business-click-502",
@@ -303,8 +323,10 @@
         "S09"
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
-      "visual_rights_review": "REQUIRED_BRAND_LOGO_AND_THIRD_PARTY_CHECK",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL"
+      "visual_rights_review": "PENDING_DIRECT_MEDIA_PREVIEW",
+      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
+      "full_asset_review_status": "BLOCKED_BROWSER_PREVIEW_NOT_RENDERED"
     },
     {
       "asset_id": "pixabay-typewriter-typing-writing-author-1335",
@@ -325,8 +347,10 @@
         "S13"
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
-      "visual_rights_review": "REQUIRED_BRAND_LOGO_AND_THIRD_PARTY_CHECK",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL"
+      "visual_rights_review": "PENDING_DIRECT_MEDIA_PREVIEW",
+      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
+      "full_asset_review_status": "BLOCKED_BROWSER_PREVIEW_NOT_RENDERED"
     },
     {
       "asset_id": "pixabay-dark-light-lens-flare-abstract-250413",
@@ -347,8 +371,10 @@
         "S15"
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
-      "visual_rights_review": "REQUIRED_BRAND_LOGO_AND_THIRD_PARTY_CHECK",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL"
+      "visual_rights_review": "PENDING_DIRECT_MEDIA_PREVIEW",
+      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
+      "full_asset_review_status": "BLOCKED_BROWSER_PREVIEW_NOT_RENDERED"
     },
     {
       "asset_id": "pixabay-particles-orange-red-dust-effect-7957",
@@ -369,9 +395,12 @@
         "S16"
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
-      "visual_rights_review": "REQUIRED_BRAND_LOGO_AND_THIRD_PARTY_CHECK",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL"
+      "visual_rights_review": "PENDING_DIRECT_MEDIA_PREVIEW",
+      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
+      "full_asset_review_status": "BLOCKED_BROWSER_PREVIEW_NOT_RENDERED"
     }
   ],
-  "last_adjustment": "S03/S04 preview inspection completed in Cloud Browser on 2026-11-05"
+  "last_adjustment": "Differentiated Mixkit preview availability from Pixabay page-only evidence on 2026-11-05",
+  "qa_rule": "License page evidence is not equivalent to visual QA; no asset is promoted from manifest-only based on provider license alone."
 }
