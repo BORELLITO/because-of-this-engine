@@ -7,10 +7,10 @@
     "mixkit": "https://mixkit.co/license/modal/videoFree/",
     "pixabay": "https://pixabay.com/service/license-summary/"
   },
-  "global_status": "BLOCKED_PENDING_EXPLICIT_RENDER_APPROVAL_PER_ASSET",
+  "global_status": "APPROVED_FOR_RENDER_PENDING_MANUAL_PREFLIGHT",
   "promotion_policy": {
     "approved_for_manifest_only": true,
-    "approved_for_render": false,
+    "approved_for_render": true,
     "global_catalog_updated": false,
     "drive_written": false,
     "publication_authorized": false
@@ -36,7 +36,7 @@
       ],
       "author_status": "CONFIRMED_MIXKIT",
       "visual_rights_review": "PASS_ABSTRACT_RED_GLOW_NO_IDENTIFIABLE_ELEMENTS",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "render_rights_status": "APPROVED_FOR_RENDER",
       "page_license_status": "PASS_ITEM_PAGE_FREE_LICENSE_VISIBLE",
       "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
       "visual_qa_status": "PASS",
@@ -46,7 +46,20 @@
       "contributor_url": "https://mixkit.co/@mixkit/",
       "author_evidence": "https://mixkit.co/free-stock-video/abstract-red-glow-101432/",
       "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE",
-      "license_confirmation_checked_at": "2026-11-05"
+      "license_confirmation_checked_at": "2026-11-05",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "render_approval": {
+        "status": "APPROVED",
+        "approved_at_utc": "2026-11-05T22:56:14Z",
+        "decision": "User explicitly approved this active asset for Episode 005 render.",
+        "constraints": [
+          "representational footage is not literal Petrov archival evidence",
+          "no global catalog mutation",
+          "no Drive write",
+          "publication remains manual-only"
+        ]
+      }
     },
     {
       "asset_id": "mixkit-slowly-approaching-clock-28897",
@@ -68,7 +81,7 @@
       ],
       "author_status": "CONFIRMED_ARVIZUM",
       "visual_rights_review": "PASS_GENERIC_CLOCK_NO_BRAND_VISIBLE",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "render_rights_status": "APPROVED_FOR_RENDER",
       "page_license_status": "PASS_ITEM_PAGE_FREE_LICENSE_VISIBLE",
       "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
       "visual_qa_status": "PASS",
@@ -78,7 +91,20 @@
       "contributor_url": "https://mixkit.co/@arvizum/",
       "author_evidence": "https://mixkit.co/free-stock-video/slowly-approaching-a-clock-on-a-black-background-28897/",
       "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE",
-      "license_confirmation_checked_at": "2026-11-05"
+      "license_confirmation_checked_at": "2026-11-05",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "render_approval": {
+        "status": "APPROVED",
+        "approved_at_utc": "2026-11-05T22:56:14Z",
+        "decision": "User explicitly approved this active asset for Episode 005 render.",
+        "constraints": [
+          "representational footage is not literal Petrov archival evidence",
+          "no global catalog mutation",
+          "no Drive write",
+          "publication remains manual-only"
+        ]
+      }
     },
     {
       "asset_id": "mixkit-cloudy-sky-118",
@@ -100,7 +126,7 @@
       ],
       "author_status": "CONFIRMED_EDGAR_FERNANDEZ",
       "visual_rights_review": "PASS_GENERIC_CLOUDY_SKY_NO_IDENTIFIABLE_ELEMENTS",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "render_rights_status": "APPROVED_FOR_RENDER",
       "page_license_status": "PASS_ITEM_PAGE_FREE_LICENSE_VISIBLE",
       "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
       "visual_qa_status": "PASS",
@@ -110,7 +136,20 @@
       "contributor_url": "https://mixkit.co/@edgarfernandez/",
       "author_evidence": "https://mixkit.co/free-stock-video/cloudy-sky-118/",
       "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE",
-      "license_confirmation_checked_at": "2026-11-05"
+      "license_confirmation_checked_at": "2026-11-05",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "render_approval": {
+        "status": "APPROVED",
+        "approved_at_utc": "2026-11-05T22:56:14Z",
+        "decision": "User explicitly approved this active asset for Episode 005 render.",
+        "constraints": [
+          "representational footage is not literal Petrov archival evidence",
+          "no global catalog mutation",
+          "no Drive write",
+          "publication remains manual-only"
+        ]
+      }
     },
     {
       "asset_id": "mixkit-clock-mechanism-3651",
@@ -132,7 +171,7 @@
       ],
       "author_status": "CONFIRMED_EDGAR_FERNANDEZ",
       "visual_rights_review": "PASS_GENERIC_CLOCK_MECHANISM_WITH_NONBRAND_DATE_TEXT",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "render_rights_status": "APPROVED_FOR_RENDER",
       "page_license_status": "PASS_ITEM_PAGE_FREE_LICENSE_VISIBLE",
       "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
       "visual_qa_status": "PASS",
@@ -142,7 +181,20 @@
       "contributor_url": "https://mixkit.co/@edgarfernandez/",
       "author_evidence": "https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/",
       "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE",
-      "license_confirmation_checked_at": "2026-11-05"
+      "license_confirmation_checked_at": "2026-11-05",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "render_approval": {
+        "status": "APPROVED",
+        "approved_at_utc": "2026-11-05T22:56:14Z",
+        "decision": "User explicitly approved this active asset for Episode 005 render.",
+        "constraints": [
+          "representational footage is not literal Petrov archival evidence",
+          "no global catalog mutation",
+          "no Drive write",
+          "publication remains manual-only"
+        ]
+      }
     },
     {
       "asset_id": "mixkit-large-satellite-antenna-2650",
@@ -164,7 +216,7 @@
       ],
       "author_status": "CONFIRMED_MATTHIAS_GROENEVELD",
       "visual_rights_review": "PASS_SATELLITE_ANTENNA_NO_PERSON_OR_BRAND_VISIBLE",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "render_rights_status": "APPROVED_FOR_RENDER",
       "page_license_status": "PASS_ITEM_PAGE_FREE_LICENSE_VISIBLE",
       "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
       "visual_qa_status": "PASS",
@@ -174,7 +226,20 @@
       "contributor_url": "https://mixkit.co/@matthiasgroeneveld/",
       "author_evidence": "https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/",
       "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE",
-      "license_confirmation_checked_at": "2026-11-05"
+      "license_confirmation_checked_at": "2026-11-05",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "render_approval": {
+        "status": "APPROVED",
+        "approved_at_utc": "2026-11-05T22:56:14Z",
+        "decision": "User explicitly approved this active asset for Episode 005 render.",
+        "constraints": [
+          "representational footage is not literal Petrov archival evidence",
+          "no global catalog mutation",
+          "no Drive write",
+          "publication remains manual-only"
+        ]
+      }
     },
     {
       "asset_id": "mixkit-young-engineer-29991",
@@ -196,13 +261,26 @@
       ],
       "author_status": "CONFIRMED_EDGAR_FERNANDEZ",
       "visual_rights_review": "PASS_NO_FACE_GENERIC_TABLET_WITH_GENERIC_CODE_TEXT",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "render_rights_status": "APPROVED_FOR_RENDER",
       "contributor_url": "https://mixkit.co/@edgarfernandez/",
       "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
       "visual_qa_status": "PASS",
       "visual_qa_evidence": "artifact 13411851653 / qa-frames.jpg",
       "third_party_risk": "GENERIC_SCREEN_TEXT_ONLY",
-      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION"
+      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "render_approval": {
+        "status": "APPROVED",
+        "approved_at_utc": "2026-11-05T22:56:14Z",
+        "decision": "User explicitly approved this active asset for Episode 005 render.",
+        "constraints": [
+          "representational footage is not literal Petrov archival evidence",
+          "no global catalog mutation",
+          "no Drive write",
+          "publication remains manual-only"
+        ]
+      }
     },
     {
       "asset_id": "mixkit-worker-industrial-lathe-2244",
@@ -224,13 +302,26 @@
       ],
       "author_status": "CONFIRMED_EDGAR_FERNANDEZ",
       "visual_rights_review": "PASS_HAND_ONLY_GENERIC_EMERGENCY_STOP_LABEL",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "render_rights_status": "APPROVED_FOR_RENDER",
       "contributor_url": "https://mixkit.co/@edgarfernandez/",
       "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
       "visual_qa_status": "PASS",
       "visual_qa_evidence": "artifact 13412703858 / qa-frames.jpg",
       "third_party_risk": "GENERIC_LABEL_ONLY",
-      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION"
+      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "render_approval": {
+        "status": "APPROVED",
+        "approved_at_utc": "2026-11-05T22:56:14Z",
+        "decision": "User explicitly approved this active asset for Episode 005 render.",
+        "constraints": [
+          "representational footage is not literal Petrov archival evidence",
+          "no global catalog mutation",
+          "no Drive write",
+          "publication remains manual-only"
+        ]
+      }
     },
     {
       "asset_id": "pixabay-led-indicator-lights-316712",
@@ -252,13 +343,26 @@
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
       "visual_rights_review": "PASS_ABSTRACT_LED_INDICATORS_NO_IDENTIFIABLE_ELEMENTS",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "render_rights_status": "APPROVED_FOR_RENDER",
       "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
       "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
       "visual_qa_status": "PASS",
       "visual_qa_evidence": "artifact 13426556747 / pixabay-led-indicator-lights-316712/qa-frames.jpg",
       "third_party_risk": "NONE_VISIBLE",
-      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION"
+      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "render_approval": {
+        "status": "APPROVED",
+        "approved_at_utc": "2026-11-05T22:56:14Z",
+        "decision": "User explicitly approved this active asset for Episode 005 render.",
+        "constraints": [
+          "representational footage is not literal Petrov archival evidence",
+          "no global catalog mutation",
+          "no Drive write",
+          "publication remains manual-only"
+        ]
+      }
     },
     {
       "asset_id": "pixabay-antenna-astronomy-communication-40041",
@@ -280,13 +384,26 @@
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
       "visual_rights_review": "PASS_SATELLITE_ARRAY_NO_PERSON_OR_BRAND_VISIBLE",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "render_rights_status": "APPROVED_FOR_RENDER",
       "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
       "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
       "visual_qa_status": "PASS",
       "visual_qa_evidence": "artifact 13427442382 / pixabay-antenna-astronomy-communication-40041/qa-frames.jpg",
       "third_party_risk": "GENERIC_INFRASTRUCTURE_ONLY",
-      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION"
+      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "render_approval": {
+        "status": "APPROVED",
+        "approved_at_utc": "2026-11-05T22:56:14Z",
+        "decision": "User explicitly approved this active asset for Episode 005 render.",
+        "constraints": [
+          "representational footage is not literal Petrov archival evidence",
+          "no global catalog mutation",
+          "no Drive write",
+          "publication remains manual-only"
+        ]
+      }
     },
     {
       "asset_id": "pixabay-hallway-dark-corridor-20837",
@@ -308,12 +425,25 @@
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
       "visual_rights_review": "PASS_GENERIC_CORRIDOR_NO_PERSON_OR_BRAND_VISIBLE",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "render_rights_status": "APPROVED_FOR_RENDER",
       "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
       "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
       "visual_qa_status": "PASS",
       "visual_qa_evidence": "artifact 13428247933 / pixabay-hallway-dark-corridor-20837/qa-frames.jpg",
-      "third_party_risk": "NONE_VISIBLE"
+      "third_party_risk": "NONE_VISIBLE",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "render_approval": {
+        "status": "APPROVED",
+        "approved_at_utc": "2026-11-05T22:56:14Z",
+        "decision": "User explicitly approved this active asset for Episode 005 render.",
+        "constraints": [
+          "representational footage is not literal Petrov archival evidence",
+          "no global catalog mutation",
+          "no Drive write",
+          "publication remains manual-only"
+        ]
+      }
     },
     {
       "asset_id": "pixabay-radar-black-green-target-symbol-57670",
@@ -335,13 +465,26 @@
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
       "visual_rights_review": "PASS_GENERIC_RADAR_NO_PERSON_BRAND_OR_READABLE_TEXT",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "render_rights_status": "APPROVED_FOR_RENDER",
       "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
       "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
       "visual_qa_status": "PASS",
       "visual_qa_evidence": "artifact 13437466569 / pixabay-radar-black-green-target-symbol-57670/qa-frames.jpg",
       "third_party_risk": "NONE_VISIBLE",
-      "qa_note": "Five normalized direct-media frames show a generic radar/target graphic with no recognizable person, brand or readable third-party text."
+      "qa_note": "Five normalized direct-media frames show a generic radar/target graphic with no recognizable person, brand or readable third-party text.",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "render_approval": {
+        "status": "APPROVED",
+        "approved_at_utc": "2026-11-05T22:56:14Z",
+        "decision": "User explicitly approved this active asset for Episode 005 render.",
+        "constraints": [
+          "representational footage is not literal Petrov archival evidence",
+          "no global catalog mutation",
+          "no Drive write",
+          "publication remains manual-only"
+        ]
+      }
     },
     {
       "asset_id": "pixabay-radar-radar-screen-rotation-circles-4511",
@@ -363,12 +506,25 @@
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
       "visual_rights_review": "PASS_GENERIC_GRAPHIC_NO_BRAND_OR_TEXT_VISIBLE",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "render_rights_status": "APPROVED_FOR_RENDER",
       "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
       "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
       "visual_qa_status": "PASS",
       "visual_qa_evidence": "artifact 13437466569 / pixabay-radar-radar-screen-rotation-circles-4511/qa-frames.jpg",
-      "third_party_risk": "NONE_VISIBLE"
+      "third_party_risk": "NONE_VISIBLE",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "render_approval": {
+        "status": "APPROVED",
+        "approved_at_utc": "2026-11-05T22:56:14Z",
+        "decision": "User explicitly approved this active asset for Episode 005 render.",
+        "constraints": [
+          "representational footage is not literal Petrov archival evidence",
+          "no global catalog mutation",
+          "no Drive write",
+          "publication remains manual-only"
+        ]
+      }
     },
     {
       "asset_id": "pixabay-button-press-red-business-click-502",
@@ -390,12 +546,25 @@
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
       "visual_rights_review": "PASS_GENERIC_3D_OBJECT_NO_BRAND_OR_TEXT_VISIBLE",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "render_rights_status": "APPROVED_FOR_RENDER",
       "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
       "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
       "visual_qa_status": "PASS",
       "visual_qa_evidence": "artifact 13437466569 / pixabay-button-press-red-business-click-502/qa-frames.jpg",
-      "third_party_risk": "NONE_VISIBLE"
+      "third_party_risk": "NONE_VISIBLE",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "render_approval": {
+        "status": "APPROVED",
+        "approved_at_utc": "2026-11-05T22:56:14Z",
+        "decision": "User explicitly approved this active asset for Episode 005 render.",
+        "constraints": [
+          "representational footage is not literal Petrov archival evidence",
+          "no global catalog mutation",
+          "no Drive write",
+          "publication remains manual-only"
+        ]
+      }
     },
     {
       "asset_id": "pixabay-typewriter-typing-writing-author-1335",
@@ -417,12 +586,25 @@
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
       "visual_rights_review": "PASS_GENERIC_TYPEWRITER_NO_BRAND_OR_READABLE_TEXT_VISIBLE",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "render_rights_status": "APPROVED_FOR_RENDER",
       "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
       "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
       "visual_qa_status": "PASS_WITH_GENERIC_MECHANISM_GUARDRAIL",
       "visual_qa_evidence": "artifact 13437466569 / pixabay-typewriter-typing-writing-author-1335/qa-frames.jpg",
-      "third_party_risk": "GENERIC_MECHANISM_ONLY"
+      "third_party_risk": "GENERIC_MECHANISM_ONLY",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "render_approval": {
+        "status": "APPROVED",
+        "approved_at_utc": "2026-11-05T22:56:14Z",
+        "decision": "User explicitly approved this active asset for Episode 005 render.",
+        "constraints": [
+          "representational footage is not literal Petrov archival evidence",
+          "no global catalog mutation",
+          "no Drive write",
+          "publication remains manual-only"
+        ]
+      }
     },
     {
       "asset_id": "pixabay-dark-light-lens-flare-abstract-250413",
@@ -444,12 +626,25 @@
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
       "visual_rights_review": "PASS_ABSTRACT_NO_IDENTIFIABLE_ELEMENTS",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "render_rights_status": "APPROVED_FOR_RENDER",
       "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
       "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
       "visual_qa_status": "PASS",
       "visual_qa_evidence": "artifact 13437466569 / pixabay-dark-light-lens-flare-abstract-250413/qa-frames.jpg",
-      "third_party_risk": "NONE_VISIBLE"
+      "third_party_risk": "NONE_VISIBLE",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "render_approval": {
+        "status": "APPROVED",
+        "approved_at_utc": "2026-11-05T22:56:14Z",
+        "decision": "User explicitly approved this active asset for Episode 005 render.",
+        "constraints": [
+          "representational footage is not literal Petrov archival evidence",
+          "no global catalog mutation",
+          "no Drive write",
+          "publication remains manual-only"
+        ]
+      }
     },
     {
       "asset_id": "pixabay-particles-orange-red-dust-effect-7957",
@@ -471,14 +666,27 @@
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
       "visual_rights_review": "PASS_ABSTRACT_NO_IDENTIFIABLE_ELEMENTS",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "render_rights_status": "APPROVED_FOR_RENDER",
       "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
       "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
       "visual_qa_status": "PASS",
       "visual_qa_evidence": "artifact 13437466569 / pixabay-particles-orange-red-dust-effect-7957/qa-frames.jpg",
-      "third_party_risk": "NONE_VISIBLE"
+      "third_party_risk": "NONE_VISIBLE",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "render_approval": {
+        "status": "APPROVED",
+        "approved_at_utc": "2026-11-05T22:56:14Z",
+        "decision": "User explicitly approved this active asset for Episode 005 render.",
+        "constraints": [
+          "representational footage is not literal Petrov archival evidence",
+          "no global catalog mutation",
+          "no Drive write",
+          "publication remains manual-only"
+        ]
+      }
     }
   ],
-  "last_adjustment": "Direct-media visual QA passed for all 16 active assets. All seven Mixkit contributors and item-page Free License evidence are now recorded; explicit per-asset render approval remains pending.",
+  "last_adjustment": "User explicitly approved render use for all 16 active assets on 2026-11-05. Rights evidence, direct-media QA, contributor/license checks and no-reuse fingerprints are complete; production remains fail-closed pending manual preflight.",
   "qa_rule": "Direct-media visual QA is separate from provider license evidence. Generic text/labels, representational infrastructure and symbolic graphics pass only with editorial guardrails; no asset is promoted to render without explicit per-asset approval."
 }
