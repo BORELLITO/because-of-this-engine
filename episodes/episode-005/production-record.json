@@ -236,7 +236,7 @@
       "asset_id": "mixkit-abstract-red-glow-101432",
       "source_url": "https://mixkit.co/free-stock-video/abstract-red-glow-101432/",
       "provider": "mixkit",
-      "author": "Provider page author not recorded in current manifest",
+      "author": "MIXKIT",
       "license_name": "Mixkit Stock Video Free License",
       "commercial_use": true,
       "platform_scope": [
@@ -252,16 +252,19 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "approved_for_render": false,
-      "approval_scope": "manifest_only",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+      "rights_status": "APPROVED_FOR_RENDER",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "contributor_url": "https://mixkit.co/@mixkit/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
     },
     {
       "asset_id": "mixkit-slowly-approaching-clock-28897",
       "source_url": "https://mixkit.co/free-stock-video/slowly-approaching-a-clock-on-a-black-background-28897/",
       "provider": "mixkit",
-      "author": "Provider page author not recorded in current manifest",
+      "author": "ARVIZUM",
       "license_name": "Mixkit Stock Video Free License",
       "commercial_use": true,
       "platform_scope": [
@@ -277,16 +280,19 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "approved_for_render": false,
-      "approval_scope": "manifest_only",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+      "rights_status": "APPROVED_FOR_RENDER",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "contributor_url": "https://mixkit.co/@arvizum/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
     },
     {
       "asset_id": "mixkit-cloudy-sky-118",
       "source_url": "https://mixkit.co/free-stock-video/cloudy-sky-118/",
       "provider": "mixkit",
-      "author": "Provider page author not recorded in current manifest",
+      "author": "EDGAR FERNANDEZ",
       "license_name": "Mixkit Stock Video Free License",
       "commercial_use": true,
       "platform_scope": [
@@ -302,16 +308,19 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "approved_for_render": false,
-      "approval_scope": "manifest_only",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+      "rights_status": "APPROVED_FOR_RENDER",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "contributor_url": "https://mixkit.co/@edgarfernandez/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
     },
     {
       "asset_id": "mixkit-clock-mechanism-3651",
       "source_url": "https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/",
       "provider": "mixkit",
-      "author": "Provider page author not recorded in current manifest",
+      "author": "EDGAR FERNANDEZ",
       "license_name": "Mixkit Stock Video Free License",
       "commercial_use": true,
       "platform_scope": [
@@ -327,16 +336,19 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "approved_for_render": false,
-      "approval_scope": "manifest_only",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+      "rights_status": "APPROVED_FOR_RENDER",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "contributor_url": "https://mixkit.co/@edgarfernandez/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
     },
     {
       "asset_id": "mixkit-large-satellite-antenna-2650",
       "source_url": "https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/",
       "provider": "mixkit",
-      "author": "Provider page author not recorded in current manifest",
+      "author": "MATTHIAS GROENEVELD",
       "license_name": "Mixkit Stock Video Free License",
       "commercial_use": true,
       "platform_scope": [
@@ -352,16 +364,19 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "approved_for_render": false,
-      "approval_scope": "manifest_only",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+      "rights_status": "APPROVED_FOR_RENDER",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "contributor_url": "https://mixkit.co/@matthiasgroeneveld/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
     },
     {
       "asset_id": "mixkit-young-engineer-29991",
       "source_url": "https://mixkit.co/free-stock-video/young-engineer-programming-in-his-workshop-seen-up-close-29991/",
       "provider": "mixkit",
-      "author": "Provider page author not recorded in current manifest",
+      "author": "EDGAR FERNANDEZ",
       "license_name": "Mixkit Stock Video Free License",
       "commercial_use": true,
       "platform_scope": [
@@ -377,16 +392,19 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "approved_for_render": false,
-      "approval_scope": "manifest_only",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+      "rights_status": "APPROVED_FOR_RENDER",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "contributor_url": "https://mixkit.co/@edgarfernandez/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
     },
     {
       "asset_id": "mixkit-worker-industrial-lathe-2244",
       "source_url": "https://mixkit.co/free-stock-video/worker-operating-an-industrial-lathe-2244/",
       "provider": "mixkit",
-      "author": "Provider page author not recorded in current manifest",
+      "author": "EDGAR FERNANDEZ",
       "license_name": "Mixkit Stock Video Free License",
       "commercial_use": true,
       "platform_scope": [
@@ -402,10 +420,13 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "approved_for_render": false,
-      "approval_scope": "manifest_only",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+      "rights_status": "APPROVED_FOR_RENDER",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "contributor_url": "https://mixkit.co/@edgarfernandez/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
     },
     {
       "asset_id": "pixabay-led-indicator-lights-316712",
@@ -427,10 +448,12 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "approved_for_render": false,
-      "approval_scope": "manifest_only",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+      "rights_status": "APPROVED_FOR_RENDER",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
     },
     {
       "asset_id": "pixabay-antenna-astronomy-communication-40041",
@@ -452,10 +475,12 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "approved_for_render": false,
-      "approval_scope": "manifest_only",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+      "rights_status": "APPROVED_FOR_RENDER",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
     },
     {
       "asset_id": "pixabay-hallway-dark-corridor-20837",
@@ -477,10 +502,12 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "approved_for_render": false,
-      "approval_scope": "manifest_only",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+      "rights_status": "APPROVED_FOR_RENDER",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
     },
     {
       "asset_id": "pixabay-alert-alarm-war-danger-risk-205519",
@@ -527,10 +554,12 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "approved_for_render": false,
-      "approval_scope": "manifest_only",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+      "rights_status": "APPROVED_FOR_RENDER",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
     },
     {
       "asset_id": "pixabay-button-press-red-business-click-502",
@@ -552,10 +581,12 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "approved_for_render": false,
-      "approval_scope": "manifest_only",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+      "rights_status": "APPROVED_FOR_RENDER",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
     },
     {
       "asset_id": "pixabay-typewriter-typing-writing-author-1335",
@@ -577,10 +608,12 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "approved_for_render": false,
-      "approval_scope": "manifest_only",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+      "rights_status": "APPROVED_FOR_RENDER",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
     },
     {
       "asset_id": "pixabay-dark-light-lens-flare-abstract-250413",
@@ -602,10 +635,12 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "approved_for_render": false,
-      "approval_scope": "manifest_only",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+      "rights_status": "APPROVED_FOR_RENDER",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
     },
     {
       "asset_id": "pixabay-particles-orange-red-dust-effect-7957",
@@ -627,10 +662,12 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "approved_for_render": false,
-      "approval_scope": "manifest_only",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+      "rights_status": "APPROVED_FOR_RENDER",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
     }
   ],
   "thumbnail_concept": {
@@ -724,7 +761,7 @@
     "duration_target_seconds": 79.704,
     "adapter": "production/render_v21_manual.py",
     "render_mode": "preview_then_final",
-    "render_authorization": "PENDING",
+    "render_authorization": "APPROVED",
     "thumbnail_final_required": true
   },
   "drive_contract": {
@@ -737,7 +774,7 @@
   },
   "factuality_status": "READY",
   "safety_status": "READY",
-  "pipeline_state": "THUMBNAIL_QA",
+  "pipeline_state": "RENDER_PREFLIGHT",
   "production_enablement": false,
   "visual_manifest_reference": "episodes/episode-005/visual/scene-asset-manifest.json",
   "visual_manifest_status": "PARTIAL_MANIFEST_VALIDATED_BLOCKED_RENDER",
@@ -746,8 +783,23 @@
     "story_fact_check": "READY_WITH_GUARDRAILS",
     "visual_manifest": "PASS_STRUCTURAL_BLOCKED_PROMOTION",
     "thumbnail": "APPROVED",
-    "render": "BLOCKED",
+    "render": "AUTHORIZED_ASSET_SCOPE_BLOCKED_MANUAL_PREFLIGHT",
     "drive": "NOT_AUTHORIZED",
     "publication": "MANUAL_ONLY"
-  }
+  },
+  "render_authorization": {
+    "status": "APPROVED",
+    "approved_at_utc": "2026-11-05T22:56:14Z",
+    "scope": "All 16 active Episode 005 visual assets for manual preview-then-final render preflight",
+    "decision": "User explicitly approved render use for the complete active asset set.",
+    "constraints": [
+      "production_enablement remains false until the manual preflight and policy gate are separately resolved",
+      "no automatic render execution",
+      "no global catalog mutation",
+      "no Drive write",
+      "publication remains manual-only",
+      "representational footage must not be presented as literal Petrov archival evidence"
+    ]
+  },
+  "last_adjustment": "Explicit render approval recorded for all 16 active assets on 2026-11-05; production remains disabled and the manual preflight is required before any media execution."
 }
