@@ -72,15 +72,15 @@
   "package_variants": [
     {
       "title": "THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
-      "thumbnail_text": "PENDING"
+      "thumbnail_text": "THE MACHINE LIED"
     },
     {
       "title": "THE NIGHT THE MACHINE LIED",
-      "thumbnail_text": "PENDING"
+      "thumbnail_text": "THE MACHINE LIED"
     },
     {
       "title": "FIVE MISSILES",
-      "thumbnail_text": "PENDING"
+      "thumbnail_text": "THE MACHINE LIED"
     }
   ],
   "next_video_bridge": "A related story about a warning that looked impossible until one person trusted the contradiction.",
@@ -90,8 +90,8 @@
   "story_score": 10,
   "package_status": "PENDING_HUMAN_APPROVAL",
   "human_editor_status": "PENDING",
-  "thumbnail_concept_id": "thumb-episode-005-pending-v1",
-  "thumbnail_manifest_id": "thumb-manifest-episode-005-pending-v1",
+  "thumbnail_concept_id": "thumb-episode-005-machine-lied-v1",
+  "thumbnail_manifest_id": "thumb-manifest-episode-005-machine-lied-v1",
   "thumbnail_status": "PENDING_HUMAN_APPROVAL",
   "platform_thumbnail_mode": {
     "youtube_shorts": "custom_if_supported",
@@ -634,36 +634,38 @@
     }
   ],
   "thumbnail_concept": {
-    "concept_id": "thumb-episode-005-pending-v1",
-    "title_alignment": "Pending replacement thumbnail; no candidate asset is active.",
-    "hero_visual": "Final thumbnail concept not selected.",
-    "thumbnail_text": "PENDING",
+    "concept_id": "thumb-episode-005-machine-lied-v1",
+    "title_alignment": "The thumbnail visualizes the central conflict: a machine reports danger while the physical world remains silent.",
+    "hero_visual": "Dark command bunker with a red abstract warning radar, empty stormy sky and an anonymous operator silhouette.",
+    "thumbnail_text": "THE MACHINE LIED",
     "visual_truth_class": "MAP_OR_DIAGRAM",
-    "rights_status": "PENDING_SELECTION",
+    "rights_status": "ORIGINAL_GENERATED_ASSET_PENDING_FINAL_HUMAN_REVIEW",
+    "candidate_library_file_id": "libfile_6be06bdc4d04819183b0742de464c9cd",
+    "candidate_sha256": "60264e8804f1260083241f34846322caf1262c992911a5f15557dd27877dec96",
     "human_review_status": "PENDING",
-    "note": "Previous thumbnail candidate removed by user request."
+    "note": "Original symbolic representational artwork; not archival Petrov evidence and not a literal Soviet interface."
   },
   "thumbnail_manifest": {
     "episode_id": "episode-005",
     "story_id": "story-stanislav-petrov-false-alarm-1983",
     "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
     "title_variant": "THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
-    "thumbnail_text": "PENDING",
-    "hero_asset_id": "PENDING_FINAL_THUMBNAIL",
+    "thumbnail_text": "THE MACHINE LIED",
+    "hero_asset_id": "thumb-episode-005-machine-lied-v1",
     "visual_truth_class": "MAP_OR_DIAGRAM",
-    "source_url": "pending://thumbnail",
-    "rights_status": "PENDING_SELECTION",
-    "sha256": "",
+    "source_url": "library://libfile_6be06bdc4d04819183b0742de464c9cd",
+    "rights_status": "PENDING_HUMAN_REVIEW",
+    "sha256": "60264e880f1260083241f34846322caf1262c992911a5f15557dd27877dec96",
     "dimensions": [
       1080,
       1920
     ],
-    "safe_margin_status": "PENDING",
-    "mobile_legibility_status": "PENDING",
+    "safe_margin_status": "PENDING_HUMAN_REVIEW",
+    "mobile_legibility_status": "PENDING_HUMAN_REVIEW",
     "human_review_status": "PENDING",
     "youtube_thumbnail_mode": "custom_if_supported",
     "tiktok_cover_mode": "approved_video_frame",
-    "final_status": "PENDING_REPLACEMENT",
+    "final_status": "CANDIDATE_READY_FOR_HUMAN_REVIEW",
     "delivery_paths": {
       "thumbnail_master_9x16_png": "episodes/episode-005/delivery/thumbnail/thumbnail_master_9x16.png",
       "thumbnail_master_9x16_jpg": "episodes/episode-005/delivery/thumbnail/thumbnail_master_9x16.jpg",
@@ -743,7 +745,7 @@
   "production_gates": {
     "story_fact_check": "READY_WITH_GUARDRAILS",
     "visual_manifest": "PASS_STRUCTURAL_BLOCKED_PROMOTION",
-    "thumbnail": "PENDING_REPLACEMENT",
+    "thumbnail": "PENDING_HUMAN_REVIEW",
     "render": "BLOCKED",
     "drive": "NOT_AUTHORIZED",
     "publication": "MANUAL_ONLY"
