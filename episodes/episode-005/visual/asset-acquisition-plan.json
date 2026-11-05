@@ -1108,18 +1108,48 @@
             "qa-frames.jpg",
             "qa-crop-9x16.jpg"
           ]
+        },
+        "qa_refresh": {
+          "workflow_run_id": 42049521282,
+          "artifact_id": 13426556747,
+          "artifact_digest": "sha256:81604ae674a11d6e4c7b27769ab80b6b9a7aaa486260edae9c280220a9750e60",
+          "commit": "af15b0bb20738b6ddcdfee098f992e958f006651",
+          "status": "SUCCESS_JSON_VALIDATED",
+          "sampling": "five_normalized_timestamps",
+          "promotion_allowed": false,
+          "render_allowed": false,
+          "global_catalog_updated": false,
+          "drive_written": false
         }
       },
       "qa": {
-        "clean_frame_visual_review": "PENDING_HUMAN_REVIEW",
-        "baked_captions_or_authored_graphics": "PENDING_HUMAN_REVIEW",
-        "embedded_logo_or_letterbox": "PENDING_HUMAN_REVIEW",
-        "semantic_fit": "PENDING_HUMAN_REVIEW",
-        "locked_9x16_crop": "PENDING_HUMAN_REVIEW",
+        "clean_frame_visual_review": "PASS_FULL_DURATION",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_FIVE_SAMPLES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_FIVE_SAMPLES",
+        "semantic_fit": "PRELIMINARY_PASS_CONDITIONAL_FOR_S06_S09_AS_ABSTRACT_INDICATOR_TEXTURE",
+        "locked_9x16_crop": "PASS_CENTER_CROP_USABLE",
         "global_reuse_fingerprint": "PENDING_FINGERPRINT_AUDIT",
         "human_approval": "PENDING",
         "approved_for_render": false,
-        "global_catalog_updated": false
+        "global_catalog_updated": false,
+        "assistant_visual_review": "Clean and visually coherent, but abstract indicator bars; not a literal Soviet control console. Human approval still required."
+      },
+      "fingerprint_audit": {
+        "workflow_run_id": 42049952757,
+        "artifact_id": 13424799852,
+        "artifact_digest": "sha256:c561091d1c94a2ef93b5e5d34b194e54c9990490da56dde60c9fedfa3921e99b",
+        "algorithm": "video-fingerprint-v2-rgb24-q4",
+        "status": "FINGERPRINT_AUDIT_PASS",
+        "global_sha256_collision": false,
+        "global_source_collision": false,
+        "global_perceptual_collision": false,
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "render_allowed": false,
+        "drive_written": false,
+        "sha256": "e4d3d281bab5ffb6808a6ad0b20dd03e3857112cf309ee86d1dec234d4ac928e",
+        "perceptual_hash": "d70c666953675401e001265ef4d80b66b8da2a8034488305320c0a12633c0395"
       }
     },
     {
@@ -1131,7 +1161,7 @@
       "truth_class": "REPRESENTATIONAL",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "REJECTED_SEMANTICALLY_WEAK",
       "media_url": "https://cdn.pixabay.com/video/2021/11/12/95686-645712467_large.mp4",
       "media_url_observed_in_browser": true,
       "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
@@ -1176,22 +1206,52 @@
             "qa-frames.jpg",
             "qa-crop-9x16.jpg"
           ]
+        },
+        "qa_refresh": {
+          "workflow_run_id": 42049521282,
+          "artifact_id": 13426556747,
+          "artifact_digest": "sha256:81604ae674a11d6e4c7b27769ab80b6b9a7aaa486260edae9c280220a9750e60",
+          "commit": "af15b0bb20738b6ddcdfee098f992e958f006651",
+          "status": "SUCCESS_JSON_VALIDATED",
+          "sampling": "five_normalized_timestamps",
+          "promotion_allowed": false,
+          "render_allowed": false,
+          "global_catalog_updated": false,
+          "drive_written": false
         }
       },
       "qa": {
-        "clean_frame_visual_review": "PENDING_HUMAN_REVIEW",
-        "baked_captions_or_authored_graphics": "PENDING_HUMAN_REVIEW",
-        "embedded_logo_or_letterbox": "PENDING_HUMAN_REVIEW",
-        "semantic_fit": "PENDING_HUMAN_REVIEW",
-        "locked_9x16_crop": "PENDING_HUMAN_REVIEW",
+        "clean_frame_visual_review": "PASS_FULL_DURATION",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_FIVE_SAMPLES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_FIVE_SAMPLES",
+        "semantic_fit": "REJECTED_SEMANTICALLY_WEAK_FOR_S12",
+        "locked_9x16_crop": "PASS_BUT_LOW_INFORMATION",
         "global_reuse_fingerprint": "PENDING_FINGERPRINT_AUDIT",
+        "human_approval": "NOT_APPLICABLE",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "assistant_visual_review": "Clean blue cloud texture, but no visible satellite, sunlight geometry or sensor context; insufficient for the S12 mechanism beat."
+      },
+      "fingerprint_audit": {
+        "workflow_run_id": 42049952757,
+        "artifact_id": 13424799852,
+        "artifact_digest": "sha256:c561091d1c94a2ef93b5e5d34b194e54c9990490da56dde60c9fedfa3921e99b",
+        "algorithm": "video-fingerprint-v2-rgb24-q4",
+        "status": "FINGERPRINT_AUDIT_PASS",
+        "global_sha256_collision": false,
+        "global_source_collision": false,
+        "global_perceptual_collision": false,
         "human_approval": "PENDING",
         "approved_for_render": false,
-        "global_catalog_updated": false
+        "global_catalog_updated": false,
+        "render_allowed": false,
+        "drive_written": false,
+        "sha256": "908dceb3cf0d3c703a0fd6d64181fbcbf7a4760fcaa6744fc03279293897a61a",
+        "perceptual_hash": "75e16b841a18f3c242a18a836e7bb9516d2cc94de281931745c7f47a78690c77"
       }
     }
   ],
-  "next_action": "Replace the two preliminary rejects (S06/S09 warning-control source and S12 cloud-sunlight-satellite source), then obtain explicit human approval only for candidates that pass the clean-source, semantic-fit and crop gates. Keep all render, catalog, Drive and publication gates blocked.",
+  "next_action": "Obtain explicit human approval only for pixabay-led-indicator-lights-316712 if the abstract indicator treatment is acceptable for S06/S09; replace pixabay-sky-clouds-satellite-95686 with a distinct S12 candidate that visibly supports the sunlight/satellite mechanism. Keep render, catalog, Drive and publication blocked.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
