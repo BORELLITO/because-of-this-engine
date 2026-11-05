@@ -96,7 +96,7 @@ jobs:
 
       - name: Generate forced-alignment captions
         run: |
-          PYTHONPATH=. python production/align_captions.py             --manifest artifacts/episode005-edge/caption-manifest.json             --model-dir "${VOSK_MODEL_DIR}"             --secondary-model-dir "${VOSK_SECONDARY_MODEL_DIR}"
+          PYTHONPATH=. python production/align_edge_captions.py --manifest artifacts/episode005-edge/caption-manifest.json --word-boundaries artifacts/episode005-edge/edge-word-boundaries.json
 
       - name: Validate forced-alignment captions
         run: |
