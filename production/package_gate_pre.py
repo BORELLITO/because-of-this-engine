@@ -4,7 +4,7 @@ from collections.abc import Mapping
 from typing import Any
 
 ALLOWED_PILLARS = {"invisible_natural_dangers","human_or_system_failure","survival_against_impossible_conditions"}
-REQUIRED_FIELDS = ("editorial_mode","pillar","series_id","incident_id","central_question","audience_promise","impossible_event","human_anchor","causal_hinge","causal_chain","proof_level","proof_assets","visual_truth_classes","escalation_beats","irreversible_choice","payoff","title_candidates","opening_frame","opening_sentence","package_variants","next_video_bridge","source_ledger_id","rights_ledger_id","reuse_scope","thumbnail_concept_id","thumbnail_status","platform_thumbnail_mode")
+REQUIRED_FIELDS = ("editorial_mode","pillar","series_id","incident_id","central_question","audience_promise","impossible_event","human_anchor","causal_hinge","causal_chain","proof_level","proof_assets","visual_truth_classes","escalation_beats","irreversible_choice","payoff","title_candidates","opening_frame","opening_sentence","package_variants","next_video_bridge","source_ledger_id","rights_ledger_id","reuse_scope","story_score","package_status","human_editor_status","thumbnail_concept_id","thumbnail_manifest_id","thumbnail_status","platform_thumbnail_mode")
 QUESTION_FIELDS = ("what_happened","why_it_happened","who_was_affected","what_changed_everything","why_it_seems_impossible","proof_or_source_note","how_danger_grows","irreversible_consequence","visual_representation_by_stage","first_frame_promise")
 TRUTH_CLASSES = {"DOCUMENTARY_EVIDENCE","ARCHIVAL_MATERIAL","STOCK_REPRESENTATION","RECONSTRUCTION","GENERATED_VISUAL","MAP_OR_DIAGRAM","ABSTRACT_ATMOSPHERE"}
 THUMBNAIL_CONCEPT_STATUSES = {"CONCEPT_READY","PENDING_HUMAN_APPROVAL"}

@@ -52,7 +52,17 @@
   "legacy_policy": {
     "status": "legacy_rollback_only",
     "no_silent_fallback": true,
-    "no_normal_runtime_selection": true
+    "no_normal_runtime_selection": true,
+    "archived_workflows": [
+      "archive/v7/workflows/because-of-this-v7.yml",
+      "archive/v7/workflows/draft-preview.yml",
+      "archive/v7/workflows/episode-002-draft-preview.yml",
+      "archive/v7/workflows/episode-004-draft-preview.yml",
+      "archive/v7/workflows/episode-004-final-release.yml",
+      "archive/v7/workflows/post-publication-verify.yml",
+      "archive/v7/workflows/v72-reuse-first-ci.yml"
+    ],
+    "active_runtime": "production/canonical_entrypoint.py"
   },
   "gate_order": [
     "PACKAGE_GATE_PRE",

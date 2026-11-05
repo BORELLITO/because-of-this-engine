@@ -27,5 +27,16 @@
       "status": "legacy_rollback_only",
       "last_verified_commit": "0b4240ff7a7ad914ba1cbe6d931c4eb967c64f4f"
     }
-  ]
+  ],
+  "archived_workflows": [
+    "archive/v7/workflows/because-of-this-v7.yml",
+    "archive/v7/workflows/draft-preview.yml",
+    "archive/v7/workflows/episode-002-draft-preview.yml",
+    "archive/v7/workflows/episode-004-draft-preview.yml",
+    "archive/v7/workflows/episode-004-final-release.yml",
+    "archive/v7/workflows/post-publication-verify.yml",
+    "archive/v7/workflows/v72-reuse-first-ci.yml"
+  ],
+  "archived_state_machine": "production/pipeline_state.py (compatibility boundary; V2.1 delegates to pipeline_state_v21)",
+  "active_entrypoint": "production/canonical_entrypoint.py"
 }

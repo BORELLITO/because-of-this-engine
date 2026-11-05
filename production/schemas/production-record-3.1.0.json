@@ -4,97 +4,39 @@
   "title": "Because Of This V2.1 production record",
   "type": "object",
   "required": [
-    "episode_id",
-    "story_id",
-    "editorial_mode",
-    "pillar",
-    "series_id",
-    "incident_id",
-    "source_ledger_id",
-    "rights_ledger_id",
-    "reuse_scope",
-    "thumbnail_concept_id",
-    "pipeline_state"
+    "implementation_id", "audit_id", "episode_id", "story_id", "editorial_mode",
+    "pillar", "series_id", "incident_id", "source_ledger_id", "rights_ledger_id",
+    "reuse_scope", "story_score", "package_status", "human_editor_status",
+    "thumbnail_concept_id", "thumbnail_manifest_id", "thumbnail_status",
+    "platform_thumbnail_mode", "question_answers", "source_ledger", "rights_ledger",
+    "thumbnail_concept", "thumbnail_manifest", "pipeline_state", "production_enablement"
   ],
   "properties": {
-    "episode_id": {
-      "type": "string",
-      "minLength": 1
-    },
-    "story_id": {
-      "type": "string",
-      "minLength": 1
-    },
-    "editorial_mode": {
-      "const": "factual_documentary"
-    },
-    "pillar": {
-      "enum": [
-        "invisible_natural_dangers",
-        "human_or_system_failure",
-        "survival_against_impossible_conditions"
-      ]
-    },
-    "series_id": {
-      "type": "string",
-      "minLength": 1
-    },
-    "incident_id": {
-      "type": "string",
-      "minLength": 1
-    },
-    "source_ledger_id": {
-      "type": "string",
-      "minLength": 1
-    },
-    "rights_ledger_id": {
-      "type": "string",
-      "minLength": 1
-    },
-    "reuse_scope": {
-      "const": "global"
-    },
-    "thumbnail_concept_id": {
-      "type": "string",
-      "minLength": 1
-    },
-    "thumbnail_status": {
-      "enum": [
-        "CONCEPT_READY",
-        "PENDING_HUMAN_APPROVAL",
-        "THUMBNAIL_PENDING",
-        "THUMBNAIL_QA",
-        "APPROVED"
-      ]
-    },
-    "pipeline_state": {
-      "enum": [
-        "DRAFT",
-        "PACKAGE_PENDING",
-        "FACT_CHECK_PENDING",
-        "STORY_PENDING",
-        "ASSETS_PENDING",
-        "RIGHTS_PENDING",
-        "REUSE_PENDING",
-        "VOICE_PENDING",
-        "AUDIO_PENDING",
-        "CAPTIONS_PENDING",
-        "PREVIEW_PENDING",
-        "THUMBNAIL_PENDING",
-        "THUMBNAIL_QA",
-        "HUMAN_REVIEW",
-        "TECHNICAL_QA",
-        "NEEDS_CORRECTION",
-        "BLOCKED",
-        "APPROVED_FOR_MANUAL_PUBLICATION",
-        "MANUALLY_PUBLISHED",
-        "METRICS_PENDING",
-        "ARCHIVED"
-      ]
-    },
-    "production_enablement": {
-      "const": false
-    }
+    "implementation_id": {"type": "string", "minLength": 1},
+    "audit_id": {"type": "string", "minLength": 1},
+    "episode_id": {"type": "string", "minLength": 1},
+    "story_id": {"type": "string", "minLength": 1},
+    "editorial_mode": {"const": "factual_documentary"},
+    "pillar": {"enum": ["invisible_natural_dangers", "human_or_system_failure", "survival_against_impossible_conditions"]},
+    "series_id": {"type": "string", "minLength": 1},
+    "incident_id": {"type": "string", "minLength": 1},
+    "source_ledger_id": {"type": "string", "minLength": 1},
+    "rights_ledger_id": {"type": "string", "minLength": 1},
+    "reuse_scope": {"const": "global"},
+    "story_score": {"type": "integer", "minimum": 0, "maximum": 10},
+    "package_status": {"enum": ["DRAFT", "PACKAGE_PENDING", "PENDING_HUMAN_APPROVAL", "APPROVED"]},
+    "human_editor_status": {"enum": ["PENDING", "APPROVED", "REJECTED", "NEEDS_CORRECTION"]},
+    "thumbnail_concept_id": {"type": "string", "minLength": 1},
+    "thumbnail_manifest_id": {"type": "string", "minLength": 1},
+    "thumbnail_status": {"enum": ["CONCEPT_READY", "PENDING_HUMAN_APPROVAL", "THUMBNAIL_PENDING", "THUMBNAIL_QA", "APPROVED"]},
+    "platform_thumbnail_mode": {"type": "object"},
+    "question_answers": {"type": "object"},
+    "source_ledger": {"type": "array"},
+    "rights_ledger": {"type": "array"},
+    "thumbnail_concept": {"type": "object"},
+    "thumbnail_manifest": {"type": "object"},
+    "pipeline_state": {"enum": ["DRAFT", "PACKAGE_PENDING", "FACT_CHECK_PENDING", "STORY_PENDING", "ASSETS_PENDING", "RIGHTS_PENDING", "REUSE_PENDING", "VOICE_PENDING", "AUDIO_PENDING", "CAPTIONS_PENDING", "PREVIEW_PENDING", "THUMBNAIL_PENDING", "THUMBNAIL_QA", "HUMAN_REVIEW", "TECHNICAL_QA", "NEEDS_CORRECTION", "BLOCKED", "APPROVED_FOR_MANUAL_PUBLICATION", "MANUALLY_PUBLISHED", "METRICS_PENDING", "ARCHIVED"]},
+    "production_enablement": {"const": false}
   },
   "additionalProperties": true
 }

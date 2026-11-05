@@ -8,65 +8,44 @@
 - Base: main at d35d78cd4a92d12375f54076e3e21b56cbe25fad
 - Candidate branch: integration/because-of-this-v2.1-20261105
 - Draft PR: 67
-- Latest audited candidate commit: 69f3ad15395ff7c7c93aa829258b82dc4662aafc
+- Candidate commit: authoritative PR head
 - Status: PARTIAL / BLOCKED_FOR_PRODUCTION
+- Canonical entrypoint: production/canonical_entrypoint.py
 - Canonical voice: Gemini TTS / Charon preserved; Cloud Charon is OFFLINE_CONTRACT_ONLY
 - Publication: manual only
 - Historical protection: One Extra Minute is excluded from execution and reuse
 
-## Implemented and tested in isolation
+## This changeset
 
-- One V2.1 read-only contract entrypoint: production/canonical_entrypoint.py.
-- PACKAGE_GATE_PRE with factual-pilot pillars, mandatory questions and 10-point score.
-- Source ledger, rights ledger and global no-reuse checks.
-- visual_truth_class separation between evidence and representation.
-- Fail-closed V2.1 state machine with no critical state skips.
-- Thumbnail concept plus final thumbnail QA and platform cover statuses.
-- Schema production-record/3.1.0.
-- legacy_registry with legacy_rollback_only semantics.
-- Existing V7 CI reconciled to recognize the V2.1 candidate policy without reactivating old engines.
-- No media, TTS, render, Drive write, publication or account mutation from the V2.1 entrypoint.
+- canonical_entrypoint.py is now the authority for the V2.1 read-only contract.
+- The old v7_orchestrator.py delegates to the canonical entrypoint whenever the V2.1 policy is active.
+- The old V2/V7 state machine is an explicit compatibility boundary; V2.1 records use pipeline_state_v21.py.
+- The global asset registry is loaded automatically and missing/incomplete catalogs block.
+- The production schema is validated by the canonical entrypoint, not only parsed as JSON.
+- The final thumbnail manifest and delivery paths are mandatory for a canonical PASS.
+- The singleton workflow audit is fail-closed in CI.
+- Historical production workflows were moved to archive/v7/workflows/; they are no longer GitHub Actions entrypoints.
 
 ## Evidence
 
 | Area | Status | Evidence |
 |---|---|---|
-| Main / refs / PRs | FOUND | GitHub API read; main d35d78c; PRs 65, 66 and 67 |
-| V2.1 contracts | TESTED | CI run 41940790342: 5/5 tests, schema, read-only assertions and clean checkout |
-| Existing V7 regression | TESTED | CI run 41940656775: success after policy/workflow compatibility correction |
-| Candidate code | IMPLEMENTED | branch commit 69f3ad1 |
-| Drive | PARTIAL | project folders and episode-004 assets found; global byte/perceptual reconciliation not proven |
-| Rights | BLOCKED | episode-specific independent license evidence is not complete |
-| Safe zones | BLOCKED | no real TikTok/YouTube UI capture for the final media exists |
-| Work session | UNKNOWN | no independent Work execution log was exposed |
-| Gemini TTS real call | NOT_RUN | no credits consumed |
-| First new production | BLOCKED | V2.1 prompt does not authorize automatic production |
+| Main / refs / PRs | FOUND | GitHub API; main d35d78c; PR 67 |
+| V2.1 contracts | TESTED | Candidate CI must pass unit, schema, adapter, singleton and clean-checkout gates |
+| Canonical adapter | IMPLEMENTED | v7_orchestrator.py delegates to canonical_entrypoint.py under active V2.1 policy |
+| Global no-reuse | BLOCKED when incomplete | Registry is required and independent perceptual hashes are required |
+| Thumbnail | BLOCKED when incomplete | Final manifest, delivery paths and strict file checks are required |
+| Legacy workflows | ARCHIVED | Definitions retained under archive/v7/workflows/, outside .github/workflows |
+| Drive | NOT RUN | No Drive write or media generation authorized |
+| Work | UNKNOWN | No independent Work execution log |
+| Gemini TTS real call | NOT RUN | No credits consumed |
+| First new production | BLOCKED | Implementation stage does not authorize automatic production |
 
-## Reconciled issues
+## Remaining blockers
 
-- The Python fixture literal error was corrected after the first failed CI.
-- The first-frame promise is read from the mandatory question contract.
-- PACKAGE_GATE_PRE pass is normalized by the canonical entrypoint.
-- The CI diagnostic now writes outside the checkout and proves no mutation.
-- Existing V7 CI accepts the V2.1 candidate policy while retaining Gemini/Charon.
-- Legacy workflow references are explicitly surfaced as unresolved, rather than silently treated as promoted.
+- The historical registry currently contains assets without independent perceptual hashes; production must remain blocked until reconciliation.
+- Real thumbnail files and platform cover records are not yet available for a V2.1 episode.
+- TTS, audio, captions, render, Drive and publication remain intentionally unintegrated.
+- Promotion to main still requires explicit approval and post-merge audit.
 
-## P0/P1
-
-- P0: candidate is not merged into main; explicit approval is still required.
-- P0: global historical asset and incident catalog is not fully reconciled.
-- P0: independent rights evidence for a new episode is not complete.
-- P1: old V7 production workflows still reference the legacy orchestration path; V21 singleton report is BLOCKED for those references.
-- P1: visual QA still requires human review of a final preview.
-- P1: real platform safe zones and Work orchestration remain unverified.
-
-## Promotion gate
-
-1. Review PR 67 and the successful CI evidence.
-2. Reconcile or explicitly archive the seven legacy workflow references reported by the V2.1 singleton audit.
-3. Obtain explicit approval to merge.
-4. Merge to main.
-5. Run the post-merge audit directly on main.
-6. Only after that, separately approve a factual story package; do not start production automatically.
-
-READY is forbidden while any P0/P1 remains open.
+READY remains forbidden while any P0/P1 is open.
