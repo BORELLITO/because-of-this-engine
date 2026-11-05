@@ -135,6 +135,10 @@ jobs:
         run: |
           ffmpeg -v error -y -i artifacts/episode005-visual-intake/candidate.mp4             -vf "fps=1,scale=540:-2,tile=3x1:padding=8:margin=8:color=black"             -frames:v 1 -q:v 2 artifacts/episode005-visual-intake/qa-frames.jpg
 
+      - name: Generate locked 9x16 crop preview
+        run: |
+          ffmpeg -v error -y -i artifacts/episode005-visual-intake/candidate.mp4             -vf "crop=ih*9/16:ih:(iw-ih*9/16)/2:0,scale=540:960"             -frames:v 1 -q:v 2 artifacts/episode005-visual-intake/qa-crop-9x16.jpg
+
       - name: Upload isolated candidate evidence
         uses: actions/upload-artifact@v4
         with:
