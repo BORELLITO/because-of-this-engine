@@ -1063,7 +1063,7 @@
       "truth_class": "REPRESENTATIONAL",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "media_url": "https://cdn.pixabay.com/video/2025/11/18/316712_large.mp4",
       "media_url_observed_in_browser": true,
       "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
@@ -1126,10 +1126,10 @@
         "clean_frame_visual_review": "PASS_FULL_DURATION",
         "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_FIVE_SAMPLES",
         "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_FIVE_SAMPLES",
-        "semantic_fit": "PRELIMINARY_PASS_CONDITIONAL_FOR_S06_S09_AS_ABSTRACT_INDICATOR_TEXTURE",
+        "semantic_fit": "APPROVED_FOR_S06_AS_ABSTRACT_INDICATOR_TEXTURE",
         "locked_9x16_crop": "PASS_CENTER_CROP_USABLE",
-        "global_reuse_fingerprint": "PENDING_FINGERPRINT_AUDIT",
-        "human_approval": "PENDING",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "assistant_visual_review": "Clean and visually coherent, but abstract indicator bars; not a literal Soviet control console. Human approval still required."
@@ -1150,6 +1150,19 @@
         "drive_written": false,
         "sha256": "e4d3d281bab5ffb6808a6ad0b20dd03e3857112cf309ee86d1dec234d4ac928e",
         "perceptual_hash": "d70c666953675401e001265ef4d80b66b8da2a8034488305320c0a12633c0395"
+      },
+      "approved_shot_ids": [
+        "S06"
+      ],
+      "approval_record": {
+        "status": "APPROVED_FOR_MANIFEST_ONLY",
+        "approved_at_utc": "2026-11-05T15:24:20Z",
+        "decision": "Approve the LED indicator candidate for S06 only as an abstract representational warning-intensity texture.",
+        "constraints": [
+          "not literal Soviet alert interface or Petrov archival evidence",
+          "no reuse in another shot of Episode 005",
+          "does not authorize render, global catalog mutation, Drive write or publication"
+        ]
       }
     },
     {
@@ -1259,7 +1272,7 @@
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "pixabay",
       "license_name": "Pixabay Content License",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "media_url": "https://cdn.pixabay.com/video/2020/05/24/40041-424371544_large.mp4",
       "media_url_observed_in_browser": true,
       "browser_verification": {
@@ -1305,10 +1318,10 @@
         "clean_frame_visual_review": "PASS_FULL_DURATION",
         "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_FIVE_SAMPLES",
         "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_FIVE_SAMPLES",
-        "semantic_fit": "PRELIMINARY_PASS_FOR_S12_AS_REPRESENTATIONAL_SATELLITE_ANTENNA",
+        "semantic_fit": "APPROVED_FOR_S12_AS_REPRESENTATIONAL_SATELLITE_ANTENNA",
         "locked_9x16_crop": "PASS_CENTRAL_ANTENNA_REMAINS_VISIBLE",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "assistant_visual_review": "Clean full-duration footage; real parabolic antenna/earth-station geometry remains readable in the 9:16 center crop. Treat as representational infrastructure, not literal Petrov archival evidence."
@@ -1331,6 +1344,19 @@
         "global_catalog_updated": false,
         "render_allowed": false,
         "drive_written": false
+      },
+      "approved_shot_ids": [
+        "S12"
+      ],
+      "approval_record": {
+        "status": "APPROVED_FOR_MANIFEST_ONLY",
+        "approved_at_utc": "2026-11-05T15:24:20Z",
+        "decision": "Approve the antenna candidate for S12 only as representational sensor/early-warning infrastructure.",
+        "constraints": [
+          "not literal Petrov archival evidence",
+          "no reuse in another shot of Episode 005",
+          "does not authorize render, global catalog mutation, Drive write or publication"
+        ]
       }
     }
   ],
@@ -1577,6 +1603,47 @@
         "fingerprint_workflow_run_id": 42025128372,
         "fingerprint_artifact_id": 13413646379,
         "sha256": "a30c4294c60190b75e2f49c076dccc7f86692a99e4bed42ae002f8094936a45d"
+      }
+    },
+    {
+      "candidate_id": "pixabay-led-indicator-lights-316712",
+      "shot_ids": [
+        "S06"
+      ],
+      "status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_at_utc": "2026-11-05T15:24:20Z",
+      "decision": "Approve as abstract indicator/electronics texture for S06 only.",
+      "constraints": [
+        "not literal Soviet alert interface or Petrov archival evidence",
+        "no reuse in another shot of Episode 005",
+        "does not authorize render, global catalog mutation, Drive write or publication"
+      ],
+      "evidence": {
+        "intake_workflow_run_id": 42044610956,
+        "intake_artifact_id": 13422389208,
+        "qa_refresh_workflow_run_id": 42049521282,
+        "fingerprint_workflow_run_id": 42049952757,
+        "fingerprint_artifact_id": 13424799852
+      }
+    },
+    {
+      "candidate_id": "pixabay-antenna-astronomy-communication-40041",
+      "shot_ids": [
+        "S12"
+      ],
+      "status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_at_utc": "2026-11-05T15:24:20Z",
+      "decision": "Approve as representational satellite/antenna mechanism for S12 only.",
+      "constraints": [
+        "not literal Petrov archival evidence",
+        "no reuse in another shot of Episode 005",
+        "does not authorize render, global catalog mutation, Drive write or publication"
+      ],
+      "evidence": {
+        "intake_workflow_run_id": 42052509193,
+        "intake_artifact_id": 13427442382,
+        "fingerprint_workflow_run_id": 42053792993,
+        "fingerprint_artifact_id": 13427769060
       }
     }
   ],
