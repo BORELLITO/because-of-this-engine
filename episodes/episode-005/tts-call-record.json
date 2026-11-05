@@ -5,7 +5,7 @@
   "provider": "creativeclaw_google_gemini",
   "model": "speech/gemini-3.8-flash-tts",
   "voice_id": "charon",
-  "attempted_at_utc": "2026-11-05T01:00:00Z",
+  "attempted_at_utc": "2026-11-05T01:28:20Z",
   "status": "BLOCKED_BEFORE_GENERATION",
   "reason": "zero_balance",
   "required_credits": 21,
