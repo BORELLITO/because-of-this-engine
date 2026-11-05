@@ -205,3 +205,21 @@ READY remains forbidden while any P0/P1 is open.
 - Flags permanecem fechadas: `human_approval=PENDING`, `approved_for_render=false`, `global_catalog_updated=false`, `render_allowed=false`, `drive_written=false` e publicação não autorizada.
 
 **Próximo gate único:** executar QA visual humano dos 12 contact sheets e decidir candidato por candidato/shot; após aprovação explícita, atualizar somente o manifesto parcial, mantendo catálogo, render, Drive e publicação bloqueados.
+
+
+## Atualização — aprovação humana do lote visual completo (2026-11-05)
+
+- O usuário aprovou os 12 candidatos Pixabay baixados e fingerprintados no lote 42073828513 / fingerprint 42074599454.
+- A aprovação foi registrada como APPROVED_FOR_MANIFEST_ONLY; ela não autoriza render, catálogo global, Drive ou publicação.
+- O plano episodes/episode-005/visual/asset-acquisition-plan.json foi atualizado no commit d020f79ef3b5723b3bfc72ac50d0880ee3618008.
+- O manifesto parcial episodes/episode-005/visual/scene-asset-manifest.json foi atualizado no commit 0a44b71b0e4cff540e9810bbe3f33f7fe98e8da8.
+- Foram escolhidos os primários de maior score dentro de cada par aprovado:
+  - S05: pixabay-alert-alarm-war-danger-risk-205519
+  - S08: pixabay-radar-radar-screen-rotation-circles-4511
+  - S09: pixabay-button-press-red-business-click-502
+  - S13: pixabay-typewriter-typing-writing-author-1335
+  - S15: pixabay-dark-light-lens-flare-abstract-250413
+  - S16: pixabay-particles-orange-red-dust-effect-7957
+- Auditoria estrutural read-only após a atualização: 16/16 shots atribuídos, 0 shots pendentes, 16 fontes únicas, 16/16 assignments com aprovação de manifesto, SHA-256/fingerprint/licença presentes.
+- Estado de promoção permanece fail-closed: final_visual_manifest_validated=false, render_authorized=false, global_catalog_update_authorized=false, drive_write_authorized=false, publication_authorized=false.
+- Próximo gate único: executar a validação final read-only do manifesto visual e dos direitos/estrutura; somente depois avaliar autorização separada para render.
