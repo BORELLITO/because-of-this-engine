@@ -61,6 +61,10 @@ jobs:
                   "source_page_url": "https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/",
                   "media_url": "https://assets.mixkit.co/videos/3651/3651-720.mp4",
               },
+              "mixkit-large-satellite-antenna-2650": {
+                  "source_page_url": "https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/",
+                  "media_url": "https://assets.mixkit.co/videos/2650/2650-720.mp4",
+              },
               "mixkit-abstract-red-glow-101432": {
                   "source_page_url": "https://mixkit.co/free-stock-video/abstract-red-glow-101432/",
                   "media_url": "https://assets.mixkit.co/bohe8920pfehyvq7p1hk5r699s7g",
@@ -71,7 +75,11 @@ jobs:
               item for item in plan.get("candidates", [])
               if isinstance(item, dict) and item.get("intake_artifact")
           ]
-          expected_ids = set(allowed)
+          expected_ids = {
+              str(item.get("candidate_id"))
+              for item in candidates
+              if str(item.get("candidate_id", "")).strip()
+          }
           actual_ids = {item.get("candidate_id") for item in candidates}
           blockers = []
           if actual_ids != expected_ids:
