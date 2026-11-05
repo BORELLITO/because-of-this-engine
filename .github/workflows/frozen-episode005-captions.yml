@@ -17,7 +17,7 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/frozen-episode005-captions.yml"
-      - "production/whisper_captions.py"
+      - "production/align_edge_captions.py"
       - "production/align_captions.py"
       - "production/generate_phrase_captions.py"
       - "episodes/episode-005/narration/en-US-charon-v1.txt"
@@ -39,14 +39,8 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install caption aligner
-        run: python -m pip install --disable-pip-version-check --no-cache-dir faster-whisper==1.2.1 huggingface_hub==0.35.3
-
-      - name: Restore Whisper model cache
-        uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684
-        with:
-          path: ~/.cache/huggingface
-          key: because-of-this-whisper-small-en-v1
+      - name: Verify native caption tools
+        run: python --version
 
       - name: Download frozen Edge artifact
         uses: actions/download-artifact@v4
@@ -98,14 +92,13 @@ jobs:
           )
           PY
 
-      - name: Generate exact acoustic word captions
+      - name: Generate official native Edge captions
         run: |
-          PYTHONPATH=. python production/whisper_captions.py \
-            --manifest artifacts/episode005-frozen/caption-manifest.json \
-            --model small.en \
-            --native-boundaries artifacts/episode005-frozen/edge-word-boundaries.json
+          PYTHONPATH=. python production/align_edge_captions.py \\
+            --manifest artifacts/episode005-frozen/caption-manifest.json \\
+            --word-boundaries artifacts/episode005-frozen/edge-word-boundaries.json
 
-      - name: Validate exact acoustic word captions
+      - name: Validate official native Edge captions
         run: |
           python - <<'PY'
           import json
@@ -115,12 +108,17 @@ jobs:
           sidecar = root / "narration.whisper.alignment.json"
           assert ass.is_file() and ass.stat().st_size > 0, ass
           data = json.loads(sidecar.read_text(encoding="utf-8"))
-          assert data["status"] == "WHISPER_FORCED_ALIGNMENT_PASS"
+          assert data["status"] == "EDGE_TTS_NATIVE_ALIGNMENT_PASS"
           assert data["word_count"] > 0
-          assert data["word_timing_normalization"]["timeline_monotonic"] is True
+          normalization = data["word_timing_normalization"]
+          assert normalization["timeline_monotonic"] is True
+          assert normalization["grouped_provider_boundary_count"] >= 0
           print({
               "caption_status": data["status"],
+              "timing_mode": data["timing_mode"],
               "word_count": data["word_count"],
+              "grouped_provider_boundary_count": normalization["grouped_provider_boundary_count"],
+              "final_word_level_ready": normalization["final_word_level_ready"],
               "caption_file": str(ass),
           })
           PY
