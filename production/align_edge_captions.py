@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import wave
 from pathlib import Path
 from typing import Any
@@ -28,19 +29,36 @@ def _load_boundaries(path: Path) -> list[dict[str, Any]]:
     words: list[dict[str, Any]] = []
     for item in data.get("words", []):
         text = str(item.get("text", "")).strip()
-        if not text or any(char.isspace() for char in text):
-            raise AlignmentError(f"Edge word boundary is not a single word: {text!r}")
+        if not text:
+            continue
         start = float(item.get("start_seconds", -1))
         end = float(item.get("end_seconds", -1))
         if start < 0 or end <= start:
             raise AlignmentError(f"Edge word boundary has an invalid interval: {item!r}")
-        words.append({
-            "word": text,
-            "start": start,
-            "end": end,
-            "confidence": 1.0,
-            "timestamp_source": "edge_tts_word_boundary",
-        })
+
+        # Edge occasionally groups punctuation-delimited words into one
+        # WordBoundary event (for example, "September 26, 1983"). Keep the
+        # provider's real interval for every token in that group instead of
+        # inventing acoustic offsets. The sidecar records the group explicitly;
+        # the renderer can therefore keep the group highlighted as one native
+        # timing unit.
+        tokens = re.findall(r"[A-Za-z0-9]+(?:['’][A-Za-z0-9]+)?", text)
+        if not tokens:
+            raise AlignmentError(f"Edge word boundary contains no spoken token: {item!r}")
+        group_id = len(words)
+        for token in tokens:
+            words.append({
+                "word": token,
+                "start": start,
+                "end": end,
+                "confidence": 1.0,
+                "timestamp_source": (
+                    "edge_tts_word_boundary_group"
+                    if len(tokens) > 1 else "edge_tts_word_boundary"
+                ),
+                "boundary_group_id": group_id if len(tokens) > 1 else None,
+                "boundary_group_text": text if len(tokens) > 1 else None,
+            })
     if not words:
         raise AlignmentError("Edge TTS returned no word boundaries")
     return words
@@ -66,7 +84,16 @@ def generate(manifest_path: Path, boundary_path: Path) -> dict[str, Any]:
     chunks = phrase_chunks(script, max_line_chars=int(caption_config.get("max_line_chars", 42)))
     native_words = _load_boundaries(boundary_path.resolve())
     events, sidecar_chunks = _align_chunks(chunks, native_words)
-    overlap_count = _normalize_sidecar_word_timeline(sidecar_chunks, audio_seconds)
+    # Native Edge intervals are already bounded by the provider. Do not split
+    # grouped provider boundaries into guessed sub-word offsets; grouped tokens
+    # intentionally retain the same real interval in the sidecar.
+    overlap_count = 0
+    for chunk in sidecar_chunks:
+        for word in chunk.get("words", []):
+            if float(word["start"]) < 0 or float(word["end"]) > audio_seconds:
+                raise AlignmentError("Native Edge word timestamp is outside the measured WAV.")
+            if float(word["end"]) <= float(word["start"]):
+                raise AlignmentError("Native Edge word timestamp has no positive interval.")
 
     events = [
         {
@@ -97,7 +124,7 @@ def generate(manifest_path: Path, boundary_path: Path) -> dict[str, Any]:
     sidecar_path.write_text(json.dumps({
         "status": "EDGE_TTS_NATIVE_ALIGNMENT_PASS",
         "provider": "Microsoft Edge TTS",
-        "timing_mode": "edge_tts_native_word_boundaries",
+        "timing_mode": "edge_tts_native_word_boundaries_with_provider_groups",
         "audio_duration_seconds": round(audio_seconds, 3),
         "word_count": len(native_words),
         "words": native_words,
@@ -105,6 +132,7 @@ def generate(manifest_path: Path, boundary_path: Path) -> dict[str, Any]:
         "word_timing_normalization": {
             "overlap_boundaries_closed": overlap_count,
             "timeline_monotonic": True,
+            "grouped_provider_boundaries_preserved": True,
         },
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return {
