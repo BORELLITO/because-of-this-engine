@@ -48,7 +48,7 @@
       "max": 74
     },
     "real_call_authorized": true,
-    "request_count": 1,
+    "request_count": 2,
     "execution_status": "EDGE_TTS_PREVIEW_GENERATED_AND_VALIDATED",
     "retry_policy": "NO_AUTOMATIC_RETRY_AFTER_SUBMISSION",
     "last_provider_attempt": {
@@ -66,9 +66,9 @@
     "execution_route": "microsoft_edge_tts_only",
     "production_provider_policy": "Edge TTS explicitly selected; no provider fallback",
     "actual_duration_seconds": 79.704,
-    "audio_sha256": "4e021c52ea57835525b144ecfc08ed6abe41c99dca326866e63c7176cc45f40f",
-    "workflow_run_id": 41961055314,
-    "artifact_id": 13384688114,
+    "audio_sha256": "bfa297c85e6de0c1a9dee5fbc74a8f7e75a6cd287bd47ecf6d97f16dd045831a",
+    "workflow_run_id": 41961294784,
+    "artifact_id": 13384643514,
     "captions": {
       "status": "EDGE_TTS_NATIVE_ALIGNMENT_PASS",
       "timing_mode": "edge_tts_native_word_boundaries_with_provider_groups",
@@ -82,14 +82,30 @@
       "model": "edge_neural",
       "voice_id": "en-US-ChristopherNeural",
       "status": "GENERATED_AND_VALIDATED",
-      "workflow_run_id": 41961055314,
-      "artifact_id": 13384688114,
+      "workflow_run_id": 41961294784,
+      "artifact_id": 13384643514,
       "duration_seconds": 79.704,
-      "audio_sha256": "4e021c52ea57835525b144ecfc08ed6abe41c99dca326866e63c7176cc45f40f",
+      "audio_sha256": "bfa297c85e6de0c1a9dee5fbc74a8f7e75a6cd287bd47ecf6d97f16dd045831a",
       "charged_credits": 0,
-      "request_count": 1,
+      "request_count": 2,
       "retry_count": 0
-    }
+    },
+    "artifact_digest": "sha256:37afddf1b196b0750418cbcf0484087832eee967f475f7acd1c95c1c4cb8d81c",
+    "preview_runs": [
+      {
+        "workflow_run_id": 41961055314,
+        "artifact_id": 13384688114,
+        "audio_sha256": "4e021c52ea57835525b144ecfc08ed6abe41c99dca326866e63c7176cc45f40f",
+        "status": "VALIDATED_BUT_SUPERSEDED"
+      },
+      {
+        "workflow_run_id": 41961294784,
+        "artifact_id": 13384643514,
+        "audio_sha256": "bfa297c85e6de0c1a9dee5fbc74a8f7e75a6cd287bd47ecf6d97f16dd045831a",
+        "status": "FROZEN_APPROVED_SOURCE"
+      }
+    ],
+    "workflow_policy": "manual_dispatch_only_after_audio_freeze"
   },
   "shot_plan": [
     {
