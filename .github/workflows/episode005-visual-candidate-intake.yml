@@ -164,6 +164,6 @@ jobs:
       - name: Upload isolated candidate evidence
         uses: actions/upload-artifact@v4
         with:
-          name: episode005-visual-intake-${{ github.event.inputs.candidate_id || 'mixkit-abstract-red-glow-101432' }}
+          name: episode005-visual-intake-${{ github.event.inputs.candidate_id || 'mixkit-clock-mechanism-3651' }}
           path: artifacts/episode005-visual-intake
           if-no-files-found: error
