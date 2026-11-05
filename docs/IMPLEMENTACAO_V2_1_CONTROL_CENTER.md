@@ -380,3 +380,19 @@ READY remains forbidden while any P0/P1 is open.
 - CI no head `202e9ec2c93705eeb0536e30029cf1b732ec6eb5`: Canonical engine CI run `42124233586` — success; V2.1 canonical integration run `42124233599` — success; Frozen native captions run `42124233568` — success.
 - Estado de segurança não mudou: `production_enablement=false`, `approved_for_render=0/16`, `global_catalog_updated=false`, `drive_written=false`, render `NOT_RUN` e publicação `MANUAL_ONLY_NOT_RUN`.
 - Próximo gate único: confirmar os cinco creators/licenças Mixkit no ledger e, em seguida, preparar a aprovação explícita de render por asset; não executar render, catálogo global, Drive ou publicação antes dessa confirmação.
+
+## Addendum — reconciliação final de contributors Mixkit e CI — 2026-11-05
+
+- As cinco pendências de autoria/licença foram verificadas diretamente nas páginas oficiais dos itens Mixkit e reconciliadas no plano e no ledger.
+- Contributors confirmados:
+  - S01 `mixkit-abstract-red-glow-101432`: Mixkit — https://mixkit.co/@mixkit/
+  - S07 `mixkit-slowly-approaching-clock-28897`: Arvizum — https://mixkit.co/@arvizum/
+  - S11 `mixkit-cloudy-sky-118`: Edgar Fernandez — https://mixkit.co/@edgarfernandez/
+  - S10 `mixkit-clock-mechanism-3651`: Edgar Fernandez — https://mixkit.co/@edgarfernandez/
+  - S02 `mixkit-large-satellite-antenna-2650`: Matthias Groeneveld — https://mixkit.co/@matthiasgroeneveld/
+- Em todos os cinco itens, a própria página exibiu `Mixkit Stock Video Free License`, com uso comercial ou pessoal, e essa evidência foi registrada junto ao contributor. Não foi inferido autor a partir de nome de arquivo ou de busca externa.
+- O ledger agora reúne os sete contributors Mixkit: os cinco confirmados nesta etapa e Edgar Fernandez já confirmado anteriormente em S03/S04.
+- A ficha de direitos deixou de bloquear por autoria/licença Mixkit. O bloqueio correto restante é apenas a aprovação explícita de render por asset, mantendo a separação entre `PASS_DIRECT_MEDIA_PREVIEW`, licença verificada e autorização de produção.
+- CI após a reconciliação, head `ae26491d7858e26e2719d33cfec5e951a35d831f`: Canonical engine CI run `42124873659` — success; Frozen Episode 005 Captions run `42124873702` — success; V2.1 canonical integration run `42124873737` — success.
+- Estado de promoção permanece fechado: `production_enablement=false`, `approved_for_render=0/16`, `global_catalog_updated=false`, `drive_written=false`, render `NOT_RUN` e publicação `MANUAL_ONLY_NOT_RUN`.
+- Próximo gate único: obter/registrar aprovação explícita de render por asset e só então executar o preflight manual fail-closed; nenhuma publicação automática será habilitada.
