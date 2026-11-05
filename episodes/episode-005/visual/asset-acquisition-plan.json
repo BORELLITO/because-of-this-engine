@@ -266,7 +266,12 @@
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
-        "global_catalog_updated": false
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "PASS_ABSTRACT_RED_GLOW_NO_IDENTIFIABLE_ELEMENTS",
+        "visual_qa_status": "PASS",
+        "visual_qa_evidence": "artifact 13403209885 / qa-frames.jpg",
+        "third_party_risk": "NONE_VISIBLE",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
       }
     },
     {
@@ -311,7 +316,12 @@
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
-        "global_catalog_updated": false
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "PASS_GENERIC_CLOCK_NO_BRAND_VISIBLE",
+        "visual_qa_status": "PASS",
+        "visual_qa_evidence": "artifact 13403188677 / qa-frames.jpg",
+        "third_party_risk": "GENERIC_CLOCK_FACE_ONLY",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
       }
     },
     {
@@ -366,7 +376,12 @@
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
-        "global_catalog_updated": false
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "PASS_GENERIC_CLOUDY_SKY_NO_IDENTIFIABLE_ELEMENTS",
+        "visual_qa_status": "PASS",
+        "visual_qa_evidence": "artifact 13404636511 / qa-frames.jpg",
+        "third_party_risk": "NONE_VISIBLE",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
       }
     },
     {
@@ -425,7 +440,12 @@
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
-        "global_catalog_updated": false
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "PASS_GENERIC_CLOCK_MECHANISM_WITH_NONBRAND_DATE_TEXT",
+        "visual_qa_status": "PASS",
+        "visual_qa_evidence": "artifact 13406364533 / qa-frames.jpg",
+        "third_party_risk": "GENERIC_CLOCK_TEXT_ONLY",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
       }
     },
     {
@@ -482,7 +502,12 @@
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
-        "global_catalog_updated": false
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "PASS_SATELLITE_ANTENNA_NO_PERSON_OR_BRAND_VISIBLE",
+        "visual_qa_status": "PASS",
+        "visual_qa_evidence": "artifact 13409661379 / qa-frames.jpg",
+        "third_party_risk": "NONE_VISIBLE",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
       }
     },
     {
@@ -606,7 +631,12 @@
         "global_catalog_updated": false,
         "editorial_caveat": "Modern tablet/code/workshop imagery; never label as literal 1983 Petrov archival footage.",
         "approval_scope": "S03_ONLY",
-        "approval_caveat": "Modern technical reconstruction of a human/system decision; never literal Petrov archival evidence."
+        "approval_caveat": "Modern technical reconstruction of a human/system decision; never literal Petrov archival evidence.",
+        "direct_media_visual_review": "PASS_NO_FACE_GENERIC_TABLET_WITH_GENERIC_CODE_TEXT",
+        "visual_qa_status": "PASS",
+        "visual_qa_evidence": "artifact 13411851653 / qa-frames.jpg",
+        "third_party_risk": "GENERIC_SCREEN_TEXT_ONLY",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
       },
       "intake_artifact": {
         "workflow_run_id": 42021165782,
@@ -666,7 +696,12 @@
         "global_catalog_updated": false,
         "editorial_caveat": "Industrial control panel is representational reconstruction for S04, never literal Petrov archival evidence.",
         "approval_scope": "S04_ONLY",
-        "approval_caveat": "Industrial control panel is representational reconstruction; never literal Petrov archival evidence."
+        "approval_caveat": "Industrial control panel is representational reconstruction; never literal Petrov archival evidence.",
+        "direct_media_visual_review": "PASS_HAND_ONLY_GENERIC_EMERGENCY_STOP_LABEL",
+        "visual_qa_status": "PASS",
+        "visual_qa_evidence": "artifact 13412703858 / qa-frames.jpg",
+        "third_party_risk": "GENERIC_LABEL_ONLY",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
       },
       "intake_artifact": {
         "workflow_run_id": 42024921610,
@@ -950,7 +985,12 @@
         "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false,
-        "assistant_visual_review": "Clean and visually coherent, but abstract indicator bars; not a literal Soviet control console. Human approval still required."
+        "assistant_visual_review": "Clean and visually coherent, but abstract indicator bars; not a literal Soviet control console. Human approval still required.",
+        "direct_media_visual_review": "PASS_ABSTRACT_LED_INDICATORS_NO_IDENTIFIABLE_ELEMENTS",
+        "visual_qa_status": "PASS",
+        "visual_qa_evidence": "artifact 13426556747 / pixabay-led-indicator-lights-316712/qa-frames.jpg",
+        "third_party_risk": "NONE_VISIBLE",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
       },
       "fingerprint_audit": {
         "workflow_run_id": 42049952757,
@@ -1142,7 +1182,12 @@
         "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false,
-        "assistant_visual_review": "Clean full-duration footage; real parabolic antenna/earth-station geometry remains readable in the 9:16 center crop. Treat as representational infrastructure, not literal Petrov archival evidence."
+        "assistant_visual_review": "Clean full-duration footage; real parabolic antenna/earth-station geometry remains readable in the 9:16 center crop. Treat as representational infrastructure, not literal Petrov archival evidence.",
+        "direct_media_visual_review": "PASS_SATELLITE_ARRAY_NO_PERSON_OR_BRAND_VISIBLE",
+        "visual_qa_status": "PASS",
+        "visual_qa_evidence": "artifact 13427442382 / pixabay-antenna-astronomy-communication-40041/qa-frames.jpg",
+        "third_party_risk": "GENERIC_INFRASTRUCTURE_ONLY",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
       },
       "fingerprint_audit": {
         "workflow_run_id": 42053792993,
@@ -3099,6 +3144,6 @@
     "validator": "production/visual_plan_contract.py",
     "checkout_commit": "d371da0ad7c72576bcd3e9f664baa6b03f89a5e4"
   },
-  "last_adjustment": "Replaced S05 primary after direct-media QA rejected recognizable-person candidate on 2026-11-05",
-  "next_gate": "Revalidate visual manifest after S05 replacement; complete rights QA before render."
+  "last_adjustment": "Completed direct-media visual QA for all 16 active manifest assets on 2026-11-05; no active asset shows a recognizable person or brand, with editorial guardrails recorded for generic text/labels.",
+  "next_gate": "Complete Mixkit author/license confirmation and obtain explicit render approval per asset."
 }
