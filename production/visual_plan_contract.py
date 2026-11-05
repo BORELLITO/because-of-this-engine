@@ -15,30 +15,15 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
+from production.visual_provider_policy import host_allowed, policy_for
 
-PROVIDER_POLICIES = {
-    "mixkit": {
-        "license_name": "Mixkit Stock Video Free License",
-        "page_hosts": {"mixkit.co"},
-        "media_hosts": {"mixkit.co"},
-    },
-    "pixabay": {
-        "license_name": "Pixabay Content License",
-        "page_hosts": {"pixabay.com"},
-        "media_hosts": {"pixabay.com"},
-    },
-}
+
 CANDIDATE_ID_PATTERN = re.compile(r"^[A-Za-z0-9._-]+$")
 SHOT_ID_PATTERN = re.compile(r"^S[0-9]{2}$")
 
 
 class VisualPlanContractError(ValueError):
     """Raised when the visual plan or manifest is structurally inconsistent."""
-
-
-def _host_allowed(hostname: str | None, allowed_bases: set[str]) -> bool:
-    normalized = str(hostname or "").lower().rstrip(".")
-    return any(normalized == base or normalized.endswith("." + base) for base in allowed_bases)
 
 
 def _duplicates(values: list[str]) -> list[str]:
@@ -146,7 +131,7 @@ def validate_visual_plan(plan: dict[str, Any], manifest: dict[str, Any]) -> dict
 
         if candidate.get("media_url") and not status.startswith("REJECTED"):
             provider = str(candidate.get("provider", ""))
-            policy = PROVIDER_POLICIES.get(provider)
+            policy = policy_for(provider)
             if policy is None:
                 errors.append(f"{candidate_id}: unsupported provider for media candidate: {provider}")
             elif candidate.get("license_name") != policy["license_name"]:
@@ -158,11 +143,11 @@ def validate_visual_plan(plan: dict[str, Any], manifest: dict[str, Any]) -> dict
                 media = urlparse(media_url)
                 source_ok = (
                     source_page.scheme == "https"
-                    and _host_allowed(source_page.hostname, policy["page_hosts"])
+                    and host_allowed(source_page.hostname, policy["page_hosts"])
                 )
                 media_ok = (
                     media.scheme == "https"
-                    and _host_allowed(media.hostname, policy["media_hosts"])
+                    and host_allowed(media.hostname, policy["media_hosts"])
                 )
                 if not source_ok or not media_ok:
                     errors.append(f"{candidate_id}: {provider} source/media host is not allowlisted")
