@@ -60,3 +60,15 @@ READY remains forbidden while any P0/P1 is open.
 - A evidência foi registrada em `episodes/episode-005/visual/asset-acquisition-plan.json`; aprovação humana, render, catálogo global, Drive e publicação continuam bloqueados.
 - O conflito do workflow `.github/workflows/episode005-visual-fingerprint-audit.yml` foi resolvido entre `main` e a branch candidata; o PR 67 está novamente `mergeable`, ainda draft.
 - Próximo gate único: QA humano dos quatro clipes e aquisição dos nove shots restantes; só depois thumbnail final, render e Drive.
+
+## Addendum de auditoria visual — 2026-11-05
+
+- Foi detectada uma fraqueza real no QA anterior: os contact sheets eram gerados somente com os primeiros segundos do clipe e o crop 9:16 era verificado em um único frame.
+- O workflow `.github/workflows/episode005-visual-candidate-intake.yml` foi corrigido no commit `9108c622adc0ab95d97be846e6294213a0056a6a` para amostrar cinco posições normalizadas — início, 25%, 50%, 75% e final — e produzir `qa-frames.jpg`, `qa-crop-9x16.jpg`, `qa-sampling.json` e os frames individuais.
+- A inspeção preliminar foi registrada no plano, sem alterar a aprovação formal:
+  - `pixabay-alert-alarm-war-205519`: rejeição preliminar por HUD/ícone/scan-lines gráficos persistentes; não passa no gate de fonte limpa.
+  - `pixabay-radar-sonar-ping-2420`: condicional; sem logo/letterbox observado, mas é diagrama radar simbólico e não evidência arquivística.
+  - `pixabay-radar-screen-4511`: condicional; crop sobrevive, porém é um insert abstrato de baixa informação e deve ser curto.
+  - `pixabay-television-broadcasting-satellite-29483`: rejeição preliminar por aderência semântica fraca ao S12; mostra apenas uma televisão com tela branca.
+- A intake dos quatro candidatos precisa ser rerodada para gerar a nova evidência antes de qualquer decisão humana. Nenhum candidato foi promovido; render, catálogo global, thumbnail, Drive e publicação continuam bloqueados.
+- Próximo passo único atualizado: rerodar a intake Pixabay com a amostragem corrigida, substituir os dois rejeitados e então buscar aprovação humana explícita somente para os candidatos que passarem nos gates.
