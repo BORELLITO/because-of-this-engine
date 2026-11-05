@@ -7,7 +7,7 @@
     "mixkit": "https://mixkit.co/license/modal/videoFree/",
     "pixabay": "https://pixabay.com/service/license-summary/"
   },
-  "global_status": "BLOCKED_PENDING_PER_ASSET_REVIEW",
+  "global_status": "BLOCKED_PENDING_FULL_FILE_QA_AND_PER_ASSET_RENDER_APPROVAL",
   "promotion_policy": {
     "approved_for_manifest_only": true,
     "approved_for_render": false,
@@ -144,9 +144,11 @@
       "assigned_shots": [
         "S03"
       ],
-      "author_status": "MISSING_FROM_LEDGER",
-      "visual_rights_review": "REQUIRED_IDENTIFIABLE_PERSON_CHECK",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL"
+      "author_status": "CONFIRMED_EDGAR_FERNANDEZ",
+      "visual_rights_review": "PREVIEW_PASS_NO_FACE_OR_RECOGNIZABLE_PERSON_VISIBLE",
+      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "contributor_url": "https://mixkit.co/@edgarfernandez/",
+      "full_asset_review_status": "PENDING_FULL_FILE_QA"
     },
     {
       "asset_id": "mixkit-worker-industrial-lathe-2244",
@@ -166,9 +168,11 @@
       "assigned_shots": [
         "S04"
       ],
-      "author_status": "MISSING_FROM_LEDGER",
-      "visual_rights_review": "REQUIRED_IDENTIFIABLE_PERSON_CHECK",
-      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL"
+      "author_status": "CONFIRMED_EDGAR_FERNANDEZ",
+      "visual_rights_review": "PREVIEW_PASS_HAND_ONLY_GENERIC_EMERGENCY_LABEL_NO_BRAND_VISIBLE",
+      "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
+      "contributor_url": "https://mixkit.co/@edgarfernandez/",
+      "full_asset_review_status": "PENDING_FULL_FILE_QA"
     },
     {
       "asset_id": "pixabay-led-indicator-lights-316712",
@@ -368,5 +372,6 @@
       "visual_rights_review": "REQUIRED_BRAND_LOGO_AND_THIRD_PARTY_CHECK",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL"
     }
-  ]
+  ],
+  "last_adjustment": "S03/S04 preview inspection completed in Cloud Browser on 2026-11-05"
 }
