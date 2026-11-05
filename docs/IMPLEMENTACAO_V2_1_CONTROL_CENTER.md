@@ -8,7 +8,7 @@
 - Base: main at d35d78cd4a92d12375f54076e3e21b56cbe25fad
 - Candidate branch: integration/because-of-this-v2.1-20261105
 - Draft PR: 67
-- Candidate commit: b4f2d958ed4d93562d024b6159d1ef7aac950719
+- Candidate commit: bc9b76a3a154fa3772c823c76ec0587409488290
 - Status: PARTIAL / BLOCKED_FOR_PRODUCTION
 - Canonical entrypoint: production/canonical_entrypoint.py
 - Canonical voice: Microsoft Edge TTS / ChristopherNeural active for zero-billing preview; Cloud/Gemini are not active routes
@@ -38,7 +38,7 @@
 | Legacy workflows | ARCHIVED | Definitions retained under archive/v7/workflows/, outside .github/workflows |
 | Drive | NOT RUN | No Drive write or media generation authorized |
 | Work | UNKNOWN | No independent Work execution log |
-| Edge TTS + captions preview | NATIVE_PROVIDER_TIMING_VALIDATED_GROUPED_BOUNDARIES | Audio run 41961294784 + frozen caption run 41966915074; 79.704 s; ChristopherNeural; 175 provider tokens; 2 grouped boundaries; caption artifact 13388300361 |\n| Visual asset acquisition | CANDIDATE_PLAN_ONLY | 15 Pexels candidates mapped to Episode 005 beats; none downloaded or approved for render |
+| Edge TTS + captions preview | NATIVE_PROVIDER_TIMING_VALIDATED_GROUPED_BOUNDARIES | Audio run 41961294784 + frozen caption run 41966915074; 79.704 s; ChristopherNeural; 175 provider tokens; 2 grouped boundaries; caption artifact 13388300361 |\n| Visual asset acquisition | CANDIDATE_PLAN_ONLY | 15 Pexels fallback candidates plus 4 Mixkit Free-License candidates mapped to Episode 005 beats; none downloaded or approved for render |
 | First new production | BLOCKED | Implementation stage does not authorize automatic production |
 
 ## Remaining blockers
@@ -46,7 +46,7 @@
 - The 13 historical registry assets were fingerprinted from their verified Drive MP4s with the versioned video-phash-v1 algorithm; future assets must use the same catalog contract.
 - Real thumbnail files and platform cover records are not yet available for a V2.1 episode.
 - Renderer accepts provider-native grouped boundaries as synchronized units; no provider interval is subdivided synthetically. Final render remains blocked only by missing approved assets, thumbnail and the remaining release gates.
-- Offline contracts for TTS, audio, captions, render and Drive are integrated; the canonical entrypoint verifies the real adapter files and symbols. Real Edge TTS audio and provider-native caption timing are generated and validated. Two provider boundary groups remain intentionally unsplit; the Whisper acoustic audit is retained as diagnostic and is not allowed to replace provider timing. The approved artifact is frozen; the synthesis workflow is manual-only because independent runs can produce different audio hashes. Visual asset acquisition, thumbnail, render, Drive write and publication remain unexecuted.
+- Offline contracts for TTS, audio, captions, render and Drive are integrated; the canonical entrypoint verifies the real adapter files and symbols. Real Edge TTS audio and provider-native caption timing are generated and validated. Two provider boundary groups remain intentionally unsplit; the Whisper acoustic audit is retained as diagnostic and is not allowed to replace provider timing. The approved artifact is frozen; the synthesis workflow is manual-only because independent runs can produce different audio hashes. Visual asset acquisition, thumbnail, render, Drive write and publication remain unexecuted. Pexels direct media download was blocked by the browser; Mixkit is now the preferred acquisition route, with license-page verification and per-file QA still mandatory.
 - Promotion to main still requires explicit approval and post-merge audit.
 
 READY remains forbidden while any P0/P1 is open.
