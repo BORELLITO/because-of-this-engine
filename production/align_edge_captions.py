@@ -13,7 +13,6 @@ from typing import Any
 from production.align_captions import (
     AlignmentError,
     _align_chunks,
-    _normalize_sidecar_word_timeline,
     _write_ass,
 )
 from production.generate_phrase_captions import phrase_chunks
@@ -84,6 +83,11 @@ def generate(manifest_path: Path, boundary_path: Path) -> dict[str, Any]:
     chunks = phrase_chunks(script, max_line_chars=int(caption_config.get("max_line_chars", 42)))
     native_words = _load_boundaries(boundary_path.resolve())
     events, sidecar_chunks = _align_chunks(chunks, native_words)
+    grouped_boundary_ids = sorted({
+        int(word["boundary_group_id"])
+        for word in native_words
+        if word.get("boundary_group_id") is not None
+    })
     # Native Edge intervals are already bounded by the provider. Do not split
     # grouped provider boundaries into guessed sub-word offsets; grouped tokens
     # intentionally retain the same real interval in the sidecar.
@@ -132,7 +136,9 @@ def generate(manifest_path: Path, boundary_path: Path) -> dict[str, Any]:
         "word_timing_normalization": {
             "overlap_boundaries_closed": overlap_count,
             "timeline_monotonic": True,
-            "grouped_provider_boundaries_preserved": True,
+            "grouped_provider_boundaries_preserved": bool(grouped_boundary_ids),
+            "grouped_provider_boundary_count": len(grouped_boundary_ids),
+            "final_word_level_ready": not bool(grouped_boundary_ids),
         },
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return {
@@ -142,7 +148,7 @@ def generate(manifest_path: Path, boundary_path: Path) -> dict[str, Any]:
         "duration_seconds": round(audio_seconds, 3),
         "event_count": len(events),
         "recognized_words": len(native_words),
-        "word_highlight_mode": "timestamp_color_transform",
+        "word_highlight_mode": "timestamp_color_transform_with_provider_groups",
         "active_word_color": active_word_color,
     }
 
