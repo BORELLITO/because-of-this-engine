@@ -6,7 +6,7 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-from production.gemini_tts import DEFAULT_MODEL, MAX_NARRATION_SECONDS, MIN_NARRATION_SECONDS, PROVIDER, VOICE_NAME, GeminiTTSError, profile_from_v21_contract
+from production.cloud_tts import MAX_NARRATION_SECONDS, MIN_NARRATION_SECONDS, PROVIDER, V21_MODEL, V21_VOICE_NAME, CloudTTSError, profile_from_v21_contract
 
 SHA256 = re.compile(r"^[0-9a-f]{64}$", re.IGNORECASE)
 POLICY_PATH = Path(__file__).resolve().parent / "active_engine_policy.json"
@@ -26,9 +26,9 @@ def validate_tts_contract(record: Mapping[str, Any], policy_path: Path = POLICY_
 
     expected = {
         "provider": policy.get("voice_provider", PROVIDER),
-        "voice_name": voice_policy.get("voice_name", VOICE_NAME),
+        "voice_name": voice_policy.get("voice_name", V21_VOICE_NAME),
         "language_code": voice_policy.get("language_code", "en-US"),
-        "model": voice_policy.get("model", DEFAULT_MODEL),
+        "model": voice_policy.get("model", V21_MODEL),
         "provider_fallback": voice_policy.get("provider_fallback", "forbidden"),
     }
     for field, value in expected.items():
@@ -57,7 +57,7 @@ def validate_tts_contract(record: Mapping[str, Any], policy_path: Path = POLICY_
 
     try:
         profile_from_v21_contract(dict(contract), policy)
-    except GeminiTTSError as exc:
+    except CloudTTSError as exc:
         failures.append(str(exc))
 
     return {
