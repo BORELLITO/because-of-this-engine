@@ -94,8 +94,8 @@ jobs:
 
       - name: Generate official native Edge captions
         run: |
-          PYTHONPATH=. python production/align_edge_captions.py \\
-            --manifest artifacts/episode005-frozen/caption-manifest.json \\
+          PYTHONPATH=. python production/align_edge_captions.py \
+            --manifest artifacts/episode005-frozen/caption-manifest.json \
             --word-boundaries artifacts/episode005-frozen/edge-word-boundaries.json
 
       - name: Validate official native Edge captions
