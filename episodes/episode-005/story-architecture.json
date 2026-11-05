@@ -60,8 +60,11 @@
       "available_credits": 0,
       "charged_credits": 0,
       "audio_produced": false,
-      "automatic_retry": false
-    }
+      "automatic_retry": false,
+      "classification": "HISTORICAL_DIAGNOSTIC_ONLY_NOT_PRODUCTION"
+    },
+    "execution_route": "direct_google_gemini_api_only",
+    "production_provider_policy": "Creative Claw forbidden"
   },
   "shot_plan": [
     {
@@ -202,11 +205,12 @@
   "production_gates": {
     "story_fact_check": "READY_WITH_GUARDRAILS",
     "script_lock": "READY_FOR_TTS",
-    "real_tts": "BLOCKED_NO_CREDITS_AUDIO_NOT_GENERATED",
+    "real_tts": "PENDING_DIRECT_GOOGLE_GEMINI_API",
     "captions": "BLOCKED_UNTIL_AUDIO",
     "render": "BLOCKED_UNTIL_CAPTIONS_AND_ASSETS",
     "thumbnail_final": "BLOCKED_UNTIL_RENDER_OR_APPROVED_FRAME",
     "drive_write": "NOT_AUTHORIZED",
-    "publication": "MANUAL_ONLY"
+    "publication": "MANUAL_ONLY",
+    "creative_claw": "DISALLOWED"
   }
 }
