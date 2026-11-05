@@ -28,10 +28,10 @@
     "Podvig technical false-alarm analysis"
   ],
   "visual_truth_classes": [
-    "BRAND_OUTRO",
+    "ABSTRACT_ATMOSPHERE",
     "DOCUMENTARY_EVIDENCE",
     "MAP_OR_DIAGRAM",
-    "REPRESENTATIONAL"
+    "RECONSTRUCTION"
   ],
   "visual_representation_by_stage": [
     "Dark bunker panel; red warning indicator comes alive.",
@@ -747,6 +747,10 @@
     "thumbnail": "PENDING_HUMAN_REVIEW",
     "render": "BLOCKED",
     "drive": "NOT_AUTHORIZED",
-    "publication": "MANUAL_ONLY"
+    "publication": "MANUAL_ONLY",
+    "visual_truth_class_normalization": {
+      "REPRESENTATIONAL": "RECONSTRUCTION",
+      "BRAND_OUTRO": "ABSTRACT_ATMOSPHERE"
+    }
   }
 }
