@@ -3189,6 +3189,19 @@
     "validator": "production/visual_plan_contract.py",
     "checkout_commit": "d371da0ad7c72576bcd3e9f664baa6b03f89a5e4"
   },
-  "last_adjustment": "Direct-media visual QA completed for all 16 active assets; Mixkit contributor profiles and item-page Free License were confirmed for the five previously incomplete ledger entries on 2026-11-05. Render approval remains separate and closed.",
-  "next_gate": "Complete explicit per-asset render approval only after rights ledger reconciliation; do not enable production, catalog, Drive or publication automatically."
+  "last_adjustment": "All 16 active assets received explicit user render approval on 2026-11-05 after direct-media QA, contributor/license reconciliation and no-reuse checks. The scene manifest remains manifest-only by contract; render authorization is recorded in the rights ledger and production record.",
+  "next_gate": "Expose the manual V2.1 render workflow on the approved base revision, then run preview preflight. Do not merge, enable production, render media, write Drive or publish automatically.",
+  "render_approval_record": {
+    "status": "APPROVED",
+    "approved_at_utc": "2026-11-05T22:56:14Z",
+    "scope": "All 16 active Episode 005 assets",
+    "evidence": "episodes/episode-005/rights/rights-audit-v21.json and episodes/episode-005/production-record.json",
+    "constraints": [
+      "production_enablement=false",
+      "manual_preflight_required",
+      "global_catalog_update=false",
+      "drive_written=false",
+      "publication_manual_only"
+    ]
+  }
 }
