@@ -439,7 +439,12 @@
         ],
         "frame_rate": "60/1",
         "codec": "h264",
-        "automated_promotion": false
+        "automated_promotion": false,
+        "fingerprint_workflow_run_id": 42016725778,
+        "fingerprint_artifact_id": 13409611998,
+        "fingerprint_artifact_digest": "sha256:30f39d5255b086062c6e01e7576c9cd9f5371476b795a1736d48579bbc2474c4",
+        "perceptual_hash": "f10ae48c3a770e23246f7fda15feccd3c4b37e1db48b9d71c6fb1511a1ee1b7c",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
       },
       "qa": {
         "clean_frame_visual_review": "PRELIMINARY_PASS",
@@ -447,16 +452,16 @@
         "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
         "semantic_fit": "PRELIMINARY_PASS_FOR_S02_AS_REPRESENTATIONAL_EARLY_WARNING_INFRASTRUCTURE",
         "locked_9x16_crop": "PRELIMINARY_PASS_CENTER_CROP_WITH_SATELLITE_DISH_PARTIALLY_VISIBLE",
-        "global_reuse_fingerprint": "PENDING",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "PENDING",
         "approved_for_render": false,
         "global_catalog_updated": false
       }
     }
   ],
-  "next_action": "Run fail-closed global fingerprint audit for mixkit-large-satellite-antenna-2650, then await explicit human approval before any manifest assignment.",
+  "next_action": "Await explicit human approval for mixkit-large-satellite-antenna-2650; if approved, assign it to S02 only, then rerun manifest validation. Do not update the global catalog or render.",
   "acquisition_route": {
-    "status": "FIFTH_CANDIDATE_DOWNLOADED_AWAITING_FINGERPRINT_AND_HUMAN_QA",
+    "status": "FIFTH_CANDIDATE_FINGERPRINT_PASS_AWAITING_HUMAN_APPROVAL",
     "preferred_provider": "mixkit",
     "fallback_provider": "pexels",
     "browser_download_status": "PEXELS_DIRECT_MEDIA_BLOCKED",
@@ -581,7 +586,13 @@
         "artifact_id": 13409661379,
         "artifact_digest": "sha256:f15336756e9e32900ff07ee7666492032887a883d923266ff2d5651ba862d5c0",
         "locked_9x16_crop": "PRELIMINARY_PASS_CENTER_CROP_WITH_SATELLITE_DISH_PARTIALLY_VISIBLE",
-        "human_approval": "PENDING"
+        "human_approval": "PENDING",
+        "fingerprint_workflow_run_id": 42016725778,
+        "fingerprint_artifact_id": 13409611998,
+        "fingerprint_artifact_digest": "sha256:30f39d5255b086062c6e01e7576c9cd9f5371476b795a1736d48579bbc2474c4",
+        "perceptual_hash": "f10ae48c3a770e23246f7fda15feccd3c4b37e1db48b9d71c6fb1511a1ee1b7c",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION"
       }
     ],
     "workspace_import": "REPLACED_BY_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE"
