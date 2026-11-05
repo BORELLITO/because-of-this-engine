@@ -12,16 +12,43 @@
   },
   "rights_policy": {
     "preferred_provider": "mixkit",
-    "fallback_provider": "pexels",
+    "fallback_provider": "pixabay",
     "license": "Mixkit Stock Video Free License",
     "license_evidence_url": "https://mixkit.co/license/modal/videoFree/",
     "commercial_use_allowed_by_provider": true,
     "attribution_required": false,
     "verification_required": "Per-asset page and downloaded-file QA remain mandatory; depicted trademarks, logos, identifiable people and third-party rights are not automatically cleared.",
     "no_archival_claim": "All representational footage must remain unlabeled as literal Petrov archival footage.",
-    "route_decision": "Mixkit is preferred after the Pexels page was reachable but its direct media download was blocked by the browser; existing Pexels candidates remain fallback candidates only.",
+    "route_decision": "Mixkit remains preferred when its page shows the commercial free license. Pixabay is now the verified fallback for relevant free-commercial candidates because the observed Mixkit radar pages were restricted to personal use; existing Pexels candidates remain tertiary legacy fallbacks until direct media rights are verified.",
     "avoid_ai_generated_sources": true,
-    "license_evidence_note": "Provider pages display Mixkit Stock Video Free License; the official license modal is retained as evidence."
+    "license_evidence_note": "License is provider-specific and must be visible on the source page before intake: Mixkit Stock Video Free License or Pixabay Content License.",
+    "legacy_fallback_provider": "pexels",
+    "provider_license_policy": {
+      "mixkit": {
+        "license_name": "Mixkit Stock Video Free License",
+        "license_evidence_url": "https://mixkit.co/license/modal/videoFree/",
+        "page_hosts": [
+          "mixkit.co"
+        ],
+        "media_hosts": [
+          "mixkit.co",
+          "assets.mixkit.co"
+        ],
+        "free_commercial_route_required": true
+      },
+      "pixabay": {
+        "license_name": "Pixabay Content License",
+        "license_evidence_url": "https://pixabay.com/service/license-summary/",
+        "page_hosts": [
+          "pixabay.com"
+        ],
+        "media_hosts": [
+          "pixabay.com",
+          "cdn.pixabay.com"
+        ],
+        "free_commercial_route_required": true
+      }
+    }
   },
   "selection_gates": [
     "source_page_exists",
@@ -662,9 +689,83 @@
         "fingerprint_artifact_id": 13413646379,
         "fingerprint_artifact_digest": "sha256:a4450ebff3562383b0b8c731bc810f810850eab1fa476737233279724c18fc69"
       }
+    },
+    {
+      "candidate_id": "pixabay-radar-sonar-ping-2420",
+      "source_page_url": "https://pixabay.com/videos/radar-sonar-ping-scan-submarine-2420/",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "media_url": "https://cdn.pixabay.com/video/2016/03/10/2420-158691979_large.mp4",
+      "media_url_observed_in_browser": true,
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "role": "S08",
+      "visual_match": "NEAR",
+      "visual_intent": "Symbolic radar/sonar monitoring contradiction; not literal Soviet archival evidence.",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "browser_verification": {
+        "source_page_verified": true,
+        "provider_license_visible": "Free for use under the Pixabay Content License",
+        "license_evidence_url": "https://pixabay.com/service/license-summary/",
+        "media_url_observed": true,
+        "observed_duration": "00:10",
+        "creator": "TH-DARK-Media"
+      },
+      "score": null,
+      "score_breakdown": {},
+      "disqualifiers": [],
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
+    },
+    {
+      "candidate_id": "pixabay-radar-screen-4511",
+      "source_page_url": "https://pixabay.com/videos/radar-radar-screen-rotation-circles-4511/",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "media_url": "https://cdn.pixabay.com/video/2016/08/16/4511-179376471_large.mp4",
+      "media_url_observed_in_browser": true,
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "role": "S08",
+      "visual_match": "NEAR",
+      "visual_intent": "Clean rotating radar-screen abstraction for the empty-ground-radar beat; not literal archival evidence.",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "browser_verification": {
+        "source_page_verified": true,
+        "provider_license_visible": "Free for use under the Pixabay Content License",
+        "license_evidence_url": "https://pixabay.com/service/license-summary/",
+        "media_url_observed": true,
+        "observed_duration": "00:07"
+      },
+      "score": null,
+      "score_breakdown": {},
+      "disqualifiers": [],
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
+    },
+    {
+      "candidate_id": "pixabay-television-broadcasting-satellite-29483",
+      "source_page_url": "https://pixabay.com/videos/television-broadcasting-satellite-29483/",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "media_url": "https://cdn.pixabay.com/video/2019/11/26/29483-376565549_large.mp4",
+      "media_url_observed_in_browser": true,
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "role": "S12",
+      "visual_match": "NEAR",
+      "visual_intent": "Representational signal/satellite infrastructure for the sensor-mechanism beat; not literal Petrov evidence.",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "browser_verification": {
+        "source_page_verified": true,
+        "provider_license_visible": "Free for use under the Pixabay Content License",
+        "license_evidence_url": "https://pixabay.com/service/license-summary/",
+        "media_url_observed": true,
+        "observed_duration": "00:30",
+        "creator": "Engin_Akyurt"
+      },
+      "score": null,
+      "score_breakdown": {},
+      "disqualifiers": [],
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
     }
   ],
-  "next_action": "Fill the six page-verified candidate records for each unresolved shot, score and shortlist two per shot, dispatch one manual intake batch for the selected IDs, then dispatch fingerprint for that same batch; keep render blocked until human semantic QA, thumbnail and final gates pass.",
+  "next_action": "Continue provider-aware discovery for unresolved shots S05,S06,S08,S09,S12,S13,S14,S15,S16. Pixabay candidates are recorded but not downloaded; shortlist, manual intake, fingerprint, human QA, thumbnail and final manifest gates remain mandatory. Render, global catalog, Drive and publication remain blocked.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -926,6 +1027,24 @@
       "license_observed": "Mixkit Restricted License",
       "evidence_note": "Browser-visible page states that the free 720p download is for personal use only; commercial route is premium Envato.",
       "media_url": "https://assets.mixkit.co/videos/5572/5572-720.mp4"
+    },
+    {
+      "candidate_id": "mixkit-abandoned-radar-station-6276",
+      "rejected_at_utc": "2026-11-05T00:00:00Z",
+      "reason": "LICENSE_RESTRICTED_PERSONAL_USE_ONLY",
+      "source_page_url": "https://mixkit.co/free-stock-video/abandoned-radar-station-by-chernobyl-6276/",
+      "license_observed": "Mixkit Restricted License",
+      "evidence_note": "Browser-visible page states that the free 720p download is for personal use only; commercial 4K route is premium.",
+      "media_url": null
+    },
+    {
+      "candidate_id": "mixkit-radar-airport-28009",
+      "rejected_at_utc": "2026-11-05T00:00:00Z",
+      "reason": "LICENSE_RESTRICTED_PERSONAL_USE_ONLY",
+      "source_page_url": "https://mixkit.co/free-stock-video/radar-at-the-edge-of-an-airport-28009/",
+      "license_observed": "Mixkit Restricted License",
+      "evidence_note": "Browser-visible page states that the free 720p download is for personal use only; commercial 4K route is premium.",
+      "media_url": null
     }
   ],
   "search_strategy": {
@@ -938,7 +1057,7 @@
       "intake_only_after_shortlist": true,
       "fingerprint_after_batch": true,
       "human_approval_after_technical_gates": true,
-      "intake_scope": "Selected shortlist IDs are dispatched as one manual batch (maximum 12 candidates); no candidate is downloaded on ordinary PR/documentation changes.",
+      "intake_scope": "Selected shortlist IDs are dispatched as one manual batch (maximum 12 candidates); provider-specific rights and host policy are revalidated before any download; no candidate is downloaded on ordinary PR/documentation changes.",
       "fingerprint_scope": "Fingerprint audit receives the same explicit candidate_ids batch and never scans the entire plan implicitly.",
       "future_candidate_record_fields": [
         "candidate_id",
@@ -958,7 +1077,7 @@
     },
     "preflight_filters": [
       "provider_page_verified",
-      "commercial_license_visible_on_free_download",
+      "commercial_license_visible_on_provider_page_and_free_download",
       "reject_personal_use_only_or_restricted_license",
       "reject_ai_generated_or_watermarked_media",
       "reject_baked_captions_logos_or_letterbox",
@@ -992,7 +1111,9 @@
       "download_max_duration_seconds": 180,
       "allowed_source_hosts": [
         "mixkit.co",
-        "assets.mixkit.co"
+        "assets.mixkit.co",
+        "pixabay.com",
+        "cdn.pixabay.com"
       ],
       "rights_revalidation_at_fingerprint": true
     },
