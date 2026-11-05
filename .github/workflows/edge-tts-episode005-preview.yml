@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - "production/edge_tts.py"
+      - "production/microsoft_edge_tts.py"
       - "episodes/episode-005/**"
       - "requirements.txt"
       - ".github/workflows/edge-tts-episode005-preview.yml"
@@ -39,14 +39,14 @@ jobs:
 
       - name: Run voice preflight
         run: |
-          PYTHONPATH=. python production/edge_tts.py \
+          PYTHONPATH=. python production/microsoft_edge_tts.py \
             --manifest episodes/episode-005/story-architecture.json \
             --preflight
 
       - name: Generate one Episode 005 narration preview
         run: |
           mkdir -p artifacts/episode005-edge
-          PYTHONPATH=. python production/edge_tts.py \
+          PYTHONPATH=. python production/microsoft_edge_tts.py \
             --manifest episodes/episode-005/story-architecture.json \
             --input episodes/episode-005/narration/en-US-charon-v1.txt \
             --output-dir artifacts/episode005-edge
