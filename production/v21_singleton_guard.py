@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-FORBIDDEN_PRODUCTION_FALLBACKS = ("piper_tts", "edge_tts", "cloud_tts")
+FORBIDDEN_PRODUCTION_FALLBACKS = ("piper_tts", "edge_tts", "cloud_tts", "v7_orchestrator.py", "v7_contract.py")
 def audit(repo_root: Path) -> dict:
     policy=json.loads((repo_root/"production/active_engine_policy.json").read_text(encoding="utf-8"))
     failures=[]
