@@ -336,3 +336,6 @@ READY remains forbidden while any P0/P1 is open.
 - Foi criada a ficha individual `episodes/episode-005/rights/rights-audit-v21.json`, com 16 assets, URLs, licença declarada, SHA-256, fingerprint, shots atribuídos e pendências de direitos por item. O arquivo é somente auditoria; não altera nenhuma autorização de render.
 
 - QA visual inicial dos shots S03 e S04 concluído no navegador: S03 mostra mãos/braço e creator identificado como Edgar Fernandez; S04 mostra apenas uma mão no painel, sem rosto e sem marca aparente. A evidência foi registrada na ficha, mas a revisão do arquivo completo e a aprovação para render continuam pendentes.
+
+- QA integral dos 14 assets restantes executada por inspeção de páginas: os 5 Mixkit restantes exibem preview/licença; os 9 Pixabay exibem licença e página do item, porém o preview de mídia não foi renderizado neste navegador. Regra aplicada: licença de provedor não equivale a QA visual; nenhum asset foi promovido.
+- Estado ajustado na ficha: Pixabay = `BLOCKED_BROWSER_PREVIEW_NOT_RENDERED`; Mixkit sem S03/S04 = `PENDING_FULL_FILE_QA`; S03/S04 = preview sem rosto, mas arquivo completo ainda pendente.
