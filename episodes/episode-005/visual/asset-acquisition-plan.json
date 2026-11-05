@@ -467,7 +467,7 @@
       "truth_class": "REPRESENTATIONAL",
       "provider": "mixkit",
       "license_name": "Mixkit Stock Video Free License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "REJECTED_SEMANTICALLY_WEAK",
       "media_url": "https://assets.mixkit.co/videos/2965/2965-720.mp4",
       "media_url_observed_in_browser": true,
       "browser_verification": {
@@ -481,12 +481,40 @@
         "visible_frame_rate": "24 fps",
         "semantic_note": "Man using a computer with screen light; suitable as a human-anchor reconstruction for S03, never as literal Petrov archival footage."
       },
-      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42019090322,
+        "artifact_id": 13409549619,
+        "artifact_digest": "sha256:cb0d4923ecf096bda7c9647334af8b917adc0ebfc1ae2973bfd0338d9f5dda13",
+        "artifact_name": "episode005-visual-intake-mixkit-man-using-computer-2965",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "0e2efa26bacc172973f2c06c3a401b3fb9e92d8d6b47c5ec68c4d9e41b7b8084",
+        "duration_seconds": 10.052,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "frame_rate": "24000/1001",
+        "codec": "h264",
+        "automated_promotion": false
+      },
+      "qa": {
+        "clean_frame_visual_review": "PASS",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_QA_FRAMES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
+        "semantic_fit": "REJECTED_TOO_CASUAL_FOR_S03_HUMAN_ANCHOR",
+        "locked_9x16_crop": "PASS_BUT_TIGHT_FACE_CROP",
+        "global_reuse_fingerprint": "NOT_RUN_REJECTED_BEFORE_FINGERPRINT",
+        "human_approval": "NOT_APPLICABLE",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "rejection_reason": "Modern casual headphone/computer scene does not credibly represent a Soviet command-bunker decision-maker and would weaken the factual reconstruction."
+      }
     }
   ],
-  "next_action": "Run fail-closed intake for mixkit-man-using-computer-2965, inspect its clean frame/crop, then fingerprint it; human approval remains pending.",
+  "next_action": "Find a distinct, commercially licensed candidate with a sober technical/control-room human context for unresolved S03; the rejected casual-computer candidate cannot enter the manifest or global catalog.",
   "acquisition_route": {
-    "status": "SIXTH_CANDIDATE_PAGE_VERIFIED_AWAITING_INTAKE",
+    "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
     "fallback_provider": "pexels",
     "browser_download_status": "PEXELS_DIRECT_MEDIA_BLOCKED",
@@ -631,11 +659,14 @@
         "visible_frame_rate": "24 fps",
         "browser_download_event": "NOT_USED_FOR_WORKSPACE_IMPORT",
         "workspace_import": "PENDING_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE",
-        "clean_frame_qa": "PENDING",
-        "rights_status": "CANDIDATE_NOT_DOWNLOADED",
-        "semantic_fit": "PRELIMINARY_PAGE_PASS_FOR_S03",
+        "clean_frame_qa": "PASS",
+        "rights_status": "REJECTED_SEMANTICALLY_WEAK",
+        "semantic_fit": "REJECTED_TOO_CASUAL_FOR_S03_HUMAN_ANCHOR",
         "media_url": "https://assets.mixkit.co/videos/2965/2965-720.mp4",
-        "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
+        "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+        "artifact_id": 13409549619,
+        "artifact_digest": "sha256:cb0d4923ecf096bda7c9647334af8b917adc0ebfc1ae2973bfd0338d9f5dda13",
+        "human_approval": "NOT_APPLICABLE"
       }
     ],
     "workspace_import": "REPLACED_BY_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE"
@@ -681,6 +712,15 @@
         "approval does not authorize global catalog mutation",
         "approval does not authorize render, Drive write or publication"
       ]
+    }
+  ],
+  "rejected_candidates": [
+    {
+      "candidate_id": "mixkit-man-using-computer-2965",
+      "rejected_at_utc": "2026-11-05T11:31:00Z",
+      "reason": "SEMANTICALLY_WEAK_FOR_S03",
+      "evidence_artifact_id": 13409549619,
+      "sha256": "0e2efa26bacc172973f2c06c3a401b3fb9e92d8d6b47c5ec68c4d9e41b7b8084"
     }
   ]
 }
