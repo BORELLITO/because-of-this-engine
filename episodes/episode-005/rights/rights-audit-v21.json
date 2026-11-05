@@ -7,7 +7,7 @@
     "mixkit": "https://mixkit.co/license/modal/videoFree/",
     "pixabay": "https://pixabay.com/service/license-summary/"
   },
-  "global_status": "BLOCKED_PENDING_DIRECT_MEDIA_PREVIEW_AND_ASSET_REPLACEMENT_AND_PER_ASSET_RENDER_APPROVAL",
+  "global_status": "BLOCKED_PENDING_DIRECT_MEDIA_PREVIEW_AND_PER_ASSET_RENDER_APPROVAL",
   "promotion_policy": {
     "approved_for_manifest_only": true,
     "approved_for_render": false,
@@ -260,11 +260,11 @@
       "third_party_risk": "NONE_VISIBLE"
     },
     {
-      "asset_id": "pixabay-alert-alarm-war-danger-risk-205519",
+      "asset_id": "pixabay-radar-black-green-target-symbol-57670",
       "provider": "pixabay",
-      "source_url": "https://pixabay.com/videos/alert-alarm-war-danger-risk-205519/",
+      "source_url": "https://pixabay.com/videos/radar-black-green-target-symbol-57670/",
       "license_name": "Pixabay Content License",
-      "license_evidence": "https://pixabay.com/videos/alert-alarm-war-danger-risk-205519/",
+      "license_evidence": "https://pixabay.com/videos/radar-black-green-target-symbol-57670/",
       "source_page_status": "PASS_PAGE_REOPENED_2026-11-05",
       "commercial_use_declared": true,
       "platform_scope": [
@@ -272,20 +272,20 @@
         "tiktok"
       ],
       "download_date": "2026-11-05",
-      "sha256": "5a2031e934028fb6c13ba07dd176092507303db83f4decc8b79acb2263ecbf8d",
-      "perceptual_fingerprint": "f2bb56d11027b73124649c52ecb1018ec945a8e1c02da9312e1ac958f733fbb6",
+      "sha256": "9293c16987da44620db4119af9fe2c776f56a2113402544e1d1bc3696f21496d",
+      "perceptual_fingerprint": "acbd3a72cf98707eb118622b22dfd5106f5b76a550255c48f2d51727689c3e6e",
       "assigned_shots": [
         "S05"
       ],
       "author_status": "NOT_REQUIRED_FOR_CURRENT_MANIFEST_BUT_RECOMMENDED",
-      "visual_rights_review": "FAIL_RECOGNIZABLE_PERSON_VISIBLE",
+      "visual_rights_review": "PASS_GENERIC_RADAR_NO_PERSON_BRAND_OR_READABLE_TEXT",
       "render_rights_status": "PENDING_EXPLICIT_RENDER_APPROVAL",
       "page_license_status": "PASS_PAGE_LICENSE_VISIBLE",
-      "full_asset_review_status": "REJECTED_CANDIDATE_REQUIRES_REPLACEMENT",
-      "visual_qa_status": "FAIL",
-      "visual_qa_evidence": "artifact 13437466569 / pixabay-alert-alarm-war-danger-risk-205519/qa-frames.jpg",
-      "third_party_risk": "RECOGNIZABLE_PERSON_AND_PROVIDER_CREATOR_WARNING",
-      "qa_note": "Direct frame sheet shows a clearly recognizable adult face; provider page also warns against use with recognizable people."
+      "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
+      "visual_qa_status": "PASS",
+      "visual_qa_evidence": "artifact 13437466569 / pixabay-radar-black-green-target-symbol-57670/qa-frames.jpg",
+      "third_party_risk": "NONE_VISIBLE",
+      "qa_note": "Five normalized direct-media frames show a generic radar/target graphic with no recognizable person, brand or readable third-party text."
     },
     {
       "asset_id": "pixabay-radar-radar-screen-rotation-circles-4511",
@@ -423,6 +423,6 @@
       "third_party_risk": "NONE_VISIBLE"
     }
   ],
-  "last_adjustment": "Completed direct-media visual QA for S05, S08, S09, S13, S14, S15 and S16 on 2026-11-05; rejected S05 due to recognizable person and retained render approval gate.",
+  "last_adjustment": "S05 primary replaced by directly inspected generic radar/target candidate after recognizable-person rejection on 2026-11-05",
   "qa_rule": "Provider license evidence is not equivalent to visual QA. Any recognizable person, brand, logo, readable third-party text, or unresolved media preview blocks promotion; render approval remains explicit per asset."
 }
