@@ -45,7 +45,7 @@
 
 - The 13 historical registry assets were fingerprinted from their verified Drive MP4s with the versioned video-phash-v1 algorithm; future assets must use the same catalog contract.
 - Real thumbnail files and platform cover records are not yet available for a V2.1 episode.
-- Final render remains blocked until the renderer's grouped-boundary policy is explicitly validated; no provider interval is subdivided synthetically.
+- Renderer accepts provider-native grouped boundaries as synchronized units; no provider interval is subdivided synthetically. Final render remains blocked only by missing approved assets, thumbnail and the remaining release gates.
 - Offline contracts for TTS, audio, captions, render and Drive are integrated; the canonical entrypoint verifies the real adapter files and symbols. Real Edge TTS audio and provider-native caption timing are generated and validated. Two provider boundary groups remain intentionally unsplit; the Whisper acoustic audit is retained as diagnostic and is not allowed to replace provider timing. The approved artifact is frozen; the synthesis workflow is manual-only because independent runs can produce different audio hashes. Visual asset acquisition, thumbnail, render, Drive write and publication remain unexecuted.
 - Promotion to main still requires explicit approval and post-merge audit.
 
