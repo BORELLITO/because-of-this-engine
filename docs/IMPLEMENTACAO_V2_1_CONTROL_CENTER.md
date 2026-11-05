@@ -8,7 +8,7 @@
 - Base: main at d35d78cd4a92d12375f54076e3e21b56cbe25fad
 - Candidate branch: integration/because-of-this-v2.1-20261105
 - Draft PR: 67
-- Candidate commit: c8f1a97b647816e1854021012c0d7d302a17c387
+- Candidate commit: 52f6e1b441b7549018712bc80a7562999ad790d7
 - Status: PARTIAL / BLOCKED_FOR_PRODUCTION
 - Canonical entrypoint: production/canonical_entrypoint.py
 - Canonical voice: Microsoft Edge TTS / ChristopherNeural active for zero-billing preview; Cloud/Gemini are not active routes
