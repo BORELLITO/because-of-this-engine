@@ -551,7 +551,7 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "mixkit",
       "license_name": "Mixkit Stock Video Free License",
-      "rights_status": "TECHNICALLY_VALIDATED_AWAITING_HUMAN_MANIFEST_DECISION",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "media_url": "https://assets.mixkit.co/videos/29991/29991-720.mp4",
       "media_url_observed_in_browser": true,
       "browser_verification": {
@@ -574,10 +574,12 @@
         "semantic_fit": "CONDITIONAL_PASS_AS_MODERN_DOCUMENTED_RECONSTRUCTION_ONLY",
         "locked_9x16_crop": "PRELIMINARY_PASS_TIGHT_HANDS_TABLET_CROP",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING_EXPLICIT_MANIFEST_DECISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false,
-        "editorial_caveat": "Modern tablet/code/workshop imagery; never label as literal 1983 Petrov archival footage."
+        "editorial_caveat": "Modern tablet/code/workshop imagery; never label as literal 1983 Petrov archival footage.",
+        "approval_scope": "S03_ONLY",
+        "approval_caveat": "Modern technical reconstruction of a human/system decision; never literal Petrov archival evidence."
       },
       "intake_artifact": {
         "workflow_run_id": 42021165782,
@@ -602,7 +604,7 @@
       }
     }
   ],
-  "next_action": "Human decision required: approve or reject mixkit-young-engineer-29991 for S03 manifest-only use. Approval would authorize only this representational modern-reconstruction asset for S03; it would not authorize render, catalog promotion, Drive or publication.",
+  "next_action": "Acquire and QA distinct candidates for unresolved shots S04,S05,S06,S08,S09,S12,S13,S14,S15,S16, then re-run final visual manifest validation. S03 is assigned to the approved modern-reconstruction candidate only.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -802,6 +804,28 @@
         "approval does not authorize global catalog mutation",
         "approval does not authorize render, Drive write or publication"
       ]
+    },
+    {
+      "candidate_id": "mixkit-young-engineer-29991",
+      "shot_ids": [
+        "S03"
+      ],
+      "decision": "APPROVED_FOR_MANIFEST_ONLY",
+      "scope": "Representational modern technical reconstruction for S03 only",
+      "constraints": [
+        "not literal Petrov archival evidence",
+        "no reuse in another shot of Episode 005",
+        "does not authorize render",
+        "does not authorize global catalog mutation",
+        "does not authorize Drive write or publication"
+      ],
+      "evidence": {
+        "intake_workflow_run_id": 42021165782,
+        "intake_artifact_id": 13411851653,
+        "fingerprint_workflow_run_id": 42021523387,
+        "fingerprint_artifact_id": 13411692548,
+        "sha256": "f1474daed5b97009063ca692859fdca1e91044ad62a9cd1f1f3009b2609b3478"
+      }
     }
   ],
   "rejected_candidates": [
