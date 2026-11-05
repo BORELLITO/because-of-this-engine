@@ -114,19 +114,24 @@
     "creative_claw_production_allowed": false,
     "only_permitted_route": "microsoft_edge_tts"
   },
-  "next_action": "Run the same adapter in an execution environment with trusted access to speech.platform.bing.com, keep SSL verification enabled, then authorize one complete Episode 005 preview.",
+  "next_action": "Use the validated Episode 005 Edge audio as the sole input for final transcription/captions; do not regenerate or switch providers.",
   "operational_preflight": {
-    "status": "BLOCKED_ENVIRONMENT_TLS",
+    "status": "EDGE_TTS_PREVIEW_GENERATED",
     "adapter": "production/microsoft_edge_tts.py",
     "dependency": "edge-tts==7.3.1",
     "dependency_installed": true,
     "ffmpeg_available": true,
     "voice_requested": "en-US-ChristopherNeural",
     "endpoint": "speech.platform.bing.com:443",
-    "audio_produced": false,
+    "audio_produced": true,
     "charged_credits": 0,
     "ssl_verification_disabled": false,
-    "diagnostic": "environment proxy returned self-signed certificate in certificate chain",
-    "checked_at_utc": "2026-11-05T00:00:00Z"
+    "diagnostic": "Real Edge TTS synthesis succeeded in GitHub Actions; local Work proxy TLS limitation remains isolated to the local environment.",
+    "checked_at_utc": "2026-11-05T02:17:33Z",
+    "duration_seconds": 79.704,
+    "audio_sha256": "4e021c52ea57835525b144ecfc08ed6abe41c99dca326866e63c7176cc45f40f",
+    "workflow_run_id": 41954211512,
+    "artifact_id": 13382850131,
+    "artifact_name": "episode005-edge-tts-preview"
   }
 }
