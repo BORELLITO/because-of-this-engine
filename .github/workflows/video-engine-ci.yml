@@ -40,6 +40,12 @@ jobs:
           assert policy["status"] == "BLOCKED_FOR_PRODUCTION"
           print("V21_POLICY_IDENTITY_PASS")
           PY
+      - name: Validate Episode 005 visual search contract
+        run: |
+          PYTHONPATH=. python production/visual_plan_contract.py \
+            --plan episodes/episode-005/visual/asset-acquisition-plan.json \
+            --manifest episodes/episode-005/visual/scene-asset-manifest.json
+
       - name: Enforce singleton runtime
         run: PYTHONPATH=. python production/v21_singleton_guard.py --repo-root .
       - name: Test legacy adapter delegates to canonical entrypoint
