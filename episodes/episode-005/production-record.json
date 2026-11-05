@@ -252,7 +252,7 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_RENDER",
+      "rights_status": "APPROVED",
       "approved_for_render": true,
       "approval_scope": "episode-005-render",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
@@ -280,7 +280,7 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_RENDER",
+      "rights_status": "APPROVED",
       "approved_for_render": true,
       "approval_scope": "episode-005-render",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
@@ -308,7 +308,7 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_RENDER",
+      "rights_status": "APPROVED",
       "approved_for_render": true,
       "approval_scope": "episode-005-render",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
@@ -336,7 +336,7 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_RENDER",
+      "rights_status": "APPROVED",
       "approved_for_render": true,
       "approval_scope": "episode-005-render",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
@@ -364,7 +364,7 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_RENDER",
+      "rights_status": "APPROVED",
       "approved_for_render": true,
       "approval_scope": "episode-005-render",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
@@ -392,7 +392,7 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_RENDER",
+      "rights_status": "APPROVED",
       "approved_for_render": true,
       "approval_scope": "episode-005-render",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
@@ -420,7 +420,7 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_RENDER",
+      "rights_status": "APPROVED",
       "approved_for_render": true,
       "approval_scope": "episode-005-render",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
@@ -448,7 +448,7 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_RENDER",
+      "rights_status": "APPROVED",
       "approved_for_render": true,
       "approval_scope": "episode-005-render",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
@@ -475,7 +475,7 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_RENDER",
+      "rights_status": "APPROVED",
       "approved_for_render": true,
       "approval_scope": "episode-005-render",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
@@ -502,7 +502,7 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_RENDER",
+      "rights_status": "APPROVED",
       "approved_for_render": true,
       "approval_scope": "episode-005-render",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
@@ -529,10 +529,11 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "approved_for_render": false,
-      "approval_scope": "manifest_only",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED"
     },
     {
       "asset_id": "pixabay-radar-radar-screen-rotation-circles-4511",
@@ -554,7 +555,7 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_RENDER",
+      "rights_status": "APPROVED",
       "approved_for_render": true,
       "approval_scope": "episode-005-render",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
@@ -581,7 +582,7 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_RENDER",
+      "rights_status": "APPROVED",
       "approved_for_render": true,
       "approval_scope": "episode-005-render",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
@@ -608,7 +609,7 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_RENDER",
+      "rights_status": "APPROVED",
       "approved_for_render": true,
       "approval_scope": "episode-005-render",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
@@ -635,7 +636,7 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_RENDER",
+      "rights_status": "APPROVED",
       "approved_for_render": true,
       "approval_scope": "episode-005-render",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
@@ -662,7 +663,7 @@
       "used_by": [
         "episode-005"
       ],
-      "rights_status": "APPROVED_FOR_RENDER",
+      "rights_status": "APPROVED",
       "approved_for_render": true,
       "approval_scope": "episode-005-render",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
@@ -774,7 +775,7 @@
   },
   "factuality_status": "READY",
   "safety_status": "READY",
-  "pipeline_state": "RENDER_PREFLIGHT",
+  "pipeline_state": "THUMBNAIL_QA",
   "production_enablement": false,
   "visual_manifest_reference": "episodes/episode-005/visual/scene-asset-manifest.json",
   "visual_manifest_status": "PARTIAL_MANIFEST_VALIDATED_BLOCKED_RENDER",
@@ -801,5 +802,5 @@
       "representational footage must not be presented as literal Petrov archival evidence"
     ]
   },
-  "last_adjustment": "Explicit render approval recorded for all 16 active assets on 2026-11-05; production remains disabled and the manual preflight is required before any media execution."
+  "last_adjustment": "Canonical vocabulary reconciled after preflight: rights_ledger entries use rights_status=APPROVED with approved_for_render=true; pipeline_state restored to valid THUMBNAIL_QA. Production remains disabled and manual preflight remains required."
 }
