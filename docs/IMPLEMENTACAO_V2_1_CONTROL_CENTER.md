@@ -8,7 +8,7 @@
 - Base: main at d35d78cd4a92d12375f54076e3e21b56cbe25fad
 - Candidate branch: integration/because-of-this-v2.1-20261105
 - Draft PR: 67
-- Candidate commit: bc9b76a3a154fa3772c823c76ec0587409488290
+- Candidate commit: c8f1a97b647816e1854021012c0d7d302a17c387
 - Status: PARTIAL / BLOCKED_FOR_PRODUCTION
 - Canonical entrypoint: production/canonical_entrypoint.py
 - Canonical voice: Microsoft Edge TTS / ChristopherNeural active for zero-billing preview; Cloud/Gemini are not active routes
@@ -38,7 +38,8 @@
 | Legacy workflows | ARCHIVED | Definitions retained under archive/v7/workflows/, outside .github/workflows |
 | Drive | NOT RUN | No Drive write or media generation authorized |
 | Work | UNKNOWN | No independent Work execution log |
-| Edge TTS + captions preview | NATIVE_PROVIDER_TIMING_VALIDATED_GROUPED_BOUNDARIES | Audio run 41961294784 + frozen caption run 41966915074; 79.704 s; ChristopherNeural; 175 provider tokens; 2 grouped boundaries; caption artifact 13388300361 |\n| Visual asset acquisition | CANDIDATE_PLAN_ONLY | 15 Pexels fallback candidates plus 4 Mixkit Free-License candidates mapped to Episode 005 beats; none downloaded or approved for render |
+| Edge TTS + captions preview | NATIVE_PROVIDER_TIMING_VALIDATED_GROUPED_BOUNDARIES | Audio run 41961294784 + frozen caption run 41966915074; 79.704 s; ChristopherNeural; 175 provider tokens; 2 grouped boundaries; caption artifact 13388300361 |
+| Visual asset acquisition | ALTERNATIVE_ROUTE_PREPARED | 15 Pexels fallback candidates plus 4 Mixkit Free-License candidates mapped to Episode 005 beats; none downloaded or approved for render |
 | First new production | BLOCKED | Implementation stage does not authorize automatic production |
 
 ## Remaining blockers
