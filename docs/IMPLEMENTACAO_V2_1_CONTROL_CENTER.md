@@ -367,3 +367,16 @@ READY remains forbidden while any P0/P1 is open.
 - Revalidação final no head `d220fdead9c25170a22227ae50bbb84247f1b871`: CI canônico run `42120350391` — success; integração V2.1 run `42120350465` — success; captions congeladas run `42120350398` — success. O PR 67 está `mergeable=true`, aberto e draft.
 - Direitos continuam sem promoção: todos os 16 assets permanecem `approved_for_render=false`; catálogo global, Drive, render e publicação seguem bloqueados. A ficha de direitos permanece globalmente bloqueada por QA/licença final pendente e aprovação explícita por asset.
 - Próximo passo único: concluir a QA direta dos Mixkit S01/S02/S03/S04/S07/S10/S11 e dos Pixabay S06/S12; só depois avaliar aprovação explícita de render por asset.
+
+## Addendum — QA visual direta completa e CI pós-gate — 2026-11-05
+
+- A QA visual direta dos arquivos integrais foi concluída para os nove assets que ainda estavam pendentes nesta etapa: Mixkit S01, S02, S03, S04, S07, S10 e S11; Pixabay S06 e S12.
+- Evidências utilizadas: artifacts de intake GitHub `13403209885`, `13403188677`, `13404636511`, `13406364533`, `13409661379`, `13411851653`, `13412703858`, `13426556747` e `13427442382`. Cada revisão considerou as cinco amostras normalizadas — início, 25%, 50%, 75% e final — e o crop vertical 9:16.
+- Resultado: os nove assets passaram na inspeção visual direta. Não foram observadas pessoas reconhecíveis, marcas identificáveis, watermarks ou letterbox nos arquivos aprovados.
+- Guardrails editoriais registrados: S03 usa tela genérica sem tratar o conteúdo como interface histórica; S04 usa painel industrial genérico sem alegação documental; S10 usa mecanismo/calendário genérico sem leitura histórica literal; S12 usa antena/infraestrutura representacional, nunca evidência literal do incidente. S13 permanece aprovado com guardrail equivalente para mecanismo genérico.
+- A correção do S05 permanece válida: o candidato com rosto reconhecível continua rejeitado no histórico e o radar/target `pixabay-radar-black-green-target-symbol-57670` é o substituto ativo, aprovado apenas para manifesto.
+- Estado consolidado da ficha de direitos: 16/16 assets com `full_asset_review_status=PASS_DIRECT_MEDIA_PREVIEW`; 0/16 com aprovação de render. A diferença entre QA visual aprovada e autorização de render foi preservada deliberadamente.
+- O ledger ainda mantém pendência de author/creator e confirmação específica da Free License para cinco itens Mixkit: S01, S02, S07, S10 e S11. S03 e S04 já têm creator registrado; Pixabay segue sujeito às ressalvas de pessoas, marcas, privacidade e uso standalone da licença.
+- CI no head `202e9ec2c93705eeb0536e30029cf1b732ec6eb5`: Canonical engine CI run `42124233586` — success; V2.1 canonical integration run `42124233599` — success; Frozen native captions run `42124233568` — success.
+- Estado de segurança não mudou: `production_enablement=false`, `approved_for_render=0/16`, `global_catalog_updated=false`, `drive_written=false`, render `NOT_RUN` e publicação `MANUAL_ONLY_NOT_RUN`.
+- Próximo gate único: confirmar os cinco creators/licenças Mixkit no ledger e, em seguida, preparar a aprovação explícita de render por asset; não executar render, catálogo global, Drive ou publicação antes dessa confirmação.
