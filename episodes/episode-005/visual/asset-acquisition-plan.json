@@ -410,7 +410,7 @@
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "mixkit",
       "license_name": "Mixkit Stock Video Free License",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "media_url": "https://assets.mixkit.co/videos/2650/2650-720.mp4",
       "media_url_observed_in_browser": true,
       "browser_verification": {
@@ -424,12 +424,39 @@
         "visible_frame_rate": "60 fps",
         "semantic_note": "Large satellite antenna in a forest; suitable as representational early-warning infrastructure for S02, not literal Petrov evidence."
       },
-      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42016296608,
+        "artifact_id": 13409661379,
+        "artifact_digest": "sha256:f15336756e9e32900ff07ee7666492032887a883d923266ff2d5651ba862d5c0",
+        "artifact_name": "episode005-visual-intake-mixkit-large-satellite-antenna-2650",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "1bfa05d75d9295ff3a08dda7017927f638292895f1c2c376667175c279813807",
+        "duration_seconds": 14.883,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "frame_rate": "60/1",
+        "codec": "h264",
+        "automated_promotion": false
+      },
+      "qa": {
+        "clean_frame_visual_review": "PRELIMINARY_PASS",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_QA_FRAMES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
+        "semantic_fit": "PRELIMINARY_PASS_FOR_S02_AS_REPRESENTATIONAL_EARLY_WARNING_INFRASTRUCTURE",
+        "locked_9x16_crop": "PRELIMINARY_PASS_CENTER_CROP_WITH_SATELLITE_DISH_PARTIALLY_VISIBLE",
+        "global_reuse_fingerprint": "PENDING",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     }
   ],
-  "next_action": "Run fail-closed intake for mixkit-large-satellite-antenna-2650, inspect its clean frame/crop, then fingerprint it; human approval remains pending.",
+  "next_action": "Run fail-closed global fingerprint audit for mixkit-large-satellite-antenna-2650, then await explicit human approval before any manifest assignment.",
   "acquisition_route": {
-    "status": "FIFTH_CANDIDATE_PAGE_VERIFIED_AWAITING_INTAKE",
+    "status": "FIFTH_CANDIDATE_DOWNLOADED_AWAITING_FINGERPRINT_AND_HUMAN_QA",
     "preferred_provider": "mixkit",
     "fallback_provider": "pexels",
     "browser_download_status": "PEXELS_DIRECT_MEDIA_BLOCKED",
@@ -546,11 +573,15 @@
         "visible_frame_rate": "60 fps",
         "browser_download_event": "NOT_USED_FOR_WORKSPACE_IMPORT",
         "workspace_import": "PENDING_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE",
-        "clean_frame_qa": "PENDING",
-        "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+        "clean_frame_qa": "PRELIMINARY_PASS",
+        "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
         "semantic_fit": "PRELIMINARY_PAGE_PASS_FOR_S02",
         "media_url": "https://assets.mixkit.co/videos/2650/2650-720.mp4",
-        "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
+        "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+        "artifact_id": 13409661379,
+        "artifact_digest": "sha256:f15336756e9e32900ff07ee7666492032887a883d923266ff2d5651ba862d5c0",
+        "locked_9x16_crop": "PRELIMINARY_PASS_CENTER_CROP_WITH_SATELLITE_DISH_PARTIALLY_VISIBLE",
+        "human_approval": "PENDING"
       }
     ],
     "workspace_import": "REPLACED_BY_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE"
