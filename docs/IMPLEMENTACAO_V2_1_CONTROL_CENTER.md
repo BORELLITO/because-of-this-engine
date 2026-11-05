@@ -253,3 +253,13 @@ READY remains forbidden while any P0/P1 is open.
 - Não existe workflow V2.1 de render final ativo na branch; nenhum render foi iniciado por essa limitação estrutural.
 - Foi preparada uma thumbnail candidata original, simbólica e sem alegação de imagem histórica, com cinco indicadores vermelhos, radar e o texto FIVE MISSILES. Ela ainda requer aprovação visual humana e não foi integrada como thumbnail final.
 - Próximo gate único: aprovar a thumbnail candidata e, em seguida, implementar/ativar a rota manual de render V2.1 sem contornar o entrypoint canônico e mantendo publicação manual.
+
+
+## Atualização — thumbnail candidata registrada (2026-11-05)
+
+- A thumbnail candidata foi aprovada para avançar como candidata técnica e registrada em episodes/episode-005/story-architecture.json.
+- Asset: Cinco luzes vermelhas no bunker.png; dimensões 1080x1920; SHA-256 84fbac028247995943aa5c9e4fcfc698526215e83c2017edc225dbcebe307276; Library file id libfile_0a269bde796c81919bd777795b907361.
+- Texto: FIVE MISSILES. A composição usa cinco indicadores vermelhos, radar verde, silhueta anônima e nuvens; é arte simbólica original, não evidência histórica.
+- O status permanece CANDIDATE_READY_FOR_HUMAN_REVIEW; ainda não é thumbnail final aprovada para publicação.
+- A rota de render V2.1 continua o único bloqueio estrutural: o entrypoint canônico é read-only, production_enablement=false e não existe workflow final ativo. Nenhuma rota legada foi reativada.
+- Próximo passo técnico seguro: implementar uma rota manual V2.1 de render com contrato próprio, preservando o entrypoint canônico read-only, publicação manual e fail-closed.
