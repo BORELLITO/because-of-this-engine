@@ -25,9 +25,9 @@
     "final_word_level_ready": false,
     "caption_authority": "provider_native_edge_boundaries",
     "acoustic_whisper_audit": "BLOCKED_ON_ASR_LEXICAL_VARIANTS",
-    "frozen_caption_workflow_run_id": 41966998397,
-    "frozen_caption_artifact_id": 13387523839,
-    "frozen_caption_artifact_digest": "sha256:105923c92bb1dc96dea5a2deb9b9756dfdf6013cbd0d17d2e0ebe9158c61025d",
+    "frozen_caption_workflow_run_id": 41967116262,
+    "frozen_caption_artifact_id": 13388585044,
+    "frozen_caption_artifact_digest": "sha256:147cc2807872d46e3d215c6f60f3fd1fed0fff8644f6359e91d3e97033ce2114",
     "sidecar": "narration.alignment.json",
     "ass": "narration.ass"
   },
