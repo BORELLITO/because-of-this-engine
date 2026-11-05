@@ -349,3 +349,12 @@ READY remains forbidden while any P0/P1 is open.
 - A ficha episodes/episode-005/rights/rights-audit-v21.json foi atualizada no commit 1e54e021ee2ca70125acb26505a532451a37b42a, mantendo approved_for_render=false, global_catalog_updated=false, drive_written=false e publication_authorized=false.
 - O bloqueio correto agora é composto por: substituição do S05, QA integral pendente de S03/S04/S06/S12, confirmação final dos itens Mixkit pendentes e aprovação explícita de render por asset. A licença não foi tratada como autorização de render.
 - Próximo passo único: substituir o candidato reprovado de S05 e completar a QA direta dos arquivos ainda pendentes; render, catálogo global, Drive e publicação permanecem bloqueados.
+
+## Addendum — reconciliação do PR e validação CI após correções — 2026-11-05
+
+- A auditoria de integração encontrou o PR 67 inicialmente `dirty`: a `main` estava três commits à frente, todos relacionados aos workflows visuais. A comparação confirmou que a branch já possuía versões posteriores e mais completas dos mesmos workflows, incluindo amostragem integral, runner `ubuntu-24.04` e FFmpeg estático limitado.
+- A ancestralidade foi reconciliada preservando a árvore da branch no merge commit `b42fb6d3636a941141ce60ba9ed5e703dac2e2f7`, com `behind_by=0`; o PR voltou a `mergeable=true` e permanece draft. Nenhum código do motor foi descartado.
+- O novo CI revelou duas inconsistências e ambas foram corrigidas: (1) o runner não instalava Pillow para inspeção dimensional dos arquivos de thumbnail; (2) o teste ainda esperava `THUMBNAIL_QA` bloqueado, apesar da thumbnail estar aprovada. Foi adicionada a instalação explícita de `Pillow==11.3.0` e a expectativa foi alinhada para exigir somente `rights_ledger` como bloqueio.
+- Evidência final: CI canônico run `42119507950` — success; integração V2.1 run `42119507933` — success; captions congeladas run `42119507986` — success. No relatório: `THUMBNAIL_QA=PASS`, `THUMBNAIL_FILES=PASS`, `rights_ledger=BLOCKED`, render `NOT_RUN`, publicação `MANUAL_ONLY_NOT_RUN`.
+- Estado preservado: `production_enablement=false`, todos os assets ainda `approved_for_render=false`, catálogo global não atualizado, Drive não escrito e publicação não autorizada.
+- Próximo passo único: substituir o candidato S05 reprovado e concluir QA direta dos arquivos pendentes; não promover direitos para render antes desses gates.
