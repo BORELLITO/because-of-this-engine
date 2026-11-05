@@ -1456,9 +1456,345 @@
         "qa_result": "PRELIMINARY_PASS_APPROVED_FOR_MANIFEST_ONLY",
         "automated_promotion": false
       }
+    },
+    {
+      "candidate_id": "pixabay-alert-alarm-war-danger-risk-205519",
+      "source_page_url": "https://pixabay.com/videos/alert-alarm-war-danger-risk-205519/",
+      "role": "S05",
+      "visual_match": "NEAR",
+      "visual_intent": "Distinct escalation insert for multiple launch-warning indicators; use as representational alarm evidence, not literal Soviet interface.",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": false,
+        "semantic_note": "Page-verified alarm/warning visual; final suitability depends on full-duration intake QA and clean-frame review."
+      },
+      "score": 74,
+      "score_breakdown": {
+        "semantic_fit": 28,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 10,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 6,
+        "source_distinctness": 4
+      },
+      "disqualifiers": []
+    },
+    {
+      "candidate_id": "pixabay-radar-black-green-target-symbol-57670",
+      "source_page_url": "https://pixabay.com/videos/radar-black-green-target-symbol-57670/",
+      "role": "S05",
+      "visual_match": "NEAR",
+      "visual_intent": "Alternative symbolic escalation insert for the warning count; distinct radar/target language without reusing S01's red glow.",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": false,
+        "semantic_note": "Page-verified radar/target visual; symbolic rather than literal launch-indicator hardware, pending full-duration QA."
+      },
+      "score": 71,
+      "score_breakdown": {
+        "semantic_fit": 25,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 10,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 6,
+        "source_distinctness": 4
+      },
+      "disqualifiers": []
+    },
+    {
+      "candidate_id": "pixabay-radar-radar-screen-rotation-circles-4511",
+      "source_page_url": "https://pixabay.com/videos/radar-radar-screen-rotation-circles-4511/",
+      "role": "S08",
+      "visual_match": "NEAR",
+      "visual_intent": "Empty ground-radar/monitoring insert contrasting with the satellite alert.",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": false,
+        "semantic_note": "Page-verified radar-screen rotation; intended as contradictory monitoring evidence, not literal 1983 Soviet footage."
+      },
+      "score": 76,
+      "score_breakdown": {
+        "semantic_fit": 29,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 11,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 6,
+        "source_distinctness": 4
+      },
+      "disqualifiers": []
+    },
+    {
+      "candidate_id": "pixabay-radar-communication-military-261518",
+      "source_page_url": "https://pixabay.com/videos/radar-communication-military-261518/",
+      "role": "S08",
+      "visual_match": "NEAR",
+      "visual_intent": "Secondary monitoring/radar evidence for the contradiction beat.",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": false,
+        "semantic_note": "Page-verified military/radar monitoring visual; candidate remains subject to full-duration semantic and crop QA."
+      },
+      "score": 73,
+      "score_breakdown": {
+        "semantic_fit": 28,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 11,
+        "vertical_crop_quality": 5,
+        "clean_frame_quality": 5,
+        "source_distinctness": 4
+      },
+      "disqualifiers": []
+    },
+    {
+      "candidate_id": "pixabay-button-press-red-business-click-502",
+      "source_page_url": "https://pixabay.com/videos/button-press-red-business-click-502/",
+      "role": "S09",
+      "visual_match": "NEAR",
+      "visual_intent": "Technical input insert representing the operator entering the false-alarm classification.",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": false,
+        "semantic_note": "Page-verified button-press action; intentionally treated as representational input rather than a celebratory interface."
+      },
+      "score": 72,
+      "score_breakdown": {
+        "semantic_fit": 26,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 8,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 7,
+        "source_distinctness": 5
+      },
+      "disqualifiers": []
+    },
+    {
+      "candidate_id": "pixabay-button-press-push-start-launching-221746",
+      "source_page_url": "https://pixabay.com/videos/button-press-push-start-launching-221746/",
+      "role": "S09",
+      "visual_match": "NEAR",
+      "visual_intent": "Alternative restrained control-input insert for the irreversible classification decision.",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": false,
+        "semantic_note": "Page-verified push/start action; use only if full-duration QA confirms no distracting launch-promo or branded context."
+      },
+      "score": 70,
+      "score_breakdown": {
+        "semantic_fit": 25,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 8,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 6,
+        "source_distinctness": 5
+      },
+      "disqualifiers": []
+    },
+    {
+      "candidate_id": "pixabay-typewriter-typing-writing-author-1335",
+      "source_page_url": "https://pixabay.com/videos/typewriter-typing-writing-author-1335/",
+      "role": "S13",
+      "visual_match": "NEAR",
+      "visual_intent": "Typewritten evidence treatment for a declassified report/logbook beat without inventing readable historical text.",
+      "truth_class": "DOCUMENTARY_EVIDENCE",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": false,
+        "semantic_note": "Page-verified typewriter action; intended for evidence atmosphere, not as a literal readable Petrov document."
+      },
+      "score": 82,
+      "score_breakdown": {
+        "semantic_fit": 32,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 13,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 7,
+        "source_distinctness": 4
+      },
+      "disqualifiers": []
+    },
+    {
+      "candidate_id": "pixabay-typewriter-type-antique-writing-38626",
+      "source_page_url": "https://pixabay.com/videos/typewriter-type-antique-writing-38626/",
+      "role": "S13",
+      "visual_match": "NEAR",
+      "visual_intent": "Secondary archival-writing treatment for the report/logbook evidence beat.",
+      "truth_class": "DOCUMENTARY_EVIDENCE",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": false,
+        "semantic_note": "Page-verified antique typewriter visual; any readable content must be rejected or obscured during intake QA."
+      },
+      "score": 79,
+      "score_breakdown": {
+        "semantic_fit": 31,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 12,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 6,
+        "source_distinctness": 4
+      },
+      "disqualifiers": []
+    },
+    {
+      "candidate_id": "pixabay-dark-light-lens-flare-abstract-250413",
+      "source_page_url": "https://pixabay.com/videos/dark-light-lens-flare-abstract-250413/",
+      "role": "S15",
+      "visual_match": "SYMBOLIC",
+      "visual_intent": "Restrained transition from warning pulse into neutral black; no victory imagery.",
+      "truth_class": "REPRESENTATIONAL",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": false,
+        "semantic_note": "Page-verified dark/light abstract transition; symbolic fallback only and distinct from the previously rejected S15 red-blur candidate."
+      },
+      "score": 74,
+      "score_breakdown": {
+        "semantic_fit": 28,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 9,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 7,
+        "source_distinctness": 4
+      },
+      "disqualifiers": []
+    },
+    {
+      "candidate_id": "pixabay-abstract-light-streaks-motion-250417",
+      "source_page_url": "https://pixabay.com/videos/abstract-light-streaks-motion-250417/",
+      "role": "S15",
+      "visual_match": "SYMBOLIC",
+      "visual_intent": "Alternative minimal light decay/transition treatment for the warning fade.",
+      "truth_class": "REPRESENTATIONAL",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": false,
+        "semantic_note": "Page-verified abstract light-motion visual; final use depends on confirming it resolves toward neutral black without branded graphics."
+      },
+      "score": 72,
+      "score_breakdown": {
+        "semantic_fit": 26,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 9,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 7,
+        "source_distinctness": 4
+      },
+      "disqualifiers": []
+    },
+    {
+      "candidate_id": "pixabay-particles-orange-red-dust-effect-7957",
+      "source_page_url": "https://pixabay.com/videos/particles-orange-red-dust-effect-7957/",
+      "role": "S16",
+      "visual_match": "SYMBOLIC",
+      "visual_intent": "Restrained branded outro texture with a controlled red/orange pulse behind the final logo lockup.",
+      "truth_class": "BRAND_OUTRO",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": false,
+        "semantic_note": "Page-verified particle texture; branding will be added only by the approved renderer, never downloaded from the source."
+      },
+      "score": 73,
+      "score_breakdown": {
+        "semantic_fit": 27,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 9,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 7,
+        "source_distinctness": 4
+      },
+      "disqualifiers": []
+    },
+    {
+      "candidate_id": "pixabay-colors-lines-lights-abstract-video-5072",
+      "source_page_url": "https://pixabay.com/videos/colors-lines-lights-abstract-video-5072/",
+      "role": "S16",
+      "visual_match": "SYMBOLIC",
+      "visual_intent": "Secondary dark abstract outro background with restrained light motion for the final logo lockup.",
+      "truth_class": "BRAND_OUTRO",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": false,
+        "semantic_note": "Page-verified abstract lines/lights visual; candidate remains blocked pending full-duration clean-frame and branding-safety QA."
+      },
+      "score": 70,
+      "score_breakdown": {
+        "semantic_fit": 25,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 8,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 7,
+        "source_distinctness": 4
+      },
+      "disqualifiers": []
     }
   ],
-  "next_action": "Formar shortlist distinta para S05, S08, S09, S13, S15 e S16 e depois executar a validação final do manifesto; render, catálogo global, Drive e publicação permanecem bloqueados.",
+  "next_action": "Dispatch the explicit 12-candidate intake batch after final shortlist review; keep download, fingerprint, approval, manifest promotion, render, catalog, Drive and publication gated.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -2113,11 +2449,22 @@
     "next_action": "Aguardar QA visual e aprovação humana explícita para o S14; não promover, renderizar, atualizar o catálogo, escrever no Drive ou publicar."
   },
   "last_candidate_addition": {
-    "added_at_utc": "2026-11-05T15:14:00Z",
+    "added_at_utc": "2026-11-05T00:00:00Z",
     "candidate_ids": [
-      "pixabay-antenna-astronomy-communication-40041"
+      "pixabay-alert-alarm-war-danger-risk-205519",
+      "pixabay-radar-black-green-target-symbol-57670",
+      "pixabay-radar-radar-screen-rotation-circles-4511",
+      "pixabay-radar-communication-military-261518",
+      "pixabay-button-press-red-business-click-502",
+      "pixabay-button-press-push-start-launching-221746",
+      "pixabay-typewriter-typing-writing-author-1335",
+      "pixabay-typewriter-type-antique-writing-38626",
+      "pixabay-dark-light-lens-flare-abstract-250413",
+      "pixabay-abstract-light-streaks-motion-250417",
+      "pixabay-particles-orange-red-dust-effect-7957",
+      "pixabay-colors-lines-lights-abstract-video-5072"
     ],
-    "rationale": "Replace the semantically weak S12 cloud/satellite candidate with a page-verified real parabolic antenna/earth-station candidate whose geometry is visible in the full frame and center crop.",
-    "source_page_and_license_verification": "Completed in browser before intake; Pixabay Content License and direct media URL were observed on the source page."
+    "rationale": "Add a page-verified Pixabay fallback shortlist with two distinct candidates per unresolved shot; exclude AI-generated, readable-personal-document, reused and watermarked routes before intake.",
+    "source_page_and_license_verification": "Completed in browser for all 12 pages; each page visibly exposed Pixabay Content License; no AI-generated marker was observed."
   }
 }
