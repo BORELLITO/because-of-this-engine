@@ -4,6 +4,11 @@ name: Because Of This Episode 005 Global Visual Fingerprint Audit
 # against the immutable global registry without promoting or mutating anything.
 on:
   workflow_dispatch:
+    inputs:
+      candidate_ids:
+        description: "Comma or newline separated IDs from asset-acquisition-plan.json for this batch"
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -22,6 +27,8 @@ jobs:
           sudo apt-get install -y --no-install-recommends ffmpeg
 
       - name: Compute and compare fingerprints
+        env:
+          CANDIDATE_IDS: ${{ inputs.candidate_ids }}
         run: |
           mkdir -p artifacts/episode005-visual-fingerprint
           python - <<'PY'
@@ -40,27 +47,48 @@ jobs:
           plan = json.loads(Path("episodes/episode-005/visual/asset-acquisition-plan.json").read_text(encoding="utf-8"))
           registry = json.loads(Path("episodes/asset-memory-registry.json").read_text(encoding="utf-8"))
 
-          candidates = [
-              item for item in plan.get("candidates", [])
-              if (
-                  isinstance(item, dict)
-                  and item.get("intake_artifact")
-                  and item.get("rights_status") not in {"REJECTED", "REJECTED_SEMANTICALLY_WEAK"}
-              )
+          requested_ids = [
+              item.strip()
+              for item in os.environ.get("CANDIDATE_IDS", "").replace("\\n", ",").split(",")
+              if item.strip()
           ]
-          expected_ids = {
-              str(item.get("candidate_id"))
-              for item in candidates
-              if str(item.get("candidate_id", "")).strip()
-          }
-          actual_ids = {item.get("candidate_id") for item in candidates}
           blockers = []
-          if actual_ids != expected_ids:
+          if not requested_ids:
+              raise SystemExit("candidate_ids input must contain at least one ID")
+          if len(requested_ids) != len(set(requested_ids)):
               blockers.append({
-                  "type": "candidate_set",
-                  "expected": sorted(expected_ids),
-                  "actual": sorted(item for item in actual_ids if item),
+                  "type": "duplicate_requested_candidate_id",
+                  "candidate_ids": requested_ids,
               })
+
+          indexed = {
+              str(item.get("candidate_id")): item
+              for item in plan.get("candidates", [])
+              if isinstance(item, dict) and str(item.get("candidate_id", "")).strip()
+          }
+          candidates = []
+          for candidate_id in requested_ids:
+              candidate = indexed.get(candidate_id)
+              if candidate is None:
+                  blockers.append({
+                      "type": "candidate_not_in_plan",
+                      "candidate_id": candidate_id,
+                  })
+                  continue
+              if str(candidate.get("rights_status", "")).startswith("REJECTED"):
+                  blockers.append({
+                      "type": "candidate_rejected_in_plan",
+                      "candidate_id": candidate_id,
+                      "rights_status": candidate.get("rights_status"),
+                  })
+                  continue
+              if not candidate.get("intake_artifact"):
+                  blockers.append({
+                      "type": "candidate_missing_intake_artifact",
+                      "candidate_id": candidate_id,
+                  })
+                  continue
+              candidates.append(candidate)
 
           registry_schema = registry.get("schema_version")
           if registry_schema not in {1, 2}:
@@ -174,6 +202,7 @@ jobs:
           report = {
               "status": "FINGERPRINT_AUDIT_PASS" if not blockers else "FINGERPRINT_AUDIT_BLOCKED",
               "episode_id": "episode-005",
+              "requested_candidate_ids": requested_ids,
               "registry_schema_version": registry_schema,
               "fingerprint_algorithm": FINGERPRINT_ALGORITHM,
               "candidate_count": len(reports),
