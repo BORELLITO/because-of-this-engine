@@ -66,8 +66,8 @@ def _number_variants(value: int) -> list[list[str]]:
     }
     if value in ordinal_ones:
         ordinal = ordinal_ones[value].split("-")
-        words = words + [ordinal[-1]] if len(words) > 1 else [ordinal[0]]
-        # Keep the ordinal form as an additional variant below.
+        # Keep the ordinal form as an additional variant below; do not
+        # mutate the cardinal form used by the normal number variants.
         ordinal_words = [_normalise(token) for token in ordinal]
     else:
         ordinal_words = []
