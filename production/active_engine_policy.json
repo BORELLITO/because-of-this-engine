@@ -30,7 +30,7 @@
     "target_provider": "microsoft_edge_tts",
     "target_voice": "en-US-ChristopherNeural",
     "real_call_required_for_ready": true,
-    "direct_api_route": "production/edge_tts.py",
+    "direct_api_route": "production/microsoft_edge_tts.py",
     "endpoint": "Microsoft Edge online TTS service via edge-tts",
     "credential": "none",
     "billing_required": false,
