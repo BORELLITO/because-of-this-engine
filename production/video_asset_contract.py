@@ -645,6 +645,18 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
     )
     if check_files and not alignment_sidecar.is_file():
         raise VideoContractError(f"Caption alignment sidecar is missing: {alignment_sidecar}")
+    if check_files:
+        try:
+            alignment_data = json.loads(alignment_sidecar.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+            raise VideoContractError(f"Caption alignment sidecar is unreadable: {alignment_sidecar}") from exc
+        normalization = alignment_data.get("word_timing_normalization") or {}
+        if normalization.get("final_word_level_ready") is False:
+            grouped = normalization.get("grouped_provider_boundary_count", 0)
+            raise VideoContractError(
+                "Caption sidecar is not final word-level ready: "
+                f"{grouped} provider boundary group(s) remain unsplit; render is blocked."
+            )
     loop_logo_path = None
     loop = manifest.get("loop") or {}
     if loop.get("logo_enabled", False) is True:
