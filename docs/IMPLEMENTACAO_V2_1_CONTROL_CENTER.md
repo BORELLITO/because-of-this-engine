@@ -40,7 +40,7 @@
 | Work | UNKNOWN | No independent Work execution log |
 | Edge TTS + captions preview | VALIDATED | Microsoft Edge / en-US-ChristopherNeural; 79.704 s; audio SHA-256 and provider-native caption record aligned; Whisper remains diagnostic only |
 | Visual asset acquisition | PARTIAL_MANIFEST_VALIDATED_BLOCKED_RENDER | 42 active candidates, 22 approved for manifest, 16 assets assigned to 16 shots, 0 unresolved; intake/fingerprint are manual-only and no asset is approved for render/catalog/Drive |
-| Canonical render route | NOT IMPLEMENTED | production/canonical_entrypoint.py is intentionally read-only, production_enablement=false, and no final V2.1 render workflow is active |
+| Canonical render route | MANUAL GATE IMPLEMENTED / EXECUTION BLOCKED | production/render_v21_manual.py and workflow episode005-v21-manual-render.yml are manual-only and fail-closed; actual render remains disabled while production_enablement=false |
 | First new production | BLOCKED | Implementation stage does not authorize automatic production |
 
 ## Current blockers
@@ -275,4 +275,8 @@ READY remains forbidden while any P0/P1 is open.
 - Pré-voo repetido com sucesso: py_compile de production/*.py, 13 testes V2.1 passando e V21_SINGLETON_PASS; nenhuma rota legada foi reativada.
 - Conflito documental corrigido neste Centro de Controle: o resumo superior agora reflete o estado real atual; os addenda históricos foram preservados.
 - Conclusão: a integração de contratos, TTS/captions, plano visual, manifesto, fingerprint e gates está implementada/testada como candidata V2.1. A integração operacional de render final ainda não está implementada e permanece corretamente bloqueada.
-- Próximo passo único: implementar e testar uma rota manual de render V2.1, separada do entrypoint read-only, com contrato de thumbnail final, preview, QA técnico/visual e rollback; publicação continuará manual e não será acionada automaticamente.
+- A entrada manual V2.1 foi implementada em production/render_v21_manual.py e registrada na policy como manual_render_entrypoint; ela executa somente preflight fail-closed e não chama o renderer legado.
+- O workflow .github/workflows/episode005-v21-manual-render.yml foi criado com workflow_dispatch, permissões somente de leitura e sem publicação/Drive.
+- O contrato media_contract_v21.py e o fixture V2.1 agora apontam para a entrada manual; o renderer legado continua fora da rota ativa.
+- Novos testes de gate passaram: 2 casos adicionais cobrindo production_enablement, autorização humana e thumbnail final obrigatória.
+- Próximo passo único: preparar o production record e os arquivos finais de thumbnail/preview; somente após esses gates e autorização explícita será possível implementar/ativar a execução de mídia do render.
