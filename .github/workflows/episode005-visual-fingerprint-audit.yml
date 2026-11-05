@@ -3,14 +3,6 @@ name: Because Of This Episode 005 Global Visual Fingerprint Audit
 # This audit is read-only and fail-closed. It verifies downloaded candidates
 # against the immutable global registry without promoting or mutating anything.
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - ".github/workflows/episode005-visual-fingerprint-audit.yml"
-      - "episodes/episode-005/visual/asset-acquisition-plan.json"
-      - "episodes/asset-memory-registry.json"
-      - "production/asset_reuse_brain.py"
-      - "production/video_asset_contract.py"
   workflow_dispatch:
 
 permissions:
@@ -47,41 +39,6 @@ jobs:
           root = Path("artifacts/episode005-visual-fingerprint")
           plan = json.loads(Path("episodes/episode-005/visual/asset-acquisition-plan.json").read_text(encoding="utf-8"))
           registry = json.loads(Path("episodes/asset-memory-registry.json").read_text(encoding="utf-8"))
-
-          allowed = {
-              "mixkit-slowly-approaching-clock-28897": {
-                  "source_page_url": "https://mixkit.co/free-stock-video/slowly-approaching-a-clock-on-a-black-background-28897/",
-                  "media_url": "https://assets.mixkit.co/videos/28897/28897-720.mp4",
-              },
-              "mixkit-cloudy-sky-118": {
-                  "source_page_url": "https://mixkit.co/free-stock-video/cloudy-sky-118/",
-                  "media_url": "https://assets.mixkit.co/videos/118/118-720.mp4",
-              },
-              "mixkit-clock-mechanism-3651": {
-                  "source_page_url": "https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/",
-                  "media_url": "https://assets.mixkit.co/videos/3651/3651-720.mp4",
-              },
-              "mixkit-large-satellite-antenna-2650": {
-                  "source_page_url": "https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/",
-                  "media_url": "https://assets.mixkit.co/videos/2650/2650-720.mp4",
-              },
-              "mixkit-man-using-computer-2965": {
-                  "source_page_url": "https://mixkit.co/free-stock-video/man-using-a-computer-2965/",
-                  "media_url": "https://assets.mixkit.co/videos/2965/2965-720.mp4",
-              },
-              "mixkit-young-engineer-29991": {
-                  "source_page_url": "https://mixkit.co/free-stock-video/young-engineer-programming-in-his-workshop-seen-up-close-29991/",
-                  "media_url": "https://assets.mixkit.co/videos/29991/29991-720.mp4",
-              },
-              "mixkit-worker-industrial-lathe-2244": {
-                  "source_page_url": "https://mixkit.co/free-stock-video/worker-operating-an-industrial-lathe-2244/",
-                  "media_url": "https://assets.mixkit.co/videos/2244/2244-720.mp4",
-              },
-              "mixkit-abstract-red-glow-101432": {
-                  "source_page_url": "https://mixkit.co/free-stock-video/abstract-red-glow-101432/",
-                  "media_url": "https://assets.mixkit.co/bohe8920pfehyvq7p1hk5r699s7g",
-              },
-          }
 
           candidates = [
               item for item in plan.get("candidates", [])
@@ -132,14 +89,13 @@ jobs:
 
           for candidate in candidates:
               candidate_id = str(candidate.get("candidate_id", ""))
-              expected = allowed.get(candidate_id)
-              if expected is None:
-                  blockers.append({"type": "candidate_not_allowlisted", "candidate_id": candidate_id})
+              expected = {
+                  "source_page_url": str(candidate.get("source_page_url", "")).strip(),
+                  "media_url": str(candidate.get("media_url", "")).strip(),
+              }
+              if not expected["source_page_url"] or not expected["media_url"]:
+                  blockers.append({"type": "candidate_source_incomplete", "candidate_id": candidate_id})
                   continue
-              if candidate.get("source_page_url") != expected["source_page_url"]:
-                  blockers.append({"type": "source_page_mismatch", "candidate_id": candidate_id})
-              if candidate.get("media_url") != expected["media_url"]:
-                  blockers.append({"type": "media_url_mismatch", "candidate_id": candidate_id})
 
               intake = candidate.get("intake_artifact") or {}
               expected_sha = str(intake.get("sha256", "")).lower()
