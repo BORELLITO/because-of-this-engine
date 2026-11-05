@@ -410,7 +410,7 @@
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "mixkit",
       "license_name": "Mixkit Stock Video Free License",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "media_url": "https://assets.mixkit.co/videos/2650/2650-720.mp4",
       "media_url_observed_in_browser": true,
       "browser_verification": {
@@ -453,15 +453,15 @@
         "semantic_fit": "PRELIMINARY_PASS_FOR_S02_AS_REPRESENTATIONAL_EARLY_WARNING_INFRASTRUCTURE",
         "locked_9x16_crop": "PRELIMINARY_PASS_CENTER_CROP_WITH_SATELLITE_DISH_PARTIALLY_VISIBLE",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false
       }
     }
   ],
-  "next_action": "Await explicit human approval for mixkit-large-satellite-antenna-2650; if approved, assign it to S02 only, then rerun manifest validation. Do not update the global catalog or render.",
+  "next_action": "Acquire and QA distinct candidates for unresolved shots S03,S04,S05,S06,S08,S09,S12,S13,S14,S15,S16, then re-run final visual manifest validation.",
   "acquisition_route": {
-    "status": "FIFTH_CANDIDATE_FINGERPRINT_PASS_AWAITING_HUMAN_APPROVAL",
+    "status": "FIFTH_CANDIDATE_APPROVED_FOR_MANIFEST_ONLY_REMAINING_SHOTS_BLOCKED",
     "preferred_provider": "mixkit",
     "fallback_provider": "pexels",
     "browser_download_status": "PEXELS_DIRECT_MEDIA_BLOCKED",
@@ -586,7 +586,7 @@
         "artifact_id": 13409661379,
         "artifact_digest": "sha256:f15336756e9e32900ff07ee7666492032887a883d923266ff2d5651ba862d5c0",
         "locked_9x16_crop": "PRELIMINARY_PASS_CENTER_CROP_WITH_SATELLITE_DISH_PARTIALLY_VISIBLE",
-        "human_approval": "PENDING",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "fingerprint_workflow_run_id": 42016725778,
         "fingerprint_artifact_id": 13409611998,
         "fingerprint_artifact_digest": "sha256:30f39d5255b086062c6e01e7576c9cd9f5371476b795a1736d48579bbc2474c4",
@@ -620,6 +620,18 @@
       "status": "APPROVED_FOR_MANIFEST_ONLY",
       "approved_at_utc": "2026-11-05T11:02:38Z",
       "decision": "Approve the clock mechanism as a symbolic mechanical-time reconstruction for S10 only.",
+      "constraints": [
+        "do not assign the same source to any other shot",
+        "do not present it as literal Petrov archival evidence",
+        "approval does not authorize global catalog mutation",
+        "approval does not authorize render, Drive write or publication"
+      ]
+    },
+    {
+      "candidate_id": "mixkit-large-satellite-antenna-2650",
+      "status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_at_utc": "2026-11-05T11:15:00Z",
+      "decision": "Approve the satellite antenna as representational early-warning infrastructure for S02 only.",
       "constraints": [
         "do not assign the same source to any other shot",
         "do not present it as literal Petrov archival evidence",
