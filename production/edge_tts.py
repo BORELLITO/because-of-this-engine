@@ -363,3 +363,26 @@ def main() -> int:
     parser.add_argument("--preflight", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
+    try:
+        manifest = _load_manifest(args.manifest.resolve())
+        if args.preflight:
+            print(json.dumps(preflight(manifest), ensure_ascii=False, indent=2))
+            return 0
+        if not args.input:
+            raise EdgeTTSError("--input is required unless --preflight is used")
+        source = args.input.read_text(encoding="utf-8").strip()
+        if not source:
+            raise EdgeTTSError("narration input is empty")
+        profile = profile_from_manifest(manifest)
+        output = (args.output_dir or args.manifest.parent / "audio").resolve()
+        report = synthesize_chunks(chunks_from_manifest(manifest, source), output, profile, dry_run=args.dry_run)
+        (output / "edge-tts-report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print(json.dumps(report, ensure_ascii=False))
+        return 0
+    except (OSError, ValueError, EdgeTTSError, json.JSONDecodeError) as exc:
+        print(f"EDGE TTS BLOCKED: {exc}")
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
