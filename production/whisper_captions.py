@@ -24,9 +24,14 @@ def _recognize(audio_path: Path, model_name: str) -> list[dict[str, Any]]:
     except ImportError as exc:
         raise AlignmentError("faster-whisper is required for local forced alignment") from exc
     try:
+        import numpy as np
+
+        with wave.open(str(audio_path), "rb") as audio:
+            pcm = audio.readframes(audio.getnframes())
+        waveform = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768.0
         model = WhisperModel(model_name, device="cpu", compute_type="int8")
         segments, _info = model.transcribe(
-            str(audio_path),
+            waveform,
             language="en",
             task="transcribe",
             word_timestamps=True,
