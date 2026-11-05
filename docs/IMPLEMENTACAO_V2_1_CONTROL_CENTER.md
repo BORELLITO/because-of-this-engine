@@ -193,3 +193,15 @@ READY remains forbidden while any P0/P1 is open.
 **Estado após a shortlist:** os shots não resolvidos continuam exatamente `S05,S08,S09,S13,S15,S16`; as flags `every_shot_assigned`, `final_visual_manifest_validated`, `global_catalog_update_authorized`, `render_authorized`, `drive_write_authorized` e `publication_authorized` permanecem falsas.
 
 **Próximo gate único:** despachar explicitamente o lote de intake dos 12 IDs acima, somente como aquisição técnica isolada; depois revalidar SHA-256, QA integral, fingerprint e aprovação humana antes de qualquer promoção.
+
+
+## Atualização — intake e fingerprint dos 12 candidatos concluídos
+
+- O primeiro dispatch do lote (#93, run `42070599841`) foi cancelado por timeout de 15 minutos no `apt-get install ffmpeg`, antes de qualquer download.
+- O workflow de intake foi corrigido no commit `c51e423ccda209b21cdb79e28d2294888c84074e` para usar FFmpeg/FFprobe estáticos com limites de tempo, sem gerenciador de pacotes. O fingerprint recebeu a mesma correção no commit `aaa1a77d85ff0f019e8a61a4e7b7b4c8fd307a23`.
+- Intake isolado concluído com sucesso: run `42073828513`, job `127408597700`, artifact `13437466569`, digest `sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057`. Resultado: 12/12 candidatos baixados, SHA-256, metadata e cinco amostras normalizadas com crops 9:16/contact sheets; todos `CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA`.
+- Fingerprint global concluído com sucesso: run `42074599454`, job `127411317006`, artifact `13438400127`, digest `sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1`. Algoritmo `video-fingerprint-v2-rgb24-q4`; registry schema 2; 12/12 sem colisão de fonte, SHA-256 ou fingerprint perceptual; blockers vazios.
+- A evidência foi registrada no plano canônico no commit `9532d5142f569bf50c41b0a74222044782f57332`. Os seis shots continuam exatamente `S05,S08,S09,S13,S15,S16`; nenhum candidato foi promovido ao manifesto.
+- Flags permanecem fechadas: `human_approval=PENDING`, `approved_for_render=false`, `global_catalog_updated=false`, `render_allowed=false`, `drive_written=false` e publicação não autorizada.
+
+**Próximo gate único:** executar QA visual humano dos 12 contact sheets e decidir candidato por candidato/shot; após aprovação explícita, atualizar somente o manifesto parcial, mantendo catálogo, render, Drive e publicação bloqueados.
