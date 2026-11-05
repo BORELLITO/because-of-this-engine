@@ -239,33 +239,28 @@ async def _list_voices():
 
 
 def preflight(manifest: dict) -> dict:
+    """Validate the pinned profile locally; synthesis is the authoritative voice check."""
     profile = profile_from_manifest(manifest)
     chunks = chunks_from_manifest(manifest, "")
     estimated = sum(len(str(chunk.get("text", ""))) for chunk in chunks)
     limit = int(os.environ.get("EDGE_TTS_MAX_CHARACTERS", "5000"))
     if estimated > limit:
         raise EdgeTTSError(f"estimated TTS characters {estimated} exceed configured budget {limit}")
-    try:
-        voices = asyncio.run(_list_voices())
-    except Exception as exc:
-        raise EdgeTTSError("Edge TTS voice catalog is unavailable; retry later") from exc
-    matches = [
-        voice for voice in voices
-        if isinstance(voice, dict)
-        and str(voice.get("Name") or voice.get("name") or "").strip() == profile["voice_name"]
-    ]
-    if not matches:
-        raise EdgeTTSError(f"approved Edge TTS voice is unavailable: {profile['voice_name']}")
+    if not edge_tts_available():
+        raise EdgeTTSError("edge-tts dependency is not installed")
     return {
         "status": "EDGE_TTS_PREFLIGHT_PASS",
         "provider": PROVIDER,
         "service": "Microsoft Edge online TTS",
         "voice_profile": profile,
-        "voice_check": matches[0],
+        "voice_check": {
+            "voice_name": profile["voice_name"],
+            "validation": "pinned_profile; authoritative check occurs during synthesis",
+        },
         "estimated_characters": estimated,
         "character_budget": limit,
         "credential_policy": "no_api_key_or_billing_account_required",
-        "quota_policy": "fail_closed_on_service_unavailability",
+        "quota_policy": "fail_closed_on_synthesis_service_unavailability",
         "checked_at_utc": _now(),
     }
 
