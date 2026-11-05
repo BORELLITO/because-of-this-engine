@@ -18,7 +18,7 @@ from production.align_captions import (
 from production.generate_phrase_captions import phrase_chunks
 
 
-def _recognize(audio_path: Path, model_name: str) -> list[dict[str, Any]]:
+def _recognize(audio_path: Path, model_name: str, prompt: str = "") -> list[dict[str, Any]]:
     try:
         from faster_whisper import WhisperModel
     except ImportError as exc:
@@ -38,6 +38,7 @@ def _recognize(audio_path: Path, model_name: str) -> list[dict[str, Any]]:
             vad_filter=False,
             beam_size=5,
             condition_on_previous_text=False,
+            initial_prompt=prompt or None,
         )
         words: list[dict[str, Any]] = []
         for segment in segments:
@@ -77,7 +78,7 @@ def generate(manifest_path: Path, model_name: str) -> dict[str, Any]:
 
     script = (base / manifest["script"]["path"]).read_text(encoding="utf-8").strip()
     chunks = phrase_chunks(script, max_line_chars=int(caption_config.get("max_line_chars", 42)))
-    words = _recognize(audio_path, model_name)
+    words = _recognize(audio_path, model_name, script)
     try:
         events, sidecar_chunks = _align_chunks(chunks, words)
     except AlignmentError as first_error:
