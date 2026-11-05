@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "because-of-this://schemas/production-record/3.1.0",
+  "title": "Because Of This V2.1 production record",
+  "type": "object",
+  "required": [
+    "episode_id",
+    "story_id",
+    "editorial_mode",
+    "pillar",
+    "series_id",
+    "incident_id",
+    "source_ledger_id",
+    "rights_ledger_id",
+    "reuse_scope",
+    "thumbnail_concept_id",
+    "pipeline_state"
+  ],
+  "properties": {
+    "episode_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "story_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "editorial_mode": {
+      "const": "factual_documentary"
+    },
+    "pillar": {
+      "enum": [
+        "invisible_natural_dangers",
+        "human_or_system_failure",
+        "survival_against_impossible_conditions"
+      ]
+    },
+    "series_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "incident_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_ledger_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rights_ledger_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reuse_scope": {
+      "const": "global"
+    },
+    "thumbnail_concept_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "thumbnail_status": {
+      "enum": [
+        "CONCEPT_READY",
+        "PENDING_HUMAN_APPROVAL",
+        "THUMBNAIL_PENDING",
+        "THUMBNAIL_QA",
+        "APPROVED"
+      ]
+    },
+    "pipeline_state": {
+      "enum": [
+        "DRAFT",
+        "PACKAGE_PENDING",
+        "FACT_CHECK_PENDING",
+        "STORY_PENDING",
+        "ASSETS_PENDING",
+        "RIGHTS_PENDING",
+        "REUSE_PENDING",
+        "VOICE_PENDING",
+        "AUDIO_PENDING",
+        "CAPTIONS_PENDING",
+        "PREVIEW_PENDING",
+        "THUMBNAIL_PENDING",
+        "THUMBNAIL_QA",
+        "HUMAN_REVIEW",
+        "TECHNICAL_QA",
+        "NEEDS_CORRECTION",
+        "BLOCKED",
+        "APPROVED_FOR_MANUAL_PUBLICATION",
+        "MANUALLY_PUBLISHED",
+        "METRICS_PENDING",
+        "ARCHIVED"
+      ]
+    },
+    "production_enablement": {
+      "const": false
+    }
+  },
+  "additionalProperties": true
+}
