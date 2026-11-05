@@ -71,7 +71,7 @@ def valid_manifest() -> dict:
             "real_audio_generated": False,
             "final_transcription_required": True,
             "target_duration_seconds": 65,
-            "adapter": "production/edge_tts.py",
+            "adapter": "production/microsoft_edge_tts.py",
         },
         "captions_contract": {
             "source": "final_audio_transcription",
