@@ -140,6 +140,7 @@
     "caption_event_count": 23,
     "grouped_provider_boundaries": 2,
     "final_word_level_ready": false,
+    "render_caption_policy": "PROVIDER_GROUP_NATIVE_ACCEPTED",
     "caption_authority": "provider_native_edge_boundaries",
     "acoustic_whisper_audit": "BLOCKED_ON_ASR_LEXICAL_VARIANTS",
     "frozen_caption_workflow_run_id": 41967116262,
