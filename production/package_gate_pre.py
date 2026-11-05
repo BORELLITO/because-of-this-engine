@@ -29,7 +29,7 @@ def _score(record: Mapping[str, Any]) -> tuple[int, list[dict[str, Any]]]:
         ("visuality", _list(record.get("visual_truth_classes")) and _list(record.get("visual_representation_by_stage"))),
         ("payoff", _text(record.get("payoff")) and _text(record.get("irreversible_choice"))),
         ("originality", _list(record.get("title_candidates"), 3) and _list(record.get("package_variants"), 1)),
-        ("american_audience_clarity", _text(record.get("audience_promise")) and _text(record.get("first_frame_promise"))),
+        ("american_audience_clarity", _text(record.get("audience_promise")) and _text((record.get("question_answers") or {}).get("first_frame_promise"))),
     ]
     details = [{"dimension": name, "score": int(passed)} for name, passed in checks]
     return sum(item["score"] for item in details), details
