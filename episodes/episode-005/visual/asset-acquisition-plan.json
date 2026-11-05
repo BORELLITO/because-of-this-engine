@@ -33,7 +33,8 @@
     "no_embedded_logo_or_letterbox",
     "semantic_match_reviewed",
     "fresh_global_reuse_check_passed",
-    "unique_asset_and_source_page"
+    "unique_asset_and_source_page",
+    "unique_source_per_shot"
   ],
   "candidates": [
     {
@@ -442,5 +443,11 @@
       "approval does not authorize render, Drive write or publication",
       "all unresolved story shots remain blocked"
     ]
+  },
+  "manifest_policy": {
+    "distinct_source_per_shot": true,
+    "duplicate_source_within_episode": "BLOCK",
+    "candidate_roles_are_suitability_hints": "A candidate role list does not authorize reusing the same source across multiple shots.",
+    "final_manifest": "episodes/episode-005/visual/scene-asset-manifest.json"
   }
 }
