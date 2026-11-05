@@ -158,6 +158,8 @@ jobs:
               if not expected["source_page_url"] or not expected["media_url"]:
                   blockers.append({"type": "candidate_source_incomplete", "candidate_id": candidate_id})
                   continue
+              provider = str(candidate.get("provider", ""))
+              policy = PROVIDER_POLICIES.get(provider)
               source_page = urlparse(expected["source_page_url"])
               media_url = urlparse(expected["media_url"])
               if not (
