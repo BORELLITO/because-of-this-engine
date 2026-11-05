@@ -697,7 +697,7 @@
       "license_name": "Pixabay Content License",
       "media_url": "https://cdn.pixabay.com/video/2016/03/10/2420-158691979_large.mp4",
       "media_url_observed_in_browser": true,
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "role": "S08",
       "visual_match": "NEAR",
       "visual_intent": "Symbolic radar/sonar monitoring contradiction; not literal Soviet archival evidence.",
@@ -713,7 +713,34 @@
       "score": null,
       "score_breakdown": {},
       "disqualifiers": [],
-      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42038088699,
+        "artifact_id": 13418919199,
+        "artifact_name": "episode005-visual-intake-42038088699",
+        "artifact_digest": "sha256:0f0e34d502ef7ff553fad4cee3c32cecd1e3e1055d6dda9adf12ab2eb97877a1",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "14353cedcbf610c6f7411c657b96898d0fba8408c14ceb0b2e4cb3c14df2ebd3",
+        "duration_seconds": 10,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "25/1",
+        "codec": "h264",
+        "automated_promotion": false
+      },
+      "qa": {
+        "clean_frame_visual_review": "PENDING_HUMAN_QA",
+        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
+        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
+        "semantic_fit": "PENDING_HUMAN_QA",
+        "locked_9x16_crop": "PENDING_HUMAN_QA",
+        "global_reuse_fingerprint": "PENDING_FINGERPRINT_AUDIT",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     },
     {
       "candidate_id": "pixabay-radar-screen-4511",
@@ -722,7 +749,7 @@
       "license_name": "Pixabay Content License",
       "media_url": "https://cdn.pixabay.com/video/2016/08/16/4511-179376471_large.mp4",
       "media_url_observed_in_browser": true,
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "role": "S08",
       "visual_match": "NEAR",
       "visual_intent": "Clean rotating radar-screen abstraction for the empty-ground-radar beat; not literal archival evidence.",
@@ -737,7 +764,34 @@
       "score": null,
       "score_breakdown": {},
       "disqualifiers": [],
-      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42038088699,
+        "artifact_id": 13418919199,
+        "artifact_name": "episode005-visual-intake-42038088699",
+        "artifact_digest": "sha256:0f0e34d502ef7ff553fad4cee3c32cecd1e3e1055d6dda9adf12ab2eb97877a1",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "8185f8459b80df5c5eaa95d4a66ac58edef34fc7f790ca4e5f74fc10a70742d6",
+        "duration_seconds": 7.2,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "25/1",
+        "codec": "h264",
+        "automated_promotion": false
+      },
+      "qa": {
+        "clean_frame_visual_review": "PENDING_HUMAN_QA",
+        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
+        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
+        "semantic_fit": "PENDING_HUMAN_QA",
+        "locked_9x16_crop": "PENDING_HUMAN_QA",
+        "global_reuse_fingerprint": "PENDING_FINGERPRINT_AUDIT",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     },
     {
       "candidate_id": "pixabay-television-broadcasting-satellite-29483",
@@ -746,7 +800,7 @@
       "license_name": "Pixabay Content License",
       "media_url": "https://cdn.pixabay.com/video/2019/11/26/29483-376565549_large.mp4",
       "media_url_observed_in_browser": true,
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "role": "S12",
       "visual_match": "NEAR",
       "visual_intent": "Representational signal/satellite infrastructure for the sensor-mechanism beat; not literal Petrov evidence.",
@@ -762,7 +816,34 @@
       "score": null,
       "score_breakdown": {},
       "disqualifiers": [],
-      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42038088699,
+        "artifact_id": 13418919199,
+        "artifact_name": "episode005-visual-intake-42038088699",
+        "artifact_digest": "sha256:0f0e34d502ef7ff553fad4cee3c32cecd1e3e1055d6dda9adf12ab2eb97877a1",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "3c4e681f8df4ebe45f4076ff392f3202d826d78206277796a58e235efa9909bc",
+        "duration_seconds": 29.567,
+        "dimensions": [
+          3840,
+          2160
+        ],
+        "frame_rate": "25/1",
+        "codec": "h264",
+        "automated_promotion": false
+      },
+      "qa": {
+        "clean_frame_visual_review": "PENDING_HUMAN_QA",
+        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
+        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
+        "semantic_fit": "PENDING_HUMAN_QA",
+        "locked_9x16_crop": "PENDING_HUMAN_QA",
+        "global_reuse_fingerprint": "PENDING_FINGERPRINT_AUDIT",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     },
     {
       "candidate_id": "pixabay-alert-alarm-war-205519",
@@ -771,7 +852,7 @@
       "license_name": "Pixabay Content License",
       "media_url": "https://cdn.pixabay.com/video/2024/03/24/205519-927335684_large.mp4",
       "media_url_observed_in_browser": true,
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "role": "S06,S09",
       "visual_match": "NEAR",
       "visual_intent": "Representational alarm-on-screen escalation and panic response; not literal Soviet archival evidence.",
@@ -788,10 +869,37 @@
       "score": null,
       "score_breakdown": {},
       "disqualifiers": [],
-      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml"
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42038088699,
+        "artifact_id": 13418919199,
+        "artifact_name": "episode005-visual-intake-42038088699",
+        "artifact_digest": "sha256:0f0e34d502ef7ff553fad4cee3c32cecd1e3e1055d6dda9adf12ab2eb97877a1",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "5a2031e934028fb6c13ba07dd176092507303db83f4decc8b79acb2263ecbf8d",
+        "duration_seconds": 16.362,
+        "dimensions": [
+          3840,
+          2160
+        ],
+        "frame_rate": "50/1",
+        "codec": "h264",
+        "automated_promotion": false
+      },
+      "qa": {
+        "clean_frame_visual_review": "PENDING_HUMAN_QA",
+        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
+        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
+        "semantic_fit": "PENDING_HUMAN_QA",
+        "locked_9x16_crop": "PENDING_HUMAN_QA",
+        "global_reuse_fingerprint": "PENDING_FINGERPRINT_AUDIT",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
     }
   ],
-  "next_action": "Expose an approved manual-dispatch mechanism for the candidate-branch workflow (default-branch workflow registration or authorized API dispatch), then intake the selected Pixabay batch pixabay-alert-alarm-war-205519,pixabay-radar-sonar-ping-2420,pixabay-radar-screen-4511,pixabay-television-broadcasting-satellite-29483. Until then, no candidate is downloaded; fingerprint, human QA, thumbnail and final manifest gates remain mandatory. Render, global catalog, Drive and publication remain blocked.",
+  "next_action": "Run the manual global fingerprint audit for the four downloaded Pixabay candidates, then perform clean-frame/9:16/semantic human QA. Keep all four blocked from render, global catalog, Drive and publication until those gates pass.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -1281,5 +1389,23 @@
         ]
       }
     ]
+  },
+  "last_manual_intake": {
+    "workflow_run_id": 42038088699,
+    "branch": "integration/because-of-this-v2.1-20261105",
+    "candidate_ids": [
+      "pixabay-alert-alarm-war-205519",
+      "pixabay-radar-sonar-ping-2420",
+      "pixabay-radar-screen-4511",
+      "pixabay-television-broadcasting-satellite-29483"
+    ],
+    "status": "BATCH_DOWNLOADED_AWAITING_HUMAN_QA",
+    "artifact_id": 13418919199,
+    "artifact_digest": "sha256:0f0e34d502ef7ff553fad4cee3c32cecd1e3e1055d6dda9adf12ab2eb97877a1",
+    "promotion_allowed": false,
+    "render_allowed": false,
+    "global_catalog_updated": false,
+    "drive_written": false,
+    "publication_allowed": false
   }
 }
