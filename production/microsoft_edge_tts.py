@@ -174,6 +174,7 @@ async def _save_mp3(text: str, profile: dict, destination: Path) -> list[dict]:
         rate=profile["rate"],
         pitch=profile["pitch"],
         volume=profile["volume"],
+        boundary="WordBoundary",
     )
     boundaries: list[dict] = []
     with destination.open("wb") as handle:
