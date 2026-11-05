@@ -27,7 +27,7 @@ jobs:
       - name: Compile canonical surface
         run: python -m py_compile production/canonical_entrypoint.py production/ledgers_v21.py production/thumbnail_contract_v21.py production/pipeline_state_v21.py production/pipeline_state.py production/render_v21_manual.py production/v7_orchestrator.py
       - name: Run V2.1 unit contracts
-        run: python -m unittest discover -s tests -p 'test_v21_integration.py' -v
+        run: python -m unittest discover -s tests -p 'test_v21*.py' -v
       - name: Verify schema and read-only behavior
         run: |
           python -m json.tool production/schemas/production-record-3.1.0.json >/dev/null
