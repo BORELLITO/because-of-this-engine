@@ -77,7 +77,11 @@ jobs:
 
           candidates = [
               item for item in plan.get("candidates", [])
-              if isinstance(item, dict) and item.get("intake_artifact")
+              if (
+                  isinstance(item, dict)
+                  and item.get("intake_artifact")
+                  and item.get("rights_status") not in {"REJECTED", "REJECTED_SEMANTICALLY_WEAK"}
+              )
           ]
           expected_ids = {
               str(item.get("candidate_id"))
