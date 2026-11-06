@@ -441,7 +441,7 @@ def validate_sequence(
             "adjacency_reports": [],
             "blocking_reasons": [],
             "review_reasons": ["visual continuity profile is not configured"],
-            "strict_preview_block": mode in {"preview", "final"},
+            "strict_preview_block": False,
         }
     normalized = normalize_profile(profile)
     scene_reports: list[dict[str, Any]] = []
