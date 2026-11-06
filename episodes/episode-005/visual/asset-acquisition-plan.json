@@ -3148,7 +3148,7 @@
       "visual_intent": "Explained atmospheric geometry: noctilucent clouds illuminated from below at night, connecting the optical ambiguity to the non-event; not literal missile or sensor footage.",
       "truth_class": "EXPLAINED_PHENOMENON",
       "provider": "nasa",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "REJECTED_AFTER_INTAKE_DIMENSION",
       "license_name": "NASA Media Guidelines (per asset)",
       "source_tier": "government_manual",
       "approved_for_render": false,
@@ -3196,7 +3196,7 @@
         "manual_government_rights_review",
         "must_not_assign_S11"
       ],
-      "selection_status": "SHORTLISTED_FOR_INTAKE",
+      "selection_status": "REJECTED_AFTER_INTAKE",
       "score_breakdown": {
         "semantic_fit": 0.9,
         "continuity_coherence": 0.87,
@@ -3205,7 +3205,97 @@
         "clean_frame_quality": 0.9,
         "source_distinctness": 1
       },
-      "manual_rights_review": "NASA SVS help page states visualizations are public domain unless otherwise noted; retain required credit and inspect the downloaded file for identifiers or licensed audio."
+      "manual_rights_review": "NASA SVS help page states visualizations are public domain unless otherwise noted; retain required credit and inspect the downloaded file for identifiers or licensed audio.",
+      "rejection_reason": "Downloaded NASA SVS WebM was 720x480 in actual ffprobe validation; below engine minimum height >=720. Do not upscale or use for render.",
+      "intake_failure": {
+        "workflow_run_id": 42171283129,
+        "job_id": 127739444748,
+        "status": "FAILED_CLOSED",
+        "assertion": "(720, 480)",
+        "validated_at_utc": "2026-11-06T05:56:12Z",
+        "superseded_by": "nasa-svs-noctilucent-clouds-3484"
+      }
+    },
+    {
+      "candidate_id": "nasa-svs-noctilucent-clouds-3484",
+      "source_page_url": "https://svs.gsfc.nasa.gov/3484/",
+      "role": "S12",
+      "visual_match": "EXACT",
+      "visual_intent": "NASA/AIM noctilucent-cloud data visualization for the night-side atmospheric ambiguity and non-event beat; explanatory, never literal Petrov archival evidence.",
+      "truth_class": "EXPLAINED_PHENOMENON",
+      "provider": "nasa",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "license_name": "NASA Media Guidelines (per asset)",
+      "source_tier": "government_manual",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "media_url": "https://svs.gsfc.nasa.gov/vis/a000000/a003400/a003484/AIM2007NLCseason_HD720.mp4",
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T00:00:00Z",
+        "observed_license": "NASA SVS public-domain lane unless otherwise noted; credit NASA/Goddard Space Flight Center Scientific Visualization Studio",
+        "observed_metadata": "1280x720 H.264 MP4, 30 fps, 67 seconds; AIM northern-hemisphere noctilucent-cloud data accumulation",
+        "media_route": "https://svs.gsfc.nasa.gov/vis/a000000/a003400/a003484/AIM2007NLCseason_HD720.mp4",
+        "rights_evidence_url": "https://svs.gsfc.nasa.gov/help/",
+        "media_url_verification": {
+          "method": "HTTP download plus ffprobe validation",
+          "status": "PASS",
+          "content_type": "video/mp4",
+          "observed_dimensions": "1280x720",
+          "duration_seconds": 67,
+          "frame_rate": "30/1",
+          "content_length_bytes": 17449796
+        }
+      },
+      "continuity_tags": {
+        "era": [
+          "period_compatible",
+          "indeterminate_era"
+        ],
+        "setting": [
+          "external_sensor",
+          "early_warning_command",
+          "documentary_evidence"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows",
+          "restrained_amber"
+        ],
+        "palette": [
+          "charcoal",
+          "desaturated_blue",
+          "amber"
+        ],
+        "texture": [
+          "atmospheric",
+          "data_visualization",
+          "low_light_grain"
+        ]
+      },
+      "continuity_risk_flags": [
+        "scientific_visualization_not_archival",
+        "credit_in_description_required",
+        "manual_government_rights_review",
+        "global_earth_data_not_literal_petrov_sensor",
+        "must_not_assign_S11"
+      ],
+      "selection_status": "SHORTLISTED_FOR_INTAKE",
+      "score_breakdown": {
+        "semantic_fit": 0.92,
+        "continuity_coherence": 0.9,
+        "license_confidence": 0.9,
+        "vertical_crop_quality": 0.78,
+        "clean_frame_quality": 0.9,
+        "source_distinctness": 1
+      },
+      "manual_rights_review": "NASA SVS page 3484 and NASA SVS help lane reviewed; retain NASA/Goddard Space Flight Center Scientific Visualization Studio credit and inspect downloaded audio/frames before any approval.",
+      "media_url_observed_by_http_probe": true,
+      "supersedes": "nasa-svs-noctilucent-clouds-20002"
     }
   ],
   "next_action": "Acquire and fingerprint distinct period-compatible replacements for S03, S04, S09 and S12; keep S06/S11 manifest-only until editorial continuity review is complete.",
@@ -4164,8 +4254,8 @@
     "continuity_coverage_score": 0.8812,
     "note": "CI revalidated the expanded shortlist. The four search-v4 candidates remain plan-only; active manifest assignments and the strict preview block are unchanged."
   },
-  "last_adjustment": "The first isolated intake attempt (run 42170992534) failed closed because Mixkit 4460-720 downloaded as 720x480; the candidate now points to the verified Full HD 4460-1080 route and remains shortlist-only.",
-  "next_gate": "Rerun the four-ID isolated intake with refresh_existing=true using the corrected Mixkit Full HD route, then inspect contact sheets and run the fingerprint audit. Do not assign candidates to the manifest or render before those gates.",
+  "last_adjustment": "The isolated intake attempts remain fail-closed: Mixkit 720 route was replaced by verified Full HD; NASA 20002 was rejected after actual media validation returned 720x480, and NASA 3484 is now the HD government replacement.",
+  "next_gate": "Dispatch the corrected four-ID isolated intake with nasa-svs-noctilucent-clouds-3484, inspect contact sheets/full-duration QA, then run the fingerprint audit. Keep manifest assignment, promotion, render, Drive and publication blocked.",
   "render_approval_record": {
     "status": "APPROVED",
     "approved_at_utc": "2026-11-05T22:56:14Z",
@@ -4387,8 +4477,8 @@
     {
       "batch_id": "search-v4-episode005-hard-conflict-recovery-20261106",
       "created_at_utc": "2026-11-06T00:00:00Z",
-      "status": "SHORTLIST_RECORDED_NO_INTAKE",
-      "mode": "SHORTLIST_ONLY_NO_DOWNLOAD_NO_PROMOTION",
+      "status": "INTAKE_ATTEMPTED_BLOCKED_DIMENSION",
+      "mode": "SHORTLIST_PLUS_ISOLATED_INTAKE_NO_PROMOTION",
       "target_shots": [
         "S03",
         "S04",
@@ -4399,11 +4489,11 @@
         "pixabay-radio-channel-solid-music-125871",
         "mixkit-inside-rear-control-cabin-4460",
         "pexels-12213087",
-        "nasa-svs-noctilucent-clouds-20002"
+        "nasa-svs-noctilucent-clouds-3484"
       ],
-      "source_pages_reviewed": 4,
-      "direct_media_routes_recorded": 4,
-      "intake_dispatched": false,
+      "source_pages_reviewed": 5,
+      "direct_media_routes_recorded": 5,
+      "intake_dispatched": true,
       "fingerprint_dispatched": false,
       "human_approval_pending": true,
       "render_allowed": false,
@@ -4422,7 +4512,7 @@
         "9x16_crop_review"
       ],
       "rejection_policy": "Reject any candidate after intake if full-duration QA reveals modern/digital UI, readable labels, watermarks, daylight, licensed audio, or a source/fingerprint collision.",
-      "next_action": "Dispatch isolated manual intake for the four exact IDs with refresh_existing=true only for pexels-38958215, then fingerprint and human QA before manifest assignment.",
+      "next_action": "Dispatch the corrected four-ID isolated intake using nasa-svs-noctilucent-clouds-3484; then inspect full-duration/contact-sheet QA and run the fingerprint audit.",
       "contract_validation": {
         "workflow_run_id": 42170029722,
         "job_id": 127735446473,
@@ -4450,15 +4540,64 @@
         "render_allowed": false
       },
       "media_route_verification": {
-        "status": "PASS",
+        "status": "PASS_WITH_REPLACEMENT",
         "candidate_ids": [
           "pexels-38958215",
           "mixkit-inside-rear-control-cabin-4460",
           "pexels-12213087",
+          "nasa-svs-noctilucent-clouds-3484"
+        ],
+        "rejected_candidate_ids": [
           "nasa-svs-noctilucent-clouds-20002"
         ],
-        "notes": "S03 route reused from prior intake evidence; Mixkit and Pexels new routes passed HTTP content-type probes; NASA route was observed on the official SVS page."
-      }
+        "notes": "Mixkit route was corrected to Full HD after run 97; NASA 20002 was rejected after actual ffprobe returned 720x480; NASA 3484 page route was downloaded and validated at 1280x720."
+      },
+      "superseded_candidate_ids": [
+        "nasa-svs-noctilucent-clouds-20002"
+      ],
+      "rejected_candidate_ids": [
+        "nasa-svs-noctilucent-clouds-20002"
+      ],
+      "replacement_candidate_ids": [
+        "nasa-svs-noctilucent-clouds-3484"
+      ],
+      "intake_workflow_run_id": 42171283129,
+      "intake_job_id": 127739444748,
+      "intake_conclusion": "failure",
+      "intake_failure_reason": "NASA 20002 downloaded as 720x480; validation requires width and height >=720."
     }
-  ]
+  ],
+  "last_intake_attempt": {
+    "recorded_at_utc": "2026-11-06T05:56:12Z",
+    "workflow_run_id": 42171283129,
+    "job_id": 127739444748,
+    "branch": "main",
+    "commit_sha": "f6663d80aac3667131a6d67992271ff1f97c444f",
+    "candidate_ids": [
+      "pexels-38958215",
+      "mixkit-inside-rear-control-cabin-4460",
+      "pexels-12213087",
+      "nasa-svs-noctilucent-clouds-20002"
+    ],
+    "refresh_existing": true,
+    "status": "FAILED_CLOSED_DIMENSION_VALIDATION",
+    "failure": "nasa-svs-noctilucent-clouds-20002 returned 720x480; no artifact uploaded; no candidate promoted.",
+    "promotion_allowed": false,
+    "render_allowed": false,
+    "global_catalog_updated": false,
+    "drive_written": false,
+    "publication_allowed": false,
+    "next_action": "Replace the NASA 20002 candidate with NASA 3484 at 1280x720 and rerun the isolated intake."
+  },
+  "last_candidate_route_correction": {
+    "recorded_at_utc": "2026-11-06T00:00:00Z",
+    "superseded_candidate_id": "nasa-svs-noctilucent-clouds-20002",
+    "replacement_candidate_id": "nasa-svs-noctilucent-clouds-3484",
+    "reason": "Actual downloaded media did not match stale page resolution metadata; 720x480 fails the engine minimum.",
+    "replacement_source_page": "https://svs.gsfc.nasa.gov/3484/",
+    "replacement_media_url": "https://svs.gsfc.nasa.gov/vis/a000000/a003400/a003484/AIM2007NLCseason_HD720.mp4",
+    "replacement_probe": "ffprobe PASS: 1280x720, 67 seconds, 30 fps, 17,449,796 bytes",
+    "render_allowed": false,
+    "promotion_allowed": false
+  }
 }
