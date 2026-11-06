@@ -63,10 +63,11 @@ def validate_request(
     policy = _policy(policy_path)
     failures: list[str] = []
 
-    if policy.get("production_enablement") is not True:
-        failures.append("active policy production_enablement=false")
-    if record.get("production_enablement") is not True:
-        failures.append("production record production_enablement=false")
+    enablement_field = "preview_enablement" if mode == "preview" else "production_enablement"
+    if policy.get(enablement_field) is not True:
+        failures.append(f"active policy {enablement_field}=false")
+    if record.get(enablement_field) is not True:
+        failures.append(f"production record {enablement_field}=false")
     authorization = record.get("render_authorization")
     if not isinstance(authorization, dict) or authorization.get("status") != "APPROVED":
         failures.append("explicit render_authorization.status=APPROVED is required")
@@ -88,7 +89,7 @@ def validate_request(
         report = validate_thumbnail_manifest(thumbnail)
         if report["status"] != "PASS":
             failures.extend(f"thumbnail:{item}" for item in report["failures"])
-        else:
+        elif mode == "final":
             files = validate_thumbnail_files(thumbnail, repo_root)
             if files["status"] != "PASS":
                 failures.extend(f"thumbnail_files:{item}" for item in files["failures"])
@@ -96,11 +97,16 @@ def validate_request(
     return {
         "status": "V21_MANUAL_RENDER_PREFLIGHT_PASS" if not failures else "V21_MANUAL_RENDER_BLOCKED",
         "mode": mode,
+        "preview_enablement": policy.get("preview_enablement") is True,
         "production_enablement": policy.get("production_enablement") is True,
         "render": "NOT_RUN",
         "publication": "MANUAL_ONLY_NOT_RUN",
         "failures": failures,
-        "next_action": "execute_manual_render_after_all_gates_pass" if not failures else "resolve:" + ",".join(failures),
+        "next_action": (
+            ("execute_manual_preview_after_all_gates_pass" if mode == "preview" else "execute_manual_render_after_all_gates_pass")
+            if not failures
+            else "resolve:" + ",".join(failures)
+        ),
     }
 
 

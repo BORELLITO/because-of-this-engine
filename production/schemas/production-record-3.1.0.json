@@ -41,6 +41,7 @@
     "render_contract": {"type": "object"},
     "drive_contract": {"type": "object"},
     "pipeline_state": {"enum": ["DRAFT", "PACKAGE_PENDING", "FACT_CHECK_PENDING", "STORY_PENDING", "ASSETS_PENDING", "RIGHTS_PENDING", "REUSE_PENDING", "VOICE_PENDING", "AUDIO_PENDING", "CAPTIONS_PENDING", "PREVIEW_PENDING", "THUMBNAIL_PENDING", "THUMBNAIL_QA", "HUMAN_REVIEW", "TECHNICAL_QA", "NEEDS_CORRECTION", "BLOCKED", "APPROVED_FOR_MANUAL_PUBLICATION", "MANUALLY_PUBLISHED", "METRICS_PENDING", "ARCHIVED"]},
+    "preview_enablement": {"type": "boolean"},
     "production_enablement": {"const": false}
   },
   "additionalProperties": true
