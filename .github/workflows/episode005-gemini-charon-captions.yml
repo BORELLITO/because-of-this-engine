@@ -96,7 +96,9 @@ jobs:
               "captions": {
                   "path": "narration.ass",
                   "alignment_sidecar": "narration.alignment.json",
-                  "max_line_chars": 42,
+                  "max_line_chars": 36,
+                  "max_lines": 2,
+                  "margin_v": 520,
                   "active_word_color": "#FF7777"
               }
           }
@@ -144,6 +146,8 @@ jobs:
           assert data["word_count"] > 0, data
           assert data["word_timing_normalization"]["timeline_monotonic"] is True, data
           assert data["captions"], data
+          assert all(str(chunk["text"]).count("\\N") <= 1 for chunk in data["captions"]), data
+          assert 2 <= len(data["captions"]), data
           assert data["audio_duration_seconds"] >= 60, data
           print(json.dumps({
               "status": "GEMINI_CHARON_CAPTIONS_READY",
