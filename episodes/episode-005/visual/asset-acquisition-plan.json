@@ -3787,8 +3787,8 @@
     "active_candidate_count": 42
   },
   "last_contract_validation": {
-    "validated_at_utc": "2026-11-06T05:03:28Z",
-    "status": "PENDING_CI_REVALIDATION",
+    "validated_at_utc": "2026-11-06T05:08:25Z",
+    "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
     "candidate_count": 43,
     "approved_manifest_candidate_count": 22,
     "manifest_asset_count": 16,
@@ -3798,12 +3798,12 @@
     "render_allowed": false,
     "global_catalog_updated": false,
     "validator": "production/visual_plan_contract.py",
-    "checkout_commit": "5596616c41073547a234c620a5e1196a0abe58c8",
+    "checkout_commit": "64548a469fe5644c319c762de7ea96d8a4b3f411",
     "revalidation_required": true,
     "continuity_gate": "REVIEW_REQUIRED",
     "continuity_research_batch": "search-v3-episode005-priority-20261106",
-    "ci_workflow_run_id": 42164890828,
-    "ci_job_id": 127718940214,
+    "ci_workflow_run_id": 42166546937,
+    "ci_job_id": 127724245182,
     "ci_conclusion": "success",
     "intake_workflow_run_id": 42165726351,
     "fingerprint_workflow_run_id": 42166326952
