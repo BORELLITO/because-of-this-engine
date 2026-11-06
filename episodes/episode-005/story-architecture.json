@@ -74,8 +74,8 @@
       "caption_count": 24,
       "audio_duration_seconds": 73.84,
       "max_lines": 2,
-      "margin_v": 520,
-      "note": "Real timestamped karaoke captions generated from the existing WAV; raised placement, maximum two lines, active word color #F04444. Preview recolor preserves the original word timestamps without another TTS call."
+      "margin_v": 650,
+      "note": "Real timestamped karaoke captions generated from the existing WAV; safe-zone placement, maximum two lines, active word color #F04444. Preview recolor preserves the original word timestamps without another TTS call."
     },
     "workflow_policy": "manual_dispatch_only; one full-script request per RUN_ONCE execution",
     "prior_attempts": [

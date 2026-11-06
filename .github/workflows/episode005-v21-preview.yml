@@ -146,7 +146,8 @@ jobs:
           assert report["music"]["sources"] == ["narration_only"], report
           assert report["branding"]["logo_overlay"] is True, report
           assert report["branding"]["logo_asset"] == "transparent_wordmark", report
-          assert report["branding"]["logo_y"] == 336, report
+          assert report["branding"]["logo_y"] == 190, report
+          assert report["branding"]["caption_margin_v"] == 650, report
           assert report["branding"]["active_word_color"] == "#F04444", report
           assert report["branding"]["narration_end_before_outro"] is True, report
           assert report["branding"]["outro_audio"] == "silence", report
