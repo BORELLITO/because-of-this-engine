@@ -22,6 +22,7 @@ from production.editorial_policy import (
     validate_clip_quantity,
 )
 from production.visual_semantics import require_visual_fit
+from production.visual_continuity import validate_sequence
 from production.canonical_config import CanonicalConfigError, validate_canonical_manifest
 from production.visual_effects_v73 import VisualEffectsError, validate_visual_effects
 
@@ -32,7 +33,29 @@ MAX_STORY_SECONDS = 75.0
 ALLOWED_MATCHES = {"EXACT", "NEAR", "EXPLANATORY", "SYMBOLIC", "ATMOSPHERE"}
 ALLOWED_TRUTH = {"VERIFIED_FACT", "DOCUMENTED_RECONSTRUCTION", "EXPLAINED_PHENOMENON", "DECLARED_FICTION"}
 ALLOWED_STATUSES = {"APPROVED", "REVIEW_REQUIRED", "REJECTED"}
-ALLOWED_PROVIDERS = {"mixkit", "pixabay", "pexels", "drive", "original"}
+ALLOWED_PROVIDERS = {
+    "mixkit",
+    "pixabay",
+    "pexels",
+    "coverr",
+    "videvo",
+    "videezy",
+    "wikimedia",
+    "nasa",
+    "noaa",
+    "loc",
+    "nara",
+    "internet_archive",
+    "drive",
+    "original",
+}
+ALLOWED_SOURCE_TIERS = {
+    "stock_auto",
+    "cc_manual",
+    "archive_manual",
+    "government_manual",
+    "original",
+}
 ALLOWED_TRANSITIONS = {"hard_cut", "crossfade", "soft_dissolve", "dip_to_black", "motion_match"}
 PREVIEW_ONLY_MODE = "draft-preview"
 MATCH_THRESHOLDS = {"EXACT": 0.80, "NEAR": 0.68, "EXPLANATORY": 0.60, "SYMBOLIC": 0.55, "ATMOSPHERE": 0.55}
@@ -274,6 +297,9 @@ def validate_asset_record(record: dict[str, Any], base: Path, episode_id: str, *
     provider = _required_text(record, "provider", f"Asset {asset_id}").lower()
     if provider not in ALLOWED_PROVIDERS:
         raise VideoContractError(f"Asset {asset_id} uses an unsupported video provider: {provider}")
+    source_tier = record.get("source_tier")
+    if source_tier is not None and str(source_tier).strip().lower() not in ALLOWED_SOURCE_TIERS:
+        raise VideoContractError(f"Asset {asset_id} uses an unsupported source_tier: {source_tier}")
     _required_text(record, "source_page_url", f"Asset {asset_id}")
     _required_text(record, "license", f"Asset {asset_id}")
     _required_text(record, "sha256", f"Asset {asset_id}")
@@ -610,6 +636,26 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
             "asset": asset,
             "visual_qa": visual_qa,
         })
+    continuity_gate = None
+    continuity_profile = manifest.get("visual_continuity_profile")
+    if continuity_profile is not None:
+        try:
+            continuity_gate = validate_sequence(
+                normalized,
+                continuity_profile,
+                mode=mode,
+            )
+        except (ValueError, TypeError) as exc:
+            raise VideoContractError(f"Visual continuity profile is invalid: {exc}") from exc
+        if mode in {"preview", "final"} and continuity_gate.get("status") != "PASS":
+            raise VideoContractError(
+                "Visual continuity gate blocks this render mode: "
+                + "; ".join(
+                    continuity_gate.get("blocking_reasons", [])
+                    or continuity_gate.get("review_reasons", [])
+                )
+            )
+
     for index, scene in enumerate(normalized):
         transition = scene.get("transition", {})
         transition_type = str(transition.get("type", "crossfade"))
@@ -758,6 +804,7 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
         "clip_policy": clip_policy,
         "clip_quantity_gate": quantity_report,
         "canonical_config": canonical_report,
+        "visual_continuity_gate": continuity_gate,
     }
 
 

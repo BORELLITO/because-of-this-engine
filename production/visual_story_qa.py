@@ -13,6 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from production.story_intelligence import StoryIntegrityError, audit_manifest
 from production.video_asset_contract import load_manifest
 from production.visual_semantics import require_visual_fit, visual_match_report
+from production.visual_continuity import validate_sequence
 
 
 def _scene_report(scene: dict, mode: str) -> dict:
@@ -113,8 +114,24 @@ def main() -> int:
             story_error = str(exc)
 
         scenes = [_scene_report(scene, args.mode) for scene in manifest.get("scenes", [])]
+        continuity_gate = validate_sequence(
+            manifest.get("scenes", []),
+            manifest.get("visual_continuity_profile"),
+            mode=args.mode,
+        )
         blocked = [scene for scene in scenes if scene["status"] != "PASS"]
-        status = "VISUAL_STORY_QA_PASS" if story_error is None and not blocked else "VISUAL_STORY_QA_BLOCKED"
+        continuity_blocked = (
+            continuity_gate.get("status") == "BLOCKED"
+            or (
+                continuity_gate.get("status") == "REVIEW_REQUIRED"
+                and continuity_gate.get("strict_preview_block") is True
+            )
+        )
+        status = (
+            "VISUAL_STORY_QA_PASS"
+            if story_error is None and not blocked and not continuity_blocked
+            else "VISUAL_STORY_QA_BLOCKED"
+        )
         report = {
             "status": status,
             "video_id": manifest.get("video_id"),
@@ -125,6 +142,7 @@ def main() -> int:
             "story_intelligence_error": story_error,
             "scenes": scenes,
             "blocking_scenes": blocked,
+            "visual_continuity_gate": continuity_gate,
             "policy": {
                 "story_graph_required": True,
                 "narration_coverage_required": True,

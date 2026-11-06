@@ -52,7 +52,40 @@
       "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
-      "drive_written": false
+      "drive_written": false,
+      "continuity_tags": {
+        "era": [
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_red"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red"
+        ],
+        "texture": [
+          "low_light_grain",
+          "abstract_light"
+        ],
+        "risk_flags": [
+          "symbolic_insert_requires_editorial_match"
+        ]
+      },
+      "continuity_risk_flags": [
+        "symbolic_insert_requires_editorial_match"
+      ],
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto"
     },
     {
       "candidate_id": "mixkit-slowly-approaching-clock-28897",
@@ -75,7 +108,37 @@
       "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
-      "drive_written": false
+      "drive_written": false,
+      "continuity_tags": {
+        "era": [
+          "analog",
+          "cold_war",
+          "period_compatible"
+        ],
+        "setting": [
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "steel"
+        ],
+        "texture": [
+          "brushed_metal",
+          "low_light_grain"
+        ],
+        "risk_flags": []
+      },
+      "continuity_risk_flags": [],
+      "continuity_review_status": "PASS",
+      "source_tier": "stock_auto"
     },
     {
       "candidate_id": "mixkit-cloudy-sky-118",
@@ -98,7 +161,41 @@
       "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
-      "drive_written": false
+      "drive_written": false,
+      "continuity_tags": {
+        "era": [
+          "period_compatible",
+          "indeterminate_era"
+        ],
+        "setting": [
+          "night_sky",
+          "external_sensor"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "low_light_grain",
+          "atmospheric"
+        ],
+        "risk_flags": [
+          "sky_time_of_day_requires_frame_qc"
+        ]
+      },
+      "continuity_risk_flags": [
+        "sky_time_of_day_requires_frame_qc"
+      ],
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto"
     },
     {
       "candidate_id": "mixkit-clock-mechanism-3651",
@@ -126,7 +223,42 @@
       "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
-      "drive_written": false
+      "drive_written": false,
+      "continuity_tags": {
+        "era": [
+          "analog",
+          "cold_war",
+          "period_compatible"
+        ],
+        "setting": [
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "steel"
+        ],
+        "texture": [
+          "brushed_metal",
+          "mechanical",
+          "low_light_grain"
+        ],
+        "risk_flags": [
+          "motif_repetition_with_S07"
+        ]
+      },
+      "continuity_risk_flags": [
+        "motif_repetition_with_S07"
+      ],
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto"
     },
     {
       "candidate_id": "mixkit-large-satellite-antenna-2650",
@@ -154,7 +286,42 @@
       "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
-      "drive_written": false
+      "drive_written": false,
+      "continuity_tags": {
+        "era": [
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "early_warning_command",
+          "external_sensor"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "steel",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "brushed_metal",
+          "low_light_grain"
+        ],
+        "risk_flags": [
+          "representational_infrastructure_not_archival"
+        ]
+      },
+      "continuity_risk_flags": [
+        "representational_infrastructure_not_archival"
+      ],
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto"
     },
     {
       "candidate_id": "mixkit-young-engineer-29991",
@@ -183,7 +350,42 @@
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
-      "editorial_caveat": "Modern tablet/code/workshop reconstruction; never literal Petrov archival evidence."
+      "editorial_caveat": "Modern tablet/code/workshop reconstruction; never literal Petrov archival evidence.",
+      "continuity_tags": {
+        "era": [
+          "modern",
+          "digital"
+        ],
+        "setting": [
+          "modern_workshop"
+        ],
+        "time_of_day": [
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key"
+        ],
+        "palette": [
+          "steel",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "metal",
+          "digital_ui"
+        ],
+        "risk_flags": [
+          "modern_era_mismatch",
+          "modern_workshop_mismatch",
+          "representational_only"
+        ]
+      },
+      "continuity_risk_flags": [
+        "modern_era_mismatch",
+        "modern_workshop_mismatch",
+        "representational_only"
+      ],
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto"
     },
     {
       "candidate_id": "mixkit-worker-industrial-lathe-2244",
@@ -212,7 +414,43 @@
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
-      "editorial_caveat": "Industrial control panel is representational reconstruction for S04, never literal Petrov archival evidence."
+      "editorial_caveat": "Industrial control panel is representational reconstruction for S04, never literal Petrov archival evidence.",
+      "continuity_tags": {
+        "era": [
+          "industrial",
+          "indeterminate_era"
+        ],
+        "setting": [
+          "industrial_floor"
+        ],
+        "time_of_day": [
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "steel",
+          "charcoal"
+        ],
+        "texture": [
+          "industrial",
+          "metal"
+        ],
+        "risk_flags": [
+          "setting_mismatch",
+          "command_chain_not_visible",
+          "period_coherence_review"
+        ]
+      },
+      "continuity_risk_flags": [
+        "setting_mismatch",
+        "command_chain_not_visible",
+        "period_coherence_review"
+      ],
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto"
     },
     {
       "candidate_id": "pixabay-led-indicator-lights-316712",
@@ -246,7 +484,43 @@
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
-      "editorial_caveat": "Abstract indicator/electronics texture for S06 only; never literal Soviet alert interface or Petrov archival evidence."
+      "editorial_caveat": "Abstract indicator/electronics texture for S06 only; never literal Soviet alert interface or Petrov archival evidence.",
+      "continuity_tags": {
+        "era": [
+          "modern",
+          "digital"
+        ],
+        "setting": [
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_red"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red",
+          "amber"
+        ],
+        "texture": [
+          "digital_ui",
+          "metal"
+        ],
+        "risk_flags": [
+          "modern_led_signature",
+          "period_coherence_review"
+        ]
+      },
+      "continuity_risk_flags": [
+        "modern_led_signature",
+        "period_coherence_review"
+      ],
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto"
     },
     {
       "candidate_id": "pixabay-antenna-astronomy-communication-40041",
@@ -275,7 +549,45 @@
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
-      "editorial_caveat": "Representational satellite/earth-station infrastructure for S12 only; never literal Petrov archival evidence."
+      "editorial_caveat": "Representational satellite/earth-station infrastructure for S12 only; never literal Petrov archival evidence.",
+      "continuity_tags": {
+        "era": [
+          "modern",
+          "digital"
+        ],
+        "setting": [
+          "external_sensor",
+          "open_sky"
+        ],
+        "time_of_day": [
+          "daylight",
+          "sunlight"
+        ],
+        "lighting": [
+          "high_key",
+          "sunlit"
+        ],
+        "palette": [
+          "steel",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "metal",
+          "atmospheric"
+        ],
+        "risk_flags": [
+          "daylight_break",
+          "modern_era_mismatch",
+          "re_shortlist_required"
+        ]
+      },
+      "continuity_risk_flags": [
+        "daylight_break",
+        "modern_era_mismatch",
+        "re_shortlist_required"
+      ],
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto"
     },
     {
       "candidate_id": "pixabay-hallway-dark-corridor-20837",
@@ -309,7 +621,42 @@
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
-      "editorial_caveat": "Representational empty institutional corridor for S14 only; never literal Petrov archival evidence and never reused in another shot."
+      "editorial_caveat": "Representational empty institutional corridor for S14 only; never literal Petrov archival evidence and never reused in another shot.",
+      "continuity_tags": {
+        "era": [
+          "analog",
+          "cold_war",
+          "period_compatible"
+        ],
+        "setting": [
+          "institutional_corridor"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "steel",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "brushed_metal",
+          "low_light_grain"
+        ],
+        "risk_flags": [
+          "representational_corridor_not_archival"
+        ]
+      },
+      "continuity_risk_flags": [
+        "representational_corridor_not_archival"
+      ],
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto"
     },
     {
       "candidate_id": "pixabay-radar-black-green-target-symbol-57670",
@@ -340,7 +687,44 @@
       "thumbnail_eligible": false,
       "drive_written": false,
       "editorial_caveat": "Representational radar/target insert for S05 only; not literal Petrov archival evidence.",
-      "selection_basis": "Replacement after direct-media QA rejected the recognizable-person candidate; approved shortlist alternative."
+      "selection_basis": "Replacement after direct-media QA rejected the recognizable-person candidate; approved shortlist alternative.",
+      "continuity_tags": {
+        "era": [
+          "analog",
+          "cold_war",
+          "period_compatible"
+        ],
+        "setting": [
+          "early_warning_command",
+          "radar_monitor"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key"
+        ],
+        "palette": [
+          "charcoal",
+          "desaturated_blue",
+          "warning_amber"
+        ],
+        "texture": [
+          "crt_phosphor",
+          "low_light_grain"
+        ],
+        "risk_flags": [
+          "green_ui_accent",
+          "symbolic_not_literal"
+        ]
+      },
+      "continuity_risk_flags": [
+        "green_ui_accent",
+        "symbolic_not_literal"
+      ],
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto"
     },
     {
       "candidate_id": "pixabay-radar-radar-screen-rotation-circles-4511",
@@ -370,7 +754,43 @@
       "thumbnail_eligible": false,
       "drive_written": false,
       "editorial_caveat": "Representational reconstruction/symbolic visual only; never literal Petrov archival evidence.",
-      "selection_basis": "Primary selection for S08: highest scored candidate in the approved two-candidate shortlist."
+      "selection_basis": "Primary selection for S08: highest scored candidate in the approved two-candidate shortlist.",
+      "continuity_tags": {
+        "era": [
+          "analog",
+          "cold_war",
+          "period_compatible"
+        ],
+        "setting": [
+          "early_warning_command",
+          "radar_monitor"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "desaturated_blue",
+          "warning_amber"
+        ],
+        "texture": [
+          "crt_phosphor",
+          "low_light_grain"
+        ],
+        "risk_flags": [
+          "symbolic_not_literal"
+        ]
+      },
+      "continuity_risk_flags": [
+        "symbolic_not_literal"
+      ],
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto"
     },
     {
       "candidate_id": "pixabay-button-press-red-business-click-502",
@@ -400,7 +820,42 @@
       "thumbnail_eligible": false,
       "drive_written": false,
       "editorial_caveat": "Representational reconstruction/symbolic visual only; never literal Petrov archival evidence.",
-      "selection_basis": "Primary selection for S09: highest scored candidate in the approved two-candidate shortlist."
+      "selection_basis": "Primary selection for S09: highest scored candidate in the approved two-candidate shortlist.",
+      "continuity_tags": {
+        "era": [
+          "modern",
+          "digital"
+        ],
+        "setting": [
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_red"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red"
+        ],
+        "texture": [
+          "metal",
+          "digital_ui"
+        ],
+        "risk_flags": [
+          "modern_interface_signature",
+          "period_coherence_review"
+        ]
+      },
+      "continuity_risk_flags": [
+        "modern_interface_signature",
+        "period_coherence_review"
+      ],
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto"
     },
     {
       "candidate_id": "pixabay-typewriter-typing-writing-author-1335",
@@ -430,7 +885,44 @@
       "thumbnail_eligible": false,
       "drive_written": false,
       "editorial_caveat": "Representational reconstruction/symbolic visual only; never literal Petrov archival evidence.",
-      "selection_basis": "Primary selection for S13: highest scored candidate in the approved two-candidate shortlist."
+      "selection_basis": "Primary selection for S13: highest scored candidate in the approved two-candidate shortlist.",
+      "continuity_tags": {
+        "era": [
+          "analog",
+          "cold_war",
+          "period_compatible"
+        ],
+        "setting": [
+          "documentary_evidence",
+          "institutional_desk"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_amber"
+        ],
+        "palette": [
+          "charcoal",
+          "amber",
+          "paper"
+        ],
+        "texture": [
+          "paper_logbook",
+          "typewriter",
+          "low_light_grain"
+        ],
+        "risk_flags": [
+          "readable_text_must_not_be_invented"
+        ]
+      },
+      "continuity_risk_flags": [
+        "readable_text_must_not_be_invented"
+      ],
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto"
     },
     {
       "candidate_id": "pixabay-dark-light-lens-flare-abstract-250413",
@@ -460,7 +952,43 @@
       "thumbnail_eligible": false,
       "drive_written": false,
       "editorial_caveat": "Representational reconstruction/symbolic visual only; never literal Petrov archival evidence.",
-      "selection_basis": "Primary selection for S15: highest scored candidate in the approved two-candidate shortlist."
+      "selection_basis": "Primary selection for S15: highest scored candidate in the approved two-candidate shortlist.",
+      "continuity_tags": {
+        "era": [
+          "period_compatible",
+          "indeterminate_era"
+        ],
+        "setting": [
+          "transition",
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_red"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red"
+        ],
+        "texture": [
+          "abstract_light",
+          "low_light_grain"
+        ],
+        "risk_flags": [
+          "generic_transition",
+          "needs_match_to_S14_and_S16"
+        ]
+      },
+      "continuity_risk_flags": [
+        "generic_transition",
+        "needs_match_to_S14_and_S16"
+      ],
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto"
     },
     {
       "candidate_id": "pixabay-particles-orange-red-dust-effect-7957",
@@ -490,7 +1018,45 @@
       "thumbnail_eligible": false,
       "drive_written": false,
       "editorial_caveat": "Representational reconstruction/symbolic visual only; never literal Petrov archival evidence.",
-      "selection_basis": "Primary selection for S16: highest scored candidate in the approved two-candidate shortlist."
+      "selection_basis": "Primary selection for S16: highest scored candidate in the approved two-candidate shortlist.",
+      "continuity_tags": {
+        "era": [
+          "period_compatible",
+          "indeterminate_era"
+        ],
+        "setting": [
+          "brand_outro",
+          "transition"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_red",
+          "restrained_amber"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red",
+          "amber"
+        ],
+        "texture": [
+          "abstract_particle",
+          "low_light_grain"
+        ],
+        "risk_flags": [
+          "generic_outro_texture",
+          "brand_lockup_only"
+        ]
+      },
+      "continuity_risk_flags": [
+        "generic_outro_texture",
+        "brand_lockup_only"
+      ],
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto"
     }
   ],
   "shot_assignments": [
@@ -508,7 +1074,34 @@
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST"
       },
-      "blocking_reason": null
+      "blocking_reason": null,
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_red"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red"
+        ],
+        "texture": [
+          "crt_phosphor",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S02",
@@ -524,7 +1117,35 @@
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST"
       },
-      "blocking_reason": null
+      "blocking_reason": null,
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "early_warning_command",
+          "external_sensor"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "steel",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "brushed_metal",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S03",
@@ -541,7 +1162,37 @@
         "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Use only as representational reconstruction; do not imply the 1983 bunker looked like a modern tablet workstation."
       },
-      "blocking_reason": null
+      "blocking_reason": null,
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "early_warning_command",
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "steel",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "crt_phosphor",
+          "brushed_metal",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S04",
@@ -558,7 +1209,37 @@
         "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Natural panel labels are scene content; do not present as the actual Soviet system."
       },
-      "blocking_reason": null
+      "blocking_reason": null,
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "technical_control_room",
+          "early_warning_command"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "steel",
+          "warning_red"
+        ],
+        "texture": [
+          "crt_phosphor",
+          "brushed_metal",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S05",
@@ -575,7 +1256,35 @@
         "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
       },
-      "blocking_reason": null
+      "blocking_reason": null,
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "early_warning_command",
+          "radar_monitor"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key"
+        ],
+        "palette": [
+          "charcoal",
+          "desaturated_blue",
+          "warning_amber"
+        ],
+        "texture": [
+          "crt_phosphor",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S06",
@@ -592,7 +1301,36 @@
         "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Use only as symbolic representational insert; do not imply the actual Soviet alert interface."
       },
-      "blocking_reason": null
+      "blocking_reason": null,
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_red"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red",
+          "amber"
+        ],
+        "texture": [
+          "crt_phosphor",
+          "metal",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S07",
@@ -608,7 +1346,34 @@
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST"
       },
-      "blocking_reason": null
+      "blocking_reason": null,
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "steel"
+        ],
+        "texture": [
+          "brushed_metal",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S08",
@@ -625,7 +1390,36 @@
         "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
       },
-      "blocking_reason": null
+      "blocking_reason": null,
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "early_warning_command",
+          "radar_monitor"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "desaturated_blue",
+          "warning_amber"
+        ],
+        "texture": [
+          "crt_phosphor",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S09",
@@ -642,7 +1436,35 @@
         "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
       },
-      "blocking_reason": null
+      "blocking_reason": null,
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_red"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red"
+        ],
+        "texture": [
+          "crt_phosphor",
+          "metal",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S10",
@@ -658,7 +1480,35 @@
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST"
       },
-      "blocking_reason": null
+      "blocking_reason": null,
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "steel"
+        ],
+        "texture": [
+          "brushed_metal",
+          "mechanical",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S11",
@@ -674,7 +1524,35 @@
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST"
       },
-      "blocking_reason": null
+      "blocking_reason": null,
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "night_sky",
+          "external_sensor"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "low_light_grain",
+          "atmospheric"
+        ]
+      }
     },
     {
       "shot_id": "S12",
@@ -691,7 +1569,35 @@
         "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Use as mechanism visualization, not as literal footage from Petrov's 1983 incident."
       },
-      "blocking_reason": null
+      "blocking_reason": null,
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "external_sensor",
+          "early_warning_command"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "steel",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "brushed_metal",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S13",
@@ -708,7 +1614,37 @@
         "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
       },
-      "blocking_reason": null
+      "blocking_reason": null,
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "documentary_evidence",
+          "institutional_desk"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_amber"
+        ],
+        "palette": [
+          "charcoal",
+          "amber",
+          "paper"
+        ],
+        "texture": [
+          "paper_logbook",
+          "typewriter",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S14",
@@ -725,7 +1661,35 @@
         "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Use only as a representational reconstruction for S14; no reuse in another shot and no claim that it depicts Petrov's facility."
       },
-      "blocking_reason": null
+      "blocking_reason": null,
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "institutional_corridor"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "steel",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "brushed_metal",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S15",
@@ -742,7 +1706,35 @@
         "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
       },
-      "blocking_reason": null
+      "blocking_reason": null,
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "transition",
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_red"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red"
+        ],
+        "texture": [
+          "abstract_light",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S16",
@@ -759,7 +1751,37 @@
         "human_approval": "APPROVED_FOR_MANIFEST",
         "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
       },
-      "blocking_reason": null
+      "blocking_reason": null,
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "brand_outro",
+          "transition"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_red",
+          "restrained_amber"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red",
+          "amber"
+        ],
+        "texture": [
+          "abstract_particle",
+          "low_light_grain"
+        ]
+      }
     }
   ],
   "unresolved_shots": [],
@@ -772,7 +1794,7 @@
     "drive_write_authorized": false,
     "publication_authorized": false
   },
-  "next_action": "Complete per-asset rights QA and explicit render approvals before any render; catalog, Drive and publication remain blocked.",
+  "next_action": "Re-shortlist assigned shots against search-v3 continuity gates; do not render or promote current assets until preview continuity returns PASS.",
   "reuse_policy": {
     "source_reuse_scope": "global",
     "distinct_source_required_per_shot": true,
@@ -915,11 +1937,19 @@
         "not literal Petrov archival evidence",
         "does not authorize render, catalog mutation, Drive write or publication"
       ]
+    },
+    {
+      "recorded_at_utc": "2026-11-06T00:00:00Z",
+      "status": "CONTINUITY_UPGRADE_REVIEW_REQUIRED",
+      "decision": "Technical source/licence gates remain intact, but the current pool must be re-shortlisted for period, palette and adjacency coherence before render.",
+      "render_authorized": false,
+      "drive_written": false,
+      "global_catalog_updated": false
     }
   ],
   "final_visual_manifest_validation": {
     "validated_at_utc": "2026-11-05T22:16:20Z",
-    "status": "VISUAL_PLAN_CONTRACT_PASS",
+    "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
     "validator": "production/visual_plan_contract.py",
     "checkout_commit": "81efe7670c0ee37567ca8bfd9647627250ae33c0",
     "candidate_count": 42,
@@ -930,8 +1960,150 @@
     "promotion_allowed": false,
     "render_allowed": false,
     "global_catalog_updated": false,
-    "revalidation_required": false,
-    "replacement_note": "S05 primary replaced after direct-media QA rejected recognizable-person candidate."
+    "revalidation_required": true,
+    "replacement_note": "S05 primary replaced after direct-media QA rejected recognizable-person candidate.",
+    "continuity_gate": "REVIEW_REQUIRED",
+    "strict_preview_block": true
   },
-  "last_adjustment": "Visual manifest kept manifest-only by contract; episode-level render authorization remains recorded in production-record.json for the manual preflight."
+  "last_adjustment": "Continuity upgrade v1 applied: all 16 assets now carry explicit continuity tags and risk flags. Existing rights approvals remain manifest-only; S03/S06/S09/S12 are hard review points and S11→S12 requires a replacement or declared bridge.",
+  "visual_continuity_profile": {
+    "schema_version": "1.0",
+    "profile_id": "episode-005-cold-war-bunker-continuity-v1",
+    "world": {
+      "era": [
+        "1983",
+        "cold_war",
+        "analog",
+        "period_compatible"
+      ],
+      "setting": [
+        "early_warning_command",
+        "technical_control_room",
+        "institutional_corridor"
+      ],
+      "time_of_day": [
+        "night",
+        "indeterminate_low_light"
+      ],
+      "lighting": [
+        "low_key",
+        "cool_shadows",
+        "restrained_red",
+        "restrained_amber"
+      ],
+      "palette": [
+        "charcoal",
+        "steel",
+        "desaturated_blue",
+        "warning_red",
+        "amber"
+      ],
+      "texture": [
+        "crt_phosphor",
+        "brushed_metal",
+        "paper_logbook",
+        "low_light_grain"
+      ]
+    },
+    "hard_constraints": {
+      "era": [
+        "1983",
+        "cold_war",
+        "analog",
+        "period_compatible"
+      ],
+      "setting": [
+        "early_warning_command",
+        "technical_control_room",
+        "institutional_corridor",
+        "documentary_evidence"
+      ],
+      "time_of_day": [
+        "night",
+        "indeterminate_low_light"
+      ],
+      "lighting": [
+        "low_key",
+        "cool_shadows",
+        "restrained_red",
+        "restrained_amber"
+      ],
+      "palette": [
+        "charcoal",
+        "steel",
+        "desaturated_blue",
+        "warning_red",
+        "amber"
+      ],
+      "texture": [
+        "crt_phosphor",
+        "brushed_metal",
+        "paper_logbook",
+        "low_light_grain"
+      ]
+    },
+    "hard_forbidden": [
+      "smartphone",
+      "rgb_gaming_lights",
+      "neon_nightclub",
+      "bright_modern_ui",
+      "watermark",
+      "baked_captions",
+      "third_party_logo",
+      "unrelated_industrial_machinery"
+    ],
+    "allowed_source_tiers": [
+      "stock_auto",
+      "archive_manual",
+      "government_manual",
+      "cc_manual",
+      "original"
+    ],
+    "transition_policy": {
+      "allow_bridge_shots": true,
+      "max_hard_conflicts": 0,
+      "required_adjacency_review": true
+    },
+    "enforcement": {
+      "manifest": "advisory",
+      "draft-preview": "block",
+      "preview": "block",
+      "final": "block"
+    },
+    "search_terms": [
+      "1983 Cold War bunker",
+      "analog early warning command room",
+      "night low-key CRT control panel",
+      "charcoal steel desaturated blue warning red",
+      "period-compatible documentary reconstruction"
+    ]
+  },
+  "continuity_gate": {
+    "status": "REVIEW_REQUIRED",
+    "profile_id": "episode-005-cold-war-bunker-continuity-v1",
+    "reason": "The existing manifest is technically rights-gated but several assigned shots still need period/palette/adjacency re-shortlisting.",
+    "strict_preview_block": true,
+    "hard_conflict_shots": [
+      "S03",
+      "S06",
+      "S09",
+      "S12"
+    ],
+    "review_shots": [
+      "S01",
+      "S02",
+      "S04",
+      "S05",
+      "S07",
+      "S08",
+      "S10",
+      "S11",
+      "S13",
+      "S14",
+      "S15",
+      "S16"
+    ],
+    "no_media_promoted": true,
+    "no_render_executed": true
+  }
 }
