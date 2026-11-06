@@ -1,0 +1,120 @@
+name: Because Of This V2.1 Episode 005 Preview
+
+# Isolated preview renderer. It never enables production, writes Drive,
+# mutates the global visual catalog or publishes.
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: "GitHub Actions run containing the frozen Edge TTS artifact"
+        required: true
+        default: "41961294784"
+        type: string
+      source_artifact_name:
+        description: "Frozen Edge TTS artifact name"
+        required: true
+        default: "episode005-edge-tts-preview"
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  render-v21-preview:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout requested revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Verify media tools
+        run: |
+          python --version
+          ffmpeg -version | head -n 1
+          ffprobe -version | head -n 1
+
+      - name: Download frozen Edge TTS artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.source_artifact_name }}
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.source_run_id }}
+          path: artifacts/episode005-frozen
+
+      - name: Verify frozen narration identity
+        run: |
+          python - <<'PY'
+          import hashlib
+          import wave
+          from pathlib import Path
+          audio = Path("artifacts/episode005-frozen/narration.wav")
+          expected = "bfa297c85e6de0c1a9dee5fbc74a8f7e75a6cd287bd47ecf6d97f16dd045831a"
+          assert audio.is_file(), audio
+          actual = hashlib.sha256(audio.read_bytes()).hexdigest()
+          assert actual == expected, {"expected": expected, "actual": actual}
+          with wave.open(str(audio), "rb") as stream:
+              duration = stream.getnframes() / stream.getframerate()
+              assert stream.getnchannels() == 1
+              assert stream.getsampwidth() == 2
+              assert stream.getframerate() == 24000
+              assert 60 <= duration <= 80, duration
+          assert Path("artifacts/episode005-frozen/narration.ass").is_file()
+          print({"audio_sha256": actual, "duration_seconds": round(duration, 3)})
+          PY
+
+      - name: Download and hash approved preview visuals
+        run: |
+          PYTHONPATH=. python production/fetch_v21_visuals.py \
+            --manifest episodes/episode-005/visual/scene-asset-manifest.json \
+            --output-root artifacts/episode005-visuals
+
+      - name: Render isolated V2.1 preview
+        run: |
+          mkdir -p artifacts/episode005-v21-preview
+          PYTHONPATH=. python production/render_v21_preview.py \
+            --scene-manifest episodes/episode-005/visual/scene-asset-manifest.json \
+            --story-architecture episodes/episode-005/story-architecture.json \
+            --asset-root artifacts/episode005-visuals \
+            --audio artifacts/episode005-frozen/narration.wav \
+            --captions artifacts/episode005-frozen/narration.ass \
+            --output artifacts/episode005-v21-preview/episode005-v21-preview.mp4 \
+            --report artifacts/episode005-v21-preview/preview-report.json
+
+      - name: Validate preview report and media
+        run: |
+          python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+          root = Path("artifacts/episode005-v21-preview")
+          report = json.loads((root / "preview-report.json").read_text(encoding="utf-8"))
+          assert report["status"] == "V21_PREVIEW_RENDER_PASS", report
+          assert report["production_enablement"] is False
+          output = root / "episode005-v21-preview.mp4"
+          probe = subprocess.run(
+              ["ffprobe", "-v", "error", "-show_entries", "stream=codec_type,width,height,r_frame_rate:format=duration", "-of", "json", str(output)],
+              check=True, capture_output=True, text=True,
+          )
+          data = json.loads(probe.stdout)
+          video = next(item for item in data["streams"] if item["codec_type"] == "video")
+          audio = next(item for item in data["streams"] if item["codec_type"] == "audio")
+          assert (int(video["width"]), int(video["height"])) == (1080, 1920)
+          assert video["r_frame_rate"] == "60/1"
+          assert audio["codec_type"] == "audio"
+          print({"status": report["status"], "duration": data["format"]["duration"], "output": str(output)})
+          PY
+
+      - name: Upload isolated V2.1 preview artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: episode005-v21-preview
+          path: |
+            artifacts/episode005-v21-preview
+            artifacts/episode005-visuals/download-report.json
+          if-no-files-found: error
