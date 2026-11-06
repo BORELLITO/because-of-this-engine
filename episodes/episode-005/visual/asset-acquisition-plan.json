@@ -3631,8 +3631,8 @@
     "active_candidate_count": 42
   },
   "last_contract_validation": {
-    "validated_at_utc": "2026-11-05T18:05:19.534Z",
-    "status": "PENDING_CI_REVALIDATION",
+    "validated_at_utc": "2026-11-06T04:54:04Z",
+    "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
     "candidate_count": 43,
     "approved_manifest_candidate_count": 22,
     "manifest_asset_count": 16,
@@ -3642,10 +3642,13 @@
     "render_allowed": false,
     "global_catalog_updated": false,
     "validator": "production/visual_plan_contract.py",
-    "checkout_commit": "d371da0ad7c72576bcd3e9f664baa6b03f89a5e4",
+    "checkout_commit": "acdf8f9a7c302ffb5edacae4521f0b0b59704a3a",
     "revalidation_required": true,
     "continuity_gate": "REVIEW_REQUIRED",
-    "continuity_research_batch": "search-v3-episode005-priority-20261106"
+    "continuity_research_batch": "search-v3-episode005-priority-20261106",
+    "ci_workflow_run_id": 42164890828,
+    "ci_job_id": 127718940214,
+    "ci_conclusion": "success"
   },
   "last_adjustment": "Search-v3 priority shortlist added without download or promotion. Candidate-level continuity tags now preserve why each option was selected, held for review or rejected.",
   "next_gate": "Expose the manual V2.1 render workflow on the approved base revision, then run preview preflight. Do not merge, enable production, render media, write Drive or publish automatically.",
