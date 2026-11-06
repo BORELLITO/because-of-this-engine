@@ -111,6 +111,7 @@ def build_scene_plan(scene_manifest: dict[str, Any], story: dict[str, Any]) -> l
             "candidate_id": candidate_id,
             "duration": end - start,
             "role": str(shot.get("role", "")),
+            "scene": shot,
             "asset": asset,
         })
     if len(plan) != 16 or len({item["candidate_id"] for item in plan}) != 16:
