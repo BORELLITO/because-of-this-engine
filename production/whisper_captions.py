@@ -291,7 +291,7 @@ def generate(
     overlap_count = _normalize_sidecar_word_timeline(sidecar_chunks, audio_seconds)
     events = _events_from_chunks(sidecar_chunks, audio_seconds)
     active_word_color = str(caption_config.get("active_word_color", "#FF7777"))
-    _write_ass(caption_path, events, sidecar_chunks, active_word_color, margin_v=int(captions.get("margin_v", 520)))
+    _write_ass(caption_path, events, sidecar_chunks, active_word_color, margin_v=int(caption_config.get("margin_v", 520)))
     sidecar_path.parent.mkdir(parents=True, exist_ok=True)
     sidecar_path.write_text(json.dumps({
         "status": "WHISPER_FORCED_ALIGNMENT_PASS",
