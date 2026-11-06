@@ -24,9 +24,9 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install Vosk alignment dependency
+      - name: Install Whisper alignment dependency
         run: |
-          python -m pip install --disable-pip-version-check --no-cache-dir vosk==0.3.45
+          python -m pip install --disable-pip-version-check --no-cache-dir faster-whisper==1.1.1
 
       - name: Install bounded static FFmpeg
         run: |
@@ -150,13 +150,6 @@ jobs:
           }, ensure_ascii=False))
           PY
 
-      - name: Download stronger English Vosk model
-        run: |
-          set -euo pipefail
-          mkdir -p "${RUNNER_TEMP}/vosk"
-          curl --fail --location --retry 2 --connect-timeout 20 --max-time 180             "https://alphacephei.com/vosk/models/vosk-model-en-us-0.22-lgraph.zip"             --output "${RUNNER_TEMP}/vosk/model.zip"
-          unzip -q "${RUNNER_TEMP}/vosk/model.zip" -d "${RUNNER_TEMP}/vosk"
-
       - name: Build forced-caption manifest
         run: |
           python - <<'PY'
@@ -178,12 +171,143 @@ jobs:
           )
           PY
 
-      - name: Generate forced captions from final Gemini WAV
+      - name: Generate Whisper word-timestamp captions
         run: |
           set -euo pipefail
-          PYTHONPATH=. python production/align_captions.py             --manifest artifacts/episode005-gemini/caption-manifest.json             --model-dir "${RUNNER_TEMP}/vosk/vosk-model-en-us-0.22-lgraph"
+          python - <<'PY'
+          import difflib
+          import json
+          import re
+          import wave
+          from pathlib import Path
+          from faster_whisper import WhisperModel
+          from production.canonical_config import caption_ass_style_line
+          from production.generate_phrase_captions import ass_time, phrase_chunks
 
-      - name: Validate forced captions
+          root = Path("artifacts/episode005-gemini")
+          audio = root / "narration.wav"
+          script = Path("episodes/episode-005/narration/en-US-charon-v1.txt").read_text(encoding="utf-8").strip()
+          chunks = phrase_chunks(script, max_line_chars=42)
+          with wave.open(str(audio), "rb") as stream:
+              duration = stream.getnframes() / stream.getframerate()
+
+          model = WhisperModel("small.en", device="cpu", compute_type="int8", cpu_threads=4)
+          segments, _info = model.transcribe(
+              str(audio),
+              language="en",
+              beam_size=5,
+              word_timestamps=True,
+              vad_filter=False,
+              condition_on_previous_text=True,
+              initial_prompt=script,
+          )
+          words = []
+          for segment in segments:
+              for item in (segment.words or []):
+                  if item.word and item.start is not None and item.end is not None:
+                      words.append({
+                          "word": item.word.strip(),
+                          "start": float(item.start),
+                          "end": float(item.end),
+                      })
+          if len(words) < 100:
+              raise SystemExit(f"Whisper returned too few word timestamps: {len(words)}")
+
+          def norm(value):
+              return re.sub(r"[^a-z0-9]", "", value.lower())
+
+          def tokens(value):
+              return [norm(x) for x in re.findall(r"[A-Za-z0-9]+(?:['’][A-Za-z0-9]+)?", value) if norm(x)]
+
+          def best_window(canonical, cursor):
+              best = None
+              min_len = max(1, len(canonical) - 5)
+              max_len = min(len(words) - cursor, len(canonical) + 8)
+              for begin in range(cursor, min(len(words), cursor + 8)):
+                  for length in range(min_len, max_len + 1):
+                      end = begin + length
+                      if end > len(words):
+                          break
+                      candidate = [norm(item["word"]) for item in words[begin:end]]
+                      score = difflib.SequenceMatcher(None, canonical, candidate).ratio()
+                      if candidate and canonical and candidate[0] == canonical[0]:
+                          score += 0.08
+                      if candidate and canonical and candidate[-1] == canonical[-1]:
+                          score += 0.08
+                      if best is None or score > best[0]:
+                          best = (score, begin, end, candidate)
+              return best
+
+          events = []
+          cursor = 0
+          for index, chunk in enumerate(chunks):
+              canonical = tokens(chunk)
+              match = best_window(canonical, cursor)
+              if match is None or match[0] < 0.42:
+                  raise SystemExit(f"Whisper could not safely map caption phrase {index + 1}: {chunk!r}")
+              score, begin, end, candidate = match
+              start = words[begin]["start"]
+              finish = words[end - 1]["end"]
+              if index == 0:
+                  start = 0.0
+              if index == len(chunks) - 1:
+                  finish = duration
+              events.append({
+                  "text": chunk,
+                  "start": round(max(0.0, start), 3),
+                  "end": round(min(duration, finish), 3),
+                  "match_score": round(score, 3),
+                  "asr_words": words[begin:end],
+              })
+              cursor = end
+
+          previous_end = 0.0
+          for event in events:
+              if event["start"] < previous_end:
+                  event["start"] = previous_end
+              if event["end"] <= event["start"]:
+                  raise SystemExit("Whisper caption event collapsed to zero duration")
+              previous_end = event["end"]
+
+          style = caption_ass_style_line()
+          ass_lines = [
+              "[Script Info]",
+              "ScriptType: v4.00+",
+              "PlayResX: 1080",
+              "PlayResY: 1920",
+              "ScaledBorderAndShadow: yes",
+              "",
+              "[V4+ Styles]",
+              "Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,StrikeOut,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding",
+              style,
+              "",
+              "[Events]",
+              "Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text",
+          ]
+          for event in events:
+              ass_lines.append(
+                  f"Dialogue: 0,{ass_time(event['start'])},{ass_time(event['end'])},Default,,0,0,0,,{event['text']}"
+              )
+          (root / "narration.ass").write_text("\n".join(ass_lines) + "\n", encoding="utf-8")
+          (root / "narration.alignment.json").write_text(json.dumps({
+              "status": "WHISPER_WORD_TIMESTAMP_PHRASE_ALIGNMENT_PASS",
+              "provider": "faster-whisper",
+              "model": "small.en",
+              "audio_duration_seconds": round(duration, 3),
+              "word_count": len(words),
+              "phrase_count": len(events),
+              "timeline_monotonic": True,
+              "events": events,
+          }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          print(json.dumps({
+              "status": "WHISPER_WORD_TIMESTAMP_PHRASE_ALIGNMENT_PASS",
+              "word_count": len(words),
+              "phrase_count": len(events),
+              "duration_seconds": round(duration, 3)
+          }, ensure_ascii=False))
+          PY
+
+      - name: Validate Whisper captions
         run: |
           python - <<'PY'
           import json
@@ -193,13 +317,14 @@ jobs:
           sidecar = root / "narration.alignment.json"
           assert ass.is_file() and ass.stat().st_size > 0
           data = json.loads(sidecar.read_text(encoding="utf-8"))
-          assert data["status"] == "FORCED_ALIGNMENT_PASS", data
+          assert data["status"] == "WHISPER_WORD_TIMESTAMP_PHRASE_ALIGNMENT_PASS", data
           assert data["word_count"] > 100, data
-          assert data["word_timing_normalization"]["timeline_monotonic"] is True
+          assert data["timeline_monotonic"] is True, data
           print({
               "status": data["status"],
-              "timing_mode": data["timing_mode"],
+              "model": data["model"],
               "word_count": data["word_count"],
+              "phrase_count": data["phrase_count"],
               "caption_file": str(ass)
           })
           PY
