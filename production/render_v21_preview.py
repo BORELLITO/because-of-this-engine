@@ -26,9 +26,9 @@ WIDTH = 1080
 HEIGHT = 1920
 MAX_SOURCE_LOOPS = 8
 CREATIVE_PROFILE = "cinematic_dread_v73"
-APPROVED_VOICE_PROVIDER = "creativeclaw_google_gemini"
-APPROVED_VOICE_ID = "charon"
-APPROVED_VOICE_MODEL = "speech/gemini-3.8-flash-tts"
+APPROVED_VOICE_PROVIDER = "gemini_tts"
+APPROVED_VOICE_NAME = "Charon"
+APPROVED_VOICE_MODEL = "gemini-3.8-flash-tts"
 
 
 class PreviewRenderError(RuntimeError):
@@ -228,9 +228,9 @@ def render_preview(
         raise PreviewRenderError("Canonical Because Of This logo is required.")
     voice_profile = validate_voice_profile(voice_profile_path, audio_path)
     audio_seconds = media_duration(audio_path)
-    if not 60.0 <= audio_seconds <= 75.0:
+    if not 60.0 <= audio_seconds <= 80.0:
         raise PreviewRenderError(
-            f"Creative narration duration must be between 60 and 75 seconds; got {audio_seconds:.3f}."
+            f"Creative narration duration must be between 60 and 80 seconds; got {audio_seconds:.3f}."
         )
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="because-of-this-v21-preview-") as raw:
