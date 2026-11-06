@@ -1,23 +1,23 @@
-Just after midnight on September 26, 1983, a Soviet early-warning system reported five American nuclear missiles in the air.
+Just after midnight on September 26, 1983, a Soviet warning system reported five American nuclear missiles.
 
-Inside a secret bunker outside Moscow, Lieutenant Colonel Stanislav Petrov had minutes to decide what happened next.
+Inside a bunker outside Moscow, Lieutenant Colonel Stanislav Petrov had minutes to decide what happened next.
 
-His job was to evaluate the alert and pass it up the chain. If he reported a real attack, the warning could move the Soviet command toward retaliation.
+His job was to assess the alert and pass it up the chain. If he called it real, Soviet command could move toward retaliation.
 
-Then the system reported another launch. Then another. Five in total.
+Then came another launch. Then another. Five in total.
 
-But Petrov noticed what the machine could not: the attack made no sense. A first strike would not begin with only five missiles—and ground radar did not confirm it.
+But Petrov saw what the machine could not: it made no sense. A first strike would not begin with only five missiles. Ground radar showed nothing.
 
-He reported the alert as false.
+He reported it false.
 
 The bunker waited.
 
 No missiles arrived.
 
-The explanation was almost absurd: sunlight reflecting off high clouds had been misread by a satellite.
+The cause was almost absurd: sunlight reflecting off high clouds had fooled a satellite.
 
 Petrov was not celebrated. The failure embarrassed the system, and he was reprimanded over a logging error.
 
-History later called him the man who saved the world. The more accurate version is quieter:
+History later called him the man who saved the world. The truer version is quieter:
 
-He refused to turn uncertainty into a catastrophe.
+He refused to turn uncertainty into catastrophe.
