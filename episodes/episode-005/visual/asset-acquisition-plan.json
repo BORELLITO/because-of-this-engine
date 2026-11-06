@@ -1,7 +1,7 @@
 {
   "plan_id": "episode-005-visual-asset-acquisition-v1",
   "episode_id": "episode-005",
-  "status": "FINGERPRINT_PASS_MANIFEST_ASSIGNMENTS_APPROVED",
+  "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
   "purpose": "Pre-download candidate pool for Episode 005. No candidate is approved for render until downloaded, SHA-256ed, visually inspected, checked for embedded text/logos/letterbox, fingerprinted, and entered into the final video manifest.",
   "frozen_audio_source": {
     "workflow_run_id": 41961294784,
@@ -4226,7 +4226,7 @@
       }
     }
   ],
-  "next_action": "Create the separate manifest PR for the approved S04/S12 replacements, then rerun visual-plan contract and continuity. Do not render or promote.",
+  "next_action": "Review and harmonize the S06/S11 era metadata with their symbolic, period-compatible editorial treatment; rerun visual-plan contract and continuity. Do not render or promote.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -5206,10 +5206,10 @@
     }
   },
   "last_contract_validation": {
-    "validated_at_utc": "2026-11-06T06:41:53Z",
+    "validated_at_utc": "2026-11-06T07:58:19Z",
     "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
-    "candidate_count": 51,
-    "approved_manifest_candidate_count": 25,
+    "candidate_count": 54,
+    "approved_manifest_candidate_count": 27,
     "manifest_asset_count": 16,
     "assigned_shot_count": 16,
     "unresolved_shot_count": 0,
@@ -5217,41 +5217,32 @@
     "render_allowed": false,
     "global_catalog_updated": false,
     "validator": "production/visual_plan_contract.py",
-    "checkout_commit": "6e845edf59a3d15695fb86017a4274353a5711a5",
+    "checkout_commit": "ef4740ccf3d20139b58c3ac1593d7e8ad3ae3bd1",
     "revalidation_required": false,
     "continuity_gate": "REVIEW_REQUIRED",
-    "continuity_research_batch": "search-v5-episode005-period-recovery-20261106",
-    "ci_workflow_run_id": 42176059809,
-    "ci_job_id": 127754674433,
+    "continuity_research_batch": "search-v6-episode005-s04-s12-recovery-20261106",
+    "ci_workflow_run_id": 42184048064,
+    "ci_job_id": 127780055727,
     "ci_conclusion": "success",
     "intake_workflow_run_id": 42174399543,
     "fingerprint_workflow_run_id": 42175277282,
     "manifest_replacement_shots": [
-      "S03",
-      "S09"
-    ],
-    "pending_continuity_shots": [
       "S04",
       "S12"
     ],
-    "continuity_hard_conflict_shots": [
-      "S04",
-      "S12"
-    ],
+    "pending_continuity_shots": [],
+    "continuity_hard_conflict_shots": [],
     "continuity_review_shots": [
       "S06",
       "S11"
     ],
-    "adjacency_review_pairs": [
-      "S11->S12",
-      "S12->S13"
-    ],
-    "continuity_hard_conflict_count": 13,
-    "continuity_coverage_score": 0.9187,
-    "note": "CI run 42176059809 validated the updated S03/S09 manifest replacements. Both new shots pass continuity; S04/S12 remain hard conflicts and S11->S12/S12->S13 remain blocked adjacency transitions. Render/preview remain blocked."
+    "adjacency_review_pairs": [],
+    "continuity_hard_conflict_count": 0,
+    "continuity_coverage_score": 0.9775,
+    "note": "Post-search-v6 manifest CI confirms the S04/S12 replacements remove all hard conflicts and adjacency blocks. Only S06/S11 remain as metadata/editorial review items; strict preview/render remain blocked."
   },
-  "last_adjustment": "Search-v6 fingerprint run 42183105946 passed for the dark vintage radio and NASA GEOS-5 no-labels visual. Both have no global source, SHA-256 or perceptual collisions; telephone remains rejected for visible Alcatel branding. The user-approved S04/S12 manifest substitutions are now recorded, pending the separate manifest PR and continuity revalidation.",
-  "next_gate": "Create and merge the separate manifest PR assigning pixabay-radio-vintage-old-171435 to S04 and nasa-svs-geos5-clouds-no-labels-4819 to S12; run visual-plan contract and continuity. Keep render, preview, global catalog, Drive and publication blocked.",
+  "last_adjustment": "Canonical CI run 42184048064 passed the visual-plan contract on manifest commit ef4740ccf3d20139b58c3ac1593d7e8ad3ae3bd1: 54 candidates, 27 approved manifest candidates, 16 assets, 16 assignments, zero unresolved shots, zero hard continuity conflicts, coverage 0.9775. S06 and S11 remain metadata/editorial review items, so strict preview/render stays blocked.",
+  "next_gate": "Resolve the S06/S11 continuity metadata review (or record an explicit manifest-only acceptance), then rerun continuity before any preview or render. Keep promotion, global catalog, Drive and publication blocked.",
   "render_approval_record": {
     "status": "APPROVED",
     "approved_at_utc": "2026-11-05T22:56:14Z",
@@ -5706,7 +5697,7 @@
     {
       "batch_id": "search-v6-episode005-s04-s12-recovery-20261106",
       "created_at_utc": "2026-11-06T07:04:29.401Z",
-      "status": "FINGERPRINT_PASS_MANIFEST_ASSIGNMENTS_APPROVED",
+      "status": "CONTRACT_PASS_CONTINUITY_REVIEW_REQUIRED",
       "mode": "SHORTLIST_PLUS_ISOLATED_INTAKE_NO_PROMOTION",
       "target_shots": [
         "S04",
@@ -5753,7 +5744,7 @@
           "nasa_4819": "VISUAL_QA_PASS_PENDING_FINGERPRINT: clean no-labels modeled Earth/cloud cover; no watermark; NASA credit metadata required."
         }
       },
-      "next_action": "Create the separate manifest PR assigning radio to S04 and NASA 4819 to S12, then run visual-plan contract and continuity. Keep promotion, render, preview, global catalog, Drive and publication gates closed.",
+      "next_action": "Harmonize S06/S11 era metadata or explicitly accept their symbolic period-compatible treatment, then rerun visual-plan contract and continuity. Keep promotion, render, preview, global catalog, Drive and publication closed.",
       "intake_workflow_run_id": 42178800543,
       "intake_job_id": 127763342737,
       "intake_artifact_id": 13484277704,
@@ -5787,7 +5778,22 @@
         "source": false,
         "sha256": false,
         "perceptual": false
-      }
+      },
+      "contract_workflow_run_id": 42184048064,
+      "contract_job_id": 127780055727,
+      "contract_checkout_commit": "ef4740ccf3d20139b58c3ac1593d7e8ad3ae3bd1",
+      "contract_conclusion": "success",
+      "continuity_gate": "REVIEW_REQUIRED",
+      "continuity_hard_conflict_shots": [],
+      "continuity_review_shots": [
+        "S06",
+        "S11"
+      ],
+      "adjacency_review_pairs": [],
+      "continuity_hard_conflict_count": 0,
+      "continuity_coverage_score": 0.9775,
+      "pending_continuity_shots": [],
+      "strict_preview_block": true
     }
   ],
   "last_intake_attempt": {
@@ -5833,31 +5839,22 @@
   },
   "continuity_gate": {
     "status": "REVIEW_REQUIRED",
-    "reason": "Fingerprint-clean S04/S12 replacements are approved for manifest; the manifest still requires a separate update and continuity CI before any render decision.",
+    "reason": "Post-search-v6 canonical CI confirms S04/S12 substitutions remove all hard conflicts and adjacency blocks; S06/S11 still lack an explicit period-compatible era tag in candidate metadata.",
     "strict_preview_block": true,
-    "hard_conflict_shots": [
-      "S04",
-      "S12"
-    ],
+    "hard_conflict_shots": [],
     "review_shots": [
       "S06",
       "S11"
     ],
-    "bridge_required_pairs": [
-      "S11->S12",
-      "S12->S13"
-    ],
+    "bridge_required_pairs": [],
     "no_media_promoted": true,
     "no_render_executed": true,
-    "ci_workflow_run_id": 42176059809,
-    "ci_job_id": 127754674433,
+    "ci_workflow_run_id": 42184048064,
+    "ci_job_id": 127780055727,
     "ci_conclusion": "success",
-    "coverage_score": 0.9187,
-    "hard_conflict_count": 13,
+    "coverage_score": 0.9775,
+    "hard_conflict_count": 0,
     "revalidation_required": false,
-    "pending_revalidation_shots": [
-      "S04",
-      "S12"
-    ]
+    "pending_revalidation_shots": []
   }
 }
