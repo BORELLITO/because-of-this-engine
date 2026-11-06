@@ -120,112 +120,569 @@
       "range": "00:00-00:04",
       "role": "hook",
       "visual": "Dark bunker panel; red warning indicator comes alive.",
-      "truth_class": "MAP_OR_DIAGRAM"
+      "truth_class": "MAP_OR_DIAGRAM",
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_red"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red"
+        ],
+        "texture": [
+          "crt_phosphor",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S02",
       "range": "00:04-00:09",
       "role": "context",
       "visual": "Night-side Earth and early-warning satellite.",
-      "truth_class": "MAP_OR_DIAGRAM"
+      "truth_class": "MAP_OR_DIAGRAM",
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "early_warning_command",
+          "external_sensor"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "steel",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "brushed_metal",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S03",
       "range": "00:09-00:14",
       "role": "human_anchor",
       "visual": "Representational command-bunker portrait/composition of Petrov; no false archival claim.",
-      "truth_class": "REPRESENTATIONAL"
+      "truth_class": "REPRESENTATIONAL",
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "early_warning_command",
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "steel",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "crt_phosphor",
+          "brushed_metal",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S04",
       "range": "00:14-00:18",
       "role": "escalation",
       "visual": "Alert moves through a command-chain diagram.",
-      "truth_class": "MAP_OR_DIAGRAM"
+      "truth_class": "MAP_OR_DIAGRAM",
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "technical_control_room",
+          "early_warning_command"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "steel",
+          "warning_red"
+        ],
+        "texture": [
+          "crt_phosphor",
+          "brushed_metal",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S05",
       "range": "00:18-00:23",
       "role": "escalation",
       "visual": "One launch indicator becomes two, then three.",
-      "truth_class": "MAP_OR_DIAGRAM"
+      "truth_class": "MAP_OR_DIAGRAM",
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "early_warning_command",
+          "radar_monitor"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key"
+        ],
+        "palette": [
+          "charcoal",
+          "desaturated_blue",
+          "warning_amber"
+        ],
+        "texture": [
+          "crt_phosphor",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S06",
       "range": "00:23-00:27",
       "role": "escalation",
       "visual": "Counter reaches five; alarm intensity rises.",
-      "truth_class": "MAP_OR_DIAGRAM"
+      "truth_class": "MAP_OR_DIAGRAM",
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_red"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red",
+          "amber"
+        ],
+        "texture": [
+          "crt_phosphor",
+          "metal",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S07",
       "range": "00:27-00:32",
       "role": "decision_pressure",
       "visual": "Petrov studies the panel, telephone and clock.",
-      "truth_class": "REPRESENTATIONAL"
+      "truth_class": "REPRESENTATIONAL",
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "steel"
+        ],
+        "texture": [
+          "brushed_metal",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S08",
       "range": "00:32-00:37",
       "role": "contradiction",
       "visual": "Ground radar remains empty while satellite alert flashes.",
-      "truth_class": "MAP_OR_DIAGRAM"
+      "truth_class": "MAP_OR_DIAGRAM",
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "early_warning_command",
+          "radar_monitor"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "desaturated_blue",
+          "warning_amber"
+        ],
+        "texture": [
+          "crt_phosphor",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S09",
       "range": "00:37-00:41",
       "role": "irreversible_choice",
       "visual": "False-alarm classification is entered; no celebratory interface.",
-      "truth_class": "MAP_OR_DIAGRAM"
+      "truth_class": "MAP_OR_DIAGRAM",
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_red"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red"
+        ],
+        "texture": [
+          "crt_phosphor",
+          "metal",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S10",
       "range": "00:41-00:46",
       "role": "suspense",
       "visual": "Bunker waits; clock advances through silence.",
-      "truth_class": "REPRESENTATIONAL"
+      "truth_class": "REPRESENTATIONAL",
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "steel"
+        ],
+        "texture": [
+          "brushed_metal",
+          "mechanical",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S11",
       "range": "00:46-00:51",
       "role": "non_event",
       "visual": "Empty night sky; expected impact never occurs.",
-      "truth_class": "REPRESENTATIONAL"
+      "truth_class": "REPRESENTATIONAL",
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "night_sky",
+          "external_sensor"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "low_light_grain",
+          "atmospheric"
+        ]
+      }
     },
     {
       "shot_id": "S12",
       "range": "00:51-00:56",
       "role": "mechanism",
       "visual": "Sunlight geometry over high clouds and satellite sensor.",
-      "truth_class": "MAP_OR_DIAGRAM"
+      "truth_class": "MAP_OR_DIAGRAM",
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "external_sensor",
+          "early_warning_command"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "steel",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "brushed_metal",
+          "low_light_grain"
+        ]
+      },
+      "continuity_mode": "bridge"
     },
     {
       "shot_id": "S13",
       "range": "00:56-01:01",
       "role": "proof",
       "visual": "Declassified report/logbook treatment with readable evidence cues.",
-      "truth_class": "DOCUMENTARY_EVIDENCE"
+      "truth_class": "DOCUMENTARY_EVIDENCE",
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "documentary_evidence",
+          "institutional_desk"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_amber"
+        ],
+        "palette": [
+          "charcoal",
+          "amber",
+          "paper"
+        ],
+        "texture": [
+          "paper_logbook",
+          "typewriter",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S14",
       "range": "01:01-01:06",
       "role": "consequence",
       "visual": "Petrov's later obscurity represented through empty military corridor.",
-      "truth_class": "REPRESENTATIONAL"
+      "truth_class": "REPRESENTATIONAL",
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "institutional_corridor"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "steel",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "brushed_metal",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S15",
       "range": "01:06-01:12",
       "role": "reframe",
       "visual": "Red warning fades into neutral black; no victory imagery.",
-      "truth_class": "MAP_OR_DIAGRAM"
+      "truth_class": "MAP_OR_DIAGRAM",
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "transition",
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_red"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red"
+        ],
+        "texture": [
+          "abstract_light",
+          "low_light_grain"
+        ]
+      }
     },
     {
       "shot_id": "S16",
       "range": "01:12-01:18",
       "role": "payoff",
       "visual": "Final branded logo lockup with restrained red pulse.",
-      "truth_class": "BRAND_OUTRO"
+      "truth_class": "BRAND_OUTRO",
+      "continuity_tags": {
+        "era": [
+          "1983",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "brand_outro",
+          "transition"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_red",
+          "restrained_amber"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red",
+          "amber"
+        ],
+        "texture": [
+          "abstract_particle",
+          "low_light_grain"
+        ]
+      }
     }
   ],
   "thumbnail_concept": {
@@ -266,17 +723,144 @@
     "episode_004_assets_reusable": false,
     "one_extra_minute_assets_reusable": false,
     "no_clip_reuse_across_episodes": true,
-    "new_asset_fingerprints_required": true
+    "new_asset_fingerprints_required": true,
+    "sequence_continuity_profile": "episode-005-cold-war-bunker-continuity-v1",
+    "continuity_dimensions": [
+      "era",
+      "setting",
+      "time_of_day",
+      "lighting",
+      "palette",
+      "texture"
+    ],
+    "adjacency_review_required": true,
+    "hard_day_night_flip": "BLOCK",
+    "bridge_shot_required_for_intentional_world_change": true
   },
   "production_gates": {
     "story_fact_check": "READY_WITH_GUARDRAILS",
     "script_lock": "READY_FOR_TTS",
     "real_tts": "PASS_WITH_DURATION_EXCEPTION",
     "captions": "NATIVE_PROVIDER_TIMING_VALIDATED_GROUPED_BOUNDARIES",
-    "render": "BLOCKED_UNTIL_APPROVED_ASSETS_AND_THUMBNAIL",
+    "render": "BLOCKED_UNTIL_APPROVED_ASSETS_AND_CONTINUITY_PASS",
     "thumbnail_final": "APPROVED_MASTER_PENDING_RENDER",
     "drive_write": "NOT_AUTHORIZED",
     "publication": "MANUAL_ONLY",
-    "creative_claw": "DISALLOWED"
+    "creative_claw": "DISALLOWED",
+    "visual_continuity_manifest": "REVIEW_REQUIRED",
+    "visual_continuity_preview": "BLOCKED_UNTIL_PASS",
+    "visual_source_lanes": "AUTOMATED_STOCK_PLUS_MANUAL_ARCHIVE_GOVERNMENT"
+  },
+  "visual_continuity_profile": {
+    "schema_version": "1.0",
+    "profile_id": "episode-005-cold-war-bunker-continuity-v1",
+    "world": {
+      "era": [
+        "1983",
+        "cold_war",
+        "analog",
+        "period_compatible"
+      ],
+      "setting": [
+        "early_warning_command",
+        "technical_control_room",
+        "institutional_corridor"
+      ],
+      "time_of_day": [
+        "night",
+        "indeterminate_low_light"
+      ],
+      "lighting": [
+        "low_key",
+        "cool_shadows",
+        "restrained_red",
+        "restrained_amber"
+      ],
+      "palette": [
+        "charcoal",
+        "steel",
+        "desaturated_blue",
+        "warning_red",
+        "amber"
+      ],
+      "texture": [
+        "crt_phosphor",
+        "brushed_metal",
+        "paper_logbook",
+        "low_light_grain"
+      ]
+    },
+    "hard_constraints": {
+      "era": [
+        "1983",
+        "cold_war",
+        "analog",
+        "period_compatible"
+      ],
+      "setting": [
+        "early_warning_command",
+        "technical_control_room",
+        "institutional_corridor",
+        "documentary_evidence"
+      ],
+      "time_of_day": [
+        "night",
+        "indeterminate_low_light"
+      ],
+      "lighting": [
+        "low_key",
+        "cool_shadows",
+        "restrained_red",
+        "restrained_amber"
+      ],
+      "palette": [
+        "charcoal",
+        "steel",
+        "desaturated_blue",
+        "warning_red",
+        "amber"
+      ],
+      "texture": [
+        "crt_phosphor",
+        "brushed_metal",
+        "paper_logbook",
+        "low_light_grain"
+      ]
+    },
+    "hard_forbidden": [
+      "smartphone",
+      "rgb_gaming_lights",
+      "neon_nightclub",
+      "bright_modern_ui",
+      "watermark",
+      "baked_captions",
+      "third_party_logo",
+      "unrelated_industrial_machinery"
+    ],
+    "allowed_source_tiers": [
+      "stock_auto",
+      "archive_manual",
+      "government_manual",
+      "cc_manual",
+      "original"
+    ],
+    "transition_policy": {
+      "allow_bridge_shots": true,
+      "max_hard_conflicts": 0,
+      "required_adjacency_review": true
+    },
+    "enforcement": {
+      "manifest": "advisory",
+      "draft-preview": "block",
+      "preview": "block",
+      "final": "block"
+    },
+    "search_terms": [
+      "1983 Cold War bunker",
+      "analog early warning command room",
+      "night low-key CRT control panel",
+      "charcoal steel desaturated blue warning red",
+      "period-compatible documentary reconstruction"
+    ]
   }
 }
