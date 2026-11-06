@@ -33,9 +33,27 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install bounded static FFmpeg
+        run: |
+          set -euo pipefail
+          tools_dir="${RUNNER_TEMP}/ffmpeg-static"
+          archive="${tools_dir}/ffmpeg.tar.xz"
+          mkdir -p "${tools_dir}"
+          curl --fail --location --retry 2 --retry-delay 2 \
+            --connect-timeout 15 --max-time 120 \
+            "https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz" \
+            --output "${archive}"
+          tar -xJf "${archive}" -C "${tools_dir}"
+          ffmpeg_path="$(find "${tools_dir}" -type f -name ffmpeg -perm -111 | head -n 1)"
+          ffprobe_path="$(find "${tools_dir}" -type f -name ffprobe -perm -111 | head -n 1)"
+          test -n "${ffmpeg_path}" && test -n "${ffprobe_path}"
+          echo "$(dirname "${ffmpeg_path}")" >> "${GITHUB_PATH}"
+
       - name: Verify media tools
         run: |
           python --version
+          command -v ffmpeg
+          command -v ffprobe
           ffmpeg -version | head -n 1
           ffprobe -version | head -n 1
 
