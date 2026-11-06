@@ -3013,12 +3013,15 @@
         "checked_at_utc": "2026-11-06T00:00:00Z",
         "observed_license": "Free Download under the Mixkit Stock Video Free License",
         "observed_metadata": "1920x1080, 30 fps, 5 seconds; analog gauges, phone, drawers and levers",
-        "media_route": "https://assets.mixkit.co/videos/4460/4460-720.mp4",
+        "media_route": "https://assets.mixkit.co/videos/4460/4460-1080.mp4",
         "media_url_verification": {
-          "method": "HTTP HEAD probe",
-          "status": "PASS",
+          "method": "HTTP GET/HEAD probe plus failed intake dimension validation",
+          "status": "PASS_HD_ROUTE_SELECTED",
           "content_type": "video/mp4",
-          "content_length_bytes": 1770094
+          "content_length_bytes": 15767463,
+          "observed_dimensions": "1920x1080 (provider page: Full HD)",
+          "supersedes_route": "https://assets.mixkit.co/videos/4460/4460-720.mp4",
+          "superseded_route_reason": "720 route downloaded as 720x480 and failed intake minimum height >=720"
         }
       },
       "continuity_tags": {
@@ -3065,7 +3068,7 @@
         "source_distinctness": 1
       },
       "manual_rights_review": "Page-level Mixkit Free License observed; direct media route returned HTTP 200 video/mp4; inspect full download for marks, logos and crop safety.",
-      "media_url": "https://assets.mixkit.co/videos/4460/4460-720.mp4",
+      "media_url": "https://assets.mixkit.co/videos/4460/4460-1080.mp4",
       "media_url_observed_by_http_probe": true
     },
     {
@@ -4161,8 +4164,8 @@
     "continuity_coverage_score": 0.8812,
     "note": "CI revalidated the expanded shortlist. The four search-v4 candidates remain plan-only; active manifest assignments and the strict preview block are unchanged."
   },
-  "last_adjustment": "Direct media routes are now recorded and externally probed for the search-v4 shortlist. Intake remains manual-only; pexels-38958215 requires refresh_existing=true because it already has evidence.",
-  "next_gate": "Dispatch the four-ID isolated intake with refresh_existing=true for pexels-38958215, then run the fingerprint audit and human full-duration/9x16 QA. Do not assign candidates to the manifest or render before those gates.",
+  "last_adjustment": "The first isolated intake attempt (run 42170992534) failed closed because Mixkit 4460-720 downloaded as 720x480; the candidate now points to the verified Full HD 4460-1080 route and remains shortlist-only.",
+  "next_gate": "Rerun the four-ID isolated intake with refresh_existing=true using the corrected Mixkit Full HD route, then inspect contact sheets and run the fingerprint audit. Do not assign candidates to the manifest or render before those gates.",
   "render_approval_record": {
     "status": "APPROVED",
     "approved_at_utc": "2026-11-05T22:56:14Z",
