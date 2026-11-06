@@ -6,6 +6,10 @@ on:
       - tts-test-episode005-gemini-20261106
   workflow_dispatch:
 
+concurrency:
+  group: episode005-full-gemini-preview
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
@@ -26,7 +30,7 @@ jobs:
 
       - name: Install Whisper alignment dependency
         run: |
-          python -m pip install --disable-pip-version-check --no-cache-dir faster-whisper==1.1.1
+          python -m pip install --disable-pip-version-check --no-cache-dir faster-whisper==1.1.1 requests==2.32.3
 
       - name: Install bounded static FFmpeg
         run: |
@@ -149,6 +153,15 @@ jobs:
               "tempo_normalization_factor": record["tempo_normalization_factor"]
           }, ensure_ascii=False))
           PY
+
+      - name: Upload narration checkpoint
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: episode005-full-gemini-narration-checkpoint
+          path: artifacts/episode005-gemini
+          if-no-files-found: error
+          retention-days: 7
 
       - name: Build forced-caption manifest
         run: |
