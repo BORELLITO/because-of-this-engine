@@ -1,7 +1,7 @@
 {
   "plan_id": "episode-005-visual-asset-acquisition-v1",
   "episode_id": "episode-005",
-  "status": "SEARCH_V6_INTAKE_QA_COMPLETE_FINGERPRINT_PENDING",
+  "status": "FINGERPRINT_PASS_MANIFEST_ASSIGNMENTS_APPROVED",
   "purpose": "Pre-download candidate pool for Episode 005. No candidate is approved for render until downloaded, SHA-256ed, visually inspected, checked for embedded text/logos/letterbox, fingerprinted, and entered into the final video manifest.",
   "frozen_audio_source": {
     "workflow_run_id": 41961294784,
@@ -3947,7 +3947,7 @@
       "visual_intent": "Low-key vintage radio emerging from darkness as a symbolic signal-transfer insert for the command chain; never literal Petrov archival evidence.",
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "pixabay",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_FINGERPRINT",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "license_name": "Pixabay Content License",
       "source_tier": "stock_auto",
       "approved_for_render": false,
@@ -3995,7 +3995,7 @@
         "vintage_home_radio_context",
         "crop_must_hold_radio_against_black"
       ],
-      "selection_status": "INTAKE_VISUAL_QA_PASS_AWAITING_FINGERPRINT",
+      "selection_status": "APPROVED_FOR_MANIFEST",
       "score_breakdown": {
         "semantic_fit": 0.76,
         "continuity_coherence": 0.88,
@@ -4013,7 +4013,7 @@
         "artifact_name": "episode005-visual-intake-42178800543",
         "artifact_digest": "sha256:76d78df18adf6d1d120ff6925b72f0cbf425a472eeaee7f40024e111b657efd",
         "automated_promotion": false,
-        "status": "CANDIDATE_DOWNLOADED_AWAITING_FINGERPRINT",
+        "status": "CANDIDATE_DOWNLOADED_FINGERPRINT_PASS_AWAITING_MANIFEST_UPDATE",
         "sha256": "bb0ce78f185d844f69dd33e036f9b1dd9f4acd293e706745cdb1453057d9392f",
         "duration_seconds": 10.417,
         "dimensions": [
@@ -4022,7 +4022,17 @@
         ],
         "frame_rate": "24/1",
         "codec": "h264",
-        "fps": 24
+        "fps": 24,
+        "size_bytes": 2560968,
+        "perceptual_hash": "d07a912392686abb788e79313681ec38fcf66937d82c8d80075f2c00771f671e",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42183105946,
+        "fingerprint_job_id": 127777035277,
+        "fingerprint_artifact_id": 13486336703,
+        "fingerprint_artifact_digest": "sha256:bc652f9dd6a614ef40b22e1b685ac92dffdbf5086051c616e67cff9ab081f1bc",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
       },
       "qa": {
         "clean_frame_visual_review": "PASS_FULL_DURATION",
@@ -4030,17 +4040,48 @@
         "embedded_logo_or_letterbox": "NO_COMMERCIAL_LOGO_OR_WATERMARK_OBSERVED",
         "semantic_fit": "PASS_S04_SIGNAL_TRANSFER_SYMBOLIC_ONLY; NOT_LITERAL_PETROV_ARCHIVAL_EVIDENCE",
         "locked_9x16_crop": "PASS_RADIO_RETAINED; PHYSICAL_FREQUENCY_SCALE_VISIBLE_BUT_NOT_BRANDED",
-        "global_reuse_fingerprint": "PENDING",
-        "human_approval": "PENDING_FINGERPRINT",
+        "global_reuse_fingerprint": "PASS_NO_SOURCE_SHA256_OR_PERCEPTUAL_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "direct_media_visual_review": "PASS_DARK_VINTAGE_RADIO_ON_BLACK_LOW_KEY_AMBER",
-        "visual_qa_status": "HUMAN_REVIEW_PASS_AWAITING_FINGERPRINT",
+        "visual_qa_status": "HUMAN_APPROVED_FOR_MANIFEST",
         "visual_qa_evidence": "artifact 13484277704 / pixabay-radio-vintage-old-171435/qa-frames.jpg and qa-crop-9x16.jpg",
         "third_party_risk": "LOW_VISIBLE_RISK; PHYSICAL_FREQUENCY_MARKINGS_PRESENT; NO_IDENTIFIABLE_BRAND",
         "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES",
-        "continuity_decision": "S04_FALLBACK_CANDIDATE_PENDING_FINGERPRINT",
-        "editorial_caveat": "Use as a symbolic signal-transfer insert, not a literal 1983 command panel; keep crop away from any future brand discovery."
+        "continuity_decision": "APPROVED_S04_REPLACEMENT_AFTER_FINGERPRINT_PASS",
+        "editorial_caveat": "Use as a symbolic signal-transfer insert, not a literal 1983 command panel; keep crop away from any future brand discovery.",
+        "fingerprint_evidence": "artifact 13486336703 / fingerprint-audit.json"
+      },
+      "approved_shot_ids": [
+        "S04"
+      ],
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "manifest_assignment": {
+        "shot_id": "S04",
+        "approved_at_utc": "2026-11-06T07:50:43Z",
+        "scope": "APPROVED_FOR_MANIFEST_ONLY",
+        "supersedes": "mixkit-worker-industrial-lathe-2244",
+        "reason": "Substituir a assinatura industrial/moderna por um insert de rádio vintage em baixa luz, mantendo a cadeia de sinal simbólica e a continuidade analógica."
+      },
+      "fingerprint_audit": {
+        "workflow_run_id": 42183105946,
+        "job_id": 127777035277,
+        "artifact_id": 13486336703,
+        "artifact_name": "episode005-visual-fingerprint-audit",
+        "artifact_digest": "sha256:bc652f9dd6a614ef40b22e1b685ac92dffdbf5086051c616e67cff9ab081f1bc",
+        "status": "FINGERPRINT_AUDIT_PASS",
+        "algorithm": "video-fingerprint-v2-rgb24-q4",
+        "sha256": "bb0ce78f185d844f69dd33e036f9b1dd9f4acd293e706745cdb1453057d9392f",
+        "perceptual_hash": "d07a912392686abb788e79313681ec38fcf66937d82c8d80075f2c00771f671e",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false,
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "render_allowed": false,
+        "drive_written": false
       }
     },
     {
@@ -4051,7 +4092,7 @@
       "visual_intent": "NASA GEOS-5 no-labels modeled cloud-cover visualization as a clean atmospheric bridge after the empty night sky; explanatory, not literal 1983 sensor footage.",
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "nasa",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_FINGERPRINT",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "license_name": "NASA Media Guidelines (per asset)",
       "source_tier": "government_manual",
       "approved_for_render": false,
@@ -4095,7 +4136,7 @@
         "bright_cloud_highlights",
         "requires_credit_metadata"
       ],
-      "selection_status": "INTAKE_VISUAL_QA_PASS_AWAITING_FINGERPRINT",
+      "selection_status": "APPROVED_FOR_MANIFEST",
       "score_breakdown": {
         "semantic_fit": 0.87,
         "continuity_coherence": 0.74,
@@ -4113,7 +4154,7 @@
         "artifact_name": "episode005-visual-intake-42178800543",
         "artifact_digest": "sha256:76d78df18adf6d1d120ff6925b72f0cbf425a472eeaee7f40024e111b657efd",
         "automated_promotion": false,
-        "status": "CANDIDATE_DOWNLOADED_AWAITING_FINGERPRINT",
+        "status": "CANDIDATE_DOWNLOADED_FINGERPRINT_PASS_AWAITING_MANIFEST_UPDATE",
         "sha256": "306a8c1b97ddb3699a84f3d35f6a0c9c3cbc593f13f9a35aef13d72a55f323d0",
         "duration_seconds": 58.4,
         "dimensions": [
@@ -4122,7 +4163,17 @@
         ],
         "frame_rate": "30/1",
         "codec": "h264",
-        "fps": 30
+        "fps": 30,
+        "size_bytes": 118000795,
+        "perceptual_hash": "262977180310b6e5eeb3fb9544113dbabbcd8c79f45f11a878b4ef3efa37b397",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42183105946,
+        "fingerprint_job_id": 127777035277,
+        "fingerprint_artifact_id": 13486336703,
+        "fingerprint_artifact_digest": "sha256:bc652f9dd6a614ef40b22e1b685ac92dffdbf5086051c616e67cff9ab081f1bc",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
       },
       "qa": {
         "clean_frame_visual_review": "PASS_FULL_DURATION",
@@ -4130,21 +4181,52 @@
         "embedded_logo_or_letterbox": "NO_WATERMARK_OR_LETTERBOX_OBSERVED",
         "semantic_fit": "PASS_S12_ATMOSPHERIC_MECHANISM; MODELED_VISUAL_NOT_LITERAL_1983_SENSOR_FOOTAGE",
         "locked_9x16_crop": "PASS_EARTH_AND_CLOUD_BELT_RETAINED; DAY_SIDE_HIGHLIGHTS_ACCEPTABLE_WITH_LOW_CONTRAST_GRADE",
-        "global_reuse_fingerprint": "PENDING",
-        "human_approval": "PENDING_FINGERPRINT",
+        "global_reuse_fingerprint": "PASS_NO_SOURCE_SHA256_OR_PERCEPTUAL_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "direct_media_visual_review": "PASS_CLEAN_NO_LABELS_EARTH_CLOUD_VISUALIZATION",
-        "visual_qa_status": "HUMAN_REVIEW_PASS_AWAITING_FINGERPRINT",
+        "visual_qa_status": "HUMAN_APPROVED_FOR_MANIFEST",
         "visual_qa_evidence": "artifact 13484277704 / nasa-svs-geos5-clouds-no-labels-4819/qa-frames.jpg and qa-crop-9x16.jpg",
         "third_party_risk": "LOW_VISIBLE_RISK; NASA_CREDIT_METADATA_REQUIRED",
         "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES",
-        "continuity_decision": "S12_REPLACEMENT_CANDIDATE_PENDING_FINGERPRINT",
-        "editorial_caveat": "Use as explanatory atmospheric visualization; retain NASA SVS credit in production metadata."
+        "continuity_decision": "APPROVED_S12_REPLACEMENT_AFTER_FINGERPRINT_PASS",
+        "editorial_caveat": "Use as explanatory atmospheric visualization; retain NASA SVS credit in production metadata.",
+        "fingerprint_evidence": "artifact 13486336703 / fingerprint-audit.json"
+      },
+      "approved_shot_ids": [
+        "S12"
+      ],
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "manifest_assignment": {
+        "shot_id": "S12",
+        "approved_at_utc": "2026-11-06T07:50:43Z",
+        "scope": "APPROVED_FOR_MANIFEST_ONLY",
+        "supersedes": "pixabay-antenna-astronomy-communication-40041",
+        "reason": "Substituir a antena moderna/daylight por uma visualização NASA sem rótulos que explica a geometria atmosférica e cria uma ponte mais limpa entre o céu noturno e o mecanismo."
+      },
+      "fingerprint_audit": {
+        "workflow_run_id": 42183105946,
+        "job_id": 127777035277,
+        "artifact_id": 13486336703,
+        "artifact_name": "episode005-visual-fingerprint-audit",
+        "artifact_digest": "sha256:bc652f9dd6a614ef40b22e1b685ac92dffdbf5086051c616e67cff9ab081f1bc",
+        "status": "FINGERPRINT_AUDIT_PASS",
+        "algorithm": "video-fingerprint-v2-rgb24-q4",
+        "sha256": "306a8c1b97ddb3699a84f3d35f6a0c9c3cbc593f13f9a35aef13d72a55f323d0",
+        "perceptual_hash": "262977180310b6e5eeb3fb9544113dbabbcd8c79f45f11a878b4ef3efa37b397",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false,
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "render_allowed": false,
+        "drive_written": false
       }
     }
   ],
-  "next_action": "Search and intake a dark period-compatible S04 control-panel candidate; complete S12 crop/credit review or replace it; then rerun continuity. Do not render or promote.",
+  "next_action": "Create the separate manifest PR for the approved S04/S12 replacements, then rerun visual-plan contract and continuity. Do not render or promote.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -4566,6 +4648,43 @@
         "S03 first 8-10 seconds favored; warm low-key grade",
         "S09 editorial crop keeps labels/timer subordinate"
       ]
+    },
+    {
+      "candidate_ids": [
+        "pixabay-radio-vintage-old-171435",
+        "nasa-svs-geos5-clouds-no-labels-4819"
+      ],
+      "shot_ids": [
+        "S04",
+        "S12"
+      ],
+      "status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_at_utc": "2026-11-06T07:50:43Z",
+      "decision": "Approve radio vintage for S04 and NASA GEOS-5 no-labels for S12 after full-duration visual QA and fingerprint audit pass.",
+      "superseded_assignments": [
+        {
+          "shot_id": "S04",
+          "previous_candidate_id": "mixkit-worker-industrial-lathe-2244"
+        },
+        {
+          "shot_id": "S12",
+          "previous_candidate_id": "pixabay-antenna-astronomy-communication-40041"
+        }
+      ],
+      "constraints": [
+        "not literal Petrov archival evidence",
+        "no source reuse",
+        "manifest-only until continuity CI",
+        "no render, catalog mutation, Drive write or publication"
+      ],
+      "evidence": {
+        "intake_workflow_run_id": 42178800543,
+        "intake_artifact_id": 13484277704,
+        "intake_artifact_digest": "sha256:76d78df18adf6d1d120ff6925b72f0cbf425a472eeaee7f40024e111b657efd",
+        "fingerprint_workflow_run_id": 42183105946,
+        "fingerprint_artifact_id": 13486336703,
+        "fingerprint_artifact_digest": "sha256:bc652f9dd6a614ef40b22e1b685ac92dffdbf5086051c616e67cff9ab081f1bc"
+      }
     }
   ],
   "rejected_candidates": [
@@ -4999,18 +5118,18 @@
     "next_action": "Run the explicit global fingerprint audit for all four downloaded candidates; do not assign, promote, render, catalog, Drive-write or publish."
   },
   "last_manual_fingerprint": {
-    "workflow_run_id": 42175277282,
-    "job_id": 127752198414,
+    "workflow_run_id": 42183105946,
+    "job_id": 127777035277,
     "branch": "main",
-    "commit_sha": "54f63c0c59dca375687c50a1350d8431b300e629",
-    "artifact_id": 13483246739,
+    "commit_sha": "ccd6f5694e9663d509fd22e4926568b807061ec3",
+    "artifact_id": 13486336703,
     "artifact_name": "episode005-visual-fingerprint-audit",
-    "artifact_digest": "sha256:473192d2e4d67b8ada86f08cc343bca81347534397c90685b47e7337db7e36fd",
+    "artifact_digest": "sha256:bc652f9dd6a614ef40b22e1b685ac92dffdbf5086051c616e67cff9ab081f1bc",
     "status": "FINGERPRINT_AUDIT_PASS",
     "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
     "candidate_ids": [
-      "pexels-11764431",
-      "pexels-4285872"
+      "pixabay-radio-vintage-old-171435",
+      "nasa-svs-geos5-clouds-no-labels-4819"
     ],
     "candidate_count": 2,
     "blockers": [],
@@ -5026,8 +5145,8 @@
       "perceptual": false
     },
     "approved_candidate_ids": [
-      "pexels-11764431",
-      "pexels-4285872"
+      "pixabay-radio-vintage-old-171435",
+      "nasa-svs-geos5-clouds-no-labels-4819"
     ]
   },
   "last_candidate_addition": {
@@ -5052,40 +5171,38 @@
   },
   "last_human_approval": {
     "candidate_ids": [
-      "pexels-11764431",
-      "pexels-4285872"
+      "pixabay-radio-vintage-old-171435",
+      "nasa-svs-geos5-clouds-no-labels-4819"
     ],
-    "approved_at_utc": "2026-11-06T06:37:52Z",
-    "decision": "Approved the two fingerprint-clean search-v5 candidates for manifest-only replacement assignments, preserving one distinct source per shot.",
+    "approved_at_utc": "2026-11-06T07:50:43Z",
+    "decision": "Aprovar o rádio vintage para S04 e a visualização NASA GEOS-5 para S12 como substituições manifest-only após QA visual e fingerprint global sem colisões.",
     "selected_primary_by_shot": {
-      "S03": "pexels-11764431",
-      "S09": "pexels-4285872"
+      "S04": "pixabay-radio-vintage-old-171435",
+      "S12": "nasa-svs-geos5-clouds-no-labels-4819"
     },
     "superseded_by_shot": {
-      "S03": "mixkit-young-engineer-29991",
-      "S09": "pixabay-button-press-red-business-click-502"
+      "S04": "mixkit-worker-industrial-lathe-2244",
+      "S12": "pixabay-antenna-astronomy-communication-40041"
     },
     "scope": "APPROVED_FOR_MANIFEST_ONLY",
     "constraints": [
-      "representational footage is not literal Petrov archival evidence",
-      "one distinct source per shot; no source reuse within or across episodes",
-      "pexels-11764431: favor the first 8-10 seconds and apply warm low-key grade",
-      "pexels-4285872: keep English labels and digital timer subordinate through editorial crop",
-      "approval does not authorize render",
-      "approval does not authorize global catalog mutation",
-      "approval does not authorize Drive write or publication",
-      "S04 remains an independent search blocker",
-      "S12 remains pending final crop and NASA credit review"
+      "footage representacional não é evidência literal de Petrov",
+      "uma fonte distinta por shot; sem reuso dentro ou entre episódios",
+      "rádio: manter insert escuro e simbólico, sem revelar marcas futuras",
+      "NASA: manter crédito NASA SVS e tratar como visualização modelada",
+      "aprovação não autoriza render",
+      "aprovação não autoriza catálogo global, Drive ou publicação",
+      "continuidade CI ainda é obrigatória"
     ],
     "evidence": {
-      "intake_workflow_run_id": 42174399543,
-      "intake_job_id": 127749408504,
-      "intake_artifact_id": 13482227807,
-      "intake_artifact_digest": "sha256:068d25a3614069052997f31097511748d07b10457511c7fb04c9d347e0b0362",
-      "fingerprint_workflow_run_id": 42175277282,
-      "fingerprint_job_id": 127752198414,
-      "fingerprint_artifact_id": 13483246739,
-      "fingerprint_artifact_digest": "sha256:473192d2e4d67b8ada86f08cc343bca81347534397c90685b47e7337db7e36fd"
+      "intake_workflow_run_id": 42178800543,
+      "intake_job_id": 127763342737,
+      "intake_artifact_id": 13484277704,
+      "intake_artifact_digest": "sha256:76d78df18adf6d1d120ff6925b72f0cbf425a472eeaee7f40024e111b657efd",
+      "fingerprint_workflow_run_id": 42183105946,
+      "fingerprint_job_id": 127777035277,
+      "fingerprint_artifact_id": 13486336703,
+      "fingerprint_artifact_digest": "sha256:bc652f9dd6a614ef40b22e1b685ac92dffdbf5086051c616e67cff9ab081f1bc"
     }
   },
   "last_contract_validation": {
@@ -5133,8 +5250,8 @@
     "continuity_coverage_score": 0.9187,
     "note": "CI run 42176059809 validated the updated S03/S09 manifest replacements. Both new shots pass continuity; S04/S12 remain hard conflicts and S11->S12/S12->S13 remain blocked adjacency transitions. Render/preview remain blocked."
   },
-  "last_adjustment": "Search-v6 intake completed on run 42178800543. Human QA rejected the S04 telephone because the Alcatel mark is legible in the 9:16 crop; the dark vintage radio passed visual QA as an S04 fallback and NASA 4819 passed visual QA as an S12 mechanism candidate. Neither is approved for manifest or render until fingerprint.",
-  "next_gate": "Fingerprint only the visually viable search-v6 candidates (pixabay-radio-vintage-old-171435 and nasa-svs-geos5-clouds-no-labels-4819) using intake run 42178800543; then decide S04/S12 replacement and rerun continuity. Keep render, preview, global catalog, Drive and publication blocked.",
+  "last_adjustment": "Search-v6 fingerprint run 42183105946 passed for the dark vintage radio and NASA GEOS-5 no-labels visual. Both have no global source, SHA-256 or perceptual collisions; telephone remains rejected for visible Alcatel branding. The user-approved S04/S12 manifest substitutions are now recorded, pending the separate manifest PR and continuity revalidation.",
+  "next_gate": "Create and merge the separate manifest PR assigning pixabay-radio-vintage-old-171435 to S04 and nasa-svs-geos5-clouds-no-labels-4819 to S12; run visual-plan contract and continuity. Keep render, preview, global catalog, Drive and publication blocked.",
   "render_approval_record": {
     "status": "APPROVED",
     "approved_at_utc": "2026-11-05T22:56:14Z",
@@ -5589,7 +5706,7 @@
     {
       "batch_id": "search-v6-episode005-s04-s12-recovery-20261106",
       "created_at_utc": "2026-11-06T07:04:29.401Z",
-      "status": "INTAKE_QA_COMPLETE_FINGERPRINT_PENDING",
+      "status": "FINGERPRINT_PASS_MANIFEST_ASSIGNMENTS_APPROVED",
       "mode": "SHORTLIST_PLUS_ISOLATED_INTAKE_NO_PROMOTION",
       "target_shots": [
         "S04",
@@ -5603,8 +5720,8 @@
       "source_pages_reviewed": 3,
       "direct_media_routes_recorded": 3,
       "intake_dispatched": true,
-      "fingerprint_dispatched": false,
-      "human_approval_pending": true,
+      "fingerprint_dispatched": true,
+      "human_approval_pending": false,
       "render_allowed": false,
       "promotion_allowed": false,
       "global_catalog_updated": false,
@@ -5636,12 +5753,41 @@
           "nasa_4819": "VISUAL_QA_PASS_PENDING_FINGERPRINT: clean no-labels modeled Earth/cloud cover; no watermark; NASA credit metadata required."
         }
       },
-      "next_action": "Fingerprint the radio and NASA candidates using intake run 42178800543; if both pass, assign radio to S04 and NASA to S12 only in a separate manifest PR, then rerun continuity. Keep all promotion/render/catalog/Drive/publication gates closed.",
+      "next_action": "Create the separate manifest PR assigning radio to S04 and NASA 4819 to S12, then run visual-plan contract and continuity. Keep promotion, render, preview, global catalog, Drive and publication gates closed.",
       "intake_workflow_run_id": 42178800543,
       "intake_job_id": 127763342737,
       "intake_artifact_id": 13484277704,
       "intake_artifact_name": "episode005-visual-intake-42178800543",
-      "intake_artifact_digest": "sha256:76d78df18adf6d1d120ff6925b72f0cbf425a472eeaee7f40024e111b657efd"
+      "intake_artifact_digest": "sha256:76d78df18adf6d1d120ff6925b72f0cbf425a472eeaee7f40024e111b657efd",
+      "fingerprint_workflow_run_id": 42183105946,
+      "fingerprint_job_id": 127777035277,
+      "fingerprint_artifact_id": 13486336703,
+      "fingerprint_artifact_name": "episode005-visual-fingerprint-audit",
+      "fingerprint_artifact_digest": "sha256:bc652f9dd6a614ef40b22e1b685ac92dffdbf5086051c616e67cff9ab081f1bc",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "fingerprint_status": "FINGERPRINT_AUDIT_PASS",
+      "fingerprint_blockers": [],
+      "visual_qa_pass_candidate_ids": [
+        "pixabay-radio-vintage-old-171435",
+        "nasa-svs-geos5-clouds-no-labels-4819"
+      ],
+      "approved_candidate_ids": [
+        "pixabay-radio-vintage-old-171435",
+        "nasa-svs-geos5-clouds-no-labels-4819"
+      ],
+      "approved_shot_by_candidate": {
+        "pixabay-radio-vintage-old-171435": "S04",
+        "nasa-svs-geos5-clouds-no-labels-4819": "S12"
+      },
+      "rejected_candidate_ids": [
+        "pixabay-vintage-telephone-257351"
+      ],
+      "pending_candidate_ids": [],
+      "global_collision_summary": {
+        "source": false,
+        "sha256": false,
+        "perceptual": false
+      }
     }
   ],
   "last_intake_attempt": {
@@ -5687,7 +5833,7 @@
   },
   "continuity_gate": {
     "status": "REVIEW_REQUIRED",
-    "reason": "CI run 42176059809 confirms the search-v5 replacements remove S03/S09 hard conflicts. Remaining hard conflicts are S04/S12; S11->S12 and S12->S13 remain blocked adjacency transitions; S06/S11 remain metadata/editorial review.",
+    "reason": "Fingerprint-clean S04/S12 replacements are approved for manifest; the manifest still requires a separate update and continuity CI before any render decision.",
     "strict_preview_block": true,
     "hard_conflict_shots": [
       "S04",
@@ -5708,6 +5854,10 @@
     "ci_conclusion": "success",
     "coverage_score": 0.9187,
     "hard_conflict_count": 13,
-    "revalidation_required": false
+    "revalidation_required": false,
+    "pending_revalidation_shots": [
+      "S04",
+      "S12"
+    ]
   }
 }
