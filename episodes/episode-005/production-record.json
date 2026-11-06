@@ -776,6 +776,7 @@
   "factuality_status": "READY",
   "safety_status": "READY",
   "pipeline_state": "THUMBNAIL_QA",
+  "preview_enablement": true,
   "production_enablement": false,
   "visual_manifest_reference": "episodes/episode-005/visual/scene-asset-manifest.json",
   "visual_manifest_status": "PARTIAL_MANIFEST_VALIDATED_BLOCKED_RENDER",
