@@ -2931,6 +2931,262 @@
       "disqualifiers": [
         "visible panel text may violate clean editorial-text policy"
       ]
+    },
+    {
+      "candidate_id": "pixabay-radio-channel-solid-music-125871",
+      "source_page_url": "https://pixabay.com/videos/radio-channel-solid-music-125871/",
+      "role": "S03",
+      "visual_match": "NEAR",
+      "visual_intent": "Hand tuning a vintage radio/channel control to represent the operator reading and reconciling a signal; symbolic reconstruction, never literal Petrov archival evidence.",
+      "truth_class": "REPRESENTATIONAL",
+      "provider": "pixabay",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "license_name": "Pixabay Content License",
+      "source_tier": "stock_auto",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T00:00:00Z",
+        "observed_license": "Free for use under the Pixabay Content License",
+        "observed_metadata": "1920x1080, 25 fps, MP4; radio/channel/tuner/control-panel tags",
+        "media_route": "Pixabay free-download route; direct media URL is resolved only during manual intake"
+      },
+      "continuity_tags": {
+        "era": [
+          "analog",
+          "period_compatible",
+          "indeterminate_era"
+        ],
+        "setting": [
+          "technical_control_room",
+          "early_warning_command"
+        ],
+        "time_of_day": [
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key"
+        ],
+        "palette": [
+          "charcoal",
+          "steel",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "brushed_metal",
+          "low_light_grain"
+        ]
+      },
+      "continuity_risk_flags": [
+        "radio_equipment_context_not_archival",
+        "lighting_requires_frame_qc",
+        "human_anchor_is_hands_only",
+        "must_not_assign_S09"
+      ],
+      "selection_status": "SHORTLISTED_FOR_INTAKE",
+      "score_breakdown": {
+        "semantic_fit": 0.86,
+        "continuity_coherence": 0.82,
+        "license_confidence": 1,
+        "vertical_crop_quality": 0.75,
+        "clean_frame_quality": 0.8,
+        "source_distinctness": 1
+      },
+      "manual_rights_review": "Page-level Pixabay Content License observed; depicted device/labels still require frame QA."
+    },
+    {
+      "candidate_id": "mixkit-inside-rear-control-cabin-4460",
+      "source_page_url": "https://mixkit.co/free-stock-video/inside-a-rear-control-cabin-of-a-subway-train-4460/",
+      "role": "S04",
+      "visual_match": "NEAR",
+      "visual_intent": "Analog gauges, levers and a control cabin establish mechanical signal handling without showing an anachronistic industrial lathe or modern UI.",
+      "truth_class": "REPRESENTATIONAL",
+      "provider": "mixkit",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "license_name": "Mixkit Stock Video Free License",
+      "source_tier": "stock_auto",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T00:00:00Z",
+        "observed_license": "Free Download under the Mixkit Stock Video Free License",
+        "observed_metadata": "1920x1080, 30 fps, 5 seconds; analog gauges, phone, drawers and levers",
+        "media_route": "Mixkit free-download route; direct media URL is resolved only during manual intake"
+      },
+      "continuity_tags": {
+        "era": [
+          "analog",
+          "period_compatible",
+          "indeterminate_era"
+        ],
+        "setting": [
+          "technical_control_room",
+          "early_warning_command"
+        ],
+        "time_of_day": [
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "steel",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "brushed_metal",
+          "mechanical",
+          "low_light_grain"
+        ]
+      },
+      "continuity_risk_flags": [
+        "subway_control_cabin_not_archival",
+        "machine_context_requires_frame_qc",
+        "no_human_anchor",
+        "must_not_assign_S03"
+      ],
+      "selection_status": "SHORTLISTED_FOR_INTAKE",
+      "score_breakdown": {
+        "semantic_fit": 0.84,
+        "continuity_coherence": 0.84,
+        "license_confidence": 1,
+        "vertical_crop_quality": 0.65,
+        "clean_frame_quality": 0.85,
+        "source_distinctness": 1
+      },
+      "manual_rights_review": "Page-level Mixkit Free License observed; inspect full download for marks, logos and crop safety."
+    },
+    {
+      "candidate_id": "pexels-12213087",
+      "source_page_url": "https://www.pexels.com/video/hand-moving-buttons-12213087/",
+      "role": "S09",
+      "visual_match": "NEAR",
+      "visual_intent": "A hand adjusts tactile knobs on a dark mixer panel as a nonliteral insert for entering the false-alarm classification; no readable interface is relied upon.",
+      "truth_class": "REPRESENTATIONAL",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "license_name": "Pexels License",
+      "source_tier": "stock_auto",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T00:00:00Z",
+        "observed_license": "Free to use",
+        "observed_metadata": "3840x2160, 25 fps, 10 seconds; dark sound-mixer panel with hand and knobs",
+        "media_route": "Pexels free-download route; direct media URL is resolved only during manual intake"
+      },
+      "continuity_tags": {
+        "era": [
+          "period_compatible",
+          "indeterminate_era"
+        ],
+        "setting": [
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key"
+        ],
+        "palette": [
+          "charcoal",
+          "steel"
+        ],
+        "texture": [
+          "brushed_metal",
+          "metal",
+          "low_light_grain"
+        ]
+      },
+      "continuity_risk_flags": [
+        "audio_mixer_context_not_archival",
+        "era_requires_frame_qc",
+        "no_readable_labels",
+        "must_not_assign_S04"
+      ],
+      "selection_status": "SHORTLISTED_FOR_INTAKE",
+      "score_breakdown": {
+        "semantic_fit": 0.84,
+        "continuity_coherence": 0.75,
+        "license_confidence": 1,
+        "vertical_crop_quality": 0.78,
+        "clean_frame_quality": 0.88,
+        "source_distinctness": 1
+      },
+      "manual_rights_review": "Page-level Pexels Free license observed; third-party marks and interface labels remain subject to full-frame QA."
+    },
+    {
+      "candidate_id": "nasa-svs-noctilucent-clouds-20002",
+      "source_page_url": "https://svs.gsfc.nasa.gov/20002/",
+      "role": "S12",
+      "visual_match": "NEAR",
+      "visual_intent": "Explained atmospheric geometry: noctilucent clouds illuminated from below at night, connecting the optical ambiguity to the non-event; not literal missile or sensor footage.",
+      "truth_class": "EXPLAINED_PHENOMENON",
+      "provider": "nasa",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "license_name": "NASA Media Guidelines (per asset)",
+      "source_tier": "government_manual",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "media_url": "https://svs.gsfc.nasa.gov/vis/a020000/a020000/a020002/NoctilucentCloudAnimation.webmhd.webm",
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T00:00:00Z",
+        "observed_license": "NASA SVS public domain unless otherwise noted; credit NASA/Goddard Space Flight Center Conceptual Image Lab",
+        "observed_metadata": "960x540 WebM download; released 2003; noctilucent clouds and night-side illumination",
+        "media_route": "https://svs.gsfc.nasa.gov/vis/a020000/a020000/a020002/NoctilucentCloudAnimation.webmhd.webm",
+        "rights_evidence_url": "https://svs.gsfc.nasa.gov/help/"
+      },
+      "continuity_tags": {
+        "era": [
+          "period_compatible",
+          "indeterminate_era"
+        ],
+        "setting": [
+          "external_sensor",
+          "early_warning_command"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows",
+          "restrained_amber"
+        ],
+        "palette": [
+          "charcoal",
+          "desaturated_blue",
+          "amber"
+        ],
+        "texture": [
+          "atmospheric",
+          "low_light_grain"
+        ]
+      },
+      "continuity_risk_flags": [
+        "scientific_visualization_not_archival",
+        "credit_in_description_required",
+        "manual_government_rights_review",
+        "must_not_assign_S11"
+      ],
+      "selection_status": "SHORTLISTED_FOR_INTAKE",
+      "score_breakdown": {
+        "semantic_fit": 0.9,
+        "continuity_coherence": 0.87,
+        "license_confidence": 0.9,
+        "vertical_crop_quality": 0.6,
+        "clean_frame_quality": 0.9,
+        "source_distinctness": 1
+      },
+      "manual_rights_review": "NASA SVS help page states visualizations are public domain unless otherwise noted; retain required credit and inspect the downloaded file for identifiers or licensed audio."
     }
   ],
   "next_action": "Acquire and fingerprint distinct period-compatible replacements for S03, S04, S09 and S12; keep S06/S11 manifest-only until editorial continuity review is complete.",
@@ -3787,18 +4043,17 @@
   "last_candidate_addition": {
     "added_at_utc": "2026-11-06T00:00:00Z",
     "candidate_ids": [
-      "pexels-38958215",
-      "pexels-38779108",
-      "pexels-5523892",
-      "pexels-6442796",
-      "pexels-12590338",
-      "pexels-33897223",
-      "pexels-33060982",
-      "pexels-16943466"
+      "pixabay-radio-channel-solid-music-125871",
+      "mixkit-inside-rear-control-cabin-4460",
+      "pexels-12213087",
+      "nasa-svs-noctilucent-clouds-20002"
     ],
-    "rationale": "Search-v3 priority pass added Pexels candidates with page-level Free license evidence and direct media routes; bright/daylight and visible-text candidates were recorded as continuity/pixel rejects.",
-    "source_page_and_license_verification": "Pexels source pages were manually reviewed; media redirects resolve to videos.pexels.com and remain not downloaded.",
-    "continuity_review": "S03/S06/S09/S11/S12 shortlisted; S12 sunset candidate requires declared bridge and S11 night candidate is preferred."
+    "rationale": "Search-v4 hard-conflict recovery adds one distinct, page-verified candidate per blocked shot. The batch mixes Pixabay, Mixkit, Pexels and NASA government media while keeping every candidate shortlist-only and unassigned.",
+    "source_page_and_license_verification": "Four source pages were reviewed. Pixabay, Mixkit and Pexels page-level free-use evidence was observed; NASA SVS page and its public-domain help guidance were recorded for per-asset manual rights review.",
+    "continuity_review": "S03 uses a vintage radio-control human anchor; S04 uses analog gauges/levers; S09 uses a dark tactile control insert; S12 uses a night-side explanatory cloud visualization to preserve S11->S12 adjacency without a day/night flip.",
+    "render_block": true,
+    "intake_dispatched": false,
+    "promotion_allowed": false
   },
   "last_human_approval": {
     "candidate_ids": [
@@ -3883,8 +4138,8 @@
     "continuity_hard_conflict_count": 23,
     "continuity_coverage_score": 0.8812
   },
-  "last_adjustment": "Token-boundary matcher fix merged and validated. The false night/neon_nightclub conflicts are gone; the remaining continuity blockers are the evidence-backed S03/S04/S09/S12 assignments plus S11->S12 and S12->S13 adjacency breaks. Pending-shot traceability aligned to the post-fix CI: S07 is PASS; S03/S04/S09/S12 remain hard conflicts.",
-  "next_gate": "Do not run the V2.1 preview until the four hard-conflict shots and two adjacency breaks are resolved or explicitly bridged, then rerun the contract and sequence gate.",
+  "last_adjustment": "Search-v4 hard-conflict recovery shortlist recorded for S03/S04/S09/S12. No manifest assignment, download, promotion, render, catalog mutation, Drive write or publication was performed. Main remains fail-closed until the exact candidates pass manual intake, fingerprint, editorial approval and the sequence gate.",
+  "next_gate": "Editorially approve the four search-v4 candidate IDs, then run the isolated manual intake and fingerprint audit. If the batch passes QA, assign at most one distinct candidate to each blocked shot, rerun the visual plan contract and sequence gate, and keep render/promotion disabled until all hard conflicts and adjacency breaks are cleared.",
   "render_approval_record": {
     "status": "APPROVED",
     "approved_at_utc": "2026-11-05T22:56:14Z",
@@ -4102,6 +4357,46 @@
         ],
         "coverage_score": 0.8812
       }
+    },
+    {
+      "batch_id": "search-v4-episode005-hard-conflict-recovery-20261106",
+      "created_at_utc": "2026-11-06T00:00:00Z",
+      "status": "SHORTLIST_RECORDED_NO_INTAKE",
+      "mode": "SHORTLIST_ONLY_NO_DOWNLOAD_NO_PROMOTION",
+      "target_shots": [
+        "S03",
+        "S04",
+        "S09",
+        "S12"
+      ],
+      "shortlist_candidate_ids": [
+        "pixabay-radio-channel-solid-music-125871",
+        "mixkit-inside-rear-control-cabin-4460",
+        "pexels-12213087",
+        "nasa-svs-noctilucent-clouds-20002"
+      ],
+      "source_pages_reviewed": 4,
+      "direct_media_routes_recorded": 1,
+      "intake_dispatched": false,
+      "fingerprint_dispatched": false,
+      "human_approval_pending": true,
+      "render_allowed": false,
+      "promotion_allowed": false,
+      "global_catalog_updated": false,
+      "drive_written": false,
+      "publication_allowed": false,
+      "criteria": [
+        "distinct_source_per_blocked_shot",
+        "semantic_fit",
+        "analog_or_period_compatible_surface",
+        "night_low_key_continuity",
+        "no_modern_ui_or_daylight_conflict",
+        "page_level_license_evidence",
+        "manual_government_rights_lane_for_NASA",
+        "9x16_crop_review"
+      ],
+      "rejection_policy": "Reject any candidate after intake if full-duration QA reveals modern/digital UI, readable labels, watermarks, daylight, licensed audio, or a source/fingerprint collision.",
+      "next_action": "Obtain editorial approval for exact IDs, then dispatch one isolated manual intake/fingerprint batch; do not assign candidates to the manifest before QA."
     }
   ]
 }
