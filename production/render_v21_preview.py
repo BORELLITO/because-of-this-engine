@@ -205,6 +205,10 @@ def render_preview(
         raise PreviewRenderError("Canonical Because Of This logo is required.")
     voice_profile = validate_voice_profile(voice_profile_path, audio_path)
     audio_seconds = media_duration(audio_path)
+    if not 60.0 <= audio_seconds <= 75.0:
+        raise PreviewRenderError(
+            f"Creative narration duration must be between 60 and 75 seconds; got {audio_seconds:.3f}."
+        )
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="because-of-this-v21-preview-") as raw:
         work = Path(raw)
