@@ -1,6 +1,7 @@
 name: One-time Episode 005 Gemini Charon Voice Test
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - tts-test-episode005-gemini-20261106
