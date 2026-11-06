@@ -29,7 +29,7 @@ CREATIVE_PROFILE = "cinematic_dread_v73"
 APPROVED_VOICE_PROVIDER = "gemini_tts"
 APPROVED_VOICE_NAME = "Charon"
 APPROVED_VOICE_MODEL = "gemini-3.8-flash-tts"
-IN_VIDEO_LOGO_Y = 336
+IN_VIDEO_LOGO_Y = 190
 IN_VIDEO_LOGO_WIDTH = 360
 OUTRO_SECONDS = 5.5
 ACTIVE_WORD_COLOR = "#F04444"
@@ -318,6 +318,7 @@ def render_preview(
             "logo_anchor": "center_upper",
             "logo_width": IN_VIDEO_LOGO_WIDTH,
             "logo_y": IN_VIDEO_LOGO_Y,
+            "caption_margin_v": 650,
             "final_center_lockup": True,
             "final_card": "brand_background_to_black",
             "outro_seconds": OUTRO_SECONDS,

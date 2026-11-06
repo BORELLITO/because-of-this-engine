@@ -9,6 +9,7 @@ from pathlib import Path
 
 OLD_ASS_COLOR = "&H007777FF&"  # RGB #FF7777 (legacy pink)
 ACTIVE_ASS_COLOR = "&H004444F0&"  # RGB #F04444 (brand red, still readable)
+CAPTION_MARGIN_V = 650
 
 
 def main() -> int:
@@ -21,6 +22,15 @@ def main() -> int:
     if OLD_ASS_COLOR not in text and ACTIVE_ASS_COLOR not in text:
         raise SystemExit("No known karaoke active-word transform was found.")
     recolored = text.replace(OLD_ASS_COLOR, ACTIVE_ASS_COLOR)
+    lines = []
+    for line in recolored.splitlines(keepends=True):
+        if line.startswith("Style: Default,"):
+            fields = line.rstrip("\r\n").split(",")
+            if len(fields) >= 3:
+                fields[-2] = str(CAPTION_MARGIN_V)
+                line = ",".join(fields) + ("\n" if line.endsWith("\n") else "")
+        lines.append(line)
+    recolored = "".join(lines)
     if ACTIVE_ASS_COLOR not in recolored:
         raise SystemExit("Karaoke recolor did not produce the expected active color.")
     args.output.parent.mkdir(parents=True, exist_ok=True)

@@ -98,7 +98,7 @@ jobs:
                   "alignment_sidecar": "narration.alignment.json",
                   "max_line_chars": 36,
                   "max_lines": 2,
-                  "margin_v": 520,
+                  "margin_v": 650,
                   "active_word_color": "#F04444"
               }
           }
