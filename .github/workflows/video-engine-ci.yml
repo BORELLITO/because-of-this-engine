@@ -37,8 +37,10 @@ jobs:
           assert policy["active_engine_version"] == "2.1"
           assert policy["canonical_entrypoint"] == "production/canonical_entrypoint.py"
           assert policy["production_enablement"] is False
-          assert policy["voice_provider"] == "microsoft_edge_tts"
-          assert policy["voice_policy"]["voice_name"] == "en-US-ChristopherNeural"
+          assert policy["voice_provider"] == "gemini_tts"
+          assert policy["voice_policy"]["voice_name"] == "Charon"
+          assert policy["voice_policy"]["model"] == "gemini-3.8-flash-tts"
+          assert policy["voice_policy"]["direct_api_route"] == "production/gemini_tts.py"
           assert policy["status"] == "BLOCKED_FOR_PRODUCTION"
           print("V21_POLICY_IDENTITY_PASS")
           PY

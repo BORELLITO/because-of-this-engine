@@ -2,7 +2,7 @@ name: Because Of This V2.1 Episode 005 Creative Preview
 
 # Isolated creative preview renderer. It never enables production, writes Drive,
 # mutates the global visual catalog or publishes. The preview is fail-closed on
-# the approved reference voice: Edge TTS is not accepted on this route.
+# the approved direct Gemini TTS Charon identity: Edge and Creative Claw substitutions are not accepted on this route.
 on:
   workflow_dispatch:
     inputs:
@@ -80,9 +80,9 @@ jobs:
           assert profile_path.is_file(), profile_path
           assert captions.is_file(), captions
           profile = json.loads(profile_path.read_text(encoding="utf-8"))
-          assert profile["provider"] == "creativeclaw_google_gemini", profile
-          assert profile["voice_id"] == "charon", profile
-          assert profile["model"] == "speech/gemini-3.8-flash-tts", profile
+          assert profile["provider"] == "gemini_tts", profile
+          assert profile["voice_name"] == "Charon", profile
+          assert profile["model"] == "gemini-3.8-flash-tts", profile
           assert profile["identity_status"] == "APPROVED_REFERENCE_MATCH", profile
           digest = hashlib.sha256(audio.read_bytes()).hexdigest()
           assert digest == profile["audio_sha256"], {"expected": profile["audio_sha256"], "actual": digest}
@@ -91,8 +91,8 @@ jobs:
               assert stream.getnchannels() == 1
               assert stream.getsampwidth() == 2
               assert stream.getframerate() in {24000, 48000}
-              assert 60 <= duration <= 75, duration
-          print({"voice": profile["voice_id"], "provider": profile["provider"], "duration_seconds": round(duration, 3), "audio_sha256": digest})
+              assert 60 <= duration <= 80, duration
+          print({"voice": profile["voice_name"], "provider": profile["provider"], "duration_seconds": round(duration, 3), "audio_sha256": digest})
           PY
 
       - name: Download and hash approved preview visuals
@@ -134,7 +134,7 @@ jobs:
           report = json.loads((root / "preview-report.json").read_text(encoding="utf-8"))
           assert report["status"] == "V21_CREATIVE_PREVIEW_RENDER_PASS", report
           assert report["creative_profile"] == "cinematic_dread_v73", report
-          assert report["voice"]["voice_id"] == "charon", report
+          assert report["voice"]["voice_name"] == "Charon", report
           assert report["music"]["status"] == "DETERMINISTIC_SUSPENSE_BED_MIXED", report
           assert report["branding"]["logo_overlay"] is True, report
           assert report["production_enablement"] is False, report

@@ -71,7 +71,7 @@ def valid_manifest() -> dict:
             "real_audio_generated": False,
             "final_transcription_required": True,
             "target_duration_seconds": 65,
-            "adapter": "production/microsoft_edge_tts.py",
+            "adapter": "production/gemini_tts.py",
         },
         "captions_contract": {
             "source": "final_audio_transcription",
@@ -100,10 +100,10 @@ def valid_manifest() -> dict:
             "delivery_adapter": "production/google_drive_delivery.py",
         },
         "tts_contract": {
-            "provider": "microsoft_edge_tts",
-            "voice_name": "en-US-ChristopherNeural",
+            "provider": "gemini_tts",
+            "voice_name": "Charon",
             "language_code": "en-US",
-            "model": "edge_neural",
+            "model": "gemini-3.8-flash-tts",
             "provider_fallback": "forbidden",
             "status": "OFFLINE_CONTRACT_VERIFIED",
             "real_call_authorized": False,
@@ -267,7 +267,7 @@ class V21IntegrationTests(unittest.TestCase):
 
     def test_tts_contract_rejects_provider_drift(self):
         manifest = valid_manifest()
-        manifest["tts_contract"]["provider"] = "gemini_tts"
+        manifest["tts_contract"]["provider"] = "microsoft_edge_tts"
         report = evaluate(manifest, registry=historical_registry())
         self.assertIn("TTS_CONTRACT", report["blocking_gates"])
 

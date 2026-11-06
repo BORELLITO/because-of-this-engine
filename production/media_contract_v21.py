@@ -8,7 +8,7 @@ from typing import Any
 SHA256 = re.compile(r"^[0-9a-f]{64}$", re.IGNORECASE)
 
 ADAPTERS = {
-    "audio_contract.adapter": ("production/microsoft_edge_tts.py", "synthesize_chunks"),
+    "audio_contract.adapter": ("production/gemini_tts.py", "synthesize_chunks"),
     "captions_contract.adapter": ("production/align_captions.py", "main"),
     "render_contract.adapter": ("production/render_v21_manual.py", "main"),
     "drive_contract.assets_adapter": ("production/google_drive_assets.py", "main"),
@@ -78,7 +78,11 @@ def validate_captions_contract(record: Mapping[str, Any]) -> dict[str, Any]:
         if contract.get(field) != value:
             failures.append(f"captions_contract.{field} must equal {value}")
     source_hash = contract.get("source_audio_sha256")
-    if not SHA256.fullmatch(str(source_hash or "")):
+    source_status = contract.get("source_audio_status")
+    if source_hash is None:
+        if source_status != "PENDING_GEMINI_GENERATION" or contract.get("real_caption_generated") is not False:
+            failures.append("captions_contract may omit source_audio_sha256 only while Gemini audio is pending")
+    elif not SHA256.fullmatch(str(source_hash)):
         failures.append("captions_contract.source_audio_sha256 must be a SHA-256")
     return _result("CAPTIONS", failures, execution="OFFLINE_CONTRACT_VERIFIED" if not failures else "BLOCKED", real_captions="NOT_RUN")
 

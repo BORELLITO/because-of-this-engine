@@ -19,9 +19,9 @@ def _write_wav(path: Path) -> None:
 
 def _profile(audio: Path) -> dict:
     return {
-        "provider": "creativeclaw_google_gemini",
-        "voice_id": "charon",
-        "model": "speech/gemini-3.8-flash-tts",
+        "provider": "gemini_tts",
+        "voice_name": "Charon",
+        "model": "gemini-3.8-flash-tts",
         "identity_status": "APPROVED_REFERENCE_MATCH",
         "audio_sha256": hashlib.sha256(audio.read_bytes()).hexdigest(),
     }
@@ -34,7 +34,7 @@ def test_creative_preview_requires_approved_charon_identity() -> None:
         _write_wav(audio)
         profile = root / "voice-profile.json"
         profile.write_text(json.dumps(_profile(audio)), encoding="utf-8")
-        assert validate_voice_profile(profile, audio)["voice_id"] == "charon"
+        assert validate_voice_profile(profile, audio)["voice_name"] == "Charon"
 
 
 def test_creative_preview_rejects_edge_voice_profile() -> None:
@@ -44,7 +44,7 @@ def test_creative_preview_rejects_edge_voice_profile() -> None:
         _write_wav(audio)
         data = _profile(audio)
         data["provider"] = "microsoft_edge_tts"
-        data["voice_id"] = "en-US-ChristopherNeural"
+        data["voice_name"] = "en-US-ChristopherNeural"
         profile = root / "voice-profile.json"
         profile.write_text(json.dumps(data), encoding="utf-8")
         try:
