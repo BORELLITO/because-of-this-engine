@@ -96,6 +96,22 @@ jobs:
           )
           PY
 
+      - name: Preserve raw Whisper timestamp evidence
+        run: |
+          PYTHONPATH=. python - <<'PY'
+          import json
+          from pathlib import Path
+          from production.whisper_captions import _recognize
+
+          root = Path("artifacts/episode005-gemini-charon")
+          words = _recognize(root / "narration.wav", "base.en")
+          (root / "whisper.raw.words.json").write_text(
+              json.dumps(words, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          print(json.dumps({"status": "WHISPER_RAW_TIMESTAMPS_CAPTURED", "word_count": len(words)}))
+          PY
+
       - name: Generate forced Gemini Charon captions
         run: |
           PYTHONPATH=. python production/whisper_captions.py \
@@ -127,6 +143,7 @@ jobs:
           PY
 
       - name: Upload Gemini narration and caption checkpoint
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: episode005-gemini-charon-captioned
