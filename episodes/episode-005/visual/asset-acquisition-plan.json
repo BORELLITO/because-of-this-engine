@@ -4226,7 +4226,7 @@
       }
     }
   ],
-  "next_action": "Create the separate manifest PR for the approved S04/S12 replacements, then rerun visual-plan contract and continuity. Do not render or promote.",
+  "next_action": "Resolver a revisão de continuidade de S06/S11 sem atribuir época factual aos stock assets: manter apenas como insert simbólico/atmosférico com classificação explícita de época indeterminada, ou buscar substitutos visualmente period-compatible. Depois, rerodar o visual-plan contract. Strict preview, render, promoção, catálogo global, Drive e publicação permanecem bloqueados.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -5206,10 +5206,10 @@
     }
   },
   "last_contract_validation": {
-    "validated_at_utc": "2026-11-06T06:41:53Z",
+    "validated_at_utc": "2026-11-06T07:55:28Z",
     "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
-    "candidate_count": 51,
-    "approved_manifest_candidate_count": 25,
+    "candidate_count": 54,
+    "approved_manifest_candidate_count": 27,
     "manifest_asset_count": 16,
     "assigned_shot_count": 16,
     "unresolved_shot_count": 0,
@@ -5217,38 +5217,82 @@
     "render_allowed": false,
     "global_catalog_updated": false,
     "validator": "production/visual_plan_contract.py",
-    "checkout_commit": "6e845edf59a3d15695fb86017a4274353a5711a5",
+    "checkout_commit": "ef4740ccf3d20139b58c3ac1593d7e8ad3ae3bd1",
     "revalidation_required": false,
     "continuity_gate": "REVIEW_REQUIRED",
-    "continuity_research_batch": "search-v5-episode005-period-recovery-20261106",
-    "ci_workflow_run_id": 42176059809,
-    "ci_job_id": 127754674433,
+    "strict_preview_block": true,
+    "ci_workflow_run_id": 42184048064,
+    "ci_job_id": 127780055727,
     "ci_conclusion": "success",
-    "intake_workflow_run_id": 42174399543,
-    "fingerprint_workflow_run_id": 42175277282,
-    "manifest_replacement_shots": [
-      "S03",
-      "S09"
-    ],
-    "pending_continuity_shots": [
-      "S04",
-      "S12"
-    ],
-    "continuity_hard_conflict_shots": [
-      "S04",
-      "S12"
-    ],
+    "continuity_hard_conflict_shots": [],
     "continuity_review_shots": [
       "S06",
       "S11"
     ],
-    "adjacency_review_pairs": [
-      "S11->S12",
-      "S12->S13"
-    ],
-    "continuity_hard_conflict_count": 13,
-    "continuity_coverage_score": 0.9187,
-    "note": "CI run 42176059809 validated the updated S03/S09 manifest replacements. Both new shots pass continuity; S04/S12 remain hard conflicts and S11->S12/S12->S13 remain blocked adjacency transitions. Render/preview remain blocked."
+    "adjacency_review_pairs": [],
+    "continuity_hard_conflict_count": 0,
+    "continuity_coverage_score": 0.9775,
+    "pending_revalidation_shots": [],
+    "previous_validation_snapshot": {
+      "validated_at_utc": "2026-11-06T06:41:53Z",
+      "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
+      "candidate_count": 51,
+      "approved_manifest_candidate_count": 25,
+      "manifest_asset_count": 16,
+      "assigned_shot_count": 16,
+      "unresolved_shot_count": 0,
+      "promotion_allowed": false,
+      "render_allowed": false,
+      "global_catalog_updated": false,
+      "validator": "production/visual_plan_contract.py",
+      "checkout_commit": "6e845edf59a3d15695fb86017a4274353a5711a5",
+      "revalidation_required": false,
+      "continuity_gate": "REVIEW_REQUIRED",
+      "continuity_research_batch": "search-v5-episode005-period-recovery-20261106",
+      "ci_workflow_run_id": 42176059809,
+      "ci_job_id": 127754674433,
+      "ci_conclusion": "success",
+      "intake_workflow_run_id": 42174399543,
+      "fingerprint_workflow_run_id": 42175277282,
+      "manifest_replacement_shots": [
+        "S03",
+        "S09"
+      ],
+      "pending_continuity_shots": [
+        "S04",
+        "S12"
+      ],
+      "continuity_hard_conflict_shots": [
+        "S04",
+        "S12"
+      ],
+      "continuity_review_shots": [
+        "S06",
+        "S11"
+      ],
+      "adjacency_review_pairs": [
+        "S11->S12",
+        "S12->S13"
+      ],
+      "continuity_hard_conflict_count": 13,
+      "continuity_coverage_score": 0.9187,
+      "note": "CI run 42176059809 validated the updated S03/S09 manifest replacements. Both new shots pass continuity; S04/S12 remain hard conflicts and S11->S12/S12->S13 remain blocked adjacency transitions. Render/preview remain blocked."
+    },
+    "visual_review_findings": {
+      "inspection_scope": "Inspeção visual dos contact sheets de QA de S06 e S11 nesta continuação.",
+      "S06": {
+        "observation": "O candidate pexels-5523892 mostra um único LED vermelho pulsando contra fundo escuro; funciona como insert simbólico de escalada, sem detalhe visual que determine época.",
+        "candidate_era": "indeterminate_era",
+        "editorial_limit": "Não classificar o arquivo como filmagem de 1983 nem como interface soviética real."
+      },
+      "S11": {
+        "observation": "O candidate pexels-12590338 mostra céu noturno com nuvens e silhuetas de árvores; funciona como atmosfera do não-evento, sem identificar local ou incidente.",
+        "candidate_era": "indeterminate_era",
+        "editorial_limit": "Não afirmar que seja o céu observado no incidente."
+      },
+      "disposition": "Manter ambas as atribuições apenas no manifesto, sem alterar a proveniência temporal dos arquivos. O contrato continua exigindo revisão porque os metadados dos candidates não confirmam os descritores de época do perfil."
+    },
+    "note": "Contrato visual validado no main pós-merge: 54 candidates, 27 aprovados para manifesto, 16/16 shots atribuídos, zero conflitos e todas as 15 transições compatíveis. S06/S11 permanecem em revisão por metadados de época indeterminados; uso representacional não prova origem em 1983."
   },
   "last_adjustment": "Search-v6 fingerprint run 42183105946 passed for the dark vintage radio and NASA GEOS-5 no-labels visual. Both have no global source, SHA-256 or perceptual collisions; telephone remains rejected for visible Alcatel branding. The user-approved S04/S12 manifest substitutions are now recorded, pending the separate manifest PR and continuity revalidation.",
   "next_gate": "Create and merge the separate manifest PR assigning pixabay-radio-vintage-old-171435 to S04 and nasa-svs-geos5-clouds-no-labels-4819 to S12; run visual-plan contract and continuity. Keep render, preview, global catalog, Drive and publication blocked.",
@@ -5833,7 +5877,7 @@
   },
   "continuity_gate": {
     "status": "REVIEW_REQUIRED",
-    "reason": "Fingerprint-clean S04/S12 replacements are approved for manifest; the manifest still requires a separate update and continuity CI before any render decision.",
+    "reason": "CI pós-merge passou com zero conflitos e sem transições adjacentes bloqueadas. S06 e S11 continuam em revisão porque os metadados de época dos candidates são indeterminados; a inspeção visual só sustenta uso simbólico/atmosférico. Strict preview/render segue bloqueado.",
     "strict_preview_block": true,
     "hard_conflict_shots": [
       "S04",
@@ -5843,21 +5887,15 @@
       "S06",
       "S11"
     ],
-    "bridge_required_pairs": [
-      "S11->S12",
-      "S12->S13"
-    ],
+    "bridge_required_pairs": [],
     "no_media_promoted": true,
     "no_render_executed": true,
-    "ci_workflow_run_id": 42176059809,
-    "ci_job_id": 127754674433,
+    "ci_workflow_run_id": 42184048064,
+    "ci_job_id": 127780055727,
     "ci_conclusion": "success",
-    "coverage_score": 0.9187,
-    "hard_conflict_count": 13,
+    "coverage_score": 0.9775,
+    "hard_conflict_count": 0,
     "revalidation_required": false,
-    "pending_revalidation_shots": [
-      "S04",
-      "S12"
-    ]
+    "pending_revalidation_shots": []
   }
 }
