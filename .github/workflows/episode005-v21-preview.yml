@@ -9,7 +9,7 @@ on:
       source_run_id:
         description: "GitHub Actions run containing the approved Gemini/Charon captioned narration artifact"
         required: true
-        default: "42262823070"
+        default: "42278428885"
         type: string
       source_artifact_name:
         description: "Artifact containing narration.wav, narration.ass and voice-profile.json"
@@ -101,6 +101,13 @@ jobs:
             --manifest episodes/episode-005/visual/scene-asset-manifest.json \
             --output-root artifacts/episode005-visuals
 
+      - name: Build black stacked outro card
+        run: |
+          mkdir -p artifacts/episode005-v21-preview
+          python -m pip install --disable-pip-version-check --quiet pillow==11.0.0
+          python production/generate_outro_card.py \
+            --output artifacts/episode005-v21-preview/outro-card.png
+
       - name: Render isolated V2.1 creative preview
         run: |
           mkdir -p artifacts/episode005-v21-preview
@@ -111,6 +118,7 @@ jobs:
             --audio artifacts/episode005-charon/narration.wav \
             --captions artifacts/episode005-charon/narration.ass \
             --logo brand/because-of-this-logo.png \
+            --outro-card artifacts/episode005-v21-preview/outro-card.png \
             --voice-profile artifacts/episode005-charon/voice-profile.json \
             --output artifacts/episode005-v21-preview/episode005-v21-preview.mp4 \
             --report artifacts/episode005-v21-preview/preview-report.json
