@@ -80,9 +80,9 @@ jobs:
           assert profile_path.is_file(), profile_path
           assert captions.is_file(), captions
           profile = json.loads(profile_path.read_text(encoding="utf-8"))
-          assert profile["provider"] == "creativeclaw_google_gemini", profile
-          assert profile["voice_id"] == "charon", profile
-          assert profile["model"] == "speech/gemini-3.8-flash-tts", profile
+          assert profile["provider"] == "gemini_tts", profile
+          assert profile["voice_name"] == "Charon", profile
+          assert profile["model"] == "gemini-3.8-flash-tts", profile
           assert profile["identity_status"] == "APPROVED_REFERENCE_MATCH", profile
           digest = hashlib.sha256(audio.read_bytes()).hexdigest()
           assert digest == profile["audio_sha256"], {"expected": profile["audio_sha256"], "actual": digest}
