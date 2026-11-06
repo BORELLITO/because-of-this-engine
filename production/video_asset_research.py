@@ -16,13 +16,33 @@ from typing import Any, Callable
 
 from production.asset_reuse_brain import REGISTRY_SCHEMA_VERSION, source_asset_key
 from production.editorial_policy import clip_quantity_policy, clip_quantity_report
+from production.visual_continuity import (
+    continuity_profile,
+    continuity_search_terms,
+    continuity_match_report,
+)
+from production.visual_provider_policy import policy_for
 from production.visual_semantics import (
     DIMENSIONS,
     evidence_text,
     visual_match_report,
 )
 
-PROVIDER_ORDER = ("mixkit", "pixabay", "pexels")
+# Ordered by low-friction automated discovery first, then manual rights lanes.
+PROVIDER_ORDER = (
+    "mixkit",
+    "pixabay",
+    "pexels",
+    "coverr",
+    "videvo",
+    "videezy",
+    "wikimedia",
+    "nasa",
+    "noaa",
+    "loc",
+    "nara",
+    "internet_archive",
+)
 FALLBACK_LADDER = ("EXACT", "NEAR", "EXPLANATORY", "SYMBOLIC", "ATMOSPHERE")
 _STOP_WORDS = {
     "a", "an", "and", "at", "behind", "by", "for", "from", "in", "into", "is",
@@ -114,7 +134,10 @@ def _narrative_search_terms(excerpt: Any) -> tuple[list[str], set[str]]:
     return negative_terms, excluded
 
 
-def query_variants_for_scene(scene: dict[str, Any]) -> list[str]:
+def query_variants_for_scene(
+    scene: dict[str, Any],
+    visual_profile: dict[str, Any] | None = None,
+) -> list[str]:
     """Build focused queries while preserving the complete narrative beat."""
     excerpt = scene.get("narration_excerpt", "")
     spec = scene.get("visual_semantics") or {}
@@ -140,6 +163,9 @@ def query_variants_for_scene(scene: dict[str, Any]) -> list[str]:
     add_terms(negative_terms)
     add_terms(required)
     add_terms(_semantic_terms(scene))
+    # Continuity terms are appended after the narrative beat so they refine
+    # discovery without replacing the semantic gate.
+    add_terms(continuity_search_terms(scene, visual_profile))
     add_terms(_tokens(excerpt))
 
     if not unique:
@@ -157,8 +183,11 @@ def query_variants_for_scene(scene: dict[str, Any]) -> list[str]:
     return variants[:3]
 
 
-def query_for_scene(scene: dict[str, Any]) -> str:
-    return query_variants_for_scene(scene)[0]
+def query_for_scene(
+    scene: dict[str, Any],
+    visual_profile: dict[str, Any] | None = None,
+) -> str:
+    return query_variants_for_scene(scene, visual_profile)[0]
 
 
 def _candidate_text(candidate: dict[str, Any]) -> str:
@@ -182,12 +211,20 @@ def _fallback_tier(candidate: dict[str, Any], scene: dict[str, Any]) -> str:
     return "ATMOSPHERE"
 
 
-def score_candidate(candidate: dict[str, Any], scene: dict[str, Any]) -> float:
+def score_candidate(
+    candidate: dict[str, Any],
+    scene: dict[str, Any],
+    visual_profile: dict[str, Any] | None = None,
+) -> float:
     guard = visual_match_report(scene, candidate, require_review=False)
     if guard.get("status") == "BLOCKED":
         return 0.0
+    continuity = continuity_match_report(scene, candidate, visual_profile)
+    if continuity.get("status") == "BLOCKED":
+        return 0.0
 
     semantic = float(guard.get("score", 0.0))
+    continuity_score = float(continuity.get("score", 1.0))
     duration = float(candidate.get("duration_seconds", 0) or 0)
     target = float(scene.get("duration", 1) or 1)
     duration_fit = min(duration / target, target / duration) if duration > 0 else 0.0
@@ -195,12 +232,30 @@ def score_candidate(candidate: dict[str, Any], scene: dict[str, Any]) -> float:
     width = int(candidate.get("width", 0) or 0)
     height = int(candidate.get("height", 0) or 0)
     orientation = 1.0 if height >= width and height > 0 else 0.45
-    provider = 0.90 if candidate.get("provider") == "mixkit" else 0.75 if candidate.get("provider") == "pixabay" else 0.70
-    rights = 1.0 if candidate.get("license") or candidate.get("rights_status") == "APPROVED" else 0.0
+    provider = {
+        "mixkit": 0.90,
+        "pixabay": 0.86,
+        "pexels": 0.84,
+        "coverr": 0.82,
+    }.get(str(candidate.get("provider")), 0.70)
+    rights = 1.0 if (
+        candidate.get("license")
+        or candidate.get("license_name")
+        or candidate.get("rights_status") == "APPROVED"
+    ) else 0.0
 
-    # Semantic fit dominates.  Duration, vertical suitability and rights are
-    # tie-breakers, never substitutes for narrative relevance.
-    return round(min(1.0, 0.68 * semantic + 0.12 * duration_fit + 0.08 * orientation + 0.06 * provider + 0.06 * rights), 4)
+    # Narrative fit remains the dominant signal.  Continuity is now an
+    # explicit first-class signal, while technical factors remain tie-breakers.
+    return round(min(
+        1.0,
+        0.48 * semantic
+        + 0.18 * continuity_score
+        + 0.10 * duration_fit
+        + 0.08 * orientation
+        + 0.06 * provider
+        + 0.05 * rights
+        + 0.05 * (1.0 if candidate.get("visual_evidence") else 0.0),
+    ), 4)
 
 
 def _candidate_key(candidate: dict[str, Any]) -> str:
@@ -211,18 +266,33 @@ def _candidate_key(candidate: dict[str, Any]) -> str:
     return json.dumps(candidate, sort_keys=True, ensure_ascii=False)
 
 
-def _prepare_candidate(candidate: dict[str, Any], provider: str, scene: dict[str, Any]) -> dict[str, Any]:
+def _prepare_candidate(
+    candidate: dict[str, Any],
+    provider: str,
+    scene: dict[str, Any],
+    visual_profile: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    provider_policy = policy_for(provider) or {}
     prepared = {
         **candidate,
         "provider": provider,
+        "source_tier": candidate.get("source_tier") or provider_policy.get("source_tier"),
+        "manual_rights_review": bool(provider_policy.get("manual_only", False)),
         "approved_for_render": False,
         "rights_status": "REVIEW_REQUIRED",
         "fallback_tier": _fallback_tier(candidate, scene),
     }
     guard = visual_match_report(scene, prepared, require_review=False)
+    continuity_guard = continuity_match_report(scene, prepared, visual_profile)
     prepared["visual_guard"] = guard
-    prepared["relevance_score"] = score_candidate(prepared, scene)
-    prepared["selection_status"] = "REVIEW_REQUIRED" if guard.get("status") == "PASS" else "REJECTED_SEMANTIC_MISMATCH"
+    prepared["continuity_guard"] = continuity_guard
+    prepared["relevance_score"] = score_candidate(prepared, scene, visual_profile)
+    if guard.get("status") != "PASS":
+        prepared["selection_status"] = "REJECTED_SEMANTIC_MISMATCH"
+    elif continuity_guard.get("status") == "BLOCKED":
+        prepared["selection_status"] = "REJECTED_CONTINUITY_CONFLICT"
+    else:
+        prepared["selection_status"] = "REVIEW_REQUIRED"
     return prepared
 
 
@@ -241,8 +311,9 @@ def build_queue(
         raise ResearchError(str(exc)) from exc
 
     results = []
+    visual_profile = continuity_profile(manifest)
     for scene in manifest.get("scenes", []):
-        variants = query_variants_for_scene(scene)
+        variants = query_variants_for_scene(scene, visual_profile)
         candidates = []
         rejected = []
         errors = []
@@ -254,7 +325,7 @@ def build_queue(
             try:
                 for query in variants:
                     for raw in searcher(query, limit):
-                        candidate = _prepare_candidate(raw, provider, scene)
+                        candidate = _prepare_candidate(raw, provider, scene, visual_profile)
                         key = _candidate_key(candidate)
                         if key in unique_keys:
                             continue
@@ -271,7 +342,7 @@ def build_queue(
                             candidate["source_asset_key"] = source_key
                             candidate["rejection_reason"] = "source asset is already retired in the global memory registry"
                             rejected.append(candidate)
-                        elif candidate["selection_status"] == "REJECTED_SEMANTIC_MISMATCH":
+                        elif candidate["selection_status"].startswith("REJECTED_"):
                             candidate["global_memory_check"] = asset_memory["status"]
                             rejected.append(candidate)
                         else:
@@ -300,9 +371,11 @@ def build_queue(
                 "retired_source_count": len(asset_memory["retired_source_keys"]),
             },
             "image_fallback": "FORBIDDEN",
+            "continuity_profile_id": (visual_profile or {}).get("profile_id"),
             "selection_rule": (
                 "match the complete narrative beat using subject, action, environment "
-                "and object evidence; reject forbidden or context-free filler"
+                "and object evidence; reject forbidden or context-free filler; "
+                "then verify the clip belongs to the declared visual world"
             ),
         })
 
@@ -312,6 +385,7 @@ def build_queue(
         "video_id": manifest.get("video_id"),
         "research_type": "approved_video_asset_queue",
         "providers": list(PROVIDER_ORDER),
+        "visual_continuity_profile": visual_profile,
         "scenes": results,
         "clip_quantity_policy": policy,
         "clip_quantity_gate": quantity,
