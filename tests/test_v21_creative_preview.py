@@ -7,6 +7,7 @@ import wave
 from pathlib import Path
 
 from production.render_v21_preview import PreviewRenderError, validate_voice_profile
+import production.render_v21_preview as preview_renderer
 
 
 def _write_wav(path: Path) -> None:
@@ -53,3 +54,10 @@ def test_creative_preview_rejects_edge_voice_profile() -> None:
             assert "Voice identity mismatch" in str(exc)
         else:
             raise AssertionError("Edge TTS must not pass the creative preview gate")
+
+
+def test_creative_preview_splits_voice_before_sidechain_mix() -> None:
+    source = Path(preview_renderer.__file__).read_text(encoding="utf-8")
+    assert "asplit=2[voice_mix][voice_key]" in source
+    assert "[bed][voice_key]sidechaincompress" in source
+    assert "[voice_mix][ducked]amix" in source
