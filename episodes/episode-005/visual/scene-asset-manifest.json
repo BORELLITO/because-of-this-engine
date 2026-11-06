@@ -5,7 +5,7 @@
   "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
   "editorial_mode": "factual_documentary",
   "title": "THE NIGHT THE MACHINE LIED",
-  "status": "PARTIAL_MANIFEST_VALIDATED_BLOCKED_RENDER",
+  "status": "PARTIAL_MANIFEST_REVALIDATION_REQUIRED_BLOCKED_RENDER",
   "purpose": "Human-approved candidate-to-shot assignments before final production promotion.",
   "source_plan": "episodes/episode-005/visual/asset-acquisition-plan.json",
   "approval_record": {
@@ -19,7 +19,23 @@
       "publication remains manual-only",
       "the visual manifest remains manifest-only; render authorization is controlled by production-record.json",
       "no automatic render execution or silent fallback"
-    ]
+    ],
+    "latest_manifest_update": {
+      "recorded_at_utc": "2026-11-06T06:41:18Z",
+      "candidate_ids": [
+        "pexels-11764431",
+        "pexels-4285872"
+      ],
+      "shot_ids": [
+        "S03",
+        "S09"
+      ],
+      "scope": "MANIFEST_ONLY",
+      "render_authorized": false,
+      "global_catalog_updated": false,
+      "drive_written": false,
+      "publication_allowed": false
+    }
   },
   "global_reuse_audit": {
     "status": "PASS_NO_COLLISION",
@@ -30,6 +46,36 @@
     "candidate_count": 12,
     "blockers": [],
     "replacement_candidate_audit": {
+      "status": "PASS_NO_COLLISION",
+      "workflow_run_id": 42166326952,
+      "job_id": 127723541842,
+      "artifact_id": 13479201438,
+      "artifact_digest": "sha256:755d8361c98a1587c9ac304690520b8520fc09d1aaa13f0551f10a641bd70934",
+      "algorithm": "video-fingerprint-v2-rgb24-q4",
+      "candidate_ids": [
+        "pexels-5523892",
+        "pexels-12590338"
+      ],
+      "blockers": [],
+      "human_approval": "APPROVED_FOR_MANIFEST_ONLY",
+      "global_catalog_updated": false
+    },
+    "latest_replacement_candidate_audit": {
+      "status": "PASS_NO_COLLISION",
+      "workflow_run_id": 42175277282,
+      "job_id": 127752198414,
+      "artifact_id": 13483246739,
+      "artifact_digest": "sha256:473192d2e4d67b8ada86f08cc343bca81347534397c90685b47e7337db7e36fd",
+      "algorithm": "video-fingerprint-v2-rgb24-q4",
+      "candidate_ids": [
+        "pexels-11764431",
+        "pexels-4285872"
+      ],
+      "blockers": [],
+      "human_approval": "APPROVED_FOR_MANIFEST_ONLY",
+      "global_catalog_updated": false
+    },
+    "previous_replacement_candidate_audit": {
       "status": "PASS_NO_COLLISION",
       "workflow_run_id": 42166326952,
       "job_id": 127723541842,
@@ -282,25 +328,42 @@
       "source_tier": "stock_auto"
     },
     {
-      "candidate_id": "mixkit-young-engineer-29991",
-      "provider": "mixkit",
-      "source_page_url": "https://mixkit.co/free-stock-video/young-engineer-programming-in-his-workshop-seen-up-close-29991/",
-      "media_url": "https://assets.mixkit.co/videos/29991/29991-720.mp4",
-      "license_name": "Mixkit Stock Video Free License",
+      "candidate_id": "pexels-11764431",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/man-using-walkie-talkie-in-bunker-11764431/",
+      "media_url": "https://videos.pexels.com/video-files/11764431/11764431-hd_1920_1080_30fps.mp4",
+      "license_name": "Pexels License",
       "source_role": "S03",
       "truth_class": "REPRESENTATIONAL",
-      "sha256": "f1474daed5b97009063ca692859fdca1e91044ad62a9cd1f1f3009b2609b3478",
-      "perceptual_hash": "a4e5ac59afbd71e65a7b8eaccba06c5c62ac7e169a6dceea4deae4cb15b5842a",
+      "sha256": "9e2ad3951cafda341e656c9be49ffc55915326b0789e243e65aad65df1408f7b",
+      "perceptual_hash": "b099b8f4ea22a379046da09b6cf48c6f56a55a5053fe21b989552b8cccf6a5c0",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
       "intake_artifact": {
-        "workflow_run_id": 42021165782,
-        "artifact_id": 13411851653,
-        "artifact_digest": "sha256:b18104580e4f089e496f203e65c25cd11d68bb599673a7e1e2243ec53d8ae015"
+        "workflow_run_id": 42174399543,
+        "job_id": 127749408504,
+        "artifact_id": 13482227807,
+        "artifact_digest": "sha256:068d25a3614069052997f31097511748d07b10457511c7fb04c9d347e0b0362",
+        "sha256": "9e2ad3951cafda341e656c9be49ffc55915326b0789e243e65aad65df1408f7b",
+        "duration_seconds": 18.965,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "frame_rate": "30000/1001",
+        "codec": "h264",
+        "size_bytes": 3507016,
+        "fps": 29.97002997002997
       },
       "fingerprint_artifact": {
-        "workflow_run_id": 42021523387,
-        "artifact_id": 13411692548,
-        "artifact_digest": "sha256:60d3a8c2b25a355f2415b9b83ead93e036727ae373ad587c8ae7e7f3b9b046f7"
+        "workflow_run_id": 42175277282,
+        "job_id": 127752198414,
+        "artifact_id": 13483246739,
+        "artifact_digest": "sha256:473192d2e4d67b8ada86f08cc343bca81347534397c90685b47e7337db7e36fd",
+        "algorithm": "video-fingerprint-v2-rgb24-q4",
+        "perceptual_hash": "b099b8f4ea22a379046da09b6cf48c6f56a55a5053fe21b989552b8cccf6a5c0",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
       },
       "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "human_approval": "APPROVED_FOR_MANIFEST",
@@ -308,39 +371,47 @@
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
-      "editorial_caveat": "Modern tablet/code/workshop reconstruction; never literal Petrov archival evidence.",
+      "editorial_caveat": "Dim-room radio operator is a representational reconstruction, never literal Petrov archival evidence. Favor the first 8-10 seconds, crop toward the operator/radio and apply the approved warm low-key grade.",
+      "selection_basis": "Search-v5 replacement for modern tablet/workshop signature; full-duration visual QA pass and global fingerprint pass.",
       "continuity_tags": {
         "era": [
-          "modern",
-          "digital"
+          "period_compatible",
+          "cold_war",
+          "analog"
         ],
         "setting": [
-          "modern_workshop"
+          "early_warning_command",
+          "technical_control_room"
         ],
         "time_of_day": [
+          "night",
           "indeterminate_low_light"
         ],
         "lighting": [
-          "low_key"
+          "low_key",
+          "cool_shadows",
+          "restrained_amber"
         ],
         "palette": [
+          "charcoal",
           "steel",
-          "desaturated_blue"
+          "amber"
         ],
         "texture": [
-          "metal",
-          "digital_ui"
+          "brushed_metal",
+          "low_light_grain",
+          "paper_logbook"
         ],
         "risk_flags": [
-          "modern_era_mismatch",
-          "modern_workshop_mismatch",
-          "representational_only"
+          "representational_operator_not_archival",
+          "workshop_like_background_requires_crop_and_grade",
+          "source_audio_must_be_stripped_in_render"
         ]
       },
       "continuity_risk_flags": [
-        "modern_era_mismatch",
-        "modern_workshop_mismatch",
-        "representational_only"
+        "representational_operator_not_archival",
+        "workshop_like_background_requires_crop_and_grade",
+        "source_audio_must_be_stripped_in_render"
       ],
       "continuity_review_status": "REVIEW_REQUIRED",
       "source_tier": "stock_auto"
@@ -681,25 +752,42 @@
       "source_tier": "stock_auto"
     },
     {
-      "candidate_id": "pixabay-button-press-red-business-click-502",
-      "provider": "pixabay",
-      "source_page_url": "https://pixabay.com/videos/button-press-red-business-click-502/",
-      "media_url": "https://cdn.pixabay.com/video/2015/08/22/502-137078153_large.mp4",
-      "license_name": "Pixabay Content License",
+      "candidate_id": "pexels-4285872",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/stop-play-buttons-record-4285872/",
+      "media_url": "https://videos.pexels.com/video-files/4285872/4285872-hd_1920_1080_30fps.mp4",
+      "license_name": "Pexels License",
       "source_role": "S09",
-      "truth_class": "DOCUMENTED_RECONSTRUCTION",
-      "sha256": "e6eaeddadbda7f8fdf9e4106ad09e0c25e0139f0212dce20a29d34cd8eb77b16",
-      "perceptual_hash": "155c325b4b0c121d7add2c16eea0d86efa5379f7bcec66dc52bec0073972e884",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "sha256": "822ecd823eccb216a38bc50a06d6cc06ba8be57639cb4382bfa510dd4a21e3cc",
+      "perceptual_hash": "d39fcb42f9736e915d4986ab2567650a9aa79a6de743a7af42d324524723b02f",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
       "intake_artifact": {
-        "workflow_run_id": 42073828513,
-        "artifact_id": 13437466569,
-        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057"
+        "workflow_run_id": 42174399543,
+        "job_id": 127749408504,
+        "artifact_id": 13482227807,
+        "artifact_digest": "sha256:068d25a3614069052997f31097511748d07b10457511c7fb04c9d347e0b0362",
+        "sha256": "822ecd823eccb216a38bc50a06d6cc06ba8be57639cb4382bfa510dd4a21e3cc",
+        "duration_seconds": 6.015,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "30000/1001",
+        "codec": "h264",
+        "size_bytes": 3981671,
+        "fps": 29.97002997002997
       },
       "fingerprint_artifact": {
-        "workflow_run_id": 42074599454,
-        "artifact_id": 13438400127,
-        "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+        "workflow_run_id": 42175277282,
+        "job_id": 127752198414,
+        "artifact_id": 13483246739,
+        "artifact_digest": "sha256:473192d2e4d67b8ada86f08cc343bca81347534397c90685b47e7337db7e36fd",
+        "algorithm": "video-fingerprint-v2-rgb24-q4",
+        "perceptual_hash": "d39fcb42f9736e915d4986ab2567650a9aa79a6de743a7af42d324524723b02f",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
       },
       "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "human_approval": "APPROVED_FOR_MANIFEST",
@@ -707,15 +795,17 @@
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
-      "editorial_caveat": "Representational reconstruction/symbolic visual only; never literal Petrov archival evidence.",
-      "selection_basis": "Primary selection for S09: highest scored candidate in the approved two-candidate shortlist.",
+      "editorial_caveat": "Dark analog tape-deck insert is representational only, never literal Petrov archival evidence. Keep English labels and the digital timer subordinate through the editorial crop; strip source audio.",
+      "selection_basis": "Search-v5 replacement for modern digital-signature input; full-duration visual QA pass and global fingerprint pass.",
       "continuity_tags": {
         "era": [
-          "modern",
-          "digital"
+          "period_compatible",
+          "cold_war",
+          "analog"
         ],
         "setting": [
-          "technical_control_room"
+          "technical_control_room",
+          "early_warning_command"
         ],
         "time_of_day": [
           "night",
@@ -723,24 +813,31 @@
         ],
         "lighting": [
           "low_key",
-          "restrained_red"
+          "restrained_red",
+          "cool_shadows"
         ],
         "palette": [
           "charcoal",
-          "warning_red"
+          "warning_red",
+          "amber"
         ],
         "texture": [
           "metal",
-          "digital_ui"
+          "crt_phosphor",
+          "low_light_grain"
         ],
         "risk_flags": [
-          "modern_interface_signature",
-          "period_coherence_review"
+          "generic_tape_deck_not_command_chain",
+          "readable_english_control_labels",
+          "digital_timer_requires_period_coherence_review",
+          "source_audio_must_be_stripped_in_render"
         ]
       },
       "continuity_risk_flags": [
-        "modern_interface_signature",
-        "period_coherence_review"
+        "generic_tape_deck_not_command_chain",
+        "readable_english_control_labels",
+        "digital_timer_requires_period_coherence_review",
+        "source_audio_must_be_stripped_in_render"
       ],
       "continuity_review_status": "REVIEW_REQUIRED",
       "source_tier": "stock_auto"
@@ -1177,12 +1274,21 @@
       "requested_truth_class": "REPRESENTATIONAL",
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
-        "candidate_id": "mixkit-young-engineer-29991",
-        "usage": "modern technical human-anchor reconstruction in workshop; not literal Petrov archival evidence",
+        "candidate_id": "pexels-11764431",
+        "usage": "Dim-room radio operator and notebook as a representational human-anchor reconstruction for the bunker narrative; not literal Petrov archival evidence.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
-        "editorial_caveat": "Use only as representational reconstruction; do not imply the 1983 bunker looked like a modern tablet workstation."
+        "editorial_caveat": "Favor the first 8-10 seconds; crop toward the operator/radio, avoid the widening shelf background, apply warm low-key grade and strip source audio.",
+        "visual_treatment": {
+          "preferred_window_seconds": [
+            0,
+            10
+          ],
+          "crop_strategy": "favor_operator_and_radio",
+          "grade": "warm_low_key",
+          "source_audio": "strip"
+        }
       },
       "blocking_reason": null,
       "continuity_tags": {
@@ -1202,17 +1308,18 @@
         ],
         "lighting": [
           "low_key",
-          "cool_shadows"
+          "cool_shadows",
+          "restrained_amber"
         ],
         "palette": [
           "charcoal",
           "steel",
-          "desaturated_blue"
+          "amber"
         ],
         "texture": [
-          "crt_phosphor",
           "brushed_metal",
-          "low_light_grain"
+          "low_light_grain",
+          "paper_logbook"
         ]
       }
     },
@@ -1451,12 +1558,18 @@
       "requested_truth_class": "MAP_OR_DIAGRAM",
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
-        "candidate_id": "pixabay-button-press-red-business-click-502",
-        "usage": "Technical input insert representing the operator entering the false-alarm classification.",
+        "candidate_id": "pexels-4285872",
+        "usage": "Dark analog tape-deck/control-panel insert representing the false-alarm classification input; not the actual Soviet interface and not literal archival evidence.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
-        "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
+        "editorial_caveat": "Use as a short insert; keep PLAY/REC/STOP labels and digital timer subordinate through the 9:16 editorial crop, and strip source audio.",
+        "visual_treatment": {
+          "crop_strategy": "avoid_extreme_label_dominance",
+          "grade": "low_key_charcoal_red_amber",
+          "source_audio": "strip",
+          "max_insert_seconds": 4
+        }
       },
       "blocking_reason": null,
       "continuity_tags": {
@@ -1467,7 +1580,8 @@
           "period_compatible"
         ],
         "setting": [
-          "technical_control_room"
+          "technical_control_room",
+          "early_warning_command"
         ],
         "time_of_day": [
           "night",
@@ -1475,15 +1589,17 @@
         ],
         "lighting": [
           "low_key",
-          "restrained_red"
+          "restrained_red",
+          "cool_shadows"
         ],
         "palette": [
           "charcoal",
-          "warning_red"
+          "warning_red",
+          "amber"
         ],
         "texture": [
-          "crt_phosphor",
           "metal",
+          "crt_phosphor",
           "low_light_grain"
         ]
       }
@@ -1811,14 +1927,14 @@
   "unresolved_shots": [],
   "promotion_gates": {
     "every_shot_assigned": true,
-    "final_visual_manifest_validated": true,
+    "final_visual_manifest_validated": false,
     "global_catalog_update_authorized": false,
     "thumbnail_final_required": true,
     "render_authorized": false,
     "drive_write_authorized": false,
     "publication_authorized": false
   },
-  "next_action": "Obtain editorial approval for the four search-v4 candidate IDs, dispatch isolated intake/fingerprint, then assign only fingerprint-clean candidates and rerun the sequence gate. Do not render or promote.",
+  "next_action": "Run the visual-plan contract on the updated S03/S09 assignments; then continue S04 dark-panel search and S12 final crop/credit review. Do not render, write Drive, mutate the global catalog or publish.",
   "reuse_policy": {
     "source_reuse_scope": "global",
     "distinct_source_required_per_shot": true,
@@ -2004,15 +2120,52 @@
         "not literal Petrov archival evidence",
         "no render, global catalog mutation, Drive write or publication"
       ]
+    },
+    {
+      "candidate_ids": [
+        "pexels-11764431",
+        "pexels-4285872"
+      ],
+      "shot_ids": [
+        "S03",
+        "S09"
+      ],
+      "status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_at_utc": "2026-11-06T06:41:18Z",
+      "decision": "Apply search-v5 replacements after full-duration visual QA and global fingerprint pass.",
+      "superseded_assignments": [
+        {
+          "shot_id": "S03",
+          "previous_candidate_id": "mixkit-young-engineer-29991"
+        },
+        {
+          "shot_id": "S09",
+          "previous_candidate_id": "pixabay-button-press-red-business-click-502"
+        }
+      ],
+      "evidence": {
+        "intake_workflow_run_id": 42174399543,
+        "intake_artifact_id": 13482227807,
+        "fingerprint_workflow_run_id": 42175277282,
+        "fingerprint_job_id": 127752198414,
+        "fingerprint_artifact_id": 13483246739,
+        "fingerprint_artifact_digest": "sha256:473192d2e4d67b8ada86f08cc343bca81347534397c90685b47e7337db7e36fd"
+      },
+      "constraints": [
+        "representational footage is not literal Petrov archival evidence",
+        "S03 favors first 8-10 seconds with warm low-key grade",
+        "S09 keeps labels/timer subordinate through editorial crop",
+        "no render, catalog mutation, Drive write or publication"
+      ]
     }
   ],
   "final_visual_manifest_validation": {
-    "validated_at_utc": "2026-11-06T05:43:03Z",
-    "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
+    "validated_at_utc": "2026-11-06T06:41:18Z",
+    "status": "REVALIDATION_REQUIRED_AFTER_SEARCH_V5_MANIFEST_REPLACEMENTS",
     "validator": "production/visual_plan_contract.py",
     "checkout_commit": "9ea8eebed4893dbaf59d0acaa879740ef43932ee",
-    "candidate_count": 47,
-    "approved_manifest_candidate_count": 23,
+    "candidate_count": 51,
+    "approved_manifest_candidate_count": 25,
     "manifest_asset_count": 16,
     "assigned_shot_count": 16,
     "unresolved_shot_count": 0,
@@ -2020,7 +2173,7 @@
     "render_allowed": false,
     "global_catalog_updated": false,
     "revalidation_required": true,
-    "replacement_note": "S06 and S11 replacements remain manifest-only review candidates. Search-v4 adds four unassigned shortlist candidates for S03/S04/S09/S12; the strict preview/render block remains active.",
+    "replacement_note": "Search-v5 replacements are now active in the manifest for S03 and S09. CI must recompute continuity; S04 remains an independent dark-panel search blocker and S12 remains pending final crop/credit review.",
     "continuity_gate": "REVIEW_REQUIRED",
     "strict_preview_block": true,
     "ci_workflow_run_id": 42170029722,
@@ -2041,9 +2194,30 @@
       "S12->S13"
     ],
     "continuity_hard_conflict_count": 23,
-    "continuity_coverage_score": 0.8812
+    "continuity_coverage_score": 0.8812,
+    "pending_revalidation_shots": [
+      "S03",
+      "S04",
+      "S09",
+      "S12"
+    ],
+    "previous_validation_snapshot": {
+      "validated_at_utc": "2026-11-06T05:43:03Z",
+      "ci_workflow_run_id": 42170029722,
+      "ci_job_id": 127735446473,
+      "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
+      "continuity_gate": "REVIEW_REQUIRED",
+      "continuity_hard_conflict_shots": [
+        "S03",
+        "S04",
+        "S09",
+        "S12"
+      ],
+      "continuity_hard_conflict_count": 23,
+      "continuity_coverage_score": 0.8812
+    }
   },
-  "last_adjustment": "CI run 42170029722/job 127735446473 revalidated the expanded 47-candidate plan without changing the 16 active assignments. Search-v4 candidates remain shortlist-only; S03/S04/S09/S12 and both adjacency breaks still block preview/render.",
+  "last_adjustment": "Applied fingerprint-clean search-v5 replacements: pexels-11764431 → S03 and pexels-4285872 → S09. Validation is intentionally stale until CI recomputes continuity; render remains blocked.",
   "visual_continuity_profile": {
     "schema_version": "1.0",
     "profile_id": "episode-005-cold-war-bunker-continuity-v1",
@@ -2157,9 +2331,9 @@
     ]
   },
   "continuity_gate": {
-    "status": "REVIEW_REQUIRED",
+    "status": "REVALIDATION_REQUIRED",
     "profile_id": "episode-005-cold-war-bunker-continuity-v1",
-    "reason": "CI confirms the token-boundary fix removed false night/neon_nightclub conflicts. Remaining hard conflicts are S03/S04/S09/S12; S06/S11 require metadata/editorial review; S11->S12 and S12->S13 require a declared bridge or replacement.",
+    "reason": "Manifest assignments changed for S03 and S09; rerun the visual-plan contract before preview. S04 and S12 remain unresolved continuity/editorial gates.",
     "strict_preview_block": true,
     "hard_conflict_shots": [
       "S03",
@@ -2181,7 +2355,14 @@
     "ci_job_id": 127731406133,
     "ci_conclusion": "success",
     "coverage_score": 0.8812,
-    "hard_conflict_count": 23
+    "hard_conflict_count": 23,
+    "revalidation_required": true,
+    "pending_revalidation_shots": [
+      "S03",
+      "S04",
+      "S09",
+      "S12"
+    ]
   },
   "replacement_history": [
     {
@@ -2203,6 +2384,28 @@
       "scope": "MANIFEST_ONLY",
       "render_allowed": false,
       "global_catalog_updated": false
+    },
+    {
+      "recorded_at_utc": "2026-11-06T06:41:18Z",
+      "shot_replacements": [
+        {
+          "shot_id": "S03",
+          "previous_candidate_id": "mixkit-young-engineer-29991",
+          "replacement_candidate_id": "pexels-11764431",
+          "reason": "remove modern tablet/workshop signature and restore a human/radio anchor aligned with the bunker narrative"
+        },
+        {
+          "shot_id": "S09",
+          "previous_candidate_id": "pixabay-button-press-red-business-click-502",
+          "replacement_candidate_id": "pexels-4285872",
+          "reason": "remove modern digital-signature interface and restore a dark analog mechanical input insert"
+        }
+      ],
+      "scope": "MANIFEST_ONLY",
+      "render_allowed": false,
+      "global_catalog_updated": false,
+      "drive_written": false,
+      "publication_allowed": false
     }
   ]
 }
