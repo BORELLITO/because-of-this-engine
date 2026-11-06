@@ -48,8 +48,8 @@
       "max": 75
     },
     "real_call_authorized": true,
-    "request_count": 0,
-    "execution_status": "PENDING_DIRECT_GEMINI_GENERATION",
+    "request_count": 1,
+    "execution_status": "GEMINI_CHARON_NARRATION_READY",
     "retry_policy": "NO_AUTOMATIC_RETRY_AFTER_SUBMISSION",
     "execution_route": "direct_gemini_api_single_full_script_request",
     "production_provider_policy": "Gemini TTS Charon explicitly selected; no provider fallback or Creative Claw route.",
@@ -57,18 +57,37 @@
       "provider": "gemini_tts",
       "model": "gemini-3.8-flash-tts",
       "voice_name": "Charon",
-      "workflow_run_id": 42225399223,
-      "status": "DURATION_REJECTED_NO_ARTIFACT",
-      "duration_seconds": 82.24,
-      "audio_persisted": false,
-      "note": "The quota was available and Gemini returned audio, but the prior 174-word script exceeded the approved 80-second ceiling. The script was shortened before a new manually authorized request."
+      "workflow_run_id": 42259035900,
+      "status": "APPROVED_NARRATION_ARTIFACT",
+      "duration_seconds": 73.52,
+      "audio_sha256": "2678ffcd4b03e92e52de76dd312d53aa910cac3dc6ac01440ceaebb66a34f1bf",
+      "audio_persisted": true,
+      "artifact": "episode005-gemini-charon-narration",
+      "note": "Direct Gemini Charon full-script request passed identity, mono 24kHz WAV and 60–80 second duration validation."
     },
     "captions": {
-      "status": "PENDING_REAL_GEMINI_AUDIO",
-      "timing_mode": "provider_agnostic_word_alignment",
-      "final_word_level_ready": false
+      "status": "GEMINI_CHARON_KARAOKE_READY",
+      "workflow_run_id": 42262823070,
+      "artifact": "episode005-gemini-charon-captioned",
+      "timing_mode": "whisper_vosk_phrase_fallback_word_timestamps",
+      "final_word_level_ready": true,
+      "caption_count": 21,
+      "audio_duration_seconds": 73.52,
+      "note": "Timestamped word-highlight ASS captions were generated from the approved Gemini Charon audio. Whisper is primary; Vosk is limited to phrase-scoped fallback."
     },
-    "workflow_policy": "manual_dispatch_only; one full-script request per RUN_ONCE execution"
+    "workflow_policy": "manual_dispatch_only; one full-script request per RUN_ONCE execution",
+    "prior_attempts": [
+      {
+        "provider": "gemini_tts",
+        "model": "gemini-3.8-flash-tts",
+        "voice_name": "Charon",
+        "workflow_run_id": 42225399223,
+        "status": "DURATION_REJECTED_NO_ARTIFACT",
+        "duration_seconds": 82.24,
+        "audio_persisted": false,
+        "note": "The quota was available and Gemini returned audio, but the prior 174-word script exceeded the approved 80-second ceiling. The script was shortened before a new manually authorized request."
+      }
+    ]
   },
   "shot_plan": [
     {
