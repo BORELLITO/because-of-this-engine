@@ -28,15 +28,33 @@ jobs:
       - name: Checkout candidate branch
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
 
-      - name: Install media tools (runner-first, bounded fallback)
+      - name: Install media tools (runner-first, pinned GitHub fallback)
         run: |
           set -euo pipefail
           if command -v ffmpeg >/dev/null 2>&1 && command -v ffprobe >/dev/null 2>&1; then
             echo "Using runner-provided ffmpeg/ffprobe"
           else
-            echo "Runner does not provide ffmpeg/ffprobe; installing distro packages"
-            sudo apt-get update
-            sudo apt-get install -y --no-install-recommends ffmpeg
+            echo "Runner does not provide ffmpeg/ffprobe; downloading pinned shared build"
+            tools_dir="${RUNNER_TEMP}/ffmpeg-pinned"
+            archive="${tools_dir}/ffmpeg-shared.tar.xz"
+            mkdir -p "${tools_dir}"
+            curl --fail --location --retry 3 --retry-all-errors --retry-delay 2 \
+              --connect-timeout 30 --max-time 360 \
+              "https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2026-10-29-19-17/ffmpeg-master-latest-linux64-gpl-shared.tar.xz" \
+              --output "${archive}"
+            echo "cab1be64394b574fd3ed306b1efc3f800b316654de6f91125d419f682f64522b  ${archive}" | sha256sum --check --status
+            tar -xJf "${archive}" -C "${tools_dir}"
+            ffmpeg_path="$(find "${tools_dir}" -type f -name ffmpeg -perm -111 | head -n 1)"
+            ffprobe_path="$(find "${tools_dir}" -type f -name ffprobe -perm -111 | head -n 1)"
+            lib_dir="$(find "${tools_dir}" -type d -name lib | head -n 1)"
+            test -n "${ffmpeg_path}" && test -n "${ffprobe_path}" && test -n "${lib_dir}"
+            media_bin_dir="$(dirname "${ffmpeg_path}")"
+            export PATH="${media_bin_dir}:${PATH}"
+            export LD_LIBRARY_PATH="${lib_dir}${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+            echo "${media_bin_dir}" >> "${GITHUB_PATH}"
+            echo "LD_LIBRARY_PATH=${LD_LIBRARY_PATH}" >> "${GITHUB_ENV}"
+            "${ffmpeg_path}" -version | head -n 1
+            "${ffprobe_path}" -version | head -n 1
           fi
 
       - name: Verify media tools
