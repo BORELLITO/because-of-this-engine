@@ -100,10 +100,10 @@ def valid_manifest() -> dict:
             "delivery_adapter": "production/google_drive_delivery.py",
         },
         "tts_contract": {
-            "provider": "microsoft_edge_tts",
-            "voice_name": "en-US-ChristopherNeural",
+            "provider": "gemini_tts",
+            "voice_name": "Charon",
             "language_code": "en-US",
-            "model": "edge_neural",
+            "model": "gemini-3.8-flash-tts",
             "provider_fallback": "forbidden",
             "status": "OFFLINE_CONTRACT_VERIFIED",
             "real_call_authorized": False,
