@@ -134,7 +134,7 @@ def validate_voice_profile(profile_path: Path, audio_path: Path) -> dict[str, An
         raise PreviewRenderError("Voice profile must be a JSON object.")
     expected = {
         "provider": APPROVED_VOICE_PROVIDER,
-        "voice_id": APPROVED_VOICE_ID,
+        "voice_name": APPROVED_VOICE_NAME,
         "model": APPROVED_VOICE_MODEL,
     }
     for key, value in expected.items():
@@ -149,7 +149,7 @@ def validate_voice_profile(profile_path: Path, audio_path: Path) -> dict[str, An
         raise PreviewRenderError("Voice profile audio_sha256 does not match narration.wav.")
     return {
         "provider": profile["provider"],
-        "voice_id": profile["voice_id"],
+        "voice_name": profile["voice_name"],
         "model": profile["model"],
         "audio_sha256": actual,
         "identity_status": profile["identity_status"],
