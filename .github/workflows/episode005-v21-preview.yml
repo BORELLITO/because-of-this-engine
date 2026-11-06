@@ -7,14 +7,14 @@ on:
   workflow_dispatch:
     inputs:
       source_run_id:
-        description: "GitHub Actions run containing the approved Charon narration artifact"
+        description: "GitHub Actions run containing the approved Gemini/Charon captioned narration artifact"
         required: true
-        default: ""
+        default: "42262823070"
         type: string
       source_artifact_name:
         description: "Artifact containing narration.wav, narration.ass and voice-profile.json"
         required: true
-        default: "episode005-charon-narration"
+        default: "episode005-gemini-charon-captioned"
         type: string
 
 permissions:
