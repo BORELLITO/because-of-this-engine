@@ -71,7 +71,7 @@ def valid_manifest() -> dict:
             "real_audio_generated": False,
             "final_transcription_required": True,
             "target_duration_seconds": 65,
-            "adapter": "production/microsoft_edge_tts.py",
+            "adapter": "production/gemini_tts.py",
         },
         "captions_contract": {
             "source": "final_audio_transcription",
@@ -267,7 +267,7 @@ class V21IntegrationTests(unittest.TestCase):
 
     def test_tts_contract_rejects_provider_drift(self):
         manifest = valid_manifest()
-        manifest["tts_contract"]["provider"] = "gemini_tts"
+        manifest["tts_contract"]["provider"] = "microsoft_edge_tts"
         report = evaluate(manifest, registry=historical_registry())
         self.assertIn("TTS_CONTRACT", report["blocking_gates"])
 
