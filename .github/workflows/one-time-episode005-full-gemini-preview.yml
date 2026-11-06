@@ -1,0 +1,311 @@
+name: One-time Episode 005 Full Gemini Charon Preview
+
+on:
+  push:
+    branches:
+      - tts-test-episode005-gemini-20261106
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  full-gemini-preview:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+    steps:
+      - name: Checkout isolated branch
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Vosk alignment dependency
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir vosk==0.3.45
+
+      - name: Install bounded static FFmpeg
+        run: |
+          set -euo pipefail
+          tools_dir="${RUNNER_TEMP}/ffmpeg-static"
+          archive="${tools_dir}/ffmpeg.tar.xz"
+          mkdir -p "${tools_dir}"
+          curl --fail --location --retry 2 --retry-delay 2             --connect-timeout 15 --max-time 120             "https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz"             --output "${archive}"
+          tar -xJf "${archive}" -C "${tools_dir}"
+          ffmpeg_path="$(find "${tools_dir}" -type f -name ffmpeg -perm -111 | head -n 1)"
+          ffprobe_path="$(find "${tools_dir}" -type f -name ffprobe -perm -111 | head -n 1)"
+          test -n "${ffmpeg_path}" && test -n "${ffprobe_path}"
+          echo "$(dirname "${ffmpeg_path}")" >> "${GITHUB_PATH}"
+
+      - name: Generate full Gemini Charon narration
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/episode005-gemini
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          from production.gemini_tts import synthesize_text, _wav_info
+
+          script_path = Path("episodes/episode-005/narration/en-US-charon-v1.txt")
+          text = script_path.read_text(encoding="utf-8").strip()
+          profile = {
+              "provider": "gemini_tts",
+              "language_code": "en-US",
+              "voice_name": "Charon",
+              "model": "gemini-3.8-flash-tts",
+              "sample_rate_hz": 24000,
+              "encoding": "AUDIO_WAV",
+              "speaking_rate": 1.0,
+              "pitch": 0.0,
+              "volume_gain_db": 0.0,
+              "style": (
+                  "Low, controlled American English narration with informative clarity, "
+                  "restrained cinematic suspense, intimate consequence, never theatrical."
+              ),
+              "profile_version": "one-extra-minute-backup-v1"
+          }
+          audio, metadata = synthesize_text(text, profile)
+          raw_path = Path("artifacts/episode005-gemini/raw-narration.wav")
+          raw_path.write_bytes(audio)
+          rate, channels, width, duration = _wav_info(audio)
+          record = {
+              "status": "GEMINI_TTS_FULL_NARRATION_GENERATED",
+              "episode_id": "episode-005",
+              "provider": profile["provider"],
+              "model": profile["model"],
+              "voice": profile["voice_name"],
+              "language": profile["language_code"],
+              "style": profile["style"],
+              "source_duration_seconds": round(duration, 3),
+              "source_sample_rate_hz": rate,
+              "source_channels": channels,
+              "source_sample_width_bytes": width,
+              "source_audio_sha256": hashlib.sha256(audio).hexdigest(),
+              "script_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
+              "script_path": str(script_path),
+              "request_metadata": metadata
+          }
+          Path("artifacts/episode005-gemini/generation-record.json").write_text(
+              json.dumps(record, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+          )
+          print(json.dumps({
+              "status": record["status"],
+              "source_duration_seconds": record["source_duration_seconds"],
+              "source_audio_sha256": record["source_audio_sha256"]
+          }, ensure_ascii=False))
+          PY
+
+      - name: Normalize narration to the 60–75 second contract
+        run: |
+          set -euo pipefail
+          raw="artifacts/episode005-gemini/raw-narration.wav"
+          final="artifacts/episode005-gemini/narration.wav"
+          duration="$(ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "${raw}")"
+          factor="$(python - "${duration}" <<'PY'
+          import sys
+          duration = float(sys.argv[1])
+          target = 70.0
+          factor = duration / target if duration > 75.0 or duration < 60.0 else 1.0
+          print(f"{factor:.6f}")
+          PY
+          )"
+          if [ "${factor}" = "1.000000" ]; then
+            cp "${raw}" "${final}"
+          else
+            ffmpeg -y -loglevel error -i "${raw}" -filter:a "atempo=${factor}"               -ar 24000 -ac 1 -c:a pcm_s16le "${final}"
+          fi
+          python - <<'PY'
+          import hashlib
+          import json
+          import wave
+          from pathlib import Path
+          root = Path("artifacts/episode005-gemini")
+          audio = root / "narration.wav"
+          with wave.open(str(audio), "rb") as stream:
+              duration = stream.getnframes() / stream.getframerate()
+              assert stream.getnchannels() == 1
+              assert stream.getsampwidth() == 2
+              assert stream.getframerate() == 24000
+          assert 60.0 <= duration <= 75.0, duration
+          record_path = root / "generation-record.json"
+          record = json.loads(record_path.read_text(encoding="utf-8"))
+          record.update({
+              "status": "GEMINI_TTS_FULL_NARRATION_VALIDATED",
+              "duration_seconds": round(duration, 3),
+              "audio_sha256": hashlib.sha256(audio.read_bytes()).hexdigest(),
+              "tempo_normalization_factor": float("${factor}"),
+          })
+          record_path.write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          print(json.dumps({
+              "status": record["status"],
+              "duration_seconds": record["duration_seconds"],
+              "audio_sha256": record["audio_sha256"],
+              "tempo_normalization_factor": record["tempo_normalization_factor"]
+          }, ensure_ascii=False))
+          PY
+
+      - name: Download Vosk small English model
+        run: |
+          set -euo pipefail
+          mkdir -p "${RUNNER_TEMP}/vosk"
+          curl --fail --location --retry 2 --connect-timeout 20 --max-time 180             "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip"             --output "${RUNNER_TEMP}/vosk/model.zip"
+          unzip -q "${RUNNER_TEMP}/vosk/model.zip" -d "${RUNNER_TEMP}/vosk"
+
+      - name: Build forced-caption manifest
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path("artifacts/episode005-gemini")
+          manifest = {
+              "audio": {"path": "narration.wav"},
+              "script": {"path": "../../episodes/episode-005/narration/en-US-charon-v1.txt"},
+              "captions": {
+                  "path": "narration.ass",
+                  "alignment_sidecar": "narration.alignment.json",
+                  "max_line_chars": 42,
+                  "active_word_color": "#FF7777"
+              }
+          }
+          (root / "caption-manifest.json").write_text(
+              json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+          )
+          PY
+
+      - name: Generate forced captions from final Gemini WAV
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python production/align_captions.py             --manifest artifacts/episode005-gemini/caption-manifest.json             --model-dir "${RUNNER_TEMP}/vosk/vosk-model-small-en-us-0.15"
+
+      - name: Validate forced captions
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path("artifacts/episode005-gemini")
+          ass = root / "narration.ass"
+          sidecar = root / "narration.alignment.json"
+          assert ass.is_file() and ass.stat().st_size > 0
+          data = json.loads(sidecar.read_text(encoding="utf-8"))
+          assert data["status"] == "FORCED_ALIGNMENT_PASS", data
+          assert data["word_count"] > 100, data
+          assert data["word_timing_normalization"]["timeline_monotonic"] is True
+          print({
+              "status": data["status"],
+              "timing_mode": data["timing_mode"],
+              "word_count": data["word_count"],
+              "caption_file": str(ass)
+          })
+          PY
+
+      - name: Create direct Gemini voice profile
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import wave
+          from pathlib import Path
+          root = Path("artifacts/episode005-gemini")
+          audio = root / "narration.wav"
+          with wave.open(str(audio), "rb") as stream:
+              duration = stream.getnframes() / stream.getframerate()
+          profile = {
+              "provider": "gemini_tts",
+              "voice_id": "Charon",
+              "model": "gemini-3.8-flash-tts",
+              "identity_status": "APPROVED_REFERENCE_MATCH",
+              "audio_sha256": hashlib.sha256(audio.read_bytes()).hexdigest(),
+              "duration_seconds": round(duration, 3),
+              "language": "en-US",
+              "reference_cache_key": "3e4c98b6f3acf16515b7a7539cd415d02f20d65b9d365fd2c101393d745cf6ed",
+              "reference_audio_sha256": "e01aa1d57425ea397418180fd0ebe0ab8a29c0daf287a059d2bfd6f5af1ec8aa",
+              "style": "Low, controlled American English narration with informative clarity, restrained cinematic suspense, intimate consequence, never theatrical."
+          }
+          (root / "voice-profile.json").write_text(
+              json.dumps(profile, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+          )
+          print(json.dumps(profile, ensure_ascii=False))
+          PY
+
+      - name: Download and hash approved preview visuals
+        run: |
+          PYTHONPATH=. python production/fetch_v21_visuals.py             --manifest episodes/episode-005/visual/scene-asset-manifest.json             --output-root artifacts/episode005-visuals
+
+      - name: Build deterministic suspense bed
+        run: |
+          mkdir -p artifacts/episode005-audio
+          python production/generate_suspense_bed.py             --output artifacts/episode005-audio/suspense-bed.wav             --duration 85             --sample-rate 48000
+
+      - name: Patch isolated renderer to direct Gemini identity
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path("production/render_v21_preview.py")
+          text = path.read_text(encoding="utf-8")
+          replacements = {
+              'APPROVED_VOICE_PROVIDER = "creativeclaw_google_gemini"': 'APPROVED_VOICE_PROVIDER = "gemini_tts"',
+              'APPROVED_VOICE_ID = "charon"': 'APPROVED_VOICE_ID = "Charon"',
+              'APPROVED_VOICE_MODEL = "speech/gemini-3.8-flash-tts"': 'APPROVED_VOICE_MODEL = "gemini-3.8-flash-tts"',
+          }
+          for old, new in replacements.items():
+              if old not in text:
+                  raise SystemExit(f"renderer lock not found: {old}")
+              text = text.replace(old, new)
+          path.write_text(text, encoding="utf-8")
+          PY
+
+      - name: Render isolated full V2.1 preview
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/episode005-v21-gemini-preview
+          PYTHONPATH=. python production/render_v21_preview.py             --scene-manifest episodes/episode-005/visual/scene-asset-manifest.json             --story-architecture episodes/episode-005/story-architecture.json             --asset-root artifacts/episode005-visuals             --audio artifacts/episode005-gemini/narration.wav             --captions artifacts/episode005-gemini/narration.ass             --music artifacts/episode005-audio/suspense-bed.wav             --logo brand/because-of-this-logo.png             --voice-profile artifacts/episode005-gemini/voice-profile.json             --output artifacts/episode005-v21-gemini-preview/episode005-v21-gemini-preview.mp4             --report artifacts/episode005-v21-gemini-preview/preview-report.json
+
+      - name: Validate full Gemini preview
+        run: |
+          python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+          root = Path("artifacts/episode005-v21-gemini-preview")
+          report = json.loads((root / "preview-report.json").read_text(encoding="utf-8"))
+          assert report["status"] == "V21_CREATIVE_PREVIEW_RENDER_PASS", report
+          assert report["voice"]["provider"] == "gemini_tts", report
+          assert report["voice"]["voice_id"] == "Charon", report
+          assert report["voice"]["model"] == "gemini-3.8-flash-tts", report
+          assert report["music"]["status"] == "DETERMINISTIC_SUSPENSE_BED_MIXED", report
+          assert report["branding"]["logo_overlay"] is True, report
+          output = root / "episode005-v21-gemini-preview.mp4"
+          probe = subprocess.run([
+              "ffprobe", "-v", "error",
+              "-show_entries", "stream=codec_type,width,height,r_frame_rate,sample_rate,channels:format=duration",
+              "-of", "json", str(output)
+          ], check=True, capture_output=True, text=True)
+          data = json.loads(probe.stdout)
+          video = next(item for item in data["streams"] if item["codec_type"] == "video")
+          audio = next(item for item in data["streams"] if item["codec_type"] == "audio")
+          assert (int(video["width"]), int(video["height"])) == (1080, 1920)
+          assert video["r_frame_rate"] == "60/1"
+          assert audio["sample_rate"] == "48000"
+          print({
+              "status": report["status"],
+              "duration": data["format"]["duration"],
+              "voice": report["voice"],
+              "audio_sample_rate": audio["sample_rate"]
+          })
+          PY
+
+      - name: Upload isolated full Gemini preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: episode005-full-gemini-charon-preview
+          path: |
+            artifacts/episode005-gemini
+            artifacts/episode005-v21-gemini-preview
+            artifacts/episode005-audio/suspense-bed.wav
+            artifacts/episode005-visuals/download-report.json
+          if-no-files-found: error
