@@ -19,9 +19,9 @@ def _write_wav(path: Path) -> None:
 
 def _profile(audio: Path) -> dict:
     return {
-        "provider": "creativeclaw_google_gemini",
-        "voice_id": "charon",
-        "model": "speech/gemini-3.8-flash-tts",
+        "provider": "gemini_tts",
+        "voice_name": "Charon",
+        "model": "gemini-3.8-flash-tts",
         "identity_status": "APPROVED_REFERENCE_MATCH",
         "audio_sha256": hashlib.sha256(audio.read_bytes()).hexdigest(),
     }
