@@ -728,10 +728,11 @@ def _write_ass(
     events: list[dict[str, Any]],
     sidecar_chunks: list[dict[str, Any]],
     active_word_color: str,
+    margin_v: int | None = None,
 ) -> None:
     if len(events) != len(sidecar_chunks):
         raise AlignmentError("Caption events and alignment chunks must have identical counts.")
-    style_line = caption_ass_style_line()
+    style_line = caption_ass_style_line(margin_v=margin_v)
     header = f"""[Script Info]
 ScriptType: v4.00+
 PlayResX: 1080
@@ -882,7 +883,7 @@ def generate(
         event["end"] = round(min(audio_seconds, event["end"]), 3)
 
     active_word_color = str(captions.get("active_word_color", "#FF7777"))
-    _write_ass(caption_path, events, sidecar_chunks, active_word_color)
+    _write_ass(caption_path, events, sidecar_chunks, active_word_color, margin_v=int(captions.get("margin_v", 520)))
     sidecar_path = (base / captions.get("alignment_sidecar", "captions/narration.alignment.json")).resolve()
     sidecar_path.parent.mkdir(parents=True, exist_ok=True)
     sidecar_path.write_text(json.dumps({

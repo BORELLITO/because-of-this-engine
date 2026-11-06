@@ -101,14 +101,6 @@ jobs:
             --manifest episodes/episode-005/visual/scene-asset-manifest.json \
             --output-root artifacts/episode005-visuals
 
-      - name: Build deterministic suspense bed
-        run: |
-          mkdir -p artifacts/episode005-audio
-          python production/generate_suspense_bed.py \
-            --output artifacts/episode005-audio/suspense-bed.wav \
-            --duration 85 \
-            --sample-rate 48000
-
       - name: Render isolated V2.1 creative preview
         run: |
           mkdir -p artifacts/episode005-v21-preview
@@ -118,7 +110,6 @@ jobs:
             --asset-root artifacts/episode005-visuals \
             --audio artifacts/episode005-charon/narration.wav \
             --captions artifacts/episode005-charon/narration.ass \
-            --music artifacts/episode005-audio/suspense-bed.wav \
             --logo brand/because-of-this-logo.png \
             --voice-profile artifacts/episode005-charon/voice-profile.json \
             --output artifacts/episode005-v21-preview/episode005-v21-preview.mp4 \
@@ -135,7 +126,8 @@ jobs:
           assert report["status"] == "V21_CREATIVE_PREVIEW_RENDER_PASS", report
           assert report["creative_profile"] == "cinematic_dread_v73", report
           assert report["voice"]["voice_name"] == "Charon", report
-          assert report["music"]["status"] == "DETERMINISTIC_SUSPENSE_BED_MIXED", report
+          assert report["music"]["status"] == "NOT_MIXED", report
+          assert report["music"]["sources"] == ["narration_only"], report
           assert report["branding"]["logo_overlay"] is True, report
           assert report["production_enablement"] is False, report
           output = root / "episode005-v21-preview.mp4"
@@ -158,6 +150,5 @@ jobs:
           name: episode005-v21-creative-preview
           path: |
             artifacts/episode005-v21-preview
-            artifacts/episode005-audio/suspense-bed.wav
             artifacts/episode005-visuals/download-report.json
           if-no-files-found: error

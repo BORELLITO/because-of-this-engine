@@ -40,16 +40,16 @@
     "voice_name": "Charon",
     "model": "gemini-3.8-flash-tts",
     "script_file": "episodes/episode-005/narration/en-US-charon-v1.txt",
-    "script_sha256": "396e75d3cacc9a356a72e6a34465c790a3e2b7981b71c8b253949a52c654f26a",
-    "character_count": 947,
-    "word_count": 154,
+    "script_sha256": "403a5bd5cd38505fb7109308544a15ea3c03fe173cb864bc055cd4c759ddd78a",
+    "character_count": 1014,
+    "word_count": 162,
     "estimated_duration_seconds": {
-      "min": 66,
-      "max": 75
+      "min": 68,
+      "max": 80
     },
     "real_call_authorized": true,
-    "request_count": 1,
-    "execution_status": "GEMINI_CHARON_NARRATION_READY",
+    "request_count": 2,
+    "execution_status": "GEMINI_CHARON_NARRATION_PENDING_REGENERATION",
     "retry_policy": "NO_AUTOMATIC_RETRY_AFTER_SUBMISSION",
     "execution_route": "direct_gemini_api_single_full_script_request",
     "production_provider_policy": "Gemini TTS Charon explicitly selected; no provider fallback or Creative Claw route.",
@@ -57,23 +57,25 @@
       "provider": "gemini_tts",
       "model": "gemini-3.8-flash-tts",
       "voice_name": "Charon",
-      "workflow_run_id": 42259035900,
-      "status": "APPROVED_NARRATION_ARTIFACT",
-      "duration_seconds": 73.52,
-      "audio_sha256": "2678ffcd4b03e92e52de76dd312d53aa910cac3dc6ac01440ceaebb66a34f1bf",
-      "audio_persisted": true,
+      "workflow_run_id": null,
+      "status": "PENDING_MANUAL_RUN_ONCE",
+      "duration_seconds": null,
+      "audio_sha256": null,
+      "audio_persisted": false,
       "artifact": "episode005-gemini-charon-narration",
-      "note": "Direct Gemini Charon full-script request passed identity, mono 24kHz WAV and 60–80 second duration validation."
+      "note": "Previous Charon artifact is retained for rollback only; this revision requires one new full-script Gemini request."
     },
     "captions": {
-      "status": "GEMINI_CHARON_KARAOKE_READY",
-      "workflow_run_id": 42262823070,
+      "status": "PENDING_NEW_GEMINI_CHARON_AUDIO",
+      "workflow_run_id": null,
       "artifact": "episode005-gemini-charon-captioned",
       "timing_mode": "whisper_vosk_phrase_fallback_word_timestamps",
-      "final_word_level_ready": true,
-      "caption_count": 21,
-      "audio_duration_seconds": 73.52,
-      "note": "Timestamped word-highlight ASS captions were generated from the approved Gemini Charon audio. Whisper is primary; Vosk is limited to phrase-scoped fallback."
+      "final_word_level_ready": false,
+      "caption_count": null,
+      "audio_duration_seconds": null,
+      "max_lines": 2,
+      "margin_v": 520,
+      "note": "Regenerate from the new final WAV; max two lines, higher placement, timestamped karaoke transforms."
     },
     "workflow_policy": "manual_dispatch_only; one full-script request per RUN_ONCE execution",
     "prior_attempts": [
@@ -87,15 +89,16 @@
         "audio_persisted": false,
         "note": "The quota was available and Gemini returned audio, but the prior 174-word script exceeded the approved 80-second ceiling. The script was shortened before a new manually authorized request."
       }
-    ]
+    ],
+    "revision_note": "Editorial rebuild: concrete first-sentence hook, causal escalation, evidence contradiction, restrained consequence and loop-safe payoff."
   },
   "shot_plan": [
     {
       "shot_id": "S01",
       "range": "00:00-00:04",
       "role": "hook",
-      "visual": "Dark bunker panel; red warning indicator comes alive.",
-      "truth_class": "MAP_OR_DIAGRAM",
+      "visual": "Representational bunker operator reacts as the warning arrives; no archival claim.",
+      "truth_class": "REPRESENTATIONAL",
       "continuity_tags": {
         "era": [
           "1983",
@@ -128,7 +131,7 @@
       "shot_id": "S02",
       "range": "00:04-00:09",
       "role": "context",
-      "visual": "Night-side Earth and early-warning satellite.",
+      "visual": "Early-warning satellite infrastructure under night-side tension.",
       "truth_class": "MAP_OR_DIAGRAM",
       "continuity_tags": {
         "era": [
@@ -163,7 +166,7 @@
       "shot_id": "S03",
       "range": "00:09-00:14",
       "role": "human_anchor",
-      "visual": "Representational command-bunker portrait/composition of Petrov; no false archival claim.",
+      "visual": "Vintage radio and operator context for the human decision; representational only.",
       "truth_class": "REPRESENTATIONAL",
       "continuity_tags": {
         "era": [
@@ -200,7 +203,7 @@
       "shot_id": "S04",
       "range": "00:14-00:18",
       "role": "escalation",
-      "visual": "Alert moves through a command-chain diagram.",
+      "visual": "A signal pulse moves through the command chain; symbolic reconstruction.",
       "truth_class": "MAP_OR_DIAGRAM",
       "continuity_tags": {
         "era": [
@@ -237,7 +240,7 @@
       "shot_id": "S05",
       "range": "00:18-00:23",
       "role": "escalation",
-      "visual": "One launch indicator becomes two, then three.",
+      "visual": "Radar target count escalates from one signal toward five.",
       "truth_class": "MAP_OR_DIAGRAM",
       "continuity_tags": {
         "era": [
@@ -272,7 +275,7 @@
       "shot_id": "S06",
       "range": "00:23-00:27",
       "role": "escalation",
-      "visual": "Counter reaches five; alarm intensity rises.",
+      "visual": "Red warning indicator intensifies as the system adds launches.",
       "truth_class": "MAP_OR_DIAGRAM",
       "continuity_tags": {
         "era": [
@@ -308,7 +311,7 @@
       "shot_id": "S07",
       "range": "00:27-00:32",
       "role": "decision_pressure",
-      "visual": "Petrov studies the panel, telephone and clock.",
+      "visual": "A clock compresses the decision window.",
       "truth_class": "REPRESENTATIONAL",
       "continuity_tags": {
         "era": [
@@ -342,7 +345,7 @@
       "shot_id": "S08",
       "range": "00:32-00:37",
       "role": "contradiction",
-      "visual": "Ground radar remains empty while satellite alert flashes.",
+      "visual": "Ground radar sweeps while the satellite warning has no confirming return.",
       "truth_class": "MAP_OR_DIAGRAM",
       "continuity_tags": {
         "era": [
@@ -378,8 +381,8 @@
       "shot_id": "S09",
       "range": "00:37-00:41",
       "role": "irreversible_choice",
-      "visual": "False-alarm classification is entered; no celebratory interface.",
-      "truth_class": "MAP_OR_DIAGRAM",
+      "visual": "A hand adjusts a dark tactile control surface to classify the warning.",
+      "truth_class": "REPRESENTATIONAL",
       "continuity_tags": {
         "era": [
           "1983",
@@ -413,7 +416,7 @@
       "shot_id": "S10",
       "range": "00:41-00:46",
       "role": "suspense",
-      "visual": "Bunker waits; clock advances through silence.",
+      "visual": "The bunker waits while the clock advances.",
       "truth_class": "REPRESENTATIONAL",
       "continuity_tags": {
         "era": [
@@ -448,7 +451,7 @@
       "shot_id": "S11",
       "range": "00:46-00:51",
       "role": "non_event",
-      "visual": "Empty night sky; expected impact never occurs.",
+      "visual": "Empty night sky; the expected impact never appears.",
       "truth_class": "REPRESENTATIONAL",
       "continuity_tags": {
         "era": [
@@ -483,7 +486,7 @@
       "shot_id": "S12",
       "range": "00:51-00:56",
       "role": "mechanism",
-      "visual": "Sunlight geometry over high clouds and satellite sensor.",
+      "visual": "Cloud cover and satellite geometry explain the false signal.",
       "truth_class": "MAP_OR_DIAGRAM",
       "continuity_tags": {
         "era": [
@@ -519,7 +522,7 @@
       "shot_id": "S13",
       "range": "00:56-01:01",
       "role": "proof",
-      "visual": "Declassified report/logbook treatment with readable evidence cues.",
+      "visual": "Typewritten report treatment carries the documented consequence.",
       "truth_class": "DOCUMENTARY_EVIDENCE",
       "continuity_tags": {
         "era": [
@@ -556,7 +559,7 @@
       "shot_id": "S14",
       "range": "01:01-01:06",
       "role": "consequence",
-      "visual": "Petrov's later obscurity represented through empty military corridor.",
+      "visual": "An empty institutional corridor represents Petrov's later obscurity.",
       "truth_class": "REPRESENTATIONAL",
       "continuity_tags": {
         "era": [
@@ -591,7 +594,7 @@
       "shot_id": "S15",
       "range": "01:06-01:12",
       "role": "reframe",
-      "visual": "Red warning fades into neutral black; no victory imagery.",
+      "visual": "The warning pulse falls away into neutral black.",
       "truth_class": "MAP_OR_DIAGRAM",
       "continuity_tags": {
         "era": [
@@ -626,7 +629,7 @@
       "shot_id": "S16",
       "range": "01:12-01:18",
       "role": "payoff",
-      "visual": "Final branded logo lockup with restrained red pulse.",
+      "visual": "Black stacked brand card designed to loop back to the opening hook.",
       "truth_class": "BRAND_OUTRO",
       "continuity_tags": {
         "era": [
