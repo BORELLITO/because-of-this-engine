@@ -50,7 +50,7 @@ CANONICAL_PROFILE: dict[str, Any] = {
         "watermark_text": "|B",
         "accent_color": "#E3262E",
         "logo_enabled": True,
-        "logo_path": "brand/because-of-this-logo.png",
+        "logo_path": "brand/because-of-this-wordmark-transparent.png",
         "logo_width": 540,
         "logo_opacity": 0.82,
         "logo_margin": 54,
@@ -73,7 +73,7 @@ CANONICAL_PROFILE: dict[str, Any] = {
         "end_tolerance_seconds": 0.1,
         "word_highlight_enabled": True,
         "word_highlight_mode": "timestamp_color_transform",
-        "active_word_color": "#FF7777",
+        "active_word_color": "#F04444",
         "word_highlight_tolerance_ms": 35,
         "style": {
             "font_name": "Arial",
