@@ -119,9 +119,10 @@ jobs:
           else
             ffmpeg -y -loglevel error -i "${raw}" -filter:a "atempo=${factor}"               -ar 24000 -ac 1 -c:a pcm_s16le "${final}"
           fi
-          python - <<'PY'
+          TEMPO_FACTOR="${factor}" python - <<'PY'
           import hashlib
           import json
+          import os
           import wave
           from pathlib import Path
           root = Path("artifacts/episode005-gemini")
@@ -138,7 +139,7 @@ jobs:
               "status": "GEMINI_TTS_FULL_NARRATION_VALIDATED",
               "duration_seconds": round(duration, 3),
               "audio_sha256": hashlib.sha256(audio.read_bytes()).hexdigest(),
-              "tempo_normalization_factor": float("${factor}"),
+              "tempo_normalization_factor": float(os.environ["TEMPO_FACTOR"]),
           })
           record_path.write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
           print(json.dumps({
