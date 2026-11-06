@@ -1,0 +1,112 @@
+name: One-time Episode 005 Gemini Charon Voice Test
+
+on:
+  push:
+    branches:
+      - tts-test-episode005-gemini-20261106
+
+permissions:
+  contents: read
+
+jobs:
+  generate-voice-test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+    steps:
+      - name: Checkout engine
+        uses: actions/checkout@v4
+
+      - name: Generate short reference-aligned Charon test
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/episode005-gemini-charon-test
+          python - <<'PY'
+          import hashlib
+          import json
+          import wave
+          from pathlib import Path
+          from production.gemini_tts import synthesize_text, _wav_info
+
+          text = (
+              "Just after midnight on September 26, 1983, a Soviet early-warning system "
+              "reported five American nuclear missiles in the air. Inside a secret bunker "
+              "outside Moscow, Lieutenant Colonel Stanislav Petrov had minutes to decide "
+              "what happened next. If the warning was real, the Soviet command could move "
+              "toward retaliation. But the machine had made one mistake—and the world was "
+              "about to depend on whether one man noticed it."
+          )
+          profile = {
+              "provider": "gemini_tts",
+              "language_code": "en-US",
+              "voice_name": "Charon",
+              "model": "gemini-3.8-flash-tts",
+              "sample_rate_hz": 24000,
+              "encoding": "AUDIO_WAV",
+              "speaking_rate": 1.0,
+              "pitch": 0.0,
+              "volume_gain_db": 0.0,
+              "style": (
+                  "Low, controlled American English narration with informative clarity, "
+                  "restrained cinematic suspense, intimate consequence, never theatrical."
+              ),
+              "profile_version": "one-extra-minute-backup-v1"
+          }
+          audio, metadata = synthesize_text(text, profile)
+          out = Path("artifacts/episode005-gemini-charon-test/narration.wav")
+          out.write_bytes(audio)
+          rate, channels, width, duration = _wav_info(audio)
+          record = {
+              "status": "GEMINI_TTS_CHARON_TEST_GENERATED",
+              "episode_id": "episode-005",
+              "provider": profile["provider"],
+              "model": profile["model"],
+              "voice": profile["voice_name"],
+              "language": profile["language_code"],
+              "style": profile["style"],
+              "duration_seconds": round(duration, 3),
+              "sample_rate_hz": rate,
+              "channels": channels,
+              "sample_width_bytes": width,
+              "audio_sha256": hashlib.sha256(audio).hexdigest(),
+              "text": text,
+              "request_metadata": metadata
+          }
+          Path("artifacts/episode005-gemini-charon-test/voice-test.json").write_text(
+              json.dumps(record, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8"
+          )
+          print(json.dumps({k: record[k] for k in (
+              "status", "provider", "model", "voice", "duration_seconds",
+              "sample_rate_hz", "audio_sha256"
+          )}, ensure_ascii=False))
+          PY
+
+      - name: Validate generated WAV
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import wave
+          from pathlib import Path
+          root = Path("artifacts/episode005-gemini-charon-test")
+          record = json.loads((root / "voice-test.json").read_text(encoding="utf-8"))
+          with wave.open(str(root / "narration.wav"), "rb") as stream:
+              assert stream.getnchannels() == 1
+              assert stream.getsampwidth() == 2
+              assert stream.getframerate() == 24000
+              duration = stream.getnframes() / stream.getframerate()
+          assert 8 <= duration <= 30, duration
+          assert record["provider"] == "gemini_tts"
+          assert record["model"] == "gemini-3.8-flash-tts"
+          assert record["voice"] == "Charon"
+          print({"status": "VOICE_TEST_VALIDATED", "duration_seconds": round(duration, 3)})
+          PY
+
+      - name: Upload voice test
+        uses: actions/upload-artifact@v4
+        with:
+          name: episode005-gemini-charon-test
+          path: artifacts/episode005-gemini-charon-test
+          if-no-files-found: error
