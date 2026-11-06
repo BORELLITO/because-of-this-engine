@@ -35,6 +35,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install thumbnail QA dependency
+        run: python -m pip install --disable-pip-version-check Pillow==11.3.0
+
       - name: Compile manual V2.1 render gate
         run: python -m py_compile production/render_v21_manual.py production/canonical_entrypoint.py
 
