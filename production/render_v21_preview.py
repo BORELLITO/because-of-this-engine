@@ -273,11 +273,11 @@ def render_preview(
             f"enable='lt(t,{final_start:.3f})':eof_action=repeat[with_top]",
             f"[with_top][logo_outro]overlay=x=(main_w-overlay_w)/2:y=(main_h-overlay_h)/2:"
             f"enable='gte(t,{final_start:.3f})':eof_action=repeat[v]",
-            "[1:a]aresample=48000,asetpts=PTS-STARTPTS,volume=1.0[voice]",
+            "[1:a]aresample=48000,asetpts=PTS-STARTPTS,volume=1.0,asplit=2[voice_mix][voice_key]",
             f"[2:a]aresample=48000,volume=0.14,atrim=duration={audio_seconds:.3f},"
             "asetpts=PTS-STARTPTS,afade=t=in:st=0:d=1.6[bed]",
-            "[bed][voice]sidechaincompress=threshold=0.055:ratio=8:attack=20:release=420:makeup=1[ducked]",
-            "[voice][ducked]amix=inputs=2:duration=first:dropout_transition=0:normalize=0,"
+            "[bed][voice_key]sidechaincompress=threshold=0.055:ratio=8:attack=20:release=420:makeup=1[ducked]",
+            "[voice_mix][ducked]amix=inputs=2:duration=first:dropout_transition=0:normalize=0,"
             "loudnorm=I=-16:TP=-1.0:LRA=7,alimiter=limit=0.95[a]",
         ])
         run([
