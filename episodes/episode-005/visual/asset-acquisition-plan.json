@@ -68,31 +68,178 @@
       "candidate_id": "pexels-5523892",
       "source_page_url": "https://www.pexels.com/video/flashing-red-light-5523892/",
       "role": "S01,S06,S09",
-      "visual_match": "EXACT",
-      "visual_intent": "red warning indicator; escalation; false-alarm classification",
+      "visual_match": "NEAR",
+      "visual_intent": "Vertical red LED pulse against darkness for escalation and false-alarm classification; symbolic, never literal archival evidence.",
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "pexels",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "license_name": "Pexels License",
+      "source_tier": "stock_auto",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T00:00:00Z",
+        "observed_license": "Free",
+        "media_route": "Pexels download redirect resolved to videos.pexels.com"
+      },
+      "media_url": "https://videos.pexels.com/video-files/5523892/5523892-uhd_2160_3840_30fps.mp4",
+      "continuity_tags": {
+        "era": [
+          "indeterminate_era"
+        ],
+        "setting": [
+          "technical_control_room",
+          "transition"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_red"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red"
+        ],
+        "texture": [
+          "abstract_light",
+          "low_light_grain"
+        ]
+      },
+      "continuity_risk_flags": [
+        "single_led_not_multi_indicator",
+        "symbolic_not_literal",
+        "must_not_repeat_S01"
+      ],
+      "selection_status": "SHORTLISTED_FOR_MANUAL_INTAKE",
+      "score_breakdown": {
+        "semantic_fit": 0.88,
+        "continuity_coherence": 0.83,
+        "license_confidence": 1,
+        "vertical_crop_quality": 0.98,
+        "clean_frame_quality": 0.86,
+        "source_distinctness": 1
+      }
     },
     {
       "candidate_id": "pexels-38958215",
       "source_page_url": "https://www.pexels.com/video/close-up-button-operation-in-dark-control-room-38958215/",
       "role": "S03,S07",
       "visual_match": "NEAR",
-      "visual_intent": "operator hands and control-room decision pressure",
-      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "visual_intent": "Hand operating red and green buttons in a dark control room; human decision pressure without a false Petrov archival claim.",
+      "truth_class": "REPRESENTATIONAL",
       "provider": "pexels",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "license_name": "Pexels License",
+      "source_tier": "stock_auto",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T00:00:00Z",
+        "observed_license": "Free",
+        "media_route": "Pexels download redirect resolved to videos.pexels.com"
+      },
+      "media_url": "https://videos.pexels.com/video-files/38958215/16572434_3840_2160_25fps.mp4",
+      "continuity_tags": {
+        "era": [
+          "indeterminate_era"
+        ],
+        "setting": [
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red",
+          "warning_green"
+        ],
+        "texture": [
+          "metal",
+          "low_light_grain"
+        ]
+      },
+      "continuity_risk_flags": [
+        "era_requires_frame_qc",
+        "human_anchor_is_hands_only",
+        "modern_control_room_possible"
+      ],
+      "selection_status": "SHORTLISTED_FOR_MANUAL_INTAKE",
+      "score_breakdown": {
+        "semantic_fit": 0.86,
+        "continuity_coherence": 0.72,
+        "license_confidence": 1,
+        "vertical_crop_quality": 0.72,
+        "clean_frame_quality": 0.85,
+        "source_distinctness": 1
+      }
     },
     {
       "candidate_id": "pexels-6442796",
       "source_page_url": "https://www.pexels.com/video/person-operating-button-panel-6442796/",
       "role": "S04,S09",
       "visual_match": "NEAR",
-      "visual_intent": "alert being passed through a technical command system",
-      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "visual_intent": "Hand operating a high-tech button panel for the irreversible classification decision; representational only.",
+      "truth_class": "REPRESENTATIONAL",
       "provider": "pexels",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "license_name": "Pexels License",
+      "source_tier": "stock_auto",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T00:00:00Z",
+        "observed_license": "Free",
+        "media_route": "Pexels download redirect resolved to videos.pexels.com"
+      },
+      "media_url": "https://videos.pexels.com/video-files/6442796/6442796-hd_1920_1080_24fps.mp4",
+      "continuity_tags": {
+        "era": [
+          "modern",
+          "digital"
+        ],
+        "setting": [
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red"
+        ],
+        "texture": [
+          "digital_ui",
+          "metal"
+        ]
+      },
+      "continuity_risk_flags": [
+        "modern_interface_signature",
+        "period_coherence_review"
+      ],
+      "selection_status": "REVIEW_REQUIRED",
+      "score_breakdown": {
+        "semantic_fit": 0.9,
+        "continuity_coherence": 0.45,
+        "license_confidence": 1,
+        "vertical_crop_quality": 0.72,
+        "clean_frame_quality": 0.83,
+        "source_distinctness": 1
+      }
     },
     {
       "candidate_id": "pexels-38779097",
@@ -119,10 +266,59 @@
       "source_page_url": "https://www.pexels.com/video/high-tech-control-room-in-action-38779108/",
       "role": "S03,S07",
       "visual_match": "NEAR",
-      "visual_intent": "operators monitoring an impossible alert",
-      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "visual_intent": "Operators monitor multiple screens in a control room; fallback human/system context if UI passes the period-coherence review.",
+      "truth_class": "REPRESENTATIONAL",
       "provider": "pexels",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "license_name": "Pexels License",
+      "source_tier": "stock_auto",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T00:00:00Z",
+        "observed_license": "Free",
+        "media_route": "Pexels download redirect resolved to videos.pexels.com"
+      },
+      "media_url": "https://videos.pexels.com/video-files/38779108/16477699_1920_1080_25fps.mp4",
+      "continuity_tags": {
+        "era": [
+          "modern",
+          "digital"
+        ],
+        "setting": [
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "digital_ui",
+          "metal"
+        ]
+      },
+      "continuity_risk_flags": [
+        "modern_ui_possible",
+        "period_coherence_review",
+        "human_anchor_not_specific"
+      ],
+      "selection_status": "REVIEW_REQUIRED",
+      "score_breakdown": {
+        "semantic_fit": 0.91,
+        "continuity_coherence": 0.42,
+        "license_confidence": 1,
+        "vertical_crop_quality": 0.72,
+        "clean_frame_quality": 0.84,
+        "source_distinctness": 1
+      }
     },
     {
       "candidate_id": "pexels-12291818",
@@ -159,10 +355,59 @@
       "source_page_url": "https://www.pexels.com/video/time-lapse-of-moving-clouds-on-a-night-sky-12590338/",
       "role": "S11,S12",
       "visual_match": "EXACT",
-      "visual_intent": "high clouds and optical ambiguity",
-      "truth_class": "EXPLAINED_PHENOMENON",
+      "visual_intent": "Moving clouds and stars over a night skyline for the non-event and optical-ambiguity beat.",
+      "truth_class": "REPRESENTATIONAL",
       "provider": "pexels",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "license_name": "Pexels License",
+      "source_tier": "stock_auto",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T00:00:00Z",
+        "observed_license": "Free",
+        "media_route": "Pexels download redirect resolved to videos.pexels.com"
+      },
+      "media_url": "https://videos.pexels.com/video-files/12590338/12590338-uhd_3840_2160_25fps.mp4",
+      "continuity_tags": {
+        "era": [
+          "indeterminate_era"
+        ],
+        "setting": [
+          "night_sky",
+          "external_sensor"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "atmospheric",
+          "low_light_grain"
+        ]
+      },
+      "continuity_risk_flags": [
+        "must_verify_no_city_branding",
+        "night_sky_bridge_candidate"
+      ],
+      "selection_status": "SHORTLISTED_FOR_MANUAL_INTAKE",
+      "score_breakdown": {
+        "semantic_fit": 0.93,
+        "continuity_coherence": 0.91,
+        "license_confidence": 1,
+        "vertical_crop_quality": 0.72,
+        "clean_frame_quality": 0.84,
+        "source_distinctness": 1
+      }
     },
     {
       "candidate_id": "pexels-30084927",
@@ -189,20 +434,116 @@
       "source_page_url": "https://www.pexels.com/video/bright-clouds-with-sun-rays-timelapse-33060982/",
       "role": "S12",
       "visual_match": "EXACT",
-      "visual_intent": "sunlight reflecting from high clouds",
-      "truth_class": "EXPLAINED_PHENOMENON",
+      "visual_intent": "Bright clouds with sun rays for the sensor-geometry explanation.",
+      "truth_class": "MAP_OR_DIAGRAM",
       "provider": "pexels",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+      "rights_status": "REJECTED_CONTINUITY_CONFLICT",
+      "license_name": "Pexels License",
+      "source_tier": "stock_auto",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T00:00:00Z",
+        "observed_license": "Free",
+        "media_route": "Pexels download redirect resolved to videos.pexels.com"
+      },
+      "media_url": "https://videos.pexels.com/video-files/33060982/14091675_3840_2160_30fps.mp4",
+      "continuity_tags": {
+        "era": [
+          "indeterminate_era"
+        ],
+        "setting": [
+          "open_sky"
+        ],
+        "time_of_day": [
+          "daylight",
+          "sunlight"
+        ],
+        "lighting": [
+          "high_key",
+          "sunlit"
+        ],
+        "palette": [
+          "bright_blue",
+          "white"
+        ],
+        "texture": [
+          "atmospheric"
+        ]
+      },
+      "continuity_risk_flags": [
+        "daylight_break",
+        "high_key_break",
+        "adjacency_conflict_with_S11"
+      ],
+      "selection_status": "REJECTED_CONTINUITY_CONFLICT",
+      "disqualifiers": [
+        "hard day/night flip",
+        "palette discontinuity"
+      ]
     },
     {
       "candidate_id": "pexels-33897223",
       "source_page_url": "https://www.pexels.com/video/aerial-view-of-large-satellite-dish-at-sunset-33897223/",
       "role": "S02,S12",
-      "visual_match": "EXACT",
-      "visual_intent": "satellite instrument and warning system",
+      "visual_match": "NEAR",
+      "visual_intent": "Large satellite dish at sunset for sensor geometry; possible bridge only if grade and adjacency remain restrained.",
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "pexels",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "license_name": "Pexels License",
+      "source_tier": "stock_auto",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T00:00:00Z",
+        "observed_license": "Free",
+        "media_route": "Pexels download redirect resolved to videos.pexels.com"
+      },
+      "media_url": "https://videos.pexels.com/video-files/33897223/14385540_3840_2160_60fps.mp4",
+      "continuity_tags": {
+        "era": [
+          "indeterminate_era"
+        ],
+        "setting": [
+          "external_sensor",
+          "early_warning_command"
+        ],
+        "time_of_day": [
+          "twilight",
+          "sunset"
+        ],
+        "lighting": [
+          "low_key",
+          "warm_amber"
+        ],
+        "palette": [
+          "steel",
+          "amber",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "brushed_metal",
+          "atmospheric"
+        ]
+      },
+      "continuity_risk_flags": [
+        "sunset_transition",
+        "daylight_risk",
+        "bridge_shot_may_be_required"
+      ],
+      "selection_status": "SHORTLISTED_FOR_MANUAL_INTAKE",
+      "continuity_mode": "bridge",
+      "score_breakdown": {
+        "semantic_fit": 0.9,
+        "continuity_coherence": 0.59,
+        "license_confidence": 1,
+        "vertical_crop_quality": 0.72,
+        "clean_frame_quality": 0.89,
+        "source_distinctness": 1
+      }
     },
     {
       "candidate_id": "pexels-4224353",
@@ -2342,9 +2683,62 @@
         "selected_as_primary_for_shot": null
       },
       "selection": "ALTERNATIVE_APPROVED_FOR_MANIFEST_ONLY"
+    },
+    {
+      "provider": "pexels",
+      "license_name": "Pexels License",
+      "source_tier": "stock_auto",
+      "rights_status": "REJECTED_PIXEL_QC_RISK",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T00:00:00Z",
+        "observed_license": "Free",
+        "media_route": "Pexels download redirect resolved to videos.pexels.com"
+      },
+      "candidate_id": "pexels-16943466",
+      "role": "S09",
+      "visual_match": "NEAR",
+      "visual_intent": "Close-up red emergency-stop buttons on a panel.",
+      "truth_class": "REPRESENTATIONAL",
+      "source_page_url": "https://www.pexels.com/video/a-close-up-of-red-buttons-on-a-machine-16943466/",
+      "media_url": "https://videos.pexels.com/video-files/16943466/16943466-uhd_3840_2160_24fps.mp4",
+      "continuity_tags": {
+        "era": [
+          "indeterminate_era"
+        ],
+        "setting": [
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_red"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red"
+        ],
+        "texture": [
+          "metal",
+          "digital_ui"
+        ]
+      },
+      "continuity_risk_flags": [
+        "visible_foreign_panel_labels",
+        "text_must_pass_pixel_qc",
+        "modern_interface_signature"
+      ],
+      "selection_status": "REJECTED_PIXEL_QC_RISK",
+      "disqualifiers": [
+        "visible panel text may violate clean editorial-text policy"
+      ]
     }
   ],
-  "next_action": "Re-shortlist the 16 assigned shots against search-v3; no render, Drive write, catalog promotion or publication until the continuity gate returns PASS.",
+  "next_action": "Dispatch the manual-only intake workflow for the four shortlisted IDs after the plan CI gate; then inspect five normalized frames, 9x16 crops and global fingerprints before any manifest replacement.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -3168,33 +3562,20 @@
     "promotion_allowed": false
   },
   "last_candidate_addition": {
-    "added_at_utc": "2026-11-05T00:00:00Z",
+    "added_at_utc": "2026-11-06T00:00:00Z",
     "candidate_ids": [
-      "pixabay-alert-alarm-war-danger-risk-205519",
-      "pixabay-radar-black-green-target-symbol-57670",
-      "pixabay-radar-radar-screen-rotation-circles-4511",
-      "pixabay-radar-communication-military-261518",
-      "pixabay-button-press-red-business-click-502",
-      "pixabay-button-press-push-start-launching-221746",
-      "pixabay-typewriter-typing-writing-author-1335",
-      "pixabay-typewriter-type-antique-writing-38626",
-      "pixabay-dark-light-lens-flare-abstract-250413",
-      "pixabay-abstract-light-streaks-motion-250417",
-      "pixabay-particles-orange-red-dust-effect-7957",
-      "pixabay-colors-lines-lights-abstract-video-5072"
+      "pexels-38958215",
+      "pexels-38779108",
+      "pexels-5523892",
+      "pexels-6442796",
+      "pexels-12590338",
+      "pexels-33897223",
+      "pexels-33060982",
+      "pexels-16943466"
     ],
-    "rationale": "Add a page-verified Pixabay fallback shortlist with two distinct candidates per unresolved shot; exclude AI-generated, readable-personal-document, reused and watermarked routes before intake.",
-    "source_page_and_license_verification": "Completed in browser for all 12 pages; each page visibly exposed Pixabay Content License, no AI-generated marker was observed, and the direct CDN media URL was observed in the page player.",
-    "human_approval_at_utc": "2026-11-05T17:59:24.004Z",
-    "human_approval": "APPROVED_FOR_MANIFEST_ONLY",
-    "selected_primary_by_shot": {
-      "S05": "pixabay-alert-alarm-war-danger-risk-205519",
-      "S08": "pixabay-radar-radar-screen-rotation-circles-4511",
-      "S09": "pixabay-button-press-red-business-click-502",
-      "S13": "pixabay-typewriter-typing-writing-author-1335",
-      "S15": "pixabay-dark-light-lens-flare-abstract-250413",
-      "S16": "pixabay-particles-orange-red-dust-effect-7957"
-    }
+    "rationale": "Search-v3 priority pass added Pexels candidates with page-level Free license evidence and direct media routes; bright/daylight and visible-text candidates were recorded as continuity/pixel rejects.",
+    "source_page_and_license_verification": "Pexels source pages were manually reviewed; media redirects resolve to videos.pexels.com and remain not downloaded.",
+    "continuity_review": "S03/S06/S09/S11/S12 shortlisted; S12 sunset candidate requires declared bridge and S11 night candidate is preferred."
   },
   "last_human_approval": {
     "candidate_ids": [
@@ -3251,8 +3632,8 @@
   },
   "last_contract_validation": {
     "validated_at_utc": "2026-11-05T18:05:19.534Z",
-    "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
-    "candidate_count": 42,
+    "status": "PENDING_CI_REVALIDATION",
+    "candidate_count": 43,
     "approved_manifest_candidate_count": 22,
     "manifest_asset_count": 16,
     "assigned_shot_count": 16,
@@ -3263,9 +3644,10 @@
     "validator": "production/visual_plan_contract.py",
     "checkout_commit": "d371da0ad7c72576bcd3e9f664baa6b03f89a5e4",
     "revalidation_required": true,
-    "continuity_gate": "REVIEW_REQUIRED"
+    "continuity_gate": "REVIEW_REQUIRED",
+    "continuity_research_batch": "search-v3-episode005-priority-20261106"
   },
-  "last_adjustment": "Continuity upgrade v1 applied: sequence-level era/setting/time/lighting/palette/texture gates, expanded provider lanes and explicit adjacency review. Existing 16-asset pool remains manifest-only and REVIEW_REQUIRED; no media was silently promoted.",
+  "last_adjustment": "Search-v3 priority shortlist added without download or promotion. Candidate-level continuity tags now preserve why each option was selected, held for review or rejected.",
   "next_gate": "Expose the manual V2.1 render workflow on the approved base revision, then run preview preflight. Do not merge, enable production, render media, write Drive or publish automatically.",
   "render_approval_record": {
     "status": "APPROVED",
@@ -3391,5 +3773,48 @@
       "charcoal steel desaturated blue warning red",
       "period-compatible documentary reconstruction"
     ]
-  }
+  },
+  "continuity_research_batches": [
+    {
+      "batch_id": "search-v3-episode005-priority-20261106",
+      "created_at_utc": "2026-11-06T00:00:00Z",
+      "status": "SHORTLISTED_AWAITING_MANUAL_INTAKE",
+      "mode": "RESEARCH_ONLY_NO_DOWNLOAD",
+      "target_shots": [
+        "S03",
+        "S06",
+        "S09",
+        "S11",
+        "S12"
+      ],
+      "shortlist_candidate_ids": [
+        "pexels-38958215",
+        "pexels-5523892",
+        "pexels-12590338",
+        "pexels-33897223"
+      ],
+      "secondary_review_candidate_ids": [
+        "pexels-38779108",
+        "pexels-6442796"
+      ],
+      "rejected_candidate_ids": [
+        "pexels-33060982",
+        "pexels-16943466"
+      ],
+      "criteria": [
+        "semantic_fit",
+        "era_setting_coherence",
+        "night_low_key_continuity",
+        "9x16_crop",
+        "clean_frame",
+        "source_distinctness",
+        "license_page_and_media_host"
+      ],
+      "source_pages_reviewed": 8,
+      "direct_media_routes_recorded": 8,
+      "intake_dispatched": false,
+      "render_allowed": false,
+      "promotion_allowed": false
+    }
+  ]
 }
