@@ -5879,10 +5879,7 @@
     "status": "REVIEW_REQUIRED",
     "reason": "CI pós-merge passou com zero conflitos e sem transições adjacentes bloqueadas. S06 e S11 continuam em revisão porque os metadados de época dos candidates são indeterminados; a inspeção visual só sustenta uso simbólico/atmosférico. Strict preview/render segue bloqueado.",
     "strict_preview_block": true,
-    "hard_conflict_shots": [
-      "S04",
-      "S12"
-    ],
+    "hard_conflict_shots": [],
     "review_shots": [
       "S06",
       "S11"
@@ -5896,6 +5893,7 @@
     "coverage_score": 0.9775,
     "hard_conflict_count": 0,
     "revalidation_required": false,
-    "pending_revalidation_shots": []
+    "pending_revalidation_shots": [],
+    "adjacency_review_pairs": []
   }
 }
