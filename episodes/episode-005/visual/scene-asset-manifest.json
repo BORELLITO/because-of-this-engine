@@ -5,7 +5,7 @@
   "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
   "editorial_mode": "factual_documentary",
   "title": "THE NIGHT THE MACHINE LIED",
-  "status": "PARTIAL_MANIFEST_VALIDATED_BLOCKED_RENDER",
+  "status": "PARTIAL_MANIFEST_REPLACEMENTS_PENDING_CONTINUITY_REVALIDATION",
   "purpose": "Human-approved candidate-to-shot assignments before final production promotion.",
   "source_plan": "episodes/episode-005/visual/asset-acquisition-plan.json",
   "approval_record": {
@@ -21,20 +21,22 @@
       "no automatic render execution or silent fallback"
     ],
     "latest_manifest_update": {
-      "recorded_at_utc": "2026-11-06T06:41:18Z",
+      "recorded_at_utc": "2026-11-06T07:50:43Z",
       "candidate_ids": [
-        "pexels-11764431",
-        "pexels-4285872"
+        "pixabay-radio-vintage-old-171435",
+        "nasa-svs-geos5-clouds-no-labels-4819"
       ],
       "shot_ids": [
-        "S03",
-        "S09"
+        "S04",
+        "S12"
       ],
       "scope": "MANIFEST_ONLY",
       "render_authorized": false,
       "global_catalog_updated": false,
       "drive_written": false,
-      "publication_allowed": false
+      "publication_allowed": false,
+      "fingerprint_workflow_run_id": 42183105946,
+      "fingerprint_artifact_id": 13486336703
     }
   },
   "global_reuse_audit": {
@@ -417,25 +419,42 @@
       "source_tier": "stock_auto"
     },
     {
-      "candidate_id": "mixkit-worker-industrial-lathe-2244",
-      "provider": "mixkit",
-      "source_page_url": "https://mixkit.co/free-stock-video/worker-operating-an-industrial-lathe-2244/",
-      "media_url": "https://assets.mixkit.co/videos/2244/2244-720.mp4",
-      "license_name": "Mixkit Stock Video Free License",
-      "source_role": "S04",
-      "truth_class": "DOCUMENTED_RECONSTRUCTION",
-      "sha256": "a30c4294c60190b75e2f49c076dccc7f86692a99e4bed42ae002f8094936a45d",
-      "perceptual_hash": "e7c8758b9f770b817e9d5ef14b7a78bceaad1dcff716a7e7d3c1aff7e63cb8d7",
+      "candidate_id": "pixabay-radio-vintage-old-171435",
+      "provider": "pixabay",
+      "source_page_url": "https://pixabay.com/videos/radio-vintage-old-sound-speaker-171435/",
+      "media_url": "https://cdn.pixabay.com/video/2023/07/13/171435-845465118_large.mp4",
+      "license_name": "Pixabay Content License",
+      "source_role": "s04",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "sha256": "bb0ce78f185d844f69dd33e036f9b1dd9f4acd293e706745cdb1453057d9392f",
+      "perceptual_hash": "d07a912392686abb788e79313681ec38fcf66937d82c8d80075f2c00771f671e",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
       "intake_artifact": {
-        "workflow_run_id": 42024921610,
-        "artifact_id": 13412703858,
-        "artifact_digest": "sha256:0cdd282c423100d8df4732dd542238a4ac8e5f46a67c40ee008e51ec1f73d742"
+        "workflow_run_id": 42178800543,
+        "job_id": 127763342737,
+        "artifact_id": 13484277704,
+        "artifact_digest": "sha256:76d78df18adf6d1d120ff6925b72f0cbf425a472eeaee7f40024e111b657efd",
+        "sha256": "bb0ce78f185d844f69dd33e036f9b1dd9f4acd293e706745cdb1453057d9392f",
+        "duration_seconds": 10.417,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "24/1",
+        "codec": "h264",
+        "size_bytes": 2560968,
+        "fps": 24
       },
       "fingerprint_artifact": {
-        "workflow_run_id": 42025128372,
-        "artifact_id": 13413646379,
-        "artifact_digest": "sha256:a4450ebff3562383b0b8c731bc810f810850eab1fa476737233279724c18fc69"
+        "workflow_run_id": 42183105946,
+        "job_id": 127777035277,
+        "artifact_id": 13486336703,
+        "artifact_digest": "sha256:bc652f9dd6a614ef40b22e1b685ac92dffdbf5086051c616e67cff9ab081f1bc",
+        "algorithm": "video-fingerprint-v2-rgb24-q4",
+        "perceptual_hash": "d07a912392686abb788e79313681ec38fcf66937d82c8d80075f2c00771f671e",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
       },
       "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "human_approval": "APPROVED_FOR_MANIFEST",
@@ -443,64 +462,89 @@
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
-      "editorial_caveat": "Industrial control panel is representational reconstruction for S04, never literal Petrov archival evidence.",
+      "editorial_caveat": "Use as a symbolic signal-transfer insert, not a literal 1983 command panel; keep crop away from any future brand discovery.",
+      "selection_basis": "Search-v6 replacement for the modern/daylight antenna conflict; NASA GEOS-5 no-labels visualization passed full-duration visual QA and global fingerprint.",
       "continuity_tags": {
         "era": [
-          "industrial",
+          "analog",
+          "period_compatible",
           "indeterminate_era"
         ],
         "setting": [
-          "industrial_floor"
+          "technical_control_room",
+          "early_warning_command",
+          "transition"
         ],
         "time_of_day": [
+          "night",
           "indeterminate_low_light"
         ],
         "lighting": [
           "low_key",
+          "restrained_amber",
           "cool_shadows"
         ],
         "palette": [
+          "charcoal",
           "steel",
-          "charcoal"
+          "amber"
         ],
         "texture": [
-          "industrial",
-          "metal"
+          "brushed_metal",
+          "mechanical",
+          "low_light_grain"
         ],
         "risk_flags": [
-          "setting_mismatch",
-          "command_chain_not_visible",
-          "period_coherence_review"
+          "static_prop_not_literal_command_panel",
+          "vintage_home_radio_context",
+          "crop_must_hold_radio_against_black"
         ]
       },
       "continuity_risk_flags": [
-        "setting_mismatch",
-        "command_chain_not_visible",
-        "period_coherence_review"
+        "static_prop_not_literal_command_panel",
+        "vintage_home_radio_context",
+        "crop_must_hold_radio_against_black"
       ],
       "continuity_review_status": "REVIEW_REQUIRED",
       "source_tier": "stock_auto"
     },
     {
-      "candidate_id": "pixabay-antenna-astronomy-communication-40041",
-      "provider": "pixabay",
-      "source_page_url": "https://pixabay.com/videos/antenna-astronomy-communication-40041/",
-      "media_url": "https://cdn.pixabay.com/video/2020/05/24/40041-424371544_large.mp4",
-      "license_name": "Pixabay Content License",
-      "source_role": "S12",
+      "candidate_id": "nasa-svs-geos5-clouds-no-labels-4819",
+      "provider": "nasa",
+      "source_page_url": "https://svs.gsfc.nasa.gov/4819/",
+      "media_url": "https://svs.gsfc.nasa.gov/vis/a000000/a004800/a004819/clouds_no_labels.mp4",
+      "license_name": "NASA Media Guidelines (per asset)",
+      "source_role": "s12",
       "truth_class": "MAP_OR_DIAGRAM",
-      "sha256": "e0a5b6cbf90c31c7f79c8cf6d9eaa515a83d4e986927a90a3840d7d36303e9b4",
-      "perceptual_hash": "720e0b55776ac929e3c7f5be259dcaa7c848fe1cefb4fc2ffd501c6b2ee1059d",
+      "sha256": "306a8c1b97ddb3699a84f3d35f6a0c9c3cbc593f13f9a35aef13d72a55f323d0",
+      "perceptual_hash": "262977180310b6e5eeb3fb9544113dbabbcd8c79f45f11a878b4ef3efa37b397",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
       "intake_artifact": {
-        "workflow_run_id": 42052509193,
-        "artifact_id": 13427442382,
-        "artifact_digest": "sha256:122fee7648e166d0eea6bce8920486107922b7c64a6c892e975dec535f65d87"
+        "workflow_run_id": 42178800543,
+        "job_id": 127763342737,
+        "artifact_id": 13484277704,
+        "artifact_digest": "sha256:76d78df18adf6d1d120ff6925b72f0cbf425a472eeaee7f40024e111b657efd",
+        "sha256": "306a8c1b97ddb3699a84f3d35f6a0c9c3cbc593f13f9a35aef13d72a55f323d0",
+        "duration_seconds": 58.4,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "30/1",
+        "codec": "h264",
+        "size_bytes": 118000795,
+        "fps": 30
       },
       "fingerprint_artifact": {
-        "workflow_run_id": 42053792993,
-        "artifact_id": 13427769060,
-        "artifact_digest": "sha256:f92cb4eed9bfc2fbaf518540413f5ab363578156f7c58d947e69c692219e0c87"
+        "workflow_run_id": 42183105946,
+        "job_id": 127777035277,
+        "artifact_id": 13486336703,
+        "artifact_digest": "sha256:bc652f9dd6a614ef40b22e1b685ac92dffdbf5086051c616e67cff9ab081f1bc",
+        "algorithm": "video-fingerprint-v2-rgb24-q4",
+        "perceptual_hash": "262977180310b6e5eeb3fb9544113dbabbcd8c79f45f11a878b4ef3efa37b397",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
       },
       "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "human_approval": "APPROVED_FOR_MANIFEST",
@@ -508,45 +552,47 @@
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
-      "editorial_caveat": "Representational satellite/earth-station infrastructure for S12 only; never literal Petrov archival evidence.",
+      "editorial_caveat": "Use as explanatory atmospheric visualization; retain NASA SVS credit in production metadata.",
+      "selection_basis": "Search-v6 replacement for the modern/daylight antenna conflict; NASA GEOS-5 no-labels visualization passed full-duration visual QA and global fingerprint.",
       "continuity_tags": {
         "era": [
-          "modern",
-          "digital"
+          "period_compatible",
+          "indeterminate_era"
         ],
         "setting": [
           "external_sensor",
-          "open_sky"
+          "early_warning_command"
         ],
         "time_of_day": [
-          "daylight",
-          "sunlight"
+          "indeterminate_low_light"
         ],
         "lighting": [
-          "high_key",
-          "sunlit"
+          "cool_shadows",
+          "low_key"
         ],
         "palette": [
+          "charcoal",
           "steel",
           "desaturated_blue"
         ],
         "texture": [
-          "metal",
-          "atmospheric"
+          "atmospheric",
+          "data_visualization",
+          "low_light_grain"
         ],
         "risk_flags": [
-          "daylight_break",
-          "modern_era_mismatch",
-          "re_shortlist_required"
+          "modeled_global_cloud_cover_not_literal_sensor",
+          "bright_cloud_highlights",
+          "requires_credit_metadata"
         ]
       },
       "continuity_risk_flags": [
-        "daylight_break",
-        "modern_era_mismatch",
-        "re_shortlist_required"
+        "modeled_global_cloud_cover_not_literal_sensor",
+        "bright_cloud_highlights",
+        "requires_credit_metadata"
       ],
       "continuity_review_status": "REVIEW_REQUIRED",
-      "source_tier": "stock_auto"
+      "source_tier": "government_manual"
     },
     {
       "candidate_id": "pixabay-hallway-dark-corridor-20837",
@@ -1331,12 +1377,22 @@
       "requested_truth_class": "MAP_OR_DIAGRAM",
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
-        "candidate_id": "mixkit-worker-industrial-lathe-2244",
-        "usage": "technical control-panel reconstruction of alert propagation; not literal Petrov archival evidence",
+        "candidate_id": "pixabay-radio-vintage-old-171435",
+        "usage": "Rádio vintage em baixa luz como insert simbólico de transferência de sinal na cadeia de alerta; não é evidência literal do sistema soviético.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
-        "editorial_caveat": "Natural panel labels are scene content; do not present as the actual Soviet system."
+        "editorial_caveat": "Usar como reconstrução simbólica, preservar o rádio contra o fundo preto, não sugerir que seja o painel real de 1983 e remover o áudio de origem.",
+        "visual_treatment": {
+          "preferred_window_seconds": [
+            0,
+            10.417
+          ],
+          "crop_strategy": "hold_radio_against_black",
+          "grade": "low_key_charcoal_amber_cool_shadows",
+          "source_audio": "strip",
+          "max_insert_seconds": 4
+        }
       },
       "blocking_reason": null,
       "continuity_tags": {
@@ -1344,11 +1400,13 @@
           "1983",
           "cold_war",
           "analog",
-          "period_compatible"
+          "period_compatible",
+          "indeterminate_era"
         ],
         "setting": [
           "technical_control_room",
-          "early_warning_command"
+          "early_warning_command",
+          "transition"
         ],
         "time_of_day": [
           "night",
@@ -1356,17 +1414,23 @@
         ],
         "lighting": [
           "low_key",
+          "restrained_amber",
           "cool_shadows"
         ],
         "palette": [
           "charcoal",
           "steel",
-          "warning_red"
+          "amber"
         ],
         "texture": [
-          "crt_phosphor",
           "brushed_metal",
+          "mechanical",
           "low_light_grain"
+        ],
+        "risk_flags": [
+          "static_prop_not_literal_command_panel",
+          "vintage_radio_symbolic_signal_transfer",
+          "source_audio_must_be_stripped_in_render"
         ]
       }
     },
@@ -1702,12 +1766,18 @@
       "requested_truth_class": "MAP_OR_DIAGRAM",
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
-        "candidate_id": "pixabay-antenna-astronomy-communication-40041",
-        "usage": "representational parabolic antenna/sensor geometry under open sky; not archival evidence",
+        "candidate_id": "nasa-svs-geos5-clouds-no-labels-4819",
+        "usage": "Visualização NASA GEOS-5 sem rótulos para explicar a cobertura de nuvens e a geometria atmosférica; não é filmagem literal do sensor de 1983.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
-        "editorial_caveat": "Use as mechanism visualization, not as literal footage from Petrov's 1983 incident."
+        "editorial_caveat": "Usar como visualização modelada, aplicar grade de baixo contraste para conter highlights e preservar o crédito NASA SVS nos metadados.",
+        "visual_treatment": {
+          "crop_strategy": "retain_earth_and_cloud_belt",
+          "grade": "low_contrast_charcoal_desaturated_blue",
+          "source_audio": "strip",
+          "credit_required": "NASA Scientific Visualization Studio"
+        }
       },
       "blocking_reason": null,
       "continuity_tags": {
@@ -1715,7 +1785,8 @@
           "1983",
           "cold_war",
           "analog",
-          "period_compatible"
+          "period_compatible",
+          "indeterminate_era"
         ],
         "setting": [
           "external_sensor",
@@ -1730,12 +1801,20 @@
           "cool_shadows"
         ],
         "palette": [
+          "charcoal",
           "steel",
           "desaturated_blue"
         ],
         "texture": [
-          "brushed_metal",
+          "atmospheric",
+          "data_visualization",
           "low_light_grain"
+        ],
+        "risk_flags": [
+          "modeled_global_cloud_cover_not_literal_sensor",
+          "bright_cloud_highlights_require_low_contrast_grade",
+          "NASA_credit_required",
+          "source_audio_must_be_stripped_in_render"
         ]
       }
     },
@@ -1934,7 +2013,7 @@
     "drive_write_authorized": false,
     "publication_authorized": false
   },
-  "next_action": "Search and intake a dark period-compatible S04 control-panel candidate; complete S12 crop/credit review or replace it; rerun continuity. Do not render, write Drive, mutate the global catalog or publish.",
+  "next_action": "Run the visual-plan contract and continuity CI on the S04/S12 replacements. Keep strict preview, render, promotion, global catalog, Drive and publication blocked until the result is reviewed.",
   "reuse_policy": {
     "source_reuse_scope": "global",
     "distinct_source_required_per_shot": true,
@@ -2161,7 +2240,7 @@
   ],
   "final_visual_manifest_validation": {
     "validated_at_utc": "2026-11-06T06:41:53Z",
-    "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
+    "status": "REVALIDATION_PENDING",
     "validator": "production/visual_plan_contract.py",
     "checkout_commit": "6e845edf59a3d15695fb86017a4274353a5711a5",
     "candidate_count": 51,
@@ -2172,8 +2251,8 @@
     "promotion_allowed": false,
     "render_allowed": false,
     "global_catalog_updated": false,
-    "revalidation_required": false,
-    "replacement_note": "Search-v5 replacements are active for S03 and S09. The latest CI contract passes structurally; continuity review remains required for S04/S12 and S11->S12/S12->S13.",
+    "revalidation_required": true,
+    "replacement_note": "S04/S12 replacements are fingerprint-clean and manifest-only; continuity CI must recalculate adjacency and hard-conflict results before render consideration.",
     "continuity_gate": "REVIEW_REQUIRED",
     "strict_preview_block": true,
     "ci_workflow_run_id": 42176059809,
@@ -2193,7 +2272,10 @@
     ],
     "continuity_hard_conflict_count": 13,
     "continuity_coverage_score": 0.9187,
-    "pending_revalidation_shots": [],
+    "pending_revalidation_shots": [
+      "S04",
+      "S12"
+    ],
     "previous_validation_snapshot": {
       "validated_at_utc": "2026-11-06T05:43:03Z",
       "ci_workflow_run_id": 42170029722,
@@ -2209,12 +2291,12 @@
       "continuity_hard_conflict_count": 23,
       "continuity_coverage_score": 0.8812
     },
-    "continuity_research_batch": "search-v5-episode005-period-recovery-20261106",
+    "continuity_research_batch": "search-v6-episode005-s04-s12-recovery-20261106",
     "intake_workflow_run_id": 42174399543,
     "fingerprint_workflow_run_id": 42175277282,
     "manifest_replacement_shots": [
-      "S03",
-      "S09"
+      "S04",
+      "S12"
     ],
     "pending_continuity_shots": [
       "S04",
@@ -2222,7 +2304,7 @@
     ],
     "note": "CI run 42176059809 validated the updated S03/S09 manifest replacements. Both new shots pass continuity; S04/S12 remain hard conflicts and S11->S12/S12->S13 remain blocked adjacency transitions. Render/preview remain blocked."
   },
-  "last_adjustment": "CI run 42176059809 passed the updated search-v5 manifest. S03 and S09 now pass continuity; hard conflicts fell from 23 to 13 and coverage rose from 0.8812 to 0.9187. S04, S12 and S11->S12/S12->S13 remain blocked.",
+  "last_adjustment": "Search-v6 replacements are now recorded in the manifest: S04 uses the dark vintage radio and S12 uses NASA GEOS-5 no-labels cloud visualization. Both passed visual QA and global fingerprint; continuity CI has not yet revalidated the sequence.",
   "visual_continuity_profile": {
     "schema_version": "1.0",
     "profile_id": "episode-005-cold-war-bunker-continuity-v1",
@@ -2338,7 +2420,7 @@
   "continuity_gate": {
     "status": "REVIEW_REQUIRED",
     "profile_id": "episode-005-cold-war-bunker-continuity-v1",
-    "reason": "CI run 42176059809 confirms S03/S09 now pass continuity. Remaining hard conflicts are S04/S12; S11->S12 and S12->S13 remain blocked adjacency transitions; S06/S11 remain metadata/editorial review.",
+    "reason": "S04 and S12 were replaced with fingerprint-clean candidates; continuity revalidation is pending. Strict preview/render remains blocked.",
     "strict_preview_block": true,
     "hard_conflict_shots": [
       "S04",
@@ -2359,11 +2441,9 @@
     "ci_conclusion": "success",
     "coverage_score": 0.9187,
     "hard_conflict_count": 13,
-    "revalidation_required": false,
+    "revalidation_required": true,
     "pending_revalidation_shots": [
-      "S03",
       "S04",
-      "S09",
       "S12"
     ]
   },
@@ -2409,6 +2489,38 @@
       "global_catalog_updated": false,
       "drive_written": false,
       "publication_allowed": false
+    },
+    {
+      "recorded_at_utc": "2026-11-06T07:50:43Z",
+      "shot_replacements": [
+        {
+          "shot_id": "S04",
+          "previous_candidate_id": "mixkit-worker-industrial-lathe-2244",
+          "replacement_candidate_id": "pixabay-radio-vintage-old-171435",
+          "reason": "remove industrial-floor/modern control signature and restore a low-key analog signal-transfer insert"
+        },
+        {
+          "shot_id": "S12",
+          "previous_candidate_id": "pixabay-antenna-astronomy-communication-40041",
+          "replacement_candidate_id": "nasa-svs-geos5-clouds-no-labels-4819",
+          "reason": "remove modern daylight antenna conflict and restore a no-labels atmospheric mechanism bridge"
+        }
+      ],
+      "scope": "MANIFEST_ONLY",
+      "render_allowed": false,
+      "global_catalog_updated": false,
+      "drive_written": false,
+      "publication_allowed": false,
+      "fingerprint_evidence": {
+        "workflow_run_id": 42183105946,
+        "job_id": 127777035277,
+        "artifact_id": 13486336703,
+        "artifact_digest": "sha256:bc652f9dd6a614ef40b22e1b685ac92dffdbf5086051c616e67cff9ab081f1bc",
+        "intake_workflow_run_id": 42178800543,
+        "intake_job_id": 127763342737,
+        "intake_artifact_id": 13484277704,
+        "intake_artifact_digest": "sha256:76d78df18adf6d1d120ff6925b72f0cbf425a472eeaee7f40024e111b657efd"
+      }
     }
   ]
 }
