@@ -189,7 +189,7 @@
       "visual_intent": "Hand operating red and green buttons in a dark control room; human decision pressure without a false Petrov archival claim.",
       "truth_class": "REPRESENTATIONAL",
       "provider": "pexels",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "REJECTED_AFTER_VISUAL_QA",
       "license_name": "Pexels License",
       "source_tier": "stock_auto",
       "approved_for_render": false,
@@ -231,7 +231,7 @@
         "human_anchor_is_hands_only",
         "modern_control_room_possible"
       ],
-      "selection_status": "REVIEW_REQUIRED",
+      "selection_status": "REJECTED_AFTER_VISUAL_QA",
       "score_breakdown": {
         "semantic_fit": 0.86,
         "continuity_coherence": 0.72,
@@ -259,7 +259,16 @@
         "frame_rate": "25/1",
         "codec": "h264",
         "size_bytes": 30045361,
-        "fps": 25
+        "fps": 25,
+        "perceptual_hash": "9e96ef1ec5b2ff32b5d58442c5f5feca729724c81507715ddcb2c89e34aa73c7",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42172605438,
+        "fingerprint_job_id": 127743687869,
+        "fingerprint_artifact_id": 13481742998,
+        "fingerprint_artifact_digest": "sha256:40fa8e7f7582c485b17e7abdbec1cc0a54a88afccbb458b4a15656b977e54ebb",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
       },
       "qa": {
         "clean_frame_visual_review": "PRELIMINARY_REJECT_CONTINUITY",
@@ -267,14 +276,17 @@
         "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
         "semantic_fit": "CONTENT_FIT_BUT_FAILS_1983_ANALOG_PERIOD_COHERENCE",
         "locked_9x16_crop": "PASS_CROP_BUT_MODERN_ACRYLIC_INTERFACE_REMAINS",
-        "global_reuse_fingerprint": "PENDING",
-        "human_approval": "PENDING_REVIEW",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "REJECTED",
         "direct_media_visual_review": "FAIL_MODERN_ACRYLIC_BUTTON_BANK_AND_READABLE_LABELS",
-        "visual_qa_status": "PRELIMINARY_REJECT_CONTINUITY",
+        "visual_qa_status": "REJECTED_AFTER_VISUAL_QA",
         "visual_qa_evidence": "artifact 13480857827 / pexels-38958215/qa-frames.jpg",
         "third_party_risk": "MODERN_INTERFACE_SIGNATURE_AND_PHYSICAL_LABELS",
-        "full_duration_qa": "FIVE_NORMALIZED_SAMPLES_REVIEWED"
-      }
+        "full_duration_qa": "FIVE_NORMALIZED_SAMPLES_REVIEWED",
+        "fingerprint_evidence": "artifact 13481742998 / fingerprint-audit.json"
+      },
+      "rejection_reason": "Full-duration contact-sheet QA shows modern transparent acrylic buttons, readable physical labels and a contemporary interface signature incompatible with the Episode 005 1983 analog control-room profile.",
+      "rejection_evidence": "artifact 13480857827 / pexels-38958215/qa-frames.jpg and qa-crop-9x16.jpg"
     },
     {
       "candidate_id": "pexels-6442796",
@@ -2992,7 +3004,7 @@
       "visual_intent": "Analog gauges, levers and a control cabin establish mechanical signal handling without showing an anachronistic industrial lathe or modern UI.",
       "truth_class": "REPRESENTATIONAL",
       "provider": "mixkit",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "REJECTED_AFTER_VISUAL_QA",
       "license_name": "Mixkit Stock Video Free License",
       "source_tier": "stock_auto",
       "approved_for_render": false,
@@ -3047,7 +3059,7 @@
         "no_human_anchor",
         "must_not_assign_S03"
       ],
-      "selection_status": "REVIEW_REQUIRED",
+      "selection_status": "REJECTED_AFTER_VISUAL_QA",
       "score_breakdown": {
         "semantic_fit": 0.84,
         "continuity_coherence": 0.84,
@@ -3078,7 +3090,16 @@
         "frame_rate": "30/1",
         "codec": "h264",
         "size_bytes": 15767463,
-        "fps": 30
+        "fps": 30,
+        "perceptual_hash": "c40367362c6cf86d75d2cce6f9868be2e0cd5dd3dcedd241337aa5bc180d2517",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42172605438,
+        "fingerprint_job_id": 127743687869,
+        "fingerprint_artifact_id": 13481742998,
+        "fingerprint_artifact_digest": "sha256:40fa8e7f7582c485b17e7abdbec1cc0a54a88afccbb458b4a15656b977e54ebb",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
       },
       "qa": {
         "clean_frame_visual_review": "PRELIMINARY_REJECT_CONTINUITY",
@@ -3086,14 +3107,17 @@
         "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
         "semantic_fit": "CONTROL_SURFACE_FIT_BUT_FAILS_NIGHT_LOW_KEY_AND_1983_COMMAND_ROOM_CONTEXT",
         "locked_9x16_crop": "PASS_CROP_BUT_BRIGHT_SUBWAY_TUNNEL_AND_MODERN_PANEL_VISIBLE",
-        "global_reuse_fingerprint": "PENDING",
-        "human_approval": "PENDING_REVIEW",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "REJECTED",
         "direct_media_visual_review": "FAIL_SUBWAY_CABIN_BRIGHT_MODERN_CONTEXT",
-        "visual_qa_status": "PRELIMINARY_REJECT_CONTINUITY",
+        "visual_qa_status": "REJECTED_AFTER_VISUAL_QA",
         "visual_qa_evidence": "artifact 13480857827 / mixkit-inside-rear-control-cabin-4460/qa-frames.jpg",
         "third_party_risk": "PHYSICAL_SIGNAGE_AND_UNRELATED_SUBWAY_CONTEXT",
-        "full_duration_qa": "FIVE_NORMALIZED_SAMPLES_REVIEWED"
-      }
+        "full_duration_qa": "FIVE_NORMALIZED_SAMPLES_REVIEWED",
+        "fingerprint_evidence": "artifact 13481742998 / fingerprint-audit.json"
+      },
+      "rejection_reason": "Full-duration contact-sheet QA shows a bright subway control cabin, transit tunnel and modern signage/panel context; it breaks the 1983 analog command-room and night low-key continuity.",
+      "rejection_evidence": "artifact 13480857827 / mixkit-inside-rear-control-cabin-4460/qa-frames.jpg and qa-crop-9x16.jpg"
     },
     {
       "candidate_id": "pexels-12213087",
@@ -3182,7 +3206,16 @@
         "frame_rate": "25/1",
         "codec": "h264",
         "size_bytes": 33522748,
-        "fps": 25
+        "fps": 25,
+        "perceptual_hash": "0d4aadcf833ef1f79a272aaf76e0820bcc640bca80b2c19961df83a61b8d3db8",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42172605438,
+        "fingerprint_job_id": 127743687869,
+        "fingerprint_artifact_id": 13481742998,
+        "fingerprint_artifact_digest": "sha256:40fa8e7f7582c485b17e7abdbec1cc0a54a88afccbb458b4a15656b977e54ebb",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
       },
       "qa": {
         "clean_frame_visual_review": "PRELIMINARY_PASS_FOR_S09_REVIEW",
@@ -3190,14 +3223,16 @@
         "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
         "semantic_fit": "PASS_DARK_TACTILE_CONTROL_INSERT",
         "locked_9x16_crop": "PASS_CENTERED_HAND_AND_KNOBS",
-        "global_reuse_fingerprint": "PENDING",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "PENDING",
         "direct_media_visual_review": "PASS_CONTENT_NO_LOGO_OR_TEXT_VISIBLE",
-        "visual_qa_status": "PENDING_FINGERPRINT_AND_HUMAN_APPROVAL",
+        "visual_qa_status": "PENDING_FINAL_HUMAN_APPROVAL",
         "visual_qa_evidence": "artifact 13480857827 / pexels-12213087/qa-frames.jpg",
         "third_party_risk": "ERA_INDETERMINATE; AVOID_READABLE_MODERN_CONTEXT",
-        "full_duration_qa": "FIVE_NORMALIZED_SAMPLES_REVIEWED"
-      }
+        "full_duration_qa": "FIVE_NORMALIZED_SAMPLES_REVIEWED",
+        "fingerprint_evidence": "artifact 13481742998 / fingerprint-audit.json"
+      },
+      "next_review": "Confirm that the dark tactile mixing surface can be used as a generic 1983-era control insert without readable modern context."
     },
     {
       "candidate_id": "nasa-svs-noctilucent-clouds-20002",
@@ -3374,7 +3409,16 @@
         "frame_rate": "30/1",
         "codec": "h264",
         "size_bytes": 17449796,
-        "fps": 30
+        "fps": 30,
+        "perceptual_hash": "7fe861ee8483fd1f1e64e4fcfcf3c831d28519d419ba117dacf162712d7c789b",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42172605438,
+        "fingerprint_job_id": 127743687869,
+        "fingerprint_artifact_id": 13481742998,
+        "fingerprint_artifact_digest": "sha256:40fa8e7f7582c485b17e7abdbec1cc0a54a88afccbb458b4a15656b977e54ebb",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
       },
       "qa": {
         "clean_frame_visual_review": "PRELIMINARY_REVIEW_REQUIRED",
@@ -3382,14 +3426,16 @@
         "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
         "semantic_fit": "PASS_NIGHT_ATMOSPHERIC_EXPLANATION_BUT_GLOBAL_EARTH_DATA_VISUALIZATION",
         "locked_9x16_crop": "PASS_CROP_WITH_DATE_LABELS_OUTSIDE_CENTERED_SAFE_AREA",
-        "global_reuse_fingerprint": "PENDING",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
         "human_approval": "PENDING",
         "direct_media_visual_review": "REVIEW_DATE_LABELS_AND_SOURCE_CONTEXT_BEFORE_APPROVAL",
-        "visual_qa_status": "PENDING_HUMAN_APPROVAL",
+        "visual_qa_status": "PENDING_FINAL_HUMAN_APPROVAL",
         "visual_qa_evidence": "artifact 13480857827 / nasa-svs-noctilucent-clouds-3484/qa-frames.jpg",
-        "third_party_risk": "GOVERNMENT_SCIENTIFIC_VISUALIZATION_REQUIRES_CREDIT;_BAKED_DATE_LABELS_IN_FULL_FRAME",
-        "full_duration_qa": "FIVE_NORMALIZED_SAMPLES_REVIEWED"
-      }
+        "third_party_risk": "GOVERNMENT_SCIENTIFIC_VISUALIZATION_REQUIRES_CREDIT; BAKED_DATE_LABELS_IN_FULL_FRAME",
+        "full_duration_qa": "FIVE_NORMALIZED_SAMPLES_REVIEWED",
+        "fingerprint_evidence": "artifact 13481742998 / fingerprint-audit.json"
+      },
+      "next_review": "Confirm final 9x16 crop excludes NASA date labels and add required credit in description; do not treat as literal Petrov sensor footage."
     }
   ],
   "next_action": "Acquire and fingerprint distinct period-compatible replacements for S03, S04, S09 and S12; keep S06/S11 manifest-only until editorial continuity review is complete.",
@@ -4211,40 +4257,45 @@
     "next_action": "Run the explicit global fingerprint audit for all four downloaded candidates; do not assign, promote, render, catalog, Drive-write or publish."
   },
   "last_manual_fingerprint": {
-    "workflow_run_id": 42166326952,
-    "job_id": 127723541842,
+    "workflow_run_id": 42172605438,
+    "job_id": 127743687869,
     "branch": "main",
-    "commit_sha": "5596616c41073547a234c620a5e1196a0abe58c8",
-    "artifact_id": 13479201438,
+    "commit_sha": "09bb00090b8ceeb78e68bd6c1ade43f074199a8d",
+    "artifact_id": 13481742998,
     "artifact_name": "episode005-visual-fingerprint-audit",
-    "artifact_digest": "sha256:755d8361c98a1587c9ac304690520b8520fc09d1aaa13f0551f10a641bd70934",
+    "artifact_digest": "sha256:40fa8e7f7582c485b17e7abdbec1cc0a54a88afccbb458b4a15656b977e54ebb",
     "status": "FINGERPRINT_AUDIT_PASS",
     "candidate_ids": [
       "pexels-38958215",
-      "pexels-5523892",
-      "pexels-12590338"
+      "mixkit-inside-rear-control-cabin-4460",
+      "pexels-12213087",
+      "nasa-svs-noctilucent-clouds-3484"
     ],
     "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
-    "candidate_count": 3,
+    "candidate_count": 4,
     "blockers": [],
-    "human_approval": "PARTIAL_APPROVAL",
+    "human_approval": "PENDING_FINAL_VISUAL_DECISIONS",
     "approved_for_render": false,
     "global_catalog_updated": false,
     "render_allowed": false,
     "drive_written": false,
     "publication_allowed": false,
-    "next_action": "The user approved pexels-5523892 for S06 and pexels-12590338 for S11 for manifest-only replacement; run CI revalidation and keep render/promotion blocked.",
-    "approved_candidate_ids": [
-      "pexels-5523892",
-      "pexels-12590338"
-    ],
-    "approved_shot_by_candidate": {
-      "pexels-5523892": "S06",
-      "pexels-12590338": "S11"
+    "global_collision_summary": {
+      "source": false,
+      "sha256": false,
+      "perceptual": false
     },
-    "pending_candidate_ids": [
-      "pexels-38958215"
-    ]
+    "preliminary_visual_decisions": {
+      "rejected": [
+        "pexels-38958215",
+        "mixkit-inside-rear-control-cabin-4460"
+      ],
+      "review_required": [
+        "pexels-12213087",
+        "nasa-svs-noctilucent-clouds-3484"
+      ]
+    },
+    "next_action": "Find new candidates for S03/S04 and finish final crop/credit review for S09/S12; do not promote or render."
   },
   "last_candidate_addition": {
     "added_at_utc": "2026-11-06T00:00:00Z",
@@ -4351,8 +4402,8 @@
     "continuity_coverage_score": 0.8812,
     "note": "CI revalidated the expanded shortlist. The four search-v4 candidates remain plan-only; active manifest assignments and the strict preview block are unchanged."
   },
-  "last_adjustment": "Intake run 42171894738 succeeded for four HD candidates. Contact-sheet QA preliminarily rejects S03/S04 for continuity and leaves S09/S12 for fingerprint plus final human/crop review; no candidate is assigned or promoted.",
-  "next_gate": "Run the four-candidate global fingerprint audit. After its evidence, formally reject S03/S04 and decide whether S09/S12 can replace the remaining continuity blockers. Keep render and publication blocked.",
+  "last_adjustment": "Fingerprint audit run 42172605438 passed for all four downloaded candidates with zero global/source/hash collisions. Visual QA formally rejected S03/S04; S09/S12 remain unassigned and pending final review.",
+  "next_gate": "Search and intake distinct period-compatible replacements for S03 and S04; finish S09/S12 crop/credit approval. Only then update the manifest and rerun the visual continuity contract. Render remains blocked.",
   "render_approval_record": {
     "status": "APPROVED",
     "approved_at_utc": "2026-11-05T22:56:14Z",
@@ -4591,7 +4642,7 @@
       "source_pages_reviewed": 5,
       "direct_media_routes_recorded": 5,
       "intake_dispatched": true,
-      "fingerprint_dispatched": false,
+      "fingerprint_dispatched": true,
       "human_approval_pending": true,
       "render_allowed": false,
       "promotion_allowed": false,
@@ -4609,7 +4660,7 @@
         "9x16_crop_review"
       ],
       "rejection_policy": "Reject any candidate after intake if full-duration QA reveals modern/digital UI, readable labels, watermarks, daylight, licensed audio, or a source/fingerprint collision.",
-      "next_action": "Run the global fingerprint audit for the four downloaded candidates; after the audit, reject S03/S04 formally and keep S09/S12 blocked pending final human/crop/credit approval.",
+      "next_action": "Search distinct period-compatible replacements for S03 and S04; complete final crop/credit review for S09 and S12 before any manifest assignment. Keep render blocked.",
       "contract_validation": {
         "workflow_run_id": 42170029722,
         "job_id": 127735446473,
@@ -4684,7 +4735,23 @@
         "notes": "Full-frame and centered 9x16 contact sheets were reviewed. S03 is a modern acrylic button bank with readable physical labels; S04 is a bright subway control cabin with unrelated transit signage; S09 is a dark tactile control insert; S12 is a NASA night-atmosphere visualization whose full-frame date labels require a final crop/credit decision.",
         "render_allowed": false,
         "promotion_allowed": false
-      }
+      },
+      "fingerprint_workflow_run_id": 42172605438,
+      "fingerprint_job_id": 127743687869,
+      "fingerprint_artifact_id": 13481742998,
+      "fingerprint_artifact_name": "episode005-visual-fingerprint-audit",
+      "fingerprint_artifact_digest": "sha256:40fa8e7f7582c485b17e7abdbec1cc0a54a88afccbb458b4a15656b977e54ebb",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "fingerprint_status": "FINGERPRINT_AUDIT_PASS",
+      "fingerprint_blockers": [],
+      "rejected_after_visual_review": [
+        "pexels-38958215",
+        "mixkit-inside-rear-control-cabin-4460"
+      ],
+      "review_required_candidate_ids": [
+        "pexels-12213087",
+        "nasa-svs-noctilucent-clouds-3484"
+      ]
     }
   ],
   "last_intake_attempt": {
