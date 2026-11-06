@@ -1818,7 +1818,7 @@
     "drive_write_authorized": false,
     "publication_authorized": false
   },
-  "next_action": "Search distinct period-compatible replacements for S03, S04, S09 and S12, then rerun intake, fingerprint and the sequence gate. Do not render or promote.",
+  "next_action": "Obtain editorial approval for the four search-v4 candidate IDs, dispatch isolated intake/fingerprint, then assign only fingerprint-clean candidates and rerun the sequence gate. Do not render or promote.",
   "reuse_policy": {
     "source_reuse_scope": "global",
     "distinct_source_required_per_shot": true,
@@ -2007,11 +2007,11 @@
     }
   ],
   "final_visual_manifest_validation": {
-    "validated_at_utc": "2026-11-06T05:30:06Z",
+    "validated_at_utc": "2026-11-06T05:43:03Z",
     "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
     "validator": "production/visual_plan_contract.py",
-    "checkout_commit": "9e76bf6c3dc5629dec4b15eaf18f797aac7cb866",
-    "candidate_count": 43,
+    "checkout_commit": "9ea8eebed4893dbaf59d0acaa879740ef43932ee",
+    "candidate_count": 47,
     "approved_manifest_candidate_count": 23,
     "manifest_asset_count": 16,
     "assigned_shot_count": 16,
@@ -2020,11 +2020,11 @@
     "render_allowed": false,
     "global_catalog_updated": false,
     "revalidation_required": true,
-    "replacement_note": "S06 and S11 replacements passed contract and removed hard conflicts; CI still requires review for S06/S11 metadata and blocks S03/S04/S09/S12 plus S11->S12 and S12->S13.",
+    "replacement_note": "S06 and S11 replacements remain manifest-only review candidates. Search-v4 adds four unassigned shortlist candidates for S03/S04/S09/S12; the strict preview/render block remains active.",
     "continuity_gate": "REVIEW_REQUIRED",
     "strict_preview_block": true,
-    "ci_workflow_run_id": 42168761462,
-    "ci_job_id": 127731406133,
+    "ci_workflow_run_id": 42170029722,
+    "ci_job_id": 127735446473,
     "ci_conclusion": "success",
     "continuity_hard_conflict_shots": [
       "S03",
@@ -2043,7 +2043,7 @@
     "continuity_hard_conflict_count": 23,
     "continuity_coverage_score": 0.8812
   },
-  "last_adjustment": "Post-fix CI recorded: S06 and S11 are no longer hard conflicts, while S03/S04/S09/S12 remain blocked and S11->S12/S12->S13 remain adjacency breaks. Preview/render stays fail-closed.",
+  "last_adjustment": "CI run 42170029722/job 127735446473 revalidated the expanded 47-candidate plan without changing the 16 active assignments. Search-v4 candidates remain shortlist-only; S03/S04/S09/S12 and both adjacency breaks still block preview/render.",
   "visual_continuity_profile": {
     "schema_version": "1.0",
     "profile_id": "episode-005-cold-war-bunker-continuity-v1",
