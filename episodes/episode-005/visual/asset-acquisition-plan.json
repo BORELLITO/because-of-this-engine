@@ -1,7 +1,7 @@
 {
   "plan_id": "episode-005-visual-asset-acquisition-v1",
   "episode_id": "episode-005",
-  "status": "SEARCH_V5_INTAKE_RECORDED_FINGERPRINT_RETRY_REQUIRED",
+  "status": "SEARCH_V5_FINGERPRINT_PASS_MANIFEST_ASSIGNMENTS_APPROVED",
   "purpose": "Pre-download candidate pool for Episode 005. No candidate is approved for render until downloaded, SHA-256ed, visually inspected, checked for embedded text/logos/letterbox, fingerprinted, and entered into the final video manifest.",
   "frozen_audio_source": {
     "workflow_run_id": 41961294784,
@@ -3445,7 +3445,7 @@
       "visual_intent": "Representational human-anchor reconstruction: a man writes and uses a radio in a dim room, preserving operator focus without claiming literal Petrov archival footage.",
       "truth_class": "REPRESENTATIONAL",
       "provider": "pexels",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_FINGERPRINT",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "license_name": "Pexels License",
       "source_tier": "stock_auto",
       "approved_for_render": false,
@@ -3493,7 +3493,7 @@
         "workshop_like_background_requires_crop_and_grade",
         "source_audio_must_be_stripped_in_render"
       ],
-      "selection_status": "REVIEW_REQUIRED",
+      "selection_status": "APPROVED_FOR_MANIFEST",
       "score_breakdown": {
         "semantic_fit": 0.9,
         "continuity_coherence": 0.87,
@@ -3515,7 +3515,7 @@
         "codec": "h264",
         "audio_present": true
       },
-      "next_review": "Fingerprint candidate; if clean, replace modern workshop assignment on S03 and apply warm-low-key grade with the first 8-10 seconds favored for the human anchor.",
+      "next_review": "Manifest-only assignment approved after clean global fingerprint; favor the first 8-10 seconds and apply warm low-key grade; render remains blocked.",
       "intake_artifact": {
         "workflow_run_id": 42174399543,
         "job_id": 127749408504,
@@ -3524,7 +3524,7 @@
         "artifact_id": 13482227807,
         "artifact_name": "episode005-visual-intake-42174399543",
         "artifact_digest": "sha256:068d25a3614069052997f31097511748d07b10457511c7fb04c9d347e0b0362",
-        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "status": "CANDIDATE_DOWNLOADED_FINGERPRINT_PASS_AWAITING_MANIFEST_UPDATE",
         "automated_promotion": false,
         "sha256": "9e2ad3951cafda341e656c9be49ffc55915326b0789e243e65aad65df1408f7b",
         "duration_seconds": 18.965,
@@ -3535,7 +3535,16 @@
         "frame_rate": "30000/1001",
         "codec": "h264",
         "size_bytes": 3507016,
-        "fps": 29.97002997002997
+        "fps": 29.97002997002997,
+        "perceptual_hash": "b099b8f4ea22a379046da09b6cf48c6f56a55a5053fe21b989552b8cccf6a5c0",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42175277282,
+        "fingerprint_job_id": 127752198414,
+        "fingerprint_artifact_id": 13483246739,
+        "fingerprint_artifact_digest": "sha256:473192d2e4d67b8ada86f08cc343bca81347534397c90685b47e7337db7e36fd",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
       },
       "qa": {
         "clean_frame_visual_review": "PASS_FULL_DURATION",
@@ -3543,16 +3552,28 @@
         "embedded_logo_or_letterbox": "NO_WATERMARK_OR_COMMERCIAL_LOGO_OBSERVED; INCIDENTAL_SHELF_PACKAGING_NOT_SEMANTIC",
         "semantic_fit": "PASS_S03_HUMAN_ANCHOR_RADIO_AND_NOTEBOOK",
         "locked_9x16_crop": "PASS_OPERATOR_AND_RADIO_RETAINED; ENDING_WIDENS_TO_SHELVES",
-        "global_reuse_fingerprint": "PENDING_RETRY_AFTER_PLAN_METADATA_COMMIT",
-        "human_approval": "PENDING_FINGERPRINT",
+        "global_reuse_fingerprint": "PASS_NO_SOURCE_SHA256_OR_PERCEPTUAL_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "direct_media_visual_review": "PASS_DIM_WARM_RADIO_OPERATOR_WITH_LOW_KEY_CONTINUITY",
-        "visual_qa_status": "HUMAN_PASS_PENDING_FINGERPRINT",
+        "visual_qa_status": "HUMAN_APPROVED_FOR_MANIFEST",
         "visual_qa_evidence": "artifact 13482227807 / pexels-11764431/qa-frames.jpg and qa-crop-9x16.jpg",
         "third_party_risk": "LOW_VISIBLE_RISK; NO_IDENTIFIABLE_COMMERCIAL_BRANDING_IN_REVIEWED_CROP",
         "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES",
-        "continuity_decision": "KEEP_FOR_FINGERPRINT_AND_S03_REPLACEMENT_REVIEW"
+        "continuity_decision": "APPROVED_S03_REPLACEMENT_AFTER_FINGERPRINT_PASS",
+        "fingerprint_evidence": "artifact 13483246739 / fingerprint-audit.json"
+      },
+      "approved_shot_ids": [
+        "S03"
+      ],
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "manifest_assignment": {
+        "shot_id": "S03",
+        "approved_at_utc": "2026-11-06T06:37:52Z",
+        "scope": "APPROVED_FOR_MANIFEST_ONLY",
+        "supersedes": "mixkit-young-engineer-29991",
+        "reason": "replace modern tablet/workshop signature with a dim-room human/radio anchor that matches the bunker narrative"
       }
     },
     {
@@ -3563,7 +3584,7 @@
       "visual_intent": "Dark analog tape-deck/control-panel insert with mechanical PLAY, REC, STOP, REW and FF actions to represent alert propagation or classification input; not the actual Soviet system.",
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "pexels",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_FINGERPRINT",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "license_name": "Pexels License",
       "source_tier": "stock_auto",
       "approved_for_render": false,
@@ -3612,7 +3633,7 @@
         "digital_timer_requires_period_coherence_review",
         "source_audio_must_be_stripped_in_render"
       ],
-      "selection_status": "REVIEW_REQUIRED",
+      "selection_status": "APPROVED_FOR_MANIFEST",
       "score_breakdown": {
         "semantic_fit": 0.83,
         "continuity_coherence": 0.82,
@@ -3634,7 +3655,7 @@
         "codec": "h264",
         "audio_present": true
       },
-      "next_review": "Fingerprint candidate; if clean, prefer S09 replacement because the dark analog panel improves period coherence, while avoiding the 9x16 crop if labels/timer dominate.",
+      "next_review": "Manifest-only assignment approved after clean global fingerprint; keep labels/timer subordinate with editorial crop; render remains blocked.",
       "intake_artifact": {
         "workflow_run_id": 42174399543,
         "job_id": 127749408504,
@@ -3643,7 +3664,7 @@
         "artifact_id": 13482227807,
         "artifact_name": "episode005-visual-intake-42174399543",
         "artifact_digest": "sha256:068d25a3614069052997f31097511748d07b10457511c7fb04c9d347e0b0362",
-        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "status": "CANDIDATE_DOWNLOADED_FINGERPRINT_PASS_AWAITING_MANIFEST_UPDATE",
         "automated_promotion": false,
         "sha256": "822ecd823eccb216a38bc50a06d6cc06ba8be57639cb4382bfa510dd4a21e3cc",
         "duration_seconds": 6.015,
@@ -3654,7 +3675,16 @@
         "frame_rate": "30000/1001",
         "codec": "h264",
         "size_bytes": 3981671,
-        "fps": 29.97002997002997
+        "fps": 29.97002997002997,
+        "perceptual_hash": "d39fcb42f9736e915d4986ab2567650a9aa79a6de743a7af42d324524723b02f",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42175277282,
+        "fingerprint_job_id": 127752198414,
+        "fingerprint_artifact_id": 13483246739,
+        "fingerprint_artifact_digest": "sha256:473192d2e4d67b8ada86f08cc343bca81347534397c90685b47e7337db7e36fd",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
       },
       "qa": {
         "clean_frame_visual_review": "PASS_FULL_DURATION",
@@ -3662,16 +3692,28 @@
         "embedded_logo_or_letterbox": "NO_LOGO_OR_LETTERBOX_OBSERVED",
         "semantic_fit": "PASS_S09_ANALOG_CLASSIFICATION_INPUT; SECONDARY_S04_PROPAGATION_INSERT",
         "locked_9x16_crop": "PASS_DARK_ANALOG_CONTROLS_RETAINED; EXTREME_CROP_MAKES_LABELS_MORE_PROMINENT",
-        "global_reuse_fingerprint": "PENDING_RETRY_AFTER_PLAN_METADATA_COMMIT",
-        "human_approval": "PENDING_FINGERPRINT",
+        "global_reuse_fingerprint": "PASS_NO_SOURCE_SHA256_OR_PERCEPTUAL_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "direct_media_visual_review": "PASS_DARK_ANALOG_TAPE_DECK_WITH_MECHANICAL_BUTTON_ACTION",
-        "visual_qa_status": "HUMAN_PASS_WITH_LABEL_AND_TIMER_CAVEAT",
+        "visual_qa_status": "HUMAN_APPROVED_FOR_MANIFEST",
         "visual_qa_evidence": "artifact 13482227807 / pexels-4285872/qa-frames.jpg and qa-crop-9x16.jpg",
         "third_party_risk": "LOW_VISIBLE_RISK; GENERIC_ENGLISH_CONTROL_LABELS_AND_DIGITAL_TIMER_REQUIRE_EDITORIAL_CROP",
         "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES",
-        "continuity_decision": "PREFER_S09_REPLACEMENT; DO_NOT USE AS LITERAL_SOVIET_INTERFACE"
+        "continuity_decision": "APPROVED_S09_REPLACEMENT_AFTER_FINGERPRINT_PASS_WITH_LABEL_TIMER_CAVEAT",
+        "fingerprint_evidence": "artifact 13483246739 / fingerprint-audit.json"
+      },
+      "approved_shot_ids": [
+        "S09"
+      ],
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "manifest_assignment": {
+        "shot_id": "S09",
+        "approved_at_utc": "2026-11-06T06:37:52Z",
+        "scope": "APPROVED_FOR_MANIFEST_ONLY",
+        "supersedes": "pixabay-button-press-red-business-click-502",
+        "reason": "replace modern digital-signature input with a dark analog mechanical control insert; keep labels/timer subordinate through crop"
       }
     },
     {
@@ -3794,7 +3836,7 @@
       "rejection_reason": "Full-duration intake QA shows a bright blue high-key modern electrical panel, visible HoseLine Inc. branding and readable labels; it breaks the episode's low-key 1983 analog bunker profile."
     }
   ],
-  "next_action": "Rerun global fingerprint for pexels-11764431 and pexels-4285872 after committing intake metadata; prefer pexels-11764431 for S03 and pexels-4285872 for S09 only if fingerprint-clean. Keep S04 search active and do not render or promote.",
+  "next_action": "Update scene-asset-manifest.json with pexels-11764431 for S03 and pexels-4285872 for S09; rerun contract validation; do not render or promote.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -4180,6 +4222,42 @@
         "fingerprint_workflow_run_id": 42166326952,
         "fingerprint_artifact_id": 13479201438
       }
+    },
+    {
+      "candidate_ids": [
+        "pexels-11764431",
+        "pexels-4285872"
+      ],
+      "shot_ids": [
+        "S03",
+        "S09"
+      ],
+      "decision": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_at_utc": "2026-11-06T06:37:52Z",
+      "scope": "Search-v5 period-continuity replacements after full-duration visual QA and global fingerprint pass.",
+      "superseded_assignments": [
+        {
+          "shot_id": "S03",
+          "previous_candidate_id": "mixkit-young-engineer-29991"
+        },
+        {
+          "shot_id": "S09",
+          "previous_candidate_id": "pixabay-button-press-red-business-click-502"
+        }
+      ],
+      "evidence": {
+        "intake_workflow_run_id": 42174399543,
+        "intake_artifact_id": 13482227807,
+        "fingerprint_workflow_run_id": 42175277282,
+        "fingerprint_artifact_id": 13483246739,
+        "fingerprint_artifact_digest": "sha256:473192d2e4d67b8ada86f08cc343bca81347534397c90685b47e7337db7e36fd"
+      },
+      "constraints": [
+        "no literal archival claim",
+        "no render, catalog mutation, Drive write or publication",
+        "S03 first 8-10 seconds favored; warm low-key grade",
+        "S09 editorial crop keeps labels/timer subordinate"
+      ]
     }
   ],
   "rejected_candidates": [
@@ -4613,24 +4691,22 @@
     "next_action": "Run the explicit global fingerprint audit for all four downloaded candidates; do not assign, promote, render, catalog, Drive-write or publish."
   },
   "last_manual_fingerprint": {
-    "workflow_run_id": 42172605438,
-    "job_id": 127743687869,
+    "workflow_run_id": 42175277282,
+    "job_id": 127752198414,
     "branch": "main",
-    "commit_sha": "09bb00090b8ceeb78e68bd6c1ade43f074199a8d",
-    "artifact_id": 13481742998,
+    "commit_sha": "54f63c0c59dca375687c50a1350d8431b300e629",
+    "artifact_id": 13483246739,
     "artifact_name": "episode005-visual-fingerprint-audit",
-    "artifact_digest": "sha256:40fa8e7f7582c485b17e7abdbec1cc0a54a88afccbb458b4a15656b977e54ebb",
+    "artifact_digest": "sha256:473192d2e4d67b8ada86f08cc343bca81347534397c90685b47e7337db7e36fd",
     "status": "FINGERPRINT_AUDIT_PASS",
-    "candidate_ids": [
-      "pexels-38958215",
-      "mixkit-inside-rear-control-cabin-4460",
-      "pexels-12213087",
-      "nasa-svs-noctilucent-clouds-3484"
-    ],
     "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
-    "candidate_count": 4,
+    "candidate_ids": [
+      "pexels-11764431",
+      "pexels-4285872"
+    ],
+    "candidate_count": 2,
     "blockers": [],
-    "human_approval": "PENDING_FINAL_VISUAL_DECISIONS",
+    "human_approval": "APPROVED_FOR_MANIFEST",
     "approved_for_render": false,
     "global_catalog_updated": false,
     "render_allowed": false,
@@ -4641,17 +4717,10 @@
       "sha256": false,
       "perceptual": false
     },
-    "preliminary_visual_decisions": {
-      "rejected": [
-        "pexels-38958215",
-        "mixkit-inside-rear-control-cabin-4460"
-      ],
-      "review_required": [
-        "pexels-12213087",
-        "nasa-svs-noctilucent-clouds-3484"
-      ]
-    },
-    "next_action": "Find new candidates for S03/S04 and finish final crop/credit review for S09/S12; do not promote or render."
+    "approved_candidate_ids": [
+      "pexels-11764431",
+      "pexels-4285872"
+    ]
   },
   "last_candidate_addition": {
     "added_at_utc": "2026-11-06T06:24:12.609Z",
@@ -4675,36 +4744,40 @@
   },
   "last_human_approval": {
     "candidate_ids": [
-      "pexels-5523892",
-      "pexels-12590338"
+      "pexels-11764431",
+      "pexels-4285872"
     ],
-    "approved_at_utc": "2026-11-06T05:21:35Z",
-    "decision": "User approved two fingerprint-clean replacement candidates for manifest-only use, with one distinct source per shot.",
+    "approved_at_utc": "2026-11-06T06:37:52Z",
+    "decision": "Approved the two fingerprint-clean search-v5 candidates for manifest-only replacement assignments, preserving one distinct source per shot.",
     "selected_primary_by_shot": {
-      "S06": "pexels-5523892",
-      "S11": "pexels-12590338"
+      "S03": "pexels-11764431",
+      "S09": "pexels-4285872"
     },
     "superseded_by_shot": {
-      "S06": "pixabay-led-indicator-lights-316712",
-      "S11": "mixkit-cloudy-sky-118"
+      "S03": "mixkit-young-engineer-29991",
+      "S09": "pixabay-button-press-red-business-click-502"
     },
     "scope": "APPROVED_FOR_MANIFEST_ONLY",
     "constraints": [
       "representational footage is not literal Petrov archival evidence",
       "one distinct source per shot; no source reuse within or across episodes",
+      "pexels-11764431: favor the first 8-10 seconds and apply warm low-key grade",
+      "pexels-4285872: keep English labels and digital timer subordinate through editorial crop",
       "approval does not authorize render",
       "approval does not authorize global catalog mutation",
       "approval does not authorize Drive write or publication",
-      "final visual manifest validation remains required",
-      "pexels-38958215 remains pending and is not assigned"
+      "S04 remains an independent search blocker",
+      "S12 remains pending final crop and NASA credit review"
     ],
     "evidence": {
-      "intake_workflow_run_id": 42165726351,
-      "intake_artifact_id": 13478797924,
-      "intake_artifact_digest": "sha256:dc37a4428e029890919302d0414eb4f5b2859692dd851d0a2c4da1c12ef70eda",
-      "fingerprint_workflow_run_id": 42166326952,
-      "fingerprint_artifact_id": 13479201438,
-      "fingerprint_artifact_digest": "sha256:755d8361c98a1587c9ac304690520b8520fc09d1aaa13f0551f10a641bd70934"
+      "intake_workflow_run_id": 42174399543,
+      "intake_job_id": 127749408504,
+      "intake_artifact_id": 13482227807,
+      "intake_artifact_digest": "sha256:068d25a3614069052997f31097511748d07b10457511c7fb04c9d347e0b0362",
+      "fingerprint_workflow_run_id": 42175277282,
+      "fingerprint_job_id": 127752198414,
+      "fingerprint_artifact_id": 13483246739,
+      "fingerprint_artifact_digest": "sha256:473192d2e4d67b8ada86f08cc343bca81347534397c90685b47e7337db7e36fd"
     }
   },
   "last_contract_validation": {
@@ -4757,8 +4830,8 @@
     "continuity_coverage_score": 0.8812,
     "note": "CI revalidated the expanded shortlist. The four search-v4 candidates remain plan-only; active manifest assignments and the strict preview block are unchanged."
   },
-  "last_adjustment": "Search-v5 intake 42174399543 completed. Full-duration QA passed pexels-11764431 and pexels-4285872 with caveats; pexels-6520278 was rejected for visible HoseLine Inc. branding, readable labels and bright high-key modern context. Fingerprint run 42174934328 failed closed because the intake metadata was not yet committed to the plan; retry is required after this metadata update.",
-  "next_gate": "Fingerprint retry must pass with zero source/SHA/perceptual collisions; then update the manifest only for editorially approved replacements. S04 and S12 remain blocked.",
+  "last_adjustment": "Fingerprint retry 42175277282 passed for pexels-11764431 and pexels-4285872 with zero source, SHA-256 or perceptual collisions. Approved manifest-only replacements are now ready for a separate manifest PR; S04 and S12 remain blocked.",
+  "next_gate": "Apply S03/S09 replacements in the scene manifest, rerun visual-plan contract, then continue the independent S04 search and S12 crop/credit review. Render, preview, catalog, Drive and publication remain blocked.",
   "render_approval_record": {
     "status": "APPROVED",
     "approved_at_utc": "2026-11-05T22:56:14Z",
@@ -4770,7 +4843,12 @@
       "global_catalog_update=false",
       "drive_written=false",
       "publication_manual_only"
-    ]
+    ],
+    "render_authorized": false,
+    "global_catalog_updated": false,
+    "drive_written": false,
+    "publication_allowed": false,
+    "reason": "Manifest-only approval; S04 and S12 are unresolved continuity/editorial gates."
   },
   "visual_continuity_profile": {
     "schema_version": "1.0",
@@ -5111,7 +5189,7 @@
     {
       "batch_id": "search-v5-episode005-period-recovery-20261106",
       "created_at_utc": "2026-11-06T06:24:12.609Z",
-      "status": "INTAKE_DOWNLOADED_VISUAL_QA_PASS_PARTIAL_FINGERPRINT_RETRY_REQUIRED",
+      "status": "FINGERPRINT_PASS_MANIFEST_ASSIGNMENTS_APPROVED",
       "mode": "SHORTLIST_PLUS_ISOLATED_INTAKE_NO_PROMOTION",
       "target_shots": [
         "S03",
@@ -5127,7 +5205,7 @@
       "direct_media_routes_recorded": 3,
       "intake_dispatched": true,
       "fingerprint_dispatched": true,
-      "human_approval_pending": true,
+      "human_approval_pending": false,
       "render_allowed": false,
       "promotion_allowed": false,
       "global_catalog_updated": false,
@@ -5143,7 +5221,7 @@
         "page-level license and media-host verification"
       ],
       "rejection_policy": "Reject after intake if full-duration QA reveals contemporary home/industrial context, bright high-key conflict, readable labels that become the story, watermark, source collision or unacceptable crop.",
-      "next_action": "Commit intake metadata to the plan, rerun fingerprint for pexels-11764431 and pexels-4285872, then assign only collision-free candidates; continue independent S04 search.",
+      "next_action": "Apply manifest-only replacements for S03 and S09; keep S04 recovery search and S12 crop/credit review active; rerun the visual-plan contract; do not render or promote.",
       "contract_validation": "PENDING_INTAKE",
       "intake_workflow_run_id": 42174399543,
       "intake_job_id": 127749408504,
@@ -5162,9 +5240,9 @@
       "rejected_after_visual_review": [
         "pexels-6520278"
       ],
-      "fingerprint_workflow_run_id": 42174934328,
-      "fingerprint_job_id": 127751108417,
-      "fingerprint_status": "FAILED_CANDIDATE_METADATA_NOT_COMMITTED",
+      "fingerprint_workflow_run_id": 42175277282,
+      "fingerprint_job_id": 127752198414,
+      "fingerprint_status": "FINGERPRINT_AUDIT_PASS",
       "fingerprint_blockers": [
         {
           "type": "candidate_missing_intake_artifact",
@@ -5174,7 +5252,27 @@
           "type": "candidate_missing_intake_artifact",
           "candidate_id": "pexels-4285872"
         }
-      ]
+      ],
+      "fingerprint_artifact_id": 13483246739,
+      "fingerprint_artifact_digest": "sha256:473192d2e4d67b8ada86f08cc343bca81347534397c90685b47e7337db7e36fd",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "approved_candidate_ids": [
+        "pexels-11764431",
+        "pexels-4285872"
+      ],
+      "approved_shot_by_candidate": {
+        "pexels-11764431": "S03",
+        "pexels-4285872": "S09"
+      },
+      "rejected_candidate_ids": [
+        "pexels-6520278"
+      ],
+      "pending_candidate_ids": [],
+      "global_collision_summary": {
+        "source": false,
+        "sha256": false,
+        "perceptual": false
+      }
     }
   ],
   "last_intake_attempt": {
