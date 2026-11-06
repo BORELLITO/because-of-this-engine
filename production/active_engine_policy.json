@@ -115,5 +115,24 @@
     "legacy_renderer_fallback": false,
     "drive_write": false,
     "publication": "manual_only"
+  },
+  "creative_preview_policy": {
+    "status": "REFERENCE_LOCKED",
+    "profile": "cinematic_dread_v73",
+    "required_voice_provider": "creativeclaw_google_gemini",
+    "required_voice_id": "charon",
+    "required_voice_model": "speech/gemini-3.8-flash-tts",
+    "provider_fallback": "forbidden",
+    "required_artifact_files": [
+      "narration.wav",
+      "narration.ass",
+      "voice-profile.json"
+    ],
+    "music": "production/generate_suspense_bed.py",
+    "target_integrated_loudness_lufs": -16,
+    "output_sample_rate_hz": 48000,
+    "logo_required": true,
+    "publication": "manual_only",
+    "note": "The creative preview route must match the approved reference identity; the operational Edge TTS route is not an acceptable creative substitute."
   }
 }
