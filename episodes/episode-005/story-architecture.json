@@ -36,83 +36,39 @@
   ],
   "narration": {
     "language": "en-US",
-    "voice_provider": "microsoft_edge_tts",
-    "voice_name": "en-US-ChristopherNeural",
-    "model": "edge_neural",
+    "voice_provider": "gemini_tts",
+    "voice_name": "Charon",
+    "model": "gemini-3.8-flash-tts",
     "script_file": "episodes/episode-005/narration/en-US-charon-v1.txt",
-    "script_sha256": "4d1691d4c00d2e8e2ea7c93f31dfbd62c0f9007875a63f2626e62944300489a8",
-    "character_count": 1066,
-    "word_count": 174,
+    "script_sha256": "396e75d3cacc9a356a72e6a34465c790a3e2b7981b71c8b253949a52c654f26a",
+    "character_count": 947,
+    "word_count": 154,
     "estimated_duration_seconds": {
       "min": 66,
-      "max": 74
+      "max": 75
     },
     "real_call_authorized": true,
-    "request_count": 2,
-    "execution_status": "EDGE_TTS_PREVIEW_GENERATED_AND_VALIDATED",
+    "request_count": 0,
+    "execution_status": "PENDING_DIRECT_GEMINI_GENERATION",
     "retry_policy": "NO_AUTOMATIC_RETRY_AFTER_SUBMISSION",
-    "last_provider_attempt": {
-      "provider": "creativeclaw_google_gemini",
-      "model": "speech/gemini-3.8-flash-tts",
-      "voice_id": "charon",
-      "status": "BLOCKED_BEFORE_GENERATION",
-      "required_credits": 21,
-      "available_credits": 0,
-      "charged_credits": 0,
-      "audio_produced": false,
-      "automatic_retry": false,
-      "classification": "HISTORICAL_DIAGNOSTIC_ONLY_NOT_PRODUCTION"
+    "execution_route": "direct_gemini_api_single_full_script_request",
+    "production_provider_policy": "Gemini TTS Charon explicitly selected; no provider fallback or Creative Claw route.",
+    "latest_attempt": {
+      "provider": "gemini_tts",
+      "model": "gemini-3.8-flash-tts",
+      "voice_name": "Charon",
+      "workflow_run_id": 42225399223,
+      "status": "DURATION_REJECTED_NO_ARTIFACT",
+      "duration_seconds": 82.24,
+      "audio_persisted": false,
+      "note": "The quota was available and Gemini returned audio, but the prior 174-word script exceeded the approved 80-second ceiling. The script was shortened before a new manually authorized request."
     },
-    "execution_route": "microsoft_edge_tts_only",
-    "production_provider_policy": "Edge TTS explicitly selected; no provider fallback",
-    "actual_duration_seconds": 79.704,
-    "audio_sha256": "bfa297c85e6de0c1a9dee5fbc74a8f7e75a6cd287bd47ecf6d97f16dd045831a",
-    "workflow_run_id": 41961294784,
-    "artifact_id": 13384643514,
     "captions": {
-      "status": "EDGE_TTS_NATIVE_ALIGNMENT_PASS",
-      "timing_mode": "edge_tts_native_word_boundaries_with_provider_groups",
-      "word_count": 175,
-      "event_count": 23,
-      "grouped_provider_boundaries": 2,
-      "final_word_level_ready": false,
-      "render_caption_policy": "PROVIDER_GROUP_NATIVE_ACCEPTED",
-      "caption_authority": "provider_native_edge_boundaries",
-      "acoustic_whisper_audit": "BLOCKED_ON_ASR_LEXICAL_VARIANTS",
-      "frozen_caption_workflow_run_id": 41967116262,
-      "frozen_caption_artifact_id": 13388585044,
-      "frozen_caption_artifact_digest": "sha256:147cc2807872d46e3d215c6f60f3fd1fed0fff8644f6359e91d3e97033ce2114",
-      "sidecar": "narration.alignment.json"
+      "status": "PENDING_REAL_GEMINI_AUDIO",
+      "timing_mode": "provider_agnostic_word_alignment",
+      "final_word_level_ready": false
     },
-    "last_production_attempt": {
-      "provider": "microsoft_edge_tts",
-      "model": "edge_neural",
-      "voice_id": "en-US-ChristopherNeural",
-      "status": "GENERATED_AND_VALIDATED",
-      "workflow_run_id": 41961294784,
-      "artifact_id": 13384643514,
-      "duration_seconds": 79.704,
-      "audio_sha256": "bfa297c85e6de0c1a9dee5fbc74a8f7e75a6cd287bd47ecf6d97f16dd045831a",
-      "charged_credits": 0,
-      "request_count": 2,
-      "retry_count": 0
-    },
-    "artifact_digest": "sha256:37afddf1b196b0750418cbcf0484087832eee967f475f7acd1c95c1c4cb8d81c",
-    "preview_runs": [
-      {
-        "workflow_run_id": 41961055314,
-        "artifact_id": 13384688114,
-        "audio_sha256": "4e021c52ea57835525b144ecfc08ed6abe41c99dca326866e63c7176cc45f40f",
-        "status": "VALIDATED_BUT_SUPERSEDED"
-      },
-      {
-        "workflow_run_id": 41961294784,
-        "artifact_id": 13384643514,
-        "audio_sha256": "bfa297c85e6de0c1a9dee5fbc74a8f7e75a6cd287bd47ecf6d97f16dd045831a",
-        "status": "FROZEN_APPROVED_SOURCE"
-      }
-    ],
-    "workflow_policy": "manual_dispatch_only_after_audio_freeze"
+    "workflow_policy": "manual_dispatch_only; one full-script request per RUN_ONCE execution"
   },
   "shot_plan": [
     {

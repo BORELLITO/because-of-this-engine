@@ -721,24 +721,26 @@
     "status": "OFFLINE_CONTRACT_VERIFIED",
     "real_call_authorized": false,
     "request_count": 0,
-    "script_sha256": "6462ef83ae90e68c60cdf9c3628be85617b94930e01e66a2eb8119130ad6c94c",
-    "estimated_characters": 1067,
+    "script_sha256": "396e75d3cacc9a356a72e6a34465c790a3e2b7981b71c8b253949a52c654f26a",
+    "estimated_characters": 947,
     "character_budget": 10000,
-    "estimated_duration_seconds": 75.92,
+    "estimated_duration_seconds": 72,
     "route": "direct_gemini_api",
     "single_request_policy": true,
     "previous_failure": {
-      "workflow_run_id": 42160354510,
-      "status": "QUOTA_EXHAUSTED_NO_AUDIO",
-      "reason": "generate_content_free_tier_requests limit reached; no automatic retry"
-    }
+      "workflow_run_id": 42225399223,
+      "status": "DURATION_REJECTED_NO_ARTIFACT",
+      "duration_seconds": 82.24,
+      "reason": "Gemini returned audio after quota reset, but the superseded 174-word script exceeded the 80-second ceiling. No artifact was persisted."
+    },
+    "script_revision": "en-US-charon-v2-shortened-for-80-second-ceiling"
   },
   "audio_contract": {
     "source": "final_audio",
     "status": "OFFLINE_CONTRACT_VERIFIED",
     "real_audio_generated": false,
     "final_transcription_required": true,
-    "target_duration_seconds": 75.92,
+    "target_duration_seconds": 72,
     "adapter": "production/gemini_tts.py",
     "source_audio_status": "PENDING_GEMINI_GENERATION"
   },
