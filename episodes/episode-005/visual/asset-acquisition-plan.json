@@ -3013,7 +3013,13 @@
         "checked_at_utc": "2026-11-06T00:00:00Z",
         "observed_license": "Free Download under the Mixkit Stock Video Free License",
         "observed_metadata": "1920x1080, 30 fps, 5 seconds; analog gauges, phone, drawers and levers",
-        "media_route": "Mixkit free-download route; direct media URL is resolved only during manual intake"
+        "media_route": "https://assets.mixkit.co/videos/4460/4460-720.mp4",
+        "media_url_verification": {
+          "method": "HTTP HEAD probe",
+          "status": "PASS",
+          "content_type": "video/mp4",
+          "content_length_bytes": 1770094
+        }
       },
       "continuity_tags": {
         "era": [
@@ -3058,7 +3064,9 @@
         "clean_frame_quality": 0.85,
         "source_distinctness": 1
       },
-      "manual_rights_review": "Page-level Mixkit Free License observed; inspect full download for marks, logos and crop safety."
+      "manual_rights_review": "Page-level Mixkit Free License observed; direct media route returned HTTP 200 video/mp4; inspect full download for marks, logos and crop safety.",
+      "media_url": "https://assets.mixkit.co/videos/4460/4460-720.mp4",
+      "media_url_observed_by_http_probe": true
     },
     {
       "candidate_id": "pexels-12213087",
@@ -3078,7 +3086,13 @@
         "checked_at_utc": "2026-11-06T00:00:00Z",
         "observed_license": "Free to use",
         "observed_metadata": "3840x2160, 25 fps, 10 seconds; dark sound-mixer panel with hand and knobs",
-        "media_route": "Pexels free-download route; direct media URL is resolved only during manual intake"
+        "media_route": "https://videos.pexels.com/video-files/12213087/12213087-uhd_3840_2160_25fps.mp4",
+        "media_url_verification": {
+          "method": "HTTP HEAD probe",
+          "status": "PASS",
+          "content_type": "video/mp4",
+          "content_length_bytes": 33522748
+        }
       },
       "continuity_tags": {
         "era": [
@@ -3119,7 +3133,9 @@
         "clean_frame_quality": 0.88,
         "source_distinctness": 1
       },
-      "manual_rights_review": "Page-level Pexels Free license observed; third-party marks and interface labels remain subject to full-frame QA."
+      "manual_rights_review": "Page-level Pexels Free license observed; direct media route returned HTTP 200 video/mp4; third-party marks and interface labels remain subject to full-frame QA.",
+      "media_url": "https://videos.pexels.com/video-files/12213087/12213087-uhd_3840_2160_25fps.mp4",
+      "media_url_observed_by_http_probe": true
     },
     {
       "candidate_id": "nasa-svs-noctilucent-clouds-20002",
@@ -4053,7 +4069,13 @@
     "continuity_review": "S03 uses a vintage radio-control human anchor; S04 uses analog gauges/levers; S09 uses a dark tactile control insert; S12 uses a night-side explanatory cloud visualization to preserve S11->S12 adjacency without a day/night flip.",
     "render_block": true,
     "intake_dispatched": false,
-    "promotion_allowed": false
+    "promotion_allowed": false,
+    "media_route_verification": {
+      "status": "PASS",
+      "method": "HTTP HEAD/source-page verification",
+      "direct_media_routes_recorded": 4,
+      "notes": "The three newly selected download routes are now explicit; no candidate is promoted or assigned by this change."
+    }
   },
   "last_human_approval": {
     "candidate_ids": [
@@ -4139,8 +4161,8 @@
     "continuity_coverage_score": 0.8812,
     "note": "CI revalidated the expanded shortlist. The four search-v4 candidates remain plan-only; active manifest assignments and the strict preview block are unchanged."
   },
-  "last_adjustment": "Search-v4 shortlist is now recorded and its expanded 47-candidate plan passed CI run 42170029722/job 127735446473. The four candidates remain unassigned and not downloaded; active manifest continuity blockers and fail-closed production gates are unchanged.",
-  "next_gate": "Obtain editorial approval for the exact search-v4 IDs, then dispatch the isolated manual intake/fingerprint batch. Only after QA may one distinct candidate replace each blocked shot, followed by contract and sequence revalidation.",
+  "last_adjustment": "Direct media routes are now recorded and externally probed for the search-v4 shortlist. Intake remains manual-only; pexels-38958215 requires refresh_existing=true because it already has evidence.",
+  "next_gate": "Dispatch the four-ID isolated intake with refresh_existing=true for pexels-38958215, then run the fingerprint audit and human full-duration/9x16 QA. Do not assign candidates to the manifest or render before those gates.",
   "render_approval_record": {
     "status": "APPROVED",
     "approved_at_utc": "2026-11-05T22:56:14Z",
@@ -4377,7 +4399,7 @@
         "nasa-svs-noctilucent-clouds-20002"
       ],
       "source_pages_reviewed": 4,
-      "direct_media_routes_recorded": 1,
+      "direct_media_routes_recorded": 4,
       "intake_dispatched": false,
       "fingerprint_dispatched": false,
       "human_approval_pending": true,
@@ -4397,7 +4419,7 @@
         "9x16_crop_review"
       ],
       "rejection_policy": "Reject any candidate after intake if full-duration QA reveals modern/digital UI, readable labels, watermarks, daylight, licensed audio, or a source/fingerprint collision.",
-      "next_action": "Obtain editorial approval for exact IDs, then dispatch one isolated manual intake/fingerprint batch; do not assign candidates to the manifest before QA.",
+      "next_action": "Dispatch isolated manual intake for the four exact IDs with refresh_existing=true only for pexels-38958215, then fingerprint and human QA before manifest assignment.",
       "contract_validation": {
         "workflow_run_id": 42170029722,
         "job_id": 127735446473,
@@ -4423,6 +4445,16 @@
         "coverage_score": 0.8812,
         "active_manifest_unchanged": true,
         "render_allowed": false
+      },
+      "media_route_verification": {
+        "status": "PASS",
+        "candidate_ids": [
+          "pexels-38958215",
+          "mixkit-inside-rear-control-cabin-4460",
+          "pexels-12213087",
+          "nasa-svs-noctilucent-clouds-20002"
+        ],
+        "notes": "S03 route reused from prior intake evidence; Mixkit and Pexels new routes passed HTTP content-type probes; NASA route was observed on the official SVS page."
       }
     }
   ]
