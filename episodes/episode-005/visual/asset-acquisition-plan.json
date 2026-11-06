@@ -67,7 +67,7 @@
     {
       "candidate_id": "pexels-5523892",
       "source_page_url": "https://www.pexels.com/video/flashing-red-light-5523892/",
-      "role": "S01,S06,S09",
+      "role": "S06",
       "visual_match": "NEAR",
       "visual_intent": "Vertical red LED pulse against darkness for escalation and false-alarm classification; symbolic, never literal archival evidence.",
       "truth_class": "MAP_OR_DIAGRAM",
@@ -114,7 +114,7 @@
         "symbolic_not_literal",
         "must_not_repeat_S01"
       ],
-      "selection_status": "REVIEW_REQUIRED",
+      "selection_status": "APPROVED_FOR_MANIFEST",
       "score_breakdown": {
         "semantic_fit": 0.88,
         "continuity_coherence": 0.83,
@@ -160,14 +160,25 @@
         "semantic_fit": "PRELIMINARY_PASS_FOR_S06_SYMBOLIC_WARNING_PULSE",
         "locked_9x16_crop": "PASS_NATIVE_VERTICAL",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "direct_media_visual_review": "PASS_ABSTRACT_RED_LED_NO_IDENTIFIABLE_ELEMENTS",
-        "visual_qa_status": "PENDING_HUMAN_APPROVAL",
+        "visual_qa_status": "HUMAN_APPROVED_FOR_MANIFEST",
         "visual_qa_evidence": "artifact 13478797924 / pexels-5523892/qa-frames.jpg",
         "third_party_risk": "NONE_VISIBLE_IN_QA_FRAMES",
-        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES",
+        "continuity_decision": "HUMAN_APPROVED_FOR_MANIFEST_ONLY"
+      },
+      "approved_shot_ids": [
+        "S06"
+      ],
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "manifest_assignment": {
+        "shot_id": "S06",
+        "approved_at_utc": "2026-11-06T05:21:35Z",
+        "scope": "APPROVED_FOR_MANIFEST_ONLY",
+        "supersedes": "pixabay-led-indicator-lights-316712"
       }
     },
     {
@@ -445,7 +456,7 @@
     {
       "candidate_id": "pexels-12590338",
       "source_page_url": "https://www.pexels.com/video/time-lapse-of-moving-clouds-on-a-night-sky-12590338/",
-      "role": "S11,S12",
+      "role": "S11",
       "visual_match": "EXACT",
       "visual_intent": "Moving clouds and stars over a night skyline for the non-event and optical-ambiguity beat.",
       "truth_class": "REPRESENTATIONAL",
@@ -491,7 +502,7 @@
         "must_verify_no_city_branding",
         "night_sky_bridge_candidate"
       ],
-      "selection_status": "REVIEW_REQUIRED",
+      "selection_status": "APPROVED_FOR_MANIFEST",
       "score_breakdown": {
         "semantic_fit": 0.93,
         "continuity_coherence": 0.91,
@@ -537,14 +548,25 @@
         "semantic_fit": "PRELIMINARY_PASS_FOR_S11_NIGHT_SKY_NON_EVENT",
         "locked_9x16_crop": "PASS_WITH_NIGHT_SKY_AND_SILHOUETTE_CENTERING",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "PENDING",
+        "human_approval": "APPROVED_FOR_MANIFEST",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "direct_media_visual_review": "PASS_NIGHT_SKY_NO_BRANDING_OBSERVED",
-        "visual_qa_status": "PENDING_HUMAN_APPROVAL",
+        "visual_qa_status": "HUMAN_APPROVED_FOR_MANIFEST",
         "visual_qa_evidence": "artifact 13478797924 / pexels-12590338/qa-frames.jpg",
         "third_party_risk": "LOW_VISIBLE_RISK; HUMAN_QA_REQUIRED",
-        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES",
+        "continuity_decision": "HUMAN_APPROVED_FOR_MANIFEST_ONLY"
+      },
+      "approved_shot_ids": [
+        "S11"
+      ],
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "manifest_assignment": {
+        "shot_id": "S11",
+        "approved_at_utc": "2026-11-06T05:21:35Z",
+        "scope": "APPROVED_FOR_MANIFEST_ONLY",
+        "supersedes": "mixkit-cloudy-sky-118"
       }
     },
     {
@@ -2911,7 +2933,7 @@
       ]
     }
   ],
-  "next_action": "Obtain explicit human continuity approval for pexels-38958215, pexels-5523892 and pexels-12590338; only after approval prepare a manifest replacement PR.",
+  "next_action": "Run CI contract and continuity validation on the replacement manifest; do not promote media, render, write Drive or publish.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -3262,6 +3284,40 @@
         "fingerprint_workflow_run_id": 42074599454,
         "fingerprint_artifact_id": 13438400127,
         "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      }
+    },
+    {
+      "candidate_ids": [
+        "pexels-5523892",
+        "pexels-12590338"
+      ],
+      "shot_ids": [
+        "S06",
+        "S11"
+      ],
+      "status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_at_utc": "2026-11-06T05:21:35Z",
+      "decision": "Approve pexels-5523892 for S06 and pexels-12590338 for S11 as continuity replacements; supersede the prior S06/S11 manifest assignments.",
+      "superseded_assignments": [
+        {
+          "shot_id": "S06",
+          "previous_candidate_id": "pixabay-led-indicator-lights-316712"
+        },
+        {
+          "shot_id": "S11",
+          "previous_candidate_id": "mixkit-cloudy-sky-118"
+        }
+      ],
+      "constraints": [
+        "no reuse within or across episodes",
+        "symbolic/representational footage only",
+        "does not authorize render, global catalog mutation, Drive write or publication"
+      ],
+      "evidence": {
+        "intake_workflow_run_id": 42165726351,
+        "intake_artifact_id": 13478797924,
+        "fingerprint_workflow_run_id": 42166326952,
+        "fingerprint_artifact_id": 13479201438
       }
     }
   ],
@@ -3709,13 +3765,24 @@
     "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
     "candidate_count": 3,
     "blockers": [],
-    "human_approval": "PENDING",
+    "human_approval": "PARTIAL_APPROVAL",
     "approved_for_render": false,
     "global_catalog_updated": false,
     "render_allowed": false,
     "drive_written": false,
     "publication_allowed": false,
-    "next_action": "Obtain explicit human continuity approval for the three candidates; do not replace manifest assets, render or publish automatically."
+    "next_action": "The user approved pexels-5523892 for S06 and pexels-12590338 for S11 for manifest-only replacement; run CI revalidation and keep render/promotion blocked.",
+    "approved_candidate_ids": [
+      "pexels-5523892",
+      "pexels-12590338"
+    ],
+    "approved_shot_by_candidate": {
+      "pexels-5523892": "S06",
+      "pexels-12590338": "S11"
+    },
+    "pending_candidate_ids": [
+      "pexels-38958215"
+    ]
   },
   "last_candidate_addition": {
     "added_at_utc": "2026-11-06T00:00:00Z",
@@ -3735,28 +3802,18 @@
   },
   "last_human_approval": {
     "candidate_ids": [
-      "pixabay-alert-alarm-war-danger-risk-205519",
-      "pixabay-radar-black-green-target-symbol-57670",
-      "pixabay-radar-radar-screen-rotation-circles-4511",
-      "pixabay-radar-communication-military-261518",
-      "pixabay-button-press-red-business-click-502",
-      "pixabay-button-press-push-start-launching-221746",
-      "pixabay-typewriter-typing-writing-author-1335",
-      "pixabay-typewriter-type-antique-writing-38626",
-      "pixabay-dark-light-lens-flare-abstract-250413",
-      "pixabay-abstract-light-streaks-motion-250417",
-      "pixabay-particles-orange-red-dust-effect-7957",
-      "pixabay-colors-lines-lights-abstract-video-5072"
+      "pexels-5523892",
+      "pexels-12590338"
     ],
-    "approved_at_utc": "2026-11-05T17:59:24.004Z",
-    "decision": "User approved all 12 downloaded and fingerprinted candidates; the highest-scoring candidate in each unresolved shot pair was selected as the primary partial-manifest assignment.",
+    "approved_at_utc": "2026-11-06T05:21:35Z",
+    "decision": "User approved two fingerprint-clean replacement candidates for manifest-only use, with one distinct source per shot.",
     "selected_primary_by_shot": {
-      "S05": "pixabay-alert-alarm-war-danger-risk-205519",
-      "S08": "pixabay-radar-radar-screen-rotation-circles-4511",
-      "S09": "pixabay-button-press-red-business-click-502",
-      "S13": "pixabay-typewriter-typing-writing-author-1335",
-      "S15": "pixabay-dark-light-lens-flare-abstract-250413",
-      "S16": "pixabay-particles-orange-red-dust-effect-7957"
+      "S06": "pexels-5523892",
+      "S11": "pexels-12590338"
+    },
+    "superseded_by_shot": {
+      "S06": "pixabay-led-indicator-lights-316712",
+      "S11": "mixkit-cloudy-sky-118"
     },
     "scope": "APPROVED_FOR_MANIFEST_ONLY",
     "constraints": [
@@ -3765,32 +3822,23 @@
       "approval does not authorize render",
       "approval does not authorize global catalog mutation",
       "approval does not authorize Drive write or publication",
-      "final visual manifest validation remains required"
+      "final visual manifest validation remains required",
+      "pexels-38958215 remains pending and is not assigned"
     ],
     "evidence": {
-      "intake_workflow_run_id": 42073828513,
-      "intake_artifact_id": 13437466569,
-      "intake_artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
-      "fingerprint_workflow_run_id": 42074599454,
-      "fingerprint_artifact_id": 13438400127,
-      "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
-    },
-    "duplicate_source_aliases_rejected": [
-      "pixabay-radar-screen-4511",
-      "pixabay-alert-alarm-war-205519"
-    ],
-    "duplicate_fix_at_utc": "2026-11-05T18:03:21.444Z",
-    "active_duplicate_aliases_removed": [
-      "pixabay-radar-screen-4511",
-      "pixabay-alert-alarm-war-205519"
-    ],
-    "active_candidate_count": 42
+      "intake_workflow_run_id": 42165726351,
+      "intake_artifact_id": 13478797924,
+      "intake_artifact_digest": "sha256:dc37a4428e029890919302d0414eb4f5b2859692dd851d0a2c4da1c12ef70eda",
+      "fingerprint_workflow_run_id": 42166326952,
+      "fingerprint_artifact_id": 13479201438,
+      "fingerprint_artifact_digest": "sha256:755d8361c98a1587c9ac304690520b8520fc09d1aaa13f0551f10a641bd70934"
+    }
   },
   "last_contract_validation": {
-    "validated_at_utc": "2026-11-06T05:08:25Z",
-    "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
+    "validated_at_utc": "2026-11-06T05:21:35Z",
+    "status": "PENDING_CI_REVALIDATION",
     "candidate_count": 43,
-    "approved_manifest_candidate_count": 22,
+    "approved_manifest_candidate_count": 21,
     "manifest_asset_count": 16,
     "assigned_shot_count": 16,
     "unresolved_shot_count": 0,
@@ -3798,18 +3846,28 @@
     "render_allowed": false,
     "global_catalog_updated": false,
     "validator": "production/visual_plan_contract.py",
-    "checkout_commit": "64548a469fe5644c319c762de7ea96d8a4b3f411",
+    "checkout_commit": null,
     "revalidation_required": true,
     "continuity_gate": "REVIEW_REQUIRED",
     "continuity_research_batch": "search-v3-episode005-priority-20261106",
-    "ci_workflow_run_id": 42166546937,
-    "ci_job_id": 127724245182,
-    "ci_conclusion": "success",
+    "ci_workflow_run_id": null,
+    "ci_job_id": null,
+    "ci_conclusion": null,
     "intake_workflow_run_id": 42165726351,
-    "fingerprint_workflow_run_id": 42166326952
+    "fingerprint_workflow_run_id": 42166326952,
+    "manifest_replacement_shots": [
+      "S06",
+      "S11"
+    ],
+    "pending_continuity_shots": [
+      "S03",
+      "S07",
+      "S09",
+      "S12"
+    ]
   },
-  "last_adjustment": "Search-v3 priority shortlist added without download or promotion. Candidate-level continuity tags now preserve why each option was selected, held for review or rejected.",
-  "next_gate": "Expose the manual V2.1 render workflow on the approved base revision, then run preview preflight. Do not merge, enable production, render media, write Drive or publish automatically.",
+  "last_adjustment": "Human-approved manifest-only continuity replacements recorded: pexels-5523892 replaces the modern LED asset on S06 and pexels-12590338 replaces the lower-confidence cloud asset on S11. S03/S07 remain blocked on period-coherence review; S12 remains blocked by the daylight/modern antenna candidate.",
+  "next_gate": "After CI PASS, perform the manual V2.1 preview preflight. Keep S03/S07/S09/S12 continuity review and all production side effects blocked.",
   "render_approval_record": {
     "status": "APPROVED",
     "approved_at_utc": "2026-11-05T22:56:14Z",
@@ -3939,7 +3997,7 @@
     {
       "batch_id": "search-v3-episode005-priority-20261106",
       "created_at_utc": "2026-11-06T00:00:00Z",
-      "status": "FINGERPRINT_PASS_AWAITING_HUMAN_APPROVAL",
+      "status": "PARTIAL_HUMAN_APPROVAL_REPLACEMENT_READY",
       "mode": "MANUAL_INTAKE_ISOLATED_NO_PROMOTION",
       "target_shots": [
         "S03",
@@ -3988,13 +4046,24 @@
       "post_intake_rejected_candidate_ids": [
         "pexels-33897223"
       ],
-      "next_action": "Obtain explicit human continuity approval for the three non-rejected candidates; only then prepare a manifest replacement PR.",
+      "next_action": "Run CI contract and continuity validation for the S06/S11 manifest replacements; keep pexels-38958215 blocked pending period-coherence review and do not render.",
       "fingerprint_workflow_run_id": 42166326952,
       "fingerprint_job_id": 127723541842,
       "fingerprint_artifact_id": 13479201438,
       "fingerprint_artifact_digest": "sha256:755d8361c98a1587c9ac304690520b8520fc09d1aaa13f0551f10a641bd70934",
       "fingerprint_status": "FINGERPRINT_AUDIT_PASS",
-      "human_approval_pending": true
+      "human_approval_pending": true,
+      "approved_candidate_ids": [
+        "pexels-5523892",
+        "pexels-12590338"
+      ],
+      "approved_shot_by_candidate": {
+        "pexels-5523892": "S06",
+        "pexels-12590338": "S11"
+      },
+      "pending_candidate_ids": [
+        "pexels-38958215"
+      ]
     }
   ]
 }
