@@ -88,12 +88,34 @@ def _family(term: str) -> frozenset[str] | None:
     return None
 
 
+def _token_sequence_contains(needle: list[str], haystack: list[str]) -> bool:
+    """Match whole underscore-delimited tags, never partial words.
+
+    A tag such as "night" may match "night_sky"; it must not match the
+    unrelated compound "neon_nightclub" merely because "night" is a
+    substring of "nightclub".
+    """
+    if not needle or not haystack or len(needle) > len(haystack):
+        return False
+    width = len(needle)
+    return any(
+        haystack[index:index + width] == needle
+        for index in range(len(haystack) - width + 1)
+    )
+
+
 def _term_matches(expected: str, actual: str) -> bool:
     left = _term(expected).replace(" ", "_")
     right = _term(actual).replace(" ", "_")
     if not left or not right:
         return False
-    if left == right or left in right or right in left:
+    if left == right:
+        return True
+    left_tokens = left.split("_")
+    right_tokens = right.split("_")
+    if _token_sequence_contains(left_tokens, right_tokens):
+        return True
+    if _token_sequence_contains(right_tokens, left_tokens):
         return True
     family = _family(left)
     return family is not None and right in family
