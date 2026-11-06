@@ -72,7 +72,7 @@
       "visual_intent": "Vertical red LED pulse against darkness for escalation and false-alarm classification; symbolic, never literal archival evidence.",
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "pexels",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "license_name": "Pexels License",
       "source_tier": "stock_auto",
       "approved_for_render": false,
@@ -461,7 +461,7 @@
       "visual_intent": "Moving clouds and stars over a night skyline for the non-event and optical-ambiguity beat.",
       "truth_class": "REPRESENTATIONAL",
       "provider": "pexels",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "license_name": "Pexels License",
       "source_tier": "stock_auto",
       "approved_for_render": false,
@@ -3866,7 +3866,7 @@
       "S12"
     ]
   },
-  "last_adjustment": "Human-approved manifest-only continuity replacements recorded: pexels-5523892 replaces the modern LED asset on S06 and pexels-12590338 replaces the lower-confidence cloud asset on S11. S03/S07 remain blocked on period-coherence review; S12 remains blocked by the daylight/modern antenna candidate.",
+  "last_adjustment": "Human-approved manifest-only continuity replacements recorded: pexels-5523892 replaces the modern LED asset on S06 and pexels-12590338 replaces the lower-confidence cloud asset on S11. S03/S07 remain blocked on period-coherence review; S12 remains blocked by the daylight/modern antenna candidate. Plan contract status corrected to APPROVED_FOR_MANIFEST_ONLY for both user-approved candidates.",
   "next_gate": "After CI PASS, perform the manual V2.1 preview preflight. Keep S03/S07/S09/S12 continuity review and all production side effects blocked.",
   "render_approval_record": {
     "status": "APPROVED",
