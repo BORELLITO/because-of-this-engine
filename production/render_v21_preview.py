@@ -191,7 +191,7 @@ def render_preview(
     asset_root: Path,
     audio_path: Path,
     captions_path: Path,
-    music_path: Path,
+    music_path: Path | None,
     logo_path: Path,
     voice_profile_path: Path,
     output_path: Path,
@@ -222,8 +222,6 @@ def render_preview(
         }
     if not captions_path.is_file():
         raise PreviewRenderError("Frozen narration.ass is required.")
-    if not music_path.is_file():
-        raise PreviewRenderError("Deterministic suspense bed is required.")
     if not logo_path.is_file():
         raise PreviewRenderError("Canonical Because Of This logo is required.")
     voice_profile = validate_voice_profile(voice_profile_path, audio_path)
@@ -259,30 +257,36 @@ def render_preview(
         )
         scene_seconds = sum(float(item["duration"]) for item in plan)
         tail = max(0.0, audio_seconds - scene_seconds)
-        final_start = max(0.0, audio_seconds - 3.2)
+        final_start = max(0.0, audio_seconds - 4.0)
         fade_start = max(0.0, audio_seconds - 2.1)
         subtitle_path = escape_filter_path(captions_path.resolve())
         filter_complex = ";".join([
             f"[0:v]tpad=stop_mode=clone:stop_duration={tail:.3f},"
             f"fade=t=out:st={fade_start:.3f}:d=0.85,format=yuv420p[base]",
             f"[base]subtitles='{subtitle_path}'[captioned]",
-            "[3:v]format=rgba,split=2[logo_top_raw][logo_outro_raw]",
-            "[logo_top_raw]scale=210:-1:flags=lanczos,colorchannelmixer=aa=0.84[logo_top]",
-            "[logo_outro_raw]scale=620:-1:flags=lanczos,colorchannelmixer=aa=0.94[logo_outro]",
-            f"[captioned][logo_top]overlay=x=main_w-overlay_w-42:y=64:"
-            f"enable='lt(t,{final_start:.3f})':eof_action=repeat[with_top]",
-            f"[with_top][logo_outro]overlay=x=(main_w-overlay_w)/2:y=(main_h-overlay_h)/2:"
-            f"enable='gte(t,{final_start:.3f})':eof_action=repeat[v]",
-            "[1:a]aresample=48000,asetpts=PTS-STARTPTS,volume=1.0,asplit=2[voice_mix][voice_key]",
-            f"[2:a]aresample=48000,volume=0.14,atrim=duration={audio_seconds:.3f},"
-            "asetpts=PTS-STARTPTS,afade=t=in:st=0:d=1.6[bed]",
-            "[bed][voice_key]sidechaincompress=threshold=0.055:ratio=8:attack=20:release=420:makeup=1[ducked]",
-            "[voice_mix][ducked]amix=inputs=2:duration=first:dropout_transition=0:normalize=0,"
+            "[2:v]format=rgba,scale=360:-1:flags=lanczos,colorchannelmixer=aa=0.90[logo]",
+            f"[captioned][logo]overlay=x=(main_w-overlay_w)/2:y=420:"
+            f"enable='lt(t,{final_start:.3f})':eof_action=repeat[branded]",
+            f"[branded]drawbox=x=0:y=0:w=iw:h=ih:color=black:t=fill:"
+            f"enable='gte(t,{final_start:.3f})'[card]",
+            f"[card]drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:"
+            f"text='BECAUSE':fontcolor=white:fontsize=170:x=(w-text_w)/2:y=390:"
+            f"enable='gte(t,{final_start:.3f})'[card1]",
+            f"[card1]drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:"
+            f"text='OF':fontcolor=white:fontsize=170:x=(w-text_w)/2:y=600:"
+            f"enable='gte(t,{final_start:.3f})'[card2]",
+            f"[card2]drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:"
+            f"text='THIS':fontcolor=white:fontsize=170:x=(w-text_w)/2:y=810:"
+            f"enable='gte(t,{final_start:.3f})'[card3]",
+            f"[card3]drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:"
+            f"text='STORIES':fontcolor=white:fontsize=170:x=(w-text_w)/2:y=1020:"
+            f"enable='gte(t,{final_start:.3f})',format=yuv420p[v]",
+            "[1:a]aresample=48000,asetpts=PTS-STARTPTS,"
             "loudnorm=I=-16:TP=-1.0:LRA=7,alimiter=limit=0.95[a]",
         ])
         run([
             "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat),
-            "-i", str(audio_path), "-stream_loop", "-1", "-i", str(music_path),
+            "-i", str(audio_path),
             "-loop", "1", "-framerate", "1", "-i", str(logo_path),
             "-filter_complex", filter_complex,
             "-map", "[v]", "-map", "[a]", "-t", f"{audio_seconds:.3f}",
@@ -304,13 +308,8 @@ def render_preview(
         "visual_continuity_gate": continuity_gate,
         "tail_extension_seconds": round(max(0.0, audio_seconds - sum(float(item["duration"]) for item in plan)), 3),
         "voice": voice_profile,
-        "music": {
-            "status": "DETERMINISTIC_SUSPENSE_BED_MIXED",
-            "path": str(music_path),
-            "target_lufs": -16,
-            "sample_rate_hz": 48000,
-        },
-        "branding": {"logo_overlay": True, "final_center_lockup": True},
+        "music": {"status": "NOT_MIXED", "background_noise_removed": True, "sources": ["narration_only"]},
+        "branding": {"logo_overlay": True, "logo_anchor": "center_lower", "logo_width": 360, "final_center_lockup": True, "final_card": "black_stacked_text"},
         "output": str(output_path),
         "output_sha256": sha256_file(output_path),
         "production_enablement": False,
@@ -331,7 +330,7 @@ def main() -> int:
     parser.add_argument("--asset-root", type=Path, required=True)
     parser.add_argument("--audio", type=Path, required=True)
     parser.add_argument("--captions", type=Path, required=True)
-    parser.add_argument("--music", type=Path, required=True)
+    parser.add_argument("--music", type=Path, default=None)
     parser.add_argument("--logo", type=Path, required=True)
     parser.add_argument("--voice-profile", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
