@@ -21,22 +21,25 @@
       "no automatic render execution or silent fallback"
     ],
     "latest_manifest_update": {
-      "recorded_at_utc": "2026-11-06T07:50:43Z",
+      "recorded_at_utc": "2026-11-06T16:10:00Z",
       "candidate_ids": [
+        "pexels-12213087",
+        "pexels-11764431",
         "pixabay-radio-vintage-old-171435",
-        "nasa-svs-geos5-clouds-no-labels-4819"
+        "mixkit-abstract-red-glow-101432"
       ],
       "shot_ids": [
-        "S04",
-        "S12"
+        "S09",
+        "S01",
+        "S03",
+        "S04"
       ],
       "scope": "MANIFEST_ONLY",
       "render_authorized": false,
       "global_catalog_updated": false,
       "drive_written": false,
       "publication_allowed": false,
-      "fingerprint_workflow_run_id": 42183105946,
-      "fingerprint_artifact_id": 13486336703
+      "reason": "Creative rebuild: remove rejected opening red abstract and irrelevant stop/play insert; replace S09 with dark tactile control action; reorder hook around human anomaly."
     }
   },
   "global_reuse_audit": {
@@ -91,6 +94,13 @@
       "blockers": [],
       "human_approval": "APPROVED_FOR_MANIFEST_ONLY",
       "global_catalog_updated": false
+    },
+    "latest_preview_rebuild": {
+      "status": "PENDING_FINGERPRINT_REVALIDATION",
+      "candidate_ids": [
+        "pexels-12213087"
+      ],
+      "reason": "New S09 candidate added for rebuilt preview; no global catalog mutation."
     }
   },
   "assets": [
@@ -798,97 +808,6 @@
       "source_tier": "stock_auto"
     },
     {
-      "candidate_id": "pexels-4285872",
-      "provider": "pexels",
-      "source_page_url": "https://www.pexels.com/video/stop-play-buttons-record-4285872/",
-      "media_url": "https://videos.pexels.com/video-files/4285872/4285872-hd_1920_1080_30fps.mp4",
-      "license_name": "Pexels License",
-      "source_role": "S09",
-      "truth_class": "MAP_OR_DIAGRAM",
-      "sha256": "822ecd823eccb216a38bc50a06d6cc06ba8be57639cb4382bfa510dd4a21e3cc",
-      "perceptual_hash": "d39fcb42f9736e915d4986ab2567650a9aa79a6de743a7af42d324524723b02f",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
-      "intake_artifact": {
-        "workflow_run_id": 42174399543,
-        "job_id": 127749408504,
-        "artifact_id": 13482227807,
-        "artifact_digest": "sha256:068d25a3614069052997f31097511748d07b10457511c7fb04c9d347e0b0362",
-        "sha256": "822ecd823eccb216a38bc50a06d6cc06ba8be57639cb4382bfa510dd4a21e3cc",
-        "duration_seconds": 6.015,
-        "dimensions": [
-          1920,
-          1080
-        ],
-        "frame_rate": "30000/1001",
-        "codec": "h264",
-        "size_bytes": 3981671,
-        "fps": 29.97002997002997
-      },
-      "fingerprint_artifact": {
-        "workflow_run_id": 42175277282,
-        "job_id": 127752198414,
-        "artifact_id": 13483246739,
-        "artifact_digest": "sha256:473192d2e4d67b8ada86f08cc343bca81347534397c90685b47e7337db7e36fd",
-        "algorithm": "video-fingerprint-v2-rgb24-q4",
-        "perceptual_hash": "d39fcb42f9736e915d4986ab2567650a9aa79a6de743a7af42d324524723b02f",
-        "global_source_collision": false,
-        "global_sha256_collision": false,
-        "global_perceptual_collision": false
-      },
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "human_approval": "APPROVED_FOR_MANIFEST",
-      "approved_for_render": false,
-      "global_catalog_updated": false,
-      "thumbnail_eligible": false,
-      "drive_written": false,
-      "editorial_caveat": "Dark analog tape-deck insert is representational only, never literal Petrov archival evidence. Keep English labels and the digital timer subordinate through the editorial crop; strip source audio.",
-      "selection_basis": "Search-v5 replacement for modern digital-signature input; full-duration visual QA pass and global fingerprint pass.",
-      "continuity_tags": {
-        "era": [
-          "period_compatible",
-          "cold_war",
-          "analog"
-        ],
-        "setting": [
-          "technical_control_room",
-          "early_warning_command"
-        ],
-        "time_of_day": [
-          "night",
-          "indeterminate_low_light"
-        ],
-        "lighting": [
-          "low_key",
-          "restrained_red",
-          "cool_shadows"
-        ],
-        "palette": [
-          "charcoal",
-          "warning_red",
-          "amber"
-        ],
-        "texture": [
-          "metal",
-          "crt_phosphor",
-          "low_light_grain"
-        ],
-        "risk_flags": [
-          "generic_tape_deck_not_command_chain",
-          "readable_english_control_labels",
-          "digital_timer_requires_period_coherence_review",
-          "source_audio_must_be_stripped_in_render"
-        ]
-      },
-      "continuity_risk_flags": [
-        "generic_tape_deck_not_command_chain",
-        "readable_english_control_labels",
-        "digital_timer_requires_period_coherence_review",
-        "source_audio_must_be_stripped_in_render"
-      ],
-      "continuity_review_status": "REVIEW_REQUIRED",
-      "source_tier": "stock_auto"
-    },
-    {
       "candidate_id": "pixabay-typewriter-typing-writing-author-1335",
       "provider": "pixabay",
       "source_page_url": "https://pixabay.com/videos/typewriter-typing-writing-author-1335/",
@@ -1236,6 +1155,61 @@
         "evidence": "Visual inspection confirms a dark clouded night sky with tree silhouettes and no visible city, logo, interface, person or date-specific claim.",
         "editorial_constraint": "Use only as the non-event/sky bridge; do not present as 1983 archival footage or tie it to a literal launch site; source audio remains stripped."
       }
+    },
+    {
+      "candidate_id": "pexels-12213087",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/hand-moving-buttons-12213087/",
+      "media_url": "https://videos.pexels.com/video-files/12213087/12213087-uhd_3840_2160_25fps.mp4",
+      "license_name": "Pexels License",
+      "source_role": "S09",
+      "truth_class": "REPRESENTATIONAL",
+      "sha256": "4a97068a2888c1146b238795504698709d38771e31f6d1f75ba2beaa12718c51",
+      "perceptual_hash": "PENDING_MANIFEST_ONLY",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42171894738,
+        "artifact_id": 13480857827,
+        "artifact_digest": "sha256:399aeb023d1a062f53dedb708b561edcd15914db5a8237050b85cc30de653c9c"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "continuity_tags": {
+        "era": [
+          "indeterminate_era",
+          "analog"
+        ],
+        "setting": [
+          "technical_control_room",
+          "early_warning_command"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "steel",
+          "warning_red"
+        ],
+        "texture": [
+          "metal",
+          "low_light_grain"
+        ],
+        "risk_flags": [
+          "era_indeterminate",
+          "no_readable_modern_context",
+          "source_audio_must_be_stripped_in_render"
+        ]
+      }
     }
   ],
   "shot_assignments": [
@@ -1247,8 +1221,8 @@
       "requested_truth_class": "MAP_OR_DIAGRAM",
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
-        "candidate_id": "mixkit-abstract-red-glow-101432",
-        "usage": "symbolic red warning pulse; never literal archival evidence",
+        "candidate_id": "pexels-11764431",
+        "usage": "Human-anchor hook: dim-room operator and radio; not literal Petrov archival evidence.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST"
@@ -1291,7 +1265,7 @@
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
         "candidate_id": "mixkit-large-satellite-antenna-2650",
-        "usage": "representational early-warning satellite infrastructure; not archival evidence",
+        "usage": "Representational early-warning satellite infrastructure; not archival evidence.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST"
@@ -1334,8 +1308,8 @@
       "requested_truth_class": "REPRESENTATIONAL",
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
-        "candidate_id": "pexels-11764431",
-        "usage": "Dim-room radio operator and notebook as a representational human-anchor reconstruction for the bunker narrative; not literal Petrov archival evidence.",
+        "candidate_id": "pixabay-radio-vintage-old-171435",
+        "usage": "Vintage radio insert for the bunker/human decision context; symbolic reconstruction.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
@@ -1391,8 +1365,8 @@
       "requested_truth_class": "MAP_OR_DIAGRAM",
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
-        "candidate_id": "pixabay-radio-vintage-old-171435",
-        "usage": "Rádio vintage em baixa luz como insert simbólico de transferência de sinal na cadeia de alerta; não é evidência literal do sistema soviético.",
+        "candidate_id": "mixkit-abstract-red-glow-101432",
+        "usage": "Abstract signal pulse for command-chain escalation; not literal interface.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
@@ -1457,7 +1431,7 @@
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
         "candidate_id": "pixabay-radar-black-green-target-symbol-57670",
-        "usage": "Distinct symbolic radar/target insert for the warning-count escalation; not literal Soviet interface.",
+        "usage": "Radar/target insert for the warning-count escalation; symbolic only.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
@@ -1502,7 +1476,7 @@
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
         "candidate_id": "pexels-5523892",
-        "usage": "Vertical red LED pulse as a symbolic escalation insert for S06; never literal Soviet alert-interface or Petrov archival footage.",
+        "usage": "Red warning pulse for escalation; never literal Soviet interface.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
@@ -1548,7 +1522,7 @@
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
         "candidate_id": "mixkit-slowly-approaching-clock-28897",
-        "usage": "clock pressure and decision window",
+        "usage": "Clock pressure and decision window.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST"
@@ -1591,7 +1565,7 @@
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
         "candidate_id": "pixabay-radar-radar-screen-rotation-circles-4511",
-        "usage": "Empty ground-radar/monitoring insert contrasting with the satellite alert.",
+        "usage": "Ground-radar contradiction insert; symbolic monitoring visual.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
@@ -1636,8 +1610,8 @@
       "requested_truth_class": "MAP_OR_DIAGRAM",
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
-        "candidate_id": "pexels-4285872",
-        "usage": "Dark analog tape-deck/control-panel insert representing the false-alarm classification input; not the actual Soviet interface and not literal archival evidence.",
+        "candidate_id": "pexels-12213087",
+        "usage": "Dark tactile control surface for the false-alarm classification; not the actual Soviet console.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
@@ -1691,7 +1665,7 @@
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
         "candidate_id": "mixkit-clock-mechanism-3651",
-        "usage": "symbolic mechanical passage of time during the bunker wait; not archival Petrov evidence",
+        "usage": "Mechanical passage of time during the bunker wait.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST"
@@ -1735,7 +1709,7 @@
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
         "candidate_id": "pexels-12590338",
-        "usage": "Night clouds and stars for the non-event beat in S11; use as atmosphere and optical-ambiguity context, not as literal incident footage.",
+        "usage": "Representational night sky for the non-event beat.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
@@ -1781,7 +1755,7 @@
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
         "candidate_id": "nasa-svs-geos5-clouds-no-labels-4819",
-        "usage": "Visualização NASA GEOS-5 sem rótulos para explicar a cobertura de nuvens e a geometria atmosférica; não é filmagem literal do sensor de 1983.",
+        "usage": "NASA cloud visualization for the optical-mechanism explanation; not literal 1983 sensor footage.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
@@ -1841,7 +1815,7 @@
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
         "candidate_id": "pixabay-typewriter-typing-writing-author-1335",
-        "usage": "Typewritten evidence treatment for a declassified report/logbook beat without inventing readable historical text.",
+        "usage": "Typewritten evidence treatment without invented readable historical text.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
@@ -1888,7 +1862,7 @@
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
         "candidate_id": "pixabay-hallway-dark-corridor-20837",
-        "usage": "representational empty institutional corridor for later obscurity and quiet institutional consequence; not literal archival evidence",
+        "usage": "Representational institutional corridor for later obscurity.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
@@ -1933,7 +1907,7 @@
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
         "candidate_id": "pixabay-dark-light-lens-flare-abstract-250413",
-        "usage": "Restrained transition from warning pulse into neutral black; no victory imagery.",
+        "usage": "Restrained transition into neutral black.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
@@ -1978,7 +1952,7 @@
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
         "candidate_id": "pixabay-particles-orange-red-dust-effect-7957",
-        "usage": "Restrained branded outro texture with a controlled red/orange pulse behind the final logo lockup.",
+        "usage": "Manifest placeholder only; renderer replaces it with a pure black stacked outro.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
