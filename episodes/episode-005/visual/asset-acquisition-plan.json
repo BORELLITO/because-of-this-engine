@@ -4090,9 +4090,9 @@
     }
   },
   "last_contract_validation": {
-    "validated_at_utc": "2026-11-06T05:30:06Z",
+    "validated_at_utc": "2026-11-06T05:43:03Z",
     "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
-    "candidate_count": 43,
+    "candidate_count": 47,
     "approved_manifest_candidate_count": 23,
     "manifest_asset_count": 16,
     "assigned_shot_count": 16,
@@ -4101,12 +4101,12 @@
     "render_allowed": false,
     "global_catalog_updated": false,
     "validator": "production/visual_plan_contract.py",
-    "checkout_commit": "9e76bf6c3dc5629dec4b15eaf18f797aac7cb866",
+    "checkout_commit": "9ea8eebed4893dbaf59d0acaa879740ef43932ee",
     "revalidation_required": true,
     "continuity_gate": "REVIEW_REQUIRED",
-    "continuity_research_batch": "search-v3-episode005-priority-20261106",
-    "ci_workflow_run_id": 42168761462,
-    "ci_job_id": 127731406133,
+    "continuity_research_batch": "search-v4-episode005-hard-conflict-recovery-20261106",
+    "ci_workflow_run_id": 42170029722,
+    "ci_job_id": 127735446473,
     "ci_conclusion": "success",
     "intake_workflow_run_id": 42165726351,
     "fingerprint_workflow_run_id": 42166326952,
@@ -4136,10 +4136,11 @@
       "S12->S13"
     ],
     "continuity_hard_conflict_count": 23,
-    "continuity_coverage_score": 0.8812
+    "continuity_coverage_score": 0.8812,
+    "note": "CI revalidated the expanded shortlist. The four search-v4 candidates remain plan-only; active manifest assignments and the strict preview block are unchanged."
   },
-  "last_adjustment": "Search-v4 hard-conflict recovery shortlist recorded for S03/S04/S09/S12. No manifest assignment, download, promotion, render, catalog mutation, Drive write or publication was performed. Main remains fail-closed until the exact candidates pass manual intake, fingerprint, editorial approval and the sequence gate.",
-  "next_gate": "Editorially approve the four search-v4 candidate IDs, then run the isolated manual intake and fingerprint audit. If the batch passes QA, assign at most one distinct candidate to each blocked shot, rerun the visual plan contract and sequence gate, and keep render/promotion disabled until all hard conflicts and adjacency breaks are cleared.",
+  "last_adjustment": "Search-v4 shortlist is now recorded and its expanded 47-candidate plan passed CI run 42170029722/job 127735446473. The four candidates remain unassigned and not downloaded; active manifest continuity blockers and fail-closed production gates are unchanged.",
+  "next_gate": "Obtain editorial approval for the exact search-v4 IDs, then dispatch the isolated manual intake/fingerprint batch. Only after QA may one distinct candidate replace each blocked shot, followed by contract and sequence revalidation.",
   "render_approval_record": {
     "status": "APPROVED",
     "approved_at_utc": "2026-11-05T22:56:14Z",
@@ -4396,7 +4397,33 @@
         "9x16_crop_review"
       ],
       "rejection_policy": "Reject any candidate after intake if full-duration QA reveals modern/digital UI, readable labels, watermarks, daylight, licensed audio, or a source/fingerprint collision.",
-      "next_action": "Obtain editorial approval for exact IDs, then dispatch one isolated manual intake/fingerprint batch; do not assign candidates to the manifest before QA."
+      "next_action": "Obtain editorial approval for exact IDs, then dispatch one isolated manual intake/fingerprint batch; do not assign candidates to the manifest before QA.",
+      "contract_validation": {
+        "workflow_run_id": 42170029722,
+        "job_id": 127735446473,
+        "conclusion": "success",
+        "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
+        "candidate_count": 47,
+        "approved_manifest_candidate_count": 23,
+        "manifest_asset_count": 16,
+        "hard_conflict_shots": [
+          "S03",
+          "S04",
+          "S09",
+          "S12"
+        ],
+        "review_shots": [
+          "S06",
+          "S11"
+        ],
+        "adjacency_review_pairs": [
+          "S11->S12",
+          "S12->S13"
+        ],
+        "coverage_score": 0.8812,
+        "active_manifest_unchanged": true,
+        "render_allowed": false
+      }
     }
   ]
 }
