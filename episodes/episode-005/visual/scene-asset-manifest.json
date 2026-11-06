@@ -5,7 +5,7 @@
   "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
   "editorial_mode": "factual_documentary",
   "title": "THE NIGHT THE MACHINE LIED",
-  "status": "PARTIAL_MANIFEST_REPLACEMENTS_PENDING_CONTINUITY_REVALIDATION",
+  "status": "MANUAL_CONTINUITY_REVIEW_RECORDED_PENDING_CI_REVALIDATION",
   "purpose": "Human-approved candidate-to-shot assignments before final production promotion.",
   "source_plan": "episodes/episode-005/visual/asset-acquisition-plan.json",
   "approval_record": {
@@ -1121,7 +1121,8 @@
       "editorial_caveat": "Representational stock footage only; do not imply that it depicts the actual 1983 warning system.",
       "continuity_tags": {
         "era": [
-          "indeterminate_era"
+          "indeterminate_era",
+          "period_compatible"
         ],
         "setting": [
           "technical_control_room",
@@ -1154,8 +1155,14 @@
         "symbolic_not_literal",
         "must_not_repeat_S01"
       ],
-      "continuity_review_status": "REVIEW_REQUIRED",
-      "source_tier": "stock_auto"
+      "continuity_review_status": "PASS_MANUAL_EDITORIAL_REVIEW",
+      "source_tier": "stock_auto",
+      "manual_continuity_review": {
+        "reviewed_at_utc": "2026-11-06T18:15:00Z",
+        "decision": "PASS_SYMBOLIC_INSERT",
+        "evidence": "Visual inspection confirms a single red LED against an otherwise black field. No readable UI, branding, person, modern interface or date-specific claim is present.",
+        "editorial_constraint": "Use only as a short symbolic warning insert; do not present as literal Soviet hardware or archival footage; source audio remains stripped."
+      }
     },
     {
       "candidate_id": "pexels-12590338",
@@ -1189,7 +1196,8 @@
       "editorial_caveat": "Representational stock footage only; no claim that it depicts the actual incident sky.",
       "continuity_tags": {
         "era": [
-          "indeterminate_era"
+          "indeterminate_era",
+          "period_compatible"
         ],
         "setting": [
           "night_sky",
@@ -1220,8 +1228,14 @@
         "must_verify_no_city_branding",
         "night_sky_bridge_candidate"
       ],
-      "continuity_review_status": "REVIEW_REQUIRED",
-      "source_tier": "stock_auto"
+      "continuity_review_status": "PASS_MANUAL_EDITORIAL_REVIEW",
+      "source_tier": "stock_auto",
+      "manual_continuity_review": {
+        "reviewed_at_utc": "2026-11-06T18:15:00Z",
+        "decision": "PASS_SYMBOLIC_INSERT",
+        "evidence": "Visual inspection confirms a dark clouded night sky with tree silhouettes and no visible city, logo, interface, person or date-specific claim.",
+        "editorial_constraint": "Use only as the non-event/sky bridge; do not present as 1983 archival footage or tie it to a literal launch site; source audio remains stripped."
+      }
     }
   ],
   "shot_assignments": [
@@ -2013,7 +2027,7 @@
     "drive_write_authorized": false,
     "publication_authorized": false
   },
-  "next_action": "Run the visual-plan contract and continuity CI on the S04/S12 replacements. Keep strict preview, render, promotion, global catalog, Drive and publication blocked until the result is reviewed.",
+  "next_action": "Validate the documented S06/S11 symbolic-insert review in CI. Keep render, catalog promotion, Drive and publication disabled; dispatch only the isolated preview after CI reports a PASS continuity gate.",
   "reuse_policy": {
     "source_reuse_scope": "global",
     "distinct_source_required_per_shot": true,
@@ -2418,9 +2432,9 @@
     ]
   },
   "continuity_gate": {
-    "status": "REVIEW_REQUIRED",
+    "status": "PENDING_CI_REVALIDATION_AFTER_MANUAL_REVIEW",
     "profile_id": "episode-005-cold-war-bunker-continuity-v1",
-    "reason": "S04 and S12 were replaced with fingerprint-clean candidates; continuity revalidation is pending. Strict preview/render remains blocked.",
+    "reason": "S06/S11 manual editorial review recorded; authoritative continuity result must be recalculated by CI before isolated preview dispatch.",
     "strict_preview_block": true,
     "hard_conflict_shots": [
       "S04",
@@ -2443,8 +2457,8 @@
     "hard_conflict_count": 13,
     "revalidation_required": true,
     "pending_revalidation_shots": [
-      "S04",
-      "S12"
+      "S06",
+      "S11"
     ]
   },
   "replacement_history": [
