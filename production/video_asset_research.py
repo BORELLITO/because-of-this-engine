@@ -175,11 +175,20 @@ def query_variants_for_scene(
     variants = [primary]
     if len(unique) >= 5:
         variants.append(" ".join(unique[:6]))
+    if visual_profile:
+        continuity_query = " ".join(
+            _tokens(" ".join(continuity_search_terms(scene, visual_profile)))[:12]
+        )
+        if continuity_query and continuity_query not in variants:
+            variants.append(continuity_query)
     if excerpt:
         excerpt_tokens = [word for word in _tokens(excerpt) if word not in excluded]
         excerpt_query = " ".join(excerpt_tokens[:10])
         if excerpt_query and excerpt_query not in variants:
             variants.append(excerpt_query)
+    # Keep the semantic primary, a compact semantic variant and a dedicated
+    # continuity variant.  This prevents long narrative beats from truncating
+    # the actual world-building constraints out of every search request.
     return variants[:3]
 
 
