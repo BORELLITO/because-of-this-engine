@@ -101,6 +101,17 @@ class VisualContinuityTests(unittest.TestCase):
         self.assertEqual(report["status"], "BLOCKED")
         self.assertGreaterEqual(len(report["conflicts"]), 2)
 
+    def test_night_does_not_match_neon_nightclub_forbidden_tag(self):
+        scene = {"scene_id": "S01", "continuity_tags": tags()}
+        profile = {**PROFILE, "hard_forbidden": [*PROFILE["hard_forbidden"], "neon_nightclub"]}
+        report = continuity_match_report(
+            scene,
+            {"source_tier": "stock_auto", "continuity_tags": tags()},
+            profile,
+        )
+        self.assertEqual(report["status"], "PASS")
+        self.assertNotIn("hard_continuity_conflict", report["risk_flags"])
+
     def test_preview_gate_blocks_bad_sequence_but_manifest_can_review(self):
         sequence = [
             {
