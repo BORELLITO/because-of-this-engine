@@ -105,24 +105,16 @@ jobs:
           print(json.dumps(manifest, indent=2))
           PY
 
-      - name: Install bounded static media tools
+      - name: Install media tools (runner-first, bounded fallback)
         run: |
           set -euo pipefail
-          tools_dir="${RUNNER_TEMP}/ffmpeg-static"
-          archive="${tools_dir}/ffmpeg.tar.xz"
-          mkdir -p "${tools_dir}"
-          curl --fail --location --retry 2 --retry-delay 2 \
-            --connect-timeout 15 --max-time 120 \
-            "https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz" \
-            --output "${archive}"
-          tar -xJf "${archive}" -C "${tools_dir}"
-          ffmpeg_path="$(find "${tools_dir}" -type f -name ffmpeg -perm -111 | head -n 1)"
-          ffprobe_path="$(find "${tools_dir}" -type f -name ffprobe -perm -111 | head -n 1)"
-          test -n "${ffmpeg_path}" && test -n "${ffprobe_path}"
-          media_bin_dir="$(dirname "${ffmpeg_path}")"
-          echo "${media_bin_dir}" >> "${GITHUB_PATH}"
-          "${ffmpeg_path}" -version | head -n 1
-          "${ffprobe_path}" -version | head -n 1
+          if command -v ffmpeg >/dev/null 2>&1 && command -v ffprobe >/dev/null 2>&1; then
+            echo "Using runner-provided ffmpeg/ffprobe"
+          else
+            echo "Runner does not provide ffmpeg/ffprobe; installing distro packages"
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends ffmpeg
+          fi
 
       - name: Verify media tools
         run: |
