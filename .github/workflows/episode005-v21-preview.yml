@@ -91,7 +91,7 @@ jobs:
               assert stream.getnchannels() == 1
               assert stream.getsampwidth() == 2
               assert stream.getframerate() in {24000, 48000}
-              assert 60 <= duration <= 80, duration
+              assert 60 <= duration <= 75, duration
           print({"voice": profile["voice_id"], "provider": profile["provider"], "duration_seconds": round(duration, 3), "audio_sha256": digest})
           PY
 
