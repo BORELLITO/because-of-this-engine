@@ -2344,7 +2344,7 @@
       "selection": "ALTERNATIVE_APPROVED_FOR_MANIFEST_ONLY"
     }
   ],
-  "next_action": "Await explicit render authorization; thumbnail final, render, global catalog, Drive and publication remain gated.",
+  "next_action": "Re-shortlist the 16 assigned shots against search-v3; no render, Drive write, catalog promotion or publication until the continuity gate returns PASS.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -2770,8 +2770,8 @@
   ],
   "search_strategy": {
     "mode": "BATCH_SHORTLIST_THEN_INTAKE",
-    "version": "search-v2",
-    "objective": "Find coherent, commercially usable, distinct visual candidates before any media download.",
+    "version": "search-v3",
+    "objective": "Find semantically correct, commercially usable and sequence-coherent video candidates before any media download.",
     "discovery_batch": {
       "candidates_per_unresolved_shot": 6,
       "shortlist_size_per_shot": 2,
@@ -2820,15 +2820,20 @@
       "reject_baked_captions_logos_or_letterbox",
       "reject_anachronistic_or_semantically_generic_visuals",
       "reject_source_or_fingerprint_reuse",
-      "verify_9x16_crop_before_approval"
+      "verify_9x16_crop_before_approval",
+      "continuity_tags_complete_for_era_setting_time_lighting_palette_texture",
+      "reject_hard_day_night_or_modern_ui_conflicts",
+      "review_adjacent_shots_for_palette_lighting_and_texture",
+      "manual_archive_or_government_rights_lane_keeps_per_file_license_evidence"
     ],
     "scoring_weights": {
-      "semantic_fit": 35,
-      "license_confidence": 20,
-      "visual_truth_and_period_coherence": 15,
-      "vertical_crop_quality": 10,
-      "clean_frame_quality": 10,
-      "source_distinctness": 10
+      "semantic_fit": 30,
+      "continuity_coherence": 25,
+      "license_confidence": 15,
+      "visual_truth_and_period_coherence": 10,
+      "vertical_crop_quality": 8,
+      "clean_frame_quality": 7,
+      "source_distinctness": 5
     },
     "score_thresholds": {
       "shortlist_for_intake": 70,
@@ -2850,7 +2855,32 @@
         "mixkit.co",
         "assets.mixkit.co",
         "pixabay.com",
-        "cdn.pixabay.com"
+        "cdn.pixabay.com",
+        "pexels.com",
+        "videos.pexels.com",
+        "images.pexels.com",
+        "coverr.co",
+        "storage.coverr.co",
+        "videvo.net",
+        "static.videvo.net",
+        "videezy.com",
+        "static.videezy.com",
+        "commons.wikimedia.org",
+        "upload.wikimedia.org",
+        "nasa.gov",
+        "images.nasa.gov",
+        "svs.gsfc.nasa.gov",
+        "noaa.gov",
+        "oceanexplorer.noaa.gov",
+        "sos.noaa.gov",
+        "loc.gov",
+        "tile.loc.gov",
+        "archives.gov",
+        "catalog.archives.gov",
+        "archive.org",
+        "ia800.us.archive.org",
+        "ia801.us.archive.org",
+        "ia900.us.archive.org"
       ],
       "rights_revalidation_at_fingerprint": true,
       "manual_dispatch_visibility": "The workflow is manual-only and present on the candidate branch; GitHub UI exposes Run workflow only when the workflow exists on the default branch or an authorized API dispatch is used. Do not add a PR trigger as a workaround."
@@ -3014,6 +3044,50 @@
       "no_render": true,
       "no_catalog_update": true,
       "no_drive_write": true
+    },
+    "continuity_dimensions": [
+      "era",
+      "setting",
+      "time_of_day",
+      "lighting",
+      "palette",
+      "texture"
+    ],
+    "transition_review": {
+      "required": true,
+      "adjacency_pairs_reviewed": true,
+      "hard_day_night_flip": "BLOCK",
+      "bridge_shot_must_be_declared": true,
+      "sequence_gate": "production.visual_continuity.validate_sequence"
+    },
+    "future_candidate_record_fields": [
+      "source_tier",
+      "manual_rights_review",
+      "continuity_tags",
+      "continuity_guard",
+      "continuity_risk_flags"
+    ],
+    "provider_lanes": {
+      "automated_stock": [
+        "mixkit",
+        "pixabay",
+        "pexels",
+        "coverr"
+      ],
+      "manual_attribution": [
+        "videvo",
+        "videezy",
+        "wikimedia"
+      ],
+      "manual_government": [
+        "nasa",
+        "noaa"
+      ],
+      "manual_archive": [
+        "loc",
+        "nara",
+        "internet_archive"
+      ]
     }
   },
   "last_manual_intake": {
@@ -3177,7 +3251,7 @@
   },
   "last_contract_validation": {
     "validated_at_utc": "2026-11-05T18:05:19.534Z",
-    "status": "VISUAL_PLAN_CONTRACT_PASS",
+    "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
     "candidate_count": 42,
     "approved_manifest_candidate_count": 22,
     "manifest_asset_count": 16,
@@ -3187,9 +3261,11 @@
     "render_allowed": false,
     "global_catalog_updated": false,
     "validator": "production/visual_plan_contract.py",
-    "checkout_commit": "d371da0ad7c72576bcd3e9f664baa6b03f89a5e4"
+    "checkout_commit": "d371da0ad7c72576bcd3e9f664baa6b03f89a5e4",
+    "revalidation_required": true,
+    "continuity_gate": "REVIEW_REQUIRED"
   },
-  "last_adjustment": "All 16 active assets received explicit user render approval on 2026-11-05 after direct-media QA, contributor/license reconciliation and no-reuse checks. The scene manifest remains manifest-only by contract; render authorization is recorded in the rights ledger and production record.",
+  "last_adjustment": "Continuity upgrade v1 applied: sequence-level era/setting/time/lighting/palette/texture gates, expanded provider lanes and explicit adjacency review. Existing 16-asset pool remains manifest-only and REVIEW_REQUIRED; no media was silently promoted.",
   "next_gate": "Expose the manual V2.1 render workflow on the approved base revision, then run preview preflight. Do not merge, enable production, render media, write Drive or publish automatically.",
   "render_approval_record": {
     "status": "APPROVED",
@@ -3202,6 +3278,118 @@
       "global_catalog_update=false",
       "drive_written=false",
       "publication_manual_only"
+    ]
+  },
+  "visual_continuity_profile": {
+    "schema_version": "1.0",
+    "profile_id": "episode-005-cold-war-bunker-continuity-v1",
+    "world": {
+      "era": [
+        "1983",
+        "cold_war",
+        "analog",
+        "period_compatible"
+      ],
+      "setting": [
+        "early_warning_command",
+        "technical_control_room",
+        "institutional_corridor"
+      ],
+      "time_of_day": [
+        "night",
+        "indeterminate_low_light"
+      ],
+      "lighting": [
+        "low_key",
+        "cool_shadows",
+        "restrained_red",
+        "restrained_amber"
+      ],
+      "palette": [
+        "charcoal",
+        "steel",
+        "desaturated_blue",
+        "warning_red",
+        "amber"
+      ],
+      "texture": [
+        "crt_phosphor",
+        "brushed_metal",
+        "paper_logbook",
+        "low_light_grain"
+      ]
+    },
+    "hard_constraints": {
+      "era": [
+        "1983",
+        "cold_war",
+        "analog",
+        "period_compatible"
+      ],
+      "setting": [
+        "early_warning_command",
+        "technical_control_room",
+        "institutional_corridor",
+        "documentary_evidence"
+      ],
+      "time_of_day": [
+        "night",
+        "indeterminate_low_light"
+      ],
+      "lighting": [
+        "low_key",
+        "cool_shadows",
+        "restrained_red",
+        "restrained_amber"
+      ],
+      "palette": [
+        "charcoal",
+        "steel",
+        "desaturated_blue",
+        "warning_red",
+        "amber"
+      ],
+      "texture": [
+        "crt_phosphor",
+        "brushed_metal",
+        "paper_logbook",
+        "low_light_grain"
+      ]
+    },
+    "hard_forbidden": [
+      "smartphone",
+      "rgb_gaming_lights",
+      "neon_nightclub",
+      "bright_modern_ui",
+      "watermark",
+      "baked_captions",
+      "third_party_logo",
+      "unrelated_industrial_machinery"
+    ],
+    "allowed_source_tiers": [
+      "stock_auto",
+      "archive_manual",
+      "government_manual",
+      "cc_manual",
+      "original"
+    ],
+    "transition_policy": {
+      "allow_bridge_shots": true,
+      "max_hard_conflicts": 0,
+      "required_adjacency_review": true
+    },
+    "enforcement": {
+      "manifest": "advisory",
+      "draft-preview": "block",
+      "preview": "block",
+      "final": "block"
+    },
+    "search_terms": [
+      "1983 Cold War bunker",
+      "analog early warning command room",
+      "night low-key CRT control panel",
+      "charcoal steel desaturated blue warning red",
+      "period-compatible documentary reconstruction"
     ]
   }
 }
