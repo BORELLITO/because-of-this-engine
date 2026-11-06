@@ -15,7 +15,11 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
-from production.visual_provider_policy import host_allowed, policy_for
+from production.visual_continuity import (
+    continuity_profile,
+    validate_sequence,
+)
+from production.visual_provider_policy import host_allowed, license_allowed, policy_for
 
 
 CANDIDATE_ID_PATTERN = re.compile(r"^[A-Za-z0-9._-]+$")
@@ -45,8 +49,8 @@ def validate_visual_plan(plan: dict[str, Any], manifest: dict[str, Any]) -> dict
 
     if strategy.get("mode") != "BATCH_SHORTLIST_THEN_INTAKE":
         errors.append("search_strategy.mode must be BATCH_SHORTLIST_THEN_INTAKE")
-    if strategy.get("version") != "search-v2":
-        errors.append("search_strategy.version must be search-v2")
+    if strategy.get("version") not in {"search-v2", "search-v3"}:
+        errors.append("search_strategy.version must be search-v2 or search-v3")
 
     batch = strategy.get("discovery_batch")
     if not isinstance(batch, dict):
@@ -134,7 +138,7 @@ def validate_visual_plan(plan: dict[str, Any], manifest: dict[str, Any]) -> dict
             policy = policy_for(provider)
             if policy is None:
                 errors.append(f"{candidate_id}: unsupported provider for media candidate: {provider}")
-            elif candidate.get("license_name") != policy["license_name"]:
+            elif not license_allowed(policy, candidate.get("license_name")):
                 errors.append(f"{candidate_id}: {provider} candidate has invalid or missing license")
             else:
                 source_page_url = str(candidate.get("source_page_url", ""))
@@ -201,6 +205,55 @@ def validate_visual_plan(plan: dict[str, Any], manifest: dict[str, Any]) -> dict
     if unresolved & assigned_shots:
         errors.append(f"shots cannot be both unresolved and assigned: {sorted(unresolved & assigned_shots)}")
 
+    continuity_gate: dict[str, Any] = {
+        "status": "NOT_CONFIGURED",
+        "mode": "manifest",
+        "strict_preview_block": False,
+    }
+    plan_profile = continuity_profile(plan)
+    manifest_profile = continuity_profile(manifest)
+    if plan_profile and manifest_profile:
+        if plan_profile.get("profile_id") != manifest_profile.get("profile_id"):
+            errors.append("plan and manifest visual continuity profile IDs do not match")
+        else:
+            assets_by_id = {
+                str(item.get("candidate_id")): item
+                for item in assets
+                if isinstance(item, dict)
+            }
+            sequence: list[dict[str, Any]] = []
+            for assignment in manifest.get("shot_assignments", []):
+                if not isinstance(assignment, dict):
+                    continue
+                shot_id = str(assignment.get("shot_id", "")).strip()
+                assignment_data = assignment.get("assignment")
+                if not isinstance(assignment_data, dict):
+                    continue
+                candidate_id = str(assignment_data.get("candidate_id", "")).strip()
+                asset = assets_by_id.get(candidate_id)
+                if asset is not None:
+                    sequence.append({
+                        "shot_id": shot_id,
+                        "scene": {
+                            "shot_id": shot_id,
+                            "continuity_tags": assignment.get("continuity_tags") or {},
+                        },
+                        "asset": asset,
+                    })
+            continuity_gate = validate_sequence(
+                sequence,
+                manifest_profile,
+                mode="manifest",
+            )
+            if (
+                continuity_gate.get("status") == "BLOCKED"
+                and manifest_profile["enforcement"].get("manifest") == "block"
+            ):
+                errors.append("visual continuity gate blocks manifest promotion")
+
+    elif plan_profile or manifest_profile:
+        errors.append("visual continuity profile must exist on both plan and manifest")
+
     if errors:
         raise VisualPlanContractError("; ".join(errors))
 
@@ -215,6 +268,7 @@ def validate_visual_plan(plan: dict[str, Any], manifest: dict[str, Any]) -> dict
         "promotion_allowed": False,
         "render_allowed": False,
         "global_catalog_updated": False,
+        "continuity_gate": continuity_gate,
     }
 
 
