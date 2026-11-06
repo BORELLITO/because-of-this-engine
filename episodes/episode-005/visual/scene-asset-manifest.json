@@ -1818,7 +1818,7 @@
     "drive_write_authorized": false,
     "publication_authorized": false
   },
-  "next_action": "Re-run the visual plan contract and continuity validator; keep S03/S07/S09/S12 review, promotion, render, Drive and publication blocked.",
+  "next_action": "Search distinct period-compatible replacements for S03, S04, S09 and S12, then rerun intake, fingerprint and the sequence gate. Do not render or promote.",
   "reuse_policy": {
     "source_reuse_scope": "global",
     "distinct_source_required_per_shot": true,
@@ -2007,12 +2007,12 @@
     }
   ],
   "final_visual_manifest_validation": {
-    "validated_at_utc": "2026-11-06T05:21:35Z",
-    "status": "PENDING_CI_REVALIDATION",
+    "validated_at_utc": "2026-11-06T05:30:06Z",
+    "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
     "validator": "production/visual_plan_contract.py",
-    "checkout_commit": null,
+    "checkout_commit": "9e76bf6c3dc5629dec4b15eaf18f797aac7cb866",
     "candidate_count": 43,
-    "approved_manifest_candidate_count": 21,
+    "approved_manifest_candidate_count": 23,
     "manifest_asset_count": 16,
     "assigned_shot_count": 16,
     "unresolved_shot_count": 0,
@@ -2020,11 +2020,30 @@
     "render_allowed": false,
     "global_catalog_updated": false,
     "revalidation_required": true,
-    "replacement_note": "S06 and S11 replaced after human approval; continuity gate must be recomputed by CI.",
+    "replacement_note": "S06 and S11 replacements passed contract and removed hard conflicts; CI still requires review for S06/S11 metadata and blocks S03/S04/S09/S12 plus S11->S12 and S12->S13.",
     "continuity_gate": "REVIEW_REQUIRED",
-    "strict_preview_block": true
+    "strict_preview_block": true,
+    "ci_workflow_run_id": 42168761462,
+    "ci_job_id": 127731406133,
+    "ci_conclusion": "success",
+    "continuity_hard_conflict_shots": [
+      "S03",
+      "S04",
+      "S09",
+      "S12"
+    ],
+    "continuity_review_shots": [
+      "S06",
+      "S11"
+    ],
+    "adjacency_review_pairs": [
+      "S11->S12",
+      "S12->S13"
+    ],
+    "continuity_hard_conflict_count": 23,
+    "continuity_coverage_score": 0.8812
   },
-  "last_adjustment": "Human-approved manifest-only replacements applied for S06 and S11. S06 now uses an abstract red LED pulse without the prior modern multi-LED signature; S11 now uses a night-sky clip with stronger continuity. Render remains blocked pending CI and sequence-level continuity review.",
+  "last_adjustment": "Post-fix CI recorded: S06 and S11 are no longer hard conflicts, while S03/S04/S09/S12 remain blocked and S11->S12/S12->S13 remain adjacency breaks. Preview/render stays fail-closed.",
   "visual_continuity_profile": {
     "schema_version": "1.0",
     "profile_id": "episode-005-cold-war-bunker-continuity-v1",
@@ -2140,31 +2159,29 @@
   "continuity_gate": {
     "status": "REVIEW_REQUIRED",
     "profile_id": "episode-005-cold-war-bunker-continuity-v1",
-    "reason": "S06 and S11 replacements were approved for manifest-only use; S03/S07/S09/S12 still require period/palette/adjacency review, with S11->S12 retained as the declared night-to-sensor bridge.",
+    "reason": "CI confirms the token-boundary fix removed false night/neon_nightclub conflicts. Remaining hard conflicts are S03/S04/S09/S12; S06/S11 require metadata/editorial review; S11->S12 and S12->S13 require a declared bridge or replacement.",
     "strict_preview_block": true,
     "hard_conflict_shots": [
       "S03",
+      "S04",
       "S09",
       "S12"
     ],
     "review_shots": [
-      "S01",
-      "S02",
-      "S04",
-      "S05",
-      "S07",
-      "S08",
-      "S10",
-      "S13",
-      "S14",
-      "S15",
-      "S16"
+      "S06",
+      "S11"
     ],
     "no_media_promoted": true,
     "no_render_executed": true,
     "bridge_required_pairs": [
-      "S11->S12"
-    ]
+      "S11->S12",
+      "S12->S13"
+    ],
+    "ci_workflow_run_id": 42168761462,
+    "ci_job_id": 127731406133,
+    "ci_conclusion": "success",
+    "coverage_score": 0.8812,
+    "hard_conflict_count": 23
   },
   "replacement_history": [
     {
