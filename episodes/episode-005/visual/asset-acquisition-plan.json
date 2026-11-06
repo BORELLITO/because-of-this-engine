@@ -3861,7 +3861,7 @@
     ],
     "pending_continuity_shots": [
       "S03",
-      "S07",
+      "S04",
       "S09",
       "S12"
     ],
@@ -3883,7 +3883,7 @@
     "continuity_hard_conflict_count": 23,
     "continuity_coverage_score": 0.8812
   },
-  "last_adjustment": "Token-boundary matcher fix merged and validated. The false night/neon_nightclub conflicts are gone; the remaining continuity blockers are the evidence-backed S03/S04/S09/S12 assignments plus S11->S12 and S12->S13 adjacency breaks.",
+  "last_adjustment": "Token-boundary matcher fix merged and validated. The false night/neon_nightclub conflicts are gone; the remaining continuity blockers are the evidence-backed S03/S04/S09/S12 assignments plus S11->S12 and S12->S13 adjacency breaks. Pending-shot traceability aligned to the post-fix CI: S07 is PASS; S03/S04/S09/S12 remain hard conflicts.",
   "next_gate": "Do not run the V2.1 preview until the four hard-conflict shots and two adjacency breaks are resolved or explicitly bridged, then rerun the contract and sequence gate.",
   "render_approval_record": {
     "status": "APPROVED",
