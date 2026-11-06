@@ -72,7 +72,7 @@
       "visual_intent": "Vertical red LED pulse against darkness for escalation and false-alarm classification; symbolic, never literal archival evidence.",
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "pexels",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "license_name": "Pexels License",
       "source_tier": "stock_auto",
       "approved_for_render": false,
@@ -114,7 +114,7 @@
         "symbolic_not_literal",
         "must_not_repeat_S01"
       ],
-      "selection_status": "SHORTLISTED_FOR_MANUAL_INTAKE",
+      "selection_status": "REVIEW_REQUIRED",
       "score_breakdown": {
         "semantic_fit": 0.88,
         "continuity_coherence": 0.83,
@@ -122,6 +122,41 @@
         "vertical_crop_quality": 0.98,
         "clean_frame_quality": 0.86,
         "source_distinctness": 1
+      },
+      "intake_artifact": {
+        "workflow_run_id": 42165726351,
+        "job_id": 127721653455,
+        "branch": "main",
+        "commit_sha": "d6c4b875b5718ccf984fe82713c2e0aab71fe1fb",
+        "artifact_id": 13478797924,
+        "artifact_name": "episode005-visual-intake-42165726351",
+        "artifact_digest": "sha256:dc37a4428e029890919302d0414eb4f5b2859692dd851d0a2c4da1c12ef70eda",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "a522bfd1dc6189baf512b5041987791e7e8fef0976d29ac8e5b16740cb553bc9",
+        "duration_seconds": 18.018,
+        "dimensions": [
+          2160,
+          3840
+        ],
+        "frame_rate": "30000/1001",
+        "codec": "h264",
+        "automated_promotion": false
+      },
+      "qa": {
+        "clean_frame_visual_review": "PRELIMINARY_PASS",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_QA_FRAMES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
+        "semantic_fit": "PRELIMINARY_PASS_FOR_S06_SYMBOLIC_WARNING_PULSE",
+        "locked_9x16_crop": "PASS_NATIVE_VERTICAL",
+        "global_reuse_fingerprint": "PENDING_FINGERPRINT_AUDIT",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "PASS_ABSTRACT_RED_LED_NO_IDENTIFIABLE_ELEMENTS",
+        "visual_qa_status": "PENDING_HUMAN_QA",
+        "visual_qa_evidence": "artifact 13478797924 / pexels-5523892/qa-frames.jpg",
+        "third_party_risk": "NONE_VISIBLE_IN_QA_FRAMES",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
       }
     },
     {
@@ -132,7 +167,7 @@
       "visual_intent": "Hand operating red and green buttons in a dark control room; human decision pressure without a false Petrov archival claim.",
       "truth_class": "REPRESENTATIONAL",
       "provider": "pexels",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "license_name": "Pexels License",
       "source_tier": "stock_auto",
       "approved_for_render": false,
@@ -174,7 +209,7 @@
         "human_anchor_is_hands_only",
         "modern_control_room_possible"
       ],
-      "selection_status": "SHORTLISTED_FOR_MANUAL_INTAKE",
+      "selection_status": "REVIEW_REQUIRED",
       "score_breakdown": {
         "semantic_fit": 0.86,
         "continuity_coherence": 0.72,
@@ -182,6 +217,41 @@
         "vertical_crop_quality": 0.72,
         "clean_frame_quality": 0.85,
         "source_distinctness": 1
+      },
+      "intake_artifact": {
+        "workflow_run_id": 42165726351,
+        "job_id": 127721653455,
+        "branch": "main",
+        "commit_sha": "d6c4b875b5718ccf984fe82713c2e0aab71fe1fb",
+        "artifact_id": 13478797924,
+        "artifact_name": "episode005-visual-intake-42165726351",
+        "artifact_digest": "sha256:dc37a4428e029890919302d0414eb4f5b2859692dd851d0a2c4da1c12ef70eda",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "76b7ebcc774b63aea0e33df94e546be592f4150e2bec1d00c5986f632c4b656f",
+        "duration_seconds": 26.88,
+        "dimensions": [
+          3840,
+          2160
+        ],
+        "frame_rate": "25/1",
+        "codec": "h264",
+        "automated_promotion": false
+      },
+      "qa": {
+        "clean_frame_visual_review": "PRELIMINARY_REVIEW_REQUIRED",
+        "baked_captions_or_authored_graphics": "PHYSICAL_BUTTON_LABELS_VISIBLE; NO_BAKED_CAPTIONS_OBSERVED",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
+        "semantic_fit": "PRELIMINARY_PASS_FOR_S03_S07_BUT_MODERN_ACRYLIC_BUTTONS_REQUIRE_PERIOD_REVIEW",
+        "locked_9x16_crop": "PRELIMINARY_PASS_CENTERED_BUTTONS_AND_HAND_ANCHOR",
+        "global_reuse_fingerprint": "PENDING_FINGERPRINT_AUDIT",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "PASS_FOR_CONTENT; PERIOD_COHERENCE_REQUIRES_REVIEW",
+        "visual_qa_status": "PENDING_HUMAN_QA",
+        "visual_qa_evidence": "artifact 13478797924 / pexels-38958215/qa-frames.jpg",
+        "third_party_risk": "PHYSICAL_BUTTON_LABELS_AND_MODERN_INTERFACE_SIGNATURE_REQUIRE_REVIEW",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
       }
     },
     {
@@ -358,7 +428,7 @@
       "visual_intent": "Moving clouds and stars over a night skyline for the non-event and optical-ambiguity beat.",
       "truth_class": "REPRESENTATIONAL",
       "provider": "pexels",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "license_name": "Pexels License",
       "source_tier": "stock_auto",
       "approved_for_render": false,
@@ -399,7 +469,7 @@
         "must_verify_no_city_branding",
         "night_sky_bridge_candidate"
       ],
-      "selection_status": "SHORTLISTED_FOR_MANUAL_INTAKE",
+      "selection_status": "REVIEW_REQUIRED",
       "score_breakdown": {
         "semantic_fit": 0.93,
         "continuity_coherence": 0.91,
@@ -407,6 +477,41 @@
         "vertical_crop_quality": 0.72,
         "clean_frame_quality": 0.84,
         "source_distinctness": 1
+      },
+      "intake_artifact": {
+        "workflow_run_id": 42165726351,
+        "job_id": 127721653455,
+        "branch": "main",
+        "commit_sha": "d6c4b875b5718ccf984fe82713c2e0aab71fe1fb",
+        "artifact_id": 13478797924,
+        "artifact_name": "episode005-visual-intake-42165726351",
+        "artifact_digest": "sha256:dc37a4428e029890919302d0414eb4f5b2859692dd851d0a2c4da1c12ef70eda",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "4525a9aee13d638be2196d043f4eeaaf80ef7a7d03b4d0b2ece87cbf4cdd6179",
+        "duration_seconds": 7.893,
+        "dimensions": [
+          3840,
+          2160
+        ],
+        "frame_rate": "25/1",
+        "codec": "h264",
+        "automated_promotion": false
+      },
+      "qa": {
+        "clean_frame_visual_review": "PRELIMINARY_PASS",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_QA_FRAMES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
+        "semantic_fit": "PRELIMINARY_PASS_FOR_S11_NIGHT_SKY_NON_EVENT",
+        "locked_9x16_crop": "PASS_WITH_NIGHT_SKY_AND_SILHOUETTE_CENTERING",
+        "global_reuse_fingerprint": "PENDING_FINGERPRINT_AUDIT",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "PASS_NIGHT_SKY_NO_BRANDING_OBSERVED",
+        "visual_qa_status": "PENDING_HUMAN_QA",
+        "visual_qa_evidence": "artifact 13478797924 / pexels-12590338/qa-frames.jpg",
+        "third_party_risk": "LOW_VISIBLE_RISK; HUMAN_QA_REQUIRED",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
       }
     },
     {
@@ -491,7 +596,7 @@
       "visual_intent": "Large satellite dish at sunset for sensor geometry; possible bridge only if grade and adjacency remain restrained.",
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "pexels",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "REJECTED_CONTINUITY_CONFLICT",
       "license_name": "Pexels License",
       "source_tier": "stock_auto",
       "approved_for_render": false,
@@ -534,7 +639,7 @@
         "daylight_risk",
         "bridge_shot_may_be_required"
       ],
-      "selection_status": "SHORTLISTED_FOR_MANUAL_INTAKE",
+      "selection_status": "REJECTED_CONTINUITY_CONFLICT",
       "continuity_mode": "bridge",
       "score_breakdown": {
         "semantic_fit": 0.9,
@@ -543,6 +648,41 @@
         "vertical_crop_quality": 0.72,
         "clean_frame_quality": 0.89,
         "source_distinctness": 1
+      },
+      "intake_artifact": {
+        "workflow_run_id": 42165726351,
+        "job_id": 127721653455,
+        "branch": "main",
+        "commit_sha": "d6c4b875b5718ccf984fe82713c2e0aab71fe1fb",
+        "artifact_id": 13478797924,
+        "artifact_name": "episode005-visual-intake-42165726351",
+        "artifact_digest": "sha256:dc37a4428e029890919302d0414eb4f5b2859692dd851d0a2c4da1c12ef70eda",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "2bf4be7b063a71f35d57860113e28be7eefc4ab71d506ec7664fdba3dbe1a29f",
+        "duration_seconds": 19.083,
+        "dimensions": [
+          3840,
+          2160
+        ],
+        "frame_rate": "60/1",
+        "codec": "h264",
+        "automated_promotion": false
+      },
+      "qa": {
+        "clean_frame_visual_review": "FAIL",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_QA_FRAMES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
+        "semantic_fit": "FAIL_FOR_EPISODE_CONTINUITY",
+        "locked_9x16_crop": "PASS_CROP_ONLY_NOT_CONTINUITY",
+        "global_reuse_fingerprint": "NOT_RUN_REJECTED_BEFORE_FINGERPRINT_AUDIT",
+        "human_approval": "REJECTED_CONTINUITY_CONFLICT",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "FAIL_BRIGHT_DAYLIGHT_GREEN_FIELD_AND_MODERN_SATELLITE_DISH_BREAK_NIGHT_LOW_KEY_WORLD",
+        "visual_qa_status": "REJECTED",
+        "visual_qa_evidence": "artifact 13478797924 / pexels-33897223/qa-frames.jpg",
+        "third_party_risk": "NO_VISIBLE_LOGO; CONTINUITY_IS_DISQUALIFIER",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
       }
     },
     {
@@ -2738,7 +2878,7 @@
       ]
     }
   ],
-  "next_action": "Dispatch the manual-only intake workflow for the four shortlisted IDs after the plan CI gate; then inspect five normalized frames, 9x16 crops and global fingerprints before any manifest replacement.",
+  "next_action": "Run fingerprint audit for the three non-rejected Episode 005 candidates; keep the active visual manifest and preview blocked until continuity approval.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -3485,37 +3625,39 @@
     }
   },
   "last_manual_intake": {
-    "workflow_run_id": 42073828513,
-    "job_id": 127408597700,
-    "branch": "integration/because-of-this-v2.1-20261105",
-    "commit_sha": "c51e423ccda209b21cdb79e28d2294888c84074e",
+    "workflow_run_id": 42165726351,
+    "job_id": 127721653455,
+    "branch": "main",
+    "commit_sha": "d6c4b875b5718ccf984fe82713c2e0aab71fe1fb",
     "candidate_ids": [
-      "pixabay-alert-alarm-war-danger-risk-205519",
-      "pixabay-radar-black-green-target-symbol-57670",
-      "pixabay-radar-radar-screen-rotation-circles-4511",
-      "pixabay-radar-communication-military-261518",
-      "pixabay-button-press-red-business-click-502",
-      "pixabay-button-press-push-start-launching-221746",
-      "pixabay-typewriter-typing-writing-author-1335",
-      "pixabay-typewriter-type-antique-writing-38626",
-      "pixabay-dark-light-lens-flare-abstract-250413",
-      "pixabay-abstract-light-streaks-motion-250417",
-      "pixabay-particles-orange-red-dust-effect-7957",
-      "pixabay-colors-lines-lights-abstract-video-5072"
+      "pexels-38958215",
+      "pexels-5523892",
+      "pexels-12590338",
+      "pexels-33897223"
     ],
     "refresh_existing": false,
     "status": "BATCH_DOWNLOADED_AWAITING_HUMAN_QA",
-    "artifact_id": 13437466569,
-    "artifact_name": "episode005-visual-intake-42073828513",
-    "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
-    "infrastructure_fix_commit": "c51e423ccda209b21cdb79e28d2294888c84074e",
+    "artifact_id": 13478797924,
+    "artifact_name": "episode005-visual-intake-42165726351",
+    "artifact_digest": "sha256:dc37a4428e029890919302d0414eb4f5b2859692dd851d0a2c4da1c12ef70eda",
     "promotion_allowed": false,
     "render_allowed": false,
     "global_catalog_updated": false,
     "drive_written": false,
     "publication_allowed": false,
     "thumbnail_eligible": false,
-    "next_action": "Run the explicit fingerprint audit for these same 12 candidates; keep approval, promotion, render, catalog, Drive and publication blocked."
+    "preliminary_visual_review": {
+      "status": "ONE_CANDIDATE_REJECTED_CONTINUITY",
+      "rejected_candidate_ids": [
+        "pexels-33897223"
+      ],
+      "review_required_candidate_ids": [
+        "pexels-38958215",
+        "pexels-5523892",
+        "pexels-12590338"
+      ]
+    },
+    "next_action": "Run the explicit fingerprint audit for the three non-rejected candidates; keep approval, promotion, render, catalog, Drive and publication blocked."
   },
   "last_manual_fingerprint": {
     "workflow_run_id": 42074599454,
@@ -3631,8 +3773,8 @@
     "active_candidate_count": 42
   },
   "last_contract_validation": {
-    "validated_at_utc": "2026-11-06T04:54:04Z",
-    "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
+    "validated_at_utc": "2026-11-06T05:03:28Z",
+    "status": "PENDING_CI_REVALIDATION",
     "candidate_count": 43,
     "approved_manifest_candidate_count": 22,
     "manifest_asset_count": 16,
@@ -3642,13 +3784,14 @@
     "render_allowed": false,
     "global_catalog_updated": false,
     "validator": "production/visual_plan_contract.py",
-    "checkout_commit": "acdf8f9a7c302ffb5edacae4521f0b0b59704a3a",
+    "checkout_commit": "d6c4b875b5718ccf984fe82713c2e0aab71fe1fb",
     "revalidation_required": true,
     "continuity_gate": "REVIEW_REQUIRED",
     "continuity_research_batch": "search-v3-episode005-priority-20261106",
     "ci_workflow_run_id": 42164890828,
     "ci_job_id": 127718940214,
-    "ci_conclusion": "success"
+    "ci_conclusion": "success",
+    "intake_workflow_run_id": 42165726351
   },
   "last_adjustment": "Search-v3 priority shortlist added without download or promotion. Candidate-level continuity tags now preserve why each option was selected, held for review or rejected.",
   "next_gate": "Expose the manual V2.1 render workflow on the approved base revision, then run preview preflight. Do not merge, enable production, render media, write Drive or publish automatically.",
@@ -3781,8 +3924,8 @@
     {
       "batch_id": "search-v3-episode005-priority-20261106",
       "created_at_utc": "2026-11-06T00:00:00Z",
-      "status": "SHORTLISTED_AWAITING_MANUAL_INTAKE",
-      "mode": "RESEARCH_ONLY_NO_DOWNLOAD",
+      "status": "INTAKE_COMPLETE_REVIEW_REQUIRED",
+      "mode": "MANUAL_INTAKE_ISOLATED_NO_PROMOTION",
       "target_shots": [
         "S03",
         "S06",
@@ -3815,9 +3958,22 @@
       ],
       "source_pages_reviewed": 8,
       "direct_media_routes_recorded": 8,
-      "intake_dispatched": false,
+      "intake_dispatched": true,
       "render_allowed": false,
-      "promotion_allowed": false
+      "promotion_allowed": false,
+      "intake_workflow_run_id": 42165726351,
+      "intake_job_id": 127721653455,
+      "intake_artifact_id": 13478797924,
+      "intake_artifact_digest": "sha256:dc37a4428e029890919302d0414eb4f5b2859692dd851d0a2c4da1c12ef70eda",
+      "fingerprint_candidate_ids": [
+        "pexels-38958215",
+        "pexels-5523892",
+        "pexels-12590338"
+      ],
+      "post_intake_rejected_candidate_ids": [
+        "pexels-33897223"
+      ],
+      "next_action": "Run fingerprint audit for pexels-38958215, pexels-5523892 and pexels-12590338; then perform final human continuity approval before any manifest replacement."
     }
   ]
 }
