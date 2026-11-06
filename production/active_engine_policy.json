@@ -48,6 +48,7 @@
   },
   "missing_dependency_policy": "fail_closed",
   "production_enablement": false,
+  "preview_enablement": true,
   "media_generation_before_human_approval": false,
   "rollback_policy": {
     "method": "revert main to last verified commit or tag",
@@ -108,6 +109,7 @@
     "mode": "manual_only",
     "preflight_required": true,
     "explicit_human_authorization_required": true,
+    "preview_enablement_required": true,
     "production_enablement_required": true,
     "automatic_execution": false,
     "legacy_renderer_fallback": false,
