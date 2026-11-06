@@ -307,7 +307,9 @@ def render_preview(
         "audio_duration_seconds": round(audio_seconds, 3),
         "total_duration_seconds": round(audio_seconds + OUTRO_SECONDS, 3),
         "visual_continuity_gate": continuity_gate,
-        "tail_extension_seconds": round(max(0.0, audio_seconds - sum(float(item["duration"]) for item in plan)), 3),
+        "tail_extension_seconds": round(
+            max(0.0, audio_seconds + OUTRO_SECONDS - sum(float(item["duration"]) for item in plan)), 3
+        ),
         "voice": voice_profile,
         "music": {"status": "NOT_MIXED", "background_noise_removed": True, "sources": ["narration_only"]},
         "branding": {
