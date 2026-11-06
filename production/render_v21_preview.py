@@ -193,6 +193,7 @@ def render_preview(
     captions_path: Path,
     music_path: Path | None,
     logo_path: Path,
+    outro_card_path: Path,
     voice_profile_path: Path,
     output_path: Path,
     report_path: Path,
@@ -224,6 +225,8 @@ def render_preview(
         raise PreviewRenderError("Frozen narration.ass is required.")
     if not logo_path.is_file():
         raise PreviewRenderError("Canonical Because Of This logo is required.")
+    if not outro_card_path.is_file():
+        raise PreviewRenderError("Black stacked outro card is required.")
     voice_profile = validate_voice_profile(voice_profile_path, audio_path)
     audio_seconds = media_duration(audio_path)
     if not 60.0 <= audio_seconds <= 80.0:
@@ -267,20 +270,9 @@ def render_preview(
             "[2:v]format=rgba,scale=360:-1:flags=lanczos,colorchannelmixer=aa=0.90[logo]",
             f"[captioned][logo]overlay=x=(main_w-overlay_w)/2:y=420:"
             f"enable='lt(t,{final_start:.3f})':eof_action=repeat[branded]",
-            f"[branded]drawbox=x=0:y=0:w=iw:h=ih:color=black:t=fill:"
-            f"enable='gte(t,{final_start:.3f})'[card]",
-            f"[card]drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:"
-            f"text='BECAUSE':fontcolor=white:fontsize=170:x=(w-text_w)/2:y=390:"
-            f"enable='gte(t,{final_start:.3f})'[card1]",
-            f"[card1]drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:"
-            f"text='OF':fontcolor=white:fontsize=170:x=(w-text_w)/2:y=600:"
-            f"enable='gte(t,{final_start:.3f})'[card2]",
-            f"[card2]drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:"
-            f"text='THIS':fontcolor=white:fontsize=170:x=(w-text_w)/2:y=810:"
-            f"enable='gte(t,{final_start:.3f})'[card3]",
-            f"[card3]drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:"
-            f"text='STORIES':fontcolor=white:fontsize=170:x=(w-text_w)/2:y=1020:"
-            f"enable='gte(t,{final_start:.3f})',format=yuv420p[v]",
+            "[3:v]format=rgba,scale=1080:1920:flags=lanczos[card]",
+            f"[branded][card]overlay=x=0:y=0:"
+            f"enable='gte(t,{final_start:.3f})':eof_action=repeat,format=yuv420p[v]",
             "[1:a]aresample=48000,asetpts=PTS-STARTPTS,"
             "loudnorm=I=-16:TP=-1.0:LRA=7,alimiter=limit=0.95[a]",
         ])
@@ -288,6 +280,7 @@ def render_preview(
             "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat),
             "-i", str(audio_path),
             "-loop", "1", "-framerate", "1", "-i", str(logo_path),
+            "-loop", "1", "-framerate", "1", "-i", str(outro_card_path),
             "-filter_complex", filter_complex,
             "-map", "[v]", "-map", "[a]", "-t", f"{audio_seconds:.3f}",
             "-r", str(FPS), "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
@@ -332,6 +325,7 @@ def main() -> int:
     parser.add_argument("--captions", type=Path, required=True)
     parser.add_argument("--music", type=Path, default=None)
     parser.add_argument("--logo", type=Path, required=True)
+    parser.add_argument("--outro-card", type=Path, required=True)
     parser.add_argument("--voice-profile", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--report", type=Path, required=True)
@@ -345,6 +339,7 @@ def main() -> int:
             args.captions,
             args.music,
             args.logo,
+            args.outro_card,
             args.voice_profile,
             args.output,
             args.report,
