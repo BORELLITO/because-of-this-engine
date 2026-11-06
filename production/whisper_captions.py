@@ -11,6 +11,7 @@ from typing import Any
 
 from production.align_captions import (
     AlignmentError,
+    _align_chunk,
     _align_chunks,
     _normalize_sidecar_word_timeline,
     _write_ass,
@@ -141,6 +142,54 @@ def _recognize_phrase_windows(
     return words
 
 
+def _advance_cursor(words: list[dict[str, Any]], cursor: int, end_time: float) -> int:
+    """Move an ASR cursor past a selected real-timestamp phrase."""
+    while cursor < len(words) and float(words[cursor]["end"]) <= end_time + 0.001:
+        cursor += 1
+    return cursor
+
+
+def _align_chunks_with_vosk_fallback(
+    chunks: list[str],
+    whisper_words: list[dict[str, Any]],
+    vosk_words: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Keep Whisper as authority and use Vosk only for a failed phrase.
+
+    Each accepted word still comes from an ASR timestamp in the final WAV.
+    The two recognizers are never concatenated into one global transcript,
+    which avoids duplicate/interleaved timelines.
+    """
+    events: list[dict[str, Any]] = []
+    sidecar_chunks: list[dict[str, Any]] = []
+    whisper_cursor = 0
+    vosk_cursor = 0
+    previous_end = 0.0
+    for chunk in chunks:
+        chosen: tuple[float, float, int, list[dict[str, Any]]] | None = None
+        source = "faster-whisper"
+        try:
+            chosen = _align_chunk(chunk, whisper_words, whisper_cursor)
+        except AlignmentError:
+            source = "Vosk"
+            chosen = _align_chunk(chunk, vosk_words, vosk_cursor)
+        start, end, next_cursor, positions = chosen
+        if start < previous_end - 0.001:
+            raise AlignmentError(
+                f"Multi-ASR fallback produced a non-monotonic phrase for {chunk!r}."
+            )
+        events.append({"start": start, "end": end, "text": chunk})
+        sidecar_chunks.append({"text": chunk, "words": positions, "timestamp_provider": source})
+        previous_end = end
+        if source == "faster-whisper":
+            whisper_cursor = next_cursor
+            vosk_cursor = _advance_cursor(vosk_words, vosk_cursor, end)
+        else:
+            vosk_cursor = next_cursor
+            whisper_cursor = _advance_cursor(whisper_words, whisper_cursor, end)
+    return events, sidecar_chunks
+
+
 def _bounded_words(words: list[dict[str, Any]], audio_seconds: float) -> list[dict[str, Any]]:
     bounded: list[dict[str, Any]] = []
     for word in words:
@@ -180,7 +229,12 @@ def _events_from_chunks(sidecar_chunks: list[dict[str, Any]], audio_seconds: flo
     return events
 
 
-def generate(manifest_path: Path, model_name: str, native_boundaries_path: Path | None = None) -> dict[str, Any]:
+def generate(
+    manifest_path: Path,
+    model_name: str,
+    native_boundaries_path: Path | None = None,
+    secondary_vosk_model_dir: Path | None = None,
+) -> dict[str, Any]:
     manifest_path = manifest_path.resolve()
     base = manifest_path.parent
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -203,21 +257,37 @@ def generate(manifest_path: Path, model_name: str, native_boundaries_path: Path 
     try:
         _events, sidecar_chunks = _align_chunks(chunks, words)
     except AlignmentError as full_error:
-        if native_boundaries_path is None:
+        if secondary_vosk_model_dir is not None:
+            from production.align_captions import _recognize as recognize_vosk
+            vosk_words = _bounded_words(
+                recognize_vosk(audio_path, secondary_vosk_model_dir),
+                audio_seconds,
+            )
+            try:
+                _events, sidecar_chunks = _align_chunks_with_vosk_fallback(
+                    chunks, words, vosk_words
+                )
+            except AlignmentError as vosk_error:
+                raise AlignmentError(
+                    f"{full_error} Phrase-scoped Vosk fallback also failed: {vosk_error}"
+                ) from vosk_error
+            alignment_mode = "whisper_vosk_phrase_fallback_word_timestamps"
+        elif native_boundaries_path is not None:
+            native_words = _load_boundaries(native_boundaries_path.resolve())
+            _native_events, native_chunks = _align_chunks(chunks, native_words)
+            window_words = _bounded_words(
+                _recognize_phrase_windows(audio_path, model_name, native_chunks, audio_seconds),
+                audio_seconds,
+            )
+            try:
+                _events, sidecar_chunks = _align_chunks(chunks, window_words)
+            except AlignmentError as window_error:
+                raise AlignmentError(
+                    f"{full_error} Phrase-window acoustic retry also failed: {window_error}"
+                ) from window_error
+            alignment_mode = "whisper_phrase_window_word_timestamps"
+        else:
             raise
-        native_words = _load_boundaries(native_boundaries_path.resolve())
-        _native_events, native_chunks = _align_chunks(chunks, native_words)
-        window_words = _bounded_words(
-            _recognize_phrase_windows(audio_path, model_name, native_chunks, audio_seconds),
-            audio_seconds,
-        )
-        try:
-            _events, sidecar_chunks = _align_chunks(chunks, window_words)
-        except AlignmentError as window_error:
-            raise AlignmentError(
-                f"{full_error} Phrase-window acoustic retry also failed: {window_error}"
-            ) from window_error
-        alignment_mode = "whisper_phrase_window_word_timestamps"
 
     overlap_count = _normalize_sidecar_word_timeline(sidecar_chunks, audio_seconds)
     events = _events_from_chunks(sidecar_chunks, audio_seconds)
@@ -226,7 +296,7 @@ def generate(manifest_path: Path, model_name: str, native_boundaries_path: Path 
     sidecar_path.parent.mkdir(parents=True, exist_ok=True)
     sidecar_path.write_text(json.dumps({
         "status": "WHISPER_FORCED_ALIGNMENT_PASS",
-        "provider": "faster-whisper",
+        "provider": "faster-whisper+vosk" if secondary_vosk_model_dir is not None else "faster-whisper",
         "model": model_name,
         "timing_mode": alignment_mode,
         "audio_duration_seconds": round(audio_seconds, 3),
@@ -259,10 +329,16 @@ def main() -> int:
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--model", default="tiny.en")
     parser.add_argument("--native-boundaries", type=Path, default=None)
+    parser.add_argument("--secondary-vosk-model-dir", type=Path, default=None)
     args = parser.parse_args()
     try:
         print(json.dumps(
-            generate(args.manifest, args.model, args.native_boundaries),
+            generate(
+                args.manifest,
+                args.model,
+                args.native_boundaries,
+                args.secondary_vosk_model_dir,
+            ),
             ensure_ascii=False,
         ))
         return 0
