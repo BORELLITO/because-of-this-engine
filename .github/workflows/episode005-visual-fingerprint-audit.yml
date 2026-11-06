@@ -9,9 +9,15 @@ on:
         description: "Comma or newline separated IDs from asset-acquisition-plan.json for this batch"
         required: true
         type: string
+      intake_run_id:
+        description: "Optional successful Episode 005 Visual Candidate Intake run ID to reuse its validated media"
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   fingerprint:
@@ -22,24 +28,16 @@ jobs:
       - name: Checkout candidate branch
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
 
-      - name: Install bounded static media tools
+      - name: Install media tools (runner-first, bounded fallback)
         run: |
           set -euo pipefail
-          tools_dir="${RUNNER_TEMP}/ffmpeg-static"
-          archive="${tools_dir}/ffmpeg.tar.xz"
-          mkdir -p "${tools_dir}"
-          curl --fail --location --retry 2 --retry-delay 2 \
-            --connect-timeout 15 --max-time 120 \
-            "https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz" \
-            --output "${archive}"
-          tar -xJf "${archive}" -C "${tools_dir}"
-          ffmpeg_path="$(find "${tools_dir}" -type f -name ffmpeg -perm -111 | head -n 1)"
-          ffprobe_path="$(find "${tools_dir}" -type f -name ffprobe -perm -111 | head -n 1)"
-          test -n "${ffmpeg_path}" && test -n "${ffprobe_path}"
-          media_bin_dir="$(dirname "${ffmpeg_path}")"
-          echo "${media_bin_dir}" >> "${GITHUB_PATH}"
-          "${ffmpeg_path}" -version | head -n 1
-          "${ffprobe_path}" -version | head -n 1
+          if command -v ffmpeg >/dev/null 2>&1 && command -v ffprobe >/dev/null 2>&1; then
+            echo "Using runner-provided ffmpeg/ffprobe"
+          else
+            echo "Runner does not provide ffmpeg/ffprobe; installing distro packages"
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends ffmpeg
+          fi
 
       - name: Verify media tools
         run: |
@@ -49,9 +47,26 @@ jobs:
           ffmpeg -version | head -n 1
           ffprobe -version | head -n 1
 
+      - name: Download validated intake artifact (optional)
+        if: ${{ inputs.intake_run_id != '' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INTAKE_RUN_ID: ${{ inputs.intake_run_id }}
+        run: |
+          set -euo pipefail
+          root="artifacts/episode005-visual-fingerprint"
+          mkdir -p "${root}/intake-source"
+          artifact_id="$(gh api --paginate "/repos/${GITHUB_REPOSITORY}/actions/runs/${INTAKE_RUN_ID}/artifacts" \
+            --jq '.artifacts[] | select(.expired == false) | select(.name == ("episode005-visual-intake-" + env.INTAKE_RUN_ID)) | .id' | head -n 1)"
+          test -n "${artifact_id}"
+          gh api "/repos/${GITHUB_REPOSITORY}/actions/artifacts/${artifact_id}/zip" > "${root}/intake.zip"
+          unzip -q "${root}/intake.zip" -d "${root}/intake-source"
+          rm -f "${root}/intake.zip"
+
       - name: Compute and compare fingerprints
         env:
           CANDIDATE_IDS: ${{ inputs.candidate_ids }}
+          INTAKE_RUN_ID: ${{ inputs.intake_run_id }}
         run: |
           mkdir -p artifacts/episode005-visual-fingerprint
           python - <<'PY'
@@ -70,6 +85,7 @@ jobs:
           from production.video_asset_contract import FINGERPRINT_ALGORITHM, ffprobe, perceptual_hash, sha256_file
 
           root = Path("artifacts/episode005-visual-fingerprint")
+          intake_source = root / "intake-source"
           plan = json.loads(Path("episodes/episode-005/visual/asset-acquisition-plan.json").read_text(encoding="utf-8"))
           registry = json.loads(Path("episodes/asset-memory-registry.json").read_text(encoding="utf-8"))
 
@@ -186,25 +202,31 @@ jobs:
 
               intake = candidate.get("intake_artifact") or {}
               expected_sha = str(intake.get("sha256", "")).lower()
-              media_path = root / f"{candidate_id}.mp4"
-              request = urllib.request.Request(
-                  expected["media_url"],
-                  headers={"User-Agent": "because-of-this-fingerprint-audit/1.0"},
-              )
-              max_bytes = 200 * 1024 * 1024
-              with urllib.request.urlopen(request, timeout=180) as response, media_path.open("wb") as handle:
-                  content_length = response.headers.get("Content-Length")
-                  if content_length and int(content_length) > max_bytes:
-                      raise RuntimeError(f"candidate exceeds 200 MiB: {candidate_id}")
-                  written = 0
-                  while True:
-                      chunk = response.read(1024 * 1024)
-                      if not chunk:
-                          break
-                      written += len(chunk)
-                      if written > max_bytes:
+              intake_media = sorted(intake_source.rglob(f"{candidate_id}/candidate.mp4")) if intake_source.exists() else []
+              if intake_media:
+                  media_path = intake_media[0]
+                  media_source = "intake_artifact"
+              else:
+                  media_path = root / f"{candidate_id}.mp4"
+                  media_source = "source_url"
+                  request = urllib.request.Request(
+                      expected["media_url"],
+                      headers={"User-Agent": "because-of-this-fingerprint-audit/1.0"},
+                  )
+                  max_bytes = 200 * 1024 * 1024
+                  with urllib.request.urlopen(request, timeout=600) as response, media_path.open("wb") as handle:
+                      content_length = response.headers.get("Content-Length")
+                      if content_length and int(content_length) > max_bytes:
                           raise RuntimeError(f"candidate exceeds 200 MiB: {candidate_id}")
-                      handle.write(chunk)
+                      written = 0
+                      while True:
+                          chunk = response.read(1024 * 1024)
+                          if not chunk:
+                              break
+                          written += len(chunk)
+                          if written > max_bytes:
+                              raise RuntimeError(f"candidate exceeds 200 MiB: {candidate_id}")
+                          handle.write(chunk)
               actual_sha = sha256_file(media_path)
               if actual_sha != expected_sha:
                   blockers.append({
@@ -259,6 +281,7 @@ jobs:
                   "candidate_id": candidate_id,
                   "source_page_url": expected["source_page_url"],
                   "media_url": expected["media_url"],
+                  "media_source": media_source,
                   "sha256": actual_sha,
                   "perceptual_hash": phash,
                   "fingerprint_algorithm": FINGERPRINT_ALGORITHM,
