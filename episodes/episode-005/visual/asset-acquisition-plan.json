@@ -2933,7 +2933,7 @@
       ]
     }
   ],
-  "next_action": "Run CI contract and continuity validation on the replacement manifest; do not promote media, render, write Drive or publish.",
+  "next_action": "Acquire and fingerprint distinct period-compatible replacements for S03, S04, S09 and S12; keep S06/S11 manifest-only until editorial continuity review is complete.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -3835,10 +3835,10 @@
     }
   },
   "last_contract_validation": {
-    "validated_at_utc": "2026-11-06T05:21:35Z",
-    "status": "PENDING_CI_REVALIDATION",
+    "validated_at_utc": "2026-11-06T05:30:06Z",
+    "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
     "candidate_count": 43,
-    "approved_manifest_candidate_count": 21,
+    "approved_manifest_candidate_count": 23,
     "manifest_asset_count": 16,
     "assigned_shot_count": 16,
     "unresolved_shot_count": 0,
@@ -3846,13 +3846,13 @@
     "render_allowed": false,
     "global_catalog_updated": false,
     "validator": "production/visual_plan_contract.py",
-    "checkout_commit": null,
+    "checkout_commit": "9e76bf6c3dc5629dec4b15eaf18f797aac7cb866",
     "revalidation_required": true,
     "continuity_gate": "REVIEW_REQUIRED",
     "continuity_research_batch": "search-v3-episode005-priority-20261106",
-    "ci_workflow_run_id": null,
-    "ci_job_id": null,
-    "ci_conclusion": null,
+    "ci_workflow_run_id": 42168761462,
+    "ci_job_id": 127731406133,
+    "ci_conclusion": "success",
     "intake_workflow_run_id": 42165726351,
     "fingerprint_workflow_run_id": 42166326952,
     "manifest_replacement_shots": [
@@ -3864,10 +3864,27 @@
       "S07",
       "S09",
       "S12"
-    ]
+    ],
+    "matcher_fix_commit": "9e76bf6c3dc5629dec4b15eaf18f797aac7cb866",
+    "continuity_hard_conflict_shots": [
+      "S03",
+      "S04",
+      "S09",
+      "S12"
+    ],
+    "continuity_review_shots": [
+      "S06",
+      "S11"
+    ],
+    "adjacency_review_pairs": [
+      "S11->S12",
+      "S12->S13"
+    ],
+    "continuity_hard_conflict_count": 23,
+    "continuity_coverage_score": 0.8812
   },
-  "last_adjustment": "Human-approved manifest-only continuity replacements recorded: pexels-5523892 replaces the modern LED asset on S06 and pexels-12590338 replaces the lower-confidence cloud asset on S11. S03/S07 remain blocked on period-coherence review; S12 remains blocked by the daylight/modern antenna candidate. Plan contract status corrected to APPROVED_FOR_MANIFEST_ONLY for both user-approved candidates.",
-  "next_gate": "After CI PASS, perform the manual V2.1 preview preflight. Keep S03/S07/S09/S12 continuity review and all production side effects blocked.",
+  "last_adjustment": "Token-boundary matcher fix merged and validated. The false night/neon_nightclub conflicts are gone; the remaining continuity blockers are the evidence-backed S03/S04/S09/S12 assignments plus S11->S12 and S12->S13 adjacency breaks.",
+  "next_gate": "Do not run the V2.1 preview until the four hard-conflict shots and two adjacency breaks are resolved or explicitly bridged, then rerun the contract and sequence gate.",
   "render_approval_record": {
     "status": "APPROVED",
     "approved_at_utc": "2026-11-05T22:56:14Z",
@@ -3997,7 +4014,7 @@
     {
       "batch_id": "search-v3-episode005-priority-20261106",
       "created_at_utc": "2026-11-06T00:00:00Z",
-      "status": "PARTIAL_HUMAN_APPROVAL_REPLACEMENT_READY",
+      "status": "CONTRACT_PASS_CONTINUITY_REVIEW_REQUIRED",
       "mode": "MANUAL_INTAKE_ISOLATED_NO_PROMOTION",
       "target_shots": [
         "S03",
@@ -4046,7 +4063,7 @@
       "post_intake_rejected_candidate_ids": [
         "pexels-33897223"
       ],
-      "next_action": "Run CI contract and continuity validation for the S06/S11 manifest replacements; keep pexels-38958215 blocked pending period-coherence review and do not render.",
+      "next_action": "Search distinct period-compatible replacements for S03, S04, S09 and S12; preserve S06/S11 as manifest-only review candidates and rerun intake/fingerprint before preview.",
       "fingerprint_workflow_run_id": 42166326952,
       "fingerprint_job_id": 127723541842,
       "fingerprint_artifact_id": 13479201438,
@@ -4063,7 +4080,28 @@
       },
       "pending_candidate_ids": [
         "pexels-38958215"
-      ]
+      ],
+      "contract_validation": {
+        "workflow_run_id": 42168761462,
+        "job_id": 127731406133,
+        "conclusion": "success",
+        "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
+        "hard_conflict_shots": [
+          "S03",
+          "S04",
+          "S09",
+          "S12"
+        ],
+        "review_shots": [
+          "S06",
+          "S11"
+        ],
+        "adjacency_review_pairs": [
+          "S11->S12",
+          "S12->S13"
+        ],
+        "coverage_score": 0.8812
+      }
     }
   ]
 }
