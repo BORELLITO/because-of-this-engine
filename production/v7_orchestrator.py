@@ -394,8 +394,34 @@ def evaluate(manifest: dict[str, Any], *, repo_root: Path, manifest_dir: Path, m
     }
 
 
+def _v21_policy_active(repo_root: Path) -> bool:
+    policy_path = repo_root / "production" / "active_engine_policy.json"
+    if not policy_path.is_file():
+        return False
+    policy = json.loads(policy_path.read_text(encoding="utf-8"))
+    return policy.get("active_engine_version") == "2.1"
+
+
+def _run_v21_canonical(args: argparse.Namespace, repo_root: Path) -> int:
+    from production.canonical_entrypoint import run_manifest
+
+    mode = str(args.mode)
+    if mode not in {"contract", "dry-run", "preflight"}:
+        raise OrchestratorError(
+            "V2.1 canonical entrypoint is read-only; media modes are not integrated yet"
+        )
+    return run_manifest(
+        args.manifest.resolve(),
+        repo_root=repo_root,
+        report_path=args.report.resolve() if args.report else None,
+        registry_path=args.registry.resolve() if args.registry else None,
+    )
+
+
 def run(args: argparse.Namespace) -> int:
     repo_root = args.repo_root.resolve()
+    if _v21_policy_active(repo_root):
+        return _run_v21_canonical(args, repo_root)
     manifest_path = args.manifest.resolve()
     relative = manifest_path.relative_to(repo_root).as_posix()
     if not SAFE_MANIFEST.fullmatch(relative):
@@ -418,6 +444,7 @@ def main() -> int:
     parser.add_argument("--check-gemini-tts", action="store_true")
     parser.add_argument("--report", type=Path)
     parser.add_argument("--record", type=Path)
+    parser.add_argument("--registry", type=Path)
     try:
         return run(parser.parse_args())
     except (OSError, ValueError, KeyError, json.JSONDecodeError, V7ContractError, OrchestratorError) as exc:

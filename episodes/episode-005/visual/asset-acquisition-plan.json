@@ -1,0 +1,3207 @@
+{
+  "plan_id": "episode-005-visual-asset-acquisition-v1",
+  "episode_id": "episode-005",
+  "status": "PARTIAL_MANIFEST_VALIDATED_BLOCKED_RENDER",
+  "purpose": "Pre-download candidate pool for Episode 005. No candidate is approved for render until downloaded, SHA-256ed, visually inspected, checked for embedded text/logos/letterbox, fingerprinted, and entered into the final video manifest.",
+  "frozen_audio_source": {
+    "workflow_run_id": 41961294784,
+    "artifact_id": 13384643514,
+    "audio_sha256": "bfa297c85e6de0c1a9dee5fbc74a8f7e75a6cd287bd47ecf6d97f16dd045831a",
+    "duration_seconds": 79.704,
+    "captions_status": "EDGE_TTS_NATIVE_ALIGNMENT_PASS"
+  },
+  "rights_policy": {
+    "preferred_provider": "mixkit",
+    "fallback_provider": "pixabay",
+    "license": "Mixkit Stock Video Free License",
+    "license_evidence_url": "https://mixkit.co/license/modal/videoFree/",
+    "commercial_use_allowed_by_provider": true,
+    "attribution_required": false,
+    "verification_required": "Per-asset page and downloaded-file QA remain mandatory; depicted trademarks, logos, identifiable people and third-party rights are not automatically cleared.",
+    "no_archival_claim": "All representational footage must remain unlabeled as literal Petrov archival footage.",
+    "route_decision": "Mixkit remains preferred when its page shows the commercial free license. Pixabay is now the verified fallback for relevant free-commercial candidates because the observed Mixkit radar pages were restricted to personal use; existing Pexels candidates remain tertiary legacy fallbacks until direct media rights are verified.",
+    "avoid_ai_generated_sources": true,
+    "license_evidence_note": "License is provider-specific and must be visible on the source page before intake: Mixkit Stock Video Free License or Pixabay Content License.",
+    "legacy_fallback_provider": "pexels",
+    "provider_license_policy": {
+      "mixkit": {
+        "license_name": "Mixkit Stock Video Free License",
+        "license_evidence_url": "https://mixkit.co/license/modal/videoFree/",
+        "page_hosts": [
+          "mixkit.co"
+        ],
+        "media_hosts": [
+          "mixkit.co",
+          "assets.mixkit.co"
+        ],
+        "free_commercial_route_required": true
+      },
+      "pixabay": {
+        "license_name": "Pixabay Content License",
+        "license_evidence_url": "https://pixabay.com/service/license-summary/",
+        "page_hosts": [
+          "pixabay.com"
+        ],
+        "media_hosts": [
+          "pixabay.com",
+          "cdn.pixabay.com"
+        ],
+        "free_commercial_route_required": true
+      }
+    }
+  },
+  "selection_gates": [
+    "source_page_exists",
+    "provider_license_visible",
+    "commercial_use_not_restricted",
+    "downloaded_file_sha256_recorded",
+    "video_only_clean_source",
+    "no_baked_captions_or_authored_graphics",
+    "no_embedded_logo_or_letterbox",
+    "semantic_match_reviewed",
+    "fresh_global_reuse_check_passed",
+    "unique_asset_and_source_page",
+    "unique_source_per_shot"
+  ],
+  "candidates": [
+    {
+      "candidate_id": "pexels-5523892",
+      "source_page_url": "https://www.pexels.com/video/flashing-red-light-5523892/",
+      "role": "S01,S06,S09",
+      "visual_match": "EXACT",
+      "visual_intent": "red warning indicator; escalation; false-alarm classification",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-38958215",
+      "source_page_url": "https://www.pexels.com/video/close-up-button-operation-in-dark-control-room-38958215/",
+      "role": "S03,S07",
+      "visual_match": "NEAR",
+      "visual_intent": "operator hands and control-room decision pressure",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-6442796",
+      "source_page_url": "https://www.pexels.com/video/person-operating-button-panel-6442796/",
+      "role": "S04,S09",
+      "visual_match": "NEAR",
+      "visual_intent": "alert being passed through a technical command system",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-38779097",
+      "source_page_url": "https://www.pexels.com/video/traffic-control-room-with-monitoring-screens-38779097/",
+      "role": "S02,S08",
+      "visual_match": "SYMBOLIC",
+      "visual_intent": "monitoring screens and conflicting signal evidence",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-38779107",
+      "source_page_url": "https://www.pexels.com/video/high-tech-control-room-monitoring-operations-38779107/",
+      "role": "S04,S08",
+      "visual_match": "NEAR",
+      "visual_intent": "multiple screens; system surveillance",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-38779108",
+      "source_page_url": "https://www.pexels.com/video/high-tech-control-room-in-action-38779108/",
+      "role": "S03,S07",
+      "visual_match": "NEAR",
+      "visual_intent": "operators monitoring an impossible alert",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-12291818",
+      "source_page_url": "https://www.pexels.com/video/silhouettes-of-soldiers-in-darkness-12291818/",
+      "role": "S14",
+      "visual_match": "NEAR",
+      "visual_intent": "military corridor; later obscurity and institutional consequence",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-19217894",
+      "source_page_url": "https://www.pexels.com/video/a-dark-hallway-with-a-light-on-the-wall-19217894/",
+      "role": "S10,S14",
+      "visual_match": "ATMOSPHERE",
+      "visual_intent": "bunker waiting; empty corridor; silence after the decision",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-5837931",
+      "source_page_url": "https://www.pexels.com/video/night-sky-timelapse-5837931/",
+      "role": "S02,S11",
+      "visual_match": "EXPLANATORY",
+      "visual_intent": "night-side Earth atmosphere; no missile impact",
+      "truth_class": "EXPLAINED_PHENOMENON",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-12590338",
+      "source_page_url": "https://www.pexels.com/video/time-lapse-of-moving-clouds-on-a-night-sky-12590338/",
+      "role": "S11,S12",
+      "visual_match": "EXACT",
+      "visual_intent": "high clouds and optical ambiguity",
+      "truth_class": "EXPLAINED_PHENOMENON",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-30084927",
+      "source_page_url": "https://www.pexels.com/video/vintage-alarm-clock-ticking-in-darkness-30084927/",
+      "role": "S07,S10",
+      "visual_match": "EXACT",
+      "visual_intent": "minutes to decide; bunker clock",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-7034348",
+      "source_page_url": "https://www.pexels.com/video/clock-is-ticking-7034348/",
+      "role": "S10",
+      "visual_match": "EXACT",
+      "visual_intent": "time passing while the command waits",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-33060982",
+      "source_page_url": "https://www.pexels.com/video/bright-clouds-with-sun-rays-timelapse-33060982/",
+      "role": "S12",
+      "visual_match": "EXACT",
+      "visual_intent": "sunlight reflecting from high clouds",
+      "truth_class": "EXPLAINED_PHENOMENON",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-33897223",
+      "source_page_url": "https://www.pexels.com/video/aerial-view-of-large-satellite-dish-at-sunset-33897223/",
+      "role": "S02,S12",
+      "visual_match": "EXACT",
+      "visual_intent": "satellite instrument and warning system",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "pexels-4224353",
+      "source_page_url": "https://www.pexels.com/video/time-lapse-of-sky-over-a-satellite-tower-4224353/",
+      "role": "S02",
+      "visual_match": "NEAR",
+      "visual_intent": "communications infrastructure under a changing sky",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED"
+    },
+    {
+      "candidate_id": "mixkit-abstract-red-glow-101432",
+      "source_page_url": "https://mixkit.co/free-stock-video/abstract-red-glow-101432/",
+      "role": "S01,S06,S09",
+      "visual_match": "SYMBOLIC",
+      "visual_intent": "red warning pulse and escalation texture without literal archival claim",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "provider": "mixkit",
+      "license_name": "Mixkit Stock Video Free License",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "media_url": "https://assets.mixkit.co/bohe8920pfehyvq7p1hk5r699s7g",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Mixkit Stock Video Free License",
+        "visible_duration_seconds": 11,
+        "visible_resolution_options": [
+          "720x1080",
+          "1080x1920"
+        ],
+        "semantic_note": "Vertical red glow/light texture; candidate for S01/S06/S09 warning escalation, subject to semantic QA because it is abstract rather than a literal console."
+      },
+      "intake_artifact": {
+        "workflow_run_id": 42005588495,
+        "artifact_id": 13403209885,
+        "artifact_digest": "sha256:e97bc6b2c2e7cac51c10a1af55a35570f5df044ac80bece0478292992ce0c78b",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "f5c6866db294ab7489e581d08d3ae5480496b42d43df8a4a6152bcc6e4d97774",
+        "duration_seconds": 10.761,
+        "dimensions": [
+          720,
+          1280
+        ],
+        "frame_rate": "24000/1001",
+        "codec": "h264",
+        "automated_promotion": false,
+        "perceptual_hash": "835461ff7f59472fc9efe33bd35dc83d65f475f22c999ee4d4df70cb139cfc3e",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42007386261,
+        "fingerprint_artifact_id": 13405087460,
+        "fingerprint_artifact_digest": "sha256:66c98c055ec1a3e2da7c861cb367cd6761f18bf205a2f05329720da6d39ebf72"
+      },
+      "qa": {
+        "clean_frame_visual_review": "PRELIMINARY_PASS",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_QA_FRAMES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
+        "semantic_fit": "PRELIMINARY_PASS_FOR_S01_S06_S09_AS_SYMBOLIC_WARNING_TEXTURE",
+        "locked_9x16_crop": "PRELIMINARY_PASS_NATIVE_VERTICAL",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "PASS_ABSTRACT_RED_GLOW_NO_IDENTIFIABLE_ELEMENTS",
+        "visual_qa_status": "PASS",
+        "visual_qa_evidence": "artifact 13403209885 / qa-frames.jpg",
+        "third_party_risk": "NONE_VISIBLE",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
+      },
+      "author": "Mixkit",
+      "contributor_url": "https://mixkit.co/@mixkit/",
+      "author_status": "CONFIRMED_FROM_MIXKIT_ITEM_PAGE",
+      "license_confirmation": {
+        "status": "CONFIRMED_ITEM_PAGE",
+        "license_name": "Mixkit Stock Video Free License",
+        "evidence_url": "https://mixkit.co/free-stock-video/abstract-red-glow-101432/",
+        "checked_at": "2026-11-05"
+      }
+    },
+    {
+      "candidate_id": "mixkit-slowly-approaching-clock-28897",
+      "source_page_url": "https://mixkit.co/free-stock-video/slowly-approaching-a-clock-on-a-black-background-28897/",
+      "role": "S07,S10",
+      "visual_match": "EXACT",
+      "visual_intent": "decision window and bunker clock under pressure",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "mixkit",
+      "license_name": "Mixkit Stock Video Free License",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "media_url": "https://assets.mixkit.co/videos/28897/28897-720.mp4",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42003907636,
+        "artifact_id": 13403188677,
+        "artifact_digest": "sha256:3d1a8b60b24cede0ebb3b99d14f8ee9fcdc508040320498ec80f8f8d5bf78299",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "d254063cd2f4ceeaf186f68c71c905fb8b27d9e94397aa0a794e93827208b505",
+        "duration_seconds": 9.458,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "frame_rate": "24/1",
+        "codec": "h264",
+        "automated_promotion": false,
+        "perceptual_hash": "9c8a21443b162c8a16f99d0876c8910cde48548fc525fc8c00c159dbc9db6f64",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42007386261,
+        "fingerprint_artifact_id": 13405087460,
+        "fingerprint_artifact_digest": "sha256:66c98c055ec1a3e2da7c861cb367cd6761f18bf205a2f05329720da6d39ebf72"
+      },
+      "qa": {
+        "clean_frame_visual_review": "PRELIMINARY_PASS",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_QA_FRAMES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
+        "semantic_fit": "PRELIMINARY_PASS_FOR_S07_S10",
+        "locked_9x16_crop": "PENDING",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "PASS_GENERIC_CLOCK_NO_BRAND_VISIBLE",
+        "visual_qa_status": "PASS",
+        "visual_qa_evidence": "artifact 13403188677 / qa-frames.jpg",
+        "third_party_risk": "GENERIC_CLOCK_FACE_ONLY",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
+      },
+      "author": "Arvizum",
+      "contributor_url": "https://mixkit.co/@arvizum/",
+      "author_status": "CONFIRMED_FROM_MIXKIT_ITEM_PAGE",
+      "license_confirmation": {
+        "status": "CONFIRMED_ITEM_PAGE",
+        "license_name": "Mixkit Stock Video Free License",
+        "evidence_url": "https://mixkit.co/free-stock-video/slowly-approaching-a-clock-on-a-black-background-28897/",
+        "checked_at": "2026-11-05"
+      }
+    },
+    {
+      "candidate_id": "mixkit-cloudy-sky-118",
+      "source_page_url": "https://mixkit.co/free-stock-video/cloudy-sky-118/",
+      "role": "S11,S12",
+      "visual_match": "EXACT",
+      "visual_intent": "high-cloud reflection mechanism and empty sky after the false alarm",
+      "truth_class": "EXPLAINED_PHENOMENON",
+      "provider": "mixkit",
+      "license_name": "Mixkit Stock Video Free License",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "media_url": "https://assets.mixkit.co/videos/118/118-720.mp4",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Mixkit Stock Video Free License",
+        "visible_duration_seconds": 16,
+        "visible_resolution_options": [
+          "1080x720",
+          "4096x2160"
+        ],
+        "semantic_note": "Clouds darken over time; candidate for S11/S12 mechanism and non-event atmosphere."
+      },
+      "intake_artifact": {
+        "workflow_run_id": 42004883836,
+        "artifact_id": 13404636511,
+        "artifact_digest": "sha256:12313afbe106a2dfdff4d9e8543b57f7e7312797620c227fae2c73291f5f2514",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "7b18e0c66a2eb1a55df0532d3bf346f1e1d193eaa805403cc39fc835e8454432",
+        "duration_seconds": 16.35,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "frame_rate": "24000/1001",
+        "codec": "h264",
+        "automated_promotion": false,
+        "perceptual_hash": "75bd02cf43583033aee2f7659350e477ff56bd126380157b845433def983964a",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42007386261,
+        "fingerprint_artifact_id": 13405087460,
+        "fingerprint_artifact_digest": "sha256:66c98c055ec1a3e2da7c861cb367cd6761f18bf205a2f05329720da6d39ebf72"
+      },
+      "qa": {
+        "clean_frame_visual_review": "PRELIMINARY_PASS",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_QA_FRAMES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
+        "semantic_fit": "PRELIMINARY_PASS_FOR_S11_S12",
+        "locked_9x16_crop": "PRELIMINARY_PASS",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "PASS_GENERIC_CLOUDY_SKY_NO_IDENTIFIABLE_ELEMENTS",
+        "visual_qa_status": "PASS",
+        "visual_qa_evidence": "artifact 13404636511 / qa-frames.jpg",
+        "third_party_risk": "NONE_VISIBLE",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
+      },
+      "author": "Edgar Fernandez",
+      "contributor_url": "https://mixkit.co/@edgarfernandez/",
+      "author_status": "CONFIRMED_FROM_MIXKIT_ITEM_PAGE",
+      "license_confirmation": {
+        "status": "CONFIRMED_ITEM_PAGE",
+        "license_name": "Mixkit Stock Video Free License",
+        "evidence_url": "https://mixkit.co/free-stock-video/cloudy-sky-118/",
+        "checked_at": "2026-11-05"
+      }
+    },
+    {
+      "candidate_id": "mixkit-clock-mechanism-3651",
+      "source_page_url": "https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/",
+      "role": "S07,S10",
+      "visual_match": "NEAR",
+      "visual_intent": "mechanical passage of time while command waits",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "mixkit",
+      "license_name": "Mixkit Stock Video Free License",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "media_url": "https://assets.mixkit.co/videos/3651/3651-720.mp4",
+      "media_url_observed_in_browser": true,
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Mixkit Stock Video Free License",
+        "visible_duration_seconds": 11,
+        "visible_resolution_options": [
+          "1080x720",
+          "1920x1080",
+          "4096x2160"
+        ],
+        "visible_frame_rate": "24 fps",
+        "semantic_note": "Macro clock mechanism; distinct source candidate for S10 decision pressure or S12 mechanism, subject to clean-frame and semantic QA."
+      },
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42010569943,
+        "artifact_id": 13406364533,
+        "artifact_digest": "sha256:620db58c193f7850a427a04d14b241f48a6779b20e98a6261b9f592fc054b326",
+        "artifact_name": "episode005-visual-intake-mixkit-clock-mechanism-3651",
+        "artifact_label_correction": "PASS",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "575ec01ae49bad9f5e5d634d51c1d78c31856e2171ca799065d9750dce3de5fd",
+        "duration_seconds": 11.011,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "frame_rate": "24000/1001",
+        "codec": "h264",
+        "automated_promotion": false,
+        "fingerprint_workflow_run_id": 42014828184,
+        "fingerprint_artifact_id": 13408966434,
+        "fingerprint_artifact_digest": "sha256:d9d4adbc09e85d5aea9370a3c7045125afe04ac81ac43cfb5dfa6b18677e2199",
+        "perceptual_hash": "8d01acb640e75c70ee0d46ceaabeec546bbcc70f24d7a4a4d0c9e1cd46a3f72",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+      },
+      "qa": {
+        "clean_frame_visual_review": "PRELIMINARY_PASS",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_QA_FRAMES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
+        "semantic_fit": "PRELIMINARY_PASS_FOR_S10_MECHANICAL_TIME_PRESSURE",
+        "locked_9x16_crop": "PRELIMINARY_PASS_CENTER_CROP_WITHOUT_LETTERBOX",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "PASS_GENERIC_CLOCK_MECHANISM_WITH_NONBRAND_DATE_TEXT",
+        "visual_qa_status": "PASS",
+        "visual_qa_evidence": "artifact 13406364533 / qa-frames.jpg",
+        "third_party_risk": "GENERIC_CLOCK_TEXT_ONLY",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
+      },
+      "author": "Edgar Fernandez",
+      "contributor_url": "https://mixkit.co/@edgarfernandez/",
+      "author_status": "CONFIRMED_FROM_MIXKIT_ITEM_PAGE",
+      "license_confirmation": {
+        "status": "CONFIRMED_ITEM_PAGE",
+        "license_name": "Mixkit Stock Video Free License",
+        "evidence_url": "https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/",
+        "checked_at": "2026-11-05"
+      }
+    },
+    {
+      "candidate_id": "mixkit-large-satellite-antenna-2650",
+      "source_page_url": "https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/",
+      "role": "S02",
+      "visual_match": "NEAR",
+      "visual_intent": "early-warning satellite/ground-station context without claiming literal Petrov archival footage",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "provider": "mixkit",
+      "license_name": "Mixkit Stock Video Free License",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "media_url": "https://assets.mixkit.co/videos/2650/2650-720.mp4",
+      "media_url_observed_in_browser": true,
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Mixkit Stock Video Free License",
+        "visible_duration_seconds": 15,
+        "visible_resolution_options": [
+          "1080x720",
+          "1920x1080"
+        ],
+        "visible_frame_rate": "60 fps",
+        "semantic_note": "Large satellite antenna in a forest; suitable as representational early-warning infrastructure for S02, not literal Petrov evidence."
+      },
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42016296608,
+        "artifact_id": 13409661379,
+        "artifact_digest": "sha256:f15336756e9e32900ff07ee7666492032887a883d923266ff2d5651ba862d5c0",
+        "artifact_name": "episode005-visual-intake-mixkit-large-satellite-antenna-2650",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "1bfa05d75d9295ff3a08dda7017927f638292895f1c2c376667175c279813807",
+        "duration_seconds": 14.883,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "frame_rate": "60/1",
+        "codec": "h264",
+        "automated_promotion": false,
+        "fingerprint_workflow_run_id": 42016725778,
+        "fingerprint_artifact_id": 13409611998,
+        "fingerprint_artifact_digest": "sha256:30f39d5255b086062c6e01e7576c9cd9f5371476b795a1736d48579bbc2474c4",
+        "perceptual_hash": "f10ae48c3a770e23246f7fda15feccd3c4b37e1db48b9d71c6fb1511a1ee1b7c",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
+      },
+      "qa": {
+        "clean_frame_visual_review": "PRELIMINARY_PASS",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_QA_FRAMES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
+        "semantic_fit": "PRELIMINARY_PASS_FOR_S02_AS_REPRESENTATIONAL_EARLY_WARNING_INFRASTRUCTURE",
+        "locked_9x16_crop": "PRELIMINARY_PASS_CENTER_CROP_WITH_SATELLITE_DISH_PARTIALLY_VISIBLE",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "PASS_SATELLITE_ANTENNA_NO_PERSON_OR_BRAND_VISIBLE",
+        "visual_qa_status": "PASS",
+        "visual_qa_evidence": "artifact 13409661379 / qa-frames.jpg",
+        "third_party_risk": "NONE_VISIBLE",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
+      },
+      "author": "Matthias Groeneveld",
+      "contributor_url": "https://mixkit.co/@matthiasgroeneveld/",
+      "author_status": "CONFIRMED_FROM_MIXKIT_ITEM_PAGE",
+      "license_confirmation": {
+        "status": "CONFIRMED_ITEM_PAGE",
+        "license_name": "Mixkit Stock Video Free License",
+        "evidence_url": "https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/",
+        "checked_at": "2026-11-05"
+      }
+    },
+    {
+      "candidate_id": "mixkit-man-using-computer-2965",
+      "source_page_url": "https://mixkit.co/free-stock-video/man-using-a-computer-2965/",
+      "role": "S03",
+      "visual_match": "NEAR",
+      "visual_intent": "human decision-maker at a technical workstation; representational Petrov reconstruction only",
+      "truth_class": "REPRESENTATIONAL",
+      "provider": "mixkit",
+      "license_name": "Mixkit Stock Video Free License",
+      "rights_status": "REJECTED_SEMANTICALLY_WEAK",
+      "media_url": "https://assets.mixkit.co/videos/2965/2965-720.mp4",
+      "media_url_observed_in_browser": true,
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Mixkit Stock Video Free License",
+        "visible_duration_seconds": 10,
+        "visible_resolution_options": [
+          "1080x720",
+          "1920x1080"
+        ],
+        "visible_frame_rate": "24 fps",
+        "semantic_note": "Man using a computer with screen light; suitable as a human-anchor reconstruction for S03, never as literal Petrov archival footage."
+      },
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42019090322,
+        "artifact_id": 13409549619,
+        "artifact_digest": "sha256:cb0d4923ecf096bda7c9647334af8b917adc0ebfc1ae2973bfd0338d9f5dda13",
+        "artifact_name": "episode005-visual-intake-mixkit-man-using-computer-2965",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "0e2efa26bacc172973f2c06c3a401b3fb9e92d8d6b47c5ec68c4d9e41b7b8084",
+        "duration_seconds": 10.052,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "frame_rate": "24000/1001",
+        "codec": "h264",
+        "automated_promotion": false
+      },
+      "qa": {
+        "clean_frame_visual_review": "PASS",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_QA_FRAMES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
+        "semantic_fit": "REJECTED_TOO_CASUAL_FOR_S03_HUMAN_ANCHOR",
+        "locked_9x16_crop": "PASS_BUT_TIGHT_FACE_CROP",
+        "global_reuse_fingerprint": "NOT_RUN_REJECTED_BEFORE_FINGERPRINT",
+        "human_approval": "NOT_APPLICABLE",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "rejection_reason": "Modern casual headphone/computer scene does not credibly represent a Soviet command-bunker decision-maker and would weaken the factual reconstruction."
+      }
+    },
+    {
+      "candidate_id": "mixkit-deep-thinking-man-5572",
+      "source_page_url": "https://mixkit.co/free-stock-video/deep-thinking-man-working-on-laptop-from-home-5572/",
+      "role": "S03",
+      "visual_match": "NEAR",
+      "visual_intent": "human presence under technical decision pressure",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "mixkit",
+      "license_name": "Mixkit Restricted License",
+      "rights_status": "REJECTED_LICENSE_RESTRICTED",
+      "media_url": "https://assets.mixkit.co/videos/5572/5572-720.mp4",
+      "media_url_observed_in_browser": true,
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Mixkit Restricted License — Free Download: 720p Version for Personal Use only",
+        "visible_duration_seconds": 10.427,
+        "visible_resolution_options": [
+          "1280x720"
+        ],
+        "visible_frame_rate": "24 fps",
+        "semantic_note": "Modern man at laptop could provide a human anchor, but the page's free asset is explicitly restricted to personal use and cannot enter the commercial production route."
+      },
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "qa": {
+        "clean_frame_visual_review": "NOT_RUN_LICENSE_REJECTED",
+        "semantic_fit": "NOT_ADVANCED_BEYOND_LICENSE_GATE",
+        "human_approval": "NOT_APPLICABLE",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      }
+    },
+    {
+      "candidate_id": "mixkit-young-engineer-29991",
+      "source_page_url": "https://mixkit.co/free-stock-video/young-engineer-programming-in-his-workshop-seen-up-close-29991/",
+      "role": "S03",
+      "visual_match": "NEAR",
+      "visual_intent": "sober technical human anchor under system-decision pressure",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "mixkit",
+      "license_name": "Mixkit Stock Video Free License",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "media_url": "https://assets.mixkit.co/videos/29991/29991-720.mp4",
+      "media_url_observed_in_browser": true,
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Mixkit Stock Video Free License — commercial or personal use",
+        "visible_duration_seconds": 15,
+        "visible_resolution_options": [
+          "1280x720",
+          "1920x1080",
+          "4096x2160"
+        ],
+        "visible_frame_rate": "24 fps",
+        "semantic_note": "Young engineer programming on a tablet in a workshop surrounded by tools and devices; representational human-anchor candidate for S03, not literal Petrov archival evidence."
+      },
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "qa": {
+        "clean_frame_visual_review": "PRELIMINARY_PASS",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED; NATURAL DEVICE CODE IS PART OF THE SCENE",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
+        "semantic_fit": "CONDITIONAL_PASS_AS_MODERN_DOCUMENTED_RECONSTRUCTION_ONLY",
+        "locked_9x16_crop": "PRELIMINARY_PASS_TIGHT_HANDS_TABLET_CROP",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "editorial_caveat": "Modern tablet/code/workshop imagery; never label as literal 1983 Petrov archival footage.",
+        "approval_scope": "S03_ONLY",
+        "approval_caveat": "Modern technical reconstruction of a human/system decision; never literal Petrov archival evidence.",
+        "direct_media_visual_review": "PASS_NO_FACE_GENERIC_TABLET_WITH_GENERIC_CODE_TEXT",
+        "visual_qa_status": "PASS",
+        "visual_qa_evidence": "artifact 13411851653 / qa-frames.jpg",
+        "third_party_risk": "GENERIC_SCREEN_TEXT_ONLY",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
+      },
+      "intake_artifact": {
+        "workflow_run_id": 42021165782,
+        "artifact_id": 13411851653,
+        "artifact_digest": "sha256:b18104580e4f089e496f203e65c25cd11d68bb599673a7e1e2243ec53d8ae015",
+        "artifact_name": "episode005-visual-intake-mixkit-young-engineer-29991",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "f1474daed5b97009063ca692859fdca1e91044ad62a9cd1f1f3009b2609b3478",
+        "duration_seconds": 15.057,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "frame_rate": "24000/1001",
+        "codec": "h264",
+        "automated_promotion": false,
+        "perceptual_hash": "a4e5ac59afbd71e65a7b8eaccba06c5c62ac7e169a6dceea4deae4cb15b5842a",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42021523387,
+        "fingerprint_artifact_id": 13411692548,
+        "fingerprint_artifact_digest": "sha256:60d3a8c2b25a355f2415b9b83ead93e036727ae373ad587c8ae7e7f3b9b046f7"
+      }
+    },
+    {
+      "candidate_id": "mixkit-worker-industrial-lathe-2244",
+      "source_page_url": "https://mixkit.co/free-stock-video/worker-operating-an-industrial-lathe-2244/",
+      "role": "S04",
+      "visual_match": "NEAR",
+      "visual_intent": "operator hand actuating a technical control panel as an alert moves through a system",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "mixkit",
+      "license_name": "Mixkit Stock Video Free License",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "media_url": "https://assets.mixkit.co/videos/2244/2244-720.mp4",
+      "media_url_observed_in_browser": true,
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Mixkit Stock Video Free License — commercial or personal use",
+        "visible_duration_seconds": 10,
+        "visible_resolution_options": [
+          "1280x720",
+          "1920x1080"
+        ],
+        "visible_frame_rate": "24 fps",
+        "semantic_note": "Close-up hand operating an industrial control panel; representational technical reconstruction for S04, never literal Petrov archival evidence."
+      },
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "qa": {
+        "clean_frame_visual_review": "PRELIMINARY_PASS",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED; PANEL LABELS ARE NATURAL SCENE CONTENT",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_QA_FRAMES",
+        "semantic_fit": "PRELIMINARY_PASS_AS_TECHNICAL_CONTROL_PANEL_RECONSTRUCTION",
+        "locked_9x16_crop": "PRELIMINARY_PASS_ACTION_AND_EMERGENCY_CONTROL_RETAINED",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "editorial_caveat": "Industrial control panel is representational reconstruction for S04, never literal Petrov archival evidence.",
+        "approval_scope": "S04_ONLY",
+        "approval_caveat": "Industrial control panel is representational reconstruction; never literal Petrov archival evidence.",
+        "direct_media_visual_review": "PASS_HAND_ONLY_GENERIC_EMERGENCY_STOP_LABEL",
+        "visual_qa_status": "PASS",
+        "visual_qa_evidence": "artifact 13412703858 / qa-frames.jpg",
+        "third_party_risk": "GENERIC_LABEL_ONLY",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
+      },
+      "intake_artifact": {
+        "workflow_run_id": 42024921610,
+        "artifact_id": 13412703858,
+        "artifact_digest": "sha256:0cdd282c423100d8df4732dd542238a4ac8e5f46a67c40ee008e51ec1f73d742",
+        "artifact_name": "episode005-visual-intake-mixkit-worker-industrial-lathe-2244",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "a30c4294c60190b75e2f49c076dccc7f86692a99e4bed42ae002f8094936a45d",
+        "duration_seconds": 10.01,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "frame_rate": "24000/1001",
+        "codec": "h264",
+        "automated_promotion": false,
+        "perceptual_hash": "e7c8758b9f770b817e9d5ef14b7a78bceaad1dcff716a7e7d3c1aff7e63cb8d7",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42025128372,
+        "fingerprint_artifact_id": 13413646379,
+        "fingerprint_artifact_digest": "sha256:a4450ebff3562383b0b8c731bc810f810850eab1fa476737233279724c18fc69"
+      }
+    },
+    {
+      "candidate_id": "pixabay-radar-sonar-ping-2420",
+      "source_page_url": "https://pixabay.com/videos/radar-sonar-ping-scan-submarine-2420/",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "media_url": "https://cdn.pixabay.com/video/2016/03/10/2420-158691979_large.mp4",
+      "media_url_observed_in_browser": true,
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "role": "S08",
+      "visual_match": "NEAR",
+      "visual_intent": "Symbolic radar/sonar monitoring contradiction; not literal Soviet archival evidence.",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "browser_verification": {
+        "source_page_verified": true,
+        "provider_license_visible": "Free for use under the Pixabay Content License",
+        "license_evidence_url": "https://pixabay.com/service/license-summary/",
+        "media_url_observed": true,
+        "observed_duration": "00:10",
+        "creator": "TH-DARK-Media"
+      },
+      "score": null,
+      "score_breakdown": {},
+      "disqualifiers": [],
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42043152146,
+        "artifact_id": 13422407818,
+        "artifact_name": "episode005-visual-intake-42043152146",
+        "artifact_digest": "sha256:2c518303ddeab0806300fe1eb4e8e1c3a01b7d0de92f1118ccbe0e77b5c7381f",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "14353cedcbf610c6f7411c657b96898d0fba8408c14ceb0b2e4cb3c14df2ebd3",
+        "duration_seconds": 10,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "25/1",
+        "codec": "h264",
+        "automated_promotion": false,
+        "fingerprint_audit": {
+          "workflow_run_id": 42039523926,
+          "job_id": 127286341600,
+          "artifact_id": 13420042319,
+          "artifact_name": "episode005-visual-fingerprint-audit",
+          "artifact_digest": "sha256:f29e75ce9c73ea465dbbd6450fdf5d9a2ff37c463b30e0e6749aa27e4c3c63d2",
+          "status": "FINGERPRINT_AUDIT_PASS",
+          "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+          "automated_promotion": false,
+          "human_approval": "PENDING",
+          "approved_for_render": false,
+          "global_catalog_updated": false,
+          "perceptual_hash": "db1c4e31762f889ebf7d12ea18065b1938f416a3768c8bcf4fee854cdf2edf67",
+          "duration_seconds": 10,
+          "width": 1920,
+          "height": 1080,
+          "fps": 25,
+          "codec": "h264",
+          "size_bytes": 3228701,
+          "global_source_collision": false,
+          "global_sha256_collision": false,
+          "global_perceptual_collision": false
+        },
+        "job_id": 127298967914
+      },
+      "qa": {
+        "clean_frame_visual_review": "PENDING_HUMAN_QA",
+        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
+        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
+        "semantic_fit": "PENDING_HUMAN_QA",
+        "locked_9x16_crop": "PENDING_HUMAN_QA",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "preliminary_visual_review": {
+          "reviewer": "assistant_visual_audit_v1",
+          "status": "PRELIMINARY_CONDITIONAL_SYMBOLIC_DIAGRAM",
+          "evidence": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg",
+            "qa-sampling.json"
+          ],
+          "observation": "No third-party logo, letterbox or source-page watermark observed in normalized samples. The asset is an intrinsic radar diagram with numeric markings and grid; the vertical crop remains legible but must be treated as symbolic/map-or-diagram evidence, not archival footage.",
+          "recommendation": "Keep blocked pending explicit human approval and a decision that native instrument markings are acceptable under the visual policy for S08.",
+          "human_approval_unchanged": "PENDING",
+          "approved_for_render": false,
+          "global_catalog_updated": false,
+          "drive_written": false
+        }
+      }
+    },
+    {
+      "candidate_id": "pixabay-television-broadcasting-satellite-29483",
+      "source_page_url": "https://pixabay.com/videos/television-broadcasting-satellite-29483/",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "media_url": "https://cdn.pixabay.com/video/2019/11/26/29483-376565549_large.mp4",
+      "media_url_observed_in_browser": true,
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "role": "S12",
+      "visual_match": "NEAR",
+      "visual_intent": "Representational signal/satellite infrastructure for the sensor-mechanism beat; not literal Petrov evidence.",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "browser_verification": {
+        "source_page_verified": true,
+        "provider_license_visible": "Free for use under the Pixabay Content License",
+        "license_evidence_url": "https://pixabay.com/service/license-summary/",
+        "media_url_observed": true,
+        "observed_duration": "00:30",
+        "creator": "Engin_Akyurt"
+      },
+      "score": null,
+      "score_breakdown": {},
+      "disqualifiers": [],
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42043152146,
+        "artifact_id": 13422407818,
+        "artifact_name": "episode005-visual-intake-42043152146",
+        "artifact_digest": "sha256:2c518303ddeab0806300fe1eb4e8e1c3a01b7d0de92f1118ccbe0e77b5c7381f",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "3c4e681f8df4ebe45f4076ff392f3202d826d78206277796a58e235efa9909bc",
+        "duration_seconds": 29.567,
+        "dimensions": [
+          3840,
+          2160
+        ],
+        "frame_rate": "25/1",
+        "codec": "h264",
+        "automated_promotion": false,
+        "fingerprint_audit": {
+          "workflow_run_id": 42039523926,
+          "job_id": 127286341600,
+          "artifact_id": 13420042319,
+          "artifact_name": "episode005-visual-fingerprint-audit",
+          "artifact_digest": "sha256:f29e75ce9c73ea465dbbd6450fdf5d9a2ff37c463b30e0e6749aa27e4c3c63d2",
+          "status": "FINGERPRINT_AUDIT_PASS",
+          "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+          "automated_promotion": false,
+          "human_approval": "PENDING",
+          "approved_for_render": false,
+          "global_catalog_updated": false,
+          "perceptual_hash": "7e2c6604c38f8aeba7e0cd5f6ba35085f7967c8d223824d0b30ae96fe74c0fdc",
+          "duration_seconds": 29.567,
+          "width": 3840,
+          "height": 2160,
+          "fps": 25,
+          "codec": "h264",
+          "size_bytes": 73865099,
+          "global_source_collision": false,
+          "global_sha256_collision": false,
+          "global_perceptual_collision": false
+        },
+        "job_id": 127298967914
+      },
+      "qa": {
+        "clean_frame_visual_review": "PENDING_HUMAN_QA",
+        "baked_captions_or_authored_graphics": "PENDING_HUMAN_QA",
+        "embedded_logo_or_letterbox": "PENDING_HUMAN_QA",
+        "semantic_fit": "PENDING_HUMAN_QA",
+        "locked_9x16_crop": "PENDING_HUMAN_QA",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "preliminary_visual_review": {
+          "reviewer": "assistant_visual_audit_v1",
+          "status": "PRELIMINARY_REJECT_SEMANTICALLY_WEAK",
+          "evidence": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg",
+            "qa-sampling.json"
+          ],
+          "observation": "The full duration is visually stable and free of a third-party logo or letterbox, but the asset depicts only a vintage television with a blank white screen. The center crop is technically viable yet does not represent sunlight geometry, high clouds or a satellite sensor.",
+          "recommendation": "Do not assign to S12. Replace with a distinct cloud/sunlight/satellite-instrument candidate; retain only as a possible broadcast/signal insert if a future shot explicitly needs that meaning.",
+          "human_approval_unchanged": "PENDING",
+          "approved_for_render": false,
+          "global_catalog_updated": false,
+          "drive_written": false
+        }
+      }
+    },
+    {
+      "candidate_id": "pixabay-led-indicator-lights-316712",
+      "source_page_url": "https://pixabay.com/videos/led-indicator-lights-electronics-316712/",
+      "role": "S06,S09",
+      "visual_match": "NEAR",
+      "visual_intent": "Abstract indicator/electronics insert for warning escalation; symbolic technical texture, not a literal Soviet alert interface.",
+      "truth_class": "REPRESENTATIONAL",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "media_url": "https://cdn.pixabay.com/video/2025/11/18/316712_large.mp4",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "browser_verification": {
+        "source_page_verified": true,
+        "provider_license_visible": "Pixabay Content License",
+        "license_evidence_url": "https://pixabay.com/service/license-summary/",
+        "media_url_observed": true,
+        "creator": "Solarselle77",
+        "editorial_note": "Abstract LED/electronics loop. It must not be presented as the actual Soviet alert interface or as literal Petrov archival evidence."
+      },
+      "score": null,
+      "score_breakdown": {},
+      "disqualifiers": [],
+      "intake_artifact": {
+        "workflow_run_id": 42044610956,
+        "job_id": 127304076065,
+        "artifact_id": 13422389208,
+        "artifact_name": "episode005-visual-intake-42044610956",
+        "artifact_digest": "sha256:6a38460d0d482e7eb75dabefdd15db9147870966a72b0ab43a698cafec2a57bc",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "e4d3d281bab5ffb6808a6ad0b20dd03e3857112cf309ee86d1dec234d4ac928e",
+        "duration_seconds": 5.208,
+        "dimensions": [
+          3872,
+          2160
+        ],
+        "frame_rate": "24/1",
+        "codec": "h264",
+        "automated_promotion": false,
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "positions": [
+            "start",
+            "quarter",
+            "middle",
+            "three_quarter",
+            "end_minus_0_1_seconds"
+          ],
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "qa_refresh": {
+          "workflow_run_id": 42049521282,
+          "artifact_id": 13426556747,
+          "artifact_digest": "sha256:81604ae674a11d6e4c7b27769ab80b6b9a7aaa486260edae9c280220a9750e60",
+          "commit": "af15b0bb20738b6ddcdfee098f992e958f006651",
+          "status": "SUCCESS_JSON_VALIDATED",
+          "sampling": "five_normalized_timestamps",
+          "promotion_allowed": false,
+          "render_allowed": false,
+          "global_catalog_updated": false,
+          "drive_written": false
+        }
+      },
+      "qa": {
+        "clean_frame_visual_review": "PASS_FULL_DURATION",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_FIVE_SAMPLES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_FIVE_SAMPLES",
+        "semantic_fit": "APPROVED_FOR_S06_AS_ABSTRACT_INDICATOR_TEXTURE",
+        "locked_9x16_crop": "PASS_CENTER_CROP_USABLE",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "assistant_visual_review": "Clean and visually coherent, but abstract indicator bars; not a literal Soviet control console. Human approval still required.",
+        "direct_media_visual_review": "PASS_ABSTRACT_LED_INDICATORS_NO_IDENTIFIABLE_ELEMENTS",
+        "visual_qa_status": "PASS",
+        "visual_qa_evidence": "artifact 13426556747 / pixabay-led-indicator-lights-316712/qa-frames.jpg",
+        "third_party_risk": "NONE_VISIBLE",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
+      },
+      "fingerprint_audit": {
+        "workflow_run_id": 42049952757,
+        "artifact_id": 13424799852,
+        "artifact_digest": "sha256:c561091d1c94a2ef93b5e5d34b194e54c9990490da56dde60c9fedfa3921e99b",
+        "algorithm": "video-fingerprint-v2-rgb24-q4",
+        "status": "FINGERPRINT_AUDIT_PASS",
+        "global_sha256_collision": false,
+        "global_source_collision": false,
+        "global_perceptual_collision": false,
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "render_allowed": false,
+        "drive_written": false,
+        "sha256": "e4d3d281bab5ffb6808a6ad0b20dd03e3857112cf309ee86d1dec234d4ac928e",
+        "perceptual_hash": "d70c666953675401e001265ef4d80b66b8da2a8034488305320c0a12633c0395"
+      },
+      "approved_shot_ids": [
+        "S06"
+      ],
+      "approval_record": {
+        "status": "APPROVED_FOR_MANIFEST_ONLY",
+        "approved_at_utc": "2026-11-05T15:24:20Z",
+        "decision": "Approve the LED indicator candidate for S06 only as an abstract representational warning-intensity texture.",
+        "constraints": [
+          "not literal Soviet alert interface or Petrov archival evidence",
+          "no reuse in another shot of Episode 005",
+          "does not authorize render, global catalog mutation, Drive write or publication"
+        ]
+      }
+    },
+    {
+      "candidate_id": "pixabay-sky-clouds-satellite-95686",
+      "source_page_url": "https://pixabay.com/videos/sky-clouds-satellite-sea-weather-95686/",
+      "role": "S12",
+      "visual_match": "STRONG",
+      "visual_intent": "Clouds, sunlight and satellite visual for the sensor-geometry beat; representational, not literal Petrov evidence.",
+      "truth_class": "REPRESENTATIONAL",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "REJECTED_SEMANTICALLY_WEAK",
+      "media_url": "https://cdn.pixabay.com/video/2021/11/12/95686-645712467_large.mp4",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "browser_verification": {
+        "source_page_verified": true,
+        "provider_license_visible": "Pixabay Content License",
+        "license_evidence_url": "https://pixabay.com/service/license-summary/",
+        "media_url_observed": true,
+        "creator": "tommyvideo",
+        "editorial_note": "Clouds/sunlight/satellite candidate for S12. It must not be presented as literal Petrov evidence."
+      },
+      "score": null,
+      "score_breakdown": {},
+      "disqualifiers": [],
+      "intake_artifact": {
+        "workflow_run_id": 42044610956,
+        "job_id": 127304076065,
+        "artifact_id": 13422389208,
+        "artifact_name": "episode005-visual-intake-42044610956",
+        "artifact_digest": "sha256:6a38460d0d482e7eb75dabefdd15db9147870966a72b0ab43a698cafec2a57bc",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "908dceb3cf0d3c703a0fd6d64181fbcbf7a4760fcaa6744fc03279293897a61a",
+        "duration_seconds": 15.018,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "30/1",
+        "codec": "h264",
+        "automated_promotion": false,
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "positions": [
+            "start",
+            "quarter",
+            "middle",
+            "three_quarter",
+            "end_minus_0_1_seconds"
+          ],
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "qa_refresh": {
+          "workflow_run_id": 42049521282,
+          "artifact_id": 13426556747,
+          "artifact_digest": "sha256:81604ae674a11d6e4c7b27769ab80b6b9a7aaa486260edae9c280220a9750e60",
+          "commit": "af15b0bb20738b6ddcdfee098f992e958f006651",
+          "status": "SUCCESS_JSON_VALIDATED",
+          "sampling": "five_normalized_timestamps",
+          "promotion_allowed": false,
+          "render_allowed": false,
+          "global_catalog_updated": false,
+          "drive_written": false
+        }
+      },
+      "qa": {
+        "clean_frame_visual_review": "PASS_FULL_DURATION",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_FIVE_SAMPLES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_FIVE_SAMPLES",
+        "semantic_fit": "REJECTED_SEMANTICALLY_WEAK_FOR_S12",
+        "locked_9x16_crop": "PASS_BUT_LOW_INFORMATION",
+        "global_reuse_fingerprint": "PENDING_FINGERPRINT_AUDIT",
+        "human_approval": "NOT_APPLICABLE",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "assistant_visual_review": "Clean blue cloud texture, but no visible satellite, sunlight geometry or sensor context; insufficient for the S12 mechanism beat."
+      },
+      "fingerprint_audit": {
+        "workflow_run_id": 42049952757,
+        "artifact_id": 13424799852,
+        "artifact_digest": "sha256:c561091d1c94a2ef93b5e5d34b194e54c9990490da56dde60c9fedfa3921e99b",
+        "algorithm": "video-fingerprint-v2-rgb24-q4",
+        "status": "FINGERPRINT_AUDIT_PASS",
+        "global_sha256_collision": false,
+        "global_source_collision": false,
+        "global_perceptual_collision": false,
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "render_allowed": false,
+        "drive_written": false,
+        "sha256": "908dceb3cf0d3c703a0fd6d64181fbcbf7a4760fcaa6744fc03279293897a61a",
+        "perceptual_hash": "75e16b841a18f3c242a18a836e7bb9516d2cc94de281931745c7f47a78690c77"
+      }
+    },
+    {
+      "candidate_id": "pixabay-antenna-astronomy-communication-40041",
+      "source_page_url": "https://pixabay.com/videos/antenna-astronomy-communication-40041/",
+      "role": "S12",
+      "visual_match": "NEAR",
+      "visual_intent": "real satellite/radio antenna under open sky; physical sensor geometry and cloud/light context",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "media_url": "https://cdn.pixabay.com/video/2020/05/24/40041-424371544_large.mp4",
+      "media_url_observed_in_browser": true,
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "visible_duration_seconds": 22,
+        "visible_resolution": "1920x1080",
+        "semantic_note": "Real parabolic antenna/earth-station infrastructure with sky and clouds; stronger S12 mechanism candidate than a generic cloud texture, pending intake and frame QA."
+      },
+      "intake_artifact": {
+        "workflow_run_id": 42052509193,
+        "job_id": 127332058958,
+        "artifact_id": 13427442382,
+        "artifact_name": "episode005-visual-intake-42052509193",
+        "artifact_digest": "sha256:122fee7648e166d0eea6bce8920486107922b7c64a6c892e975dec535f65d87c",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "e0a5b6cbf90c31c7f79c8cf6d9eaa515a83d4e986927a90a3840d7d36303e9b4",
+        "duration_seconds": 22.548,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "30/1",
+        "codec": "h264",
+        "automated_promotion": false,
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "positions": [
+            "start",
+            "quarter",
+            "middle",
+            "three_quarter",
+            "end_minus_0_1_seconds"
+          ],
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        }
+      },
+      "qa": {
+        "clean_frame_visual_review": "PASS_FULL_DURATION",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_FIVE_SAMPLES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_FIVE_SAMPLES",
+        "semantic_fit": "APPROVED_FOR_S12_AS_REPRESENTATIONAL_SATELLITE_ANTENNA",
+        "locked_9x16_crop": "PASS_CENTRAL_ANTENNA_REMAINS_VISIBLE",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "assistant_visual_review": "Clean full-duration footage; real parabolic antenna/earth-station geometry remains readable in the 9:16 center crop. Treat as representational infrastructure, not literal Petrov archival evidence.",
+        "direct_media_visual_review": "PASS_SATELLITE_ARRAY_NO_PERSON_OR_BRAND_VISIBLE",
+        "visual_qa_status": "PASS",
+        "visual_qa_evidence": "artifact 13427442382 / pixabay-antenna-astronomy-communication-40041/qa-frames.jpg",
+        "third_party_risk": "GENERIC_INFRASTRUCTURE_ONLY",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES"
+      },
+      "fingerprint_audit": {
+        "workflow_run_id": 42053792993,
+        "job_id": 127336595316,
+        "artifact_id": 13427769060,
+        "artifact_name": "episode005-visual-fingerprint-audit",
+        "artifact_digest": "sha256:f92cb4eed9bfc2fbaf518540413f5ab363578156f7c58d947e69c692219e0c87",
+        "status": "FINGERPRINT_AUDIT_PASS",
+        "algorithm": "video-fingerprint-v2-rgb24-q4",
+        "global_sha256_collision": false,
+        "global_source_collision": false,
+        "global_perceptual_collision": false,
+        "sha256": "e0a5b6cbf90c31c7f79c8cf6d9eaa515a83d4e986927a90a3840d7d36303e9b4",
+        "perceptual_hash": "720e0b55776ac929e3c7f5be259dcaa7c848fe1cefb4fc2ffd501c6b2ee1059d",
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "render_allowed": false,
+        "drive_written": false
+      },
+      "approved_shot_ids": [
+        "S12"
+      ],
+      "approval_record": {
+        "status": "APPROVED_FOR_MANIFEST_ONLY",
+        "approved_at_utc": "2026-11-05T15:24:20Z",
+        "decision": "Approve the antenna candidate for S12 only as representational sensor/early-warning infrastructure.",
+        "constraints": [
+          "not literal Petrov archival evidence",
+          "no reuse in another shot of Episode 005",
+          "does not authorize render, global catalog mutation, Drive write or publication"
+        ]
+      }
+    },
+    {
+      "candidate_id": "pixabay-hallway-dark-corridor-20837",
+      "source_page_url": "https://pixabay.com/videos/hallway-dark-corridor-dim-mystery-20837/",
+      "role": "S14",
+      "visual_match": "NEAR",
+      "visual_intent": "empty institutional corridor representing later obscurity and the quiet consequence after the decision",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "media_url": "https://cdn.pixabay.com/video/2019/01/19/20837-312432073_large.mp4",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "media_url_observed": "Edit video link on the provider page exposed the direct CDN media URL.",
+        "semantic_note": "Dark empty corridor with no literal military insignia identified in the source-page metadata; use only as a representational reconstruction, never as literal Petrov archival evidence.",
+        "visual_qa": "Shortlist only; downloaded five-point QA and 9:16 crop checks still required."
+      },
+      "score": 78,
+      "score_breakdown": {
+        "semantic_fit": 27,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 11,
+        "vertical_crop_quality": 7,
+        "clean_frame_quality": 7,
+        "source_distinctness": 6
+      },
+      "disqualifiers": [
+        "generic corridor; military specificity is representational rather than literal"
+      ],
+      "intake_artifact": {
+        "workflow_run_id": 42056121022,
+        "artifact_id": 13428247933,
+        "artifact_name": "episode005-visual-intake-42056121022",
+        "artifact_digest": "sha256:e6f1d8424a909e08ab527ff555fe359e4c9be8214990cf5b91364f80f590bb83",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "automated_promotion": false,
+        "sha256": "e6c20511f889daa57834ddf5f97ea076ffffedc0a321850a4ea8fa295479d72d",
+        "duration_seconds": 6.933,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "29.97002997002997",
+        "codec": "h264",
+        "size_bytes": 4347752,
+        "perceptual_hash": "40df89d9d2edf33d5a94509be3c9f3abb6073dd28ff1914aba8307eb1055aafd",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "job_id": 127344872248,
+        "fingerprint_workflow_run_id": 42059893725,
+        "fingerprint_job_id": 127358312867,
+        "fingerprint_artifact_id": 13431651011,
+        "fingerprint_artifact_digest": "sha256:71428db1a7810ba8074da7c85139ff0a6720a06ea06aab169b5dd539f3ed7e8d"
+      },
+      "qa": {
+        "clean_frame_visual_review": "PRELIMINARY_PASS_BROWSER_QA",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_BROWSER_QA",
+        "embedded_logo_or_letterbox": "NO_VISIBLE_WATERMARK_OR_LETTERBOX; SMALL_UNREADABLE_WALL_ELEMENT_RETAINS_SCENE_CONTEXT",
+        "semantic_fit": "PRELIMINARY_PASS_FOR_S14_EMPTY_INSTITUTIONAL_CORRIDOR",
+        "locked_9x16_crop": "PRELIMINARY_PASS_CENTERED_CORRIDOR_FINAL_CROP_GATE_PENDING",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "drive_written": false
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 42059893725,
+        "job_id": 127358312867,
+        "artifact_id": 13431651011,
+        "artifact_name": "episode005-visual-fingerprint-audit",
+        "artifact_digest": "sha256:71428db1a7810ba8074da7c85139ff0a6720a06ea06aab169b5dd539f3ed7e8d",
+        "status": "FINGERPRINT_AUDIT_PASS",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "automated_promotion": false,
+        "sha256": "e6c20511f889daa57834ddf5f97ea076ffffedc0a321850a4ea8fa295479d72d",
+        "perceptual_hash": "40df89d9d2edf33d5a94509be3c9f3abb6073dd28ff1914aba8307eb1055aafd",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
+      },
+      "browser_qa": {
+        "inspected_source_page_url": "https://pixabay.com/videos/hallway-dark-corridor-dim-mystery-20837/",
+        "inspected_media_url": "https://cdn.pixabay.com/video/2019/01/19/20837-312432073_large.mp4",
+        "source_license_visible": "Pixabay Content License",
+        "observed_duration_seconds": 6.933,
+        "visual_findings": [
+          "empty institutional corridor with centered vanishing point",
+          "no people, captions, visible watermark or letterbox observed",
+          "small unreadable wall element retained as scene context",
+          "native 16:9 framing; centered corridor supports a restrained 9:16 crop"
+        ],
+        "qa_result": "PRELIMINARY_PASS_APPROVED_FOR_MANIFEST_ONLY",
+        "automated_promotion": false
+      }
+    },
+    {
+      "candidate_id": "pixabay-alert-alarm-war-danger-risk-205519",
+      "source_page_url": "https://pixabay.com/videos/alert-alarm-war-danger-risk-205519/",
+      "role": "S05",
+      "visual_match": "NEAR",
+      "visual_intent": "Distinct escalation insert for multiple launch-warning indicators; use as representational alarm evidence, not literal Soviet interface.",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "REJECTED_RECOGNIZABLE_PERSON",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": true,
+        "semantic_note": "Page-verified alarm/warning visual; final suitability depends on full-duration intake QA and clean-frame review."
+      },
+      "score": 74,
+      "score_breakdown": {
+        "semantic_fit": 28,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 10,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 6,
+        "source_distinctness": 4
+      },
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2024/03/24/205519-927335684_large.mp4",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "5a2031e934028fb6c13ba07dd176092507303db83f4decc8b79acb2263ecbf8d",
+        "duration_seconds": 16.362,
+        "dimensions": [
+          3840,
+          2160
+        ],
+        "frame_rate": "50/1",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false,
+        "perceptual_hash": "f2bb56d11027b73124649c52ecb1018ec945a8e1c02da9312e1ac958f733fbb6",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42074599454,
+        "fingerprint_artifact_id": 13438400127,
+        "fingerprint_artifact_name": "episode005-visual-fingerprint-audit",
+        "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "REJECTED_RECOGNIZABLE_PERSON",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "REJECTED_AFTER_DIRECT_MEDIA_QA",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "FAIL_RECOGNIZABLE_PERSON_VISIBLE"
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": "S05"
+      },
+      "selection": "REJECTED_AFTER_DIRECT_MEDIA_QA",
+      "rejection_evidence": {
+        "artifact_id": 13437466569,
+        "qa_contact_sheet": "pixabay-alert-alarm-war-danger-risk-205519/qa-frames.jpg",
+        "reason": "Recognizable adult face visible in direct-media frame sheet; provider page warning also observed."
+      }
+    },
+    {
+      "candidate_id": "pixabay-radar-black-green-target-symbol-57670",
+      "source_page_url": "https://pixabay.com/videos/radar-black-green-target-symbol-57670/",
+      "role": "S05",
+      "visual_match": "NEAR",
+      "visual_intent": "Alternative symbolic escalation insert for the warning count; distinct radar/target language without reusing S01's red glow.",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": true,
+        "semantic_note": "Page-verified radar/target visual; symbolic rather than literal launch-indicator hardware, pending full-duration QA."
+      },
+      "score": 71,
+      "score_breakdown": {
+        "semantic_fit": 25,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 10,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 6,
+        "source_distinctness": 4
+      },
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2020/11/28/57670-486125393_large.mp4",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "9293c16987da44620db4119af9fe2c776f56a2113402544e1d1bc3696f21496d",
+        "duration_seconds": 20,
+        "dimensions": [
+          3840,
+          2160
+        ],
+        "frame_rate": "25/1",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false,
+        "perceptual_hash": "acbd3a72cf98707eb118622b22dfd5106f5b76a550255c48f2d51727689c3e6e",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42074599454,
+        "fingerprint_artifact_id": 13438400127,
+        "fingerprint_artifact_name": "episode005-visual-fingerprint-audit",
+        "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "PASS_GENERIC_RADAR_NO_PERSON_BRAND_OR_READABLE_TEXT"
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": null
+      },
+      "selection": "PRIMARY_REPLACEMENT_APPROVED_FOR_PARTIAL_MANIFEST",
+      "selected_shot_id": "S05",
+      "replacement_evidence": {
+        "artifact_id": 13437466569,
+        "qa_contact_sheet": "pixabay-radar-black-green-target-symbol-57670/qa-frames.jpg",
+        "result": "PASS_NO_RECOGNIZABLE_PERSON_NO_BRAND_NO_READABLE_THIRD_PARTY_TEXT"
+      }
+    },
+    {
+      "candidate_id": "pixabay-radar-radar-screen-rotation-circles-4511",
+      "source_page_url": "https://pixabay.com/videos/radar-radar-screen-rotation-circles-4511/",
+      "role": "S08",
+      "visual_match": "NEAR",
+      "visual_intent": "Empty ground-radar/monitoring insert contrasting with the satellite alert.",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": true,
+        "semantic_note": "Page-verified radar-screen rotation; intended as contradictory monitoring evidence, not literal 1983 Soviet footage."
+      },
+      "score": 76,
+      "score_breakdown": {
+        "semantic_fit": 29,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 11,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 6,
+        "source_distinctness": 4
+      },
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2016/08/16/4511-179376471_large.mp4",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "8185f8459b80df5c5eaa95d4a66ac58edef34fc7f790ca4e5f74fc10a70742d6",
+        "duration_seconds": 7.2,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "25/1",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false,
+        "perceptual_hash": "6818a74392e5f6ef8d3ded092f6c1ce791afd3d710e0acd30e7cf78a60b12242",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42074599454,
+        "fingerprint_artifact_id": 13438400127,
+        "fingerprint_artifact_name": "episode005-visual-fingerprint-audit",
+        "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": "S08"
+      },
+      "selection": "PRIMARY_APPROVED_FOR_PARTIAL_MANIFEST",
+      "selected_shot_id": "S08"
+    },
+    {
+      "candidate_id": "pixabay-radar-communication-military-261518",
+      "source_page_url": "https://pixabay.com/videos/radar-communication-military-261518/",
+      "role": "S08",
+      "visual_match": "NEAR",
+      "visual_intent": "Secondary monitoring/radar evidence for the contradiction beat.",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": true,
+        "semantic_note": "Page-verified military/radar monitoring visual; candidate remains subject to full-duration semantic and crop QA."
+      },
+      "score": 73,
+      "score_breakdown": {
+        "semantic_fit": 28,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 11,
+        "vertical_crop_quality": 5,
+        "clean_frame_quality": 5,
+        "source_distinctness": 4
+      },
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2025/02/28/261518_large.mp4",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "032d21331f071798b51126eb2483e37edaa6169444ddc42197ef5d7689c206f1",
+        "duration_seconds": 30,
+        "dimensions": [
+          3840,
+          2160
+        ],
+        "frame_rate": "60/1",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false,
+        "perceptual_hash": "a09f404e6acb40682784a5499d023d7e77c1eaf6f89285b85cb5ee8f61e3697c",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42074599454,
+        "fingerprint_artifact_id": 13438400127,
+        "fingerprint_artifact_name": "episode005-visual-fingerprint-audit",
+        "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": null
+      },
+      "selection": "ALTERNATIVE_APPROVED_FOR_MANIFEST_ONLY"
+    },
+    {
+      "candidate_id": "pixabay-button-press-red-business-click-502",
+      "source_page_url": "https://pixabay.com/videos/button-press-red-business-click-502/",
+      "role": "S09",
+      "visual_match": "NEAR",
+      "visual_intent": "Technical input insert representing the operator entering the false-alarm classification.",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": true,
+        "semantic_note": "Page-verified button-press action; intentionally treated as representational input rather than a celebratory interface."
+      },
+      "score": 72,
+      "score_breakdown": {
+        "semantic_fit": 26,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 8,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 7,
+        "source_distinctness": 5
+      },
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2015/08/22/502-137078153_large.mp4",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "e6eaeddadbda7f8fdf9e4106ad09e0c25e0139f0212dce20a29d34cd8eb77b16",
+        "duration_seconds": 3.08,
+        "dimensions": [
+          1440,
+          1080
+        ],
+        "frame_rate": "25/1",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false,
+        "perceptual_hash": "155c325b4b0c121d7add2c16eea0d86efa5379f7bcec66dc52bec0073972e884",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42074599454,
+        "fingerprint_artifact_id": 13438400127,
+        "fingerprint_artifact_name": "episode005-visual-fingerprint-audit",
+        "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": "S09"
+      },
+      "selection": "PRIMARY_APPROVED_FOR_PARTIAL_MANIFEST",
+      "selected_shot_id": "S09"
+    },
+    {
+      "candidate_id": "pixabay-button-press-push-start-launching-221746",
+      "source_page_url": "https://pixabay.com/videos/button-press-push-start-launching-221746/",
+      "role": "S09",
+      "visual_match": "NEAR",
+      "visual_intent": "Alternative restrained control-input insert for the irreversible classification decision.",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": true,
+        "semantic_note": "Page-verified push/start action; use only if full-duration QA confirms no distracting launch-promo or branded context."
+      },
+      "score": 70,
+      "score_breakdown": {
+        "semantic_fit": 25,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 8,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 6,
+        "source_distinctness": 5
+      },
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2024/07/17/221746_large.mp4",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "1759e5e945fccab493e4ac2c084af30a58673511ee41a03bfea538471a048090",
+        "duration_seconds": 6.967,
+        "dimensions": [
+          4096,
+          2160
+        ],
+        "frame_rate": "30/1",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false,
+        "perceptual_hash": "9a482a42348c20c6db67edec646009d28f2d03b0a8befa55b0883d1183078e15",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42074599454,
+        "fingerprint_artifact_id": 13438400127,
+        "fingerprint_artifact_name": "episode005-visual-fingerprint-audit",
+        "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": null
+      },
+      "selection": "ALTERNATIVE_APPROVED_FOR_MANIFEST_ONLY"
+    },
+    {
+      "candidate_id": "pixabay-typewriter-typing-writing-author-1335",
+      "source_page_url": "https://pixabay.com/videos/typewriter-typing-writing-author-1335/",
+      "role": "S13",
+      "visual_match": "NEAR",
+      "visual_intent": "Typewritten evidence treatment for a declassified report/logbook beat without inventing readable historical text.",
+      "truth_class": "DOCUMENTARY_EVIDENCE",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": true,
+        "semantic_note": "Page-verified typewriter action; intended for evidence atmosphere, not as a literal readable Petrov document."
+      },
+      "score": 82,
+      "score_breakdown": {
+        "semantic_fit": 32,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 13,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 7,
+        "source_distinctness": 4
+      },
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2015/11/12/1335-145564309_large.mp4",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "2df86b63f6f05398b44ac2c4b28e9f370036e552b20d0b30e2842e2e71aabd23",
+        "duration_seconds": 31.637,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "30000/1001",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false,
+        "perceptual_hash": "e42ec360a46a9ef093c7055f72d0bb39ebffb9a8e7ce3acb6ee96902f70673fe",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42074599454,
+        "fingerprint_artifact_id": 13438400127,
+        "fingerprint_artifact_name": "episode005-visual-fingerprint-audit",
+        "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": "S13"
+      },
+      "selection": "PRIMARY_APPROVED_FOR_PARTIAL_MANIFEST",
+      "selected_shot_id": "S13"
+    },
+    {
+      "candidate_id": "pixabay-typewriter-type-antique-writing-38626",
+      "source_page_url": "https://pixabay.com/videos/typewriter-type-antique-writing-38626/",
+      "role": "S13",
+      "visual_match": "NEAR",
+      "visual_intent": "Secondary archival-writing treatment for the report/logbook evidence beat.",
+      "truth_class": "DOCUMENTARY_EVIDENCE",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": true,
+        "semantic_note": "Page-verified antique typewriter visual; any readable content must be rejected or obscured during intake QA."
+      },
+      "score": 79,
+      "score_breakdown": {
+        "semantic_fit": 31,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 12,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 6,
+        "source_distinctness": 4
+      },
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2020/05/10/38626-418875137_large.mp4",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "de777464e8fbcf6f29d9a53786d85706db1667c50cb882690f09543fe6938416",
+        "duration_seconds": 9.543,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "30000/1001",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false,
+        "perceptual_hash": "59697b26ba5121adc65b7b36745a3b6516c7baca5545564415d058c396cbbc4b",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42074599454,
+        "fingerprint_artifact_id": 13438400127,
+        "fingerprint_artifact_name": "episode005-visual-fingerprint-audit",
+        "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": null
+      },
+      "selection": "ALTERNATIVE_APPROVED_FOR_MANIFEST_ONLY"
+    },
+    {
+      "candidate_id": "pixabay-dark-light-lens-flare-abstract-250413",
+      "source_page_url": "https://pixabay.com/videos/dark-light-lens-flare-abstract-250413/",
+      "role": "S15",
+      "visual_match": "SYMBOLIC",
+      "visual_intent": "Restrained transition from warning pulse into neutral black; no victory imagery.",
+      "truth_class": "REPRESENTATIONAL",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": true,
+        "semantic_note": "Page-verified dark/light abstract transition; symbolic fallback only and distinct from the previously rejected S15 red-blur candidate."
+      },
+      "score": 74,
+      "score_breakdown": {
+        "semantic_fit": 28,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 9,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 7,
+        "source_distinctness": 4
+      },
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2025/01/03/250413_large.mp4",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "bc173bee51dd0dd3120d2cfbfc2884f5681849b384bc661af7f2721d92a2c8ad",
+        "duration_seconds": 20.103,
+        "dimensions": [
+          3838,
+          2160
+        ],
+        "frame_rate": "24000/1001",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false,
+        "perceptual_hash": "57bce8d11491f760dbeea11a0b9925a6d0085ae70c32966ef3a62cb887a16026",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42074599454,
+        "fingerprint_artifact_id": 13438400127,
+        "fingerprint_artifact_name": "episode005-visual-fingerprint-audit",
+        "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": "S15"
+      },
+      "selection": "PRIMARY_APPROVED_FOR_PARTIAL_MANIFEST",
+      "selected_shot_id": "S15"
+    },
+    {
+      "candidate_id": "pixabay-abstract-light-streaks-motion-250417",
+      "source_page_url": "https://pixabay.com/videos/abstract-light-streaks-motion-250417/",
+      "role": "S15",
+      "visual_match": "SYMBOLIC",
+      "visual_intent": "Alternative minimal light decay/transition treatment for the warning fade.",
+      "truth_class": "REPRESENTATIONAL",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": true,
+        "semantic_note": "Page-verified abstract light-motion visual; final use depends on confirming it resolves toward neutral black without branded graphics."
+      },
+      "score": 72,
+      "score_breakdown": {
+        "semantic_fit": 26,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 9,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 7,
+        "source_distinctness": 4
+      },
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2025/01/03/250417_large.mp4",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "13f0d7a85d716d6b3d4317481ad1aebda02ab6d8ae605b5c09b87d31df6e3729",
+        "duration_seconds": 20.103,
+        "dimensions": [
+          3838,
+          2160
+        ],
+        "frame_rate": "24000/1001",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false,
+        "perceptual_hash": "05e3bb62160003bd1e41343d71fede23be8fba4c141bb9408c27156472368072",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42074599454,
+        "fingerprint_artifact_id": 13438400127,
+        "fingerprint_artifact_name": "episode005-visual-fingerprint-audit",
+        "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": null
+      },
+      "selection": "ALTERNATIVE_APPROVED_FOR_MANIFEST_ONLY"
+    },
+    {
+      "candidate_id": "pixabay-particles-orange-red-dust-effect-7957",
+      "source_page_url": "https://pixabay.com/videos/particles-orange-red-dust-effect-7957/",
+      "role": "S16",
+      "visual_match": "SYMBOLIC",
+      "visual_intent": "Restrained branded outro texture with a controlled red/orange pulse behind the final logo lockup.",
+      "truth_class": "BRAND_OUTRO",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": true,
+        "semantic_note": "Page-verified particle texture; branding will be added only by the approved renderer, never downloaded from the source."
+      },
+      "score": 73,
+      "score_breakdown": {
+        "semantic_fit": 27,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 9,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 7,
+        "source_distinctness": 4
+      },
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2017/02/26/7957-205810637_large.mp4",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "00cb906c22484217646c6aeedc90f725941f4aa25e0df64378c1b0ecfe267282",
+        "duration_seconds": 29.993,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "25/1",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false,
+        "perceptual_hash": "423fdfd63cdb0a3bd7cb7c798b1dc532e41d0d98234fad78e2cba05b49f97911",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42074599454,
+        "fingerprint_artifact_id": 13438400127,
+        "fingerprint_artifact_name": "episode005-visual-fingerprint-audit",
+        "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": "S16"
+      },
+      "selection": "PRIMARY_APPROVED_FOR_PARTIAL_MANIFEST",
+      "selected_shot_id": "S16"
+    },
+    {
+      "candidate_id": "pixabay-colors-lines-lights-abstract-video-5072",
+      "source_page_url": "https://pixabay.com/videos/colors-lines-lights-abstract-video-5072/",
+      "role": "S16",
+      "visual_match": "SYMBOLIC",
+      "visual_intent": "Secondary dark abstract outro background with restrained light motion for the final logo lockup.",
+      "truth_class": "BRAND_OUTRO",
+      "provider": "pixabay",
+      "license_name": "Pixabay Content License",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": true,
+        "semantic_note": "Page-verified abstract lines/lights visual; candidate remains blocked pending full-duration clean-frame and branding-safety QA."
+      },
+      "score": 70,
+      "score_breakdown": {
+        "semantic_fit": 25,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 8,
+        "vertical_crop_quality": 6,
+        "clean_frame_quality": 7,
+        "source_distinctness": 4
+      },
+      "disqualifiers": [],
+      "media_url": "https://cdn.pixabay.com/video/2016/09/13/5072-183299851_large.mp4",
+      "media_url_observed_in_browser": true,
+      "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "1851cf32bb43685dad7ce61e6c5b25fd6511ebd40c5fce3a80664f78cbc50d3e",
+        "duration_seconds": 9.967,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "30/1",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false,
+        "perceptual_hash": "e87af50c065ea5f6a305806696a507c114c75b1e391a9650fae29d886a42a712",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42074599454,
+        "fingerprint_artifact_id": 13438400127,
+        "fingerprint_artifact_name": "episode005-visual-fingerprint-audit",
+        "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false
+      },
+      "human_approval_record": {
+        "approved_at_utc": "2026-11-05T17:59:24.004Z",
+        "decision": "USER_APPROVED_ALL_12_CANDIDATES",
+        "scope": "MANIFEST_ONLY",
+        "selected_as_primary_for_shot": null
+      },
+      "selection": "ALTERNATIVE_APPROVED_FOR_MANIFEST_ONLY"
+    }
+  ],
+  "next_action": "Await explicit render authorization; thumbnail final, render, global catalog, Drive and publication remain gated.",
+  "acquisition_route": {
+    "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
+    "preferred_provider": "mixkit",
+    "fallback_provider": "pexels",
+    "browser_download_status": "PEXELS_DIRECT_MEDIA_BLOCKED",
+    "candidate_policy": "Only pages explicitly carrying the Mixkit Stock Video Free License may advance. Restricted-license, AI-generated, watermark, baked-graphics, letterboxed or semantically weak clips are rejected.",
+    "collection_pages": [
+      "https://mixkit.co/free-stock-video/red-light/",
+      "https://mixkit.co/free-stock-video/security/",
+      "https://mixkit.co/free-stock-video/discover/clock/?orientation=vertical",
+      "https://mixkit.co/free-stock-video/clouds/"
+    ],
+    "license_checked_at_utc": "2026-11-05T00:00:00Z",
+    "download_attempts": [
+      {
+        "candidate_id": "mixkit-slowly-approaching-clock-28897",
+        "source_page_verified": true,
+        "license_visible_on_page": "Mixkit Stock Video Free License",
+        "visible_duration_seconds": 9,
+        "visible_resolution_options": [
+          "1080x720",
+          "1920x1080"
+        ],
+        "browser_download_event": "OBSERVED",
+        "workspace_import": "REPLACED_BY_GITHUB_ACTIONS_INTAKE",
+        "sha256": "d254063cd2f4ceeaf186f68c71c905fb8b27d9e94397aa0a794e93827208b505",
+        "clean_frame_qa": "PRELIMINARY_PASS",
+        "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "note": "Browser download completed in the isolated browser environment, but the resulting file is not exposed to the repository workspace for hashing and QA.",
+        "media_url": "https://assets.mixkit.co/videos/28897/28897-720.mp4",
+        "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+        "workflow_run_id": 42003907636,
+        "artifact_id": 13403188677
+      },
+      {
+        "candidate_id": "mixkit-abstract-red-glow-101432",
+        "source_page_verified": true,
+        "license_visible_on_page": "Mixkit Stock Video Free License",
+        "visible_duration_seconds": 11,
+        "visible_resolution_options": [
+          "720x1080",
+          "1080x1920"
+        ],
+        "browser_download_event": "NOT_USED_FOR_WORKSPACE_IMPORT",
+        "workspace_import": "REPLACED_BY_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE",
+        "sha256": "f5c6866db294ab7489e581d08d3ae5480496b42d43df8a4a6152bcc6e4d97774",
+        "clean_frame_qa": "PRELIMINARY_PASS",
+        "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "note": "Official Mixkit page verified in browser; opaque direct media URL was allowlisted and downloaded by the fail-closed GitHub intake workflow.",
+        "media_url": "https://assets.mixkit.co/bohe8920pfehyvq7p1hk5r699s7g",
+        "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+        "workflow_run_id": 42005588495,
+        "artifact_id": 13403209885,
+        "artifact_digest": "sha256:e97bc6b2c2e7cac51c10a1af55a35570f5df044ac80bece0478292992ce0c78b"
+      },
+      {
+        "candidate_id": "mixkit-cloudy-sky-118",
+        "source_page_verified": true,
+        "license_visible_on_page": "Mixkit Stock Video Free License",
+        "browser_download_event": "NOT_USED_FOR_WORKSPACE_IMPORT",
+        "workspace_import": "REPLACED_BY_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE",
+        "sha256": "7b18e0c66a2eb1a55df0532d3bf346f1e1d193eaa805403cc39fc835e8454432",
+        "perceptual_hash": "75bd02cf43583033aee2f7659350e477ff56bd126380157b845433def983964a",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "clean_frame_qa": "PRELIMINARY_PASS",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "media_url": "https://assets.mixkit.co/videos/118/118-720.mp4",
+        "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+        "workflow_run_id": 42004883836,
+        "artifact_id": 13404636511,
+        "fingerprint_workflow_run_id": 42007386261,
+        "fingerprint_artifact_id": 13405087460,
+        "fingerprint_artifact_digest": "sha256:66c98c055ec1a3e2da7c861cb367cd6761f18bf205a2f05329720da6d39ebf72"
+      },
+      {
+        "candidate_id": "mixkit-clock-mechanism-3651",
+        "source_page_verified": true,
+        "license_visible_on_page": "Mixkit Stock Video Free License",
+        "visible_duration_seconds": 11,
+        "visible_resolution_options": [
+          "1080x720",
+          "1920x1080",
+          "4096x2160"
+        ],
+        "browser_download_event": "OBSERVED",
+        "workspace_import": "REPLACED_BY_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE",
+        "sha256": "575ec01ae49bad9f5e5d634d51c1d78c31856e2171ca799065d9750dce3de5fd",
+        "clean_frame_qa": "PRELIMINARY_PASS",
+        "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "semantic_fit": "PRELIMINARY_PASS_FOR_S10_MECHANICAL_TIME_PRESSURE",
+        "locked_9x16_crop": "PRELIMINARY_PASS_CENTER_CROP_WITHOUT_LETTERBOX",
+        "media_url": "https://assets.mixkit.co/videos/3651/3651-720.mp4",
+        "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+        "workflow_run_id": 42009940548,
+        "artifact_id": 13406364533,
+        "artifact_digest": "sha256:620db58c193f7850a427a04d14b241f48a6779b20e98a6261b9f592fc054b326",
+        "artifact_label_correction": "Rerun required after CI artifact naming fix.",
+        "fingerprint_workflow_run_id": 42014828184,
+        "fingerprint_artifact_id": 13408966434,
+        "fingerprint_artifact_digest": "sha256:d9d4adbc09e85d5aea9370a3c7045125afe04ac81ac43cfb5dfa6b18677e2199",
+        "perceptual_hash": "8d01acb640e75c70ee0d46ceaabeec546bbcc70f24d7a4a4d0c9e1cd46a3f72",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST"
+      },
+      {
+        "candidate_id": "mixkit-large-satellite-antenna-2650",
+        "source_page_verified": true,
+        "license_visible_on_page": "Mixkit Stock Video Free License",
+        "visible_duration_seconds": 15,
+        "visible_resolution_options": [
+          "1080x720",
+          "1920x1080"
+        ],
+        "visible_frame_rate": "60 fps",
+        "browser_download_event": "NOT_USED_FOR_WORKSPACE_IMPORT",
+        "workspace_import": "PENDING_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE",
+        "clean_frame_qa": "PRELIMINARY_PASS",
+        "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "semantic_fit": "PRELIMINARY_PAGE_PASS_FOR_S02",
+        "media_url": "https://assets.mixkit.co/videos/2650/2650-720.mp4",
+        "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+        "artifact_id": 13409661379,
+        "artifact_digest": "sha256:f15336756e9e32900ff07ee7666492032887a883d923266ff2d5651ba862d5c0",
+        "locked_9x16_crop": "PRELIMINARY_PASS_CENTER_CROP_WITH_SATELLITE_DISH_PARTIALLY_VISIBLE",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "fingerprint_workflow_run_id": 42016725778,
+        "fingerprint_artifact_id": 13409611998,
+        "fingerprint_artifact_digest": "sha256:30f39d5255b086062c6e01e7576c9cd9f5371476b795a1736d48579bbc2474c4",
+        "perceptual_hash": "f10ae48c3a770e23246f7fda15feccd3c4b37e1db48b9d71c6fb1511a1ee1b7c",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION"
+      },
+      {
+        "candidate_id": "mixkit-man-using-computer-2965",
+        "source_page_verified": true,
+        "license_visible_on_page": "Mixkit Stock Video Free License",
+        "visible_duration_seconds": 10,
+        "visible_resolution_options": [
+          "1080x720",
+          "1920x1080"
+        ],
+        "visible_frame_rate": "24 fps",
+        "browser_download_event": "NOT_USED_FOR_WORKSPACE_IMPORT",
+        "workspace_import": "PENDING_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE",
+        "clean_frame_qa": "PASS",
+        "rights_status": "REJECTED_SEMANTICALLY_WEAK",
+        "semantic_fit": "REJECTED_TOO_CASUAL_FOR_S03_HUMAN_ANCHOR",
+        "media_url": "https://assets.mixkit.co/videos/2965/2965-720.mp4",
+        "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
+        "artifact_id": 13409549619,
+        "artifact_digest": "sha256:cb0d4923ecf096bda7c9647334af8b917adc0ebfc1ae2973bfd0338d9f5dda13",
+        "human_approval": "NOT_APPLICABLE"
+      }
+    ],
+    "workspace_import": "REPLACED_BY_REPRODUCIBLE_GITHUB_ACTIONS_INTAKE"
+  },
+  "human_approval_record": {
+    "status": "APPROVED_FOR_MANIFEST_ONLY",
+    "approved_at_utc": "2026-11-05T10:10:00Z",
+    "decision": "Approve the three downloaded candidates for the Episode 005 visual manifest.",
+    "constraints": [
+      "red-light candidate remains symbolic and must not be presented as literal Petrov archival evidence",
+      "approval does not authorize global catalog mutation",
+      "approval does not authorize render, Drive write or publication",
+      "all unresolved story shots remain blocked"
+    ]
+  },
+  "manifest_policy": {
+    "distinct_source_per_shot": true,
+    "duplicate_source_within_episode": "BLOCK",
+    "candidate_roles_are_suitability_hints": "A candidate role list does not authorize reusing the same source across multiple shots.",
+    "final_manifest": "episodes/episode-005/visual/scene-asset-manifest.json"
+  },
+  "additional_human_approval_records": [
+    {
+      "candidate_id": "mixkit-clock-mechanism-3651",
+      "status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_at_utc": "2026-11-05T11:02:38Z",
+      "decision": "Approve the clock mechanism as a symbolic mechanical-time reconstruction for S10 only.",
+      "constraints": [
+        "do not assign the same source to any other shot",
+        "do not present it as literal Petrov archival evidence",
+        "approval does not authorize global catalog mutation",
+        "approval does not authorize render, Drive write or publication"
+      ]
+    },
+    {
+      "candidate_id": "mixkit-large-satellite-antenna-2650",
+      "status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_at_utc": "2026-11-05T11:20:47Z",
+      "decision": "Approve the satellite antenna as representational early-warning infrastructure for S02 only.",
+      "constraints": [
+        "do not assign the same source to any other shot",
+        "do not present it as literal Petrov archival evidence",
+        "approval does not authorize global catalog mutation",
+        "approval does not authorize render, Drive write or publication"
+      ]
+    },
+    {
+      "candidate_id": "mixkit-young-engineer-29991",
+      "shot_ids": [
+        "S03"
+      ],
+      "decision": "APPROVED_FOR_MANIFEST_ONLY",
+      "scope": "Representational modern technical reconstruction for S03 only",
+      "constraints": [
+        "not literal Petrov archival evidence",
+        "no reuse in another shot of Episode 005",
+        "does not authorize render",
+        "does not authorize global catalog mutation",
+        "does not authorize Drive write or publication"
+      ],
+      "evidence": {
+        "intake_workflow_run_id": 42021165782,
+        "intake_artifact_id": 13411851653,
+        "fingerprint_workflow_run_id": 42021523387,
+        "fingerprint_artifact_id": 13411692548,
+        "sha256": "f1474daed5b97009063ca692859fdca1e91044ad62a9cd1f1f3009b2609b3478"
+      }
+    },
+    {
+      "candidate_id": "mixkit-worker-industrial-lathe-2244",
+      "shot_ids": [
+        "S04"
+      ],
+      "decision": "APPROVED_FOR_MANIFEST_ONLY",
+      "scope": "Representational technical control-panel reconstruction",
+      "constraints": [
+        "not literal Petrov archival evidence",
+        "no reuse in another shot of Episode 005",
+        "does not authorize render",
+        "does not authorize global catalog mutation",
+        "does not authorize Drive write or publication"
+      ],
+      "evidence": {
+        "intake_workflow_run_id": 42024921610,
+        "intake_artifact_id": 13412703858,
+        "fingerprint_workflow_run_id": 42025128372,
+        "fingerprint_artifact_id": 13413646379,
+        "sha256": "a30c4294c60190b75e2f49c076dccc7f86692a99e4bed42ae002f8094936a45d"
+      }
+    },
+    {
+      "candidate_id": "pixabay-led-indicator-lights-316712",
+      "shot_ids": [
+        "S06"
+      ],
+      "status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_at_utc": "2026-11-05T15:24:20Z",
+      "decision": "Approve as abstract indicator/electronics texture for S06 only.",
+      "constraints": [
+        "not literal Soviet alert interface or Petrov archival evidence",
+        "no reuse in another shot of Episode 005",
+        "does not authorize render, global catalog mutation, Drive write or publication"
+      ],
+      "evidence": {
+        "intake_workflow_run_id": 42044610956,
+        "intake_artifact_id": 13422389208,
+        "qa_refresh_workflow_run_id": 42049521282,
+        "fingerprint_workflow_run_id": 42049952757,
+        "fingerprint_artifact_id": 13424799852
+      }
+    },
+    {
+      "candidate_id": "pixabay-antenna-astronomy-communication-40041",
+      "shot_ids": [
+        "S12"
+      ],
+      "status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_at_utc": "2026-11-05T15:24:20Z",
+      "decision": "Approve as representational satellite/antenna mechanism for S12 only.",
+      "constraints": [
+        "not literal Petrov archival evidence",
+        "no reuse in another shot of Episode 005",
+        "does not authorize render, global catalog mutation, Drive write or publication"
+      ],
+      "evidence": {
+        "intake_workflow_run_id": 42052509193,
+        "intake_artifact_id": 13427442382,
+        "fingerprint_workflow_run_id": 42053792993,
+        "fingerprint_artifact_id": 13427769060
+      }
+    },
+    {
+      "candidate_id": "pixabay-hallway-dark-corridor-20837",
+      "shot_ids": [
+        "S14"
+      ],
+      "status": "APPROVED_FOR_MANIFEST_ONLY",
+      "approved_at_utc": "2026-11-05T00:00:00Z",
+      "decision": "Approve the Pixabay hallway as a representational empty institutional corridor for S14 only.",
+      "constraints": [
+        "not literal Petrov archival evidence",
+        "no reuse in another shot of Episode 005",
+        "does not authorize render",
+        "does not authorize global catalog mutation",
+        "does not authorize Drive write or publication"
+      ],
+      "evidence": {
+        "intake_workflow_run_id": 42056121022,
+        "intake_artifact_id": 13428247933,
+        "fingerprint_workflow_run_id": 42059893725,
+        "fingerprint_artifact_id": 13431651011,
+        "fingerprint_artifact_digest": "sha256:71428db1a7810ba8074da7c85139ff0a6720a06ea06aab169b5dd539f3ed7e8d",
+        "sha256": "e6c20511f889daa57834ddf5f97ea076ffffedc0a321850a4ea8fa295479d72d"
+      }
+    },
+    {
+      "candidate_ids": [
+        "pixabay-alert-alarm-war-danger-risk-205519",
+        "pixabay-radar-black-green-target-symbol-57670",
+        "pixabay-radar-radar-screen-rotation-circles-4511",
+        "pixabay-radar-communication-military-261518",
+        "pixabay-button-press-red-business-click-502",
+        "pixabay-button-press-push-start-launching-221746",
+        "pixabay-typewriter-typing-writing-author-1335",
+        "pixabay-typewriter-type-antique-writing-38626",
+        "pixabay-dark-light-lens-flare-abstract-250413",
+        "pixabay-abstract-light-streaks-motion-250417",
+        "pixabay-particles-orange-red-dust-effect-7957",
+        "pixabay-colors-lines-lights-abstract-video-5072"
+      ],
+      "approved_at_utc": "2026-11-05T17:59:24.004Z",
+      "decision": "User approved all 12 downloaded and fingerprinted candidates; the highest-scoring candidate in each unresolved shot pair was selected as the primary partial-manifest assignment.",
+      "selected_primary_by_shot": {
+        "S05": "pixabay-alert-alarm-war-danger-risk-205519",
+        "S08": "pixabay-radar-radar-screen-rotation-circles-4511",
+        "S09": "pixabay-button-press-red-business-click-502",
+        "S13": "pixabay-typewriter-typing-writing-author-1335",
+        "S15": "pixabay-dark-light-lens-flare-abstract-250413",
+        "S16": "pixabay-particles-orange-red-dust-effect-7957"
+      },
+      "scope": "APPROVED_FOR_MANIFEST_ONLY",
+      "constraints": [
+        "representational footage is not literal Petrov archival evidence",
+        "one distinct source per shot; no source reuse within or across episodes",
+        "approval does not authorize render",
+        "approval does not authorize global catalog mutation",
+        "approval does not authorize Drive write or publication",
+        "final visual manifest validation remains required"
+      ],
+      "evidence": {
+        "intake_workflow_run_id": 42073828513,
+        "intake_artifact_id": 13437466569,
+        "intake_artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "fingerprint_workflow_run_id": 42074599454,
+        "fingerprint_artifact_id": 13438400127,
+        "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      }
+    }
+  ],
+  "rejected_candidates": [
+    {
+      "candidate_id": "mixkit-man-using-computer-2965",
+      "rejected_at_utc": "2026-11-05T11:31:00Z",
+      "reason": "SEMANTICALLY_WEAK_FOR_S03",
+      "evidence_artifact_id": 13409549619,
+      "sha256": "0e2efa26bacc172973f2c06c3a401b3fb9e92d8d6b47c5ec68c4d9e41b7b8084"
+    },
+    {
+      "candidate_id": "mixkit-deep-thinking-man-5572",
+      "rejected_at_utc": "2026-11-05T11:45:00Z",
+      "reason": "LICENSE_RESTRICTED_PERSONAL_USE_ONLY",
+      "source_page_url": "https://mixkit.co/free-stock-video/deep-thinking-man-working-on-laptop-from-home-5572/",
+      "license_observed": "Mixkit Restricted License",
+      "evidence_note": "Browser-visible page states that the free 720p download is for personal use only; commercial route is premium Envato.",
+      "media_url": "https://assets.mixkit.co/videos/5572/5572-720.mp4"
+    },
+    {
+      "candidate_id": "mixkit-abandoned-radar-station-6276",
+      "rejected_at_utc": "2026-11-05T00:00:00Z",
+      "reason": "LICENSE_RESTRICTED_PERSONAL_USE_ONLY",
+      "source_page_url": "https://mixkit.co/free-stock-video/abandoned-radar-station-by-chernobyl-6276/",
+      "license_observed": "Mixkit Restricted License",
+      "evidence_note": "Browser-visible page states that the free 720p download is for personal use only; commercial 4K route is premium.",
+      "media_url": null
+    },
+    {
+      "candidate_id": "mixkit-radar-airport-28009",
+      "rejected_at_utc": "2026-11-05T00:00:00Z",
+      "reason": "LICENSE_RESTRICTED_PERSONAL_USE_ONLY",
+      "source_page_url": "https://mixkit.co/free-stock-video/radar-at-the-edge-of-an-airport-28009/",
+      "license_observed": "Mixkit Restricted License",
+      "evidence_note": "Browser-visible page states that the free 720p download is for personal use only; commercial 4K route is premium.",
+      "media_url": null
+    },
+    {
+      "candidate_id": "pixabay-documents-papers-research-212509",
+      "rejected_at_utc": "2026-11-05T00:00:00Z",
+      "reason": "SEMANTIC_AND_PRIVACY_RISK",
+      "source_page_url": "https://pixabay.com/videos/documents-papers-research-education-212509/",
+      "license_observed": "Pixabay Content License",
+      "evidence_note": "Browser visual inspection showed modern readable documents, including passport/visa-like material and personal-looking text; not suitable for a declassified military report/logbook treatment."
+    },
+    {
+      "candidate_id": "pixabay-red-light-blur-flare-250419",
+      "rejected_at_utc": "2026-11-05T00:00:00Z",
+      "reason": "SEMANTICALLY_GENERIC_AND_VISUAL_OVERLAP",
+      "source_page_url": "https://pixabay.com/videos/red-light-blur-flare-gradient-250419/",
+      "license_observed": "Pixabay Content License",
+      "evidence_note": "Browser page describes an abstract red blur/flare/gradient; it lacks a distinct warning-pulse action and overlaps the existing S01 red-glow visual family, so it is rejected for S15."
+    },
+    {
+      "candidate_id": "pixabay-radar-screen-4511",
+      "rejected_at_utc": "2026-11-05T18:03:21.444Z",
+      "reason": "DUPLICATE_SOURCE_ALIAS",
+      "duplicate_of": "pixabay-radar-radar-screen-rotation-circles-4511",
+      "source_page_url": "https://pixabay.com/videos/radar-radar-screen-rotation-circles-4511/",
+      "media_url": "https://cdn.pixabay.com/video/2016/08/16/4511-179376471_large.mp4",
+      "evidence_note": "Same provider source page and direct media URL already exist under the canonical candidate ID; excluded to preserve unique source identity."
+    },
+    {
+      "candidate_id": "pixabay-alert-alarm-war-205519",
+      "rejected_at_utc": "2026-11-05T18:03:21.444Z",
+      "reason": "DUPLICATE_SOURCE_ALIAS",
+      "duplicate_of": "pixabay-alert-alarm-war-danger-risk-205519",
+      "source_page_url": "https://pixabay.com/videos/alert-alarm-war-danger-risk-205519/",
+      "media_url": "https://cdn.pixabay.com/video/2024/03/24/205519-927335684_large.mp4",
+      "evidence_note": "Same provider source page and direct media URL already exist under the canonical candidate ID; excluded to preserve unique source identity."
+    }
+  ],
+  "search_strategy": {
+    "mode": "BATCH_SHORTLIST_THEN_INTAKE",
+    "version": "search-v2",
+    "objective": "Find coherent, commercially usable, distinct visual candidates before any media download.",
+    "discovery_batch": {
+      "candidates_per_unresolved_shot": 6,
+      "shortlist_size_per_shot": 2,
+      "intake_only_after_shortlist": true,
+      "fingerprint_after_batch": true,
+      "human_approval_after_technical_gates": true,
+      "intake_scope": "Selected shortlist IDs are dispatched as one manual batch (maximum 12 candidates); provider-specific rights and host policy are revalidated before any download; no candidate is downloaded on ordinary PR/documentation changes.",
+      "fingerprint_scope": "Fingerprint audit receives the same explicit candidate_ids batch and never scans the entire plan implicitly.",
+      "future_candidate_record_fields": [
+        "candidate_id",
+        "role",
+        "visual_match",
+        "visual_intent",
+        "truth_class",
+        "provider",
+        "source_page_url",
+        "license_name",
+        "media_url",
+        "browser_verification",
+        "score",
+        "score_breakdown",
+        "disqualifiers"
+      ],
+      "qa_sampling": {
+        "method": "five_normalized_timestamps",
+        "positions": [
+          "start",
+          "quarter",
+          "middle",
+          "three_quarter",
+          "end_minus_0_1_seconds"
+        ],
+        "required_artifacts": [
+          "qa-frames.jpg",
+          "qa-crop-9x16.jpg",
+          "qa-sampling.json"
+        ],
+        "rationale": "The previous first-frame/first-three-seconds sampling could miss late baked graphics or semantic drift."
+      }
+    },
+    "preflight_filters": [
+      "provider_page_verified",
+      "commercial_license_visible_on_provider_page_and_free_download",
+      "reject_personal_use_only_or_restricted_license",
+      "reject_ai_generated_or_watermarked_media",
+      "reject_baked_captions_logos_or_letterbox",
+      "reject_anachronistic_or_semantically_generic_visuals",
+      "reject_source_or_fingerprint_reuse",
+      "verify_9x16_crop_before_approval"
+    ],
+    "scoring_weights": {
+      "semantic_fit": 35,
+      "license_confidence": 20,
+      "visual_truth_and_period_coherence": 15,
+      "vertical_crop_quality": 10,
+      "clean_frame_quality": 10,
+      "source_distinctness": 10
+    },
+    "score_thresholds": {
+      "shortlist_for_intake": 70,
+      "request_manifest_approval": 80,
+      "hard_reject_below": 55
+    },
+    "ci_policy": {
+      "visual_candidate_intake": "MANUAL_DISPATCH_ONLY",
+      "global_fingerprint_audit": "MANUAL_DISPATCH_ONLY",
+      "source_of_truth_for_urls": "asset-acquisition-plan.json",
+      "duplicate_workflow_allowlists": "PROHIBITED",
+      "batch_input_required": true,
+      "batch_input_format": "Comma- or newline-separated candidate IDs already present in asset-acquisition-plan.json.",
+      "ordinary_pr_media_downloads": false,
+      "batch_max_candidates": 12,
+      "download_max_bytes": 209715200,
+      "download_max_duration_seconds": 180,
+      "allowed_source_hosts": [
+        "mixkit.co",
+        "assets.mixkit.co",
+        "pixabay.com",
+        "cdn.pixabay.com"
+      ],
+      "rights_revalidation_at_fingerprint": true,
+      "manual_dispatch_visibility": "The workflow is manual-only and present on the candidate branch; GitHub UI exposes Run workflow only when the workflow exists on the default branch or an authorized API dispatch is used. Do not add a PR trigger as a workaround."
+    },
+    "unresolved_shot_queue": [
+      {
+        "shot_id": "S05",
+        "requested_visual": "Distinct progression of multiple launch-warning indicators",
+        "preferred_queries": [
+          "warning indicator panel",
+          "alarm indicator lights",
+          "technical alert display",
+          "control panel lights"
+        ],
+        "avoid": [
+          "police-only imagery",
+          "personal-use-only Mixkit pages",
+          "generic neon",
+          "reusing S01 red glow"
+        ]
+      },
+      {
+        "shot_id": "S06",
+        "requested_visual": "Escalating alarm intensity without literal archival claim",
+        "preferred_queries": [
+          "alarm panel escalation",
+          "industrial warning lights",
+          "technical warning display",
+          "emergency indicator panel"
+        ],
+        "avoid": [
+          "generic nightclub lights",
+          "watermarked footage",
+          "duplicate control-panel source"
+        ]
+      },
+      {
+        "shot_id": "S08",
+        "requested_visual": "Empty ground radar or contradictory monitoring evidence",
+        "preferred_queries": [
+          "radar screen",
+          "monitoring screen",
+          "control room radar",
+          "empty surveillance display"
+        ],
+        "avoid": [
+          "literal modern police branding",
+          "personal-use-only pages",
+          "generic computer stock"
+        ]
+      },
+      {
+        "shot_id": "S09",
+        "requested_visual": "False-alarm classification entered into a technical system",
+        "preferred_queries": [
+          "operator pressing control panel",
+          "technical classification interface",
+          "button panel operator",
+          "machine control input"
+        ],
+        "avoid": [
+          "generic laptop close-up",
+          "visible personal data",
+          "reusing S04 panel source"
+        ]
+      },
+      {
+        "shot_id": "S12",
+        "requested_visual": "Sunlight geometry over high clouds and sensor reflection",
+        "preferred_queries": [
+          "sun rays clouds",
+          "high clouds sunlight",
+          "satellite sensor reflection",
+          "atmospheric light geometry"
+        ],
+        "avoid": [
+          "reusing S11 cloud source",
+          "AI-generated sky",
+          "literal missile imagery"
+        ]
+      },
+      {
+        "shot_id": "S13",
+        "requested_visual": "Declassified report or logbook evidence treatment",
+        "preferred_queries": [
+          "declassified document",
+          "archive report pages",
+          "military logbook",
+          "typewritten report"
+        ],
+        "avoid": [
+          "unlicensed readable documents",
+          "invented historical text",
+          "modern personal information"
+        ]
+      },
+      {
+        "shot_id": "S14",
+        "requested_visual": "Empty military corridor representing later obscurity",
+        "preferred_queries": [
+          "empty military corridor",
+          "institutional hallway",
+          "bunker corridor",
+          "dark official hallway"
+        ],
+        "avoid": [
+          "horror gore",
+          "literal identifiable military facility claim",
+          "reusing S10 clock source"
+        ]
+      },
+      {
+        "shot_id": "S15",
+        "requested_visual": "Warning pulse fading into neutral black",
+        "preferred_queries": [
+          "red light fade black",
+          "warning glow fade",
+          "minimal red pulse",
+          "dark transition light"
+        ],
+        "avoid": [
+          "reusing S01 red glow",
+          "generic copyrighted graphics",
+          "watermarked transitions"
+        ]
+      },
+      {
+        "shot_id": "S16",
+        "requested_visual": "Restrained branded outro with red pulse",
+        "preferred_queries": [
+          "minimal red pulse background",
+          "dark logo outro background",
+          "subtle red light fade"
+        ],
+        "avoid": [
+          "third-party logos",
+          "reusing any story asset",
+          "unlicensed templates"
+        ]
+      }
+    ],
+    "last_candidate_addition": {
+      "added_at_utc": "2026-11-05T00:00:00Z",
+      "candidate_ids": [
+        "pixabay-hallway-dark-corridor-20837"
+      ],
+      "rationale": "Add one page-verified, distinct S14 corridor shortlist candidate; reject the inspected S13 documents and S15 abstract red-blur candidates before intake.",
+      "source_page_and_license_verification": "Completed in browser before intake; Pixabay Content License and direct media URL were observed on the S14 source page."
+    },
+    "last_candidate_intake": {
+      "recorded_at_utc": "2026-11-05T00:00:00Z",
+      "workflow_run_id": 42044610956,
+      "candidate_ids": [
+        "pixabay-led-indicator-lights-316712",
+        "pixabay-sky-clouds-satellite-95686"
+      ],
+      "status": "BATCH_DOWNLOADED_AWAITING_HUMAN_QA",
+      "evidence_artifact_id": 13422389208,
+      "evidence_artifact_digest": "sha256:6a38460d0d482e7eb75dabefdd15db9147870966a72b0ab43a698cafec2a57bc",
+      "no_promotion": true,
+      "no_render": true,
+      "no_catalog_update": true,
+      "no_drive_write": true
+    }
+  },
+  "last_manual_intake": {
+    "workflow_run_id": 42073828513,
+    "job_id": 127408597700,
+    "branch": "integration/because-of-this-v2.1-20261105",
+    "commit_sha": "c51e423ccda209b21cdb79e28d2294888c84074e",
+    "candidate_ids": [
+      "pixabay-alert-alarm-war-danger-risk-205519",
+      "pixabay-radar-black-green-target-symbol-57670",
+      "pixabay-radar-radar-screen-rotation-circles-4511",
+      "pixabay-radar-communication-military-261518",
+      "pixabay-button-press-red-business-click-502",
+      "pixabay-button-press-push-start-launching-221746",
+      "pixabay-typewriter-typing-writing-author-1335",
+      "pixabay-typewriter-type-antique-writing-38626",
+      "pixabay-dark-light-lens-flare-abstract-250413",
+      "pixabay-abstract-light-streaks-motion-250417",
+      "pixabay-particles-orange-red-dust-effect-7957",
+      "pixabay-colors-lines-lights-abstract-video-5072"
+    ],
+    "refresh_existing": false,
+    "status": "BATCH_DOWNLOADED_AWAITING_HUMAN_QA",
+    "artifact_id": 13437466569,
+    "artifact_name": "episode005-visual-intake-42073828513",
+    "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+    "infrastructure_fix_commit": "c51e423ccda209b21cdb79e28d2294888c84074e",
+    "promotion_allowed": false,
+    "render_allowed": false,
+    "global_catalog_updated": false,
+    "drive_written": false,
+    "publication_allowed": false,
+    "thumbnail_eligible": false,
+    "next_action": "Run the explicit fingerprint audit for these same 12 candidates; keep approval, promotion, render, catalog, Drive and publication blocked."
+  },
+  "last_manual_fingerprint": {
+    "workflow_run_id": 42074599454,
+    "job_id": 127411317006,
+    "branch": "integration/because-of-this-v2.1-20261105",
+    "commit_sha": "aaa1a77d85ff0f019e8a61a4e7b7b4c8fd307a23",
+    "artifact_id": 13438400127,
+    "artifact_name": "episode005-visual-fingerprint-audit",
+    "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1",
+    "status": "FINGERPRINT_AUDIT_PASS",
+    "candidate_ids": [
+      "pixabay-alert-alarm-war-danger-risk-205519",
+      "pixabay-radar-black-green-target-symbol-57670",
+      "pixabay-radar-radar-screen-rotation-circles-4511",
+      "pixabay-radar-communication-military-261518",
+      "pixabay-button-press-red-business-click-502",
+      "pixabay-button-press-push-start-launching-221746",
+      "pixabay-typewriter-typing-writing-author-1335",
+      "pixabay-typewriter-type-antique-writing-38626",
+      "pixabay-dark-light-lens-flare-abstract-250413",
+      "pixabay-abstract-light-streaks-motion-250417",
+      "pixabay-particles-orange-red-dust-effect-7957",
+      "pixabay-colors-lines-lights-abstract-video-5072"
+    ],
+    "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+    "candidate_count": 12,
+    "blockers": [],
+    "human_approval": "APPROVED_FOR_MANIFEST_ONLY",
+    "approved_for_render": false,
+    "global_catalog_updated": false,
+    "render_allowed": false,
+    "drive_written": false,
+    "publication_allowed": false,
+    "next_action": "Run final read-only visual manifest validation for the six primary assignments; do not render or publish.",
+    "approved_at_utc": "2026-11-05T17:59:24.004Z",
+    "selected_primary_by_shot": {
+      "S05": "pixabay-alert-alarm-war-danger-risk-205519",
+      "S08": "pixabay-radar-radar-screen-rotation-circles-4511",
+      "S09": "pixabay-button-press-red-business-click-502",
+      "S13": "pixabay-typewriter-typing-writing-author-1335",
+      "S15": "pixabay-dark-light-lens-flare-abstract-250413",
+      "S16": "pixabay-particles-orange-red-dust-effect-7957"
+    },
+    "promotion_allowed": false
+  },
+  "last_candidate_addition": {
+    "added_at_utc": "2026-11-05T00:00:00Z",
+    "candidate_ids": [
+      "pixabay-alert-alarm-war-danger-risk-205519",
+      "pixabay-radar-black-green-target-symbol-57670",
+      "pixabay-radar-radar-screen-rotation-circles-4511",
+      "pixabay-radar-communication-military-261518",
+      "pixabay-button-press-red-business-click-502",
+      "pixabay-button-press-push-start-launching-221746",
+      "pixabay-typewriter-typing-writing-author-1335",
+      "pixabay-typewriter-type-antique-writing-38626",
+      "pixabay-dark-light-lens-flare-abstract-250413",
+      "pixabay-abstract-light-streaks-motion-250417",
+      "pixabay-particles-orange-red-dust-effect-7957",
+      "pixabay-colors-lines-lights-abstract-video-5072"
+    ],
+    "rationale": "Add a page-verified Pixabay fallback shortlist with two distinct candidates per unresolved shot; exclude AI-generated, readable-personal-document, reused and watermarked routes before intake.",
+    "source_page_and_license_verification": "Completed in browser for all 12 pages; each page visibly exposed Pixabay Content License, no AI-generated marker was observed, and the direct CDN media URL was observed in the page player.",
+    "human_approval_at_utc": "2026-11-05T17:59:24.004Z",
+    "human_approval": "APPROVED_FOR_MANIFEST_ONLY",
+    "selected_primary_by_shot": {
+      "S05": "pixabay-alert-alarm-war-danger-risk-205519",
+      "S08": "pixabay-radar-radar-screen-rotation-circles-4511",
+      "S09": "pixabay-button-press-red-business-click-502",
+      "S13": "pixabay-typewriter-typing-writing-author-1335",
+      "S15": "pixabay-dark-light-lens-flare-abstract-250413",
+      "S16": "pixabay-particles-orange-red-dust-effect-7957"
+    }
+  },
+  "last_human_approval": {
+    "candidate_ids": [
+      "pixabay-alert-alarm-war-danger-risk-205519",
+      "pixabay-radar-black-green-target-symbol-57670",
+      "pixabay-radar-radar-screen-rotation-circles-4511",
+      "pixabay-radar-communication-military-261518",
+      "pixabay-button-press-red-business-click-502",
+      "pixabay-button-press-push-start-launching-221746",
+      "pixabay-typewriter-typing-writing-author-1335",
+      "pixabay-typewriter-type-antique-writing-38626",
+      "pixabay-dark-light-lens-flare-abstract-250413",
+      "pixabay-abstract-light-streaks-motion-250417",
+      "pixabay-particles-orange-red-dust-effect-7957",
+      "pixabay-colors-lines-lights-abstract-video-5072"
+    ],
+    "approved_at_utc": "2026-11-05T17:59:24.004Z",
+    "decision": "User approved all 12 downloaded and fingerprinted candidates; the highest-scoring candidate in each unresolved shot pair was selected as the primary partial-manifest assignment.",
+    "selected_primary_by_shot": {
+      "S05": "pixabay-alert-alarm-war-danger-risk-205519",
+      "S08": "pixabay-radar-radar-screen-rotation-circles-4511",
+      "S09": "pixabay-button-press-red-business-click-502",
+      "S13": "pixabay-typewriter-typing-writing-author-1335",
+      "S15": "pixabay-dark-light-lens-flare-abstract-250413",
+      "S16": "pixabay-particles-orange-red-dust-effect-7957"
+    },
+    "scope": "APPROVED_FOR_MANIFEST_ONLY",
+    "constraints": [
+      "representational footage is not literal Petrov archival evidence",
+      "one distinct source per shot; no source reuse within or across episodes",
+      "approval does not authorize render",
+      "approval does not authorize global catalog mutation",
+      "approval does not authorize Drive write or publication",
+      "final visual manifest validation remains required"
+    ],
+    "evidence": {
+      "intake_workflow_run_id": 42073828513,
+      "intake_artifact_id": 13437466569,
+      "intake_artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+      "fingerprint_workflow_run_id": 42074599454,
+      "fingerprint_artifact_id": 13438400127,
+      "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+    },
+    "duplicate_source_aliases_rejected": [
+      "pixabay-radar-screen-4511",
+      "pixabay-alert-alarm-war-205519"
+    ],
+    "duplicate_fix_at_utc": "2026-11-05T18:03:21.444Z",
+    "active_duplicate_aliases_removed": [
+      "pixabay-radar-screen-4511",
+      "pixabay-alert-alarm-war-205519"
+    ],
+    "active_candidate_count": 42
+  },
+  "last_contract_validation": {
+    "validated_at_utc": "2026-11-05T18:05:19.534Z",
+    "status": "VISUAL_PLAN_CONTRACT_PASS",
+    "candidate_count": 42,
+    "approved_manifest_candidate_count": 22,
+    "manifest_asset_count": 16,
+    "assigned_shot_count": 16,
+    "unresolved_shot_count": 0,
+    "promotion_allowed": false,
+    "render_allowed": false,
+    "global_catalog_updated": false,
+    "validator": "production/visual_plan_contract.py",
+    "checkout_commit": "d371da0ad7c72576bcd3e9f664baa6b03f89a5e4"
+  },
+  "last_adjustment": "All 16 active assets received explicit user render approval on 2026-11-05 after direct-media QA, contributor/license reconciliation and no-reuse checks. The scene manifest remains manifest-only by contract; render authorization is recorded in the rights ledger and production record.",
+  "next_gate": "Expose the manual V2.1 render workflow on the approved base revision, then run preview preflight. Do not merge, enable production, render media, write Drive or publish automatically.",
+  "render_approval_record": {
+    "status": "APPROVED",
+    "approved_at_utc": "2026-11-05T22:56:14Z",
+    "scope": "All 16 active Episode 005 assets",
+    "evidence": "episodes/episode-005/rights/rights-audit-v21.json and episodes/episode-005/production-record.json",
+    "constraints": [
+      "production_enablement=false",
+      "manual_preflight_required",
+      "global_catalog_update=false",
+      "drive_written=false",
+      "publication_manual_only"
+    ]
+  }
+}

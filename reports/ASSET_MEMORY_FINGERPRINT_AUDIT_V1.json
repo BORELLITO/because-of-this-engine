@@ -1,0 +1,137 @@
+{
+  "audit_id": "AUDIT-V21-ASSET-FINGERPRINT-20261105-01",
+  "generated_at": "2026-11-05",
+  "status": "VERIFIED",
+  "source": "Google Drive files referenced by episodes/asset-memory-registry.json",
+  "algorithm": {
+    "name": "video-phash-v1-dct32-low8",
+    "frame_positions": [
+      0.1,
+      0.3,
+      0.5,
+      0.7,
+      0.9
+    ],
+    "description": "Five normalized grayscale frames, 32x32 DCT, low-frequency 8x8 coefficients, median threshold; SHA-256 remains the byte identity.",
+    "independent_from_sha256": true
+  },
+  "assets": [
+    {
+      "asset_id": "because-of-this-episode-001-s01",
+      "sha256": "feea34fa97b6bd82316d40f0f31ebe8f7713183d3d74ccda2084d7354fc533ee",
+      "size_bytes": 7696207,
+      "duration_seconds": 20.229,
+      "perceptual_hash": "vphash-v1:2ad2aa55ab54aa53:2a95aa56aa55aa56:2ac9aa55aa51af45:2ab1aa54aa45af55:2b3eaa41aa5ca355",
+      "animation_fingerprint": "frames5-v1:2ad2aa55ab54aa53:2a95aa56aa55aa56:2ac9aa55aa51af45:2ab1aa54aa45af55:2b3eaa41aa5ca355",
+      "status": "VERIFIED_FROM_DRIVE"
+    },
+    {
+      "asset_id": "because-of-this-episode-001-s02",
+      "sha256": "3b58bb9f92a77fd817a89194f41336ee20686c9f408589e320da279b7a5ab5bc",
+      "size_bytes": 3152295,
+      "duration_seconds": 11.136,
+      "perceptual_hash": "vphash-v1:2b12aa74ab51b875:2a1baa74aa51b875:2a1baa74aa55b155:2a1baa74aa55b354:2a1baa74aa55a355",
+      "animation_fingerprint": "frames5-v1:2b12aa74ab51b875:2a1baa74aa51b875:2a1baa74aa55b155:2a1baa74aa55b354:2a1baa74aa55a355",
+      "status": "VERIFIED_FROM_DRIVE"
+    },
+    {
+      "asset_id": "because-of-this-episode-001-s03",
+      "sha256": "454d23871c927cba37158e7f837b4c5973e1663511a68ee453f19ff07bf64a43",
+      "size_bytes": 8551933,
+      "duration_seconds": 12.08,
+      "perceptual_hash": "vphash-v1:2a50ba45aa15bf5c:2a54ae55aa15af58:2a50ae55aa15af5c:2a50aa55ab12af5d:2a58aa55aa15af5c",
+      "animation_fingerprint": "frames5-v1:2a50ba45aa15bf5c:2a54ae55aa15af58:2a50ae55aa15af5c:2a50aa55ab12af5d:2a58aa55aa15af5c",
+      "status": "VERIFIED_FROM_DRIVE"
+    },
+    {
+      "asset_id": "because-of-this-episode-001-s04",
+      "sha256": "dd39518761ec11386f260db36378a8a10655284a7ce65bfd8cf3b5fa8b248429",
+      "size_bytes": 4494312,
+      "duration_seconds": 12.958,
+      "perceptual_hash": "vphash-v1:6a17ea15e847ea14:6a17ea15e847ea14:6a17ea15e846ea91:6a17ea14e857ea14:6a15ea15ea15ea15",
+      "animation_fingerprint": "frames5-v1:6a17ea15e847ea14:6a17ea15e847ea14:6a17ea15e846ea91:6a17ea14e857ea14:6a15ea15ea15ea15",
+      "status": "VERIFIED_FROM_DRIVE"
+    },
+    {
+      "asset_id": "because-of-this-episode-001-s05",
+      "sha256": "0250538a1d6b12d46c731af2a4bf09f41cf9d2121e4a4fa70ed2d03acdc61843",
+      "size_bytes": 14289715,
+      "duration_seconds": 24.383,
+      "perceptual_hash": "vphash-v1:3b4eea71aa51b20c:2f38a857aa45a715:2a559f71b841ae16:2f38a847aa45af15:2a15af78b840af95",
+      "animation_fingerprint": "frames5-v1:3b4eea71aa51b20c:2f38a857aa45a715:2a559f71b841ae16:2f38a847aa45af15:2a15af78b840af95",
+      "status": "VERIFIED_FROM_DRIVE"
+    },
+    {
+      "asset_id": "because-of-this-episode-001-s06",
+      "sha256": "8a25c6bb54a78d82a694c68cfcc292dc281413cdae18f5dfdfa8b09c70c42ef3",
+      "size_bytes": 14547864,
+      "duration_seconds": 21.7,
+      "perceptual_hash": "vphash-v1:6a15ea17a915e817:6817ea17a81cea17:6817ea15a815ea57:6857ea15a815ea17:6857ea15a815ea17",
+      "animation_fingerprint": "frames5-v1:6a15ea17a915e817:6817ea17a81cea17:6817ea15a815ea57:6857ea15a815ea17:6857ea15a815ea17",
+      "status": "VERIFIED_FROM_DRIVE"
+    },
+    {
+      "asset_id": "because-of-this-episode-001-s07",
+      "sha256": "744f005019d490152688df5aae9fc2a6eb382e0041ddc405faa5953ed23be40b",
+      "size_bytes": 40256369,
+      "duration_seconds": 9.64,
+      "perceptual_hash": "vphash-v1:2e6aaa55ab5ca454:2a63ab55ae549351:2a6aaa55ab50b656:2a6aaa55aa54b655:2a6aaa55aa54b655",
+      "animation_fingerprint": "frames5-v1:2e6aaa55ab5ca454:2a63ab55ae549351:2a6aaa55ab50b656:2a6aaa55aa54b655:2a6aaa55aa54b655",
+      "status": "VERIFIED_FROM_DRIVE"
+    },
+    {
+      "asset_id": "because-of-this-episode-001-s08",
+      "sha256": "985f8f019911be295037b66b52e4cc2ab2a22f7e8197333e8b2c9e8bcf6cbc7a",
+      "size_bytes": 14140268,
+      "duration_seconds": 9.32,
+      "perceptual_hash": "vphash-v1:2a15aa55ea45ea55:2a15aa55ea45ea55:2a15aa55ea45ea55:2a15aa15ea45eb55:2a15aa15ea45eb55",
+      "animation_fingerprint": "frames5-v1:2a15aa55ea45ea55:2a15aa55ea45ea55:2a15aa55ea45ea55:2a15aa15ea45eb55:2a15aa15ea45eb55",
+      "status": "VERIFIED_FROM_DRIVE"
+    },
+    {
+      "asset_id": "because-of-this-episode-001-s09",
+      "sha256": "71bb2b493d10e3878a9b973b309e60da191ad9e21ef38d64fe12692ca64c2592",
+      "size_bytes": 14431452,
+      "duration_seconds": 9.5,
+      "perceptual_hash": "vphash-v1:3b6caa50ab159353:2e65aa51aa548e5b:2e67aa51aa54961b:2b60aa59af34931b:2b7caa51ae369341",
+      "animation_fingerprint": "frames5-v1:3b6caa50ab159353:2e65aa51aa548e5b:2e67aa51aa54961b:2b60aa59af34931b:2b7caa51ae369341",
+      "status": "VERIFIED_FROM_DRIVE"
+    },
+    {
+      "asset_id": "because-of-this-episode-001-s10",
+      "sha256": "6d6dc6bd5b45700e919864e16f2b8745c24e179f84ffca7734170f65c09d8961",
+      "size_bytes": 2973051,
+      "duration_seconds": 9.62,
+      "perceptual_hash": "vphash-v1:2a64aa5dab56e861:2a64aa5daa53ea64:2a64aa5daa53ea64:2a64aa5daa53e26c:2a60ae5dab56e861",
+      "animation_fingerprint": "frames5-v1:2a64aa5dab56e861:2a64aa5daa53ea64:2a64aa5daa53ea64:2a64aa5daa53e26c:2a60ae5dab56e861",
+      "status": "VERIFIED_FROM_DRIVE"
+    },
+    {
+      "asset_id": "because-of-this-episode-001-s11",
+      "sha256": "0b140a38e69e20a01ff276606db946eb2213ebbe5bac5bef8341939612fd3e69",
+      "size_bytes": 16528292,
+      "duration_seconds": 29.28,
+      "perceptual_hash": "vphash-v1:2a55a655aa55aaaa:2a553d55aa51a8ae:2a55aa54af5aaa85:2a55be59ea15aa50:2a55be5ee805aa54",
+      "animation_fingerprint": "frames5-v1:2a55a655aa55aaaa:2a553d55aa51a8ae:2a55aa54af5aaa85:2a55be59ea15aa50:2a55be5ee805aa54",
+      "status": "VERIFIED_FROM_DRIVE"
+    },
+    {
+      "asset_id": "because-of-this-episode-001-s12",
+      "sha256": "573ca2ecd2389baf847c588512eabea7570059e503119dcff4d0158f7ea180fd",
+      "size_bytes": 5406010,
+      "duration_seconds": 12.32,
+      "perceptual_hash": "vphash-v1:28469867ac67b966:28469867ac67b966:28469867ac67b966:28469867ac67b966:2c469867be46b946",
+      "animation_fingerprint": "frames5-v1:28469867ac67b966:28469867ac67b966:28469867ac67b966:28469867ac67b966:2c469867be46b946",
+      "status": "VERIFIED_FROM_DRIVE"
+    },
+    {
+      "asset_id": "because-of-this-episode-002-s12",
+      "sha256": "2c9c1f57654de26f8f24d87fedbc98372c33d53b9fc5548bcca33eb310e71630",
+      "size_bytes": 14926216,
+      "duration_seconds": 32.64,
+      "perceptual_hash": "vphash-v1:6a14eb47a855eb14:6a15ea56b847ea14:6a55eb15e844aa55:2a51eb44a917ba56:2a55ea44ba1da953",
+      "animation_fingerprint": "frames5-v1:6a14eb47a855eb14:6a15ea56b847ea14:6a55eb15e844aa55:2a51eb44a917ba56:2a55ea44ba1da953",
+      "status": "VERIFIED_FROM_DRIVE"
+    }
+  ]
+}

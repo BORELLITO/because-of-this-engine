@@ -23,6 +23,12 @@ from production.canonical_config import (
     CanonicalConfigError,
     validate_canonical_manifest,
 )
+from production.pipeline_state_v21 import (
+    STATES as V21_STATES,
+    StateTransitionError as V21StateTransitionError,
+    load_or_initialize as load_v21_or_initialize,
+    transition_manifest as transition_v21_manifest,
+)
 
 STATES = (
     "CREATED",
@@ -70,6 +76,10 @@ SAFE_JOB_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{2,119}$")
 
 class PipelineStateError(RuntimeError):
     """Raised when a job state would become ambiguous or unsafe."""
+
+
+def _is_v21_manifest(manifest: dict[str, Any]) -> bool:
+    return manifest.get("editorial_mode") == "factual_documentary" and "pipeline_state" in manifest
 
 
 def now() -> str:
@@ -133,6 +143,11 @@ def _atomic_write(path: Path, payload: dict[str, Any]) -> None:
 def load_or_initialize(manifest_path: Path, *, enforce_canonical: bool = False) -> dict[str, Any]:
     manifest_path = manifest_path.resolve()
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if _is_v21_manifest(manifest):
+        try:
+            return load_v21_or_initialize(manifest_path)
+        except (OSError, ValueError, V21StateTransitionError) as exc:
+            raise PipelineStateError(str(exc)) from exc
     canonical_report = None
     if enforce_canonical:
         try:
@@ -179,6 +194,12 @@ def load_or_initialize(manifest_path: Path, *, enforce_canonical: bool = False) 
 
 
 def transition(manifest_path: Path, target: str, stage: str, details: dict[str, Any] | None = None, *, enforce_canonical: bool = False) -> dict[str, Any]:
+    manifest = json.loads(manifest_path.resolve().read_text(encoding="utf-8"))
+    if _is_v21_manifest(manifest):
+        try:
+            return transition_v21_manifest(manifest_path, target, evidence=details)
+        except (OSError, ValueError, V21StateTransitionError) as exc:
+            raise PipelineStateError(str(exc)) from exc
     if target not in STATES:
         raise PipelineStateError(f"Unknown pipeline state: {target}")
     state = load_or_initialize(manifest_path, enforce_canonical=enforce_canonical)
@@ -204,7 +225,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Initialize or advance the v2 production state machine.")
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--initialize", action="store_true")
-    parser.add_argument("--transition", choices=STATES)
+    parser.add_argument("--transition", choices=sorted(set(STATES) | set(V21_STATES)) )
     parser.add_argument("--stage", default="pipeline")
     parser.add_argument("--allow-noncanonical", action="store_true", help="Only for isolated local fixtures; production CLI remains locked.")
     args = parser.parse_args()

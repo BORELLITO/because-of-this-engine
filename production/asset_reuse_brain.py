@@ -26,7 +26,8 @@ IDENTITY_FIELDS = (
     "perceptual_hash",
     "animation_fingerprint",
 )
-REGISTRY_SCHEMA_VERSION = 1
+REGISTRY_SCHEMA_VERSION = 2
+SUPPORTED_REGISTRY_SCHEMA_VERSIONS = {1, 2}
 _TRACKING_PREFIXES = ("utm_", "fbclid", "gclid", "mc_", "ref", "ref_")
 _PROVIDER_ID_KEYS = ("provider_asset_id", "source_asset_id", "provider_id")
 
@@ -172,8 +173,8 @@ def _registry_records(path: Path) -> list[dict[str, Any]]:
         payload = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         raise AssetReuseBrainError(f"Could not read asset memory registry: {path}") from exc
-    if not isinstance(payload, dict) or payload.get("schema_version") != REGISTRY_SCHEMA_VERSION:
-        raise AssetReuseBrainError("Asset memory registry has an unsupported schema.")
+    if not isinstance(payload, dict) or payload.get("schema_version") not in SUPPORTED_REGISTRY_SCHEMA_VERSIONS:
+        raise AssetReuseBrainError("Asset memory registry has an unsupported schema; supported versions are 1 and 2.")
     assets = payload.get("assets")
     if not isinstance(assets, list):
         raise AssetReuseBrainError("Asset memory registry assets must be a list.")

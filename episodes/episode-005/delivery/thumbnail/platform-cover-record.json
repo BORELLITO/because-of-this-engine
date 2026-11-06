@@ -1,0 +1,19 @@
+{
+  "episode_id": "episode-005",
+  "thumbnail_asset_id": "thumb-episode-005-machine-lied-v1",
+  "thumbnail_text": "THE MACHINE LIED",
+  "final_status": "APPROVED",
+  "human_review_status": "APPROVED",
+  "youtube_shorts": {
+    "mode": "custom_if_supported",
+    "asset": "thumbnail_master_9x16.png"
+  },
+  "tiktok": {
+    "mode": "approved_video_frame",
+    "asset": "thumbnail_master_9x16.png"
+  },
+  "rights_status": "APPROVED",
+  "source_class": "ORIGINAL_GENERATED_SYMBOLIC_ART",
+  "truth_note": "Not archival Petrov evidence and not a literal Soviet interface.",
+  "approved_at_utc": "2026-11-05T00:00:00Z"
+}

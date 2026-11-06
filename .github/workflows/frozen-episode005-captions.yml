@@ -1,0 +1,131 @@
+name: Because Of This Frozen Episode 005 Captions
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: "GitHub Actions run containing the frozen Edge artifact"
+        required: true
+        default: "41961294784"
+        type: string
+      source_artifact_name:
+        description: "Frozen artifact name"
+        required: true
+        default: "episode005-edge-tts-preview"
+        type: string
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/frozen-episode005-captions.yml"
+      - "production/align_edge_captions.py"
+      - "production/align_captions.py"
+      - "production/generate_phrase_captions.py"
+      - "episodes/episode-005/narration/en-US-charon-v1.txt"
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  frozen-captions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout candidate
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Verify native caption tools
+        run: python --version
+
+      - name: Download frozen Edge artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.source_artifact_name || 'episode005-edge-tts-preview' }}
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.source_run_id || '41961294784' }}
+          path: artifacts/episode005-frozen
+
+      - name: Verify frozen audio identity
+        run: |
+          python - <<'PY'
+          import hashlib
+          import wave
+          from pathlib import Path
+          root = Path("artifacts/episode005-frozen")
+          audio = root / "narration.wav"
+          expected = "bfa297c85e6de0c1a9dee5fbc74a8f7e75a6cd287bd47ecf6d97f16dd045831a"
+          assert audio.is_file(), audio
+          actual = hashlib.sha256(audio.read_bytes()).hexdigest()
+          assert actual == expected, {"expected": expected, "actual": actual}
+          with wave.open(str(audio), "rb") as stream:
+              duration = stream.getnframes() / stream.getframerate()
+              assert stream.getnchannels() == 1
+              assert stream.getsampwidth() == 2
+              assert stream.getframerate() == 24000
+              assert 60 <= duration <= 80, duration
+          print({"audio_sha256": actual, "duration_seconds": round(duration, 3)})
+          PY
+
+      - name: Build frozen caption manifest
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          manifest = {
+              "audio": {"path": "narration.wav"},
+              "script": {"path": "../../episodes/episode-005/narration/en-US-charon-v1.txt"},
+              "captions": {
+                  "path": "narration.whisper.ass",
+                  "alignment_sidecar": "narration.whisper.alignment.json",
+                  "max_line_chars": 42,
+                  "active_word_color": "#FF7777"
+              }
+          }
+          Path("artifacts/episode005-frozen/caption-manifest.json").write_text(
+              json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          PY
+
+      - name: Generate official native Edge captions
+        run: |
+          PYTHONPATH=. python production/align_edge_captions.py \
+            --manifest artifacts/episode005-frozen/caption-manifest.json \
+            --word-boundaries artifacts/episode005-frozen/edge-word-boundaries.json
+
+      - name: Validate official native Edge captions
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path("artifacts/episode005-frozen")
+          ass = root / "narration.whisper.ass"
+          sidecar = root / "narration.whisper.alignment.json"
+          assert ass.is_file() and ass.stat().st_size > 0, ass
+          data = json.loads(sidecar.read_text(encoding="utf-8"))
+          assert data["status"] == "EDGE_TTS_NATIVE_ALIGNMENT_PASS"
+          assert data["word_count"] > 0
+          normalization = data["word_timing_normalization"]
+          assert normalization["timeline_monotonic"] is True
+          assert normalization["grouped_provider_boundary_count"] >= 0
+          print({
+              "caption_status": data["status"],
+              "timing_mode": data["timing_mode"],
+              "word_count": data["word_count"],
+              "grouped_provider_boundary_count": normalization["grouped_provider_boundary_count"],
+              "final_word_level_ready": normalization["final_word_level_ready"],
+              "caption_file": str(ass),
+          })
+          PY
+
+      - name: Upload frozen caption artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: episode005-frozen-captions
+          path: artifacts/episode005-frozen
+          if-no-files-found: error

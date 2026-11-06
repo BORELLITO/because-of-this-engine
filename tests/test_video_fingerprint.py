@@ -5,6 +5,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from production.video_asset_contract import (
+    FINGERPRINT_ALGORITHM,
     FINGERPRINT_FRAME_BYTES,
     VideoContractError,
     _validate_clean_frame_layout,
@@ -40,6 +41,7 @@ class VideoFingerprintTests(unittest.TestCase):
         self.assertNotEqual(first, second)
         self.assertNotEqual(first, "f" * 64)
         self.assertEqual(len(first), 64)
+        self.assertEqual(FINGERPRINT_ALGORITHM, "video-fingerprint-v2-rgb24-q4")
 
     def test_hydrated_fingerprint_overrides_toolchain_drift_after_sha_check(self) -> None:
         with tempfile.NamedTemporaryFile(suffix=".mp4") as handle:

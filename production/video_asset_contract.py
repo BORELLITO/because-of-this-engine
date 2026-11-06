@@ -76,6 +76,7 @@ def sha256_file(path: Path) -> str:
 
 
 FINGERPRINT_VERSION = 2
+FINGERPRINT_ALGORITHM = "video-fingerprint-v2-rgb24-q4"
 FINGERPRINT_SAMPLE_FRACTIONS = (0.15, 0.35, 0.50, 0.65, 0.85)
 FINGERPRINT_FRAME_WIDTH = 24
 FINGERPRINT_FRAME_HEIGHT = 24
@@ -645,6 +646,25 @@ def validate_manifest(manifest: dict[str, Any], episode_dir: Path, *, mode: str 
     )
     if check_files and not alignment_sidecar.is_file():
         raise VideoContractError(f"Caption alignment sidecar is missing: {alignment_sidecar}")
+    if check_files:
+        try:
+            alignment_data = json.loads(alignment_sidecar.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+            raise VideoContractError(f"Caption alignment sidecar is unreadable: {alignment_sidecar}") from exc
+        normalization = alignment_data.get("word_timing_normalization") or {}
+        if normalization.get("final_word_level_ready") is False:
+            grouped = int(normalization.get("grouped_provider_boundary_count", 0) or 0)
+            provider_group_mode = (
+                alignment_data.get("status") == "EDGE_TTS_NATIVE_ALIGNMENT_PASS"
+                and alignment_data.get("provider") == "Microsoft Edge TTS"
+                and grouped > 0
+                and normalization.get("grouped_provider_boundaries_preserved") is True
+            )
+            if not provider_group_mode:
+                raise VideoContractError(
+                    "Caption sidecar is not final word-level ready: "
+                    f"{grouped} provider boundary group(s) remain unsplit; render is blocked."
+                )
     loop_logo_path = None
     loop = manifest.get("loop") or {}
     if loop.get("logo_enabled", False) is True:

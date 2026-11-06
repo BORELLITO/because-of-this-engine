@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
-"""Prove that the active Because Of This entrypoint is the V7.3 Charon engine only."""
-
+"""Compatibility singleton guard for the active engine policy."""
 from __future__ import annotations
-
 import argparse
 import json
 from pathlib import Path
@@ -10,29 +8,36 @@ from pathlib import Path
 from production.canonical_config import CANONICAL_PROFILE_ID, CANONICAL_PROFILE_FINGERPRINT
 from production.v7_contract import PROMPT_SHA256, PROMPT_VERSION, validate_prompt_and_schema
 
-
 class SingletonGuardError(RuntimeError):
     pass
-
 
 FORBIDDEN_ACTIVE_MARKERS = (
     "because-of-this-v2-locked-2026-10",
     "master_prompt_version: 6.0",
-        "elevenlabs",
+    "elevenlabs",
     "narrate.py",
 )
-
 
 def _active_workflow_paths(root: Path) -> list[Path]:
     workflow_root = root / ".github" / "workflows"
     return sorted(path for path in workflow_root.glob("*.yml") if path.name == "because-of-this-v7.yml")
 
-
 def audit(repo_root: Path) -> dict[str, object]:
     root = repo_root.resolve()
-    prompt = validate_prompt_and_schema(root)
     policy_path = root / "production" / "active_engine_policy.json"
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
+    if policy.get("active_engine_version") == "2.1":
+        from production.v21_singleton_guard import audit as audit_v21
+        result = audit_v21(root)
+        if result["status"] != "V21_SINGLETON_PASS":
+            raise SingletonGuardError("V2.1 singleton reconciliation blocked: " + "; ".join(result["failures"]))
+        return {
+            "status": "V21_SINGLE_ACTIVE_ENGINE_PASS",
+            "profile": policy.get("active_engine_profile"),
+            "canonical_entrypoint": policy.get("canonical_entrypoint"),
+            "legacy_execution": "blocked_and_archived",
+        }
+    prompt = validate_prompt_and_schema(root)
     if policy.get("active_engine_profile") != CANONICAL_PROFILE_ID:
         raise SingletonGuardError("active policy does not point to the V7.3 Charon profile")
     if policy.get("active_engine_fingerprint") != CANONICAL_PROFILE_FINGERPRINT:
@@ -52,16 +57,7 @@ def audit(repo_root: Path) -> dict[str, object]:
                 offenders.append(f"{path.relative_to(root)} contains forbidden active marker {marker}")
     if offenders:
         raise SingletonGuardError("; ".join(offenders))
-    return {
-        "status": "V7_SINGLE_ACTIVE_ENGINE_PASS",
-        "profile": CANONICAL_PROFILE_ID,
-        "fingerprint": CANONICAL_PROFILE_FINGERPRINT,
-        "prompt_version": PROMPT_VERSION,
-        "prompt_sha256": PROMPT_SHA256,
-        "workflow": str(workflows[0].relative_to(root)),
-        "legacy_execution": "blocked_and_archived",
-    }
-
+    return {"status": "V7_SINGLE_ACTIVE_ENGINE_PASS", "profile": CANONICAL_PROFILE_ID, "fingerprint": CANONICAL_PROFILE_FINGERPRINT, "prompt_version": PROMPT_VERSION, "prompt_sha256": PROMPT_SHA256, "workflow": str(workflows[0].relative_to(root)), "legacy_execution": "blocked_and_archived"}
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -71,9 +67,8 @@ def main() -> int:
         print(json.dumps(audit(args.repo_root), ensure_ascii=False, indent=2))
         return 0
     except (OSError, ValueError, json.JSONDecodeError, SingletonGuardError) as exc:
-        print(f"V7 SINGLETON BLOCKED: {exc}")
+        print(f"SINGLETON BLOCKED: {exc}")
         return 1
-
 
 if __name__ == "__main__":
     raise SystemExit(main())

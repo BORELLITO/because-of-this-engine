@@ -33,15 +33,62 @@ ONES = [
     "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
     "sixteen", "seventeen", "eighteen", "nineteen",
 ]
-TENS = ["", "", "twenty", "thirty", "forty", "fifty"]
-
+TENS = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
 
 def _number_words(value: int) -> list[str]:
     if 0 <= value < len(ONES):
         return [ONES[value]]
-    if 20 <= value < 60:
+    if 20 <= value < 100:
         return [TENS[value // 10]] + ([] if value % 10 == 0 else [ONES[value % 10]])
+    if 100 <= value < 1000:
+        hundreds, remainder = divmod(value, 100)
+        return _number_words(hundreds) + ["hundred"] + ([] if remainder == 0 else _number_words(remainder))
     return [str(value)]
+
+
+def _number_variants(value: int) -> list[list[str]]:
+    """Map a written number to bounded spoken forms without inventing timing."""
+    variants: list[list[str]] = [[_normalise(str(value))]]
+    words = _number_words(value)
+    # Dates are commonly spoken with ordinal day numbers even when the
+    # canonical script uses digits (for example, "September 26, 1983").
+    # These are lexical recognition variants only; alignment still requires a
+    # real Whisper/Vosk timestamp for every accepted unit.
+    ordinal_ones = {
+        1: "first", 2: "second", 3: "third", 4: "fourth", 5: "fifth",
+        6: "sixth", 7: "seventh", 8: "eighth", 9: "ninth", 10: "tenth",
+        11: "eleventh", 12: "twelfth", 13: "thirteenth", 14: "fourteenth",
+        15: "fifteenth", 16: "sixteenth", 17: "seventeenth", 18: "eighteenth",
+        19: "nineteenth", 20: "twentieth", 21: "twenty-first", 22: "twenty-second",
+        23: "twenty-third", 24: "twenty-fourth", 25: "twenty-fifth",
+        26: "twenty-sixth", 27: "twenty-seventh", 28: "twenty-eighth",
+        29: "twenty-ninth", 30: "thirtieth", 31: "thirty-first",
+    }
+    if value in ordinal_ones:
+        ordinal = ordinal_ones[value].split("-")
+        # Keep the ordinal form as an additional variant below; do not
+        # mutate the cardinal form used by the normal number variants.
+        ordinal_words = [_normalise(token) for token in ordinal]
+    else:
+        ordinal_words = []
+    if words != [str(value)]:
+        variants.append(words)
+        if ordinal_words:
+            variants.append(ordinal_words)
+        if len(words) > 1:
+            variants.append(["".join(words)])
+    if 1000 <= value <= 2099:
+        century, remainder = divmod(value, 100)
+        if remainder:
+            variants.append(_number_words(century) + _number_words(remainder))
+            variants.append(_number_words(century) + ["hundred"] + _number_words(remainder))
+            variants.append(["one", "thousand"] + _number_words(value % 1000))
+    unique: list[list[str]] = []
+    for variant in variants:
+        normalized = [_normalise(token) for token in variant if _normalise(token)]
+        if normalized and normalized not in unique:
+            unique.append(normalized)
+    return unique
 
 
 def _normalise(value: str) -> str:
@@ -67,10 +114,14 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
             ]))
             index += 3
             continue
+        if raw[index].isdigit():
+            result.append((raw[index], _number_variants(int(raw[index]))))
+            index += 1
+            continue
         token = _normalise(raw[index])
         if token:
             short_word_variants = {
-                "a": [["a"], ["uh"], ["ah"]],
+                "a": [["a"], ["uh"], ["ah"], ["as"]],
                 "an": [["an"], ["un"]],
                 "the": [["the"], ["uh"], ["thuh"], ["thee"]],
                 "to": [["to"], ["two"], ["tuh"]],
@@ -82,6 +133,7 @@ def _units(text: str) -> list[tuple[str, list[list[str]]]]:
                 "at": [["at"], ["ət"]],
                 "is": [["is"], ["iz"]],
                 "was": [["was"], ["wuz"]],
+                "five": [["five"], ["5"]],
                 # Vosk may realize the unstressed vowel in “than” as “then”.
                 # This is an explicit lexical ASR variant only; timing still
                 # comes from the real Vosk word timestamp in the final WAV.
@@ -187,7 +239,7 @@ def _align_chunk(
         # therefore begin several recognized tokens after the previous one,
         # especially when Vosk emits segment results. Search a generous,
         # bounded lookahead but still keep the timeline strictly monotonic.
-        window_end = min(len(asr_words), search_cursor + 48)
+        window_end = min(len(asr_words), search_cursor + 12)
         for candidate in range(search_cursor, window_end):
             match = _match_at(asr_words, candidate, alternatives)
             if not match:
@@ -748,11 +800,27 @@ def generate(
         if secondary_model_path is not None:
             try:
                 secondary_words = _recognize(audio_path, secondary_model_path)
-                asr_words = _merge_word_timings(asr_words, secondary_words)
+                # Keep the secondary recognizer as an independent timeline.
+                # Merging two full acoustic passes interleaves duplicate or
+                # hallucinated tokens and destroys monotonic phrase order.
+                asr_words = secondary_words
                 events, sidecar_chunks = _align_chunks(chunks, asr_words)
                 secondary_aligned = True
             except AlignmentError as error:
                 secondary_error = error
+
+        if not secondary_aligned:
+            # The two real acoustic passes may contain every content word but
+            # miss one unstressed function word at a phrase boundary. The
+            # existing bounded recovery is allowed only for that lexical class;
+            # it never estimates timestamps for dates, names, or other content.
+            try:
+                events, sidecar_chunks = _align_chunks(
+                    chunks, asr_words, recover_missing=True
+                )
+                secondary_aligned = True
+            except AlignmentError:
+                pass
 
         if not secondary_aligned:
             constrained_vocabulary = _canonical_vocabulary(script)
