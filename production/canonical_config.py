@@ -96,7 +96,7 @@ CANONICAL_PROFILE: dict[str, Any] = {
             "alignment": 2,
             "margin_l": 100,
             "margin_r": 100,
-            "margin_v": 320,
+            "margin_v": 520,
             "encoding": 1,
         },
     },
@@ -150,15 +150,16 @@ def _canonical_json(value: Any) -> bytes:
 CANONICAL_PROFILE_FINGERPRINT = hashlib.sha256(_canonical_json(CANONICAL_PROFILE)).hexdigest()
 
 
-def caption_ass_style_line(name: str = "Default") -> str:
+def caption_ass_style_line(name: str = "Default", margin_v: int | None = None) -> str:
     style = CANONICAL_PROFILE["captions"]["style"]
+    resolved_margin_v = style["margin_v"] if margin_v is None else int(margin_v)
     fields = (
         name, style["font_name"], style["font_size"], style["primary_color"],
         style["secondary_color"], style["outline_color"], style["back_color"],
         style["bold"], style["italic"], style["underline"], style["strike_out"],
         style["scale_x"], style["scale_y"], style["spacing"], style["angle"],
         style["border_style"], style["outline"], style["shadow"], style["alignment"],
-        style["margin_l"], style["margin_r"], style["margin_v"], style["encoding"],
+        style["margin_l"], style["margin_r"], resolved_margin_v, style["encoding"],
     )
     return "Style: " + ",".join(str(value) for value in fields)
 
