@@ -34,7 +34,7 @@ def test_creative_preview_requires_approved_charon_identity() -> None:
         _write_wav(audio)
         profile = root / "voice-profile.json"
         profile.write_text(json.dumps(_profile(audio)), encoding="utf-8")
-        assert validate_voice_profile(profile, audio)["voice_id"] == "charon"
+        assert validate_voice_profile(profile, audio)["voice_name"] == "Charon"
 
 
 def test_creative_preview_rejects_edge_voice_profile() -> None:
@@ -44,7 +44,7 @@ def test_creative_preview_rejects_edge_voice_profile() -> None:
         _write_wav(audio)
         data = _profile(audio)
         data["provider"] = "microsoft_edge_tts"
-        data["voice_id"] = "en-US-ChristopherNeural"
+        data["voice_name"] = "en-US-ChristopherNeural"
         profile = root / "voice-profile.json"
         profile.write_text(json.dumps(data), encoding="utf-8")
         try:
