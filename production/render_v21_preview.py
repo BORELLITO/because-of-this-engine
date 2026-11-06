@@ -83,7 +83,26 @@ def parse_range(value: str) -> tuple[float, float]:
     return start_seconds, end_seconds
 
 
-def build_scene_plan(scene_manifest: dict[str, Any], story: dict[str, Any]) -> list[dict[str, Any]]:
+def story_timeline_duration(story: dict[str, Any]) -> float:
+    """Return the authored timeline length before audio-driven normalization."""
+    durations: list[float] = []
+    for shot in story.get("shot_plan", []):
+        start, end = parse_range(str(shot.get("range", "")))
+        durations.append(end - start)
+    if not durations:
+        raise PreviewRenderError("Story shot plan is empty.")
+    total = sum(durations)
+    if total <= 0:
+        raise PreviewRenderError("Story shot plan has no positive duration.")
+    return total
+
+
+def build_scene_plan(
+    scene_manifest: dict[str, Any],
+    story: dict[str, Any],
+    *,
+    target_duration: float | None = None,
+) -> list[dict[str, Any]]:
     assets = {
         str(item.get("candidate_id")): item
         for item in scene_manifest.get("assets", [])
@@ -113,8 +132,34 @@ def build_scene_plan(scene_manifest: dict[str, Any], story: dict[str, Any]) -> l
         })
     if len(plan) != 16 or len({item["candidate_id"] for item in plan}) != 16:
         raise PreviewRenderError("Episode 005 preview requires 16 distinct assigned assets.")
-    return plan
 
+    if target_duration is not None:
+        if target_duration <= 0:
+            raise PreviewRenderError("Target timeline duration must be positive.")
+        source_duration = sum(float(item["duration"]) for item in plan)
+        if source_duration <= 0:
+            raise PreviewRenderError("Authored timeline duration must be positive.")
+        if target_duration < len(plan) * 2.0:
+            raise PreviewRenderError(
+                "Target audio is too short for the minimum two-second scene policy."
+            )
+        scale = target_duration / source_duration
+        elapsed = 0.0
+        for index, scene in enumerate(plan):
+            authored_duration = float(scene["duration"])
+            scene["timeline_source_duration"] = authored_duration
+            if index == len(plan) - 1:
+                duration = target_duration - elapsed
+            else:
+                duration = authored_duration * scale
+            if duration <= 0:
+                raise PreviewRenderError(
+                    f"Audio-driven timeline produced a non-positive duration for {scene['shot_id']}."
+                )
+            scene["duration"] = duration
+            elapsed += duration
+
+    return plan
 
 def escape_filter_path(path: Path) -> str:
     return str(path).replace("\\", "\\\\").replace(":", r"\:").replace("'", r"\'")
@@ -196,19 +241,26 @@ def render_preview(
 ) -> dict[str, Any]:
     scene_manifest = json.loads(scene_manifest_path.read_text(encoding="utf-8"))
     story = json.loads(story_path.read_text(encoding="utf-8"))
-    plan = build_scene_plan(scene_manifest, story)
+    authored_scene_seconds = story_timeline_duration(story)
     if not captions_path.is_file():
         raise PreviewRenderError("Frozen narration.ass is required.")
     if not music_path.is_file():
         raise PreviewRenderError("Deterministic suspense bed is required.")
     if not logo_path.is_file():
         raise PreviewRenderError("Canonical Because Of This logo is required.")
-    voice_profile = validate_voice_profile(voice_profile_path, audio_path)
+    if not audio_path.is_file():
+        raise PreviewRenderError(f"Narration file is missing: {audio_path}")
     audio_seconds = media_duration(audio_path)
     if not 60.0 <= audio_seconds <= 75.0:
         raise PreviewRenderError(
             f"Creative narration duration must be between 60 and 75 seconds; got {audio_seconds:.3f}."
         )
+    voice_profile = validate_voice_profile(voice_profile_path, audio_path)
+    plan = build_scene_plan(
+        scene_manifest,
+        story,
+        target_duration=audio_seconds,
+    )
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="because-of-this-v21-preview-") as raw:
         work = Path(raw)
@@ -277,7 +329,10 @@ def render_preview(
         "creative_profile": CREATIVE_PROFILE,
         "scene_count": len(plan),
         "scene_duration_seconds": round(sum(float(item["duration"]) for item in plan), 3),
+        "authored_scene_duration_seconds": round(authored_scene_seconds, 3),
         "audio_duration_seconds": round(audio_seconds, 3),
+        "timeline_scale_factor": round(audio_seconds / authored_scene_seconds, 6),
+        "timeline_scaling_applied": abs(audio_seconds - authored_scene_seconds) > 0.001,
         "tail_extension_seconds": round(max(0.0, audio_seconds - sum(float(item["duration"]) for item in plan)), 3),
         "voice": voice_profile,
         "music": {
