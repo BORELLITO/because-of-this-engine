@@ -40,9 +40,9 @@ jobs:
             mkdir -p "${tools_dir}"
             curl --fail --location --retry 3 --retry-all-errors --retry-delay 2 \
               --connect-timeout 30 --max-time 360 \
-              "https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2026-11-04-12-51/ffmpeg-master-latest-linux64-gpl-shared.tar.xz" \
+              "https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2026-11-04-12-51/ffmpeg-N-128406-g1fe6854fd9-linux64-gpl-shared.tar.xz" \
               --output "${archive}"
-            echo "7a48db803a3f894ecbcb56e25e29e73ec9dbbd46568c3731de536c5ccdc70856  ${archive}" | sha256sum --check --status
+            echo "67be0e5f0a91cd4fcd98b89eb35df6201e2b2c8357552e67e0c8b8d26a2979ff  ${archive}" | sha256sum --check --status
             tar -xJf "${archive}" -C "${tools_dir}"
             ffmpeg_path="$(find "${tools_dir}" -type f -name ffmpeg -perm -111 | head -n 1)"
             ffprobe_path="$(find "${tools_dir}" -type f -name ffprobe -perm -111 | head -n 1)"
