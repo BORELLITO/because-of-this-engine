@@ -162,10 +162,13 @@ def _align_chunks_with_vosk_fallback(
     """
     events: list[dict[str, Any]] = []
     sidecar_chunks: list[dict[str, Any]] = []
-    whisper_cursor = 0
-    vosk_cursor = 0
     previous_end = 0.0
     for chunk in chunks:
+        # Start each phrase from the final timestamp of the preceding phrase.
+        # A fallback cannot therefore carry a stale token index into the other
+        # recognizer's independent transcript.
+        whisper_cursor = _advance_cursor(whisper_words, 0, previous_end)
+        vosk_cursor = _advance_cursor(vosk_words, 0, previous_end)
         chosen: tuple[float, float, int, list[dict[str, Any]]] | None = None
         source = "faster-whisper"
         try:
@@ -181,12 +184,8 @@ def _align_chunks_with_vosk_fallback(
         events.append({"start": start, "end": end, "text": chunk})
         sidecar_chunks.append({"text": chunk, "words": positions, "timestamp_provider": source})
         previous_end = end
-        if source == "faster-whisper":
-            whisper_cursor = next_cursor
-            vosk_cursor = _advance_cursor(vosk_words, vosk_cursor, end)
-        else:
-            vosk_cursor = next_cursor
-            whisper_cursor = _advance_cursor(whisper_words, whisper_cursor, end)
+        # Cursors are recomputed from the real phrase boundary above; do not
+        # transfer source-local token indexes across recognizers.
     return events, sidecar_chunks
 
 
