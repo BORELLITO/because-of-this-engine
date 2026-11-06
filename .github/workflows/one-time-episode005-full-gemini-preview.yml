@@ -150,11 +150,11 @@ jobs:
           }, ensure_ascii=False))
           PY
 
-      - name: Download Vosk small English model
+      - name: Download stronger English Vosk model
         run: |
           set -euo pipefail
           mkdir -p "${RUNNER_TEMP}/vosk"
-          curl --fail --location --retry 2 --connect-timeout 20 --max-time 180             "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip"             --output "${RUNNER_TEMP}/vosk/model.zip"
+          curl --fail --location --retry 2 --connect-timeout 20 --max-time 180             "https://alphacephei.com/vosk/models/vosk-model-en-us-0.22-lgraph.zip"             --output "${RUNNER_TEMP}/vosk/model.zip"
           unzip -q "${RUNNER_TEMP}/vosk/model.zip" -d "${RUNNER_TEMP}/vosk"
 
       - name: Build forced-caption manifest
@@ -181,7 +181,7 @@ jobs:
       - name: Generate forced captions from final Gemini WAV
         run: |
           set -euo pipefail
-          PYTHONPATH=. python production/align_captions.py             --manifest artifacts/episode005-gemini/caption-manifest.json             --model-dir "${RUNNER_TEMP}/vosk/vosk-model-small-en-us-0.15"
+          PYTHONPATH=. python production/align_captions.py             --manifest artifacts/episode005-gemini/caption-manifest.json             --model-dir "${RUNNER_TEMP}/vosk/vosk-model-en-us-0.22-lgraph"
 
       - name: Validate forced captions
         run: |
