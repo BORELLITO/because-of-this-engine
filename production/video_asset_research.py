@@ -176,9 +176,17 @@ def query_variants_for_scene(
     if len(unique) >= 5:
         variants.append(" ".join(unique[:6]))
     if visual_profile:
-        continuity_query = " ".join(
-            _tokens(" ".join(continuity_search_terms(scene, visual_profile)))[:12]
-        )
+        # Keep at least one controlled term from every continuity dimension so
+        # texture/era constraints cannot disappear behind a long narrative beat.
+        raw_tags = scene.get("continuity_tags") or scene.get("visual_continuity_tags") or {}
+        structured_terms: list[str] = []
+        for dimension in ("era", "setting", "time_of_day", "lighting", "texture", "palette"):
+            values = raw_tags.get(dimension, []) if isinstance(raw_tags, dict) else []
+            if not values:
+                values = (visual_profile.get("world") or {}).get(dimension, [])
+            structured_terms.extend(_terms(values[:1] if isinstance(values, list) else [values]))
+        structured_terms.extend(continuity_search_terms(scene, visual_profile))
+        continuity_query = " ".join(_tokens(" ".join(structured_terms))[:18])
         if continuity_query and continuity_query not in variants:
             variants.append(continuity_query)
     if excerpt:
