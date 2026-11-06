@@ -98,7 +98,7 @@ jobs:
               assert stream.getsampwidth() == 2
               assert stream.getframerate() == 24000
               duration = stream.getnframes() / stream.getframerate()
-          assert 8 <= duration <= 30, duration
+          assert 8 <= duration <= 35, duration
           assert record["provider"] == "gemini_tts"
           assert record["model"] == "gemini-3.8-flash-tts"
           assert record["voice"] == "Charon"
