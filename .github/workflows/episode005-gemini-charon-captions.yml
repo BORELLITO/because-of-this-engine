@@ -71,18 +71,8 @@ jobs:
           }))
           PY
 
-      - name: Install alignment dependency
-        run: python -m pip install --disable-pip-version-check vosk==0.3.45
-
-      - name: Download higher-accuracy English alignment model
-        run: |
-          set -euo pipefail
-          mkdir -p .cache/vosk
-          curl --fail --location --silent --show-error \
-            https://alphacephei.com/vosk/models/vosk-model-en-us-0.22-lgraph.zip \
-            -o .cache/vosk/model.zip
-          unzip -q .cache/vosk/model.zip -d .cache/vosk
-          test -d .cache/vosk/vosk-model-en-us-0.22-lgraph
+      - name: Install word-timestamp alignment dependency
+        run: python -m pip install --disable-pip-version-check faster-whisper==1.1.1
 
       - name: Build Gemini caption manifest
         run: |
@@ -108,9 +98,9 @@ jobs:
 
       - name: Generate forced Gemini Charon captions
         run: |
-          PYTHONPATH=. python production/align_captions.py \
+          PYTHONPATH=. python production/whisper_captions.py \
             --manifest artifacts/episode005-gemini-charon/caption-manifest.json \
-            --model-dir .cache/vosk/vosk-model-en-us-0.22-lgraph
+            --model base.en
 
       - name: Validate real-timestamp karaoke captions
         run: |
@@ -122,8 +112,8 @@ jobs:
           sidecar = root / "narration.alignment.json"
           assert ass.is_file() and ass.stat().st_size > 0, ass
           data = json.loads(sidecar.read_text(encoding="utf-8"))
-          assert data["status"] == "FORCED_ALIGNMENT_PASS", data
-          assert data["provider"] == "Vosk", data
+          assert data["status"] == "WHISPER_FORCED_ALIGNMENT_PASS", data
+          assert data["provider"] == "faster-whisper", data
           assert data["word_count"] > 0, data
           assert data["word_timing_normalization"]["timeline_monotonic"] is True, data
           assert data["captions"], data
