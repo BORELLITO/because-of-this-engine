@@ -1,7 +1,7 @@
 {
   "plan_id": "episode-005-visual-asset-acquisition-v1",
   "episode_id": "episode-005",
-  "status": "PARTIAL_MANIFEST_VALIDATED_BLOCKED_RENDER",
+  "status": "SEARCH_V5_SHORTLIST_RECORDED",
   "purpose": "Pre-download candidate pool for Episode 005. No candidate is approved for render until downloaded, SHA-256ed, visually inspected, checked for embedded text/logos/letterbox, fingerprinted, and entered into the final video manifest.",
   "frozen_audio_source": {
     "workflow_run_id": 41961294784,
@@ -3436,9 +3436,250 @@
         "fingerprint_evidence": "artifact 13481742998 / fingerprint-audit.json"
       },
       "next_review": "Confirm final 9x16 crop excludes NASA date labels and add required credit in description; do not treat as literal Petrov sensor footage."
+    },
+    {
+      "candidate_id": "pexels-11764431",
+      "source_page_url": "https://www.pexels.com/video/man-using-walkie-talkie-in-bunker-11764431/",
+      "role": "S03",
+      "visual_match": "STRONG",
+      "visual_intent": "Representational human-anchor reconstruction: a man writes and uses a radio in a dim room, preserving operator focus without claiming literal Petrov archival footage.",
+      "truth_class": "REPRESENTATIONAL",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "license_name": "Pexels License",
+      "source_tier": "stock_auto",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T06:24:12.609Z",
+        "observed_license": "Free",
+        "observed_metadata": "1920x1080, 29.97 fps, 19 seconds; man writes in a notebook and uses a radio in a dimly lit room",
+        "media_route": "Pexels download redirect resolved to videos.pexels.com"
+      },
+      "media_url": "https://videos.pexels.com/video-files/11764431/11764431-hd_1920_1080_30fps.mp4",
+      "continuity_tags": {
+        "era": [
+          "period_compatible",
+          "cold_war",
+          "analog"
+        ],
+        "setting": [
+          "early_warning_command",
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows",
+          "restrained_amber"
+        ],
+        "palette": [
+          "charcoal",
+          "steel",
+          "amber"
+        ],
+        "texture": [
+          "brushed_metal",
+          "low_light_grain",
+          "paper_logbook"
+        ]
+      },
+      "continuity_risk_flags": [
+        "representational_operator_not_archival",
+        "workshop_like_background_requires_crop_and_grade",
+        "source_audio_must_be_stripped_in_render"
+      ],
+      "selection_status": "SHORTLIST_ONLY",
+      "score_breakdown": {
+        "semantic_fit": 0.9,
+        "continuity_coherence": 0.87,
+        "license_confidence": 1,
+        "vertical_crop_quality": 0.84,
+        "clean_frame_quality": 0.86,
+        "source_distinctness": 1
+      },
+      "manual_rights_review": "Pexels page-level free-use evidence observed; visual-only render path must strip source audio.",
+      "media_url_observed_by_http_probe": true,
+      "media_url_verification": {
+        "method": "HTTP HEAD probe plus local download/ffprobe",
+        "status": "PASS",
+        "content_type": "video/mp4",
+        "content_length_bytes": 3507016,
+        "observed_dimensions": "1280x720",
+        "duration_seconds": 18.965,
+        "frame_rate": "30000/1001",
+        "codec": "h264",
+        "audio_present": true
+      },
+      "next_review": "Confirm the centered 9x16 crop keeps the operator and radio while minimizing the workshop shelf context; reject if the crop reads as contemporary home workshop."
+    },
+    {
+      "candidate_id": "pexels-4285872",
+      "source_page_url": "https://www.pexels.com/video/stop-play-buttons-record-4285872/",
+      "role": "S04,S09",
+      "visual_match": "STRONG",
+      "visual_intent": "Dark analog tape-deck/control-panel insert with mechanical PLAY, REC, STOP, REW and FF actions to represent alert propagation or classification input; not the actual Soviet system.",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "license_name": "Pexels License",
+      "source_tier": "stock_auto",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T06:24:12.609Z",
+        "observed_license": "Free",
+        "observed_metadata": "1920x1080, 29.97 fps, 6 seconds; close-up of a tape recorder control panel with buttons and digital timer",
+        "media_route": "Pexels download redirect resolved to videos.pexels.com"
+      },
+      "media_url": "https://videos.pexels.com/video-files/4285872/4285872-hd_1920_1080_30fps.mp4",
+      "continuity_tags": {
+        "era": [
+          "period_compatible",
+          "cold_war",
+          "analog"
+        ],
+        "setting": [
+          "technical_control_room",
+          "early_warning_command"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_red",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red",
+          "amber"
+        ],
+        "texture": [
+          "metal",
+          "crt_phosphor",
+          "low_light_grain"
+        ]
+      },
+      "continuity_risk_flags": [
+        "generic_tape_deck_not_command_chain",
+        "readable_english_control_labels",
+        "digital_timer_requires_period_coherence_review",
+        "source_audio_must_be_stripped_in_render"
+      ],
+      "selection_status": "SHORTLIST_ONLY",
+      "score_breakdown": {
+        "semantic_fit": 0.83,
+        "continuity_coherence": 0.82,
+        "license_confidence": 1,
+        "vertical_crop_quality": 0.8,
+        "clean_frame_quality": 0.86,
+        "source_distinctness": 1
+      },
+      "manual_rights_review": "Pexels page-level free-use evidence observed; use only as representational reconstruction and strip source audio in render.",
+      "media_url_observed_by_http_probe": true,
+      "media_url_verification": {
+        "method": "HTTP HEAD probe plus local download/ffprobe",
+        "status": "PASS",
+        "content_type": "video/mp4",
+        "content_length_bytes": 3981671,
+        "observed_dimensions": "1920x1080",
+        "duration_seconds": 6.015,
+        "frame_rate": "30000/1001",
+        "codec": "h264",
+        "audio_present": true
+      },
+      "next_review": "Compare full-frame and 9x16 samples against S03/S05/S06 palette; reject if digital timer or English labels overpower the abstract command-chain meaning."
+    },
+    {
+      "candidate_id": "pexels-6520278",
+      "source_page_url": "https://www.pexels.com/video/person-flicking-switches-6520278/",
+      "role": "S04",
+      "visual_match": "NEAR",
+      "visual_intent": "Representational multi-switch control-panel action for alert propagation; natural panel labels are scene content, never literal Petrov interface evidence.",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "provider": "pexels",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "license_name": "Pexels License",
+      "source_tier": "stock_auto",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T06:24:12.609Z",
+        "observed_license": "Free",
+        "observed_metadata": "3840x2160, 23.98 fps, 9 seconds; close-up hand flicking switches on an electrical panel",
+        "media_route": "Pexels download redirect resolved to videos.pexels.com"
+      },
+      "media_url": "https://videos.pexels.com/video-files/6520278/6520278-uhd_3840_2160_24fps.mp4",
+      "continuity_tags": {
+        "era": [
+          "period_compatible",
+          "analog"
+        ],
+        "setting": [
+          "technical_control_room",
+          "early_warning_command"
+        ],
+        "time_of_day": [
+          "indeterminate_low_light",
+          "night"
+        ],
+        "lighting": [
+          "cool_shadows",
+          "low_key"
+        ],
+        "palette": [
+          "steel",
+          "charcoal",
+          "warning_red",
+          "amber"
+        ],
+        "texture": [
+          "metal",
+          "brushed_metal",
+          "low_light_grain"
+        ]
+      },
+      "continuity_risk_flags": [
+        "bright_blue_panel_high_key_conflict",
+        "industrial_panel_not_bunker_specific",
+        "natural_labels_require_crop_review",
+        "no_source_audio_observed"
+      ],
+      "selection_status": "SHORTLIST_ONLY",
+      "score_breakdown": {
+        "semantic_fit": 0.86,
+        "continuity_coherence": 0.7,
+        "license_confidence": 1,
+        "vertical_crop_quality": 0.83,
+        "clean_frame_quality": 0.87,
+        "source_distinctness": 1
+      },
+      "manual_rights_review": "Pexels page-level free-use evidence observed; source is a visual-only candidate with no audio stream observed in local ffprobe.",
+      "media_url_observed_by_http_probe": true,
+      "media_url_verification": {
+        "method": "HTTP HEAD probe plus local download/ffprobe",
+        "status": "PASS",
+        "content_type": "video/mp4",
+        "content_length_bytes": 25742378,
+        "observed_dimensions": "3840x2160",
+        "duration_seconds": 9.009,
+        "frame_rate": "24000/1001",
+        "codec": "h264",
+        "audio_present": false
+      },
+      "next_review": "Use only if the crop and grade suppress the blue/high-key context; otherwise keep as rejected fallback and prefer a darker period-compatible control surface."
     }
   ],
-  "next_action": "Acquire and fingerprint distinct period-compatible replacements for S03, S04, S09 and S12; keep S06/S11 manifest-only until editorial continuity review is complete.",
+  "next_action": "Dispatch isolated intake for search-v5 candidates pexels-11764431, pexels-4285872 and pexels-6520278; perform five-sample and centered 9x16 QA, then fingerprint only candidates that survive visual review. Keep S03/S04/S09/S12 unassigned and render blocked.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -4298,24 +4539,23 @@
     "next_action": "Find new candidates for S03/S04 and finish final crop/credit review for S09/S12; do not promote or render."
   },
   "last_candidate_addition": {
-    "added_at_utc": "2026-11-06T00:00:00Z",
+    "added_at_utc": "2026-11-06T06:24:12.609Z",
     "candidate_ids": [
-      "pixabay-radio-channel-solid-music-125871",
-      "mixkit-inside-rear-control-cabin-4460",
-      "pexels-12213087",
-      "nasa-svs-noctilucent-clouds-20002"
+      "pexels-11764431",
+      "pexels-4285872",
+      "pexels-6520278"
     ],
-    "rationale": "Search-v4 hard-conflict recovery adds one distinct, page-verified candidate per blocked shot. The batch mixes Pixabay, Mixkit, Pexels and NASA government media while keeping every candidate shortlist-only and unassigned.",
-    "source_page_and_license_verification": "Four source pages were reviewed. Pixabay, Mixkit and Pexels page-level free-use evidence was observed; NASA SVS page and its public-domain help guidance were recorded for per-asset manual rights review.",
-    "continuity_review": "S03 uses a vintage radio-control human anchor; S04 uses analog gauges/levers; S09 uses a dark tactile control insert; S12 uses a night-side explanatory cloud visualization to preserve S11->S12 adjacency without a day/night flip.",
+    "rationale": "Search-v5 expands the blocked-shot recovery lane with a period-compatible human operator and two analog control-panel alternatives sourced from Pexels. Candidates remain shortlist-only; no active manifest assignment changes.",
+    "source_page_and_license_verification": "Pexels source pages were reviewed for Free-use evidence and direct media routes were resolved to videos.pexels.com. Local ffprobe confirmed the recorded dimensions, duration, frame rate and audio presence.",
+    "continuity_review": "S03 prioritizes a dim-room radio operator over modern tablet/workshop imagery. S04 compares a dark tape-deck action against a multi-switch panel; 6520278 is explicitly fallback because of its bright blue/high-key context. Candidate 4285872 may serve S09 only if its labels/timer remain subordinate.",
     "render_block": true,
     "intake_dispatched": false,
     "promotion_allowed": false,
     "media_route_verification": {
       "status": "PASS",
-      "method": "HTTP HEAD/source-page verification",
-      "direct_media_routes_recorded": 4,
-      "notes": "The three newly selected download routes are now explicit; no candidate is promoted or assigned by this change."
+      "method": "Pexels page review plus HTTP HEAD/local ffprobe",
+      "direct_media_routes_recorded": 3,
+      "notes": "All three routes resolve to video/mp4; source audio is stripped by the renderer and does not enter the narration mix."
     }
   },
   "last_human_approval": {
@@ -4402,8 +4642,8 @@
     "continuity_coverage_score": 0.8812,
     "note": "CI revalidated the expanded shortlist. The four search-v4 candidates remain plan-only; active manifest assignments and the strict preview block are unchanged."
   },
-  "last_adjustment": "Fingerprint audit run 42172605438 passed for all four downloaded candidates with zero global/source/hash collisions. Visual QA formally rejected S03/S04; S09/S12 remain unassigned and pending final review.",
-  "next_gate": "Search and intake distinct period-compatible replacements for S03 and S04; finish S09/S12 crop/credit approval. Only then update the manifest and rerun the visual continuity contract. Render remains blocked.",
+  "last_adjustment": "Search-v5 added a dim-room radio operator and two analog control-panel alternatives for the S03/S04 hard conflicts; active manifest remains unchanged and render remains blocked.",
+  "next_gate": "Complete search-v5 visual QA and fingerprint audit. Assign S03/S04 only after period, palette and adjacency coherence pass; finalize S09/S12 crop/credit review separately.",
   "render_approval_record": {
     "status": "APPROVED",
     "approved_at_utc": "2026-11-05T22:56:14Z",
@@ -4752,6 +4992,44 @@
         "pexels-12213087",
         "nasa-svs-noctilucent-clouds-3484"
       ]
+    },
+    {
+      "batch_id": "search-v5-episode005-period-recovery-20261106",
+      "created_at_utc": "2026-11-06T06:24:12.609Z",
+      "status": "SHORTLIST_ONLY_AWAITING_INTAKE",
+      "mode": "SHORTLIST_PLUS_ISOLATED_INTAKE_NO_PROMOTION",
+      "target_shots": [
+        "S03",
+        "S04",
+        "S09"
+      ],
+      "shortlist_candidate_ids": [
+        "pexels-11764431",
+        "pexels-4285872",
+        "pexels-6520278"
+      ],
+      "source_pages_reviewed": 3,
+      "direct_media_routes_recorded": 3,
+      "intake_dispatched": false,
+      "fingerprint_dispatched": false,
+      "human_approval_pending": true,
+      "render_allowed": false,
+      "promotion_allowed": false,
+      "global_catalog_updated": false,
+      "drive_written": false,
+      "publication_allowed": false,
+      "criteria": [
+        "human-anchor plausibility",
+        "period-compatible analog surface",
+        "night low-key continuity",
+        "9x16 crop",
+        "clean frame",
+        "source distinctness",
+        "page-level license and media-host verification"
+      ],
+      "rejection_policy": "Reject after intake if full-duration QA reveals contemporary home/industrial context, bright high-key conflict, readable labels that become the story, watermark, source collision or unacceptable crop.",
+      "next_action": "Dispatch isolated intake, inspect full-frame and centered 9x16 contact sheets, then fingerprint only visually viable candidates.",
+      "contract_validation": "PENDING_INTAKE"
     }
   ],
   "last_intake_attempt": {
