@@ -5,7 +5,7 @@
   "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
   "editorial_mode": "factual_documentary",
   "title": "THE NIGHT THE MACHINE LIED",
-  "status": "PARTIAL_MANIFEST_REVALIDATION_REQUIRED_BLOCKED_RENDER",
+  "status": "PARTIAL_MANIFEST_VALIDATED_BLOCKED_RENDER",
   "purpose": "Human-approved candidate-to-shot assignments before final production promotion.",
   "source_plan": "episodes/episode-005/visual/asset-acquisition-plan.json",
   "approval_record": {
@@ -1927,14 +1927,14 @@
   "unresolved_shots": [],
   "promotion_gates": {
     "every_shot_assigned": true,
-    "final_visual_manifest_validated": false,
+    "final_visual_manifest_validated": true,
     "global_catalog_update_authorized": false,
     "thumbnail_final_required": true,
     "render_authorized": false,
     "drive_write_authorized": false,
     "publication_authorized": false
   },
-  "next_action": "Run the visual-plan contract on the updated S03/S09 assignments; then continue S04 dark-panel search and S12 final crop/credit review. Do not render, write Drive, mutate the global catalog or publish.",
+  "next_action": "Search and intake a dark period-compatible S04 control-panel candidate; complete S12 crop/credit review or replace it; rerun continuity. Do not render, write Drive, mutate the global catalog or publish.",
   "reuse_policy": {
     "source_reuse_scope": "global",
     "distinct_source_required_per_shot": true,
@@ -2160,10 +2160,10 @@
     }
   ],
   "final_visual_manifest_validation": {
-    "validated_at_utc": "2026-11-06T06:41:18Z",
-    "status": "REVALIDATION_REQUIRED_AFTER_SEARCH_V5_MANIFEST_REPLACEMENTS",
+    "validated_at_utc": "2026-11-06T06:41:53Z",
+    "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
     "validator": "production/visual_plan_contract.py",
-    "checkout_commit": "9ea8eebed4893dbaf59d0acaa879740ef43932ee",
+    "checkout_commit": "6e845edf59a3d15695fb86017a4274353a5711a5",
     "candidate_count": 51,
     "approved_manifest_candidate_count": 25,
     "manifest_asset_count": 16,
@@ -2172,17 +2172,15 @@
     "promotion_allowed": false,
     "render_allowed": false,
     "global_catalog_updated": false,
-    "revalidation_required": true,
-    "replacement_note": "Search-v5 replacements are now active in the manifest for S03 and S09. CI must recompute continuity; S04 remains an independent dark-panel search blocker and S12 remains pending final crop/credit review.",
+    "revalidation_required": false,
+    "replacement_note": "Search-v5 replacements are active for S03 and S09. The latest CI contract passes structurally; continuity review remains required for S04/S12 and S11->S12/S12->S13.",
     "continuity_gate": "REVIEW_REQUIRED",
     "strict_preview_block": true,
-    "ci_workflow_run_id": 42170029722,
-    "ci_job_id": 127735446473,
+    "ci_workflow_run_id": 42176059809,
+    "ci_job_id": 127754674433,
     "ci_conclusion": "success",
     "continuity_hard_conflict_shots": [
-      "S03",
       "S04",
-      "S09",
       "S12"
     ],
     "continuity_review_shots": [
@@ -2193,14 +2191,9 @@
       "S11->S12",
       "S12->S13"
     ],
-    "continuity_hard_conflict_count": 23,
-    "continuity_coverage_score": 0.8812,
-    "pending_revalidation_shots": [
-      "S03",
-      "S04",
-      "S09",
-      "S12"
-    ],
+    "continuity_hard_conflict_count": 13,
+    "continuity_coverage_score": 0.9187,
+    "pending_revalidation_shots": [],
     "previous_validation_snapshot": {
       "validated_at_utc": "2026-11-06T05:43:03Z",
       "ci_workflow_run_id": 42170029722,
@@ -2215,9 +2208,21 @@
       ],
       "continuity_hard_conflict_count": 23,
       "continuity_coverage_score": 0.8812
-    }
+    },
+    "continuity_research_batch": "search-v5-episode005-period-recovery-20261106",
+    "intake_workflow_run_id": 42174399543,
+    "fingerprint_workflow_run_id": 42175277282,
+    "manifest_replacement_shots": [
+      "S03",
+      "S09"
+    ],
+    "pending_continuity_shots": [
+      "S04",
+      "S12"
+    ],
+    "note": "CI run 42176059809 validated the updated S03/S09 manifest replacements. Both new shots pass continuity; S04/S12 remain hard conflicts and S11->S12/S12->S13 remain blocked adjacency transitions. Render/preview remain blocked."
   },
-  "last_adjustment": "Applied fingerprint-clean search-v5 replacements: pexels-11764431 → S03 and pexels-4285872 → S09. Validation is intentionally stale until CI recomputes continuity; render remains blocked.",
+  "last_adjustment": "CI run 42176059809 passed the updated search-v5 manifest. S03 and S09 now pass continuity; hard conflicts fell from 23 to 13 and coverage rose from 0.8812 to 0.9187. S04, S12 and S11->S12/S12->S13 remain blocked.",
   "visual_continuity_profile": {
     "schema_version": "1.0",
     "profile_id": "episode-005-cold-war-bunker-continuity-v1",
@@ -2331,14 +2336,12 @@
     ]
   },
   "continuity_gate": {
-    "status": "REVALIDATION_REQUIRED",
+    "status": "REVIEW_REQUIRED",
     "profile_id": "episode-005-cold-war-bunker-continuity-v1",
-    "reason": "Manifest assignments changed for S03 and S09; rerun the visual-plan contract before preview. S04 and S12 remain unresolved continuity/editorial gates.",
+    "reason": "CI run 42176059809 confirms S03/S09 now pass continuity. Remaining hard conflicts are S04/S12; S11->S12 and S12->S13 remain blocked adjacency transitions; S06/S11 remain metadata/editorial review.",
     "strict_preview_block": true,
     "hard_conflict_shots": [
-      "S03",
       "S04",
-      "S09",
       "S12"
     ],
     "review_shots": [
@@ -2351,12 +2354,12 @@
       "S11->S12",
       "S12->S13"
     ],
-    "ci_workflow_run_id": 42168761462,
-    "ci_job_id": 127731406133,
+    "ci_workflow_run_id": 42176059809,
+    "ci_job_id": 127754674433,
     "ci_conclusion": "success",
-    "coverage_score": 0.8812,
-    "hard_conflict_count": 23,
-    "revalidation_required": true,
+    "coverage_score": 0.9187,
+    "hard_conflict_count": 13,
+    "revalidation_required": false,
     "pending_revalidation_shots": [
       "S03",
       "S04",

@@ -1,7 +1,7 @@
 {
   "plan_id": "episode-005-visual-asset-acquisition-v1",
   "episode_id": "episode-005",
-  "status": "SEARCH_V5_FINGERPRINT_PASS_MANIFEST_ASSIGNMENTS_APPROVED",
+  "status": "SEARCH_V5_MANIFEST_CONTRACT_PASS_CONTINUITY_REVIEW",
   "purpose": "Pre-download candidate pool for Episode 005. No candidate is approved for render until downloaded, SHA-256ed, visually inspected, checked for embedded text/logos/letterbox, fingerprinted, and entered into the final video manifest.",
   "frozen_audio_source": {
     "workflow_run_id": 41961294784,
@@ -3836,7 +3836,7 @@
       "rejection_reason": "Full-duration intake QA shows a bright blue high-key modern electrical panel, visible HoseLine Inc. branding and readable labels; it breaks the episode's low-key 1983 analog bunker profile."
     }
   ],
-  "next_action": "Update scene-asset-manifest.json with pexels-11764431 for S03 and pexels-4285872 for S09; rerun contract validation; do not render or promote.",
+  "next_action": "Search and intake a dark period-compatible S04 control-panel candidate; complete S12 crop/credit review or replace it; then rerun continuity. Do not render or promote.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -4781,10 +4781,10 @@
     }
   },
   "last_contract_validation": {
-    "validated_at_utc": "2026-11-06T05:43:03Z",
+    "validated_at_utc": "2026-11-06T06:41:53Z",
     "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
-    "candidate_count": 47,
-    "approved_manifest_candidate_count": 23,
+    "candidate_count": 51,
+    "approved_manifest_candidate_count": 25,
     "manifest_asset_count": 16,
     "assigned_shot_count": 16,
     "unresolved_shot_count": 0,
@@ -4792,30 +4792,25 @@
     "render_allowed": false,
     "global_catalog_updated": false,
     "validator": "production/visual_plan_contract.py",
-    "checkout_commit": "9ea8eebed4893dbaf59d0acaa879740ef43932ee",
-    "revalidation_required": true,
+    "checkout_commit": "6e845edf59a3d15695fb86017a4274353a5711a5",
+    "revalidation_required": false,
     "continuity_gate": "REVIEW_REQUIRED",
-    "continuity_research_batch": "search-v4-episode005-hard-conflict-recovery-20261106",
-    "ci_workflow_run_id": 42170029722,
-    "ci_job_id": 127735446473,
+    "continuity_research_batch": "search-v5-episode005-period-recovery-20261106",
+    "ci_workflow_run_id": 42176059809,
+    "ci_job_id": 127754674433,
     "ci_conclusion": "success",
-    "intake_workflow_run_id": 42165726351,
-    "fingerprint_workflow_run_id": 42166326952,
+    "intake_workflow_run_id": 42174399543,
+    "fingerprint_workflow_run_id": 42175277282,
     "manifest_replacement_shots": [
-      "S06",
-      "S11"
+      "S03",
+      "S09"
     ],
     "pending_continuity_shots": [
-      "S03",
       "S04",
-      "S09",
       "S12"
     ],
-    "matcher_fix_commit": "9e76bf6c3dc5629dec4b15eaf18f797aac7cb866",
     "continuity_hard_conflict_shots": [
-      "S03",
       "S04",
-      "S09",
       "S12"
     ],
     "continuity_review_shots": [
@@ -4826,12 +4821,12 @@
       "S11->S12",
       "S12->S13"
     ],
-    "continuity_hard_conflict_count": 23,
-    "continuity_coverage_score": 0.8812,
-    "note": "CI revalidated the expanded shortlist. The four search-v4 candidates remain plan-only; active manifest assignments and the strict preview block are unchanged."
+    "continuity_hard_conflict_count": 13,
+    "continuity_coverage_score": 0.9187,
+    "note": "CI run 42176059809 validated the updated S03/S09 manifest replacements. Both new shots pass continuity; S04/S12 remain hard conflicts and S11->S12/S12->S13 remain blocked adjacency transitions. Render/preview remain blocked."
   },
-  "last_adjustment": "Fingerprint retry 42175277282 passed for pexels-11764431 and pexels-4285872 with zero source, SHA-256 or perceptual collisions. Approved manifest-only replacements are now ready for a separate manifest PR; S04 and S12 remain blocked.",
-  "next_gate": "Apply S03/S09 replacements in the scene manifest, rerun visual-plan contract, then continue the independent S04 search and S12 crop/credit review. Render, preview, catalog, Drive and publication remain blocked.",
+  "last_adjustment": "CI run 42176059809 passed the updated search-v5 manifest. S03 and S09 now pass continuity; hard conflicts fell from 23 to 13 and coverage rose from 0.8812 to 0.9187. S04, S12 and the two adjacency breaks remain blocked.",
+  "next_gate": "Resolve S04 and S12 plus S11->S12 and S12->S13 adjacency breaks; keep render, preview, global catalog, Drive and publication blocked.",
   "render_approval_record": {
     "status": "APPROVED",
     "approved_at_utc": "2026-11-05T22:56:14Z",
@@ -5221,8 +5216,8 @@
         "page-level license and media-host verification"
       ],
       "rejection_policy": "Reject after intake if full-duration QA reveals contemporary home/industrial context, bright high-key conflict, readable labels that become the story, watermark, source collision or unacceptable crop.",
-      "next_action": "Apply manifest-only replacements for S03 and S09; keep S04 recovery search and S12 crop/credit review active; rerun the visual-plan contract; do not render or promote.",
-      "contract_validation": "PENDING_INTAKE",
+      "next_action": "Search and intake a dark period-compatible S04 control-panel candidate; complete S12 crop/credit review or replace it; rerun continuity. Do not render or promote.",
+      "contract_validation": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
       "intake_workflow_run_id": 42174399543,
       "intake_job_id": 127749408504,
       "intake_artifact_id": 13482227807,
@@ -5243,16 +5238,7 @@
       "fingerprint_workflow_run_id": 42175277282,
       "fingerprint_job_id": 127752198414,
       "fingerprint_status": "FINGERPRINT_AUDIT_PASS",
-      "fingerprint_blockers": [
-        {
-          "type": "candidate_missing_intake_artifact",
-          "candidate_id": "pexels-11764431"
-        },
-        {
-          "type": "candidate_missing_intake_artifact",
-          "candidate_id": "pexels-4285872"
-        }
-      ],
+      "fingerprint_blockers": [],
       "fingerprint_artifact_id": 13483246739,
       "fingerprint_artifact_digest": "sha256:473192d2e4d67b8ada86f08cc343bca81347534397c90685b47e7337db7e36fd",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
@@ -5272,7 +5258,25 @@
         "source": false,
         "sha256": false,
         "perceptual": false
-      }
+      },
+      "contract_workflow_run_id": 42176059809,
+      "contract_job_id": 127754674433,
+      "contract_checkout_commit": "6e845edf59a3d15695fb86017a4274353a5711a5",
+      "contract_conclusion": "success",
+      "continuity_hard_conflict_shots": [
+        "S04",
+        "S12"
+      ],
+      "continuity_review_shots": [
+        "S06",
+        "S11"
+      ],
+      "adjacency_review_pairs": [
+        "S11->S12",
+        "S12->S13"
+      ],
+      "continuity_hard_conflict_count": 13,
+      "continuity_coverage_score": 0.9187
     }
   ],
   "last_intake_attempt": {
@@ -5315,5 +5319,30 @@
     "replacement_probe": "ffprobe PASS: 1280x720, 67 seconds, 30 fps, 17,449,796 bytes",
     "render_allowed": false,
     "promotion_allowed": false
+  },
+  "continuity_gate": {
+    "status": "REVIEW_REQUIRED",
+    "reason": "CI run 42176059809 confirms the search-v5 replacements remove S03/S09 hard conflicts. Remaining hard conflicts are S04/S12; S11->S12 and S12->S13 remain blocked adjacency transitions; S06/S11 remain metadata/editorial review.",
+    "strict_preview_block": true,
+    "hard_conflict_shots": [
+      "S04",
+      "S12"
+    ],
+    "review_shots": [
+      "S06",
+      "S11"
+    ],
+    "bridge_required_pairs": [
+      "S11->S12",
+      "S12->S13"
+    ],
+    "no_media_promoted": true,
+    "no_render_executed": true,
+    "ci_workflow_run_id": 42176059809,
+    "ci_job_id": 127754674433,
+    "ci_conclusion": "success",
+    "coverage_score": 0.9187,
+    "hard_conflict_count": 13,
+    "revalidation_required": false
   }
 }
