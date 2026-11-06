@@ -1,7 +1,7 @@
 {
   "plan_id": "episode-005-visual-asset-acquisition-v1",
   "episode_id": "episode-005",
-  "status": "SEARCH_V6_SHORTLIST_READY_FOR_INTAKE",
+  "status": "SEARCH_V6_INTAKE_QA_COMPLETE_FINGERPRINT_PENDING",
   "purpose": "Pre-download candidate pool for Episode 005. No candidate is approved for render until downloaded, SHA-256ed, visually inspected, checked for embedded text/logos/letterbox, fingerprinted, and entered into the final video manifest.",
   "frozen_audio_source": {
     "workflow_run_id": 41961294784,
@@ -3843,7 +3843,7 @@
       "visual_intent": "Red/blue-lit rotary telephone being lifted and handled as a representational command-chain escalation beat; never literal Petrov archival evidence.",
       "truth_class": "REPRESENTATIONAL",
       "provider": "pixabay",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "REJECTED_VISUAL_QA",
       "license_name": "Pixabay Content License",
       "source_tier": "stock_auto",
       "approved_for_render": false,
@@ -3891,7 +3891,7 @@
         "telephone_is_symbolic_not_panel",
         "crop_must_remove_table_details"
       ],
-      "selection_status": "SHORTLISTED_FOR_INTAKE",
+      "selection_status": "REJECTED_AFTER_INTAKE_QA",
       "score_breakdown": {
         "semantic_fit": 0.79,
         "continuity_coherence": 0.84,
@@ -3899,6 +3899,44 @@
         "vertical_crop_quality": 0.92,
         "clean_frame_quality": 0.86,
         "source_distinctness": 1
+      },
+      "intake_artifact": {
+        "workflow_run_id": 42178800543,
+        "job_id": 127763342737,
+        "branch": "main",
+        "commit_sha": "2c5d2fc833ca412a2ba2bb148d6a92f3c5a1d3b9",
+        "artifact_id": 13484277704,
+        "artifact_name": "episode005-visual-intake-42178800543",
+        "artifact_digest": "sha256:76d78df18adf6d1d120ff6925b72f0cbf425a472eeaee7f40024e111b657efd",
+        "automated_promotion": false,
+        "status": "CANDIDATE_DOWNLOADED_REJECTED_VISUAL_QA",
+        "sha256": "1d8c3e5f9c743c1b3ad5c1235dfffad5549a9f26f38db9fa050ca732a6a1d6aa",
+        "duration_seconds": 10.708,
+        "dimensions": [
+          4096,
+          2160
+        ],
+        "frame_rate": "24/1",
+        "codec": "h264",
+        "fps": 24
+      },
+      "qa": {
+        "clean_frame_visual_review": "PASS_FULL_DURATION",
+        "baked_captions_or_authored_graphics": "NO_BAKED_CAPTIONS_OR_AUTHORED_GRAPHICS_OBSERVED",
+        "embedded_logo_or_letterbox": "FAIL_VISIBLE_ALCATEL_BRAND_IN_9X16_CROP",
+        "semantic_fit": "REJECT_BRAND_RISK_OVERRIDES_SYMBOLIC_S04_FIT",
+        "locked_9x16_crop": "FAIL_CROP_REVEALS_ALCATEL_MARK_AND_PRINTED_TABLE_DETAILS",
+        "global_reuse_fingerprint": "PENDING_NOT_RUN_AFTER_VISUAL_REJECTION",
+        "human_approval": "REJECTED",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "FAIL_BRAND_VISIBLE_IN_CROP",
+        "visual_qa_status": "HUMAN_REJECTED",
+        "visual_qa_evidence": "artifact 13484277704 / pixabay-vintage-telephone-257351/qa-frames.jpg and qa-crop-9x16.jpg",
+        "third_party_risk": "HIGH_VISIBLE_BRAND_RISK; ALCATEL MARK IS LEGIBLE IN THE ENGINE CROP",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES_FOR_REJECTION_REVIEW",
+        "continuity_decision": "REJECT_S04_PRIMARY; DO_NOT_ASSIGN_TO_MANIFEST",
+        "rejection_reason": "Visible Alcatel branding persists in the 9x16 crop; narrowing the crop would remove the command-chain semantic."
       }
     },
     {
@@ -3909,7 +3947,7 @@
       "visual_intent": "Low-key vintage radio emerging from darkness as a symbolic signal-transfer insert for the command chain; never literal Petrov archival evidence.",
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "pixabay",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_FINGERPRINT",
       "license_name": "Pixabay Content License",
       "source_tier": "stock_auto",
       "approved_for_render": false,
@@ -3957,7 +3995,7 @@
         "vintage_home_radio_context",
         "crop_must_hold_radio_against_black"
       ],
-      "selection_status": "SHORTLISTED_FOR_INTAKE",
+      "selection_status": "INTAKE_VISUAL_QA_PASS_AWAITING_FINGERPRINT",
       "score_breakdown": {
         "semantic_fit": 0.76,
         "continuity_coherence": 0.88,
@@ -3965,6 +4003,44 @@
         "vertical_crop_quality": 0.82,
         "clean_frame_quality": 0.84,
         "source_distinctness": 1
+      },
+      "intake_artifact": {
+        "workflow_run_id": 42178800543,
+        "job_id": 127763342737,
+        "branch": "main",
+        "commit_sha": "2c5d2fc833ca412a2ba2bb148d6a92f3c5a1d3b9",
+        "artifact_id": 13484277704,
+        "artifact_name": "episode005-visual-intake-42178800543",
+        "artifact_digest": "sha256:76d78df18adf6d1d120ff6925b72f0cbf425a472eeaee7f40024e111b657efd",
+        "automated_promotion": false,
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_FINGERPRINT",
+        "sha256": "bb0ce78f185d844f69dd33e036f9b1dd9f4acd293e706745cdb1453057d9392f",
+        "duration_seconds": 10.417,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "24/1",
+        "codec": "h264",
+        "fps": 24
+      },
+      "qa": {
+        "clean_frame_visual_review": "PASS_FULL_DURATION",
+        "baked_captions_or_authored_graphics": "NO_BAKED_CAPTIONS_OR_AUTHORED_GRAPHICS_OBSERVED",
+        "embedded_logo_or_letterbox": "NO_COMMERCIAL_LOGO_OR_WATERMARK_OBSERVED",
+        "semantic_fit": "PASS_S04_SIGNAL_TRANSFER_SYMBOLIC_ONLY; NOT_LITERAL_PETROV_ARCHIVAL_EVIDENCE",
+        "locked_9x16_crop": "PASS_RADIO_RETAINED; PHYSICAL_FREQUENCY_SCALE_VISIBLE_BUT_NOT_BRANDED",
+        "global_reuse_fingerprint": "PENDING",
+        "human_approval": "PENDING_FINGERPRINT",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "PASS_DARK_VINTAGE_RADIO_ON_BLACK_LOW_KEY_AMBER",
+        "visual_qa_status": "HUMAN_REVIEW_PASS_AWAITING_FINGERPRINT",
+        "visual_qa_evidence": "artifact 13484277704 / pixabay-radio-vintage-old-171435/qa-frames.jpg and qa-crop-9x16.jpg",
+        "third_party_risk": "LOW_VISIBLE_RISK; PHYSICAL_FREQUENCY_MARKINGS_PRESENT; NO_IDENTIFIABLE_BRAND",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES",
+        "continuity_decision": "S04_FALLBACK_CANDIDATE_PENDING_FINGERPRINT",
+        "editorial_caveat": "Use as a symbolic signal-transfer insert, not a literal 1983 command panel; keep crop away from any future brand discovery."
       }
     },
     {
@@ -3975,7 +4051,7 @@
       "visual_intent": "NASA GEOS-5 no-labels modeled cloud-cover visualization as a clean atmospheric bridge after the empty night sky; explanatory, not literal 1983 sensor footage.",
       "truth_class": "MAP_OR_DIAGRAM",
       "provider": "nasa",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_FINGERPRINT",
       "license_name": "NASA Media Guidelines (per asset)",
       "source_tier": "government_manual",
       "approved_for_render": false,
@@ -4019,7 +4095,7 @@
         "bright_cloud_highlights",
         "requires_credit_metadata"
       ],
-      "selection_status": "SHORTLISTED_FOR_INTAKE",
+      "selection_status": "INTAKE_VISUAL_QA_PASS_AWAITING_FINGERPRINT",
       "score_breakdown": {
         "semantic_fit": 0.87,
         "continuity_coherence": 0.74,
@@ -4027,6 +4103,44 @@
         "vertical_crop_quality": 0.8,
         "clean_frame_quality": 0.91,
         "source_distinctness": 1
+      },
+      "intake_artifact": {
+        "workflow_run_id": 42178800543,
+        "job_id": 127763342737,
+        "branch": "main",
+        "commit_sha": "2c5d2fc833ca412a2ba2bb148d6a92f3c5a1d3b9",
+        "artifact_id": 13484277704,
+        "artifact_name": "episode005-visual-intake-42178800543",
+        "artifact_digest": "sha256:76d78df18adf6d1d120ff6925b72f0cbf425a472eeaee7f40024e111b657efd",
+        "automated_promotion": false,
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_FINGERPRINT",
+        "sha256": "306a8c1b97ddb3699a84f3d35f6a0c9c3cbc593f13f9a35aef13d72a55f323d0",
+        "duration_seconds": 58.4,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "30/1",
+        "codec": "h264",
+        "fps": 30
+      },
+      "qa": {
+        "clean_frame_visual_review": "PASS_FULL_DURATION",
+        "baked_captions_or_authored_graphics": "NO_LABELS_OR_AUTHORED_GRAPHICS_OBSERVED",
+        "embedded_logo_or_letterbox": "NO_WATERMARK_OR_LETTERBOX_OBSERVED",
+        "semantic_fit": "PASS_S12_ATMOSPHERIC_MECHANISM; MODELED_VISUAL_NOT_LITERAL_1983_SENSOR_FOOTAGE",
+        "locked_9x16_crop": "PASS_EARTH_AND_CLOUD_BELT_RETAINED; DAY_SIDE_HIGHLIGHTS_ACCEPTABLE_WITH_LOW_CONTRAST_GRADE",
+        "global_reuse_fingerprint": "PENDING",
+        "human_approval": "PENDING_FINGERPRINT",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "PASS_CLEAN_NO_LABELS_EARTH_CLOUD_VISUALIZATION",
+        "visual_qa_status": "HUMAN_REVIEW_PASS_AWAITING_FINGERPRINT",
+        "visual_qa_evidence": "artifact 13484277704 / nasa-svs-geos5-clouds-no-labels-4819/qa-frames.jpg and qa-crop-9x16.jpg",
+        "third_party_risk": "LOW_VISIBLE_RISK; NASA_CREDIT_METADATA_REQUIRED",
+        "full_duration_qa": "PASS_FIVE_NORMALIZED_SAMPLES",
+        "continuity_decision": "S12_REPLACEMENT_CANDIDATE_PENDING_FINGERPRINT",
+        "editorial_caveat": "Use as explanatory atmospheric visualization; retain NASA SVS credit in production metadata."
       }
     }
   ],
@@ -5019,8 +5133,8 @@
     "continuity_coverage_score": 0.9187,
     "note": "CI run 42176059809 validated the updated S03/S09 manifest replacements. Both new shots pass continuity; S04/S12 remain hard conflicts and S11->S12/S12->S13 remain blocked adjacency transitions. Render/preview remain blocked."
   },
-  "last_adjustment": "Search-v6 expanded provider coverage for the two remaining hard conflicts. S04 now has two Pixabay analog escalation candidates and S12 has a no-labels NASA cloud-cover candidate; none is approved for manifest or render.",
-  "next_gate": "Run isolated intake and fingerprint for search-v6 candidates; only then decide S04/S12 replacement and rerun continuity. Keep render, preview, global catalog, Drive and publication blocked.",
+  "last_adjustment": "Search-v6 intake completed on run 42178800543. Human QA rejected the S04 telephone because the Alcatel mark is legible in the 9:16 crop; the dark vintage radio passed visual QA as an S04 fallback and NASA 4819 passed visual QA as an S12 mechanism candidate. Neither is approved for manifest or render until fingerprint.",
+  "next_gate": "Fingerprint only the visually viable search-v6 candidates (pixabay-radio-vintage-old-171435 and nasa-svs-geos5-clouds-no-labels-4819) using intake run 42178800543; then decide S04/S12 replacement and rerun continuity. Keep render, preview, global catalog, Drive and publication blocked.",
   "render_approval_record": {
     "status": "APPROVED",
     "approved_at_utc": "2026-11-05T22:56:14Z",
@@ -5475,7 +5589,7 @@
     {
       "batch_id": "search-v6-episode005-s04-s12-recovery-20261106",
       "created_at_utc": "2026-11-06T07:04:29.401Z",
-      "status": "SHORTLISTED_FOR_INTAKE",
+      "status": "INTAKE_QA_COMPLETE_FINGERPRINT_PENDING",
       "mode": "SHORTLIST_PLUS_ISOLATED_INTAKE_NO_PROMOTION",
       "target_shots": [
         "S04",
@@ -5488,7 +5602,7 @@
       ],
       "source_pages_reviewed": 3,
       "direct_media_routes_recorded": 3,
-      "intake_dispatched": false,
+      "intake_dispatched": true,
       "fingerprint_dispatched": false,
       "human_approval_pending": true,
       "render_allowed": false,
@@ -5515,9 +5629,19 @@
           "nasa-svs-come-fly-with-me-lake-11267",
           "nasa-svs-earth-at-night-11157"
         ],
-        "exclusions_reason": "31110 and 11157 contain authored title/date/location labels; 11267 contains location overlays; their use would create baked-text or crop ambiguity."
+        "exclusions_reason": "31110 and 11157 contain authored title/date/location labels; 11267 contains location overlays; their use would create baked-text or crop ambiguity.",
+        "intake_qa": {
+          "telephone_257351": "REJECTED: visible Alcatel mark in the 9x16 crop; crop cannot preserve semantics without brand risk.",
+          "radio_171435": "VISUAL_QA_PASS_PENDING_FINGERPRINT: dark vintage radio on black; physical frequency markings visible; no identifiable commercial logo.",
+          "nasa_4819": "VISUAL_QA_PASS_PENDING_FINGERPRINT: clean no-labels modeled Earth/cloud cover; no watermark; NASA credit metadata required."
+        }
       },
-      "next_action": "Dispatch isolated intake for the three shortlisted candidates, inspect all normalized samples, then fingerprint before any manifest assignment. Keep S04/S12 hard conflicts and render blocked."
+      "next_action": "Fingerprint the radio and NASA candidates using intake run 42178800543; if both pass, assign radio to S04 and NASA to S12 only in a separate manifest PR, then rerun continuity. Keep all promotion/render/catalog/Drive/publication gates closed.",
+      "intake_workflow_run_id": 42178800543,
+      "intake_job_id": 127763342737,
+      "intake_artifact_id": 13484277704,
+      "intake_artifact_name": "episode005-visual-intake-42178800543",
+      "intake_artifact_digest": "sha256:76d78df18adf6d1d120ff6925b72f0cbf425a472eeaee7f40024e111b657efd"
     }
   ],
   "last_intake_attempt": {
