@@ -126,6 +126,11 @@ class VisualContinuityTests(unittest.TestCase):
         self.assertEqual(preview_report["status"], "BLOCKED")
         self.assertTrue(preview_report["strict_preview_block"])
 
+    def test_unconfigured_profile_is_not_a_render_block(self):
+        report = validate_sequence([], None, mode="preview")
+        self.assertEqual(report["status"], "NOT_CONFIGURED")
+        self.assertFalse(report["strict_preview_block"])
+
     def test_manual_provider_license_and_hosts_are_explicit(self):
         policy = policy_for("wikimedia")
         self.assertIsNotNone(policy)
