@@ -18,6 +18,8 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+from production.visual_continuity import validate_sequence
+
 
 FPS = 60
 WIDTH = 1080
@@ -197,6 +199,16 @@ def render_preview(
     scene_manifest = json.loads(scene_manifest_path.read_text(encoding="utf-8"))
     story = json.loads(story_path.read_text(encoding="utf-8"))
     plan = build_scene_plan(scene_manifest, story)
+    continuity_gate = validate_sequence(
+        plan,
+        scene_manifest.get("visual_continuity_profile"),
+        mode="preview",
+    )
+    if continuity_gate.get("status") != "PASS":
+        reasons = continuity_gate.get("blocking_reasons", []) or continuity_gate.get("review_reasons", [])
+        raise PreviewRenderError(
+            "Visual continuity gate blocked preview: " + "; ".join(reasons)
+        )
     if not captions_path.is_file():
         raise PreviewRenderError("Frozen narration.ass is required.")
     if not music_path.is_file():
@@ -278,6 +290,7 @@ def render_preview(
         "scene_count": len(plan),
         "scene_duration_seconds": round(sum(float(item["duration"]) for item in plan), 3),
         "audio_duration_seconds": round(audio_seconds, 3),
+        "visual_continuity_gate": continuity_gate,
         "tail_extension_seconds": round(max(0.0, audio_seconds - sum(float(item["duration"]) for item in plan)), 3),
         "voice": voice_profile,
         "music": {
