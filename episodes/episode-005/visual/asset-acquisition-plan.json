@@ -1,7 +1,7 @@
 {
   "plan_id": "episode-005-visual-asset-acquisition-v1",
   "episode_id": "episode-005",
-  "status": "SEARCH_V5_MANIFEST_CONTRACT_PASS_CONTINUITY_REVIEW",
+  "status": "SEARCH_V6_SHORTLIST_READY_FOR_INTAKE",
   "purpose": "Pre-download candidate pool for Episode 005. No candidate is approved for render until downloaded, SHA-256ed, visually inspected, checked for embedded text/logos/letterbox, fingerprinted, and entered into the final video manifest.",
   "frozen_audio_source": {
     "workflow_run_id": 41961294784,
@@ -3834,6 +3834,200 @@
         "continuity_decision": "REJECT_AND_CONTINUE_SEARCH_FOR_DARK_PERIOD_COMPATIBLE_S04_PANEL"
       },
       "rejection_reason": "Full-duration intake QA shows a bright blue high-key modern electrical panel, visible HoseLine Inc. branding and readable labels; it breaks the episode's low-key 1983 analog bunker profile."
+    },
+    {
+      "candidate_id": "pixabay-vintage-telephone-257351",
+      "source_page_url": "https://pixabay.com/videos/telephone-vintage-old-phone-4k-257351/",
+      "role": "S04",
+      "visual_match": "NEAR",
+      "visual_intent": "Red/blue-lit rotary telephone being lifted and handled as a representational command-chain escalation beat; never literal Petrov archival evidence.",
+      "truth_class": "REPRESENTATIONAL",
+      "provider": "pixabay",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "license_name": "Pixabay Content License",
+      "source_tier": "stock_auto",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T07:04:29.401Z",
+        "observed_license": "Free for use under the Pixabay Content License",
+        "media_route": "Pixabay page contentUrl resolved to cdn.pixabay.com"
+      },
+      "media_url": "https://cdn.pixabay.com/video/2025/02/09/257351_large.mp4",
+      "continuity_tags": {
+        "era": [
+          "analog",
+          "period_compatible",
+          "indeterminate_era"
+        ],
+        "setting": [
+          "technical_control_room",
+          "early_warning_command",
+          "transition"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_red",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "brushed_metal",
+          "mechanical",
+          "low_light_grain"
+        ]
+      },
+      "continuity_risk_flags": [
+        "stylized_red_blue_lighting",
+        "telephone_is_symbolic_not_panel",
+        "crop_must_remove_table_details"
+      ],
+      "selection_status": "SHORTLISTED_FOR_INTAKE",
+      "score_breakdown": {
+        "semantic_fit": 0.79,
+        "continuity_coherence": 0.84,
+        "license_confidence": 1,
+        "vertical_crop_quality": 0.92,
+        "clean_frame_quality": 0.86,
+        "source_distinctness": 1
+      }
+    },
+    {
+      "candidate_id": "pixabay-radio-vintage-old-171435",
+      "source_page_url": "https://pixabay.com/videos/radio-vintage-old-sound-speaker-171435/",
+      "role": "S04",
+      "visual_match": "NEAR",
+      "visual_intent": "Low-key vintage radio emerging from darkness as a symbolic signal-transfer insert for the command chain; never literal Petrov archival evidence.",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "provider": "pixabay",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "license_name": "Pixabay Content License",
+      "source_tier": "stock_auto",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T07:04:29.401Z",
+        "observed_license": "Free for use under the Pixabay Content License",
+        "media_route": "Pixabay page contentUrl resolved to cdn.pixabay.com"
+      },
+      "media_url": "https://cdn.pixabay.com/video/2023/07/13/171435-845465118_large.mp4",
+      "continuity_tags": {
+        "era": [
+          "analog",
+          "period_compatible",
+          "indeterminate_era"
+        ],
+        "setting": [
+          "technical_control_room",
+          "early_warning_command",
+          "transition"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_amber",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "steel",
+          "amber"
+        ],
+        "texture": [
+          "brushed_metal",
+          "mechanical",
+          "low_light_grain"
+        ]
+      },
+      "continuity_risk_flags": [
+        "static_prop_not_literal_command_panel",
+        "vintage_home_radio_context",
+        "crop_must_hold_radio_against_black"
+      ],
+      "selection_status": "SHORTLISTED_FOR_INTAKE",
+      "score_breakdown": {
+        "semantic_fit": 0.76,
+        "continuity_coherence": 0.88,
+        "license_confidence": 1,
+        "vertical_crop_quality": 0.82,
+        "clean_frame_quality": 0.84,
+        "source_distinctness": 1
+      }
+    },
+    {
+      "candidate_id": "nasa-svs-geos5-clouds-no-labels-4819",
+      "source_page_url": "https://svs.gsfc.nasa.gov/4819/",
+      "role": "S12",
+      "visual_match": "NEAR",
+      "visual_intent": "NASA GEOS-5 no-labels modeled cloud-cover visualization as a clean atmospheric bridge after the empty night sky; explanatory, not literal 1983 sensor footage.",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "provider": "nasa",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "license_name": "NASA Media Guidelines (per asset)",
+      "source_tier": "government_manual",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T07:04:29.401Z",
+        "observed_license": "NASA SVS media; NASA Media Guidelines apply per asset",
+        "media_route": "NASA SVS page route resolved to svs.gsfc.nasa.gov MP4"
+      },
+      "media_url": "https://svs.gsfc.nasa.gov/vis/a000000/a004800/a004819/clouds_no_labels.mp4",
+      "continuity_tags": {
+        "era": [
+          "period_compatible",
+          "indeterminate_era"
+        ],
+        "setting": [
+          "external_sensor",
+          "early_warning_command"
+        ],
+        "time_of_day": [
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "cool_shadows",
+          "low_key"
+        ],
+        "palette": [
+          "charcoal",
+          "steel",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "atmospheric",
+          "data_visualization",
+          "low_light_grain"
+        ]
+      },
+      "continuity_risk_flags": [
+        "modeled_global_cloud_cover_not_literal_sensor",
+        "bright_cloud_highlights",
+        "requires_credit_metadata"
+      ],
+      "selection_status": "SHORTLISTED_FOR_INTAKE",
+      "score_breakdown": {
+        "semantic_fit": 0.87,
+        "continuity_coherence": 0.74,
+        "license_confidence": 0.9,
+        "vertical_crop_quality": 0.8,
+        "clean_frame_quality": 0.91,
+        "source_distinctness": 1
+      }
     }
   ],
   "next_action": "Search and intake a dark period-compatible S04 control-panel candidate; complete S12 crop/credit review or replace it; then rerun continuity. Do not render or promote.",
@@ -4825,8 +5019,8 @@
     "continuity_coverage_score": 0.9187,
     "note": "CI run 42176059809 validated the updated S03/S09 manifest replacements. Both new shots pass continuity; S04/S12 remain hard conflicts and S11->S12/S12->S13 remain blocked adjacency transitions. Render/preview remain blocked."
   },
-  "last_adjustment": "CI run 42176059809 passed the updated search-v5 manifest. S03 and S09 now pass continuity; hard conflicts fell from 23 to 13 and coverage rose from 0.8812 to 0.9187. S04, S12 and the two adjacency breaks remain blocked.",
-  "next_gate": "Resolve S04 and S12 plus S11->S12 and S12->S13 adjacency breaks; keep render, preview, global catalog, Drive and publication blocked.",
+  "last_adjustment": "Search-v6 expanded provider coverage for the two remaining hard conflicts. S04 now has two Pixabay analog escalation candidates and S12 has a no-labels NASA cloud-cover candidate; none is approved for manifest or render.",
+  "next_gate": "Run isolated intake and fingerprint for search-v6 candidates; only then decide S04/S12 replacement and rerun continuity. Keep render, preview, global catalog, Drive and publication blocked.",
   "render_approval_record": {
     "status": "APPROVED",
     "approved_at_utc": "2026-11-05T22:56:14Z",
@@ -5277,6 +5471,53 @@
       ],
       "continuity_hard_conflict_count": 13,
       "continuity_coverage_score": 0.9187
+    },
+    {
+      "batch_id": "search-v6-episode005-s04-s12-recovery-20261106",
+      "created_at_utc": "2026-11-06T07:04:29.401Z",
+      "status": "SHORTLISTED_FOR_INTAKE",
+      "mode": "SHORTLIST_PLUS_ISOLATED_INTAKE_NO_PROMOTION",
+      "target_shots": [
+        "S04",
+        "S12"
+      ],
+      "shortlist_candidate_ids": [
+        "pixabay-vintage-telephone-257351",
+        "pixabay-radio-vintage-old-171435",
+        "nasa-svs-geos5-clouds-no-labels-4819"
+      ],
+      "source_pages_reviewed": 3,
+      "direct_media_routes_recorded": 3,
+      "intake_dispatched": false,
+      "fingerprint_dispatched": false,
+      "human_approval_pending": true,
+      "render_allowed": false,
+      "promotion_allowed": false,
+      "global_catalog_updated": false,
+      "drive_written": false,
+      "publication_allowed": false,
+      "criteria": [
+        "semantic fit for S04 command-chain escalation and S12 atmospheric mechanism",
+        "1983 analog/night low-key continuity",
+        "clean 9x16 crop",
+        "no baked captions or third-party logo",
+        "page-level license and media-host verification",
+        "fresh source and fingerprint distinctness"
+      ],
+      "rejection_policy": "Reject after intake if full-duration QA reveals home-radio context, readable brand/labels, high-key daylight, authored graphics, watermark, source collision or an unacceptable 9x16 crop.",
+      "editorial_findings": {
+        "s04_primary": "pixabay-vintage-telephone-257351",
+        "s04_fallback": "pixabay-radio-vintage-old-171435",
+        "s12_primary": "nasa-svs-geos5-clouds-no-labels-4819",
+        "excluded_after_research": [
+          "nasa-svs-marine-layer-clouds-31110",
+          "nasa-svs-come-fly-with-me-medina-11267",
+          "nasa-svs-come-fly-with-me-lake-11267",
+          "nasa-svs-earth-at-night-11157"
+        ],
+        "exclusions_reason": "31110 and 11157 contain authored title/date/location labels; 11267 contains location overlays; their use would create baked-text or crop ambiguity."
+      },
+      "next_action": "Dispatch isolated intake for the three shortlisted candidates, inspect all normalized samples, then fingerprint before any manifest assignment. Keep S04/S12 hard conflicts and render blocked."
     }
   ],
   "last_intake_attempt": {
