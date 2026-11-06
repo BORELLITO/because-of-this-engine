@@ -99,7 +99,7 @@ jobs:
                   "max_line_chars": 36,
                   "max_lines": 2,
                   "margin_v": 520,
-                  "active_word_color": "#FF7777"
+                  "active_word_color": "#F04444"
               }
           }
           (root / "caption-manifest.json").write_text(

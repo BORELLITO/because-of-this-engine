@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Render the creative Episode 005 preview with the locked channel profile.
 
-This route is intentionally separate from final publication, but it is no
-longer a voice-only technical smoke test. A creative preview must carry the
-approved narration identity, suspense bed, cinematic-dread grade and brand
-lockup. Missing creative inputs fail closed.
+This route is intentionally separate from final publication. A creative
+preview carries the approved narration identity, cinematic-dread grade,
+transparent wordmark, karaoke captions and a narration-free branded outro.
+Missing creative inputs fail closed.
 """
 
 from __future__ import annotations
@@ -29,6 +29,10 @@ CREATIVE_PROFILE = "cinematic_dread_v73"
 APPROVED_VOICE_PROVIDER = "gemini_tts"
 APPROVED_VOICE_NAME = "Charon"
 APPROVED_VOICE_MODEL = "gemini-3.8-flash-tts"
+IN_VIDEO_LOGO_Y = 336
+IN_VIDEO_LOGO_WIDTH = 360
+OUTRO_SECONDS = 5.5
+ACTIVE_WORD_COLOR = "#F04444"
 
 
 class PreviewRenderError(RuntimeError):
@@ -259,22 +263,25 @@ def render_preview(
             encoding="utf-8",
         )
         scene_seconds = sum(float(item["duration"]) for item in plan)
-        tail = max(0.0, audio_seconds - scene_seconds)
-        final_start = max(0.0, audio_seconds - 4.0)
-        fade_start = max(0.0, audio_seconds - 2.1)
+        total_seconds = audio_seconds + OUTRO_SECONDS
+        tail = max(0.0, total_seconds - scene_seconds)
         subtitle_path = escape_filter_path(captions_path.resolve())
         filter_complex = ";".join([
             f"[0:v]tpad=stop_mode=clone:stop_duration={tail:.3f},"
-            f"fade=t=out:st={fade_start:.3f}:d=0.85,format=yuv420p[base]",
+            "format=yuv420p[base]",
             f"[base]subtitles='{subtitle_path}'[captioned]",
-            "[2:v]format=rgba,scale=360:-1:flags=lanczos,colorchannelmixer=aa=0.90[logo]",
-            f"[captioned][logo]overlay=x=(main_w-overlay_w)/2:y=420:"
-            f"enable='lt(t,{final_start:.3f})':eof_action=repeat[branded]",
-            "[3:v]format=rgba,scale=1080:1920:flags=lanczos[card]",
-            f"[branded][card]overlay=x=0:y=0:"
-            f"enable='gte(t,{final_start:.3f})':eof_action=repeat,format=yuv420p[v]",
+            f"[2:v]format=rgba,scale={IN_VIDEO_LOGO_WIDTH}:-1:flags=lanczos,"
+            "colorchannelmixer=aa=0.90[logo]",
+            f"[captioned][logo]overlay=x=(main_w-overlay_w)/2:y={IN_VIDEO_LOGO_Y}:"
+            f"enable='lt(t,{audio_seconds:.3f})':eof_action=repeat[branded]",
+            "[3:v]format=rgba,scale=1080:1920:flags=lanczos,"
+            "fade=t=in:st=0:d=0.80:color=black,"
+            f"fade=t=out:st={OUTRO_SECONDS - 1.2:.2f}:d=1.20:color=black,"
+            f"setpts=PTS-STARTPTS+{audio_seconds:.3f}/TB[outro]",
+            "[branded][outro]overlay=x=0:y=0:eof_action=repeat,format=yuv420p[v]",
             "[1:a]aresample=48000,asetpts=PTS-STARTPTS,"
-            "loudnorm=I=-16:TP=-1.0:LRA=7,alimiter=limit=0.95[a]",
+            f"loudnorm=I=-16:TP=-1.0:LRA=7,alimiter=limit=0.95,"
+            f"apad=pad_dur={OUTRO_SECONDS:.3f},atrim=duration={total_seconds:.3f}[a]",
         ])
         run([
             "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat),
@@ -282,7 +289,7 @@ def render_preview(
             "-loop", "1", "-framerate", "1", "-i", str(logo_path),
             "-loop", "1", "-framerate", "1", "-i", str(outro_card_path),
             "-filter_complex", filter_complex,
-            "-map", "[v]", "-map", "[a]", "-t", f"{audio_seconds:.3f}",
+            "-map", "[v]", "-map", "[a]", "-t", f"{total_seconds:.3f}",
             "-r", str(FPS), "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
             "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-ar", "48000",
             "-ac", "2", "-movflags", "+faststart", str(output_path),
@@ -298,11 +305,24 @@ def render_preview(
         "scene_count": len(plan),
         "scene_duration_seconds": round(sum(float(item["duration"]) for item in plan), 3),
         "audio_duration_seconds": round(audio_seconds, 3),
+        "total_duration_seconds": round(audio_seconds + OUTRO_SECONDS, 3),
         "visual_continuity_gate": continuity_gate,
         "tail_extension_seconds": round(max(0.0, audio_seconds - sum(float(item["duration"]) for item in plan)), 3),
         "voice": voice_profile,
         "music": {"status": "NOT_MIXED", "background_noise_removed": True, "sources": ["narration_only"]},
-        "branding": {"logo_overlay": True, "logo_anchor": "center_lower", "logo_width": 360, "final_center_lockup": True, "final_card": "black_stacked_text"},
+        "branding": {
+            "logo_overlay": True,
+            "logo_asset": "transparent_wordmark",
+            "logo_anchor": "center_upper",
+            "logo_width": IN_VIDEO_LOGO_WIDTH,
+            "logo_y": IN_VIDEO_LOGO_Y,
+            "final_center_lockup": True,
+            "final_card": "brand_background_to_black",
+            "outro_seconds": OUTRO_SECONDS,
+            "narration_end_before_outro": True,
+            "outro_audio": "silence",
+            "active_word_color": ACTIVE_WORD_COLOR,
+        },
         "output": str(output_path),
         "output_sha256": sha256_file(output_path),
         "production_enablement": False,

@@ -101,11 +101,19 @@ jobs:
             --manifest episodes/episode-005/visual/scene-asset-manifest.json \
             --output-root artifacts/episode005-visuals
 
-      - name: Build black stacked outro card
+      - name: Recolor approved karaoke captions
+        run: |
+          PYTHONPATH=. python production/recolor_karaoke_ass.py \
+            --input artifacts/episode005-charon/narration.ass \
+            --output artifacts/episode005-charon/narration-preview.ass
+
+      - name: Build branded outro card
         run: |
           mkdir -p artifacts/episode005-v21-preview
           python -m pip install --disable-pip-version-check --quiet pillow==11.0.0
           python production/generate_outro_card.py \
+            --background episodes/episode-005/delivery/thumbnail/thumbnail_master_9x16.jpg \
+            --logo brand/because-of-this-wordmark-transparent.png \
             --output artifacts/episode005-v21-preview/outro-card.png
 
       - name: Render isolated V2.1 creative preview
@@ -116,8 +124,8 @@ jobs:
             --story-architecture episodes/episode-005/story-architecture.json \
             --asset-root artifacts/episode005-visuals \
             --audio artifacts/episode005-charon/narration.wav \
-            --captions artifacts/episode005-charon/narration.ass \
-            --logo brand/because-of-this-logo.png \
+            --captions artifacts/episode005-charon/narration-preview.ass \
+            --logo brand/because-of-this-wordmark-transparent.png \
             --outro-card artifacts/episode005-v21-preview/outro-card.png \
             --voice-profile artifacts/episode005-charon/voice-profile.json \
             --output artifacts/episode005-v21-preview/episode005-v21-preview.mp4 \
@@ -137,6 +145,12 @@ jobs:
           assert report["music"]["status"] == "NOT_MIXED", report
           assert report["music"]["sources"] == ["narration_only"], report
           assert report["branding"]["logo_overlay"] is True, report
+          assert report["branding"]["logo_asset"] == "transparent_wordmark", report
+          assert report["branding"]["logo_y"] == 336, report
+          assert report["branding"]["active_word_color"] == "#F04444", report
+          assert report["branding"]["narration_end_before_outro"] is True, report
+          assert report["branding"]["outro_audio"] == "silence", report
+          assert 78.0 <= float(report["total_duration_seconds"]) <= 80.0, report
           assert report["production_enablement"] is False, report
           output = root / "episode005-v21-preview.mp4"
           probe = subprocess.run(
