@@ -59,8 +59,8 @@ jobs:
               assert stream.getnchannels() == 1
               assert stream.getsampwidth() == 2
               assert stream.getframerate() == 24000
-              assert 60 <= duration <= 80, duration
           digest = hashlib.sha256(audio).hexdigest()
+          duration_status = "PASS" if 60 <= duration <= 80 else "REJECTED_OUTSIDE_60_TO_80_SECONDS"
           voice_profile = {
               "provider": "gemini_tts",
               "voice_name": "Charon",
@@ -70,6 +70,7 @@ jobs:
               "audio_sha256": digest,
               "script_sha256": hashlib.sha256(script.encode("utf-8")).hexdigest(),
               "duration_seconds": round(duration, 3),
+              "duration_status": duration_status,
               "request_count": 1,
               "provider_metadata": metadata,
           }
@@ -77,6 +78,7 @@ jobs:
               json.dumps(voice_profile, ensure_ascii=False, indent=2) + "\n",
               encoding="utf-8",
           )
+          assert duration_status == "PASS", {"duration_seconds": duration, "status": duration_status}
           print(json.dumps({
               "status": "GEMINI_TTS_CHARON_NARRATION_GENERATED",
               "duration_seconds": round(duration, 3),
@@ -86,8 +88,9 @@ jobs:
           PY
 
       - name: Upload narration checkpoint
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: episode005-gemini-charon-narration
           path: artifacts/episode005-gemini-charon
-          if-no-files-found: error
+          if-no-files-found: warn
