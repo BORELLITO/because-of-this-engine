@@ -184,7 +184,8 @@ def query_variants_for_scene(
             values = raw_tags.get(dimension, []) if isinstance(raw_tags, dict) else []
             if not values:
                 values = (visual_profile.get("world") or {}).get(dimension, [])
-            structured_terms.extend(_terms(values[:1] if isinstance(values, list) else [values]))
+            selected = values[:1] if isinstance(values, list) else [values]
+            structured_terms.extend(str(value) for value in selected if str(value).strip())
         structured_terms.extend(continuity_search_terms(scene, visual_profile))
         continuity_query = " ".join(_tokens(" ".join(structured_terms))[:18])
         if continuity_query and continuity_query not in variants:
