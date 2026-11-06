@@ -139,7 +139,7 @@ def generate(manifest_path: Path) -> dict:
 
     caption_path = (base / manifest["captions"]["path"]).resolve()
     caption_path.parent.mkdir(parents=True, exist_ok=True)
-    style_line = caption_ass_style_line()
+    style_line = caption_ass_style_line(margin_v=int(caption_config.get("margin_v", 520)))
     ass = f"""[Script Info]
 ScriptType: v4.00+
 PlayResX: 1080
