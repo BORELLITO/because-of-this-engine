@@ -102,6 +102,23 @@ class FinalV21RenderTests(unittest.TestCase):
         self.assertIn(str(self.output),str(self.output))
         self.assertIn(str(self.mix.resolve()),command[-1])
 
+    def test_sirens_are_prohibited_but_no_sfx_is_permitted_with_context(self):
+        with self.assertRaisesRegex(FinalRenderError,"siren/alarm"):
+            build_audio_mix_command(
+                self.narration,self.music,{"sfx:siren":self.sfx},
+                self.mix,voice_seconds=65,profile=self.profile)
+        manifest=self.root/"sfx-decision.json"
+        manifest.write_text(json.dumps({
+            "episode_id":"episode-test",
+            "status":"QA_VERIFIED_NO_SFX_REQUIRED",
+            "story_sound_design":"AMBIENT_MUSIC_ONLY","stems":[]}))
+        _verify_sfx_evidence("episode-test",{},manifest)
+        manifest.write_text(json.dumps({
+            "episode_id":"episode-test",
+            "status":"QA_VERIFIED_NO_SFX_REQUIRED","stems":[]}))
+        with self.assertRaises(FinalRenderError):
+            _verify_sfx_evidence("episode-test",{},manifest)
+
     def test_tampered_preview_report_blocks_before_assembly(self):
         self.picture.write_bytes(b"verified simulated preview bytes")
         voice={"audio_sha256":"a"*64}
@@ -176,6 +193,21 @@ class FinalV21RenderTests(unittest.TestCase):
                          __import__("production.render_v21_final",fromlist=["_video_payload_sha256"])._video_payload_sha256(self.output))
         self.assertEqual(result["publication"],"MANUAL_ONLY_NOT_RUN")
         self.assertEqual(result["drive_write"],"NOT_RUN")
+        # The music must survive the Charon-free outro until its final fade.
+        import array
+        with wave.open(str(self.mix),"rb") as source:
+            rate=source.getframerate()
+            self.assertEqual(rate,48000)
+            samples=array.array("h")
+            samples.frombytes(source.readframes(source.getnframes()))
+        def rms(start,end):
+            vals=samples[int(start*rate):int(end*rate)]
+            return math.sqrt(sum(x*x for x in vals)/max(1,len(vals)))
+        self.assertGreater(rms(16.5,17.5),80.0,
+                           "music vanished before the final logo")
+        self.assertLess(rms(19.30,19.49),rms(17.5,18.0)*0.5,
+                        "music did not fade to black")
+
         with patch("production.render_v21_final._time_signature",return_value=19.5):
             with self.assertRaisesRegex(FinalRenderError,"overwrite"):
                 assemble_verified_picture_with_audio(
