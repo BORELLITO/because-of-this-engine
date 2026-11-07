@@ -2,8 +2,8 @@ name: Because Of This - S09 retro keyboard candidate QA (read only)
 
 on:
   push:
-    branches: ["audit/episode005-s09-retro-keyboard-20261107"]
-    paths: [".github/workflows/episode005-s09-retro-keyboard-qa.yml"]
+    branches: ["audit/episode005-s09-analog-radar-20261107"]
+    paths: [".github/workflows/episode005-s09-analog-radar-qa.yml"]
 
 permissions:
   contents: read
