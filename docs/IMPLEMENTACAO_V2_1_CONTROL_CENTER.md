@@ -570,3 +570,15 @@ O motor agora possui fingerprint FFmpeg/Chromaprint completo dos **cinco áudios
 **Evidência:** `reports/AUDIO_ACOUSTIC_FIVE_SOURCE_QA_20261107.json`. Este upgrade completa apenas a cobertura acústica dos cinco áudios atualmente registrados, **NÃO** o histórico global desconhecido de SFX, versões sem registro, licenciamento de terceiros ou incorporação automática do pós-voo ao futuro renderizador. A produção e publicação seguem manual/bloqueadas, sem TTS, render de episódio, alterações visuais ou de voz.
 
 **Próximo passo único:** definir o ponto real do renderizador V2.1 autorizado que chamará obrigatoriamente o adaptador de mix e pós-voo e validar com um master completo sob política de produção aprovada; até lá, não liberar render/publicação.
+
+### 2026-11-07 — Trava obrigatória de áudio na entrega final Drive (V2.1)
+
+**Causa-raiz:** o V2.1 já tinha `verify_master_binding()` e `validate_completed_audio_mix()`, mas o adaptador `production/google_drive_delivery.py` ainda conseguia enviar um MP4 sem invocar os testes do áudio. Esse caminho de fuga foi fechado no próprio `deliver()`, **antes** de inicializar a rede ou credenciais Drive.
+
+O módulo `production/final_delivery_v21.py` exige o vídeo master exato, política V2.1 de produção habilitada, permissão separada de entrega final, identidade Gemini/Charon, final H.264 1080×1920 60fps + AAC 48kHz 60–80s, gates independentes de histórico de áudio/direitos/verdade visual, recibo de mix com replay e participação real de narração/música/SFX e correspondência acústica ao master. Falha na ausência ou inconsistência de QUALQUER prova. Cobertura: MP4/MOV/MKV/WEBM/M4V/AVI entregues por `google_drive_delivery.deliver()`, mesmo aninhados em pastas. Backups sem vídeo permanecem fora desse escopo, preservados.
+
+**Travas permanentes em vigor:** `production_enablement=false`, `final_drive_delivery_enablement=false`, Charon/Gemini e `publication_policy=manual_only`. `production/v21_singleton_guard.py` agora denuncia remoção da integração e habilitação silenciosa da entrega final. Não há rota ativa de renderização FINAL que produza novo áudio e recibo; o novo código é uma barreira real do adaptador existente, não execução automática de vídeo. A prévia isolada do GitHub Actions continua distinta de publicação/entrega final.
+
+**Testes:** `tests/test_v21_final_delivery_gate.py` cobre produção desabilitada, falta de recibo, master trocado, direitos e histórico SFX bloqueados, vídeo escondido em pasta, bypass da API `deliver()` e caso positivo sintético isolado. CI principal garante, via monkeypatch, que a chamada Drive `service()` nunca é alcançada por um vídeo não autorizado. Não houve upload, TTS, render ou publicação nesta etapa. Evidências e limites em `docs/V21_FINAL_DRIVE_DELIVERY_AUDIO_LOCK.md`.
+
+**Próximo passo único:** planejar e testar o renderizador V2.1 autorizado que chame o adaptador de mixagem aprovado e o pós-voo antes de entregar. Não reativar V7 nem habilitar produção sem aprovação específica, provas de direitos e histórico de áudio.
