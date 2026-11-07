@@ -309,8 +309,8 @@ def _verify_sfx_evidence(
 def run_final(
     *,
     record_path: Path, repo_root: Path, preview: Path, preview_report: Path,
-    narration: Path, voice_profile: Path, music: Path, music_candidate: Path,
-    effects_manifest: Path, sfx: dict[str, Path],
+    narration: Path, voice_profile: Path, music: Path | None, music_candidate: Path | None,
+    effects_manifest: Path, sfx: dict[str, Path], music_pool: Path | None = None,
     output: Path, mix_output: Path, receipt: Path, report: Path,
 ) -> dict[str, Any]:
     """One supported final dispatch: preflight FIRST, then verified media only."""
@@ -330,23 +330,36 @@ def run_final(
     voice = validate_voice_profile(voice_profile, narration)
     _verify_preview_binding(preview, preview_report, voice)
     _verify_sfx_evidence(str(record.get("episode_id")), sfx, effects_manifest)
-    candidate = _json(music_candidate)
-    audio_gate = check_file(music, candidate, root=repo_root)
-    if audio_gate.get("status") != "PASS":
-        raise FinalRenderError("music source anti-reuse/license evidence blocked: "
-                               + str(audio_gate.get("failures", [])))
-    # Distinct from source identity: explicit authorization and independent
-    # music usage rights are required before actually dispatching the mix.
-    if (candidate.get("episode_id") != record.get("episode_id") or
-            candidate.get("editorial_use_approval") != "VERIFIED_BY_ENGINE" or
-            not candidate.get("source_license_url")):
-        raise FinalRenderError("episode-specific soundtrack provenance/rights missing")
+    # The motor alone ranks and chooses one licensed, low-interference
+    # soundtrack against THIS story. Supplying a manual music filename cannot
+    # bypass selection, scope, no-siren or historical anti-reuse checks.
+    if music_pool is None:
+        raise FinalRenderError("engine-curated licensed music candidate pool is mandatory")
     profile = _json(PROFILE_PATH)
     if profile.get("status") != "INDEPENDENT_AUDIO_QA_PASS":
         raise FinalRenderError("final music/SFX gain calibration has no independent listening QA")
     voice_seconds = media_duration(narration)
+    total_seconds = _time_signature(profile, voice_seconds)
+    pool = _json(music_pool)
+    selection = select_for_story(pool, repo_root=repo_root,
+                                 total_seconds=total_seconds)
+    if selection.get("status") != "AUTO_SELECTED_EVIDENCE_BOUND_V21":
+        raise FinalRenderError("engine found no source-cleared story-fitting suspense music: "
+                               + str(selection.get("reason") or selection.get("decisions")))
+    chosen = selection["selected"]
+    music_path = Path(chosen["audio_path"]).resolve()
+    candidate = next((entry for entry in pool["candidates"]
+                      if entry.get("candidate_id") == chosen["candidate_id"]), None)
+    if candidate is None:
+        raise FinalRenderError("selected candidate missing from attested music pool")
+    if music is not None and music.resolve() != music_path:
+        raise FinalRenderError("manual music path conflicts with engine choice")
+    if music_candidate is not None:
+        manual = _json(music_candidate)
+        if manual.get("sha256") != candidate.get("sha256"):
+            raise FinalRenderError("legacy music candidate contradicts engine choice")
     result = assemble_verified_picture_with_audio(
-        picture=preview, narration=narration, music=music, sfx=sfx,
+        picture=preview, narration=narration, music=music_path, sfx=sfx,
         output=output, mix_output=mix_output, audio_receipt=receipt,
         voice_seconds=voice_seconds, profile=profile,
         episode_id=str(record.get("episode_id")))
@@ -357,7 +370,20 @@ def run_final(
         **result,
         "preview_report_sha256": file_sha256(preview_report),
         "narration_profile_sha256": file_sha256(voice_profile),
-        "music_candidate_sha256": file_sha256(music_candidate),
+        "music_pool_sha256": file_sha256(music_pool),
+        "selected_music": {
+            "candidate_id": chosen["candidate_id"],
+            "title": candidate["title"], "artist": candidate["artist"],
+            "source_sha256": chosen["original_audio_sha256"],
+            "source_item_url": candidate["source_item_url"],
+            "rights_evidence_sha256": chosen["rights_evidence_sha256"],
+            "engine_score": chosen["score"],
+            "status": "AUTO_SELECTED_EVIDENCE_BOUND_V21",
+            "music_to_end_card": True,
+            "music_fade_to_black_seconds": profile["music_fade_out_seconds"],
+            "publication_authorized": False
+        },
+        "music_selection_decisions": selection["decisions"],
         "sfx_manifest_sha256": file_sha256(effects_manifest),
         "audio_profile_sha256": file_sha256(PROFILE_PATH),
         "production_authorized_for_this_render": True,
@@ -378,8 +404,9 @@ def main() -> int:
     p.add_argument("--preview-report", type=Path, required=True)
     p.add_argument("--narration", type=Path, required=True)
     p.add_argument("--voice-profile", type=Path, required=True)
-    p.add_argument("--music", type=Path, required=True)
-    p.add_argument("--music-candidate", type=Path, required=True)
+    p.add_argument("--music", type=Path, help="Optional legacy consistency check, not a selection")
+    p.add_argument("--music-candidate", type=Path, help="Optional legacy consistency check")
+    p.add_argument("--music-pool", type=Path, help="Required engine-curated music candidates/rights evidence")
     p.add_argument("--effects-manifest", type=Path, required=True)
     p.add_argument("--sfx", action="append", default=[], help="sfx:name=/path/to/verified-pretimed.wav")
     p.add_argument("--output", type=Path, required=True)
@@ -399,7 +426,9 @@ def main() -> int:
             repo_root=args.repo_root.resolve(),
             preview=args.preview.resolve(), preview_report=args.preview_report.resolve(),
             narration=args.narration.resolve(), voice_profile=args.voice_profile.resolve(),
-            music=args.music.resolve(), music_candidate=args.music_candidate.resolve(),
+            music=args.music.resolve() if args.music else None,
+            music_candidate=args.music_candidate.resolve() if args.music_candidate else None,
+            music_pool=args.music_pool.resolve() if args.music_pool else None,
             effects_manifest=args.effects_manifest.resolve(), sfx=effects,
             output=args.output.resolve(), mix_output=args.mix_output.resolve(),
             receipt=args.receipt.resolve(), report=args.report.resolve(),
