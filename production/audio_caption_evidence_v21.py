@@ -49,8 +49,12 @@ def audit(
             errors.append("wrong frozen Charon provider/voice")
         if profile.get("audio_sha256") != _sha256(audio_path):
             errors.append("audio SHA-256 differs from frozen voice profile")
-        if profile.get("script_sha256") != hashlib.sha256(script.encode("utf-8")).hexdigest():
-            errors.append("script SHA-256 differs from frozen voice profile")
+        # Episode 006's approved narration workflow calls read_text().strip()
+        # before synthesis and hashes THAT exact provider input, not the
+        # source file's trailing newline. Preserve the frozen audio identity.
+        tts_script = script.strip()
+        if profile.get("script_sha256") != hashlib.sha256(tts_script.encode("utf-8")).hexdigest():
+            errors.append("normalized TTS script SHA-256 differs from frozen voice profile")
         words = sidecar.get("words")
         captions = sidecar.get("captions")
         if sidecar.get("status") != "WHISPER_FORCED_ALIGNMENT_PASS":
