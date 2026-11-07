@@ -93,6 +93,46 @@ jobs:
           print("V21_FINAL_VIDEO_DRIVE_DELIVERY_EVIDENCE_GATE_PASS_NO_NETWORK")
           PY
 
+      - name: Enforce canonical final V2.1 render stays blocked without production authority
+        run: |
+          set +e
+          PYTHONPATH=. python production/render_v21_final.py \
+            --repo-root . \
+            --record episodes/episode-005/production-record.json \
+            --preview /tmp/missing-v21-preview.mp4 \
+            --preview-report /tmp/missing-v21-preview-report.json \
+            --narration /tmp/missing-v21-voice.wav \
+            --voice-profile /tmp/missing-v21-voice-profile.json \
+            --music /tmp/missing-v21-music.wav \
+            --music-candidate /tmp/missing-v21-music-source.json \
+            --effects-manifest /tmp/missing-v21-sfx.json \
+            --sfx sfx:alarm=/tmp/missing-v21-sfx.wav \
+            --output /tmp/v21-final-NOT-AUTHORIZED.mp4 \
+            --mix-output /tmp/v21-final-NOT-AUTHORIZED-mix.wav \
+            --receipt /tmp/v21-final-NOT-AUTHORIZED-receipt.json \
+            --report /tmp/v21-final-NOT-AUTHORIZED-report.json > /tmp/v21-final-block.json
+          code=$?
+          set -e
+          test "$code" -eq 1
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from production.v21_singleton_guard import audit
+          policy=json.loads(Path("production/active_engine_policy.json").read_text())
+          assert policy["final_render_entrypoint"] == "production/render_v21_final.py"
+          assert policy["final_render_route"]["generate_new_TTS"] is False
+          assert policy["production_enablement"] is False
+          assert policy["publication_policy"] == "manual_only"
+          assert audit(Path("."))["status"] == "V21_SINGLETON_PASS"
+          result=json.loads(Path("/tmp/v21-final-block.json").read_text())
+          assert result["status"] == "V21_FINAL_RENDER_BLOCKED",result
+          assert result["drive_write"] == "NOT_RUN"
+          assert result["publication"] == "MANUAL_ONLY_NOT_RUN"
+          assert not Path("/tmp/v21-final-NOT-AUTHORIZED.mp4").exists()
+          assert not Path("/tmp/v21-final-NOT-AUTHORIZED-mix.wav").exists()
+          print("V21_FINAL_RENDER_CANONICAL_ROUTE_IMPLEMENTED_POLICY_BLOCKED")
+          PY
+
       - name: Validate active policy
         run: |
           python - <<'PY'
