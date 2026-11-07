@@ -114,7 +114,7 @@ class AudioCandidateGateTests(unittest.TestCase):
         # Silent accidental deletion of a registered historical source
         # must prevent an apparently unique candidate from passing.
         data["sources"]=[s for s in data["sources"]
-                         if s["source_sha256"]!="4a84629bdd611489b49f28187c70f2fc6d4a48b11347ef5c05cf301e1cd1fa24"]
+                         if s["source_sha256"]!=self.old_sha]
         data["source_count"]=len(data["sources"])
         path.write_text(json.dumps(data))
         outcome=check_file(self.audio,self.candidate,root=self.root)
