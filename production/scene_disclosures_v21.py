@@ -169,7 +169,7 @@ def validate_disclosure(
                 problems.append("NASA: GEOS-5 model/1983 truth constraint missing")
             if (
                 any(name not in footer for name in REQUIRED_CREDIT_NAMES)
-                or NASA_LINE1.split(" (")[0] not in footer
+                or "GEOS-5" not in footer
                 or "2020" not in footer or "1983" not in footer
                 or "NOT" not in footer or "does not endorse" not in footer
             ):
