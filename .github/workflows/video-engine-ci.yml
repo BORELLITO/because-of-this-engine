@@ -36,6 +36,26 @@ jobs:
           ffprobe -version | head -n 1
       - name: Run V2.1 tests
         run: PYTHONPATH=. python -m unittest discover -s tests -p 'test_v21*.py' -v
+      - name: Audit acoustic catalog coverage and fail-closed release boundary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from production.audio_acoustic_fingerprint_v21 import unpack, ALGORITHM
+          from production.audio_mix_receipt_v21 import ALGORITHM as MIX_ALGORITHM
+          catalog = json.loads(Path("episodes/audio-acoustic-fingerprints-v21.json").read_text())
+          assert catalog["algorithm"] == ALGORITHM
+          assert catalog["source_count"] == len(catalog["sources"]) == 2
+          verified = {x["source_sha256"] for x in catalog["sources"]}
+          assert "4a84629bdd611489b49f28187c70f2fc6d4a48b11347ef5c05cf301e1cd1fa24" in verified
+          assert all(len(unpack(x["fingerprint"])) >= 64 for x in catalog["sources"])
+          assert MIX_ALGORITHM == "verified-local-ffmpeg-mix-replay-v1"
+          policy=json.loads(Path("production/active_engine_policy.json").read_text())
+          assert policy["production_enablement"] is False
+          assert policy["publication_policy"] == "manual_only"
+          print("V21_ACOUSTIC_CATALOG_AND_POSTFLIGHT_FAIL_CLOSED_PASS")
+          PY
+
       - name: Validate active policy
         run: |
           python - <<'PY'
