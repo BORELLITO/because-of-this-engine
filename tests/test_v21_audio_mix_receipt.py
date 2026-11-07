@@ -2,6 +2,7 @@
 from __future__ import annotations
 import json
 import math
+import subprocess
 import shutil
 import struct
 import tempfile
@@ -10,7 +11,7 @@ import wave
 from pathlib import Path
 
 from production.audio_mix_receipt_v21 import (
-    MixReceiptError, execute_with_receipt, file_sha256, verify_receipt,
+    MixReceiptError, execute_with_receipt, file_sha256, verify_receipt, verify_master_binding,
 )
 
 HAS_FFMPEG = bool(shutil.which("ffmpeg") and shutil.which("ffprobe"))
@@ -88,6 +89,23 @@ class RealAudioMixReceiptTests(unittest.TestCase):
         self.assertEqual(result["status"],"BLOCKED",result)
         self.assertTrue(any("no measured contribution" in item
                             for item in result.get("errors",[])))
+
+    def test_master_aac_audio_binds_to_replayed_mix_without_publication(self):
+        # Generate a real 14-second test master, not a production episode.
+        make_tone(self.voice,166,14.0)
+        make_tone(self.music,93,14.0)
+        self.issue()
+        video=self.root/"synthetic-master.mp4"
+        subprocess.run([
+            "ffmpeg","-nostdin","-hide_banner","-v","error",
+            "-f","lavfi","-i","color=c=black:s=160x288:r=8",
+            "-i",str(self.output),"-c:v","mpeg4","-c:a","aac",
+            "-shortest","-y",str(video)],check=True,capture_output=True,timeout=60)
+        result=verify_master_binding(self.receipt,video)
+        self.assertEqual(result["status"],"PASS",result)
+        self.assertTrue(result["master_audio_bound"])
+        self.assertCountEqual(result["source_contributions_confirmed"],["narration","music"])
+        self.assertFalse(result["publication_authorized"])
 
     def test_source_edit_after_render_is_detected(self):
         self.issue()
