@@ -17,9 +17,44 @@
   "output_limiter_limit": 0.95,
   "outro_seconds": 5.5,
   "narration_end_before_outro": true,
-  "music_ends_before_outro": true,
-  "source_policy": "SFX_MUST_BE_PRETIMED_APPROVED_STEMS",
+  "music_ends_before_outro": false,
+  "source_policy": "MUSIC_MANDATORY_SFX_OPTIONAL_NO_SIRENS",
   "release_requires": "INDEPENDENT_AUDIO_QA_AND_ALL_FINAL_GATES",
   "publication": "manual_only",
-  "production_enablement": false
+  "production_enablement": false,
+  "music_gain_max": 0.12,
+  "music_starts_at_seconds": 0,
+  "music_to_last_frame": true,
+  "outro_audio": "music_fades_with_visual_to_black",
+  "music_fade_in_seconds": 0.4,
+  "music_fade_out_seconds": 1.2,
+  "music_fade_out_alignment": "last_1.2_seconds_of_existing_outro_visual_fade",
+  "music_duration_policy": "MATCH_EXACT_FINAL_MASTER_NO_LOOPS",
+  "speech_ducking": {
+    "enabled": true,
+    "method": "ffmpeg_sidechaincompress",
+    "threshold": 0.02,
+    "ratio": 3,
+    "attack_ms": 12,
+    "release_ms": 280,
+    "source": "CHARON_NARRATION_ONLY"
+  },
+  "music_selection": {
+    "required_every_video": true,
+    "decision_maker": "MOTOR_V21",
+    "selection_engine": "production/music_autoselect_v21.py",
+    "rights_evidence_required": true,
+    "original_audio_sha256_required": true,
+    "acoustic_reuse_check_required": true,
+    "forbidden_sounds": [
+      "siren",
+      "alarm",
+      "klaxon",
+      "lead_vocals",
+      "jumpscare"
+    ],
+    "no_approved_track_action": "BLOCK_ACQUIRE_ALTERNATIVES_NOT_SILENCE",
+    "primary_genre": "psychological_suspense_dark_ambient",
+    "source_duration_must_cover_final_duration": true
+  }
 }
