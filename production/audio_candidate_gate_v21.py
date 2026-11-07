@@ -9,6 +9,7 @@ import argparse
 import hashlib
 import json
 import re
+import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -46,6 +47,18 @@ def check_file(path:Path, candidate:dict[str,Any],*,root:Path)->dict[str,Any]:
     if path.stat().st_size<1024:issues.append("audio is too small to verify as full source")
     specified=str(candidate.get("sha256") or "").strip().lower()
     if specified != digest or not SHA.fullmatch(specified):issues.append("declared source SHA-256 does not match actual audio bytes")
+    # Probe the actual bytes, not a caller-supplied file extension or flag.
+    try:
+        result=subprocess.run(
+            ["ffprobe","-v","error","-show_entries","format=duration:stream=codec_type,codec_name",
+             "-of","json",str(path)],capture_output=True,text=True,timeout=25,check=True)
+        probe=json.loads(result.stdout)
+        streams=probe.get("streams") or []
+        duration=float((probe.get("format") or {}).get("duration") or 0)
+        if duration<10 or not any(s.get("codec_type")=="audio" for s in streams):
+            issues.append("source is not a decodable music-length audio file")
+    except (OSError,ValueError,subprocess.CalledProcessError,subprocess.TimeoutExpired,json.JSONDecodeError):
+        issues.append("source audio decoding/ffprobe failed")
     if candidate.get("kind") not in {"music_bed","sfx"}:issues.append("unsupported audio kind")
     if candidate.get("license_verified") is not True:
         issues.append("item-specific commercial license not independently verified")
@@ -67,9 +80,11 @@ def check_file(path:Path, candidate:dict[str,Any],*,root:Path)->dict[str,Any]:
         "failures":issues,
         "input_sha256":digest,
         "known_historical_source_count":len(protected["sha256"]),
-        "ready_for_render":not issues,
+        "identity_check_pass":not issues,
+        "ready_for_render":False,
         "publication_authorized":False,
-        "note":"Exact file anti-reuse + declared acoustic QA; this gate does not perform full acoustic fingerprinting."
+        "scope":"IDENTITY_AND_DECODING_ONLY_NEXT_STAGE_REQUIRED",
+        "note":"This verifies real source bytes/decodability and exact identity reuse, not acoustic similarity, all copyright rights, render or publication. Caller-supplied QA flags are not independent proof."
     }
 
 
