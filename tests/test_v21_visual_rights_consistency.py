@@ -120,15 +120,16 @@ class V21VisualRightsConsistencyTests(unittest.TestCase):
         self.assertEqual(result["status"], "BLOCKED")
         self.assertTrue(any("escapes repository" in e for e in result["failures"]))
 
-    def test_real_episode_005_is_blocked_and_unmodified(self):
+    def test_real_episode_005_matches_exact_media_without_render_or_publication(self):
         production = json.loads((ROOT / "episodes/episode-005/production-record.json").read_text())
         before = copy.deepcopy(production)
         result = validate_visual_rights_consistency(production, repo_root=ROOT)
-        self.assertEqual(result["status"], "BLOCKED")
+        self.assertEqual(result["status"], "PASS")
         self.assertEqual(production, before)
-        self.assertFalse(any("visual assets missing render rights:" in e for e in result["failures"]))
+        self.assertEqual(result["failures"], [])
+        self.assertEqual(result["render"], "NOT_RUN")
         self.assertFalse(any("pexels-8888977: render rights not independently approved" in e for e in result["failures"]))
-        self.assertTrue(any("nasa-svs-geos5-clouds-no-labels-4819: render rights not independently approved" in e for e in result["failures"]))
+        self.assertFalse(any("nasa-svs-geos5-clouds-no-labels-4819: render rights not independently approved" in e for e in result["failures"]))
         self.assertTrue(any("nasa-svs-geos5-clouds-no-labels-4819" in e for e in result["failures"]))
         self.assertFalse(any("pexels-8888977: plan does not record human manifest approval" in e for e in result["failures"]))
 
