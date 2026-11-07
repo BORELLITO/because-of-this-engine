@@ -165,5 +165,34 @@
     "generate_new_TTS": false,
     "publication": "manual_only",
     "production_enablement": false
+  },
+  "soundtrack_policy_v21": {
+    "status": "ENFORCED_ENGINE_SELECTS_VETTED_MUSIC",
+    "selector": "production/music_autoselect_v21.py",
+    "story_based_selection": true,
+    "per_episode_license_dossier_required": true,
+    "verified_source_bytes_and_chromaprint_required": true,
+    "music_required_in_every_final": true,
+    "music_starts_seconds": 0,
+    "music_continues_through_logo_end_card": true,
+    "music_to_last_frame": true,
+    "fade_out_sync": "EXISTING_VISUAL_FADE_TO_BLACK_LAST_1_2_SECONDS",
+    "music_fade_out_seconds": 1.2,
+    "outro_duration_seconds": 5.5,
+    "music_gain_max": 0.12,
+    "voice_provider": "gemini_tts",
+    "voice_name": "Charon",
+    "narration_ducking": "SIDECHAIN_COMPRESSOR_V21",
+    "forbidden_sounds": [
+      "siren",
+      "alarm",
+      "klaxon",
+      "lead_vocals",
+      "jump_scare"
+    ],
+    "sfx_optional_if_story_qa_passes": true,
+    "no_clear_music_action": "FAIL_CLOSED_NO_SILENT_SUBSTITUTE",
+    "production_enablement": false,
+    "publication": "manual_only"
   }
 }
