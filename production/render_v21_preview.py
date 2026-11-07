@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Any
 
 from production.visual_continuity import validate_sequence
+from production.scene_disclosures_v21 import load_for_preview, ffmpeg_nasa_overlay, NASA_ID
 
 
 FPS = 60
@@ -160,7 +161,7 @@ def validate_voice_profile(profile_path: Path, audio_path: Path) -> dict[str, An
     }
 
 
-def render_scene(scene: dict[str, Any], asset_path: Path, output: Path) -> None:
+def render_scene(scene: dict[str, Any], asset_path: Path, output: Path, disclosure: dict[str, Any] | None = None) -> None:
     duration = float(scene["duration"])
     source_duration = media_duration(asset_path)
     loop_count = max(0, math.ceil(duration / source_duration) - 1)
@@ -180,6 +181,18 @@ def render_scene(scene: dict[str, Any], asset_path: Path, output: Path) -> None:
         f"fps={FPS},format=yuv420p,setsar=1,"
         f"fade=t=in:st=0:d=0.16,fade=t=out:st={fade_out_start:.3f}:d=0.18"
     )
+    if scene["candidate_id"] == NASA_ID:
+        if disclosure is None:
+            raise PreviewRenderError("NASA GEOS-5 model must have verified notice and credits.")
+        try:
+            nasa_overlay = ffmpeg_nasa_overlay(disclosure)
+        except ValueError as exc:
+            raise PreviewRenderError(str(exc)) from exc
+        anchor = f"fps={FPS},format=yuv420p,setsar=1,"
+        if anchor not in filters:
+            raise PreviewRenderError("V2.1 overlay anchor changed; block before rendering.")
+        filters = filters.replace(anchor, f"fps={FPS},format=yuv420p,setsar=1" + nasa_overlay + ",")
+
     input_args = ["-stream_loop", str(loop_count)] if loop_count else []
     run([
         "ffmpeg", "-y", *input_args, "-i", str(asset_path), "-an",
@@ -203,6 +216,7 @@ def render_preview(
     report_path: Path,
 ) -> dict[str, Any]:
     scene_manifest = json.loads(scene_manifest_path.read_text(encoding="utf-8"))
+    verified_disclosures = load_for_preview(scene_manifest_path, scene_manifest)
     story = json.loads(story_path.read_text(encoding="utf-8"))
     plan = build_scene_plan(scene_manifest, story)
     continuity_profile = scene_manifest.get("visual_continuity_profile")
@@ -251,7 +265,7 @@ def render_preview(
             if sha256_file(asset_path).lower() != expected_sha:
                 raise PreviewRenderError(f"Visual SHA-256 mismatch: {candidate_id}")
             scene_file = work / f"scene-{index:02d}.mp4"
-            render_scene(scene, asset_path, scene_file)
+            render_scene(scene, asset_path, scene_file, disclosure=verified_disclosures.get(candidate_id))
             scene_files.append(scene_file)
 
         concat = work / "concat.txt"
