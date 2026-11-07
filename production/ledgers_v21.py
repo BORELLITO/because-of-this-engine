@@ -34,6 +34,9 @@ def validate_source_ledger(record: Mapping[str, Any]) -> dict[str, Any]:
         failures.extend(f"entry[{index}] missing:{field}" for field in required if not _text(entry.get(field)))
         if entry.get("fact_check_status") not in {"VERIFIED", "PASS"}:
             failures.append(f"entry[{index}] fact_check_status is not verified")
+        # An evidence field is not enough if it cannot identify a secure source.
+        if not str(entry.get("source_url") or "").strip().lower().startswith("https://"):
+            failures.append(f"entry[{index}] source_url must use HTTPS")
         if entry.get("primary_or_secondary") not in {"primary", "secondary"}:
             failures.append(f"entry[{index}] primary_or_secondary is invalid")
     for claim_id, claim_entries in by_claim.items():
@@ -45,6 +48,14 @@ def validate_source_ledger(record: Mapping[str, Any]) -> dict[str, Any]:
             failures.append(f"claim:{claim_id} requires primary+corroboration or two independent reliable sources")
         if primary and corroboration and len(verified) < 2:
             failures.append(f"claim:{claim_id} declares corroboration without a second verified ledger entry")
+        # A single URL repeated under two publisher labels is not corroboration.
+        independent_urls = {
+            str(item.get("source_url") or "").strip().lower().rstrip("/")
+            for item in verified
+            if _text(item.get("source_url"))
+        }
+        if len(verified) >= 2 and len(independent_urls) < 2:
+            failures.append(f"claim:{claim_id} has repeated source URL, not independent corroboration")
     return _status("source_ledger", not failures, failures, warnings)
 
 def validate_rights_ledger(record: Mapping[str, Any]) -> dict[str, Any]:
