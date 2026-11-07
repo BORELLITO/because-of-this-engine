@@ -33,8 +33,8 @@ jobs:
           set -euo pipefail
           mkdir -p artifacts/s09-retro-keyboard
           curl --fail --location --silent --show-error --retry 2 --retry-delay 2 \
-            --connect-timeout 15 --max-time 120 --max-filesize 90M \
-            "https://videos.pexels.com/video-files/8888977/8888977-hd_1920_1080_24fps.mp4" \
+            --connect-timeout 15 --max-time 120 --max-filesize 150M \
+            "https://videos.pexels.com/video-files/8888977/8888977-uhd_4096_2160_25fps.mp4" \
             --output artifacts/s09-retro-keyboard/candidate.mp4
           ffprobe -v error -show_entries format=duration,size:stream=codec_type,codec_name,width,height,r_frame_rate \
             -of json artifacts/s09-retro-keyboard/candidate.mp4 > artifacts/s09-retro-keyboard/ffprobe.json
@@ -50,13 +50,13 @@ jobs:
           assert 4<=d<=40, d
           assert int(v["width"])>=1280 and int(v["height"])>=720, v
           content=base/"candidate.mp4"
-          assert content.stat().st_size<=90*1024*1024
+          assert content.stat().st_size<=150*1024*1024
           evidence={
             "status":"DOWNLOADED_QA_ONLY_NOT_APPROVED",
-            "source_page_url":"https://www.pexels.com/video/a-person-operating-a-radar-8888977/",
+            "source_page_url":"https://www.pexels.com/video/person-typing-on-a-keyboard-8888977/",
             "provider":"pexels","artist":"MART PRODUCTION",
             "license_name":"Pexels License","license_page":"https://www.pexels.com/license/",
-            "media_url":"https://videos.pexels.com/video-files/8888977/8888977-hd_1920_1080_24fps.mp4",
+            "media_url":"https://videos.pexels.com/video-files/8888977/8888977-uhd_4096_2160_25fps.mp4",
             "sha256":hashlib.sha256(content.read_bytes()).hexdigest(),
             "bytes":content.stat().st_size,"duration_seconds":d,
             "width":v["width"],"height":v["height"],"fps":v["r_frame_rate"],
