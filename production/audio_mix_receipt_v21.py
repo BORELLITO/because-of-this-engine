@@ -33,19 +33,20 @@ def decoded_pcm_sha256(path: Path) -> str:
             "-i", str(path), "-map", "0:a:0",
             "-ac", "1", "-ar", "48000", "-f", "s16le", "-"]
     try:
-        proc = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        sha = hashlib.sha256()
-        size = 0
-        while True:
-            chunk = proc.stdout.read(1 << 20)
-            if not chunk:
-                break
-            size += len(chunk)
-            sha.update(chunk)
-        proc.stderr.read(65536)
-        if proc.wait(timeout=40) or size < 192000:
-            raise MixReceiptError("decoded audio missing or too short")
-        return sha.hexdigest()
+        with subprocess.Popen(args, stdout=subprocess.PIPE,
+                              stderr=subprocess.PIPE) as proc:
+            sha = hashlib.sha256()
+            size = 0
+            while True:
+                chunk = proc.stdout.read(1 << 20)
+                if not chunk:
+                    break
+                size += len(chunk)
+                sha.update(chunk)
+            proc.stderr.read(65536)
+            if proc.wait(timeout=40) or size < 192000:
+                raise MixReceiptError("decoded audio missing or too short")
+            return sha.hexdigest()
     except (OSError, subprocess.TimeoutExpired) as exc:
         raise MixReceiptError("FFmpeg PCM decoding failed") from exc
 
