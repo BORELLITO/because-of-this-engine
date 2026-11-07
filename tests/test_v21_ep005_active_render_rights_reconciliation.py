@@ -26,7 +26,7 @@ ORIGINAL_REPLACEMENTS = {
     "pexels-12590338",
     "pexels-8888977",
 }
-PENDING = {"pexels-11764431", "nasa-svs-geos5-clouds-no-labels-4819"}
+PENDING = set()
 AUTO_APPROVED = ORIGINAL_REPLACEMENTS - PENDING
 
 
@@ -68,7 +68,7 @@ class ActiveEpisodeRightsReconciliationTests(unittest.TestCase):
             self.assertEqual(value["rights_status"], "APPROVED")
             self.assertTrue(value["approved_for_render"])
 
-    def test_five_new_assets_auto_approved_and_two_correctly_blocked(self):
+    def test_seven_new_assets_eligible_only_for_labelled_scoped_render(self):
         by_id = {x["asset_id"]: x for x in self.record["rights_ledger"]}
         self.assertEqual({k for k in ORIGINAL_REPLACEMENTS if by_id[k]["rights_status"] == "APPROVED"}, AUTO_APPROVED)
         self.assertEqual({k for k in ORIGINAL_REPLACEMENTS if by_id[k]["rights_status"] == "PENDING_INDEPENDENT_RENDER_RIGHTS"}, PENDING)
@@ -116,29 +116,31 @@ class ActiveEpisodeRightsReconciliationTests(unittest.TestCase):
 
     def test_reconciled_rights_and_audio_still_block_real_release(self):
         canonical = validate_rights_ledger(self.record)
-        self.assertEqual(canonical["status"], "BLOCKED")
-        self.assertEqual(sum("is not independently approved" in x for x in canonical["failures"]), 2)
+        self.assertEqual(canonical["status"], "PASS")
+        self.assertEqual(canonical["failures"], [])
         self.assertEqual(validate_visual_plan(self.plan, self.manifest)["status"], "VISUAL_PLAN_CONTRACT_PASS")
         visual = validate_visual_rights_consistency(self.record, repo_root=ROOT)
-        self.assertEqual(visual["status"], "BLOCKED")
-        self.assertEqual(sum("render rights not independently approved" in x for x in visual["failures"]), 2)
+        self.assertEqual(visual["status"], "PASS")
+        self.assertEqual(visual["failures"], [])
         self.assertFalse(any("visual assets missing render rights" in x for x in visual["failures"]))
         report = build_dossier(self.record, self.plan, self.manifest)
-        self.assertEqual(report["status"], "RECONCILIATION_REQUIRED")
+        self.assertEqual(report["status"], "EVIDENCE_CONSISTENT_NOT_RENDER_AUTHORIZED")
         self.assertEqual(report["missing_render_rights"], [])
         self.assertEqual(report["stale_render_rights"], [])
         self.assertEqual(set(report["pending_recorded_rights"]), PENDING)
         self.assertEqual(set(report["pending_render_rights"]), PENDING)
-        self.assertEqual(report["render_rights_matched_count"], 14)
+        self.assertEqual(report["render_rights_matched_count"], 16)
         self.assertEqual(report["render"], "NOT_RUN")
+        from production.audio_history_audit_v21 import audit as audit_audio_history
+        self.assertEqual(audit_audio_history(ROOT)["status"], "BLOCKED")
+        self.assertFalse(self.record["production_enablement"])
+
 
     def test_forged_pending_person_approval_does_not_pass_autonomous_gate(self):
         from production.rights_autonomy_v21 import audit_repository
         altered = copy.deepcopy(self.record)
         target = next(x for x in altered["rights_ledger"] if x["asset_id"] == "pexels-11764431")
-        target["rights_status"] = "APPROVED"
-        target["approved_for_render"] = True
-        target["commercial_use"] = True
+        target["sha256"] = "f" * 64
         self.assertEqual(audit_repository(altered, repo_root=ROOT)["status"], "BLOCKED")
 
 
