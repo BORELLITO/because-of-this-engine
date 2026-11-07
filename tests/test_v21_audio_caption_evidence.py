@@ -60,6 +60,25 @@ class CaptionEvidenceTests(unittest.TestCase):
         self.assertEqual(result["perceptual_audio_caption_qa"], "REQUIRES_HUMAN_REVIEW")
         self.assertFalse(result["publication_authorized"])
 
+    def test_trailing_newline_uses_exact_tts_script_hash(self):
+        self.script.write_text("One final decision.\n", encoding="utf-8")
+        # The narration workflow sends .strip() to the provider. A newline
+        # in the source text is not a different acoustic prompt.
+        result = self._result()
+        self.assertEqual(result["status"], "AUDIO_CAPTION_STRUCTURAL_PASS", result)
+
+    def test_real_episode006_source_matches_frozen_checkpoint_script_identity(self):
+        root = Path(__file__).resolve().parents[1]
+        source = (root / "episodes/episode-006/narration/en-US-charon-v1.txt").read_text(encoding="utf-8")
+        self.assertEqual(
+            hashlib.sha256(source.strip().encode("utf-8")).hexdigest(),
+            "412c4bfa1c26abd7631ec1cad74cae2e07b6d33012631bbbac53df8c8e0b3112",
+        )
+        self.assertNotEqual(
+            hashlib.sha256(source.encode("utf-8")).hexdigest(),
+            "412c4bfa1c26abd7631ec1cad74cae2e07b6d33012631bbbac53df8c8e0b3112",
+        )
+
     def test_script_mismatch_blocks(self):
         self.script.write_text("A totally different transcript.", encoding="utf-8")
         self.assertEqual(self._result()["status"], "BLOCKED")
