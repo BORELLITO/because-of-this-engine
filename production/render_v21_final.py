@@ -156,6 +156,10 @@ def assemble_verified_picture_with_audio(
     Caller MUST have passed validate_request(mode='final') and required
     provenance checks. It refuses to overwrite anything previously approved.
     """
+    destinations = [output, mix_output, audio_receipt]
+    all_paths = [picture, narration, music, *sfx.values(), *destinations]
+    if len({path.resolve() for path in all_paths}) != len(all_paths):
+        raise FinalRenderError("source and destination paths must be unique")
     for path in (output, mix_output, audio_receipt):
         if path.exists():
             raise FinalRenderError("refusing to overwrite a previous video or audio receipt: " + str(path))
@@ -169,15 +173,14 @@ def assemble_verified_picture_with_audio(
     if abs(picture_duration - total) > 0.36:
         raise FinalRenderError("picture duration differs from frozen Charon/outro timing")
     source_video_sha = _video_payload_sha256(picture)
-    from production.audio_mix_receipt_v21 import verify_receipt
     sources = {"narration": narration, "music": music, **sfx}
     mix_command = build_audio_mix_command(
         narration, music, sfx, mix_output,
         voice_seconds=voice_seconds, profile=profile)
     execute_with_receipt(episode_id, mix_command, sources, mix_output, audio_receipt)
-    local_mix = verify_receipt(audio_receipt)
-    if local_mix.get("status") != "PASS":
-        raise FinalRenderError("real mix replay or per-stem effect contribution failed")
+    # The mandatory postflight below runs replay, per-stem counterfactual
+    # verification and finished-master binding exactly once. Avoid redundant
+    # expensive replays before the fast video stream-copy step.
     pending = output.with_name("." + output.stem + ".V21-CANDIDATE" + output.suffix)
     if pending.exists():
         raise FinalRenderError("unreviewed candidate output already exists")
