@@ -6,7 +6,6 @@ and scoped human authorization disagree. Does not grant render/publication.
 from __future__ import annotations
 
 import json
-from collections import Counter
 from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
@@ -120,13 +119,18 @@ def validate_visual_rights_consistency(
         if candidate is None:
             failures.append(f"{asset_id}: missing acquisition candidate")
             continue
-        if candidate.get("rights_status") != "APPROVED_FOR_MANIFEST_ONLY" or (candidate.get("qa") or {}).get("human_approval") != "APPROVED_FOR_MANIFEST":
+        candidate_qa = candidate.get("qa")
+        if not isinstance(candidate_qa, Mapping):
+            candidate_qa = {}
+        if candidate.get("rights_status") != "APPROVED_FOR_MANIFEST_ONLY" or candidate_qa.get("human_approval") != "APPROVED_FOR_MANIFEST":
             failures.append(f"{asset_id}: plan does not record human manifest approval")
         if asset.get("rights_status") != "APPROVED_FOR_MANIFEST_ONLY" or asset.get("human_approval") != "APPROVED_FOR_MANIFEST":
             failures.append(f"{asset_id}: manifest approval invalid")
         if asset.get("approved_for_render") is not False:
             failures.append(f"{asset_id}: manifest must not promote render permission")
-        intake = candidate.get("intake_artifact") or {}
+        intake = candidate.get("intake_artifact")
+        if not isinstance(intake, Mapping):
+            intake = {}
         for field, actual, expected in (
             ("source page", _url(asset.get("source_page_url")), _url(candidate.get("source_page_url"))),
             ("SHA-256", asset.get("sha256"), intake.get("sha256")),
@@ -149,7 +153,8 @@ def validate_visual_rights_consistency(
             failures.append(f"{asset_id}: render rights not independently approved")
         if right.get("approval_scope") != f"{episode_id}-render":
             failures.append(f"{asset_id}: incorrect render approval scope")
-        if episode_id not in (right.get("used_by") or []):
+        usages = right.get("used_by")
+        if not isinstance(usages, list) or episode_id not in usages:
             failures.append(f"{asset_id}: rights ledger does not list episode use")
 
     report["asset_count"] = len(assets)
