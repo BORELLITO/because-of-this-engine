@@ -43,6 +43,8 @@ class AudioCandidateGateTests(unittest.TestCase):
                                "drive_file_id":"historical-id","track_id":"existing-song"}]}
         (self.root/"episodes"/"audio-rendered-master-registry.json").write_text(json.dumps(self.master))
         (self.root/"episodes"/"audio-memory-registry.json").write_text(json.dumps(self.legacy))
+        shutil.copyfile(ROOT/"episodes"/"audio-acoustic-fingerprints-v21.json",
+                        self.root/"episodes"/"audio-acoustic-fingerprints-v21.json")
         self.audio=self.root/"candidate.wav"
         self.audio.write_bytes(self.new)
         self.candidate={"sha256":hashlib.sha256(self.new).hexdigest(),
