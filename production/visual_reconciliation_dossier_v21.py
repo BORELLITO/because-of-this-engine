@@ -112,10 +112,14 @@ def build_dossier(
             "user_approval_inferred": False,
             "requires_manual_rights_reconciliation": not render_rights_match,
         })
+    is_coherent = (
+        not problems and not missing and not stale and not pending_visual
+        and not provenance_mismatches and all(x["render_rights_matched"] for x in items)
+    )
     return {
         "schema_version": "1.0",
         "gate": "VISUAL_RECONCILIATION_DOSSIER",
-        "status": "RECONCILIATION_REQUIRED",
+        "status": "EVIDENCE_CONSISTENT_NOT_RENDER_AUTHORIZED" if is_coherent else "RECONCILIATION_REQUIRED",
         "episode_id": episode,
         "asset_count": len(assets),
         "render_rights_matched_count": sum(bool(x["render_rights_matched"]) for x in items),
