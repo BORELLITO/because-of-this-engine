@@ -1,0 +1,143 @@
+name: Because Of This Episode 006 Gemini Charon Captions
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: "Successful Gemini/Charon narration workflow run ID"
+        required: true
+        default: "42317039843"
+        type: string
+      source_artifact_name:
+        description: "Narration checkpoint artifact name"
+        required: true
+        default: "episode006-gemini-charon-narration"
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  gemini-charon-captions:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout requested revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Download approved Gemini Charon checkpoint
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.source_artifact_name }}
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.source_run_id }}
+          path: artifacts/episode006-gemini-charon
+
+      - name: Verify checkpoint identity and audio contract
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import wave
+          from pathlib import Path
+
+          root = Path("artifacts/episode006-gemini-charon")
+          audio = root / "narration.wav"
+          profile_path = root / "voice-profile.json"
+          script = Path("episodes/episode-006/narration/en-US-charon-v1.txt").read_text(encoding="utf-8").strip()
+          assert audio.is_file(), audio
+          assert profile_path.is_file(), profile_path
+          profile = json.loads(profile_path.read_text(encoding="utf-8"))
+          actual_sha = hashlib.sha256(audio.read_bytes()).hexdigest()
+          assert profile["provider"] == "gemini_tts", profile
+          assert profile["voice_name"] == "Charon", profile
+          assert profile["model"] == "gemini-3.8-flash-tts", profile
+          assert profile["duration_status"] == "PASS", profile
+          assert profile["audio_sha256"] == actual_sha, profile
+          assert profile["script_sha256"] == hashlib.sha256(script.encode("utf-8")).hexdigest(), profile
+          with wave.open(str(audio), "rb") as stream:
+              duration = stream.getnframes() / stream.getframerate()
+              assert stream.getnchannels() == 1
+              assert stream.getsampwidth() == 2
+              assert stream.getframerate() == 24000
+          assert 60 <= duration <= 80, duration
+          print(json.dumps({"status":"APPROVED_GEMINI_CHARON_CHECKPOINT","audio_sha256":actual_sha,"duration_seconds":round(duration,3)}))
+          PY
+
+      - name: Install independent timestamp aligners
+        run: python -m pip install --disable-pip-version-check faster-whisper==1.1.1 vosk==0.3.45
+
+      - name: Download fixed Vosk fallback model
+        run: |
+          set -euo pipefail
+          mkdir -p .cache/vosk
+          curl --fail --location --silent --show-error https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip -o .cache/vosk/model.zip
+          unzip -q .cache/vosk/model.zip -d .cache/vosk
+          test -d .cache/vosk/vosk-model-small-en-us-0.15
+
+      - name: Build Gemini caption manifest
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path("artifacts/episode006-gemini-charon")
+          manifest = {
+              "audio": {"path": "narration.wav"},
+              "script": {"path": "../../episodes/episode-006/narration/en-US-charon-v1.txt"},
+              "captions": {
+                  "path": "narration.ass",
+                  "alignment_sidecar": "narration.alignment.json",
+                  "max_line_chars": 36,
+                  "max_lines": 2,
+                  "margin_v": 650,
+                  "active_word_color": "#F04444"
+              }
+          }
+          (root / "caption-manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          PY
+
+      - name: Preserve raw Whisper timestamp evidence
+        run: |
+          PYTHONPATH=. python - <<'PY'
+          import json
+          from pathlib import Path
+          from production.whisper_captions import _recognize
+          root = Path("artifacts/episode006-gemini-charon")
+          words = _recognize(root / "narration.wav", "base.en")
+          (root / "whisper.raw.words.json").write_text(json.dumps(words, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          print(json.dumps({"status":"WHISPER_RAW_TIMESTAMPS_CAPTURED","word_count":len(words)}))
+          PY
+
+      - name: Generate forced Gemini Charon captions
+        run: |
+          PYTHONPATH=. python production/whisper_captions.py --manifest artifacts/episode006-gemini-charon/caption-manifest.json --model base.en --secondary-vosk-model-dir .cache/vosk/vosk-model-small-en-us-0.15
+
+      - name: Validate real-timestamp karaoke captions
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path("artifacts/episode006-gemini-charon")
+          ass = root / "narration.ass"
+          sidecar = root / "narration.alignment.json"
+          assert ass.is_file() and ass.stat().st_size > 0, ass
+          data = json.loads(sidecar.read_text(encoding="utf-8"))
+          assert data["status"] == "WHISPER_FORCED_ALIGNMENT_PASS", data
+          assert data["provider"] in {"faster-whisper", "faster-whisper+vosk"}, data
+          assert data["word_count"] > 0, data
+          assert data["word_timing_normalization"]["timeline_monotonic"] is True, data
+          assert data["captions"], data
+          assert all(str(chunk["text"]).count("\\N") <= 1 for chunk in data["captions"]), data
+          assert len(data["captions"]) >= 2, data
+          assert data["audio_duration_seconds"] >= 60, data
+          print(json.dumps({"status":"GEMINI_CHARON_CAPTIONS_READY","caption_count":len(data["captions"]),"audio_duration_seconds":data["audio_duration_seconds"],"timing_mode":data["timing_mode"]}))
+          PY
+
+      - name: Upload Gemini narration and caption checkpoint
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: episode006-gemini-charon-captioned
+          path: artifacts/episode006-gemini-charon
+          if-no-files-found: error
