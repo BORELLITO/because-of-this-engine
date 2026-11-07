@@ -16,10 +16,7 @@ import re
 from pathlib import Path
 from typing import Iterable
 
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from googleapiclient.discovery import build
-from googleapiclient.http import MediaFileUpload
+from production.final_delivery_v21 import verify_drive_video_delivery
 
 FOLDER_MIME = "application/vnd.google-apps.folder"
 DEFAULT_ROOT_FOLDER = "1A-oyowfHtdciB2_NZSLIZ0oG-ajOeYVb"
@@ -36,7 +33,9 @@ def require_env(name: str) -> str:
     return value
 
 
-def credentials() -> Credentials:
+def credentials():
+    from google.auth.transport.requests import Request
+    from google.oauth2.credentials import Credentials
     creds = Credentials(
         token=None,
         refresh_token=require_env("GOOGLE_REFRESH_TOKEN"),
@@ -50,6 +49,7 @@ def credentials() -> Credentials:
 
 
 def service():
+    from googleapiclient.discovery import build
     return build("drive", "v3", credentials=credentials(), cache_discovery=False)
 
 
@@ -157,6 +157,7 @@ def iter_files(paths: Iterable[Path]) -> list[tuple[Path, Path]]:
 
 
 def upload_verified(drive, parent_id: str, local: Path, remote_name: str, job_id: str) -> dict:
+    from googleapiclient.http import MediaFileUpload
     local_size = local.stat().st_size
     local_md5 = md5(local)
     mime_type = mimetypes.guess_type(local.name)[0] or "application/octet-stream"
@@ -228,7 +229,24 @@ def deliver(
     delivery_name: str,
     paths: list[Path],
     job_id: str,
+    *,
+    production_record_path: Path | None = None,
+    audio_receipt_path: Path | None = None,
+    master_video_path: Path | None = None,
+    repo_root: Path = Path("."),
+    policy_path: Path | None = None,
 ) -> dict:
+    # Mandatory before auth/network access, even for direct deliver() callers.
+    final_gate = verify_drive_video_delivery(
+        paths,
+        production_record_path=production_record_path,
+        audio_receipt_path=audio_receipt_path,
+        master_video_path=master_video_path,
+        repo_root=repo_root,
+        policy_path=policy_path,
+    )
+    if final_gate["status"] == "BLOCKED":
+        raise DeliveryError("Final V2.1 media delivery blocked: " + "; ".join(final_gate["failures"]))
     drive = service()
     root = validate_folder(drive, root_folder_id)
     collection_id = ensure_folder(drive, root_folder_id, safe_name(collection))
@@ -272,6 +290,11 @@ def main() -> int:
     parser.add_argument("--delivery-name", default=f"github-run-{os.environ.get('GITHUB_RUN_ID', 'local')}")
     parser.add_argument("--path", action="append", default=[])
     parser.add_argument("--receipt", type=Path)
+    parser.add_argument("--production-record", type=Path)
+    parser.add_argument("--audio-mix-receipt", type=Path)
+    parser.add_argument("--master-video", type=Path)
+    parser.add_argument("--repo-root", type=Path, default=Path("."))
+    parser.add_argument("--policy", type=Path)
     parser.add_argument("--job-id", default=os.environ.get("BECAUSE_OF_THIS_JOB_ID", ""))
     args = parser.parse_args()
 
@@ -298,6 +321,11 @@ def main() -> int:
             args.delivery_name,
             [Path(value) for value in args.path],
             args.job_id,
+            production_record_path=args.production_record,
+            audio_receipt_path=args.audio_mix_receipt,
+            master_video_path=args.master_video,
+            repo_root=args.repo_root,
+            policy_path=args.policy,
         )
         payload = json.dumps(report, ensure_ascii=False, indent=2) + "\n"
         if args.receipt:
