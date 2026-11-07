@@ -7,6 +7,7 @@ publication, source ownership, or human approval.
 from __future__ import annotations
 
 import json
+import hashlib
 from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
@@ -101,7 +102,7 @@ def inspect(record: Mapping[str, Any], manifest: Mapping[str, Any],
                 if details.get("delivery_verified") is not True:
                     failures.append("NASA S12: draft credit has not been verified in rendered/on-platform delivery")
         risk_shots.append({"source":NASA_ID,"actual_shots":actual_nasa_shots,
-                           "risk":"2020_GE0S5_MODEL_NOT_1983_SENSOR","status":"BLOCKED_UNTIL_DELIVERY_EVIDENCE"})
+                           "risk":"2020_GEOS5_MODEL_NOT_1983_SENSOR","status":"BLOCKED_UNTIL_DELIVERY_EVIDENCE"})
     return {
         "gate":"SHOT_CONTEXT_V21",
         "status":"PASS" if not failures else "BLOCKED",
@@ -118,7 +119,51 @@ def inspect_repository(record:Mapping[str,Any],*,repo_root:Path)->dict[str,Any]:
         reviews=_read_json(repo_root,str(ep)) if ep else None
         delivery_path=record.get("delivery_credits_manifest_path")
         delivery=_read_json(repo_root,str(delivery_path)) if delivery_path else None
-        return inspect(record,scene,reviews,delivery)
+        result=inspect(record,scene,reviews,delivery)
+        # An editable JSON boolean is NEVER sufficient to prove that a NASA
+        # disclosure actually reached the final encoded video and description.
+        # Require a real local output with an exact hash, source attribution
+        # description file, and independent frame-level verification report.
+        # These files intentionally do not exist while production is disabled.
+        nasa = (delivery or {}).get("nasa_svs_4819",{})
+        if isinstance(nasa,Mapping) and nasa.get("delivery_verified") is True:
+            failures=result["failures"]
+            media_rel=nasa.get("final_video_path")
+            digest=str(nasa.get("final_video_sha256") or "")
+            description_rel=nasa.get("final_description_path")
+            receipt_rel=nasa.get("visual_credit_qa_receipt_path")
+            if (not isinstance(media_rel,str) or not isinstance(description_rel,str)
+                    or not isinstance(receipt_rel,str) or len(digest)!=64):
+                failures.append("NASA S12: delivery proof missing source media, description, verified frame receipt or SHA-256")
+            else:
+                try:
+                    root=repo_root.resolve()
+                    def checked_file(value:str)->Path:
+                        p=(root/value).resolve()
+                        p.relative_to(root)
+                        if not p.is_file():
+                            raise ValueError("file not found")
+                        return p
+                    video=checked_file(media_rel)
+                    desc=checked_file(description_rel)
+                    receipt=checked_file(receipt_rel)
+                    video_digest=hashlib.sha256(video.read_bytes()).hexdigest()
+                    if video_digest!=digest:
+                        failures.append("NASA S12: final media hash not verified")
+                    description=desc.read_text(encoding="utf-8")
+                    if NASA_CREDIT not in description or NASA_DISCLOSURE not in description:
+                        failures.append("NASA S12: actual delivery description lacks source credit or model disclaimer")
+                    proof=json.loads(receipt.read_text(encoding="utf-8"))
+                    if (proof.get("final_video_sha256")!=digest
+                            or proof.get("nasa_credit_onscreen_verified") is not True
+                            or proof.get("nasa_disclosure_onscreen_verified") is not True
+                            or proof.get("inspection_method")!="FRAME_LEVEL_FINISHED_RENDER"
+                            or proof.get("frame_count_inspected",0)<1):
+                        failures.append("NASA S12: independent final-frame inspection evidence missing")
+                except (ValueError,OSError,TypeError,UnicodeDecodeError,json.JSONDecodeError) as exc:
+                    failures.append(f"NASA S12: final delivered artifact verification failed: {exc}")
+            result["status"]="BLOCKED" if failures else "PASS"
+        return result
     except (ValueError,TypeError,KeyError,OSError,json.JSONDecodeError) as exc:
         return {"gate":"SHOT_CONTEXT_V21","status":"BLOCKED","failures":[f"unavailable scene or delivery evidence:{exc}"],
                 "actual_assignments":{},"risk_shots":[],"render":"NOT_RUN","publication":"NOT_RUN"}
