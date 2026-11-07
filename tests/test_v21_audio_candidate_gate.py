@@ -33,8 +33,8 @@ class AudioCandidateGateTests(unittest.TestCase):
                     frames.extend(struct.pack("<h",value))
                 w.writeframes(bytes(frames))
             return output.getvalue()
-        self.old=wav_bytes(223.0)
-        self.new=wav_bytes(331.0)
+        self.old=wav_bytes(331.0)
+        self.new=wav_bytes(223.0)
         self.old_sha=hashlib.sha256(self.old).hexdigest()
         self.master={"rendered_masters":[{
             "episode_id":"fixture-final","music_asset":{"sha256":self.old_sha,"drive_file_id":"historical-id"}
