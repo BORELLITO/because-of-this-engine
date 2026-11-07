@@ -1,0 +1,652 @@
+{
+  "schema_version": "1.0",
+  "purpose": "IMMUTABLE_AUDIT_SNAPSHOT_PRE_RECONCILIATION",
+  "captured_date": "2026-11-07",
+  "source_commit": "98c930b99954c5302ccb542fa841f0b48199a033",
+  "source_path": "episodes/episode-005/production-record.json",
+  "source_file_git_blob_sha": "900bcfdf56e5804c1c84ca623e8967e22923d88d",
+  "source_count": 16,
+  "stale_asset_ids": [
+    "mixkit-cloudy-sky-118",
+    "mixkit-young-engineer-29991",
+    "mixkit-worker-industrial-lathe-2244",
+    "pixabay-led-indicator-lights-316712",
+    "pixabay-antenna-astronomy-communication-40041",
+    "pixabay-alert-alarm-war-danger-risk-205519",
+    "pixabay-button-press-red-business-click-502"
+  ],
+  "stale_entries_original": [
+    {
+      "asset_id": "mixkit-cloudy-sky-118",
+      "source_url": "https://mixkit.co/free-stock-video/cloudy-sky-118/",
+      "provider": "mixkit",
+      "author": "EDGAR FERNANDEZ",
+      "license_name": "Mixkit Stock Video Free License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://mixkit.co/free-stock-video/cloudy-sky-118/",
+      "sha256": "7b18e0c66a2eb1a55df0532d3bf346f1e1d193eaa805403cc39fc835e8454432",
+      "perceptual_fingerprint": "75bd02cf43583033aee2f7659350e477ff56bd126380157b845433def983964a",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "contributor_url": "https://mixkit.co/@edgarfernandez/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
+    },
+    {
+      "asset_id": "mixkit-young-engineer-29991",
+      "source_url": "https://mixkit.co/free-stock-video/young-engineer-programming-in-his-workshop-seen-up-close-29991/",
+      "provider": "mixkit",
+      "author": "EDGAR FERNANDEZ",
+      "license_name": "Mixkit Stock Video Free License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://mixkit.co/free-stock-video/young-engineer-programming-in-his-workshop-seen-up-close-29991/",
+      "sha256": "f1474daed5b97009063ca692859fdca1e91044ad62a9cd1f1f3009b2609b3478",
+      "perceptual_fingerprint": "a4e5ac59afbd71e65a7b8eaccba06c5c62ac7e169a6dceea4deae4cb15b5842a",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "contributor_url": "https://mixkit.co/@edgarfernandez/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
+    },
+    {
+      "asset_id": "mixkit-worker-industrial-lathe-2244",
+      "source_url": "https://mixkit.co/free-stock-video/worker-operating-an-industrial-lathe-2244/",
+      "provider": "mixkit",
+      "author": "EDGAR FERNANDEZ",
+      "license_name": "Mixkit Stock Video Free License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://mixkit.co/free-stock-video/worker-operating-an-industrial-lathe-2244/",
+      "sha256": "a30c4294c60190b75e2f49c076dccc7f86692a99e4bed42ae002f8094936a45d",
+      "perceptual_fingerprint": "e7c8758b9f770b817e9d5ef14b7a78bceaad1dcff716a7e7d3c1aff7e63cb8d7",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "contributor_url": "https://mixkit.co/@edgarfernandez/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
+    },
+    {
+      "asset_id": "pixabay-led-indicator-lights-316712",
+      "source_url": "https://pixabay.com/videos/led-indicator-lights-electronics-316712/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/led-indicator-lights-electronics-316712/",
+      "sha256": "e4d3d281bab5ffb6808a6ad0b20dd03e3857112cf309ee86d1dec234d4ac928e",
+      "perceptual_fingerprint": "d70c666953675401e001265ef4d80b66b8da2a8034488305320c0a12633c0395",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
+    },
+    {
+      "asset_id": "pixabay-antenna-astronomy-communication-40041",
+      "source_url": "https://pixabay.com/videos/antenna-astronomy-communication-40041/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/antenna-astronomy-communication-40041/",
+      "sha256": "e0a5b6cbf90c31c7f79c8cf6d9eaa515a83d4e986927a90a3840d7d36303e9b4",
+      "perceptual_fingerprint": "720e0b55776ac929e3c7f5be259dcaa7c848fe1cefb4fc2ffd501c6b2ee1059d",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
+    },
+    {
+      "asset_id": "pixabay-alert-alarm-war-danger-risk-205519",
+      "source_url": "https://pixabay.com/videos/alert-alarm-war-danger-risk-205519/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/alert-alarm-war-danger-risk-205519/",
+      "sha256": "5a2031e934028fb6c13ba07dd176092507303db83f4decc8b79acb2263ecbf8d",
+      "perceptual_fingerprint": "f2bb56d11027b73124649c52ecb1018ec945a8e1c02da9312e1ac958f733fbb6",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED"
+    },
+    {
+      "asset_id": "pixabay-button-press-red-business-click-502",
+      "source_url": "https://pixabay.com/videos/button-press-red-business-click-502/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/button-press-red-business-click-502/",
+      "sha256": "e6eaeddadbda7f8fdf9e4106ad09e0c25e0139f0212dce20a29d34cd8eb77b16",
+      "perceptual_fingerprint": "155c325b4b0c121d7add2c16eea0d86efa5379f7bcec66dc52bec0073972e884",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
+    }
+  ],
+  "full_original_rights_ledger": [
+    {
+      "asset_id": "mixkit-abstract-red-glow-101432",
+      "source_url": "https://mixkit.co/free-stock-video/abstract-red-glow-101432/",
+      "provider": "mixkit",
+      "author": "MIXKIT",
+      "license_name": "Mixkit Stock Video Free License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://mixkit.co/free-stock-video/abstract-red-glow-101432/",
+      "sha256": "f5c6866db294ab7489e581d08d3ae5480496b42d43df8a4a6152bcc6e4d97774",
+      "perceptual_fingerprint": "835461ff7f59472fc9efe33bd35dc83d65f475f22c999ee4d4df70cb139cfc3e",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "contributor_url": "https://mixkit.co/@mixkit/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
+    },
+    {
+      "asset_id": "mixkit-slowly-approaching-clock-28897",
+      "source_url": "https://mixkit.co/free-stock-video/slowly-approaching-a-clock-on-a-black-background-28897/",
+      "provider": "mixkit",
+      "author": "ARVIZUM",
+      "license_name": "Mixkit Stock Video Free License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://mixkit.co/free-stock-video/slowly-approaching-a-clock-on-a-black-background-28897/",
+      "sha256": "d254063cd2f4ceeaf186f68c71c905fb8b27d9e94397aa0a794e93827208b505",
+      "perceptual_fingerprint": "9c8a21443b162c8a16f99d0876c8910cde48548fc525fc8c00c159dbc9db6f64",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "contributor_url": "https://mixkit.co/@arvizum/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
+    },
+    {
+      "asset_id": "mixkit-cloudy-sky-118",
+      "source_url": "https://mixkit.co/free-stock-video/cloudy-sky-118/",
+      "provider": "mixkit",
+      "author": "EDGAR FERNANDEZ",
+      "license_name": "Mixkit Stock Video Free License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://mixkit.co/free-stock-video/cloudy-sky-118/",
+      "sha256": "7b18e0c66a2eb1a55df0532d3bf346f1e1d193eaa805403cc39fc835e8454432",
+      "perceptual_fingerprint": "75bd02cf43583033aee2f7659350e477ff56bd126380157b845433def983964a",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "contributor_url": "https://mixkit.co/@edgarfernandez/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
+    },
+    {
+      "asset_id": "mixkit-clock-mechanism-3651",
+      "source_url": "https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/",
+      "provider": "mixkit",
+      "author": "EDGAR FERNANDEZ",
+      "license_name": "Mixkit Stock Video Free License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/",
+      "sha256": "575ec01ae49bad9f5e5d634d51c1d78c31856e2171ca799065d9750dce3de5fd",
+      "perceptual_fingerprint": "8d01acb640e75c70ee0d46ceaabeec546bbcc70f24d7a4a4d0c9e1cd46a3f72",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "contributor_url": "https://mixkit.co/@edgarfernandez/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
+    },
+    {
+      "asset_id": "mixkit-large-satellite-antenna-2650",
+      "source_url": "https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/",
+      "provider": "mixkit",
+      "author": "MATTHIAS GROENEVELD",
+      "license_name": "Mixkit Stock Video Free License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/",
+      "sha256": "1bfa05d75d9295ff3a08dda7017927f638292895f1c2c376667175c279813807",
+      "perceptual_fingerprint": "f10ae48c3a770e23246f7fda15feccd3c4b37e1db48b9d71c6fb1511a1ee1b7c",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "contributor_url": "https://mixkit.co/@matthiasgroeneveld/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
+    },
+    {
+      "asset_id": "mixkit-young-engineer-29991",
+      "source_url": "https://mixkit.co/free-stock-video/young-engineer-programming-in-his-workshop-seen-up-close-29991/",
+      "provider": "mixkit",
+      "author": "EDGAR FERNANDEZ",
+      "license_name": "Mixkit Stock Video Free License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://mixkit.co/free-stock-video/young-engineer-programming-in-his-workshop-seen-up-close-29991/",
+      "sha256": "f1474daed5b97009063ca692859fdca1e91044ad62a9cd1f1f3009b2609b3478",
+      "perceptual_fingerprint": "a4e5ac59afbd71e65a7b8eaccba06c5c62ac7e169a6dceea4deae4cb15b5842a",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "contributor_url": "https://mixkit.co/@edgarfernandez/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
+    },
+    {
+      "asset_id": "mixkit-worker-industrial-lathe-2244",
+      "source_url": "https://mixkit.co/free-stock-video/worker-operating-an-industrial-lathe-2244/",
+      "provider": "mixkit",
+      "author": "EDGAR FERNANDEZ",
+      "license_name": "Mixkit Stock Video Free License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://mixkit.co/free-stock-video/worker-operating-an-industrial-lathe-2244/",
+      "sha256": "a30c4294c60190b75e2f49c076dccc7f86692a99e4bed42ae002f8094936a45d",
+      "perceptual_fingerprint": "e7c8758b9f770b817e9d5ef14b7a78bceaad1dcff716a7e7d3c1aff7e63cb8d7",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "contributor_url": "https://mixkit.co/@edgarfernandez/",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
+    },
+    {
+      "asset_id": "pixabay-led-indicator-lights-316712",
+      "source_url": "https://pixabay.com/videos/led-indicator-lights-electronics-316712/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/led-indicator-lights-electronics-316712/",
+      "sha256": "e4d3d281bab5ffb6808a6ad0b20dd03e3857112cf309ee86d1dec234d4ac928e",
+      "perceptual_fingerprint": "d70c666953675401e001265ef4d80b66b8da2a8034488305320c0a12633c0395",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
+    },
+    {
+      "asset_id": "pixabay-antenna-astronomy-communication-40041",
+      "source_url": "https://pixabay.com/videos/antenna-astronomy-communication-40041/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/antenna-astronomy-communication-40041/",
+      "sha256": "e0a5b6cbf90c31c7f79c8cf6d9eaa515a83d4e986927a90a3840d7d36303e9b4",
+      "perceptual_fingerprint": "720e0b55776ac929e3c7f5be259dcaa7c848fe1cefb4fc2ffd501c6b2ee1059d",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
+    },
+    {
+      "asset_id": "pixabay-hallway-dark-corridor-20837",
+      "source_url": "https://pixabay.com/videos/hallway-dark-corridor-dim-mystery-20837/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/hallway-dark-corridor-dim-mystery-20837/",
+      "sha256": "e6c20511f889daa57834ddf5f97ea076ffffedc0a321850a4ea8fa295479d72d",
+      "perceptual_fingerprint": "40df89d9d2edf33d5a94509be3c9f3abb6073dd28ff1914aba8307eb1055aafd",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
+    },
+    {
+      "asset_id": "pixabay-alert-alarm-war-danger-risk-205519",
+      "source_url": "https://pixabay.com/videos/alert-alarm-war-danger-risk-205519/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/alert-alarm-war-danger-risk-205519/",
+      "sha256": "5a2031e934028fb6c13ba07dd176092507303db83f4decc8b79acb2263ecbf8d",
+      "perceptual_fingerprint": "f2bb56d11027b73124649c52ecb1018ec945a8e1c02da9312e1ac958f733fbb6",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED"
+    },
+    {
+      "asset_id": "pixabay-radar-radar-screen-rotation-circles-4511",
+      "source_url": "https://pixabay.com/videos/radar-radar-screen-rotation-circles-4511/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/radar-radar-screen-rotation-circles-4511/",
+      "sha256": "8185f8459b80df5c5eaa95d4a66ac58edef34fc7f790ca4e5f74fc10a70742d6",
+      "perceptual_fingerprint": "6818a74392e5f6ef8d3ded092f6c1ce791afd3d710e0acd30e7cf78a60b12242",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
+    },
+    {
+      "asset_id": "pixabay-button-press-red-business-click-502",
+      "source_url": "https://pixabay.com/videos/button-press-red-business-click-502/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/button-press-red-business-click-502/",
+      "sha256": "e6eaeddadbda7f8fdf9e4106ad09e0c25e0139f0212dce20a29d34cd8eb77b16",
+      "perceptual_fingerprint": "155c325b4b0c121d7add2c16eea0d86efa5379f7bcec66dc52bec0073972e884",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
+    },
+    {
+      "asset_id": "pixabay-typewriter-typing-writing-author-1335",
+      "source_url": "https://pixabay.com/videos/typewriter-typing-writing-author-1335/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/typewriter-typing-writing-author-1335/",
+      "sha256": "2df86b63f6f05398b44ac2c4b28e9f370036e552b20d0b30e2842e2e71aabd23",
+      "perceptual_fingerprint": "e42ec360a46a9ef093c7055f72d0bb39ebffb9a8e7ce3acb6ee96902f70673fe",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
+    },
+    {
+      "asset_id": "pixabay-dark-light-lens-flare-abstract-250413",
+      "source_url": "https://pixabay.com/videos/dark-light-lens-flare-abstract-250413/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/dark-light-lens-flare-abstract-250413/",
+      "sha256": "bc173bee51dd0dd3120d2cfbfc2884f5681849b384bc661af7f2721d92a2c8ad",
+      "perceptual_fingerprint": "57bce8d11491f760dbeea11a0b9925a6d0085ae70c32966ef3a62cb887a16026",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
+    },
+    {
+      "asset_id": "pixabay-particles-orange-red-dust-effect-7957",
+      "source_url": "https://pixabay.com/videos/particles-orange-red-dust-effect-7957/",
+      "provider": "pixabay",
+      "author": "Provider page author not recorded in current manifest",
+      "license_name": "Pixabay Content License",
+      "commercial_use": true,
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "download_date": "2026-11-05",
+      "license_evidence": "https://pixabay.com/videos/particles-orange-red-dust-effect-7957/",
+      "sha256": "00cb906c22484217646c6aeedc90f725941f4aa25e0df64378c1b0ecfe267282",
+      "perceptual_fingerprint": "423fdfd63cdb0a3bd7cb7c798b1dc532e41d0d98234fad78e2cba05b49f97911",
+      "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
+      "story_id": "story-stanislav-petrov-false-alarm-1983",
+      "used_by": [
+        "episode-005"
+      ],
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "render_approval_status": "APPROVED",
+      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE"
+    }
+  ],
+  "notice": "Former approved entries belong to SUPERSEDED visuals. Historical approvals must NEVER be inherited by their replacement sources. Original entries preserved byte-for-byte as parsed JSON objects; production record remains recoverable by Git history."
+}

@@ -34,12 +34,15 @@ class V21VisualReconciliationDossierTests(unittest.TestCase):
         self.assertEqual(result["status"], "RECONCILIATION_REQUIRED")
         self.assertEqual(result["asset_count"], 16)
         self.assertEqual(result["render_rights_matched_count"], 9)
-        self.assertEqual(set(result["missing_render_rights"]), IDS_PENDING_RIGHTS | {S09})
-        self.assertEqual(len(result["stale_render_rights"]), 7)
+        self.assertEqual(result["missing_render_rights"], [])
+        self.assertEqual(set(result["pending_render_rights"]), IDS_PENDING_RIGHTS | {S09})
+        self.assertEqual(set(result["pending_recorded_rights"]), IDS_PENDING_RIGHTS | {S09})
+        self.assertEqual(result["stale_render_rights"], [])
         self.assertEqual(set(result["approved_manifest_only_pending_render_rights"]), IDS_PENDING_RIGHTS | {S09})
         self.assertEqual(result["pending_visual_approval"], [])
         self.assertEqual(result["source_provenance_mismatches"], [])
-        self.assertEqual(len(result["draft_pending_rights_not_canonical"]), 7)
+        self.assertEqual(len(result["draft_pending_rights_not_canonical"]), 0)
+        self.assertEqual(result["rights_ledger_entry_count"], 16)
         self.assertEqual(result["render"], "NOT_RUN")
         self.assertFalse(result["production_enablement"])
         self.assertFalse(any(x["approved_for_render"] for x in result["draft_pending_rights_not_canonical"]))
@@ -49,8 +52,8 @@ class V21VisualReconciliationDossierTests(unittest.TestCase):
         backup = copy.deepcopy((rec, plan, man))
         report = build_dossier(rec, plan, man)
         self.assertEqual((rec, plan, man), backup)
-        self.assertTrue(all(x["rights_status"] == "PENDING_INDEPENDENT_RENDER_RIGHTS" for x in report["draft_pending_rights_not_canonical"]))
-        self.assertTrue(all(x["user_approval_inferred"] is False for x in report["draft_pending_rights_not_canonical"]))
+        self.assertTrue(all(x["render_rights_status"] == "PENDING_INDEPENDENT_RENDER_RIGHTS" for x in report["assets"] if x["asset_id"] in IDS_PENDING_RIGHTS | {S09}))
+        self.assertTrue(all(x["user_approval_inferred"] is False for x in report["assets"]))
 
     def test_missing_human_approval_blocks_even_if_manifest_claims_approved(self):
         rec, plan, man = self._sources()
@@ -87,20 +90,17 @@ class V21VisualReconciliationDossierTests(unittest.TestCase):
                     p["intake_artifact"]["perceptual_hash"]
                     for p in plan["candidates"] if p["candidate_id"] == S09
                 )
-            if not any(e["asset_id"] == asset["candidate_id"] for e in rec["rights_ledger"]):
-                rec["rights_ledger"].append({
-                    "asset_id": asset["candidate_id"],
-                    "source_url": asset["source_page_url"],
-                    "sha256": asset["sha256"],
-                    "perceptual_fingerprint": asset["perceptual_hash"],
-                    "rights_status": "APPROVED",
-                    "approved_for_render": True,
-                    "approval_scope": "episode-005-render",
-                })
-        rec["rights_ledger"] = [
-            x for x in rec["rights_ledger"]
-            if x["asset_id"] in {a["candidate_id"] for a in man["assets"]}
-        ]
+            # SYNTHETIC TEST FIXTURE ONLY: prove the all-approved path without
+            # changing the actual episode. No license or release is granted.
+            entry = next(e for e in rec["rights_ledger"] if e["asset_id"] == asset["candidate_id"])
+            entry.update({
+                "source_url": asset["source_page_url"],
+                "sha256": asset["sha256"],
+                "perceptual_fingerprint": asset["perceptual_hash"],
+                "rights_status": "APPROVED",
+                "approved_for_render": True,
+                "approval_scope": "episode-005-render",
+            })
         report = build_dossier(rec, plan, man)
         self.assertEqual(report["status"], "EVIDENCE_CONSISTENT_NOT_RENDER_AUTHORIZED", report)
         self.assertEqual(report["render_rights_matched_count"], 16)

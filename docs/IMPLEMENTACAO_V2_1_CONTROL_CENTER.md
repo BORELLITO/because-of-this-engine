@@ -473,3 +473,17 @@ READY remains forbidden while any P0/P1 is open.
 **Estado esperado da CI:** `VISUAL_PLAN_CONTRACT_PASS` (apenas plano e manifesto) enquanto `VISUAL_RIGHTS_CONSISTENCY=BLOCKED` e `AUDIO_HISTORY_COVERAGE=BLOCKED`. Produção e publicação continuam bloqueadas/manual. Qualquer futura autorização para render exige evidência própria, testes e liberação explícita.
 
 **Único próximo passo:** reconciliar seis direitos independentes de fontes atuais + S09 (Pexels 8888977), mantendo os sete direitos antigos rastreáveis, e fazer preflight completo apenas após comprovação individual.
+
+### Reconciliação estrutural dos sete direitos de render do Episode 005 — 2026-11-07
+
+**Objetivo:** eliminar a discrepância entre 16 clipes atualmente selecionados e 16 entradas do antigo ledger que incluíam sete autorizações para mídias descartadas.
+
+**Mudança efetiva na branch, sujeita à CI/PR:** `episodes/episode-005/production-record.json` agora registra exatamente os **16 IDs do manifesto atual**, preservando as **nove entradas anteriormente aprovadas** sem modificações e substituindo no cadastro ativo os sete IDs antigos pelos **sete ID/hash/fingerprint corretos**, todos com `rights_status=PENDING_INDEPENDENT_RENDER_RIGHTS`, `approved_for_render=false`, `commercial_use=false`, `approval_scope=null`, `used_by=[]` e escopo autorizado vazio. Isso é reconciliação de identidade e fila de pendências, **não** concessão de licenças, uso efetivo ou autorização de render.
+
+**Histórico preservado:** backup principal `backup/main-before-ep005-rights-ledger-20261107`, e snapshot íntegro `reports/archives/EP005_RIGHTS_LEDGER_BEFORE_ACTIVE_RECONCILIATION_20261107.json` contendo as 16 entradas originais e destacando as sete aprovadas para cenas agora aposentadas. Licenças antigas jamais migradas automaticamente para os substitutos.
+
+**Referência individual:** `reports/EP005_ACTIVE_RIGHTS_RECONCILIATION_20261107.json` enumera os sete clipes ativos, artista quando confirmado, fonte original, SHA-256, fingerprint, termos oficiais Pexels/Pixabay/NASA e restrições históricas, de marcas/pessoas e propaganda. NASA SVS 4819 é uma visualização **GEOS-5 de 2020**, não uma gravação real dos sensores soviéticos de 1983; creditar NASA Scientific Visualization Studio, Greg Shirah e Trent L. Schindler, e não insinuar endosso.
+
+**Testes obrigatórios:** cobertura de identidade exata 16/16, snapshot histórico idêntico, nove aprovações intactas, sete pendências sem `used_by` ou direitos concedidos, hashes iguais ao arquivo de aquisição, e testes negativos impedindo liberação ao editar somente um campo. A CI precisa exigir `rights_ledger=BLOCKED`, `VISUAL_RIGHTS_CONSISTENCY=BLOCKED`, `AUDIO_HISTORY_COVERAGE=BLOCKED`, enquanto o contrato de manifesto segue `PASS`. Um teste negativo aprovado não equivale a produção liberada.
+
+**Próximo passo único:** concluir revisão individual de marcas, pessoas, fidelidade histórica e comprovação do escopo comercial/YouTube/TikTok; autorizar cada entrada somente após evidência verificável, sem trocar novamente S09 nem gerar áudio, e revisar também o histórico global de trilhas antes do preflight final.
