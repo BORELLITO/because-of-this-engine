@@ -129,6 +129,43 @@ def audit(repo_root: Path) -> dict[str, Any]:
     if len(registry) != len(declarations):
         failures.append("historical manifest/registry entry count discrepancy")
 
+    # Additional REAL completed-master inventory is independent of archival
+    # manifest declarations. It must not retroactively mark legacy rows as used.
+    master_path = repo_root / "episodes" / "audio-rendered-master-registry.json"
+    master_rows: list[dict[str, Any]] = []
+    full_track_collisions: list[dict[str, Any]] = []
+    try:
+        master_data=json.loads(master_path.read_text(encoding="utf-8"))
+        master_rows=master_data.get("rendered_masters", [])
+        full_track_collisions=master_data.get("verified_full_track_collisions", [])
+        if not isinstance(master_rows,list) or not isinstance(full_track_collisions,list):
+            raise ValueError("master registry arrays required")
+        if len(master_rows) != 4 or len({x["episode_id"] for x in master_rows}) != len(master_rows):
+            failures.append("four unique historical final masters are not evidenced")
+        master_shas = [x.get("master_video",{}).get("sha256") for x in master_rows]
+        if any(not SHA.fullmatch(str(x or "")) for x in master_shas):
+            failures.append("a historical final master SHA-256 is invalid")
+        by_music:dict[str,set[str]]=defaultdict(set)
+        for x in master_rows:
+            music=x.get("music_asset",{})
+            sh=str(music.get("sha256") or "")
+            if not SHA.fullmatch(sh):
+                failures.append("master music identity is not a verified SHA-256")
+                continue
+            if music.get("verified_original_bytes") is not True:
+                failures.append("master music original bytes not independently verified")
+            by_music[sh].add(str(x.get("episode_id") or ""))
+        actual=[{"sha256":sha,"episodes":sorted(owners)}
+                for sha,owners in sorted(by_music.items()) if len(owners)>1]
+        if {x.get("track_sha256") for x in full_track_collisions} != {x["sha256"] for x in actual}:
+            failures.append("full soundtrack reuse collision not accounted for in report")
+        if actual:
+            failures.append("verified completed-master music source reused across historical episodes")
+    except (OSError,ValueError,TypeError,KeyError,json.JSONDecodeError) as exc:
+        failures.append(f"completed-master evidence registry unavailable or invalid:{exc}")
+        master_rows=[]
+        full_track_collisions=[]
+
     return {
         "gate": "AUDIO_HISTORY_COVERAGE",
         "status": "BLOCKED" if failures else "PASS",
@@ -142,6 +179,9 @@ def audit(repo_root: Path) -> dict[str, Any]:
             if isinstance(e, dict) and e.get("source_verification") == "VERIFIED_FROM_ORIGINAL_DRIVE_MP3_BYTES_2026_11_07"
         }),
         "verified_master_audio_count": sum(1 for e in registry if isinstance(e,dict) and e.get("actual_master_audio_verified") is True),
+        "verified_delivered_master_file_count": len(master_rows),
+        "delivered_music_collision_count": len(full_track_collisions),
+        "delivered_master_evidence_is_not_legacy_manifest_proof": True,
         "historical_use_verified": not failures,
         "render": "NOT_RUN",
         "publication": "NOT_RUN",
