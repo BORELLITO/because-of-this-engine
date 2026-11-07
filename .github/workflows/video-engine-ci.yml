@@ -86,9 +86,13 @@ jobs:
           assert len(d["approved_manifest_only_pending_render_rights"]) == 7
           assert d["pending_visual_approval"] == []
           assert d["source_provenance_mismatches"] == []
-          assert len(d["missing_render_rights"]) == 7
-          assert len(d["stale_render_rights"]) == 7
-          assert not any(item["approved_for_render"] for item in d["draft_pending_rights_not_canonical"])
+          assert d["missing_render_rights"] == []
+          assert len(d["pending_render_rights"]) == 7
+          assert len(d["pending_recorded_rights"]) == 7
+          assert d["stale_render_rights"] == []
+          assert d["rights_ledger_entry_count"] == 16
+          assert d["draft_pending_rights_not_canonical"] == []
+          assert all(item["render_rights_status"] == "PENDING_INDEPENDENT_RENDER_RIGHTS" for item in d["assets"] if not item["render_rights_matched"])
           assert d["render"] == "NOT_RUN"
           assert d["publication"] == "NOT_RUN"
           assert d["production_enablement"] is False
@@ -110,13 +114,17 @@ jobs:
           from pathlib import Path
           report = json.loads(Path("/tmp/episode005-v21-report.json").read_text(encoding="utf-8"))
           assert report["status"] == "BLOCKED", report
-          assert report["blocking_gates"] == ["VISUAL_RIGHTS_CONSISTENCY", "AUDIO_HISTORY_COVERAGE"], report["blocking_gates"]
+          assert report["blocking_gates"] == ["rights_ledger", "VISUAL_RIGHTS_CONSISTENCY", "AUDIO_HISTORY_COVERAGE"], report["blocking_gates"]
+          rights = next(g for g in report["checks"] if g.get("ledger") == "rights_ledger")
+          assert rights["status"] == "BLOCKED"
+          assert sum("is not independently approved for render" in x for x in rights["failures"]) == 7
           audio = next(g for g in report["checks"] if g.get("gate") == "AUDIO_HISTORY_COVERAGE")
           assert audio["status"] == "BLOCKED", audio
           assert audio["registry_track_count"] == 0, audio
           assert any("audio history completeness" in f for f in audio["failures"]), audio
           visual = next(g for g in report["checks"] if g.get("gate") == "VISUAL_RIGHTS_CONSISTENCY")
-          assert any("visual assets missing render rights" in f for f in visual["failures"]), visual
+          assert not any("visual assets missing render rights" in f for f in visual["failures"]), visual
+          assert sum("render rights not independently approved" in x for x in visual["failures"]) == 7
           assert any("pexels-8888977" in f for f in visual["failures"]), visual
           assert not any("pexels-8888977: plan does not record human manifest approval" in f for f in visual["failures"]), visual
           assert report["production_enablement"] is False
