@@ -74,6 +74,30 @@ jobs:
               print("EPISODE005_VISUAL_PLAN_VERIFIED_NO_AUTOMATIC_RENDER")
           PY
 
+      - name: Reconcile Episode 005 visual evidence (report-only; no rights promotion)
+        run: |
+          PYTHONPATH=. python production/visual_reconciliation_dossier_v21.py \
+            --repo-root . \
+            --record episodes/episode-005/production-record.json > /tmp/ep005-rights-dossier.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d = json.loads(Path("/tmp/ep005-rights-dossier.json").read_text(encoding="utf-8"))
+          assert d["status"] == "RECONCILIATION_REQUIRED", d["status"]
+          assert d["asset_count"] == 16
+          assert d["render_rights_matched_count"] == 9
+          assert len(d["approved_manifest_only_pending_render_rights"]) == 6
+          assert d["pending_visual_approval"] == ["pexels-12213087"]
+          assert d["source_provenance_mismatches"] == ["pexels-12213087"]
+          assert len(d["missing_render_rights"]) == 7
+          assert len(d["stale_render_rights"]) == 7
+          assert not any(item["approved_for_render"] for item in d["draft_pending_rights_not_canonical"])
+          assert d["render"] == "NOT_RUN"
+          assert d["publication"] == "NOT_RUN"
+          assert d["production_enablement"] is False
+          print("EPISODE005_PENDING_EVIDENCE_RECONCILIATION_ENFORCED_PASS")
+          PY
+
       - name: Verify Episode 005 contract blocks stale visual rights (no render)
         run: |
           set +e
