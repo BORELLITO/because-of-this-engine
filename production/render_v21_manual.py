@@ -19,6 +19,7 @@ from production.thumbnail_contract_v21 import (
 from production.visual_rights_consistency_v21 import validate_visual_rights_consistency
 from production.audio_history_audit_v21 import audit as audit_audio_history
 from production.rights_autonomy_v21 import audit_repository as audit_autonomous_rights
+from production.shot_context_v21 import inspect_repository as inspect_shot_context
 
 POLICY_PATH = Path(__file__).resolve().parent / "active_engine_policy.json"
 EXPECTED_ENTRYPOINT = "production/canonical_entrypoint.py"
@@ -101,6 +102,10 @@ def validate_request(
     autonomous = audit_autonomous_rights(record, repo_root=repo_root)
     if autonomous["status"] != "PASS":
         failures.extend("autonomous_rights:" + f for f in autonomous["failures"])
+
+    shot_context = inspect_shot_context(record, repo_root=repo_root)
+    if shot_context["status"] != "PASS":
+        failures.extend("shot_context:" + reason for reason in shot_context["failures"])
 
     thumbnail = record.get("thumbnail_manifest")
     if not isinstance(thumbnail, dict):
