@@ -135,6 +135,67 @@ def review_file(path: Path, catalog_path: Path) -> dict[str, Any]:
                 "publication_authorized": False}
 
 
+def catalog_coverage(repo_root: Path) -> dict[str, Any]:
+    """Cross-check signatures against ALL source hashes in both versioned ledgers.
+
+    Verifies inventory/serialization consistency, not audio copyrights or
+    regenerated original bytes. Production remains governed by separate gates.
+    """
+    errors: list[str] = []
+    expected: set[str] = set()
+    catalog_identities: set[str] = set()
+    try:
+        root = repo_root.resolve()
+        catalog = json.loads((root / CATALOG_PATH).read_text(encoding="utf-8"))
+        memory = json.loads((root / "episodes/audio-memory-registry.json").read_text(encoding="utf-8"))
+        masters = json.loads((root / "episodes/audio-rendered-master-registry.json").read_text(encoding="utf-8"))
+        if catalog.get("algorithm") != ALGORITHM or not isinstance(catalog.get("sources"), list):
+            raise FingerprintError("catalog algorithm or sources malformed")
+        if catalog.get("source_count") != len(catalog["sources"]):
+            errors.append("catalog source_count differs from actual entries")
+        if len({s.get("source_id") for s in catalog["sources"]}) != len(catalog["sources"]):
+            errors.append("duplicate acoustic source identifiers")
+        for source in catalog["sources"]:
+            sha = str(source.get("source_sha256") or "")
+            if len(sha) != 64 or any(ch not in "0123456789abcdef" for ch in sha):
+                errors.append("acoustic source contains invalid SHA-256")
+                continue
+            if sha in catalog_identities:
+                errors.append("duplicate acoustic source SHA-256")
+            catalog_identities.add(sha)
+            if not source.get("evidence_scope") or not source.get("historical_episode_ids"):
+                errors.append("acoustic source provenance incomplete")
+            unpack(source["fingerprint"])
+        for track in memory.get("tracks", []):
+            sha = track.get("source_file_sha256") or track.get("sha256")
+            if sha:
+                expected.add(str(sha).lower())
+        for master in masters.get("rendered_masters", []):
+            sha = (master.get("music_asset") or {}).get("sha256")
+            if sha:
+                expected.add(str(sha).lower())
+        if not expected:
+            errors.append("no historical audio identities to compare")
+    except (OSError, ValueError, KeyError, TypeError, FingerprintError,
+            json.JSONDecodeError) as exc:
+        errors.append("acoustic catalog audit failed: " + str(exc))
+    missing = sorted(expected - catalog_identities)
+    if missing:
+        errors.append("historical music source lacks acoustic evidence: " + ",".join(missing))
+    return {
+        "gate": "AUDIO_ACOUSTIC_CATALOG_COVERAGE_V21",
+        "status": "PASS" if not errors else "BLOCKED",
+        "failures": errors,
+        "known_source_count": len(expected),
+        "catalog_source_count": len(catalog_identities),
+        "covered_count": len(expected & catalog_identities),
+        "missing_source_sha256": missing,
+        "ready_for_render": False,
+        "publication_authorized": False,
+        "note": "Coverage is limited to original tracks represented in checked-in ledgers.",
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--file", type=Path, required=True)

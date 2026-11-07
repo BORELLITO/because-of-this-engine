@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "audit_date": "2026-11-07",
+  "scope": "Known five unique historical source audio identities only; does not establish world-wide acoustic originality or downstream render clearance",
+  "producer": "Audited source bytes from Google Drive and previously recovered GitHub render sources; no TTS or production render performed",
+  "algorithm": "ffmpeg-chromaprint-algo1-raw32-v1",
+  "catalog_path": "episodes/audio-acoustic-fingerprints-v21.json",
+  "source_count": 5,
+  "new_sources": [
+    {
+      "source_id": "legacy-003-echoes",
+      "file": "episode-002-echoes-andrew-ev.mp3",
+      "drive_file_id": "1u-1ZKkVxKTw_E6vEzW0VcpF2lfjGfmeI",
+      "source_sha256": "49842074dc06f05a40690c2b3af42bd32be76a5f6505a65cfe952b2fe1ccb5de",
+      "fingerprint_frame_count": 1806,
+      "fingerprint_raw_sha256": "1bc302caa178929f94d8996db75ab4d5b0e2bae8fc08aff1592e99ecd4fdb503",
+      "trim_17s_at_17s_volume35_aac96kbps_similarity": 0.97721,
+      "scope": "SOURCE_CONFIRMED_AND_EP003_MASTER_CORRELATION_KNOWN"
+    },
+    {
+      "source_id": "legacy-001-002-frightnight",
+      "file": "test001-suspense-bed-fright-night.mp3",
+      "drive_file_id": "1bDbbr-bMA3puBvrQ2QzvSTfbicXJmdni",
+      "source_sha256": "144384cf2bcda8070a0d11c8aa98c3ae547de861a553275788669b7cf6a57bcd",
+      "fingerprint_frame_count": 797,
+      "fingerprint_raw_sha256": "19d940c6dc59b174386872254b9166b0c9e3dda25630f829c1a7c9e1625271a7",
+      "trim_17s_at_17s_volume35_aac96kbps_similarity": 0.95215,
+      "scope": "LEGACY_DECLARED_001_002_NOT_PROVEN_IN_LATER_V7_MASTERS"
+    },
+    {
+      "source_id": "legacy-004-delosound",
+      "file": "episode-004-suspense-tension-trailer-2.mp3",
+      "drive_file_id": "1LJtxg5fXoheepYVK5HO1M1DhEo_pVIDg",
+      "source_sha256": "dd57de53251011da1cc72f22c81595e80c03151c46d4a43e71aa6baaf2bc98cc",
+      "fingerprint_frame_count": 1077,
+      "fingerprint_raw_sha256": "81f033d0f546a8c29e165c2a79353dc297c5e742f4b015e5bff90cc9c727c9d9",
+      "trim_17s_at_17s_volume35_aac96kbps_similarity": 0.96159,
+      "scope": "LEGACY_DECLARED_004_NOT_PROVEN_IN_LATER_V7_MASTER"
+    }
+  ],
+  "retained_sources": [
+    {
+      "source_id": "v7-001-generated-music",
+      "source_sha256": "ada559a1f992984e1b501fd76639478501615c617fed5034c43e99a745521ccf",
+      "raw_fingerprint_sha256": "b1567d991ed7b405db613afe64721b639dcdd06d70a4a75096f8c411786ae068",
+      "status": "UNCHANGED"
+    },
+    {
+      "source_id": "v7-002-004-reused-procedural",
+      "source_sha256": "4a84629bdd611489b49f28187c70f2fc6d4a48b11347ef5c05cf301e1cd1fa24",
+      "raw_fingerprint_sha256": "1e145ed8e6ba0dfc1e31f44b0a59542096ca83003879a71ea682314574ab87bf",
+      "status": "UNCHANGED_P0_DUPLICATE_HISTORICAL_SOURCE"
+    }
+  ],
+  "qa": {
+    "original_source_sha256_verification": "PASS_3_OF_3",
+    "reference_fingerprint_integrity": "PASS_5_OF_5_SOURCE_ENTRIES_DECODED",
+    "cross_reference_results": "ALL_10_DISTINCT_SOURCE_PAIRS_BELOW_LIKELY_REUSE_THRESHOLD_0_88",
+    "max_distinct_pair_similarity": 0.77995,
+    "identical_source_match": "PASS_5_OF_5",
+    "reencoded_excerpt_test": "PASS_3_OF_3",
+    "evidence_from_files_not_just_text": true
+  },
+  "limitations": [
+    "Mixed soundtrack with narration/SFX can suppress music fingerprint retrieval; use postmix receipts as independent proof",
+    "Distinct music at 0.77995 is very close to 0.78 review threshold; conservative false-review may occur",
+    "Legacy MP3 source declarations do not prove use in superseding V7 final masters",
+    "No unindexed third-party music, infinite catalog, pitch/tempo modifications or all sound effects can be declared covered",
+    "Source rights and final publishing eligibility remain separately gated"
+  ],
+  "release_state": {
+    "production_enablement": false,
+    "render_executed": false,
+    "tts_executed": false,
+    "publication_authorized": false
+  },
+  "next_step": "Require acoustic catalog to stay synchronized with historical ledgers; when future V2.1 final renderer exists, attach verified replayed mix receipt and master audio binding before release."
+}
