@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "episode_id": "episode-005",
+  "policy_id": "nasa-factual-model-v1",
+  "source_of_truth": "https://svs.gsfc.nasa.gov/4819/",
+  "disclosures": [
+    {
+      "shot_id": "S12",
+      "asset_id": "nasa-svs-geos5-clouds-no-labels-4819",
+      "sha256": "306a8c1b97ddb3699a84f3d35f6a0c9c3cbc593f13f9a35aef13d72a55f323d0",
+      "source_url": "https://svs.gsfc.nasa.gov/4819/",
+      "source_title": "Earth Day 2020: GEOS-5 Modeled Cloud Cover",
+      "source_release_date": "2020-04-20",
+      "source_provenance": "NASA's Scientific Visualization Studio",
+      "scientific_truth_class": "ILLUSTRATIVE_MODEL_NOT_ARCHIVAL",
+      "not_actual_soviet_sensor_1983": true,
+      "label_visible_on_shot": true,
+      "source_audio_usage": "STRIP",
+      "overlay": {
+        "line_1": "NASA GEOS-5 MODEL (2020)",
+        "line_2": "Illustration - NOT 1983 sensor footage",
+        "anchor": "upper_mid_below_brand",
+        "y1": 370,
+        "y2": 440,
+        "minimum_font_px": 31,
+        "max_text_width_px": 970,
+        "background_plate": true,
+        "hold_full_scene": true
+      },
+      "credits": {
+        "primary": "NASA's Scientific Visualization Studio",
+        "visualizers": [
+          "Greg Shirah",
+          "Trent L. Schindler"
+        ],
+        "producer": "Ryan Fitzgibbons"
+      },
+      "delivery_description_footer": "Visual source: NASA's Scientific Visualization Studio — GEOS-5 modeled cloud cover (Earth Day 2020). Visualization: Greg Shirah and Trent L. Schindler. Producer: Ryan Fitzgibbons. Illustrative scientific model, NOT actual imagery or records from the Soviet early-warning system in 1983. NASA does not endorse this production. Source: https://svs.gsfc.nasa.gov/4819/",
+      "platforms": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "needs_manual_publication_qa": true,
+      "no_nasa_endorsement": true,
+      "credit_metadata_prepared": true,
+      "overlay_renderer_required": true,
+      "overlay_render_sample_verified": false,
+      "final_assembled_video_metadata_verified": false,
+      "final_publication_verified": false
+    }
+  ],
+  "production_enablement": false,
+  "publication_policy": "manual_only",
+  "status": "METADATA_PREPARED_RENDERER_CHECK_AND_SAMPLE_EVIDENCE_REQUIRED"
+}
