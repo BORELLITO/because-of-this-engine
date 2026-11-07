@@ -31,6 +31,25 @@ def audit(repo_root: Path) -> dict:
         failures.append("production_enablement must remain false in candidate")
     if policy.get("legacy_policy", {}).get("status") != "legacy_rollback_only":
         failures.append("legacy policy missing")
+    # V2.1 final delivery must never bypass the audio postflight gate.
+    # The currently approved candidate intentionally keeps remote final delivery off.
+    if policy.get("final_drive_delivery_enablement") is not False:
+        failures.append("final Drive media delivery must remain disabled in candidate V2.1")
+    guard = policy.get("final_delivery_audio_gate") or {}
+    if (guard.get("adapter") != "production/final_delivery_v21.py" or
+            guard.get("drive_adapter") != "production/google_drive_delivery.py" or
+            guard.get("receipt_required") is not True):
+        failures.append("mandatory V2.1 final audio postflight policy is missing")
+    adapter_path = root / "production" / "google_drive_delivery.py"
+    if not adapter_path.is_file():
+        failures.append("Drive delivery adapter missing")
+    else:
+        delivery_source = adapter_path.read_text(encoding="utf-8")
+        if ("verify_drive_video_delivery(" not in delivery_source or
+                'final_gate["status"] == "BLOCKED"' not in delivery_source):
+            failures.append("Drive adapter lost mandatory final video postflight check")
+    if not (root / "production" / "final_delivery_v21.py").is_file():
+        failures.append("verified final video delivery gate missing")
     workflow_root = root / ".github" / "workflows"
     workflows = sorted(workflow_root.glob("*.yml")) if workflow_root.exists() else []
     for path in workflows:
