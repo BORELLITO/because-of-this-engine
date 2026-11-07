@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "state": "COPIED_TO_DRIVE_SIZE_VERIFIED_RESTORE_NOT_PROVEN",
+  "captured_on": "2026-11-07",
+  "publication_authorized": false,
+  "drive_folder_id": "1GUOcSRo91xxypW-GgCchubhx9FaMGk5u",
+  "notes": "Source zip hashes measured from downloaded GitHub Actions artifact. Drive upload accepted and size verified; no independent Drive byte-for-byte restore/hash check yet. A source hash alone is not proof of restored content.",
+  "records": [
+    {
+      "episode": "006",
+      "kind": "gemini_charon_narration",
+      "workflow_run_id": 42317039843,
+      "artifact_id": 13551870075,
+      "name": "episode006-gemini-charon-narration-run42317039843.zip",
+      "size_bytes": 2641420,
+      "source_zip_sha256": "511025d7248dd185aa293aaf668e47e76c38a59b40eee89ac50a86ce302c9c7f",
+      "drive_file_id": "1AdO-cWZuuB5xLfRZXT3LxPXv2zZzqy8-"
+    },
+    {
+      "episode": "006",
+      "kind": "gemini_charon_captioned",
+      "workflow_run_id": 42317332809,
+      "artifact_id": 13551222956,
+      "name": "episode006-gemini-charon-captioned-run42317332809.zip",
+      "size_bytes": 2654033,
+      "source_zip_sha256": "f964e028f0376b11dcbc03f0264b96e5ad6015306f931678aa64b8186fed107e",
+      "drive_file_id": "12M70EUiodrvBYzVJ3ahrwt6p58O5-MPT"
+    },
+    {
+      "episode": "005",
+      "kind": "v21_creative_preview",
+      "workflow_run_id": 42279812022,
+      "artifact_id": 13535267066,
+      "name": "episode005-v21-creative-preview-run42279812022.zip",
+      "size_bytes": 24667284,
+      "source_zip_sha256": "255efbb515ff331d4c11cef68bb09766297e6e2f362cf7122e38b8227e86ea5f",
+      "drive_file_id": "1BhV8WR_0oEQZOb03kchMCCAK-LFUj2ek"
+    }
+  ]
+}
