@@ -545,3 +545,4 @@ A busca por nome, pasta e MIME no Google Drive não retornava os MP4s histórico
 
 **Próximo passo:** implantar recibos de mix *desde a próxima renderização*, com hash de fontes, render e áudio resultante, e acionar revisão de composição antes da produção. Para SFX históricos sem evidência, manter desconhecido; nenhuma TTS, renderização, nova postagem, alteração de HUD/voz ou mudança do motor canônico ocorreu nesta auditoria.
 
+**Limite hard-lock do novo guard:** mesmo com identidade SHA nova, licença e revisão acústica declaradas, `audio_candidate_gate_v21.py` verifica a decodificação real via FFprobe e **NUNCA** emite `ready_for_render=true` sozinho. O PASS só significa identidade exata não reutilizada no catálogo conhecido; autorização do áudio, fingerprint acústico e renderização composta continuam dependências independentes. Não aceitar campos informados pelo próprio candidato como prova suficiente de direitos.
