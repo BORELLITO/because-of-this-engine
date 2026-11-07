@@ -526,7 +526,11 @@
       "editorial_manifest_approval": "APPROVED_FOR_MANIFEST_ONLY",
       "production_enablement": false,
       "approval_evidence": "NOT_ISSUED",
-      "original_approved_asset_reference": null
+      "original_approved_asset_reference": null,
+      "autonomous_decision": "BLOCKED_PENDING_SAFEGUARDS",
+      "blocking_rationale": "Recognizable stock actor cannot be misidentified as Petrov; safe non-identifiable crop or alternate footage required.",
+      "automated_decision_policy": "production/rights_autonomy_v21.py",
+      "automated_decision_evidence": "reports/EP005_AUTONOMOUS_RIGHTS_VISUAL_EVIDENCE_20261107.json"
     },
     {
       "asset_id": "pixabay-radio-vintage-old-171435",
@@ -536,17 +540,20 @@
       "author_verification_status": "PENDING_PAGE_LEVEL_CONFIRMATION",
       "license_name": "Pixabay Content License",
       "license_evidence": "https://pixabay.com/service/terms/",
-      "license_evidence_scope": "GENERAL_PROVIDER_POLICY_ONLY_ITEM_CONTEXT_NOT_CLEARED",
+      "license_evidence_scope": "OFFICIAL_PROVIDER_LICENSE_PLUS_EXACT_MEDIA_INTAKE_AND_FRAME_QA",
       "source_page_evidence": "https://pixabay.com/videos/radio-vintage-old-sound-speaker-171435/",
       "source_page_reviewed_on": "2026-11-07",
-      "commercial_use": false,
+      "commercial_use": true,
       "general_commercial_use_potential": "POSSIBLE_SUBJECT_TO_PROVIDER_RESTRICTIONS",
-      "platform_scope": [],
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
       "requested_platform_scope": [
         "youtube_shorts",
         "tiktok"
       ],
-      "download_date": null,
+      "download_date": "2026-11-07",
       "intake_workflow_run_id": 42178800543,
       "intake_artifact_id": 13484277704,
       "sha256": "bb0ce78f185d844f69dd33e036f9b1dd9f4acd293e706745cdb1453057d9392f",
@@ -554,15 +561,17 @@
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
       "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
       "story_id": "story-stanislav-petrov-false-alarm-1983",
-      "used_by": [],
+      "used_by": [
+        "episode-005"
+      ],
       "intended_use_episode": "episode-005",
-      "rights_status": "PENDING_INDEPENDENT_RENDER_RIGHTS",
-      "approved_for_render": false,
-      "approval_scope": null,
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
       "requested_approval_scope": "episode-005-render",
-      "render_approval_status": "BLOCKED_AWAITING_INDEPENDENT_REVIEW",
-      "license_confirmation_status": "GENERAL_TERMS_AND_ITEM_PAGE_CHECKED_NO_RENDER_CLEARANCE",
-      "third_party_rights_review": "PENDING_FULL_CONTENT_AND_CONTEXT",
+      "render_approval_status": "AUTO_APPROVED_EVIDENCE_BOUND_V21",
+      "license_confirmation_status": "OFFICIAL_PROVIDER_ITEM_AND_GENERAL_COMMERCIAL_USE_VERIFIED_SCOPE_LIMITED",
+      "third_party_rights_review": "NO_VISIBLE_IDENTIFIABLE_PERSON_OR_BRAND_IN_SAMPLED_APPROVED_CROP; VERIFY_FINAL_RENDER_BEFORE_PUBLICATION",
       "visual_historical_truth_review": "REPRESENTATIONAL_OR_EXPLANATORY_ONLY",
       "narrative_risk_note": "Symbolic vintage home radio, not Soviet command equipment; crop avoid markings.",
       "credits_required": false,
@@ -575,7 +584,17 @@
       "editorial_manifest_approval": "APPROVED_FOR_MANIFEST_ONLY",
       "production_enablement": false,
       "approval_evidence": "NOT_ISSUED",
-      "original_approved_asset_reference": null
+      "original_approved_asset_reference": null,
+      "used_by_semantics": "AUTHORIZED_INTENDED_EPISODE_NOT_PROOF_OF_RELEASE_OR_PUBLICATION",
+      "download_date_evidence": "Original bytes restored from GitHub Actions artifact and SHA-256 verified on 2026-11-07",
+      "automated_decision_policy": "production/rights_autonomy_v21.py",
+      "automated_decision_evidence": "reports/EP005_AUTONOMOUS_RIGHTS_VISUAL_EVIDENCE_20261107.json",
+      "auto_review_scope": "LICENSED_MATERIAL_FOR_PRIVATE_EDITORIAL_RENDER_ONLY_RELEASE_VERIFICATION_SEPARATE",
+      "no_endorsement_or_archival_claim": true,
+      "official_license_terms_checked_date": "2026-11-07",
+      "source_audio_policy": "strip",
+      "published_or_distributed": false,
+      "legal_opinion": false
     },
     {
       "asset_id": "nasa-svs-geos5-clouds-no-labels-4819",
@@ -624,7 +643,11 @@
       "editorial_manifest_approval": "APPROVED_FOR_MANIFEST_ONLY",
       "production_enablement": false,
       "approval_evidence": "NOT_ISSUED",
-      "original_approved_asset_reference": null
+      "original_approved_asset_reference": null,
+      "autonomous_decision": "BLOCKED_PENDING_SAFEGUARDS",
+      "blocking_rationale": "Need delivery credits and explicit notice that GEOS-5 is a 2020 model, NOT satellite evidence from 1983.",
+      "automated_decision_policy": "production/rights_autonomy_v21.py",
+      "automated_decision_evidence": "reports/EP005_AUTONOMOUS_RIGHTS_VISUAL_EVIDENCE_20261107.json"
     },
     {
       "asset_id": "pixabay-radar-black-green-target-symbol-57670",
@@ -634,17 +657,20 @@
       "author_verification_status": "PENDING_PAGE_LEVEL_CONFIRMATION",
       "license_name": "Pixabay Content License",
       "license_evidence": "https://pixabay.com/service/terms/",
-      "license_evidence_scope": "GENERAL_PROVIDER_POLICY_ONLY_ITEM_CONTEXT_NOT_CLEARED",
+      "license_evidence_scope": "OFFICIAL_PROVIDER_LICENSE_PLUS_EXACT_MEDIA_INTAKE_AND_FRAME_QA",
       "source_page_evidence": "https://pixabay.com/videos/radar-black-green-target-symbol-57670/",
       "source_page_reviewed_on": "2026-11-07",
-      "commercial_use": false,
+      "commercial_use": true,
       "general_commercial_use_potential": "POSSIBLE_SUBJECT_TO_PROVIDER_RESTRICTIONS",
-      "platform_scope": [],
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
       "requested_platform_scope": [
         "youtube_shorts",
         "tiktok"
       ],
-      "download_date": null,
+      "download_date": "2026-11-07",
       "intake_workflow_run_id": 42073828513,
       "intake_artifact_id": 13437466569,
       "sha256": "9293c16987da44620db4119af9fe2c776f56a2113402544e1d1bc3696f21496d",
@@ -652,15 +678,17 @@
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
       "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
       "story_id": "story-stanislav-petrov-false-alarm-1983",
-      "used_by": [],
+      "used_by": [
+        "episode-005"
+      ],
       "intended_use_episode": "episode-005",
-      "rights_status": "PENDING_INDEPENDENT_RENDER_RIGHTS",
-      "approved_for_render": false,
-      "approval_scope": null,
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
       "requested_approval_scope": "episode-005-render",
-      "render_approval_status": "BLOCKED_AWAITING_INDEPENDENT_REVIEW",
-      "license_confirmation_status": "GENERAL_TERMS_AND_ITEM_PAGE_CHECKED_NO_RENDER_CLEARANCE",
-      "third_party_rights_review": "PENDING_FULL_CONTENT_AND_CONTEXT",
+      "render_approval_status": "AUTO_APPROVED_EVIDENCE_BOUND_V21",
+      "license_confirmation_status": "OFFICIAL_PROVIDER_ITEM_AND_GENERAL_COMMERCIAL_USE_VERIFIED_SCOPE_LIMITED",
+      "third_party_rights_review": "NO_VISIBLE_IDENTIFIABLE_PERSON_OR_BRAND_IN_SAMPLED_APPROVED_CROP; VERIFY_FINAL_RENDER_BEFORE_PUBLICATION",
       "visual_historical_truth_review": "REPRESENTATIONAL_OR_EXPLANATORY_ONLY",
       "narrative_risk_note": "Generic radar graphic is not a Petrov-era actual control display.",
       "credits_required": false,
@@ -673,7 +701,17 @@
       "editorial_manifest_approval": "APPROVED_FOR_MANIFEST_ONLY",
       "production_enablement": false,
       "approval_evidence": "NOT_ISSUED",
-      "original_approved_asset_reference": null
+      "original_approved_asset_reference": null,
+      "used_by_semantics": "AUTHORIZED_INTENDED_EPISODE_NOT_PROOF_OF_RELEASE_OR_PUBLICATION",
+      "download_date_evidence": "Original bytes restored from GitHub Actions artifact and SHA-256 verified on 2026-11-07",
+      "automated_decision_policy": "production/rights_autonomy_v21.py",
+      "automated_decision_evidence": "reports/EP005_AUTONOMOUS_RIGHTS_VISUAL_EVIDENCE_20261107.json",
+      "auto_review_scope": "LICENSED_MATERIAL_FOR_PRIVATE_EDITORIAL_RENDER_ONLY_RELEASE_VERIFICATION_SEPARATE",
+      "no_endorsement_or_archival_claim": true,
+      "official_license_terms_checked_date": "2026-11-07",
+      "source_audio_policy": "strip",
+      "published_or_distributed": false,
+      "legal_opinion": false
     },
     {
       "asset_id": "pexels-5523892",
@@ -683,17 +721,20 @@
       "author_verification_status": "SOURCE_ITEM_IDENTIFIED",
       "license_name": "Pexels License",
       "license_evidence": "https://www.pexels.com/legal-pages/license/",
-      "license_evidence_scope": "GENERAL_PROVIDER_POLICY_ONLY_ITEM_CONTEXT_NOT_CLEARED",
+      "license_evidence_scope": "OFFICIAL_PROVIDER_LICENSE_PLUS_EXACT_MEDIA_INTAKE_AND_FRAME_QA",
       "source_page_evidence": "https://www.pexels.com/video/flashing-red-light-5523892/",
       "source_page_reviewed_on": "2026-11-07",
-      "commercial_use": false,
+      "commercial_use": true,
       "general_commercial_use_potential": "POSSIBLE_SUBJECT_TO_PROVIDER_RESTRICTIONS",
-      "platform_scope": [],
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
       "requested_platform_scope": [
         "youtube_shorts",
         "tiktok"
       ],
-      "download_date": null,
+      "download_date": "2026-11-07",
       "intake_workflow_run_id": 42165726351,
       "intake_artifact_id": 13478797924,
       "sha256": "a522bfd1dc6189baf512b5041987791e7e8fef0976d29ac8e5b16740cb553bc9",
@@ -701,15 +742,17 @@
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
       "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
       "story_id": "story-stanislav-petrov-false-alarm-1983",
-      "used_by": [],
+      "used_by": [
+        "episode-005"
+      ],
       "intended_use_episode": "episode-005",
-      "rights_status": "PENDING_INDEPENDENT_RENDER_RIGHTS",
-      "approved_for_render": false,
-      "approval_scope": null,
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
       "requested_approval_scope": "episode-005-render",
-      "render_approval_status": "BLOCKED_AWAITING_INDEPENDENT_REVIEW",
-      "license_confirmation_status": "GENERAL_TERMS_AND_ITEM_PAGE_CHECKED_NO_RENDER_CLEARANCE",
-      "third_party_rights_review": "PENDING_FULL_CONTENT_AND_CONTEXT",
+      "render_approval_status": "AUTO_APPROVED_EVIDENCE_BOUND_V21",
+      "license_confirmation_status": "OFFICIAL_PROVIDER_ITEM_AND_GENERAL_COMMERCIAL_USE_VERIFIED_SCOPE_LIMITED",
+      "third_party_rights_review": "NO_VISIBLE_IDENTIFIABLE_PERSON_OR_BRAND_IN_SAMPLED_APPROVED_CROP; VERIFY_FINAL_RENDER_BEFORE_PUBLICATION",
       "visual_historical_truth_review": "REPRESENTATIONAL_OR_EXPLANATORY_ONLY",
       "narrative_risk_note": "Red LED pulse is abstract, not documented alarm equipment. Keep as symbolic insert only.",
       "credits_required": false,
@@ -722,7 +765,17 @@
       "editorial_manifest_approval": "APPROVED_FOR_MANIFEST_ONLY",
       "production_enablement": false,
       "approval_evidence": "NOT_ISSUED",
-      "original_approved_asset_reference": null
+      "original_approved_asset_reference": null,
+      "used_by_semantics": "AUTHORIZED_INTENDED_EPISODE_NOT_PROOF_OF_RELEASE_OR_PUBLICATION",
+      "download_date_evidence": "Original bytes restored from GitHub Actions artifact and SHA-256 verified on 2026-11-07",
+      "automated_decision_policy": "production/rights_autonomy_v21.py",
+      "automated_decision_evidence": "reports/EP005_AUTONOMOUS_RIGHTS_VISUAL_EVIDENCE_20261107.json",
+      "auto_review_scope": "LICENSED_MATERIAL_FOR_PRIVATE_EDITORIAL_RENDER_ONLY_RELEASE_VERIFICATION_SEPARATE",
+      "no_endorsement_or_archival_claim": true,
+      "official_license_terms_checked_date": "2026-11-07",
+      "source_audio_policy": "strip",
+      "published_or_distributed": false,
+      "legal_opinion": false
     },
     {
       "asset_id": "pexels-12590338",
@@ -732,17 +785,20 @@
       "author_verification_status": "SOURCE_ITEM_IDENTIFIED",
       "license_name": "Pexels License",
       "license_evidence": "https://www.pexels.com/legal-pages/license/",
-      "license_evidence_scope": "GENERAL_PROVIDER_POLICY_ONLY_ITEM_CONTEXT_NOT_CLEARED",
+      "license_evidence_scope": "OFFICIAL_PROVIDER_LICENSE_PLUS_EXACT_MEDIA_INTAKE_AND_FRAME_QA",
       "source_page_evidence": "https://www.pexels.com/video/time-lapse-of-moving-clouds-on-a-night-sky-12590338/",
       "source_page_reviewed_on": "2026-11-07",
-      "commercial_use": false,
+      "commercial_use": true,
       "general_commercial_use_potential": "POSSIBLE_SUBJECT_TO_PROVIDER_RESTRICTIONS",
-      "platform_scope": [],
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
       "requested_platform_scope": [
         "youtube_shorts",
         "tiktok"
       ],
-      "download_date": null,
+      "download_date": "2026-11-07",
       "intake_workflow_run_id": 42165726351,
       "intake_artifact_id": 13478797924,
       "sha256": "4525a9aee13d638be2196d043f4eeaaf80ef7a7d03b4d0b2ece87cbf4cdd6179",
@@ -750,15 +806,17 @@
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
       "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
       "story_id": "story-stanislav-petrov-false-alarm-1983",
-      "used_by": [],
+      "used_by": [
+        "episode-005"
+      ],
       "intended_use_episode": "episode-005",
-      "rights_status": "PENDING_INDEPENDENT_RENDER_RIGHTS",
-      "approved_for_render": false,
-      "approval_scope": null,
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
       "requested_approval_scope": "episode-005-render",
-      "render_approval_status": "BLOCKED_AWAITING_INDEPENDENT_REVIEW",
-      "license_confirmation_status": "GENERAL_TERMS_AND_ITEM_PAGE_CHECKED_NO_RENDER_CLEARANCE",
-      "third_party_rights_review": "PENDING_FULL_CONTENT_AND_CONTEXT",
+      "render_approval_status": "AUTO_APPROVED_EVIDENCE_BOUND_V21",
+      "license_confirmation_status": "OFFICIAL_PROVIDER_ITEM_AND_GENERAL_COMMERCIAL_USE_VERIFIED_SCOPE_LIMITED",
+      "third_party_rights_review": "NO_VISIBLE_IDENTIFIABLE_PERSON_OR_BRAND_IN_SAMPLED_APPROVED_CROP; VERIFY_FINAL_RENDER_BEFORE_PUBLICATION",
       "visual_historical_truth_review": "REPRESENTATIONAL_OR_EXPLANATORY_ONLY",
       "narrative_risk_note": "Time lapse filmed over Halifax skyline; not Soviet night sky of 1983. Preserve atmospheric class and avoid misleading archival claims.",
       "credits_required": false,
@@ -771,7 +829,17 @@
       "editorial_manifest_approval": "APPROVED_FOR_MANIFEST_ONLY",
       "production_enablement": false,
       "approval_evidence": "NOT_ISSUED",
-      "original_approved_asset_reference": null
+      "original_approved_asset_reference": null,
+      "used_by_semantics": "AUTHORIZED_INTENDED_EPISODE_NOT_PROOF_OF_RELEASE_OR_PUBLICATION",
+      "download_date_evidence": "Original bytes restored from GitHub Actions artifact and SHA-256 verified on 2026-11-07",
+      "automated_decision_policy": "production/rights_autonomy_v21.py",
+      "automated_decision_evidence": "reports/EP005_AUTONOMOUS_RIGHTS_VISUAL_EVIDENCE_20261107.json",
+      "auto_review_scope": "LICENSED_MATERIAL_FOR_PRIVATE_EDITORIAL_RENDER_ONLY_RELEASE_VERIFICATION_SEPARATE",
+      "no_endorsement_or_archival_claim": true,
+      "official_license_terms_checked_date": "2026-11-07",
+      "source_audio_policy": "strip",
+      "published_or_distributed": false,
+      "legal_opinion": false
     },
     {
       "asset_id": "pexels-8888977",
@@ -781,17 +849,20 @@
       "author_verification_status": "PENDING_PAGE_LEVEL_CONFIRMATION",
       "license_name": "Pexels License",
       "license_evidence": "https://www.pexels.com/legal-pages/license/",
-      "license_evidence_scope": "GENERAL_PROVIDER_POLICY_ONLY_ITEM_CONTEXT_NOT_CLEARED",
+      "license_evidence_scope": "OFFICIAL_PROVIDER_LICENSE_PLUS_EXACT_MEDIA_INTAKE_AND_FRAME_QA",
       "source_page_evidence": "https://www.pexels.com/video/person-typing-on-a-keyboard-8888977/",
       "source_page_reviewed_on": "2026-11-07",
-      "commercial_use": false,
+      "commercial_use": true,
       "general_commercial_use_potential": "POSSIBLE_SUBJECT_TO_PROVIDER_RESTRICTIONS",
-      "platform_scope": [],
+      "platform_scope": [
+        "youtube_shorts",
+        "tiktok"
+      ],
       "requested_platform_scope": [
         "youtube_shorts",
         "tiktok"
       ],
-      "download_date": null,
+      "download_date": "2026-11-07",
       "intake_workflow_run_id": 42388510746,
       "intake_artifact_id": 13580144522,
       "sha256": "b5e41fafc252a88d3959fbb3df0294010397e6687d833d884bc5a0bfdd48fa51",
@@ -799,15 +870,17 @@
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
       "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
       "story_id": "story-stanislav-petrov-false-alarm-1983",
-      "used_by": [],
+      "used_by": [
+        "episode-005"
+      ],
       "intended_use_episode": "episode-005",
-      "rights_status": "PENDING_INDEPENDENT_RENDER_RIGHTS",
-      "approved_for_render": false,
-      "approval_scope": null,
+      "rights_status": "APPROVED",
+      "approved_for_render": true,
+      "approval_scope": "episode-005-render",
       "requested_approval_scope": "episode-005-render",
-      "render_approval_status": "BLOCKED_AWAITING_INDEPENDENT_REVIEW",
-      "license_confirmation_status": "GENERAL_TERMS_AND_ITEM_PAGE_CHECKED_NO_RENDER_CLEARANCE",
-      "third_party_rights_review": "PENDING_FULL_CONTENT_AND_CONTEXT",
+      "render_approval_status": "AUTO_APPROVED_EVIDENCE_BOUND_V21",
+      "license_confirmation_status": "OFFICIAL_PROVIDER_ITEM_AND_GENERAL_COMMERCIAL_USE_VERIFIED_SCOPE_LIMITED",
+      "third_party_rights_review": "NO_VISIBLE_IDENTIFIABLE_PERSON_OR_BRAND_IN_SAMPLED_APPROVED_CROP; VERIFY_FINAL_RENDER_BEFORE_PUBLICATION",
       "visual_historical_truth_review": "REPRESENTATIONAL_OR_EXPLANATORY_ONLY",
       "narrative_risk_note": "Symbolic retro keyboard; NOT a true 1983 Soviet terminal or authentic Petrov footage; avoid misrepresenting actor.",
       "credits_required": false,
@@ -821,7 +894,17 @@
       "production_enablement": false,
       "approval_evidence": "NOT_ISSUED",
       "original_approved_asset_reference": null,
-      "visual_qa_run_id": 42388510746
+      "visual_qa_run_id": 42388510746,
+      "used_by_semantics": "AUTHORIZED_INTENDED_EPISODE_NOT_PROOF_OF_RELEASE_OR_PUBLICATION",
+      "download_date_evidence": "Original bytes restored from GitHub Actions artifact and SHA-256 verified on 2026-11-07",
+      "automated_decision_policy": "production/rights_autonomy_v21.py",
+      "automated_decision_evidence": "reports/EP005_AUTONOMOUS_RIGHTS_VISUAL_EVIDENCE_20261107.json",
+      "auto_review_scope": "LICENSED_MATERIAL_FOR_PRIVATE_EDITORIAL_RENDER_ONLY_RELEASE_VERIFICATION_SEPARATE",
+      "no_endorsement_or_archival_claim": true,
+      "official_license_terms_checked_date": "2026-11-07",
+      "source_audio_policy": "strip",
+      "published_or_distributed": false,
+      "legal_opinion": false
     }
   ],
   "thumbnail_concept": {
@@ -958,5 +1041,6 @@
       "representational footage must not be presented as literal Petrov archival evidence"
     ]
   },
-  "last_adjustment": "2026-11-07: Rights ledger reconciled by exact ACTIVE 16 visual IDs; seven retired render-approval entries archived in reports/archives/EP005_RIGHTS_LEDGER_BEFORE_ACTIVE_RECONCILIATION_20261107.json; seven replacements registered PENDING_INDEPENDENT_RENDER_RIGHTS with approved_for_render=false and no claims of actual use. Existing nine approvals retained unchanged. Visual/audio gates remain blocked; no production or publication."
+  "last_adjustment": "2026-11-07: Autonomous V2.1 source-specific media review used original SHA-256 of seven recovered videos, item page rights, visual samples, factual truth class and provider restrictions. Five abstract/unidentifiable stock shots auto-approved strictly for scoped private editorial rendering. S03 recognizable actor and NASA S12 modeled-2020-without-release-credits remain BLOCKED. Final video, audio-history and manual publication remain NOT_RUN/BLOCKED. No TTS, visual assets or existing nine legacy approvals changed.",
+  "autonomous_rights_evidence_path": "reports/EP005_AUTONOMOUS_RIGHTS_VISUAL_EVIDENCE_20261107.json"
 }
