@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "algorithm": "ffmpeg-chromaprint-algo1-raw32-v1",
+  "constructed_date": "2026-11-07",
+  "coverage": "KNOWN_ORIGINAL_SOURCE_AUDIO_NOT_WORLDWIDE_ORIGINALITY",
+  "duration_cap_seconds": 360,
+  "fingerprint_status": "VERIFIED_FROM_REAL_SOURCE_BYTES_SHA256_MATCHED",
+  "source_count": 2,
+  "sources": [
+    {
+      "source_id": "v7-001-generated-music",
+      "source_sha256": "ada559a1f992984e1b501fd76639478501615c617fed5034c43e99a745521ccf",
+      "historical_episode_ids": [
+        "episode-001-preview-v72-charon-clean"
+      ],
+      "evidence_scope": "VERIFIED_FINAL_MUSIC_SOURCE",
+      "fingerprint": {
+        "algorithm": "ffmpeg-chromaprint-algo1-raw32-v1",
+        "frame_count": 544,
+        "raw_sha256": "b1567d991ed7b405db613afe64721b639dcdd06d70a4a75096f8c411786ae068",
+        "compressed_words_b64": "eNqVlTFr21AQx3mEhyDQIbwlHTIXTyV9UwjdazIVLdHU+SGMSTWpIR8go/GUj+GKDKHkA3jIEDyJkg/wEMY4mlQT2v/dPdlK4hY6/HiSsM53//vfydw5badOZ6WLiLoRZmAsaKII1E/4LbAE7q1nIlxHtkwjxIpCLF03gRzvnjs9CRS5QM9jYPNuLC/X5TovQWIpothC3QwY2+IZbRxIhtr2wRSUC8Tyekb88HoMilXgC2Id9FT9tqey/VTZ/aGyR0NlenPhHJxUKkZeM+hWP4ge7X8XW+CcSpATTlnnhbxSps9o05ca66BZ8Y8as9c14ho5XqXaXKbaXnZirYSCNU+ZSe6Ze2j+OYc2AUu4cCakGXoDMvw2S7yuicZzfhOiFIrQY+qPbaEech899/EQep3hPEO8Zeh7LR5Q45bGo0aPGj1qhD4M9BJ/adOgvhL1TdO1J4K/1OSmQ7OB9bqAPhfo40fwDtfv57heKHNAunsd930UJz5iPzSUh1OjNsYtdCeu0cfrwY69DTTAA4d4x4i7i7x2K52diE6znP3FsYRUTtRZJIiV4N1ksWNz5EI4+AqxTJ4qMw01Tl97QurynRoHa08YeEA8MRdIv+4MJRvda/ZCBTyDvHjGEQt9RP+buT6k0wd4HlMmK1Fn6TezTbnhfkxAw6LzPKO5TvAe1QXPA3jNsbeyvuTE4NmM4DoHrwh5bfE96mZPyL5gva4AfFDcdGZnFcAM1jyHre4DRrQfqr1pBa9W8KrXZ8hlKV5nrUdNT43LIeKBFfi9UPV5iHM0WMeyDrOYwF9TzPadV/GdU9kDvPj0YnflLSn7YpZTDu2e2MSDXuwJ0/VEV/sXtM/ts3kMoO/cjz5iJSnPNc33kvYBejcCkw7Ln47JgP2F977hTIGjWF5/OPX66ydw6t88ItZj7tc5jTtgntDbNOwI+KkMe4brTENeFfLyvHPi4AXWq3y5Bzt7dYsnzA28dkm7EHlfCc/90IPmPda9wG4vjtHHY8xfwKYyjzyTzSJoj5yge9xIXo/I6XuJfVXKzhLEJ/fNXB1i32N+1KHfsIcdYKC76W88X6MHMwJxRjzXYCUnf1OSQWQTh13hOp6g7xC8hV1DxOV/eqL93rq2jxVrbxLS3nONf49F/Z1jLmg/yI5gPDHkHS17wj3f0XnH7wn8zsg+/AOxE7ym"
+      }
+    },
+    {
+      "source_id": "v7-002-004-reused-procedural",
+      "source_sha256": "4a84629bdd611489b49f28187c70f2fc6d4a48b11347ef5c05cf301e1cd1fa24",
+      "historical_episode_ids": [
+        "episode-002-archive-tape",
+        "because-of-this-episode-004"
+      ],
+      "evidence_scope": "VERIFIED_FINAL_MUSIC_SOURCE_P0_COLLISION",
+      "fingerprint": {
+        "algorithm": "ffmpeg-chromaprint-algo1-raw32-v1",
+        "frame_count": 544,
+        "raw_sha256": "1e145ed8e6ba0dfc1e31f44b0a59542096ca83003879a71ea682314574ab87bf",
+        "compressed_words_b64": "eNor/pu6vhgTr8WKf5KM1+PEtLFvoOwk1l5q2jf47MRn70DYSe34JDavUNuftLVzLdl2Dj2/Dh47f44QOwdr2h0O+WUwl0dE2gsA6eZQEA=="
+      }
+    }
+  ],
+  "publication_authorized": false
+}

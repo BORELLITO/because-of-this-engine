@@ -13,6 +13,8 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
+from production.audio_acoustic_fingerprint_v21 import CATALOG_PATH, review_file
+
 SHA = re.compile(r"^[0-9a-f]{64}$")
 MASTER_REGISTRY = Path("episodes/audio-rendered-master-registry.json")
 LEGACY_REGISTRY = Path("episodes/audio-memory-registry.json")
@@ -69,6 +71,14 @@ def check_file(path:Path, candidate:dict[str,Any],*,root:Path)->dict[str,Any]:
         value=digest if key=="sha256" else str(candidate.get(key) or "").strip().lower()
         if value and value in protected[key]:
             issues.append(f"historical audio identity reused:{key}:{value}")
+    acoustic = None
+    if candidate.get("kind") == "music_bed":
+        acoustic = review_file(path, root / CATALOG_PATH)
+        if acoustic["status"] != "PASS":
+            reasons = acoustic.get("failures") or [
+                "Acoustic similarity to historical music is ambiguous or reused"
+            ]
+            issues.extend("acoustic:" + str(reason) for reason in reasons)
     if candidate.get("kind")=="sfx":
         # Counting checked-in video order from missing release logs is unsafe.
         issues.append("3-video SFX cooldown cannot be proved by existing historical record")
@@ -80,11 +90,12 @@ def check_file(path:Path, candidate:dict[str,Any],*,root:Path)->dict[str,Any]:
         "failures":issues,
         "input_sha256":digest,
         "known_historical_source_count":len(protected["sha256"]),
+        "acoustic_fingerprint_review":acoustic,
         "identity_check_pass":not issues,
         "ready_for_render":False,
         "publication_authorized":False,
         "scope":"IDENTITY_AND_DECODING_ONLY_NEXT_STAGE_REQUIRED",
-        "note":"This verifies real source bytes/decodability and exact identity reuse, not acoustic similarity, all copyright rights, render or publication. Caller-supplied QA flags are not independent proof."
+        "note":"This validates exact identities and real Chromaprint similarity against the limited checked-in catalog; it does NOT establish full historical coverage, copyright clearance or publication rights."
     }
 
 
