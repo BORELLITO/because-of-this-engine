@@ -294,6 +294,8 @@ def run_final(
     narration: Path, voice_profile: Path, music: Path, music_candidate: Path,
     effects_manifest: Path, sfx: dict[str, Path],
     output: Path, mix_output: Path, receipt: Path, report: Path,
+    story_music_context: Path | None = None,
+    soundtrack_candidates: Path | None = None,
 ) -> dict[str, Any]:
     """One supported final dispatch: preflight FIRST, then verified media only."""
     record = _json(record_path)
@@ -312,7 +314,15 @@ def run_final(
     voice = validate_voice_profile(voice_profile, narration)
     _verify_preview_binding(preview, preview_report, voice)
     _verify_sfx_evidence(str(record.get("episode_id")), sfx, effects_manifest)
+    if story_music_context is None or soundtrack_candidates is None:
+        raise FinalRenderError("automatic story-matched soundtrack selection evidence is mandatory")
+    from production.music_direction_v21 import select_soundtrack
+    choices = _json(soundtrack_candidates)
+    chosen = select_soundtrack(_json(story_music_context), choices.get("tracks", []))
     candidate = _json(music_candidate)
+    if (chosen.get("status") != "EDITORIAL_SELECTED_RIGHTS_REVIEW_REQUIRED" or
+            chosen.get("selected_track_id") != candidate.get("track_id")):
+        raise FinalRenderError("selected music does not match autonomous suspense score and rights evidence")
     audio_gate = check_file(music, candidate, root=repo_root)
     if audio_gate.get("status") != "PASS":
         raise FinalRenderError("music source anti-reuse/license evidence blocked: "
@@ -362,6 +372,8 @@ def main() -> int:
     p.add_argument("--voice-profile", type=Path, required=True)
     p.add_argument("--music", type=Path, required=True)
     p.add_argument("--music-candidate", type=Path, required=True)
+    p.add_argument("--story-music-context", type=Path, required=True)
+    p.add_argument("--soundtrack-candidates", type=Path, required=True)
     p.add_argument("--effects-manifest", type=Path, required=True)
     p.add_argument("--sfx", action="append", default=[], help="sfx:name=/path/to/verified-pretimed.wav")
     p.add_argument("--output", type=Path, required=True)
@@ -385,6 +397,8 @@ def main() -> int:
             effects_manifest=args.effects_manifest.resolve(), sfx=effects,
             output=args.output.resolve(), mix_output=args.mix_output.resolve(),
             receipt=args.receipt.resolve(), report=args.report.resolve(),
+            story_music_context=args.story_music_context.resolve(),
+            soundtrack_candidates=args.soundtrack_candidates.resolve(),
         )
         print(json.dumps(result, ensure_ascii=False))
         return 0
