@@ -58,7 +58,7 @@ class FinalV21RenderTests(unittest.TestCase):
                 narration=self.narration,voice_profile=self.root/"voice-profile.json",
                 music=self.music,music_candidate=self.root/"music-candidate.json",
                 effects_manifest=self.root/"effects.json",
-                sfx={"sfx:alarm":self.sfx},
+                sfx={"sfx:footsteps":self.sfx},
                 output=self.output,mix_output=self.mix,receipt=self.receipt,
                 report=self.root/"final-report.json",
             )
@@ -78,16 +78,26 @@ class FinalV21RenderTests(unittest.TestCase):
             _time_signature(p,65.0)
         with self.assertRaises(FinalRenderError):
             _time_signature(self.profile,76.0)
+        p=dict(self.profile,music_gain=0.13)
+        with self.assertRaises(FinalRenderError):
+            _time_signature(p,65)
+        p=dict(self.profile,music_to_last_frame=False)
+        with self.assertRaises(FinalRenderError):
+            _time_signature(p,65)
 
     def test_mix_command_preserves_narration_target_and_pretimed_sfx(self):
         command=build_audio_mix_command(
-            self.narration,self.music,{"sfx:alarm":self.sfx},
+            self.narration,self.music,{"sfx:footsteps":self.sfx},
             self.mix,voice_seconds=65.0,profile=self.profile)
         joined=" ".join(command)
         self.assertIn("loudnorm=I=-16:TP=-1:LRA=7",joined)
         self.assertIn("volume=0.1200",joined)
         self.assertIn("volume=0.0800",joined)
         self.assertIn("amix=inputs=3",joined)
+        self.assertIn("sidechaincompress",joined)
+        self.assertIn("atrim=duration=70.500",joined)
+        self.assertIn("afade=t=out:st=69.300:d=1.200",joined)
+        self.assertNotIn("-stream_loop",command)
         self.assertIn("apad=pad_dur=5.500",joined)
         self.assertIn(str(self.output),str(self.output))
         self.assertIn(str(self.mix.resolve()),command[-1])
@@ -122,17 +132,17 @@ class FinalV21RenderTests(unittest.TestCase):
     def test_episode_specific_sfx_provenance_is_not_optional(self):
         self.sfx.write_bytes(b"test pretimed source audio")
         data={"episode_id":"episode-test","status":"QA_VERIFIED","stems":[{
-            "role":"sfx:alarm","source_sha256":file_sha256(self.sfx),
+            "role":"sfx:footsteps","source_sha256":file_sha256(self.sfx),
             "license_status":"APPROVED","timing_review":"VERIFIED"}]}
         path=self.root/"effects.json"
         path.write_text(json.dumps(data))
-        _verify_sfx_evidence("episode-test",{"sfx:alarm":self.sfx},path)
+        _verify_sfx_evidence("episode-test",{"sfx:footsteps":self.sfx},path)
         with self.assertRaises(FinalRenderError):
             _verify_sfx_evidence("episode-test",{},path)
         data["stems"][0]["source_sha256"]="f"*64
         path.write_text(json.dumps(data))
         with self.assertRaisesRegex(FinalRenderError,"SFX rights"):
-            _verify_sfx_evidence("episode-test",{"sfx:alarm":self.sfx},path)
+            _verify_sfx_evidence("episode-test",{"sfx:footsteps":self.sfx},path)
 
     @unittest.skipUnless(FFMPEG,"real FFmpeg/ffprobe is required for E2E")
     def test_real_synthetic_picture_audio_mix_and_master_binding(self):
@@ -141,7 +151,7 @@ class FinalV21RenderTests(unittest.TestCase):
         # receipt, counterfactual SFX checks, AAC master binding and bitstream
         # identity run unchanged.
         tone(self.narration,173)
-        tone(self.music,91)
+        tone(self.music,91,20.0)
         tone(self.sfx,341)
         subprocess.run([
             "ffmpeg","-nostdin","-hide_banner","-loglevel","error",
@@ -154,13 +164,13 @@ class FinalV21RenderTests(unittest.TestCase):
         with patch("production.render_v21_final._time_signature",return_value=19.5):
             result=assemble_verified_picture_with_audio(
                 picture=self.picture,narration=self.narration,music=self.music,
-                sfx={"sfx:alarm":self.sfx},
+                sfx={"sfx:footsteps":self.sfx},
                 output=self.output,mix_output=self.mix,audio_receipt=self.receipt,
                 voice_seconds=14.0,profile=self.profile,episode_id="synthetic-test"
             )
         self.assertEqual(result["status"],"V21_FINAL_AUDIO_AND_PICTURE_TECHNICAL_PASS",result)
         self.assertTrue(result["master_audio_bound"])
-        self.assertCountEqual(result["stem_contributions"],["narration","music","sfx:alarm"])
+        self.assertCountEqual(result["stem_contributions"],["narration","music","sfx:footsteps"])
         self.assertNotEqual(result["picture_sha256"],result["final_master_sha256"])
         self.assertEqual(result["picture_video_stream_sha256"],
                          __import__("production.render_v21_final",fromlist=["_video_payload_sha256"])._video_payload_sha256(self.output))
@@ -170,7 +180,7 @@ class FinalV21RenderTests(unittest.TestCase):
             with self.assertRaisesRegex(FinalRenderError,"overwrite"):
                 assemble_verified_picture_with_audio(
                     picture=self.picture,narration=self.narration,music=self.music,
-                    sfx={"sfx:alarm":self.sfx},output=self.output,mix_output=self.mix,
+                    sfx={"sfx:footsteps":self.sfx},output=self.output,mix_output=self.mix,
                     audio_receipt=self.receipt,voice_seconds=14,
                     profile=self.profile,episode_id="synthetic-test"
                 )
