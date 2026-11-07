@@ -1,5 +1,8 @@
 # BECAUSE OF THIS — V2.1 Integration Control Center
 
+> **CANONICAL STATUS — 2026-11-07:** The active source of truth is `production/active_engine_policy.json`: V2.1 factual documentary, Gemini TTS / Charon, `production_enablement=false`, manual publication. Earlier Edge/Piper statements in this historical log are superseded. See latest addendum at the bottom.
+
+
 - Implementation ID: IMPL-V21-20261105-01
 - Audit ID: AUDIT-V21-20261105-01
 - Specification: PROMPT_MESTRE_IMPLEMENTACAO_INTEGRACAO_BECAUSE_OF_THIS_V2_1_FINAL(2).txt
@@ -411,3 +414,25 @@ READY remains forbidden while any P0/P1 is open.
 - O preflight manual de render não foi executado: a workflow `.github/workflows/episode005-v21-manual-render.yml` existe somente na branch candidata e ainda não está exposta pelo Actions da revisão-base. Nenhum merge foi realizado para disponibilizá-la.
 - Estado atual: direitos aprovados para render, contrato canônico validado, produção ainda desabilitada, render `NOT_RUN`, Drive não escrito e publicação não executada.
 - Próximo gate único: decisão explícita sobre tornar a workflow manual disponível na revisão-base; somente depois executar o preflight `preview`, que deve permanecer fail-closed enquanto `production_enablement=false`.
+
+## Addendum auditado — integração segura, rastreabilidade e provas (2026-11-07)
+
+**Authority:** `production/active_engine_policy.json`. Perfil ativo V2.1, narrativa factual, Gemini TTS/Charon, `production_enablement=false`, `preview_enablement=true`, publicação exclusivamente manual. O `canonical_entrypoint.py` é um validador somente leitura, não um renderer.
+
+### Integrado na main (verificar pelos PRs e commits, não por memória de conversa)
+
+- [PR #122](https://github.com/BORELLITO/because-of-this-engine/pull/122), merge `fe49022d44f7991c886121d3204f7aa80cbc1787`: housekeeping semanal convertido para inventário READ-ONLY; rotas Edge TTS/legendas congeladas removidas de Actions ativas e arquivadas; singleton guard, verificação de identidade visual e testes de evidência; direitos, narrativas e legendas sem promoção automática. Rollback pré-merge `backup/main-pre-safety-20261107`.
+- [PR #123](https://github.com/BORELLITO/because-of-this-engine/pull/123), merge `009722aa64ef889adb5baa5972e47e7a4e42890b`: `VISUAL_RIGHTS_CONSISTENCY` impede passar direitos de mídias antigas para novas. Comparação plano → manifesto → direitos, hashes, fingerprint, autorizações e escopo; CI usa prova negativa controlada.
+- [PR #124](https://github.com/BORELLITO/because-of-this-engine/pull/124), merge `dfbb2143b3819ebeddfcd77628746cd87ed269e8`: `AUDIO_HISTORY_COVERAGE` read-only e bloqueio no preflight final; inventário de cinco manifestos históricos. Registro `audio-memory-registry.json` ainda com zero faixas e não deve ser declarado completo.
+- [PR #125](https://github.com/BORELLITO/because-of-this-engine/pull/125) hotfix a promover somente após testes: a narração congelada do Episódio 006 foi sintetizada a partir de `read_text().strip()`; o verificador introduzido no PR #122 não pode incluir o newline final no hash. Identidade TTS aprovada `412c4bfa1c26abd7631ec1cad74cae2e07b6d33012631bbbac53df8c8e0b3112`; arquivo-fonte cru termina com newline e tem outro hash. Nenhuma nova voz será gerada por esse ajuste.
+
+### Evidências verificadas e bloqueios
+
+- Backups dos checkpoints: Episode 006 voz, Episode 006 voz+legendas e Episode 005 preview copiados para Google Drive; as três cópias foram recuperadas, hashes SHA-256 coincidiram com origem e todos ZIPs passaram no CRC. Recibos: `reports/ARTIFACT_PROTECTION_20261107.json`.
+- CI V2.1 principal passou após PRs #122, #123 e #124. Isso comprova contratos e bloqueios esperados, **não uma execução audiovisual final**.
+- Episode 005: manifesto visual inclui 16 clipes, porém somente 9 IDs correspondem às entradas de direitos; sete direitos antigos não representam sete substitutos. S09 `pexels-12213087` tem aprovação humana pendente no plano e fingerprint divergente no manifesto. O estado correto de `VISUAL_RIGHTS_CONSISTENCY` é BLOCKED até reconciliação e evidências reais, nunca auto-APPROVED.
+- Histórico de áudio: cinco manifestos declaram trilhas; Episodes 001/002 indicam o mesmo Drive ID de música. Isso é uma duplicação **documental** de identidade, não prova de uso em material publicado. Auditar master e histórico antes de definir `coverage_status=VERIFIED_COMPLETE`. Detalhes: `reports/AUDIO_HISTORY_DISCOVERY_20261107.json`.
+- Episode 006: checkpoint WAV real 73,64 s, 24 kHz mono, 164 palavras alinhadas, 21 eventos ASS; revisão perceptiva palavra a palavra e QA visual final continuam pendentes. A frase sobre qual bomba foi enterrada em Goldsboro está sob revisão factual em `episodes/episode-006/FACT_REVIEW_20261107.md`.
+- Não houve publicação externa, Drive write de mídia final, novas chamadas TTS, render final ou alteração da identidade Charon/HUD aprovada durante esses upgrades.
+
+**Próximo passo único:** reconciliar com evidência real as sete entradas de direitos faltantes do Episode 005 e a aprovação do candidato S09, sem promover qualquer estado por inferência; depois auditar o catálogo de áudio e os materiais reais antes de solicitar outro preflight de produção. A política permanece fail-closed.
