@@ -1,3 +1,11 @@
+> **ESTADO CANÔNICO (07/11/2026):** consulte primeiro `production/active_engine_policy.json`.
+> A política declara a candidata V2.1 factual com Gemini TTS/Charon direto,
+> `production/canonical_entrypoint.py` como validador somente leitura,
+> `production_enablement=false` e publicação manual.
+> As instruções V7/V7.2/Piper abaixo são HISTÓRICAS, não autorizam execução.
+> Confira as configurações e aprovações atuais antes de qualquer operação.
+> Consulte `docs/QUALITY_SAFETY_HARDENING_20261107.md`.
+
 # BECAUSE OF THIS — Motor oficial V7.1 Piper + melhorias V7.2 Reuse First
 
 Este é o **único motor oficial** de produção do canal. O núcleo canônico V7.1 permanece com o modelo de voz **Piper TTS local**, em inglês. A **V7.2 Reuse First** foi aprovada e ativada como uma camada de economia, segurança, memória de mídias e validação incremental, sem substituir a voz, o roteiro ou a estética validados.
