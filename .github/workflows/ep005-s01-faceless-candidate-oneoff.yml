@@ -120,7 +120,7 @@ jobs:
           for i,fraction in enumerate((.06,.26,.46,.66,.86)):
             second=duration*fraction
             for mode in ('native','vertical'):
-              vf='scale=640:-2' if mode=='native' else 'crop=ih*9/16:ih:(iw-ih*9/16)/2:0,scale=540:960'
+              vf='scale=640:-2' if mode=='native' else 'scale=540:960:force_original_aspect_ratio=increase,crop=540:960'
               subprocess.run(['ffmpeg','-v','error','-y','-ss',str(second),'-i',str(mp4),'-frames:v','1','-vf',vf,str(root/f'{mode}-{i:02d}.jpg')],check=True)
           for mode in ('native','vertical'):
             subprocess.run(['ffmpeg','-v','error','-y','-framerate','1','-start_number','0','-i',
