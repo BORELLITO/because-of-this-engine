@@ -55,6 +55,43 @@ def _policy(policy_path: Path = POLICY_PATH) -> dict[str, Any]:
     return policy
 
 
+def validate_completed_audio_mix(
+    record: dict[str, Any],
+    *,
+    receipt_path: Path,
+    master_video: Path,
+) -> dict[str, Any]:
+    """Postflight adapter for FUTURE authorized renders; never unblocks production.
+
+    Independent FFmpeg replay + per-source counterfactual + finished-master
+    acoustic binding. The active V2.1 entrypoint is still manual preflight only.
+    """
+    from production.audio_mix_receipt_v21 import verify_master_binding
+
+    try:
+        receipt = _read_json(receipt_path)
+        if receipt.get("episode_id") != record.get("episode_id"):
+            raise ManualRenderGateError("postmix receipt belongs to another episode")
+        result = verify_master_binding(receipt_path, master_video)
+        if result["status"] != "PASS":
+            raise ManualRenderGateError("postmix evidence failed: " + str(result.get("errors") or result))
+        return {
+            "status": "V21_AUDIO_POSTFLIGHT_EVIDENCE_PASS",
+            "source_contributions_confirmed": result["source_contributions_confirmed"],
+            "master_audio_bound": True,
+            "production_enabled": False,
+            "publication": "MANUAL_ONLY_NOT_RUN",
+            "authorization_scope": "EVIDENCE_VERIFICATION_ONLY_NOT_RELEASE",
+        }
+    except (ManualRenderGateError, OSError, ValueError) as exc:
+        return {
+            "status": "V21_AUDIO_POSTFLIGHT_BLOCKED",
+            "failures": [str(exc)],
+            "production_enabled": False,
+            "publication": "MANUAL_ONLY_NOT_RUN",
+        }
+
+
 def validate_request(
     record: dict[str, Any],
     *,
