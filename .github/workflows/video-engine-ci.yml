@@ -115,7 +115,14 @@ jobs:
           from pathlib import Path
           report = json.loads(Path("/tmp/episode005-v21-report.json").read_text(encoding="utf-8"))
           assert report["status"] == "BLOCKED", report
-          assert report["blocking_gates"] == ["rights_ledger", "VISUAL_RIGHTS_CONSISTENCY", "AUDIO_HISTORY_COVERAGE"], report["blocking_gates"]
+          assert report["blocking_gates"] == ["rights_ledger", "VISUAL_RIGHTS_CONSISTENCY", "AUDIO_HISTORY_COVERAGE", "SHOT_CONTEXT_V21"], report["blocking_gates"]
+          shot = next(g for g in report["checks"] if g.get("gate") == "SHOT_CONTEXT_V21")
+          assert shot["status"] == "BLOCKED", shot
+          assert shot["actual_assignments"]["S01"] == "pexels-11764431", shot
+          assert shot["actual_assignments"]["S03"] == "pixabay-radio-vintage-old-171435", shot
+          assert shot["actual_assignments"]["S12"] == "nasa-svs-geos5-clouds-no-labels-4819", shot
+          assert any("actual scene S01" in x for x in shot["failures"]), shot
+          assert any("NASA S12: draft credit has not been verified" in x for x in shot["failures"]), shot
           rights = next(g for g in report["checks"] if g.get("ledger") == "rights_ledger")
           assert rights["status"] == "BLOCKED"
           assert sum("is not independently approved for render" in x for x in rights["failures"]) == 2
@@ -158,6 +165,23 @@ jobs:
           assert data["publication_executed"] is False
           assert data["render_executed"] is False
           print("EP005_RIGHTS_AUTONOMY_DECISION_PASS_RELEASE_FAIL_CLOSED")
+          PY
+
+      - name: Real-shot context, actor identity and NASA disclosure regression
+        run: |
+          PYTHONPATH=. python -m unittest discover -s tests -p "test_v21_shot_context_nasa.py" -v
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from production.shot_context_v21 import inspect_repository
+          root=Path(".")
+          record=json.loads(Path("episodes/episode-005/production-record.json").read_text())
+          result=inspect_repository(record,repo_root=root)
+          assert result["status"]=="BLOCKED",result
+          assert "S01" in result["actual_assignments"]
+          assert not any("at actual scene S03" in x for x in result["failures"]),result
+          assert result["render"]=="NOT_RUN" and result["publication"]=="NOT_RUN"
+          print("EP005_S01_REAL_ACTOR_AND_NASA_S12_NOT_FAKE_ARCHIVAL_BLOCKED")
           PY
 
       - name: Enforce singleton runtime
