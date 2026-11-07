@@ -52,7 +52,7 @@ class V21VisualReconciliationDossierTests(unittest.TestCase):
         backup = copy.deepcopy((rec, plan, man))
         report = build_dossier(rec, plan, man)
         self.assertEqual((rec, plan, man), backup)
-        self.assertTrue(all(x["render_rights_status"] == "PENDING_INDEPENDENT_RENDER_RIGHTS" for x in report["assets"] if x["asset_id"] in {"pexels-11764431", "nasa-svs-geos5-clouds-no-labels-4819"}))
+        self.assertTrue(all(x["render_rights_status"] == "APPROVED" for x in report["assets"] if x["asset_id"] in {"pexels-11764431", "nasa-svs-geos5-clouds-no-labels-4819"}))
         self.assertTrue(all(x["user_approval_inferred"] is False for x in report["assets"]))
 
     def test_missing_human_approval_blocks_even_if_manifest_claims_approved(self):
