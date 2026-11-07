@@ -87,6 +87,21 @@ def _time_signature(profile: dict[str, Any], voice_seconds: float) -> float:
             profile.get("target_voice_integrated_loudness_lufs") != -16 or
             profile.get("outro_seconds") != OUTRO_SECONDS):
         raise FinalRenderError("frozen creative audio calibration/outro changed")
+    if (profile.get("music_covers_full_picture") is not True or
+            profile.get("music_ends_before_outro") is not False or
+            profile.get("music_start_seconds") != 0 or
+            profile.get("music_fade_out_end") != "picture_end"):
+        raise FinalRenderError("suspense music must cover picture and fade during outro")
+    fade = profile.get("music_fade_out_seconds")
+    if not isinstance(fade, (int, float)) or isinstance(fade, bool) or not 1 <= fade <= OUTRO_SECONDS:
+        raise FinalRenderError("music fade must end exactly at final picture black")
+    duck = profile.get("music_ducking") or {}
+    if (duck.get("method") != "sidechaincompress" or
+            not 0.001 <= float(duck.get("threshold", 0)) <= 0.1 or
+            not 2 <= float(duck.get("ratio", 0)) <= 12 or
+            not 5 <= float(duck.get("attack_ms", 0)) <= 100 or
+            not 100 <= float(duck.get("release_ms", 0)) <= 1000):
+        raise FinalRenderError("voice-priority music ducking configuration is invalid")
     if profile.get("status") not in {
             "CANDIDATE_FOR_QA_NOT_RELEASE_APPROVED", "INDEPENDENT_AUDIO_QA_PASS"}:
         raise FinalRenderError("audio mix profile status invalid")
@@ -119,24 +134,36 @@ def build_audio_mix_command(
 
     # Preserve the approved narration loudness target -16 LUFS. The music and
     # effect gains are *candidate* settings, not approved sound quality claims.
+    fade_seconds = float(profile["music_fade_out_seconds"])
+    fade_start = total - fade_seconds
+    duck = profile["music_ducking"]
     graph = [
         f"[0:a]aresample=48000,loudnorm=I=-16:TP=-1:LRA=7,"
         f"alimiter=limit=0.95,atrim=duration={voice_seconds:.3f},"
-        "asetpts=PTS-STARTPTS[v]",
-        f"[1:a]aresample=48000,atrim=duration={voice_seconds:.3f},"
-        f"asetpts=PTS-STARTPTS,volume={profile['music_gain']:.4f}[m]",
+        "asetpts=PTS-STARTPTS,asplit=2[v][key]",
+        f"[key]apad=pad_dur={OUTRO_SECONDS:.3f},"
+        f"atrim=duration={total:.3f}[sidechain]",
+        f"[1:a]aresample=48000,atrim=duration={total:.3f},"
+        f"asetpts=PTS-STARTPTS,volume={profile['music_gain']:.4f}[bed]",
+        f"[bed][sidechain]sidechaincompress="
+        f"threshold={duck['threshold']}:ratio={duck['ratio']}:"
+        f"attack={duck['attack_ms']}:release={duck['release_ms']}:"
+        f"makeup={duck['makeup']},"
+        f"afade=t=out:st={fade_start:.3f}:d={fade_seconds:.3f}[m]",
+        f"[v]apad=pad_dur={OUTRO_SECONDS:.3f},"
+        f"atrim=duration={total:.3f}[voicefull]",
     ]
-    inputs = ["[v]", "[m]"]
+    inputs = ["[voicefull]", "[m]"]
     for i, name in enumerate(sorted(sfx), start=2):
         graph.append(
-            f"[{i}:a]aresample=48000,atrim=duration={voice_seconds:.3f},"
-            f"asetpts=PTS-STARTPTS,volume={profile['sfx_gain']:.4f}[s{i}]"
+            f"[{i}:a]aresample=48000,atrim=duration={total:.3f},"
+            f"asetpts=PTS-STARTPTS,volume={profile['sfx_gain']:.4f},"
+            f"apad=pad_dur={total:.3f},atrim=duration={total:.3f}[s{i}]"
         )
         inputs.append(f"[s{i}]")
     graph.append(
-        "".join(inputs) + f"amix=inputs={len(inputs)}:duration=first:normalize=0,"
+        "".join(inputs) + f"amix=inputs={len(inputs)}:duration=longest:normalize=0,"
         "alimiter=limit=0.95,"
-        f"apad=pad_dur={OUTRO_SECONDS:.3f},"
         f"atrim=duration={total:.3f}[out]"
     )
     command += ["-filter_complex", ";".join(graph), "-map", "[out]",
