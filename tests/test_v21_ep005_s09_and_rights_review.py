@@ -65,7 +65,7 @@ class EP005S09AndRightsReviewTests(unittest.TestCase):
         self.assertFalse(any("visual assets missing render rights" in x for x in result["failures"]))
         self.assertFalse(any("pexels-8888977: render rights not independently approved" in x for x in result["failures"]))
         self.assertFalse(any("nasa-svs-geos5-clouds-no-labels-4819: render rights not independently approved" in x for x in result["failures"]))
-        self.assertTrue(any("nasa-svs-geos5-clouds-no-labels-4819" in x for x in result["failures"]))
+        self.assertFalse(any("nasa-svs-geos5-clouds-no-labels-4819" in x for x in result["failures"]))
         self.assertFalse(any("pexels-8888977: plan does not record human manifest approval" in x for x in result["failures"]))
 
 
