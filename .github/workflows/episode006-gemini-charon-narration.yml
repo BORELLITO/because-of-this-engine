@@ -1,0 +1,96 @@
+name: Because Of This Episode 006 Gemini Charon Narration
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_mode:
+        description: "Use RUN_ONCE only after confirming the Gemini quota is available."
+        required: true
+        default: "CACHE_ONLY"
+        type: choice
+        options:
+          - CACHE_ONLY
+          - RUN_ONCE
+
+permissions:
+  contents: read
+
+jobs:
+  generate-direct-gemini-charon:
+    if: ${{ inputs.run_mode == 'RUN_ONCE' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+    steps:
+      - name: Checkout requested revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Generate one approved Gemini Charon narration
+        run: |
+          set -euo pipefail
+          test -n "${GEMINI_API_KEY}"
+          mkdir -p artifacts/episode006-gemini-charon
+          PYTHONPATH=. python - <<'PY'
+          import hashlib
+          import json
+          import wave
+          from pathlib import Path
+
+          from production.gemini_tts import synthesize_text
+
+          script = Path("episodes/episode-006/narration/en-US-charon-v1.txt").read_text(encoding="utf-8").strip()
+          profile = {
+              "provider": "gemini_tts",
+              "voice_name": "Charon",
+              "language_code": "en-US",
+              "model": "gemini-3.8-flash-tts",
+              "sample_rate_hz": 24000,
+              "style": "controlled, clear, restrained cinematic suspense",
+          }
+          audio, metadata = synthesize_text(script, profile)
+          root = Path("artifacts/episode006-gemini-charon")
+          audio_path = root / "narration.wav"
+          audio_path.write_bytes(audio)
+          with wave.open(str(audio_path), "rb") as stream:
+              duration = stream.getnframes() / stream.getframerate()
+              assert stream.getnchannels() == 1
+              assert stream.getsampwidth() == 2
+              assert stream.getframerate() == 24000
+          digest = hashlib.sha256(audio).hexdigest()
+          duration_status = "PASS" if 60 <= duration <= 80 else "REJECTED_OUTSIDE_60_TO_80_SECONDS"
+          voice_profile = {
+              "episode_id": "episode-006",
+              "provider": "gemini_tts",
+              "voice_name": "Charon",
+              "language_code": "en-US",
+              "model": "gemini-3.8-flash-tts",
+              "identity_status": "APPROVED_REFERENCE_MATCH",
+              "audio_sha256": digest,
+              "script_sha256": hashlib.sha256(script.encode("utf-8")).hexdigest(),
+              "duration_seconds": round(duration, 3),
+              "duration_status": duration_status,
+              "request_count": 1,
+              "provider_metadata": metadata,
+          }
+          (root / "voice-profile.json").write_text(
+              json.dumps(voice_profile, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          assert duration_status == "PASS", {"duration_seconds": duration, "status": duration_status}
+          print(json.dumps({
+              "status": "GEMINI_TTS_CHARON_NARRATION_GENERATED",
+              "episode_id": "episode-006",
+              "duration_seconds": round(duration, 3),
+              "audio_sha256": digest,
+              "request_count": 1,
+          }))
+          PY
+
+      - name: Upload narration checkpoint
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: episode006-gemini-charon-narration
+          path: artifacts/episode006-gemini-charon
+          if-no-files-found: warn
