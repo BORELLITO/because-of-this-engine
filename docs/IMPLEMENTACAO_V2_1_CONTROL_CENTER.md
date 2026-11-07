@@ -487,3 +487,15 @@ READY remains forbidden while any P0/P1 is open.
 **Testes obrigatórios:** cobertura de identidade exata 16/16, snapshot histórico idêntico, nove aprovações intactas, sete pendências sem `used_by` ou direitos concedidos, hashes iguais ao arquivo de aquisição, e testes negativos impedindo liberação ao editar somente um campo. A CI precisa exigir `rights_ledger=BLOCKED`, `VISUAL_RIGHTS_CONSISTENCY=BLOCKED`, `AUDIO_HISTORY_COVERAGE=BLOCKED`, enquanto o contrato de manifesto segue `PASS`. Um teste negativo aprovado não equivale a produção liberada.
 
 **Próximo passo único:** concluir revisão individual de marcas, pessoas, fidelidade histórica e comprovação do escopo comercial/YouTube/TikTok; autorizar cada entrada somente após evidência verificável, sem trocar novamente S09 nem gerar áudio, e revisar também o histórico global de trilhas antes do preflight final.
+
+### 2026-11-07 — Motor de aprovação AUTÔNOMA por evidência (V2.1)
+
+O usuário determinou explicitamente que o próprio motor deve **decidir se o clipe está apto**, sem pedidos repetidos de aprovação. A implementação em `production/rights_autonomy_v21.py` avalia origem oficial/termos, SHA-256 e fingerprint correspondentes ao vídeo real recuperado, inspeção de cinco amostras 9:16, rosto/marcas, classe factual, áudio externo, histórico conhecido de reuso e requisitos de crédito. No modo atual, a decisão automatizada consome a evidência visual previamente estruturada em `reports/EP005_AUTONOMOUS_RIGHTS_VISUAL_EVIDENCE_20261107.json`. Para mídias futuras, é preciso alimentar essa evidência com um processo automático de visão, sem afirmar que ela já é feita fim a fim.
+
+**Cinco decisões autônomas elegíveis ao render editorial daquele episódio:** S04 rádio vintage, S05 radar gráfico, S06 luz vermelha, S09 teclado retrô, S11 céu noturno. Direitos `APPROVED`, `commercial_use=true`, `approved_for_render=true`, com `render_approval_status=AUTO_APPROVED_EVIDENCE_BOUND_V21` e escopo estrito `episode-005-render`. Não representam verdade documental primária, pessoas reais do incidente ou publicação aprovada. `used_by` indica intenção autorizada, não vídeo publicado.
+
+**Duas recusas fundamentadas do próprio motor:** S03 homem com rosto identificável (não atribuir ao Petrov ou operador soviético verdadeiro); S12 NASA modelo atmosférico de 2020 (precisa prova de crédito NASA SVS/Greg Shirah/Trent L. Schindler e aviso de que não se trata de dados do sistema soviético de 1983). O motor decide BLOQUEAR e deve tentar resolver/substituir autonomamente sem pedir liberação genérica ao usuário.
+
+**Segurança:** fonte e fingerprint da cena não foram alterados; antigos nove direitos preservados; o histórico de áudio ainda está INCOMPLETO. `RIGHTS_AUTONOMY_V21` é gate adicional canônico e do pré-voo manual. O episódio não está apto a publicação nem a render final, Gemini/Charon e regras de mídia mantidos. Este estágio distingue autonomia **do decisor** versus automação completa de novas análises visuais, que ainda exige integrar visão upstream e validação do render composto.
+
+Documentação de política, decisões e fontes: `docs/RIGHTS_AUTONOMY_V21.md`.

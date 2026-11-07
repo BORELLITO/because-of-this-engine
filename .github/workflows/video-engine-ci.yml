@@ -82,17 +82,18 @@ jobs:
           d = json.loads(Path("/tmp/ep005-rights-dossier.json").read_text(encoding="utf-8"))
           assert d["status"] == "RECONCILIATION_REQUIRED", d["status"]
           assert d["asset_count"] == 16
-          assert d["render_rights_matched_count"] == 9
-          assert len(d["approved_manifest_only_pending_render_rights"]) == 7
+          assert d["render_rights_matched_count"] == 14
+          assert len(d["approved_manifest_only_pending_render_rights"]) == 2
           assert d["pending_visual_approval"] == []
           assert d["source_provenance_mismatches"] == []
           assert d["missing_render_rights"] == []
-          assert len(d["pending_render_rights"]) == 7
-          assert len(d["pending_recorded_rights"]) == 7
+          assert len(d["pending_render_rights"]) == 2
+          assert len(d["pending_recorded_rights"]) == 2
           assert d["stale_render_rights"] == []
           assert d["rights_ledger_entry_count"] == 16
           assert d["draft_pending_rights_not_canonical"] == []
           assert all(item["render_rights_status"] == "PENDING_INDEPENDENT_RENDER_RIGHTS" for item in d["assets"] if not item["render_rights_matched"])
+          assert set(d["pending_render_rights"]) == {"pexels-11764431","nasa-svs-geos5-clouds-no-labels-4819"}
           assert d["render"] == "NOT_RUN"
           assert d["publication"] == "NOT_RUN"
           assert d["production_enablement"] is False
@@ -117,21 +118,46 @@ jobs:
           assert report["blocking_gates"] == ["rights_ledger", "VISUAL_RIGHTS_CONSISTENCY", "AUDIO_HISTORY_COVERAGE"], report["blocking_gates"]
           rights = next(g for g in report["checks"] if g.get("ledger") == "rights_ledger")
           assert rights["status"] == "BLOCKED"
-          assert sum("is not independently approved for render" in x for x in rights["failures"]) == 7
+          assert sum("is not independently approved for render" in x for x in rights["failures"]) == 2
           audio = next(g for g in report["checks"] if g.get("gate") == "AUDIO_HISTORY_COVERAGE")
           assert audio["status"] == "BLOCKED", audio
           assert audio["registry_track_count"] == 0, audio
           assert any("audio history completeness" in f for f in audio["failures"]), audio
           visual = next(g for g in report["checks"] if g.get("gate") == "VISUAL_RIGHTS_CONSISTENCY")
           assert not any("visual assets missing render rights" in f for f in visual["failures"]), visual
-          assert sum("render rights not independently approved" in x for x in visual["failures"]) == 7
-          assert any("pexels-8888977" in f for f in visual["failures"]), visual
+          assert sum("render rights not independently approved" in x for x in visual["failures"]) == 2
+          assert any("pexels-11764431" in f for f in visual["failures"]), visual
+          assert any("nasa-svs-geos5-clouds-no-labels-4819" in f for f in visual["failures"]), visual
+          assert not any("pexels-8888977" in f for f in visual["failures"]), visual
           assert not any("pexels-8888977: plan does not record human manifest approval" in f for f in visual["failures"]), visual
           assert report["production_enablement"] is False
           assert report["media_generation"] == "NOT_RUN"
           assert report["render"] == "NOT_RUN"
           assert report["publication"] == "MANUAL_ONLY_NOT_RUN"
           print("EPISODE005_CROSS_LEDGER_EXPECTED_BLOCK_PASS")
+          PY
+
+      - name: Audit autonomous source-specific render decisions (5 approved, 2 blocked)
+        run: |
+          PYTHONPATH=. python production/rights_autonomy_v21.py \
+            --repo-root . \
+            --record episodes/episode-005/production-record.json > /tmp/ep005-rights-decisions.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path("/tmp/ep005-rights-decisions.json").read_text())
+          assert data["status"] == "PASS", data
+          assert data["auto_approved_count"] == 5, data
+          assert data["blocked_count"] == 2, data
+          allowed={x["asset_id"] for x in data["decisions"] if x["allow_scoped_render"]}
+          blocked={x["asset_id"] for x in data["decisions"] if not x["allow_scoped_render"]}
+          assert allowed == {"pixabay-radio-vintage-old-171435",
+                             "pixabay-radar-black-green-target-symbol-57670",
+                             "pexels-5523892","pexels-12590338","pexels-8888977"},allowed
+          assert blocked == {"pexels-11764431","nasa-svs-geos5-clouds-no-labels-4819"},blocked
+          assert data["publication_executed"] is False
+          assert data["render_executed"] is False
+          print("EP005_RIGHTS_AUTONOMY_DECISION_PASS_RELEASE_FAIL_CLOSED")
           PY
 
       - name: Enforce singleton runtime

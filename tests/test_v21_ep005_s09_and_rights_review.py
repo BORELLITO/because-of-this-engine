@@ -24,7 +24,7 @@ class EP005S09AndRightsReviewTests(unittest.TestCase):
         self.assertEqual(s["source_beats"]["existing_active_asset_id"], "pexels-12213087")
         self.assertTrue(any(x["candidate_id"] == "pexels-8888977" and x["rights_status"] == "APPROVED_FOR_MANIFEST_ONLY" for x in self.plan["candidates"]))
         self.assertTrue(any(x["candidate_id"] == "pexels-8888977" and x["approved_for_render"] is False for x in self.manifest["assets"]))
-        self.assertTrue(any(x["asset_id"] == "pexels-8888977" and x["rights_status"] == "PENDING_INDEPENDENT_RENDER_RIGHTS" and x["approved_for_render"] is False for x in self.record["rights_ledger"]))
+        self.assertTrue(any(x["asset_id"] == "pexels-8888977" and x["rights_status"] == "APPROVED" and x["approved_for_render"] is True and x["render_approval_status"] == "AUTO_APPROVED_EVIDENCE_BOUND_V21" for x in self.record["rights_ledger"]))
 
     def test_qa_only_source_hash_and_approvals_are_fail_closed(self):
         x = next(x for x in self.selection["history"] if x["asset_id"] == "pexels-8888977")
@@ -63,8 +63,9 @@ class EP005S09AndRightsReviewTests(unittest.TestCase):
         result = validate_visual_rights_consistency(self.record, repo_root=ROOT)
         self.assertEqual(result["status"], "BLOCKED")
         self.assertFalse(any("visual assets missing render rights" in x for x in result["failures"]))
-        self.assertTrue(any("pexels-8888977: render rights not independently approved" in x for x in result["failures"]))
-        self.assertTrue(any("pexels-8888977" in x for x in result["failures"]))
+        self.assertFalse(any("pexels-8888977: render rights not independently approved" in x for x in result["failures"]))
+        self.assertTrue(any("nasa-svs-geos5-clouds-no-labels-4819: render rights not independently approved" in x for x in result["failures"]))
+        self.assertTrue(any("nasa-svs-geos5-clouds-no-labels-4819" in x for x in result["failures"]))
         self.assertFalse(any("pexels-8888977: plan does not record human manifest approval" in x for x in result["failures"]))
 
 
