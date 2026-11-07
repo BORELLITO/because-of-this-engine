@@ -21,25 +21,19 @@
       "no automatic render execution or silent fallback"
     ],
     "latest_manifest_update": {
-      "recorded_at_utc": "2026-11-06T16:10:00Z",
+      "recorded_on_date": "2026-11-07",
       "candidate_ids": [
-        "pexels-12213087",
-        "pexels-11764431",
-        "pixabay-radio-vintage-old-171435",
-        "mixkit-abstract-red-glow-101432"
+        "pexels-8888977"
       ],
       "shot_ids": [
-        "S09",
-        "S01",
-        "S03",
-        "S04"
+        "S09"
       ],
       "scope": "MANIFEST_ONLY",
       "render_authorized": false,
       "global_catalog_updated": false,
       "drive_written": false,
       "publication_allowed": false,
-      "reason": "Creative rebuild: remove rejected opening red abstract and irrelevant stop/play insert; replace S09 with dark tactile control action; reorder hook around human anomaly."
+      "reason": "More faithful symbolic depiction of typing false-alarm classification; user approved after preview; verified source and known-history fingerprint."
     }
   },
   "global_reuse_audit": {
@@ -1157,35 +1151,41 @@
       }
     },
     {
-      "candidate_id": "pexels-12213087",
+      "candidate_id": "pexels-8888977",
       "provider": "pexels",
-      "source_page_url": "https://www.pexels.com/video/hand-moving-buttons-12213087/",
-      "media_url": "https://videos.pexels.com/video-files/12213087/12213087-uhd_3840_2160_25fps.mp4",
+      "source_page_url": "https://www.pexels.com/video/person-typing-on-a-keyboard-8888977/",
+      "media_url": "https://videos.pexels.com/video-files/8888977/8888977-uhd_4096_2160_25fps.mp4",
       "license_name": "Pexels License",
       "source_role": "S09",
       "truth_class": "REPRESENTATIONAL",
-      "sha256": "4a97068a2888c1146b238795504698709d38771e31f6d1f75ba2beaa12718c51",
-      "perceptual_hash": "PENDING_MANIFEST_ONLY",
+      "source_truth_disclaimer": "Stock footage of keyboard; never Petrov or actual 1983 Soviet command equipment",
+      "sha256": "b5e41fafc252a88d3959fbb3df0294010397e6687d833d884bc5a0bfdd48fa51",
+      "perceptual_hash": "11084cf2f2f6ddf92255d82bcb19c5cc04003c2dbc1b7c21f0bf617aa87915a8",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
       "intake_artifact": {
-        "workflow_run_id": 42171894738,
-        "artifact_id": 13480857827,
-        "artifact_digest": "sha256:399aeb023d1a062f53dedb708b561edcd15914db5a8237050b85cc30de653c9c"
+        "workflow_run_id": 42388510746,
+        "artifact_id": 13580144522,
+        "artifact_digest": "sha256:c7dbc26fc3da1d80036f962df6f9df2266ad26ef7af413fbef0cce195094a338",
+        "fingerprint_workflow_run_id": 42390022588,
+        "fingerprint_artifact_id": 13581475505,
+        "fingerprint_artifact_digest": "sha256:87ebe742d0f9816f6f8f37152ca8963007f3524fa826fcd7c55292d01d6cf819"
       },
       "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "human_approval": "APPROVED_FOR_MANIFEST",
+      "human_approval_scope": "USER_APPROVED_EDITORIAL_REPLACEMENT_S09_NOT_RIGHTS",
       "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
       "continuity_tags": {
         "era": [
-          "indeterminate_era",
+          "1983_style_representation",
+          "period_compatible",
           "analog"
         ],
         "setting": [
           "technical_control_room",
-          "early_warning_command"
+          "representational_data_entry"
         ],
         "time_of_day": [
           "night",
@@ -1198,16 +1198,19 @@
         "palette": [
           "charcoal",
           "steel",
-          "warning_red"
+          "muted_amber"
         ],
         "texture": [
-          "metal",
+          "aged_beige_keyboard",
+          "plastic_keys",
           "low_light_grain"
         ],
         "risk_flags": [
-          "era_indeterminate",
-          "no_readable_modern_context",
-          "source_audio_must_be_stripped_in_render"
+          "not_literal_1983_command_panel",
+          "modern_stock_actor_clothing",
+          "source_audio_none",
+          "third_party_rights_review_pending",
+          "period_style_not_archival"
         ]
       }
     }
@@ -1608,22 +1611,24 @@
       "role": "irreversible_choice",
       "requested_visual": "False-alarm classification is entered; no celebratory interface.",
       "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST_ONLY_NOT_RENDER",
       "assignment": {
-        "candidate_id": "pexels-12213087",
-        "usage": "Dark tactile control surface for the false-alarm classification; not the actual Soviet console.",
+        "candidate_id": "pexels-8888977",
+        "usage": "Hands typing retro-style keyboard as a symbolic depiction of the false-alarm classification. Not literal Soviet command console.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
-        "editorial_caveat": "Use as a short insert; keep PLAY/REC/STOP labels and digital timer subordinate through the 9:16 editorial crop, and strip source audio.",
+        "human_approval_basis": "User authorized recommended S09 preview on 2026-11-07",
+        "editorial_caveat": "Representational modern stock; never imply archival Petrov footage or literal technical equipment; mask/crop avoid modern clothing; no misleading graphics.",
         "visual_treatment": {
-          "crop_strategy": "avoid_extreme_label_dominance",
-          "grade": "low_key_charcoal_red_amber",
-          "source_audio": "strip",
+          "crop_strategy": "locked_center_hands_and_keys_9x16",
+          "grade": "conservative_low_key_cool_shadows",
+          "source_audio": "strip_or_none",
           "max_insert_seconds": 4
-        }
+        },
+        "blocker": "S09_REPLACEMENT_RENDER_RIGHTS_AND_FULL_EPISODE_PREFLIGHT_PENDING"
       },
-      "blocking_reason": null,
+      "blocking_reason": "Rights record missing for replacement; no global release",
       "continuity_tags": {
         "era": [
           "1983",
@@ -1632,8 +1637,8 @@
           "period_compatible"
         ],
         "setting": [
-          "technical_control_room",
-          "early_warning_command"
+          "early_warning_command",
+          "technical_control_room"
         ],
         "time_of_day": [
           "night",
@@ -1641,18 +1646,17 @@
         ],
         "lighting": [
           "low_key",
-          "restrained_red",
           "cool_shadows"
         ],
         "palette": [
           "charcoal",
-          "warning_red",
+          "steel",
           "amber"
         ],
         "texture": [
-          "metal",
-          "crt_phosphor",
-          "low_light_grain"
+          "low_light_grain",
+          "paper_logbook",
+          "analog_input"
         ]
       }
     },
@@ -2001,7 +2005,7 @@
     "drive_write_authorized": false,
     "publication_authorized": false
   },
-  "next_action": "Validate the documented S06/S11 symbolic-insert review in CI. Keep render, catalog promotion, Drive and publication disabled; dispatch only the isolated preview after CI reports a PASS continuity gate.",
+  "next_action": "Reconcile rights ledger for seven missing active assets and remove or archive seven stale rights only after independent evidence. Keep Episode 005 blocked for render.",
   "reuse_policy": {
     "source_reuse_scope": "global",
     "distinct_source_required_per_shot": true,
@@ -2224,6 +2228,22 @@
         "S09 keeps labels/timer subordinate through editorial crop",
         "no render, catalog mutation, Drive write or publication"
       ]
+    },
+    {
+      "date": "2026-11-07",
+      "candidate_ids": [
+        "pexels-8888977"
+      ],
+      "shot_ids": [
+        "S09"
+      ],
+      "decision": "USER_EDITORIAL_APPROVAL_FOR_MANIFEST_ONLY",
+      "approved_for_render": false,
+      "evidence": {
+        "source_qa_run": 42388510746,
+        "source_phash_run": 42390022588
+      },
+      "note": "Based on user's instruction to proceed with recommended preview; does not approve third-party/legal rights or actual 1983 identity"
     }
   ],
   "final_visual_manifest_validation": {
@@ -2292,7 +2312,7 @@
     ],
     "note": "CI run 42176059809 validated the updated S03/S09 manifest replacements. Both new shots pass continuity; S04/S12 remain hard conflicts and S11->S12/S12->S13 remain blocked adjacency transitions. Render/preview remain blocked."
   },
-  "last_adjustment": "Search-v6 replacements are now recorded in the manifest: S04 uses the dark vintage radio and S12 uses NASA GEOS-5 no-labels cloud visualization. Both passed visual QA and global fingerprint; continuity CI has not yet revalidated the sequence.",
+  "last_adjustment": "2026-11-07: S09 manifest replaced audio mixer by retro keyboard Pexels 8888977, verified source hash/perceptual identity, user-approved editorially only; render rights remain blocked.",
   "visual_continuity_profile": {
     "schema_version": "1.0",
     "profile_id": "episode-005-cold-war-bunker-continuity-v1",
@@ -2509,6 +2529,37 @@
         "intake_artifact_id": 13484277704,
         "intake_artifact_digest": "sha256:76d78df18adf6d1d120ff6925b72f0cbf425a472eeaee7f40024e111b657efd"
       }
+    },
+    {
+      "recorded_on_date": "2026-11-07",
+      "shot_replacements": [
+        {
+          "shot_id": "S09",
+          "previous_candidate_id": "pexels-12213087",
+          "replacement_candidate_id": "pexels-8888977",
+          "reason": "User approved realistic hands typing symbolic decision entry instead of inaccurate mixing console."
+        }
+      ],
+      "scope": "APPROVED_FOR_MANIFEST_ONLY",
+      "render_allowed": false,
+      "global_catalog_updated": false,
+      "drive_written": false,
+      "publication_allowed": false,
+      "evidence": {
+        "qa_run_id": 42388510746,
+        "qa_artifact_id": 13580144522,
+        "fingerprint_run_id": 42390022588,
+        "fingerprint_artifact_id": 13581475505,
+        "sha256": "b5e41fafc252a88d3959fbb3df0294010397e6687d833d884bc5a0bfdd48fa51",
+        "perceptual_hash": "11084cf2f2f6ddf92255d82bcb19c5cc04003c2dbc1b7c21f0bf617aa87915a8",
+        "known_history_checked_registry": 13,
+        "known_history_checked_scenes": 56
+      },
+      "restrictions": [
+        "do not present as 1983 archival video",
+        "independent rights approval pending",
+        "all other Episode 005 safety gates remain fail closed"
+      ]
     }
   ]
 }
