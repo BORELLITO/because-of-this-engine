@@ -150,5 +150,20 @@
     "visual_rights_gate_required": true,
     "manual_publication_only": true,
     "production_remains_disabled": true
+  },
+  "final_render_entrypoint": "production/render_v21_final.py",
+  "final_render_route": {
+    "status": "IMPLEMENTED_FAIL_CLOSED_NO_PRODUCTION_AUTHORIZATION",
+    "dispatch": "manual_only",
+    "reuse_visual_from": "production/render_v21_preview.py",
+    "audio_mix_receipt": "production/audio_mix_receipt_v21.py",
+    "audio_mix_profile": "production/audio_mix_profile_v21.json",
+    "final_master_postflight": "production/render_v21_manual.py",
+    "drive_delivery": "production/google_drive_delivery.py",
+    "required_independent_audio_QA": true,
+    "source_clip_reconstruction": false,
+    "generate_new_TTS": false,
+    "publication": "manual_only",
+    "production_enablement": false
   }
 }
