@@ -50,9 +50,10 @@ class UserApprovedS09ManifestOnlyTests(unittest.TestCase):
         rights=validate_visual_rights_consistency(self.record,repo_root=ROOT)
         self.assertEqual(rights["status"],"BLOCKED")
         self.assertFalse(any("visual assets missing render rights" in error for error in rights["failures"]))
-        self.assertTrue(any("pexels-8888977: render rights not independently approved" in error for error in rights["failures"]))
+        self.assertFalse(any("pexels-8888977: render rights not independently approved" in error for error in rights["failures"]))
+        self.assertTrue(any("pexels-11764431: render rights not independently approved" in error for error in rights["failures"]))
         self.assertFalse(any("plan does not record human manifest approval" in e and ASSET in e for e in rights["failures"]))
-        self.assertTrue(any(x["asset_id"]==ASSET and x["approved_for_render"] is False for x in self.record["rights_ledger"]))
+        self.assertTrue(any(x["asset_id"]==ASSET and x["approved_for_render"] is True and x["render_approval_status"]=="AUTO_APPROVED_EVIDENCE_BOUND_V21" for x in self.record["rights_ledger"]))
 
     def test_safety_flags_user_approved_only_for_editorial_choice(self):
         e=self.evidence["release_state"]
