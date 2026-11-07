@@ -19,7 +19,7 @@ IDS_PENDING_RIGHTS = {
     "pexels-5523892",
     "pexels-12590338",
 }
-S09 = "pexels-12213087"
+S09 = "pexels-8888977"
 
 
 class V21VisualReconciliationDossierTests(unittest.TestCase):
@@ -36,9 +36,9 @@ class V21VisualReconciliationDossierTests(unittest.TestCase):
         self.assertEqual(result["render_rights_matched_count"], 9)
         self.assertEqual(set(result["missing_render_rights"]), IDS_PENDING_RIGHTS | {S09})
         self.assertEqual(len(result["stale_render_rights"]), 7)
-        self.assertEqual(set(result["approved_manifest_only_pending_render_rights"]), IDS_PENDING_RIGHTS)
-        self.assertEqual(result["pending_visual_approval"], [S09])
-        self.assertEqual(result["source_provenance_mismatches"], [S09])
+        self.assertEqual(set(result["approved_manifest_only_pending_render_rights"]), IDS_PENDING_RIGHTS | {S09})
+        self.assertEqual(result["pending_visual_approval"], [])
+        self.assertEqual(result["source_provenance_mismatches"], [])
         self.assertEqual(len(result["draft_pending_rights_not_canonical"]), 7)
         self.assertEqual(result["render"], "NOT_RUN")
         self.assertFalse(result["production_enablement"])
