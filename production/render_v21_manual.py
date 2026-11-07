@@ -17,6 +17,7 @@ from production.thumbnail_contract_v21 import (
     validate_thumbnail_manifest,
 )
 from production.visual_rights_consistency_v21 import validate_visual_rights_consistency
+from production.audio_history_audit_v21 import audit as audit_audio_history
 
 POLICY_PATH = Path(__file__).resolve().parent / "active_engine_policy.json"
 EXPECTED_ENTRYPOINT = "production/canonical_entrypoint.py"
@@ -90,6 +91,11 @@ def validate_request(
         failures.extend(
             "visual_rights:" + reason for reason in visual_identity["failures"]
         )
+
+    if mode == "final":
+        history = audit_audio_history(repo_root)
+        if history["status"] != "PASS":
+            failures.extend("audio_history:" + reason for reason in history["failures"])
 
     thumbnail = record.get("thumbnail_manifest")
     if not isinstance(thumbnail, dict):
