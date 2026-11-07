@@ -13,6 +13,7 @@ import tempfile
 import unittest
 from pathlib import Path
 from production.audio_candidate_gate_v21 import check_file, historical_identities, _read
+from production.audio_acoustic_fingerprint_v21 import pack, fingerprint
 
 ROOT=Path(__file__).resolve().parents[1]
 
@@ -45,6 +46,24 @@ class AudioCandidateGateTests(unittest.TestCase):
         (self.root/"episodes"/"audio-memory-registry.json").write_text(json.dumps(self.legacy))
         shutil.copyfile(ROOT/"episodes"/"audio-acoustic-fingerprints-v21.json",
                         self.root/"episodes"/"audio-acoustic-fingerprints-v21.json")
+        # Complete the fixture catalog with the synthetic historical WAV.
+        # Positive check runs only with FFmpeg present; negative checks still
+        # run fail-closed when FFmpeg is absent in lightweight CI.
+        if shutil.which("ffmpeg"):
+            original=self.root/"original.wav"
+            original.write_bytes(self.old)
+            fp_path=self.root/"episodes"/"audio-acoustic-fingerprints-v21.json"
+            cat=json.loads(fp_path.read_text())
+            cat["sources"].append({
+                "source_id":"fixture-original",
+                "source_sha256":self.old_sha,
+                "historical_episode_ids":["legacy-001"],
+                "evidence_scope":"TEST_FIXTURE_SYNTHETIC_SOURCE_BYTES",
+                "fingerprint":pack(fingerprint(original)),
+            })
+            cat["source_count"]=len(cat["sources"])
+            fp_path.write_text(json.dumps(cat))
+
         self.audio=self.root/"candidate.wav"
         self.audio.write_bytes(self.new)
         self.candidate={"sha256":hashlib.sha256(self.new).hexdigest(),
@@ -88,6 +107,19 @@ class AudioCandidateGateTests(unittest.TestCase):
         c=dict(self.candidate,kind="sfx")
         self.assertTrue(any("SFX cooldown" in x
                             for x in check_file(self.audio,c,root=self.root)["failures"]))
+
+    def test_incomplete_catalog_blocks_even_with_new_distinct_music(self):
+        path=self.root/"episodes"/"audio-acoustic-fingerprints-v21.json"
+        data=json.loads(path.read_text())
+        # Silent accidental deletion of a registered historical source
+        # must prevent an apparently unique candidate from passing.
+        data["sources"]=[s for s in data["sources"]
+                         if s["source_sha256"]!="4a84629bdd611489b49f28187c70f2fc6d4a48b11347ef5c05cf301e1cd1fa24"]
+        data["source_count"]=len(data["sources"])
+        path.write_text(json.dumps(data))
+        outcome=check_file(self.audio,self.candidate,root=self.root)
+        self.assertEqual(outcome["status"],"BLOCKED")
+        self.assertTrue(any("catalog_coverage:" in x for x in outcome["failures"]))
 
     def test_real_master_and_legacy_registries_protect_identical_002_004_track(self):
         master=_read(ROOT/"episodes/audio-rendered-master-registry.json")
