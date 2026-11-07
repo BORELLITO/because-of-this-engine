@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "reviewed_on": "2026-11-07",
+  "episode_id": "episode-005",
+  "actual_risky_shot": "S01",
+  "finding": "Source plan labels pexels-11764431 as S03 but actual manifest assigns that actor footage to S01. Must reason over executable manifest, not acquisition role.",
+  "current_asset": {
+    "asset_id": "pexels-11764431",
+    "source": "https://www.pexels.com/video/man-using-walkie-talkie-in-bunker-11764431/",
+    "actor_identifiable": true,
+    "blocked_for_render": true,
+    "reason": "Visible face in purported historical reenactment; no evidence actor represents Petrov or actual 1983 operator."
+  },
+  "candidates": [
+    {
+      "source": "https://www.pexels.com/video/person-turning-on-the-radio-6077617/",
+      "provider": "pexels",
+      "source_artist": "KoolShooters",
+      "public_page_metadata": {
+        "license": "Free / Pexels License",
+        "width": 4096,
+        "height": 2160,
+        "source_fps": 50,
+        "duration_seconds": 5
+      },
+      "intended_use": "Short cold-open closeup of a hand operating an era-compatible boombox; clearly illustrative, not 1983 command room evidence.",
+      "score_preliminary": "PREFERRED_TO_INSPECT",
+      "risks": [
+        "Period 1980s boombox may still feel civilian/non-command",
+        "vertical 9:16 crop may obscure hardware",
+        "must inspect actual frames for face/branding, background daylight and source audio"
+      ],
+      "source_original_downloaded": false,
+      "source_sha256_verified": false,
+      "perceptual_fingerprint_verified": false,
+      "render_authorized": false,
+      "manifest_changed": false
+    },
+    {
+      "source": "https://www.pexels.com/video/person-turning-the-knobs-of-a-radio-10295575/",
+      "provider": "pexels",
+      "source_artist": "Ron Lach",
+      "public_page_metadata": {
+        "license": "Free / Pexels License",
+        "subject": "Closeup of hands tuning vintage radio"
+      },
+      "intended_use": "Alternative closeup of hands and analog dial with no face; figurative Cold War warning signal.",
+      "score_preliminary": "SECONDARY_TO_INSPECT",
+      "risks": [
+        "May overlap visually with S03 vintage-radio footage",
+        "needs night/low-key suitability and no brand check",
+        "requires real QA and no-reuse audit"
+      ],
+      "source_original_downloaded": false,
+      "source_sha256_verified": false,
+      "perceptual_fingerprint_verified": false,
+      "render_authorized": false,
+      "manifest_changed": false
+    }
+  ],
+  "no_guessing": {
+    "reject_without_real_media_sha256": true,
+    "require_vertical_crop_visual_qa": true,
+    "require_global_reuse_fingerprint": true,
+    "do_not_reuse_S03_source": true,
+    "do_not_autopromote_candidates": true
+  },
+  "next_step": "Fetch short-listed source videos via isolated intake runner, score 9:16 crop, period/lighting continuity, third-party identity, global reuse. Promote only after evidence-backed motor decision and rollback-safe manifest update."
+}
