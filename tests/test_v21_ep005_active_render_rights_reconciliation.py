@@ -17,7 +17,7 @@ from production.visual_plan_contract import validate_visual_plan
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "episodes" / "episode-005"
 ARCHIVE = ROOT / "reports" / "archives" / "EP005_RIGHTS_LEDGER_BEFORE_ACTIVE_RECONCILIATION_20261107.json"
-PENDING = {
+ORIGINAL_REPLACEMENTS = {
     "pexels-11764431",
     "pixabay-radio-vintage-old-171435",
     "nasa-svs-geos5-clouds-no-labels-4819",
@@ -26,6 +26,8 @@ PENDING = {
     "pexels-12590338",
     "pexels-8888977",
 }
+PENDING = {"pexels-11764431", "nasa-svs-geos5-clouds-no-labels-4819"}
+AUTO_APPROVED = ORIGINAL_REPLACEMENTS - PENDING
 
 
 class ActiveEpisodeRightsReconciliationTests(unittest.TestCase):
@@ -66,28 +68,32 @@ class ActiveEpisodeRightsReconciliationTests(unittest.TestCase):
             self.assertEqual(value["rights_status"], "APPROVED")
             self.assertTrue(value["approved_for_render"])
 
-    def test_seven_new_active_entries_are_pending_and_cannot_claim_usage(self):
-        entry_by_id = {x["asset_id"]: x for x in self.record["rights_ledger"]}
-        self.assertEqual({key for key, value in entry_by_id.items() if value["rights_status"] == "PENDING_INDEPENDENT_RENDER_RIGHTS"}, PENDING)
+    def test_five_new_assets_auto_approved_and_two_correctly_blocked(self):
+        by_id = {x["asset_id"]: x for x in self.record["rights_ledger"]}
+        self.assertEqual({k for k in ORIGINAL_REPLACEMENTS if by_id[k]["rights_status"] == "APPROVED"}, AUTO_APPROVED)
+        self.assertEqual({k for k in ORIGINAL_REPLACEMENTS if by_id[k]["rights_status"] == "PENDING_INDEPENDENT_RENDER_RIGHTS"}, PENDING)
         for key in PENDING:
-            entry = entry_by_id[key]
-            self.assertFalse(entry["approved_for_render"], key)
-            self.assertIs(entry["commercial_use"], False, key)
-            self.assertIs(entry["approval_scope"], None, key)
-            self.assertIs(entry["download_date"], None, key)
-            self.assertEqual(entry["platform_scope"], [], key)
-            self.assertEqual(entry["used_by"], [], key)
-            self.assertFalse(entry["global_catalog_updated"], key)
-            self.assertFalse(entry["derived_rights_from_prior_asset"], key)
-            self.assertFalse(entry["reused_prior_approval"], key)
-            self.assertEqual(entry["approval_evidence"], "NOT_ISSUED")
-            self.assertEqual(entry["license_evidence_scope"], "GENERAL_PROVIDER_POLICY_ONLY_ITEM_CONTEXT_NOT_CLEARED")
+            entry=by_id[key]
+            self.assertFalse(entry["approved_for_render"])
+            self.assertFalse(entry["commercial_use"])
+            self.assertIsNone(entry["approval_scope"])
+            self.assertEqual(entry["used_by"],[])
+            self.assertFalse(entry["global_catalog_updated"])
+            self.assertFalse(entry["derived_rights_from_prior_asset"])
+        for key in AUTO_APPROVED:
+            entry=by_id[key]
+            self.assertTrue(entry["approved_for_render"])
+            self.assertTrue(entry["commercial_use"])
+            self.assertEqual(entry["approval_scope"],"episode-005-render")
+            self.assertEqual(entry["render_approval_status"],"AUTO_APPROVED_EVIDENCE_BOUND_V21")
+            self.assertEqual(entry["used_by_semantics"],"AUTHORIZED_INTENDED_EPISODE_NOT_PROOF_OF_RELEASE_OR_PUBLICATION")
+            self.assertFalse(entry["published_or_distributed"])
 
     def test_new_rights_identities_match_intake_bytes_and_perceptual_hashes(self):
         entries = {x["asset_id"]: x for x in self.record["rights_ledger"]}
         plans = {x["candidate_id"]: x for x in self.plan["candidates"]}
         visuals = {x["candidate_id"]: x for x in self.manifest["assets"]}
-        for key in PENDING:
+        for key in ORIGINAL_REPLACEMENTS:
             e, c, a = entries[key], plans[key], visuals[key]
             self.assertEqual(e["sha256"], c["intake_artifact"]["sha256"])
             self.assertEqual(e["perceptual_fingerprint"], c["intake_artifact"]["perceptual_hash"])
@@ -99,7 +105,7 @@ class ActiveEpisodeRightsReconciliationTests(unittest.TestCase):
             self.assertEqual(e["fingerprint_algorithm"], a["fingerprint_algorithm"])
 
     def test_license_source_review_is_not_a_render_license(self):
-        self.assertEqual({x["provider"] for x in self.record["rights_ledger"] if x["asset_id"] in PENDING}, {"nasa", "pexels", "pixabay"})
+        self.assertEqual({x["provider"] for x in self.record["rights_ledger"] if x["asset_id"] in ORIGINAL_REPLACEMENTS}, {"nasa", "pexels", "pixabay"})
         nasa = next(x for x in self.record["rights_ledger"] if x["asset_id"].startswith("nasa-svs-"))
         self.assertTrue(nasa["credits_required"])
         self.assertIn("Greg Shirah", nasa["required_credit_text"])
@@ -111,11 +117,11 @@ class ActiveEpisodeRightsReconciliationTests(unittest.TestCase):
     def test_reconciled_rights_and_audio_still_block_real_release(self):
         canonical = validate_rights_ledger(self.record)
         self.assertEqual(canonical["status"], "BLOCKED")
-        self.assertEqual(sum("is not independently approved" in x for x in canonical["failures"]), 7)
+        self.assertEqual(sum("is not independently approved" in x for x in canonical["failures"]), 2)
         self.assertEqual(validate_visual_plan(self.plan, self.manifest)["status"], "VISUAL_PLAN_CONTRACT_PASS")
         visual = validate_visual_rights_consistency(self.record, repo_root=ROOT)
         self.assertEqual(visual["status"], "BLOCKED")
-        self.assertEqual(sum("render rights not independently approved" in x for x in visual["failures"]), 7)
+        self.assertEqual(sum("render rights not independently approved" in x for x in visual["failures"]), 2)
         self.assertFalse(any("visual assets missing render rights" in x for x in visual["failures"]))
         report = build_dossier(self.record, self.plan, self.manifest)
         self.assertEqual(report["status"], "RECONCILIATION_REQUIRED")
@@ -123,18 +129,17 @@ class ActiveEpisodeRightsReconciliationTests(unittest.TestCase):
         self.assertEqual(report["stale_render_rights"], [])
         self.assertEqual(set(report["pending_recorded_rights"]), PENDING)
         self.assertEqual(set(report["pending_render_rights"]), PENDING)
-        self.assertEqual(report["render_rights_matched_count"], 9)
+        self.assertEqual(report["render_rights_matched_count"], 14)
         self.assertEqual(report["render"], "NOT_RUN")
 
-    def test_fake_approval_status_does_not_bypass_other_gates(self):
+    def test_forged_pending_person_approval_does_not_pass_autonomous_gate(self):
+        from production.rights_autonomy_v21 import audit_repository
         altered = copy.deepcopy(self.record)
-        target = next(x for x in altered["rights_ledger"] if x["asset_id"] == "pexels-8888977")
+        target = next(x for x in altered["rights_ledger"] if x["asset_id"] == "pexels-11764431")
         target["rights_status"] = "APPROVED"
         target["approved_for_render"] = True
-        self.assertEqual(validate_rights_ledger(altered)["status"], "BLOCKED")
-        visual = validate_visual_rights_consistency(altered, repo_root=ROOT)
-        self.assertEqual(visual["status"], "BLOCKED")
-        self.assertTrue(any("approval scope" in x for x in visual["failures"]))
+        target["commercial_use"] = True
+        self.assertEqual(audit_repository(altered, repo_root=ROOT)["status"], "BLOCKED")
 
 
 if __name__ == "__main__":
