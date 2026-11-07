@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import Any
 
 from production.visual_continuity import validate_sequence
-from production.scene_disclosures_v21 import load_for_preview, ffmpeg_nasa_overlay, NASA_ID
+from production.scene_disclosures_v21 import load_for_preview, ffmpeg_nasa_overlay, ffmpeg_actor_overlay, NASA_ID, ACTOR_ID
 
 
 FPS = 60
@@ -181,17 +181,21 @@ def render_scene(scene: dict[str, Any], asset_path: Path, output: Path, disclosu
         f"fps={FPS},format=yuv420p,setsar=1,"
         f"fade=t=in:st=0:d=0.16,fade=t=out:st={fade_out_start:.3f}:d=0.18"
     )
-    if scene["candidate_id"] == NASA_ID:
+    if scene["candidate_id"] in {NASA_ID, ACTOR_ID}:
         if disclosure is None:
-            raise PreviewRenderError("NASA GEOS-5 model must have verified notice and credits.")
+            raise PreviewRenderError("S01/S12 non-archival label and credit disclosure is mandatory.")
         try:
-            nasa_overlay = ffmpeg_nasa_overlay(disclosure)
+            overlay = (
+                ffmpeg_nasa_overlay(disclosure)
+                if scene["candidate_id"] == NASA_ID
+                else ffmpeg_actor_overlay(disclosure)
+            )
         except ValueError as exc:
             raise PreviewRenderError(str(exc)) from exc
         anchor = f"fps={FPS},format=yuv420p,setsar=1,"
         if anchor not in filters:
-            raise PreviewRenderError("V2.1 overlay anchor changed; block before rendering.")
-        filters = filters.replace(anchor, f"fps={FPS},format=yuv420p,setsar=1" + nasa_overlay + ",")
+            raise PreviewRenderError("V2.1 truth-label overlay anchor changed; block before rendering.")
+        filters = filters.replace(anchor, f"fps={FPS},format=yuv420p,setsar=1" + overlay + ",")
 
     input_args = ["-stream_loop", str(loop_count)] if loop_count else []
     run([
