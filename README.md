@@ -1,3 +1,11 @@
+> **CANONICAL STATUS (2026-11-07):** Read `production/active_engine_policy.json` first.
+> It declares the V2.1 factual-documentary candidate with direct Gemini/Charon TTS,
+> `production/canonical_entrypoint.py` as the read-only contract validator,
+> `production_enablement=false`, and manual-only publication. V7/V7.2/Piper
+> descriptions below are retained as historical context, NOT current runbooks.
+> The approved visual/audio profile must be verified from the active contract
+> before any media operation. See `docs/QUALITY_SAFETY_HARDENING_20261107.md`.
+
 # BECAUSE OF THIS — V7.1 Piper Canonical Engine + Active V7.2 Reuse-First Add-ons
 
 This repository contains the single canonical production engine for the
