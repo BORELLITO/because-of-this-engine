@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "state": "COPIED_TO_DRIVE_SIZE_VERIFIED_RESTORE_NOT_PROVEN",
+  "state": "RESTORE_VERIFIED_SHA256_MATCH_AND_ZIP_CRC_PASS",
   "captured_on": "2026-11-07",
   "publication_authorized": false,
   "drive_folder_id": "1GUOcSRo91xxypW-GgCchubhx9FaMGk5u",
-  "notes": "Source zip hashes measured from downloaded GitHub Actions artifact. Drive upload accepted and size verified; no independent Drive byte-for-byte restore/hash check yet. A source hash alone is not proof of restored content.",
+  "notes": "All three GitHub Actions ZIP artifacts were uploaded to Drive and independently fetched back on 2026-11-07. SHA-256 of downloaded Drive copies matched exact GitHub-sourced ZIP hashes. Python zipfile.testzip() returned null for each archive. This proves only these three backups, not the full historical media collection.",
   "records": [
     {
       "episode": "006",
@@ -14,7 +14,11 @@
       "name": "episode006-gemini-charon-narration-run42317039843.zip",
       "size_bytes": 2641420,
       "source_zip_sha256": "511025d7248dd185aa293aaf668e47e76c38a59b40eee89ac50a86ce302c9c7f",
-      "drive_file_id": "1AdO-cWZuuB5xLfRZXT3LxPXv2zZzqy8-"
+      "drive_file_id": "1AdO-cWZuuB5xLfRZXT3LxPXv2zZzqy8-",
+      "restored_zip_sha256": "511025d7248dd185aa293aaf668e47e76c38a59b40eee89ac50a86ce302c9c7f",
+      "restored_size_bytes": 2641420,
+      "restore_verified": true,
+      "zip_crc_status": "PASS"
     },
     {
       "episode": "006",
@@ -24,7 +28,11 @@
       "name": "episode006-gemini-charon-captioned-run42317332809.zip",
       "size_bytes": 2654033,
       "source_zip_sha256": "f964e028f0376b11dcbc03f0264b96e5ad6015306f931678aa64b8186fed107e",
-      "drive_file_id": "12M70EUiodrvBYzVJ3ahrwt6p58O5-MPT"
+      "drive_file_id": "12M70EUiodrvBYzVJ3ahrwt6p58O5-MPT",
+      "restored_zip_sha256": "f964e028f0376b11dcbc03f0264b96e5ad6015306f931678aa64b8186fed107e",
+      "restored_size_bytes": 2654033,
+      "restore_verified": true,
+      "zip_crc_status": "PASS"
     },
     {
       "episode": "005",
@@ -34,7 +42,17 @@
       "name": "episode005-v21-creative-preview-run42279812022.zip",
       "size_bytes": 24667284,
       "source_zip_sha256": "255efbb515ff331d4c11cef68bb09766297e6e2f362cf7122e38b8227e86ea5f",
-      "drive_file_id": "1BhV8WR_0oEQZOb03kchMCCAK-LFUj2ek"
+      "drive_file_id": "1BhV8WR_0oEQZOb03kchMCCAK-LFUj2ek",
+      "restored_zip_sha256": "255efbb515ff331d4c11cef68bb09766297e6e2f362cf7122e38b8227e86ea5f",
+      "restored_size_bytes": 24667284,
+      "restore_verified": true,
+      "zip_crc_status": "PASS"
     }
-  ]
+  ],
+  "restore_verification": {
+    "verified_on": "2026-11-07",
+    "method": "Download raw ZIP bytes from Drive, compare locally to separately preserved GitHub Actions source SHA-256, run zipfile.testzip() for archive CRC",
+    "result": "PASS",
+    "artifact_count": 3
+  }
 }

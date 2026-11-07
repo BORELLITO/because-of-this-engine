@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "audited_on": "2026-11-07",
+  "status": "REGISTRY_INCOMPLETE_REQUIRES_HUMAN_RECONCILIATION",
+  "registry_path": "episodes/audio-memory-registry.json",
+  "registry_entry_count": 0,
+  "source_manifests": [
+    {
+      "episode_id": "because-of-this-episode-001",
+      "manifest": "episodes/episode-001/manifest.json",
+      "original_filename": "871.mp3",
+      "source_page_url": "https://mixkit.co/free-stock-music/mood/suspenseful/",
+      "author": "Michael Ramir C.",
+      "provider": "mixkit",
+      "drive_file_id": "1bDbbr-bMA3puBvrQ2QzvSTfbicXJmdni",
+      "track_id": null,
+      "sha256": null,
+      "evidence": "MANIFEST_DECLARATION_ONLY_NOT_PROOF_OF_AUDIO_USE_OR_PUBLICATION"
+    },
+    {
+      "episode_id": "because-of-this-episode-002",
+      "manifest": "episodes/episode-002/manifest.json",
+      "original_filename": "871.mp3",
+      "source_page_url": "https://mixkit.co/free-stock-music/mood/suspenseful/",
+      "author": "Michael Ramir C.",
+      "provider": "mixkit",
+      "drive_file_id": "1bDbbr-bMA3puBvrQ2QzvSTfbicXJmdni",
+      "track_id": null,
+      "sha256": null,
+      "evidence": "MANIFEST_DECLARATION_ONLY_NOT_PROOF_OF_AUDIO_USE_OR_PUBLICATION"
+    },
+    {
+      "episode_id": "because-of-this-episode-003",
+      "manifest": "episodes/episode-003/manifest.json",
+      "original_filename": "episode-002-echoes-andrew-ev.mp3",
+      "source_page_url": "https://mixkit.co/free-stock-music/mood/suspenseful/",
+      "author": "Andrew Ev",
+      "provider": "mixkit",
+      "drive_file_id": "1u-1ZKkVxKTw_E6vEzW0VcpF2lfjGfmeI",
+      "track_id": null,
+      "sha256": null,
+      "evidence": "MANIFEST_DECLARATION_ONLY_NOT_PROOF_OF_AUDIO_USE_OR_PUBLICATION"
+    },
+    {
+      "episode_id": "because-of-this-episode-004",
+      "manifest": "episodes/episode-004/manifest.json",
+      "original_filename": "delosound-suspense-tension-trailer-2-345353.mp3",
+      "source_page_url": "https://pixabay.com/music/suspense-suspense-tension-trailer-2-345353/",
+      "author": "DELOSound",
+      "provider": "pixabay",
+      "drive_file_id": "1LJtxg5fXoheepYVK5HO1M1DhEo_pVIDg",
+      "track_id": null,
+      "sha256": "dd57de53251011da1cc72f22c81595e80c03151c46d4a43e71aa6baaf2bc98cc",
+      "evidence": "MANIFEST_DECLARATION_ONLY_NOT_PROOF_OF_AUDIO_USE_OR_PUBLICATION"
+    },
+    {
+      "episode_id": "episode-001-preview-v72-charon-clean",
+      "manifest": "episodes/video-001/manifest.json",
+      "original_filename": null,
+      "source_page_url": null,
+      "author": null,
+      "provider": "engine_generated",
+      "drive_file_id": null,
+      "track_id": "V73-PROCEDURAL-SUSPENSE-BED-001",
+      "sha256": null,
+      "evidence": "MANIFEST_DECLARATION_ONLY_NOT_PROOF_OF_AUDIO_USE_OR_PUBLICATION"
+    }
+  ],
+  "declared_identity_collisions": [
+    {
+      "identity": "drive_file_id:1bDbbr-bMA3puBvrQ2QzvSTfbicXJmdni",
+      "episodes": [
+        "because-of-this-episode-001",
+        "because-of-this-episode-002"
+      ],
+      "confidence": "IDENTICAL_MANIFEST_IDENTIFIER_NOT_PUBLISHED_AUDIO_PROOF"
+    }
+  ],
+  "caveats": [
+    "Manifest identities are not evidence that each planned track was used in a delivered or published video.",
+    "The historical registry should not be marked complete until verified master audio hashes and release records are reconciled.",
+    "No track rights, re-use exception, or status promotion is granted by this discovery."
+  ],
+  "recommended_action": "Verify complete historical music and SFX usage from output masters and Drive releases; append evidence-backed ledger entries with original identity and licenses; do not erase historical duplication."
+}
