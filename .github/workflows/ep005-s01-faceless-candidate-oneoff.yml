@@ -1,0 +1,140 @@
+name: EP005 S01 faceless replacement isolated video QA one-shot
+
+on:
+  push:
+    branches: ["audit/s01-faceless-nasa-disclosure-v21-20261107"]
+    paths: [".github/workflows/ep005-s01-faceless-candidate-oneoff.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  inspect-candidate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 16
+    steps:
+      - name: Checkout isolated QA branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Ensure ffmpeg tools
+        run: |
+          set -euo pipefail
+          if ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends ffmpeg
+          fi
+      - name: Download actual Pexels licensed source and calculate fingerprint
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/s01-faceless-7698438
+          url='https://videos.pexels.com/video-files/7698438/7698438-uhd_2160_4096_25fps.mp4'
+          curl --fail --location --retry 3 --retry-delay 4 \
+            --connect-timeout 30 --max-time 300 --max-filesize 250M \
+            "$url" -o artifacts/s01-faceless-7698438/candidate.mp4
+          PYTHONPATH=. python - <<'PY'
+          import json
+          from pathlib import Path
+          from production.video_asset_contract import ffprobe, sha256_file, perceptual_hash, FINGERPRINT_ALGORITHM
+          from production.asset_reuse_brain import source_asset_key, canonicalize_source_url
+          root=Path('artifacts/s01-faceless-7698438')
+          source=root/'candidate.mp4'
+          info=ffprobe(source)
+          duration=float(info['duration'])
+          sha=sha256_file(source)
+          ph=perceptual_hash(source, duration=duration)
+          page='https://www.pexels.com/video/person-writing-on-a-notebook-7698438/'
+          needle={'sha256':sha.lower(),'perceptual_hash':ph.lower(),
+                  'source_asset_key':source_asset_key({'provider':'pexels','source_page_url':page}).lower(),
+                  'canonical_source_url':canonicalize_source_url(page).lower(), 'provider_asset_id':'7698438'}
+          collisions=[]
+          registry=json.loads(Path('episodes/asset-memory-registry.json').read_text())
+          for r in registry['assets']:
+            actual={'sha256':str(r.get('sha256') or '').lower(),
+                    'perceptual_hash':str(r.get('perceptual_hash') or '').lower(),
+                    'source_asset_key':str(r.get('source_asset_key') or '').lower(),
+                    'canonical_source_url':canonicalize_source_url(r.get('canonical_source_url') or r.get('source_page_url')).lower(),
+                    'provider_asset_id':str(r.get('provider_asset_id') or '').lower()}
+            for field,val in needle.items():
+              if actual[field] and actual[field]==val:
+                collisions.append({'origin':'global_catalog','id':r.get('asset_id'),'field':field})
+          manifest_count=0;scene_count=0
+          for f in sorted(Path('episodes').glob('*/manifest.json')):
+            manifest_count+=1
+            doc=json.loads(f.read_text())
+            for shot in doc.get('scenes',[]):
+              scene_count+=1
+              a=shot.get('asset') or {}
+              if not isinstance(a,dict):continue
+              actual={'sha256':str(a.get('sha256') or '').lower(),
+                      'perceptual_hash':str(a.get('perceptual_hash') or '').lower(),
+                      'source_asset_key':str(source_asset_key(a) or '').lower(),
+                      'canonical_source_url':canonicalize_source_url(a.get('source_page_url')).lower(),
+                      'provider_asset_id':str(a.get('provider_asset_id') or '').lower()}
+              for field,val in needle.items():
+                if actual[field] and actual[field]==val:
+                  collisions.append({'origin':str(f),'id':a.get('asset_id'),'field':field})
+          plan_count=0
+          for f in sorted(Path('episodes').glob('*/visual/asset-acquisition-plan.json')):
+            doc=json.loads(f.read_text())
+            for asset in doc.get('candidates',[]):
+              plan_count+=1
+              a=asset.get('intake_artifact') or {}
+              actual={'sha256':str(a.get('sha256') or '').lower(),
+                      'perceptual_hash':str(a.get('perceptual_hash') or '').lower(),
+                      'source_asset_key':str(source_asset_key(asset) or '').lower(),
+                      'canonical_source_url':canonicalize_source_url(asset.get('source_page_url')).lower(),
+                      'provider_asset_id':str(asset.get('provider_asset_id') or '').lower()}
+              for field,val in needle.items():
+                if actual[field] and actual[field]==val:
+                  collisions.append({'origin':str(f),'id':asset.get('candidate_id'),'field':field})
+          r={
+              'status':'VIDEO_DOWNLOADED_QA_ONLY_PENDING_VISUAL_EVIDENCE',
+              'candidate_id':'pexels-7698438','shot_id':'S01','provider':'pexels',
+              'author':'MART PRODUCTION',
+              'source_page_url':page,'media_url':'https://videos.pexels.com/video-files/7698438/7698438-uhd_2160_4096_25fps.mp4',
+              'license_name':'Pexels License','terms_url':'https://www.pexels.com/license/',
+              'sha256':sha,'perceptual_hash':ph,'fingerprint_algorithm':FINGERPRINT_ALGORITHM,
+              'file_size_bytes':source.stat().st_size,'ffprobe':info,
+              'catalog_records_checked':len(registry['assets']),
+              'historic_manifest_count':manifest_count,'historic_scene_count':scene_count,
+              'acquisition_candidates_checked':plan_count,
+              'known_collisions':collisions,
+              'no_reuse_claim_scope':'Only known GitHub catalog, manifests and plans, NOT every past published media',
+              'truth_class':'REPRESENTATIONAL_NOT_REAL_PETROV_LOG',
+              'render_authorized':False,'publication_authorized':False
+          }
+          (root/'source-and-fingerprint.json').write_text(json.dumps(r,indent=2)+'\n')
+          print(json.dumps({k:r[k] for k in ('sha256','perceptual_hash','file_size_bytes','known_collisions','catalog_records_checked','historic_scene_count')}))
+          assert duration>=4 and not collisions
+          PY
+      - name: Extract five original and vertical QA frames plus compact proxy
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          root=Path('artifacts/s01-faceless-7698438')
+          r=json.loads((root/'source-and-fingerprint.json').read_text())
+          duration=float(r['ffprobe']['duration'])
+          mp4=root/'candidate.mp4'
+          for i,fraction in enumerate((.06,.26,.46,.66,.86)):
+            second=duration*fraction
+            for mode in ('native','vertical'):
+              vf='scale=640:-2' if mode=='native' else 'crop=ih*9/16:ih:(iw-ih*9/16)/2:0,scale=540:960'
+              subprocess.run(['ffmpeg','-v','error','-y','-ss',str(second),'-i',str(mp4),'-frames:v','1','-vf',vf,str(root/f'{mode}-{i:02d}.jpg')],check=True)
+          for mode in ('native','vertical'):
+            subprocess.run(['ffmpeg','-v','error','-y','-framerate','1','-start_number','0','-i',
+                            str(root/f'{mode}-%02d.jpg'),'-vf',
+                            'tile=3x2:padding=8:margin=8:color=black',
+                            '-frames:v','1',str(root/f'{mode}-contact.jpg')],check=True)
+          subprocess.run(['ffmpeg','-v','error','-y','-ss',str(duration*.40),'-i',str(mp4),
+                          '-an','-t','4','-vf','scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,fps=60',
+                          '-c:v','libx264','-preset','veryfast','-crf','24',str(root/'S01-QA-preview-only.mp4')],check=True)
+          PY
+      - name: Save candidate evidence without affecting production
+        uses: actions/upload-artifact@v4
+        with:
+          name: ep005-s01-faceless-real-QA-${{ github.run_id }}
+          path: artifacts/s01-faceless-7698438/
+          if-no-files-found: error
+          retention-days: 7
