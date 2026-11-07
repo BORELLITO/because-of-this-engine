@@ -6,6 +6,7 @@ import hashlib
 import json
 import io
 import math
+import shutil
 import struct
 import wave
 import tempfile
@@ -48,6 +49,7 @@ class AudioCandidateGateTests(unittest.TestCase):
                         "kind":"music_bed","license_verified":True,
                         "acoustic_uniqueness_qa":"VERIFIED","drive_file_id":"new-source"}
 
+    @unittest.skipUnless(shutil.which("ffprobe"), "real ffprobe required for positive source validation")
     def test_distinct_audio_bytes_can_pass_identity_gate_without_publication_approval(self):
         report=check_file(self.audio,self.candidate,root=self.root)
         self.assertEqual(report["status"],"PASS",report)
