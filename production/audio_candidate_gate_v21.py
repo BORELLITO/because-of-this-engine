@@ -13,7 +13,7 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
-from production.audio_acoustic_fingerprint_v21 import CATALOG_PATH, review_file
+from production.audio_acoustic_fingerprint_v21 import CATALOG_PATH, review_file, catalog_coverage
 
 SHA = re.compile(r"^[0-9a-f]{64}$")
 MASTER_REGISTRY = Path("episodes/audio-rendered-master-registry.json")
@@ -73,6 +73,9 @@ def check_file(path:Path, candidate:dict[str,Any],*,root:Path)->dict[str,Any]:
             issues.append(f"historical audio identity reused:{key}:{value}")
     acoustic = None
     if candidate.get("kind") == "music_bed":
+        coverage = catalog_coverage(root)
+        if coverage["status"] != "PASS":
+            issues.extend("catalog_coverage:" + msg for msg in coverage["failures"])
         acoustic = review_file(path, root / CATALOG_PATH)
         if acoustic["status"] != "PASS":
             reasons = acoustic.get("failures") or [
@@ -91,6 +94,7 @@ def check_file(path:Path, candidate:dict[str,Any],*,root:Path)->dict[str,Any]:
         "input_sha256":digest,
         "known_historical_source_count":len(protected["sha256"]),
         "acoustic_fingerprint_review":acoustic,
+        "acoustic_catalog_coverage": coverage if candidate.get("kind") == "music_bed" else None,
         "identity_check_pass":not issues,
         "ready_for_render":False,
         "publication_authorized":False,
