@@ -71,7 +71,7 @@ class ManualRenderGateTests(unittest.TestCase):
             self.assertTrue(any("thumbnail_manifest" in item for item in report["failures"]))
 
 
-    def test_preview_enablement_allows_preflight_without_production(self) -> None:
+    def test_preview_enablement_does_not_bypass_missing_visual_rights(self) -> None:
         with __import__("tempfile").TemporaryDirectory() as raw:
             tmp_path = Path(raw)
             record = {
@@ -126,7 +126,8 @@ class ManualRenderGateTests(unittest.TestCase):
                 encoding="utf-8",
             )
             report = validate_request(record, repo_root=tmp_path, policy_path=policy, mode="preview")
-            self.assertEqual(report["status"], "V21_MANUAL_RENDER_PREFLIGHT_PASS")
+            self.assertEqual(report["status"], "V21_MANUAL_RENDER_BLOCKED")
+            self.assertTrue(any("visual_rights:" in reason for reason in report["failures"]))
             self.assertFalse(report["production_enablement"])
             self.assertTrue(report["preview_enablement"])
             self.assertEqual(report["render"], "NOT_RUN")
