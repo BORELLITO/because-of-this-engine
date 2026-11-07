@@ -129,7 +129,11 @@ jobs:
           assert rights["failures"] == []
           audio = next(g for g in report["checks"] if g.get("gate") == "AUDIO_HISTORY_COVERAGE")
           assert audio["status"] == "BLOCKED", audio
-          assert audio["registry_track_count"] == 0, audio
+          assert audio["registry_track_count"] == 5, audio
+          assert audio["verified_original_source_count"] == 3, audio
+          assert audio["verified_master_audio_count"] == 0, audio
+          assert len(audio["historical_identity_collisions"]) >= 1, audio
+          assert any("SFX usage coverage" in f for f in audio["failures"]), audio
           assert any("audio history completeness" in f for f in audio["failures"]), audio
           visual = next(g for g in report["checks"] if g.get("gate") == "VISUAL_RIGHTS_CONSISTENCY")
           assert not any("visual assets missing render rights" in f for f in visual["failures"]), visual
