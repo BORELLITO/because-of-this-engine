@@ -197,6 +197,10 @@ def assemble_verified_picture_with_audio(
         if path.exists():
             raise FinalRenderError("refusing to overwrite a previous video or audio receipt: " + str(path))
     total = _time_signature(profile, voice_seconds)
+    music_metadata = _probe(music)
+    music_seconds = float((music_metadata.get("format") or {}).get("duration") or 0)
+    if music_seconds < total + 0.03:
+        raise FinalRenderError("full-length music source is shorter than final picture/outro; looping forbidden")
     picture_metadata = _probe(picture)
     image_streams = [x for x in picture_metadata.get("streams", [])
                      if x.get("codec_type") == "video"]
@@ -277,16 +281,24 @@ def _verify_sfx_evidence(
     episode_id: str, stems: dict[str, Path], manifest_path: Path,
 ) -> None:
     data = _json(manifest_path)
-    if data.get("episode_id") != episode_id or data.get("status") != "QA_VERIFIED":
-        raise FinalRenderError("episode-scoped SFX manifest or independent QA missing")
+    if data.get("episode_id") != episode_id:
+        raise FinalRenderError("SFX manifest episode mismatch")
     entries = data.get("stems")
-    if not isinstance(entries, list) or len(entries) != len(stems) or not stems:
-        raise FinalRenderError("at least one real pre-timed SFX stem is required for final production")
+    if not stems and data.get("status") == "QA_VERIFIED_NO_SFX_REQUIRED":
+        if entries != [] or data.get("story_sound_design") != "AMBIENT_MUSIC_ONLY":
+            raise FinalRenderError("no-SFX story decision missing independent context")
+        return
+    if data.get("status") != "QA_VERIFIED":
+        raise FinalRenderError("episode-scoped SFX manifest or independent QA missing")
+    if not isinstance(entries, list) or len(entries) != len(stems):
+        raise FinalRenderError("SFX sources and manifest must match")
     seen: set[str] = set()
     for entry in entries:
         role = entry.get("role") if isinstance(entry, dict) else None
-        if role not in stems or role in seen:
-            raise FinalRenderError("SFX role missing, duplicated or not present in the real mix")
+        if role not in stems or role in seen or any(
+                banned in str(role).lower()
+                for banned in ("siren", "sirene", "alarm", "alarme", "horn", "klaxon")):
+            raise FinalRenderError("SFX role missing, prohibited siren/alarm or duplicated")
         seen.add(role)
         if (entry.get("source_sha256") != file_sha256(stems[role]) or
                 entry.get("license_status") != "APPROVED" or
