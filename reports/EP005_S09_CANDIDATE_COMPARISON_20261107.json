@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0",
+  "episode_id": "episode-005",
+  "shot_id": "S09",
+  "qa_date": "2026-11-07",
+  "source_beats": {
+    "range": "00:37-00:41",
+    "role": "irreversible_choice",
+    "requested_visual": "False-alarm classification is entered; no celebratory interface.",
+    "existing_active_asset_id": "pexels-12213087"
+  },
+  "selection_decision": "PREFERRED_CANDIDATE_PENDING_HUMAN_AND_REUSE_QA",
+  "history": [
+    {
+      "asset_id": "pexels-12213087",
+      "source_url": "https://www.pexels.com/video/hand-moving-buttons-12213087/",
+      "state": "CURRENT_MANIFEST_UNAPPROVED_FOR_RENDER",
+      "technical_problem": "Dark audio mixing console; PLAY/REC/STOP or mixer functionality is not 1983 early-warning classification equipment. Visual plan human_approval=PENDING; manifest fingerprint remains PENDING_MANIFEST_ONLY.",
+      "human_approval": "PENDING"
+    },
+    {
+      "asset_id": "pexels-6442793",
+      "source_url": "https://www.pexels.com/video/a-person-operating-a-radar-6442793/",
+      "state": "NOT_RECOMMENDED_AFTER_ACTUAL_FRAME_QA",
+      "sha256": "062be75f253bd3a9681c835c9a1f69e789357fc7b04562d98c64e66f9d82712a",
+      "clip_seconds": 8.255,
+      "source_resolution": "1920x1080@24fps",
+      "source_qa_run": 42388122655,
+      "source_qa_artifact": 13580920198,
+      "qa_artifact_zip_sha256": "e43f93faf8cdeda578600753d5ec59465e74905322c0036f94d9202e888267fc",
+      "technical_problem": "Source description implies radar but visual inspection shows vectorscope/video-monitor-style display and conspicuous bright modern LED decor. Vertical crop retains inappropriate scene elements.",
+      "human_approval": "NOT_REQUESTED",
+      "approved_for_render": false
+    },
+    {
+      "asset_id": "pexels-8888977",
+      "source_url": "https://www.pexels.com/video/person-typing-on-a-keyboard-8888977/",
+      "media_url": "https://videos.pexels.com/video-files/8888977/8888977-uhd_4096_2160_25fps.mp4",
+      "state": "PREFERRED_FOR_EDITORIAL_REVIEW_NOT_PROMOTED",
+      "provider": "pexels",
+      "artist": "MART PRODUCTION",
+      "license": "Pexels License; public item page Free; review terms https://www.pexels.com/license/",
+      "sha256": "b5e41fafc252a88d3959fbb3df0294010397e6687d833d884bc5a0bfdd48fa51",
+      "bytes": 63292776,
+      "source_resolution": "4096x2160@25fps",
+      "source_duration_seconds": 24.6,
+      "preview_qa": {
+        "time_range_seconds": [
+          12,
+          16
+        ],
+        "dimensions": [
+          1080,
+          1920
+        ],
+        "output_fps": 60,
+        "source_fps": 25,
+        "frame_rate_conversion": "DUPLICATED_FRAMES_NOT_NATIVE_60",
+        "duration_seconds": 4,
+        "video_sha256": "9e13600c4f2ccbf3836334d56591835ae353cedb65dd291d2b7cc28d6a1f0784",
+        "source_audio": "REMOVED",
+        "treatment": "TECHNICAL_CENTER_CROP_ONLY_NO_GENERATIVE_EDIT",
+        "preview_label": "4 SECOND QA CLIP NOT FINAL VIDEO"
+      },
+      "evidence": {
+        "qa_run_id": 42388510746,
+        "qa_artifact_id": 13580144522,
+        "archive_zip_sha256": "c7dbc26fc3da1d80036f962df6f9df2266ad26ef7af413fbef0cce195094a338",
+        "drive_backup_file_id": "1rdUiMhgJ05YK8CMRsqB2VqzBq3KE_N_E",
+        "drive_restoration": "SHA256_MATCH_AND_ZIP_CRC_PASS",
+        "qa_sample_count": 5,
+        "has_native_and_vertical_contacts": true
+      },
+      "editorial_notes": "Real hands type beige/old-fashioned full keyboard in low-light scene. Better visual metaphor for Petrov classifying the alert than mixing desk or modern vectorscope; NOT proof of any actual Petrov/Soviet terminal. Costume is modern in places; keep crop on hands and keyboard, grade minimally. 4-second sample 12–16 s. Narration unchanged.",
+      "approval_state": {
+        "human_visual": "PENDING",
+        "independent_render_rights": "PENDING",
+        "global_no_reuse_fingerprint": "PENDING",
+        "full_footage_license_and_3p_review": "PENDING",
+        "approved_for_manifest": false,
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "production_enablement": false,
+        "publication": "NOT_ALLOWED"
+      }
+    }
+  ],
+  "do_not_change": [
+    "episodes/episode-005/production-record.json",
+    "episodes/episode-005/visual/scene-asset-manifest.json",
+    "episodes/episode-005/visual/asset-acquisition-plan.json",
+    "episodes/asset-memory-registry.json",
+    "production/active_engine_policy.json"
+  ],
+  "next_required_action": "Obtain explicit editorial approval of retro keyboard S09 candidate; independently verify source/physical fingerprint no-reuse and item-specific rights; then reconcile plan+manifest+rights in reviewed changes.",
+  "render_allowed": false,
+  "publication_allowed": false
+}
