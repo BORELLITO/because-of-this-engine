@@ -16,6 +16,7 @@ from production.thumbnail_contract_v21 import (
     validate_thumbnail_files,
     validate_thumbnail_manifest,
 )
+from production.visual_rights_consistency_v21 import validate_visual_rights_consistency
 
 POLICY_PATH = Path(__file__).resolve().parent / "active_engine_policy.json"
 EXPECTED_ENTRYPOINT = "production/canonical_entrypoint.py"
@@ -81,6 +82,14 @@ def validate_request(
                 failures.append(f"render_contract.{field} must equal {value}")
         if contract.get("render_executed") is not False:
             failures.append("render_contract.render_executed must be false before dispatch")
+
+    # Every authorized manual preview/final request must bind its exact
+    # visual asset identities to a matching, independently authorized ledger.
+    visual_identity = validate_visual_rights_consistency(record, repo_root=repo_root)
+    if visual_identity["status"] != "PASS":
+        failures.extend(
+            "visual_rights:" + reason for reason in visual_identity["failures"]
+        )
 
     thumbnail = record.get("thumbnail_manifest")
     if not isinstance(thumbnail, dict):
