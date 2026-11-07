@@ -211,3 +211,30 @@ def verify_receipt(receipt: Path, *, replay: bool = True) -> dict[str, Any]:
         return {"status": "BLOCKED", "replay_verified": False,
                 "errors": [str(exc)], "master_video_verified": False,
                 "publication_authorized": False}
+
+
+def verify_master_binding(receipt: Path, master_video: Path) -> dict[str, Any]:
+    """Read-only postflight gate: independently replay mix and match AAC master."""
+    from production.audio_acoustic_fingerprint_v21 import compare, fingerprint
+    result = verify_receipt(receipt, replay=True)
+    if result["status"] != "PASS":
+        return {"status": "BLOCKED", "reason": "mix receipt replay was not verified",
+                "receipt_result": result, "publication_authorized": False}
+    try:
+        record = json.loads(receipt.read_text(encoding="utf-8"))
+        master = master_video.resolve()
+        if not master.is_file() or master.stat().st_size < 1024:
+            raise MixReceiptError("final video master is not present")
+        mix = Path(record["output"]["path"])
+        similarity = compare(fingerprint(mix), fingerprint(master))
+        if similarity["similarity"] < 0.94:
+            raise MixReceiptError("master audio does not match verified mixed audio")
+        return {"status": "PASS", "source_contributions_confirmed":
+                result["source_contributions_confirmed"],
+                "mix_replay_verified": True, "master_video_sha256": file_sha256(master),
+                "acoustic_similarity": similarity["similarity"],
+                "master_audio_bound": True, "publication_authorized": False,
+                "scope": "POSTFLIGHT_AUDIO_PROVENANCE_ONLY"}
+    except (OSError, ValueError, KeyError, TypeError, MixReceiptError) as exc:
+        return {"status": "BLOCKED", "master_audio_bound": False,
+                "errors": [str(exc)], "publication_authorized": False}
