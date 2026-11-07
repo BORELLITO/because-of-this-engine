@@ -1,0 +1,104 @@
+# Archived one-off QA workflow. Not active; no trigger in .github/workflows.
+# Successful acquisition runs: 42388122655 (radar styled screen) and 42388510746 (retro keyboard).
+# Reviewed candidate: Pexels 8888977; pending rights, reuse and editorial approval.
+name: Because Of This - S09 retro keyboard candidate QA (read only)
+
+on:
+  push:
+    branches: ["audit/episode005-s09-analog-radar-20261107"]
+    paths: [".github/workflows/episode005-s09-analog-radar-qa.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  visual-intake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout isolated branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Ensure ffmpeg and ffprobe are available
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends ffmpeg
+          fi
+          ffmpeg -version | head -n 1
+          ffprobe -version | head -n 1
+
+      - name: Download exact verified source and inspect video
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/s09-retro-keyboard
+          curl --fail --location --silent --show-error --retry 2 --retry-delay 2 \
+            --connect-timeout 15 --max-time 120 --max-filesize 150M \
+            "https://videos.pexels.com/video-files/8888977/8888977-uhd_4096_2160_25fps.mp4" \
+            --output artifacts/s09-retro-keyboard/candidate.mp4
+          ffprobe -v error -show_entries format=duration,size:stream=codec_type,codec_name,width,height,r_frame_rate \
+            -of json artifacts/s09-retro-keyboard/candidate.mp4 > artifacts/s09-retro-keyboard/ffprobe.json
+          python - <<'PY'
+          from pathlib import Path
+          import json, hashlib
+          base=Path("artifacts/s09-retro-keyboard")
+          x=json.loads((base/"ffprobe.json").read_text())
+          videos=[v for v in x.get("streams",[]) if v.get("codec_type")=="video"]
+          assert len(videos)==1, videos
+          v=videos[0]
+          d=float(x["format"]["duration"])
+          assert 4<=d<=40, d
+          assert int(v["width"])>=1280 and int(v["height"])>=720, v
+          content=base/"candidate.mp4"
+          assert content.stat().st_size<=150*1024*1024
+          evidence={
+            "status":"DOWNLOADED_QA_ONLY_NOT_APPROVED",
+            "source_page_url":"https://www.pexels.com/video/person-typing-on-a-keyboard-8888977/",
+            "provider":"pexels","artist":"MART PRODUCTION",
+            "license_name":"Pexels License","license_page":"https://www.pexels.com/license/",
+            "media_url":"https://videos.pexels.com/video-files/8888977/8888977-uhd_4096_2160_25fps.mp4",
+            "sha256":hashlib.sha256(content.read_bytes()).hexdigest(),
+            "bytes":content.stat().st_size,"duration_seconds":d,
+            "width":v["width"],"height":v["height"],"fps":v["r_frame_rate"],
+            "codec":v["codec_name"],"sample_mode":"FIVE_FRAME_NATIVE_AND_VERTICAL_CROP",
+            "approved_for_render":False,"human_approval":"PENDING",
+            "catalog_mutated":False,"source_audio_use":"PROHIBITED",
+            "historical_truth":"REPRESENTATIONAL_1980S_STYLE_DATA_ENTRY_NOT_HISTORICAL"
+          }
+          (base/"qa-report.json").write_text(json.dumps(evidence,indent=2)+"\n")
+          print(json.dumps(evidence))
+          PY
+
+      - name: Build five-frame native and vertical QA sheets
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          base=Path("artifacts/s09-retro-keyboard")
+          x=json.loads((base/"qa-report.json").read_text())
+          d=x["duration_seconds"]
+          for i,part in enumerate((.08,.28,.5,.72,.92)):
+            sec=round(d*part,3)
+            for crop in (False,True):
+              prefix="vertical" if crop else "native"
+              vf=("crop=ih*9/16:ih:(iw-ih*9/16)/2:0,scale=540:960" if crop else "scale=540:-2")
+              subprocess.run(["ffmpeg","-v","error","-y","-ss",str(sec),"-i",str(base/"candidate.mp4"),
+                              "-frames:v","1","-vf",vf,str(base/f"{prefix}-{i:02d}.jpg")],check=True)
+          for name in ("native","vertical"):
+            subprocess.run(["ffmpeg","-v","error","-y","-framerate","1","-start_number","0",
+                            "-i",str(base/f"{name}-%02d.jpg"),"-vf","tile=3x2:padding=8:margin=8:color=black",
+                            "-frames:v","1",str(base/f"{name}-contact.jpg")],check=True)
+          PY
+
+      - name: Preserve candidate and QA as isolated GitHub artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: episode005-s09-retro-keyboard-QA-${{ github.run_id }}
+          path: artifacts/s09-retro-keyboard
+          retention-days: 7
+          if-no-files-found: error
