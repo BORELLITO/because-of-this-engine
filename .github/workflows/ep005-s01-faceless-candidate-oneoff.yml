@@ -1,4 +1,4 @@
-name: EP005 S01 faceless replacement isolated video QA one-shot
+name: EP005 S01 faceless alternatives isolated real video QA
 
 on:
   push:
@@ -9,132 +9,120 @@ permissions:
   contents: read
 
 jobs:
-  inspect-candidate:
+  source-inspection:
     runs-on: ubuntu-24.04
-    timeout-minutes: 16
+    timeout-minutes: 18
     steps:
-      - name: Checkout isolated QA branch
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-      - name: Ensure ffmpeg tools
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Ensure ffmpeg
         run: |
           set -euo pipefail
           if ! command -v ffprobe >/dev/null 2>&1; then
             sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends ffmpeg
           fi
-      - name: Download actual Pexels licensed source and calculate fingerprint
+      - name: Fetch candidate sources and prove SHA256, phash and no known reuse
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p artifacts/s01-faceless-7698438
-          url='https://videos.pexels.com/video-files/7698438/7698438-uhd_2160_4096_25fps.mp4'
-          curl --fail --location --retry 3 --retry-delay 4 \
-            --connect-timeout 30 --max-time 300 --max-filesize 250M \
-            "$url" -o artifacts/s01-faceless-7698438/candidate.mp4
+          mkdir -p artifacts/s01-next
           PYTHONPATH=. python - <<'PY'
-          import json
+          import subprocess,json
           from pathlib import Path
-          from production.video_asset_contract import ffprobe, sha256_file, perceptual_hash, FINGERPRINT_ALGORITHM
-          from production.asset_reuse_brain import source_asset_key, canonicalize_source_url
-          root=Path('artifacts/s01-faceless-7698438')
-          source=root/'candidate.mp4'
-          info=ffprobe(source)
-          duration=float(info['duration'])
-          sha=sha256_file(source)
-          ph=perceptual_hash(source, duration=duration)
-          page='https://www.pexels.com/video/person-writing-on-a-notebook-7698438/'
-          needle={'sha256':sha.lower(),'perceptual_hash':ph.lower(),
-                  'source_asset_key':source_asset_key({'provider':'pexels','source_page_url':page}).lower(),
-                  'canonical_source_url':canonicalize_source_url(page).lower(), 'provider_asset_id':'7698438'}
-          collisions=[]
-          registry=json.loads(Path('episodes/asset-memory-registry.json').read_text())
-          for r in registry['assets']:
-            actual={'sha256':str(r.get('sha256') or '').lower(),
-                    'perceptual_hash':str(r.get('perceptual_hash') or '').lower(),
-                    'source_asset_key':str(r.get('source_asset_key') or '').lower(),
-                    'canonical_source_url':canonicalize_source_url(r.get('canonical_source_url') or r.get('source_page_url')).lower(),
-                    'provider_asset_id':str(r.get('provider_asset_id') or '').lower()}
-            for field,val in needle.items():
-              if actual[field] and actual[field]==val:
-                collisions.append({'origin':'global_catalog','id':r.get('asset_id'),'field':field})
-          manifest_count=0;scene_count=0
-          for f in sorted(Path('episodes').glob('*/manifest.json')):
-            manifest_count+=1
-            doc=json.loads(f.read_text())
-            for shot in doc.get('scenes',[]):
-              scene_count+=1
-              a=shot.get('asset') or {}
-              if not isinstance(a,dict):continue
-              actual={'sha256':str(a.get('sha256') or '').lower(),
-                      'perceptual_hash':str(a.get('perceptual_hash') or '').lower(),
-                      'source_asset_key':str(source_asset_key(a) or '').lower(),
-                      'canonical_source_url':canonicalize_source_url(a.get('source_page_url')).lower(),
-                      'provider_asset_id':str(a.get('provider_asset_id') or '').lower()}
-              for field,val in needle.items():
-                if actual[field] and actual[field]==val:
-                  collisions.append({'origin':str(f),'id':a.get('asset_id'),'field':field})
-          plan_count=0
-          for f in sorted(Path('episodes').glob('*/visual/asset-acquisition-plan.json')):
-            doc=json.loads(f.read_text())
-            for asset in doc.get('candidates',[]):
-              plan_count+=1
-              a=asset.get('intake_artifact') or {}
-              actual={'sha256':str(a.get('sha256') or '').lower(),
-                      'perceptual_hash':str(a.get('perceptual_hash') or '').lower(),
-                      'source_asset_key':str(source_asset_key(asset) or '').lower(),
-                      'canonical_source_url':canonicalize_source_url(asset.get('source_page_url')).lower(),
-                      'provider_asset_id':str(asset.get('provider_asset_id') or '').lower()}
-              for field,val in needle.items():
-                if actual[field] and actual[field]==val:
-                  collisions.append({'origin':str(f),'id':asset.get('candidate_id'),'field':field})
-          r={
-              'status':'VIDEO_DOWNLOADED_QA_ONLY_PENDING_VISUAL_EVIDENCE',
-              'candidate_id':'pexels-7698438','shot_id':'S01','provider':'pexels',
-              'author':'MART PRODUCTION',
-              'source_page_url':page,'media_url':'https://videos.pexels.com/video-files/7698438/7698438-uhd_2160_4096_25fps.mp4',
-              'license_name':'Pexels License','terms_url':'https://www.pexels.com/license/',
-              'sha256':sha,'perceptual_hash':ph,'fingerprint_algorithm':FINGERPRINT_ALGORITHM,
-              'file_size_bytes':source.stat().st_size,'ffprobe':info,
-              'catalog_records_checked':len(registry['assets']),
-              'historic_manifest_count':manifest_count,'historic_scene_count':scene_count,
-              'acquisition_candidates_checked':plan_count,
-              'known_collisions':collisions,
-              'no_reuse_claim_scope':'Only known GitHub catalog, manifests and plans, NOT every past published media',
-              'truth_class':'REPRESENTATIONAL_NOT_REAL_PETROV_LOG',
-              'render_authorized':False,'publication_authorized':False
+          from production.video_asset_contract import ffprobe,sha256_file,perceptual_hash,FINGERPRINT_ALGORITHM
+          from production.asset_reuse_brain import source_asset_key,canonicalize_source_url
+          root=Path('artifacts/s01-next')
+          choices={
+            '4105989':{
+               'name':'Gustavo Fring — hands writing notebook',
+               'source_page_url':'https://www.pexels.com/video/close-up-of-a-person-s-hands-while-writing-4105989/',
+               'urls':['https://videos.pexels.com/video-files/4105989/4105989-uhd_3840_2160_30fps.mp4','https://videos.pexels.com/video-files/4105989/4105989-uhd_3840_2160_25fps.mp4','https://videos.pexels.com/video-files/4105989/4105989-hd_1920_1080_30fps.mp4'],
+               'artist':'Gustavo Fring'},
+            '11995909':{
+               'name':'Harvey Tan Villarino — hand writing notebook',
+               'source_page_url':'https://www.pexels.com/video/close-up-view-of-handwriting-in-notebook-11995909/',
+               'urls':['https://videos.pexels.com/video-files/11995909/11995909-hd_1920_1080_50fps.mp4','https://videos.pexels.com/video-files/11995909/11995909-hd_1920_1080_30fps.mp4','https://videos.pexels.com/video-files/11995909/11995909-hd_1920_1080_25fps.mp4'],
+               'artist':'Harvey Tan Villarino'}
           }
-          (root/'source-and-fingerprint.json').write_text(json.dumps(r,indent=2)+'\n')
-          print(json.dumps({k:r[k] for k in ('sha256','perceptual_hash','file_size_bytes','known_collisions','catalog_records_checked','historic_scene_count')}))
-          assert duration>=4 and not collisions
-          PY
-      - name: Extract five original and vertical QA frames plus compact proxy
-        shell: bash
-        run: |
-          set -euo pipefail
-          python - <<'PY'
-          import json,subprocess
-          from pathlib import Path
-          root=Path('artifacts/s01-faceless-7698438')
-          r=json.loads((root/'source-and-fingerprint.json').read_text())
-          duration=float(r['ffprobe']['duration'])
-          mp4=root/'candidate.mp4'
-          for i,fraction in enumerate((.06,.26,.46,.66,.86)):
-            second=duration*fraction
+          registry=json.loads(Path('episodes/asset-memory-registry.json').read_text())
+          manifest_paths=sorted(Path('episodes').glob('*/manifest.json'))
+          plan_paths=sorted(Path('episodes').glob('*/visual/asset-acquisition-plan.json'))
+          reports=[]
+          for clip_id,c in choices.items():
+            dst=root/clip_id;dst.mkdir()
+            p=dst/'candidate.mp4'
+            url=None
+            for option in c['urls']:
+              command=['curl','--fail','--location','--silent','--show-error','--retry','1','--connect-timeout','20','--max-time','140','--max-filesize','250M',option,'-o',str(p)]
+              attempt=subprocess.run(command,capture_output=True,text=True)
+              if attempt.returncode==0 and p.is_file() and p.stat().st_size>1024:
+                url=option;break
+              p.unlink(missing_ok=True)
+            if not url:
+              reports.append({'candidate_id':'pexels-'+clip_id,'status':'SOURCE_URL_UNAVAILABLE','urls_tried':c['urls']})
+              continue
+            info=ffprobe(p)
+            sha=sha256_file(p);ph=perceptual_hash(p,duration=float(info['duration']))
+            identities={'sha256':sha.lower(),'perceptual_hash':ph.lower(),'canonical_source_url':canonicalize_source_url(c['source_page_url']).lower(),
+                        'source_asset_key':source_asset_key({'provider':'pexels','source_page_url':c['source_page_url']}).lower()}
+            collisions=[]
+            for asset in registry.get('assets',[]):
+              actual={'sha256':str(asset.get('sha256') or '').lower(),
+                      'perceptual_hash':str(asset.get('perceptual_hash') or '').lower(),
+                      'canonical_source_url':canonicalize_source_url(asset.get('canonical_source_url') or asset.get('source_page_url')).lower(),
+                      'source_asset_key':str(asset.get('source_asset_key') or '').lower()}
+              collisions.extend({'source':'global_catalog','id':asset.get('asset_id'),'key':k} for k,v in identities.items() if actual[k] and actual[k]==v)
+            for f in manifest_paths:
+              doc=json.loads(f.read_text())
+              for shot in doc.get('scenes',[]):
+                a=shot.get('asset') or {}
+                if not isinstance(a,dict):continue
+                actual={'sha256':str(a.get('sha256') or '').lower(),
+                        'perceptual_hash':str(a.get('perceptual_hash') or '').lower(),
+                        'canonical_source_url':canonicalize_source_url(a.get('source_page_url')).lower(),
+                        'source_asset_key':str(source_asset_key(a) or '').lower()}
+                collisions.extend({'source':str(f),'id':a.get('asset_id'),'key':k} for k,v in identities.items() if actual[k] and actual[k]==v)
+            for f in plan_paths:
+              doc=json.loads(f.read_text())
+              for a in doc.get('candidates',[]):
+                q=a.get('intake_artifact') or {}
+                actual={'sha256':str(q.get('sha256') or '').lower(),
+                        'perceptual_hash':str(q.get('perceptual_hash') or '').lower(),
+                        'canonical_source_url':canonicalize_source_url(a.get('source_page_url')).lower(),
+                        'source_asset_key':str(source_asset_key(a) or '').lower()}
+                collisions.extend({'source':str(f),'id':a.get('candidate_id'),'key':k} for k,v in identities.items() if actual[k] and actual[k]==v)
+            report={'candidate_id':'pexels-'+clip_id,'shot_id':'S01','status':'TECHNICAL_MEDIA_QA_PASS_PENDING_EDITORIAL' if not collisions else 'BLOCKED_KNOWN_COLLISION',
+                    'artist':c['artist'],'source_page_url':c['source_page_url'],'source_media_url':url,
+                    'license':'Pexels License','sha256':sha,'perceptual_hash':ph,
+                    'fingerprint_algorithm':FINGERPRINT_ALGORITHM,'ffprobe':info,'byte_size':p.stat().st_size,
+                    'known_history_collisions':collisions,
+                    'registry_entries_checked':len(registry.get('assets',[])),
+                    'historic_manifest_count':len(manifest_paths),'visual_plan_count':len(plan_paths),
+                    'editorial_truth_class':'REPRESENTATIONAL_NOT_ARCHIVE',
+                    'rights_approved_for_render':False,'publication_approved':False}
+            (dst/'qa-source.json').write_text(json.dumps(report,indent=2)+'\n')
+            reports.append(report)
+            for i,frac in enumerate((.08,.28,.48,.68,.88)):
+              t=float(info['duration'])*frac
+              for mode in ('native','vertical'):
+                filt='scale=640:-2' if mode=='native' else 'scale=540:960:force_original_aspect_ratio=increase,crop=540:960'
+                subprocess.run(['ffmpeg','-v','error','-y','-ss',str(t),'-i',str(p),
+                     '-frames:v','1','-vf',filt,str(dst/f'{mode}-{i:02d}.jpg')],check=True)
             for mode in ('native','vertical'):
-              vf='scale=640:-2' if mode=='native' else 'scale=540:960:force_original_aspect_ratio=increase,crop=540:960'
-              subprocess.run(['ffmpeg','-v','error','-y','-ss',str(second),'-i',str(mp4),'-frames:v','1','-vf',vf,str(root/f'{mode}-{i:02d}.jpg')],check=True)
-          for mode in ('native','vertical'):
-            subprocess.run(['ffmpeg','-v','error','-y','-framerate','1','-start_number','0','-i',
-                            str(root/f'{mode}-%02d.jpg'),'-vf',
-                            'tile=3x2:padding=8:margin=8:color=black',
-                            '-frames:v','1',str(root/f'{mode}-contact.jpg')],check=True)
-          subprocess.run(['ffmpeg','-v','error','-y','-ss',str(duration*.40),'-i',str(mp4),
-                          '-an','-t','4','-vf','scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,fps=60',
-                          '-c:v','libx264','-preset','veryfast','-crf','24',str(root/'S01-QA-preview-only.mp4')],check=True)
+              subprocess.run(['ffmpeg','-v','error','-y','-framerate','1','-start_number','0',
+                 '-i',str(dst/f'{mode}-%02d.jpg'),'-vf','tile=3x2:padding=8:margin=8:color=black',
+                 '-frames:v','1',str(dst/f'{mode}-contact.jpg')],check=True)
+            subprocess.run(['ffmpeg','-v','error','-y','-ss',str(float(info['duration'])*.24),
+                '-i',str(p),'-an','-t','4','-vf','scale=540:960:force_original_aspect_ratio=increase,crop=540:960,fps=30',
+                '-c:v','libx264','-preset','veryfast','-crf','25',str(dst/'QA-only-4sec.mp4')],check=True)
+          (root/'candidates-summary.json').write_text(json.dumps(reports,indent=2)+'\n')
+          print(json.dumps(reports))
+          assert any(r['status']=='TECHNICAL_MEDIA_QA_PASS_PENDING_EDITORIAL' for r in reports),reports
           PY
-      - name: Save candidate evidence without affecting production
+      - name: Save QA only; no production edit
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ep005-s01-faceless-real-QA-${{ github.run_id }}
-          path: artifacts/s01-faceless-7698438/
-          if-no-files-found: error
+          name: ep005-s01-alternatives-QA-${{ github.run_id }}
+          path: artifacts/s01-next/
           retention-days: 7
+          if-no-files-found: error
