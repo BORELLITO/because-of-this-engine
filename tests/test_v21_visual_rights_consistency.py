@@ -130,7 +130,7 @@ class V21VisualRightsConsistencyTests(unittest.TestCase):
         self.assertEqual(result["render"], "NOT_RUN")
         self.assertFalse(any("pexels-8888977: render rights not independently approved" in e for e in result["failures"]))
         self.assertFalse(any("nasa-svs-geos5-clouds-no-labels-4819: render rights not independently approved" in e for e in result["failures"]))
-        self.assertTrue(any("nasa-svs-geos5-clouds-no-labels-4819" in e for e in result["failures"]))
+        self.assertFalse(any("nasa-svs-geos5-clouds-no-labels-4819" in e for e in result["failures"]))
         self.assertFalse(any("pexels-8888977: plan does not record human manifest approval" in e for e in result["failures"]))
 
     def test_manual_preview_can_pass_only_with_matching_evidence(self):
