@@ -19,7 +19,7 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
-from production.audio_candidate_gate_v21 import check_file
+from production.music_autoselect_v21 import select_for_story
 from production.audio_mix_receipt_v21 import execute_with_receipt, file_sha256
 from production.render_v21_manual import validate_completed_audio_mix, validate_request
 from production.render_v21_preview import validate_voice_profile, media_duration
@@ -96,6 +96,30 @@ def _time_signature(profile: dict[str, Any], voice_seconds: float) -> float:
         value = profile.get(key)
         if not isinstance(value, (int, float)) or isinstance(value, bool) or not 0 < value < 1:
             raise FinalRenderError("audio gain must be conservative")
+    if (profile.get("music_gain") > 0.12
+            or profile.get("music_gain_max") != 0.12
+            or profile.get("music_starts_at_seconds") != 0
+            or profile.get("music_to_last_frame") is not True
+            or profile.get("music_ends_before_outro") is not False
+            or profile.get("outro_audio") != "music_fades_with_visual_to_black"
+            or profile.get("music_fade_out_alignment")
+               != "last_1.2_seconds_of_existing_outro_visual_fade"
+            or profile.get("music_fade_out_seconds") != 1.2
+            or profile.get("music_fade_in_seconds") != 0.4
+            or profile.get("music_duration_policy") != "MATCH_EXACT_FINAL_MASTER_NO_LOOPS"):
+        raise FinalRenderError("approved continuous music, gain ceiling or outro fade contract changed")
+    selection = profile.get("music_selection") or {}
+    duck = profile.get("speech_ducking") or {}
+    if (selection.get("decision_maker") != "MOTOR_V21"
+            or selection.get("required_every_video") is not True
+            or selection.get("no_approved_track_action") != "BLOCK_ACQUIRE_ALTERNATIVES_NOT_SILENCE"
+            or duck.get("enabled") is not True
+            or duck.get("method") != "ffmpeg_sidechaincompress"
+            or not 0 < duck.get("threshold", 0) <= 0.1
+            or not 2 <= duck.get("ratio", 0) <= 8
+            or not 5 <= duck.get("attack_ms", 0) <= 40
+            or not 100 <= duck.get("release_ms", 0) <= 800):
+        raise FinalRenderError("autonomous sound selection or voice-ducking contract changed")
     return round(voice_seconds + OUTRO_SECONDS, 3)
 
 
@@ -105,28 +129,38 @@ def build_audio_mix_command(
 ) -> list[str]:
     """Deterministic FFmpeg recipe; terms/creative mixing gains are explicit."""
     total = _time_signature(profile, voice_seconds)
-    if any(not role.startswith("sfx:") or len(role) <= 4 for role in sfx):
-        raise FinalRenderError("all effects must have a named sfx:<id> role")
+    if any(not role.startswith("sfx:") or len(role) <= 4 or
+           any(word in role.lower() for word in ("siren", "sirene", "alarm", "alarme", "horn", "klaxon"))
+           for role in sfx):
+        raise FinalRenderError("siren/alarm sound effects are prohibited in V2.1")
     if len(sfx) != len(set(sfx)) or len(sfx) > 10:
         raise FinalRenderError("too many or duplicate effect roles")
     command = [
         "ffmpeg", "-nostdin", "-hide_banner", "-v", "error",
-        "-i", str(narration.resolve()),
-        "-stream_loop", "-1", "-i", str(music.resolve()),
+        "-i", str(narration.resolve()), "-i", str(music.resolve()),
     ]
     for name in sorted(sfx):
         command += ["-i", str(sfx[name].resolve())]
 
-    # Preserve the approved narration loudness target -16 LUFS. The music and
-    # effect gains are *candidate* settings, not approved sound quality claims.
+    # User-approved intent: subtle 0.12 maximum, narration always foreground.
+    # The music starts at t=0, is ducked whenever Charon speaks, continues
+    # across the voice-free branded outro and fades with its last 1.2s to black.
+    fade_at = total - profile["music_fade_out_seconds"]
+    duck = profile["speech_ducking"]
     graph = [
         f"[0:a]aresample=48000,loudnorm=I=-16:TP=-1:LRA=7,"
         f"alimiter=limit=0.95,atrim=duration={voice_seconds:.3f},"
-        "asetpts=PTS-STARTPTS[v]",
-        f"[1:a]aresample=48000,atrim=duration={voice_seconds:.3f},"
-        f"asetpts=PTS-STARTPTS,volume={profile['music_gain']:.4f}[m]",
+        f"asetpts=PTS-STARTPTS,apad=pad_dur={OUTRO_SECONDS:.3f},"
+        f"atrim=duration={total:.3f},asplit=2[v][voice_key]",
+        f"[1:a]aresample=48000,atrim=duration={total:.3f},"
+        f"asetpts=PTS-STARTPTS,volume={profile['music_gain']:.4f},"
+        f"afade=t=in:st=0:d={profile['music_fade_in_seconds']:.3f},"
+        f"afade=t=out:st={fade_at:.3f}:d={profile['music_fade_out_seconds']:.3f}[musicbed]",
+        f"[musicbed][voice_key]sidechaincompress="
+        f"threshold={duck['threshold']:.4f}:ratio={duck['ratio']:.2f}:"
+        f"attack={duck['attack_ms']}:release={duck['release_ms']}[ducked]",
     ]
-    inputs = ["[v]", "[m]"]
+    inputs = ["[v]", "[ducked]"]
     for i, name in enumerate(sorted(sfx), start=2):
         graph.append(
             f"[{i}:a]aresample=48000,atrim=duration={voice_seconds:.3f},"
@@ -134,9 +168,8 @@ def build_audio_mix_command(
         )
         inputs.append(f"[s{i}]")
     graph.append(
-        "".join(inputs) + f"amix=inputs={len(inputs)}:duration=first:normalize=0,"
+        "".join(inputs) + f"amix=inputs={len(inputs)}:duration=longest:normalize=0,"
         "alimiter=limit=0.95,"
-        f"apad=pad_dur={OUTRO_SECONDS:.3f},"
         f"atrim=duration={total:.3f}[out]"
     )
     command += ["-filter_complex", ";".join(graph), "-map", "[out]",
