@@ -1,0 +1,119 @@
+{
+  "schema_version": "1.0",
+  "audited_on": "2026-11-07",
+  "episode_id": "episode-005",
+  "authority": "production/active_engine_policy.json",
+  "state": "SOURCE_DISCLAIMER_SAMPLE_VERIFIED_PRIVATE_SCOPED_RENDER_ALLOWED_FINAL_VIDEO_NOT_VERIFIED",
+  "detected_source_role_drift": {
+    "actual_actor_asset": "pexels-11764431",
+    "actual_actor_shot": "S01",
+    "source_role_metadata": "S04",
+    "actual_radio_asset": "pixabay-radio-vintage-old-171435",
+    "actual_radio_shot": "S03",
+    "action": "Follow actual shot_assignments, not stale source_role. No camera, VO, story or scene order changed."
+  },
+  "user_decision_preference": "Engine makes source suitability decisions; does not repeatedly ask per-video approval",
+  "alternatives_inspected_and_rejected": [
+    {
+      "asset": "pexels-7698438",
+      "real_source_sha256": "3d1b53ad66576083c3010d5fa223922a9be87fbb1f113783b484e036c4306a5c",
+      "run": 42400100998,
+      "reason": "Bright modern office, unsuitable warm low-key 1983 scene; not selected"
+    },
+    {
+      "asset": "pexels-4105989",
+      "real_source_sha256": "175385269dff3b0ec8089a9f41e54c76530ca11b337c78282b67a7f3c5dc3034",
+      "run": 42400377683,
+      "reason": "Too modern and bright for opening; hand/ring; not selected"
+    },
+    {
+      "asset": "pexels-11995909",
+      "real_source_sha256": "7ee49feeafa08e39250276f1305e3fde19d3a878787468481ab5f7b19368f213",
+      "run": 42400377683,
+      "reason": "Portrait crop impractical and lighting inconsistent; not selected"
+    },
+    {
+      "asset": "pexels-6734222",
+      "real_source_sha256": "3990014b0c913f800886747da6e62ba75c57310ad807cb5bad8cb638561bdca5",
+      "run": 42400978794,
+      "reason": "Hand and notebook fall largely outside 9:16 locked crop; blurry and low semantic value"
+    },
+    {
+      "asset": "pexels-6830883",
+      "real_source_sha256": "ff4633f8995907c5c8d4cee60818315f5e36705261750a04e5bbc59f0886771d",
+      "run": 42400978794,
+      "reason": "Legible modern romantic letter; contradicts historical emergency classification narrative"
+    }
+  ],
+  "retained_actor_S01": {
+    "asset_id": "pexels-11764431",
+    "actual_shot_id": "S01",
+    "real_source_sha256": "9e2ad3951cafda341e656c9be49ffc55915326b0789e243e65aad65df1408f7b",
+    "source_url": "https://www.pexels.com/video/man-using-walkie-talkie-in-bunker-11764431/",
+    "actor_remains_identifiable": true,
+    "actor_is_petrov": false,
+    "actual_1983_archival": false,
+    "model_release_claimed": false,
+    "no_defamation_or_personal_endorsement_claim": true,
+    "user_facing_notice": "DRAMATIZATION - NOT ARCHIVAL FOOTAGE",
+    "overlay_qa_4s": {
+      "duration_seconds": 4,
+      "dimensions": [
+        1080,
+        1920
+      ],
+      "fps": 60,
+      "sha256": "c7a4a30bf8f108363759534598b9a4cddb79a5cc024a0caa3eab86721e47bbf7",
+      "frame_sha256": "9d532e650e157818b7628225f93ff485033d3747c74c7631dbfed6f0fa9e803b",
+      "sample_visual_review": "PASS_TEXT_CLEAR_FACE_STILL_IDENTIFIABLE",
+      "complete_episode_rendered": false
+    }
+  },
+  "nasa_S12": {
+    "asset_id": "nasa-svs-geos5-clouds-no-labels-4819",
+    "actual_shot_id": "S12",
+    "real_source_sha256": "306a8c1b97ddb3699a84f3d35f6a0c9c3cbc593f13f9a35aef13d72a55f323d0",
+    "source_url": "https://svs.gsfc.nasa.gov/4819/",
+    "source_release_date": "2020-04-20",
+    "actual_soviet_1983_sensor_footage": false,
+    "model_source_type": "GEOS-5_CLOUD_VISUALIZATION",
+    "credits": [
+      "NASA's Scientific Visualization Studio",
+      "Greg Shirah",
+      "Trent L. Schindler",
+      "Ryan Fitzgibbons"
+    ],
+    "required_notice": [
+      "NASA GEOS-5 MODEL (2020)",
+      "Illustration - NOT 1983 sensor footage"
+    ],
+    "overlay_qa_5s": {
+      "duration_seconds": 5,
+      "dimensions": [
+        1080,
+        1920
+      ],
+      "fps": 60,
+      "sha256": "6ca0255fa7a447052a84d9cad403d351de2f815e88e715f68b4a68804ba0d4bc",
+      "frame_sha256": "51bf6cd9c08061f4143a1801f70fd5bd4b724c6a46bde5a92b5ebf0522cb1fd1",
+      "sample_visual_review": "PASS_TEXT_LEGIBLE_SOURCE_MODEL_DISTINGUISHED",
+      "complete_episode_rendered": false
+    }
+  },
+  "enforce_by": [
+    "production/scene_disclosures_v21.py",
+    "production/rights_autonomy_v21.py",
+    "production/render_v21_preview.py",
+    "production/render_v21_manual.py",
+    "production/canonical_entrypoint.py"
+  ],
+  "source_substitution": false,
+  "changed_old_narration": false,
+  "executed_new_tts": false,
+  "full_render_executed": false,
+  "published": false,
+  "publication_policy": "manual_only",
+  "production_enablement": false,
+  "global_audio_history": "BLOCKED_UNVERIFIED",
+  "next_step": "Full render must include both on-screen source labels and description credits; validate assembled master and platform description metadata before any distribution, and reconcile historical audio registry independently."
+}
