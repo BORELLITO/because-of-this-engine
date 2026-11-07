@@ -66,6 +66,26 @@ def audit(repo_root: Path) -> dict:
                 'validate_completed_audio_mix(' not in final_source or
                 'build_audio_mix_command(' not in final_source):
             failures.append("canonical final renderer bypassed V2.1 preflight, mix or postflight")
+    # Every final episode MUST have a story-selected legal soundtrack through
+    # the logo end card. Never silently revert to a blank outro or siren bed.
+    soundtrack = policy.get("soundtrack_policy_v21") or {}
+    if (soundtrack.get("status") != "ENFORCED_ENGINE_SELECTS_VETTED_MUSIC"
+            or soundtrack.get("selector") != "production/music_autoselect_v21.py"
+            or soundtrack.get("music_required_in_every_final") is not True
+            or soundtrack.get("music_to_last_frame") is not True
+            or soundtrack.get("music_gain_max") != 0.12
+            or soundtrack.get("music_fade_out_seconds") != 1.2
+            or soundtrack.get("narration_ducking") != "SIDECHAIN_COMPRESSOR_V21"
+            or soundtrack.get("no_clear_music_action") != "FAIL_CLOSED_NO_SILENT_SUBSTITUTE"):
+        failures.append("required autonomous continuous suspense soundtrack policy changed")
+    if not (root / "production" / "music_autoselect_v21.py").is_file():
+        failures.append("autonomous music selection engine missing")
+    if final_file.is_file():
+        final_source = final_file.read_text(encoding="utf-8")
+        if ("select_for_story(" not in final_source
+                or "sidechaincompress=" not in final_source
+                or "afade=t=out" not in final_source):
+            failures.append("final renderer lost story-selected music, ducking or outro fade")
     workflow_root = root / ".github" / "workflows"
     workflows = sorted(workflow_root.glob("*.yml")) if workflow_root.exists() else []
     for path in workflows:
