@@ -135,5 +135,20 @@
     "publication": "manual_only",
     "note": "The creative preview route must match the approved direct Gemini TTS Charon identity. No Edge or Creative Claw substitution is accepted.",
     "required_voice_name": "Charon"
+  },
+  "final_drive_delivery_enablement": false,
+  "final_delivery_audio_gate": {
+    "status": "ENFORCED_FAIL_CLOSED",
+    "mode": "FINAL_VIDEO_BEFORE_DRIVE_WRITE",
+    "adapter": "production/final_delivery_v21.py",
+    "drive_adapter": "production/google_drive_delivery.py",
+    "receipt_required": true,
+    "independent_ffmpeg_replay": true,
+    "individual_stem_contribution": true,
+    "exact_master_identity": true,
+    "historical_audio_gate_required": true,
+    "visual_rights_gate_required": true,
+    "manual_publication_only": true,
+    "production_remains_disabled": true
   }
 }
