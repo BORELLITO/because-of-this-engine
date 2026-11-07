@@ -1041,6 +1041,8 @@
       "representational footage must not be presented as literal Petrov archival evidence"
     ]
   },
-  "last_adjustment": "2026-11-07: Autonomous V2.1 source-specific media review used original SHA-256 of seven recovered videos, item page rights, visual samples, factual truth class and provider restrictions. Five abstract/unidentifiable stock shots auto-approved strictly for scoped private editorial rendering. S03 recognizable actor and NASA S12 modeled-2020-without-release-credits remain BLOCKED. Final video, audio-history and manual publication remain NOT_RUN/BLOCKED. No TTS, visual assets or existing nine legacy approvals changed.",
-  "autonomous_rights_evidence_path": "reports/EP005_AUTONOMOUS_RIGHTS_VISUAL_EVIDENCE_20261107.json"
+  "last_adjustment": "2026-11-07: Discovered stale shot identity source_role in plan: identifiable stock actor pexels-11764431 actually assigned S01, not S03. Added actual-shot context gate and NASA SVS exact 2020 GEOS-5 credit/disclosure DRAFT. Actor and NASA remain BLOCKED, no rights granted; no render or publication.",
+  "autonomous_rights_evidence_path": "reports/EP005_AUTONOMOUS_RIGHTS_VISUAL_EVIDENCE_20261107.json",
+  "delivery_credits_manifest_path": "episodes/episode-005/delivery/source-credits-pending.json",
+  "credits_delivery_state": "DRAFT_NOT_RENDERED_OR_PUBLISHED"
 }
