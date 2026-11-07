@@ -53,6 +53,8 @@ def decoded_pcm_sha256(path: Path) -> str:
 def _validate(command: list[str], sources: Mapping[str, Path], output: Path) -> None:
     if not isinstance(command, list) or len(command) < 5 or Path(command[0]).name != "ffmpeg":
         raise MixReceiptError("requires explicit FFmpeg argv")
+    if len(sources) > 24:
+        raise MixReceiptError("too many audio stems for verified replay")
     if not {"narration", "music"}.issubset(sources):
         raise MixReceiptError("narration/music roles required")
     if len({str(p.resolve()) for p in sources.values()}) != len(sources):
@@ -164,7 +166,42 @@ def verify_receipt(receipt: Path, *, replay: bool = True) -> dict[str, Any]:
                            timeout=180, check=True)
             if decoded_pcm_sha256(target) != mixed_pcm:
                 raise MixReceiptError("replayed audio differs from original mix")
+        # Counterfactual proof: every listed stem must measurably influence
+        # the decoded output. A listed -i source that never reaches [out]
+        # must not obtain an apparently valid mix receipt.
+        contributions = []
+        with tempfile.TemporaryDirectory() as folder:
+            for role, original in sources.items():
+                probe = subprocess.run([
+                    "ffprobe", "-v", "error", "-show_entries", "format=duration",
+                    "-of", "default=noprint_wrappers=1:nokey=1", str(original)],
+                    capture_output=True, text=True, timeout=25, check=True)
+                seconds = float(probe.stdout.strip())
+                if not 0 < seconds < 3600:
+                    raise MixReceiptError("stem duration not independently verified: " + role)
+                silent = Path(folder) / ("silence-" + str(len(contributions)) + ".wav")
+                subprocess.run(["ffmpeg", "-nostdin", "-hide_banner", "-v", "error",
+                                "-f", "lavfi", "-i", "anullsrc=r=48000:cl=mono",
+                                "-t", str(seconds), "-c:a", "pcm_s16le", str(silent)],
+                               capture_output=True, timeout=90, check=True)
+                alternate = list(command)
+                replaced = False
+                for pos, value in enumerate(alternate[:-1]):
+                    if value == "-i" and pos + 1 < len(alternate) and (
+                            os.path.realpath(alternate[pos + 1]) == str(original.resolve())):
+                        alternate[pos + 1] = str(silent)
+                        replaced = True
+                        break
+                if not replaced:
+                    raise MixReceiptError("stem not in FFmpeg input argv: " + role)
+                counterfactual = Path(folder) / ("without-" + str(len(contributions)) + output.suffix)
+                subprocess.run([*alternate[:-1], str(counterfactual)], capture_output=True,
+                               timeout=180, check=True)
+                if decoded_pcm_sha256(counterfactual) == mixed_pcm:
+                    raise MixReceiptError("stem has no measured contribution to output mix: " + role)
+                contributions.append(role)
         return {"status": "PASS", "replay_verified": True,
+                "source_contributions_confirmed": contributions,
                 "sources_verified": len(sources),
                 "output_sha256": data["output"]["sha256"],
                 "decoded_pcm_sha256": mixed_pcm,
