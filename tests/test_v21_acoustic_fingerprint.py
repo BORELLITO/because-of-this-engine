@@ -15,7 +15,7 @@ from pathlib import Path
 
 from production.audio_acoustic_fingerprint_v21 import (
     ALGORITHM, CATALOG_PATH, FingerprintError, compare, fingerprint,
-    pack, review_file, unpack,
+    pack, review_file, unpack, catalog_coverage,
 )
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -47,13 +47,57 @@ class AudioAcousticFingerprintTests(unittest.TestCase):
 
     def test_historical_fingerprint_entries_validate_checksums(self):
         self.assertEqual(self.catalog["algorithm"],ALGORITHM)
-        self.assertGreaterEqual(len(self.catalog["sources"]),2)
+        self.assertEqual(len(self.catalog["sources"]),5)
+        self.assertEqual(self.catalog["source_count"],5)
+        self.assertEqual(catalog_coverage(ROOT)["status"],"PASS")
         sources={x["source_sha256"] for x in self.catalog["sources"]}
         self.assertIn("4a84629bdd611489b49f28187c70f2fc6d4a48b11347ef5c05cf301e1cd1fa24",sources)
         for x in self.catalog["sources"]:
             f=unpack(x["fingerprint"])
             self.assertGreaterEqual(len(f),64)
             self.assertEqual(pack(f)["raw_sha256"],x["fingerprint"]["raw_sha256"])
+
+    def test_all_three_original_mp3_sources_are_covered(self):
+        expected={
+            "49842074dc06f05a40690c2b3af42bd32be76a5f6505a65cfe952b2fe1ccb5de",
+            "144384cf2bcda8070a0d11c8aa98c3ae547de861a553275788669b7cf6a57bcd",
+            "dd57de53251011da1cc72f22c81595e80c03151c46d4a43e71aa6baaf2bc98cc",
+        }
+        present={x["source_sha256"] for x in self.catalog["sources"]}
+        self.assertTrue(expected.issubset(present))
+        result=catalog_coverage(ROOT)
+        self.assertEqual(result["known_source_count"],5)
+        self.assertEqual(result["covered_count"],5)
+        self.assertEqual(result["missing_source_sha256"],[])
+
+    def test_all_five_full_signatures_decode_and_do_not_cross_match_as_copies(self):
+        frames=[unpack(x["fingerprint"]) for x in self.catalog["sources"]]
+        self.assertEqual([len(f) for f in frames],[544,544,1806,797,1077])
+        for i in range(len(frames)):
+            for j in range(i+1,len(frames)):
+                verdict=compare(frames[i],frames[j])
+                self.assertNotEqual(verdict["classification"],"LIKELY_REUSE",
+                                   (i,j,verdict))
+        for f in frames:
+            self.assertEqual(compare(f,f)["classification"],"LIKELY_REUSE")
+
+    def test_missing_acoustic_source_cannot_be_considered_complete(self):
+        with tempfile.TemporaryDirectory() as dirname:
+            from shutil import copyfile
+            import json
+            root=Path(dirname)
+            (root/"episodes").mkdir()
+            for name in ("audio-memory-registry.json","audio-rendered-master-registry.json"):
+                copyfile(ROOT/"episodes"/name,root/"episodes"/name)
+            catalog=copy.deepcopy(self.catalog)
+            catalog["sources"]=[s for s in catalog["sources"]
+                                  if s["source_id"]!="legacy-003-echoes"]
+            catalog["source_count"]=len(catalog["sources"])
+            (root/CATALOG_PATH).write_text(json.dumps(catalog))
+            outcome=catalog_coverage(root)
+            self.assertEqual(outcome["status"],"BLOCKED")
+            self.assertIn("49842074dc06f05a40690c2b3af42bd32be76a5f6505a65cfe952b2fe1ccb5de",
+                          outcome["missing_source_sha256"])
 
     def test_corrupted_fingerprint_is_blocked(self):
         entry=copy.deepcopy(self.catalog["sources"][0]["fingerprint"])
