@@ -1,0 +1,152 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-11-07",
+  "source_of_truth": "Verified original delivered master MP4 and raw music files, NOT old legacy v2 manifest declarations.",
+  "authority": "QUARANTINED_HISTORICAL_EVIDENCE_ONLY",
+  "master_records_count": 4,
+  "rendered_masters": [
+    {
+      "episode_id": "episode-001-preview-v72-charon-clean",
+      "release_type": "FINAL",
+      "master_video": {
+        "drive_file_id": "1PJUyr6vSQhbBekRvh-byP592-8kKy511",
+        "sha256": "6d019c3c5e2f2570b3bb975ca20de2e733140f8f380188880eebb2e3b7dc78b4",
+        "codec": "h264",
+        "audio_codec": "aac",
+        "audio_sample_rate": 48000,
+        "audio_channels": 1,
+        "duration_seconds": 65.12,
+        "verification": "DOWNLOADED_FULL_MP4_BYTES_MATCH_GITHUB_ACTIONS_OUTPUT_SHA256",
+        "workflow_run_id": 41103303509,
+        "job_id": 124225574108,
+        "mixed_audio_decoded_48k_mono_s16le_sha256": "26bcf6934ab4bfb3c66ba9afcd7942e08d992412c7c1df2941eff0cfc30c38f9"
+      },
+      "music_asset": {
+        "drive_file_id": "1OsLfMgxaK74SJ4Z2GWaqVyUKJdmyV8z6",
+        "sha256": "ada559a1f992984e1b501fd76639478501615c617fed5034c43e99a745521ccf",
+        "source_type": "procedural",
+        "verified_original_bytes": true,
+        "waveform_match_method": "FFMPEG_DECODE_2000HZ_MONO_8SECOND_SEGMENTS_NORMALIZED_CROSS_CORRELATION_WITH_PLUS_MINUS_2SEC_LAG",
+        "waveform_match_max_abs_correlation": 0.6214,
+        "confidence": "SUPPORTING_WAVEFORM_EVIDENCE_NOT_ISOLATED_MULTITRACK_PROOF"
+      },
+      "sfx_tracks_verified": 0,
+      "master_is_published": "NOT_VERIFIED",
+      "license_status": "NOT_INFERRED_FROM_SOURCE_HASH",
+      "source_version_notice": "V7 final uses generated WAV, not proof that legacy Mixkit 871.mp3 appeared in this master"
+    },
+    {
+      "episode_id": "episode-002-archive-tape",
+      "release_type": "FINAL",
+      "master_video": {
+        "drive_file_id": "1rfSdXGFr8xsXQNWU4AtqSUt7TIf9YGVy",
+        "sha256": "0659c0cd5d2f07602cd21e147ac9587419039b8bc2ce6b31155920ae9d46a216",
+        "codec": "h264",
+        "audio_codec": "aac",
+        "audio_sample_rate": 48000,
+        "audio_channels": 1,
+        "duration_seconds": 69.6,
+        "verification": "DOWNLOADED_FULL_MP4_BYTES_MATCH_GITHUB_ACTIONS_OUTPUT_SHA256",
+        "workflow_run_id": 41248538051,
+        "job_id": 124676984583,
+        "mixed_audio_decoded_48k_mono_s16le_sha256": "39fcbc8d92eeb6d8fb5222f182c8cb8dd7563570e2ee8a71c500d1af7d749aee"
+      },
+      "music_asset": {
+        "drive_file_id": "1P7NlvP50-V2Y8CaZQXPE2EhU99t_Zy9X",
+        "sha256": "4a84629bdd611489b49f28187c70f2fc6d4a48b11347ef5c05cf301e1cd1fa24",
+        "source_type": "procedural",
+        "verified_original_bytes": true,
+        "waveform_match_method": "FFMPEG_DECODE_2000HZ_MONO_8SECOND_SEGMENTS_NORMALIZED_CROSS_CORRELATION_WITH_PLUS_MINUS_2SEC_LAG",
+        "waveform_match_max_abs_correlation": 0.3362,
+        "confidence": "SUPPORTING_WAVEFORM_EVIDENCE_NOT_ISOLATED_MULTITRACK_PROOF"
+      },
+      "sfx_tracks_verified": 0,
+      "master_is_published": "NOT_VERIFIED",
+      "license_status": "NOT_INFERRED_FROM_SOURCE_HASH",
+      "source_version_notice": "V7 final uses generated WAV, not proof that legacy Mixkit 871.mp3 appeared in this master"
+    },
+    {
+      "episode_id": "because-of-this-episode-003",
+      "release_type": "FINAL",
+      "master_video": {
+        "drive_file_id": "1Y1wPxgkXlIsm4JYAjOqOJfLtAv3jyVA-",
+        "sha256": "b7af5dc8e534135da9d51f55b2419ca6124cb9717c51df397961cb37f975f682",
+        "codec": "h264",
+        "audio_codec": "aac",
+        "audio_sample_rate": 48000,
+        "audio_channels": 1,
+        "duration_seconds": 75.693,
+        "verification": "DOWNLOADED_FULL_MP4_BYTES_MATCH_GITHUB_ACTIONS_OUTPUT_SHA256",
+        "workflow_run_id": 40616131845,
+        "job_id": 122578936951,
+        "mixed_audio_decoded_48k_mono_s16le_sha256": "fa5b283261e153d4b562661a1da59d059f56350b9d4c48f7426b6572e3a37ef7"
+      },
+      "music_asset": {
+        "drive_file_id": "1u-1ZKkVxKTw_E6vEzW0VcpF2lfjGfmeI",
+        "sha256": "49842074dc06f05a40690c2b3af42bd32be76a5f6505a65cfe952b2fe1ccb5de",
+        "source_type": "mixkit",
+        "verified_original_bytes": true,
+        "waveform_match_method": "FFMPEG_DECODE_2000HZ_MONO_8SECOND_SEGMENTS_NORMALIZED_CROSS_CORRELATION_WITH_PLUS_MINUS_2SEC_LAG",
+        "waveform_match_max_abs_correlation": 0.1482,
+        "confidence": "SUPPORTING_WAVEFORM_EVIDENCE_NOT_ISOLATED_MULTITRACK_PROOF"
+      },
+      "sfx_tracks_verified": 0,
+      "master_is_published": "NOT_VERIFIED",
+      "license_status": "NOT_INFERRED_FROM_SOURCE_HASH",
+      "source_version_notice": "V2 historical source Echoes matches this final audio"
+    },
+    {
+      "episode_id": "because-of-this-episode-004",
+      "release_type": "FINAL",
+      "master_video": {
+        "drive_file_id": "1YkgYxxniXZVTZK4iwgpgcSl6DP-aQJhn",
+        "sha256": "9e9edc0e307301b8ea028174a63391b2eb56b7b8fe8a4a566e86558394eb6111",
+        "codec": "h264",
+        "audio_codec": "aac",
+        "audio_sample_rate": 48000,
+        "audio_channels": 1,
+        "duration_seconds": 71,
+        "verification": "DOWNLOADED_FULL_MP4_BYTES_MATCH_GITHUB_ACTIONS_OUTPUT_SHA256",
+        "workflow_run_id": 41376351220,
+        "job_id": 125057381997,
+        "mixed_audio_decoded_48k_mono_s16le_sha256": "ae4bbb4d02ce0636089bc81d005b8cf6398404eeb881133c89bde48"
+      },
+      "music_asset": {
+        "drive_file_id": "19dFe9lPreCmDh5Ubb29YN9AyF4O6yuxO",
+        "sha256": "4a84629bdd611489b49f28187c70f2fc6d4a48b11347ef5c05cf301e1cd1fa24",
+        "source_type": "procedural",
+        "verified_original_bytes": true,
+        "waveform_match_method": "FFMPEG_DECODE_2000HZ_MONO_8SECOND_SEGMENTS_NORMALIZED_CROSS_CORRELATION_WITH_PLUS_MINUS_2SEC_LAG",
+        "waveform_match_max_abs_correlation": 0.3327,
+        "confidence": "SUPPORTING_WAVEFORM_EVIDENCE_NOT_ISOLATED_MULTITRACK_PROOF"
+      },
+      "sfx_tracks_verified": 0,
+      "master_is_published": "NOT_VERIFIED",
+      "license_status": "NOT_INFERRED_FROM_SOURCE_HASH",
+      "source_version_notice": "V7.4 final uses verified procedural music.wav; legacy episodes/episode-004/manifest.json declares different Pixabay MP3, which must remain an ARCHIVED declaration not promoted to actual V7.4 master use"
+    }
+  ],
+  "verified_full_track_collisions": [
+    {
+      "track_sha256": "4a84629bdd611489b49f28187c70f2fc6d4a48b11347ef5c05cf301e1cd1fa24",
+      "source_ids": [
+        "1P7NlvP50-V2Y8CaZQXPE2EhU99t_Zy9X",
+        "19dFe9lPreCmDh5Ubb29YN9AyF4O6yuxO"
+      ],
+      "affected_final_master_ids": [
+        "episode-002-archive-tape",
+        "because-of-this-episode-004"
+      ],
+      "proof": "Both full music.wav source files were downloaded from different Drive IDs and compared byte-for-byte (SHA-256 equal); both matched corresponding completed final video soundtrack in waveform tests.",
+      "severity": "P0_HISTORICAL_FULL_TRACK_REUSE_POLICY_CONFLICT",
+      "remediation": "No re-render or retroactive publication change. Quarantine SHA and other historical music fingerprints against all new episodes, and require new unique music and master-level audio verification."
+    }
+  ],
+  "master_audio_evidence_level": "MASTER_MP4_SHA256_VERIFIED_AND_SOURCE_MUSIC_CORRELATION_WITH_LOG_SUPPORT; NOT STEM_SEPARATION_OR_PUBLICATION_VERIFICATION",
+  "historical_sfx_coverage": "UNKNOWN",
+  "historical_published_use": "UNKNOWN",
+  "legacy_manifest_scope": "episodes/episode-001..004/manifest.json declarations preserved independently. Do not reconcile versions solely by episode ordinal.",
+  "production_enablement": false,
+  "publication": "MANUAL_ONLY_NOT_RUN",
+  "next_step": "Prevent same music source from being selected for a new episode, then add automated master mix receipts to future renderer so SFX and source-to-master lineage become independently provable."
+}
