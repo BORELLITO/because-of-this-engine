@@ -13,6 +13,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import subprocess
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
@@ -126,8 +127,20 @@ def evaluate_one(
             or qa.get("speech_masking_risk") != "LOW"
             or qa.get("abrupt_stinger") is not False):
         reasons.append("music intelligibility/no-siren QA not independently recorded")
-    if candidate.get("source_duration_seconds", 0) < total_seconds + 0.03:
-        reasons.append("song too short: no looping or stretched audio permitted")
+    try:
+        probe = subprocess.run(
+            ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+             "-of", "default=noprint_wrappers=1:nokey=1", str(path)],
+            capture_output=True, text=True, check=True, timeout=25)
+        verified_seconds = float(probe.stdout.strip())
+        if verified_seconds < total_seconds + 0.03:
+            reasons.append("actual song too short: looping/stretching prohibited")
+        if abs(verified_seconds - float(candidate.get("source_duration_seconds") or 0)) > 0.30:
+            reasons.append("declared song duration disagrees with original audio")
+    except (OSError, ValueError, TypeError, subprocess.CalledProcessError,
+            subprocess.TimeoutExpired):
+        verified_seconds = 0
+        reasons.append("real audio duration unavailable or decoder failed")
     reasons += _evidence(candidate, digest, episode_id)
     # Run real source identity, ffprobe, Chromaprint and prior-use checks.
     acoustic = check_file(path, candidate, root=repo_root)
@@ -142,7 +155,7 @@ def evaluate_one(
              + len(tags & PREFERRED_TEXTURES) * 5
              + (16 if qa.get("speech_masking_risk") == "LOW" else 0)
              + (10 if candidate.get("arc_fit") == arc else 0)
-             + (5 if candidate.get("source_duration_seconds", 0) >= total_seconds + 8 else 0))
+             + (5 if verified_seconds >= total_seconds + 8 else 0))
     if not matching:
         reasons.append("track does not fit documented story mood")
     return {"candidate_id": candidate_id, "status": "BLOCKED" if reasons else "ELIGIBLE",
