@@ -126,7 +126,9 @@ jobs:
           visual = next(g for g in report["checks"] if g.get("gate") == "VISUAL_RIGHTS_CONSISTENCY")
           assert not any("visual assets missing render rights" in f for f in visual["failures"]), visual
           assert sum("render rights not independently approved" in x for x in visual["failures"]) == 2
-          assert any("pexels-8888977" in f for f in visual["failures"]), visual
+          assert any("pexels-11764431" in f for f in visual["failures"]), visual
+          assert any("nasa-svs-geos5-clouds-no-labels-4819" in f for f in visual["failures"]), visual
+          assert not any("pexels-8888977" in f for f in visual["failures"]), visual
           assert not any("pexels-8888977: plan does not record human manifest approval" in f for f in visual["failures"]), visual
           assert report["production_enablement"] is False
           assert report["media_generation"] == "NOT_RUN"
