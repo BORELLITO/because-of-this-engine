@@ -60,7 +60,7 @@ class V21VisualReconciliationDossierTests(unittest.TestCase):
 
     def test_tampered_intake_sha_detected(self):
         rec, plan, man = self._sources()
-        target = IDS_PENDING_RIGHTS.pop() if False else "pexels-11764431"
+        target = "pexels-11764431"
         candidate = next(x for x in plan["candidates"] if x["candidate_id"] == target)
         candidate["intake_artifact"]["sha256"] = "f" * 64
         report = build_dossier(rec, plan, man)
