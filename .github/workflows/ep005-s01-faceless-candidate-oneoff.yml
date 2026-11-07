@@ -32,16 +32,16 @@ jobs:
           from production.asset_reuse_brain import source_asset_key,canonicalize_source_url
           root=Path('artifacts/s01-next')
           choices={
-            '4105989':{
-               'name':'Gustavo Fring — hands writing notebook',
-               'source_page_url':'https://www.pexels.com/video/close-up-of-a-person-s-hands-while-writing-4105989/',
-               'urls':['https://videos.pexels.com/video-files/4105989/4105989-uhd_3840_2160_30fps.mp4','https://videos.pexels.com/video-files/4105989/4105989-uhd_3840_2160_25fps.mp4','https://videos.pexels.com/video-files/4105989/4105989-hd_1920_1080_30fps.mp4'],
-               'artist':'Gustavo Fring'},
-            '11995909':{
-               'name':'Harvey Tan Villarino — hand writing notebook',
-               'source_page_url':'https://www.pexels.com/video/close-up-view-of-handwriting-in-notebook-11995909/',
-               'urls':['https://videos.pexels.com/video-files/11995909/11995909-hd_1920_1080_50fps.mp4','https://videos.pexels.com/video-files/11995909/11995909-hd_1920_1080_30fps.mp4','https://videos.pexels.com/video-files/11995909/11995909-hd_1920_1080_25fps.mp4'],
-               'artist':'Harvey Tan Villarino'}
+            '6734222':{
+               'name':'Kamli Jagyasa — dim-light writing',
+               'source_page_url':'https://www.pexels.com/video/hand-writing-in-notebook-6734222/',
+               'urls':['https://videos.pexels.com/video-files/6734222/6734222-hd_1920_1080_24fps.mp4','https://videos.pexels.com/video-files/6734222/6734222-hd_1920_1080_25fps.mp4','https://videos.pexels.com/video-files/6734222/6734222-hd_1920_1080_30fps.mp4'],
+               'artist':'Kamli Jagyasa'},
+            '6830883':{
+               'name':'cottonbro studio — warm vintage letter',
+               'source_page_url':'https://www.pexels.com/video/man-writing-love-letter-6830883/',
+               'urls':['https://videos.pexels.com/video-files/6830883/6830883-uhd_4096_2160_25fps.mp4','https://videos.pexels.com/video-files/6830883/6830883-hd_1920_1080_25fps.mp4','https://videos.pexels.com/video-files/6830883/6830883-hd_1920_1080_25fps.mp4'],
+               'artist':'cottonbro studio'}
           }
           registry=json.loads(Path('episodes/asset-memory-registry.json').read_text())
           manifest_paths=sorted(Path('episodes').glob('*/manifest.json'))
