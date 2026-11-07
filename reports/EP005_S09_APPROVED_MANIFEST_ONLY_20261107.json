@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "created_date": "2026-11-07",
+  "episode_id": "episode-005",
+  "shot_id": "S09",
+  "decision": "USER_EDITORIAL_APPROVAL_FOR_MANIFEST_ONLY",
+  "approval_basis": "User replied 'Pode seguir com sua recomendação e executa os upgrades' after prior assistant recommended Pexels 8888977 and explicitly asked to approve the 4-second preview as the replacement for S09.",
+  "new_candidate_id": "pexels-8888977",
+  "old_candidate_id": "pexels-12213087",
+  "editorial_truth_class": "REPRESENTATIONAL_NOT_ARCHIVAL",
+  "source": {
+    "provider": "pexels",
+    "artist": "MART PRODUCTION",
+    "page": "https://www.pexels.com/video/person-typing-on-a-keyboard-8888977/",
+    "media_url": "https://videos.pexels.com/video-files/8888977/8888977-uhd_4096_2160_25fps.mp4",
+    "terms": "https://www.pexels.com/legal-pages/license/",
+    "licenses_general": "Free for personal/commercial uses subject to identifiable people, brands, non-endorsement and other rights"
+  },
+  "original_media": {
+    "sha256": "b5e41fafc252a88d3959fbb3df0294010397e6687d833d884bc5a0bfdd48fa51",
+    "perceptual_hash": "11084cf2f2f6ddf92255d82bcb19c5cc04003c2dbc1b7c21f0bf617aa87915a8",
+    "algorithm": "video-fingerprint-v2-rgb24-q4",
+    "duration_seconds": 24.6,
+    "resolution": [
+      4096,
+      2160
+    ],
+    "source_fps": 25,
+    "source_audio": false
+  },
+  "evidence": {
+    "source_qa_run_id": 42388510746,
+    "source_qa_artifact_id": 13580144522,
+    "source_qa_artifact_digest": "sha256:c7dbc26fc3da1d80036f962df6f9df2266ad26ef7af413fbef0cce195094a338",
+    "source_qa_drive_backup": "1rdUiMhgJ05YK8CMRsqB2VqzBq3KE_N_E",
+    "s09_4second_preview_sha256": "9e13600c4f2ccbf3836334d56591835ae353cedb65dd291d2b7cc28d6a1f0784",
+    "perceptual_audit_run_id": 42390022588,
+    "perceptual_audit_artifact_id": 13581475505,
+    "perceptual_audit_artifact_digest": "sha256:87ebe742d0f9816f6f8f37152ca8963007f3524fa826fcd7c55292d01d6cf819",
+    "registry_entries_checked": 13,
+    "historical_scene_records_checked": 56,
+    "source_identity": "pexels:8888977",
+    "detected_collisions": 0,
+    "coverage_limit": "Only tracked GitHub registry and historical manifests; external/unindexed usage remains unknown"
+  },
+  "release_state": {
+    "approved_for_manifest_only": true,
+    "user_editorial_approval_recorded": true,
+    "legal_render_authorization": false,
+    "rights_ledger_updated": false,
+    "global_asset_registry_updated": false,
+    "render_executed": false,
+    "publication_executed": false,
+    "production_enablement": false
+  },
+  "render_safety_requirements": [
+    "Confirm final asset-specific license, identifiable persons, signage, modern clothing and truthful contextual use",
+    "Reconcile rights ledger independently without importing old S09 rights",
+    "Validate complete episode audio history and visual rights consistency before render",
+    "Show representational shot only; do not imply true 1983 Petrov footage"
+  ],
+  "rollback": {
+    "backup_policy": "Git branch history; original pexels-12213087 candidate is retained in acquisition plan with original hashes",
+    "old_manifest_shot_id": "S09",
+    "can_revert_pr": true
+  },
+  "note": "Known-history fingerprint PASS is a technical evidence result, not proof of all historical media usage. The preview source is 25 fps, output 60 fps by frame duplication; do not imply native 60 fps source."
+}
