@@ -1,9 +1,9 @@
-name: Because Of This - S09 analog radar candidate QA (read only)
+name: Because Of This - S09 retro keyboard candidate QA (read only)
 
 on:
   push:
-    branches: ["audit/episode005-s09-analog-radar-20261107"]
-    paths: [".github/workflows/episode005-s09-analog-radar-qa.yml"]
+    branches: ["audit/episode005-s09-retro-keyboard-20261107"]
+    paths: [".github/workflows/episode005-s09-retro-keyboard-qa.yml"]
 
 permissions:
   contents: read
@@ -31,39 +31,39 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p artifacts/s09-analog-radar
+          mkdir -p artifacts/s09-retro-keyboard
           curl --fail --location --silent --show-error --retry 2 --retry-delay 2 \
-            --connect-timeout 15 --max-time 120 --max-filesize 50M \
-            "https://videos.pexels.com/video-files/6442793/6442793-hd_1920_1080_24fps.mp4" \
-            --output artifacts/s09-analog-radar/candidate.mp4
+            --connect-timeout 15 --max-time 120 --max-filesize 90M \
+            "https://videos.pexels.com/video-files/8888977/8888977-hd_1920_1080_24fps.mp4" \
+            --output artifacts/s09-retro-keyboard/candidate.mp4
           ffprobe -v error -show_entries format=duration,size:stream=codec_type,codec_name,width,height,r_frame_rate \
-            -of json artifacts/s09-analog-radar/candidate.mp4 > artifacts/s09-analog-radar/ffprobe.json
+            -of json artifacts/s09-retro-keyboard/candidate.mp4 > artifacts/s09-retro-keyboard/ffprobe.json
           python - <<'PY'
           from pathlib import Path
           import json, hashlib
-          base=Path("artifacts/s09-analog-radar")
+          base=Path("artifacts/s09-retro-keyboard")
           x=json.loads((base/"ffprobe.json").read_text())
           videos=[v for v in x.get("streams",[]) if v.get("codec_type")=="video"]
           assert len(videos)==1, videos
           v=videos[0]
           d=float(x["format"]["duration"])
-          assert 4<=d<=20, d
+          assert 4<=d<=40, d
           assert int(v["width"])>=1280 and int(v["height"])>=720, v
           content=base/"candidate.mp4"
-          assert content.stat().st_size<=50*1024*1024
+          assert content.stat().st_size<=90*1024*1024
           evidence={
             "status":"DOWNLOADED_QA_ONLY_NOT_APPROVED",
-            "source_page_url":"https://www.pexels.com/video/a-person-operating-a-radar-6442793/",
-            "provider":"pexels","artist":"ArtHouse Studio",
+            "source_page_url":"https://www.pexels.com/video/a-person-operating-a-radar-8888977/",
+            "provider":"pexels","artist":"MART PRODUCTION",
             "license_name":"Pexels License","license_page":"https://www.pexels.com/license/",
-            "media_url":"https://videos.pexels.com/video-files/6442793/6442793-hd_1920_1080_24fps.mp4",
+            "media_url":"https://videos.pexels.com/video-files/8888977/8888977-hd_1920_1080_24fps.mp4",
             "sha256":hashlib.sha256(content.read_bytes()).hexdigest(),
             "bytes":content.stat().st_size,"duration_seconds":d,
             "width":v["width"],"height":v["height"],"fps":v["r_frame_rate"],
             "codec":v["codec_name"],"sample_mode":"FIVE_FRAME_NATIVE_AND_VERTICAL_CROP",
             "approved_for_render":False,"human_approval":"PENDING",
             "catalog_mutated":False,"source_audio_use":"PROHIBITED",
-            "historical_truth":"REPRESENTATIONAL_NOT_1983_ARCHIVE"
+            "historical_truth":"REPRESENTATIONAL_1980S_STYLE_DATA_ENTRY_NOT_HISTORICAL"
           }
           (base/"qa-report.json").write_text(json.dumps(evidence,indent=2)+"\n")
           print(json.dumps(evidence))
@@ -76,7 +76,7 @@ jobs:
           python - <<'PY'
           import json,subprocess
           from pathlib import Path
-          base=Path("artifacts/s09-analog-radar")
+          base=Path("artifacts/s09-retro-keyboard")
           x=json.loads((base/"qa-report.json").read_text())
           d=x["duration_seconds"]
           for i,part in enumerate((.08,.28,.5,.72,.92)):
@@ -95,7 +95,7 @@ jobs:
       - name: Preserve candidate and QA as isolated GitHub artifact
         uses: actions/upload-artifact@v4
         with:
-          name: episode005-s09-analog-radar-QA-${{ github.run_id }}
-          path: artifacts/s09-analog-radar
+          name: episode005-s09-retro-keyboard-QA-${{ github.run_id }}
+          path: artifacts/s09-retro-keyboard
           retention-days: 7
           if-no-files-found: error
