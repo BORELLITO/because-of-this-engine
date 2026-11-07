@@ -28,6 +28,16 @@ class V21SafetyHardeningTests(unittest.TestCase):
                 "active_engine_version": "2.1",
                 "canonical_entrypoint": "production/canonical_entrypoint.py",
                 "production_enablement": False,
+                "soundtrack_policy_v21": {
+                    "status": "ENFORCED_ENGINE_SELECTS_VETTED_MUSIC",
+                    "selector": "production/music_autoselect_v21.py",
+                    "music_required_in_every_final": True,
+                    "music_to_last_frame": True,
+                    "music_gain_max": 0.12,
+                    "music_fade_out_seconds": 1.2,
+                    "narration_ducking": "SIDECHAIN_COMPRESSOR_V21",
+                    "no_clear_music_action": "FAIL_CLOSED_NO_SILENT_SUBSTITUTE",
+                },
                 "final_render_entrypoint": "production/render_v21_final.py",
                 "final_render_route": {
                     "status": "IMPLEMENTED_FAIL_CLOSED_NO_PRODUCTION_AUTHORIZATION",
@@ -47,8 +57,14 @@ class V21SafetyHardeningTests(unittest.TestCase):
         (self.root / "production" / "render_v21_final.py").write_text(
             'validate_request(record, repo_root=repo_root, mode="final")\n'
             'validate_completed_audio_mix(\n'
-            'build_audio_mix_command(\n',
+            'build_audio_mix_command(\n'
+            'select_for_story(\n'
+            'sidechaincompress=\n'
+            'afade=t=out\n',
             encoding="utf-8",
+        )
+        (self.root / "production" / "music_autoselect_v21.py").write_text(
+            "# isolated soundtrack selector fixture\n",encoding="utf-8"
         )
         (self.root / "production" / "final_delivery_v21.py").write_text(
             "# test fixture: final-drive delivery proof boundary\n", encoding="utf-8")
