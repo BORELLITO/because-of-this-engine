@@ -133,6 +133,50 @@ jobs:
           print("V21_FINAL_RENDER_CANONICAL_ROUTE_IMPLEMENTED_POLICY_BLOCKED")
           PY
 
+      - name: Verify story music autopick and exact end-card fade hard-lock
+        run: |
+          PYTHONPATH=. python - <<'PY'
+          import json
+          from pathlib import Path
+          from production.render_v21_final import _time_signature, build_audio_mix_command, FinalRenderError
+          from production.v21_singleton_guard import audit
+          policy=json.loads(Path("production/active_engine_policy.json").read_text())
+          p=json.loads(Path("production/audio_mix_profile_v21.json").read_text())
+          music=policy["soundtrack_policy_v21"]
+          assert music["music_required_in_every_final"] is True
+          assert music["story_based_selection"] is True
+          assert music["music_to_last_frame"] is True
+          assert music["music_fade_out_seconds"] == 1.2
+          assert music["music_gain_max"] == p["music_gain"] == 0.12
+          assert p["music_ends_before_outro"] is False
+          assert p["music_selection"]["decision_maker"] == "MOTOR_V21"
+          assert p["speech_ducking"]["enabled"] is True
+          assert _time_signature(p,65.0) == 70.5
+          command=build_audio_mix_command(
+              Path("/tmp/charon.wav"),Path("/tmp/story-music.wav"),{},
+              Path("/tmp/out.wav"),voice_seconds=65,profile=p)
+          graph=command[command.index("-filter_complex")+1]
+          assert "-stream_loop" not in command
+          assert "sidechaincompress=" in graph
+          assert "volume=0.1200" in graph
+          assert "afade=t=out:st=69.300:d=1.200" in graph
+          assert "atrim=duration=70.500" in graph
+          assert "amix=inputs=2:duration=longest" in graph
+          try:
+              build_audio_mix_command(
+                  Path("/tmp/charon.wav"),Path("/tmp/music.wav"),
+                  {"sfx:siren":Path("/tmp/siren.wav")},Path("/tmp/out.wav"),
+                  voice_seconds=65,profile=p)
+              raise AssertionError("Siren should be blocked")
+          except FinalRenderError:
+              pass
+          assert policy["production_enablement"] is False
+          assert policy["final_drive_delivery_enablement"] is False
+          assert policy["publication_policy"] == "manual_only"
+          assert audit(Path("."))["status"] == "V21_SINGLETON_PASS"
+          print("V21_AUTONOMOUS_STORY_MUSIC_CONTINUOUS_ENDCARD_FADE_LOCK_PASS")
+          PY
+
       - name: Validate active policy
         run: |
           python - <<'PY'
