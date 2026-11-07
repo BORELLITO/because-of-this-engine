@@ -3175,7 +3175,7 @@
         "no_readable_labels",
         "must_not_assign_S04"
       ],
-      "selection_status": "REVIEW_REQUIRED",
+      "selection_status": "EDITORIALLY_SUPERSEDED_FOR_S09_BY_PEXELS_8888977",
       "score_breakdown": {
         "semantic_fit": 0.84,
         "continuity_coherence": 0.75,
@@ -3232,7 +3232,13 @@
         "full_duration_qa": "FIVE_NORMALIZED_SAMPLES_REVIEWED",
         "fingerprint_evidence": "artifact 13481742998 / fingerprint-audit.json"
       },
-      "next_review": "Confirm that the dark tactile mixing surface can be used as a generic 1983-era control insert without readable modern context."
+      "next_review": "Confirm that the dark tactile mixing surface can be used as a generic 1983-era control insert without readable modern context.",
+      "editorial_supersession": {
+        "date": "2026-11-07",
+        "reason": "Audio-mixer footage was not an appropriate symbolic cue; replaced with hands typing after visual QA and known-history fingerprint audit",
+        "replacement_candidate_id": "pexels-8888977",
+        "approved_for_render": false
+      }
     },
     {
       "candidate_id": "nasa-svs-noctilucent-clouds-20002",
@@ -4224,9 +4230,168 @@
         "render_allowed": false,
         "drive_written": false
       }
+    },
+    {
+      "candidate_id": "pexels-8888977",
+      "source_page_url": "https://www.pexels.com/video/person-typing-on-a-keyboard-8888977/",
+      "media_url": "https://videos.pexels.com/video-files/8888977/8888977-uhd_4096_2160_25fps.mp4",
+      "role": "S09",
+      "visual_match": "NEAR",
+      "visual_intent": "Close-up of hands typing on an old-fashioned beige keyboard as a SYMBOLIC representation of entering the false-alarm classification. NOT footage of Petrov, not an actual Soviet command console or historical terminal.",
+      "truth_class": "REPRESENTATIONAL",
+      "provider": "pexels",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "license_name": "Pexels License",
+      "source_tier": "stock_auto",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "browser_verification": {
+        "status": "SOURCE_PAGE_AND_GENERAL_LICENSE_REVIEWED",
+        "reviewed_date": "2026-11-07",
+        "source_author": "MART PRODUCTION",
+        "observed_license": "Free; Pexels License general commercial permission subject to third-party/personality rights",
+        "license_page": "https://www.pexels.com/legal-pages/license/",
+        "artist": "MART PRODUCTION",
+        "page": "https://www.pexels.com/video/person-typing-on-a-keyboard-8888977/",
+        "media_url_verification": {
+          "method": "REAL_GITHUB_ACTIONS_DOWNLOAD_AND_SHA256",
+          "status": "PASS",
+          "workflow_run_id": 42388510746,
+          "content_type": "video/mp4",
+          "content_length_bytes": 63292776
+        }
+      },
+      "continuity_tags": {
+        "era": [
+          "analog",
+          "period_compatible",
+          "1983_style_representation"
+        ],
+        "setting": [
+          "technical_control_room",
+          "representational_data_entry"
+        ],
+        "time_of_day": [
+          "indeterminate_low_light",
+          "night"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "muted_amber",
+          "steel"
+        ],
+        "texture": [
+          "low_light_grain",
+          "aged_beige_keyboard",
+          "plastic_keys"
+        ]
+      },
+      "continuity_risk_flags": [
+        "modern_stock_not_1983_archive",
+        "keyboard_is_representational_not_literal_console",
+        "clothing_may_be_modern",
+        "center_crop_hands_keys",
+        "no_person_as_real_character",
+        "no_literal_date_claim",
+        "source_audio_disallowed"
+      ],
+      "selection_status": "APPROVED_FOR_MANIFEST_ONLY_BY_USER",
+      "score_breakdown": {
+        "semantic_fit": 0.85,
+        "continuity_coherence": 0.78,
+        "license_confidence": 0.9,
+        "vertical_crop_quality": 0.88,
+        "clean_frame_quality": 0.92,
+        "source_distinctness": 0.96,
+        "score_origin": "EDITORIAL_ESTIMATE_NOT_AUTOMATED_VALIDATION"
+      },
+      "manual_rights_review": "Pexels standard commercial-use license verified; artwork, brands and people may have separate rights. Approval here covers ONLY editorial choice for manifest. Render rights remain pending independent review.",
+      "intake_artifact": {
+        "workflow_run_id": 42388510746,
+        "branch": "audit/episode005-s09-analog-radar-20261107",
+        "commit_sha": "84cf5cf731c1dd658ca291b18e538ea312667172",
+        "artifact_id": 13580144522,
+        "artifact_name": "episode005-s09-retro-keyboard-QA-42388510746",
+        "artifact_digest": "sha256:c7dbc26fc3da1d80036f962df6f9df2266ad26ef7af413fbef0cce195094a338",
+        "status": "CANDIDATE_DOWNLOADED_FINGERPRINT_PASS_APPROVED_FOR_MANIFEST_ONLY",
+        "automated_promotion": false,
+        "sha256": "b5e41fafc252a88d3959fbb3df0294010397e6687d833d884bc5a0bfdd48fa51",
+        "duration_seconds": 24.6,
+        "dimensions": [
+          4096,
+          2160
+        ],
+        "frame_rate": "25/1",
+        "codec": "h264",
+        "fps": 25,
+        "size_bytes": 63292776,
+        "perceptual_hash": "11084cf2f2f6ddf92255d82bcb19c5cc04003c2dbc1b7c21f0bf617aa87915a8",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42390022588,
+        "fingerprint_artifact_id": 13581475505,
+        "fingerprint_artifact_digest": "sha256:87ebe742d0f9816f6f8f37152ca8963007f3524fa826fcd7c55292d01d6cf819",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false,
+        "global_history_coverage": "KNOWN_13_REGISTRY_ITEMS_AND_56_HISTORICAL_SCENES_UNINDEXED_RELEASES_UNKNOWN",
+        "archival_qa_backup_drive_file_id": "1rdUiMhgJ05YK8CMRsqB2VqzBq3KE_N_E"
+      },
+      "qa": {
+        "clean_frame_visual_review": "PASS_FIVE_SAMPLED_NATIVE_AND_9X16_FRAMES",
+        "baked_captions_or_authored_graphics": "NOT_OBSERVED_IN_SAMPLED_FRAMES",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_SAMPLED_FRAMES",
+        "semantic_fit": "USER_APPROVED_OLD_KEYBOARD_SYMBOLIC_FALSE_ALARM_ENTRY_NOT_1983_ARCHIVAL",
+        "locked_9x16_crop": "PASS_HANDS_AND_KEYS_CENTERED_IN_4_SECOND_QA_PREVIEW",
+        "global_reuse_fingerprint": "NO_COLLISION_IN_13_REGISTERED_ASSETS_AND_56_HISTORICAL_SCENES",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "visual_qa_status": "EDITORIAL_APPROVED_FOR_MANIFEST_ONLY",
+        "human_approval_basis": "User instructed to proceed with the recommended keyboard after assistant explicitly asked whether to approve the preview for S09; 2026-11-07",
+        "human_approval_date": "2026-11-07",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "PASS_TECHNICAL_REAL_CLIP_REVIEW_NOT_FULL_HUMAN_FRAME_BY_FRAME",
+        "visual_qa_evidence": "GitHub run 42388510746 artifact 13580144522; 5 native+9:16 samples; QA 4 sec preview; Drive backup 1rdUiMhgJ05YK8CMRsqB2VqzBq3KE_N_E",
+        "third_party_risk": "PEOPLE_HANDS_OR_CLOTHING_AND_BRANDING_REQUIRE_FINAL_RIGHTS_CONTEXT_REVIEW",
+        "audio_source_policy": "STRIP_OR_NO_AUDIO_SOURCE",
+        "editorial_caveat": "Stock reconstruction only; do not imply exact Soviet 1983 device or identity of any person",
+        "fingerprint_evidence": "GitHub run 42390022588 artifact 13581475505: known-history pass"
+      },
+      "approved_shot_ids": [
+        "S09"
+      ],
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "manifest_assignment": {
+        "shot_id": "S09",
+        "approved_on_date": "2026-11-07",
+        "scope": "APPROVED_FOR_MANIFEST_ONLY",
+        "supersedes": "pexels-12213087",
+        "reason": "User approved the recommended retro keyboard as a clearer symbol for entering the false-alarm classification; avoid modern mixing-console misrepresentation."
+      },
+      "fingerprint_audit": {
+        "workflow_run_id": 42390022588,
+        "artifact_id": 13581475505,
+        "artifact_digest": "sha256:87ebe742d0f9816f6f8f37152ca8963007f3524fa826fcd7c55292d01d6cf819",
+        "status": "KNOWN_HISTORY_FINGERPRINT_PASS",
+        "algorithm": "video-fingerprint-v2-rgb24-q4",
+        "sha256": "b5e41fafc252a88d3959fbb3df0294010397e6687d833d884bc5a0bfdd48fa51",
+        "perceptual_hash": "11084cf2f2f6ddf92255d82bcb19c5cc04003c2dbc1b7c21f0bf617aa87915a8",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false,
+        "coverage_limit": "13 registered assets, 56 known historical scene assignments; not exhaustive external history",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "render_allowed": false,
+        "drive_written": false
+      },
+      "next_review": "Independent source-specific third-party and render rights reconciliation; no publication"
     }
   ],
-  "next_action": "Create the separate manifest PR for the approved S04/S12 replacements, then rerun visual-plan contract and continuity. Do not render or promote.",
+  "next_action": "Reconcile S09 media and seven missing rights identities; record no-render restrictions and run full CI. Maintain production and publication blocked.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -4685,6 +4850,32 @@
         "fingerprint_artifact_id": 13486336703,
         "fingerprint_artifact_digest": "sha256:bc652f9dd6a614ef40b22e1b685ac92dffdbf5086051c616e67cff9ab081f1bc"
       }
+    },
+    {
+      "candidate_ids": [
+        "pexels-8888977"
+      ],
+      "shot_ids": [
+        "S09"
+      ],
+      "date": "2026-11-07",
+      "decision": "USER_EDITORIAL_APPROVAL_FOR_MANIFEST_ONLY",
+      "approval_evidence": "User's message in current project conversation: 'Pode seguir com sua recomendação e executa os upgrades.' after explicit question asking whether to approve retro keyboard replacement for S09.",
+      "scope": "APPROVED_FOR_MANIFEST_ONLY",
+      "supersedes": "pexels-12213087",
+      "render_authorized": false,
+      "global_catalog_updated": false,
+      "publication_authorized": false,
+      "qa_workflow_run_id": 42388510746,
+      "known_history_fingerprint_run_id": 42390022588,
+      "candidate_source_sha256": "b5e41fafc252a88d3959fbb3df0294010397e6687d833d884bc5a0bfdd48fa51",
+      "candidate_perceptual_hash": "11084cf2f2f6ddf92255d82bcb19c5cc04003c2dbc1b7c21f0bf617aa87915a8",
+      "constraints": [
+        "not archival footage or actual Soviet terminal",
+        "no new TTS or video render",
+        "independent rights approval required",
+        "global historical coverage is not exhaustive"
+      ]
     }
   ],
   "rejected_candidates": [
@@ -5150,60 +5341,24 @@
     ]
   },
   "last_candidate_addition": {
-    "added_at_utc": "2026-11-06T06:24:12.609Z",
-    "candidate_ids": [
-      "pexels-11764431",
-      "pexels-4285872",
-      "pexels-6520278"
-    ],
-    "rationale": "Search-v5 expands the blocked-shot recovery lane with a period-compatible human operator and two analog control-panel alternatives sourced from Pexels. Candidates remain shortlist-only; no active manifest assignment changes.",
-    "source_page_and_license_verification": "Pexels source pages were reviewed for Free-use evidence and direct media routes were resolved to videos.pexels.com. Local ffprobe confirmed the recorded dimensions, duration, frame rate and audio presence.",
-    "continuity_review": "S03 prioritizes a dim-room radio operator over modern tablet/workshop imagery. S04 compares a dark tape-deck action against a multi-switch panel; 6520278 is explicitly fallback because of its bright blue/high-key context. Candidate 4285872 may serve S09 only if its labels/timer remain subordinate.",
-    "render_block": true,
-    "intake_dispatched": false,
-    "promotion_allowed": false,
-    "media_route_verification": {
-      "status": "PASS",
-      "method": "Pexels page review plus HTTP HEAD/local ffprobe",
-      "direct_media_routes_recorded": 3,
-      "notes": "All three routes resolve to video/mp4; source audio is stripped by the renderer and does not enter the narration mix."
-    }
+    "date": "2026-11-07",
+    "candidate_id": "pexels-8888977",
+    "source_workflow_run_id": 42388510746,
+    "fingerprint_workflow_run_id": 42390022588,
+    "status": "EDITORIALLY_APPROVED_MANIFEST_ONLY"
   },
   "last_human_approval": {
+    "date": "2026-11-07",
     "candidate_ids": [
-      "pixabay-radio-vintage-old-171435",
-      "nasa-svs-geos5-clouds-no-labels-4819"
+      "pexels-8888977"
     ],
-    "approved_at_utc": "2026-11-06T07:50:43Z",
-    "decision": "Aprovar o rádio vintage para S04 e a visualização NASA GEOS-5 para S12 como substituições manifest-only após QA visual e fingerprint global sem colisões.",
-    "selected_primary_by_shot": {
-      "S04": "pixabay-radio-vintage-old-171435",
-      "S12": "nasa-svs-geos5-clouds-no-labels-4819"
-    },
-    "superseded_by_shot": {
-      "S04": "mixkit-worker-industrial-lathe-2244",
-      "S12": "pixabay-antenna-astronomy-communication-40041"
-    },
+    "shot_ids": [
+      "S09"
+    ],
     "scope": "APPROVED_FOR_MANIFEST_ONLY",
-    "constraints": [
-      "footage representacional não é evidência literal de Petrov",
-      "uma fonte distinta por shot; sem reuso dentro ou entre episódios",
-      "rádio: manter insert escuro e simbólico, sem revelar marcas futuras",
-      "NASA: manter crédito NASA SVS e tratar como visualização modelada",
-      "aprovação não autoriza render",
-      "aprovação não autoriza catálogo global, Drive ou publicação",
-      "continuidade CI ainda é obrigatória"
-    ],
-    "evidence": {
-      "intake_workflow_run_id": 42178800543,
-      "intake_job_id": 127763342737,
-      "intake_artifact_id": 13484277704,
-      "intake_artifact_digest": "sha256:76d78df18adf6d1d120ff6925b72f0cbf425a472eeaee7f40024e111b657efd",
-      "fingerprint_workflow_run_id": 42183105946,
-      "fingerprint_job_id": 127777035277,
-      "fingerprint_artifact_id": 13486336703,
-      "fingerprint_artifact_digest": "sha256:bc652f9dd6a614ef40b22e1b685ac92dffdbf5086051c616e67cff9ab081f1bc"
-    }
+    "render_authorized": false,
+    "source_fingerprint_status": "KNOWN_HISTORY_FINGERPRINT_PASS",
+    "approval_context": "user directed assistant to proceed with recommended S09 preview"
   },
   "last_contract_validation": {
     "validated_at_utc": "2026-11-06T06:41:53Z",
@@ -5250,8 +5405,8 @@
     "continuity_coverage_score": 0.9187,
     "note": "CI run 42176059809 validated the updated S03/S09 manifest replacements. Both new shots pass continuity; S04/S12 remain hard conflicts and S11->S12/S12->S13 remain blocked adjacency transitions. Render/preview remain blocked."
   },
-  "last_adjustment": "Search-v6 fingerprint run 42183105946 passed for the dark vintage radio and NASA GEOS-5 no-labels visual. Both have no global source, SHA-256 or perceptual collisions; telephone remains rejected for visible Alcatel branding. The user-approved S04/S12 manifest substitutions are now recorded, pending the separate manifest PR and continuity revalidation.",
-  "next_gate": "Create and merge the separate manifest PR assigning pixabay-radio-vintage-old-171435 to S04 and nasa-svs-geos5-clouds-no-labels-4819 to S12; run visual-plan contract and continuity. Keep render, preview, global catalog, Drive and publication blocked.",
+  "last_adjustment": "2026-11-07: User-approved keyboard retro S09 candidate entered into plan as manifest-only; source checksum, perceptual fingerprint and known-history reuse audit verified; independent rights and final release remain blocked.",
+  "next_gate": "VISUAL_PLAN_CONTRACT_AND_CROSS_LEDGER_EXPECTED_BLOCKS",
   "render_approval_record": {
     "status": "APPROVED",
     "approved_at_utc": "2026-11-05T22:56:14Z",
