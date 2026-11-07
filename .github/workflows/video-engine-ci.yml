@@ -26,6 +26,14 @@ jobs:
         run: python -m pip install --disable-pip-version-check Pillow==11.3.0
       - name: Compile canonical V2.1 surface
         run: python -m py_compile production/*.py
+      - name: Install real FFmpeg for S01/S12 label smoke tests
+        run: |
+          if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends ffmpeg
+          fi
+          ffmpeg -version | head -n 1
+          ffprobe -version | head -n 1
       - name: Run V2.1 tests
         run: PYTHONPATH=. python -m unittest discover -s tests -p 'test_v21*.py' -v
       - name: Validate active policy
