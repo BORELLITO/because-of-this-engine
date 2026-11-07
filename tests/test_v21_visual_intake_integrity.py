@@ -1,66 +1,55 @@
-"""Test the real Episode 005 manifest as blocked; use in-memory synthetic
-approval only to exercise positive validation. Never mutate production records.
+"""The user-approved S09 replacement passes MANIFEST checks only.
+The episode must remain blocked by independent render rights and audio history.
 """
 from __future__ import annotations
-
 import copy
 import json
 import unittest
 from pathlib import Path
-
 from production.visual_plan_contract import VisualPlanContractError, validate_visual_plan
 
-
 ROOT = Path(__file__).resolve().parents[1]
-
+NEW_ID = "pexels-8888977"
+OLD_ID = "pexels-12213087"
 
 class VisualIntakeIntegrityTests(unittest.TestCase):
     def setUp(self):
-        self.plan = json.loads(
-            (ROOT / "episodes/episode-005/visual/asset-acquisition-plan.json").read_text(encoding="utf-8")
-        )
-        self.manifest = json.loads(
-            (ROOT / "episodes/episode-005/visual/scene-asset-manifest.json").read_text(encoding="utf-8")
-        )
+        self.plan=json.loads((ROOT/"episodes/episode-005/visual/asset-acquisition-plan.json").read_text(encoding="utf-8"))
+        self.manifest=json.loads((ROOT/"episodes/episode-005/visual/scene-asset-manifest.json").read_text(encoding="utf-8"))
 
-    def _synthetically_consistent(self):
-        plan = copy.deepcopy(self.plan)
-        manifest = copy.deepcopy(self.manifest)
-        # TEST FIXTURE ONLY. Never write approvals or pretend this is human QA.
-        candidate = next(c for c in plan["candidates"] if c["candidate_id"] == "pexels-12213087")
-        asset = next(a for a in manifest["assets"] if a["candidate_id"] == "pexels-12213087")
-        candidate["rights_status"] = "APPROVED_FOR_MANIFEST_ONLY"
-        candidate["qa"]["human_approval"] = "APPROVED_FOR_MANIFEST"
-        asset["perceptual_hash"] = candidate["intake_artifact"]["perceptual_hash"]
-        return plan, manifest
+    def _consistent_copy(self):
+        return copy.deepcopy(self.plan),copy.deepcopy(self.manifest)
 
-    def test_real_manifest_is_blocked_until_approval_and_hash_reconcile(self):
-        with self.assertRaises(VisualPlanContractError) as raised:
-            validate_visual_plan(self.plan, self.manifest)
-        reason = str(raised.exception)
-        self.assertIn("manifest contains a candidate not approved", reason)
-        self.assertIn("pexels-12213087: intake perceptual fingerprint mismatch", reason)
-
-    def test_consistent_synthetic_fixture_passes_without_promoting_media(self):
-        plan, manifest = self._synthetically_consistent()
-        report = validate_visual_plan(plan, manifest)
-        self.assertEqual(report["status"], "VISUAL_PLAN_CONTRACT_PASS")
-        self.assertFalse(report["render_allowed"])
+    def test_real_manifest_passes_without_authorizing_render(self):
+        report=validate_visual_plan(self.plan,self.manifest)
+        self.assertEqual(report["status"],"VISUAL_PLAN_CONTRACT_PASS")
+        self.assertEqual(report["manifest_asset_count"],16)
         self.assertFalse(report["promotion_allowed"])
+        self.assertFalse(report["render_allowed"])
         self.assertFalse(report["global_catalog_updated"])
+        asset=next(a for a in self.manifest["assets"] if a["candidate_id"]==NEW_ID)
+        self.assertFalse(asset["approved_for_render"])
+        self.assertFalse(any(a["candidate_id"]==OLD_ID for a in self.manifest["assets"]))
+        self.assertTrue(any(a["candidate_id"]==OLD_ID for a in self.plan["candidates"]))
+
+    def test_synthetic_human_approval_revocation_blocks(self):
+        plan,man=self._consistent_copy()
+        c=next(a for a in plan["candidates"] if a["candidate_id"]==NEW_ID)
+        c["rights_status"]="CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA"
+        with self.assertRaisesRegex(VisualPlanContractError,"manifest contains a candidate not approved"):
+            validate_visual_plan(plan,man)
 
     def test_tampered_sha_is_rejected(self):
-        plan, manifest = self._synthetically_consistent()
-        manifest["assets"][0]["sha256"] = "0" * 64
-        with self.assertRaisesRegex(VisualPlanContractError, "intake SHA-256 mismatch"):
-            validate_visual_plan(plan, manifest)
+        plan,man=self._consistent_copy()
+        next(a for a in man["assets"] if a["candidate_id"]==NEW_ID)["sha256"]="0"*64
+        with self.assertRaisesRegex(VisualPlanContractError,"intake SHA-256 mismatch"):
+            validate_visual_plan(plan,man)
 
     def test_tampered_perceptual_identity_is_rejected(self):
-        plan, manifest = self._synthetically_consistent()
-        manifest["assets"][0]["perceptual_hash"] = "PENDING_MANIFEST_ONLY"
-        with self.assertRaisesRegex(VisualPlanContractError, "perceptual fingerprint mismatch"):
-            validate_visual_plan(plan, manifest)
+        plan,man=self._consistent_copy()
+        next(a for a in man["assets"] if a["candidate_id"]==NEW_ID)["perceptual_hash"]="PENDING_MANIFEST_ONLY"
+        with self.assertRaisesRegex(VisualPlanContractError,"intake perceptual fingerprint mismatch"):
+            validate_visual_plan(plan,man)
 
-
-if __name__ == "__main__":
+if __name__=="__main__":
     unittest.main()

@@ -16,14 +16,14 @@ class EP005S09AndRightsReviewTests(unittest.TestCase):
         cls.manifest = json.loads((ROOT / "episodes/episode-005/visual/scene-asset-manifest.json").read_text(encoding="utf-8"))
         cls.record = json.loads((ROOT / "episodes/episode-005/production-record.json").read_text(encoding="utf-8"))
 
-    def test_new_candidate_remains_independent_from_canonical_asset(self):
+    def test_old_snapshot_and_new_manifest_approval_remain_distinct_from_render_rights(self):
         s = self.selection
         self.assertEqual(s["selection_decision"], "PREFERRED_CANDIDATE_PENDING_HUMAN_AND_REUSE_QA")
         self.assertFalse(s["render_allowed"])
         self.assertFalse(s["publication_allowed"])
         self.assertEqual(s["source_beats"]["existing_active_asset_id"], "pexels-12213087")
-        self.assertFalse(any(x["candidate_id"] == "pexels-8888977" for x in self.plan["candidates"]))
-        self.assertFalse(any(x["candidate_id"] == "pexels-8888977" for x in self.manifest["assets"]))
+        self.assertTrue(any(x["candidate_id"] == "pexels-8888977" and x["rights_status"] == "APPROVED_FOR_MANIFEST_ONLY" for x in self.plan["candidates"]))
+        self.assertTrue(any(x["candidate_id"] == "pexels-8888977" and x["approved_for_render"] is False for x in self.manifest["assets"]))
         self.assertFalse(any(x["asset_id"] == "pexels-8888977" for x in self.record["rights_ledger"]))
 
     def test_qa_only_source_hash_and_approvals_are_fail_closed(self):
@@ -63,7 +63,8 @@ class EP005S09AndRightsReviewTests(unittest.TestCase):
         result = validate_visual_rights_consistency(self.record, repo_root=ROOT)
         self.assertEqual(result["status"], "BLOCKED")
         self.assertTrue(any("visual assets missing render rights" in x for x in result["failures"]))
-        self.assertTrue(any("pexels-12213087: plan does not record human manifest approval" in x for x in result["failures"]))
+        self.assertTrue(any("pexels-8888977" in x for x in result["failures"]))
+        self.assertFalse(any("pexels-8888977: plan does not record human manifest approval" in x for x in result["failures"]))
 
 
 if __name__ == "__main__":

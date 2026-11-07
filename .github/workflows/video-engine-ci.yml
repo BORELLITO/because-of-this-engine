@@ -44,34 +44,31 @@ jobs:
           assert policy["status"] == "BLOCKED_FOR_PRODUCTION"
           print("V21_POLICY_IDENTITY_PASS")
           PY
-      - name: Validate Episode 005 visual plan (fail-closed on pending approval)
+      - name: Validate user-approved S09 manifest without render promotion
         run: |
           PYTHONPATH=. python - <<'PY'
           import json
           from pathlib import Path
-          from production.visual_plan_contract import validate_visual_plan, VisualPlanContractError
-          plan = json.loads(Path("episodes/episode-005/visual/asset-acquisition-plan.json").read_text())
-          manifest = json.loads(Path("episodes/episode-005/visual/scene-asset-manifest.json").read_text())
-          approved = {c["candidate_id"] for c in plan["candidates"] if c.get("rights_status") == "APPROVED_FOR_MANIFEST_ONLY"}
-          pending = sorted(a["candidate_id"] for a in manifest["assets"] if a["candidate_id"] not in approved)
-          try:
-              report = validate_visual_plan(plan, manifest)
-          except VisualPlanContractError as exc:
-              # The real Pexels S09 candidate is pending human approval: preserve
-              # the hard block. Any NEW discrepancy must fail CI, not be hidden.
-              expected = ["pexels-12213087"]
-              assert pending == expected, {"unexpected_pending_assets": pending}
-              expected_failures = {
-                  "manifest contains a candidate not approved for manifest-only use",
-                  "pexels-12213087: intake perceptual fingerprint mismatch or pending",
-              }
-              assert set(str(exc).split("; ")) == expected_failures, str(exc)
-              print("::warning::EPISODE005_VISUAL_BLOCKED_PENDING_HUMAN_APPROVAL:" + ",".join(pending))
-          else:
-              assert not pending, {"manifest_approved_without_plan_evidence": pending}
-              assert report["status"] == "VISUAL_PLAN_CONTRACT_PASS", report
-              assert report["render_allowed"] is False, report
-              print("EPISODE005_VISUAL_PLAN_VERIFIED_NO_AUTOMATIC_RENDER")
+          from production.visual_plan_contract import validate_visual_plan
+          plan=json.loads(Path("episodes/episode-005/visual/asset-acquisition-plan.json").read_text())
+          scene=json.loads(Path("episodes/episode-005/visual/scene-asset-manifest.json").read_text())
+          report=validate_visual_plan(plan,scene)
+          assert report["status"]=="VISUAL_PLAN_CONTRACT_PASS",report
+          assert report["manifest_asset_count"]==16,report
+          assert report["render_allowed"] is False and report["promotion_allowed"] is False,report
+          assert report["global_catalog_updated"] is False,report
+          s09=next(s for s in scene["shot_assignments"] if s["shot_id"]=="S09")
+          assert s09["assignment"]["candidate_id"]=="pexels-8888977",s09
+          asset=next(a for a in scene["assets"] if a["candidate_id"]=="pexels-8888977")
+          candidate=next(a for a in plan["candidates"] if a["candidate_id"]=="pexels-8888977")
+          assert candidate["rights_status"]=="APPROVED_FOR_MANIFEST_ONLY"
+          assert candidate["qa"]["human_approval"]=="APPROVED_FOR_MANIFEST"
+          assert asset["sha256"]==candidate["intake_artifact"]["sha256"]
+          assert asset["perceptual_hash"]==candidate["intake_artifact"]["perceptual_hash"]
+          assert asset["approved_for_render"] is False
+          assert candidate["approved_for_render"] is False
+          assert not any(a["candidate_id"]=="pexels-12213087" for a in scene["assets"])
+          print("EP005_S09_MANIFEST_ONLY_APPROVAL_PASS_NO_RENDER")
           PY
 
       - name: Reconcile Episode 005 visual evidence (report-only; no rights promotion)
@@ -86,9 +83,9 @@ jobs:
           assert d["status"] == "RECONCILIATION_REQUIRED", d["status"]
           assert d["asset_count"] == 16
           assert d["render_rights_matched_count"] == 9
-          assert len(d["approved_manifest_only_pending_render_rights"]) == 6
-          assert d["pending_visual_approval"] == ["pexels-12213087"]
-          assert d["source_provenance_mismatches"] == ["pexels-12213087"]
+          assert len(d["approved_manifest_only_pending_render_rights"]) == 7
+          assert d["pending_visual_approval"] == []
+          assert d["source_provenance_mismatches"] == []
           assert len(d["missing_render_rights"]) == 7
           assert len(d["stale_render_rights"]) == 7
           assert not any(item["approved_for_render"] for item in d["draft_pending_rights_not_canonical"])
@@ -120,7 +117,8 @@ jobs:
           assert any("audio history completeness" in f for f in audio["failures"]), audio
           visual = next(g for g in report["checks"] if g.get("gate") == "VISUAL_RIGHTS_CONSISTENCY")
           assert any("visual assets missing render rights" in f for f in visual["failures"]), visual
-          assert any("pexels-12213087: plan does not record human manifest approval" in f for f in visual["failures"]), visual
+          assert any("pexels-8888977" in f for f in visual["failures"]), visual
+          assert not any("pexels-8888977: plan does not record human manifest approval" in f for f in visual["failures"]), visual
           assert report["production_enablement"] is False
           assert report["media_generation"] == "NOT_RUN"
           assert report["render"] == "NOT_RUN"

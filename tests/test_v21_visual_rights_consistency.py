@@ -127,7 +127,8 @@ class V21VisualRightsConsistencyTests(unittest.TestCase):
         self.assertEqual(result["status"], "BLOCKED")
         self.assertEqual(production, before)
         self.assertTrue(any("visual assets missing render rights:" in e for e in result["failures"]))
-        self.assertTrue(any("pexels-12213087: plan does not record human manifest approval" in e for e in result["failures"]))
+        self.assertTrue(any("pexels-8888977" in e for e in result["failures"]))
+        self.assertFalse(any("pexels-8888977: plan does not record human manifest approval" in e for e in result["failures"]))
 
     def test_manual_preview_can_pass_only_with_matching_evidence(self):
         self.record["preview_enablement"] = True
