@@ -44,6 +44,8 @@ def build_dossier(
     missing = sorted(set(assets) - set(rights))
     stale = sorted(set(rights) - set(assets))
     approved_manifest_only: list[str] = []
+    pending_rights: list[str] = []
+    recorded_pending_rights: list[str] = []
     pending_visual: list[str] = []
     provenance_mismatches: list[str] = []
     draft_entries: list[dict[str, Any]] = []
@@ -70,8 +72,6 @@ def build_dossier(
         )
         if not manifest_approved:
             pending_visual.append(asset_id)
-        if asset_id in missing and manifest_approved and provenance:
-            approved_manifest_only.append(asset_id)
         render_rights_match = bool(
             existing
             and provenance
@@ -82,6 +82,12 @@ def build_dossier(
             and existing.get("perceptual_fingerprint") == asset.get("perceptual_hash")
             and existing.get("source_url") == asset.get("source_page_url")
         )
+        if not render_rights_match:
+            pending_rights.append(asset_id)
+            if manifest_approved and provenance:
+                approved_manifest_only.append(asset_id)
+        if existing and existing.get("rights_status") == "PENDING_INDEPENDENT_RENDER_RIGHTS" and existing.get("approved_for_render") is False:
+            recorded_pending_rights.append(asset_id)
         if asset_id in missing:
             draft_entries.append({
                 "asset_id": asset_id,
@@ -108,6 +114,7 @@ def build_dossier(
             "plan_manifest_approval": manifest_approved,
             "source_provenance_matched": provenance,
             "render_ledger_exists": existing is not None,
+            "render_rights_status": existing.get("rights_status") if existing else "NOT_RECORDED",
             "render_rights_matched": render_rights_match,
             "user_approval_inferred": False,
             "requires_manual_rights_reconciliation": not render_rights_match,
@@ -125,6 +132,9 @@ def build_dossier(
         "render_rights_matched_count": sum(bool(x["render_rights_matched"]) for x in items),
         "missing_render_rights": missing,
         "stale_render_rights": stale,
+        "pending_render_rights": sorted(pending_rights),
+        "pending_recorded_rights": sorted(recorded_pending_rights),
+        "rights_ledger_entry_count": len(rights),
         "approved_manifest_only_pending_render_rights": sorted(approved_manifest_only),
         "pending_visual_approval": sorted(pending_visual),
         "source_provenance_mismatches": sorted(provenance_mismatches),
