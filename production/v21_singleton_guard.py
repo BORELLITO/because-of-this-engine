@@ -50,6 +50,22 @@ def audit(repo_root: Path) -> dict:
             failures.append("Drive adapter lost mandatory final video postflight check")
     if not (root / "production" / "final_delivery_v21.py").is_file():
         failures.append("verified final video delivery gate missing")
+    final_route = policy.get("final_render_route") or {}
+    if (policy.get("final_render_entrypoint") != "production/render_v21_final.py"
+            or final_route.get("status") != "IMPLEMENTED_FAIL_CLOSED_NO_PRODUCTION_AUTHORIZATION"
+            or final_route.get("generate_new_TTS") is not False
+            or final_route.get("publication") != "manual_only"):
+        failures.append("singleton V2.1 final render route identity or no-TTS release lock changed")
+    final_file = root / "production" / "render_v21_final.py"
+    if not final_file.is_file():
+        failures.append("canonical V2.1 final render adapter missing")
+    else:
+        final_source = final_file.read_text(encoding="utf-8")
+        if ('validate_request(record, repo_root=repo_root, mode="final")'
+                not in final_source or
+                'validate_completed_audio_mix(' not in final_source or
+                'build_audio_mix_command(' not in final_source):
+            failures.append("canonical final renderer bypassed V2.1 preflight, mix or postflight")
     workflow_root = root / ".github" / "workflows"
     workflows = sorted(workflow_root.glob("*.yml")) if workflow_root.exists() else []
     for path in workflows:
