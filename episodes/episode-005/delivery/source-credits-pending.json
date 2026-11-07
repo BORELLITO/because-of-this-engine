@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "episode_id": "episode-005",
+  "status": "DRAFT_CREDITS_NOT_DELIVERED",
+  "source_recorded_on": "2026-11-07",
+  "disclosure_policy": "Evidence-bound factual documentary. Clearly distinguish illustrative imagery from historical footage.",
+  "nasa_svs_4819": {
+    "source_asset_id": "nasa-svs-geos5-clouds-no-labels-4819",
+    "actual_shot_id": "S12",
+    "source_url": "https://svs.gsfc.nasa.gov/4819/",
+    "credit": "NASA Scientific Visualization Studio",
+    "additional_credits": [
+      "Greg Shirah (NASA/GSFC), visualizer",
+      "Trent L. Schindler (USRA), visualizer",
+      "Ryan Fitzgibbons (USRA), producer"
+    ],
+    "disclosure": "Illustrative GEOS-5 modeled cloud cover (2020); not 1983 Soviet satellite data.",
+    "mode": "ILLUSTRATIVE_NON_ARCHIVAL",
+    "recommended_caption": "Illustrative visualization — NASA SVS / GEOS-5 (2020)",
+    "suggested_video_description_english": "Illustrative atmospheric visualization (not historical incident footage): NASA Scientific Visualization Studio, Greg Shirah, Trent L. Schindler, and Ryan Fitzgibbons. Earth Day 2020 GEOS-5 modeled cloud cover (https://svs.gsfc.nasa.gov/4819/). This visualization does not depict Soviet early-warning satellite data from 1983. No NASA endorsement is implied.",
+    "onsite_credit_check_required": true,
+    "delivery_verified": false,
+    "final_video_path": null,
+    "final_video_sha256": null,
+    "description_posted_url": null,
+    "ready_for_publication": false,
+    "official_source_last_checked": "2026-11-07"
+  },
+  "s03_actor": {
+    "source_asset_id": "pexels-11764431",
+    "actual_shot_id": "S01",
+    "plan_role_stale": "S03",
+    "current_risk": "Identifiable stock actor in opening could be mistaken for real Petrov/Soviet operator",
+    "allowed_remediation": "Replace S01 with inspected non-identifiable visual, e.g. hands-only, silhouettes from rear, command room objects; never auto blur actor and claim historical evidence.",
+    "resolved": false,
+    "render_approved": false
+  },
+  "caption_guidance": {
+    "historical_mode": "Documentary with clearly illustrative B-roll. Do not identify actors as historical persons.",
+    "global_disclaimer": "Some imagery is illustrative stock footage or scientific visualization, not archival recordings of the events described."
+  },
+  "signoff": {
+    "automatic_metadata_generation": true,
+    "rendered_asset_verified": false,
+    "publisher_platform_verified": false,
+    "publication_authorized": false
+  }
+}
