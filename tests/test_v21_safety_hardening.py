@@ -28,8 +28,21 @@ class V21SafetyHardeningTests(unittest.TestCase):
                 "active_engine_version": "2.1",
                 "canonical_entrypoint": "production/canonical_entrypoint.py",
                 "production_enablement": False,
+                "final_drive_delivery_enablement": False,
+                "final_delivery_audio_gate": {
+                    "adapter": "production/final_delivery_v21.py",
+                    "drive_adapter": "production/google_drive_delivery.py",
+                    "receipt_required": True
+                },
                 "legacy_policy": {"status": "legacy_rollback_only"},
             }), encoding="utf-8"
+        )
+
+        (self.root / "production" / "final_delivery_v21.py").write_text(
+            "# test fixture: final-drive delivery proof boundary\n", encoding="utf-8")
+        (self.root / "production" / "google_drive_delivery.py").write_text(
+            'verify_drive_video_delivery(\nif final_gate["status"] == "BLOCKED":\n',
+            encoding="utf-8",
         )
 
     def test_active_gemini_charon_workflow_is_allowed(self):
