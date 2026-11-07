@@ -28,6 +28,12 @@ class V21SafetyHardeningTests(unittest.TestCase):
                 "active_engine_version": "2.1",
                 "canonical_entrypoint": "production/canonical_entrypoint.py",
                 "production_enablement": False,
+                "final_render_entrypoint": "production/render_v21_final.py",
+                "final_render_route": {
+                    "status": "IMPLEMENTED_FAIL_CLOSED_NO_PRODUCTION_AUTHORIZATION",
+                    "generate_new_TTS": False,
+                    "publication": "manual_only",
+                },
                 "final_drive_delivery_enablement": False,
                 "final_delivery_audio_gate": {
                     "adapter": "production/final_delivery_v21.py",
@@ -38,6 +44,12 @@ class V21SafetyHardeningTests(unittest.TestCase):
             }), encoding="utf-8"
         )
 
+        (self.root / "production" / "render_v21_final.py").write_text(
+            'validate_request(record, repo_root=repo_root, mode="final")\n'
+            'validate_completed_audio_mix(\n'
+            'build_audio_mix_command(\n',
+            encoding="utf-8",
+        )
         (self.root / "production" / "final_delivery_v21.py").write_text(
             "# test fixture: final-drive delivery proof boundary\n", encoding="utf-8")
         (self.root / "production" / "google_drive_delivery.py").write_text(

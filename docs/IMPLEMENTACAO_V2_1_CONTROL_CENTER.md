@@ -582,3 +582,14 @@ O módulo `production/final_delivery_v21.py` exige o vídeo master exato, polít
 **Testes:** `tests/test_v21_final_delivery_gate.py` cobre produção desabilitada, falta de recibo, master trocado, direitos e histórico SFX bloqueados, vídeo escondido em pasta, bypass da API `deliver()` e caso positivo sintético isolado. CI principal garante, via monkeypatch, que a chamada Drive `service()` nunca é alcançada por um vídeo não autorizado. Não houve upload, TTS, render ou publicação nesta etapa. Evidências e limites em `docs/V21_FINAL_DRIVE_DELIVERY_AUDIO_LOCK.md`.
 
 **Próximo passo único:** planejar e testar o renderizador V2.1 autorizado que chame o adaptador de mixagem aprovado e o pós-voo antes de entregar. Não reativar V7 nem habilitar produção sem aprovação específica, provas de direitos e histórico de áudio.
+
+### 2026-11-07 — Renderizador FINAL V2.1 único (implementado em isolamento)
+
+**Decisão arquitetural:** NÃO reconstruir as 16 cenas nem reabrir o V7. A nova rota `production/render_v21_final.py` usa a saída com SHA verificado do atual `render_v21_preview.py` como picture master congelado; valida report, Gemini/Charon, legenda na margem 650, logo/cores/continuidade e usa `ffmpeg -c:v copy` para preservar exatamente o fluxo H264. Substitui apenas a faixa sonora, mixando narração + música inédita + SFX pré-temporizados sob `production/audio_mix_receipt_v21.execute_with_receipt`; faz replay e testes contrafactuais de cada stem, pós-voo com `validate_completed_audio_mix`, comparação de hashes do stream de vídeo e do master AAC, e gera artefatos locais auditáveis.
+
+**Travas:** CLI só acessa mídia depois de `validate_request(mode=final)`. A política vigente mantém `production_enablement=false`, `final_drive_delivery_enablement=false` e `publication_policy=manual_only`. `production/audio_mix_profile_v21.json` define volume musical e SFX como **proposta candidata não aprovada em escuta**, e exige futura passagem para `INDEPENDENT_AUDIO_QA_PASS` antes de renderização final real. O histórico de efeitos e colisão entre 002/004 continuam bloqueadores separados. Não gerar Gemini/Charon novamente ou alterar vídeos aprovados.
+
+**Teste E2E:** `tests/test_v21_final_render.py` constrói vídeo/áudios sintéticos com FFmpeg, verifica mix real, replay, SFX presente, transcodificação AAC, master e identidade do bitstream visual, sem 1 crédito de TTS. O teste reduz a duração apenas no helper isolado; requisitos 1080×1920/60 fps/60–80s permanecem no contrato real de entrega. O singleton e CI verificam a rota única e bloqueio canônico. Evidência detalhada: `docs/V21_CANONICAL_FINAL_RENDER_ROUTE.md`.
+
+**Próximo passo único:** concluir SFX/histórico e prova perceptiva de mixagem, rodar teste de render final real 1080×1920/60fps em ambiente privado sob autorização e só então habilitar produção manual, sem autopublicação.
+
