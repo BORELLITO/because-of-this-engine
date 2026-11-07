@@ -499,3 +499,17 @@ O usuário determinou explicitamente que o próprio motor deve **decidir se o cl
 **Segurança:** fonte e fingerprint da cena não foram alterados; antigos nove direitos preservados; o histórico de áudio ainda está INCOMPLETO. `RIGHTS_AUTONOMY_V21` é gate adicional canônico e do pré-voo manual. O episódio não está apto a publicação nem a render final, Gemini/Charon e regras de mídia mantidos. Este estágio distingue autonomia **do decisor** versus automação completa de novas análises visuais, que ainda exige integrar visão upstream e validação do render composto.
 
 Documentação de política, decisões e fontes: `docs/RIGHTS_AUTONOMY_V21.md`.
+
+### 2026-11-07 — Conciliação de cenas reais, abertura S01 e credits NASA S12
+
+**Motivo concreto descoberto:** o campo `source_role=S03` do clipe identificável `pexels-11764431` na aquisição é DESATUALIZADO. O manifesto executor seleciona o ator em **S01 (00:00–00:04)**, enquanto **S03** utiliza `pixabay-radio-vintage-old-171435`, e **S12** utiliza o modelo NASA. O motor de direitos anterior classificava corretamente o asset, mas não associava risco à posição onde aparece. A checagem de fonte/cena não pode depender de papel declarado na aquisição.
+
+**Código:** `production/shot_context_v21.py` agora identifica a associação real S## → asset, impede media IDs inexistentes ou duplicados, destaca divergências `source_role` vs posicionamento real e bloqueia fonte com pessoa identificável na abertura. O gate `SHOT_CONTEXT_V21` foi conectado tanto ao validador canônico quanto ao preflight manual; nunca promove direitos.
+
+**NASA SVS 4819:** página oficial https://svs.gsfc.nasa.gov/4819/ documenta **Earth Day 2020: GEOS-5 Modeled Cloud Cover**; visualizadores Greg Shirah e Trent L. Schindler, produtor Ryan Fitzgibbons. `episodes/episode-005/delivery/source-credits-pending.json` contém crédito, texto explicativo e sugestão em inglês para descrição da publicação. **Não é prova de que texto aparece no vídeo, na legenda ou na publicação.** Gate exige evidência de arquivo final com SHA-256, descrição contendo o texto exato e recibo de inspeção de frames, não apenas `delivery_verified=true`. Até o delivery ser comprovado, NASA S12 é BLOQUEADO.
+
+**S01 — solução visual preferencial:** encontrar clipe apenas de mãos/rádio/tecnologia de época. Pré-seleção documental em `reports/EP005_S01_SAFE_REPLACEMENT_SHORTLIST_20261107.json`: Pexels 6077617 e Pexels 10295575, **não baixados nem aprovados**. QA do arquivo bruto (SHA, phash, 9:16, originalidade, licenças, continuidade) deverá decidir o substituto antes de alterar o manifesto. Fonte S03 não pode ser repetida para S01 sem passar regra de reuso.
+
+**Integridade:** V2.1, Gemini/Charon, 16 clipes atuais e respectivas autorizações permanecem intactos. Nove aprovações anteriores, cinco liberações editoriais controladas, dois bloqueios (ator/NASA), histórico global de áudio INCOMPLETO, produção desabilitada e publicação manual. Nenhuma voz, render, vídeo final, Drive release ou publicação executada.
+
+**Próximo passo único:** intake + QA real dos candidatos S01, decidir automaticamente e substituir com rollback; depois gerar e verificar créditos NASA no pacote final e conciliar memória de áudio. Não liberar por simples alteração de campos em JSON.
