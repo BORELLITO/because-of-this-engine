@@ -132,6 +132,9 @@ jobs:
           assert audio["registry_track_count"] == 5, audio
           assert audio["verified_original_source_count"] == 3, audio
           assert audio["verified_master_audio_count"] == 0, audio
+          assert audio["verified_delivered_master_file_count"] == 4, audio
+          assert audio["delivered_music_collision_count"] == 1, audio
+          assert any("verified completed-master music source reused" in f for f in audio["failures"]), audio
           assert len(audio["historical_identity_collisions"]) >= 1, audio
           assert any("SFX usage coverage" in f for f in audio["failures"]), audio
           assert any("audio history completeness" in f for f in audio["failures"]), audio
