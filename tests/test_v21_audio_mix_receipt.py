@@ -10,6 +10,7 @@ import unittest
 import wave
 from pathlib import Path
 
+from production.render_v21_manual import validate_completed_audio_mix
 from production.audio_mix_receipt_v21 import (
     MixReceiptError, execute_with_receipt, file_sha256, verify_receipt, verify_master_binding,
 )
@@ -106,6 +107,13 @@ class RealAudioMixReceiptTests(unittest.TestCase):
         self.assertTrue(result["master_audio_bound"])
         self.assertCountEqual(result["source_contributions_confirmed"],["narration","music"])
         self.assertFalse(result["publication_authorized"])
+        adapter=validate_completed_audio_mix(
+            {"episode_id":"ep-test"},receipt_path=self.receipt,master_video=video)
+        self.assertEqual(adapter["status"],"V21_AUDIO_POSTFLIGHT_EVIDENCE_PASS",adapter)
+        self.assertEqual(adapter["publication"],"MANUAL_ONLY_NOT_RUN")
+        wrong=validate_completed_audio_mix(
+            {"episode_id":"wrong-episode"},receipt_path=self.receipt,master_video=video)
+        self.assertEqual(wrong["status"],"V21_AUDIO_POSTFLIGHT_BLOCKED")
 
     def test_source_edit_after_render_is_detected(self):
         self.issue()
