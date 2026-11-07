@@ -15,6 +15,7 @@ from typing import Any
 from urllib.parse import urlparse
 
 from production.visual_rights_consistency_v21 import _read_json
+from production.scene_disclosures_v21 import ACTOR_ID, NASA_ID, SCENE_PATH, validate_disclosure
 
 APPROVED_STATUS = "AUTO_APPROVED_EVIDENCE_BOUND_V21"
 PENDING_STATUS = "PENDING_INDEPENDENT_RENDER_RIGHTS"
@@ -54,6 +55,8 @@ def decide_one(
     candidate: Mapping[str, Any] | None,
     asset: Mapping[str, Any] | None,
     evidence: Mapping[str, Any] | None,
+    *,
+    verified_disclosure: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     asset_id = str(right.get("asset_id") or "")
     reasons: list[str] = []
@@ -91,7 +94,11 @@ def decide_one(
     if evidence.get("visual_brand_class") != "none_observed":
         reasons.append("logo or brand clearance is not established")
     if evidence.get("visual_person_class") not in {"none", "hands_only_unidentifiable"}:
-        reasons.append("identifiable person or depiction risk unresolved")
+        if not (asset_id == ACTOR_ID and isinstance(verified_disclosure, Mapping)
+                and verified_disclosure.get("not_actual_stanislav_petrov") is True
+                and verified_disclosure.get("no_actor_endorsement") is True
+                and verified_disclosure.get("overlay_render_sample_verified") is True):
+            reasons.append("identifiable person or depiction risk unresolved")
     if evidence.get("editorial_truth_class") != asset.get("truth_class"):
         reasons.append("footage truth class mismatch")
     if (evidence.get("source_audio_policy") != "strip"
@@ -108,10 +115,20 @@ def decide_one(
     if not evidence.get("official_item_page_verified"):
         reasons.append("source item page has not been verified")
     if provider == "nasa":
+        # The final release cannot yet be certified, but a VERIFIED source
+        # preview can be cleared for scoped *nonpublishing* video rendering
+        # when actual in-scene model labels and description credits are locked.
+        credits_sample_locked = (
+            asset_id == NASA_ID
+            and isinstance(verified_disclosure, Mapping)
+            and verified_disclosure.get("overlay_render_sample_verified") is True
+            and verified_disclosure.get("no_nasa_endorsement") is True
+            and verified_disclosure.get("final_assembled_video_metadata_verified") is False
+        )
         if (not evidence.get("nasa_required_credits")
                 or not evidence.get("nasa_required_truth_notice")
-                or evidence.get("delivery_credit_and_model_notice_verified") is not True):
-            reasons.append("NASA source credits and truthful 2020 model disclosure not verified in delivery")
+                or not credits_sample_locked):
+            reasons.append("NASA source credits and truthful 2020 model disclosure not verified in source QA")
     return {
         "asset_id": asset_id,
         "decision": "AUTO_APPROVED_FOR_SCOPED_RENDER" if not reasons else "BLOCKED_PENDING_SAFEGUARDS",
@@ -124,7 +141,8 @@ def decide_one(
 
 
 def audit(record: Mapping[str, Any], plan: Mapping[str, Any],
-          scene: Mapping[str, Any], evidence: Mapping[str, Any]) -> dict[str, Any]:
+          scene: Mapping[str, Any], evidence: Mapping[str, Any],
+          disclosure_contract: Mapping[str, Any] | None = None) -> dict[str, Any]:
     problems: list[str] = []
     try:
         candidates = _asset_map(plan.get("candidates"), "candidate_id")
@@ -138,13 +156,27 @@ def audit(record: Mapping[str, Any], plan: Mapping[str, Any],
     if (evidence.get("episode_id") != expected_episode or plan.get("episode_id") != expected_episode
             or scene.get("episode_id") != expected_episode):
         problems.append("rights decision episode identity does not match scene and record")
+    verified_disclosures: dict[str, Mapping[str, Any]] = {}
+    if disclosure_contract is not None:
+        disclosure_report = validate_disclosure(scene, disclosure_contract)
+        if disclosure_report["status"] == "PASS":
+            verified_disclosures = {
+                str(item["asset_id"]): item
+                for item in disclosure_contract.get("disclosures", [])
+                if isinstance(item, Mapping) and item.get("asset_id")
+            }
+        else:
+            problems.append("scene disclaimer contract failed: " + "; ".join(disclosure_report["failures"]))
     decisions = []
     for asset_id in sorted(reviews):
         current = rights.get(asset_id)
         if current is None:
             problems.append(f"{asset_id}: audited rights entry missing from active record")
             continue
-        result = decide_one(current, candidates.get(asset_id), assets.get(asset_id), reviews[asset_id])
+        result = decide_one(
+            current, candidates.get(asset_id), assets.get(asset_id),
+            reviews[asset_id], verified_disclosure=verified_disclosures.get(asset_id),
+        )
         decisions.append(result)
         should_be_approved = result["allow_scoped_render"]
         if should_be_approved:
@@ -186,7 +218,16 @@ def audit_repository(record: Mapping[str, Any], *, repo_root: Path) -> dict[str,
         scene = _read_json(repo_root, str(record.get("visual_manifest_reference") or ""))
         plan = _read_json(repo_root, str(scene.get("source_plan") or ""))
         evidence = _read_json(repo_root, str(path))
-        return audit(record, plan, scene, evidence)
+        disclosure = None
+        sensitive_ids = {str(x.get("candidate_id")) for x in scene.get("assets", [])
+                         if isinstance(x, Mapping)} & {ACTOR_ID, NASA_ID}
+        if sensitive_ids:
+            if scene.get("scene_disclosure_contract") != SCENE_PATH:
+                return {"gate": "RIGHTS_AUTONOMY_V21", "status": "BLOCKED",
+                        "failures": ["S01/S12 source disclaimer contract missing"],
+                        "decisions": []}
+            disclosure = _read_json(repo_root, SCENE_PATH)
+        return audit(record, plan, scene, evidence, disclosure_contract=disclosure)
     except (ValueError, OSError, TypeError, json.JSONDecodeError) as exc:
         return {"gate": "RIGHTS_AUTONOMY_V21", "status": "BLOCKED",
                 "failures": [f"unreadable evidence:{exc}"], "decisions": []}

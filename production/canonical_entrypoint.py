@@ -19,6 +19,7 @@ from production.thumbnail_contract_v21 import validate_thumbnail_concept, valida
 from production.visual_rights_consistency_v21 import validate_visual_rights_consistency
 from production.audio_history_audit_v21 import audit as audit_audio_history
 from production.rights_autonomy_v21 import audit_repository as audit_autonomous_rights
+from production.scene_disclosures_v21 import audit_repository as audit_scene_disclosures
 
 SCHEMA_PATH = Path(__file__).resolve().parent / "schemas" / "production-record-3.1.0.json"
 
@@ -82,6 +83,7 @@ def evaluate(manifest: dict[str, Any], *, registry: list[dict[str, Any]] | None 
         checks.append(validate_visual_rights_consistency(manifest, repo_root=repo_root))
         checks.append(audit_audio_history(repo_root))
         checks.append(audit_autonomous_rights(manifest, repo_root=repo_root))
+        checks.append(audit_scene_disclosures(manifest, repo_root=repo_root))
     blocking = [item.get("gate") or item.get("ledger") for item in checks if item["status"] not in {"PASS", "PACKAGE_GATE_PASS"}]
     return {"implementation_id": manifest.get("implementation_id"), "audit_id": manifest.get("audit_id"), "status": "PASS" if not blocking else "BLOCKED", "production_enablement": False, "media_generation": "NOT_RUN", "tts": "NOT_RUN", "render": "NOT_RUN", "publication": "MANUAL_ONLY_NOT_RUN", "checks": checks, "blocking_gates": blocking, "next_action": "human_story_approval" if not blocking else "resolve:" + ",".join(blocking)}
 

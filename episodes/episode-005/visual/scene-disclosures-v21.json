@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0",
+  "episode_id": "episode-005",
+  "policy_id": "nasa-factual-model-v1",
+  "source_of_truth": "https://svs.gsfc.nasa.gov/4819/",
+  "disclosures": [
+    {
+      "shot_id": "S01",
+      "asset_id": "pexels-11764431",
+      "source_url": "https://www.pexels.com/video/man-using-walkie-talkie-in-bunker-11764431/",
+      "sha256": "9e2ad3951cafda341e656c9be49ffc55915326b0789e243e65aad65df1408f7b",
+      "provider": "pexels",
+      "source_creator": "Said Gülüm",
+      "source_license": "Pexels License",
+      "original_source_truth": "STOCK_ACTOR_NOT_HISTORICAL_PERSON",
+      "not_actual_stanislav_petrov": true,
+      "not_archival_1983": true,
+      "label_visible_on_shot": true,
+      "source_audio_usage": "STRIP",
+      "overlay": {
+        "line_1": "DRAMATIZATION - NOT ARCHIVAL FOOTAGE",
+        "anchor": "upper_mid_below_brand",
+        "y1": 370,
+        "minimum_font_px": 29,
+        "max_text_width_px": 970,
+        "background_plate": true,
+        "hold_full_scene": true
+      },
+      "delivery_description_footer": "Visual reconstruction: identifiable stock actor from Pexels (Said Gülüm). The actor is NOT Stanislav Petrov or a confirmed Soviet officer. This video is NOT archival footage of the 1983 incident. Source: https://www.pexels.com/video/man-using-walkie-talkie-in-bunker-11764431/. No endorsement is implied.",
+      "needs_manual_publication_qa": true,
+      "no_actor_endorsement": true,
+      "verification": {
+        "source_sha256_verified": true,
+        "sample_type": "4_SECOND_ACTUAL_SOURCE_FFMPEG_WITH_DISCLOSURE",
+        "sample_duration_seconds": 4,
+        "output_resolution": [
+          1080,
+          1920
+        ],
+        "output_fps": 60,
+        "source_footage_sha256": "9e2ad3951cafda341e656c9be49ffc55915326b0789e243e65aad65df1408f7b",
+        "sample_video_sha256": "c7a4a30bf8f108363759534598b9a4cddb79a5cc024a0caa3eab86721e47bbf7",
+        "sample_still_sha256": "9d532e650e157818b7628225f93ff485033d3747c74c7631dbfed6f0fa9e803b",
+        "sample_review": "PASS_LABEL_VISIBLE_AND_FACE_STILL_IDENTIFIABLE_NOT_MASKED",
+        "source_role_conflict_resolved": "actual active assignment is S01, despite historical source_role=S03",
+        "scope": "QA_ONLY_NOT_FINAL_EPISODE"
+      },
+      "platforms": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "overlay_renderer_required": true,
+      "overlay_render_sample_verified": true,
+      "final_assembled_video_metadata_verified": false,
+      "final_publication_verified": false
+    },
+    {
+      "shot_id": "S12",
+      "asset_id": "nasa-svs-geos5-clouds-no-labels-4819",
+      "sha256": "306a8c1b97ddb3699a84f3d35f6a0c9c3cbc593f13f9a35aef13d72a55f323d0",
+      "source_url": "https://svs.gsfc.nasa.gov/4819/",
+      "source_title": "Earth Day 2020: GEOS-5 Modeled Cloud Cover",
+      "source_release_date": "2020-04-20",
+      "source_provenance": "NASA's Scientific Visualization Studio",
+      "scientific_truth_class": "ILLUSTRATIVE_MODEL_NOT_ARCHIVAL",
+      "not_actual_soviet_sensor_1983": true,
+      "label_visible_on_shot": true,
+      "source_audio_usage": "STRIP",
+      "overlay": {
+        "line_1": "NASA GEOS-5 MODEL (2020)",
+        "line_2": "Illustration - NOT 1983 sensor footage",
+        "anchor": "upper_mid_below_brand",
+        "y1": 370,
+        "y2": 440,
+        "minimum_font_px": 31,
+        "max_text_width_px": 970,
+        "background_plate": true,
+        "hold_full_scene": true
+      },
+      "credits": {
+        "primary": "NASA's Scientific Visualization Studio",
+        "visualizers": [
+          "Greg Shirah",
+          "Trent L. Schindler"
+        ],
+        "producer": "Ryan Fitzgibbons"
+      },
+      "delivery_description_footer": "Visual source: NASA's Scientific Visualization Studio — GEOS-5 modeled cloud cover (Earth Day 2020). Visualization: Greg Shirah and Trent L. Schindler. Producer: Ryan Fitzgibbons. Illustrative scientific model, NOT actual imagery or records from the Soviet early-warning system in 1983. NASA does not endorse this production. Source: https://svs.gsfc.nasa.gov/4819/",
+      "platforms": [
+        "youtube_shorts",
+        "tiktok"
+      ],
+      "needs_manual_publication_qa": true,
+      "no_nasa_endorsement": true,
+      "credit_metadata_prepared": true,
+      "overlay_renderer_required": true,
+      "overlay_render_sample_verified": true,
+      "final_assembled_video_metadata_verified": false,
+      "final_publication_verified": false,
+      "overlay_qa_receipt": {
+        "sample_type": "5_SECOND_ACTUAL_NASA_SOURCE_FFMPEG_WITH_DISCLOSURE",
+        "sample_resolution": [
+          1080,
+          1920
+        ],
+        "sample_fps": 60,
+        "sample_video_sha256": "6ca0255fa7a447052a84d9cad403d351de2f815e88e715f68b4a68804ba0d4bc",
+        "sample_still_sha256": "51bf6cd9c08061f4143a1801f70fd5bd4b724c6a46bde5a92b5ebf0522cb1fd1",
+        "source_sha256_verified": true,
+        "sample_review": "PASS_LEGIBLE_MODEL_NOT_1983_NOTICE",
+        "scope": "QA_ONLY_NOT_FINAL_EPISODE"
+      }
+    }
+  ],
+  "production_enablement": false,
+  "publication_policy": "manual_only",
+  "status": "TWO_SCENE_DISCLAIMERS_PREPARED_AND_REAL_SOURCE_PREVIEW_SAMPLES_VERIFIED_FINAL_RELEASE_NOT_RUN"
+}

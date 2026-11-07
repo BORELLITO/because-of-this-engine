@@ -43,7 +43,7 @@
       "visual_person_class": "identifiable",
       "visual_brand_class": "none_observed",
       "visual_subject": "actor_using_handheld_radio",
-      "permitted_narrative_framing": "generic_reconstruction",
+      "permitted_narrative_framing": "representation_of_unnamed_actor_labelled_not_actual_Stanislav_Petrov",
       "historical_misrepresentation_risk": "recognizable_actor_could_be_mistaken_for_Petrov_or_real_operator",
       "editorial_truth_class": "REPRESENTATIONAL",
       "user_approval_not_required_for_rights_decision": true,
@@ -61,7 +61,20 @@
       "decision_hint_for_manual_audit": "BLOCK",
       "issuer": "SENIOR_MEDIA_POLICY_AND_VISUAL_RISK_QA_2026_11_07",
       "legal_opinion": false,
-      "scope_limit": "Eligible video-input use only; final assembled context, captions and platform release require separate verification."
+      "scope_limit": "Eligible video-input use only; final assembled context, captions and platform release require separate verification.",
+      "source_role_warning": "Historical source_role=S03 but actual active shot S01 (hook); decision targets S01 explicitly",
+      "actor_onscreen_label_qa": {
+        "contract": "episodes/episode-005/visual/scene-disclosures-v21.json",
+        "actual_shot": "S01",
+        "evidence_type": "REAL_SOURCE_FOOTAGE_FFMPEG_SAMPLE_QA_NOT_FINAL_MASTER",
+        "label": "DRAMATIZATION - NOT ARCHIVAL FOOTAGE",
+        "source_video_sha256": "9e2ad3951cafda341e656c9be49ffc55915326b0789e243e65aad65df1408f7b",
+        "sample_video_sha256": "c7a4a30bf8f108363759534598b9a4cddb79a5cc024a0caa3eab86721e47bbf7",
+        "sample_frame_sha256": "9d532e650e157818b7628225f93ff485033d3747c74c7631dbfed6f0fa9e803b",
+        "face_recognizable": true,
+        "labelled_as_actual_person": false,
+        "final_assembled_video_verified": false
+      }
     },
     {
       "asset_id": "pixabay-radio-vintage-old-171435",
@@ -129,7 +142,22 @@
       "decision_hint_for_manual_audit": "BLOCK_MISSING_DELIVERY_DISCLOSURE",
       "issuer": "SENIOR_MEDIA_POLICY_AND_VISUAL_RISK_QA_2026_11_07",
       "legal_opinion": false,
-      "scope_limit": "Eligible video-input use only; final assembled context, captions and platform release require separate verification."
+      "scope_limit": "Eligible video-input use only; final assembled context, captions and platform release require separate verification.",
+      "nasa_scientific_overlay_qa": {
+        "contract": "episodes/episode-005/visual/scene-disclosures-v21.json",
+        "actual_shot": "S12",
+        "evidence_type": "REAL_NASA_SOURCE_FOOTAGE_FFMPEG_SAMPLE_QA_NOT_FINAL_MASTER",
+        "overlay_labels": [
+          "NASA GEOS-5 MODEL (2020)",
+          "Illustration - NOT 1983 sensor footage"
+        ],
+        "source_video_sha256": "306a8c1b97ddb3699a84f3d35f6a0c9c3cbc593f13f9a35aef13d72a55f323d0",
+        "sample_video_sha256": "6ca0255fa7a447052a84d9cad403d351de2f815e88e715f68b4a68804ba0d4bc",
+        "sample_frame_sha256": "51bf6cd9c08061f4143a1801f70fd5bd4b724c6a46bde5a92b5ebf0522cb1fd1",
+        "source_date_label": "2020",
+        "actual_soviet_1983_data": false,
+        "final_assembled_video_verified": false
+      }
     },
     {
       "asset_id": "pixabay-radar-black-green-target-symbol-57670",
@@ -270,5 +298,9 @@
   ],
   "production_enablement": false,
   "publication_policy": "manual_only",
-  "no_external_auto_publication": true
+  "no_external_auto_publication": true,
+  "augmentation_date": "2026-11-07",
+  "source_disclosure_safety_concept": "ACTUAL_SAMPLE_VERIFIED_BUT_FULL_FINAL_VIDEO_NOT_YET_RENDERED",
+  "verified_per_asset_render_source_eligibility": true,
+  "publication_authorized": false
 }

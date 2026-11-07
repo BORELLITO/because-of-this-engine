@@ -2561,5 +2561,7 @@
         "all other Episode 005 safety gates remain fail closed"
       ]
     }
-  ]
+  ],
+  "scene_disclosure_contract": "episodes/episode-005/visual/scene-disclosures-v21.json",
+  "scene_disclosure_policy": "NASA_GE0S5_2020_FACTUAL_LABEL_REQUIRED_PRE_RENDER_AND_IN_PLATFORM_METADATA"
 }
