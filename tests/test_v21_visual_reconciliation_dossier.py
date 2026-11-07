@@ -29,16 +29,16 @@ class V21VisualReconciliationDossierTests(unittest.TestCase):
         plan = json.loads((ROOT / man["source_plan"]).read_text(encoding="utf-8"))
         return rec, plan, man
 
-    def test_real_episode_is_reconciliation_required_not_approved(self):
+    def test_real_episode_visual_identities_are_consistent_not_published(self):
         result = inspect_repo(ROOT, RECORD)
-        self.assertEqual(result["status"], "RECONCILIATION_REQUIRED")
+        self.assertEqual(result["status"], "EVIDENCE_CONSISTENT_NOT_RENDER_AUTHORIZED")
         self.assertEqual(result["asset_count"], 16)
-        self.assertEqual(result["render_rights_matched_count"], 14)
+        self.assertEqual(result["render_rights_matched_count"], 16)
         self.assertEqual(result["missing_render_rights"], [])
-        self.assertEqual(set(result["pending_render_rights"]), {"pexels-11764431", "nasa-svs-geos5-clouds-no-labels-4819"})
-        self.assertEqual(set(result["pending_recorded_rights"]), {"pexels-11764431", "nasa-svs-geos5-clouds-no-labels-4819"})
+        self.assertEqual(result["pending_render_rights"], [])
+        self.assertEqual(result["pending_recorded_rights"], [])
         self.assertEqual(result["stale_render_rights"], [])
-        self.assertEqual(set(result["approved_manifest_only_pending_render_rights"]), {"pexels-11764431", "nasa-svs-geos5-clouds-no-labels-4819"})
+        self.assertEqual(result["approved_manifest_only_pending_render_rights"], [])
         self.assertEqual(result["pending_visual_approval"], [])
         self.assertEqual(result["source_provenance_mismatches"], [])
         self.assertEqual(len(result["draft_pending_rights_not_canonical"]), 0)
