@@ -17,6 +17,7 @@ from production.tts_contract_v21 import validate_tts_contract
 from production.media_contract_v21 import validate_adapter_wiring, validate_audio_contract, validate_captions_contract, validate_drive_contract, validate_render_contract
 from production.thumbnail_contract_v21 import validate_thumbnail_concept, validate_thumbnail_files, validate_thumbnail_manifest
 from production.visual_rights_consistency_v21 import validate_visual_rights_consistency
+from production.audio_history_audit_v21 import audit as audit_audio_history
 
 SCHEMA_PATH = Path(__file__).resolve().parent / "schemas" / "production-record-3.1.0.json"
 
@@ -78,6 +79,7 @@ def evaluate(manifest: dict[str, Any], *, registry: list[dict[str, Any]] | None 
     # manifest. This check is mandatory for real repository-backed records.
     if repo_root is not None:
         checks.append(validate_visual_rights_consistency(manifest, repo_root=repo_root))
+        checks.append(audit_audio_history(repo_root))
     blocking = [item.get("gate") or item.get("ledger") for item in checks if item["status"] not in {"PASS", "PACKAGE_GATE_PASS"}]
     return {"implementation_id": manifest.get("implementation_id"), "audit_id": manifest.get("audit_id"), "status": "PASS" if not blocking else "BLOCKED", "production_enablement": False, "media_generation": "NOT_RUN", "tts": "NOT_RUN", "render": "NOT_RUN", "publication": "MANUAL_ONLY_NOT_RUN", "checks": checks, "blocking_gates": blocking, "next_action": "human_story_approval" if not blocking else "resolve:" + ",".join(blocking)}
 
