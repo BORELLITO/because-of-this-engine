@@ -50,6 +50,14 @@ class V21AudioHistoryAuditTests(unittest.TestCase):
             }
             for idx in (1, 2)
         ]
+        (self.episodes/"audio-rendered-master-registry.json").write_text(json.dumps({
+            "rendered_masters": [{
+                "episode_id": f"fixture-render-{i}",
+                "master_video": {"sha256": f"{i:064x}"},
+                "music_asset": {"sha256": f"{i+10:064x}", "verified_original_bytes": True},
+            } for i in range(1,5)],
+            "verified_full_track_collisions": [],
+        }), encoding="utf-8")
         self._write("VERIFIED_COMPLETE", "VERIFIED_COMPLETE", self.source)
 
     def _write(self, coverage, sfx, tracks):
@@ -100,6 +108,15 @@ class V21AudioHistoryAuditTests(unittest.TestCase):
         self.assertEqual(report["status"], "BLOCKED")
         self.assertTrue(any("collision unresolved" in s for s in report["failures"]))
 
+    def test_forged_final_master_soundtrack_reuse_blocks(self):
+        file=self.episodes/"audio-rendered-master-registry.json"
+        data=json.loads(file.read_text())
+        data["rendered_masters"][3]["music_asset"]["sha256"] = data["rendered_masters"][1]["music_asset"]["sha256"]
+        file.write_text(json.dumps(data))
+        report=audit(self.root)
+        self.assertEqual(report["status"],"BLOCKED")
+        self.assertTrue(any("full soundtrack reuse collision" in f for f in report["failures"]))
+
     def test_real_source_sha_verified_but_masters_unproven(self):
         report = audit(ROOT)
         self.assertEqual(report["status"], "BLOCKED")
@@ -107,6 +124,9 @@ class V21AudioHistoryAuditTests(unittest.TestCase):
         self.assertEqual(report["registry_track_count"], 5)
         self.assertEqual(report["verified_original_source_count"], 3)
         self.assertEqual(report["verified_master_audio_count"], 0)
+        self.assertEqual(report["verified_delivered_master_file_count"], 4)
+        self.assertEqual(report["delivered_music_collision_count"], 1)
+        self.assertTrue(any("verified completed-master music source reused" in f for f in report["failures"]))
         self.assertTrue(any("master audio usage is not verified" in f for f in report["failures"]))
         self.assertTrue(any("historical music source identity collision" in f for f in report["failures"]))
         self.assertTrue(any("historical SFX usage" in f for f in report["failures"]))
