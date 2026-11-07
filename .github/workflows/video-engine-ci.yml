@@ -57,8 +57,40 @@ jobs:
           assert MIX_ALGORITHM == "verified-local-ffmpeg-mix-replay-v1"
           policy=json.loads(Path("production/active_engine_policy.json").read_text())
           assert policy["production_enablement"] is False
+          assert policy["final_drive_delivery_enablement"] is False
+          assert policy["final_delivery_audio_gate"]["receipt_required"] is True
+          assert policy["final_delivery_audio_gate"]["independent_ffmpeg_replay"] is True
           assert policy["publication_policy"] == "manual_only"
           print("V21_ACOUSTIC_CATALOG_AND_POSTFLIGHT_FAIL_CLOSED_PASS")
+          PY
+
+      - name: Verify final-video Drive delivery fails before any remote network call
+        run: |
+          PYTHONPATH=. python - <<'PY'
+          from pathlib import Path
+          import tempfile
+          from unittest.mock import patch
+          from production.final_delivery_v21 import verify_drive_video_delivery
+          from production.google_drive_delivery import deliver, DeliveryError
+          with tempfile.TemporaryDirectory() as d:
+              file=Path(d)/"not-yet-authorized-master.mp4"
+              file.write_bytes(b"synthetic fake master"*100)
+              report=verify_drive_video_delivery(
+                  [file],repo_root=Path("."),
+                  production_record_path=Path("episodes/episode-005/production-record.json"),
+                  master_video_path=file)
+              assert report["status"]=="BLOCKED",report
+              assert report["remote_write"]=="NOT_RUN"
+              assert any("final_drive_delivery_enablement" in x for x in report["failures"])
+              with patch("production.google_drive_delivery.service",
+                         side_effect=AssertionError("illegal network access")):
+                  try:
+                      deliver("TEST","TEST","TEST",[file],"test-delivery")
+                  except DeliveryError as exc:
+                      assert "Final V2.1 media delivery blocked" in str(exc)
+                  else:
+                      raise AssertionError("Drive write gate bypassed")
+          print("V21_FINAL_VIDEO_DRIVE_DELIVERY_EVIDENCE_GATE_PASS_NO_NETWORK")
           PY
 
       - name: Validate active policy
