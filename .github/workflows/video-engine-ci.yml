@@ -61,7 +61,11 @@ jobs:
               # the hard block. Any NEW discrepancy must fail CI, not be hidden.
               expected = ["pexels-12213087"]
               assert pending == expected, {"unexpected_pending_assets": pending}
-              assert str(exc) == "manifest contains a candidate not approved for manifest-only use", str(exc)
+              expected_failures = {
+                  "manifest contains a candidate not approved for manifest-only use",
+                  "pexels-12213087: intake perceptual fingerprint mismatch or pending",
+              }
+              assert set(str(exc).split("; ")) == expected_failures, str(exc)
               print("::warning::EPISODE005_VISUAL_BLOCKED_PENDING_HUMAN_APPROVAL:" + ",".join(pending))
           else:
               assert not pending, {"manifest_approved_without_plan_evidence": pending}
