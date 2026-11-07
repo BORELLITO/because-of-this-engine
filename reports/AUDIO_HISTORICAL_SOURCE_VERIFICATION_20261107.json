@@ -1,0 +1,94 @@
+{
+  "report_date": "2026-11-07",
+  "status": "SOURCE_BYTES_VERIFIED_MASTER_USAGE_UNVERIFIED",
+  "canonical_registry": "episodes/audio-memory-registry.json",
+  "verified_original_mp3_sources": [
+    {
+      "drive_file_id": "1bDbbr-bMA3puBvrQ2QzvSTfbicXJmdni",
+      "drive_name": "test001-suspense-bed-fright-night.mp3",
+      "sha256": "144384cf2bcda8070a0d11c8aa98c3ae547de861a553275788669b7cf6a57bcd",
+      "bytes": 3243407,
+      "decoded_mp3_seconds": 101.32898,
+      "declared_by": [
+        "because-of-this-episode-001",
+        "because-of-this-episode-002"
+      ],
+      "source_file_verified": true,
+      "master_use_verified": false
+    },
+    {
+      "drive_file_id": "1u-1ZKkVxKTw_E6vEzW0VcpF2lfjGfmeI",
+      "drive_name": "episode-002-echoes-andrew-ev.mp3",
+      "sha256": "49842074dc06f05a40690c2b3af42bd32be76a5f6505a65cfe952b2fe1ccb5de",
+      "bytes": 9052021,
+      "decoded_mp3_seconds": 226.298775,
+      "declared_by": [
+        "because-of-this-episode-003"
+      ],
+      "source_file_verified": true,
+      "master_use_verified": false
+    },
+    {
+      "drive_file_id": "1LJtxg5fXoheepYVK5HO1M1DhEo_pVIDg",
+      "drive_name": "episode-004-suspense-tension-trailer-2.mp3",
+      "sha256": "dd57de53251011da1cc72f22c81595e80c03151c46d4a43e71aa6baaf2bc98cc",
+      "bytes": 4353462,
+      "decoded_mp3_seconds": 136.045688,
+      "declared_by": [
+        "because-of-this-episode-004"
+      ],
+      "source_file_verified": true,
+      "master_use_verified": false
+    }
+  ],
+  "procedural": {
+    "episode_id": "episode-001-preview-v72-charon-clean",
+    "track_id": "V73-PROCEDURAL-SUSPENSE-BED-001",
+    "generator_file": "production/generate_suspense_bed.py",
+    "status": "MANIFEST_DECLARED_NO_INDEPENDENT_GENERATED_AUDIO_VERIFICATION"
+  },
+  "historical_duplicate": {
+    "source_id": "1bDbbr-bMA3puBvrQ2QzvSTfbicXJmdni",
+    "episode_ids": [
+      "because-of-this-episode-001",
+      "because-of-this-episode-002"
+    ],
+    "observed_fact": "Both manifests declare exactly the same Drive source and downloaded SHA-256",
+    "not_established": "No evidence yet that both delivered videos actually contain that music"
+  },
+  "drive_render_folder_checks": [
+    {
+      "folder": "render-because-of-this-episode-001-final",
+      "child": "rendered",
+      "result": "NO_VISIBLE_FILES_IN_DRIVE_FOLDER"
+    },
+    {
+      "folder": "render-because-of-this-episode-002-final",
+      "child": "rendered",
+      "result": "NO_VISIBLE_FILES_IN_DRIVE_FOLDER"
+    },
+    {
+      "folder": "render-because-of-this-episode-003-final",
+      "child": "rendered",
+      "result": "NO_VISIBLE_FILES_IN_DRIVE_FOLDER"
+    },
+    {
+      "folder": "render-because-of-this-episode-004-preview",
+      "child": "rendered",
+      "result": "REQUIRES_ADDITIONAL_FILE_SEARCH"
+    }
+  ],
+  "usage_evidence": {
+    "master_mp4_hash_verified_count": 0,
+    "source_to_master_audio_mix_verified_count": 0,
+    "effect_inventory_verified_count": 0,
+    "publication_verified_count": 0
+  },
+  "constraints": [
+    "No license or final video usage is inferred from a manifest or source file being present.",
+    "The registered audio track source identity MUST NOT be reused for a fresh episode while historical collisions are unresolved.",
+    "Do not turn the canonical audio history gate green just because source music matches a declaration.",
+    "No legacy renderer or voice was executed; no production enabled."
+  ],
+  "next_step": "Locate rendered historical masters or exact FFmpeg audio mix receipts, verify delivered audio content/music identity and effects. Only then may master/use status be promoted."
+}
