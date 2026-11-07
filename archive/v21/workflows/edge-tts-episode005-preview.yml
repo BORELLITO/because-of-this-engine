@@ -1,3 +1,4 @@
+# Historical, inactive Edge TTS workflow. This file is NOT an Actions entrypoint.
 name: Because Of This Edge TTS Episode 005 Preview
 
 # Real Edge synthesis is manual-only: every run can produce a new acoustic file.

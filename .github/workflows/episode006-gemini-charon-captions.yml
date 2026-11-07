@@ -134,6 +134,15 @@ jobs:
           print(json.dumps({"status":"GEMINI_CHARON_CAPTIONS_READY","caption_count":len(data["captions"]),"audio_duration_seconds":data["audio_duration_seconds"],"timing_mode":data["timing_mode"]}))
           PY
 
+      - name: Verify frozen Charon audio/word/caption integrity
+        run: |
+          PYTHONPATH=. python production/audio_caption_evidence_v21.py \
+            --audio artifacts/episode006-gemini-charon/narration.wav \
+            --script episodes/episode-006/narration/en-US-charon-v1.txt \
+            --ass artifacts/episode006-gemini-charon/narration.ass \
+            --sidecar artifacts/episode006-gemini-charon/narration.alignment.json \
+            --profile artifacts/episode006-gemini-charon/voice-profile.json
+
       - name: Upload Gemini narration and caption checkpoint
         if: always()
         uses: actions/upload-artifact@v4

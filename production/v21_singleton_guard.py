@@ -3,7 +3,19 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-FORBIDDEN_PRODUCTION_FALLBACKS = ("piper_tts", "production/v7_orchestrator.py", "production/v7_contract.py", "production/render_video_episode.py", "production/gemini_tts.py")
+# Gemini/Charon is the approved V2.1 TTS provider; it is NOT a legacy fallback.
+# Block executable entrypoints of retired providers, without blocking the active
+# Gemini adapter or archived historical evidence.
+FORBIDDEN_PRODUCTION_FALLBACKS = (
+    "production/microsoft_edge_tts.py",
+    "production/align_edge_captions.py",
+    "production/piper_tts.py",
+    "production/cloud_tts.py",
+    "production/v7_orchestrator.py",
+    "production/v7_contract.py",
+    "production/render_video_episode.py",
+)
+RETIRED_WORKFLOW_NAME_MARKERS = ("edge-tts", "piper-tts", "piper_tts", "legacy-render")
 EXEMPT_WORKFLOWS = {"v21-integration-readonly.yml", "video-engine-ci.yml", "github-housekeeping.yml"}
 
 def audit(repo_root: Path) -> dict:
@@ -25,8 +37,10 @@ def audit(repo_root: Path) -> dict:
         if path.name in EXEMPT_WORKFLOWS:
             continue
         text = path.read_text(encoding="utf-8", errors="replace")
+        if any(marker in path.name.lower() for marker in RETIRED_WORKFLOW_NAME_MARKERS):
+            failures.append(f"retired provider workflow remains active:{path.relative_to(root).as_posix()}")
         if any(token in text for token in FORBIDDEN_PRODUCTION_FALLBACKS):
-            failures.append(f"legacy/provider reference requires reconciliation:{path.relative_to(root).as_posix()}")
+            failures.append(f"legacy/provider entrypoint requires reconciliation:{path.relative_to(root).as_posix()}")
     if not (workflow_root / "v21-integration-readonly.yml").is_file():
         failures.append("canonical V2.1 workflow is missing")
     return {"status": "V21_SINGLETON_PASS" if not failures else "V21_SINGLETON_BLOCKED", "canonical_entrypoint": policy.get("canonical_entrypoint"), "failures": failures, "workflow_count": len(workflows)}

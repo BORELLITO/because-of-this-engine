@@ -44,11 +44,35 @@ jobs:
           assert policy["status"] == "BLOCKED_FOR_PRODUCTION"
           print("V21_POLICY_IDENTITY_PASS")
           PY
-      - name: Validate Episode 005 visual search contract
+      - name: Validate Episode 005 visual plan (fail-closed on pending approval)
         run: |
-          PYTHONPATH=. python production/visual_plan_contract.py \
-            --plan episodes/episode-005/visual/asset-acquisition-plan.json \
-            --manifest episodes/episode-005/visual/scene-asset-manifest.json
+          PYTHONPATH=. python - <<'PY'
+          import json
+          from pathlib import Path
+          from production.visual_plan_contract import validate_visual_plan, VisualPlanContractError
+          plan = json.loads(Path("episodes/episode-005/visual/asset-acquisition-plan.json").read_text())
+          manifest = json.loads(Path("episodes/episode-005/visual/scene-asset-manifest.json").read_text())
+          approved = {c["candidate_id"] for c in plan["candidates"] if c.get("rights_status") == "APPROVED_FOR_MANIFEST_ONLY"}
+          pending = sorted(a["candidate_id"] for a in manifest["assets"] if a["candidate_id"] not in approved)
+          try:
+              report = validate_visual_plan(plan, manifest)
+          except VisualPlanContractError as exc:
+              # The real Pexels S09 candidate is pending human approval: preserve
+              # the hard block. Any NEW discrepancy must fail CI, not be hidden.
+              expected = ["pexels-12213087"]
+              assert pending == expected, {"unexpected_pending_assets": pending}
+              expected_failures = {
+                  "manifest contains a candidate not approved for manifest-only use",
+                  "pexels-12213087: intake perceptual fingerprint mismatch or pending",
+              }
+              assert set(str(exc).split("; ")) == expected_failures, str(exc)
+              print("::warning::EPISODE005_VISUAL_BLOCKED_PENDING_HUMAN_APPROVAL:" + ",".join(pending))
+          else:
+              assert not pending, {"manifest_approved_without_plan_evidence": pending}
+              assert report["status"] == "VISUAL_PLAN_CONTRACT_PASS", report
+              assert report["render_allowed"] is False, report
+              print("EPISODE005_VISUAL_PLAN_VERIFIED_NO_AUTOMATIC_RENDER")
+          PY
 
       - name: Validate Episode 005 production record remains fail-closed
         run: |

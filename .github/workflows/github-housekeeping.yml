@@ -1,115 +1,47 @@
-name: GitHub Housekeeping
+name: Because Of This — non-destructive storage audit
 
+# Production evidence is never removed by scheduled housekeeping.
+# Only inventory/report. Deletion requires a separate reviewed change.
 on:
   workflow_dispatch:
   schedule:
     - cron: "20 6 * * 0"
 
 permissions:
-  actions: write
+  actions: read
   contents: read
 
 concurrency:
-  group: github-housekeeping
+  group: because-of-this-storage-audit
   cancel-in-progress: false
 
 jobs:
-  housekeeping:
+  storage-audit:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Prune disposable Actions storage and history
+      - name: Inventory artifacts, runs and caches (READ ONLY)
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b
         with:
           script: |
-            const { owner, repo } = context.repo;
+            const {owner, repo} = context.repo;
+            const artifacts = await github.paginate(github.rest.actions.listArtifactsForRepo,
+              {owner, repo, per_page: 100});
+            const runs = await github.paginate(github.rest.actions.listWorkflowRunsForRepo,
+              {owner, repo, per_page: 100});
+            const bytes = artifacts.reduce((sum, item) => sum + (item.size_in_bytes || 0), 0);
+            const expired = artifacts.filter(item => item.expired).length;
             const now = Date.now();
-            const DAY = 24 * 60 * 60 * 1000;
-            const protectedArtifactName = /(release|backup|permanent|keep)/i;
-
-            const artifacts = await github.paginate(
-              github.rest.actions.listArtifactsForRepo,
-              { owner, repo, per_page: 100 }
-            );
-            let artifactsDeleted = 0;
-            let artifactBytesDeleted = 0;
-            for (const a of artifacts) {
-              if (protectedArtifactName.test(a.name || '')) continue;
-              const ageDays = (now - new Date(a.created_at).getTime()) / DAY;
-              if (!a.expired && ageDays <= 3) continue;
-              try {
-                await github.rest.actions.deleteArtifact({ owner, repo, artifact_id: a.id });
-                artifactsDeleted++;
-                artifactBytesDeleted += a.size_in_bytes || 0;
-              } catch (e) {
-                core.warning(`Artifact ${a.id}: ${e.status || e.message}`);
-              }
-            }
-
-            const runs = await github.paginate(
-              github.rest.actions.listWorkflowRunsForRepo,
-              { owner, repo, per_page: 100 }
-            );
-            const classify = (run) => {
-              if (run.conclusion === 'success') return 'success';
-              if (['failure','timed_out','action_required','startup_failure'].includes(run.conclusion)) return 'failure';
-              if (['cancelled','skipped','neutral'].includes(run.conclusion)) return 'cancelled';
-              return 'other';
-            };
-            const keepLimit = { success: 20, failure: 20, cancelled: 5, other: 20 };
-            const buckets = new Map();
-            for (const run of runs) {
-              if (run.status !== 'completed') continue;
-              const cls = classify(run);
-              const key = `${run.workflow_id}:${cls}`;
-              if (!buckets.has(key)) buckets.set(key, []);
-              buckets.get(key).push(run);
-            }
-
-            let runsDeleted = 0;
-            for (const [key, group] of buckets.entries()) {
-              group.sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
-              const cls = key.split(':').pop();
-              const limit = keepLimit[cls] ?? 20;
-              for (let i = limit; i < group.length; i++) {
-                const run = group[i];
-                if (run.id === context.runId) continue;
-                try {
-                  await github.rest.actions.deleteWorkflowRun({ owner, repo, run_id: run.id });
-                  runsDeleted++;
-                } catch (e) {
-                  core.warning(`Run ${run.id}: ${e.status || e.message}`);
-                }
-              }
-            }
-
-            let cachesDeleted = 0;
-            let cacheBytesDeleted = 0;
-            try {
-              const response = await github.request('GET /repos/{owner}/{repo}/actions/caches', {
-                owner, repo, per_page: 100
-              });
-              for (const c of (response.data.actions_caches || [])) {
-                const idleDays = (now - new Date(c.last_accessed_at || c.created_at).getTime()) / DAY;
-                if (idleDays <= 21) continue;
-                try {
-                  await github.request('DELETE /repos/{owner}/{repo}/actions/caches/{cache_id}', {
-                    owner, repo, cache_id: c.id
-                  });
-                  cachesDeleted++;
-                  cacheBytesDeleted += c.size_in_bytes || 0;
-                } catch (e) {
-                  core.warning(`Cache ${c.id}: ${e.status || e.message}`);
-                }
-              }
-            } catch (e) {
-              core.warning(`Cache audit: ${e.status || e.message}`);
-            }
-
+            const soon = artifacts.filter(item => item.expires_at &&
+              new Date(item.expires_at).getTime() > now &&
+              new Date(item.expires_at).getTime() - now <= 7 * 86400000);
+            const names = soon.slice(0, 20).map(item =>
+              `- ${item.name}: expires ${item.expires_at}, artifact #${item.id}`);
             await core.summary
-              .addHeading('GitHub Housekeeping')
-              .addRaw(`Artifacts deleted: ${artifactsDeleted} (${artifactBytesDeleted} bytes)\n`)
-              .addRaw(`Workflow runs deleted: ${runsDeleted}\n`)
-              .addRaw(`Stale caches deleted: ${cachesDeleted} (${cacheBytesDeleted} bytes)\n`)
-              .addRaw('Branches and releases are never deleted automatically.\n')
+              .addHeading('Because Of This — READ-ONLY storage audit')
+              .addRaw(`Artifacts: ${artifacts.length}; approx bytes: ${bytes}; expired: ${expired}\n\n`)
+              .addRaw(`Workflow runs indexed: ${runs.length}\n\n`)
+              .addHeading('Artifacts expiring within 7 days')
+              .addRaw(names.length ? names.join('\n') + '\n' : 'None detected.\n')
+              .addRaw('\nNo artifact, run, cache, branch or release was deleted.\n')
               .write();

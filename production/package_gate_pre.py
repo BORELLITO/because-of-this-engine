@@ -61,4 +61,4 @@ def evaluate_package_gate(record: Mapping[str, Any]) -> dict[str, Any]:
     if record.get("safety_status") in {"BLOCKED","REJECTED"}: failures.append("safety_status is blocked")
     deferred = [key for key in ("source_ledger_status","rights_ledger_status","reuse_status") if record.get(key) not in {"READY","PASS","APPROVED"}]
     warnings.extend(f"{key} remains deferred to its downstream gate" for key in deferred)
-    return {"gate":"PACKAGE_GATE_PRE","status":"PACKAGE_GATE_PASS" if not failures else "PACKAGE_GATE_BLOCKED","production_enablement":False,"score":score,"score_max":10,"score_dimensions":dimensions,"failures":failures,"warnings":warnings,"hard_gates_deferred":deferred,"next_state":"FACT_CHECK_PENDING" if not failures else "BLOCKED"}
+    return {"gate":"PACKAGE_GATE_PRE","status":"PACKAGE_GATE_PASS" if not failures else "PACKAGE_GATE_BLOCKED","production_enablement":False,"score":score,"score_max":10,"score_scope":"STRUCTURAL_COMPLETENESS_ONLY","editorial_quality_proven":False,"score_dimensions":dimensions,"failures":failures,"warnings":warnings,"hard_gates_deferred":deferred,"next_state":"FACT_CHECK_PENDING" if not failures else "BLOCKED"}

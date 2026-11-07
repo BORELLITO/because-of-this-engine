@@ -171,6 +171,26 @@ def validate_visual_plan(plan: dict[str, Any], manifest: dict[str, Any]) -> dict
     if not set(manifest_ids).issubset(approved_ids):
         errors.append("manifest contains a candidate not approved for manifest-only use")
 
+    # The manifest must use the exact approved intake bytes. A pending or
+    # fabricated perceptual fingerprint cannot pass simply because source and
+    # license metadata are present.
+    candidates_by_id = {str(item.get("candidate_id")): item for item in candidates}
+    for asset in assets:
+        candidate_id = str(asset.get("candidate_id", ""))
+        candidate = candidates_by_id.get(candidate_id)
+        if candidate is None:
+            errors.append(f"{candidate_id}: no matching acquisition candidate")
+            continue
+        intake = candidate.get("intake_artifact") or {}
+        original_sha = str(intake.get("sha256") or "")
+        manifest_sha = str(asset.get("sha256") or "")
+        if not original_sha or manifest_sha != original_sha:
+            errors.append(f"{candidate_id}: intake SHA-256 mismatch or missing")
+        original_fingerprint = str(intake.get("perceptual_hash") or "")
+        manifest_fingerprint = str(asset.get("perceptual_hash") or "")
+        if not original_fingerprint or manifest_fingerprint != original_fingerprint:
+            errors.append(f"{candidate_id}: intake perceptual fingerprint mismatch or pending")
+
     for asset in assets:
         candidate_id = str(asset.get("candidate_id", ""))
         if asset.get("approved_for_render") is not False:
