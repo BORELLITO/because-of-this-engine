@@ -4,6 +4,10 @@ Fixtures do not grant licenses or claim acoustic novelty in production.
 from __future__ import annotations
 import hashlib
 import json
+import io
+import math
+import struct
+import wave
 import tempfile
 import unittest
 from pathlib import Path
@@ -16,8 +20,20 @@ class AudioCandidateGateTests(unittest.TestCase):
         self.ctx=tempfile.TemporaryDirectory();self.addCleanup(self.ctx.cleanup)
         self.root=Path(self.ctx.name)
         (self.root/"episodes").mkdir()
-        self.old=b"already used music bytes" * 200
-        self.new=b"unique pending review music bytes" * 200
+        def wav_bytes(freq:float)->bytes:
+            output=io.BytesIO()
+            with wave.open(output,"wb") as w:
+                w.setnchannels(1)
+                w.setsampwidth(2)
+                w.setframerate(8000)
+                frames=bytearray()
+                for i in range(8000*11):
+                    value=int(17000*math.sin(2*math.pi*(freq+3*i/8000)*i/8000))
+                    frames.extend(struct.pack("<h",value))
+                w.writeframes(bytes(frames))
+            return output.getvalue()
+        self.old=wav_bytes(223.0)
+        self.new=wav_bytes(331.0)
         self.old_sha=hashlib.sha256(self.old).hexdigest()
         self.master={"rendered_masters":[{
             "episode_id":"fixture-final","music_asset":{"sha256":self.old_sha,"drive_file_id":"historical-id"}
@@ -35,7 +51,9 @@ class AudioCandidateGateTests(unittest.TestCase):
     def test_distinct_audio_bytes_can_pass_identity_gate_without_publication_approval(self):
         report=check_file(self.audio,self.candidate,root=self.root)
         self.assertEqual(report["status"],"PASS",report)
-        self.assertTrue(report["ready_for_render"])
+        self.assertTrue(report["identity_check_pass"])
+        self.assertFalse(report["ready_for_render"])
+        self.assertEqual(report["scope"],"IDENTITY_AND_DECODING_ONLY_NEXT_STAGE_REQUIRED")
         self.assertFalse(report["publication_authorized"])
 
     def test_same_music_exact_source_detects_reuse(self):
