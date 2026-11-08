@@ -593,3 +593,11 @@ O módulo `production/final_delivery_v21.py` exige o vídeo master exato, polít
 
 **Próximo passo único:** concluir SFX/histórico e prova perceptiva de mixagem, rodar teste de render final real 1080×1920/60fps em ambiente privado sob autorização e só então habilitar produção manual, sem autopublicação.
 
+### 2026-11-07 — Blindagem complementar da única trilha autônoma após PR #140
+
+A main recebeu PR #140 de seleção musical por história, mixagem Charon prioritária e trilha constante até o fade preto. O PR #141 alternativo foi **fechado SEM MERGE** por conflito e duplicidade de arquitetura. Preservar a única rota production/music_direction_v21.py e o perfil sonoro do PR #140 (ganho 0,12 candidato, ducking, fade final de 3,5s, outro visual 5,5s). Não existem dois seletores ativos.
+
+Blindagem aplicada sobre o módulo canônico: exige SHA-256 do áudio original e arquivo de dossiê de licença com hash e vínculo ao episódio/fornecedor oficial/YouTube/TikTok/Content ID; recusa auto-declarações e links fictícios; compara o source SHA e URLs do vencedor contra a faixa realmente usada; o master exige duração real suficiente, sem repetir faixa curta em loop. Proibição de sirenes/alarmes também nos stems SFX; ausência de efeitos é permitida apenas se a história tiver QA contextual explícito AMBIENT_MUSIC_ONLY. As decisões e evidências musicais entram no relatório final auditável.
+
+Testes de regressão de integridade de direitos, Content ID, seleção, áudio intacto e fade do cartão, sem render real ou TTS. Documentação complementar: docs/V21_MUSIC_RIGHTS_AND_SFX_HARDENING.md. Os gates de produção e entrega continuam desligados; novos downloads e provas de direitos exigem ingestão confiável (ainda não automatizada integralmente). Próxima dependência: ingerir candidatos licenciados e produzir um preview privado, auditar equilíbrio de voz/trilha por escuta e histórico SFX antes de habilitar produção.
+

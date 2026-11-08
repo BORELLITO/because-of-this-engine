@@ -33,6 +33,13 @@ class V21SafetyHardeningTests(unittest.TestCase):
                     "status": "IMPLEMENTED_FAIL_CLOSED_NO_PRODUCTION_AUTHORIZATION",
                     "generate_new_TTS": False,
                     "publication": "manual_only",
+                    "soundtrack_selection": "production/music_direction_v21.py",
+                    "music_bed_required": True,
+                    "music_covers_outro": True,
+                    "voice_priority_ducking_required": True,
+                    "no_sirens_alarms": True,
+                    "music_rights_per_episode": True,
+                    "music_volume_candidate": 0.12,
                 },
                 "final_drive_delivery_enablement": False,
                 "final_delivery_audio_gate": {
@@ -47,8 +54,15 @@ class V21SafetyHardeningTests(unittest.TestCase):
         (self.root / "production" / "render_v21_final.py").write_text(
             'validate_request(record, repo_root=repo_root, mode="final")\n'
             'validate_completed_audio_mix(\n'
-            'build_audio_mix_command(\n',
+            'build_audio_mix_command(\n'
+            'select_soundtrack(\n'
+            'selected_audio_sha256\n'
+            'sidechaincompress\n'
+            'afade=t=out\n',
             encoding="utf-8",
+        )
+        (self.root / "production" / "music_direction_v21.py").write_text(
+            "# canonical soundtrack selector fixture\n", encoding="utf-8"
         )
         (self.root / "production" / "final_delivery_v21.py").write_text(
             "# test fixture: final-drive delivery proof boundary\n", encoding="utf-8")
