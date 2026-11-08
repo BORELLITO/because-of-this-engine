@@ -41,6 +41,14 @@ class V21SafetyHardeningTests(unittest.TestCase):
                     "music_rights_per_episode": True,
                     "music_volume_candidate": 0.12,
                 },
+                "zero_additional_cost_policy": {
+                    "mode": "ABSOLUTE_ZERO_ADDITIONAL_SPEND",
+                    "max_incremental_spend_usd": 0,
+                    "allow_paid_apis": False,
+                    "allow_new_unverified_tts_calls": False,
+                    "external_spend_hard_cap_verified": False,
+                    "default_for_unknown_external_cost": "BLOCK",
+                },
                 "final_drive_delivery_enablement": False,
                 "final_delivery_audio_gate": {
                     "adapter": "production/final_delivery_v21.py",
@@ -51,6 +59,9 @@ class V21SafetyHardeningTests(unittest.TestCase):
             }), encoding="utf-8"
         )
 
+        (self.root / "production" / "gemini_tts.py").write_text(
+            'assert_zero_cost("gemini_tts_generate_content")\n',encoding="utf-8"
+        )
         (self.root / "production" / "render_v21_final.py").write_text(
             'validate_request(record, repo_root=repo_root, mode="final")\n'
             'validate_completed_audio_mix(\n'
