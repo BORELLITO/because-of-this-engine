@@ -70,6 +70,8 @@ class V21SafetyHardeningTests(unittest.TestCase):
         )
         (self.root / "production" / "render_v21_manual.py").write_text(
             "audit_soundtrack_release(\n", encoding="utf-8")
+        (self.root / "production" / "music_content_screen_v21.py").write_text(
+            "# synthetic read-only source screening fixture\n", encoding="utf-8")
         (self.root / "production" / "soundtrack_release_evidence_v21.py").write_text(
             "# isolated story music release truth gate fixture\n", encoding="utf-8")
         (self.root / "production" / "render_v21_final.py").write_text(

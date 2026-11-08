@@ -9,8 +9,9 @@ from production.soundtrack_release_evidence_v21 import audit
 
 ROOT = Path(__file__).resolve().parents[1]
 DOSSIER = "episodes/episode-005/music-clearance-v21.json"
-QA = "reports/EP005_STOCK_MUSIC_SILENT_DESCENT_PRIVATE_QA_20261107.json"
+QA = "reports/EP005_MIXKIT_INVESTIGATIVE_HEAD_TO_HEAD_QA_20261108.json"
 MASTERS = "episodes/audio-rendered-master-registry.json"
+SIGNAL = "reports/EP005_SELPAN_SOURCE_SCREEN_QA_20261108.json"
 
 
 class V21SoundtrackReleaseEvidenceTests(unittest.TestCase):
@@ -18,7 +19,7 @@ class V21SoundtrackReleaseEvidenceTests(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)
-        for relative in (DOSSIER, QA, MASTERS):
+        for relative in (DOSSIER, QA, MASTERS, SIGNAL):
             target = self.root / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes((ROOT / relative).read_bytes())
@@ -75,10 +76,10 @@ class V21SoundtrackReleaseEvidenceTests(unittest.TestCase):
         self.assertTrue(any("SFX dossier disagrees" in x for x in result["failures"]))
         self.assertTrue(any("historical SFX contributions remain unproven" in x for x in result["failures"]))
 
-    def test_melancholic_tag_is_not_pretended_to_be_suspense_listening_QA(self):
+    def test_provider_investigative_tags_do_not_replace_independent_listening_QA(self):
         result=audit(self.root, "episode-005")
         self.assertEqual(result["evidence"]["creative_fitness_for_story"],
-                         "HOLD_MELANCHOLIC_PROVIDER_TAGS_NOT_SUSPENSE_PROOF")
+                         "PENDING_STORY_MUSIC_AUDITION_PROVIDER_TAGS_ONLY")
         self.assertTrue(any("editorial fit" in x for x in result["failures"]))
 
     def test_fake_official_url_and_original_song_sha_are_rejected(self):
@@ -89,16 +90,38 @@ class V21SoundtrackReleaseEvidenceTests(unittest.TestCase):
         result=audit(self.root, "episode-005")
         self.assertEqual(result["status"], "BLOCKED")
         self.assertTrue(any("source/provider/license URLs" in x for x in result["failures"]))
-        self.assertTrue(any("source identity/duration" in x for x in result["failures"]))
+        self.assertTrue(any("Selpan original MP3" in x for x in result["failures"]))
 
     def test_music_QA_cannot_be_changed_to_claim_release_pass(self):
         qa_path=self.root / QA
         qa=json.loads(qa_path.read_text())
-        qa["decision"]["status"]="PRODUCTION_APPROVED"
+        qa["status"]="PRODUCTION_APPROVED"
         qa_path.write_text(json.dumps(qa))
         result=audit(self.root,"episode-005")
         self.assertEqual(result["status"],"BLOCKED")
-        self.assertTrue(any("private Charon mix technical evidence" in x for x in result["failures"]))
+        self.assertTrue(any("selected Selpan preview/voice mix" in x for x in result["failures"]))
+
+    def test_selpan_is_active_but_its_content_screen_is_not_falsely_certified(self):
+        a = audit(self.root, "episode-005")
+        self.assertEqual(a["evidence"]["music_sfx_content_review"],
+                         "PENDING_FULL_SOURCE_AUDITION_AND_VOICE_CLARITY")
+        self.assertTrue(any("source listening/SFX" in x for x in a["failures"]))
+        dossier = self.dossier()
+        self.assertEqual(dossier["title"], "Selpan")
+        self.assertEqual(dossier["audio_content_screen"]["siren_absence_certified"], False)
+        self.assertTrue((ROOT / "episodes/episode-005/music-clearance-silent-descent-archive-v21.json").is_file())
+
+    def test_source_screen_evidence_is_bound_to_same_real_original_mp3(self):
+        checked=audit(self.root,"episode-005")
+        self.assertEqual(checked["status"],"BLOCKED")
+        self.assertEqual(checked["evidence"].get("source_signal_screen"),
+                         "HEURISTIC_FLAGGED_QUALIFIED_LISTENING_NOT_COMPLETE")
+        dossier=self.dossier()
+        dossier["audio_content_screen"]["detected_tonal_risk_regions"]=0
+        self.write_dossier(dossier)
+        blocked=audit(self.root,"episode-005")
+        self.assertTrue(any("signal-screen evidence mismatch" in x for x in blocked["failures"]))
+        self.assertFalse(blocked["publication_authorized"])
 
     def test_ledger_missing_and_missing_candidate_dossier_block(self):
         (self.root / MASTERS).unlink()

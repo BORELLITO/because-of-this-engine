@@ -90,41 +90,86 @@ def audit(repo_root: Path, episode_id: str) -> dict[str, Any]:
         if not isinstance(qa_path, str) or not qa_path.startswith("reports/"):
             raise ValueError("QA report must be a versioned repository report")
         qa = _load(root, qa_path)
-        candidate = qa.get("candidate") or {}
-        sfx_report = qa.get("source_review") or {}
-        mix = qa.get("mix") or {}
-        source_evidence = d.get("source_evidence") or {}
-        sha = d.get("source_sha256")
-        if (qa.get("episode_id") != episode_id or
-                qa.get("provider", "").lower() != provider or
-                candidate.get("title") != d.get("title") or
+        # The immutable Episode005 head-to-head test is a different schema
+        # from the earlier single-track Silent Descent QA. Select the *actual*
+        # music row by source SHA/URL rather than trusting an editorial label.
+        if isinstance(qa.get("candidates"), list):
+            candidate = next(
+                (x for x in qa["candidates"]
+                 if x.get("title") == d.get("title")
+                 and x.get("source_sha256") == d.get("source_sha256")), None)
+            history = d.get("source_evidence") or {}
+            workflow = qa.get("evidence_workflow") or {}
+            music_sha = d.get("source_sha256")
+            # Missing/mismatched SHA must BLOCK, not crash when candidate is null.
+            candidate = candidate or {}
+            if not candidate or (
+                qa.get("episode_id") != episode_id or
+                qa.get("scope") != "TWO_REAL_ORIGINAL_MIXKIT_MUSIC_STOCK_SOURCES_WITH_EXISTING_APPROVED_CHARON_PRIVATE_QA_ONLY" or
+                not SHA.fullmatch(str(music_sha or "")) or
                 candidate.get("artist") != d.get("artist") or
-                candidate.get("original_mp3_url") != mp3 or
-                candidate.get("license_url") != expected_license or
-                candidate.get("original_audio_sha256") != sha or
-                not SHA.fullmatch(str(sha or "")) or
-                abs(float(candidate.get("duration_seconds") or 0) -
-                    float(d.get("source_duration_seconds") or 0)) > .05):
-            failures.append("source identity/duration disagrees with original MP3 and archived QA")
+                candidate.get("source_url") != mp3 or
+                abs(float(candidate.get("source_duration_seconds") or 0) -
+                    float(d.get("source_duration_seconds") or 0)) > 0.05 or
+                workflow.get("run_id") != history.get("qa_workflow_run_id") or
+                workflow.get("conclusion") != "success" or
+                not bool((qa.get("approved_voice") or {}).get("existing_cache_only")) or
+                (qa.get("approved_voice") or {}).get("voice_name") != "Charon"):
+                failures.append("Selpan original MP3 and exact-head-to-head QA provenance inconsistent")
+            else:
+                evidence["original_music_bytes"] = "SHA256_VERIFIED_IN_EXISTING_PRIVATE_QA_RUN"
+            mix = qa.get("mix") or {}
+            if (mix.get("source_ids_compared") != 5 or
+                    history.get("acoustic_catalog_count") != 5 or
+                    candidate.get("max_historic_similarity", 1) >= 0.78 or
+                    mix.get("known_reuse_status") != "NO_MATCH_IN_KNOWN_FIVE"):
+                failures.append("new candidate five-source acoustic replay/collision evidence missing")
+            else:
+                evidence["new_song_vs_five_known_historical_sources"] = "NO_MATCH_IN_KNOWN_CATALOG_ONLY"
+            if (qa.get("status") != "PRIVATE_HEAD_TO_HEAD_TECHNICAL_PASS_RELEASE_BLOCKED" or
+                    mix.get("stem_replay_verified") is not True or
+                    candidate.get("technical_verdict") != "PASS" or
+                    (qa.get("provisional_director_choice") or {}).get("title") != d.get("title")):
+                failures.append("selected Selpan preview/voice mix was not genuinely verified")
+            else:
+                evidence["actual_private_audio_mix"] = "TECHNICAL_PASS_NOT_MASTER_OR_PUBLICATION"
         else:
-            evidence["original_music_bytes"] = "SHA256_VERIFIED_IN_EXISTING_PRIVATE_QA_RUN"
-        if (sfx_report.get("historical_catalog_sources_verified") != 5 or
-                sfx_report.get("known_catalog_reuse") != "NO_MATCH_IN_KNOWN_CATALOG" or
-                source_evidence.get("acoustic_catalog_count") != 5 or
-                source_evidence.get("qa_workflow_run_id") !=
-                (qa.get("qa_ci") or {}).get("run_id") or
-                (qa.get("qa_ci") or {}).get("conclusion") != "success"):
-            failures.append("five-source acoustic comparison not substantiated by archived CI")
-        else:
-            evidence["new_song_vs_five_known_historical_sources"] = "NO_MATCH_IN_KNOWN_CATALOG_ONLY"
-        if (mix.get("mix_receipt_replay") is not True or
-                set(mix.get("stem_contributions") or []) != {"music", "narration"} or
-                (qa.get("decision") or {}).get("status") !=
-                    "PRIVATE_AUDIO_QA_TECHNICAL_PASS_NOT_RELEASE_APPROVED" or
-                (qa.get("narration") or {}).get("voice_name") != "Charon"):
-            failures.append("archived private Charon mix technical evidence incomplete")
-        else:
-            evidence["actual_private_audio_mix"] = "TECHNICAL_PASS_NOT_MASTER_OR_PUBLICATION"
+
+            candidate = qa.get("candidate") or {}
+            sfx_report = qa.get("source_review") or {}
+            mix = qa.get("mix") or {}
+            source_evidence = d.get("source_evidence") or {}
+            sha = d.get("source_sha256")
+            if (qa.get("episode_id") != episode_id or
+                    qa.get("provider", "").lower() != provider or
+                    candidate.get("title") != d.get("title") or
+                    candidate.get("artist") != d.get("artist") or
+                    candidate.get("original_mp3_url") != mp3 or
+                    candidate.get("license_url") != expected_license or
+                    candidate.get("original_audio_sha256") != sha or
+                    not SHA.fullmatch(str(sha or "")) or
+                    abs(float(candidate.get("duration_seconds") or 0) -
+                        float(d.get("source_duration_seconds") or 0)) > .05):
+                failures.append("source identity/duration disagrees with original MP3 and archived QA")
+            else:
+                evidence["original_music_bytes"] = "SHA256_VERIFIED_IN_EXISTING_PRIVATE_QA_RUN"
+            if (sfx_report.get("historical_catalog_sources_verified") != 5 or
+                    sfx_report.get("known_catalog_reuse") != "NO_MATCH_IN_KNOWN_CATALOG" or
+                    source_evidence.get("acoustic_catalog_count") != 5 or
+                    source_evidence.get("qa_workflow_run_id") !=
+                    (qa.get("qa_ci") or {}).get("run_id") or
+                    (qa.get("qa_ci") or {}).get("conclusion") != "success"):
+                failures.append("five-source acoustic comparison not substantiated by archived CI")
+            else:
+                evidence["new_song_vs_five_known_historical_sources"] = "NO_MATCH_IN_KNOWN_CATALOG_ONLY"
+            if (mix.get("mix_receipt_replay") is not True or
+                    set(mix.get("stem_contributions") or []) != {"music", "narration"} or
+                    (qa.get("decision") or {}).get("status") !=
+                        "PRIVATE_AUDIO_QA_TECHNICAL_PASS_NOT_RELEASE_APPROVED" or
+                    (qa.get("narration") or {}).get("voice_name") != "Charon"):
+                failures.append("archived private Charon mix technical evidence incomplete")
+            else:
+                evidence["actual_private_audio_mix"] = "TECHNICAL_PASS_NOT_MASTER_OR_PUBLICATION"
     except (OSError, ValueError, TypeError, json.JSONDecodeError) as exc:
         failures.append("archived real-media audio QA missing/invalid: " + str(exc))
 
@@ -141,6 +186,40 @@ def audit(repo_root: Path, episode_id: str) -> dict[str, Any]:
         if (editorial.get("status") == "PENDING_INDEPENDENT_STORY_FIT" and
                 editorial.get("suspense_or_investigative_tags_in_provider_listing") is False):
             evidence["creative_fitness_for_story"] = "HOLD_MELANCHOLIC_PROVIDER_TAGS_NOT_SUSPENSE_PROOF"
+        elif editorial.get("status") == "PENDING_INDEPENDENT_STORY_FIT":
+            evidence["creative_fitness_for_story"] = "PENDING_STORY_MUSIC_AUDITION_PROVIDER_TAGS_ONLY"
+
+    # Heuristic signal inspection may flag siren-like sweeps or sharp
+    # transients but CANNOT assert absence of sirens, vocal masking or other
+    # intrusive effects; a full-source qualified audition remains required.
+    screen = d.get("audio_content_screen") or {}
+    if screen.get("source_screen_evidence_path"):
+        try:
+            if not str(screen["source_screen_evidence_path"]).startswith("reports/"):
+                raise ValueError("source signal report must be a repository report")
+            measured = _load(root, screen["source_screen_evidence_path"])
+            original_sha = d.get("source_sha256")
+            if (measured.get("original_source_sha256") != original_sha or
+                    screen.get("original_source_sha256") != original_sha or
+                    screen.get("source_screen_workflow_run_id") !=
+                        (measured.get("archived_audio_qa") or {}).get("run_id") or
+                    screen.get("source_screen_report_sha256") !=
+                        (measured.get("archived_audio_qa") or {}).get("full_report_sha256") or
+                    screen.get("detected_tonal_risk_regions") !=
+                        measured.get("detected_tonal_region_count") or
+                    measured.get("source_siren_absence_certified") is not False or
+                    measured.get("release_authorized") is not False):
+                failures.append("original music signal-screen evidence mismatch or forged")
+            else:
+                evidence["source_signal_screen"] = "HEURISTIC_FLAGGED_QUALIFIED_LISTENING_NOT_COMPLETE"
+        except (OSError, ValueError, TypeError, json.JSONDecodeError) as exc:
+            failures.append("real original-source signal report missing or invalid: " + str(exc))
+    if (screen.get("status") != "QUALIFIED_CONTENT_REVIEW_PASS" or
+            screen.get("siren_absence_certified") is not True or
+            screen.get("speech_masking_safely_verified") is not True or
+            not SHA.fullmatch(str(screen.get("independent_audio_review_sha256") or ""))):
+        failures.append("source listening/SFX/no-siren and voice-masking review is pending")
+        evidence["music_sfx_content_review"] = "PENDING_FULL_SOURCE_AUDITION_AND_VOICE_CLARITY"
 
     claim = d.get("content_id") or {}
     if claim.get("status") == "PLATFORM_EVIDENCE_REVIEWED_NO_UNRESOLVED_CLAIM":

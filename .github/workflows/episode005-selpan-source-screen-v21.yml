@@ -1,0 +1,85 @@
+name: BECAUSE OF THIS V2.1 EP005 Selpan Source Audio Screening FREE
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/episode005-selpan-source-screen-v21.yml"
+      - "production/music_content_screen_v21.py"
+      - "tests/test_v21_music_content_screen.py"
+      - "episodes/episode-005/music-clearance-v21.json"
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  source-screen:
+    if: github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout canonical V2.1
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Enforce zero cost and install free analysis dependencies
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python - <<'PY'
+          from production.zero_cost_v21 import evaluate_cost
+          assert evaluate_cost("offline_media_qa")["status"]=="PASS"
+          assert evaluate_cost("gemini_tts_generate_content")["status"]=="BLOCKED"
+          assert evaluate_cost("paid_render_api")["status"]=="BLOCKED"
+          PY
+          python -m pip install --disable-pip-version-check numpy==2.2.6 scipy==1.15.3
+          PYTHONPATH=. python -m unittest -v tests.test_v21_music_content_screen
+          if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends ffmpeg
+          fi
+          ffmpeg -version | head -n 1
+      - name: Download original Mixkit Selpan for temporary inspection only
+        run: |
+          set -euo pipefail
+          mkdir -p private/ep005
+          curl --fail --location --retry 3 --retry-delay 2 --connect-timeout 15 --max-time 120 --proto '=https' --tlsv1.2 'https://assets.mixkit.co/music/612/612.mp3' -o private/ep005/selpan-source.mp3
+          echo "3d46ec4a1572e00a7da4b3e697067c7cbb07331bc5837758985ff95eda858267  private/ep005/selpan-source.mp3" | sha256sum --check
+      - name: Reuse approved Episode005 Charon without external TTS
+        uses: actions/download-artifact@v4
+        with:
+          name: episode005-gemini-charon-captioned
+          github-token: ${{ github.token }}
+          run-id: 42278428885
+          path: private/ep005/charon
+      - name: Inspect original source for potential sweeps and estimated voice masking
+        run: |
+          set -euo pipefail
+          mkdir -p private/ep005/report
+          PYTHONPATH=. python production/music_content_screen_v21.py --music private/ep005/selpan-source.mp3 --approved-voice private/ep005/charon/narration.wav --expected-sha256 3d46ec4a1572e00a7da4b3e697067c7cbb07331bc5837758985ff95eda858267 --output private/ep005/report/EP005_Selpan_Source_Signal_Screen.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path("private/ep005/report/EP005_Selpan_Source_Signal_Screen.json").read_text())
+          assert r["original_source_sha256"]=="3d46ec4a1572e00a7da4b3e697067c7cbb07331bc5837758985ff95eda858267"
+          assert 193.3<=r["duration_seconds"]<=194.0,r
+          assert r["absence_of_sirens_certified"] is False
+          assert r["absence_of_vocals_certified"] is False
+          assert r["no_content_id_claim_certified"] is False
+          assert r["release_authorized"] is False
+          assert r["cost_usd"]==0 and r["new_tts_requests"]==0
+          assert r["speech_masking_estimate"]["comprehensibility_verified"] is False
+          print("EP005_SELPAN_REAL_SOURCE_TRIAGE_PASS_NOT_A_LISTENING_RELEASE_CERTIFICATION")
+          PY
+      - name: Erase original stock music and original narration
+        if: always()
+        run: |
+          rm -rf private/ep005/selpan-source.mp3 private/ep005/charon
+      - name: Save private numerical QA report only
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: episode005-selpan-source-screen-v21
+          path: private/ep005/report/EP005_Selpan_Source_Signal_Screen.json
+          if-no-files-found: error
+          retention-days: 7

@@ -94,6 +94,10 @@ def audit(repo_root: Path) -> dict:
     no_charge = audit_zero_cost(root)
     if no_charge["status"] != "PASS":
         failures.extend("zero-cost:" + item for item in no_charge["failures"])
+    # Source waveform diagnostics are evidence only, never a 'no sirens'
+    # certificate. The final-release gate must still require qualified QA.
+    if not (root / "production" / "music_content_screen_v21.py").is_file():
+        failures.append("Selpan original-source sound screening missing")
     music_rights = root / "production" / "soundtrack_release_evidence_v21.py"
     if not music_rights.is_file():
         failures.append("music license/Content ID/historical SFX release verifier missing")

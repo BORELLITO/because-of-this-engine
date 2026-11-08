@@ -84,17 +84,21 @@ class EP005MixkitPrivateAudioTests(unittest.TestCase):
         self.assertIn("PROVISIONAL",report["provisional_director_choice"]["status"])
         self.assertIn("PLATFORM_CONTENT_ID_UNKNOWN",report["unresolved"])
 
-    def test_current_ep005_clearance_remains_blocked_despite_provisional_choice(self):
-        root=Path(__file__).resolve().parents[1]
-        legacy=json.loads((root/"episodes/episode-005/music-clearance-v21.json").read_text())
-        selection=legacy["director_research_decision_v21"]
+    def test_selpan_is_active_qa_candidate_and_silent_descent_is_preserved(self):
+        root = Path(__file__).resolve().parents[1]
+        current=json.loads((root/"episodes/episode-005/music-clearance-v21.json").read_text())
+        archived=json.loads((root/"episodes/episode-005/music-clearance-silent-descent-archive-v21.json").read_text())
         report=json.loads((root/"reports/EP005_MIXKIT_INVESTIGATIVE_HEAD_TO_HEAD_QA_20261108.json").read_text())
-        self.assertEqual(selection["candidate_title"],"Selpan")
-        self.assertEqual(selection["original_mp3_sha256"],report["candidates"][0]["source_sha256"])
-        self.assertEqual(selection["real_comparison_workflow_run_id"],42494029735)
-        self.assertFalse(selection["bypass_existing_release_gate"])
-        self.assertFalse(selection["publication_authorized"])
-        self.assertEqual(legacy["decision"]["status"],"HOLD_FOR_CREATIVE_AND_CONTENT_ID_EVIDENCE")
+        self.assertEqual(current["title"],"Selpan")
+        self.assertEqual(current["source_sha256"],report["candidates"][0]["source_sha256"])
+        self.assertEqual(current["source_evidence"]["qa_workflow_run_id"],42494029735)
+        self.assertFalse(current["decision"]["publication_authorized"])
+        self.assertEqual(current["decision"]["status"],
+                         "HOLD_FOR_QUALIFIED_SOURCE_AUDITION_AND_CONTENT_ID")
+        self.assertEqual(current["content_id"]["status"],"UNKNOWN_NOT_CHECKED_ON_DESTINATION_PLATFORM")
+        self.assertEqual(archived["title"],"Silent Descent")
+        self.assertEqual(archived["source_sha256"],
+                         "601955cacab6c38417687b144754c914f392f6508c35c241372695ad3987ec2b")
 
     def test_strict_zero_spend_remains_enforced(self):
         self.assertEqual(evaluate_cost("existing_charon_audio_reuse")["status"],"PASS")

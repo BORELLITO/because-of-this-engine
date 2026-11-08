@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-11-08",
+  "episode_id": "episode-005",
+  "candidate_id": "mixkit-selpan-eugenio-mininni-612",
+  "analysis_scope": "ORIGINAL_SOURCE_SIGNAL_HEURISTICS_NOT_QUALIFIED_LISTENING",
+  "original_source_url": "https://assets.mixkit.co/music/612/612.mp3",
+  "original_source_sha256": "3d46ec4a1572e00a7da4b3e697067c7cbb07331bc5837758985ff95eda858267",
+  "source_duration_seconds": 193.615,
+  "archived_audio_qa": {
+    "run_id": 42503857799,
+    "artifact_id": 13626975270,
+    "artifact_name": "episode005-selpan-source-screen-v21",
+    "full_report_sha256": "87cd319a2c945672ce9ff1ed9f10a53c3d7bb9bfcdf1c4d15489747214a66ea4"
+  },
+  "screening_method": "FFMPEG_PCM_11025_STFT_380_1500HZ_AND_100MS_RMS",
+  "tonal_sweep_risk_regions": [
+    {
+      "start_seconds": 1.11,
+      "end_seconds": 10.27,
+      "max_peak_change_hz": 586.8,
+      "meaning": "POSSIBLE_TONAL_SWEEP_COULD_BE_MUSIC_OR_SIREN"
+    },
+    {
+      "start_seconds": 11.33,
+      "end_seconds": 32.23,
+      "max_peak_change_hz": 651.4,
+      "meaning": "POSSIBLE_TONAL_SWEEP_COULD_BE_MUSIC_OR_SIREN"
+    },
+    {
+      "start_seconds": 34.32,
+      "end_seconds": 37.34,
+      "max_peak_change_hz": 567.4,
+      "meaning": "POSSIBLE_TONAL_SWEEP_COULD_BE_MUSIC_OR_SIREN"
+    },
+    {
+      "start_seconds": 46.07,
+      "end_seconds": 49.6,
+      "max_peak_change_hz": 423.1,
+      "meaning": "POSSIBLE_TONAL_SWEEP_COULD_BE_MUSIC_OR_SIREN"
+    },
+    {
+      "start_seconds": 51.18,
+      "end_seconds": 56.24,
+      "max_peak_change_hz": 332.7,
+      "meaning": "POSSIBLE_TONAL_SWEEP_COULD_BE_MUSIC_OR_SIREN"
+    },
+    {
+      "start_seconds": 64.46,
+      "end_seconds": 70.03,
+      "max_peak_change_hz": 414.5,
+      "meaning": "POSSIBLE_TONAL_SWEEP_COULD_BE_MUSIC_OR_SIREN"
+    },
+    {
+      "start_seconds": 81.32,
+      "end_seconds": 85.36,
+      "max_peak_change_hz": 441.4,
+      "meaning": "POSSIBLE_TONAL_SWEEP_COULD_BE_MUSIC_OR_SIREN"
+    },
+    {
+      "start_seconds": 89.49,
+      "end_seconds": 95.58,
+      "max_peak_change_hz": 560.9,
+      "meaning": "POSSIBLE_TONAL_SWEEP_COULD_BE_MUSIC_OR_SIREN"
+    },
+    {
+      "start_seconds": 100.22,
+      "end_seconds": 119.59,
+      "max_peak_change_hz": 931.3,
+      "meaning": "POSSIBLE_TONAL_SWEEP_COULD_BE_MUSIC_OR_SIREN"
+    },
+    {
+      "start_seconds": 124.74,
+      "end_seconds": 127.76,
+      "max_peak_change_hz": 599.7,
+      "meaning": "POSSIBLE_TONAL_SWEEP_COULD_BE_MUSIC_OR_SIREN"
+    },
+    {
+      "start_seconds": 135.98,
+      "end_seconds": 151.26,
+      "max_peak_change_hz": 947.5,
+      "meaning": "POSSIBLE_TONAL_SWEEP_COULD_BE_MUSIC_OR_SIREN"
+    },
+    {
+      "start_seconds": 153.34,
+      "end_seconds": 155.86,
+      "max_peak_change_hz": 927,
+      "meaning": "POSSIBLE_TONAL_SWEEP_COULD_BE_MUSIC_OR_SIREN"
+    },
+    {
+      "start_seconds": 159.99,
+      "end_seconds": 164.54,
+      "max_peak_change_hz": 677.2,
+      "meaning": "POSSIBLE_TONAL_SWEEP_COULD_BE_MUSIC_OR_SIREN"
+    },
+    {
+      "start_seconds": 171.73,
+      "end_seconds": 183.44,
+      "max_peak_change_hz": 403.7,
+      "meaning": "POSSIBLE_TONAL_SWEEP_COULD_BE_MUSIC_OR_SIREN"
+    },
+    {
+      "start_seconds": 189.61,
+      "end_seconds": 193.15,
+      "max_peak_change_hz": 672.9,
+      "meaning": "POSSIBLE_TONAL_SWEEP_COULD_BE_MUSIC_OR_SIREN"
+    }
+  ],
+  "detected_tonal_region_count": 15,
+  "within_preview_79_34_sec_tonal_region_count": 6,
+  "abrupt_transient_candidate_count": 0,
+  "original_decoded_signal_rms_dbfs": -11.03,
+  "original_decoded_float_peak_dbfs": 2.77,
+  "note_on_original_peak": "Lossy MP3 decoding can exceed 0dBFS in floating-point output; this is not the finished master AAC true peak. Prior private mixed preview was -1.2dBTP.",
+  "masking_pre_sidechain": {
+    "active_voice_windows": 103,
+    "median_music_to_voice_db": -13.07,
+    "portion_music_within_12db_of_voice": 0.427,
+    "validity": "RAW_PCM_ONLY_NOT_FINAL_SIDECHAIN_MIX_LISTENABILITY"
+  },
+  "human_listening_evidence_complete": false,
+  "source_siren_absence_certified": false,
+  "source_vocal_absence_certified": false,
+  "content_id_cleared": false,
+  "license": "MIXKIT_FREE_MUSIC_VIDEO_USE_PERMITTED_NOT_CONTENT_ID_WAIVER",
+  "qualified_review_status": "MUST_INSPECT_FLAGGED_REGIONS_BEFORE_APPROVAL",
+  "release_authorized": false,
+  "production_authorized": false,
+  "publication_authorized": false,
+  "new_tts_requests": 0,
+  "incremental_cost_usd": 0
+}
