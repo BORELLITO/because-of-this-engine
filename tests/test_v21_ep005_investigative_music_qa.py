@@ -94,7 +94,7 @@ class EP005MixkitPrivateAudioTests(unittest.TestCase):
         self.assertEqual(current["source_evidence"]["qa_workflow_run_id"],42494029735)
         self.assertFalse(current["decision"]["publication_authorized"])
         self.assertEqual(current["decision"]["status"],
-                         "HOLD_FOR_SOURCE_SCREEN_STORY_FIT_AND_CONTENT_ID")
+                         "HOLD_FOR_QUALIFIED_SOURCE_AUDITION_AND_CONTENT_ID")
         self.assertEqual(current["content_id"]["status"],"UNKNOWN_NOT_CHECKED_ON_DESTINATION_PLATFORM")
         self.assertEqual(archived["title"],"Silent Descent")
         self.assertEqual(archived["source_sha256"],
