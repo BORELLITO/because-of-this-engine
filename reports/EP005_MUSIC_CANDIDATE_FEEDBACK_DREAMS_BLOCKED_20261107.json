@@ -1,0 +1,45 @@
+{
+  "episode_id": "episode-005",
+  "candidate": {
+    "title": "Feedback Dreams",
+    "artist": "Eugenio Mininni",
+    "provider": "Mixkit",
+    "official_listing": "https://mixkit.co/free-stock-music/atmospheres/",
+    "original_asset_url": "https://assets.mixkit.co/music/588/588.mp3",
+    "file_sha256": "13dff735e4cc2cc0a36c29f3492d92799f8f14f1d9ddae28a8bcf2544cc1470c",
+    "original_duration_catalog": "2:29"
+  },
+  "verification": {
+    "method": "real FFmpeg Chromaprint compared to versioned five-source history",
+    "frame_count": 1184,
+    "status": "BLOCKED_REVIEW_REQUIRED",
+    "threshold_review": 0.78,
+    "threshold_reuse": 0.88,
+    "top_matches": [
+      {
+        "source_id": "v7-001-generated-music",
+        "similarity": 0.8112,
+        "classification": "REVIEW_REQUIRED"
+      },
+      {
+        "source_id": "v7-002-004-reused-procedural",
+        "similarity": 0.78678,
+        "classification": "REVIEW_REQUIRED"
+      },
+      {
+        "source_id": "legacy-003-echoes",
+        "similarity": 0.75326,
+        "classification": "NO_MATCH_IN_KNOWN_CATALOG"
+      }
+    ],
+    "conclusion": "Cannot treat as confirmed reuse, but acoustic ambiguity blocks use or production without independent analysis."
+  },
+  "production_effects": {
+    "source_track_approved": false,
+    "qa_mix_exported": false,
+    "music_catalog_modified": false,
+    "historical_music_threshold_weakened": false,
+    "publication_authorized": false
+  },
+  "next": "Evaluate distinct Mixkit candidates one by one; preserve global threshold and request actual content listening/Content ID review before release."
+}
