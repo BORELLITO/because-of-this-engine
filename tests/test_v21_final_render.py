@@ -79,6 +79,16 @@ class FinalV21RenderTests(unittest.TestCase):
         with self.assertRaises(FinalRenderError):
             _time_signature(self.profile,76.0)
 
+    def test_output_true_peak_policy_cannot_be_silently_relaxed(self):
+        p = dict(self.profile)
+        p["output_limiter_auto_level"] = True
+        with self.assertRaisesRegex(FinalRenderError,"true-peak headroom"):
+            _time_signature(p, 65.0)
+        p = dict(self.profile)
+        p["output_true_peak_dbTP_max"] = 0.0
+        with self.assertRaisesRegex(FinalRenderError,"true-peak headroom"):
+            _time_signature(p, 65.0)
+
     def test_mix_command_preserves_narration_target_and_pretimed_sfx(self):
         command=build_audio_mix_command(
             self.narration,self.music,{"sfx:footsteps":self.sfx},
@@ -92,6 +102,8 @@ class FinalV21RenderTests(unittest.TestCase):
         self.assertIn("afade=t=out:st=67.000:d=3.500",joined)
         self.assertIn("atrim=duration=70.500",joined)
         self.assertIn("duration=longest",joined)
+        self.assertEqual(joined.count("alimiter=limit=0.90:level=0"),2)
+        self.assertNotIn("alimiter=limit=0.95,",joined)
         self.assertNotIn("-stream_loop",command)
         self.assertIn("apad=pad_dur=5.500",joined)
         self.assertIn(str(self.output),str(self.output))
@@ -181,6 +193,11 @@ class FinalV21RenderTests(unittest.TestCase):
             )
         self.assertEqual(result["status"],"V21_FINAL_AUDIO_AND_PICTURE_TECHNICAL_PASS",result)
         self.assertTrue(result["master_audio_bound"])
+        audio_qa = result["finished_master_audio_qa"]
+        self.assertEqual(audio_qa["status"], "PASS", audio_qa)
+        self.assertLessEqual(audio_qa["true_peak_dbTP"], -1.0)
+        self.assertGreaterEqual(audio_qa["integrated_loudness_lufs"], -20.0)
+        self.assertLessEqual(audio_qa["integrated_loudness_lufs"], -13.0)
         self.assertCountEqual(result["stem_contributions"],["narration","music","sfx:footsteps"])
         self.assertNotEqual(result["picture_sha256"],result["final_master_sha256"])
         self.assertEqual(result["picture_video_stream_sha256"],
