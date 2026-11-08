@@ -94,6 +94,13 @@ def audit(repo_root: Path) -> dict:
     no_charge = audit_zero_cost(root)
     if no_charge["status"] != "PASS":
         failures.extend("zero-cost:" + item for item in no_charge["failures"])
+    music_rights = root / "production" / "soundtrack_release_evidence_v21.py"
+    if not music_rights.is_file():
+        failures.append("music license/Content ID/historical SFX release verifier missing")
+    manual = root / "production" / "render_v21_manual.py"
+    if not manual.is_file() or (
+        "audit_soundtrack_release(" not in manual.read_text(encoding="utf-8")):
+        failures.append("final render preflight lost soundtrack release truth gate")
     workflow_root = root / ".github" / "workflows"
     workflows = sorted(workflow_root.glob("*.yml")) if workflow_root.exists() else []
     for path in workflows:

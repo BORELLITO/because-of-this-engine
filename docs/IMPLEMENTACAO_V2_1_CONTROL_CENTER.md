@@ -630,3 +630,16 @@ Foi recuperado o checkpoint Gemini/Charon do episódio 005 (WAV original 73,84s,
 **Estado mantido:** V2.1 canônico, Gemini/Charon como voz alvo e narrações aprovadas intactas; escolha musical por história, ganho 0,12, música do começo ao fade final, sem sirenes, produção/Drive desabilitados e publicação manual. Este upgrade não executa TTS, render, Drive ou postagem. Prova documental em `docs/V21_ABSOLUTE_ZERO_INCREMENTAL_COST.md`.
 
 **Único próximo passo:** avançar na verificação do histórico de efeitos e direitos/Content ID da trilha Silent Descent do episódio 005, sem custos ou novo TTS; só liberar o que for seguro e verificável.
+
+### 2026-11-08 — EP005: auditoria separada da licença, Content ID, narrativa e histórico SFX
+
+**Achado verificável:** Mixkit permite Silent Descent de Eugenio Mininni em vídeo comercial online sem pagamento, mas não garante ausência de reivindicação de Content ID. A faixa é classificada oficialmente como *reflective/melancholic/piano/strings*, e o EP005 é suspense histórico/investigativo: o motor não presume adequação só porque o FFmpeg mediu LUFS/pico e os hashes passaram. Relatório QA original registrado, SHA do MP3 e cinco comparáveis acústicos preservados.
+
+**Implementado sem redefinir nenhum motor:** dossiê por episódio em `episodes/episode-005/music-clearance-v21.json`, avaliador somente-leitura `production/soundtrack_release_evidence_v21.py`, gate adicional obrigatório no pré-voo `mode=final` de `production/render_v21_manual.py` e controles CI/singleton contra aprovação fictícia de Content ID, fonte trocada ou SFX sem provas. O estado real continua BLOCKED e não bloqueia a escuta privada de candidatos.
+
+**Histórico:** quatro masters antigos têm SHA de vídeo verificável e 0 stems SFX individualmente provados; não inferir que não havia efeitos. Reutilização de trilha procedural 002/004 permanece identificada em `episodes/audio-rendered-master-registry.json` e proibida para novos episódios. Não reescrever antigos nem marcar a cobertura como completa retroativamente.
+
+**Segurança:** custo adicional 0, produção e entrega final OFF, voz Gemini/Charon e legendas/clipes existentes intactos, publicação manual. Documentação: `docs/V21_EP005_MIXKIT_RIGHTS_AND_ARCHIVED_SFX_DECISION.md`.
+
+**Próximo passo único:** buscar/avaliar fonte Mixkit gratuita de suspense investigativo mais adequada e construir dossiê de licença e escuta; preservar bloqueio de Content ID desconhecido e somente reconciliar SFX históricos com recibos/arquivos realmente recuperados.
+
