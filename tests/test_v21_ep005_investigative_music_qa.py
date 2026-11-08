@@ -84,6 +84,18 @@ class EP005MixkitPrivateAudioTests(unittest.TestCase):
         self.assertIn("PROVISIONAL",report["provisional_director_choice"]["status"])
         self.assertIn("PLATFORM_CONTENT_ID_UNKNOWN",report["unresolved"])
 
+    def test_current_ep005_clearance_remains_blocked_despite_provisional_choice(self):
+        root=Path(__file__).resolve().parents[1]
+        legacy=json.loads((root/"episodes/episode-005/music-clearance-v21.json").read_text())
+        selection=legacy["director_research_decision_v21"]
+        report=json.loads((root/"reports/EP005_MIXKIT_INVESTIGATIVE_HEAD_TO_HEAD_QA_20261108.json").read_text())
+        self.assertEqual(selection["candidate_title"],"Selpan")
+        self.assertEqual(selection["original_mp3_sha256"],report["candidates"][0]["source_sha256"])
+        self.assertEqual(selection["real_comparison_workflow_run_id"],42494029735)
+        self.assertFalse(selection["bypass_existing_release_gate"])
+        self.assertFalse(selection["publication_authorized"])
+        self.assertEqual(legacy["decision"]["status"],"HOLD_FOR_CREATIVE_AND_CONTENT_ID_EVIDENCE")
+
     def test_strict_zero_spend_remains_enforced(self):
         self.assertEqual(evaluate_cost("existing_charon_audio_reuse")["status"],"PASS")
         self.assertEqual(evaluate_cost("gemini_tts_generate_content")["status"],"BLOCKED")
