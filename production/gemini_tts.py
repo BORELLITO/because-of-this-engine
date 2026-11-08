@@ -135,6 +135,13 @@ def _api_key() -> str:
 
 
 def _request_json(url: str, body: dict[str, Any]) -> dict[str, Any]:
+    # Absolute zero-spend requirement: no new Gemini HTTP request may reach
+    # the provider merely because a free tier or an API key exists.
+    from production.zero_cost_v21 import assert_zero_cost, ZeroCostViolation
+    try:
+        assert_zero_cost("gemini_tts_generate_content")
+    except ZeroCostViolation as exc:
+        raise GeminiTTSError("ZERO_COST_POLICY_BLOCKED: " + str(exc)) from exc
     raw = json.dumps(body, ensure_ascii=False).encode("utf-8")
     request = urllib.request.Request(
         url,
