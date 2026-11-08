@@ -56,6 +56,13 @@ jobs:
           assert coverage["missing_source_sha256"] == [], coverage
           assert MIX_ALGORITHM == "verified-local-ffmpeg-mix-replay-v1"
           policy=json.loads(Path("production/active_engine_policy.json").read_text())
+          from production.render_v21_final import PROFILE_PATH, _time_signature
+          profile=json.loads(PROFILE_PATH.read_text())
+          assert profile["output_limiter_limit"] == 0.90
+          assert profile["output_limiter_auto_level"] is False
+          assert profile["output_true_peak_dbTP_max"] == -1.0
+          assert profile["output_loudness_lufs_bounds"] == [-20.0,-13.0]
+          assert _time_signature(profile, 65.0) == 70.5
           assert policy["production_enablement"] is False
           assert policy["final_drive_delivery_enablement"] is False
           assert policy["final_delivery_audio_gate"]["receipt_required"] is True
