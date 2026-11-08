@@ -193,6 +193,27 @@ def audit(repo_root: Path, episode_id: str) -> dict[str, Any]:
     # transients but CANNOT assert absence of sirens, vocal masking or other
     # intrusive effects; a full-source qualified audition remains required.
     screen = d.get("audio_content_screen") or {}
+    if screen.get("source_screen_evidence_path"):
+        try:
+            if not str(screen["source_screen_evidence_path"]).startswith("reports/"):
+                raise ValueError("source signal report must be a repository report")
+            measured = _load(root, screen["source_screen_evidence_path"])
+            original_sha = d.get("source_sha256")
+            if (measured.get("original_source_sha256") != original_sha or
+                    screen.get("original_source_sha256") != original_sha or
+                    screen.get("source_screen_workflow_run_id") !=
+                        (measured.get("archived_audio_qa") or {}).get("run_id") or
+                    screen.get("source_screen_report_sha256") !=
+                        (measured.get("archived_audio_qa") or {}).get("full_report_sha256") or
+                    screen.get("detected_tonal_risk_regions") !=
+                        measured.get("detected_tonal_region_count") or
+                    measured.get("source_siren_absence_certified") is not False or
+                    measured.get("release_authorized") is not False):
+                failures.append("original music signal-screen evidence mismatch or forged")
+            else:
+                evidence["source_signal_screen"] = "HEURISTIC_FLAGGED_QUALIFIED_LISTENING_NOT_COMPLETE"
+        except (OSError, ValueError, TypeError, json.JSONDecodeError) as exc:
+            failures.append("real original-source signal report missing or invalid: " + str(exc))
     if (screen.get("status") != "QUALIFIED_CONTENT_REVIEW_PASS" or
             screen.get("siren_absence_certified") is not True or
             screen.get("speech_masking_safely_verified") is not True or
