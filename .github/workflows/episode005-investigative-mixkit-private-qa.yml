@@ -17,6 +17,8 @@ permissions:
 
 jobs:
   investigative-music-qa:
+    # Skip before runner allocation if the repo ever becomes private (billable minutes risk).
+    if: github.event.repository.private == false
     runs-on: ubuntu-24.04
     timeout-minutes: 35
     steps:
