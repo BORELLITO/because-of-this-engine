@@ -23,3 +23,13 @@ O gate de release existente `production/soundtrack_release_evidence_v21.py` pass
 **Status pretendido após CI:** Selpan é a candidata técnica mais alinhada e possui licença para vídeo comercial; **NOT_APPROVED_FOR_RELEASE** até conclusão real de escuta, avaliação de conteúdo da fonte e voz, situação Content ID e direitos de imagens/SFX. O bloqueio não é contornado pelo resultado da triagem. Nenhuma trilha original de terceiros é incorporada ao GitHub.
 
 **Única próxima tarefa de desbloqueio:** analisar os intervalos sinalizados pelo detector com escuta independente, conferir correspondência emocional com o episódio e obter evidência de reivindicações no destino; manter custo adicional zero e evitar publicar por engano.
+
+## Resultado da triagem no áudio original (evidência executada)
+
+GitHub Actions [42503857799](https://github.com/BORELLITO/because-of-this-engine/actions/runs/42503857799) executou o script sobre os **bytes originais conferidos por SHA** e o WAV Charon já aprovado. Arquivo compacto versionado: `reports/EP005_SELPAN_SOURCE_SCREEN_QA_20261108.json`; artefato bruto JSON `13626975270` (hash SHA-256 **87cd319a2c945672ce9ff1ed9f10a53c3d7bb9bfcdf1c4d15489747214a66ea4**).
+
+Resultado: Selpan tem **193,615s de áudio decodificado**; detector conservador identificou 15 regiões de possível oscilação tonal nos 193s, das quais **seis** intersectam os primeiros 79,34s do episódio. Não detectou candidatos a estalos/transientes bruscos pelo limiar usado, mas isso não exclui impactos ou alarmes com outras características. Não é correto afirmar que essas variações sejam sirenes — elas podem ser notas de guitarra ou outros instrumentos.
+
+Estimativa bruta música/voz **antes do ducking, loudnorm e master**: mediana −13,07 dB música em relação à voz nas janelas ativas; 42,7% das janelas ativas dentro de uma diferença de 12 dB. Esta medida não prova que a voz ficou mascarada: o motor faz compressão sidechain e a prévia mixada tem pico verdadeiro aprovado. A verificação da compreensibilidade depende de escuta/qualificação.
+
+A ausência de sirenes, o Content ID, a adequação artística e o histórico de SFX não foram certificados, por isso o estado do dossiê agora é `AUTOMATED_SOURCE_SCAN_FLAGGED_QUALIFIED_AUDITION_REQUIRED` e o gate final continua **BLOCKED**. Nenhuma chamada Gemini, compra, upload Drive, render visual ou publicação foi feita.
