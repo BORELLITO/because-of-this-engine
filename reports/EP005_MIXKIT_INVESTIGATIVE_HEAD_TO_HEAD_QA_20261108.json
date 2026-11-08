@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-11-08",
+  "episode_id": "episode-005",
+  "scope": "TWO_REAL_ORIGINAL_MIXKIT_MUSIC_STOCK_SOURCES_WITH_EXISTING_APPROVED_CHARON_PRIVATE_QA_ONLY",
+  "evidence_workflow": {
+    "run_id": 42494029735,
+    "run_url": "https://github.com/BORELLITO/because-of-this-engine/actions/runs/42494029735",
+    "conclusion": "success",
+    "artifact_id": 13622780892,
+    "artifact_name": "episode005-selpan-delirium-charon-private-qa",
+    "artifact_retention_days": 7
+  },
+  "original_music_source": "https://mixkit.co/free-stock-music/drone-music/",
+  "listing_html_sha256": "eb9f44414701aeba7a7e021c24897569ddd74e11c77a721bdec2d1699f76a5a3",
+  "provider_license": "https://mixkit.co/license/modal/musicFree/",
+  "license_scope": "FREE_COMMERCIAL_ONLINE_VIDEO_ALLOWED_NOT_CONTENT_ID_IMMUNITY",
+  "approved_voice": {
+    "provider": "gemini_tts",
+    "voice_name": "Charon",
+    "sha256": "0746581eae60c3cccf69173f24658b8dc49fdbb85c74d060c26b7dcecae66ebe",
+    "duration_seconds": 73.84,
+    "existing_cache_only": true,
+    "new_tts_requests": 0
+  },
+  "mix": {
+    "total_seconds": 79.34,
+    "music_gain": 0.12,
+    "outro_seconds": 5.5,
+    "fade_out_seconds": 3.5,
+    "stem_replay_verified": true,
+    "source_ids_compared": 5,
+    "known_reuse_status": "NO_MATCH_IN_KNOWN_FIVE",
+    "sfx_new_added": 0
+  },
+  "candidates": [
+    {
+      "title": "Selpan",
+      "artist": "Eugenio Mininni",
+      "source_url": "https://assets.mixkit.co/music/612/612.mp3",
+      "source_sha256": "3d46ec4a1572e00a7da4b3e697067c7cbb07331bc5837758985ff95eda858267",
+      "source_duration_seconds": 193.646,
+      "original_provider_metadata": [
+        "mysterious",
+        "eerie",
+        "investigation",
+        "documentary",
+        "electric guitar",
+        "sound effects"
+      ],
+      "metadata_story_fit_score": 16,
+      "max_historic_similarity": 0.70605,
+      "preview_filename": "EP005_Selpan_Charon_Suspense_Private_QA.mp3",
+      "preview_sha256": "79f6606d88e977dbf7996fb9a9197977eb3263762e7833475d21cf740edf6efa",
+      "integrated_lufs": -17,
+      "true_peak_dbTP": -1.2,
+      "early_outro_rms": 870.688,
+      "near_black_rms": 86.819,
+      "technical_verdict": "PASS",
+      "release_verdict": "PENDING_HUMAN_INDEPENDENT_AUDITION_AND_CONTENT_ID"
+    },
+    {
+      "title": "Delirium",
+      "artist": "Eugenio Mininni",
+      "source_url": "https://assets.mixkit.co/music/605/605.mp3",
+      "source_sha256": "c5b38b0191bada42aaaac2330e5de875409d9d9423cb3fd4804b0b69f4cb69e4",
+      "source_duration_seconds": 289.646,
+      "original_provider_metadata": [
+        "mysterious",
+        "disturbing",
+        "investigation",
+        "crime",
+        "bass",
+        "sound effects"
+      ],
+      "metadata_story_fit_score": 6,
+      "max_historic_similarity": 0.74837,
+      "preview_filename": "EP005_Delirium_Charon_Suspense_Private_QA.mp3",
+      "preview_sha256": "e2a57fe8c6e4e0802196069727c52edad0195c1031bbc5a3b51d2f391c93d9d0",
+      "integrated_lufs": -17.1,
+      "true_peak_dbTP": -1.2,
+      "early_outro_rms": 1559.474,
+      "near_black_rms": 77.346,
+      "technical_verdict": "PASS",
+      "release_verdict": "PENDING_HUMAN_INDEPENDENT_AUDITION_AND_CONTENT_ID"
+    }
+  ],
+  "comparison_artifact_source_sha256": "304c8225bfaf8996879f13a65fd7297b71566c01b98b3e1805317f61af202074",
+  "provisional_director_choice": {
+    "title": "Selpan",
+    "method": "DETERMINISTIC_PROVIDER_METADATA_STORY_FIT_ONLY",
+    "status": "PROVISIONAL_PRIVATE_QA_FAVORITE_NOT_RELEASE_APPROVAL",
+    "rationale": "Investigation/documentary/eerie tags better match Petrov 1983 historical suspense than Delirium's crime-heavy disturbing classification"
+  },
+  "unresolved": [
+    "NO_INDEPENDENT_VERIFIED_FULL_AUDIO_AUDITION_NO_SIREN_CERTIFICATION",
+    "PLATFORM_CONTENT_ID_UNKNOWN",
+    "HISTORICAL_SFX_ARCHIVE_UNPROVEN",
+    "EP005_VISUAL_RIGHTS_AND_FULL_RENDER_RELEASE_INDEPENDENTLY_BLOCKED",
+    "THE_CURRENT_MUSIC_CLEARANCE_RECORD_STILL_DESCRIBES_SILENT_DESCENT_NOT_THIS_PROVISIONAL_FAVORITE"
+  ],
+  "status": "PRIVATE_HEAD_TO_HEAD_TECHNICAL_PASS_RELEASE_BLOCKED",
+  "total_incremental_spend_usd": 0,
+  "production_enablement": false,
+  "drive_delivery_enablement": false,
+  "publication_authorized": false
+}

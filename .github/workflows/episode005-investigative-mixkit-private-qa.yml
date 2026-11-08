@@ -1,0 +1,72 @@
+name: BECAUSE OF THIS V2.1 EP005 Investigative Mixkit Music QA ($0)
+
+# Private soundtrack comparison on canonical sources. No voice generation,
+# release/master render, paid APIs, paid runners, Drive, or publication.
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/episode005-investigative-mixkit-private-qa.yml"
+      - "production/ep005_investigative_music_qa.py"
+      - "tests/test_v21_ep005_investigative_music_qa.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  investigative-music-qa:
+    # Skip before runner allocation if the repo ever becomes private (billable minutes risk).
+    if: github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout existing V2.1 canonical engine
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Ensure no paid API or TTS is authorized; existing voice reuse only
+        run: |
+          PYTHONPATH=. python - <<'PY'
+          from production.zero_cost_v21 import evaluate_cost
+          assert evaluate_cost("existing_charon_audio_reuse")["status"] == "PASS"
+          assert evaluate_cost("gemini_tts_generate_content")["status"] == "BLOCKED"
+          assert evaluate_cost("paid_render_api")["status"] == "BLOCKED"
+          print("COST_POLICY_ZERO_NEW_CHARGES_PASS")
+          PY
+      - name: Install FFmpeg only if absent on the standard public runner
+        run: |
+          set -euo pipefail
+          if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends ffmpeg
+          fi
+          ffmpeg -version | head -n 1
+          PYTHONPATH=. python -m unittest -v tests.test_v21_ep005_investigative_music_qa
+      - name: Recover existing approved EP005 Gemini Charon artifact — no network TTS
+        uses: actions/download-artifact@v4
+        with:
+          name: episode005-gemini-charon-captioned
+          github-token: ${{ github.token }}
+          run-id: 42278428885
+          path: private/ep005/charon
+      - name: Retrieve actual official free stock MP3s and compare both private Charon mixes
+        env:
+          PYTHONPATH: .
+        run: |
+          python production/ep005_investigative_music_qa.py --repo-root . --voice-dir private/ep005/charon --output-dir private/ep005/qa
+      - name: Erase original stock MP3s and narration before artifact packaging
+        if: always()
+        run: |
+          rm -rf private/ep005/charon
+          rm -f private/ep005/qa/.source-*.mp3 private/ep005/qa/.mixed-*.wav private/ep005/qa/.receipt-*.json private/ep005/qa/.mixkit-listing.html
+      - name: Deliver short-lived private vocal+music comparisons and evidence only
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: episode005-selpan-delirium-charon-private-qa
+          path: |
+            private/ep005/qa/EP005_Selpan_Charon_Suspense_Private_QA.mp3
+            private/ep005/qa/EP005_Delirium_Charon_Suspense_Private_QA.mp3
+            private/ep005/qa/EP005_MIXKIT_INVESTIGATIVE_COMPARISON_QA.json
+          if-no-files-found: error
+          retention-days: 7

@@ -63,5 +63,27 @@
     "publication_authorized": false,
     "final_render_authorized": false,
     "extra_spend_authorized": false
+  },
+  "director_research_decision_v21": {
+    "status": "PROVISIONAL_HEAD_TO_HEAD_FAVORITE_NOT_RELEASE_CLEARANCE",
+    "candidate_title": "Selpan",
+    "candidate_artist": "Eugenio Mininni",
+    "original_mp3_url": "https://assets.mixkit.co/music/612/612.mp3",
+    "original_mp3_sha256": "3d46ec4a1572e00a7da4b3e697067c7cbb07331bc5837758985ff95eda858267",
+    "evidence_report": "reports/EP005_MIXKIT_INVESTIGATIVE_HEAD_TO_HEAD_QA_20261108.json",
+    "real_comparison_workflow_run_id": 42494029735,
+    "selection_basis": "BETTER_OFFICIAL_INVESTIGATION_DOCUMENTARY_TAGS_THAN_DELIRIUM; PRIVATE_REAL_FFMPEG_MIX_QUALITY_PASS",
+    "decision_maker": "V21_MUSIC_DIRECTION_ENGINE",
+    "status_scope": "EDITORIAL_CANDIDATE_ONLY; current Silent Descent clearance dossier preserved as historical candidate",
+    "remaining_required_checks": [
+      "FULL_SIREN_ALARM_AUDITION",
+      "PER_TRACK_CONTENT_ID_REVIEW",
+      "SOURCE_SPECIFIC_EPISODE_LICENSE_DOSSIER",
+      "HISTORICAL_SFX_AND_VISUAL_RIGHTS_GATES"
+    ],
+    "bypass_existing_release_gate": false,
+    "production_authorized": false,
+    "publication_authorized": false,
+    "extra_cost_usd": 0
   }
 }
