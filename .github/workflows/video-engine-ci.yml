@@ -157,6 +157,26 @@ jobs:
           print("V21_ZERO_INCREMENTAL_SPEND_FAIL_CLOSED_TEST_PASS")
           PY
 
+      - name: Audit real EP005 Mixkit license scope vs unresolved claims and historical SFX
+        run: |
+          PYTHONPATH=. python - <<'PY'
+          from pathlib import Path
+          from production.soundtrack_release_evidence_v21 import audit
+          a = audit(Path("."), "episode-005")
+          assert a["status"] == "BLOCKED", a
+          evidence = a["evidence"]
+          assert evidence["license_for_commercial_online_video"] == "SOURCE_TERMS_CONFIRMED_NOT_GLOBAL_CLAIM_WAIVER", a
+          assert evidence["original_music_bytes"] == "SHA256_VERIFIED_IN_EXISTING_PRIVATE_QA_RUN", a
+          assert evidence["actual_private_audio_mix"] == "TECHNICAL_PASS_NOT_MASTER_OR_PUBLICATION", a
+          assert evidence["new_song_vs_five_known_historical_sources"] == "NO_MATCH_IN_KNOWN_CATALOG_ONLY", a
+          assert evidence["content_id_claim_risk"] == "PENDING_PLATFORM_OR_PROVIDER_CASE_EVIDENCE", a
+          assert evidence["historical_sfx"] == "ZERO_INDEPENDENT_STEM_PROOFS_DO_NOT_RETROACTIVELY_APPROVE", a
+          assert a["historical_inventory"]["historical_master_count"] == 4, a
+          assert a["historical_inventory"]["historical_soundtrack_collision_count"] == 1, a
+          assert not a["production_authorized"] and not a["publication_authorized"], a
+          print("V21_MIXKIT_SOURCE_VALID_BUT_CONTENTID_STORY_SFX_RELEASE_HELD_PASS")
+          PY
+
       - name: Validate active policy
         run: |
           python - <<'PY'
