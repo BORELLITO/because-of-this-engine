@@ -102,6 +102,13 @@ def audit_repository(repo_root: Path) -> dict[str, Any]:
             operation, policy_path=root / "production" / "active_engine_policy.json")
         if check["status"] != "BLOCKED":
             errors.append(operation + ": forbidden charge path was opened")
+    for ep in ("005", "006"):
+        workflow = root / ".github" / "workflows" / (
+            "episode" + ep + "-gemini-charon-narration.yml")
+        if not workflow.is_file() or (
+                "python -m production.zero_cost_v21 --operation gemini_tts_generate_content"
+                not in workflow.read_text(encoding="utf-8")):
+            errors.append("episode" + ep + " Gemini workflow lacks no-cost preflight")
     tts = root / "production" / "gemini_tts.py"
     if not tts.is_file() or 'assert_zero_cost("gemini_tts_generate_content")' not in tts.read_text(encoding="utf-8"):
         errors.append("Gemini network call site lacks the mandatory absolute zero-cost gate")
