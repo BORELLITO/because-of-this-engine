@@ -101,6 +101,8 @@ def audit(repo_root: Path, episode_id: str) -> dict[str, Any]:
             history = d.get("source_evidence") or {}
             workflow = qa.get("evidence_workflow") or {}
             music_sha = d.get("source_sha256")
+            # Missing/mismatched SHA must BLOCK, not crash when candidate is null.
+            candidate = candidate or {}
             if not candidate or (
                 qa.get("episode_id") != episode_id or
                 qa.get("scope") != "TWO_REAL_ORIGINAL_MIXKIT_MUSIC_STOCK_SOURCES_WITH_EXISTING_APPROVED_CHARON_PRIVATE_QA_ONLY" or
