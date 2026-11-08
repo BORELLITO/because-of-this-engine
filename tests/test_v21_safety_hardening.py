@@ -68,6 +68,10 @@ class V21SafetyHardeningTests(unittest.TestCase):
         (self.root / "production" / "gemini_tts.py").write_text(
             'assert_zero_cost("gemini_tts_generate_content")\n',encoding="utf-8"
         )
+        (self.root / "production" / "render_v21_manual.py").write_text(
+            "audit_soundtrack_release(\n", encoding="utf-8")
+        (self.root / "production" / "soundtrack_release_evidence_v21.py").write_text(
+            "# isolated story music release truth gate fixture\n", encoding="utf-8")
         (self.root / "production" / "render_v21_final.py").write_text(
             'validate_request(record, repo_root=repo_root, mode="final")\n'
             'validate_completed_audio_mix(\n'
