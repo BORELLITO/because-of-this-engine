@@ -142,6 +142,21 @@ jobs:
           print("V21_FINAL_RENDER_CANONICAL_ROUTE_IMPLEMENTED_POLICY_BLOCKED")
           PY
 
+      - name: Assert absolute zero additional cost and no external TTS network
+        run: |
+          PYTHONPATH=. python -m production.zero_cost_v21 --audit-repository --repo-root .
+          PYTHONPATH=. python - <<'PY'
+          from production.zero_cost_v21 import evaluate_cost
+          for op in ("gemini_tts_generate_content","gemini_batch_generate",
+                     "paid_render_api","paid_stock_purchase","unknown_service"):
+              report = evaluate_cost(op)
+              assert report["status"] == "BLOCKED",report
+              assert report["external_request_authorized"] is False
+          for op in ("existing_charon_audio_reuse","ffmpeg_local_mix","offline_media_qa"):
+              assert evaluate_cost(op)["status"] == "PASS"
+          print("V21_ZERO_INCREMENTAL_SPEND_FAIL_CLOSED_TEST_PASS")
+          PY
+
       - name: Validate active policy
         run: |
           python - <<'PY'
