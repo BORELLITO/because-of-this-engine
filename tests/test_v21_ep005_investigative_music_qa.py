@@ -1,5 +1,7 @@
 """Offline tests for private EP005 original-Mixkit music discovery and ranking."""
 import unittest
+import json
+from pathlib import Path
 
 from production.ep005_investigative_music_qa import (
     TARGETS, LISTING, LICENSE, VOICE_SHA,
@@ -55,6 +57,32 @@ class EP005MixkitPrivateAudioTests(unittest.TestCase):
         self.assertGreater(TARGETS["Selpan"]["duration_listed_seconds"],79.34)
         self.assertGreater(TARGETS["Delirium"]["duration_listed_seconds"],79.34)
         self.assertEqual(len(VOICE_SHA),64)
+
+    def test_archived_real_qa_report_is_not_forged_as_release(self):
+        root=Path(__file__).resolve().parents[1]
+        report=json.loads((root/"reports/EP005_MIXKIT_INVESTIGATIVE_HEAD_TO_HEAD_QA_20261108.json").read_text())
+        self.assertEqual(report["evidence_workflow"]["conclusion"],"success")
+        self.assertEqual(report["evidence_workflow"]["run_id"],42494029735)
+        self.assertEqual(report["status"],"PRIVATE_HEAD_TO_HEAD_TECHNICAL_PASS_RELEASE_BLOCKED")
+        self.assertEqual(report["total_incremental_spend_usd"],0)
+        self.assertFalse(report["publication_authorized"])
+        self.assertFalse(report["production_enablement"])
+        self.assertEqual(report["approved_voice"]["new_tts_requests"],0)
+        self.assertEqual(report["mix"]["source_ids_compared"],5)
+        candidates={x["title"]:x for x in report["candidates"]}
+        self.assertEqual(len(candidates),2)
+        self.assertEqual(candidates["Selpan"]["source_sha256"],
+                         "3d46ec4a1572e00a7da4b3e697067c7cbb07331bc5837758985ff95eda858267")
+        self.assertEqual(candidates["Delirium"]["source_sha256"],
+                         "c5b38b0191bada42aaaac2330e5de875409d9d9423cb3fd4804b0b69f4cb69e4")
+        for candidate in candidates.values():
+            self.assertEqual(candidate["technical_verdict"],"PASS")
+            self.assertIn("PENDING",candidate["release_verdict"])
+            self.assertLess(candidate["true_peak_dbTP"],-1)
+            self.assertLess(candidate["near_black_rms"],candidate["early_outro_rms"]*0.2)
+        self.assertEqual(report["provisional_director_choice"]["title"],"Selpan")
+        self.assertIn("PROVISIONAL",report["provisional_director_choice"]["status"])
+        self.assertIn("PLATFORM_CONTENT_ID_UNKNOWN",report["unresolved"])
 
     def test_strict_zero_spend_remains_enforced(self):
         self.assertEqual(evaluate_cost("existing_charon_audio_reuse")["status"],"PASS")
