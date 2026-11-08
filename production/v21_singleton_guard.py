@@ -85,7 +85,12 @@ def audit(repo_root: Path) -> dict:
                 or "afade=t=out" not in final_source
                 or '"-stream_loop"' in final_source):
             failures.append("final renderer lost automatic source-bound no-loop suspense bed")
-    from production.zero_cost_v21 import audit_repository as audit_zero_cost
+    # GitHub CI invokes this guard both as a package and as a direct script.
+    # Direct-script Python places production/ (not the repository root) on sys.path.
+    if __package__ in (None, ""):
+        from zero_cost_v21 import audit_repository as audit_zero_cost
+    else:
+        from production.zero_cost_v21 import audit_repository as audit_zero_cost
     no_charge = audit_zero_cost(root)
     if no_charge["status"] != "PASS":
         failures.extend("zero-cost:" + item for item in no_charge["failures"])
