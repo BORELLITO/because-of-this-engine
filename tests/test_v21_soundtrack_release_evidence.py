@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DOSSIER = "episodes/episode-005/music-clearance-v21.json"
 QA = "reports/EP005_MIXKIT_INVESTIGATIVE_HEAD_TO_HEAD_QA_20261108.json"
 MASTERS = "episodes/audio-rendered-master-registry.json"
+SIGNAL = "reports/EP005_SELPAN_SOURCE_SCREEN_QA_20261108.json"
 
 
 class V21SoundtrackReleaseEvidenceTests(unittest.TestCase):
@@ -18,7 +19,7 @@ class V21SoundtrackReleaseEvidenceTests(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)
-        for relative in (DOSSIER, QA, MASTERS):
+        for relative in (DOSSIER, QA, MASTERS, SIGNAL):
             target = self.root / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes((ROOT / relative).read_bytes())
@@ -109,6 +110,18 @@ class V21SoundtrackReleaseEvidenceTests(unittest.TestCase):
         self.assertEqual(dossier["title"], "Selpan")
         self.assertEqual(dossier["audio_content_screen"]["siren_absence_certified"], False)
         self.assertTrue((ROOT / "episodes/episode-005/music-clearance-silent-descent-archive-v21.json").is_file())
+
+    def test_source_screen_evidence_is_bound_to_same_real_original_mp3(self):
+        checked=audit(self.root,"episode-005")
+        self.assertEqual(checked["status"],"BLOCKED")
+        self.assertEqual(checked["evidence"].get("source_signal_screen"),
+                         "HEURISTIC_FLAGGED_QUALIFIED_LISTENING_NOT_COMPLETE")
+        dossier=self.dossier()
+        dossier["audio_content_screen"]["detected_tonal_risk_regions"]=0
+        self.write_dossier(dossier)
+        blocked=audit(self.root,"episode-005")
+        self.assertTrue(any("signal-screen evidence mismatch" in x for x in blocked["failures"]))
+        self.assertFalse(blocked["publication_authorized"])
 
     def test_ledger_missing_and_missing_candidate_dossier_block(self):
         (self.root / MASTERS).unlink()
