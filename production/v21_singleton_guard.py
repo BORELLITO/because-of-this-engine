@@ -66,6 +66,25 @@ def audit(repo_root: Path) -> dict:
                 'validate_completed_audio_mix(' not in final_source or
                 'build_audio_mix_command(' not in final_source):
             failures.append("canonical final renderer bypassed V2.1 preflight, mix or postflight")
+    music = policy.get("final_render_route") or {}
+    if (music.get("soundtrack_selection") != "production/music_direction_v21.py"
+            or music.get("music_bed_required") is not True
+            or music.get("music_covers_outro") is not True
+            or music.get("voice_priority_ducking_required") is not True
+            or music.get("no_sirens_alarms") is not True
+            or music.get("music_rights_per_episode") is not True
+            or music.get("music_volume_candidate") != 0.12):
+        failures.append("singleton story-selected music or voice priority policy changed")
+    if not (root / "production" / "music_direction_v21.py").is_file():
+        failures.append("canonical music-direction verifier missing")
+    if final_file.is_file():
+        final_source=final_file.read_text(encoding="utf-8")
+        if ("select_soundtrack(" not in final_source
+                or "selected_audio_sha256" not in final_source
+                or "sidechaincompress" not in final_source
+                or "afade=t=out" not in final_source
+                or '"-stream_loop"' in final_source):
+            failures.append("final renderer lost automatic source-bound no-loop suspense bed")
     workflow_root = root / ".github" / "workflows"
     workflows = sorted(workflow_root.glob("*.yml")) if workflow_root.exists() else []
     for path in workflows:
