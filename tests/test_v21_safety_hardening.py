@@ -59,6 +59,12 @@ class V21SafetyHardeningTests(unittest.TestCase):
             }), encoding="utf-8"
         )
 
+        for ep in ("005", "006"):
+            (self.workflows / ("episode" + ep + "-gemini-charon-narration.yml")).write_text(
+                "name: fixture narration\n"
+                "run: python -m production.zero_cost_v21 --operation gemini_tts_generate_content\n",
+                encoding="utf-8",
+            )
         (self.root / "production" / "gemini_tts.py").write_text(
             'assert_zero_cost("gemini_tts_generate_content")\n',encoding="utf-8"
         )
