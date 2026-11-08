@@ -148,6 +148,11 @@ def _time_signature(profile: dict[str, Any], voice_seconds: float) -> float:
         raise FinalRenderError("audio mix profile status invalid")
     if not 60 <= voice_seconds or voice_seconds + OUTRO_SECONDS > 80.0:
         raise FinalRenderError("voice/outro timing cannot fit 60–80s final master")
+    if (profile.get("output_limiter_limit") != 0.90 or
+            profile.get("output_limiter_auto_level") is not False or
+            profile.get("output_true_peak_dbTP_max") != -1.0 or
+            profile.get("output_loudness_lufs_bounds") != [-20.0, -13.0]):
+        raise FinalRenderError("true-peak headroom and master loudness contract changed")
     for key in ("music_gain", "sfx_gain"):
         value = profile.get(key)
         if not isinstance(value, (int, float)) or isinstance(value, bool) or not 0 < value < 1:
