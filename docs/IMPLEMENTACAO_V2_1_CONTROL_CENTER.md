@@ -601,3 +601,12 @@ Blindagem aplicada sobre o módulo canônico: exige SHA-256 do áudio original e
 
 Testes de regressão de integridade de direitos, Content ID, seleção, áudio intacto e fade do cartão, sem render real ou TTS. Documentação complementar: docs/V21_MUSIC_RIGHTS_AND_SFX_HARDENING.md. Os gates de produção e entrega continuam desligados; novos downloads e provas de direitos exigem ingestão confiável (ainda não automatizada integralmente). Próxima dependência: ingerir candidatos licenciados e produzir um preview privado, auditar equilíbrio de voz/trilha por escuta e histórico SFX antes de habilitar produção.
 
+### 2026-11-07 — QA real de volume com Charon e correção do limitador de pico
+
+Foi recuperado o checkpoint Gemini/Charon do episódio 005 (WAV original 73,84s, SHA-256 verificado), sem chamada à API/TTS. Realizou-se uma prévia isolada de áudio (não MP4, não publicação) com trilha de suspense **original gerada somente para teste** e 5,5s finais com fade musical de 3,5s, ganho linear 0,12 e ducking. O áudio não deve ser promovido como faixa stock aprovada, pois é exclusivamente experiência de equilíbrio e não dossiê de escolha do motor.
+
+**Problema observado:** o FFmpeg alimiter=limit=0.95, com autoelevação de nível ativada por padrão, permitiu picos reconstruídos próximos de 0 dBFS. No protótipo corrigido com level=0, o MP3 final apresentou medição FFmpeg EBU R128 -16,7 LUFS integrados, true peak -3,9 dBFS e LRA 3,7 LU, sem clipping relevante.
+
+**Correção integrada ao código em isolamento:** production/render_v21_final.py usa limitador sem autoelevação, calibração conservadora 0,90 e mede EBU R128 no **master AAC realmente produzido** antes de promover a saída. A faixa obrigatória é -20 a -13 LUFS integrados, pico verdadeiro ≤ -1 dBTP. Caso não haja medição ou haja falha técnica, bloqueia. O resultado fica em finished_master_audio_qa. Fonte e instruções: docs/V21_FINAL_AUDIO_TRUE_PEAK_QA.md.
+
+**Travas mantidas:** produção/Drive desabilitados, Charon/Gemini, trilha por história, licenças e Chromaprint independentes, sem sirenes, fade do outro em 3,5s, publicação manual. O valor 0,12 continua candidato à escuta: confirmação técnica de não-clipping não substitui aprovação perceptiva. Próxima prioridade continua sendo fonte musical nova efetivamente licenciada e arquivo original auditável para preview completo.

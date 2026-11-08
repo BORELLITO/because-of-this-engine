@@ -14,7 +14,7 @@
   "voice_loudness_range": 7,
   "music_gain": 0.12,
   "sfx_gain": 0.08,
-  "output_limiter_limit": 0.95,
+  "output_limiter_limit": 0.9,
   "outro_seconds": 5.5,
   "narration_end_before_outro": true,
   "music_ends_before_outro": false,
@@ -51,5 +51,13 @@
     "release_ms": 350,
     "makeup": 1
   },
-  "music_loudness_qa": "REQUIRED_BEFORE_RELEASE"
+  "music_loudness_qa": "REQUIRED_BEFORE_RELEASE",
+  "output_limiter_auto_level": false,
+  "output_true_peak_dbTP_max": -1,
+  "output_loudness_lufs_bounds": [
+    -20,
+    -13
+  ],
+  "output_peak_qa_scope": "MEASURE_FINISHED_MASTER_AAC_EBUR128_BEFORE_PROMOTION",
+  "output_peak_qa_status": "REQUIRED_FOR_RELEASE_NOT_PERCEPTUAL_APPROVAL"
 }

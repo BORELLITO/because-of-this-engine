@@ -15,6 +15,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -57,6 +58,46 @@ def _probe(path: Path) -> dict[str, Any]:
     except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired,
             json.JSONDecodeError) as exc:
         raise FinalRenderError("media FFprobe failed: " + str(path)) from exc
+
+
+def _final_master_loudness(path: Path) -> dict[str, Any]:
+    """Require actual finished-audio LUFS and true-peak headroom, no pass on silence.
+
+    FFmpeg EBU R128 reports numbers from decoded master bytes (AAC included).
+    This is a technical proof, not human listening or speech clarity proof.
+    """
+    try:
+        measured = subprocess.run(
+            ["ffmpeg", "-nostdin", "-hide_banner", "-v", "info",
+             "-i", str(path), "-map", "0:a:0", "-af", "ebur128=peak=true",
+             "-f", "null", "-"],
+            capture_output=True, text=True, check=True, timeout=150)
+        summary = measured.stderr.rsplit("Summary:", 1)
+        if len(summary) != 2:
+            raise FinalRenderError("EBU R128 measurement summary is absent")
+        integrated = re.search(r"Integrated loudness:\s*I:\s*(-?\d+(?:\.\d+)?)\s*LUFS",
+                               summary[1])
+        peak = re.search(r"True peak:\s*Peak:\s*(-?\d+(?:\.\d+)?)\s*dBFS",
+                         summary[1])
+        if not integrated or not peak:
+            raise FinalRenderError("invalid/incomplete LUFS or true-peak measurement")
+        lufs, peak_db = float(integrated.group(1)), float(peak.group(1))
+        if not -20.0 <= lufs <= -13.0:
+            raise FinalRenderError(f"final integrated loudness out of QA range: {lufs} LUFS")
+        if peak_db > -1.0:
+            raise FinalRenderError(f"final AAC true peak too high: {peak_db} dBTP")
+        return {
+            "status": "PASS",
+            "method": "FFMPEG_EBUR128_TRUE_PEAK_ON_FINISHED_MASTER_V21",
+            "integrated_loudness_lufs": lufs,
+            "true_peak_dbTP": peak_db,
+            "target_voice_lufs": -16.0,
+            "music_linear_gain_max": 0.12,
+            "publication_authorized": False,
+        }
+    except (OSError, subprocess.CalledProcessError,
+            subprocess.TimeoutExpired) as exc:
+        raise FinalRenderError("independent EBU R128 measurement failed") from exc
 
 
 def _video_payload_sha256(path: Path) -> str:
@@ -107,6 +148,11 @@ def _time_signature(profile: dict[str, Any], voice_seconds: float) -> float:
         raise FinalRenderError("audio mix profile status invalid")
     if not 60 <= voice_seconds or voice_seconds + OUTRO_SECONDS > 80.0:
         raise FinalRenderError("voice/outro timing cannot fit 60–80s final master")
+    if (profile.get("output_limiter_limit") != 0.90 or
+            profile.get("output_limiter_auto_level") is not False or
+            profile.get("output_true_peak_dbTP_max") != -1.0 or
+            profile.get("output_loudness_lufs_bounds") != [-20.0, -13.0]):
+        raise FinalRenderError("true-peak headroom and master loudness contract changed")
     for key in ("music_gain", "sfx_gain"):
         value = profile.get(key)
         if not isinstance(value, (int, float)) or isinstance(value, bool) or not 0 < value < 1:
@@ -142,7 +188,7 @@ def build_audio_mix_command(
     duck = profile["music_ducking"]
     graph = [
         f"[0:a]aresample=48000,loudnorm=I=-16:TP=-1:LRA=7,"
-        f"alimiter=limit=0.95,atrim=duration={voice_seconds:.3f},"
+        f"alimiter=limit=0.90:level=0,atrim=duration={voice_seconds:.3f},"
         "asetpts=PTS-STARTPTS,asplit=2[v][key]",
         f"[key]apad=pad_dur={OUTRO_SECONDS:.3f},"
         f"atrim=duration={total:.3f}[sidechain]",
@@ -166,7 +212,7 @@ def build_audio_mix_command(
         inputs.append(f"[s{i}]")
     graph.append(
         "".join(inputs) + f"amix=inputs={len(inputs)}:duration=longest:normalize=0,"
-        "alimiter=limit=0.95,"
+        "alimiter=limit=0.90:level=0,"
         f"atrim=duration={total:.3f}[out]"
     )
     command += ["-filter_complex", ";".join(graph), "-map", "[out]",
@@ -234,6 +280,7 @@ def assemble_verified_picture_with_audio(
             receipt_path=audio_receipt, master_video=pending)
         if postflight.get("status") != "V21_AUDIO_POSTFLIGHT_EVIDENCE_PASS":
             raise FinalRenderError("finished master does not match independently replayed audio")
+        audio_qa = _final_master_loudness(pending)
         actual_video_sha = _video_payload_sha256(pending)
         if source_video_sha != actual_video_sha:
             raise FinalRenderError("output video stream differs from approved picture/HUD/captions")
@@ -252,6 +299,7 @@ def assemble_verified_picture_with_audio(
         "receipt_sha256": file_sha256(audio_receipt),
         "stem_contributions": postflight["source_contributions_confirmed"],
         "master_audio_bound": postflight["master_audio_bound"],
+        "finished_master_audio_qa": audio_qa,
         "total_duration_seconds": total,
         "publication": "MANUAL_ONLY_NOT_RUN",
         "drive_write": "NOT_RUN",
