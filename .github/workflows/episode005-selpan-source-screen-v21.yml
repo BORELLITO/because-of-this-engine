@@ -34,7 +34,11 @@ jobs:
           PY
           python -m pip install --disable-pip-version-check numpy==2.2.6 scipy==1.15.3
           PYTHONPATH=. python -m unittest -v tests.test_v21_music_content_screen
-          command -v ffmpeg
+          if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends ffmpeg
+          fi
+          ffmpeg -version | head -n 1
       - name: Download original Mixkit Selpan for temporary inspection only
         run: |
           set -euo pipefail
