@@ -60,18 +60,26 @@
     "legacy_audio_use_claim": "NOT_VERIFIED"
   },
   "decision": {
-    "status": "HOLD_FOR_SOURCE_SCREEN_STORY_FIT_AND_CONTENT_ID",
+    "status": "HOLD_FOR_QUALIFIED_SOURCE_AUDITION_AND_CONTENT_ID",
     "publication_authorized": false,
     "final_render_authorized": false,
     "extra_spend_authorized": false
   },
   "audio_content_screen": {
-    "status": "PENDING_ORIGINAL_SOURCE_AUTOMATED_SCREEN_AND_QUALIFIED_LISTENING",
-    "method": "music_content_screen_v21.py",
-    "expected_sha256": "3d46ec4a1572e00a7da4b3e697067c7cbb07331bc5837758985ff95eda858267",
-    "source_audio_contains_sound_effects_provider_tag": true,
+    "status": "AUTOMATED_SOURCE_SCAN_FLAGGED_QUALIFIED_AUDITION_REQUIRED",
+    "source_screen_evidence_path": "reports/EP005_SELPAN_SOURCE_SCREEN_QA_20261108.json",
+    "source_screen_workflow_run_id": 42503857799,
+    "source_screen_report_sha256": "87cd319a2c945672ce9ff1ed9f10a53c3d7bb9bfcdf1c4d15489747214a66ea4",
+    "original_source_sha256": "3d46ec4a1572e00a7da4b3e697067c7cbb07331bc5837758985ff95eda858267",
+    "detected_tonal_risk_regions": 15,
+    "regions_in_episode_79_34s": 6,
+    "abrupt_transient_candidates": 0,
+    "source_siren_absence_certified": false,
     "siren_absence_certified": false,
-    "speech_masking_safely_verified": false
+    "source_vocals_absence_certified": false,
+    "speech_masking_safely_verified": false,
+    "qualified_human_or_equivalent_audition_completed": false,
+    "commentary": "Tonal glides may be guitar/effects, not proven sirens. 42.7% raw voice-active bins within 12dB before voice-keyed ducking; audibility cannot be approved without listening."
   },
   "previous_candidates": [
     {
