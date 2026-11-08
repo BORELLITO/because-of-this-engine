@@ -120,14 +120,17 @@ def build_audio_mix_command(
 ) -> list[str]:
     """Deterministic FFmpeg recipe; terms/creative mixing gains are explicit."""
     total = _time_signature(profile, voice_seconds)
-    if any(not role.startswith("sfx:") or len(role) <= 4 for role in sfx):
-        raise FinalRenderError("all effects must have a named sfx:<id> role")
+    if any(not role.startswith("sfx:") or len(role) <= 4 or
+           any(term in role.lower() for term in
+               ("siren", "sirene", "alarm", "alarme", "horn", "klaxon"))
+           for role in sfx):
+        raise FinalRenderError("invalid SFX role or prohibited siren/alarm effect")
     if len(sfx) != len(set(sfx)) or len(sfx) > 10:
         raise FinalRenderError("too many or duplicate effect roles")
     command = [
         "ffmpeg", "-nostdin", "-hide_banner", "-v", "error",
         "-i", str(narration.resolve()),
-        "-stream_loop", "-1", "-i", str(music.resolve()),
+        "-i", str(music.resolve()),
     ]
     for name in sorted(sfx):
         command += ["-i", str(sfx[name].resolve())]
@@ -191,6 +194,12 @@ def assemble_verified_picture_with_audio(
         if path.exists():
             raise FinalRenderError("refusing to overwrite a previous video or audio receipt: " + str(path))
     total = _time_signature(profile, voice_seconds)
+    # A fully-scored music source must cover the picture AND 5.5s branded
+    # card. Do not silently loop, stretch or cut a short stock clip.
+    music_metadata = _probe(music)
+    music_seconds = float((music_metadata.get("format") or {}).get("duration") or 0)
+    if music_seconds < total + 0.03:
+        raise FinalRenderError("selected soundtrack does not cover full final master/outro")
     picture_metadata = _probe(picture)
     image_streams = [x for x in picture_metadata.get("streams", [])
                      if x.get("codec_type") == "video"]
@@ -271,15 +280,23 @@ def _verify_sfx_evidence(
     episode_id: str, stems: dict[str, Path], manifest_path: Path,
 ) -> None:
     data = _json(manifest_path)
-    if data.get("episode_id") != episode_id or data.get("status") != "QA_VERIFIED":
-        raise FinalRenderError("episode-scoped SFX manifest or independent QA missing")
+    if data.get("episode_id") != episode_id:
+        raise FinalRenderError("episode-scoped SFX decision missing")
     entries = data.get("stems")
-    if not isinstance(entries, list) or len(entries) != len(stems) or not stems:
-        raise FinalRenderError("at least one real pre-timed SFX stem is required for final production")
+    if not stems and data.get("status") == "QA_VERIFIED_NO_SFX_REQUIRED":
+        if entries != [] or data.get("story_sound_design") != "AMBIENT_MUSIC_ONLY":
+            raise FinalRenderError("no-SFX story decision lacks contextual QA evidence")
+        return
+    if data.get("status") != "QA_VERIFIED":
+        raise FinalRenderError("episode-scoped SFX manifest or independent QA missing")
+    if not isinstance(entries, list) or len(entries) != len(stems):
+        raise FinalRenderError("effect stems not identical to verified manifest")
     seen: set[str] = set()
     for entry in entries:
         role = entry.get("role") if isinstance(entry, dict) else None
-        if role not in stems or role in seen:
+        if role not in stems or role in seen or any(
+                term in str(role).lower() for term in
+                ("siren", "sirene", "alarm", "alarme", "horn", "klaxon")):
             raise FinalRenderError("SFX role missing, duplicated or not present in the real mix")
         seen.add(role)
         if (entry.get("source_sha256") != file_sha256(stems[role]) or
@@ -321,7 +338,12 @@ def run_final(
     chosen = select_soundtrack(_json(story_music_context), choices.get("tracks", []))
     candidate = _json(music_candidate)
     if (chosen.get("status") != "EDITORIAL_SELECTED_RIGHTS_REVIEW_REQUIRED" or
-            chosen.get("selected_track_id") != candidate.get("track_id")):
+            chosen.get("selected_track_id") != candidate.get("track_id") or
+            chosen.get("episode_id") != record.get("episode_id") or
+            chosen.get("selected_audio_sha256") != candidate.get("sha256") or
+            chosen.get("selected_source_url") != candidate.get("source_url") or
+            chosen.get("selected_license_url") != candidate.get("source_license_url") or
+            chosen.get("selected_rights_evidence_sha256") != candidate.get("rights_evidence_sha256")):
         raise FinalRenderError("selected music does not match autonomous suspense score and rights evidence")
     audio_gate = check_file(music, candidate, root=repo_root)
     if audio_gate.get("status") != "PASS":
@@ -350,6 +372,20 @@ def run_final(
         "preview_report_sha256": file_sha256(preview_report),
         "narration_profile_sha256": file_sha256(voice_profile),
         "music_candidate_sha256": file_sha256(music_candidate),
+        "auto_selected_music": {
+            "track_id": chosen["selected_track_id"],
+            "source_sha256": chosen["selected_audio_sha256"],
+            "source_url": chosen["selected_source_url"],
+            "rights_evidence_sha256": chosen["selected_rights_evidence_sha256"],
+            "score": chosen["score"],
+            "status": chosen["status"],
+            "chosen_by": "MOTOR_V21_SINGLETON",
+            "music_through_logo_outro": True,
+            "fade_out_seconds": profile["music_fade_out_seconds"],
+            "publication_authorized": False,
+        },
+        "music_story_context_sha256": file_sha256(story_music_context),
+        "music_candidate_pool_sha256": file_sha256(soundtrack_candidates),
         "sfx_manifest_sha256": file_sha256(effects_manifest),
         "audio_profile_sha256": file_sha256(PROFILE_PATH),
         "production_authorized_for_this_render": True,
