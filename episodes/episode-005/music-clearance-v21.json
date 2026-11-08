@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "episode_id": "episode-005",
+  "candidate_id": "mixkit-silent-descent-eugenio-mininni-614",
+  "title": "Silent Descent",
+  "artist": "Eugenio Mininni",
+  "provider": "mixkit",
+  "official_listing_url": "https://mixkit.co/free-stock-music/",
+  "official_category_url": "https://mixkit.co/free-stock-music/film-score/",
+  "original_source_url": "https://assets.mixkit.co/music/614/614.mp3",
+  "official_license_url": "https://mixkit.co/license/modal/musicFree/",
+  "source_sha256": "601955cacab6c38417687b144754c914f392f6508c35c241372695ad3987ec2b",
+  "source_duration_seconds": 160.417959,
+  "source_qa_report": "reports/EP005_STOCK_MUSIC_SILENT_DESCENT_PRIVATE_QA_20261107.json",
+  "source_evidence": {
+    "status": "ORIGINAL_MP3_SHA_AND_AUDIO_QA_VERIFIED",
+    "qa_workflow_run_id": 42430775156,
+    "acoustic_catalog_count": 5,
+    "highest_known_similarity": 0.61751
+  },
+  "license_scope": {
+    "status": "PROVIDER_MUSIC_FREE_LICENSE_LISTED",
+    "commercial_online_video_allowed": true,
+    "online_social_video_allowed": true,
+    "no_payment_required": true,
+    "credit_required": false,
+    "provider_claim_support_documented": true,
+    "independent_content_id_clearance": false,
+    "restrict_standalone_republishing": true,
+    "official_verification_date": "2026-11-08"
+  },
+  "editorial_fit": {
+    "status": "PENDING_INDEPENDENT_STORY_FIT",
+    "episode_story_type": "historical_mystery",
+    "provider_descriptive_tags": [
+      "film_score",
+      "reflective",
+      "melancholic",
+      "piano",
+      "strings",
+      "cinematic",
+      "melodic"
+    ],
+    "suspense_or_investigative_tags_in_provider_listing": false,
+    "assessment": "Melancholic dramatic score verified in provider listing; suitability for investigative historical suspense is not established by a technical mix pass."
+  },
+  "content_id": {
+    "status": "UNKNOWN_NOT_CHECKED_ON_DESTINATION_PLATFORM",
+    "claim_exists": null,
+    "claim_check_artifact_id": null,
+    "provider_support_url": "https://mixkit.co/license/modal/musicFree/",
+    "note": "The provider's license anticipates possible claims; no YouTube/TikTok claim-check evidence exists. Do not assert globally Content ID free."
+  },
+  "historical_sfx": {
+    "status": "UNKNOWN_ARCHIVAL_NO_STEM_PROOFS",
+    "historical_rendered_master_registry": "episodes/audio-rendered-master-registry.json",
+    "expected_historical_master_count": 4,
+    "verified_sfx_stem_sources": 0,
+    "legacy_audio_use_claim": "NOT_VERIFIED"
+  },
+  "decision": {
+    "status": "HOLD_FOR_CREATIVE_AND_CONTENT_ID_EVIDENCE",
+    "publication_authorized": false,
+    "final_render_authorized": false,
+    "extra_spend_authorized": false
+  }
+}
