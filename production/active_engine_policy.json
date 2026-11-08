@@ -173,5 +173,26 @@
     "no_sirens_alarms": true,
     "music_rights_per_episode": true,
     "music_volume_candidate": 0.12
+  },
+  "zero_additional_cost_policy": {
+    "mode": "ABSOLUTE_ZERO_ADDITIONAL_SPEND",
+    "max_incremental_spend_usd": 0,
+    "allow_paid_apis": false,
+    "allow_new_unverified_tts_calls": false,
+    "external_spend_hard_cap_verified": false,
+    "default_for_unknown_external_cost": "BLOCK",
+    "free_stock_only": true,
+    "rights_commercial_clearance_required": true,
+    "existing_narration_reuse_allowed": true,
+    "normal_ci_execution": "standard_GitHub_hosted_runner_public_repository_only",
+    "allowed_offline_operations": [
+      "existing_charon_audio_reuse",
+      "ffmpeg_local_mix",
+      "offline_media_qa",
+      "music_rights_read_only_audit",
+      "source_fingerprint_local",
+      "offline_python_tests"
+    ],
+    "note": "The provider pricing free tier does not prove this key cannot incur charges. New external calls remain disabled until a non-bypassable account-level zero-cost control can be established and approved."
   }
 }

@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       run_mode:
-        description: "Use RUN_ONCE only after confirming the Gemini quota is available."
+        description: "RUN_ONCE is blocked under strict zero-cost policy until account-level spending cannot occur."
         required: true
         default: "CACHE_ONLY"
         type: choice
@@ -25,6 +25,11 @@ jobs:
     steps:
       - name: Checkout requested revision
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Absolute zero-cost preflight — refuse any unverified Gemini API request
+        run: |
+          # Deliberate fail-closed gate: no network request or provider charge.
+          PYTHONPATH=. python -m production.zero_cost_v21 --operation gemini_tts_generate_content
 
       - name: Generate one approved Gemini Charon narration
         run: |
