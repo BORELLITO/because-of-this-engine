@@ -1,0 +1,71 @@
+{
+  "episode_id": "episode-005",
+  "scope": "ACTUAL_PROVIDER_MUSIC_PLUS_APPROVED_NARRATION_PRIVATE_AUDIO_QA_NO_RELEASE",
+  "provider": "Mixkit",
+  "candidate": {
+    "title": "Silent Descent",
+    "artist": "Eugenio Mininni",
+    "listing_url": "https://mixkit.co/free-stock-music/",
+    "original_mp3_url": "https://assets.mixkit.co/music/614/614.mp3",
+    "license_url": "https://mixkit.co/license/modal/musicFree/",
+    "original_audio_sha256": "601955cacab6c38417687b144754c914f392f6508c35c241372695ad3987ec2b",
+    "duration_seconds": 160.417959
+  },
+  "narration": {
+    "provider": "gemini_tts",
+    "voice_name": "Charon",
+    "original_audio_sha256": "0746581eae60c3cccf69173f24658b8dc49fdbb85c74d060c26b7dcecae66ebe",
+    "duration_seconds": 73.84,
+    "tts_new_requests": 0
+  },
+  "source_review": {
+    "historical_catalog_sources_verified": 5,
+    "maximum_similarity": 0.61751,
+    "similarity_review_threshold": 0.78,
+    "known_catalog_reuse": "NO_MATCH_IN_KNOWN_CATALOG",
+    "rights_individual_music_source": "MIXKIT_STOCK_MUSIC_FREE_LICENSE_LISTED_CURRENT_SOURCE",
+    "third_party_content_id_clearance": "PENDING",
+    "human_soundtrack_listening_approval": "PENDING",
+    "source_audio_committed_to_git": false
+  },
+  "mix": {
+    "mode": "V21_ORIGINAL_CHRONOLOGICAL_FINAL_AUDIO_GRAPH_PRIVATE_EXPERIMENT",
+    "stem_count": 2,
+    "stem_contributions": [
+      "narration",
+      "music"
+    ],
+    "mix_receipt_replay": true,
+    "music_gain_linear": 0.12,
+    "music_sidechain": {
+      "threshold": 0.025,
+      "ratio": 6,
+      "attack_ms": 25,
+      "release_ms": 350
+    },
+    "logo_outro_seconds": 5.5,
+    "fade_out_seconds": 3.5,
+    "mp3_duration_seconds": 79.32,
+    "integrated_loudness_lufs": -17,
+    "true_peak_dbTP": -1.2,
+    "early_outro_rms": 1521.4,
+    "late_outro_rms": 30.42,
+    "mp3_sha256": "e5a93d0e55322de46078f3d4e1e01eae772ee36eb6f8685df8b78773ca569761"
+  },
+  "qa_ci": {
+    "run_id": 42430775156,
+    "run_url": "https://github.com/BORELLITO/because-of-this-engine/actions/runs/42430775156",
+    "conclusion": "success",
+    "artifact_id": 13597158690,
+    "artifact_name": "episode005-silent-descent-private-audio-qa"
+  },
+  "decision": {
+    "status": "PRIVATE_AUDIO_QA_TECHNICAL_PASS_NOT_RELEASE_APPROVED",
+    "human_listening_qa_required": true,
+    "production_enablement": false,
+    "drive_delivery_enablement": false,
+    "publication_authorized": false,
+    "no_visual_render": true,
+    "next_step": "Human or independent qualified listening of final candidate, then per-item Content ID and rights evidence dossier; do not mark approved prematurely."
+  }
+}
