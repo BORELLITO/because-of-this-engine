@@ -655,3 +655,11 @@ Foi recuperado o checkpoint Gemini/Charon do episódio 005 (WAV original 73,84s,
 
 **Próximo passo único:** ampliar o QA automatizado com inspeção perceptiva (incluindo sirenes, alarmes e mascaramento real da voz) na Selpan; então criar dossiê individual vinculado ao áudio original SHA + episódio e reconciliar o gate final para usar ESSA candidata, sem aprovar retroativamente o antigo Silent Descent.
 
+
+### 2026-11-08 — Selpan candidata ativa e triagem de áudio original (QA sob bloqueio)
+
+O comparativo real 42494029735 Selpan/Delirium já estava aprovado tecnicamente (mixagem com Charon e 5 assinaturas históricas); foi preservado, sem refazer o áudio ou consumir TTS. O dossiê **ativo** `episodes/episode-005/music-clearance-v21.json` agora aponta para Selpan de Eugenio Mininni com SHA do MP3 original 3d46ec4a1572e00a7da4b3e697067c7cbb07331bc5837758985ff95eda858267, e liga à prova real `reports/EP005_MIXKIT_INVESTIGATIVE_HEAD_TO_HEAD_QA_20261108.json`. O dossiê de Silent Descent foi preservado em arquivo histórico, sem ser apagado ou sobrescrito.
+
+O módulo `production/music_content_screen_v21.py` faz triagem objetiva no arquivo original: possíveis variações tonais como sirene, transientes, dinâmica e estimativa conservadora de concorrência com voz. Executa sob runner padrão **público** gratuito, verificação SHA, sem API paga ou nova voz; originals apagados e somente relatório numérico arquivado. **Não afirmar ausência absoluta de sirenes/alarmes ou aprovação por mera triagem espectral**. O gate `production/soundtrack_release_evidence_v21.py` reconcilia os dois formatos de QA reais, compara fonte selecionada com SHA e mantém escuta independente, direito visual/histórico SFX e Content ID desconhecido como bloqueios separados. Testes e singleton acompanham esse contrato. Ver `docs/V21_EP005_SELPAN_AUDIO_SCREEN_AND_TRUTH.md`.
+
+**Status:** faixa melhor posicionada editorialmente; licença Mixkit para vídeo comercial documentada; nível musical 0,12 e Charon preservados; produção/Drive/publish OFF, R$ 0 adicional, Content ID e julgamento auditivo ainda NÃO certificados. **Único próximo passo:** revisar trechos da análise de frequência com escuta qualificada e confirmar riscos antes da liberação de qualquer vídeo.
