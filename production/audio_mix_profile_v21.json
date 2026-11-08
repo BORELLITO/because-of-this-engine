@@ -17,9 +17,39 @@
   "output_limiter_limit": 0.95,
   "outro_seconds": 5.5,
   "narration_end_before_outro": true,
-  "music_ends_before_outro": true,
+  "music_ends_before_outro": false,
   "source_policy": "SFX_MUST_BE_PRETIMED_APPROVED_STEMS",
   "release_requires": "INDEPENDENT_AUDIO_QA_AND_ALL_FINAL_GATES",
   "publication": "manual_only",
-  "production_enablement": false
+  "production_enablement": false,
+  "music_covers_full_picture": true,
+  "music_fade_out_seconds": 3.5,
+  "music_fade_out_end": "picture_end",
+  "music_start_seconds": 0,
+  "music_selection": "AUTO_BY_STORY_WITH_VERIFIED_LICENSE_AND_ACOUSTIC_NONREUSE",
+  "music_avoid_tags": [
+    "siren",
+    "alarm",
+    "emergency",
+    "police",
+    "air_raid",
+    "horn",
+    "loud_stinger"
+  ],
+  "music_style_tags": [
+    "psychological_suspense",
+    "dark_ambient",
+    "cinematic_drone",
+    "subtle_tension"
+  ],
+  "music_gain_is_linear_not_percent": true,
+  "music_ducking": {
+    "method": "sidechaincompress",
+    "threshold": 0.025,
+    "ratio": 6,
+    "attack_ms": 25,
+    "release_ms": 350,
+    "makeup": 1
+  },
+  "music_loudness_qa": "REQUIRED_BEFORE_RELEASE"
 }

@@ -105,6 +105,8 @@ jobs:
             --voice-profile /tmp/missing-v21-voice-profile.json \
             --music /tmp/missing-v21-music.wav \
             --music-candidate /tmp/missing-v21-music-source.json \
+            --story-music-context /tmp/missing-v21-story-music.json \
+            --soundtrack-candidates /tmp/missing-v21-music-candidates.json \
             --effects-manifest /tmp/missing-v21-sfx.json \
             --sfx sfx:alarm=/tmp/missing-v21-sfx.wav \
             --output /tmp/v21-final-NOT-AUTHORIZED.mp4 \

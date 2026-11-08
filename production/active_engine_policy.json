@@ -164,6 +164,14 @@
     "source_clip_reconstruction": false,
     "generate_new_TTS": false,
     "publication": "manual_only",
-    "production_enablement": false
+    "production_enablement": false,
+    "soundtrack_selection": "production/music_direction_v21.py",
+    "music_bed_required": true,
+    "music_covers_outro": true,
+    "music_fade_out_required": true,
+    "voice_priority_ducking_required": true,
+    "no_sirens_alarms": true,
+    "music_rights_per_episode": true,
+    "music_volume_candidate": 0.12
   }
 }
