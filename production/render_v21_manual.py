@@ -18,6 +18,7 @@ from production.thumbnail_contract_v21 import (
 )
 from production.visual_rights_consistency_v21 import validate_visual_rights_consistency
 from production.audio_history_audit_v21 import audit as audit_audio_history
+from production.soundtrack_release_evidence_v21 import audit as audit_soundtrack_release
 from production.rights_autonomy_v21 import audit_repository as audit_autonomous_rights
 from production.scene_disclosures_v21 import audit_repository as audit_scene_disclosures
 
@@ -135,6 +136,14 @@ def validate_request(
         history = audit_audio_history(repo_root)
         if history["status"] != "PASS":
             failures.extend("audio_history:" + reason for reason in history["failures"])
+
+        # Separate provider license, Content ID, story-fit and historic SFX.
+        # A technically clean music preview must not override release holds.
+        soundtrack = audit_soundtrack_release(
+            repo_root, str(record.get("episode_id") or ""))
+        if soundtrack["status"] != "PASS":
+            failures.extend("soundtrack_release:" + reason
+                            for reason in soundtrack["failures"])
 
     scene_disclosure = audit_scene_disclosures(record, repo_root=repo_root)
     if scene_disclosure["status"] != "PASS":
