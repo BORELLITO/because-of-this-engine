@@ -33,13 +33,13 @@ jobs:
           ffmpeg -version | head -n 1
           ffprobe -version | head -n 1
           PYTHONPATH=. python -m py_compile production/audio_mix_receipt_v21.py production/audio_acoustic_fingerprint_v21.py production/render_v21_final.py
-      - name: Download Mixkit Feedback Dreams from exact browser-confirmed official asset URL
+      - name: Download Mixkit Piano Horror from exact browser-confirmed official asset URL
         run: |
           set -euo pipefail
           mkdir -p private/ep005
           curl --fail --location --retry 3 --retry-delay 2 --connect-timeout 15 --max-time 120 \
             --proto '=https' --tlsv1.2 -A 'Mozilla/5.0 (compatible; BOT-Audio-QA/1.0)' \
-            'https://assets.mixkit.co/music/588/588.mp3' -o private/ep005/source.mp3
+            'https://assets.mixkit.co/music/download/mixkit-piano-horror-671.mp3' -o private/ep005/source.mp3
           test "$(stat -c '%s' private/ep005/source.mp3)" -gt 100000
           ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 private/ep005/source.mp3
       - name: Retrieve already approved Gemini Charon Episode005 artifact with NO TTS call
@@ -75,9 +75,9 @@ jobs:
           coverage=catalog_coverage(Path('.'))
           acoustic=review_file(music,Path('episodes/audio-acoustic-fingerprints-v21.json'))
           report={'status':'CANDIDATE_NOT_PRODUCTION_APPROVED','episode_id':'episode-005',
-                  'song':'Feedback Dreams','artist':'Eugenio Mininni','provider':'Mixkit',
-                  'provider_listing':'https://mixkit.co/free-stock-music/atmospheres/',
-                  'browser_verified_original_mp3':'https://assets.mixkit.co/music/588/588.mp3',
+                  'song':'Piano Horror','artist':'Francisco Alvear','provider':'Mixkit',
+                  'provider_listing':'https://mixkit.co/free-stock-music/tag/horror/',
+                  'browser_verified_original_mp3':'https://assets.mixkit.co/music/download/mixkit-piano-horror-671.mp3',
                   'stock_music_license':'https://mixkit.co/license/modal/musicFree/',
                   'original_music_sha256':file_sha256(music),
                   'original_music_duration_seconds':song_seconds,
@@ -101,7 +101,7 @@ jobs:
           proof=verify_receipt(receipt,replay=True)
           assert proof['status']=='PASS',proof
           assert set(proof['source_contributions_confirmed'])=={'narration','music'},proof
-          preview=root/'BOT_EP005_Feedback_Dreams_Charon_Private_QA.mp3'
+          preview=root/'BOT_EP005_Piano_Horror_Charon_Private_QA.mp3'
           subprocess.run(['ffmpeg','-nostdin','-hide_banner','-v','error','-i',str(mix),
                           '-c:a','libmp3lame','-b:a','192k','-y',str(preview)],
                           check=True,capture_output=True,timeout=120)
@@ -145,9 +145,9 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: episode005-feedback-dreams-private-audio-qa
+          name: episode005-piano-horror-private-audio-qa
           path: |
             private/ep005/report.json
-            private/ep005/BOT_EP005_Feedback_Dreams_Charon_Private_QA.mp3
+            private/ep005/BOT_EP005_Piano_Horror_Charon_Private_QA.mp3
           if-no-files-found: warn
           retention-days: 14
