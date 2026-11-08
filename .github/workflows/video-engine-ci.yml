@@ -171,6 +171,15 @@ jobs:
           assert evidence["new_song_vs_five_known_historical_sources"] == "NO_MATCH_IN_KNOWN_CATALOG_ONLY", a
           assert evidence["content_id_claim_risk"] == "PENDING_PLATFORM_OR_PROVIDER_CASE_EVIDENCE", a
           assert evidence["historical_sfx"] == "ZERO_INDEPENDENT_STEM_PROOFS_DO_NOT_RETROACTIVELY_APPROVE", a
+          assert evidence["source_signal_screen"] == "HEURISTIC_FLAGGED_QUALIFIED_LISTENING_NOT_COMPLETE", a
+          from pathlib import Path
+          import json
+          source=json.loads(Path("reports/EP005_SELPAN_SOURCE_SCREEN_QA_20261108.json").read_text())
+          assert source["detected_tonal_region_count"] == 15
+          assert source["within_preview_79_34_sec_tonal_region_count"] == 6
+          assert source["source_siren_absence_certified"] is False
+          assert source["content_id_cleared"] is False
+
           assert a["historical_inventory"]["historical_master_count"] == 4, a
           assert a["historical_inventory"]["historical_soundtrack_collision_count"] == 1, a
           assert not a["production_authorized"] and not a["publication_authorized"], a
