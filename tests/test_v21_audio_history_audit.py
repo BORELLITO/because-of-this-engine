@@ -46,6 +46,18 @@ class V21AudioHistoryAuditTests(unittest.TestCase):
                     "mixed_audio_sha256": TWO,
                     "artifact_id": "fixture-mix-artifact",
                     "mix_execution_log_sha256": ONE,
+                    "schema_version": "1.0",
+                    "narration_sha256": ONE,
+                    "mix_command_sha256": TWO,
+                    "music_sources": [{
+                        "identity": f"distinct-track-{idx}",
+                        "sha256": ONE,
+                        "source_bytes_sha256": TWO,
+                        "source_bytes_verified": True,
+                        "audible_use_verified": True,
+                    }],
+                    "sfx_sources": [],
+                    "sfx_usage_status": "VERIFIED_NONE",
                 },
             }
             for idx in (1, 2)
