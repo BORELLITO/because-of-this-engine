@@ -21,7 +21,7 @@
     "release_approved": false
   },
   "license_scope": {
-    "status": "SOURCE_TERMS_CONFIRMED_NOT_GLOBAL_CLAIM_WAIVER",
+    "status": "PROVIDER_MUSIC_FREE_LICENSE_LISTED",
     "commercial_online_video_allowed": true,
     "online_social_video_allowed": true,
     "no_payment_required": true,
@@ -37,7 +37,7 @@
     "claim_handling_procedure": "If a platform claim occurs, forward the claim details to team@mixkit.co."
   },
   "editorial_fit": {
-    "status": "PENDING_STORY_MUSIC_AUDITION_PROVIDER_TAGS_ONLY",
+    "status": "PENDING_INDEPENDENT_STORY_FIT",
     "episode_story_type": "historical_mystery",
     "provider_descriptive_tags": [
       "mysterious",
