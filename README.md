@@ -1,90 +1,53 @@
-> **CANONICAL STATUS (2026-11-07):** Read `production/active_engine_policy.json` first.
-> It declares the V2.1 factual-documentary candidate with direct Gemini/Charon TTS,
-> `production/canonical_entrypoint.py` as the read-only contract validator,
-> `production_enablement=false`, and manual-only publication. V7/V7.2/Piper
-> descriptions below are retained as historical context, NOT current runbooks.
-> The approved visual/audio profile must be verified from the active contract
-> before any media operation. See `docs/QUALITY_SAFETY_HARDENING_20261107.md`.
+# BECAUSE OF THIS — Motor Canônico V2.1
 
-# BECAUSE OF THIS — V7.1 Piper Canonical Engine + Active V7.2 Reuse-First Add-ons
+> **Fonte única de verdade:** `production/active_engine_policy.json`  
+> **Entrypoint único normal:** `production/canonical_entrypoint.py`  
+> **Guard de singleton:** `production/v21_singleton_guard.py`
 
-This repository contains the single canonical production engine for the
-Because Of This channel. The approved V7.2 Reuse-First optimization layer is
-ACTIVE on top of the locked Piper V7.1 core, without changing the canonical
-voice model, profile fingerprint or human-controlled publication policy.
-The active feature bundle is declared in `production/active_engine_policy.json`.
-V7.1 is driven by the pinned master prompt
-`docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V7_1_PIPER_TTS_LOCAL.txt` and schema
-`because-of-this://schemas/production-record/3.0.0`.
+Este repositório contém o único motor canônico do canal Because Of This. O estado ativo é o candidato V2.1 factual-documentary com Gemini TTS direto, voz Charon e publicação manual. Nenhum outro motor, prompt, workflow ou provedor pode ser selecionado silenciosamente.
 
-## Active engine contract
+## Contrato ativo
 
-- Video-only vertical output: 1080×1920, 60 fps, 60–75 seconds.
-- Narration provider: local Piper neural TTS only, `en_US-ryan-high`,
-  LINEAR16 at 24 kHz, with no API key, billing account, network synthesis or silent fallback.
-- Audio is the master clock. Captions are generated from final audio using
-  forced alignment; estimated timings are not accepted.
-- Every visual beat requires direct semantic anchors, rights evidence,
-  SHA-256/perceptual identity and a reservation/consumption history that
-  prevents reuse or derivation reuse.
-- Publication is always manual. The engine produces a handoff and G11 closes
-  only from a matching manual publication receipt.
+- Idioma: inglês norte-americano (`en-US`).
+- Voz: Gemini TTS direto, modelo `gemini-3.8-flash-tts`, voz `Charon`.
+- Fallback de provedor: proibido.
+- Vídeo: 1080×1920, 60 fps, 60–75 s (exceção máxima de 80 s).
+- Áudio final: relógio mestre; legendas por alinhamento forçado palavra a palavra.
+- Legendas: no máximo duas linhas, safe zone superior aprovada, base branca, palavra ativa `#F04444`, sem travessão em/en.
+- Visual: clipes/reconstruções cinematográficas fotorrealistas, coerentes com cada beat; sem gráficos, diagramas, HUD, mapas, loops, clipes reutilizados ou preenchimento genérico.
+- Branding: logo transparente na posição aprovada; história/narração terminam antes do endfilm de 5–6 s e fade para preto.
+- Custos: zero gasto adicional; novas chamadas externas não verificadas ficam bloqueadas.
+- Publicação e Drive: somente manualmente; nenhuma automação publica ou grava mídia remotamente.
 
-## Canonical entrypoints
+## Ordem obrigatória
 
-- `production/v7_contract.py` — prompt, schema, manifest and gate contract.
-- `production/v7_singleton_guard.py` — proves the active profile and workflow
-  are V7.1 and rejects retired execution markers.
-- `production/v7_orchestrator.py` — G0–G11 evaluation, idempotency and
-  production-record generation.
-- `production/piper_tts.py` — Piper local model preflight, chunk synthesis,
-  provenance, hashes and real-duration metadata; Edge and Google Cloud adapters are archived.
-- `production/v7_post_publication.py` — manual-only G11 verifier.
-- `.github/workflows/because-of-this-v7.yml` — manually dispatched production
-  workflow; it stops on missing evidence and never publishes automatically.
+`STORY → HOOK → AUDIO/TIMECODES → BEATS → SHOT MAP → RIGHTS → REUSE → HUMAN STORY APPROVAL → TTS → MIX → TRANSCRIPTION → CAPTIONS → VISUAL ASSEMBLY → PREVIEW → HUMAN PREVIEW REVIEW → RENDER → QA → DELIVERY → MANUAL PUBLICATION`
 
-## Lifecycle
+Um gate bloqueado é uma parada intencional. Não existe fallback silencioso, promoção automática ou substituição por outro motor.
 
-Use `--mode contract` for structural validation before external work, `--mode
-dry-run` for local Piper TTS prosody and orchestration checks, `--mode preflight` after
-approved assets/music and narration coverage are hydrated, `--mode preview`
-for a render candidate, and `--mode production` only after final artifacts,
-preview approval and human approval are registered. A blocked gate is an intentional stop, not an implicit fallback.
+## Entrypoints e validação
 
-The Episode 001 draft preview completed successfully with Piper narration,
-Vosk-aligned captions, FFmpeg render and Drive delivery:
-https://github.com/BORELLITO/because-of-this-engine/actions/runs/40986385249
-
-**The already completed MP4 must be reused rather than rendered again when the
-verified source script, manifest and code fingerprints match.** Its original
-Drive folder is https://drive.google.com/drive/folders/1HkjYfLf4vXJuJ1XjE-pQWVdjPGho6NDh.
-This file is DRAFT_PREVIEW_ONLY: do not confuse technical success with commercial
-rights review, editorial approval or permission to publish.
-
-## Rollback
-
-The previous V6/Gemini engine is not executable from the active tree. Its
-entrypoints and exact stable commit are preserved under `archive/v6/` for
-auditing and an explicit reviewed rollback only.
-
-## Local checks
+Antes de qualquer operação:
 
 ```bash
-python -m pip install -r requirements.txt
-PYTHONPATH=. python -m unittest discover -s tests -p 'test_v7*.py' -v
-PYTHONPATH=. python production/v7_singleton_guard.py --repo-root .
-PYTHONPATH=. python production/v7_orchestrator.py --repo-root . \
-  --manifest episodes/video-001/manifest.json --mode dry-run
+PYTHONPATH=. python production/v21_singleton_guard.py --repo-root .
+PYTHONPATH=. python production/canonical_entrypoint.py \
+  --repo-root . \
+  --manifest episodes/episode-005/production-record.json \
+  --report /tmp/episode005-v21-report.json
 ```
 
-## Active V7.2 Reuse First
+Testes canônicos:
 
-- `production/narration_cache.py`: Piper model/config SHA-256, all voice settings, beat list and pronunciation-aware cache keys; Drive checksum-verified reuse.
-- `production/asset_reuse_brain.py`: archived footage stays retired and cannot be silently recycled across episodes.
-- `production/audio_reuse_brain.py`: track IDs, audio hashes, Drive IDs and historical music records checked.
-- `production/release_integrity_v72.py`: read-only registry-backed release integrity checks in place of unconditional PASS metadata.
-- `experimental/v72/reuse_first.py`: exact original media code and input fingerprints, original nine Drive delivery receipts and zero-media rerun planning.
-- `experimental/v72/verify_drive_receipt.py`: read-only Drive receipt size/hash metadata verification.
-- Two manual production/preview workflows share a media lock and preserve newly generated audio/caption artifacts on Drive. No automatic channel publishing.
-- The ordinary main-branch CI now runs both the V7.1 canonical and extended V7.2 guard/regression suites. Full audiovisual second-run validation remains outstanding by design; do not waste production resources to recreate the approved preview.
+```bash
+PYTHONPATH=. python -m unittest discover -s tests -p 'test_v21*.py' -v
+PYTHONPATH=. python -m py_compile production/*.py
+```
 
+O preview só pode existir quando os gates permitirem. A produção permanece desabilitada até autorização humana explícita.
+
+## Histórico isolado
+
+Implementações V7/Piper, Edge TTS, Creative Claw e outros experimentos permanecem somente como evidência histórica, rollback ou auditoria. Não são runbooks atuais, não são fallback e não podem ser escolhidos pelo runtime.
+
+A identidade visual canônica está registrada em `docs/CANONICAL_VISUAL_EDITORIAL_LOCK_20261112.md`. O estado editorial do EP005 e suas fontes são mantidos nos artefatos canônicos da Library; a falta de cobertura visual ou de evidência de áudio mantém o episódio bloqueado.
