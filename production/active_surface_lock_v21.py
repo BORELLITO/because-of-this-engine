@@ -1,17 +1,68 @@
-"""Fail-closed lock for the one active Because Of This runtime surface.
-
-This guard prevents documentation, policy and entrypoint drift from making a
-retired V7/Piper/Creative Claw path look executable again.
-"""
+"""Fail-closed lock for the one active Because Of This runtime surface."""
 
 from __future__ import annotations
 
+import ast
 import json
 from pathlib import Path
 
 ACTIVE_VERSION = "2.1"
 ACTIVE_ENTRYPOINT = "production/canonical_entrypoint.py"
 ACTIVE_PROFILE = "because-of-this-v2.1-canonical-factual-gemini-charon-2026-11"
+
+# These files remain in the repository only for audit/rollback evidence. They
+# must never be imported by the active V2.1 runtime.
+LEGACY_FILES = {
+    "align_edge_captions.py",
+    "cloud_tts.py",
+    "microsoft_edge_tts.py",
+    "piper_tts.py",
+    "production_record_v7.py",
+    "release_integrity_v72.py",
+    "render_video_episode.py",
+    "v7_contract.py",
+    "v7_orchestrator.py",
+    "v7_post_publication.py",
+    "v7_singleton_guard.py",
+    "visual_effects_v73.py",
+}
+
+LEGACY_MODULE_PREFIXES = (
+    "production.align_edge_captions",
+    "production.cloud_tts",
+    "production.microsoft_edge_tts",
+    "production.piper_tts",
+    "production.production_record_v7",
+    "production.release_integrity_v72",
+    "production.render_video_episode",
+    "production.v7_contract",
+    "production.v7_orchestrator",
+    "production.v7_post_publication",
+    "production.v7_singleton_guard",
+    "production.visual_effects_v73",
+)
+
+
+def _legacy_imports(root: Path) -> list[str]:
+    failures: list[str] = []
+    production_root = root / "production"
+    for path in sorted(production_root.glob("*.py")):
+        if path.name in LEGACY_FILES:
+            continue
+        try:
+            tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+        except (OSError, SyntaxError) as exc:
+            failures.append(f"active module unreadable:{path.name}:{exc}")
+            continue
+        for node in ast.walk(tree):
+            imported = ""
+            if isinstance(node, ast.Import):
+                imported = next((alias.name for alias in node.names), "")
+            elif isinstance(node, ast.ImportFrom):
+                imported = node.module or ""
+            if any(imported == prefix or imported.startswith(prefix + ".") for prefix in LEGACY_MODULE_PREFIXES):
+                failures.append(f"active module imports retired runtime:{path.name}->{imported}")
+    return failures
 
 
 def audit(repo_root: Path) -> dict[str, object]:
@@ -42,6 +93,8 @@ def audit(repo_root: Path) -> dict[str, object]:
         failures.append("production must remain fail-closed")
     if policy.get("publication_policy") != "manual_only":
         failures.append("publication must remain manual-only")
+    if (policy.get("legacy_policy") or {}).get("active_runtime") != ACTIVE_ENTRYPOINT:
+        failures.append("legacy policy does not point back to the canonical entrypoint")
 
     if not readme_path.is_file():
         failures.append("canonical README missing")
@@ -49,7 +102,7 @@ def audit(repo_root: Path) -> dict[str, object]:
         readme = readme_path.read_text(encoding="utf-8")
         required = (
             "Motor Canônico V2.1",
-            "production/canonical_entrypoint.py",
+            ACTIVE_ENTRYPOINT,
             "gemini-3.8-flash-tts",
             "Charon",
         )
@@ -65,14 +118,23 @@ def audit(repo_root: Path) -> dict[str, object]:
             if marker in readme
         )
 
-    for relative in ("production/canonical_entrypoint.py", "production/v21_singleton_guard.py"):
+    for relative in (ACTIVE_ENTRYPOINT, "production/v21_singleton_guard.py"):
         if not (root / relative).is_file():
             failures.append(f"canonical runtime file missing:{relative}")
+
+    entrypoint = root / ACTIVE_ENTRYPOINT
+    if entrypoint.is_file():
+        source = entrypoint.read_text(encoding="utf-8", errors="replace")
+        if 'media_generation": "NOT_RUN"' not in source or 'publication": "MANUAL_ONLY_NOT_RUN"' not in source:
+            failures.append("canonical entrypoint lost read-only fail-closed markers")
+
+    failures.extend(_legacy_imports(root))
 
     return {
         "status": "ACTIVE_SURFACE_LOCK_PASS" if not failures else "ACTIVE_SURFACE_LOCK_BLOCKED",
         "active_engine_version": policy.get("active_engine_version"),
         "canonical_entrypoint": policy.get("canonical_entrypoint"),
+        "legacy_import_failures": [x for x in failures if "retired runtime" in x],
         "failures": failures,
     }
 
