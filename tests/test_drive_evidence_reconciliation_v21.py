@@ -53,5 +53,26 @@ class DriveEvidenceReconciliationTests(unittest.TestCase):
         self.assertEqual(row["promotion_status"], "BLOCKED")
 
 
+    def test_explicit_not_located_artifact_is_not_contextual(self):
+        report = build_reconciliation_report(
+            _registry(),
+            {
+                "artifacts": [
+                    {
+                        "episode_id": "episode-001",
+                        "evidence_status": "NOT_LOCATED",
+                        "evidence_scope": "TARGETED_DRIVE_SEARCH_NO_MATCH",
+                        "strict_receipt_promotable": False,
+                    }
+                ]
+            },
+        )
+        row = report["rows"][0]
+        self.assertEqual(row["evidence_status"], "NOT_LOCATED")
+        self.assertFalse(row["contextual_evidence_present"])
+        self.assertEqual(report["contextual_evidence_count"], 0)
+        self.assertEqual(row["promotion_status"], "BLOCKED")
+
+
 if __name__ == "__main__":
     unittest.main()
