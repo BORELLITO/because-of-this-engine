@@ -996,10 +996,10 @@
     "status": "OFFLINE_CONTRACT_VERIFIED",
     "real_call_authorized": false,
     "request_count": 0,
-    "script_sha256": "396e75d3cacc9a356a72e6a34465c790a3e2b7981b71c8b253949a52c654f26a",
-    "estimated_characters": 947,
+    "script_sha256": "403a5bd5cd38505fb7109308544a15ea3c03fe173cb864bc055cd4c759ddd78a",
+    "estimated_characters": 1014,
     "character_budget": 10000,
-    "estimated_duration_seconds": 72,
+    "estimated_duration_seconds": 73.84,
     "route": "direct_gemini_api",
     "single_request_policy": true,
     "previous_failure": {
@@ -1008,7 +1008,7 @@
       "duration_seconds": 82.24,
       "reason": "Gemini returned audio after quota reset, but the superseded 174-word script exceeded the 80-second ceiling. No artifact was persisted."
     },
-    "script_revision": "en-US-charon-v2-shortened-for-80-second-ceiling"
+    "script_revision": "en-US-charon-v1-162-word-approved"
   },
   "audio_contract": {
     "source": "final_audio",
@@ -1017,7 +1017,8 @@
     "final_transcription_required": true,
     "target_duration_seconds": 72,
     "adapter": "production/gemini_tts.py",
-    "source_audio_status": "PENDING_GEMINI_GENERATION"
+    "source_audio_status": "GEMINI_ARTIFACT_VERIFIED_NOT_YET_BOUND_TO_RENDER_MIX",
+    "artifact_evidence_status": "VERIFIED_GITHUB_ACTIONS_ARTIFACT"
   },
   "captions_contract": {
     "source": "final_audio_transcription",
@@ -1025,10 +1026,11 @@
     "status": "OFFLINE_CONTRACT_VERIFIED",
     "real_caption_generated": false,
     "safe_zone_status": "PENDING_REAL_CAPTURE",
-    "source_audio_sha256": null,
-    "source_audio_status": "PENDING_GEMINI_GENERATION",
+    "source_audio_sha256": "0746581eae60c3cccf69173f24658b8dc49fdbb85c74d060c26b7dcecae66ebe",
+    "source_audio_status": "GEMINI_ARTIFACT_VERIFIED_NOT_YET_BOUND_TO_RENDER_MIX",
     "adapter": "production/align_captions.py",
-    "timing_mode": "provider_agnostic_word_alignment_pending_generated_audio"
+    "timing_mode": "provider_agnostic_word_alignment_pending_generated_audio",
+    "artifact_evidence_status": "VERIFIED_GITHUB_ACTIONS_ARTIFACT"
   },
   "render_contract": {
     "width": 1080,
@@ -1086,5 +1088,44 @@
   "episode_name": "05 - THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
   "episode_slug": "the-signal-that-could-have-started-world-war-iii",
   "naming_policy": "DISPLAY_NAME_FORMAT_NN_DASH_VIDEO_TITLE_TECHNICAL_EPISODE_ID_IMMUTABLE",
-  "display_name": "05 - THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III"
+  "display_name": "05 - THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
+  "narration_artifact_evidence": {
+    "status": "VERIFIED_GITHUB_ACTIONS_ARTIFACT",
+    "provider": "gemini_tts",
+    "voice_name": "Charon",
+    "model": "gemini-3.8-flash-tts",
+    "workflow_run_id": 42278191077,
+    "artifact_name": "episode005-gemini-charon-narration",
+    "artifact_digest": "sha256:dbc14725394bbcd32df0fb4a28bac911630d9ba13c3788f3ad4368c00d3bcc7f",
+    "audio_sha256": "0746581eae60c3cccf69173f24658b8dc49fdbb85c74d060c26b7dcecae66ebe",
+    "duration_seconds": 73.84,
+    "script_path": "episodes/episode-005/narration/en-US-charon-v1.txt",
+    "script_sha256": "403a5bd5cd38505fb7109308544a15ea3c03fe173cb864bc055cd4c759ddd78a",
+    "persisted": true,
+    "final_mix_bound": false,
+    "release_authorized": false
+  },
+  "caption_artifact_evidence": {
+    "status": "VERIFIED_GITHUB_ACTIONS_ARTIFACT",
+    "workflow_run_id": 42278428885,
+    "artifact_name": "episode005-gemini-charon-captioned",
+    "artifact_digest": "sha256:bfbf53458f4c64948e7744aafe6f522e124a4682a34690d336da3bf1831a711e",
+    "source_audio_sha256": "0746581eae60c3cccf69173f24658b8dc49fdbb85c74d060c26b7dcecae66ebe",
+    "duration_seconds": 73.84,
+    "timing_mode": "whisper_full_audio_word_timestamps",
+    "word_level": true,
+    "caption_count": 24,
+    "max_lines": 2,
+    "margin_v": 650,
+    "active_word_color": "#F04444",
+    "final_mix_bound": false,
+    "release_authorized": false
+  },
+  "artifact_reconciliation": {
+    "status": "RECONCILIATION_REQUIRED",
+    "policy": "Persisted narration/caption artifacts are real evidence, but do not authorize final audio mix, render, Drive delivery or publication.",
+    "source": "GitHub Actions artifact registry",
+    "release_authorized": false,
+    "final_mix_bound": false
+  }
 }
