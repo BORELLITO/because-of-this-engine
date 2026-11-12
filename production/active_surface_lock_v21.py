@@ -43,10 +43,71 @@ LEGACY_MODULE_PREFIXES = (
 )
 
 
+def _module_path(root: Path, module: str) -> Path | None:
+    if not module.startswith("production."):
+        return None
+    relative = Path(*module.split("."))
+    candidate = root / f"{relative}.py"
+    if candidate.is_file():
+        return candidate
+    package_init = root / relative / "__init__.py"
+    return package_init if package_init.is_file() else None
+
+
+def _imports_from(path: Path, root: Path) -> list[Path]:
+    try:
+        tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+    except (OSError, SyntaxError):
+        return []
+    imports: list[Path] = []
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                imported = _module_path(root, alias.name)
+                if imported is not None:
+                    imports.append(imported)
+        elif isinstance(node, ast.ImportFrom):
+            module = node.module or ""
+            if node.level:
+                # Active modules use absolute production imports today; retain
+                # relative resolution for future modules in the same package.
+                base = path.parent
+                for _ in range(max(0, node.level - 1)):
+                    base = base.parent
+                candidate = base / Path(*module.split(".")) if module else base
+                candidate_py = candidate.with_suffix(".py")
+                if candidate_py.is_file():
+                    imports.append(candidate_py)
+            else:
+                imported = _module_path(root, module)
+                if imported is not None:
+                    imports.append(imported)
+    return imports
+
+
+def _active_module_paths(root: Path) -> list[Path]:
+    """Return the import closure of the canonical entrypoint and its guards."""
+    seeds = [
+        root / ACTIVE_ENTRYPOINT,
+        root / "production" / "v21_singleton_guard.py",
+        root / "production" / "active_surface_lock_v21.py",
+    ]
+    pending = [path for path in seeds if path.is_file()]
+    visited: set[Path] = set()
+    ordered: list[Path] = []
+    while pending:
+        path = pending.pop(0).resolve()
+        if path in visited:
+            continue
+        visited.add(path)
+        ordered.append(path)
+        pending.extend(_imports_from(path, root))
+    return ordered
+
+
 def _legacy_imports(root: Path) -> list[str]:
     failures: list[str] = []
-    production_root = root / "production"
-    for path in sorted(production_root.glob("*.py")):
+    for path in _active_module_paths(root):
         if path.name in LEGACY_FILES:
             continue
         try:
