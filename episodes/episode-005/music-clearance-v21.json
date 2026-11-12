@@ -21,7 +21,7 @@
     "release_approved": false
   },
   "license_scope": {
-    "status": "VERIFIED_OFFICIAL_MIXKIT_MUSIC_FREE_LICENSE_20261112",
+    "status": "SOURCE_TERMS_CONFIRMED_NOT_GLOBAL_CLAIM_WAIVER",
     "commercial_online_video_allowed": true,
     "online_social_video_allowed": true,
     "no_payment_required": true,
@@ -37,7 +37,7 @@
     "claim_handling_procedure": "If a platform claim occurs, forward the claim details to team@mixkit.co."
   },
   "editorial_fit": {
-    "status": "APPROVED_BY_USER_PRIVATE_MIX",
+    "status": "PENDING_STORY_MUSIC_AUDITION_PROVIDER_TAGS_ONLY",
     "episode_story_type": "historical_mystery",
     "provider_descriptive_tags": [
       "mysterious",
@@ -48,15 +48,22 @@
       "documentary"
     ],
     "suspense_or_investigative_tags_in_provider_listing": true,
-    "assessment": "User approved the private Selpan mix for balance, voice intelligibility and restrained suspense tone. This is creative/audio approval, not automatic release authorization."
+    "assessment": "User approved the private Selpan mix for balance, voice intelligibility and restrained suspense tone. This is creative/audio approval, not automatic release authorization.",
+    "user_private_mix_approval": {
+      "status": "APPROVED_BY_USER",
+      "scope": "Private Selpan mix balance, Charon voice intelligibility and restrained suspense tone",
+      "approved_at": "2026-11-12"
+    }
   },
   "content_id": {
-    "status": "LICENSE_PROHIBITS_RIGHTS_MANAGEMENT_REGISTRATION",
+    "status": "UNKNOWN_NOT_CHECKED_ON_DESTINATION_PLATFORM",
     "claim_exists": null,
     "claim_check_artifact_id": null,
     "provider_support_url": "https://mixkit.co/license/modal/musicFree/",
     "note": "Mixkit permits YouTube/social video use but prohibits registering the track in a rights-management service. Any platform claim must be handled with Mixkit support; no Content ID registration will be attempted.",
-    "checked_at": "2026-11-12"
+    "checked_at": "2026-11-12",
+    "license_policy": "Mixkit prohibits registering this track in a rights-management service; no Content ID registration will be attempted.",
+    "claim_handling_procedure": "If a platform claim occurs, forward the claim details to team@mixkit.co."
   },
   "historical_sfx": {
     "status": "UNKNOWN_ARCHIVAL_NO_STEM_PROOFS",
@@ -66,11 +73,12 @@
     "legacy_audio_use_claim": "NOT_VERIFIED"
   },
   "decision": {
-    "status": "HOLD_FOR_HISTORICAL_COVERAGE_AND_PLATFORM_CLAIM_HANDLING",
+    "status": "HOLD_FOR_QUALIFIED_SOURCE_AUDITION_AND_CONTENT_ID",
     "publication_authorized": false,
     "final_render_authorized": false,
     "extra_spend_authorized": false,
-    "reason": "Creative mix and official license evidence are approved. Final release remains blocked by historical audio coverage, final-master binding/postflight, and handling of any platform claim without Content ID registration."
+    "reason": "Creative mix and official license evidence are approved. Final release remains blocked by historical audio coverage, final-master binding/postflight, and handling of any platform claim without Content ID registration.",
+    "correction_note": "User approval clears creative mix review only; canonical release state remains fail-closed until objective source screening, platform claim handling and historical coverage are proven."
   },
   "audio_content_screen": {
     "status": "AUTOMATED_SOURCE_SCAN_FLAGGED_QUALIFIED_AUDITION_REQUIRED",
@@ -85,11 +93,16 @@
     "siren_absence_certified": false,
     "source_vocals_absence_certified": false,
     "speech_masking_safely_verified": false,
-    "qualified_human_or_equivalent_audition_completed": true,
-    "commentary": "User approved the private mix creatively. Objective source-level siren absence and platform claim behavior remain non-certified.",
+    "qualified_human_or_equivalent_audition_completed": false,
+    "commentary": "The user approved the private mix creatively. Objective source-level siren absence and platform claim behavior remain non-certified.",
     "human_audition_approval": {
       "status": "APPROVED_BY_USER",
       "scope": "Private Selpan mix balance, Charon voice intelligibility and restrained suspense tone",
+      "approved_at": "2026-11-12"
+    },
+    "user_private_mix_approval": {
+      "status": "APPROVED_BY_USER",
+      "scope": "Creative mix balance and voice intelligibility only",
       "approved_at": "2026-11-12"
     }
   },
