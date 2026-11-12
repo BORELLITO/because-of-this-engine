@@ -14,6 +14,8 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+from production.mix_receipt_v21 import validate_mix_receipt
+
 SHA = re.compile(r"^[0-9a-f]{64}$")
 MASTER_PROOF = "VERIFIED_MASTER_AUDIO_MIX_AND_SOURCE_IDENTITY"
 VALID_KIND = {"music_bed", "procedural_music", "sfx"}
