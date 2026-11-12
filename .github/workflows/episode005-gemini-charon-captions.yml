@@ -99,7 +99,13 @@ jobs:
                   "max_line_chars": 36,
                   "max_lines": 2,
                   "margin_v": 650,
-                  "active_word_color": "#F04444"
+                  "active_word_color": "#F04444",
+                  "alignment_mode": "audio_final_forced_alignment",
+                  "alignment_source": "faster_whisper_real_word_timestamps",
+                  "word_level_available": True,
+                  "word_highlight_enabled": True,
+                  "word_highlight_mode": "timestamp_color_transform",
+                  "word_highlight_tolerance_ms": 35
               }
           }
           (root / "caption-manifest.json").write_text(
@@ -156,6 +162,13 @@ jobs:
               "timing_mode": data["timing_mode"],
           }))
           PY
+
+      - name: Enforce V2.1 caption lock and no-dash policy
+        run: |
+          PYTHONPATH=. python production/caption_quality.py \
+            --manifest artifacts/episode005-gemini-charon/caption-manifest.json \
+            --require-word-level \
+            --report artifacts/episode005-gemini-charon/caption-qa.json
 
       - name: Upload Gemini narration and caption checkpoint
         if: always()
