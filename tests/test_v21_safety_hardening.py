@@ -58,6 +58,18 @@ class V21SafetyHardeningTests(unittest.TestCase):
                 "legacy_policy": {"status": "legacy_rollback_only"},
             }), encoding="utf-8"
         )
+        canonical_root = Path(__file__).resolve().parents[1]
+        for relative in (
+            "caption_policy_v21.json",
+            "align_captions.py",
+            "whisper_captions.py",
+            "generate_phrase_captions.py",
+            "caption_quality.py",
+            "caption_style_v21.py",
+        ):
+            source = canonical_root / "production" / relative
+            target = self.root / "production" / relative
+            target.write_bytes(source.read_bytes())
 
         for ep in ("005", "006"):
             (self.workflows / ("episode" + ep + "-gemini-charon-narration.yml")).write_text(
