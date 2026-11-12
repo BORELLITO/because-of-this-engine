@@ -19,6 +19,7 @@ from production.thumbnail_contract_v21 import validate_thumbnail_concept, valida
 from production.visual_rights_consistency_v21 import validate_visual_rights_consistency
 from production.audio_history_audit_v21 import audit as audit_audio_history
 from production.historical_receipt_recovery_v21 import build_recovery_report
+from production.drive_evidence_reconciliation_v21 import build_reconciliation_report
 from production.rights_autonomy_v21 import audit_repository as audit_autonomous_rights
 from production.scene_disclosures_v21 import audit_repository as audit_scene_disclosures
 
@@ -106,6 +107,23 @@ def evaluate(manifest: dict[str, Any], *, registry: list[dict[str, Any]] | None 
                 audio_history["historical_receipt_recovery_status"] = "BLOCKED"
             else:
                 audio_history["historical_receipt_recovery_status"] = "PASS"
+        drive_evidence_path = repo_root / "reports" / "drive-evidence-reconciliation-v21.json"
+        if drive_evidence_path.exists():
+            try:
+                drive_evidence = json.loads(drive_evidence_path.read_text(encoding="utf-8"))
+                drive_reconciliation = build_reconciliation_report(recovery_registry, drive_evidence)
+            except (OSError, ValueError, json.JSONDecodeError) as exc:
+                drive_reconciliation = {
+                    "gate": "AUDIO_HISTORY_DRIVE_EVIDENCE_RECONCILIATION",
+                    "status": "BLOCKED",
+                    "promotion_status": "BLOCKED",
+                    "blocking_reasons": [f"Drive evidence reconciliation unavailable or invalid:{exc}"],
+                }
+            audio_history["drive_evidence_reconciliation"] = drive_reconciliation
+            audio_history["drive_evidence_reconciliation_status"] = drive_reconciliation.get("status", "BLOCKED")
+            if drive_reconciliation.get("status") != "PASS":
+                audio_history["failures"] = list(audio_history.get("failures", []))
+                audio_history["failures"].append("historical Drive evidence reconciliation is blocked")
         checks.append(audio_history)
         checks.append(audit_autonomous_rights(manifest, repo_root=repo_root))
         checks.append(audit_scene_disclosures(manifest, repo_root=repo_root))

@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0",
+  "gate": "AUDIO_HISTORY_DRIVE_EVIDENCE_RECONCILIATION",
+  "generated_at": "2026-11-12",
+  "source_of_truth": "Targeted Google Drive manifest and rendered-folder audit; canonical audio-rendered-master-registry.json remains authoritative for completed masters.",
+  "status": "BLOCKED",
+  "promotion_status": "BLOCKED",
+  "master_count": 4,
+  "contextual_evidence_count": 3,
+  "strict_receipt_count": 0,
+  "artifacts": [
+    {
+      "episode_id": "episode-001-preview-v72-charon-clean",
+      "evidence_status": "LOCATED",
+      "manifest_drive_file_id": "1NW5QtT_cFHeZwZImjgxk4sR_dTSEIGDE",
+      "manifest_title": "EP001 final manifest",
+      "manifest_status": "PRODUCTION_COMPLETE",
+      "truth_mode": "DECLARED_FICTION",
+      "qa_status": "VIDEO_RELEASE_VALIDATED",
+      "delivery_status": "DRIVE_VERIFIED",
+      "narration_sha256": "50b097468272f75a025a445ec3b8e1963d3b160b06181fb4b01da1c8ff5edac1",
+      "music_declaration": {
+        "drive_file_id": "1bDbbr-bMA3puBvrQ2QzvSTfbicXJmdni",
+        "provider": "mixkit",
+        "original_filename": "871.mp3",
+        "source_page": "https://mixkit.co/free-stock-music/mood/suspenseful/"
+      },
+      "evidence_scope": "MANIFEST_CONTEXT_ONLY",
+      "strict_receipt_promotable": false,
+      "notes": [
+        "Manifest music declaration does not match the canonical registry source ID; retained as historical declaration only."
+      ]
+    },
+    {
+      "episode_id": "episode-002-archive-tape",
+      "evidence_status": "NOT_LOCATED",
+      "evidence_scope": "TARGETED_DRIVE_SEARCH_NO_MATCH",
+      "strict_receipt_promotable": false,
+      "notes": [
+        "No direct manifest or strict mix receipt was located in the targeted Drive searches."
+      ]
+    },
+    {
+      "episode_id": "because-of-this-episode-003",
+      "evidence_status": "LOCATED",
+      "manifest_drive_file_id": "1ZmfaIW2oTGmPDG4RF537UOQh7uiNxOzR",
+      "manifest_title": "EP003 final manifest",
+      "manifest_status": "PRODUCTION_COMPLETE",
+      "qa_status": "VIDEO_RELEASE_VALIDATED",
+      "delivery_status": "DRIVE_VERIFIED",
+      "narration_sha256": "16726d3f7d6cc2a154fc29e8c66c3ad6ba5e854dda4de8fc86878c52b3213a64",
+      "music_declaration": {
+        "drive_file_id": "1u-1ZKkVxKTw_E6vEzW0VcpF2lfjGfmeI",
+        "provider": "mixkit",
+        "original_filename": "episode-002-echoes-andrew-ev.mp3"
+      },
+      "evidence_scope": "MANIFEST_CONTEXT_ONLY",
+      "strict_receipt_promotable": false,
+      "notes": [
+        "Manifest and canonical registry identify the same source ID, but no replayable mix command/log or SFX lineage is present."
+      ]
+    },
+    {
+      "episode_id": "because-of-this-episode-004",
+      "evidence_status": "LOCATED",
+      "manifest_drive_file_id": "1K1r8Cuc4pBMFpM_d8Tc-e_jED-V9N1A5",
+      "manifest_title": "EP004 preview manifest",
+      "manifest_status": "PREVIEW_COMPLETE",
+      "qa_status": "VIDEO_RELEASE_VALIDATED",
+      "delivery_status": "DRIVE_VERIFIED",
+      "narration_sha256": "f31c9d5e2dd8028a7614b6cf9970f56a0f2faaddfe6b59cf102f1b9b029641a8",
+      "music_declaration": {
+        "drive_file_id": "1LJtxg5fXoheepYVK5HO1M1DhEo_pVIDg",
+        "provider": "pixabay",
+        "original_filename": "delosound-suspense-tension-trailer-2-345353.mp3",
+        "source_page": "https://pixabay.com/music/suspense-suspense-tension-trailer-2-345353/",
+        "sha256": "dd57de53251011da1cc72f22c81595e80c03151c46d4a43e71aa6baaf2bc98cc"
+      },
+      "evidence_scope": "MANIFEST_CONTEXT_ONLY",
+      "strict_receipt_promotable": false,
+      "notes": [
+        "This is a preview manifest and its declared source ID differs from the canonical final-master source ID."
+      ]
+    }
+  ],
+  "policy": "Drive manifests, QA flags, delivery flags, narration fingerprints, and source declarations are contextual evidence only. They never promote a historical master or certify audible music/SFX use without a replayable strict V2.1 mix receipt.",
+  "next_required_evidence": [
+    "per-master strict_mix_receipt",
+    "mix_command_sha256",
+    "mix_execution_log_sha256",
+    "artifact_id",
+    "music_sources",
+    "sfx_sources",
+    "sfx_usage_status"
+  ]
+}
