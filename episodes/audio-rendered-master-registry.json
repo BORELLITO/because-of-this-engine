@@ -3,6 +3,17 @@
   "date": "2026-11-07",
   "source_of_truth": "Verified original delivered master MP4 and raw music files, NOT old legacy v2 manifest declarations.",
   "authority": "QUARANTINED_HISTORICAL_EVIDENCE_ONLY",
+  "quarantined_legacy_artifacts": [
+    {
+      "drive_file_id": "17uh1gpVA9t2YR-6J7ZeaVqVRDmjf-v_u",
+      "title": "because-of-this-episode-001-final.mp4",
+      "sha256": "47ac47e8bfa654c5c2ebdfa32f51172602223752ee61d5fecff8d216d60eba52",
+      "dimensions": "2160x3840",
+      "fps": 25,
+      "status": "LEGACY_DUPLICATE_NOT_CANONICAL",
+      "reason": "Conflicts with the canonical 1080x1920/60fps master record and is retained only for audit; never promote by filename or episode ordinal."
+    }
+  ],
   "master_records_count": 4,
   "rendered_masters": [
     {
@@ -19,7 +30,8 @@
         "verification": "DOWNLOADED_FULL_MP4_BYTES_MATCH_GITHUB_ACTIONS_OUTPUT_SHA256",
         "workflow_run_id": 41103303509,
         "job_id": 124225574108,
-        "mixed_audio_decoded_48k_mono_s16le_sha256": "26bcf6934ab4bfb3c66ba9afcd7942e08d992412c7c1df2941eff0cfc30c38f9"
+        "mixed_audio_decoded_48k_mono_s16le_sha256": "8e3e63122a13486df4b5b14827ce7b0d762b5afb303d5697fc542ecc0a4cdc8c",
+        "pcm_reverification": "RECOMPUTED_FROM_DRIVE_MASTER_2026-11-11"
       },
       "music_asset": {
         "drive_file_id": "1OsLfMgxaK74SJ4Z2GWaqVyUKJdmyV8z6",
@@ -49,7 +61,8 @@
         "verification": "DOWNLOADED_FULL_MP4_BYTES_MATCH_GITHUB_ACTIONS_OUTPUT_SHA256",
         "workflow_run_id": 41248538051,
         "job_id": 124676984583,
-        "mixed_audio_decoded_48k_mono_s16le_sha256": "39fcbc8d92eeb6d8fb5222f182c8cb8dd7563570e2ee8a71c500d1af7d749aee"
+        "mixed_audio_decoded_48k_mono_s16le_sha256": "d20bb55e9726af57696324ea78cdbf670d01f375785d3c5a879ed00b305c1ab4",
+        "pcm_reverification": "RECOMPUTED_FROM_DRIVE_MASTER_2026-11-11"
       },
       "music_asset": {
         "drive_file_id": "1P7NlvP50-V2Y8CaZQXPE2EhU99t_Zy9X",
@@ -79,7 +92,8 @@
         "verification": "DOWNLOADED_FULL_MP4_BYTES_MATCH_GITHUB_ACTIONS_OUTPUT_SHA256",
         "workflow_run_id": 40616131845,
         "job_id": 122578936951,
-        "mixed_audio_decoded_48k_mono_s16le_sha256": "fa5b283261e153d4b562661a1da59d059f56350b9d4c48f7426b6572e3a37ef7"
+        "mixed_audio_decoded_48k_mono_s16le_sha256": "9fd4fa925ee128d9b4c9a0b36883074ad09e83cd23d076d41c92091d293d2374",
+        "pcm_reverification": "RECOMPUTED_FROM_DRIVE_MASTER_2026-11-11"
       },
       "music_asset": {
         "drive_file_id": "1u-1ZKkVxKTw_E6vEzW0VcpF2lfjGfmeI",
@@ -109,7 +123,8 @@
         "verification": "DOWNLOADED_FULL_MP4_BYTES_MATCH_GITHUB_ACTIONS_OUTPUT_SHA256",
         "workflow_run_id": 41376351220,
         "job_id": 125057381997,
-        "mixed_audio_decoded_48k_mono_s16le_sha256": "ae4bbb4d02ce0636089bc81d005b8cf6398404eeb881133c89bde48"
+        "mixed_audio_decoded_48k_mono_s16le_sha256": "cacad7c642d145a061d10e9e61b75d64513a73fb959694aa3d264802af9a0ea6",
+        "pcm_reverification": "RECOMPUTED_FROM_DRIVE_MASTER_2026-11-11"
       },
       "music_asset": {
         "drive_file_id": "19dFe9lPreCmDh5Ubb29YN9AyF4O6yuxO",
@@ -150,3 +165,4 @@
   "publication": "MANUAL_ONLY_NOT_RUN",
   "next_step": "Prevent same music source from being selected for a new episode, then add automated master mix receipts to future renderer so SFX and source-to-master lineage become independently provable."
 }
+
