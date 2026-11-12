@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "gate": "AUDIO_HISTORY_RECEIPT_RECOVERY",
+  "status": "BLOCKED",
+  "generated_at": "2026-11-12",
+  "source_of_truth": "episodes/audio-rendered-master-registry.json",
+  "master_count": 4,
+  "ready_count": 0,
+  "blocked_count": 4,
+  "rows": [
+    {
+      "episode_id": "episode-001-preview-v72-charon-clean",
+      "master_drive_file_id": "1PJUyr6vSQhbBekRvh-byP592-8kKy511",
+      "master_video_sha256": "6d019c3c5e2f2570b3bb975ca20de2e733140f8f380188880eebb2e3b7dc78b4",
+      "mixed_audio_sha256": "8e3e63122a13486df4b5b14827ce7b0d762b5afb303d5697fc542ecc0a4cdc8c",
+      "music_source_drive_file_id": "1OsLfMgxaK74SJ4Z2GWaqVyUKJdmyV8z6",
+      "music_source_sha256": "ada559a1f992984e1b501fd76639478501615c617fed5034c43e99a745521ccf",
+      "status": "BLOCKED",
+      "receipt_present": false,
+      "receipt_failures": [
+        "strict_mix_receipt",
+        "narration_sha256",
+        "mix_command_sha256",
+        "mix_execution_log_sha256",
+        "artifact_id",
+        "sfx_usage_status",
+        "music_sources",
+        "sfx_sources"
+      ]
+    },
+    {
+      "episode_id": "episode-002-archive-tape",
+      "master_drive_file_id": "1rfSdXGFr8xsXQNWU4AtqSUt7TIf9YGVy",
+      "master_video_sha256": "0659c0cd5d2f07602cd21e147ac9587419039b8bc2ce6b31155920ae9d46a216",
+      "mixed_audio_sha256": "d20bb55e9726af57696324ea78cdbf670d01f375785d3c5a879ed00b305c1ab4",
+      "music_source_drive_file_id": "1P7NlvP50-V2Y8CaZQXPE2EhU99t_Zy9X",
+      "music_source_sha256": "4a84629bdd611489b49f28187c70f2fc6d4a48b11347ef5c05cf301e1cd1fa24",
+      "status": "BLOCKED",
+      "receipt_present": false,
+      "receipt_failures": [
+        "strict_mix_receipt",
+        "narration_sha256",
+        "mix_command_sha256",
+        "mix_execution_log_sha256",
+        "artifact_id",
+        "sfx_usage_status",
+        "music_sources",
+        "sfx_sources"
+      ]
+    },
+    {
+      "episode_id": "because-of-this-episode-003",
+      "master_drive_file_id": "1Y1wPxgkXlIsm4JYAjOqOJfLtAv3jyVA-",
+      "master_video_sha256": "b7af5dc8e534135da9d51f55b2419ca6124cb9717c51df397961cb37f975f682",
+      "mixed_audio_sha256": "9fd4fa925ee128d9b4c9a0b36883074ad09e83cd23d076d41c92091d293d2374",
+      "music_source_drive_file_id": "1u-1ZKkVxKTw_E6vEzW0VcpF2lfjGfmeI",
+      "music_source_sha256": "49842074dc06f05a40690c2b3af42bd32be76a5f6505a65cfe952b2fe1ccb5de",
+      "status": "BLOCKED",
+      "receipt_present": false,
+      "receipt_failures": [
+        "strict_mix_receipt",
+        "narration_sha256",
+        "mix_command_sha256",
+        "mix_execution_log_sha256",
+        "artifact_id",
+        "sfx_usage_status",
+        "music_sources",
+        "sfx_sources"
+      ]
+    },
+    {
+      "episode_id": "because-of-this-episode-004",
+      "master_drive_file_id": "1YkgYxxniXZVTZK4iwgpgcSl6DP-aQJhn",
+      "master_video_sha256": "9e9edc0e307301b8ea028174a63391b2eb56b7b8fe8a4a566e86558394eb6111",
+      "mixed_audio_sha256": "cacad7c642d145a061d10e9e61b75d64513a73fb959694aa3d264802af9a0ea6",
+      "music_source_drive_file_id": "19dFe9lPreCmDh5Ubb29YN9AyF4O6yuxO",
+      "music_source_sha256": "4a84629bdd611489b49f28187c70f2fc6d4a48b11347ef5c05cf301e1cd1fa24",
+      "status": "BLOCKED",
+      "receipt_present": false,
+      "receipt_failures": [
+        "strict_mix_receipt",
+        "narration_sha256",
+        "mix_command_sha256",
+        "mix_execution_log_sha256",
+        "artifact_id",
+        "sfx_usage_status",
+        "music_sources",
+        "sfx_sources"
+      ]
+    }
+  ],
+  "next_required_evidence": [
+    "strict_mix_receipt",
+    "narration_sha256",
+    "mix_command_sha256",
+    "mix_execution_log_sha256",
+    "artifact_id",
+    "music_sources",
+    "sfx_usage_status",
+    "sfx_sources"
+  ],
+  "policy": "No historical master is promoted to independently verified audible source use by this report alone."
+}
