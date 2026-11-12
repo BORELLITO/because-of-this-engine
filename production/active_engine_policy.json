@@ -194,5 +194,14 @@
       "offline_python_tests"
     ],
     "note": "The provider pricing free tier does not prove this key cannot incur charges. New external calls remain disabled until a non-bypassable account-level zero-cost control can be established and approved."
+  },
+  "episode_naming_policy": {
+    "display_format": "NN - VIDEO TITLE",
+    "technical_episode_id": "immutable episode-NNN",
+    "display_name_source": "video_title",
+    "zero_padding": 2,
+    "validation": "production/episode_naming_v21.py",
+    "legacy_records_without_naming_fields": "not_applicable_only",
+    "malformed_numbered_names": "blocking"
   }
 }
