@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""V7.3 Charon production profile with canonical cinematic-dread visual effects for Because Of This.
+"""Historical V7 manifest compatibility helpers.
 
-This module is the only active configuration authority.  The former Gemini
-profile is retained only in Git history/rollback documentation and is not
-accepted for active production.
+The active Because Of This runtime is V2.1 and is governed by
+``production/active_engine_policy.json`` plus the V2.1 contracts.  This module
+is retained only so archived V7 manifests and rollback evidence remain
+auditable; it is not an active runtime authority.
 """
 
 from __future__ import annotations
