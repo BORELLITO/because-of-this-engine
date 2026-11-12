@@ -52,7 +52,10 @@ def _registry_map(master_registry: Any) -> dict[str, dict[str, Any]]:
 def _row(master: dict[str, Any], artifact: dict[str, Any] | None) -> dict[str, Any]:
     episode_id = str(master.get("episode_id") or "").strip()
     canonical_music = master.get("music_asset") or {}
-    if artifact is None:
+    # The evidence pack may explicitly record that a targeted search did not
+    # locate an artifact. That is a clean absence, not a malformed context
+    # record, and must not inflate the contextual-artifact count.
+    if artifact is None or str(artifact.get("evidence_status") or "").strip() == "NOT_LOCATED":
         return {
             "episode_id": episode_id,
             "evidence_status": "NOT_LOCATED",
