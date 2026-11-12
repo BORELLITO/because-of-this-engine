@@ -92,15 +92,12 @@ def audit(repo_root: Path) -> dict[str, Any]:
             # The master receipt must prove that THIS source is present in THIS
             # master. Merely hashing the input file or rendered MP4 is not enough.
             receipt = entry.get("master_release_evidence")
-            if (not isinstance(receipt, dict)
-                    or receipt.get("verification_method") != MASTER_PROOF
-                    or receipt.get("episode_id") != episode
-                    or receipt.get("source_identity_verified_in_mix") is not True
-                    or not SHA.fullmatch(str(receipt.get("master_video_sha256") or ""))
-                    or not SHA.fullmatch(str(receipt.get("mixed_audio_sha256") or ""))
-                    or not str(receipt.get("artifact_id") or "")
-                    or not str(receipt.get("mix_execution_log_sha256") or "")):
-                failures.append(f"{episode}: no independently verifiable master audio-mix receipt")
+            receipt_failures = validate_mix_receipt(receipt, expected_episode_id=episode)
+            if receipt_failures:
+                failures.append(
+                    f"{episode}: no independently verifiable master audio-mix receipt:"
+                    + ";".join(receipt_failures)
+                )
         if entry.get("published_use_verified") is True and entry.get("actual_master_audio_verified") is not True:
             failures.append(f"{episode}: publication assertion without master proof")
 
