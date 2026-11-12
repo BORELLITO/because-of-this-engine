@@ -20,8 +20,10 @@ class CanonicalRecoveryGateTests(unittest.TestCase):
                 "{}", encoding="utf-8"
             )
             report = evaluate({}, registry=[], repo_root=root)
-            gates = report["blocking_gates"]
-            self.assertIn("AUDIO_HISTORY_RECEIPT_RECOVERY", gates)
+            audio = next(item for item in report["checks"] if item.get("gate") == "AUDIO_HISTORY_COVERAGE")
+            self.assertEqual(audio["historical_receipt_recovery_status"], "BLOCKED")
+            self.assertEqual(audio["historical_receipt_recovery"]["gate"], "AUDIO_HISTORY_RECEIPT_RECOVERY")
+            self.assertIn("historical receipt recovery gate is blocked", audio["failures"])
 
     def test_legacy_or_synthetic_root_does_not_enable_new_gate(self):
         with tempfile.TemporaryDirectory() as raw:
