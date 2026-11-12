@@ -840,5 +840,9 @@
       "charcoal steel desaturated blue warning red",
       "period-compatible documentary reconstruction"
     ]
-  }
+  },
+  "video_title": "THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
+  "episode_name": "THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
+  "episode_slug": "the-signal-that-could-have-started-world-war-iii",
+  "naming_policy": "DISPLAY_NAME_EQUALS_VIDEO_TITLE_TECHNICAL_EPISODE_ID_IMMUTABLE"
 }
