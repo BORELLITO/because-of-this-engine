@@ -27,8 +27,8 @@
       "master_video_sha256": null,
       "master_release_evidence": null,
       "published_use_verified": false,
-      "historical_reuse_flag": "DUPLICATE_SOURCE_IDENTITY_ACROSS_EPISODES_UNRESOLVED",
-      "reuse_status": "HISTORICAL_SOURCE_UNDER_REVIEW",
+      "historical_reuse_flag": "DUPLICATE_SOURCE_IDENTITY_ACROSS_EPISODES_QUARANTINED",
+      "reuse_status": "QUARANTINED_DOCUMENTED_IDENTITY_CONFLICT",
       "rights_status": "SOURCE_LICENSE_DECLARED_NOT_PUBLICATION_EVIDENCE",
       "approved_for_new_episode_reuse": false
     },
@@ -50,8 +50,8 @@
       "master_video_sha256": null,
       "master_release_evidence": null,
       "published_use_verified": false,
-      "historical_reuse_flag": "DUPLICATE_SOURCE_IDENTITY_ACROSS_EPISODES_UNRESOLVED",
-      "reuse_status": "HISTORICAL_SOURCE_UNDER_REVIEW",
+      "historical_reuse_flag": "DUPLICATE_SOURCE_IDENTITY_ACROSS_EPISODES_QUARANTINED",
+      "reuse_status": "QUARANTINED_DOCUMENTED_IDENTITY_CONFLICT",
       "rights_status": "SOURCE_LICENSE_DECLARED_NOT_PUBLICATION_EVIDENCE",
       "approved_for_new_episode_reuse": false
     },
