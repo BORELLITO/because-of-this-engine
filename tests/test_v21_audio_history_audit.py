@@ -64,6 +64,7 @@ class V21AudioHistoryAuditTests(unittest.TestCase):
         self.registry.write_text(json.dumps({
             "coverage_status": coverage,
             "sfx_coverage_status": sfx,
+            "known_identity_conflicts": [],
             "tracks": tracks,
         }), encoding="utf-8")
 
@@ -128,12 +129,19 @@ class V21AudioHistoryAuditTests(unittest.TestCase):
         self.assertEqual(report["delivered_music_collision_count"], 1)
         self.assertTrue(any("verified completed-master music source reused" in f for f in report["failures"]))
         self.assertTrue(any("master audio usage is not verified" in f for f in report["failures"]))
-        self.assertTrue(any("historical music source identity collision" in f for f in report["failures"]))
+        self.assertFalse(any("historical music source identity collision" in f for f in report["failures"]))
         self.assertTrue(any("historical SFX usage" in f for f in report["failures"]))
         self.assertTrue(any("because-of-this-episode-001" in c["declared_by"]
                             and "because-of-this-episode-002" in c["declared_by"]
                             for c in report["historical_identity_collisions"]))
 
+    def test_documented_collision_is_quarantined_but_not_called_unresolved(self):
+        report = audit(ROOT)
+        self.assertTrue(report["quarantined_historical_identity_collisions"])
+        self.assertFalse(report["unresolved_historical_identity_collisions"])
+        self.assertFalse(any("collision unresolved" in f for f in report["failures"]))
+
 
 if __name__ == "__main__":
     unittest.main()
+

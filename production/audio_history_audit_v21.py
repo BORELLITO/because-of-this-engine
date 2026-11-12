@@ -120,7 +120,26 @@ def audit(repo_root: Path) -> dict[str, Any]:
         {"identity": k, "declared_by": sorted(set(v))}
         for k, v in sorted(by_key.items()) if len(set(v)) > 1
     ]
-    if historical_collisions:
+    # A duplicate declaration is not silently accepted, but it is no longer
+    # an "unresolved" diagnostic when the registry explicitly records the
+    # identity conflict and keeps it quarantined. Actual audible use is still
+    # unproven below, so coverage remains blocked until master receipts exist.
+    documented_conflicts = ledger.get("known_identity_conflicts") or []
+    quarantined_collisions: list[dict[str, Any]] = []
+    unresolved_collisions: list[dict[str, Any]] = []
+    for collision in historical_collisions:
+        identity = collision["identity"]
+        value = identity.split(":", 1)[1] if ":" in identity else identity
+        documented = any(
+            isinstance(item, dict)
+            and value in {
+                str(item.get("drive_file_id") or "").strip().lower(),
+                str(item.get("sha256") or "").strip().lower(),
+            }
+            for item in documented_conflicts
+        )
+        (quarantined_collisions if documented else unresolved_collisions).append(collision)
+    if unresolved_collisions:
         failures.append("historical music source identity collision unresolved")
     if ledger.get("coverage_status") != "VERIFIED_COMPLETE":
         failures.append("audio history completeness has not been independently verified")
@@ -174,6 +193,8 @@ def audit(repo_root: Path) -> dict[str, Any]:
         "manifest_music_count": len(declarations),
         "registry_track_count": len(registry),
         "historical_identity_collisions": historical_collisions,
+        "quarantined_historical_identity_collisions": quarantined_collisions,
+        "unresolved_historical_identity_collisions": unresolved_collisions,
         "verified_original_source_count": len({
             e.get("source_file_sha256") for e in registry
             if isinstance(e, dict) and e.get("source_verification") == "VERIFIED_FROM_ORIGINAL_DRIVE_MP3_BYTES_2026_11_07"
@@ -199,3 +220,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
