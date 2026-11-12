@@ -18,6 +18,7 @@ from production.media_contract_v21 import validate_adapter_wiring, validate_audi
 from production.thumbnail_contract_v21 import validate_thumbnail_concept, validate_thumbnail_files, validate_thumbnail_manifest
 from production.visual_rights_consistency_v21 import validate_visual_rights_consistency
 from production.audio_history_audit_v21 import audit as audit_audio_history
+from production.historical_receipt_recovery_v21 import build_recovery_report
 from production.rights_autonomy_v21 import audit_repository as audit_autonomous_rights
 from production.scene_disclosures_v21 import audit_repository as audit_scene_disclosures
 
@@ -81,7 +82,31 @@ def evaluate(manifest: dict[str, Any], *, registry: list[dict[str, Any]] | None 
     # manifest. This check is mandatory for real repository-backed records.
     if repo_root is not None:
         checks.append(validate_visual_rights_consistency(manifest, repo_root=repo_root))
-        checks.append(audit_audio_history(repo_root))
+        audio_history = audit_audio_history(repo_root)
+        # Keep the public blocking contract consolidated under
+        # AUDIO_HISTORY_COVERAGE while attaching the stricter recovery
+        # inventory as a nested, fail-closed sub-audit.
+        recovery_registry_path = repo_root / "episodes" / "audio-rendered-master-registry.json"
+        recovery_report_path = repo_root / "reports" / "historical-receipt-recovery-v21.json"
+        if recovery_registry_path.exists() and recovery_report_path.exists():
+            try:
+                recovery_registry = json.loads(recovery_registry_path.read_text(encoding="utf-8"))
+                recovery = build_recovery_report(recovery_registry)
+            except (OSError, ValueError, json.JSONDecodeError) as exc:
+                recovery = {
+                    "gate": "AUDIO_HISTORY_RECEIPT_RECOVERY",
+                    "status": "BLOCKED",
+                    "failures": [f"recovery inventory unavailable or invalid:{exc}"],
+                }
+            audio_history = dict(audio_history)
+            audio_history["historical_receipt_recovery"] = recovery
+            if recovery.get("status") != "PASS":
+                audio_history["failures"] = list(audio_history.get("failures", []))
+                audio_history["failures"].append("historical receipt recovery gate is blocked")
+                audio_history["historical_receipt_recovery_status"] = "BLOCKED"
+            else:
+                audio_history["historical_receipt_recovery_status"] = "PASS"
+        checks.append(audio_history)
         checks.append(audit_autonomous_rights(manifest, repo_root=repo_root))
         checks.append(audit_scene_disclosures(manifest, repo_root=repo_root))
     blocking = [item.get("gate") or item.get("ledger") for item in checks if item["status"] not in {"PASS", "PACKAGE_GATE_PASS"}]
