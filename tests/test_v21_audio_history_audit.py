@@ -135,6 +135,18 @@ class V21AudioHistoryAuditTests(unittest.TestCase):
                             and "because-of-this-episode-002" in c["declared_by"]
                             for c in report["historical_identity_collisions"]))
 
+        ledger = json.loads((ROOT / "episodes" / "audio-memory-registry.json").read_text())
+        conflict_rows = [row for row in ledger["tracks"]
+                         if row.get("episode_id") in {
+                             "because-of-this-episode-001",
+                             "because-of-this-episode-002",
+                         }]
+        self.assertTrue(all(
+            row.get("historical_reuse_flag") == "DUPLICATE_SOURCE_IDENTITY_ACROSS_EPISODES_QUARANTINED"
+            and row.get("reuse_status") == "QUARANTINED_DOCUMENTED_IDENTITY_CONFLICT"
+            for row in conflict_rows
+        ))
+
     def test_documented_collision_is_quarantined_but_not_called_unresolved(self):
         report = audit(ROOT)
         self.assertTrue(report["quarantined_historical_identity_collisions"])
@@ -144,4 +156,3 @@ class V21AudioHistoryAuditTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
