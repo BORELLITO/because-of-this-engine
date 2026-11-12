@@ -154,5 +154,49 @@
       }
     ],
     "conclusion": "Exact narration bytes were recovered for three historical manifests, but no strict mix receipt, command hash, execution log, artifact binding, or script-hash match was recovered. The historical gate remains BLOCKED and no episode is promoted."
+  },
+  "historical_source_bytes_discovery": {
+    "discovered_at": "2026-11-12",
+    "status": "PARTIAL_SOURCE_BYTES_VERIFIED",
+    "policy": "SOURCE_BYTES_AND_ACOUSTIC_SIMILARITY_ONLY; NOT STRICT_RECEIPT-SUFFICIENT",
+    "verified_music_sources": [
+      {
+        "episode_id": "episode-001-preview-v72-charon-clean",
+        "drive_file_id": "1OsLfMgxaK74SJ4Z2GWaqVyUKJdmyV8z6",
+        "sha256": "ada559a1f992984e1b501fd76639478501615c617fed5034c43e99a745521ccf",
+        "duration_seconds": 70
+      },
+      {
+        "episode_id": "episode-002-archive-tape",
+        "drive_file_id": "1P7NlvP50-V2Y8CaZQXPE2EhU99t_Zy9X",
+        "sha256": "4a84629bdd611489b49f28187c70f2fc6d4a48b11347ef5c05cf301e1cd1fa24",
+        "duration_seconds": 70
+      },
+      {
+        "episode_id": "because-of-this-episode-003",
+        "drive_file_id": "1u-1ZKkVxKTw_E6vEzW0VcpF2lfjGfmeI",
+        "sha256": "49842074dc06f05a40690c2b3af42bd32be76a5f6505a65cfe952b2fe1ccb5de",
+        "duration_seconds": 226.298775
+      },
+      {
+        "episode_id": "because-of-this-episode-004",
+        "drive_file_id": "19dFe9lPreCmDh5Ubb29YN9AyF4O6yuxO",
+        "sha256": "4a84629bdd611489b49f28187c70f2fc6d4a48b11347ef5c05cf301e1cd1fa24",
+        "duration_seconds": 70
+      }
+    ],
+    "replay_probe": {
+      "episode_id": "because-of-this-episode-003",
+      "narration_sha256": "16726d3f7d6cc2a154fc29e8c66c3ad6ba5e854dda4de8fc86878c52b3213a64",
+      "music_sha256": "49842074dc06f05a40690c2b3af42bd32be76a5f6505a65cfe952b2fe1ccb5de",
+      "master_mixed_audio_pcm_sha256": "9fd4fa925ee128d9b4c9a0b36883074ad09e83cd23d076d41c92091d293d2374",
+      "replayed_mixed_audio_pcm_sha256": "5069c6c5b8e2d7328df13927f9e2e5350c99b6efc7949ad87f3bb58bd6d9dfa2",
+      "acoustic_similarity": 0.99805,
+      "local_ffmpeg_version": "7.1.5-0+deb13u1",
+      "legacy_renderer_reference_commit": "309f2e97eff4ee450d032a8d8dd6b7d518da08c9",
+      "status": "NEAR_MATCH_NOT_STRICT_PROOF",
+      "conclusion": "The replay is acoustically near-identical but fails exact PCM hash equality; no strict receipt or execution log can be reconstructed from this probe."
+    },
+    "conclusion": "All four registered historical music source bytes were verified by SHA-256. One replay probe reached 0.99805 acoustic similarity but failed exact PCM equality, so source identity and waveform similarity remain contextual evidence only."
   }
 }
