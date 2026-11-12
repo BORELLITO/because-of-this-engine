@@ -22,6 +22,7 @@ from production.historical_receipt_recovery_v21 import build_recovery_report
 from production.drive_evidence_reconciliation_v21 import build_reconciliation_report
 from production.rights_autonomy_v21 import audit_repository as audit_autonomous_rights
 from production.scene_disclosures_v21 import audit_repository as audit_scene_disclosures
+from production.episode_naming_v21 import validate_episode_naming
 
 SCHEMA_PATH = Path(__file__).resolve().parent / "schemas" / "production-record-3.1.0.json"
 
@@ -62,6 +63,7 @@ def validate_production_schema(record: Mapping[str, Any], schema_path: Path = SC
     return {"gate": "PRODUCTION_RECORD_SCHEMA", "status": "PASS" if not failures else "BLOCKED", "failures": failures, "schema": schema.get("$id")}
 
 def evaluate(manifest: dict[str, Any], *, registry: list[dict[str, Any]] | None = None, repo_root: Path | None = None) -> dict[str, Any]:
+    naming = validate_episode_naming(manifest)
     schema = validate_production_schema(manifest)
     package = evaluate_package_gate(manifest)
     source = validate_source_ledger(manifest)
@@ -76,7 +78,7 @@ def evaluate(manifest: dict[str, Any], *, registry: list[dict[str, Any]] | None 
     adapter_wiring = validate_adapter_wiring(manifest, repo_root)
     thumbnail_manifest = manifest.get("thumbnail_manifest")
     thumbnail = validate_thumbnail_manifest(thumbnail_manifest) if isinstance(thumbnail_manifest, dict) else {"gate": "THUMBNAIL_QA", "status": "BLOCKED", "failures": ["thumbnail_manifest is mandatory"]}
-    checks = [schema, package, source, rights, reuse, concept, tts, audio, captions, render, drive, adapter_wiring, thumbnail]
+    checks = [naming, schema, package, source, rights, reuse, concept, tts, audio, captions, render, drive, adapter_wiring, thumbnail]
     if repo_root is not None and thumbnail["status"] == "PASS":
         checks.append(validate_thumbnail_files(thumbnail_manifest, repo_root))
     # A structurally valid rights ledger cannot certify a different media
