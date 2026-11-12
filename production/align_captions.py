@@ -21,7 +21,11 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from production.generate_phrase_captions import ass_time, phrase_chunks
-from production.canonical_config import caption_ass_style_line
+from production.caption_style_v21 import (
+    caption_ass_style_line,
+    default_active_word_color,
+    validate_caption_text,
+)
 
 
 class AlignmentError(RuntimeError):
@@ -668,7 +672,7 @@ def _normalize_sidecar_word_timeline(
     return overlap_count
 
 def _ass_color(value: str) -> str:
-    raw = str(value or "#FF7777").lstrip("#")
+    raw = str(value or "#F04444").lstrip("#")
     if len(raw) != 6 or any(char not in "0123456789abcdefABCDEF" for char in raw):
         raise AlignmentError("Active-word caption color must be a valid six-digit hex color.")
     red, green, blue = raw[0:2], raw[2:4], raw[4:6]
@@ -732,6 +736,11 @@ def _write_ass(
 ) -> None:
     if len(events) != len(sidecar_chunks):
         raise AlignmentError("Caption events and alignment chunks must have identical counts.")
+    for event in events:
+        try:
+            validate_caption_text(str(event.get("text", "")))
+        except ValueError as exc:
+            raise AlignmentError(str(exc)) from exc
     style_line = caption_ass_style_line(margin_v=margin_v)
     header = f"""[Script Info]
 ScriptType: v4.00+
@@ -882,8 +891,8 @@ def generate(
         event["start"] = round(max(0.0, event["start"]), 3)
         event["end"] = round(min(audio_seconds, event["end"]), 3)
 
-    active_word_color = str(captions.get("active_word_color", "#FF7777"))
-    _write_ass(caption_path, events, sidecar_chunks, active_word_color, margin_v=int(captions.get("margin_v", 520)))
+    active_word_color = str(captions.get("active_word_color", default_active_word_color()))
+    _write_ass(caption_path, events, sidecar_chunks, active_word_color, margin_v=int(captions.get("margin_v", 650)))
     sidecar_path = (base / captions.get("alignment_sidecar", "captions/narration.alignment.json")).resolve()
     sidecar_path.parent.mkdir(parents=True, exist_ok=True)
     sidecar_path.write_text(json.dumps({
