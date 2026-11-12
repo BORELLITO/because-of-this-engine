@@ -29,7 +29,12 @@
     "provider_claim_support_documented": true,
     "independent_content_id_clearance": false,
     "restrict_standalone_republishing": true,
-    "official_verification_date": "2026-11-08"
+    "official_verification_date": "2026-11-12",
+    "rights_evidence_url": "https://mixkit.co/license/modal/musicFree/",
+    "youtube_use_confirmed": true,
+    "social_media_use_confirmed": true,
+    "content_id_registration_prohibited": true,
+    "claim_handling_procedure": "If a platform claim occurs, forward the claim details to team@mixkit.co."
   },
   "editorial_fit": {
     "status": "PENDING_INDEPENDENT_STORY_FIT",
@@ -43,14 +48,22 @@
       "documentary"
     ],
     "suspense_or_investigative_tags_in_provider_listing": true,
-    "assessment": "Best preliminary match by official investigation/documentary genre and a verified private mix. Still requires original audio listening and intrusive-sound QA; no claim of final artistic approval."
+    "assessment": "User approved the private Selpan mix for balance, voice intelligibility and restrained suspense tone. This is creative/audio approval, not automatic release authorization.",
+    "user_private_mix_approval": {
+      "status": "APPROVED_BY_USER",
+      "scope": "Private Selpan mix balance, Charon voice intelligibility and restrained suspense tone",
+      "approved_at": "2026-11-12"
+    }
   },
   "content_id": {
     "status": "UNKNOWN_NOT_CHECKED_ON_DESTINATION_PLATFORM",
     "claim_exists": null,
     "claim_check_artifact_id": null,
     "provider_support_url": "https://mixkit.co/license/modal/musicFree/",
-    "note": "Free commercial video use is documented, Content ID claims are not proven absent."
+    "note": "Mixkit permits YouTube/social video use but prohibits registering the track in a rights-management service. Any platform claim must be handled with Mixkit support; no Content ID registration will be attempted.",
+    "checked_at": "2026-11-12",
+    "license_policy": "Mixkit prohibits registering this track in a rights-management service; no Content ID registration will be attempted.",
+    "claim_handling_procedure": "If a platform claim occurs, forward the claim details to team@mixkit.co."
   },
   "historical_sfx": {
     "status": "UNKNOWN_ARCHIVAL_NO_STEM_PROOFS",
@@ -63,7 +76,9 @@
     "status": "HOLD_FOR_QUALIFIED_SOURCE_AUDITION_AND_CONTENT_ID",
     "publication_authorized": false,
     "final_render_authorized": false,
-    "extra_spend_authorized": false
+    "extra_spend_authorized": false,
+    "reason": "Creative mix and official license evidence are approved. Final release remains blocked by historical audio coverage, final-master binding/postflight, and handling of any platform claim without Content ID registration.",
+    "correction_note": "User approval clears creative mix review only; canonical release state remains fail-closed until objective source screening, platform claim handling and historical coverage are proven."
   },
   "audio_content_screen": {
     "status": "AUTOMATED_SOURCE_SCAN_FLAGGED_QUALIFIED_AUDITION_REQUIRED",
@@ -79,7 +94,17 @@
     "source_vocals_absence_certified": false,
     "speech_masking_safely_verified": false,
     "qualified_human_or_equivalent_audition_completed": false,
-    "commentary": "Tonal glides may be guitar/effects, not proven sirens. 42.7% raw voice-active bins within 12dB before voice-keyed ducking; audibility cannot be approved without listening."
+    "commentary": "The user approved the private mix creatively. Objective source-level siren absence and platform claim behavior remain non-certified.",
+    "human_audition_approval": {
+      "status": "APPROVED_BY_USER",
+      "scope": "Private Selpan mix balance, Charon voice intelligibility and restrained suspense tone",
+      "approved_at": "2026-11-12"
+    },
+    "user_private_mix_approval": {
+      "status": "APPROVED_BY_USER",
+      "scope": "Creative mix balance and voice intelligibility only",
+      "approved_at": "2026-11-12"
+    }
   },
   "previous_candidates": [
     {
@@ -88,5 +113,23 @@
       "current_release_candidate": false,
       "reason": "Melancholic dramatic themes less aligned than investigative/documentary suspense"
     }
-  ]
+  ],
+  "private_strict_mix_receipt": {
+    "status": "PASS_TECHNICAL_PRIVATE_ONLY",
+    "source_url": "https://assets.mixkit.co/music/612/612.mp3",
+    "source_sha256": "3d46ec4a1572e00a7da4b3e697067c7cbb07331bc5837758985ff95eda858267",
+    "narration_sha256": "0746581eae60c3cccf69173f24658b8dc49fdbb85c74d060c26b7dcecae66ebe",
+    "mixed_audio_sha256": "da5715f76fd4b908ef1f9dc904973e939ff087c7b09c3371a66eeffc305e921a",
+    "mixed_pcm_sha256": "176e0a10de0309570411385803dc4918073e3b0d08d549c0addae2c46993b95b",
+    "mix_command_sha256": "dc34b2906ba38906053d287b6bb5d890d9067df896e0de14d61b4ba5d577fd30",
+    "duration_seconds": 79.34,
+    "sfx_usage_status": "VERIFIED_NONE",
+    "replay_verified": true,
+    "source_contributions_confirmed": [
+      "narration",
+      "music"
+    ],
+    "release_approved": false,
+    "publication_authorized": false
+  }
 }
