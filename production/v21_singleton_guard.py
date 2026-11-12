@@ -31,6 +31,45 @@ def audit(repo_root: Path) -> dict:
         failures.append("production_enablement must remain false in candidate")
     if policy.get("legacy_policy", {}).get("status") != "legacy_rollback_only":
         failures.append("legacy policy missing")
+    # Caption layout and typography are part of the active V2.1 identity.
+    # Keep this check in the singleton guard so an old caption motor cannot
+    # silently re-enter through a workflow or helper script.
+    caption_policy_path = root / "production" / "caption_policy_v21.json"
+    if not caption_policy_path.is_file():
+        failures.append("active V2.1 caption policy is missing")
+    else:
+        try:
+            caption_policy = json.loads(caption_policy_path.read_text(encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            failures.append(f"active V2.1 caption policy is unreadable:{exc}")
+            caption_policy = {}
+        if caption_policy.get("project") != "Because Of This Stories":
+            failures.append("caption policy is not scoped to Because Of This Stories")
+        if caption_policy.get("runtime") != "because_of_this_v21":
+            failures.append("caption policy runtime must be because_of_this_v21")
+        if caption_policy.get("forbidden_caption_characters") != ["—", "–"]:
+            failures.append("caption policy must forbid em dash and en dash")
+        layout = caption_policy.get("layout") if isinstance(caption_policy.get("layout"), dict) else {}
+        if layout.get("margin_v") != 650 or layout.get("max_lines") != 2:
+            failures.append("caption safe-zone layout drifted from the approved V2.1 lock")
+        alignment = caption_policy.get("alignment") if isinstance(caption_policy.get("alignment"), dict) else {}
+        if alignment.get("active_word_color") != "#F04444":
+            failures.append("active karaoke red drifted from #F04444")
+    active_caption_files = (
+        root / "production" / "align_captions.py",
+        root / "production" / "whisper_captions.py",
+        root / "production" / "generate_phrase_captions.py",
+        root / "production" / "caption_quality.py",
+    )
+    for path in active_caption_files:
+        if not path.is_file():
+            failures.append(f"active caption module missing:{path.relative_to(root).as_posix()}")
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace")
+        if 'margin_v", 520' in text or "margin_v=520" in text or "#FF7777" in text:
+            failures.append(f"legacy caption defaults remain active:{path.relative_to(root).as_posix()}")
+        if path.name != "caption_quality.py" and "caption_style_v21" not in text:
+            failures.append(f"active caption module is not wired to V2.1 policy:{path.relative_to(root).as_posix()}")
     # V2.1 final delivery must never bypass the audio postflight gate.
     # The currently approved candidate intentionally keeps remote final delivery off.
     if policy.get("final_drive_delivery_enablement") is not False:

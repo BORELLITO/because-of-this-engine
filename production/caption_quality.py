@@ -17,6 +17,8 @@ import wave
 from pathlib import Path
 from typing import Any
 
+from production.caption_style_v21 import forbidden_caption_characters
+
 
 class CaptionQualityError(RuntimeError):
     """Raised when the caption contract fails."""
@@ -275,7 +277,7 @@ def quality_report(manifest_path: Path, require_word_level: bool = False) -> dic
             sidecar = json.loads(sidecar_path.read_text(encoding="utf-8"))
         except (OSError, UnicodeError, json.JSONDecodeError) as exc:
             raise CaptionQualityError("Caption alignment sidecar is unreadable.") from exc
-        if sidecar.get("status") != "FORCED_ALIGNMENT_PASS" or not isinstance(sidecar.get("words"), list):
+        if sidecar.get("status") not in {"FORCED_ALIGNMENT_PASS", "WHISPER_FORCED_ALIGNMENT_PASS"} or not isinstance(sidecar.get("words"), list):
             raise CaptionQualityError("Forced caption alignment sidecar is incomplete.")
         if abs(float(sidecar.get("audio_duration_seconds", -1)) - duration) > 0.15:
             raise CaptionQualityError("Caption alignment sidecar duration does not match narration.")
@@ -327,6 +329,12 @@ def quality_report(manifest_path: Path, require_word_level: bool = False) -> dic
 
     quality_events = []
     for index, event in enumerate(events, start=1):
+        forbidden = sorted({character for character in forbidden_caption_characters() if character in event["visible_text"]})
+        if forbidden:
+            raise CaptionQualityError(
+                f"Caption C{index:03d} contains forbidden dash character(s): "
+                + ", ".join(repr(item) for item in forbidden)
+            )
         lines = event["visible_text"].splitlines()
         if not 1 <= len(lines) <= max_lines:
             raise CaptionQualityError(f"Caption C{index:03d} exceeds the {max_lines}-line limit.")

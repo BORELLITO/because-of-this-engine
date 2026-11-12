@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Gemini TTS Charon adapter for the Because Of This V7.2 engine.
+"""Gemini TTS Charon adapter for the active Because Of This V2.1 engine.
 
 Uses the Gemini generateContent TTS REST contract with the repository's
 GEMINI_API_KEY. The active voice is the prebuilt Charon voice; there is no
@@ -100,7 +100,7 @@ def profile_from_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
 
 
 def profile_from_v21_contract(contract: dict[str, Any], policy: dict[str, Any]) -> dict[str, Any]:
-    """Build the V2.1 profile through the existing Gemini adapter without making a request."""
+    """Build the V2.1 profile without making a provider request."""
     voice_policy = policy.get("voice_policy") if isinstance(policy.get("voice_policy"), dict) else {}
     expected = {
         "provider": policy.get("voice_provider", PROVIDER),

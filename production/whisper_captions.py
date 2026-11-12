@@ -18,6 +18,7 @@ from production.align_captions import (
 )
 from production.align_edge_captions import _load_boundaries
 from production.generate_phrase_captions import phrase_chunks
+from production.caption_style_v21 import default_active_word_color
 
 
 def _load_audio(audio_path: Path) -> tuple[Any, int, float]:
@@ -290,8 +291,8 @@ def generate(
 
     overlap_count = _normalize_sidecar_word_timeline(sidecar_chunks, audio_seconds)
     events = _events_from_chunks(sidecar_chunks, audio_seconds)
-    active_word_color = str(caption_config.get("active_word_color", "#FF7777"))
-    _write_ass(caption_path, events, sidecar_chunks, active_word_color, margin_v=int(caption_config.get("margin_v", 520)))
+    active_word_color = str(caption_config.get("active_word_color", default_active_word_color()))
+    _write_ass(caption_path, events, sidecar_chunks, active_word_color, margin_v=int(caption_config.get("margin_v", 650)))
     sidecar_path.parent.mkdir(parents=True, exist_ok=True)
     sidecar_path.write_text(json.dumps({
         "status": "WHISPER_FORCED_ALIGNMENT_PASS",

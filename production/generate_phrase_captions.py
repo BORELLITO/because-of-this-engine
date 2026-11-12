@@ -18,7 +18,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from production.canonical_config import caption_ass_style_line
+from production.caption_style_v21 import caption_ass_style_line, validate_caption_text
 
 
 class CaptionGenerationError(RuntimeError):
@@ -123,6 +123,11 @@ def generate(manifest_path: Path) -> dict:
     if max_line_chars < 20:
         raise CaptionGenerationError("Caption max_line_chars must be at least 20.")
     chunks = phrase_chunks(script, max_line_chars=max_line_chars)
+    for chunk in chunks:
+        try:
+            validate_caption_text(chunk)
+        except ValueError as exc:
+            raise CaptionGenerationError(str(exc)) from exc
 
     weights = [max(1, len(tokenize(chunk))) for chunk in chunks]
     total_weight = sum(weights)
@@ -139,7 +144,7 @@ def generate(manifest_path: Path) -> dict:
 
     caption_path = (base / manifest["captions"]["path"]).resolve()
     caption_path.parent.mkdir(parents=True, exist_ok=True)
-    style_line = caption_ass_style_line(margin_v=int(caption_config.get("margin_v", 520)))
+    style_line = caption_ass_style_line(margin_v=int(caption_config.get("margin_v", 650)))
     ass = f"""[Script Info]
 ScriptType: v4.00+
 PlayResX: 1080

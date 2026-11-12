@@ -1,0 +1,23 @@
+{
+  "policy_version": "1.0",
+  "project": "Because Of This Stories",
+  "runtime": "because_of_this_v21",
+  "alignment": {
+    "mode": "audio_final_forced_alignment",
+    "source": "real_word_timestamps",
+    "word_highlight_enabled": true,
+    "word_highlight_mode": "timestamp_color_transform",
+    "active_word_color": "#F04444",
+    "max_tolerance_ms": 35
+  },
+  "layout": {
+    "max_lines": 2,
+    "max_line_chars": 42,
+    "alignment": 2,
+    "margin_v": 650,
+    "margin_l": 100,
+    "margin_r": 100
+  },
+  "forbidden_caption_characters": ["—", "–"],
+  "ordinary_internal_hyphen_allowed": true
+}
