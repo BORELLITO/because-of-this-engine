@@ -11,19 +11,19 @@ class ActiveSurfaceLockTest(unittest.TestCase):
         self.assertEqual(report["status"], "ACTIVE_SURFACE_LOCK_PASS", report)
         self.assertEqual(report["failures"], [])
 
-    def test_retired_runtime_import_is_blocked(self):
+    def test_retired_runtime_import_is_blocked_in_active_closure(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)
             production = root / "production"
             production.mkdir()
-            (production / "active_helper.py").write_text(
+            (production / "canonical_entrypoint.py").write_text(
                 "from production.piper_tts import synthesize\n",
                 encoding="utf-8",
             )
             failures = _legacy_imports(root)
             self.assertEqual(
                 failures,
-                ["active module imports retired runtime:active_helper.py->production.piper_tts"],
+                ["active module imports retired runtime:canonical_entrypoint.py->production.piper_tts"],
             )
 
 
