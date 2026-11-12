@@ -23,6 +23,7 @@ from production.drive_evidence_reconciliation_v21 import build_reconciliation_re
 from production.rights_autonomy_v21 import audit_repository as audit_autonomous_rights
 from production.scene_disclosures_v21 import audit_repository as audit_scene_disclosures
 from production.episode_naming_v21 import validate_episode_naming
+from production.episode_artifact_reconciliation_v21 import reconcile_artifacts
 
 SCHEMA_PATH = Path(__file__).resolve().parent / "schemas" / "production-record-3.1.0.json"
 
@@ -64,6 +65,13 @@ def validate_production_schema(record: Mapping[str, Any], schema_path: Path = SC
 
 def evaluate(manifest: dict[str, Any], *, registry: list[dict[str, Any]] | None = None, repo_root: Path | None = None) -> dict[str, Any]:
     naming = validate_episode_naming(manifest)
+    artifact_reconciliation = {
+        "gate": "EP005_ARTIFACT_RECONCILIATION",
+        "status": "PASS",
+        "mode": "NOT_APPLICABLE_NO_STORY_ARCHITECTURE",
+        "release_authorized": False,
+        "failures": [],
+    }
     schema = validate_production_schema(manifest)
     package = evaluate_package_gate(manifest)
     source = validate_source_ledger(manifest)
@@ -78,13 +86,27 @@ def evaluate(manifest: dict[str, Any], *, registry: list[dict[str, Any]] | None 
     adapter_wiring = validate_adapter_wiring(manifest, repo_root)
     thumbnail_manifest = manifest.get("thumbnail_manifest")
     thumbnail = validate_thumbnail_manifest(thumbnail_manifest) if isinstance(thumbnail_manifest, dict) else {"gate": "THUMBNAIL_QA", "status": "BLOCKED", "failures": ["thumbnail_manifest is mandatory"]}
-    checks = [naming, schema, package, source, rights, reuse, concept, tts, audio, captions, render, drive, adapter_wiring, thumbnail]
+    checks = [naming, artifact_reconciliation, schema, package, source, rights, reuse, concept, tts, audio, captions, render, drive, adapter_wiring, thumbnail]
     if repo_root is not None and thumbnail["status"] == "PASS":
         checks.append(validate_thumbnail_files(thumbnail_manifest, repo_root))
     # A structurally valid rights ledger cannot certify a different media
     # manifest. This check is mandatory for real repository-backed records.
     if repo_root is not None:
         checks.append(validate_visual_rights_consistency(manifest, repo_root=repo_root))
+        episode_id = str(manifest.get("episode_id") or "").strip()
+        architecture_path = repo_root / "episodes" / episode_id / "story-architecture.json"
+        if episode_id and architecture_path.exists():
+            try:
+                architecture = json.loads(architecture_path.read_text(encoding="utf-8"))
+                artifact_reconciliation = reconcile_artifacts(manifest, architecture)
+            except (OSError, ValueError, json.JSONDecodeError) as exc:
+                artifact_reconciliation = {
+                    "gate": "EP005_ARTIFACT_RECONCILIATION",
+                    "status": "BLOCKED",
+                    "release_authorized": False,
+                    "failures": [f"story architecture unavailable or invalid:{exc}"],
+                }
+            checks[1] = artifact_reconciliation
         audio_history = audit_audio_history(repo_root)
         # Keep the public blocking contract consolidated under
         # AUDIO_HISTORY_COVERAGE while attaching the stricter recovery
