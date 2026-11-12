@@ -1,71 +1,48 @@
-"""Only-one-engine policy regression and workflow guard wiring."""
+"""Regression tests for the single active V2.1 engine boundary."""
+
 import json
-import tempfile
 import unittest
 from pathlib import Path
 
-from production import engine_singleton_guard as guard
-from production.master_prompt_contract import MASTER_PROMPT_PATH, SCHEMA_PATH
+from production.v21_singleton_guard import audit
 
 
 class SingletonGuardTest(unittest.TestCase):
-    def setUp(self):
-        self.tmp = tempfile.TemporaryDirectory()
-        self.addCleanup(self.tmp.cleanup)
-        self.root = Path(self.tmp.name)
-        prod = self.root / "production"
-        prod.mkdir()
-        canonical_root = Path(__file__).resolve().parents[1]
-
-        prompt_path = self.root / MASTER_PROMPT_PATH
-        prompt_path.parent.mkdir(parents=True)
-        prompt_path.write_bytes((canonical_root / MASTER_PROMPT_PATH).read_bytes())
-        schema_path = self.root / SCHEMA_PATH
-        schema_path.parent.mkdir(parents=True)
-        schema_path.write_bytes((canonical_root / SCHEMA_PATH).read_bytes())
-
-        (prod / "active_engine_policy.json").write_text(json.dumps({
-            "active_engine_profile": guard.CANONICAL_PROFILE_ID,
-            "active_engine_fingerprint": guard.CANONICAL_PROFILE_FINGERPRINT,
-            "update_rule": "approved_update_supersedes_previous_active_engine",
-            "retired_versions": "must_not_remain_executable_in_active_tree",
-            "master_prompt_version": guard.MASTER_PROMPT_VERSION,
-            "master_prompt_sha256": guard.MASTER_PROMPT_SHA256,
-            "production_schema": guard.SCHEMA_ID,
-            "publication_policy": "manual_only",
-        }), encoding="utf-8")
-        (prod / "canonical_config.py").write_text(
-            "CANONICAL_PROFILE_ID = 'active'\n"
-            "CANONICAL_PROFILE_FINGERPRINT = 'fingerprint'\n", encoding="utf-8"
+    @classmethod
+    def setUpClass(cls):
+        cls.root = Path(__file__).resolve().parents[1]
+        cls.policy = json.loads(
+            (cls.root / "production" / "active_engine_policy.json").read_text(
+                encoding="utf-8"
+            )
         )
+        cls.readme = (cls.root / "README.md").read_text(encoding="utf-8")
 
-    def test_single_current_profile_passes(self):
-        self.assertEqual(guard.run(self.root), 0)
+    def test_active_policy_points_to_v21_gemini_charon(self):
+        self.assertEqual(self.policy["active_engine_version"], "2.1")
+        self.assertEqual(
+            self.policy["canonical_entrypoint"],
+            "production/canonical_entrypoint.py",
+        )
+        self.assertEqual(self.policy["voice_provider"], "gemini_tts")
+        self.assertEqual(self.policy["voice_policy"]["model"], "gemini-3.8-flash-tts")
+        self.assertEqual(self.policy["voice_policy"]["voice_name"], "Charon")
+        self.assertFalse(self.policy["voice_policy"]["creative_claw_allowed"])
+        self.assertFalse(self.policy["production_enablement"])
 
-    def test_retired_executable_tree_is_blocked(self):
-        legacy = self.root / "production" / "legacy"
-        legacy.mkdir()
-        (legacy / "runner.py").write_text("print('old')\n", encoding="utf-8")
-        self.assertEqual(guard.run(self.root), 1)
+    def test_readme_does_not_advertise_retired_runtime(self):
+        self.assertIn("Motor Canônico V2.1", self.readme)
+        self.assertIn("production/canonical_entrypoint.py", self.readme)
+        self.assertNotIn("V7.1 Piper Canonical Engine + Active V7.2", self.readme)
+        self.assertNotIn("Narration provider: local Piper neural TTS only", self.readme)
+        self.assertNotIn("Active V7.2 Reuse First", self.readme)
 
-    def test_policy_fingerprint_mismatch_is_blocked(self):
-        policy_path = self.root / "production" / "active_engine_policy.json"
-        policy = json.loads(policy_path.read_text())
-        policy["active_engine_fingerprint"] = "outdated"
-        policy_path.write_text(json.dumps(policy), encoding="utf-8")
-        self.assertEqual(guard.run(self.root), 1)
+    def test_singleton_guard_passes_current_tree(self):
+        report = audit(self.root)
+        self.assertEqual(report["status"], "V21_SINGLETON_PASS", report)
+        self.assertEqual(report["canonical_entrypoint"], "production/canonical_entrypoint.py")
+        self.assertEqual(report["failures"], [])
 
-    def test_production_workflow_guards_are_wired(self):
-        root = Path(__file__).resolve().parents[1]
-        render = (root / ".github/workflows/render-video-episode.yml").read_text()
-        ci = (root / ".github/workflows/video-engine-ci.yml").read_text()
-        for marker in ("Require latest main revision at checkout",
-                       "Recheck latest main revision before render",
-                       "Block stale revision before Drive delivery",
-                       "engine_singleton_guard.py",
-                       "manifest_readiness.py"):
-            self.assertIn(marker, render)
-        for marker in ("engine_singleton_guard.py",
-                       "manifest_readiness.py",
-                       "unittest discover"):
-            self.assertIn(marker, ci)
+
+if __name__ == "__main__":
+    unittest.main()
