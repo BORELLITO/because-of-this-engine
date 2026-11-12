@@ -1083,7 +1083,8 @@
   "last_adjustment": "2026-11-07: S01 actual identifiable actor remains physically unchanged but receives mandatory verified real-footage DRAMATIZATION label; NASA S12 GEOS-5 2020 receives verified model-vs-1983 overlay and exact official credits. Two former pending sources cleared ONLY for scoped/private editorial assembly with fail-closed scene disclosure gate; no publishing, output render or finalized delivery metadata proven. Audio history still BLOCKED.",
   "autonomous_rights_evidence_path": "reports/EP005_AUTONOMOUS_RIGHTS_VISUAL_EVIDENCE_20261107.json",
   "video_title": "THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
-  "episode_name": "THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
+  "episode_name": "05 - THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
   "episode_slug": "the-signal-that-could-have-started-world-war-iii",
-  "naming_policy": "DISPLAY_NAME_EQUALS_VIDEO_TITLE_TECHNICAL_EPISODE_ID_IMMUTABLE"
+  "naming_policy": "DISPLAY_NAME_FORMAT_NN_DASH_VIDEO_TITLE_TECHNICAL_EPISODE_ID_IMMUTABLE",
+  "display_name": "05 - THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III"
 }
