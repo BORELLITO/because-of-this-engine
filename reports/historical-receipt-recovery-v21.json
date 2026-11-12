@@ -99,5 +99,60 @@
     "sfx_usage_status",
     "sfx_sources"
   ],
-  "policy": "No historical master is promoted to independently verified audible source use by this report alone."
+  "policy": "No historical master is promoted to independently verified audible source use by this report alone.",
+  "historical_narration_cache_discovery": {
+    "discovered_at": "2026-11-12",
+    "provider": "Google Drive",
+    "folder_id": "10uQgvwG9WxfyyzPi-Kh6i699C-SWbqDW",
+    "folder_url": "https://drive.google.com/drive/folders/10uQgvwG9WxfyyzPi-Kh6i699C-SWbqDW",
+    "cache_file_pairs_found": 26,
+    "evidence_policy": "CACHE_BYTES_MATCH_ONLY; NOT RECEIPT-SUFFICIENT",
+    "exact_manifest_narration_matches": [
+      {
+        "episode_id": "episode-001-preview-v72-charon-clean",
+        "manifest_narration_sha256": "50b097468272f75a025a445ec3b8e1963d3b160b06181fb4b01da1c8ff5edac1",
+        "cache_key": "445de084de7ae279cf3bf61622b683b8848f545fe2a608d9a9309ad199841769",
+        "drive_wav_file_id": "1tC1lqxIw8IScF61ErCtHbt0XMhOJqOJI",
+        "drive_wav_url": "https://drive.google.com/file/d/1tC1lqxIw8IScF61ErCtHbt0XMhOJqOJI/view?usp=drivesdk",
+        "cache_duration_seconds": 71.48,
+        "cache_script_sha256": "54a9f92d50f88da9ca418938e8c408d2469e41bc1d9c7b037bb834794f9bb33f",
+        "manifest_script_sha256": "b6a8939e4f576a49518327b6e9ff75e3ee68428f9e0c07c03ef513946046a177",
+        "script_hash_match": false,
+        "status": "PARTIAL_NARRATION_BYTES_ONLY"
+      },
+      {
+        "episode_id": "because-of-this-episode-003",
+        "manifest_narration_sha256": "16726d3f7d6cc2a154fc29e8c66c3ad6ba5e854dda4de8fc86878c52b3213a64",
+        "cache_key": "5f080e9b9ad5fa8804adc44361c083c5160c07966fa5008863042eb5b9bdf15f",
+        "drive_wav_file_id": "1ftrjWPU4JnUvVFC_JjVZzkNK0g5rx28f",
+        "drive_wav_url": "https://drive.google.com/file/d/1ftrjWPU4JnUvVFC_JjVZzkNK0g5rx28f/view?usp=drivesdk",
+        "cache_duration_seconds": 74.493,
+        "cache_script_sha256": "c794ea0e3b79c11e98d250c838a4e1571fdf4b2e32855a67e00de424d0694e9c",
+        "manifest_script_sha256": "d79775c4c00673ae647942a6e5a83097c2f2b8b5eeaa5752f77f79396df1deb3",
+        "script_hash_match": false,
+        "duration_normalization_applied": true,
+        "status": "PARTIAL_NARRATION_BYTES_ONLY"
+      },
+      {
+        "episode_id": "because-of-this-episode-004",
+        "manifest_narration_sha256": "f31c9d5e2dd8028a7614b6cf9970f56a0f2faaddfe6b59cf102f1b9b029641a8",
+        "cache_key": "d8171b0748f5704999f8fa5ff26abd738d04eaf398b0e26d72fe233ed4866d2e",
+        "drive_wav_file_id": "1FoXYMs2oy07Uw6urZju8TR6_eqkGlfzO",
+        "drive_wav_url": "https://drive.google.com/file/d/1FoXYMs2oy07Uw6urZju8TR6_eqkGlfzO/view?usp=drivesdk",
+        "cache_duration_seconds": 69.2,
+        "cache_script_sha256": "5e03440fc1c86ea0172f639edf5d460fac3f4a86c7e70e75b7c98c3a26bdb616",
+        "manifest_script_sha256": "c6372e20cff9117728c8891be07d7a5419ee6cc1eab88786726bddef4c3ed22e",
+        "script_hash_match": false,
+        "status": "PARTIAL_NARRATION_BYTES_ONLY"
+      }
+    ],
+    "unmatched_manifest_narration_hashes": [
+      {
+        "episode_id": "episode-002-archive-tape",
+        "manifest_narration_sha256": "09b324c2a4bad581929cad68bb596be1b55e884f910295424fb20d15819a472d",
+        "status": "NO_MATCH_IN_DISCOVERED_NARRATION_CACHE"
+      }
+    ],
+    "conclusion": "Exact narration bytes were recovered for three historical manifests, but no strict mix receipt, command hash, execution log, artifact binding, or script-hash match was recovered. The historical gate remains BLOCKED and no episode is promoted."
+  }
 }
