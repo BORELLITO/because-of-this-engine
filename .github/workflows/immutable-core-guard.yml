@@ -1,0 +1,42 @@
+name: Because Of This immutable core
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, "hardening/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  immutable-core:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout with history
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Compile immutable-core guard
+        run: python -m py_compile production/immutable_core_guard.py
+      - name: Verify canonical contract and authority hashes
+        run: PYTHONPATH=. python production/immutable_core_guard.py --repo-root .
+      - name: Require explicit authorization for core changes
+        run: |
+          if [[ "$GITHUB_EVENT_NAME" != "pull_request" ]]; then exit 0; fi
+          PR_TITLE="$(jq -r '.pull_request.title // empty' "$GITHUB_EVENT_PATH")"
+          BASE_REF="$(jq -r '.pull_request.base.ref // empty' "$GITHUB_EVENT_PATH")"
+          changed="$(git diff --name-only origin/$BASE_REF...HEAD)"
+          if echo "$changed" | grep -Eq '^(production/active_engine_policy.json|production/active_surface_lock_v21.py|production/caption_policy_v21.json|production/render_v21_preview.py|production/render_v21_final.py|docs/CANONICAL_VISUAL_EDITORIAL_LOCK_20261112.md|docs/QUALITY_SAFETY_HARDENING_20261107.md|production/immutable_core_policy_v1.json|production/immutable_core_guard.py|docs/IMMUTABLE_CORE_PROTOCOL.md)$'; then
+            if [[ "$PR_TITLE" != *AUTHORIZED-IMMUTABLE-CORE-UPDATE* ]]; then
+              echo "BLOCKED: core authority changed without explicit authorization."
+              exit 1
+            fi
+          fi
+      - name: Run immutable-core regression tests
+        run: PYTHONPATH=. python -m unittest tests.test_immutable_core_guard -v

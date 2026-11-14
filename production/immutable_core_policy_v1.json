@@ -1,0 +1,74 @@
+{
+  "policy_id": "because-of-this-immutable-core-v1",
+  "policy_version": "1.0",
+  "status": "LOCKED",
+  "scope": "BECAUSE OF THIS engine",
+  "default_action_on_drift": "BLOCK",
+  "default_change_mode": "NO_SILENT_MUTATION",
+  "explicit_authorization": {
+    "required": true,
+    "change_request_marker": "AUTHORIZED-IMMUTABLE-CORE-UPDATE",
+    "human_review_required": true,
+    "direct_main_changes": "FORBIDDEN"
+  },
+  "authority_files": [
+    {"path": "production/active_engine_policy.json", "git_blob_sha1": "815e8f902fb02bd175de13ab703763091f59acbd"},
+    {"path": "production/active_surface_lock_v21.py", "git_blob_sha1": "ccac45502045be9699ab0bde5ed9d37d18ddfcba"},
+    {"path": "production/caption_policy_v21.json", "git_blob_sha1": "4b1eab9de35a088aaaebee78b19a335d7377056f"},
+    {"path": "production/render_v21_preview.py", "git_blob_sha1": "be25d2a5f943be921cc4e40af7d5aaf0d98630c3"},
+    {"path": "production/render_v21_final.py", "git_blob_sha1": "615f8707eac3d28ffcbec03cbc13f00c3b7907ff"},
+    {"path": "docs/CANONICAL_VISUAL_EDITORIAL_LOCK_20261112.md", "git_blob_sha1": "5e99ad1faaac61e9c96f4a86646025f24eb702c5"},
+    {"path": "docs/QUALITY_SAFETY_HARDENING_20261107.md", "git_blob_sha1": "8aeba7e3f114053e1ca3c14dc442b31510384c98"}
+  ],
+  "immutable_contract": {
+    "runtime": {
+      "active_engine_version": "2.1",
+      "active_engine_profile": "because-of-this-v2.1-canonical-factual-gemini-charon-2026-11",
+      "canonical_entrypoint": "production/canonical_entrypoint.py",
+      "voice_provider": "gemini_tts",
+      "voice_name": "Charon",
+      "voice_model": "gemini-3.8-flash-tts",
+      "provider_fallback": "forbidden",
+      "creative_claw_allowed": false,
+      "production_enablement": false,
+      "publication_policy": "manual_only",
+      "missing_dependency_policy": "fail_closed"
+    },
+    "render": {"width": 1080, "height": 1920, "fps": 60},
+    "branding": {
+      "logo_asset": "brand/because-of-this-wordmark-transparent.png",
+      "logo_anchor": "center_upper",
+      "logo_y": 190,
+      "logo_width": 360,
+      "original_transparent_logo_required": true
+    },
+    "captions": {
+      "alignment_source": "real_word_timestamps",
+      "max_lines": 2,
+      "margin_v": 650,
+      "active_word_color": "#F04444",
+      "forbidden_characters": ["—", "–"]
+    },
+    "v21_preview_regression_baseline": {
+      "scene_count": 16,
+      "outro_seconds": 5.5,
+      "narration_must_end_before_outro": true
+    },
+    "visual": {
+      "source_of_truth": "docs/CANONICAL_VISUAL_EDITORIAL_LOCK_20261112.md",
+      "generic_keyword_filler": false,
+      "reused_clips": false,
+      "silent_clip_substitution": false,
+      "approved_clip_change_requires_episode_lock_update": true
+    }
+  },
+  "episode_surface_lock_protocol": {
+    "required_when": "approved_for_render",
+    "file_pattern": "episodes/<episode-id>/approved-surface-lock.json",
+    "status_required": "APPROVED_LOCKED",
+    "required_fields": ["episode_id", "shot_assignments", "branding", "captions", "approved_by", "approved_at"],
+    "clip_assignment_change": "BLOCK",
+    "logo_or_caption_change": "BLOCK",
+    "missing_lock": "BLOCK"
+  }
+}
