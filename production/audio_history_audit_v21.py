@@ -154,6 +154,8 @@ def audit(repo_root: Path) -> dict[str, Any]:
     full_track_collisions: list[dict[str, Any]] = []
     try:
         master_data=json.loads(master_path.read_text(encoding="utf-8"))
+        if not isinstance(master_data, dict):
+            raise ValueError("completed-master registry must be an object")
         master_rows=master_data.get("rendered_masters", [])
         full_track_collisions=master_data.get("verified_full_track_collisions", [])
         if not isinstance(master_rows,list) or not isinstance(full_track_collisions,list):

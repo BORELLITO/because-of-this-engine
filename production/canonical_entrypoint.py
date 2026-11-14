@@ -113,11 +113,15 @@ def evaluate(manifest: dict[str, Any], *, registry: list[dict[str, Any]] | None 
         # inventory as a nested, fail-closed sub-audit.
         recovery_registry_path = repo_root / "episodes" / "audio-rendered-master-registry.json"
         recovery_report_path = repo_root / "reports" / "historical-receipt-recovery-v21.json"
+        recovery_registry: dict[str, Any] | None = None
         if recovery_registry_path.exists() and recovery_report_path.exists():
             try:
-                recovery_registry = json.loads(recovery_registry_path.read_text(encoding="utf-8"))
-                recovery = build_recovery_report(recovery_registry)
-            except (OSError, ValueError, json.JSONDecodeError) as exc:
+                loaded_registry = json.loads(recovery_registry_path.read_text(encoding="utf-8"))
+                if not isinstance(loaded_registry, dict):
+                    raise ValueError("historical recovery registry must be an object")
+                recovery = build_recovery_report(loaded_registry)
+                recovery_registry = loaded_registry
+            except (OSError, ValueError, TypeError) as exc:
                 recovery = {
                     "gate": "AUDIO_HISTORY_RECEIPT_RECOVERY",
                     "status": "BLOCKED",
@@ -134,9 +138,11 @@ def evaluate(manifest: dict[str, Any], *, registry: list[dict[str, Any]] | None 
         drive_evidence_path = repo_root / "reports" / "drive-evidence-reconciliation-v21.json"
         if drive_evidence_path.exists():
             try:
+                if recovery_registry is None:
+                    raise ValueError("historical recovery registry unavailable or invalid")
                 drive_evidence = json.loads(drive_evidence_path.read_text(encoding="utf-8"))
                 drive_reconciliation = build_reconciliation_report(recovery_registry, drive_evidence)
-            except (OSError, ValueError, json.JSONDecodeError) as exc:
+            except (OSError, ValueError, TypeError) as exc:
                 drive_reconciliation = {
                     "gate": "AUDIO_HISTORY_DRIVE_EVIDENCE_RECONCILIATION",
                     "status": "BLOCKED",
