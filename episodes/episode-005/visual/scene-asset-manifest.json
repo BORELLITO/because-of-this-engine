@@ -5,7 +5,7 @@
   "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
   "editorial_mode": "factual_documentary",
   "title": "THE NIGHT THE MACHINE LIED",
-  "status": "BLOCKED_EDITORIAL_NO_CLOCK_REPLACEMENTS_REQUIRED",
+  "status": "ACTIVE_V21_MANIFEST_READY_NO_CLOCK_NO_NASA",
   "purpose": "Human-approved candidate-to-shot assignments before final production promotion.",
   "source_plan": "episodes/episode-005/visual/asset-acquisition-plan.json",
   "approval_record": {
@@ -20,22 +20,27 @@
       "the visual manifest remains manifest-only; render authorization is controlled by production-record.json",
       "no automatic render execution or silent fallback",
       "No clock, watch, timepiece or clock-mechanism footage is permitted in the active Episode 005 visual set.",
-      "Previous complete-set render authorization is superseded until S07 and S10 receive non-clock replacements."
+      "No NASA source, NASA-derived visualization or NASA media URL is permitted in the active Episode 005 visual set.",
+      "S07 and S10 use only their declared public-domain source segments; no full-source substitution."
     ],
     "latest_manifest_update": {
-      "recorded_on_date": "2026-11-07",
+      "recorded_on_date": "2026-11-15",
       "candidate_ids": [
-        "pexels-8888977"
+        "archive-prelinger-onguard1956-s07",
+        "archive-gov-antps25-29604-s10",
+        "pixabay-antenna-astronomy-communication-40041"
       ],
       "shot_ids": [
-        "S09"
+        "S07",
+        "S10",
+        "S12"
       ],
       "scope": "MANIFEST_ONLY",
       "render_authorized": false,
       "global_catalog_updated": false,
       "drive_written": false,
       "publication_allowed": false,
-      "reason": "More faithful symbolic depiction of typing false-alarm classification; user approved after preview; verified source and known-history fingerprint."
+      "reason": "Removed NASA S12 and resolved S07/S10 with exact public-domain non-clock archival segments under V2.1."
     }
   },
   "global_reuse_audit": {
@@ -397,92 +402,6 @@
       ],
       "continuity_review_status": "REVIEW_REQUIRED",
       "source_tier": "stock_auto"
-    },
-    {
-      "candidate_id": "nasa-svs-geos5-clouds-no-labels-4819",
-      "provider": "nasa",
-      "source_page_url": "https://svs.gsfc.nasa.gov/4819/",
-      "media_url": "https://svs.gsfc.nasa.gov/vis/a000000/a004800/a004819/clouds_no_labels.mp4",
-      "license_name": "NASA Media Guidelines (per asset)",
-      "source_role": "s12",
-      "truth_class": "MAP_OR_DIAGRAM",
-      "sha256": "306a8c1b97ddb3699a84f3d35f6a0c9c3cbc593f13f9a35aef13d72a55f323d0",
-      "perceptual_hash": "262977180310b6e5eeb3fb9544113dbabbcd8c79f45f11a878b4ef3efa37b397",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
-      "intake_artifact": {
-        "workflow_run_id": 42178800543,
-        "job_id": 127763342737,
-        "artifact_id": 13484277704,
-        "artifact_digest": "sha256:76d78df18adf6d1d120ff6925b72f0cbf425a472eeaee7f40024e111b657efd",
-        "sha256": "306a8c1b97ddb3699a84f3d35f6a0c9c3cbc593f13f9a35aef13d72a55f323d0",
-        "duration_seconds": 58.4,
-        "dimensions": [
-          1920,
-          1080
-        ],
-        "frame_rate": "30/1",
-        "codec": "h264",
-        "size_bytes": 118000795,
-        "fps": 30
-      },
-      "fingerprint_artifact": {
-        "workflow_run_id": 42183105946,
-        "job_id": 127777035277,
-        "artifact_id": 13486336703,
-        "artifact_digest": "sha256:bc652f9dd6a614ef40b22e1b685ac92dffdbf5086051c616e67cff9ab081f1bc",
-        "algorithm": "video-fingerprint-v2-rgb24-q4",
-        "perceptual_hash": "262977180310b6e5eeb3fb9544113dbabbcd8c79f45f11a878b4ef3efa37b397",
-        "global_source_collision": false,
-        "global_sha256_collision": false,
-        "global_perceptual_collision": false
-      },
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "human_approval": "APPROVED_FOR_MANIFEST",
-      "approved_for_render": false,
-      "global_catalog_updated": false,
-      "thumbnail_eligible": false,
-      "drive_written": false,
-      "editorial_caveat": "Use as explanatory atmospheric visualization; retain NASA SVS credit in production metadata.",
-      "selection_basis": "Search-v6 replacement for the modern/daylight antenna conflict; NASA GEOS-5 no-labels visualization passed full-duration visual QA and global fingerprint.",
-      "continuity_tags": {
-        "era": [
-          "period_compatible",
-          "indeterminate_era"
-        ],
-        "setting": [
-          "external_sensor",
-          "early_warning_command"
-        ],
-        "time_of_day": [
-          "indeterminate_low_light"
-        ],
-        "lighting": [
-          "cool_shadows",
-          "low_key"
-        ],
-        "palette": [
-          "charcoal",
-          "steel",
-          "desaturated_blue"
-        ],
-        "texture": [
-          "atmospheric",
-          "data_visualization",
-          "low_light_grain"
-        ],
-        "risk_flags": [
-          "modeled_global_cloud_cover_not_literal_sensor",
-          "bright_cloud_highlights",
-          "requires_credit_metadata"
-        ]
-      },
-      "continuity_risk_flags": [
-        "modeled_global_cloud_cover_not_literal_sensor",
-        "bright_cloud_highlights",
-        "requires_credit_metadata"
-      ],
-      "continuity_review_status": "REVIEW_REQUIRED",
-      "source_tier": "government_manual"
     },
     {
       "candidate_id": "pixabay-hallway-dark-corridor-20837",
@@ -1099,6 +1018,340 @@
           "period_style_not_archival"
         ]
       }
+    },
+    {
+      "candidate_id": "archive-prelinger-onguard1956-s07",
+      "source_page_url": "https://archive.org/details/OnGuard1956",
+      "provider": "internet_archive",
+      "license_name": "Public Domain",
+      "media_url": "https://archive.org/download/OnGuard1956/OnGuard1956_512kb.mp4",
+      "source_role": "S07",
+      "role": "S07",
+      "visual_match": "NEAR",
+      "visual_intent": "Dark archival SAGE control room and operator at a radar scope; selected segment only.",
+      "truth_class": "REPRESENTATIONAL",
+      "score": 88,
+      "score_breakdown": {
+        "semantic_fit": 30,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 18,
+        "vertical_crop_quality": 8,
+        "clean_frame_quality": 8,
+        "source_distinctness": 4
+      },
+      "source_segment": {
+        "start_seconds": 282,
+        "end_seconds": 318,
+        "method": "stream_copy",
+        "reason": "operator/scope/control-room passage before the clock material"
+      },
+      "source_sha256": "9ab0e10175608df8d164fa7d553d8269dfde9c39cd0ce11e44decf9c69eaf13b",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Creative Commons Public Domain Dedication",
+        "license_evidence_url": "https://archive.org/details/OnGuard1956",
+        "semantic_note": "1956 SAGE control-room footage; representational only, never literal Petrov evidence."
+      },
+      "intake_artifact": {
+        "workflow_run_id": "manual-archive-audit-20261115",
+        "artifact_id": "local-onguard1956-s07",
+        "artifact_digest": "sha256:manual-source-audit",
+        "status": "MANUAL_SOURCE_AUDIT_PASS",
+        "sha256": "244923c250150692a1e8a632817b536132ccf08d3fa01199bd08fb932deafb30",
+        "perceptual_hash": "b859dd7ccc5863560f04a4f5086e598b584e8319dc4dcbbf578eb9fab991f28e",
+        "duration_seconds": 36.316,
+        "width": 640,
+        "height": 480,
+        "frame_rate": "24000/1001",
+        "codec": "mpeg4",
+        "source_sha256": "9ab0e10175608df8d164fa7d553d8269dfde9c39cd0ce11e44decf9c69eaf13b",
+        "source_segment": {
+          "start_seconds": 282,
+          "end_seconds": 318
+        }
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": "manual-archive-audit-20261115",
+        "artifact_id": "local-onguard1956-s07-fingerprint",
+        "artifact_digest": "sha256:manual-fingerprint-audit",
+        "algorithm": "video-fingerprint-v2-rgb24-q4",
+        "perceptual_hash": "b859dd7ccc5863560f04a4f5086e598b584e8319dc4dcbbf578eb9fab991f28e",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
+        "locked_9x16_crop": "PASS_CENTER_OPERATOR_SCOPE",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "PASS_ARCHIVAL_CONTROL_ROOM_NO_CLOCK_IN_SELECTED_SEGMENT"
+      },
+      "selection_basis": "Selected from the public-domain SAGE film after frame review of the exact segment; preserves archival/operator/control-room language without copying the reference logo, captions or clock shot.",
+      "editorial_caveat": "Public-domain representational archive footage, not literal Petrov evidence. Use only the declared segment; no clock, watch, timepiece or time display.",
+      "continuity_tags": {
+        "era": [
+          "1950s",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "technical_control_room",
+          "early_warning_command"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_amber"
+        ],
+        "palette": [
+          "charcoal",
+          "steel",
+          "amber"
+        ],
+        "texture": [
+          "archival_grain",
+          "crt_scope",
+          "brushed_metal"
+        ],
+        "risk_flags": [
+          "representational_archive_not_literal_petrov_evidence",
+          "selected_segment_only"
+        ]
+      },
+      "continuity_risk_flags": [
+        "representational_archive_not_literal_petrov_evidence",
+        "selected_segment_only"
+      ],
+      "continuity_review_status": "PASS_MANUAL_EDITORIAL_REVIEW",
+      "source_tier": "archive_manual",
+      "author": "United States Air Force / public-domain government film",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "sha256": "244923c250150692a1e8a632817b536132ccf08d3fa01199bd08fb932deafb30",
+      "perceptual_hash": "b859dd7ccc5863560f04a4f5086e598b584e8319dc4dcbbf578eb9fab991f28e"
+    },
+    {
+      "candidate_id": "archive-gov-antps25-29604-s10",
+      "source_page_url": "https://archive.org/details/gov.dod.dimoc.29604",
+      "provider": "internet_archive",
+      "license_name": "Public Domain",
+      "media_url": "https://archive.org/download/gov.dod.dimoc.29604/gov.dod.dimoc.29604_512kb.mp4",
+      "source_role": "S10",
+      "role": "S10",
+      "visual_match": "NEAR",
+      "visual_intent": "Live-action radar operator and close control-panel adjustments in a dark technical room; selected segment only.",
+      "truth_class": "REPRESENTATIONAL",
+      "score": 90,
+      "score_breakdown": {
+        "semantic_fit": 31,
+        "license_confidence": 20,
+        "visual_truth_and_period_coherence": 19,
+        "vertical_crop_quality": 8,
+        "clean_frame_quality": 8,
+        "source_distinctness": 4
+      },
+      "source_segment": {
+        "start_seconds": 550,
+        "end_seconds": 590,
+        "method": "stream_copy",
+        "reason": "live-action operator and radar-console passage selected from the 1963 government film"
+      },
+      "source_sha256": "b3abca79dc84421d141900d8cb21ec225dab2b362d390bbb8a6c20fc97da2ac2",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Public domain (US Government work)",
+        "license_evidence_url": "https://findanyfootage.com/films/an-tps-25-ground-surveillance-radar-the-1963",
+        "source_rights_page": "https://archive.org/details/gov.dod.dimoc.29604",
+        "semantic_note": "1963 U.S. Department of Defense radar training footage; selected live-action segment only."
+      },
+      "intake_artifact": {
+        "workflow_run_id": "manual-archive-audit-20261115",
+        "artifact_id": "local-antps25-29604-s10",
+        "artifact_digest": "sha256:manual-source-audit",
+        "status": "MANUAL_SOURCE_AUDIT_PASS",
+        "sha256": "06f744e3d62d7797a825671f165b299cb769c2138c68fd925e7c0e5bc215778f",
+        "perceptual_hash": "4366c57bfea0b85e50e56334c8f5c05d28cb14b531bca983d7bc077f91118c09",
+        "duration_seconds": 42.24,
+        "width": 640,
+        "height": 480,
+        "frame_rate": "24000/1001",
+        "codec": "mpeg4",
+        "source_sha256": "b3abca79dc84421d141900d8cb21ec225dab2b362d390bbb8a6c20fc97da2ac2",
+        "source_segment": {
+          "start_seconds": 550,
+          "end_seconds": 590
+        }
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": "manual-archive-audit-20261115",
+        "artifact_id": "local-antps25-29604-s10-fingerprint",
+        "artifact_digest": "sha256:manual-fingerprint-audit",
+        "algorithm": "video-fingerprint-v2-rgb24-q4",
+        "perceptual_hash": "4366c57bfea0b85e50e56334c8f5c05d28cb14b531bca983d7bc077f91118c09",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
+      },
+      "qa": {
+        "technical_validation": "PASS",
+        "clean_frame_visual_review": "HUMAN_APPROVED",
+        "baked_captions_or_authored_graphics": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "embedded_logo_or_letterbox": "HUMAN_APPROVED_NO_ISSUE_OBSERVED",
+        "semantic_fit": "HUMAN_APPROVED",
+        "locked_9x16_crop": "PASS_CENTER_OPERATOR_CONSOLE",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "PASS_LIVE_ACTION_RADAR_OPERATOR_NO_CLOCK_IN_SELECTED_SEGMENT"
+      },
+      "selection_basis": "Selected from public-domain U.S. government radar footage after frame review of the exact segment; supplies live operator/control-panel rhythm without importing the reference branding or captions.",
+      "editorial_caveat": "Public-domain representational government footage, not literal Petrov evidence. Use only the declared segment; no clock, watch, timepiece or time display.",
+      "continuity_tags": {
+        "era": [
+          "1960s",
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "technical_control_room",
+          "radar_station"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "steel",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "archival_grain",
+          "radar_console",
+          "brushed_metal"
+        ],
+        "risk_flags": [
+          "representational_archive_not_literal_petrov_evidence",
+          "selected_segment_only"
+        ]
+      },
+      "continuity_risk_flags": [
+        "representational_archive_not_literal_petrov_evidence",
+        "selected_segment_only"
+      ],
+      "continuity_review_status": "PASS_MANUAL_EDITORIAL_REVIEW",
+      "source_tier": "government_manual",
+      "author": "United States Department of Defense / FedFlix public-domain government film",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "sha256": "06f744e3d62d7797a825671f165b299cb769c2138c68fd925e7c0e5bc215778f",
+      "perceptual_hash": "4366c57bfea0b85e50e56334c8f5c05d28cb14b531bca983d7bc077f91118c09"
+    },
+    {
+      "candidate_id": "pixabay-antenna-astronomy-communication-40041",
+      "provider": "pixabay",
+      "source_page_url": "https://pixabay.com/videos/antenna-astronomy-communication-40041/",
+      "media_url": "https://cdn.pixabay.com/video/2020/05/24/40041-424371544_large.mp4",
+      "license_name": "Pixabay Content License",
+      "source_role": "S12",
+      "truth_class": "MAP_OR_DIAGRAM",
+      "sha256": "e0a5b6cbf90c31c7f79c8cf6d9eaa515a83d4e986927a90a3840d7d36303e9b4",
+      "perceptual_hash": "720e0b55776ac929e3c7f5be259dcaa7c848fe1cefb4fc2ffd501c6b2ee1059d",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42052509193,
+        "job_id": 127332058958,
+        "artifact_id": 13427442382,
+        "artifact_digest": "sha256:122fee7648e166d0eea6bce8920486107922b7c64a6c892e975dec535f65d87c",
+        "sha256": "e0a5b6cbf90c31c7f79c8cf6d9eaa515a83d4e986927a90a3840d7d36303e9b4",
+        "duration_seconds": 22.548,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "frame_rate": "30/1",
+        "codec": "h264",
+        "fps": 30,
+        "perceptual_hash": "720e0b55776ac929e3c7f5be259dcaa7c848fe1cefb4fc2ffd501c6b2ee1059d"
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 42053792993,
+        "job_id": 127336595316,
+        "artifact_id": 13427769060,
+        "artifact_digest": "sha256:f92cb4eed9bfc2fbaf518540413f5ab363578156f7c58d947e69c692219e0c87",
+        "algorithm": "video-fingerprint-v2-rgb24-q4",
+        "perceptual_hash": "720e0b55776ac929e3c7f5be259dcaa7c848fe1cefb4fc2ffd501c6b2ee1059d",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "editorial_caveat": "Representational satellite/antenna infrastructure, not literal Petrov archival evidence; no NASA source and no source audio.",
+      "selection_basis": "Replaces the NASA S12 asset under the standing no-NASA rule; exact page, media, intake and fingerprint evidence already exist.",
+      "continuity_tags": {
+        "era": [
+          "period_compatible",
+          "indeterminate_era"
+        ],
+        "setting": [
+          "external_sensor",
+          "early_warning_command"
+        ],
+        "time_of_day": [
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "cool_shadows",
+          "low_key"
+        ],
+        "palette": [
+          "charcoal",
+          "steel",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "brushed_metal",
+          "atmospheric"
+        ],
+        "risk_flags": [
+          "representational_infrastructure_not_archival"
+        ]
+      },
+      "continuity_risk_flags": [
+        "representational_infrastructure_not_archival"
+      ],
+      "continuity_review_status": "PASS_MANUAL_EDITORIAL_REVIEW",
+      "source_tier": "stock_auto"
     }
   ],
   "shot_assignments": [
@@ -1408,9 +1661,15 @@
       "role": "decision_pressure",
       "requested_visual": "Dark analog control surface under decision pressure; no clock, watch, timepiece or time display.",
       "requested_truth_class": "REPRESENTATIONAL",
-      "status": "BLOCKED_REPLACEMENT_REQUIRED_NO_CLOCK",
-      "assignment": null,
-      "blocking_reason": null,
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST_ONLY_NOT_RENDER",
+      "assignment": {
+        "candidate_id": "archive-prelinger-onguard1956-s07",
+        "usage": "Public-domain SAGE control-room/operator segment for decision pressure; representational only.",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "editorial_caveat": "Representational footage only; never literal Petrov archival evidence; source audio stripped."
+      },
       "continuity_tags": {
         "era": [
           "1983",
@@ -1438,8 +1697,7 @@
           "low_light_grain"
         ]
       },
-      "visual_request": "Dark analog control surface under decision pressure; no clock, watch, timepiece or time display.",
-      "editorial_lock": "NO_CLOCKS"
+      "visual_request": "Dark analog control surface under decision pressure; no clock, watch, timepiece or time display."
     },
     {
       "shot_id": "S08",
@@ -1548,9 +1806,15 @@
       "role": "suspense",
       "requested_visual": "Bunker holds in low-key silence as indicator lights settle; no clock, watch, timepiece or time display.",
       "requested_truth_class": "REPRESENTATIONAL",
-      "status": "BLOCKED_REPLACEMENT_REQUIRED_NO_CLOCK",
-      "assignment": null,
-      "blocking_reason": null,
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST_ONLY_NOT_RENDER",
+      "assignment": {
+        "candidate_id": "archive-gov-antps25-29604-s10",
+        "usage": "Public-domain radar operator/control-panel segment for suspended bunker tension; representational only.",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "editorial_caveat": "Representational footage only; never literal Petrov archival evidence; source audio stripped."
+      },
       "continuity_tags": {
         "era": [
           "1983",
@@ -1579,8 +1843,7 @@
           "low_light_grain"
         ]
       },
-      "visual_request": "Bunker holds in low-key silence as indicator lights settle; no clock, watch, timepiece or time display.",
-      "editorial_lock": "NO_CLOCKS"
+      "visual_request": "Bunker holds in low-key silence as indicator lights settle; no clock, watch, timepiece or time display."
     },
     {
       "shot_id": "S11",
@@ -1634,22 +1897,20 @@
       "role": "mechanism",
       "requested_visual": "Sunlight geometry over high clouds and satellite sensor.",
       "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST_ONLY_NOT_RENDER",
       "assignment": {
-        "candidate_id": "nasa-svs-geos5-clouds-no-labels-4819",
-        "usage": "NASA cloud visualization for the optical-mechanism explanation; not literal 1983 sensor footage.",
+        "candidate_id": "pixabay-antenna-astronomy-communication-40041",
+        "usage": "Representational satellite/antenna mechanism; not literal Petrov archival evidence.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
-        "editorial_caveat": "Usar como visualização modelada, aplicar grade de baixo contraste para conter highlights e preservar o crédito NASA SVS nos metadados.",
+        "editorial_caveat": "No NASA source; generic infrastructure only; source audio stripped.",
         "visual_treatment": {
-          "crop_strategy": "retain_earth_and_cloud_belt",
+          "crop_strategy": "retain_antenna_against_sky",
           "grade": "low_contrast_charcoal_desaturated_blue",
-          "source_audio": "strip",
-          "credit_required": "NASA Scientific Visualization Studio"
+          "source_audio": "strip"
         }
       },
-      "blocking_reason": null,
       "continuity_tags": {
         "era": [
           "1983",
@@ -1873,10 +2134,7 @@
       }
     }
   ],
-  "unresolved_shots": [
-    "S07",
-    "S10"
-  ],
+  "unresolved_shots": [],
   "promotion_gates": {
     "every_shot_assigned": false,
     "final_visual_manifest_validated": false,

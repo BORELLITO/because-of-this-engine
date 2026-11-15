@@ -16,6 +16,7 @@ CANONICAL_ENGINE_VERSION = "2.1"
 EPISODE005 = "episode-005"
 EPISODE005_MANIFEST = "episodes/episode-005/visual/scene-asset-manifest.json"
 EPISODE005_SHOT_COUNT = 16
+EPISODE005_FORBIDDEN_PROVIDERS = ("nasa",)
 EPISODE005_NO_CLOCK_TERMS = (
     "clock",
     "alarm clock",
@@ -111,6 +112,19 @@ def validate_scene_manifest(
             failures.append("active manifest contains a non-object asset")
             continue
         candidate_id = str(asset.get("candidate_id") or "<missing>")
+        provider = str(asset.get("provider") or "").strip().lower()
+        source_urls = " ".join(
+            str(asset.get(field) or "").lower()
+            for field in ("source_page_url", "media_url")
+        )
+        if expected_episode_id == EPISODE005 and (
+            provider in EPISODE005_FORBIDDEN_PROVIDERS
+            or "nasa.gov" in source_urls
+            or "svs.gsfc.nasa.gov" in source_urls
+        ):
+            failures.append(
+                f"Episode 005 active visual source uses a forbidden provider: {candidate_id}"
+            )
         hits = forbidden_concept_hits(asset, forbidden)
         if hits:
             asset_hits[candidate_id] = hits
@@ -214,6 +228,7 @@ def validate_record_visual_source(record: dict[str, Any], repo_root: Path) -> di
 
 __all__ = [
     "EPISODE005_MANIFEST",
+    "EPISODE005_FORBIDDEN_PROVIDERS",
     "EPISODE005_NO_CLOCK_TERMS",
     "forbidden_concept_hits",
     "validate_record_visual_source",

@@ -39,7 +39,6 @@ PROVIDER_ORDER = (
     "videvo",
     "videezy",
     "wikimedia",
-    "nasa",
     "noaa",
     "loc",
     "nara",

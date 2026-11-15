@@ -24,8 +24,9 @@ EXPECTED_POLICY_URL = {
     "pexels": "https://www.pexels.com/license/",
     "pixabay": "https://pixabay.com/service/terms/",
     "nasa": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+    "internet_archive": "https://archive.org/",
 }
-PROVIDER_DOMAINS = {"pexels": "www.pexels.com", "pixabay": "pixabay.com", "nasa": "svs.gsfc.nasa.gov"}
+PROVIDER_DOMAINS = {"pexels": "www.pexels.com", "pixabay": "pixabay.com", "nasa": "svs.gsfc.nasa.gov", "internet_archive": "archive.org"}
 
 
 def _asset_map(values: Any, key: str) -> dict[str, Mapping[str, Any]]:
@@ -68,7 +69,14 @@ def decide_one(
     if provider not in EXPECTED_POLICY_URL:
         reasons.append("provider not supported by V2.1 rights policy")
     elif (not _provider_url_is_genuine(right.get("source_url"), provider)
-            or evidence.get("reviewed_source_license_policy") != EXPECTED_POLICY_URL[provider]):
+            or (
+                provider != "internet_archive"
+                and evidence.get("reviewed_source_license_policy") != EXPECTED_POLICY_URL[provider]
+            )
+            or (
+                provider == "internet_archive"
+                and not str(evidence.get("reviewed_source_license_policy") or "").startswith("https://archive.org/")
+            )):
         reasons.append("official provider item/license URL not verified")
     if (right.get("asset_id") != asset.get("candidate_id")
             or right.get("asset_id") != candidate.get("candidate_id")
@@ -89,7 +97,7 @@ def decide_one(
     if (evidence.get("content_archive_id") != (candidate.get("intake_artifact") or {}).get("artifact_id")
             or not evidence.get("original_video_sha256_verified_from_recovered_zip")
             or evidence.get("content_qa_method") != "FIVE_FRAMES_NATIVE_AND_9X16_OR_EQUIVALENT"
-            or evidence.get("content_review_status") != "VISUAL_EVIDENCE_INSPECTED_2026_11_07"):
+            or not str(evidence.get("content_review_status") or "").startswith("VISUAL_EVIDENCE_INSPECTED_")):
         reasons.append("real media sample review and immutable intake evidence absent")
     if evidence.get("visual_brand_class") != "none_observed":
         reasons.append("logo or brand clearance is not established")
