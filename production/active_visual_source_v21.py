@@ -125,6 +125,9 @@ def validate_scene_manifest(
             failures.append("active manifest contains a non-object shot assignment")
             continue
         shot_id = str(item.get("shot_id") or "").strip()
+        assignment_hits = forbidden_concept_hits(item, forbidden)
+        if assignment_hits:
+            asset_hits[f"shot:{shot_id or '<missing>'}"] = assignment_hits
         assignment = item.get("assignment")
         if isinstance(assignment, dict) and str(assignment.get("candidate_id") or "").strip():
             assigned_shots[shot_id] = str(assignment["candidate_id"]).strip()
