@@ -3,8 +3,8 @@
   "candidate_status": "IMPLEMENTATION_CANDIDATE",
   "active_engine_profile": "because-of-this-v2.1-canonical-factual-gemini-charon-2026-11",
   "active_engine_version": "2.1",
-  "master_prompt_version": "V2.1",
-  "master_prompt_sha256": "8f51c909363ead5c6d2964b733fcdf8909632dc68fef966802b1f8a56e2cb173",
+  "master_prompt_version": "V3",
+  "master_prompt_sha256": "354b9dfb3950e20aecf1b363a95916914a99a9f9cd2f5454d7dd0570c3d4487e",
   "production_schema": "because-of-this://schemas/production-record/3.1.0",
   "canonical_entrypoint": "production/canonical_entrypoint.py",
   "active_engine_policy": "production/active_engine_policy.json",
@@ -236,5 +236,9 @@
       "caption_margin_v": 320,
       "outro_logo_width_px": 820
     }
-  }
+  },
+  "master_prompt_path": "docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V3.md",
+  "visual_policy_gate": "production/v3_visual_policy.py",
+  "prompt_authority_gate": "production/prompt_authority_v3.py",
+  "audit_status": "V3_AUTHORITY_REGISTERED_RENDER_REMAINS_BLOCKED"
 }
