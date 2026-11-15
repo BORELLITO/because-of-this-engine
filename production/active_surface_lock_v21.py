@@ -154,6 +154,32 @@ def audit(repo_root: Path) -> dict[str, object]:
         failures.append("production must remain fail-closed")
     if policy.get("publication_policy") != "manual_only":
         failures.append("publication must remain manual-only")
+
+    visual = policy.get("visual_composition_contract")
+    if not isinstance(visual, dict) or visual.get("status") != "LOCKED":
+        failures.append("V2.1 visual composition contract is missing or unlocked")
+    else:
+        if visual.get("source_of_truth") != "production/v21_visual_contract.py":
+            failures.append("visual composition source of truth drifted")
+        if visual.get("reference_overlay_policy") != "CLIP_SEQUENCE_ONLY":
+            failures.append("reference MP4 must be clip-sequence-only")
+        if visual.get("clean_source_required_for_render") is not True:
+            failures.append("clean source requirement is not enforced")
+        logo = visual.get("in_video_logo") if isinstance(visual.get("in_video_logo"), dict) else {}
+        if (logo.get("anchor"), logo.get("width_px"), logo.get("y_px"), logo.get("opacity")) != (
+            "center_upper", 360, 190, 0.90
+        ):
+            failures.append("V2.1 in-video logo layout drifted")
+        captions = visual.get("captions") if isinstance(visual.get("captions"), dict) else {}
+        if (captions.get("alignment"), captions.get("margin_v"), captions.get("max_lines"),
+                captions.get("max_line_chars"), captions.get("active_word_color")) != (
+            2, 650, 2, 42, "#F04444"
+        ):
+            failures.append("V2.1 caption layout or karaoke color drifted")
+        outro = visual.get("outro") if isinstance(visual.get("outro"), dict) else {}
+        if (outro.get("anchor"), outro.get("logo_width_px"), outro.get("duration_seconds"),
+                outro.get("transition")) != ("center_center", 620, 5.5, "brand_background_to_black"):
+            failures.append("V2.1 outro layout drifted")
     if (policy.get("legacy_policy") or {}).get("active_runtime") != ACTIVE_ENTRYPOINT:
         failures.append("legacy policy does not point back to the canonical entrypoint")
 

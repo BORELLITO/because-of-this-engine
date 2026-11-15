@@ -20,20 +20,39 @@ from typing import Any
 
 from production.visual_continuity import validate_sequence
 from production.scene_disclosures_v21 import load_for_preview, ffmpeg_nasa_overlay, ffmpeg_actor_overlay, NASA_ID, ACTOR_ID
+from production.v21_visual_contract import (
+    ACTIVE_WORD_COLOR as CONTRACT_ACTIVE_WORD_COLOR,
+    CAPTION_MARGIN_V as CONTRACT_CAPTION_MARGIN_V,
+    IN_VIDEO_LOGO_OPACITY as CONTRACT_IN_VIDEO_LOGO_OPACITY,
+    IN_VIDEO_LOGO_WIDTH as CONTRACT_IN_VIDEO_LOGO_WIDTH,
+    IN_VIDEO_LOGO_Y as CONTRACT_IN_VIDEO_LOGO_Y,
+    OUTRO_SECONDS as CONTRACT_OUTRO_SECONDS,
+    VIDEO_FPS as CONTRACT_VIDEO_FPS,
+    VIDEO_HEIGHT as CONTRACT_VIDEO_HEIGHT,
+    VIDEO_WIDTH as CONTRACT_VIDEO_WIDTH,
+    validate_caption_ass,
+    validate_logo_path,
+)
 
 
-FPS = 60
-WIDTH = 1080
-HEIGHT = 1920
 MAX_SOURCE_LOOPS = 8
 CREATIVE_PROFILE = "cinematic_dread_v73"
 APPROVED_VOICE_PROVIDER = "gemini_tts"
 APPROVED_VOICE_NAME = "Charon"
 APPROVED_VOICE_MODEL = "gemini-3.8-flash-tts"
+
+# These compiled literals are checked against production/v21_visual_contract.py
+# by tests; keeping them explicit lets the immutable guard inspect the route
+# without executing arbitrary imports.
+FPS = 60
+WIDTH = 1080
+HEIGHT = 1920
 IN_VIDEO_LOGO_Y = 190
 IN_VIDEO_LOGO_WIDTH = 360
+IN_VIDEO_LOGO_OPACITY = 0.90
 OUTRO_SECONDS = 5.5
 ACTIVE_WORD_COLOR = "#F04444"
+CAPTION_MARGIN_V = 650
 
 
 class PreviewRenderError(RuntimeError):
@@ -247,6 +266,11 @@ def render_preview(
         raise PreviewRenderError("Frozen narration.ass is required.")
     if not logo_path.is_file():
         raise PreviewRenderError("Canonical Because Of This logo is required.")
+    try:
+        validate_caption_ass(captions_path)
+        validate_logo_path(logo_path, sha256_file(logo_path))
+    except (OSError, ValueError) as exc:
+        raise PreviewRenderError(str(exc)) from exc
     if not outro_card_path.is_file():
         raise PreviewRenderError("Black stacked outro card is required.")
     voice_profile = validate_voice_profile(voice_profile_path, audio_path)
@@ -289,7 +313,7 @@ def render_preview(
             "format=yuv420p[base]",
             f"[base]subtitles='{subtitle_path}'[captioned]",
             f"[2:v]format=rgba,scale={IN_VIDEO_LOGO_WIDTH}:-1:flags=lanczos,"
-            "colorchannelmixer=aa=0.90[logo]",
+            f"colorchannelmixer=aa={IN_VIDEO_LOGO_OPACITY:.2f}[logo]",
             f"[captioned][logo]overlay=x=(main_w-overlay_w)/2:y={IN_VIDEO_LOGO_Y}:"
             f"enable='lt(t,{audio_seconds:.3f})':eof_action=repeat[branded]",
             "[3:v]format=rgba,scale=1080:1920:flags=lanczos,"
@@ -336,7 +360,7 @@ def render_preview(
             "logo_anchor": "center_upper",
             "logo_width": IN_VIDEO_LOGO_WIDTH,
             "logo_y": IN_VIDEO_LOGO_Y,
-            "caption_margin_v": 650,
+            "caption_margin_v": CAPTION_MARGIN_V,
             "final_center_lockup": True,
             "final_card": "brand_background_to_black",
             "outro_seconds": OUTRO_SECONDS,

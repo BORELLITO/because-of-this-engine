@@ -14,11 +14,11 @@
   "authority_files": [
     {
       "path": "production/active_engine_policy.json",
-      "git_blob_sha1": "815e8f902fb02bd175de13ab703763091f59acbd"
+      "git_blob_sha1": "3199c9576d9139deb53aacb4575265332501d0d2"
     },
     {
       "path": "production/active_surface_lock_v21.py",
-      "git_blob_sha1": "ccac45502045be9699ab0bde5ed9d37d18ddfcba"
+      "git_blob_sha1": "0a06372335aeee2e6457ccae54a08f322430200a"
     },
     {
       "path": "production/caption_policy_v21.json",
@@ -26,7 +26,7 @@
     },
     {
       "path": "production/render_v21_preview.py",
-      "git_blob_sha1": "be25d2a5f943be921cc4e40af7d5aaf0d98630c3"
+      "git_blob_sha1": "efa59740c6dd7f887cdff2a23890d652c9f5c820"
     },
     {
       "path": "production/render_v21_final.py",
@@ -34,11 +34,15 @@
     },
     {
       "path": "docs/CANONICAL_VISUAL_EDITORIAL_LOCK_20261112.md",
-      "git_blob_sha1": "5e99ad1faaac61e9c96f4a86646025f24eb702c5"
+      "git_blob_sha1": "f6d36360974937b71ed9b80fe8d921682b6e3f82"
     },
     {
       "path": "docs/QUALITY_SAFETY_HARDENING_20261107.md",
       "git_blob_sha1": "8aeba7e3f114053e1ca3c14dc442b31510384c98"
+    },
+    {
+      "path": "production/v21_visual_contract.py",
+      "git_blob_sha1": "de52b51f71487a00e373059dc201fc69ce699027"
     }
   ],
   "immutable_contract": {
