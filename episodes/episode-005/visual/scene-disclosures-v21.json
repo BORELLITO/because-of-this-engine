@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "episode_id": "episode-005",
-  "policy_id": "representational-actor-v1-no-nasa",
+  "policy_id": "representational-actor-v1",
   "source_of_truth": "https://www.pexels.com/video/man-using-walkie-talkie-in-bunker-11764431/",
   "disclosures": [
     {
