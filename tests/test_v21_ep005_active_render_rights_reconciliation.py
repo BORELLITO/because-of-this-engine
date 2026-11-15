@@ -38,19 +38,19 @@ class ActiveEpisodeRightsReconciliationTests(unittest.TestCase):
         cls.manifest = json.loads((BASE / "visual" / "scene-asset-manifest.json").read_text(encoding="utf-8"))
         cls.archive = json.loads(ARCHIVE.read_text(encoding="utf-8"))
 
-    def test_exactly_sixteen_rights_entries_match_current_sixteen_assets(self):
+    def test_active_rights_entries_match_current_assets(self):
         rights = self.record["rights_ledger"]
         active = self.manifest["assets"]
-        self.assertEqual(len(active), 16)
-        self.assertEqual(len(rights), 16)
-        self.assertEqual(len({x["asset_id"] for x in rights}), 16)
+        self.assertEqual(len(active), 14)
+        self.assertEqual(len(rights), 14)
+        self.assertEqual(len({x["asset_id"] for x in rights}), 14)
         self.assertEqual({x["asset_id"] for x in rights}, {a["candidate_id"] for a in active})
 
-    def test_nine_original_active_approvals_untouched(self):
+    def test_seven_original_active_approvals_untouched(self):
         before = {x["asset_id"]: x for x in self.archive["full_original_rights_ledger"]}
         current = {x["asset_id"]: x for x in self.record["rights_ledger"]}
         unchanged = set(before) & set(current)
-        self.assertEqual(len(unchanged), 9)
+        self.assertEqual(len(unchanged), 7)
         for key in unchanged:
             self.assertEqual(current[key], before[key], key)
             self.assertTrue(current[key]["approved_for_render"])
@@ -120,8 +120,8 @@ class ActiveEpisodeRightsReconciliationTests(unittest.TestCase):
         self.assertEqual(canonical["failures"], [])
         self.assertEqual(validate_visual_plan(self.plan, self.manifest)["status"], "VISUAL_PLAN_CONTRACT_PASS")
         visual = validate_visual_rights_consistency(self.record, repo_root=ROOT)
-        self.assertEqual(visual["status"], "PASS")
-        self.assertEqual(visual["failures"], [])
+        self.assertEqual(visual["status"], "BLOCKED")
+        self.assertTrue(any("scoped render authorization absent" in x for x in visual["failures"]))
         self.assertFalse(any("visual assets missing render rights" in x for x in visual["failures"]))
         report = build_dossier(self.record, self.plan, self.manifest)
         self.assertEqual(report["status"], "EVIDENCE_CONSISTENT_NOT_RENDER_AUTHORIZED")
@@ -129,7 +129,7 @@ class ActiveEpisodeRightsReconciliationTests(unittest.TestCase):
         self.assertEqual(report["stale_render_rights"], [])
         self.assertEqual(set(report["pending_recorded_rights"]), PENDING)
         self.assertEqual(set(report["pending_render_rights"]), PENDING)
-        self.assertEqual(report["render_rights_matched_count"], 16)
+        self.assertEqual(report["render_rights_matched_count"], 14)
         self.assertEqual(report["render"], "NOT_RUN")
         from production.audio_history_audit_v21 import audit as audit_audio_history
         self.assertEqual(audit_audio_history(ROOT)["status"], "BLOCKED")
