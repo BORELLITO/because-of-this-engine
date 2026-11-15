@@ -15,9 +15,11 @@ IDS_PENDING_RIGHTS = {
     "pexels-11764431",
     "pixabay-radio-vintage-old-171435",
     "pixabay-antenna-astronomy-communication-40041",
-    "pixabay-radar-black-green-target-symbol-57670",
-    "pexels-5523892",
     "pexels-12590338",
+    "pixabay-button-press-red-business-click-502",
+    "pixabay-button-press-push-start-launching-221746",
+    "mixkit-worker-industrial-lathe-2244",
+    "pixabay-radar-communication-military-261518",
 }
 S09 = "pexels-8888977"
 
@@ -57,9 +59,10 @@ class V21VisualReconciliationDossierTests(unittest.TestCase):
 
     def test_missing_human_approval_blocks_even_if_manifest_claims_approved(self):
         rec, plan, man = self._sources()
-        plan["candidates"][0]["qa"]["human_approval"] = "PENDING"
+        target = next(x for x in plan["candidates"] if x["candidate_id"] == "pexels-11764431")
+        target["qa"]["human_approval"] = "PENDING"
         report = build_dossier(rec, plan, man)
-        self.assertIn(plan["candidates"][0]["candidate_id"], report["pending_visual_approval"])
+        self.assertIn(target["candidate_id"], report["pending_visual_approval"])
 
     def test_tampered_intake_sha_detected(self):
         rec, plan, man = self._sources()

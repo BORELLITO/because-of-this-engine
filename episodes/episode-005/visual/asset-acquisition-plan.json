@@ -4796,7 +4796,7 @@
       "perceptual_hash": "7d26c374a8e6060a7715bc0713917210364681365fd2c5b4a39da38d44769d34"
     }
   ],
-  "next_action": "Human visual QA of the five normalized intake frames and 9x16 crop for wikimedia-meerkat-night-telescopes-2023; candidate remains outside the active manifest until explicit approval.",
+  "next_action": "Re-run authoritative sequence-level continuity and rights validation for the corrected active manifest; keep preview/render blocked until PASS.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -5911,8 +5911,8 @@
     "continuity_coverage_score": 0.9187,
     "note": "CI run 42176059809 validated the updated S03/S09 manifest replacements. Both new shots pass continuity; S04/S12 remain hard conflicts and S11->S12/S12->S13 remain blocked adjacency transitions. Render/preview remain blocked."
   },
-  "last_adjustment": "2026-11-15: removed NASA from active S12 and added two manually audited public-domain archival segments with deterministic source trims for S07/S10; active V2.1 manifest is complete, render remains separately gated.",
-  "next_gate": "V2.1 active visual source PASS plus visual rights consistency PASS; render remains manual-only until preview QA.",
+  "last_adjustment": "2026-11-15: active manifest corrected to concrete non-graphic clips; graphical/radar-overlay assignments removed; S02, S07 and S10 preserved; authoritative continuity and rights revalidation remains required.",
+  "next_gate": "AUTHORITATIVE_SEQUENCE_CONTINUITY_AND_RIGHTS_REVALIDATION",
   "render_approval_record": {
     "status": "APPROVED",
     "approved_at_utc": "2026-11-05T22:56:14Z",

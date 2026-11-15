@@ -19,7 +19,7 @@ class AutonomousRightsDecisionTests(unittest.TestCase):
     def test_current_active_rights_are_audited_without_nasa(self):
         report=audit(self.record,self.plan,self.scene,self.evidence,disclosure_contract=self.disclosure)
         self.assertEqual(report["status"],"PASS",report)
-        self.assertEqual(report["auto_approved_count"],9)
+        self.assertEqual(report["auto_approved_count"],7)
         self.assertEqual(report["blocked_count"],0)
         self.assertFalse(any(x["provider"]=="nasa" for x in self.record["rights_ledger"]))
         self.assertEqual(audit_repository(self.record,repo_root=ROOT)["status"],"PASS")

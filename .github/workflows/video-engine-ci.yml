@@ -304,7 +304,7 @@ jobs:
           assert scene_truth["publication_authorized"] is False
           decision = next(g for g in report["checks"] if g.get("gate") == "RIGHTS_AUTONOMY_V21")
           assert decision["status"] == "PASS", decision
-          assert decision["auto_approved_count"] == 9 and decision["blocked_count"] == 0
+          assert decision["auto_approved_count"] == 7 and decision["blocked_count"] == 0
           assert report["production_enablement"] is False
           assert report["media_generation"] == "NOT_RUN"
           assert report["render"] == "NOT_RUN"
@@ -312,7 +312,7 @@ jobs:
           print("EPISODE005_CROSS_LEDGER_EXPECTED_BLOCK_PASS")
           PY
 
-      - name: Audit autonomous source-specific render decisions (9 labelled, 0 blocked)
+      - name: Audit autonomous source-specific render decisions (7 active, 0 blocked)
         run: |
           PYTHONPATH=. python production/rights_autonomy_v21.py \
             --repo-root . \
@@ -322,13 +322,12 @@ jobs:
           from pathlib import Path
           data=json.loads(Path("/tmp/ep005-rights-decisions.json").read_text())
           assert data["status"] == "PASS", data
-          assert data["auto_approved_count"] == 9, data
+          assert data["auto_approved_count"] == 7, data
           assert data["blocked_count"] == 0, data
           allowed={x["asset_id"] for x in data["decisions"] if x["allow_scoped_render"]}
           blocked={x["asset_id"] for x in data["decisions"] if not x["allow_scoped_render"]}
           assert allowed == {"pixabay-radio-vintage-old-171435",
-                             "pixabay-radar-black-green-target-symbol-57670",
-                             "pexels-5523892","pexels-12590338","pexels-8888977",
+                             "pexels-12590338","pexels-8888977",
                              "pexels-11764431","archive-prelinger-onguard1956-s07",
                              "archive-gov-antps25-29604-s10",
                              "pixabay-antenna-astronomy-communication-40041"},allowed

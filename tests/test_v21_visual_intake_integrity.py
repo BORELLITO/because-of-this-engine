@@ -7,6 +7,8 @@ from pathlib import Path
 from production.visual_plan_contract import VisualPlanContractError,validate_visual_plan
 ROOT=Path(__file__).resolve().parents[1]
 NEW_ID="pexels-8888977"
+S07_ID="archive-prelinger-onguard1956-s07"
+S10_ID="archive-gov-antps25-29604-s10"
 class VisualIntakeIntegrityTests(unittest.TestCase):
     def setUp(self):
         self.plan=json.loads((ROOT/"episodes/episode-005/visual/asset-acquisition-plan.json").read_text())
@@ -20,8 +22,8 @@ class VisualIntakeIntegrityTests(unittest.TestCase):
         self.assertFalse(report["global_catalog_updated"])
         self.assertFalse(next(a for a in self.manifest["assets"] if a["candidate_id"]==NEW_ID)["approved_for_render"])
         self.assertEqual(self.manifest["unresolved_shots"],[])
-        self.assertEqual(self.manifest["assets"][-3]["source_segment"]["start_seconds"],282)
-        self.assertEqual(self.manifest["assets"][-2]["source_segment"]["start_seconds"],550)
+        self.assertEqual(next(a for a in self.manifest["assets"] if a["candidate_id"]==S07_ID)["source_segment"]["start_seconds"],282)
+        self.assertEqual(next(a for a in self.manifest["assets"] if a["candidate_id"]==S10_ID)["source_segment"]["start_seconds"],550)
     def test_synthetic_human_approval_revocation_blocks(self):
         plan=copy.deepcopy(self.plan)
         man=copy.deepcopy(self.manifest)

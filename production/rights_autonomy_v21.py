@@ -176,7 +176,11 @@ def audit(record: Mapping[str, Any], plan: Mapping[str, Any],
         else:
             problems.append("scene disclaimer contract failed: " + "; ".join(disclosure_report["failures"]))
     decisions = []
-    for asset_id in sorted(reviews):
+    # The evidence report is cumulative. Only evidence for assets that remain
+    # in the active scene manifest can participate in the current episode gate.
+    # Historical/rejected candidates must not become stale-rights blockers.
+    active_asset_ids = set(assets)
+    for asset_id in sorted(set(reviews) & active_asset_ids):
         current = rights.get(asset_id)
         if current is None:
             problems.append(f"{asset_id}: audited rights entry missing from active record")
@@ -201,7 +205,7 @@ def audit(record: Mapping[str, Any], plan: Mapping[str, Any],
               or current.get("commercial_use") is not False):
             problems.append(f"{asset_id}: unsafe attempt to approve unresolved media rights")
     for asset_id, val in rights.items():
-        if val.get("render_approval_status") == APPROVED_STATUS and asset_id not in reviews:
+        if asset_id in active_asset_ids and val.get("render_approval_status") == APPROVED_STATUS and asset_id not in reviews:
             problems.append(f"{asset_id}: auto-approved rights lack source evidence review")
     return {
         "gate": "RIGHTS_AUTONOMY_V21", "status": "PASS" if not problems else "BLOCKED",
