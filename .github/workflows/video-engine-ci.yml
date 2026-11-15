@@ -337,25 +337,8 @@ jobs:
 
       - name: Enforce singleton runtime
         run: PYTHONPATH=. python production/v21_singleton_guard.py --repo-root .
-      - name: Test legacy adapter delegates to canonical entrypoint
+      - name: Confirm no retired engine is used by the active workflow
         run: |
-          set +e
-          PYTHONPATH=. python production/v7_orchestrator.py \
-            --repo-root . \
-            --manifest examples/video-only-episode-manifest-v7.template.json \
-            --mode dry-run \
-            --report /tmp/v21-adapter-report.json
-          code=$?
-          set -e
-          test "$code" -eq 1
-          python - <<'PY'
-          import json
-          with open("/tmp/v21-adapter-report.json", encoding="utf-8") as handle:
-              report = json.load(handle)
-          assert report["status"] == "BLOCKED"
-          assert "PRODUCTION_RECORD_SCHEMA" in report["blocking_gates"]
-          assert report["render"] == "NOT_RUN"
-          print("LEGACY_ADAPTER_FAIL_CLOSED_PASS")
-          PY
+          ! grep -R -E "production/(v7_orchestrator|v7_contract|render_video_episode)\\.py" .github/workflows production/canonical_entrypoint.py production/render_v21_preview.py production/fetch_v21_visuals.py
       - name: Confirm checkout is clean
         run: test -z "$(git status --porcelain)"
