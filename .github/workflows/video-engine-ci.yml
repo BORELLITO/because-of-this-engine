@@ -212,7 +212,7 @@ jobs:
           scene=json.loads(Path("episodes/episode-005/visual/scene-asset-manifest.json").read_text())
           report=validate_visual_plan(plan,scene)
           assert report["status"]=="VISUAL_PLAN_CONTRACT_PASS",report
-          assert report["manifest_asset_count"]==14,report
+          assert report["manifest_asset_count"]==16,report
           assert report["render_allowed"] is False and report["promotion_allowed"] is False,report
           assert report["global_catalog_updated"] is False,report
           s09=next(s for s in scene["shot_assignments"] if s["shot_id"]=="S09")
@@ -239,8 +239,8 @@ jobs:
           from pathlib import Path
           d = json.loads(Path("/tmp/ep005-rights-dossier.json").read_text(encoding="utf-8"))
           assert d["status"] == "EVIDENCE_CONSISTENT_NOT_RENDER_AUTHORIZED", d["status"]
-          assert d["asset_count"] == 14
-          assert d["render_rights_matched_count"] == 14
+          assert d["asset_count"] == 16
+          assert d["render_rights_matched_count"] == 16
           assert d["approved_manifest_only_pending_render_rights"] == []
           assert d["pending_visual_approval"] == []
           assert d["source_provenance_mismatches"] == []
@@ -248,7 +248,7 @@ jobs:
           assert d["pending_render_rights"] == []
           assert d["pending_recorded_rights"] == []
           assert d["stale_render_rights"] == []
-          assert d["rights_ledger_entry_count"] == 14
+          assert d["rights_ledger_entry_count"] == 16
           assert d["draft_pending_rights_not_canonical"] == []
           assert all(item["render_rights_status"] == "PENDING_INDEPENDENT_RENDER_RIGHTS" for item in d["assets"] if not item["render_rights_matched"])
           assert d["pending_render_rights"] == []
