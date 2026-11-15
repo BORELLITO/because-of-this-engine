@@ -197,47 +197,47 @@
       }
     },
     {
-      "asset_id": "mixkit-large-satellite-antenna-2650",
-      "provider": "mixkit",
-      "source_url": "https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/",
-      "license_name": "Mixkit Stock Video Free License",
-      "license_evidence": "https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/",
-      "source_page_status": "PASS_PAGE_REOPENED_2026-11-05",
+      "asset_id": "wikimedia-meerkat-night-telescopes-2023",
+      "provider": "wikimedia",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Night_time_lapse_of_the_MeerKAT_telescopes_at_the_Meerkat_National_Park.webm",
+      "license_name": "CC BY-SA 3.0",
+      "license_evidence": "https://commons.wikimedia.org/wiki/File:Night_time_lapse_of_the_MeerKAT_telescopes_at_the_Meerkat_National_Park.webm",
+      "source_page_status": "PASS_WIKIMEDIA_FILE_PAGE_REVIEW_2026-11-15",
       "commercial_use_declared": true,
       "platform_scope": [
         "youtube_shorts",
         "tiktok"
       ],
-      "download_date": "2026-11-05",
-      "sha256": "1bfa05d75d9295ff3a08dda7017927f638292895f1c2c376667175c279813807",
-      "perceptual_fingerprint": "f10ae48c3a770e23246f7fda15feccd3c4b37e1db48b9d71c6fb1511a1ee1b7c",
+      "download_date": "2026-11-15",
+      "sha256": "0af0714d0a4dbf24b08ceb7e28b5263190758d85b64041cb8ccb689d0267b615",
+      "perceptual_fingerprint": "7d26c374a8e6060a7715bc0713917210364681365fd2c5b4a39da38d44769d34",
       "assigned_shots": [
         "S02"
       ],
-      "author_status": "CONFIRMED_MATTHIAS_GROENEVELD",
-      "visual_rights_review": "PASS_SATELLITE_ANTENNA_NO_PERSON_OR_BRAND_VISIBLE",
-      "render_rights_status": "APPROVED_FOR_RENDER",
-      "page_license_status": "PASS_ITEM_PAGE_FREE_LICENSE_VISIBLE",
-      "full_asset_review_status": "PASS_DIRECT_MEDIA_PREVIEW",
-      "visual_qa_status": "PASS",
-      "visual_qa_evidence": "artifact 13409661379 / qa-frames.jpg",
-      "third_party_risk": "NONE_VISIBLE",
-      "qa_sampling": "FIVE_NORMALIZED_SAMPLES_FULL_DURATION",
-      "contributor_url": "https://mixkit.co/@matthiasgroeneveld/",
-      "author_evidence": "https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/",
-      "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE",
-      "license_confirmation_checked_at": "2026-11-05",
+      "author_status": "CONFIRMED_FROM_WIKIMEDIA_COMMONS_FILE_PAGE",
+      "author": "Square Kilometre Array Organisation (SKAO) / South African Radio Astronomy Observatory (SARAO)",
+      "visual_rights_review": "PASS_PHYSICAL_RADIO_TELESCOPE_INFRASTRUCTURE_NO_VISIBLE_BRAND_CONFLICT",
+      "render_rights_status": "APPROVED_FOR_MANIFEST_ONLY_PENDING_FINAL_PREFLIGHT",
+      "page_license_status": "PASS_CC_BY_SA_3_0_FILE_LICENSE_VISIBLE",
+      "full_asset_review_status": "PASS_DIRECT_MEDIA_INTAKE",
+      "visual_qa_status": "USER_APPROVED_FOR_MANIFEST",
+      "visual_qa_evidence": "Explicit user approval recorded 2026-11-15; automated intake and fingerprint artifacts retained.",
+      "third_party_risk": "CC_BY_SA_ATTRIBUTION_AND_SHARE_ALIKE_REQUIRED",
+      "qa_sampling": "AUTOMATED_INTAKE_AND_FINGERPRINT_PLUS_USER_MANIFEST_APPROVAL",
+      "contributor_url": "https://www.skao.int/",
+      "author_evidence": "https://commons.wikimedia.org/wiki/File:Night_time_lapse_of_the_MeerKAT_telescopes_at_the_Meerkat_National_Park.webm",
+      "license_confirmation_status": "CONFIRMED_WIKIMEDIA_PER_FILE_CC_BY_SA_3_0",
+      "license_confirmation_checked_at": "2026-11-15",
       "approved_for_render": true,
       "approval_scope": "episode-005-render",
       "render_approval": {
-        "status": "APPROVED",
-        "approved_at_utc": "2026-11-05T22:56:14Z",
-        "decision": "User explicitly approved this active asset for Episode 005 render.",
+        "status": "MANIFEST_APPROVAL_ONLY",
+        "approved_at_utc": "2026-11-15",
+        "decision": "User approved S02 for manifest promotion; final render remains separately gated.",
         "constraints": [
-          "representational footage is not literal Petrov archival evidence",
-          "no global catalog mutation",
-          "no Drive write",
-          "publication remains manual-only"
+          "representational footage only, not literal Petrov archival evidence",
+          "credit and share-alike obligations must be carried into final delivery",
+          "no global catalog mutation, Drive write or publication"
         ]
       }
     },
@@ -687,6 +687,6 @@
       }
     }
   ],
-  "last_adjustment": "User explicitly approved render use for all 16 active assets on 2026-11-05. Rights evidence, direct-media QA, contributor/license checks and no-reuse fingerprints are complete; production remains fail-closed pending manual preflight.",
+  "last_adjustment": "2026-11-15: Replaced S02 rights identity with user-approved Wikimedia Meerkat candidate; preserved CC BY-SA attribution/share-alike obligations and fail-closed render policy.",
   "qa_rule": "Direct-media visual QA is separate from provider license evidence. Generic text/labels, representational infrastructure and symbolic graphics pass only with editorial guardrails; no asset is promoted to render without explicit per-asset approval."
 }

@@ -4651,7 +4651,7 @@
       "visual_intent": "Physical radio telescope dishes at night for the external-sensor/communications beat; representational reconstruction, never literal Petrov archival evidence.",
       "truth_class": "REPRESENTATIONAL",
       "provider": "wikimedia",
-      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "license_name": "Wikimedia Commons Per-File License",
       "license_detail": "CC BY-SA 3.0",
       "source_tier": "cc_manual",
@@ -4713,8 +4713,8 @@
         "time_lapse_natural_sky_motion",
         "cc_by_sa_attribution_required"
       ],
-      "selection_status": "REVIEW_REQUIRED",
-      "human_approval": "PENDING",
+      "selection_status": "APPROVED_FOR_MANIFEST",
+      "human_approval": "APPROVED_FOR_MANIFEST",
       "intake_artifact": {
         "workflow_run_id": 43731902701,
         "job_id": 132865989911,
@@ -4763,7 +4763,37 @@
         "global_catalog_updated": false,
         "render_allowed": false,
         "drive_written": false
-      }
+      },
+      "qa": {
+        "clean_frame_visual_review": "USER_APPROVED_MANIFEST_CANDIDATE",
+        "baked_captions_or_authored_graphics": "NOT_APPLICABLE_TO_SOURCE",
+        "embedded_logo_or_letterbox": "NOT_OBSERVED_IN_INTAKE_AUDIT",
+        "semantic_fit": "USER_APPROVED_EXACT_S02_EXTERNAL_SENSOR_FIT",
+        "locked_9x16_crop": "PENDING_RENDER_PREFLIGHT",
+        "global_reuse_fingerprint": "PASS_NO_COLLISION",
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "direct_media_visual_review": "USER_APPROVED_PHYSICAL_RADIO_TELESCOPE_NIGHT_FOOTAGE",
+        "visual_qa_status": "USER_APPROVED_FOR_MANIFEST",
+        "visual_qa_evidence": "Explicit user approval recorded on 2026-11-15; automated intake and fingerprint gates passed.",
+        "third_party_risk": "CC_BY_SA_ATTRIBUTION_AND_SHARE_ALIKE_REQUIRED",
+        "full_duration_qa": "AUTOMATED_INTAKE_AND_FINGERPRINT_PASS_HUMAN_MANIFEST_APPROVAL"
+      },
+      "approval_record": {
+        "status": "APPROVED_FOR_MANIFEST_ONLY",
+        "approved_at_utc": "2026-11-15",
+        "decision": "User approved S02 for manifest promotion as representational external-sensor/radio-telescope footage.",
+        "constraints": [
+          "representational reconstruction only; never literal Petrov archival evidence",
+          "CC BY-SA 3.0 attribution and share-alike obligations remain active",
+          "does not authorize render, global catalog mutation, Drive write or publication"
+        ]
+      },
+      "approved_shot_ids": [
+        "S02"
+      ],
+      "perceptual_hash": "7d26c374a8e6060a7715bc0713917210364681365fd2c5b4a39da38d44769d34"
     }
   ],
   "next_action": "Human visual QA of the five normalized intake frames and 9x16 crop for wikimedia-meerkat-night-telescopes-2023; candidate remains outside the active manifest until explicit approval.",
