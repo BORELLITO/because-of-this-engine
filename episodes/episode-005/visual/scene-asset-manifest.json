@@ -275,7 +275,9 @@
       "source_tier": "cc_manual",
       "author": "Square Kilometre Array Organisation (SKAO) / South African Radio Astronomy Observatory (SARAO)",
       "selection_basis": "User explicitly approved the S02 candidate for manifest promotion; automated intake and fingerprint gates passed.",
-      "editorial_caveat": "Representational radio-telescope infrastructure only; never literal Petrov archival evidence. CC BY-SA 3.0 attribution and share-alike obligations remain active."
+      "editorial_caveat": "Representational radio-telescope infrastructure only; never literal Petrov archival evidence. CC BY-SA 3.0 attribution and share-alike obligations remain active.",
+      "sha256": "0af0714d0a4dbf24b08ceb7e28b5263190758d85b64041cb8ccb689d0267b615",
+      "perceptual_hash": "7d26c374a8e6060a7715bc0713917210364681365fd2c5b4a39da38d44769d34"
     },
     {
       "candidate_id": "pexels-11764431",
