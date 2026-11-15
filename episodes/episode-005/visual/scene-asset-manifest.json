@@ -2457,7 +2457,8 @@
         "intake_artifact_id": 14169181114,
         "fingerprint_workflow_run_id": 43732559732,
         "source_sha256": "0af0714d0a4dbf24b08ceb7e28b5263190758d85b64041cb8ccb689d0267b615",
-        "perceptual_hash": "7d26c374a8e6060a7715bc0713917210364681365fd2c5b4a39da38d44769d34"
+        "perceptual_hash": "7d26c374a8e6060a7715bc0713917210364681365fd2c5b4a39da38d44769d34",
+        "fingerprint_artifact_id": 14168629077
       },
       "constraints": [
         "not literal Petrov archival evidence",
