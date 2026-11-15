@@ -15,7 +15,7 @@ IDS_PENDING_RIGHTS = {
     "pexels-11764431",
     "pixabay-radio-vintage-old-171435",
     "pixabay-antenna-astronomy-communication-40041",
-    "pixabay-12590338",
+    "pexels-12590338",
     "pixabay-button-press-red-business-click-502",
     "pixabay-button-press-push-start-launching-221746",
     "mixkit-worker-industrial-lathe-2244",
