@@ -6426,7 +6426,7 @@
     "artifact_digest": "sha256:41ed8e492c77e1e058bdce44a415ddc11691cdb0340c4c8c654ded586b5dfc91",
     "promotion_allowed": false,
     "render_allowed": false,
-    "next_action": "Run global fingerprint audit using the recorded intake artifact, then perform human QA before any manifest assignment."
+    "next_action": "Run the CI-protected global fingerprint audit using the recorded intake artifact; keep human approval, manifest assignment, render, preview, Drive, catalog and publication blocked."
   },
   "last_candidate_route_correction": {
     "recorded_at_utc": "2026-11-06T00:00:00Z",
