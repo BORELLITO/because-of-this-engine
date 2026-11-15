@@ -998,7 +998,7 @@
   },
   "factuality_status": "READY",
   "safety_status": "READY",
-  "pipeline_state": "VISUAL_MANIFEST_BLOCKED",
+  "pipeline_state": "BLOCKED",
   "preview_enablement": false,
   "production_enablement": false,
   "visual_manifest_reference": "episodes/episode-005/visual/scene-asset-manifest.json",
