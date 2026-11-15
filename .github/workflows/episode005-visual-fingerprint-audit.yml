@@ -239,12 +239,13 @@ jobs:
               else:
                   media_path = root / f"{candidate_id}.mp4"
                   media_source = "source_url"
+                  source_path = root / f"{candidate_id}.source.mp4"
                   request = urllib.request.Request(
                       expected["media_url"],
                       headers={"User-Agent": "because-of-this-fingerprint-audit/1.0"},
                   )
                   max_bytes = 200 * 1024 * 1024
-                  with urllib.request.urlopen(request, timeout=600) as response, media_path.open("wb") as handle:
+                  with urllib.request.urlopen(request, timeout=600) as response, source_path.open("wb") as handle:
                       content_length = response.headers.get("Content-Length")
                       if content_length and int(content_length) > max_bytes:
                           raise RuntimeError(f"candidate exceeds 200 MiB: {candidate_id}")
@@ -257,6 +258,18 @@ jobs:
                           if written > max_bytes:
                               raise RuntimeError(f"candidate exceeds 200 MiB: {candidate_id}")
                           handle.write(chunk)
+                  source_segment = candidate.get("source_segment")
+                  if source_segment:
+                      start = float(source_segment["start_seconds"])
+                      end = float(source_segment["end_seconds"])
+                      if not 0 <= start < end:
+                          raise RuntimeError(f"invalid source_segment: {candidate_id}")
+                      expected_source_sha = str(candidate.get("source_sha256", "")).lower()
+                      if expected_source_sha and sha256_file(source_path) != expected_source_sha:
+                          raise RuntimeError(f"source SHA-256 mismatch: {candidate_id}")
+                      subprocess.run(["ffmpeg","-v","error","-y","-ss",f"{start:.3f}","-to",f"{end:.3f}","-i",str(source_path),"-map","0:v:0","-map","0:a?","-c","copy","-avoid_negative_ts","make_zero",str(media_path)],check=True)
+                  else:
+                      source_path.replace(media_path)
               actual_sha = sha256_file(media_path)
               if actual_sha != expected_sha:
                   blockers.append({
@@ -311,6 +324,8 @@ jobs:
                   "candidate_id": candidate_id,
                   "source_page_url": expected["source_page_url"],
                   "media_url": expected["media_url"],
+                  "source_segment": candidate.get("source_segment"),
+                  "source_sha256": candidate.get("source_sha256"),
                   "media_source": media_source,
                   "sha256": actual_sha,
                   "perceptual_hash": phash,
