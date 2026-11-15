@@ -133,6 +133,17 @@ def audit(repo_root: Path, episode_id: str) -> dict[str, Any]:
                 failures.append("selected Selpan preview/voice mix was not genuinely verified")
             else:
                 evidence["actual_private_audio_mix"] = "TECHNICAL_PASS_NOT_MASTER_OR_PUBLICATION"
+
+            # Bind the private candidate master to both immutable artifacts:
+            # the provider MP3 and the generated preview. The old dossier used
+            # the preview hash under the source field, which weakened provenance.
+            private_master = d.get("private_candidate_master") or {}
+            if private_master:
+                if private_master.get("selpan_source_mp3_sha256") != d.get("source_sha256"):
+                    failures.append("private candidate master source MP3 SHA does not match the rights dossier")
+                if private_master.get("selpan_preview_mp3_sha256") != candidate.get("preview_sha256"):
+                    failures.append("private candidate master preview SHA does not match archived QA")
+
         else:
 
             candidate = qa.get("candidate") or {}
