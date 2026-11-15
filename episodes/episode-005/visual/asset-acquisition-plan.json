@@ -4715,11 +4715,31 @@
       ],
       "selection_status": "REVIEW_REQUIRED",
       "human_approval": "PENDING",
-      "intake_artifact": null,
+      "intake_artifact": {
+        "workflow_run_id": 43731902701,
+        "job_id": 132865989911,
+        "branch": "main",
+        "commit_sha": "4a9c10d738eebd87a9b84bfda2dae8353ea8c910",
+        "artifact_id": 14169181114,
+        "artifact_name": "episode005-visual-intake-43731902701",
+        "artifact_digest": "sha256:41ed8e492c77e1e058bdce44a415ddc11691cdb0340c4c8c654ded586b5dfc91",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "0af0714d0a4dbf24b08ceb7e28b5263190758d85b64041cb8ccb689d0267b615",
+        "duration_seconds": 13.947,
+        "dimensions": [
+          3840,
+          2160
+        ],
+        "frame_rate": "30000/1001",
+        "codec": "vp9",
+        "automated_promotion": false,
+        "size_bytes": 27618974,
+        "fps": 29.97002997002997
+      },
       "fingerprint_artifact": null
     }
   ],
-  "next_action": "Run the canonical manual visual candidate intake for wikimedia-meerkat-night-telescopes-2023, then run the read-only global fingerprint audit and continuity/adjacency review. Keep the active manifest and render blocked.",
+  "next_action": "Re-run global fingerprint audit for wikimedia-meerkat-night-telescopes-2023 using the recorded intake artifact; keep human approval, manifest assignment, render, preview, Drive, catalog and publication blocked.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -6392,34 +6412,21 @@
     }
   ],
   "last_intake_attempt": {
-    "recorded_at_utc": "2026-11-06T06:03:00Z",
-    "workflow_run_id": 42171894738,
-    "job_id": 127741410604,
+    "recorded_at_utc": "2026-11-15T15:48:57Z",
+    "workflow_run_id": 43731902701,
+    "job_id": 132865989911,
     "branch": "main",
-    "commit_sha": "7833aece9f28884e87bd29353666651f31a5bf06",
+    "commit_sha": "4a9c10d738eebd87a9b84bfda2dae8353ea8c910",
     "candidate_ids": [
-      "pexels-38958215",
-      "mixkit-inside-rear-control-cabin-4460",
-      "pexels-12213087",
-      "nasa-svs-noctilucent-clouds-3484"
+      "wikimedia-meerkat-night-telescopes-2023"
     ],
-    "refresh_existing": true,
-    "status": "SUCCESS_BUT_AWAITING_QA",
-    "artifact_id": 13480857827,
-    "artifact_digest": "sha256:399aeb023d1a062f53dedb708b561edcd15914db5a8237050b85cc30de653c9c",
-    "prior_failures": [
-      {
-        "workflow_run_id": 42170992534,
-        "reason": "Mixkit 4460-720 route downloaded 720x480"
-      },
-      {
-        "workflow_run_id": 42171283129,
-        "reason": "NASA 20002 route downloaded 720x480"
-      }
-    ],
+    "refresh_existing": false,
+    "status": "SUCCESS_BUT_AWAITING_HUMAN_QA",
+    "artifact_id": 14169181114,
+    "artifact_digest": "sha256:41ed8e492c77e1e058bdce44a415ddc11691cdb0340c4c8c654ded586b5dfc91",
     "promotion_allowed": false,
     "render_allowed": false,
-    "next_action": "Run global fingerprint audit, then formalize visual decisions."
+    "next_action": "Run the CI-protected global fingerprint audit using the recorded intake artifact; keep human approval, manifest assignment, render, preview, Drive, catalog and publication blocked."
   },
   "last_candidate_route_correction": {
     "recorded_at_utc": "2026-11-06T00:00:00Z",
