@@ -26,21 +26,17 @@
     "latest_manifest_update": {
       "recorded_on_date": "2026-11-15",
       "candidate_ids": [
-        "archive-prelinger-onguard1956-s07",
-        "archive-gov-antps25-29604-s10",
-        "pixabay-antenna-astronomy-communication-40041"
+        "wikimedia-meerkat-night-telescopes-2023"
       ],
       "shot_ids": [
-        "S07",
-        "S10",
-        "S12"
+        "S02"
       ],
       "scope": "MANIFEST_ONLY",
       "render_authorized": false,
       "global_catalog_updated": false,
       "drive_written": false,
       "publication_allowed": false,
-      "reason": "Removed NASA S12 and resolved S07/S10 with exact public-domain non-clock archival segments under V2.1."
+      "reason": "User explicitly approved the S02 replacement; source intake, fingerprint and rights evidence are retained, while final continuity/render gates remain blocked."
     }
   },
   "global_reuse_audit": {
@@ -162,32 +158,82 @@
       "source_tier": "stock_auto"
     },
     {
-      "candidate_id": "mixkit-large-satellite-antenna-2650",
-      "provider": "mixkit",
-      "source_page_url": "https://mixkit.co/free-stock-video/large-satellite-antenna-in-the-forest-2650/",
-      "media_url": "https://assets.mixkit.co/videos/2650/2650-720.mp4",
-      "license_name": "Mixkit Stock Video Free License",
+      "candidate_id": "wikimedia-meerkat-night-telescopes-2023",
+      "provider": "wikimedia",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Night_time_lapse_of_the_MeerKAT_telescopes_at_the_Meerkat_National_Park.webm",
+      "media_url": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Night_time_lapse_of_the_MeerKAT_telescopes_at_the_Meerkat_National_Park.webm",
       "source_role": "S02",
-      "truth_class": "MAP_OR_DIAGRAM",
-      "sha256": "1bfa05d75d9295ff3a08dda7017927f638292895f1c2c376667175c279813807",
-      "perceptual_hash": "f10ae48c3a770e23246f7fda15feccd3c4b37e1db48b9d71c6fb1511a1ee1b7c",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
-      "intake_artifact": {
-        "workflow_run_id": 42016296608,
-        "artifact_id": 13409661379,
-        "artifact_digest": "sha256:f15336756e9e32900ff07ee7666492032887a883d923266ff2d5651ba862d5c0"
-      },
-      "fingerprint_artifact": {
-        "workflow_run_id": 42016725778,
-        "artifact_id": 13409611998,
-        "artifact_digest": "sha256:30f39d5255b086062c6e01e7576c9cd9f5371476b795a1736d48579bbc2474c4"
-      },
+      "role": "S02",
+      "visual_match": "EXACT",
+      "visual_intent": "Physical radio telescope dishes at night for the external-sensor/communications beat; representational reconstruction, never literal Petrov archival evidence.",
+      "truth_class": "REPRESENTATIONAL",
+      "source_sha256": "0af0714d0a4dbf24b08ceb7e28b5263190758d85b64041cb8ccb689d0267b615",
+      "license_name": "Wikimedia Commons Per-File License",
+      "license_detail": "CC BY-SA 3.0",
       "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "human_approval": "APPROVED_FOR_MANIFEST",
       "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-15T00:00:00Z",
+        "observed_license": "CC BY-SA 3.0",
+        "author": "Square Kilometre Array Organisation (SKAO) / South African Radio Astronomy Observatory (SARAO)",
+        "attribution_required": true,
+        "share_alike_required": true,
+        "media_route": "Wikimedia Commons original file resolved to upload.wikimedia.org"
+      },
+      "intake_artifact": {
+        "workflow_run_id": 43731902701,
+        "job_id": 132865989911,
+        "branch": "main",
+        "commit_sha": "4a9c10d738eebd87a9b84bfda2dae8353ea8c910",
+        "artifact_id": 14169181114,
+        "artifact_name": "episode005-visual-intake-43731902701",
+        "artifact_digest": "sha256:41ed8e492c77e1e058bdce44a415ddc11691cdb0340c4c8c654ded586b5dfc91",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "0af0714d0a4dbf24b08ceb7e28b5263190758d85b64041cb8ccb689d0267b615",
+        "duration_seconds": 13.947,
+        "dimensions": [
+          3840,
+          2160
+        ],
+        "frame_rate": "30000/1001",
+        "codec": "vp9",
+        "automated_promotion": false,
+        "size_bytes": 27618974,
+        "fps": 29.97002997002997,
+        "perceptual_hash": "7d26c374a8e6060a7715bc0713917210364681365fd2c5b4a39da38d44769d34",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 43732559732,
+        "fingerprint_job_id": 132868028415,
+        "fingerprint_artifact_id": 14168629077,
+        "fingerprint_artifact_name": "episode005-visual-fingerprint-audit",
+        "fingerprint_artifact_digest": "sha256:fb73a68f724ef5385e8ac08d54d9850e14ef57cbf4b817685e38bf4e27a286d6",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 43732559732,
+        "job_id": 132868028415,
+        "artifact_id": 14168629077,
+        "artifact_name": "episode005-visual-fingerprint-audit",
+        "artifact_digest": "sha256:fb73a68f724ef5385e8ac08d54d9850e14ef57cbf4b817685e38bf4e27a286d6",
+        "status": "FINGERPRINT_AUDIT_PASS",
+        "algorithm": "video-fingerprint-v2-rgb24-q4",
+        "perceptual_hash": "7d26c374a8e6060a7715bc0713917210364681365fd2c5b4a39da38d44769d34",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false,
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "render_allowed": false,
+        "drive_written": false
+      },
       "continuity_tags": {
         "era": [
           "cold_war",
@@ -215,14 +261,21 @@
           "low_light_grain"
         ],
         "risk_flags": [
-          "representational_infrastructure_not_archival"
+          "representational_infrastructure_not_archival",
+          "time_lapse_natural_sky_motion",
+          "cc_by_sa_attribution_required"
         ]
       },
       "continuity_risk_flags": [
-        "representational_infrastructure_not_archival"
+        "representational_infrastructure_not_archival",
+        "time_lapse_natural_sky_motion",
+        "cc_by_sa_attribution_required"
       ],
-      "continuity_review_status": "REVIEW_REQUIRED",
-      "source_tier": "stock_auto"
+      "continuity_review_status": "USER_APPROVED_MANIFEST_ONLY",
+      "source_tier": "cc_manual",
+      "author": "Square Kilometre Array Organisation (SKAO) / South African Radio Astronomy Observatory (SARAO)",
+      "selection_basis": "User explicitly approved the S02 candidate for manifest promotion; automated intake and fingerprint gates passed.",
+      "editorial_caveat": "Representational radio-telescope infrastructure only; never literal Petrov archival evidence. CC BY-SA 3.0 attribution and share-alike obligations remain active."
     },
     {
       "candidate_id": "pexels-11764431",
@@ -1406,16 +1459,17 @@
       "requested_truth_class": "MAP_OR_DIAGRAM",
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
       "assignment": {
-        "candidate_id": "mixkit-large-satellite-antenna-2650",
-        "usage": "Representational early-warning satellite infrastructure; not archival evidence.",
+        "candidate_id": "wikimedia-meerkat-night-telescopes-2023",
+        "usage": "Representational physical radio-telescope infrastructure for the external-sensor/communications beat; not archival evidence.",
         "approved_for_render": false,
         "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_MANIFEST"
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "approval_scope": "USER_APPROVED_MANIFEST_ONLY",
+        "editorial_caveat": "Never literal Petrov archival evidence; retain CC BY-SA attribution/share-alike obligations."
       },
       "blocking_reason": null,
       "continuity_tags": {
         "era": [
-          "1983",
           "cold_war",
           "analog",
           "period_compatible"
@@ -1439,6 +1493,11 @@
         "texture": [
           "brushed_metal",
           "low_light_grain"
+        ],
+        "risk_flags": [
+          "representational_infrastructure_not_archival",
+          "time_lapse_natural_sky_motion",
+          "cc_by_sa_attribution_required"
         ]
       }
     },
@@ -2384,6 +2443,27 @@
         "source_phash_run": 42390022588
       },
       "note": "Based on user's instruction to proceed with recommended preview; does not approve third-party/legal rights or actual 1983 identity"
+    },
+    {
+      "candidate_id": "wikimedia-meerkat-night-telescopes-2023",
+      "shot_ids": [
+        "S02"
+      ],
+      "decision": "USER_APPROVED_FOR_MANIFEST_ONLY",
+      "approved_at_utc": "2026-11-15",
+      "scope": "Representational external-sensor/radio-telescope footage",
+      "evidence": {
+        "intake_workflow_run_id": 43731902701,
+        "intake_artifact_id": 14169181114,
+        "fingerprint_workflow_run_id": 43732559732,
+        "source_sha256": "0af0714d0a4dbf24b08ceb7e28b5263190758d85b64041cb8ccb689d0267b615",
+        "perceptual_hash": "7d26c374a8e6060a7715bc0713917210364681365fd2c5b4a39da38d44769d34"
+      },
+      "constraints": [
+        "not literal Petrov archival evidence",
+        "CC BY-SA 3.0 attribution and share-alike required",
+        "manifest-only approval; no render, catalog mutation, Drive write or publication"
+      ]
     }
   ],
   "final_visual_manifest_validation": {
@@ -2424,7 +2504,8 @@
       "S04",
       "S07",
       "S10",
-      "S12"
+      "S12",
+      "S02"
     ],
     "previous_validation_snapshot": {
       "validated_at_utc": "2026-11-06T05:43:03Z",
@@ -2458,7 +2539,7 @@
       "S10"
     ]
   },
-  "last_adjustment": "2026-11-07: S09 manifest replaced audio mixer by retro keyboard Pexels 8888977, verified source hash/perceptual identity, user-approved editorially only; render rights remain blocked.",
+  "last_adjustment": "2026-11-15: User-approved manifest-only replacement of S02 with Wikimedia Meerkat radio-telescope night footage; CC BY-SA attribution/share-alike retained; render remains blocked.",
   "visual_continuity_profile": {
     "schema_version": "1.0",
     "profile_id": "episode-005-cold-war-bunker-continuity-v1",
@@ -2604,7 +2685,8 @@
       "S06",
       "S07",
       "S10",
-      "S11"
+      "S11",
+      "S02"
     ]
   },
   "replacement_history": [
@@ -2734,6 +2816,34 @@
       "global_catalog_updated": false,
       "drive_written": false,
       "publication_allowed": false
+    },
+    {
+      "recorded_on_date": "2026-11-15",
+      "shot_replacements": [
+        {
+          "shot_id": "S02",
+          "previous_candidate_id": "mixkit-large-satellite-antenna-2650",
+          "replacement_candidate_id": "wikimedia-meerkat-night-telescopes-2023",
+          "reason": "User-approved replacement improves exact physical external-sensor/radio-telescope fit and removes the prior generic satellite asset."
+        }
+      ],
+      "scope": "APPROVED_FOR_MANIFEST_ONLY",
+      "render_allowed": false,
+      "global_catalog_updated": false,
+      "drive_written": false,
+      "publication_allowed": false,
+      "evidence": {
+        "intake_workflow_run_id": 43731902701,
+        "intake_artifact_id": 14169181114,
+        "fingerprint_workflow_run_id": 43732559732,
+        "source_sha256": "0af0714d0a4dbf24b08ceb7e28b5263190758d85b64041cb8ccb689d0267b615",
+        "perceptual_hash": "7d26c374a8e6060a7715bc0713917210364681365fd2c5b4a39da38d44769d34"
+      },
+      "restrictions": [
+        "representational only",
+        "CC BY-SA attribution/share-alike required",
+        "all render and publication gates remain fail-closed"
+      ]
     }
   ],
   "scene_disclosure_contract": "episodes/episode-005/visual/scene-disclosures-v21.json",
