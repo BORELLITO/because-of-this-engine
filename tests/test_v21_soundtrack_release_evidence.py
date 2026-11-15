@@ -111,6 +111,34 @@ class V21SoundtrackReleaseEvidenceTests(unittest.TestCase):
         self.assertEqual(dossier["audio_content_screen"]["siren_absence_certified"], False)
         self.assertTrue((ROOT / "episodes/episode-005/music-clearance-silent-descent-archive-v21.json").is_file())
 
+    def test_private_candidate_master_binds_source_and_preview_hashes(self):
+        baseline = audit(ROOT, "episode-005")
+        self.assertFalse(any("private candidate master" in failure
+                             for failure in baseline["failures"]))
+
+        dossier = self.dossier()
+        self.assertEqual(
+            dossier["private_candidate_master"]["selpan_source_mp3_sha256"],
+            dossier["source_sha256"])
+        qa = json.loads((self.root / QA).read_text(encoding="utf-8"))
+        selpan = next(item for item in qa["candidates"] if item["title"] == "Selpan")
+        self.assertEqual(
+            dossier["private_candidate_master"]["selpan_preview_mp3_sha256"],
+            selpan["preview_sha256"])
+        dossier["private_candidate_master"]["selpan_source_mp3_sha256"] = "f" * 64
+        self.write_dossier(dossier)
+        result = audit(self.root, "episode-005")
+        self.assertTrue(any("source MP3 SHA" in failure
+                            for failure in result["failures"]))
+
+        dossier["private_candidate_master"]["selpan_source_mp3_sha256"] = (
+            dossier["source_sha256"])
+        dossier["private_candidate_master"]["selpan_preview_mp3_sha256"] = "f" * 64
+        self.write_dossier(dossier)
+        result = audit(self.root, "episode-005")
+        self.assertTrue(any("preview SHA" in failure
+                            for failure in result["failures"]))
+
     def test_source_screen_evidence_is_bound_to_same_real_original_mp3(self):
         checked=audit(self.root,"episode-005")
         self.assertEqual(checked["status"],"BLOCKED")
