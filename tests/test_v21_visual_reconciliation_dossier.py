@@ -1,4 +1,4 @@
-"""Non-promoting, deterministic report tests for the active V2.1 visual reconciliation contract."""
+"""Non-promoting, deterministic report tests for the active V2.1 visual reconciliation contract; active manifest remains 16 assets."""
 from __future__ import annotations
 
 import copy
