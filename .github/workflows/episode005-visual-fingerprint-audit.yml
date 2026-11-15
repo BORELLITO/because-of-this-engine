@@ -99,6 +99,7 @@ jobs:
           from urllib.parse import urlparse
 
           from production.asset_reuse_brain import source_asset_key
+          from production.active_visual_source_v21 import forbidden_concept_hits
           from production.visual_provider_policy import PROVIDER_POLICIES, host_allowed, policy_for
           from production.video_asset_contract import FINGERPRINT_ALGORITHM, ffprobe, perceptual_hash, sha256_file
 
@@ -131,6 +132,9 @@ jobs:
               for item in plan.get("candidates", [])
               if isinstance(item, dict) and str(item.get("candidate_id", "")).strip()
           }
+          forbidden_concepts = (
+              (plan.get("visual_continuity_profile") or {}).get("hard_forbidden") or []
+          )
           candidates = []
           for candidate_id in requested_ids:
               candidate = indexed.get(candidate_id)
@@ -138,6 +142,14 @@ jobs:
                   blockers.append({
                       "type": "candidate_not_in_plan",
                       "candidate_id": candidate_id,
+                  })
+                  continue
+              editorial_hits = forbidden_concept_hits(candidate, forbidden_concepts)
+              if editorial_hits:
+                  blockers.append({
+                      "type": "candidate_editorial_exclusion",
+                      "candidate_id": candidate_id,
+                      "hits": editorial_hits,
                   })
                   continue
               if str(candidate.get("rights_status", "")).startswith("REJECTED"):
