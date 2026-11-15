@@ -1028,7 +1028,7 @@
       "source_role": "S07",
       "role": "S07",
       "visual_match": "NEAR",
-      "visual_intent": "Dark archival SAGE control room and operator at a radar scope; representational reconstruction, no clock or time display.",
+      "visual_intent": "Dark archival SAGE control room and operator at a radar scope; selected segment only.",
       "truth_class": "REPRESENTATIONAL",
       "score": 88,
       "score_breakdown": {
@@ -1141,7 +1141,9 @@
       "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
-      "drive_written": false
+      "drive_written": false,
+      "sha256": "244923c250150692a1e8a632817b536132ccf08d3fa01199bd08fb932deafb30",
+      "perceptual_hash": "b859dd7ccc5863560f04a4f5086e598b584e8319dc4dcbbf578eb9fab991f28e"
     },
     {
       "candidate_id": "archive-gov-antps25-29604-s10",
@@ -1152,7 +1154,7 @@
       "source_role": "S10",
       "role": "S10",
       "visual_match": "NEAR",
-      "visual_intent": "Live-action radar operator and close control-panel adjustments in a dark technical room; no clock or time display.",
+      "visual_intent": "Live-action radar operator and close control-panel adjustments in a dark technical room; selected segment only.",
       "truth_class": "REPRESENTATIONAL",
       "score": 90,
       "score_breakdown": {
@@ -1266,7 +1268,9 @@
       "approved_for_render": false,
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
-      "drive_written": false
+      "drive_written": false,
+      "sha256": "06f744e3d62d7797a825671f165b299cb769c2138c68fd925e7c0e5bc215778f",
+      "perceptual_hash": "4366c57bfea0b85e50e56334c8f5c05d28cb14b531bca983d7bc077f91118c09"
     },
     {
       "candidate_id": "pixabay-antenna-astronomy-communication-40041",
