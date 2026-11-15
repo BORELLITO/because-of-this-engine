@@ -38,6 +38,10 @@ OUTRO_LOGO_WIDTH = 620
 OUTRO_SECONDS = 5.5
 OUTRO_TRANSITION = "brand_background_to_black"
 
+# Compatibility aliases kept for existing V2.1 tests and reporting imports.
+IN_VIDEO_LOGO_WIDTH = LOGO_WIDTH
+IN_VIDEO_LOGO_Y = LOGO_Y
+
 
 def expected_contract() -> dict[str, object]:
     return {
