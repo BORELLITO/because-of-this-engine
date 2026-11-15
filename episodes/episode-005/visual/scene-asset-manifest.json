@@ -2197,16 +2197,16 @@
   ],
   "unresolved_shots": [],
   "promotion_gates": {
-    "every_shot_assigned": false,
+    "every_shot_assigned": true,
     "final_visual_manifest_validated": false,
     "global_catalog_update_authorized": false,
     "thumbnail_final_required": true,
     "render_authorized": false,
     "drive_write_authorized": false,
     "publication_authorized": false,
-    "visual_source_gate": "BLOCKED_EDITORIAL_NO_CLOCK_REPLACEMENTS_REQUIRED"
+    "visual_source_gate": "BLOCKED_CONTINUITY_REVALIDATION_REQUIRED"
   },
-  "next_action": "Replace S07 and S10 with clean, non-clock visual candidates; complete intake, fingerprint, continuity and rights revalidation before any preview.",
+  "next_action": "Run authoritative sequence-level continuity and rights revalidation for S02, S06, S07, S10, S11 and S12; keep preview blocked until PASS.",
   "reuse_policy": {
     "source_reuse_scope": "global",
     "distinct_source_required_per_shot": true,
@@ -2470,20 +2470,20 @@
     }
   ],
   "final_visual_manifest_validation": {
-    "validated_at_utc": "2026-11-06T06:41:53Z",
-    "status": "BLOCKED_EDITORIAL_NO_CLOCK_REPLACEMENTS_REQUIRED",
+    "validated_at_utc": "2026-11-15",
+    "status": "VISUAL_PLAN_CONTRACT_PASS_WITH_CONTINUITY_REVIEW",
     "validator": "production/visual_plan_contract.py",
-    "checkout_commit": "6e845edf59a3d15695fb86017a4274353a5711a5",
+    "checkout_commit": "e0a527c7a67622e0020e9b781bed436b6aabbd6a",
     "candidate_count": 51,
     "approved_manifest_candidate_count": 25,
-    "manifest_asset_count": 14,
-    "assigned_shot_count": 14,
-    "unresolved_shot_count": 2,
+    "manifest_asset_count": 16,
+    "assigned_shot_count": 16,
+    "unresolved_shot_count": 0,
     "promotion_allowed": false,
     "render_allowed": false,
     "global_catalog_updated": false,
     "revalidation_required": true,
-    "replacement_note": "S04/S12 replacements are fingerprint-clean and manifest-only; continuity CI must recalculate adjacency and hard-conflict results before render consideration.",
+    "replacement_note": "S07 and S10 now use approved public-domain no-clock segments. The source/intake/fingerprint contracts are consistent; sequence-level adjacency and continuity metrics still require authoritative recalculation before preview.",
     "continuity_gate": "REVIEW_REQUIRED",
     "strict_preview_block": true,
     "ci_workflow_run_id": 42176059809,
@@ -2504,11 +2504,12 @@
     "continuity_hard_conflict_count": 13,
     "continuity_coverage_score": 0.9187,
     "pending_revalidation_shots": [
-      "S04",
+      "S02",
+      "S06",
       "S07",
       "S10",
-      "S12",
-      "S02"
+      "S11",
+      "S12"
     ],
     "previous_validation_snapshot": {
       "validated_at_utc": "2026-11-06T05:43:03Z",
@@ -2536,13 +2537,13 @@
       "S04",
       "S12"
     ],
-    "note": "The active manifest contains no clock assets. S07 and S10 are intentionally unassigned until clean non-clock replacements pass the V2.1 gates.",
+    "note": "The active manifest contains no clock assets and no NASA assets. S07/S10 replacement source QA passed; preview remains blocked pending sequence-level revalidation.",
     "editorial_block_shots": [
       "S07",
       "S10"
     ]
   },
-  "last_adjustment": "2026-11-15: User-approved manifest-only replacement of S02 with Wikimedia Meerkat radio-telescope night footage; CC BY-SA attribution/share-alike retained; render remains blocked.",
+  "last_adjustment": "2026-11-15: S07/S10 clock assignments are now replaced by approved public-domain no-clock segments; stale clock-replacement blocker reconciled. Sequence-level continuity and rights revalidation remain mandatory.",
   "visual_continuity_profile": {
     "schema_version": "1.0",
     "profile_id": "episode-005-cold-war-bunker-continuity-v1",
@@ -2660,9 +2661,9 @@
     ]
   },
   "continuity_gate": {
-    "status": "BLOCKED_EDITORIAL_NO_CLOCK_REPLACEMENTS_REQUIRED",
+    "status": "REVIEW_REQUIRED",
     "profile_id": "episode-005-cold-war-bunker-continuity-v1",
-    "reason": "S07/S10 clock assignments were revoked by the current editorial lock; authoritative continuity and rights validation must run after replacement.",
+    "reason": "S07/S10 now have approved public-domain no-clock replacement segments; authoritative sequence-level continuity, adjacency and rights revalidation remains required before preview.",
     "strict_preview_block": true,
     "hard_conflict_shots": [
       "S04",
@@ -2685,11 +2686,12 @@
     "hard_conflict_count": 13,
     "revalidation_required": true,
     "pending_revalidation_shots": [
+      "S02",
       "S06",
       "S07",
       "S10",
       "S11",
-      "S02"
+      "S12"
     ]
   },
   "replacement_history": [
