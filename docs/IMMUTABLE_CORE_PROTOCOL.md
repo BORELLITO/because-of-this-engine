@@ -37,3 +37,23 @@ Before preview or production: read the active policy, read the immutable-core po
 Protect main manually with required Pull Requests, required immutable-core checks, disabled direct pushes, disabled force pushes and disabled branch deletion. The connected integration can inspect files, create branches and prepare Pull Requests, but lacks repository-administration permission to guarantee these settings automatically.
 
 Rollback means closing the Pull Request or reverting its commit. Never delete history.
+
+
+## Transparência obrigatória para o usuário
+
+O motor não deve apenas bloquear regressões: deve manter Borelli informado durante todo o trabalho. Nenhuma ação relevante pode ser executada de forma silenciosa.
+
+Antes de agir, o responsável deve informar, em formato curto e didático:
+
+- estado atual;
+- o que será feito;
+- escopo autorizado;
+- o que será preservado;
+- riscos ou bloqueios;
+- qual evidência será apresentada.
+
+Durante a execução, usar os estados PLANEJADO, EM EXECUÇÃO e BLOQUEADO quando aplicável. Ao terminar, informar separadamente IMPLEMENTADO, TESTADO, APROVADO e PRÓXIMO PASSO. Nunca declarar conclusão sem evidência verificável.
+
+Toda mudança do núcleo precisa carregar o relatório de transparência no corpo do Pull Request. O workflow immutable-core bloqueia a mudança quando qualquer seção obrigatória estiver ausente.
+
+O modelo oficial está em docs/CHANGE_TRANSPARENCY_PROTOCOL.md. Esta regra não autoriza mudanças por si só; ela apenas garante que Borelli saiba o que está acontecendo e possa interromper ou autorizar o próximo passo.
