@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Any
 
 from production.visual_continuity import validate_sequence
+from production.active_visual_source_v21 import validate_scene_manifest
 from production.scene_disclosures_v21 import load_for_preview, ffmpeg_nasa_overlay, ffmpeg_actor_overlay, NASA_ID, ACTOR_ID
 from production.v21_visual_contract import (
     ACTIVE_WORD_COLOR as CONTRACT_ACTIVE_WORD_COLOR,
@@ -239,6 +240,16 @@ def render_preview(
     report_path: Path,
 ) -> dict[str, Any]:
     scene_manifest = json.loads(scene_manifest_path.read_text(encoding="utf-8"))
+    active_source_gate = validate_scene_manifest(
+        scene_manifest,
+        scene_manifest_path,
+        expected_episode_id=str(scene_manifest.get("episode_id") or "episode-005"),
+    )
+    if active_source_gate["status"] != "PASS":
+        raise PreviewRenderError(
+            "Active V2.1 visual source gate blocked preview: "
+            + "; ".join(active_source_gate["failures"])
+        )
     verified_disclosures = load_for_preview(scene_manifest_path, scene_manifest)
     story = json.loads(story_path.read_text(encoding="utf-8"))
     plan = build_scene_plan(scene_manifest, story)
@@ -348,6 +359,7 @@ def render_preview(
         "scene_duration_seconds": round(sum(float(item["duration"]) for item in plan), 3),
         "audio_duration_seconds": round(audio_seconds, 3),
         "total_duration_seconds": round(audio_seconds + OUTRO_SECONDS, 3),
+        "active_visual_source_gate": active_source_gate,
         "visual_continuity_gate": continuity_gate,
         "tail_extension_seconds": round(
             max(0.0, audio_seconds + OUTRO_SECONDS - sum(float(item["duration"]) for item in plan)), 3
