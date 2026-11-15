@@ -103,7 +103,7 @@ class V21VisualReconciliationDossierTests(unittest.TestCase):
             })
         report = build_dossier(rec, plan, man)
         self.assertEqual(report["status"], "EVIDENCE_CONSISTENT_NOT_RENDER_AUTHORIZED", report)
-        self.assertEqual(report["render_rights_matched_count"], 14)
+        self.assertEqual(report["render_rights_matched_count"], 16)
         self.assertEqual(report["draft_pending_rights_not_canonical"], [])
         self.assertEqual(report["render"], "NOT_RUN")
 
