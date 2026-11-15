@@ -54,3 +54,19 @@ Use the transparent original Because Of This logo in its approved safe position.
 ## Release gate
 
 A technically valid audio candidate cannot promote a video when the visual scene contracts or visual style are unresolved. Human preview approval remains mandatory.
+
+
+## Referência de clipes sem herança de overlays
+
+Quando Borelli fornece um MP4 como referência de edição, ele pode definir apenas a sequência, a seleção e a continuidade dos clipes. O MP4 de referência nunca autoriza herdar legenda, karaokê, logo, posição, espaçamento, cor, tipografia, marca d'água ou outro elemento queimado na imagem.
+
+A composição ativa é sempre reconstruída pela camada V2.1:
+
+- logo: brand/because-of-this-wordmark-transparent.png, hash canônico validado;
+- logo no vídeo: largura 360 px, eixo central, y=190;
+- legenda: alinhamento 2, centralizada na faixa inferior, margin_v=650;
+- máximo de duas linhas e até 42 caracteres por linha;
+- karaokê por timestamps reais, ativo em #F04444;
+- nenhum render pode aceitar os marcadores legados y=72, margin_v=320 ou logo 540/820.
+
+Se a única fonte disponível já contiver esses overlays queimados, ela não é fonte de render final: é apenas referência visual. O render exige os clipes limpos ou os arquivos de origem para preservar a qualidade máxima.
