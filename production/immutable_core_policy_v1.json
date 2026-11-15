@@ -1,6 +1,6 @@
 {
   "policy_id": "because-of-this-immutable-core-v1",
-  "policy_version": "1.1",
+  "policy_version": "1.2",
   "status": "LOCKED",
   "scope": "BECAUSE OF THIS engine",
   "default_action_on_drift": "BLOCK",
@@ -14,7 +14,7 @@
   "authority_files": [
     {
       "path": "production/active_engine_policy.json",
-      "git_blob_sha1": "3199c9576d9139deb53aacb4575265332501d0d2"
+      "git_blob_sha1": "4655c187c8214e7d10c16a5b304ffef5aaf6a268"
     },
     {
       "path": "production/active_surface_lock_v21.py",
@@ -43,6 +43,22 @@
     {
       "path": "production/v21_visual_contract.py",
       "git_blob_sha1": "71e9a629aaa3d50010b618651bacf6e1002d81ef"
+    },
+    {
+      "path": "production/render_v21_manual.py",
+      "git_blob_sha1": "4394b8b92dcc99a545394c93962d0e81cadcf8d4"
+    },
+    {
+      "path": "docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V3.md",
+      "git_blob_sha1": "db460dfa70fcf0f5aeef1a81c718fc5f0345abaf"
+    },
+    {
+      "path": "production/prompt_authority_v3.py",
+      "git_blob_sha1": "77aa57c4efe332c02a32939195d5db8e83aac5dd"
+    },
+    {
+      "path": "production/v3_visual_policy.py",
+      "git_blob_sha1": "97d1d9209d7de13a306790ae53e129d959545438"
     }
   ],
   "immutable_contract": {
@@ -91,7 +107,19 @@
       "generic_keyword_filler": false,
       "reused_clips": false,
       "silent_clip_substitution": false,
-      "approved_clip_change_requires_episode_lock_update": true
+      "approved_clip_change_requires_episode_lock_update": true,
+      "direct_photorealistic_event_only": true,
+      "forbidden_scene_classes": [
+        "MAP_OR_DIAGRAM",
+        "ABSTRACT_ATMOSPHERE"
+      ]
+    },
+    "prompt_authority": {
+      "version": "V3",
+      "path": "docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V3.md",
+      "sha256": "354b9dfb3950e20aecf1b363a95916914a99a9f9cd2f5454d7dd0570c3d4487e",
+      "validation": "production/prompt_authority_v3.py",
+      "drift_action": "BLOCK"
     }
   },
   "episode_surface_lock_protocol": {

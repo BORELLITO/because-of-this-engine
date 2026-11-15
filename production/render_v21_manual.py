@@ -21,6 +21,8 @@ from production.audio_history_audit_v21 import audit as audit_audio_history
 from production.soundtrack_release_evidence_v21 import audit as audit_soundtrack_release
 from production.rights_autonomy_v21 import audit_repository as audit_autonomous_rights
 from production.scene_disclosures_v21 import audit_repository as audit_scene_disclosures
+from production.prompt_authority_v3 import validate_prompt_authority
+from production.v3_visual_policy import audit_episode
 
 POLICY_PATH = Path(__file__).resolve().parent / "active_engine_policy.json"
 EXPECTED_ENTRYPOINT = "production/canonical_entrypoint.py"
@@ -104,6 +106,18 @@ def validate_request(
         raise ManualRenderGateError(f"unsupported render mode: {mode}")
     policy = _policy(policy_path)
     failures: list[str] = []
+
+    # Synthetic unit fixtures may pass a temporary policy. Only the real
+    # repository policy is allowed to enforce the operational Prompt V3 and
+    # direct-photorealistic episode gate.
+    canonical_policy = policy_path.resolve() == POLICY_PATH.resolve()
+    if canonical_policy:
+        prompt_report = validate_prompt_authority(repo_root, policy)
+        if prompt_report["status"] != "PROMPT_AUTHORITY_PASS":
+            failures.extend("prompt_authority:" + item for item in prompt_report["failures"])
+        visual_policy = audit_episode(repo_root, record)
+        if visual_policy["status"] != "V3_VISUAL_POLICY_PASS":
+            failures.extend("v3_visual:" + item for item in visual_policy["failures"])
 
     enablement_field = "preview_enablement" if mode == "preview" else "production_enablement"
     if policy.get(enablement_field) is not True:

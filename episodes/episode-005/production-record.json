@@ -1135,7 +1135,7 @@
     ],
     "blocked_at_utc": "2026-11-15T00:00:00Z"
   },
-  "last_adjustment": "2026-11-15: V2.1 manifest completed with two public-domain non-clock archival segments; NASA S12 removed; preview/render remain blocked pending manual preflight.",
+  "last_adjustment": "2026-11-15: Prompt V3 registered in isolated PR; direct-photorealistic visual gate added; historical Edge record quarantined; no clips, preview, render or publication changed.",
   "autonomous_rights_evidence_path": "reports/EP005_AUTONOMOUS_RIGHTS_VISUAL_EVIDENCE_20261107.json",
   "video_title": "THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
   "episode_name": "05 - THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
@@ -1180,5 +1180,17 @@
     "source": "GitHub Actions artifact registry",
     "release_authorized": false,
     "final_mix_bound": false
+  },
+  "active_prompt": {
+    "version": "V3",
+    "path": "docs/PROMPT_MESTRE_BECAUSE_OF_THIS_V3.md",
+    "sha256": "354b9dfb3950e20aecf1b363a95916914a99a9f9cd2f5454d7dd0570c3d4487e",
+    "authority_status": "REGISTERED_IN_PR_NOT_YET_MERGED"
+  },
+  "v3_visual_policy": {
+    "status": "BLOCKED_REVIEW_REQUIRED",
+    "gate": "production/v3_visual_policy.py",
+    "reason": "Current Episode 005 manifest still contains MAP_OR_DIAGRAM and diagrammatic/abstract requests; no clips were changed.",
+    "render_allowed": false
   }
 }
