@@ -128,7 +128,8 @@ PROVIDER_POLICIES: dict[str, dict[str, Any]] = {
         manual_only=True,
     ),
     "internet_archive": _policy(
-        license_name="Internet Archive Rights Statement (per item)",
+        license_name="Public Domain",
+        license_names=("Internet Archive Rights Statement (per item)",),
         page_hosts={"archive.org"},
         media_hosts={"archive.org", "ia801", "ia800", "ia900"},
         source_tier="archive_manual",
