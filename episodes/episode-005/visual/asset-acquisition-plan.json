@@ -4734,12 +4734,22 @@
         "codec": "vp9",
         "automated_promotion": false,
         "size_bytes": 27618974,
-        "fps": 29.97002997002997
+        "fps": 29.97002997002997,
+        "perceptual_hash": "7d26c374a8e6060a7715bc0713917210364681365fd2c5b4a39da38d44769d34",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 43732559732,
+        "fingerprint_job_id": 132868028415,
+        "fingerprint_artifact_id": 14168629077,
+        "fingerprint_artifact_name": "episode005-visual-fingerprint-audit",
+        "fingerprint_artifact_digest": "sha256:fb73a68f724ef5385e8ac08d54d9850e14ef57cbf4b817685e38bf4e27a286d6",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
       },
       "fingerprint_artifact": null
     }
   ],
-  "next_action": "Re-run global fingerprint audit for wikimedia-meerkat-night-telescopes-2023 using the recorded intake artifact; keep human approval, manifest assignment, render, preview, Drive, catalog and publication blocked.",
+  "next_action": "Human visual QA of the five normalized intake frames and 9x16 crop for wikimedia-meerkat-night-telescopes-2023; keep manifest assignment, render, preview, Drive, catalog and publication blocked.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -6468,5 +6478,27 @@
       "S12"
     ]
   },
-  "clock_candidates": []
+  "clock_candidates": [],
+  "last_fingerprint_attempt": {
+    "recorded_at_utc": "2026-11-15T15:55:15Z",
+    "workflow_run_id": 43732559732,
+    "job_id": 132868028415,
+    "branch": "main",
+    "commit_sha": "bde75a0302124b2fb25ef0e43ae6116907f23de0",
+    "candidate_ids": [
+      "wikimedia-meerkat-night-telescopes-2023"
+    ],
+    "intake_run_id": 43731902701,
+    "status": "FINGERPRINT_AUDIT_PASS",
+    "artifact_id": 14168629077,
+    "artifact_name": "episode005-visual-fingerprint-audit",
+    "artifact_digest": "sha256:fb73a68f724ef5385e8ac08d54d9850e14ef57cbf4b817685e38bf4e27a286d6",
+    "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+    "blockers": [],
+    "human_approval_pending": true,
+    "promotion_allowed": false,
+    "render_allowed": false,
+    "global_catalog_updated": false,
+    "drive_written": false
+  }
 }
