@@ -117,6 +117,14 @@ class V21SoundtrackReleaseEvidenceTests(unittest.TestCase):
                              for failure in baseline["failures"]))
 
         dossier = self.dossier()
+        self.assertEqual(
+            dossier["private_candidate_master"]["selpan_source_mp3_sha256"],
+            dossier["source_sha256"])
+        qa = json.loads((self.root / QA).read_text(encoding="utf-8"))
+        selpan = next(item for item in qa["candidates"] if item["title"] == "Selpan")
+        self.assertEqual(
+            dossier["private_candidate_master"]["selpan_preview_mp3_sha256"],
+            selpan["preview_sha256"])
         dossier["private_candidate_master"]["selpan_source_mp3_sha256"] = "f" * 64
         self.write_dossier(dossier)
         result = audit(self.root, "episode-005")
