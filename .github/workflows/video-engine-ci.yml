@@ -312,7 +312,7 @@ jobs:
           print("EPISODE005_CROSS_LEDGER_EXPECTED_BLOCK_PASS")
           PY
 
-      - name: Audit autonomous source-specific render decisions (9 labelled, 0 blocked)
+      - name: Audit autonomous source-specific render decisions (7 active, 0 blocked)
         run: |
           PYTHONPATH=. python production/rights_autonomy_v21.py \
             --repo-root . \
@@ -327,8 +327,7 @@ jobs:
           allowed={x["asset_id"] for x in data["decisions"] if x["allow_scoped_render"]}
           blocked={x["asset_id"] for x in data["decisions"] if not x["allow_scoped_render"]}
           assert allowed == {"pixabay-radio-vintage-old-171435",
-                             "pixabay-radar-black-green-target-symbol-57670",
-                             "pexels-5523892","pexels-12590338","pexels-8888977",
+                             "pexels-12590338","pexels-8888977",
                              "pexels-11764431","archive-prelinger-onguard1956-s07",
                              "archive-gov-antps25-29604-s10",
                              "pixabay-antenna-astronomy-communication-40041"},allowed
