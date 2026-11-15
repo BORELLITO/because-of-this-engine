@@ -553,8 +553,8 @@
       "official_license_terms_checked_date": "2026-11-05"
     },
     {
-      "asset_id": "pixabay-led-indicator-lights-316712",
-      "source_url": "https://pixabay.com/videos/led-indicator-lights-electronics-316712/",
+      "asset_id": "pixabay-button-press-red-business-click-502",
+      "source_url": "https://pixabay.com/videos/button-press-red-business-click-502/",
       "provider": "pixabay",
       "author": "UNVERIFIED_CONTRIBUTOR",
       "license_name": "Pixabay Content License",
@@ -568,16 +568,16 @@
         "tiktok"
       ],
       "download_date": "2026-11-05",
-      "license_evidence": "https://pixabay.com/service/license-summary/",
-      "sha256": "e4d3d281bab5ffb6808a6ad0b20dd03e3857112cf309ee86d1dec234d4ac928e",
+      "license_evidence": "https://pixabay.com/videos/button-press-red-business-click-502/",
+      "sha256": "e6eaeddadbda7f8fdf9e4106ad09e0c25e0139f0212dce20a29d34cd8eb77b16",
       "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
       "story_id": "story-stanislav-petrov-false-alarm-1983",
       "used_by": [
         "episode-005"
       ],
       "intended_use_episode": "episode-005",
-      "intake_workflow_run_id": 42044610956,
-      "intake_artifact_id": 13422389208,
+      "intake_workflow_run_id": 42073828513,
+      "intake_artifact_id": 13437466569,
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
       "rights_status": "APPROVED",
       "approved_for_render": true,
@@ -591,7 +591,7 @@
       "autonomous_decision": "BLOCKED_PENDING_FINAL_PREFLIGHT",
       "blocking_rationale": "Asset rights are scoped to this episode; episode preview/render remains blocked until explicit V2.1 preflight authorization.",
       "visual_historical_truth_review": "REPRESENTATIONAL_OR_EXPLANATORY_ONLY",
-      "narrative_risk_note": "Representational footage only; never literal Petrov archival evidence.",
+      "narrative_risk_note": "Representational physical button footage; never literal Soviet interface.",
       "source_media_audio_allowed": false,
       "source_audio_policy": "strip",
       "credits_required": false,
@@ -605,7 +605,8 @@
       "derived_rights_from_prior_asset": false,
       "actual_scene_assignment": "S06",
       "no_endorsement_or_archival_claim": true,
-      "official_license_terms_checked_date": "2026-11-05"
+      "official_license_terms_checked_date": "2026-11-05",
+      "perceptual_fingerprint": "155c325b4b0c121d7add2c16eea0d86efa5379f7bcec66dc52bec0073972e884"
     },
     {
       "asset_id": "archive-prelinger-onguard1956-s07",
@@ -997,7 +998,7 @@
       "approved_for_render": true,
       "approval_scope": "episode-005-render",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
-      "render_approval_status": "APPROVED",
+      "render_approval_status": "MANIFEST_EVIDENCE_BOUND_NOT_FINAL_RENDER",
       "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE",
       "actual_scene_assignment": "S13"
     },
@@ -1025,7 +1026,7 @@
       "approved_for_render": true,
       "approval_scope": "episode-005-render",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
-      "render_approval_status": "APPROVED",
+      "render_approval_status": "MANIFEST_EVIDENCE_BOUND_NOT_FINAL_RENDER",
       "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE",
       "actual_scene_assignment": "S14"
     },
@@ -1053,7 +1054,7 @@
       "approved_for_render": true,
       "approval_scope": "episode-005-render",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
-      "render_approval_status": "APPROVED",
+      "render_approval_status": "MANIFEST_EVIDENCE_BOUND_NOT_FINAL_RENDER",
       "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE",
       "actual_scene_assignment": "S15"
     },
@@ -1081,7 +1082,7 @@
       "approved_for_render": true,
       "approval_scope": "episode-005-render",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
-      "render_approval_status": "APPROVED",
+      "render_approval_status": "MANIFEST_EVIDENCE_BOUND_NOT_FINAL_RENDER",
       "license_confirmation_status": "CONFIRMED_ITEM_PAGE_FREE_LICENSE",
       "actual_scene_assignment": "S16"
     }
