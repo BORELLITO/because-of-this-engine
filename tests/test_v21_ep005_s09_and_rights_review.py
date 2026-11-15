@@ -61,8 +61,8 @@ class EP005S09AndRightsReviewTests(unittest.TestCase):
     def test_new_evidence_does_not_unblock_real_episode(self):
         from production.visual_rights_consistency_v21 import validate_visual_rights_consistency
         result = validate_visual_rights_consistency(self.record, repo_root=ROOT)
-        self.assertEqual(result["status"], "PASS")
-        self.assertFalse(any("visual assets missing render rights" in x for x in result["failures"]))
+        self.assertEqual(result["status"], "BLOCKED")
+        self.assertTrue(any("scoped render authorization absent" in x for x in result["failures"]))
         self.assertFalse(any("pexels-8888977: render rights not independently approved" in x for x in result["failures"]))
         self.assertFalse(any("nasa-svs-geos5-clouds-no-labels-4819: render rights not independently approved" in x for x in result["failures"]))
         self.assertFalse(any("nasa-svs-geos5-clouds-no-labels-4819" in x for x in result["failures"]))
