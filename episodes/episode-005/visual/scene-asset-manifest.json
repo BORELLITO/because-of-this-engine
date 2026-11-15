@@ -5,7 +5,7 @@
   "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
   "editorial_mode": "factual_documentary",
   "title": "THE NIGHT THE MACHINE LIED",
-  "status": "MANUAL_CONTINUITY_REVIEW_RECORDED_PENDING_CI_REVALIDATION",
+  "status": "BLOCKED_EDITORIAL_NO_CLOCK_REPLACEMENTS_REQUIRED",
   "purpose": "Human-approved candidate-to-shot assignments before final production promotion.",
   "source_plan": "episodes/episode-005/visual/asset-acquisition-plan.json",
   "approval_record": {
@@ -18,7 +18,9 @@
       "Drive write remains disabled",
       "publication remains manual-only",
       "the visual manifest remains manifest-only; render authorization is controlled by production-record.json",
-      "no automatic render execution or silent fallback"
+      "no automatic render execution or silent fallback",
+      "No clock, watch, timepiece or clock-mechanism footage is permitted in the active Episode 005 visual set.",
+      "Previous complete-set render authorization is superseded until S07 and S10 receive non-clock replacements."
     ],
     "latest_manifest_update": {
       "recorded_on_date": "2026-11-07",
@@ -150,122 +152,6 @@
       },
       "continuity_risk_flags": [
         "symbolic_insert_requires_editorial_match"
-      ],
-      "continuity_review_status": "REVIEW_REQUIRED",
-      "source_tier": "stock_auto"
-    },
-    {
-      "candidate_id": "mixkit-slowly-approaching-clock-28897",
-      "provider": "mixkit",
-      "source_page_url": "https://mixkit.co/free-stock-video/slowly-approaching-a-clock-on-a-black-background-28897/",
-      "media_url": "https://assets.mixkit.co/videos/28897/28897-720.mp4",
-      "license_name": "Mixkit Stock Video Free License",
-      "source_role": "S07,S10",
-      "truth_class": "DOCUMENTED_RECONSTRUCTION",
-      "sha256": "d254063cd2f4ceeaf186f68c71c905fb8b27d9e94397aa0a794e93827208b505",
-      "perceptual_hash": "9c8a21443b162c8a16f99d0876c8910cde48548fc525fc8c00c159dbc9db6f64",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
-      "intake_artifact": {
-        "workflow_run_id": 42003907636,
-        "artifact_id": 13403188677,
-        "artifact_digest": "sha256:3d1a8b60b24cede0ebb3b99d14f8ee9fcdc508040320498ec80f8f8d5bf78299"
-      },
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "human_approval": "APPROVED_FOR_MANIFEST",
-      "approved_for_render": false,
-      "global_catalog_updated": false,
-      "thumbnail_eligible": false,
-      "drive_written": false,
-      "continuity_tags": {
-        "era": [
-          "analog",
-          "cold_war",
-          "period_compatible"
-        ],
-        "setting": [
-          "technical_control_room"
-        ],
-        "time_of_day": [
-          "night",
-          "indeterminate_low_light"
-        ],
-        "lighting": [
-          "low_key",
-          "cool_shadows"
-        ],
-        "palette": [
-          "charcoal",
-          "steel"
-        ],
-        "texture": [
-          "brushed_metal",
-          "low_light_grain"
-        ],
-        "risk_flags": []
-      },
-      "continuity_risk_flags": [],
-      "continuity_review_status": "PASS",
-      "source_tier": "stock_auto"
-    },
-    {
-      "candidate_id": "mixkit-clock-mechanism-3651",
-      "provider": "mixkit",
-      "source_page_url": "https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/",
-      "media_url": "https://assets.mixkit.co/videos/3651/3651-720.mp4",
-      "license_name": "Mixkit Stock Video Free License",
-      "source_role": "S10",
-      "truth_class": "DOCUMENTED_RECONSTRUCTION",
-      "sha256": "575ec01ae49bad9f5e5d634d51c1d78c31856e2171ca799065d9750dce3de5fd",
-      "perceptual_hash": "8d01acb640e75c70ee0d46ceaabeec546bbcc70f24d7a4a4d0c9e1cd46a3f72",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
-      "intake_artifact": {
-        "workflow_run_id": 42010569943,
-        "artifact_id": 13406364533,
-        "artifact_digest": "sha256:620db58c193f7850a427a04d14b241f48a6779b20e98a6261b9f592fc054b326"
-      },
-      "fingerprint_artifact": {
-        "workflow_run_id": 42014828184,
-        "artifact_id": 13408966434,
-        "artifact_digest": "sha256:d9d4adbc09e85d5aea9370a3c7045125afe04ac81ac43cfb5dfa6b18677e2199"
-      },
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "human_approval": "APPROVED_FOR_MANIFEST",
-      "approved_for_render": false,
-      "global_catalog_updated": false,
-      "thumbnail_eligible": false,
-      "drive_written": false,
-      "continuity_tags": {
-        "era": [
-          "analog",
-          "cold_war",
-          "period_compatible"
-        ],
-        "setting": [
-          "technical_control_room"
-        ],
-        "time_of_day": [
-          "night",
-          "indeterminate_low_light"
-        ],
-        "lighting": [
-          "low_key",
-          "cool_shadows"
-        ],
-        "palette": [
-          "charcoal",
-          "steel"
-        ],
-        "texture": [
-          "brushed_metal",
-          "mechanical",
-          "low_light_grain"
-        ],
-        "risk_flags": [
-          "motif_repetition_with_S07"
-        ]
-      },
-      "continuity_risk_flags": [
-        "motif_repetition_with_S07"
       ],
       "continuity_review_status": "REVIEW_REQUIRED",
       "source_tier": "stock_auto"
@@ -1522,14 +1408,8 @@
       "role": "decision_pressure",
       "requested_visual": "Petrov studies the panel, telephone and clock.",
       "requested_truth_class": "REPRESENTATIONAL",
-      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
-      "assignment": {
-        "candidate_id": "mixkit-slowly-approaching-clock-28897",
-        "usage": "Clock pressure and decision window.",
-        "approved_for_render": false,
-        "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_MANIFEST"
-      },
+      "status": "BLOCKED_REPLACEMENT_REQUIRED_NO_CLOCK",
+      "assignment": null,
       "blocking_reason": null,
       "continuity_tags": {
         "era": [
@@ -1557,7 +1437,9 @@
           "brushed_metal",
           "low_light_grain"
         ]
-      }
+      },
+      "visual_request": "Dark analog control surface under decision pressure; no clock, watch, timepiece or time display.",
+      "editorial_lock": "NO_CLOCKS"
     },
     {
       "shot_id": "S08",
@@ -1666,14 +1548,8 @@
       "role": "suspense",
       "requested_visual": "Bunker waits; clock advances through silence.",
       "requested_truth_class": "REPRESENTATIONAL",
-      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
-      "assignment": {
-        "candidate_id": "mixkit-clock-mechanism-3651",
-        "usage": "Mechanical passage of time during the bunker wait.",
-        "approved_for_render": false,
-        "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_MANIFEST"
-      },
+      "status": "BLOCKED_REPLACEMENT_REQUIRED_NO_CLOCK",
+      "assignment": null,
       "blocking_reason": null,
       "continuity_tags": {
         "era": [
@@ -1702,7 +1578,9 @@
           "mechanical",
           "low_light_grain"
         ]
-      }
+      },
+      "visual_request": "Bunker holds in low-key silence as indicator lights settle; no clock, watch, timepiece or time display.",
+      "editorial_lock": "NO_CLOCKS"
     },
     {
       "shot_id": "S11",
@@ -1995,17 +1873,21 @@
       }
     }
   ],
-  "unresolved_shots": [],
+  "unresolved_shots": [
+    "S07",
+    "S10"
+  ],
   "promotion_gates": {
-    "every_shot_assigned": true,
-    "final_visual_manifest_validated": true,
+    "every_shot_assigned": false,
+    "final_visual_manifest_validated": false,
     "global_catalog_update_authorized": false,
     "thumbnail_final_required": true,
     "render_authorized": false,
     "drive_write_authorized": false,
-    "publication_authorized": false
+    "publication_authorized": false,
+    "visual_source_gate": "BLOCKED_EDITORIAL_NO_CLOCK_REPLACEMENTS_REQUIRED"
   },
-  "next_action": "Reconcile rights ledger for seven missing active assets and remove or archive seven stale rights only after independent evidence. Keep Episode 005 blocked for render.",
+  "next_action": "Replace S07 and S10 with clean, non-clock visual candidates; complete intake, fingerprint, continuity and rights revalidation before any preview.",
   "reuse_policy": {
     "source_reuse_scope": "global",
     "distinct_source_required_per_shot": true,
@@ -2248,14 +2130,14 @@
   ],
   "final_visual_manifest_validation": {
     "validated_at_utc": "2026-11-06T06:41:53Z",
-    "status": "REVALIDATION_PENDING",
+    "status": "BLOCKED_EDITORIAL_NO_CLOCK_REPLACEMENTS_REQUIRED",
     "validator": "production/visual_plan_contract.py",
     "checkout_commit": "6e845edf59a3d15695fb86017a4274353a5711a5",
     "candidate_count": 51,
     "approved_manifest_candidate_count": 25,
-    "manifest_asset_count": 16,
-    "assigned_shot_count": 16,
-    "unresolved_shot_count": 0,
+    "manifest_asset_count": 14,
+    "assigned_shot_count": 14,
+    "unresolved_shot_count": 2,
     "promotion_allowed": false,
     "render_allowed": false,
     "global_catalog_updated": false,
@@ -2282,6 +2164,8 @@
     "continuity_coverage_score": 0.9187,
     "pending_revalidation_shots": [
       "S04",
+      "S07",
+      "S10",
       "S12"
     ],
     "previous_validation_snapshot": {
@@ -2310,7 +2194,11 @@
       "S04",
       "S12"
     ],
-    "note": "CI run 42176059809 validated the updated S03/S09 manifest replacements. Both new shots pass continuity; S04/S12 remain hard conflicts and S11->S12/S12->S13 remain blocked adjacency transitions. Render/preview remain blocked."
+    "note": "The active manifest contains no clock assets. S07 and S10 are intentionally unassigned until clean non-clock replacements pass the V2.1 gates.",
+    "editorial_block_shots": [
+      "S07",
+      "S10"
+    ]
   },
   "last_adjustment": "2026-11-07: S09 manifest replaced audio mixer by retro keyboard Pexels 8888977, verified source hash/perceptual identity, user-approved editorially only; render rights remain blocked.",
   "visual_continuity_profile": {
@@ -2397,7 +2285,11 @@
       "watermark",
       "baked_captions",
       "third_party_logo",
-      "unrelated_industrial_machinery"
+      "unrelated_industrial_machinery",
+      "clock",
+      "alarm clock",
+      "timepiece",
+      "clock mechanism"
     ],
     "allowed_source_tiers": [
       "stock_auto",
@@ -2426,9 +2318,9 @@
     ]
   },
   "continuity_gate": {
-    "status": "PENDING_CI_REVALIDATION_AFTER_MANUAL_REVIEW",
+    "status": "BLOCKED_EDITORIAL_NO_CLOCK_REPLACEMENTS_REQUIRED",
     "profile_id": "episode-005-cold-war-bunker-continuity-v1",
-    "reason": "S06/S11 manual editorial review recorded; authoritative continuity result must be recalculated by CI before isolated preview dispatch.",
+    "reason": "S07/S10 clock assignments were revoked by the current editorial lock; authoritative continuity and rights validation must run after replacement.",
     "strict_preview_block": true,
     "hard_conflict_shots": [
       "S04",
@@ -2452,6 +2344,8 @@
     "revalidation_required": true,
     "pending_revalidation_shots": [
       "S06",
+      "S07",
+      "S10",
       "S11"
     ]
   },
@@ -2560,8 +2454,59 @@
         "independent rights approval pending",
         "all other Episode 005 safety gates remain fail closed"
       ]
+    },
+    {
+      "recorded_at_utc": "2026-11-15T00:00:00Z",
+      "shot_replacements": [
+        {
+          "shot_id": "S07",
+          "previous_candidate_id": "mixkit-slowly-approaching-clock-28897",
+          "replacement_candidate_id": null,
+          "reason": "Current editorial lock forbids clocks; replacement required."
+        },
+        {
+          "shot_id": "S10",
+          "previous_candidate_id": "mixkit-clock-mechanism-3651",
+          "replacement_candidate_id": null,
+          "reason": "Current editorial lock forbids clocks; replacement required."
+        }
+      ],
+      "scope": "ACTIVE_MANIFEST_BLOCK",
+      "render_allowed": false,
+      "global_catalog_updated": false,
+      "drive_written": false,
+      "publication_allowed": false
     }
   ],
   "scene_disclosure_contract": "episodes/episode-005/visual/scene-disclosures-v21.json",
-  "scene_disclosure_policy": "NASA_GE0S5_2020_FACTUAL_LABEL_REQUIRED_PRE_RENDER_AND_IN_PLATFORM_METADATA"
+  "scene_disclosure_policy": "NASA_GE0S5_2020_FACTUAL_LABEL_REQUIRED_PRE_RENDER_AND_IN_PLATFORM_METADATA",
+  "canonical_engine_version": "2.1",
+  "runtime_source_of_truth": "episodes/episode-005/visual/scene-asset-manifest.json",
+  "editorial_exclusions": {
+    "status": "LOCKED",
+    "forbidden_concepts": [
+      "clock",
+      "alarm clock",
+      "timepiece",
+      "clock mechanism"
+    ],
+    "scope": "episode-005-active-visual-runtime",
+    "reason": "Current editorial direction explicitly forbids clocks and timepieces; replacements are required before any preview or render."
+  },
+  "superseded_editorial_assets": [
+    {
+      "candidate_id": "mixkit-slowly-approaching-clock-28897",
+      "shot_ids": [
+        "S07"
+      ],
+      "reason": "NO_CLOCKS_EDITORIAL_LOCK"
+    },
+    {
+      "candidate_id": "mixkit-clock-mechanism-3651",
+      "shot_ids": [
+        "S10"
+      ],
+      "reason": "NO_CLOCKS_EDITORIAL_LOCK"
+    }
+  ]
 }
