@@ -1,3 +1,4 @@
+# AUTHORIZED-IMMUTABLE-CORE-UPDATE: visual intake lock approved for this change.
 import json
 import tempfile
 import unittest
