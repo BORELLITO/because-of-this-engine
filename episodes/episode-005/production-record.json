@@ -1226,7 +1226,7 @@
     ],
     "blocked_at_utc": "2026-11-15T00:00:00Z"
   },
-  "last_adjustment": "2026-11-15: corrected V3 visual truth metadata to the canonical package-gate vocabulary and removed active graphical/radar-overlay assignments; S02, S07 and S10 preserved; preview/render remain fail-closed pending revalidation.",
+  "last_adjustment": "2026-11-15: reconciled stale render_contract authorization metadata to BLOCKED; corrected V3 visual truth metadata to the canonical package-gate vocabulary and removed active graphical/radar-overlay assignments; S02, S07 and S10 preserved; preview/render remain fail-closed pending revalidation.",
   "autonomous_rights_evidence_path": "reports/EP005_AUTONOMOUS_RIGHTS_VISUAL_EVIDENCE_20261107.json",
   "video_title": "THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
   "episode_name": "05 - THE SIGNAL THAT COULD HAVE STARTED WORLD WAR III",
