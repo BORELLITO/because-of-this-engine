@@ -32,11 +32,14 @@ jobs:
           PR_TITLE="$(jq -r '.pull_request.title // empty' "$GITHUB_EVENT_PATH")"
           BASE_REF="$(jq -r '.pull_request.base.ref // empty' "$GITHUB_EVENT_PATH")"
           changed="$(git diff --name-only origin/$BASE_REF...HEAD)"
-          if echo "$changed" | grep -Eq '^(production/active_engine_policy.json|production/active_surface_lock_v21.py|production/caption_policy_v21.json|production/render_v21_preview.py|production/render_v21_final.py|docs/CANONICAL_VISUAL_EDITORIAL_LOCK_20261112.md|docs/QUALITY_SAFETY_HARDENING_20261107.md|production/immutable_core_policy_v1.json|production/immutable_core_guard.py|docs/IMMUTABLE_CORE_PROTOCOL.md)$'; then
+          if echo "$changed" | grep -Eq '^(production/active_engine_policy.json|production/active_surface_lock_v21.py|production/caption_policy_v21.json|production/render_v21_preview.py|production/render_v21_final.py|docs/CANONICAL_VISUAL_EDITORIAL_LOCK_20261112.md|docs/QUALITY_SAFETY_HARDENING_20261107.md|production/immutable_core_policy_v1.json|production/immutable_core_guard.py|docs/IMMUTABLE_CORE_PROTOCOL.md|docs/CHANGE_TRANSPARENCY_PROTOCOL.md)$'; then
             if [[ "$PR_TITLE" != *AUTHORIZED-IMMUTABLE-CORE-UPDATE* ]]; then
               echo "BLOCKED: core authority changed without explicit authorization."
               exit 1
             fi
           fi
+      - name: Require transparent change report
+        if: github.event_name == 'pull_request'
+        run: PYTHONPATH=. python production/immutable_core_guard.py --repo-root . --event-path "$GITHUB_EVENT_PATH"
       - name: Run immutable-core regression tests
         run: PYTHONPATH=. python -m unittest tests.test_immutable_core_guard -v
