@@ -4641,9 +4641,85 @@
       "author": "United States Department of Defense / FedFlix public-domain government film",
       "sha256": "06f744e3d62d7797a825671f165b299cb769c2138c68fd925e7c0e5bc215778f",
       "perceptual_hash": "4366c57bfea0b85e50e56334c8f5c05d28cb14b531bca983d7bc077f91118c09"
+    },
+    {
+      "candidate_id": "wikimedia-meerkat-night-telescopes-2023",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Night_time_lapse_of_the_MeerKAT_telescopes_at_the_Meerkat_National_Park.webm",
+      "media_url": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Night_time_lapse_of_the_MeerKAT_telescopes_at_the_Meerkat_National_Park.webm",
+      "role": "S02",
+      "visual_match": "EXACT",
+      "visual_intent": "Physical radio telescope dishes at night for the external-sensor/communications beat; representational reconstruction, never literal Petrov archival evidence.",
+      "truth_class": "REPRESENTATIONAL",
+      "provider": "wikimedia",
+      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "license_name": "Wikimedia Commons Per-File License",
+      "license_detail": "CC BY-SA 3.0",
+      "source_tier": "cc_manual",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-15T00:00:00Z",
+        "observed_license": "CC BY-SA 3.0",
+        "author": "Square Kilometre Array Organisation (SKAO) / South African Radio Astronomy Observatory (SARAO)",
+        "attribution_required": true,
+        "share_alike_required": true,
+        "media_route": "Wikimedia Commons original file resolved to upload.wikimedia.org"
+      },
+      "media_metadata_observed": {
+        "duration_seconds": 13.947,
+        "dimensions": [
+          3840,
+          2160
+        ],
+        "frame_rate": "30000/1001",
+        "codec": "vp9",
+        "source_sha256": "0af0714d0a4dbf24b08ceb7e28b5263190758d85b64041cb8ccb689d0267b615"
+      },
+      "continuity_tags": {
+        "era": [
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "early_warning_command",
+          "external_sensor"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "steel",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "brushed_metal",
+          "low_light_grain"
+        ],
+        "risk_flags": [
+          "representational_infrastructure_not_archival",
+          "time_lapse_natural_sky_motion",
+          "cc_by_sa_attribution_required"
+        ]
+      },
+      "continuity_risk_flags": [
+        "representational_infrastructure_not_archival",
+        "time_lapse_natural_sky_motion",
+        "cc_by_sa_attribution_required"
+      ],
+      "selection_status": "REVIEW_REQUIRED",
+      "human_approval": "PENDING",
+      "intake_artifact": null,
+      "fingerprint_artifact": null
     }
   ],
-  "next_action": "Run V2.1 visual-plan, rights-consistency and preview preflight on the complete 16-asset manifest; keep render and publication gated.",
+  "next_action": "Run the canonical manual visual candidate intake for wikimedia-meerkat-night-telescopes-2023, then run the read-only global fingerprint audit and continuity/adjacency review. Keep the active manifest and render blocked.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -5685,13 +5761,20 @@
   },
   "last_candidate_addition": {
     "recorded_at_utc": "2026-11-15T00:00:00Z",
-    "candidate_ids": [
-      "archive-prelinger-onguard1956-s07",
-      "archive-gov-antps25-29604-s10"
-    ],
-    "route": "Internet Archive public-domain manual archive/government lane",
-    "promotion_allowed": false,
-    "render_allowed": false
+    "candidate_id": "wikimedia-meerkat-night-telescopes-2023",
+    "shot_id": "S02",
+    "scope": "CANDIDATE_REGISTRATION_ONLY",
+    "source_page_reviewed": true,
+    "direct_media_sha256": "0af0714d0a4dbf24b08ceb7e28b5263190758d85b64041cb8ccb689d0267b615",
+    "license": "CC BY-SA 3.0",
+    "attribution_required": true,
+    "share_alike_required": true,
+    "manifest_updated": false,
+    "render_allowed": false,
+    "global_catalog_updated": false,
+    "drive_written": false,
+    "publication_allowed": false,
+    "reason": "Register the strongest night physical antenna candidate from search round 3 so the canonical manual intake workflow can validate it."
   },
   "last_human_approval": {
     "date": "2026-11-07",
