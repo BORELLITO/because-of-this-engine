@@ -41,17 +41,18 @@ APPROVED_VOICE_PROVIDER = "gemini_tts"
 APPROVED_VOICE_NAME = "Charon"
 APPROVED_VOICE_MODEL = "gemini-3.8-flash-tts"
 
-# Explicit names are retained for the immutable-core static guard and legacy
-# V2.1 test imports; every value still comes from the single contract above.
-FPS = CONTRACT_VIDEO_FPS
-WIDTH = CONTRACT_VIDEO_WIDTH
-HEIGHT = CONTRACT_VIDEO_HEIGHT
-IN_VIDEO_LOGO_Y = CONTRACT_IN_VIDEO_LOGO_Y
-IN_VIDEO_LOGO_WIDTH = CONTRACT_IN_VIDEO_LOGO_WIDTH
-IN_VIDEO_LOGO_OPACITY = CONTRACT_IN_VIDEO_LOGO_OPACITY
-OUTRO_SECONDS = CONTRACT_OUTRO_SECONDS
-ACTIVE_WORD_COLOR = CONTRACT_ACTIVE_WORD_COLOR
-CAPTION_MARGIN_V = CONTRACT_CAPTION_MARGIN_V
+# These compiled literals are checked against production/v21_visual_contract.py
+# by tests; keeping them explicit lets the immutable guard inspect the route
+# without executing arbitrary imports.
+FPS = 60
+WIDTH = 1080
+HEIGHT = 1920
+IN_VIDEO_LOGO_Y = 190
+IN_VIDEO_LOGO_WIDTH = 360
+IN_VIDEO_LOGO_OPACITY = 0.90
+OUTRO_SECONDS = 5.5
+ACTIVE_WORD_COLOR = "#F04444"
+CAPTION_MARGIN_V = 650
 
 
 class PreviewRenderError(RuntimeError):
