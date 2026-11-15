@@ -87,5 +87,30 @@ class AssetMemoryResearchTests(unittest.TestCase):
                 )
 
 
+    def test_research_rejects_reference_overlay_candidate(self):
+        raw = candidate()
+        raw["visual_evidence"]["pixel_qc"] = {
+            "text_overlay_present": True,
+            "authored_graphics_present": False,
+            "compositor_layers_disclosed": False,
+            "embedded_text_status": "NONE",
+        }
+        result = build_queue(
+            manifest(),
+            {"mixkit": lambda query, limit: [raw]},
+            limit=1,
+        )
+        scene = result["scenes"][0]
+        self.assertEqual(scene["candidates"], [])
+        self.assertEqual(
+            scene["rejected_candidates"][0]["selection_status"],
+            "REJECTED_COMPOSITION_CONFLICT",
+        )
+        self.assertEqual(
+            scene["rejected_candidates"][0]["visual_composition_guard"]["status"],
+            "BLOCKED",
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
