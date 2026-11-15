@@ -21,6 +21,8 @@ from production.audio_history_audit_v21 import audit as audit_audio_history
 from production.soundtrack_release_evidence_v21 import audit as audit_soundtrack_release
 from production.rights_autonomy_v21 import audit_repository as audit_autonomous_rights
 from production.scene_disclosures_v21 import audit_repository as audit_scene_disclosures
+from production.prompt_authority_v3 import validate_prompt_authority
+from production.v3_visual_policy import audit_episode
 
 POLICY_PATH = Path(__file__).resolve().parent / "active_engine_policy.json"
 EXPECTED_ENTRYPOINT = "production/canonical_entrypoint.py"
@@ -53,6 +55,9 @@ def _policy(policy_path: Path = POLICY_PATH) -> dict[str, Any]:
         raise ManualRenderGateError("manual render entrypoint mismatch")
     if policy.get("publication_policy") != "manual_only":
         raise ManualRenderGateError("publication must remain manual_only")
+    prompt_report = validate_prompt_authority(Path(policy_path).resolve().parents[1], policy)
+    if prompt_report["status"] != "PROMPT_AUTHORITY_PASS":
+        raise ManualRenderGateError("prompt_authority:" + "; ".join(prompt_report["failures"]))
     return policy
 
 
@@ -104,6 +109,10 @@ def validate_request(
         raise ManualRenderGateError(f"unsupported render mode: {mode}")
     policy = _policy(policy_path)
     failures: list[str] = []
+
+    visual_policy = audit_episode(repo_root, record)
+    if visual_policy["status"] != "V3_VISUAL_POLICY_PASS":
+        failures.extend("v3_visual:" + item for item in visual_policy["failures"])
 
     enablement_field = "preview_enablement" if mode == "preview" else "production_enablement"
     if policy.get(enablement_field) is not True:
