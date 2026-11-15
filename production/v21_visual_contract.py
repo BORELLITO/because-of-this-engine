@@ -91,3 +91,29 @@ def reject_legacy_layout(values: dict[str, object]) -> None:
     for key, legacy_value in legacy_markers.items():
         if values.get(key) == legacy_value:
             raise ValueError(f"Legacy visual layout marker is forbidden in V2.1: {key}={legacy_value}")
+
+
+def validate_caption_ass(path: Path) -> None:
+    """Validate the burned-in ASS layout before FFmpeg touches the picture."""
+    text = path.read_text(encoding="utf-8")
+    style_lines = [line for line in text.splitlines() if line.startswith("Style: Default,")]
+    if len(style_lines) != 1:
+        raise ValueError("Active V2.1 captions require exactly one Default ASS style.")
+    fields = style_lines[0].split(",")
+    # ASS fields: alignment=18, margin_l=19, margin_r=20, margin_v=21.
+    expected = {
+        18: str(CAPTION_ALIGNMENT),
+        19: str(CAPTION_MARGIN_L),
+        20: str(CAPTION_MARGIN_R),
+        21: str(CAPTION_MARGIN_V),
+    }
+    for index, value in expected.items():
+        if len(fields) <= index or fields[index] != value:
+            actual = fields[index] if len(fields) > index else "<missing>"
+            raise ValueError(
+                f"Caption ASS layout drift at field {index}: expected {value}, got {actual}"
+            )
+    if "&H004444F0&" not in text:
+        raise ValueError("Caption ASS is missing the canonical active-word red #F04444 transform.")
+    if "—" in text or "–" in text:
+        raise ValueError("Caption ASS contains a forbidden em dash or en dash.")
