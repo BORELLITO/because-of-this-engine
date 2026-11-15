@@ -5,7 +5,7 @@
   "incident_id": "incident-soviet-early-warning-false-alarm-1983-09-26",
   "editorial_mode": "factual_documentary",
   "title": "THE NIGHT THE MACHINE LIED",
-  "status": "ACTIVE_V21_MANIFEST_READY_NO_CLOCK_NO_NASA",
+  "status": "ACTIVE_V21_MANIFEST_REVIEW_REQUIRED",
   "purpose": "Human-approved candidate-to-shot assignments before final production promotion.",
   "source_plan": "episodes/episode-005/visual/asset-acquisition-plan.json",
   "approval_record": {
@@ -102,190 +102,12 @@
   },
   "assets": [
     {
-      "candidate_id": "mixkit-abstract-red-glow-101432",
-      "provider": "mixkit",
-      "source_page_url": "https://mixkit.co/free-stock-video/abstract-red-glow-101432/",
-      "media_url": "https://assets.mixkit.co/bohe8920pfehyvq7p1hk5r699s7g",
-      "license_name": "Mixkit Stock Video Free License",
-      "source_role": "S01,S06,S09",
-      "truth_class": "MAP_OR_DIAGRAM",
-      "sha256": "f5c6866db294ab7489e581d08d3ae5480496b42d43df8a4a6152bcc6e4d97774",
-      "perceptual_hash": "835461ff7f59472fc9efe33bd35dc83d65f475f22c999ee4d4df70cb139cfc3e",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
-      "intake_artifact": {
-        "workflow_run_id": 42005588495,
-        "artifact_id": 13403209885,
-        "artifact_digest": "sha256:e97bc6b2c2e7cac51c10a1af55a35570f5df044ac80bece0478292992ce0c78b"
-      },
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "human_approval": "APPROVED_FOR_MANIFEST",
-      "approved_for_render": false,
-      "global_catalog_updated": false,
-      "thumbnail_eligible": false,
-      "drive_written": false,
-      "continuity_tags": {
-        "era": [
-          "analog",
-          "period_compatible"
-        ],
-        "setting": [
-          "technical_control_room"
-        ],
-        "time_of_day": [
-          "night",
-          "indeterminate_low_light"
-        ],
-        "lighting": [
-          "low_key",
-          "restrained_red"
-        ],
-        "palette": [
-          "charcoal",
-          "warning_red"
-        ],
-        "texture": [
-          "low_light_grain",
-          "abstract_light"
-        ],
-        "risk_flags": [
-          "symbolic_insert_requires_editorial_match"
-        ]
-      },
-      "continuity_risk_flags": [
-        "symbolic_insert_requires_editorial_match"
-      ],
-      "continuity_review_status": "REVIEW_REQUIRED",
-      "source_tier": "stock_auto"
-    },
-    {
-      "candidate_id": "wikimedia-meerkat-night-telescopes-2023",
-      "provider": "wikimedia",
-      "source_page_url": "https://commons.wikimedia.org/wiki/File:Night_time_lapse_of_the_MeerKAT_telescopes_at_the_Meerkat_National_Park.webm",
-      "media_url": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Night_time_lapse_of_the_MeerKAT_telescopes_at_the_Meerkat_National_Park.webm",
-      "source_role": "S02",
-      "role": "S02",
-      "visual_match": "EXACT",
-      "visual_intent": "Physical radio telescope dishes at night for the external-sensor/communications beat; representational reconstruction, never literal Petrov archival evidence.",
-      "truth_class": "REPRESENTATIONAL",
-      "source_sha256": "0af0714d0a4dbf24b08ceb7e28b5263190758d85b64041cb8ccb689d0267b615",
-      "license_name": "Wikimedia Commons Per-File License",
-      "license_detail": "CC BY-SA 3.0",
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "human_approval": "APPROVED_FOR_MANIFEST",
-      "approved_for_render": false,
-      "global_catalog_updated": false,
-      "thumbnail_eligible": false,
-      "drive_written": false,
-      "browser_verification": {
-        "status": "SOURCE_PAGE_REVIEWED",
-        "checked_at_utc": "2026-11-15T00:00:00Z",
-        "observed_license": "CC BY-SA 3.0",
-        "author": "Square Kilometre Array Organisation (SKAO) / South African Radio Astronomy Observatory (SARAO)",
-        "attribution_required": true,
-        "share_alike_required": true,
-        "media_route": "Wikimedia Commons original file resolved to upload.wikimedia.org"
-      },
-      "intake_artifact": {
-        "workflow_run_id": 43731902701,
-        "job_id": 132865989911,
-        "branch": "main",
-        "commit_sha": "4a9c10d738eebd87a9b84bfda2dae8353ea8c910",
-        "artifact_id": 14169181114,
-        "artifact_name": "episode005-visual-intake-43731902701",
-        "artifact_digest": "sha256:41ed8e492c77e1e058bdce44a415ddc11691cdb0340c4c8c654ded586b5dfc91",
-        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
-        "sha256": "0af0714d0a4dbf24b08ceb7e28b5263190758d85b64041cb8ccb689d0267b615",
-        "duration_seconds": 13.947,
-        "dimensions": [
-          3840,
-          2160
-        ],
-        "frame_rate": "30000/1001",
-        "codec": "vp9",
-        "automated_promotion": false,
-        "size_bytes": 27618974,
-        "fps": 29.97002997002997,
-        "perceptual_hash": "7d26c374a8e6060a7715bc0713917210364681365fd2c5b4a39da38d44769d34",
-        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
-        "fingerprint_workflow_run_id": 43732559732,
-        "fingerprint_job_id": 132868028415,
-        "fingerprint_artifact_id": 14168629077,
-        "fingerprint_artifact_name": "episode005-visual-fingerprint-audit",
-        "fingerprint_artifact_digest": "sha256:fb73a68f724ef5385e8ac08d54d9850e14ef57cbf4b817685e38bf4e27a286d6",
-        "global_source_collision": false,
-        "global_sha256_collision": false,
-        "global_perceptual_collision": false
-      },
-      "fingerprint_artifact": {
-        "workflow_run_id": 43732559732,
-        "job_id": 132868028415,
-        "artifact_id": 14168629077,
-        "artifact_name": "episode005-visual-fingerprint-audit",
-        "artifact_digest": "sha256:fb73a68f724ef5385e8ac08d54d9850e14ef57cbf4b817685e38bf4e27a286d6",
-        "status": "FINGERPRINT_AUDIT_PASS",
-        "algorithm": "video-fingerprint-v2-rgb24-q4",
-        "perceptual_hash": "7d26c374a8e6060a7715bc0713917210364681365fd2c5b4a39da38d44769d34",
-        "global_source_collision": false,
-        "global_sha256_collision": false,
-        "global_perceptual_collision": false,
-        "human_approval": "APPROVED_FOR_MANIFEST",
-        "approved_for_render": false,
-        "global_catalog_updated": false,
-        "render_allowed": false,
-        "drive_written": false
-      },
-      "continuity_tags": {
-        "era": [
-          "cold_war",
-          "analog",
-          "period_compatible"
-        ],
-        "setting": [
-          "early_warning_command",
-          "external_sensor"
-        ],
-        "time_of_day": [
-          "night",
-          "indeterminate_low_light"
-        ],
-        "lighting": [
-          "low_key",
-          "cool_shadows"
-        ],
-        "palette": [
-          "steel",
-          "desaturated_blue"
-        ],
-        "texture": [
-          "brushed_metal",
-          "low_light_grain"
-        ],
-        "risk_flags": [
-          "representational_infrastructure_not_archival",
-          "time_lapse_natural_sky_motion",
-          "cc_by_sa_attribution_required"
-        ]
-      },
-      "continuity_risk_flags": [
-        "representational_infrastructure_not_archival",
-        "time_lapse_natural_sky_motion",
-        "cc_by_sa_attribution_required"
-      ],
-      "continuity_review_status": "USER_APPROVED_MANIFEST_ONLY",
-      "source_tier": "cc_manual",
-      "author": "Square Kilometre Array Organisation (SKAO) / South African Radio Astronomy Observatory (SARAO)",
-      "selection_basis": "User explicitly approved the S02 candidate for manifest promotion; automated intake and fingerprint gates passed.",
-      "editorial_caveat": "Representational radio-telescope infrastructure only; never literal Petrov archival evidence. CC BY-SA 3.0 attribution and share-alike obligations remain active.",
-      "sha256": "0af0714d0a4dbf24b08ceb7e28b5263190758d85b64041cb8ccb689d0267b615",
-      "perceptual_hash": "7d26c374a8e6060a7715bc0713917210364681365fd2c5b4a39da38d44769d34"
-    },
-    {
       "candidate_id": "pexels-11764431",
       "provider": "pexels",
       "source_page_url": "https://www.pexels.com/video/man-using-walkie-talkie-in-bunker-11764431/",
       "media_url": "https://videos.pexels.com/video-files/11764431/11764431-hd_1920_1080_30fps.mp4",
       "license_name": "Pexels License",
-      "source_role": "S03",
+      "source_role": "S01",
       "truth_class": "REPRESENTATIONAL",
       "sha256": "9e2ad3951cafda341e656c9be49ffc55915326b0789e243e65aad65df1408f7b",
       "perceptual_hash": "b099b8f4ea22a379046da09b6cf48c6f56a55a5053fe21b989552b8cccf6a5c0",
@@ -366,7 +188,137 @@
         "source_audio_must_be_stripped_in_render"
       ],
       "continuity_review_status": "REVIEW_REQUIRED",
-      "source_tier": "stock_auto"
+      "source_tier": "stock_auto",
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T06:24:12.609Z",
+        "observed_license": "Free",
+        "observed_metadata": "1920x1080, 29.97 fps, 19 seconds; man writes in a notebook and uses a radio in a dimly lit room",
+        "media_route": "Pexels download redirect resolved to videos.pexels.com"
+      }
+    },
+    {
+      "candidate_id": "wikimedia-meerkat-night-telescopes-2023",
+      "provider": "wikimedia",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Night_time_lapse_of_the_MeerKAT_telescopes_at_the_Meerkat_National_Park.webm",
+      "media_url": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Night_time_lapse_of_the_MeerKAT_telescopes_at_the_Meerkat_National_Park.webm",
+      "source_role": "S02",
+      "role": "S02",
+      "visual_match": "EXACT",
+      "visual_intent": "Physical radio telescope dishes at night for the external-sensor/communications beat; representational reconstruction, never literal Petrov archival evidence.",
+      "truth_class": "REPRESENTATIONAL",
+      "source_sha256": "0af0714d0a4dbf24b08ceb7e28b5263190758d85b64041cb8ccb689d0267b615",
+      "license_name": "Wikimedia Commons Per-File License",
+      "license_detail": "CC BY-SA 3.0",
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-15T00:00:00Z",
+        "observed_license": "CC BY-SA 3.0",
+        "author": "Square Kilometre Array Organisation (SKAO) / South African Radio Astronomy Observatory (SARAO)",
+        "attribution_required": true,
+        "share_alike_required": true,
+        "media_route": "Wikimedia Commons original file resolved to upload.wikimedia.org"
+      },
+      "intake_artifact": {
+        "workflow_run_id": 43731902701,
+        "job_id": 132865989911,
+        "branch": "main",
+        "commit_sha": "4a9c10d738eebd87a9b84bfda2dae8353ea8c910",
+        "artifact_id": 14169181114,
+        "artifact_name": "episode005-visual-intake-43731902701",
+        "artifact_digest": "sha256:41ed8e492c77e1e058bdce44a415ddc11691cdb0340c4c8c654ded586b5dfc91",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "0af0714d0a4dbf24b08ceb7e28b5263190758d85b64041cb8ccb689d0267b615",
+        "duration_seconds": 13.947,
+        "dimensions": [
+          3840,
+          2160
+        ],
+        "frame_rate": "30000/1001",
+        "codec": "vp9",
+        "automated_promotion": false,
+        "size_bytes": 27618974,
+        "fps": 29.97002997002997,
+        "perceptual_hash": "7d26c374a8e6060a7715bc0713917210364681365fd2c5b4a39da38d44769d34",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 43732559732,
+        "fingerprint_job_id": 132868028415,
+        "fingerprint_artifact_id": 14168629077,
+        "fingerprint_artifact_name": "episode005-visual-fingerprint-audit",
+        "fingerprint_artifact_digest": "sha256:fb73a68f724ef5385e8ac08d54d9850e14ef57cbf4b817685e38bf4e27a286d6",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 43732559732,
+        "job_id": 132868028415,
+        "artifact_id": 14168629077,
+        "artifact_name": "episode005-visual-fingerprint-audit",
+        "artifact_digest": "sha256:fb73a68f724ef5385e8ac08d54d9850e14ef57cbf4b817685e38bf4e27a286d6",
+        "status": "FINGERPRINT_AUDIT_PASS",
+        "algorithm": "video-fingerprint-v2-rgb24-q4",
+        "perceptual_hash": "7d26c374a8e6060a7715bc0713917210364681365fd2c5b4a39da38d44769d34",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false,
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "render_allowed": false,
+        "drive_written": false
+      },
+      "continuity_tags": {
+        "era": [
+          "cold_war",
+          "analog",
+          "period_compatible"
+        ],
+        "setting": [
+          "early_warning_command",
+          "external_sensor"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "steel",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "brushed_metal",
+          "low_light_grain"
+        ],
+        "risk_flags": [
+          "representational_infrastructure_not_archival",
+          "time_lapse_natural_sky_motion",
+          "cc_by_sa_attribution_required"
+        ]
+      },
+      "continuity_risk_flags": [
+        "representational_infrastructure_not_archival",
+        "time_lapse_natural_sky_motion",
+        "cc_by_sa_attribution_required"
+      ],
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "cc_manual",
+      "author": "Square Kilometre Array Organisation (SKAO) / South African Radio Astronomy Observatory (SARAO)",
+      "selection_basis": "User explicitly approved the S02 candidate for manifest promotion; automated intake and fingerprint gates passed.",
+      "editorial_caveat": "Representational radio-telescope infrastructure only; never literal Petrov archival evidence. CC BY-SA 3.0 attribution and share-alike obligations remain active.",
+      "sha256": "0af0714d0a4dbf24b08ceb7e28b5263190758d85b64041cb8ccb689d0267b615",
+      "perceptual_hash": "7d26c374a8e6060a7715bc0713917210364681365fd2c5b4a39da38d44769d34",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4"
     },
     {
       "candidate_id": "pixabay-radio-vintage-old-171435",
@@ -374,8 +326,8 @@
       "source_page_url": "https://pixabay.com/videos/radio-vintage-old-sound-speaker-171435/",
       "media_url": "https://cdn.pixabay.com/video/2023/07/13/171435-845465118_large.mp4",
       "license_name": "Pixabay Content License",
-      "source_role": "s04",
-      "truth_class": "MAP_OR_DIAGRAM",
+      "source_role": "S03",
+      "truth_class": "REPRESENTATIONAL",
       "sha256": "bb0ce78f185d844f69dd33e036f9b1dd9f4acd293e706745cdb1453057d9392f",
       "perceptual_hash": "d07a912392686abb788e79313681ec38fcf66937d82c8d80075f2c00771f671e",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
@@ -456,33 +408,45 @@
         "crop_must_hold_radio_against_black"
       ],
       "continuity_review_status": "REVIEW_REQUIRED",
-      "source_tier": "stock_auto"
+      "source_tier": "stock_auto",
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T07:04:29.401Z",
+        "observed_license": "Free for use under the Pixabay Content License",
+        "media_route": "Pixabay page contentUrl resolved to cdn.pixabay.com"
+      }
     },
     {
-      "candidate_id": "pixabay-hallway-dark-corridor-20837",
-      "provider": "pixabay",
-      "source_page_url": "https://pixabay.com/videos/hallway-dark-corridor-dim-mystery-20837/",
-      "media_url": "https://cdn.pixabay.com/video/2019/01/19/20837-312432073_large.mp4",
-      "license_name": "Pixabay Content License",
-      "source_role": "S14",
+      "candidate_id": "mixkit-worker-industrial-lathe-2244",
+      "provider": "mixkit",
+      "source_page_url": "https://mixkit.co/free-stock-video/worker-operating-an-industrial-lathe-2244/",
+      "media_url": "https://assets.mixkit.co/videos/2244/2244-720.mp4",
+      "source_role": "S04",
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
-      "sha256": "e6c20511f889daa57834ddf5f97ea076ffffedc0a321850a4ea8fa295479d72d",
-      "perceptual_hash": "40df89d9d2edf33d5a94509be3c9f3abb6073dd28ff1914aba8307eb1055aafd",
+      "license_name": "Mixkit Stock Video Free License",
+      "sha256": "a30c4294c60190b75e2f49c076dccc7f86692a99e4bed42ae002f8094936a45d",
+      "perceptual_hash": "e7c8758b9f770b817e9d5ef14b7a78bceaad1dcff716a7e7d3c1aff7e63cb8d7",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
       "intake_artifact": {
-        "workflow_run_id": 42056121022,
-        "artifact_id": 13428247933,
-        "artifact_digest": "sha256:e6f1d8424a909e08ab527ff555fe359e4c9be8214990cf5b91364f80f590bb83"
-      },
-      "fingerprint_artifact": {
-        "workflow_run_id": 42059893725,
-        "job_id": 127358312867,
-        "artifact_id": 13431651011,
-        "artifact_digest": "sha256:71428db1a7810ba8074da7c85139ff0a6720a06ea06aab169b5dd539f3ed7e8d",
-        "status": "FINGERPRINT_AUDIT_PASS",
-        "global_source_collision": false,
-        "global_sha256_collision": false,
-        "global_perceptual_collision": false
+        "workflow_run_id": 42024921610,
+        "artifact_id": 13412703858,
+        "artifact_digest": "sha256:0cdd282c423100d8df4732dd542238a4ac8e5f46a67c40ee008e51ec1f73d742",
+        "artifact_name": "episode005-visual-intake-mixkit-worker-industrial-lathe-2244",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "a30c4294c60190b75e2f49c076dccc7f86692a99e4bed42ae002f8094936a45d",
+        "duration_seconds": 10.01,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "frame_rate": "24000/1001",
+        "codec": "h264",
+        "automated_promotion": false,
+        "perceptual_hash": "e7c8758b9f770b817e9d5ef14b7a78bceaad1dcff716a7e7d3c1aff7e63cb8d7",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42025128372,
+        "fingerprint_artifact_id": 13413646379,
+        "fingerprint_artifact_digest": "sha256:a4450ebff3562383b0b8c731bc810f810850eab1fa476737233279724c18fc69"
       },
       "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "human_approval": "APPROVED_FOR_MANIFEST",
@@ -490,64 +454,62 @@
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
-      "editorial_caveat": "Representational empty institutional corridor for S14 only; never literal Petrov archival evidence and never reused in another shot.",
-      "continuity_tags": {
-        "era": [
-          "analog",
-          "cold_war",
-          "period_compatible"
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Mixkit Stock Video Free License — commercial or personal use",
+        "visible_duration_seconds": 10,
+        "visible_resolution_options": [
+          "1280x720",
+          "1920x1080"
         ],
-        "setting": [
-          "institutional_corridor"
-        ],
-        "time_of_day": [
-          "night",
-          "indeterminate_low_light"
-        ],
-        "lighting": [
-          "low_key",
-          "cool_shadows"
-        ],
-        "palette": [
-          "charcoal",
-          "steel",
-          "desaturated_blue"
-        ],
-        "texture": [
-          "brushed_metal",
-          "low_light_grain"
-        ],
-        "risk_flags": [
-          "representational_corridor_not_archival"
-        ]
+        "visible_frame_rate": "24 fps",
+        "semantic_note": "Close-up hand operating an industrial control panel; representational technical reconstruction for S04, never literal Petrov archival evidence."
       },
-      "continuity_risk_flags": [
-        "representational_corridor_not_archival"
-      ],
+      "editorial_caveat": "Industrial control panel is representational reconstruction for S04, never literal Petrov archival evidence.",
       "continuity_review_status": "REVIEW_REQUIRED",
       "source_tier": "stock_auto"
     },
     {
-      "candidate_id": "pixabay-radar-black-green-target-symbol-57670",
+      "candidate_id": "pixabay-button-press-push-start-launching-221746",
       "provider": "pixabay",
-      "source_page_url": "https://pixabay.com/videos/radar-black-green-target-symbol-57670/",
-      "media_url": "https://cdn.pixabay.com/video/2020/11/28/57670-486125393_large.mp4",
-      "license_name": "Pixabay Content License",
+      "source_page_url": "https://pixabay.com/videos/button-press-push-start-launching-221746/",
+      "media_url": "https://cdn.pixabay.com/video/2024/07/17/221746_large.mp4",
       "source_role": "S05",
-      "truth_class": "MAP_OR_DIAGRAM",
-      "sha256": "9293c16987da44620db4119af9fe2c776f56a2113402544e1d1bc3696f21496d",
-      "perceptual_hash": "acbd3a72cf98707eb118622b22dfd5106f5b76a550255c48f2d51727689c3e6e",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "license_name": "Pixabay Content License",
+      "sha256": "1759e5e945fccab493e4ac2c084af30a58673511ee41a03bfea538471a048090",
+      "perceptual_hash": "9a482a42348c20c6db67edec646009d28f2d03b0a8befa55b0883d1183078e15",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
       "intake_artifact": {
         "workflow_run_id": 42073828513,
         "job_id": 127408597700,
         "artifact_id": 13437466569,
-        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057"
-      },
-      "fingerprint_artifact": {
-        "workflow_run_id": 42074599454,
-        "artifact_id": 13438400127,
-        "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "1759e5e945fccab493e4ac2c084af30a58673511ee41a03bfea538471a048090",
+        "duration_seconds": 6.967,
+        "dimensions": [
+          4096,
+          2160
+        ],
+        "frame_rate": "30/1",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false,
+        "perceptual_hash": "9a482a42348c20c6db67edec646009d28f2d03b0a8befa55b0883d1183078e15",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42074599454,
+        "fingerprint_artifact_id": 13438400127,
+        "fingerprint_artifact_name": "episode005-visual-fingerprint-audit",
+        "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
       },
       "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "human_approval": "APPROVED_FOR_MANIFEST",
@@ -555,410 +517,69 @@
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
-      "editorial_caveat": "Representational radar/target insert for S05 only; not literal Petrov archival evidence.",
-      "selection_basis": "Replacement after direct-media QA rejected the recognizable-person candidate; approved shortlist alternative.",
-      "continuity_tags": {
-        "era": [
-          "analog",
-          "cold_war",
-          "period_compatible"
-        ],
-        "setting": [
-          "early_warning_command",
-          "radar_monitor"
-        ],
-        "time_of_day": [
-          "night",
-          "indeterminate_low_light"
-        ],
-        "lighting": [
-          "low_key"
-        ],
-        "palette": [
-          "charcoal",
-          "desaturated_blue",
-          "warning_amber"
-        ],
-        "texture": [
-          "crt_phosphor",
-          "low_light_grain"
-        ],
-        "risk_flags": [
-          "green_ui_accent",
-          "symbolic_not_literal"
-        ]
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": true,
+        "semantic_note": "Page-verified push/start action; use only if full-duration QA confirms no distracting launch-promo or branded context."
       },
-      "continuity_risk_flags": [
-        "green_ui_accent",
-        "symbolic_not_literal"
-      ],
+      "editorial_caveat": "Representational footage only; never literal Petrov archival evidence.",
       "continuity_review_status": "REVIEW_REQUIRED",
       "source_tier": "stock_auto"
     },
     {
-      "candidate_id": "pixabay-radar-radar-screen-rotation-circles-4511",
+      "candidate_id": "pixabay-led-indicator-lights-316712",
       "provider": "pixabay",
-      "source_page_url": "https://pixabay.com/videos/radar-radar-screen-rotation-circles-4511/",
-      "media_url": "https://cdn.pixabay.com/video/2016/08/16/4511-179376471_large.mp4",
-      "license_name": "Pixabay Content License",
-      "source_role": "S08",
-      "truth_class": "MAP_OR_DIAGRAM",
-      "sha256": "8185f8459b80df5c5eaa95d4a66ac58edef34fc7f790ca4e5f74fc10a70742d6",
-      "perceptual_hash": "6818a74392e5f6ef8d3ded092f6c1ce791afd3d710e0acd30e7cf78a60b12242",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
-      "intake_artifact": {
-        "workflow_run_id": 42073828513,
-        "artifact_id": 13437466569,
-        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057"
-      },
-      "fingerprint_artifact": {
-        "workflow_run_id": 42074599454,
-        "artifact_id": 13438400127,
-        "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
-      },
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "human_approval": "APPROVED_FOR_MANIFEST",
-      "approved_for_render": false,
-      "global_catalog_updated": false,
-      "thumbnail_eligible": false,
-      "drive_written": false,
-      "editorial_caveat": "Representational reconstruction/symbolic visual only; never literal Petrov archival evidence.",
-      "selection_basis": "Primary selection for S08: highest scored candidate in the approved two-candidate shortlist.",
-      "continuity_tags": {
-        "era": [
-          "analog",
-          "cold_war",
-          "period_compatible"
-        ],
-        "setting": [
-          "early_warning_command",
-          "radar_monitor"
-        ],
-        "time_of_day": [
-          "night",
-          "indeterminate_low_light"
-        ],
-        "lighting": [
-          "low_key",
-          "cool_shadows"
-        ],
-        "palette": [
-          "charcoal",
-          "desaturated_blue",
-          "warning_amber"
-        ],
-        "texture": [
-          "crt_phosphor",
-          "low_light_grain"
-        ],
-        "risk_flags": [
-          "symbolic_not_literal"
-        ]
-      },
-      "continuity_risk_flags": [
-        "symbolic_not_literal"
-      ],
-      "continuity_review_status": "REVIEW_REQUIRED",
-      "source_tier": "stock_auto"
-    },
-    {
-      "candidate_id": "pixabay-typewriter-typing-writing-author-1335",
-      "provider": "pixabay",
-      "source_page_url": "https://pixabay.com/videos/typewriter-typing-writing-author-1335/",
-      "media_url": "https://cdn.pixabay.com/video/2015/11/12/1335-145564309_large.mp4",
-      "license_name": "Pixabay Content License",
-      "source_role": "S13",
-      "truth_class": "DOCUMENTARY_EVIDENCE",
-      "sha256": "2df86b63f6f05398b44ac2c4b28e9f370036e552b20d0b30e2842e2e71aabd23",
-      "perceptual_hash": "e42ec360a46a9ef093c7055f72d0bb39ebffb9a8e7ce3acb6ee96902f70673fe",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
-      "intake_artifact": {
-        "workflow_run_id": 42073828513,
-        "artifact_id": 13437466569,
-        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057"
-      },
-      "fingerprint_artifact": {
-        "workflow_run_id": 42074599454,
-        "artifact_id": 13438400127,
-        "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
-      },
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "human_approval": "APPROVED_FOR_MANIFEST",
-      "approved_for_render": false,
-      "global_catalog_updated": false,
-      "thumbnail_eligible": false,
-      "drive_written": false,
-      "editorial_caveat": "Representational reconstruction/symbolic visual only; never literal Petrov archival evidence.",
-      "selection_basis": "Primary selection for S13: highest scored candidate in the approved two-candidate shortlist.",
-      "continuity_tags": {
-        "era": [
-          "analog",
-          "cold_war",
-          "period_compatible"
-        ],
-        "setting": [
-          "documentary_evidence",
-          "institutional_desk"
-        ],
-        "time_of_day": [
-          "night",
-          "indeterminate_low_light"
-        ],
-        "lighting": [
-          "low_key",
-          "restrained_amber"
-        ],
-        "palette": [
-          "charcoal",
-          "amber",
-          "paper"
-        ],
-        "texture": [
-          "paper_logbook",
-          "typewriter",
-          "low_light_grain"
-        ],
-        "risk_flags": [
-          "readable_text_must_not_be_invented"
-        ]
-      },
-      "continuity_risk_flags": [
-        "readable_text_must_not_be_invented"
-      ],
-      "continuity_review_status": "REVIEW_REQUIRED",
-      "source_tier": "stock_auto"
-    },
-    {
-      "candidate_id": "pixabay-dark-light-lens-flare-abstract-250413",
-      "provider": "pixabay",
-      "source_page_url": "https://pixabay.com/videos/dark-light-lens-flare-abstract-250413/",
-      "media_url": "https://cdn.pixabay.com/video/2025/01/03/250413_large.mp4",
-      "license_name": "Pixabay Content License",
-      "source_role": "S15",
-      "truth_class": "REPRESENTATIONAL",
-      "sha256": "bc173bee51dd0dd3120d2cfbfc2884f5681849b384bc661af7f2721d92a2c8ad",
-      "perceptual_hash": "57bce8d11491f760dbeea11a0b9925a6d0085ae70c32966ef3a62cb887a16026",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
-      "intake_artifact": {
-        "workflow_run_id": 42073828513,
-        "artifact_id": 13437466569,
-        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057"
-      },
-      "fingerprint_artifact": {
-        "workflow_run_id": 42074599454,
-        "artifact_id": 13438400127,
-        "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
-      },
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "human_approval": "APPROVED_FOR_MANIFEST",
-      "approved_for_render": false,
-      "global_catalog_updated": false,
-      "thumbnail_eligible": false,
-      "drive_written": false,
-      "editorial_caveat": "Representational reconstruction/symbolic visual only; never literal Petrov archival evidence.",
-      "selection_basis": "Primary selection for S15: highest scored candidate in the approved two-candidate shortlist.",
-      "continuity_tags": {
-        "era": [
-          "period_compatible",
-          "indeterminate_era"
-        ],
-        "setting": [
-          "transition",
-          "technical_control_room"
-        ],
-        "time_of_day": [
-          "night",
-          "indeterminate_low_light"
-        ],
-        "lighting": [
-          "low_key",
-          "restrained_red"
-        ],
-        "palette": [
-          "charcoal",
-          "warning_red"
-        ],
-        "texture": [
-          "abstract_light",
-          "low_light_grain"
-        ],
-        "risk_flags": [
-          "generic_transition",
-          "needs_match_to_S14_and_S16"
-        ]
-      },
-      "continuity_risk_flags": [
-        "generic_transition",
-        "needs_match_to_S14_and_S16"
-      ],
-      "continuity_review_status": "REVIEW_REQUIRED",
-      "source_tier": "stock_auto"
-    },
-    {
-      "candidate_id": "pixabay-particles-orange-red-dust-effect-7957",
-      "provider": "pixabay",
-      "source_page_url": "https://pixabay.com/videos/particles-orange-red-dust-effect-7957/",
-      "media_url": "https://cdn.pixabay.com/video/2017/02/26/7957-205810637_large.mp4",
-      "license_name": "Pixabay Content License",
-      "source_role": "S16",
-      "truth_class": "BRAND_OUTRO",
-      "sha256": "00cb906c22484217646c6aeedc90f725941f4aa25e0df64378c1b0ecfe267282",
-      "perceptual_hash": "423fdfd63cdb0a3bd7cb7c798b1dc532e41d0d98234fad78e2cba05b49f97911",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
-      "intake_artifact": {
-        "workflow_run_id": 42073828513,
-        "artifact_id": 13437466569,
-        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057"
-      },
-      "fingerprint_artifact": {
-        "workflow_run_id": 42074599454,
-        "artifact_id": 13438400127,
-        "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
-      },
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "human_approval": "APPROVED_FOR_MANIFEST",
-      "approved_for_render": false,
-      "global_catalog_updated": false,
-      "thumbnail_eligible": false,
-      "drive_written": false,
-      "editorial_caveat": "Representational reconstruction/symbolic visual only; never literal Petrov archival evidence.",
-      "selection_basis": "Primary selection for S16: highest scored candidate in the approved two-candidate shortlist.",
-      "continuity_tags": {
-        "era": [
-          "period_compatible",
-          "indeterminate_era"
-        ],
-        "setting": [
-          "brand_outro",
-          "transition"
-        ],
-        "time_of_day": [
-          "night",
-          "indeterminate_low_light"
-        ],
-        "lighting": [
-          "low_key",
-          "restrained_red",
-          "restrained_amber"
-        ],
-        "palette": [
-          "charcoal",
-          "warning_red",
-          "amber"
-        ],
-        "texture": [
-          "abstract_particle",
-          "low_light_grain"
-        ],
-        "risk_flags": [
-          "generic_outro_texture",
-          "brand_lockup_only"
-        ]
-      },
-      "continuity_risk_flags": [
-        "generic_outro_texture",
-        "brand_lockup_only"
-      ],
-      "continuity_review_status": "REVIEW_REQUIRED",
-      "source_tier": "stock_auto"
-    },
-    {
-      "candidate_id": "pexels-5523892",
-      "provider": "pexels",
-      "source_page_url": "https://www.pexels.com/video/flashing-red-light-5523892/",
-      "media_url": "https://videos.pexels.com/video-files/5523892/5523892-uhd_2160_3840_30fps.mp4",
-      "license_name": "Pexels License",
+      "source_page_url": "https://pixabay.com/videos/led-indicator-lights-electronics-316712/",
+      "media_url": "https://cdn.pixabay.com/video/2025/11/18/316712_large.mp4",
       "source_role": "S06",
-      "truth_class": "MAP_OR_DIAGRAM",
-      "sha256": "a522bfd1dc6189baf512b5041987791e7e8fef0976d29ac8e5b16740cb553bc9",
-      "perceptual_hash": "18e51258379c4a0f337db9ffe3caad0d47562b12607b73a6f5607019cc31c7dc",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
-      "intake_artifact": {
-        "workflow_run_id": 42165726351,
-        "job_id": 127721653455,
-        "artifact_id": 13478797924,
-        "artifact_digest": "sha256:dc37a4428e029890919302d0414eb4f5b2859692dd851d0a2c4da1c12ef70eda"
-      },
-      "fingerprint_artifact": {
-        "workflow_run_id": 42166326952,
-        "job_id": 127723541842,
-        "artifact_id": 13479201438,
-        "artifact_digest": "sha256:755d8361c98a1587c9ac304690520b8520fc09d1aaa13f0551f10a641bd70934"
-      },
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "human_approval": "APPROVED_FOR_MANIFEST",
-      "approved_for_render": false,
-      "global_catalog_updated": false,
-      "thumbnail_eligible": false,
-      "drive_written": false,
-      "editorial_caveat": "Representational stock footage only; do not imply that it depicts the actual 1983 warning system.",
-      "continuity_tags": {
-        "era": [
-          "indeterminate_era",
-          "period_compatible"
-        ],
-        "setting": [
-          "technical_control_room",
-          "transition"
-        ],
-        "time_of_day": [
-          "night",
-          "indeterminate_low_light"
-        ],
-        "lighting": [
-          "low_key",
-          "restrained_red"
-        ],
-        "palette": [
-          "charcoal",
-          "warning_red"
-        ],
-        "texture": [
-          "abstract_light",
-          "low_light_grain"
-        ],
-        "risk_flags": [
-          "single_led_not_multi_indicator",
-          "symbolic_not_literal",
-          "must_not_repeat_S01"
-        ]
-      },
-      "continuity_risk_flags": [
-        "single_led_not_multi_indicator",
-        "symbolic_not_literal",
-        "must_not_repeat_S01"
-      ],
-      "continuity_review_status": "PASS_MANUAL_EDITORIAL_REVIEW",
-      "source_tier": "stock_auto",
-      "manual_continuity_review": {
-        "reviewed_at_utc": "2026-11-06T18:15:00Z",
-        "decision": "PASS_SYMBOLIC_INSERT",
-        "evidence": "Visual inspection confirms a single red LED against an otherwise black field. No readable UI, branding, person, modern interface or date-specific claim is present.",
-        "editorial_constraint": "Use only as a short symbolic warning insert; do not present as literal Soviet hardware or archival footage; source audio remains stripped."
-      }
-    },
-    {
-      "candidate_id": "pexels-12590338",
-      "provider": "pexels",
-      "source_page_url": "https://www.pexels.com/video/time-lapse-of-moving-clouds-on-a-night-sky-12590338/",
-      "media_url": "https://videos.pexels.com/video-files/12590338/12590338-uhd_3840_2160_25fps.mp4",
-      "license_name": "Pexels License",
-      "source_role": "S11",
       "truth_class": "REPRESENTATIONAL",
-      "sha256": "4525a9aee13d638be2196d043f4eeaaf80ef7a7d03b4d0b2ece87cbf4cdd6179",
-      "perceptual_hash": "e497ff0542c419e02ff630a6dbf9aeca5eb5e5849d3f14664e099f06484398d5",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "license_name": "Pixabay Content License",
+      "sha256": "e4d3d281bab5ffb6808a6ad0b20dd03e3857112cf309ee86d1dec234d4ac928e",
       "intake_artifact": {
-        "workflow_run_id": 42165726351,
-        "job_id": 127721653455,
-        "artifact_id": 13478797924,
-        "artifact_digest": "sha256:dc37a4428e029890919302d0414eb4f5b2859692dd851d0a2c4da1c12ef70eda"
-      },
-      "fingerprint_artifact": {
-        "workflow_run_id": 42166326952,
-        "job_id": 127723541842,
-        "artifact_id": 13479201438,
-        "artifact_digest": "sha256:755d8361c98a1587c9ac304690520b8520fc09d1aaa13f0551f10a641bd70934"
+        "workflow_run_id": 42044610956,
+        "job_id": 127304076065,
+        "artifact_id": 13422389208,
+        "artifact_name": "episode005-visual-intake-42044610956",
+        "artifact_digest": "sha256:6a38460d0d482e7eb75dabefdd15db9147870966a72b0ab43a698cafec2a57bc",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "e4d3d281bab5ffb6808a6ad0b20dd03e3857112cf309ee86d1dec234d4ac928e",
+        "duration_seconds": 5.208,
+        "dimensions": [
+          3872,
+          2160
+        ],
+        "frame_rate": "24/1",
+        "codec": "h264",
+        "automated_promotion": false,
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "positions": [
+            "start",
+            "quarter",
+            "middle",
+            "three_quarter",
+            "end_minus_0_1_seconds"
+          ],
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "qa_refresh": {
+          "workflow_run_id": 42049521282,
+          "artifact_id": 13426556747,
+          "artifact_digest": "sha256:81604ae674a11d6e4c7b27769ab80b6b9a7aaa486260edae9c280220a9750e60",
+          "commit": "af15b0bb20738b6ddcdfee098f992e958f006651",
+          "status": "SUCCESS_JSON_VALIDATED",
+          "sampling": "five_normalized_timestamps",
+          "promotion_allowed": false,
+          "render_allowed": false,
+          "global_catalog_updated": false,
+          "drive_written": false
+        }
       },
       "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
       "human_approval": "APPROVED_FOR_MANIFEST",
@@ -966,113 +587,17 @@
       "global_catalog_updated": false,
       "thumbnail_eligible": false,
       "drive_written": false,
-      "editorial_caveat": "Representational stock footage only; no claim that it depicts the actual incident sky.",
-      "continuity_tags": {
-        "era": [
-          "indeterminate_era",
-          "period_compatible"
-        ],
-        "setting": [
-          "night_sky",
-          "external_sensor"
-        ],
-        "time_of_day": [
-          "night",
-          "indeterminate_low_light"
-        ],
-        "lighting": [
-          "low_key",
-          "cool_shadows"
-        ],
-        "palette": [
-          "charcoal",
-          "desaturated_blue"
-        ],
-        "texture": [
-          "atmospheric",
-          "low_light_grain"
-        ],
-        "risk_flags": [
-          "must_verify_no_city_branding",
-          "night_sky_bridge_candidate"
-        ]
+      "browser_verification": {
+        "source_page_verified": true,
+        "provider_license_visible": "Pixabay Content License",
+        "license_evidence_url": "https://pixabay.com/service/license-summary/",
+        "media_url_observed": true,
+        "creator": "Solarselle77",
+        "editorial_note": "Abstract LED/electronics loop. It must not be presented as the actual Soviet alert interface or as literal Petrov archival evidence."
       },
-      "continuity_risk_flags": [
-        "must_verify_no_city_branding",
-        "night_sky_bridge_candidate"
-      ],
-      "continuity_review_status": "PASS_MANUAL_EDITORIAL_REVIEW",
-      "source_tier": "stock_auto",
-      "manual_continuity_review": {
-        "reviewed_at_utc": "2026-11-06T18:15:00Z",
-        "decision": "PASS_SYMBOLIC_INSERT",
-        "evidence": "Visual inspection confirms a dark clouded night sky with tree silhouettes and no visible city, logo, interface, person or date-specific claim.",
-        "editorial_constraint": "Use only as the non-event/sky bridge; do not present as 1983 archival footage or tie it to a literal launch site; source audio remains stripped."
-      }
-    },
-    {
-      "candidate_id": "pexels-8888977",
-      "provider": "pexels",
-      "source_page_url": "https://www.pexels.com/video/person-typing-on-a-keyboard-8888977/",
-      "media_url": "https://videos.pexels.com/video-files/8888977/8888977-uhd_4096_2160_25fps.mp4",
-      "license_name": "Pexels License",
-      "source_role": "S09",
-      "truth_class": "REPRESENTATIONAL",
-      "source_truth_disclaimer": "Stock footage of keyboard; never Petrov or actual 1983 Soviet command equipment",
-      "sha256": "b5e41fafc252a88d3959fbb3df0294010397e6687d833d884bc5a0bfdd48fa51",
-      "perceptual_hash": "11084cf2f2f6ddf92255d82bcb19c5cc04003c2dbc1b7c21f0bf617aa87915a8",
-      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
-      "intake_artifact": {
-        "workflow_run_id": 42388510746,
-        "artifact_id": 13580144522,
-        "artifact_digest": "sha256:c7dbc26fc3da1d80036f962df6f9df2266ad26ef7af413fbef0cce195094a338",
-        "fingerprint_workflow_run_id": 42390022588,
-        "fingerprint_artifact_id": 13581475505,
-        "fingerprint_artifact_digest": "sha256:87ebe742d0f9816f6f8f37152ca8963007f3524fa826fcd7c55292d01d6cf819"
-      },
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
-      "human_approval": "APPROVED_FOR_MANIFEST",
-      "human_approval_scope": "USER_APPROVED_EDITORIAL_REPLACEMENT_S09_NOT_RIGHTS",
-      "approved_for_render": false,
-      "global_catalog_updated": false,
-      "thumbnail_eligible": false,
-      "drive_written": false,
-      "continuity_tags": {
-        "era": [
-          "1983_style_representation",
-          "period_compatible",
-          "analog"
-        ],
-        "setting": [
-          "technical_control_room",
-          "representational_data_entry"
-        ],
-        "time_of_day": [
-          "night",
-          "indeterminate_low_light"
-        ],
-        "lighting": [
-          "low_key",
-          "cool_shadows"
-        ],
-        "palette": [
-          "charcoal",
-          "steel",
-          "muted_amber"
-        ],
-        "texture": [
-          "aged_beige_keyboard",
-          "plastic_keys",
-          "low_light_grain"
-        ],
-        "risk_flags": [
-          "not_literal_1983_command_panel",
-          "modern_stock_actor_clothing",
-          "source_audio_none",
-          "third_party_rights_review_pending",
-          "period_style_not_archival"
-        ]
-      }
+      "editorial_caveat": "Representational footage only; never literal Petrov archival evidence.",
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto"
     },
     {
       "candidate_id": "archive-prelinger-onguard1956-s07",
@@ -1189,7 +714,7 @@
         "representational_archive_not_literal_petrov_evidence",
         "selected_segment_only"
       ],
-      "continuity_review_status": "PASS_MANUAL_EDITORIAL_REVIEW",
+      "continuity_review_status": "REVIEW_REQUIRED",
       "source_tier": "archive_manual",
       "author": "United States Air Force / public-domain government film",
       "human_approval": "APPROVED_FOR_MANIFEST",
@@ -1199,6 +724,148 @@
       "drive_written": false,
       "sha256": "244923c250150692a1e8a632817b536132ccf08d3fa01199bd08fb932deafb30",
       "perceptual_hash": "b859dd7ccc5863560f04a4f5086e598b584e8319dc4dcbbf578eb9fab991f28e"
+    },
+    {
+      "candidate_id": "pixabay-radar-communication-military-261518",
+      "provider": "pixabay",
+      "source_page_url": "https://pixabay.com/videos/radar-communication-military-261518/",
+      "media_url": "https://cdn.pixabay.com/video/2025/02/28/261518_large.mp4",
+      "source_role": "S08",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "license_name": "Pixabay Content License",
+      "sha256": "032d21331f071798b51126eb2483e37edaa6169444ddc42197ef5d7689c206f1",
+      "perceptual_hash": "a09f404e6acb40682784a5499d023d7e77c1eaf6f89285b85cb5ee8f61e3697c",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "job_id": 127408597700,
+        "artifact_id": 13437466569,
+        "artifact_name": "episode005-visual-intake-42073828513",
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057",
+        "status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
+        "sha256": "032d21331f071798b51126eb2483e37edaa6169444ddc42197ef5d7689c206f1",
+        "duration_seconds": 30,
+        "dimensions": [
+          3840,
+          2160
+        ],
+        "frame_rate": "60/1",
+        "codec": "h264",
+        "qa_sampling": {
+          "method": "five_normalized_timestamps",
+          "sample_count": 5,
+          "contact_sheets": [
+            "qa-frames.jpg",
+            "qa-crop-9x16.jpg"
+          ]
+        },
+        "automated_promotion": false,
+        "perceptual_hash": "a09f404e6acb40682784a5499d023d7e77c1eaf6f89285b85cb5ee8f61e3697c",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "fingerprint_workflow_run_id": 42074599454,
+        "fingerprint_artifact_id": 13438400127,
+        "fingerprint_artifact_name": "episode005-visual-fingerprint-audit",
+        "fingerprint_artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": true,
+        "semantic_note": "Page-verified military/radar monitoring visual; candidate remains subject to full-duration semantic and crop QA."
+      },
+      "editorial_caveat": "Representational footage only; never literal Petrov archival evidence.",
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto"
+    },
+    {
+      "candidate_id": "pexels-8888977",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/person-typing-on-a-keyboard-8888977/",
+      "media_url": "https://videos.pexels.com/video-files/8888977/8888977-uhd_4096_2160_25fps.mp4",
+      "license_name": "Pexels License",
+      "source_role": "S09",
+      "truth_class": "REPRESENTATIONAL",
+      "source_truth_disclaimer": "Stock footage of keyboard; never Petrov or actual 1983 Soviet command equipment",
+      "sha256": "b5e41fafc252a88d3959fbb3df0294010397e6687d833d884bc5a0bfdd48fa51",
+      "perceptual_hash": "11084cf2f2f6ddf92255d82bcb19c5cc04003c2dbc1b7c21f0bf617aa87915a8",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42388510746,
+        "artifact_id": 13580144522,
+        "artifact_digest": "sha256:c7dbc26fc3da1d80036f962df6f9df2266ad26ef7af413fbef0cce195094a338",
+        "fingerprint_workflow_run_id": 42390022588,
+        "fingerprint_artifact_id": 13581475505,
+        "fingerprint_artifact_digest": "sha256:87ebe742d0f9816f6f8f37152ca8963007f3524fa826fcd7c55292d01d6cf819"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "human_approval_scope": "USER_APPROVED_EDITORIAL_REPLACEMENT_S09_NOT_RIGHTS",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "continuity_tags": {
+        "era": [
+          "1983_style_representation",
+          "period_compatible",
+          "analog"
+        ],
+        "setting": [
+          "technical_control_room",
+          "representational_data_entry"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "steel",
+          "muted_amber"
+        ],
+        "texture": [
+          "aged_beige_keyboard",
+          "plastic_keys",
+          "low_light_grain"
+        ],
+        "risk_flags": [
+          "not_literal_1983_command_panel",
+          "modern_stock_actor_clothing",
+          "source_audio_none",
+          "third_party_rights_review_pending",
+          "period_style_not_archival"
+        ]
+      },
+      "browser_verification": {
+        "status": "SOURCE_PAGE_AND_GENERAL_LICENSE_REVIEWED",
+        "reviewed_date": "2026-11-07",
+        "source_author": "MART PRODUCTION",
+        "observed_license": "Free; Pexels License general commercial permission subject to third-party/personality rights",
+        "license_page": "https://www.pexels.com/legal-pages/license/",
+        "artist": "MART PRODUCTION",
+        "page": "https://www.pexels.com/video/person-typing-on-a-keyboard-8888977/",
+        "media_url_verification": {
+          "method": "REAL_GITHUB_ACTIONS_DOWNLOAD_AND_SHA256",
+          "status": "PASS",
+          "workflow_run_id": 42388510746,
+          "content_type": "video/mp4",
+          "content_length_bytes": 63292776
+        }
+      },
+      "editorial_caveat": "Stock reconstruction only; do not imply exact Soviet 1983 device or identity of any person",
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto"
     },
     {
       "candidate_id": "archive-gov-antps25-29604-s10",
@@ -1316,7 +983,7 @@
         "representational_archive_not_literal_petrov_evidence",
         "selected_segment_only"
       ],
-      "continuity_review_status": "PASS_MANUAL_EDITORIAL_REVIEW",
+      "continuity_review_status": "REVIEW_REQUIRED",
       "source_tier": "government_manual",
       "author": "United States Department of Defense / FedFlix public-domain government film",
       "human_approval": "APPROVED_FOR_MANIFEST",
@@ -1328,13 +995,92 @@
       "perceptual_hash": "4366c57bfea0b85e50e56334c8f5c05d28cb14b531bca983d7bc077f91118c09"
     },
     {
+      "candidate_id": "pexels-12590338",
+      "provider": "pexels",
+      "source_page_url": "https://www.pexels.com/video/time-lapse-of-moving-clouds-on-a-night-sky-12590338/",
+      "media_url": "https://videos.pexels.com/video-files/12590338/12590338-uhd_3840_2160_25fps.mp4",
+      "license_name": "Pexels License",
+      "source_role": "S11",
+      "truth_class": "REPRESENTATIONAL",
+      "sha256": "4525a9aee13d638be2196d043f4eeaaf80ef7a7d03b4d0b2ece87cbf4cdd6179",
+      "perceptual_hash": "e497ff0542c419e02ff630a6dbf9aeca5eb5e5849d3f14664e099f06484398d5",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42165726351,
+        "job_id": 127721653455,
+        "artifact_id": 13478797924,
+        "artifact_digest": "sha256:dc37a4428e029890919302d0414eb4f5b2859692dd851d0a2c4da1c12ef70eda"
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 42166326952,
+        "job_id": 127723541842,
+        "artifact_id": 13479201438,
+        "artifact_digest": "sha256:755d8361c98a1587c9ac304690520b8520fc09d1aaa13f0551f10a641bd70934"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "editorial_caveat": "Representational stock footage only; no claim that it depicts the actual incident sky.",
+      "continuity_tags": {
+        "era": [
+          "indeterminate_era",
+          "period_compatible"
+        ],
+        "setting": [
+          "night_sky",
+          "external_sensor"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "atmospheric",
+          "low_light_grain"
+        ],
+        "risk_flags": [
+          "must_verify_no_city_branding",
+          "night_sky_bridge_candidate"
+        ]
+      },
+      "continuity_risk_flags": [
+        "must_verify_no_city_branding",
+        "night_sky_bridge_candidate"
+      ],
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto",
+      "manual_continuity_review": {
+        "reviewed_at_utc": "2026-11-06T18:15:00Z",
+        "decision": "PASS_SYMBOLIC_INSERT",
+        "evidence": "Visual inspection confirms a dark clouded night sky with tree silhouettes and no visible city, logo, interface, person or date-specific claim.",
+        "editorial_constraint": "Use only as the non-event/sky bridge; do not present as 1983 archival footage or tie it to a literal launch site; source audio remains stripped."
+      },
+      "browser_verification": {
+        "status": "SOURCE_PAGE_REVIEWED",
+        "checked_at_utc": "2026-11-06T00:00:00Z",
+        "observed_license": "Free",
+        "media_route": "Pexels download redirect resolved to videos.pexels.com"
+      }
+    },
+    {
       "candidate_id": "pixabay-antenna-astronomy-communication-40041",
       "provider": "pixabay",
       "source_page_url": "https://pixabay.com/videos/antenna-astronomy-communication-40041/",
       "media_url": "https://cdn.pixabay.com/video/2020/05/24/40041-424371544_large.mp4",
       "license_name": "Pixabay Content License",
       "source_role": "S12",
-      "truth_class": "MAP_OR_DIAGRAM",
+      "truth_class": "REPRESENTATIONAL",
       "sha256": "e0a5b6cbf90c31c7f79c8cf6d9eaa515a83d4e986927a90a3840d7d36303e9b4",
       "perceptual_hash": "720e0b55776ac929e3c7f5be259dcaa7c848fe1cefb4fc2ffd501c6b2ee1059d",
       "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
@@ -1405,8 +1151,318 @@
       "continuity_risk_flags": [
         "representational_infrastructure_not_archival"
       ],
-      "continuity_review_status": "PASS_MANUAL_EDITORIAL_REVIEW",
-      "source_tier": "stock_auto"
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "visible_duration_seconds": 22,
+        "visible_resolution": "1920x1080",
+        "semantic_note": "Real parabolic antenna/earth-station infrastructure with sky and clouds; stronger S12 mechanism candidate than a generic cloud texture, pending intake and frame QA."
+      }
+    },
+    {
+      "candidate_id": "pixabay-typewriter-typing-writing-author-1335",
+      "provider": "pixabay",
+      "source_page_url": "https://pixabay.com/videos/typewriter-typing-writing-author-1335/",
+      "media_url": "https://cdn.pixabay.com/video/2015/11/12/1335-145564309_large.mp4",
+      "license_name": "Pixabay Content License",
+      "source_role": "S13",
+      "truth_class": "DOCUMENTARY_EVIDENCE",
+      "sha256": "2df86b63f6f05398b44ac2c4b28e9f370036e552b20d0b30e2842e2e71aabd23",
+      "perceptual_hash": "e42ec360a46a9ef093c7055f72d0bb39ebffb9a8e7ce3acb6ee96902f70673fe",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "artifact_id": 13437466569,
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057"
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 42074599454,
+        "artifact_id": 13438400127,
+        "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "editorial_caveat": "Representational reconstruction/symbolic visual only; never literal Petrov archival evidence.",
+      "selection_basis": "Primary selection for S13: highest scored candidate in the approved two-candidate shortlist.",
+      "continuity_tags": {
+        "era": [
+          "analog",
+          "cold_war",
+          "period_compatible"
+        ],
+        "setting": [
+          "documentary_evidence",
+          "institutional_desk"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_amber"
+        ],
+        "palette": [
+          "charcoal",
+          "amber",
+          "paper"
+        ],
+        "texture": [
+          "paper_logbook",
+          "typewriter",
+          "low_light_grain"
+        ],
+        "risk_flags": [
+          "readable_text_must_not_be_invented"
+        ]
+      },
+      "continuity_risk_flags": [
+        "readable_text_must_not_be_invented"
+      ],
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": true,
+        "semantic_note": "Page-verified typewriter action; intended for evidence atmosphere, not as a literal readable Petrov document."
+      }
+    },
+    {
+      "candidate_id": "pixabay-hallway-dark-corridor-20837",
+      "provider": "pixabay",
+      "source_page_url": "https://pixabay.com/videos/hallway-dark-corridor-dim-mystery-20837/",
+      "media_url": "https://cdn.pixabay.com/video/2019/01/19/20837-312432073_large.mp4",
+      "license_name": "Pixabay Content License",
+      "source_role": "S14",
+      "truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "sha256": "e6c20511f889daa57834ddf5f97ea076ffffedc0a321850a4ea8fa295479d72d",
+      "perceptual_hash": "40df89d9d2edf33d5a94509be3c9f3abb6073dd28ff1914aba8307eb1055aafd",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42056121022,
+        "artifact_id": 13428247933,
+        "artifact_digest": "sha256:e6f1d8424a909e08ab527ff555fe359e4c9be8214990cf5b91364f80f590bb83"
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 42059893725,
+        "job_id": 127358312867,
+        "artifact_id": 13431651011,
+        "artifact_name": "episode005-visual-fingerprint-audit",
+        "artifact_digest": "sha256:71428db1a7810ba8074da7c85139ff0a6720a06ea06aab169b5dd539f3ed7e8d",
+        "status": "FINGERPRINT_AUDIT_PASS",
+        "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+        "automated_promotion": false,
+        "sha256": "e6c20511f889daa57834ddf5f97ea076ffffedc0a321850a4ea8fa295479d72d",
+        "perceptual_hash": "40df89d9d2edf33d5a94509be3c9f3abb6073dd28ff1914aba8307eb1055aafd",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "editorial_caveat": "Representational empty institutional corridor for S14 only; never literal Petrov archival evidence and never reused in another shot.",
+      "continuity_tags": {
+        "era": [
+          "analog",
+          "cold_war",
+          "period_compatible"
+        ],
+        "setting": [
+          "institutional_corridor"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "cool_shadows"
+        ],
+        "palette": [
+          "charcoal",
+          "steel",
+          "desaturated_blue"
+        ],
+        "texture": [
+          "brushed_metal",
+          "low_light_grain"
+        ],
+        "risk_flags": [
+          "representational_corridor_not_archival"
+        ]
+      },
+      "continuity_risk_flags": [
+        "representational_corridor_not_archival"
+      ],
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "media_url_observed": "Edit video link on the provider page exposed the direct CDN media URL.",
+        "semantic_note": "Dark empty corridor with no literal military insignia identified in the source-page metadata; use only as a representational reconstruction, never as literal Petrov archival evidence.",
+        "visual_qa": "Shortlist only; downloaded five-point QA and 9:16 crop checks still required."
+      }
+    },
+    {
+      "candidate_id": "pixabay-dark-light-lens-flare-abstract-250413",
+      "provider": "pixabay",
+      "source_page_url": "https://pixabay.com/videos/dark-light-lens-flare-abstract-250413/",
+      "media_url": "https://cdn.pixabay.com/video/2025/01/03/250413_large.mp4",
+      "license_name": "Pixabay Content License",
+      "source_role": "S15",
+      "truth_class": "REPRESENTATIONAL",
+      "sha256": "bc173bee51dd0dd3120d2cfbfc2884f5681849b384bc661af7f2721d92a2c8ad",
+      "perceptual_hash": "57bce8d11491f760dbeea11a0b9925a6d0085ae70c32966ef3a62cb887a16026",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "artifact_id": 13437466569,
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057"
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 42074599454,
+        "artifact_id": 13438400127,
+        "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "editorial_caveat": "Representational reconstruction/symbolic visual only; never literal Petrov archival evidence.",
+      "selection_basis": "Primary selection for S15: highest scored candidate in the approved two-candidate shortlist.",
+      "continuity_tags": {
+        "era": [
+          "period_compatible",
+          "indeterminate_era"
+        ],
+        "setting": [
+          "transition",
+          "technical_control_room"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_red"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red"
+        ],
+        "texture": [
+          "abstract_light",
+          "low_light_grain"
+        ],
+        "risk_flags": [
+          "generic_transition",
+          "needs_match_to_S14_and_S16"
+        ]
+      },
+      "continuity_risk_flags": [
+        "generic_transition",
+        "needs_match_to_S14_and_S16"
+      ],
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": true,
+        "semantic_note": "Page-verified dark/light abstract transition; symbolic fallback only and distinct from the previously rejected S15 red-blur candidate."
+      }
+    },
+    {
+      "candidate_id": "pixabay-particles-orange-red-dust-effect-7957",
+      "provider": "pixabay",
+      "source_page_url": "https://pixabay.com/videos/particles-orange-red-dust-effect-7957/",
+      "media_url": "https://cdn.pixabay.com/video/2017/02/26/7957-205810637_large.mp4",
+      "license_name": "Pixabay Content License",
+      "source_role": "S16",
+      "truth_class": "BRAND_OUTRO",
+      "sha256": "00cb906c22484217646c6aeedc90f725941f4aa25e0df64378c1b0ecfe267282",
+      "perceptual_hash": "423fdfd63cdb0a3bd7cb7c798b1dc532e41d0d98234fad78e2cba05b49f97911",
+      "fingerprint_algorithm": "video-fingerprint-v2-rgb24-q4",
+      "intake_artifact": {
+        "workflow_run_id": 42073828513,
+        "artifact_id": 13437466569,
+        "artifact_digest": "sha256:19b29cd3ea7ba77af62067c6f29bad72c3ffc8b837c0a44565252613b2b15057"
+      },
+      "fingerprint_artifact": {
+        "workflow_run_id": 42074599454,
+        "artifact_id": 13438400127,
+        "artifact_digest": "sha256:bf30a68cd1afe703492db843698ec9254b1e7563bbb161cab895bf4ad87c31b1"
+      },
+      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "human_approval": "APPROVED_FOR_MANIFEST",
+      "approved_for_render": false,
+      "global_catalog_updated": false,
+      "thumbnail_eligible": false,
+      "drive_written": false,
+      "editorial_caveat": "Representational reconstruction/symbolic visual only; never literal Petrov archival evidence.",
+      "selection_basis": "Primary selection for S16: highest scored candidate in the approved two-candidate shortlist.",
+      "continuity_tags": {
+        "era": [
+          "period_compatible",
+          "indeterminate_era"
+        ],
+        "setting": [
+          "brand_outro",
+          "transition"
+        ],
+        "time_of_day": [
+          "night",
+          "indeterminate_low_light"
+        ],
+        "lighting": [
+          "low_key",
+          "restrained_red",
+          "restrained_amber"
+        ],
+        "palette": [
+          "charcoal",
+          "warning_red",
+          "amber"
+        ],
+        "texture": [
+          "abstract_particle",
+          "low_light_grain"
+        ],
+        "risk_flags": [
+          "generic_outro_texture",
+          "brand_lockup_only"
+        ]
+      },
+      "continuity_risk_flags": [
+        "generic_outro_texture",
+        "brand_lockup_only"
+      ],
+      "continuity_review_status": "REVIEW_REQUIRED",
+      "source_tier": "stock_auto",
+      "browser_verification": {
+        "source_page_verified": true,
+        "license_visible": "Pixabay Content License",
+        "ai_generated": false,
+        "media_url_observed_in_browser": true,
+        "semantic_note": "Page-verified particle texture; branding will be added only by the approved renderer, never downloaded from the source."
+      }
     }
   ],
   "shot_assignments": [
@@ -1414,15 +1470,16 @@
       "shot_id": "S01",
       "range": "00:00-00:04",
       "role": "hook",
-      "requested_visual": "Dark bunker panel; red warning indicator comes alive.",
-      "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "requested_visual": "Photorealistic bunker operator with radio in low-key darkness; the warning begins.",
+      "requested_truth_class": "REPRESENTATIONAL",
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST_ONLY_NOT_RENDER",
       "assignment": {
         "candidate_id": "pexels-11764431",
-        "usage": "Human-anchor hook: dim-room operator and radio; not literal Petrov archival evidence.",
+        "usage": "Opening human-anchor reconstruction; not archival evidence.",
         "approved_for_render": false,
         "global_catalog_updated": false,
-        "human_approval": "APPROVED_FOR_MANIFEST"
+        "human_approval": "APPROVED_FOR_MANIFEST",
+        "editorial_caveat": "Opening human-anchor reconstruction; not archival evidence."
       },
       "blocking_reason": null,
       "continuity_tags": {
@@ -1451,23 +1508,24 @@
           "crt_phosphor",
           "low_light_grain"
         ]
-      }
+      },
+      "visual_request": "Photorealistic bunker operator with radio in low-key darkness; the warning begins."
     },
     {
       "shot_id": "S02",
       "range": "00:04-00:09",
       "role": "context",
-      "requested_visual": "Night-side Earth and early-warning satellite.",
-      "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "requested_visual": "Photorealistic physical radio-telescope dishes at night; representational external-sensor infrastructure.",
+      "requested_truth_class": "REPRESENTATIONAL",
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST_ONLY_NOT_RENDER",
       "assignment": {
         "candidate_id": "wikimedia-meerkat-night-telescopes-2023",
-        "usage": "Representational physical radio-telescope infrastructure for the external-sensor/communications beat; not archival evidence.",
+        "usage": "Physical radio-telescope infrastructure; never literal Petrov archival evidence.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
         "approval_scope": "USER_APPROVED_MANIFEST_ONLY",
-        "editorial_caveat": "Never literal Petrov archival evidence; retain CC BY-SA attribution/share-alike obligations."
+        "editorial_caveat": "Physical radio-telescope infrastructure; never literal Petrov archival evidence."
       },
       "blocking_reason": null,
       "continuity_tags": {
@@ -1501,22 +1559,23 @@
           "time_lapse_natural_sky_motion",
           "cc_by_sa_attribution_required"
         ]
-      }
+      },
+      "visual_request": "Photorealistic physical radio-telescope dishes at night; representational external-sensor infrastructure."
     },
     {
       "shot_id": "S03",
       "range": "00:09-00:14",
       "role": "human_anchor",
-      "requested_visual": "Representational command-bunker portrait/composition of Petrov; no false archival claim.",
+      "requested_visual": "Photorealistic vintage radio in a dark control-room setting; representational only.",
       "requested_truth_class": "REPRESENTATIONAL",
-      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST_ONLY_NOT_RENDER",
       "assignment": {
         "candidate_id": "pixabay-radio-vintage-old-171435",
-        "usage": "Vintage radio insert for the bunker/human decision context; symbolic reconstruction.",
+        "usage": "Physical vintage-radio insert; never literal Petrov archival evidence.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
-        "editorial_caveat": "Favor the first 8-10 seconds; crop toward the operator/radio, avoid the widening shelf background, apply warm low-key grade and strip source audio.",
+        "editorial_caveat": "Physical vintage-radio insert; never literal Petrov archival evidence.",
         "visual_treatment": {
           "preferred_window_seconds": [
             0,
@@ -1558,22 +1617,23 @@
           "low_light_grain",
           "paper_logbook"
         ]
-      }
+      },
+      "visual_request": "Photorealistic vintage radio in a dark control-room setting; representational only."
     },
     {
       "shot_id": "S04",
       "range": "00:14-00:18",
       "role": "escalation",
-      "requested_visual": "Alert moves through a command-chain diagram.",
-      "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "requested_visual": "Photorealistic hand operating a period-compatible control panel as the alert is relayed.",
+      "requested_truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST_ONLY_NOT_RENDER",
       "assignment": {
-        "candidate_id": "mixkit-abstract-red-glow-101432",
-        "usage": "Abstract signal pulse for command-chain escalation; not literal interface.",
+        "candidate_id": "mixkit-worker-industrial-lathe-2244",
+        "usage": "Representational control-panel action; never literal Petrov archival evidence.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
-        "editorial_caveat": "Usar como reconstrução simbólica, preservar o rádio contra o fundo preto, não sugerir que seja o painel real de 1983 e remover o áudio de origem.",
+        "editorial_caveat": "Representational control-panel action; never literal Petrov archival evidence.",
         "visual_treatment": {
           "preferred_window_seconds": [
             0,
@@ -1623,22 +1683,23 @@
           "vintage_radio_symbolic_signal_transfer",
           "source_audio_must_be_stripped_in_render"
         ]
-      }
+      },
+      "visual_request": "Photorealistic hand operating a period-compatible control panel as the alert is relayed."
     },
     {
       "shot_id": "S05",
       "range": "00:18-00:23",
       "role": "escalation",
-      "requested_visual": "One launch indicator becomes two, then three.",
-      "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "requested_visual": "Photorealistic close-up of a launch-control button action; representational escalation only.",
+      "requested_truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST_ONLY_NOT_RENDER",
       "assignment": {
-        "candidate_id": "pixabay-radar-black-green-target-symbol-57670",
-        "usage": "Radar/target insert for the warning-count escalation; symbolic only.",
+        "candidate_id": "pixabay-button-press-push-start-launching-221746",
+        "usage": "Physical button action; no claim of the actual 1983 system.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
-        "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
+        "editorial_caveat": "Physical button action; no claim of the actual 1983 system."
       },
       "blocking_reason": null,
       "continuity_tags": {
@@ -1668,22 +1729,23 @@
           "crt_phosphor",
           "low_light_grain"
         ]
-      }
+      },
+      "visual_request": "Photorealistic close-up of a launch-control button action; representational escalation only."
     },
     {
       "shot_id": "S06",
       "range": "00:23-00:27",
       "role": "escalation",
-      "requested_visual": "Counter reaches five; alarm intensity rises.",
-      "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "requested_visual": "Photorealistic physical warning lights intensify; no authored interface.",
+      "requested_truth_class": "REPRESENTATIONAL",
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST_ONLY_NOT_RENDER",
       "assignment": {
-        "candidate_id": "pexels-5523892",
-        "usage": "Red warning pulse for escalation; never literal Soviet interface.",
+        "candidate_id": "pixabay-led-indicator-lights-316712",
+        "usage": "Physical indicator-light insert; never literal Soviet interface.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
-        "editorial_caveat": "Representational stock footage only; do not imply that it depicts the actual 1983 warning system."
+        "editorial_caveat": "Physical indicator-light insert; never literal Soviet interface."
       },
       "blocking_reason": null,
       "continuity_tags": {
@@ -1714,22 +1776,23 @@
           "abstract_light",
           "low_light_grain"
         ]
-      }
+      },
+      "visual_request": "Photorealistic physical warning lights intensify; no authored interface."
     },
     {
       "shot_id": "S07",
       "range": "00:27-00:32",
       "role": "decision_pressure",
-      "requested_visual": "Dark analog control surface under decision pressure; no clock, watch, timepiece or time display.",
+      "requested_visual": "Photorealistic archival control-room/operator segment under decision pressure; no time display.",
       "requested_truth_class": "REPRESENTATIONAL",
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST_ONLY_NOT_RENDER",
       "assignment": {
         "candidate_id": "archive-prelinger-onguard1956-s07",
-        "usage": "Public-domain SAGE control-room/operator segment for decision pressure; representational only.",
+        "usage": "Approved public-domain segment; representational only; source audio stripped.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
-        "editorial_caveat": "Representational footage only; never literal Petrov archival evidence; source audio stripped."
+        "editorial_caveat": "Approved public-domain segment; representational only; source audio stripped."
       },
       "continuity_tags": {
         "era": [
@@ -1758,22 +1821,23 @@
           "low_light_grain"
         ]
       },
-      "visual_request": "Dark analog control surface under decision pressure; no clock, watch, timepiece or time display."
+      "visual_request": "Photorealistic archival control-room/operator segment under decision pressure; no time display.",
+      "blocking_reason": null
     },
     {
       "shot_id": "S08",
       "range": "00:32-00:37",
       "role": "contradiction",
-      "requested_visual": "Ground radar remains empty while satellite alert flashes.",
-      "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "requested_visual": "Photorealistic radar-monitoring equipment and operator context; no authored interface.",
+      "requested_truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST_ONLY_NOT_RENDER",
       "assignment": {
-        "candidate_id": "pixabay-radar-radar-screen-rotation-circles-4511",
-        "usage": "Ground-radar contradiction insert; symbolic monitoring visual.",
+        "candidate_id": "pixabay-radar-communication-military-261518",
+        "usage": "Representational radar-monitoring footage; not literal Petrov archival evidence.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
-        "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
+        "editorial_caveat": "Representational radar-monitoring footage; not literal Petrov archival evidence."
       },
       "blocking_reason": null,
       "continuity_tags": {
@@ -1804,23 +1868,24 @@
           "crt_phosphor",
           "low_light_grain"
         ]
-      }
+      },
+      "visual_request": "Photorealistic radar-monitoring equipment and operator context; no authored interface."
     },
     {
       "shot_id": "S09",
       "range": "00:37-00:41",
       "role": "irreversible_choice",
-      "requested_visual": "False-alarm classification is entered; no celebratory interface.",
-      "requested_truth_class": "MAP_OR_DIAGRAM",
+      "requested_visual": "Photorealistic hands entering a classification on an old keyboard; no authored interface.",
+      "requested_truth_class": "REPRESENTATIONAL",
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST_ONLY_NOT_RENDER",
       "assignment": {
         "candidate_id": "pexels-8888977",
-        "usage": "Hands typing retro-style keyboard as a symbolic depiction of the false-alarm classification. Not literal Soviet command console.",
+        "usage": "Stock reconstruction only; not a literal Soviet command console.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
         "human_approval_basis": "User authorized recommended S09 preview on 2026-11-07",
-        "editorial_caveat": "Representational modern stock; never imply archival Petrov footage or literal technical equipment; mask/crop avoid modern clothing; no misleading graphics.",
+        "editorial_caveat": "Stock reconstruction only; not a literal Soviet command console.",
         "visual_treatment": {
           "crop_strategy": "locked_center_hands_and_keys_9x16",
           "grade": "conservative_low_key_cool_shadows",
@@ -1829,7 +1894,7 @@
         },
         "blocker": "S09_REPLACEMENT_RENDER_RIGHTS_AND_FULL_EPISODE_PREFLIGHT_PENDING"
       },
-      "blocking_reason": "Rights record missing for replacement; no global release",
+      "blocking_reason": null,
       "continuity_tags": {
         "era": [
           "1983",
@@ -1859,22 +1924,23 @@
           "paper_logbook",
           "analog_input"
         ]
-      }
+      },
+      "visual_request": "Photorealistic hands entering a classification on an old keyboard; no authored interface."
     },
     {
       "shot_id": "S10",
       "range": "00:41-00:46",
       "role": "suspense",
-      "requested_visual": "Bunker holds in low-key silence as indicator lights settle; no clock, watch, timepiece or time display.",
+      "requested_visual": "Photorealistic radar operator/control-panel segment in low-key silence; no time display.",
       "requested_truth_class": "REPRESENTATIONAL",
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST_ONLY_NOT_RENDER",
       "assignment": {
         "candidate_id": "archive-gov-antps25-29604-s10",
-        "usage": "Public-domain radar operator/control-panel segment for suspended bunker tension; representational only.",
+        "usage": "Approved public-domain segment; representational only; source audio stripped.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
-        "editorial_caveat": "Representational footage only; never literal Petrov archival evidence; source audio stripped."
+        "editorial_caveat": "Approved public-domain segment; representational only; source audio stripped."
       },
       "continuity_tags": {
         "era": [
@@ -1904,22 +1970,23 @@
           "low_light_grain"
         ]
       },
-      "visual_request": "Bunker holds in low-key silence as indicator lights settle; no clock, watch, timepiece or time display."
+      "visual_request": "Photorealistic radar operator/control-panel segment in low-key silence; no time display.",
+      "blocking_reason": null
     },
     {
       "shot_id": "S11",
       "range": "00:46-00:51",
       "role": "non_event",
-      "requested_visual": "Empty night sky; expected impact never occurs.",
+      "requested_visual": "Photorealistic empty night sky; the expected impact never occurs.",
       "requested_truth_class": "REPRESENTATIONAL",
-      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST_ONLY_NOT_RENDER",
       "assignment": {
         "candidate_id": "pexels-12590338",
-        "usage": "Representational night sky for the non-event beat.",
+        "usage": "Representational night sky; no claim of the incident sky.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
-        "editorial_caveat": "Representational stock footage only; no claim that it depicts the actual incident sky."
+        "editorial_caveat": "Representational night sky; no claim of the incident sky."
       },
       "blocking_reason": null,
       "continuity_tags": {
@@ -1950,22 +2017,23 @@
           "atmospheric",
           "low_light_grain"
         ]
-      }
+      },
+      "visual_request": "Photorealistic empty night sky; the expected impact never occurs."
     },
     {
       "shot_id": "S12",
       "range": "00:51-00:56",
       "role": "mechanism",
-      "requested_visual": "Sunlight geometry over high clouds and satellite sensor.",
-      "requested_truth_class": "MAP_OR_DIAGRAM",
+      "requested_visual": "Photorealistic physical antenna against natural clouds; representational mechanism only.",
+      "requested_truth_class": "REPRESENTATIONAL",
       "status": "ASSIGNED_APPROVED_FOR_MANIFEST_ONLY_NOT_RENDER",
       "assignment": {
         "candidate_id": "pixabay-antenna-astronomy-communication-40041",
-        "usage": "Representational satellite/antenna mechanism; not literal Petrov archival evidence.",
+        "usage": "Physical antenna footage; no NASA source and no archival claim.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
-        "editorial_caveat": "No NASA source; generic infrastructure only; source audio stripped.",
+        "editorial_caveat": "Physical antenna footage; no NASA source and no archival claim.",
         "visual_treatment": {
           "crop_strategy": "retain_antenna_against_sky",
           "grade": "low_contrast_charcoal_desaturated_blue",
@@ -2008,22 +2076,24 @@
           "NASA_credit_required",
           "source_audio_must_be_stripped_in_render"
         ]
-      }
+      },
+      "blocking_reason": null,
+      "visual_request": "Photorealistic physical antenna against natural clouds; representational mechanism only."
     },
     {
       "shot_id": "S13",
       "range": "00:56-01:01",
       "role": "proof",
-      "requested_visual": "Declassified report/logbook treatment with readable evidence cues.",
+      "requested_visual": "Photorealistic typewriter and paper evidence treatment; no invented readable text.",
       "requested_truth_class": "DOCUMENTARY_EVIDENCE",
-      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST_ONLY_NOT_RENDER",
       "assignment": {
         "candidate_id": "pixabay-typewriter-typing-writing-author-1335",
-        "usage": "Typewritten evidence treatment without invented readable historical text.",
+        "usage": "Evidence-treatment footage; never literal Petrov archival evidence.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
-        "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
+        "editorial_caveat": "Evidence-treatment footage; never literal Petrov archival evidence."
       },
       "blocking_reason": null,
       "continuity_tags": {
@@ -2055,22 +2125,23 @@
           "typewriter",
           "low_light_grain"
         ]
-      }
+      },
+      "visual_request": "Photorealistic typewriter and paper evidence treatment; no invented readable text."
     },
     {
       "shot_id": "S14",
       "range": "01:01-01:06",
       "role": "consequence",
-      "requested_visual": "Petrov's later obscurity represented through empty military corridor.",
-      "requested_truth_class": "REPRESENTATIONAL",
-      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "requested_visual": "Photorealistic empty institutional corridor representing later obscurity.",
+      "requested_truth_class": "DOCUMENTED_RECONSTRUCTION",
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST_ONLY_NOT_RENDER",
       "assignment": {
         "candidate_id": "pixabay-hallway-dark-corridor-20837",
-        "usage": "Representational institutional corridor for later obscurity.",
+        "usage": "Representational corridor; never literal Petrov facility.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
-        "editorial_caveat": "Use only as a representational reconstruction for S14; no reuse in another shot and no claim that it depicts Petrov's facility."
+        "editorial_caveat": "Representational corridor; never literal Petrov facility."
       },
       "blocking_reason": null,
       "continuity_tags": {
@@ -2100,22 +2171,23 @@
           "brushed_metal",
           "low_light_grain"
         ]
-      }
+      },
+      "visual_request": "Photorealistic empty institutional corridor representing later obscurity."
     },
     {
       "shot_id": "S15",
       "range": "01:06-01:12",
       "role": "reframe",
-      "requested_visual": "Red warning fades into neutral black; no victory imagery.",
-      "requested_truth_class": "MAP_OR_DIAGRAM",
-      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "requested_visual": "Photorealistic light falloff into black as the warning subsides.",
+      "requested_truth_class": "REPRESENTATIONAL",
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST_ONLY_NOT_RENDER",
       "assignment": {
         "candidate_id": "pixabay-dark-light-lens-flare-abstract-250413",
-        "usage": "Restrained transition into neutral black.",
+        "usage": "Restrained transition only; no event claim.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
-        "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
+        "editorial_caveat": "Restrained transition only; no event claim."
       },
       "blocking_reason": null,
       "continuity_tags": {
@@ -2145,22 +2217,23 @@
           "abstract_light",
           "low_light_grain"
         ]
-      }
+      },
+      "visual_request": "Photorealistic light falloff into black as the warning subsides."
     },
     {
       "shot_id": "S16",
       "range": "01:12-01:18",
       "role": "payoff",
-      "requested_visual": "Final branded logo lockup with restrained red pulse.",
+      "requested_visual": "Clean branded outro with the original transparent wordmark on restrained black.",
       "requested_truth_class": "BRAND_OUTRO",
-      "status": "ASSIGNED_APPROVED_FOR_MANIFEST",
+      "status": "ASSIGNED_APPROVED_FOR_MANIFEST_ONLY_NOT_RENDER",
       "assignment": {
         "candidate_id": "pixabay-particles-orange-red-dust-effect-7957",
-        "usage": "Manifest placeholder only; renderer replaces it with a pure black stacked outro.",
+        "usage": "Manifest placeholder; renderer uses the locked original logo outro.",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "human_approval": "APPROVED_FOR_MANIFEST",
-        "editorial_caveat": "Representational visual only; do not present as literal Petrov archival evidence."
+        "editorial_caveat": "Manifest placeholder; renderer uses the locked original logo outro."
       },
       "blocking_reason": null,
       "continuity_tags": {
@@ -2192,7 +2265,8 @@
           "abstract_particle",
           "low_light_grain"
         ]
-      }
+      },
+      "visual_request": "Clean branded outro with the original transparent wordmark on restrained black."
     }
   ],
   "unresolved_shots": [],
@@ -2206,7 +2280,7 @@
     "publication_authorized": false,
     "visual_source_gate": "BLOCKED_CONTINUITY_REVALIDATION_REQUIRED"
   },
-  "next_action": "Run authoritative sequence-level continuity and rights revalidation for S02, S06, S07, S10, S11 and S12; keep preview blocked until PASS.",
+  "next_action": "Run the authoritative V2.1 sequence-level continuity and rights revalidation after this visual-lock correction; keep preview and render blocked.",
   "reuse_policy": {
     "source_reuse_scope": "global",
     "distinct_source_required_per_shot": true,
@@ -2543,7 +2617,7 @@
       "S10"
     ]
   },
-  "last_adjustment": "2026-11-15: S07/S10 clock assignments are now replaced by approved public-domain no-clock segments; stale clock-replacement blocker reconciled. Sequence-level continuity and rights revalidation remain mandatory.",
+  "last_adjustment": "2026-11-15: removed graphical/radar-overlay assignments from the active visual set; retained approved S02, S07 and S10 footage; replaced S04, S05, S06 and S08 with concrete non-graphic clips; preview remains blocked pending revalidation.",
   "visual_continuity_profile": {
     "schema_version": "1.0",
     "profile_id": "episode-005-cold-war-bunker-continuity-v1",
