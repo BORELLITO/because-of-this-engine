@@ -96,6 +96,8 @@ jobs:
                   "license_name": candidate["license_name"],
                   "role": candidate.get("role", ""),
                   "visual_match": candidate.get("visual_match", ""),
+                  "source_segment": candidate.get("source_segment"),
+                  "source_sha256": candidate.get("source_sha256"),
               })
 
           manifest = {
@@ -147,16 +149,37 @@ jobs:
               candidate_root = root / candidate["candidate_id"]
               candidate_root.mkdir(parents=True, exist_ok=True)
               media = candidate_root / "candidate.mp4"
+              segment = candidate.get("source_segment")
+              download_target = candidate_root / ("source.mp4" if segment else "candidate.mp4")
               subprocess.run(
                   [
                       "curl", "--fail", "--location", "--retry", "2",
                       "--retry-delay", "2", "--connect-timeout", "20",
-                      "--max-time", "180", "--max-filesize", "200M",
+                      "--max-time", "600", "--max-filesize", "200M",
                       candidate["media_url"],
-                      "--output", str(media),
+                      "--output", str(download_target),
                   ],
                   check=True,
               )
+              if segment:
+                  start = float(segment["start_seconds"])
+                  end = float(segment["end_seconds"])
+                  assert 0 <= start < end, segment
+                  expected_source_sha = str(candidate.get("source_sha256") or "").strip().lower()
+                  if expected_source_sha:
+                      import hashlib
+                      assert hashlib.sha256(download_target.read_bytes()).hexdigest() == expected_source_sha
+                  subprocess.run(
+                      [
+                          "ffmpeg", "-v", "error", "-y",
+                          "-ss", f"{start:.3f}", "-to", f"{end:.3f}",
+                          "-i", str(download_target),
+                          "-map", "0:v:0", "-map", "0:a?",
+                          "-c", "copy", "-avoid_negative_ts", "make_zero",
+                          str(media),
+                      ],
+                      check=True,
+                  )
               assert media.is_file() and media.stat().st_size > 0, media
           PY
 
@@ -282,6 +305,8 @@ jobs:
                   "source_page_url": candidate["source_page_url"],
                   "media_url": candidate["media_url"],
                   "license_name": candidate["license_name"],
+                  "source_segment": candidate.get("source_segment"),
+                  "source_sha256": candidate.get("source_sha256"),
                   "sha256": sha256,
                   "metadata": {
                       "duration_seconds": round(duration, 3),
