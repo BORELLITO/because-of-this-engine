@@ -675,7 +675,7 @@
         "direct_media_visual_review": "PASS_ARCHIVAL_CONTROL_ROOM_NO_CLOCK_IN_SELECTED_SEGMENT"
       },
       "selection_basis": "Selected from the public-domain SAGE film after frame review of the exact segment; preserves archival/operator/control-room language without copying the reference logo, captions or clock shot.",
-      "editorial_caveat": "Public-domain representational archive footage, not literal Petrov evidence. Use only the declared segment; no clock, watch, timepiece or time display.",
+      "editorial_caveat": "Public-domain representational archive footage, not literal Petrov evidence. Use only the declared segment; no timekeeping objects or time displays.",
       "continuity_tags": {
         "era": [
           "1950s",
@@ -944,7 +944,7 @@
         "direct_media_visual_review": "PASS_LIVE_ACTION_RADAR_OPERATOR_NO_CLOCK_IN_SELECTED_SEGMENT"
       },
       "selection_basis": "Selected from public-domain U.S. government radar footage after frame review of the exact segment; supplies live operator/control-panel rhythm without importing the reference branding or captions.",
-      "editorial_caveat": "Public-domain representational government footage, not literal Petrov evidence. Use only the declared segment; no clock, watch, timepiece or time display.",
+      "editorial_caveat": "Public-domain representational government footage, not literal Petrov evidence. Use only the declared segment; no timekeeping objects or time displays.",
       "continuity_tags": {
         "era": [
           "1960s",
