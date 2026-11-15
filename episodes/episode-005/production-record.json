@@ -1181,7 +1181,7 @@
     "duration_target_seconds": 79.704,
     "adapter": "production/render_v21_manual.py",
     "render_mode": "preview_then_final",
-    "render_authorization": "APPROVED",
+    "render_authorization": "BLOCKED",
     "thumbnail_final_required": true
   },
   "drive_contract": {
