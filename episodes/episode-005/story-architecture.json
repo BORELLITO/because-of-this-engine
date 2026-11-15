@@ -311,7 +311,7 @@
       "shot_id": "S07",
       "range": "00:27-00:32",
       "role": "decision_pressure",
-      "visual": "A clock compresses the decision window.",
+      "visual": "Dark analog control surface under decision pressure; no clock, watch, timepiece or time display.",
       "truth_class": "REPRESENTATIONAL",
       "continuity_tags": {
         "era": [
@@ -416,7 +416,7 @@
       "shot_id": "S10",
       "range": "00:41-00:46",
       "role": "suspense",
-      "visual": "The bunker waits while the clock advances.",
+      "visual": "The bunker holds in low-key silence as indicator lights settle; no clock, watch, timepiece or time display.",
       "truth_class": "REPRESENTATIONAL",
       "continuity_tags": {
         "era": [
@@ -713,7 +713,21 @@
     ],
     "adjacency_review_required": true,
     "hard_day_night_flip": "BLOCK",
-    "bridge_shot_required_for_intentional_world_change": true
+    "bridge_shot_required_for_intentional_world_change": true,
+    "editorial_visual_exclusions": {
+      "status": "LOCKED",
+      "forbidden_concepts": [
+        "clock",
+        "alarm clock",
+        "timepiece",
+        "clock mechanism"
+      ],
+      "scope": "episode-005-active-visual-runtime",
+      "replacement_required_for": [
+        "S07",
+        "S10"
+      ]
+    }
   },
   "production_gates": {
     "story_fact_check": "READY_WITH_GUARDRAILS",
@@ -725,7 +739,7 @@
     "drive_write": "NOT_AUTHORIZED",
     "publication": "MANUAL_ONLY",
     "creative_claw": "DISALLOWED",
-    "visual_continuity_manifest": "REVIEW_REQUIRED",
+    "visual_continuity_manifest": "BLOCKED_NO_CLOCK_REPLACEMENTS_REQUIRED",
     "visual_continuity_preview": "PASS",
     "visual_source_lanes": "AUTOMATED_STOCK_PLUS_MANUAL_ARCHIVE_GOVERNMENT"
   },
@@ -813,7 +827,11 @@
       "watermark",
       "baked_captions",
       "third_party_logo",
-      "unrelated_industrial_machinery"
+      "unrelated_industrial_machinery",
+      "clock",
+      "alarm clock",
+      "timepiece",
+      "clock mechanism"
     ],
     "allowed_source_tiers": [
       "stock_auto",

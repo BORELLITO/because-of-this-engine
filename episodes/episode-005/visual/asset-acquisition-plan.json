@@ -1,7 +1,7 @@
 {
   "plan_id": "episode-005-visual-asset-acquisition-v1",
   "episode_id": "episode-005",
-  "status": "FINGERPRINT_PASS_MANIFEST_ASSIGNMENTS_APPROVED",
+  "status": "ACTIVE_SEARCH_PLAN_WITH_NO_CLOCK_EDITORIAL_LOCK",
   "purpose": "Pre-download candidate pool for Episode 005. No candidate is approved for render until downloaded, SHA-256ed, visually inspected, checked for embedded text/logos/letterbox, fingerprinted, and entered into the final video manifest.",
   "frozen_audio_source": {
     "workflow_run_id": 41961294784,
@@ -829,7 +829,7 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "mixkit",
       "license_name": "Mixkit Stock Video Free License",
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "rights_status": "REJECTED_EDITORIAL_NO_CLOCK",
       "media_url": "https://assets.mixkit.co/videos/28897/28897-720.mp4",
       "media_url_observed_in_browser": true,
       "acquisition_workflow": ".github/workflows/episode005-visual-candidate-intake.yml",
@@ -860,7 +860,7 @@
         "semantic_fit": "PRELIMINARY_PASS_FOR_S07_S10",
         "locked_9x16_crop": "PENDING",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "APPROVED_FOR_MANIFEST",
+        "human_approval": "REVOKED_EDITORIAL_NO_CLOCK",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "direct_media_visual_review": "PASS_GENERIC_CLOCK_NO_BRAND_VISIBLE",
@@ -877,7 +877,10 @@
         "license_name": "Mixkit Stock Video Free License",
         "evidence_url": "https://mixkit.co/free-stock-video/slowly-approaching-a-clock-on-a-black-background-28897/",
         "checked_at": "2026-11-05"
-      }
+      },
+      "selection_status": "REJECTED_EDITORIAL_FORBIDDEN_CONCEPT",
+      "rejection_reason": "Active Episode 005 editorial lock forbids clocks and timepieces.",
+      "approved_for_render": false
     },
     {
       "candidate_id": "mixkit-cloudy-sky-118",
@@ -957,7 +960,7 @@
       "truth_class": "DOCUMENTED_RECONSTRUCTION",
       "provider": "mixkit",
       "license_name": "Mixkit Stock Video Free License",
-      "rights_status": "APPROVED_FOR_MANIFEST_ONLY",
+      "rights_status": "REJECTED_EDITORIAL_NO_CLOCK",
       "media_url": "https://assets.mixkit.co/videos/3651/3651-720.mp4",
       "media_url_observed_in_browser": true,
       "browser_verification": {
@@ -1002,7 +1005,7 @@
         "semantic_fit": "PRELIMINARY_PASS_FOR_S10_MECHANICAL_TIME_PRESSURE",
         "locked_9x16_crop": "PRELIMINARY_PASS_CENTER_CROP_WITHOUT_LETTERBOX",
         "global_reuse_fingerprint": "PASS_NO_COLLISION",
-        "human_approval": "APPROVED_FOR_MANIFEST",
+        "human_approval": "REVOKED_EDITORIAL_NO_CLOCK",
         "approved_for_render": false,
         "global_catalog_updated": false,
         "direct_media_visual_review": "PASS_GENERIC_CLOCK_MECHANISM_WITH_NONBRAND_DATE_TEXT",
@@ -1019,7 +1022,10 @@
         "license_name": "Mixkit Stock Video Free License",
         "evidence_url": "https://mixkit.co/free-stock-video/mechanism-of-a-working-clock-3651/",
         "checked_at": "2026-11-05"
-      }
+      },
+      "selection_status": "REJECTED_EDITORIAL_FORBIDDEN_CONCEPT",
+      "rejection_reason": "Active Episode 005 editorial lock forbids clocks and timepieces.",
+      "approved_for_render": false
     },
     {
       "candidate_id": "mixkit-large-satellite-antenna-2650",
@@ -4391,7 +4397,7 @@
       "next_review": "Independent source-specific third-party and render rights reconciliation; no publication"
     }
   ],
-  "next_action": "Reconcile S09 media and seven missing rights identities; record no-render restrictions and run full CI. Maintain production and publication blocked.",
+  "next_action": "Search and intake clean non-clock replacements for S07 and S10; do not dispatch any clock candidate.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
@@ -5004,7 +5010,8 @@
       "continuity_tags_complete_for_era_setting_time_lighting_palette_texture",
       "reject_hard_day_night_or_modern_ui_conflicts",
       "review_adjacent_shots_for_palette_lighting_and_texture",
-      "manual_archive_or_government_rights_lane_keeps_per_file_license_evidence"
+      "manual_archive_or_government_rights_lane_keeps_per_file_license_evidence",
+      "reject clocks, watches, timepieces and clock mechanisms under the active Episode 005 editorial lock"
     ],
     "scoring_weights": {
       "semantic_fit": 30,
@@ -5199,6 +5206,38 @@
           "third-party logos",
           "reusing any story asset",
           "unlicensed templates"
+        ]
+      },
+      {
+        "shot_id": "S07",
+        "requested_visual": "Dark analog control surface under decision pressure without a clock or time display",
+        "preferred_queries": [
+          "analog control surface hand",
+          "bunker operator decision panel",
+          "dark tactile control panel"
+        ],
+        "avoid": [
+          "clock",
+          "watch",
+          "timepiece",
+          "digital timer",
+          "modern UI"
+        ]
+      },
+      {
+        "shot_id": "S10",
+        "requested_visual": "Bunker holds in low-key silence as indicator lights settle without a clock or time display",
+        "preferred_queries": [
+          "dark bunker control room",
+          "analog indicator lights silence",
+          "low key technical control room"
+        ],
+        "avoid": [
+          "clock",
+          "watch",
+          "timepiece",
+          "digital timer",
+          "modern UI"
         ]
       }
     ],
@@ -5405,7 +5444,7 @@
     "continuity_coverage_score": 0.9187,
     "note": "CI run 42176059809 validated the updated S03/S09 manifest replacements. Both new shots pass continuity; S04/S12 remain hard conflicts and S11->S12/S12->S13 remain blocked adjacency transitions. Render/preview remain blocked."
   },
-  "last_adjustment": "2026-11-07: User-approved keyboard retro S09 candidate entered into plan as manifest-only; source checksum, perceptual fingerprint and known-history reuse audit verified; independent rights and final release remain blocked.",
+  "last_adjustment": "2026-11-15: current editorial lock forbids clock, watch, timepiece and clock-mechanism footage; S07/S10 moved to unresolved replacement queue.",
   "next_gate": "VISUAL_PLAN_CONTRACT_AND_CROSS_LEDGER_EXPECTED_BLOCKS",
   "render_approval_record": {
     "status": "APPROVED",
@@ -5509,7 +5548,11 @@
       "watermark",
       "baked_captions",
       "third_party_logo",
-      "unrelated_industrial_machinery"
+      "unrelated_industrial_machinery",
+      "clock",
+      "alarm clock",
+      "timepiece",
+      "clock mechanism"
     ],
     "allowed_source_tiers": [
       "stock_auto",
@@ -6014,5 +6057,6 @@
       "S04",
       "S12"
     ]
-  }
+  },
+  "clock_candidates": []
 }

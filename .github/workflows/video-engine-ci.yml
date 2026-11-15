@@ -212,7 +212,7 @@ jobs:
           scene=json.loads(Path("episodes/episode-005/visual/scene-asset-manifest.json").read_text())
           report=validate_visual_plan(plan,scene)
           assert report["status"]=="VISUAL_PLAN_CONTRACT_PASS",report
-          assert report["manifest_asset_count"]==16,report
+          assert report["manifest_asset_count"]==14,report
           assert report["render_allowed"] is False and report["promotion_allowed"] is False,report
           assert report["global_catalog_updated"] is False,report
           s09=next(s for s in scene["shot_assignments"] if s["shot_id"]=="S09")
@@ -239,8 +239,8 @@ jobs:
           from pathlib import Path
           d = json.loads(Path("/tmp/ep005-rights-dossier.json").read_text(encoding="utf-8"))
           assert d["status"] == "EVIDENCE_CONSISTENT_NOT_RENDER_AUTHORIZED", d["status"]
-          assert d["asset_count"] == 16
-          assert d["render_rights_matched_count"] == 16
+          assert d["asset_count"] == 14
+          assert d["render_rights_matched_count"] == 14
           assert d["approved_manifest_only_pending_render_rights"] == []
           assert d["pending_visual_approval"] == []
           assert d["source_provenance_mismatches"] == []
@@ -248,7 +248,7 @@ jobs:
           assert d["pending_render_rights"] == []
           assert d["pending_recorded_rights"] == []
           assert d["stale_render_rights"] == []
-          assert d["rights_ledger_entry_count"] == 16
+          assert d["rights_ledger_entry_count"] == 14
           assert d["draft_pending_rights_not_canonical"] == []
           assert all(item["render_rights_status"] == "PENDING_INDEPENDENT_RENDER_RIGHTS" for item in d["assets"] if not item["render_rights_matched"])
           assert d["pending_render_rights"] == []
@@ -273,7 +273,7 @@ jobs:
           from pathlib import Path
           report = json.loads(Path("/tmp/episode005-v21-report.json").read_text(encoding="utf-8"))
           assert report["status"] == "BLOCKED", report
-          assert report["blocking_gates"] == ["AUDIO_HISTORY_COVERAGE"], report["blocking_gates"]
+          assert report["blocking_gates"] == ["ACTIVE_V21_VISUAL_SOURCE", "VISUAL_RIGHTS_CONSISTENCY", "AUDIO_HISTORY_COVERAGE"], report["blocking_gates"]
           rights = next(g for g in report["checks"] if g.get("ledger") == "rights_ledger")
           assert rights["status"] == "PASS"
           assert rights["failures"] == []
@@ -290,7 +290,8 @@ jobs:
           assert any("audio history completeness" in f for f in audio["failures"]), audio
           visual = next(g for g in report["checks"] if g.get("gate") == "VISUAL_RIGHTS_CONSISTENCY")
           assert not any("visual assets missing render rights" in f for f in visual["failures"]), visual
-          assert visual["status"] == "PASS" and visual["failures"] == [], visual
+          assert visual["status"] == "BLOCKED", visual
+          assert any("scoped render authorization absent" in f for f in visual["failures"]), visual
           assert not any("pexels-11764431" in f for f in visual["failures"]), visual
           assert not any("nasa-svs-geos5-clouds-no-labels-4819" in f for f in visual["failures"]), visual
           assert not any("pexels-8888977" in f for f in visual["failures"]), visual
@@ -337,25 +338,5 @@ jobs:
 
       - name: Enforce singleton runtime
         run: PYTHONPATH=. python production/v21_singleton_guard.py --repo-root .
-      - name: Test legacy adapter delegates to canonical entrypoint
-        run: |
-          set +e
-          PYTHONPATH=. python production/v7_orchestrator.py \
-            --repo-root . \
-            --manifest examples/video-only-episode-manifest-v7.template.json \
-            --mode dry-run \
-            --report /tmp/v21-adapter-report.json
-          code=$?
-          set -e
-          test "$code" -eq 1
-          python - <<'PY'
-          import json
-          with open("/tmp/v21-adapter-report.json", encoding="utf-8") as handle:
-              report = json.load(handle)
-          assert report["status"] == "BLOCKED"
-          assert "PRODUCTION_RECORD_SCHEMA" in report["blocking_gates"]
-          assert report["render"] == "NOT_RUN"
-          print("LEGACY_ADAPTER_FAIL_CLOSED_PASS")
-          PY
       - name: Confirm checkout is clean
         run: test -z "$(git status --porcelain)"

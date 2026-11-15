@@ -85,6 +85,11 @@ def validate_visual_rights_consistency(
     if stale:
         failures.append("rights entries refer to inactive visual assets: " + ",".join(stale))
 
+    unresolved_shots = {
+        str(item).strip()
+        for item in (scene.get("unresolved_shots") or [])
+        if str(item).strip()
+    }
     assignments = scene.get("shot_assignments")
     if not isinstance(assignments, list) or not assignments:
         failures.append("shot assignments missing")
@@ -98,7 +103,12 @@ def validate_visual_rights_consistency(
             sid = str(shot.get("shot_id") or "")
             assignment = shot.get("assignment")
             aid = str((assignment or {}).get("candidate_id") or "") if isinstance(assignment, Mapping) else ""
-            if not aid or not sid:
+            if not sid:
+                failures.append("incomplete shot assignment")
+                continue
+            if not aid:
+                if sid in unresolved_shots:
+                    continue
                 failures.append("incomplete shot assignment")
                 continue
             assigned_ids.append(aid)

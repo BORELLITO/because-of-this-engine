@@ -32,8 +32,8 @@ class V21VisualReconciliationDossierTests(unittest.TestCase):
     def test_real_episode_visual_identities_are_consistent_not_published(self):
         result = inspect_repo(ROOT, RECORD)
         self.assertEqual(result["status"], "EVIDENCE_CONSISTENT_NOT_RENDER_AUTHORIZED")
-        self.assertEqual(result["asset_count"], 16)
-        self.assertEqual(result["render_rights_matched_count"], 16)
+        self.assertEqual(result["asset_count"], 14)
+        self.assertEqual(result["render_rights_matched_count"], 14)
         self.assertEqual(result["missing_render_rights"], [])
         self.assertEqual(result["pending_render_rights"], [])
         self.assertEqual(result["pending_recorded_rights"], [])
@@ -42,7 +42,7 @@ class V21VisualReconciliationDossierTests(unittest.TestCase):
         self.assertEqual(result["pending_visual_approval"], [])
         self.assertEqual(result["source_provenance_mismatches"], [])
         self.assertEqual(len(result["draft_pending_rights_not_canonical"]), 0)
-        self.assertEqual(result["rights_ledger_entry_count"], 16)
+        self.assertEqual(result["rights_ledger_entry_count"], 14)
         self.assertEqual(result["render"], "NOT_RUN")
         self.assertFalse(result["production_enablement"])
         self.assertFalse(any(x["approved_for_render"] for x in result["draft_pending_rights_not_canonical"]))
@@ -103,7 +103,7 @@ class V21VisualReconciliationDossierTests(unittest.TestCase):
             })
         report = build_dossier(rec, plan, man)
         self.assertEqual(report["status"], "EVIDENCE_CONSISTENT_NOT_RENDER_AUTHORIZED", report)
-        self.assertEqual(report["render_rights_matched_count"], 16)
+        self.assertEqual(report["render_rights_matched_count"], 14)
         self.assertEqual(report["draft_pending_rights_not_canonical"], [])
         self.assertEqual(report["render"], "NOT_RUN")
 

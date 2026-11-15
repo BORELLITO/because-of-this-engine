@@ -23,6 +23,7 @@ from production.visual_continuity import (
 )
 from production.visual_provider_policy import policy_for
 from production.v21_visual_contract import visual_source_gate
+from production.active_visual_source_v21 import forbidden_concept_hits
 from production.visual_semantics import (
     DIMENSIONS,
     evidence_text,
@@ -304,11 +305,20 @@ def _prepare_candidate(
     guard = visual_match_report(scene, prepared, require_review=False)
     continuity_guard = continuity_match_report(scene, prepared, visual_profile)
     composition_guard = visual_source_gate(prepared)
+    forbidden = (visual_profile or {}).get("hard_forbidden", [])
+    editorial_forbidden_hits = forbidden_concept_hits(prepared, forbidden)
     prepared["visual_guard"] = guard
     prepared["continuity_guard"] = continuity_guard
     prepared["visual_composition_guard"] = composition_guard
+    prepared["editorial_forbidden_concepts"] = editorial_forbidden_hits
     prepared["relevance_score"] = score_candidate(prepared, scene, visual_profile)
-    if composition_guard.get("status") == "BLOCKED":
+    if editorial_forbidden_hits:
+        prepared["selection_status"] = "REJECTED_EDITORIAL_FORBIDDEN_CONCEPT"
+        prepared["rejection_reason"] = (
+            "candidate contains an active editorial exclusion: "
+            + ", ".join(editorial_forbidden_hits)
+        )
+    elif composition_guard.get("status") == "BLOCKED":
         prepared["selection_status"] = "REJECTED_COMPOSITION_CONFLICT"
     elif guard.get("status") != "PASS":
         prepared["selection_status"] = "REJECTED_SEMANTIC_MISMATCH"

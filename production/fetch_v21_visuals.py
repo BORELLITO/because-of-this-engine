@@ -10,6 +10,8 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
+from production.active_visual_source_v21 import validate_scene_manifest
+
 
 def sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
@@ -39,6 +41,16 @@ def main() -> int:
     args = parser.parse_args()
 
     manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
+    source_gate = validate_scene_manifest(
+        manifest,
+        args.manifest,
+        expected_episode_id=str(manifest.get("episode_id") or "episode-005"),
+    )
+    if source_gate["status"] != "PASS":
+        raise SystemExit(
+            "Active V2.1 visual source gate blocked intake: "
+            + "; ".join(source_gate["failures"])
+        )
     assets = manifest.get("assets")
     if not isinstance(assets, list) or len(assets) != 16:
         raise SystemExit("Episode 005 preview requires exactly 16 manifest assets.")

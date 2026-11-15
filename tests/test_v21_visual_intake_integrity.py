@@ -23,7 +23,7 @@ class VisualIntakeIntegrityTests(unittest.TestCase):
     def test_real_manifest_passes_without_authorizing_render(self):
         report=validate_visual_plan(self.plan,self.manifest)
         self.assertEqual(report["status"],"VISUAL_PLAN_CONTRACT_PASS")
-        self.assertEqual(report["manifest_asset_count"],16)
+        self.assertEqual(report["manifest_asset_count"],14)
         self.assertFalse(report["promotion_allowed"])
         self.assertFalse(report["render_allowed"])
         self.assertFalse(report["global_catalog_updated"])
@@ -31,6 +31,7 @@ class VisualIntakeIntegrityTests(unittest.TestCase):
         self.assertFalse(asset["approved_for_render"])
         self.assertFalse(any(a["candidate_id"]==OLD_ID for a in self.manifest["assets"]))
         self.assertTrue(any(a["candidate_id"]==OLD_ID for a in self.plan["candidates"]))
+        self.assertEqual(set(self.manifest["unresolved_shots"]), {"S07", "S10"})
 
     def test_synthetic_human_approval_revocation_blocks(self):
         plan,man=self._consistent_copy()
