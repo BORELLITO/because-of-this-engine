@@ -4651,7 +4651,7 @@
       "visual_intent": "Physical radio telescope dishes at night for the external-sensor/communications beat; representational reconstruction, never literal Petrov archival evidence.",
       "truth_class": "REPRESENTATIONAL",
       "provider": "wikimedia",
-      "rights_status": "CANDIDATE_NOT_DOWNLOADED",
+      "rights_status": "CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA",
       "license_name": "Wikimedia Commons Per-File License",
       "license_detail": "CC BY-SA 3.0",
       "source_tier": "cc_manual",
@@ -4746,10 +4746,27 @@
         "global_sha256_collision": false,
         "global_perceptual_collision": false
       },
-      "fingerprint_artifact": null
+      "fingerprint_artifact": {
+        "workflow_run_id": 43732559732,
+        "job_id": 132868028415,
+        "artifact_id": 14168629077,
+        "artifact_name": "episode005-visual-fingerprint-audit",
+        "artifact_digest": "sha256:fb73a68f724ef5385e8ac08d54d9850e14ef57cbf4b817685e38bf4e27a286d6",
+        "status": "FINGERPRINT_AUDIT_PASS",
+        "algorithm": "video-fingerprint-v2-rgb24-q4",
+        "perceptual_hash": "7d26c374a8e6060a7715bc0713917210364681365fd2c5b4a39da38d44769d34",
+        "global_source_collision": false,
+        "global_sha256_collision": false,
+        "global_perceptual_collision": false,
+        "human_approval": "PENDING",
+        "approved_for_render": false,
+        "global_catalog_updated": false,
+        "render_allowed": false,
+        "drive_written": false
+      }
     }
   ],
-  "next_action": "Human visual QA of the five normalized intake frames and 9x16 crop for wikimedia-meerkat-night-telescopes-2023; keep manifest assignment, render, preview, Drive, catalog and publication blocked.",
+  "next_action": "Human visual QA of the five normalized intake frames and 9x16 crop for wikimedia-meerkat-night-telescopes-2023; candidate remains outside the active manifest until explicit approval.",
   "acquisition_route": {
     "status": "SIXTH_CANDIDATE_REJECTED_SEMANTICALLY_WEAK_SEARCH_S03_CONTINUES",
     "preferred_provider": "mixkit",
