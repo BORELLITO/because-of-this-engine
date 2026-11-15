@@ -121,3 +121,95 @@ def validate_caption_ass(path: Path) -> None:
         raise ValueError("Caption ASS is missing the canonical active-word red #F04444 transform.")
     if "—" in text or "–" in text:
         raise ValueError("Caption ASS contains a forbidden em dash or en dash.")
+
+
+# Search-intake policy: the reference MP4 may define sequence only.  A source
+# with inherited/burned overlays must never enter the active visual candidate
+# pool as if it were a clean clip.  Missing pixel evidence remains review-only.
+_SOURCE_BLOCK_FLAGS = (
+    "text_overlay_present",
+    "authored_graphics_present",
+    "compositor_layers_disclosed",
+    "overlay_present",
+    "burned_in_overlay",
+    "burned_in_text",
+    "logo_burned_in",
+    "captions_burned_in",
+    "reference_overlay_inherited",
+)
+_ALLOWED_EMBEDDED_TEXT_STATUSES = {"NONE", "NATURAL_SOURCE_ONLY"}
+_REFERENCE_OVERLAY_POLICIES = {
+    "INHERIT",
+    "INHERIT_REFERENCE",
+    "BURNED_IN",
+    "RENDER_WITH_REFERENCE_OVERLAY",
+}
+
+
+def visual_source_gate(candidate: dict[str, object]) -> dict[str, object]:
+    """Apply the locked clean-source policy at search intake.
+
+    Search providers may return metadata without pixel evidence.  That is not
+    approval: it remains REVIEW_REQUIRED until the clean-source evidence is
+    present.  Explicit overlay or inherited-reference signals are rejected
+    immediately so the sample MP4 cannot contaminate the active candidate pool.
+    """
+    evidence = candidate.get("visual_evidence")
+    evidence_map = evidence if isinstance(evidence, dict) else {}
+    pixel_qc = evidence_map.get("pixel_qc")
+    if not isinstance(pixel_qc, dict):
+        pixel_qc = candidate.get("pixel_qc")
+    if not isinstance(pixel_qc, dict):
+        pixel_qc = {}
+
+    reasons: list[str] = []
+    for key in _SOURCE_BLOCK_FLAGS:
+        if candidate.get(key) is True or pixel_qc.get(key) is True:
+            reasons.append(f"{key}=true")
+    embedded_text_status = str(
+        pixel_qc.get("embedded_text_status")
+        or candidate.get("embedded_text_status")
+        or ""
+    ).strip().upper()
+    if embedded_text_status and embedded_text_status not in _ALLOWED_EMBEDDED_TEXT_STATUSES:
+        reasons.append(f"embedded_text_status={embedded_text_status}")
+    external_branding = str(
+        pixel_qc.get("external_branding")
+        or candidate.get("external_branding")
+        or ""
+    ).strip().upper()
+    if external_branding and external_branding not in {"NONE", "NATURAL_SOURCE_ONLY"}:
+        reasons.append(f"external_branding={external_branding}")
+    overlay_policy = str(
+        candidate.get("reference_overlay_policy")
+        or candidate.get("overlay_policy")
+        or ""
+    ).strip().upper()
+    if overlay_policy in _REFERENCE_OVERLAY_POLICIES:
+        reasons.append(f"reference_overlay_policy={overlay_policy}")
+    if candidate.get("clean_source") is False:
+        reasons.append("clean_source=false")
+
+    evidence_complete = all(
+        key in pixel_qc
+        for key in (
+            "text_overlay_present",
+            "authored_graphics_present",
+            "compositor_layers_disclosed",
+            "embedded_text_status",
+        )
+    )
+    if reasons:
+        status = "BLOCKED"
+    elif evidence_complete:
+        status = "PASS"
+    else:
+        status = "REVIEW_REQUIRED"
+    return {
+        "status": status,
+        "policy": "CLIP_SEQUENCE_ONLY",
+        "clean_source_required": True,
+        "evidence_present": bool(pixel_qc),
+        "evidence_complete": evidence_complete,
+        "reasons": reasons,
+    }
