@@ -24,6 +24,7 @@ from production.rights_autonomy_v21 import audit_repository as audit_autonomous_
 from production.scene_disclosures_v21 import audit_repository as audit_scene_disclosures
 from production.episode_naming_v21 import validate_episode_naming
 from production.episode_artifact_reconciliation_v21 import reconcile_artifacts
+from production.active_visual_source_v21 import validate_record_visual_source
 
 SCHEMA_PATH = Path(__file__).resolve().parent / "schemas" / "production-record-3.1.0.json"
 
@@ -92,6 +93,7 @@ def evaluate(manifest: dict[str, Any], *, registry: list[dict[str, Any]] | None 
     # A structurally valid rights ledger cannot certify a different media
     # manifest. This check is mandatory for real repository-backed records.
     if repo_root is not None:
+        checks.append(validate_record_visual_source(manifest, repo_root=repo_root))
         checks.append(validate_visual_rights_consistency(manifest, repo_root=repo_root))
         episode_id = str(manifest.get("episode_id") or "").strip()
         architecture_path = repo_root / "episodes" / episode_id / "story-architecture.json"
