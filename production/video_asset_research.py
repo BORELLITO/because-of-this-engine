@@ -22,6 +22,7 @@ from production.visual_continuity import (
     continuity_match_report,
 )
 from production.visual_provider_policy import policy_for
+from production.v21_visual_contract import visual_source_gate
 from production.visual_semantics import (
     DIMENSIONS,
     evidence_text,
@@ -302,10 +303,14 @@ def _prepare_candidate(
     }
     guard = visual_match_report(scene, prepared, require_review=False)
     continuity_guard = continuity_match_report(scene, prepared, visual_profile)
+    composition_guard = visual_source_gate(prepared)
     prepared["visual_guard"] = guard
     prepared["continuity_guard"] = continuity_guard
+    prepared["visual_composition_guard"] = composition_guard
     prepared["relevance_score"] = score_candidate(prepared, scene, visual_profile)
-    if guard.get("status") != "PASS":
+    if composition_guard.get("status") == "BLOCKED":
+        prepared["selection_status"] = "REJECTED_COMPOSITION_CONFLICT"
+    elif guard.get("status") != "PASS":
         prepared["selection_status"] = "REJECTED_SEMANTIC_MISMATCH"
     elif continuity_guard.get("status") == "BLOCKED":
         prepared["selection_status"] = "REJECTED_CONTINUITY_CONFLICT"
