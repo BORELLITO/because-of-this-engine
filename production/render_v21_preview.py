@@ -21,15 +21,15 @@ from typing import Any
 from production.visual_continuity import validate_sequence
 from production.scene_disclosures_v21 import load_for_preview, ffmpeg_nasa_overlay, ffmpeg_actor_overlay, NASA_ID, ACTOR_ID
 from production.v21_visual_contract import (
-    ACTIVE_WORD_COLOR,
-    CAPTION_MARGIN_V,
-    IN_VIDEO_LOGO_OPACITY,
-    IN_VIDEO_LOGO_WIDTH,
-    IN_VIDEO_LOGO_Y,
-    OUTRO_SECONDS,
-    VIDEO_FPS as FPS,
-    VIDEO_HEIGHT as HEIGHT,
-    VIDEO_WIDTH as WIDTH,
+    ACTIVE_WORD_COLOR as CONTRACT_ACTIVE_WORD_COLOR,
+    CAPTION_MARGIN_V as CONTRACT_CAPTION_MARGIN_V,
+    IN_VIDEO_LOGO_OPACITY as CONTRACT_IN_VIDEO_LOGO_OPACITY,
+    IN_VIDEO_LOGO_WIDTH as CONTRACT_IN_VIDEO_LOGO_WIDTH,
+    IN_VIDEO_LOGO_Y as CONTRACT_IN_VIDEO_LOGO_Y,
+    OUTRO_SECONDS as CONTRACT_OUTRO_SECONDS,
+    VIDEO_FPS as CONTRACT_VIDEO_FPS,
+    VIDEO_HEIGHT as CONTRACT_VIDEO_HEIGHT,
+    VIDEO_WIDTH as CONTRACT_VIDEO_WIDTH,
     validate_caption_ass,
     validate_logo_path,
 )
@@ -40,6 +40,18 @@ CREATIVE_PROFILE = "cinematic_dread_v73"
 APPROVED_VOICE_PROVIDER = "gemini_tts"
 APPROVED_VOICE_NAME = "Charon"
 APPROVED_VOICE_MODEL = "gemini-3.8-flash-tts"
+
+# Explicit names are retained for the immutable-core static guard and legacy
+# V2.1 test imports; every value still comes from the single contract above.
+FPS = CONTRACT_VIDEO_FPS
+WIDTH = CONTRACT_VIDEO_WIDTH
+HEIGHT = CONTRACT_VIDEO_HEIGHT
+IN_VIDEO_LOGO_Y = CONTRACT_IN_VIDEO_LOGO_Y
+IN_VIDEO_LOGO_WIDTH = CONTRACT_IN_VIDEO_LOGO_WIDTH
+IN_VIDEO_LOGO_OPACITY = CONTRACT_IN_VIDEO_LOGO_OPACITY
+OUTRO_SECONDS = CONTRACT_OUTRO_SECONDS
+ACTIVE_WORD_COLOR = CONTRACT_ACTIVE_WORD_COLOR
+CAPTION_MARGIN_V = CONTRACT_CAPTION_MARGIN_V
 
 
 class PreviewRenderError(RuntimeError):
