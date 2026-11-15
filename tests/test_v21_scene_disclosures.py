@@ -1,4 +1,4 @@
-"""Active Episode 005 has one mandatory actor disclosure and no NASA source."""
+"""Active Episode 005 has one mandatory actor disclosure and no forbidden provider source."""
 from __future__ import annotations
 import copy
 import json
@@ -20,7 +20,7 @@ class SceneDisclosureTests(unittest.TestCase):
         self.assertEqual(result["status"],"PASS",result)
         self.assertEqual(set(result["checked_shots"]),{ACTOR_SHOT})
         self.assertEqual(set(load_for_preview(SCENE_PATH,self.scene)),{ACTOR_ID})
-        self.assertNotIn("nasa",self.disclosures["policy_id"])
+        self.assertNotIn("nasa",self.disclosures["policy_id"].lower())
         self.assertEqual(audit_repository(self.record,repo_root=ROOT)["status"],"PASS")
     def test_actor_receipt_and_text_are_bound(self):
         actor=self.disclosures["disclosures"][0]
