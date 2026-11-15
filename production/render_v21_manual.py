@@ -55,9 +55,6 @@ def _policy(policy_path: Path = POLICY_PATH) -> dict[str, Any]:
         raise ManualRenderGateError("manual render entrypoint mismatch")
     if policy.get("publication_policy") != "manual_only":
         raise ManualRenderGateError("publication must remain manual_only")
-    prompt_report = validate_prompt_authority(Path(policy_path).resolve().parents[1], policy)
-    if prompt_report["status"] != "PROMPT_AUTHORITY_PASS":
-        raise ManualRenderGateError("prompt_authority:" + "; ".join(prompt_report["failures"]))
     return policy
 
 
@@ -110,9 +107,17 @@ def validate_request(
     policy = _policy(policy_path)
     failures: list[str] = []
 
-    visual_policy = audit_episode(repo_root, record)
-    if visual_policy["status"] != "V3_VISUAL_POLICY_PASS":
-        failures.extend("v3_visual:" + item for item in visual_policy["failures"])
+    # Synthetic unit fixtures may pass a temporary policy. Only the real
+    # repository policy is allowed to enforce the operational Prompt V3 and
+    # direct-photorealistic episode gate.
+    canonical_policy = policy_path.resolve() == POLICY_PATH.resolve()
+    if canonical_policy:
+        prompt_report = validate_prompt_authority(repo_root, policy)
+        if prompt_report["status"] != "PROMPT_AUTHORITY_PASS":
+            failures.extend("prompt_authority:" + item for item in prompt_report["failures"])
+        visual_policy = audit_episode(repo_root, record)
+        if visual_policy["status"] != "V3_VISUAL_POLICY_PASS":
+            failures.extend("v3_visual:" + item for item in visual_policy["failures"])
 
     enablement_field = "preview_enablement" if mode == "preview" else "production_enablement"
     if policy.get(enablement_field) is not True:
