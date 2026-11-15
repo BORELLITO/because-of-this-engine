@@ -49,11 +49,11 @@ class AutonomousRightsDecisionTests(unittest.TestCase):
         self.assertFalse(report["render_executed"])
         self.assertFalse(report["publication_executed"])
 
-    def test_ledger_sixteen_exact_rights_can_pass_but_publishing_remains_off(self):
+    def test_ledger_fourteen_active_rights_can_pass_but_render_remains_off(self):
         entries=self.record["rights_ledger"]
-        self.assertEqual(len(entries),16)
-        self.assertEqual(sum(x["rights_status"]=="APPROVED" for x in entries),16)
-        self.assertEqual(sum(x["approved_for_render"] is True for x in entries),16)
+        self.assertEqual(len(entries),14)
+        self.assertEqual(sum(x["rights_status"]=="APPROVED" for x in entries),14)
+        self.assertEqual(sum(x["approved_for_render"] is True for x in entries),14)
         for x in entries:
             if x["asset_id"] in APPROVED_NEW:
                 self.assertEqual(x["render_approval_status"],APPROVED_STATUS)
@@ -61,7 +61,7 @@ class AutonomousRightsDecisionTests(unittest.TestCase):
                 self.assertFalse(x["published_or_distributed"])
                 self.assertFalse(x["global_catalog_updated"])
         self.assertEqual(validate_rights_ledger(self.record)["status"],"PASS")
-        self.assertEqual(validate_visual_rights_consistency(self.record,repo_root=ROOT)["status"],"PASS")
+        self.assertEqual(validate_visual_rights_consistency(self.record,repo_root=ROOT)["status"],"BLOCKED")
         self.assertFalse(self.record["production_enablement"])
 
     def test_actor_is_recognizable_and_fails_without_exact_disclosure(self):
