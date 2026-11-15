@@ -203,5 +203,38 @@
     "validation": "production/episode_naming_v21.py",
     "legacy_records_without_naming_fields": "not_applicable_only",
     "malformed_numbered_names": "blocking"
+  },
+  "visual_composition_contract": {
+    "status": "LOCKED",
+    "source_of_truth": "production/v21_visual_contract.py",
+    "reference_overlay_policy": "CLIP_SEQUENCE_ONLY",
+    "clean_source_required_for_render": true,
+    "logo_asset": "brand/because-of-this-wordmark-transparent.png",
+    "logo_sha256": "5c062475dd174b5b314f53ae9e9f7be64ad534ae529c791ea8668265cc5dc33b",
+    "in_video_logo": {
+      "anchor": "center_upper",
+      "width_px": 360,
+      "y_px": 190,
+      "opacity": 0.9
+    },
+    "captions": {
+      "alignment": 2,
+      "margin_v": 650,
+      "max_lines": 2,
+      "max_line_chars": 42,
+      "active_word_color": "#F04444"
+    },
+    "outro": {
+      "anchor": "center_center",
+      "logo_width_px": 620,
+      "duration_seconds": 5.5,
+      "transition": "brand_background_to_black"
+    },
+    "forbidden_legacy_markers": {
+      "logo_y_px": 72,
+      "logo_width_px": 540,
+      "caption_margin_v": 320,
+      "outro_logo_width_px": 820
+    }
   }
 }
