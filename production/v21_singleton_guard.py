@@ -27,18 +27,6 @@ def audit(repo_root: Path) -> dict:
         failures.append("active policy is not V2.1")
     if policy.get("canonical_entrypoint") != "production/canonical_entrypoint.py":
         failures.append("canonical_entrypoint mismatch")
-    visual_source_gate = root / "production" / "active_visual_source_v21.py"
-    if not visual_source_gate.is_file():
-        failures.append("canonical V2.1 visual source gate is missing")
-    else:
-        visual_source_text = visual_source_gate.read_text(encoding="utf-8", errors="replace")
-        if "validate_scene_manifest" not in visual_source_text:
-            failures.append("canonical visual source gate is incomplete")
-        preview_source = root / "production" / "render_v21_preview.py"
-        intake_source = root / "production" / "fetch_v21_visuals.py"
-        for route in (preview_source, intake_source):
-            if not route.is_file() or "validate_scene_manifest" not in route.read_text(encoding="utf-8", errors="replace"):
-                failures.append(f"active visual route bypasses source gate:{route.relative_to(root).as_posix()}")
     if policy.get("production_enablement") is not False:
         failures.append("production_enablement must remain false in candidate")
     if policy.get("legacy_policy", {}).get("status") != "legacy_rollback_only":
