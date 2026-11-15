@@ -1,4 +1,4 @@
-"""Non-promoting, deterministic report tests for visual rights reconciliation."""
+"""Non-promoting, deterministic report tests for the active V2.1 visual reconciliation contract."""
 from __future__ import annotations
 
 import copy
