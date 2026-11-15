@@ -21,7 +21,7 @@ LOGO_SHA256 = "5c062475dd174b5b314f53ae9e9f7be64ad534ae529c791ea8668265cc5dc33b"
 LOGO_ANCHOR = "center_upper"
 LOGO_WIDTH = 360
 LOGO_Y = 190
-LOGO_OPACITY = 0.90
+IN_VIDEO_LOGO_OPACITY = 0.90
 
 # Caption contract: centered lower-third, forced word timestamps only.
 CAPTION_ALIGNMENT = 2
@@ -49,7 +49,7 @@ def expected_contract() -> dict[str, object]:
             "anchor": LOGO_ANCHOR,
             "width": LOGO_WIDTH,
             "y": LOGO_Y,
-            "opacity": LOGO_OPACITY,
+            "opacity": IN_VIDEO_LOGO_OPACITY,
         },
         "captions": {
             "alignment": CAPTION_ALIGNMENT,
