@@ -139,7 +139,7 @@
     "candidate_file_name": "EP005_Selpan_Private_Master_Candidate.mp4",
     "candidate_container_sha256": "3807cedd071d3f29b7845b316f1f85cf7ad05772513b0755de12c219a07d3af9",
     "video_stream_sha256": "2555a57644f7ed96769ffc735fd6cf9c7b43b91538c7cf4a8f499174c5a6dc6f",
-    "selpan_source_mp3_sha256": "79f6606d88e977dbf7996fb9a9197977eb3263762e7833475d21cf740edf6efa",
+    "selpan_source_mp3_sha256": "3d46ec4a1572e00a7da4b3e697067c7cbb07331bc5837758985ff95eda858267",
     "qa_artifact_id": 13622780892,
     "duration_seconds": 79.34,
     "resolution": "1080x1920",
@@ -152,6 +152,8 @@
     "release_approved": false,
     "publication_authorized": false,
     "library_file_id": "libfile_78294da631508191ab833dabf8875bc3",
-    "receipt_library_file_id": "libfile_0bd2f71df580819195a46cfe624fe175"
+    "receipt_library_file_id": "libfile_0bd2f71df580819195a46cfe624fe175",
+    "selpan_preview_mp3_sha256": "79f6606d88e977dbf7996fb9a9197977eb3263762e7833475d21cf740edf6efa",
+    "hash_semantics_note": "selpan_source_mp3_sha256 = hash do MP3 original do provedor; selpan_preview_mp3_sha256 = hash do preview privado mixado (voz + música)."
   }
 }
