@@ -12,6 +12,16 @@ from typing import Any
 
 POLICY_RELATIVE = Path("production/immutable_core_policy_v1.json")
 AUTHORIZATION_MARKER = "AUTHORIZED-IMMUTABLE-CORE-UPDATE"
+TRANSPARENCY_REQUIRED_SECTIONS = (
+    "## Transparência da mudança",
+    "### Estado antes",
+    "### Escopo autorizado",
+    "### O que foi preservado",
+    "### Impacto e riscos",
+    "### Testes e evidências",
+    "### Rollback",
+    "### Próximo passo",
+)
 
 
 class ImmutableCoreError(ValueError):
@@ -54,6 +64,36 @@ def _check(failures: list[str], actual: Any, expected: Any, label: str) -> None:
         failures.append(f"{label}: expected {expected!r}, got {actual!r}")
 
 
+def validate_change_transparency(event: dict[str, Any], policy: dict[str, Any]) -> dict[str, Any]:
+    """Require a human-readable, evidence-backed change report on core PRs."""
+    pull_request = event.get("pull_request")
+    if not isinstance(pull_request, dict):
+        return {"status": "CHANGE_TRANSPARENCY_NOT_APPLICABLE", "failures": []}
+
+    title = str(pull_request.get("title", ""))
+    body = str(pull_request.get("body") or "")
+    failures: list[str] = []
+    transparency = policy.get("operational_transparency")
+    if not isinstance(transparency, dict):
+        failures.append("operational_transparency is missing")
+        required_sections = TRANSPARENCY_REQUIRED_SECTIONS
+    else:
+        required_sections = tuple(transparency.get("required_report_sections", TRANSPARENCY_REQUIRED_SECTIONS))
+
+    if AUTHORIZATION_MARKER not in title:
+        failures.append("PR title is missing explicit authorization marker")
+    if not body.strip():
+        failures.append("PR body must contain the transparency report")
+    for section in required_sections:
+        if section not in body:
+            failures.append(f"PR body is missing transparency section:{section}")
+
+    return {
+        "status": "CHANGE_TRANSPARENCY_PASS" if not failures else "CHANGE_TRANSPARENCY_BLOCKED",
+        "required_sections": list(required_sections),
+        "failures": failures,
+    }
+
 def audit(repo_root: Path) -> dict[str, Any]:
     root = repo_root.resolve()
     failures: list[str] = []
@@ -75,6 +115,22 @@ def audit(repo_root: Path) -> dict[str, Any]:
         _check(failures, authorization.get("change_request_marker"), AUTHORIZATION_MARKER, "authorization.marker")
         _check(failures, authorization.get("human_review_required"), True, "authorization.human_review_required")
         _check(failures, authorization.get("direct_main_changes"), "FORBIDDEN", "authorization.direct_main_changes")
+
+    transparency = policy.get("operational_transparency")
+    if not isinstance(transparency, dict):
+        failures.append("operational_transparency is missing")
+    else:
+        _check(failures, transparency.get("status"), "MANDATORY", "operational_transparency.status")
+        _check(failures, transparency.get("user_visibility_required"), True, "operational_transparency.user_visibility_required")
+        _check(failures, transparency.get("no_hidden_actions"), True, "operational_transparency.no_hidden_actions")
+        _check(failures, transparency.get("before_action_report_required"), True, "operational_transparency.before_action_report_required")
+        _check(failures, transparency.get("after_action_report_required"), True, "operational_transparency.after_action_report_required")
+        _check(failures, transparency.get("evidence_required_for_completion"), True, "operational_transparency.evidence_required_for_completion")
+        _check(failures, transparency.get("rollback_required"), True, "operational_transparency.rollback_required")
+        declared_sections = tuple(transparency.get("required_report_sections", []))
+        for section in TRANSPARENCY_REQUIRED_SECTIONS:
+            if section not in declared_sections:
+                failures.append(f"operational_transparency missing section:{section}")
 
     for authority in policy.get("authority_files", []):
         if not isinstance(authority, dict):
@@ -220,8 +276,23 @@ def main() -> int:
     parser.add_argument("--repo-root", type=Path, default=Path("."))
     parser.add_argument("--episode-manifest", type=Path)
     parser.add_argument("--surface-lock", type=Path)
+    parser.add_argument("--event-path", type=Path)
     args = parser.parse_args()
     report = audit(args.repo_root)
+
+    if report["status"] == "IMMUTABLE_CORE_PASS" and args.event_path:
+        try:
+            event = _load_json(args.event_path)
+            policy = _load_json(args.repo_root / POLICY_RELATIVE)
+            transparency_report = validate_change_transparency(event, policy)
+        except ImmutableCoreError as exc:
+            report["status"] = "IMMUTABLE_CORE_BLOCKED"
+            report["failures"].append(str(exc))
+        else:
+            report["change_transparency"] = transparency_report
+            if transparency_report["status"] == "CHANGE_TRANSPARENCY_BLOCKED":
+                report["status"] = "IMMUTABLE_CORE_BLOCKED"
+                report["failures"].extend(transparency_report["failures"])
 
     if report["status"] == "IMMUTABLE_CORE_PASS" and args.episode_manifest and args.surface_lock:
         try:

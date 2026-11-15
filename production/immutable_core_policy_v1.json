@@ -1,6 +1,6 @@
 {
   "policy_id": "because-of-this-immutable-core-v1",
-  "policy_version": "1.0",
+  "policy_version": "1.1",
   "status": "LOCKED",
   "scope": "BECAUSE OF THIS engine",
   "default_action_on_drift": "BLOCK",
@@ -12,13 +12,34 @@
     "direct_main_changes": "FORBIDDEN"
   },
   "authority_files": [
-    {"path": "production/active_engine_policy.json", "git_blob_sha1": "815e8f902fb02bd175de13ab703763091f59acbd"},
-    {"path": "production/active_surface_lock_v21.py", "git_blob_sha1": "ccac45502045be9699ab0bde5ed9d37d18ddfcba"},
-    {"path": "production/caption_policy_v21.json", "git_blob_sha1": "4b1eab9de35a088aaaebee78b19a335d7377056f"},
-    {"path": "production/render_v21_preview.py", "git_blob_sha1": "be25d2a5f943be921cc4e40af7d5aaf0d98630c3"},
-    {"path": "production/render_v21_final.py", "git_blob_sha1": "615f8707eac3d28ffcbec03cbc13f00c3b7907ff"},
-    {"path": "docs/CANONICAL_VISUAL_EDITORIAL_LOCK_20261112.md", "git_blob_sha1": "5e99ad1faaac61e9c96f4a86646025f24eb702c5"},
-    {"path": "docs/QUALITY_SAFETY_HARDENING_20261107.md", "git_blob_sha1": "8aeba7e3f114053e1ca3c14dc442b31510384c98"}
+    {
+      "path": "production/active_engine_policy.json",
+      "git_blob_sha1": "815e8f902fb02bd175de13ab703763091f59acbd"
+    },
+    {
+      "path": "production/active_surface_lock_v21.py",
+      "git_blob_sha1": "ccac45502045be9699ab0bde5ed9d37d18ddfcba"
+    },
+    {
+      "path": "production/caption_policy_v21.json",
+      "git_blob_sha1": "4b1eab9de35a088aaaebee78b19a335d7377056f"
+    },
+    {
+      "path": "production/render_v21_preview.py",
+      "git_blob_sha1": "be25d2a5f943be921cc4e40af7d5aaf0d98630c3"
+    },
+    {
+      "path": "production/render_v21_final.py",
+      "git_blob_sha1": "615f8707eac3d28ffcbec03cbc13f00c3b7907ff"
+    },
+    {
+      "path": "docs/CANONICAL_VISUAL_EDITORIAL_LOCK_20261112.md",
+      "git_blob_sha1": "5e99ad1faaac61e9c96f4a86646025f24eb702c5"
+    },
+    {
+      "path": "docs/QUALITY_SAFETY_HARDENING_20261107.md",
+      "git_blob_sha1": "8aeba7e3f114053e1ca3c14dc442b31510384c98"
+    }
   ],
   "immutable_contract": {
     "runtime": {
@@ -34,7 +55,11 @@
       "publication_policy": "manual_only",
       "missing_dependency_policy": "fail_closed"
     },
-    "render": {"width": 1080, "height": 1920, "fps": 60},
+    "render": {
+      "width": 1080,
+      "height": 1920,
+      "fps": 60
+    },
     "branding": {
       "logo_asset": "brand/because-of-this-wordmark-transparent.png",
       "logo_anchor": "center_upper",
@@ -47,7 +72,10 @@
       "max_lines": 2,
       "margin_v": 650,
       "active_word_color": "#F04444",
-      "forbidden_characters": ["—", "–"]
+      "forbidden_characters": [
+        "—",
+        "–"
+      ]
     },
     "v21_preview_regression_baseline": {
       "scene_count": 16,
@@ -66,9 +94,45 @@
     "required_when": "approved_for_render",
     "file_pattern": "episodes/<episode-id>/approved-surface-lock.json",
     "status_required": "APPROVED_LOCKED",
-    "required_fields": ["episode_id", "shot_assignments", "branding", "captions", "approved_by", "approved_at"],
+    "required_fields": [
+      "episode_id",
+      "shot_assignments",
+      "branding",
+      "captions",
+      "approved_by",
+      "approved_at"
+    ],
     "clip_assignment_change": "BLOCK",
     "logo_or_caption_change": "BLOCK",
     "missing_lock": "BLOCK"
+  },
+  "operational_transparency": {
+    "status": "MANDATORY",
+    "user_visibility_required": true,
+    "no_hidden_actions": true,
+    "language": "pt-BR",
+    "before_action_report_required": true,
+    "after_action_report_required": true,
+    "evidence_required_for_completion": true,
+    "rollback_required": true,
+    "protocol_document": "docs/CHANGE_TRANSPARENCY_PROTOCOL.md",
+    "required_report_sections": [
+      "## Transparência da mudança",
+      "### Estado antes",
+      "### Escopo autorizado",
+      "### O que foi preservado",
+      "### Impacto e riscos",
+      "### Testes e evidências",
+      "### Rollback",
+      "### Próximo passo"
+    ],
+    "state_labels": [
+      "PLANEJADO",
+      "EM EXECUÇÃO",
+      "IMPLEMENTADO",
+      "TESTADO",
+      "APROVADO",
+      "BLOQUEADO"
+    ]
   }
 }
