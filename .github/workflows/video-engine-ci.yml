@@ -273,7 +273,7 @@ jobs:
           from pathlib import Path
           report = json.loads(Path("/tmp/episode005-v21-report.json").read_text(encoding="utf-8"))
           assert report["status"] == "BLOCKED", report
-          assert report["blocking_gates"] == ["ACTIVE_V21_VISUAL_SOURCE", "VISUAL_RIGHTS_CONSISTENCY", "AUDIO_HISTORY_COVERAGE"], report["blocking_gates"]
+          assert report["blocking_gates"] == ["VISUAL_RIGHTS_CONSISTENCY", "AUDIO_HISTORY_COVERAGE"], report["blocking_gates"]
           rights = next(g for g in report["checks"] if g.get("ledger") == "rights_ledger")
           assert rights["status"] == "PASS"
           assert rights["failures"] == []
