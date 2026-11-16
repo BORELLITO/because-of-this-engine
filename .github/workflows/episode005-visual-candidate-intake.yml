@@ -76,6 +76,7 @@ jobs:
               provider = str(candidate.get("provider", ""))
               policy = policy_for(provider)
               assert policy is not None, f"unsupported provider: {provider}"
+              assert not policy.get("manual_only", False), (\n                  provider,\n                  "manual-only providers cannot enter the automated candidate downloader",\n              )
               assert candidate.get("source_page_url"), f"source_page_url missing: {candidate_id}"
               assert candidate.get("media_url"), f"media_url missing: {candidate_id}"
               assert candidate.get("license_name") == policy["license_name"], candidate.get("license_name")

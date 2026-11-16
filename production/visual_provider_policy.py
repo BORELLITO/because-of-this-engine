@@ -135,6 +135,19 @@ PROVIDER_POLICIES: dict[str, dict[str, Any]] = {
         source_tier="archive_manual",
         manual_only=True,
     ),
+    # Browser-generated AI clips are an isolated, manual-only intake lane.
+    # LoreMotion has no documented production API in this project; do not let
+    # the automated stock downloader or CI promote it silently.
+    "loremotion": _policy(
+        license_name="LoreMotion Terms of Service (per generated clip)",
+        license_names=(
+            "LoreMotion Commercial Use Claim (per generated clip)",
+        ),
+        page_hosts={"loremotion.com"},
+        media_hosts={"loremotion.com"},
+        source_tier="ai_generated_manual",
+        manual_only=True,
+    ),
     "original": _policy(
         license_name="Original/Commissioned Source",
         page_hosts=set(),
