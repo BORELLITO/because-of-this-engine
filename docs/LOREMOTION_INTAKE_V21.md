@@ -39,3 +39,11 @@ LoreMotion está registrado como fonte opcional e manual-only. O teste browser v
 ## Por que é assim
 
 A página validada oferece uma ferramenta browser gratuita, mas não foi encontrada uma API pública documentada para uso estável no pipeline. O LoreMotion também tem regras próprias de uso, direitos sobre entradas e retenção limitada. Portanto, a arquitetura segura é gerar manualmente, registrar evidências, validar, aprovar e reconciliar, mantendo o engine V2.1 como autoridade final.
+
+
+## Controle administrativo
+
+Toda alteração em arquivos de autoridade exige revisão humana e o marcador explícito
+`AUTHORIZED-IMMUTABLE-CORE-UPDATE` no título da mudança. O marcador autoriza a revisão
+da alteração; ele não libera renderização, publicação, promoção automática ou bypass de
+qualquer trava do V2.1.
