@@ -46,6 +46,20 @@ class RunflowContractTests(unittest.TestCase):
         with self.assertRaises(RunflowError):
             load_request(request, repo_root=root)
 
+    def test_checkpoint_is_inferred_from_production_record(self):
+        root = self.make_repo()
+        record = json.loads((root / "episodes/episode-005/production-record.json").read_text())
+        record["caption_artifact_evidence"] = {
+            "workflow_run_id": 456,
+            "artifact_name": "approved-captioned-checkpoint",
+        }
+        (root / "episodes/episode-005/production-record.json").write_text(json.dumps(record))
+        request = root / "request.json"
+        request.write_text(json.dumps({"episode_id": "episode-005", "mode": "preview"}))
+        resolved = load_request(request, repo_root=root)
+        self.assertEqual(resolved["source_run_id"], "456")
+        self.assertEqual(resolved["source_artifact_name"], "approved-captioned-checkpoint")
+
 
 if __name__ == "__main__":
     unittest.main()
