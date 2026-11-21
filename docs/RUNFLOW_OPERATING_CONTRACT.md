@@ -6,7 +6,8 @@ O Runflow mestre é a única rota operacional para transformar um checkpoint
 Gemini/Charon já validado em um vídeo V2.1 com visuais, legendas, logo, outro e
 QA técnico. A chamada operacional passa a ser:
 
-1. informar `episode_id`, `source_run_id` e `source_artifact_name`;
+1. informar `episode_id` (os IDs do checkpoint são inferidos automaticamente do
+   production record; podem ser sobrescritos quando necessário);
 2. executar `BECAUSE OF THIS — Runflow Mestre`;
 3. receber um único bundle de artefatos com o MP4 e seus relatórios.
 
