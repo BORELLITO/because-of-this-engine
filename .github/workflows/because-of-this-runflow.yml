@@ -94,6 +94,27 @@ jobs:
             --repo-root . \
             --report artifacts/runflow/runflow-plan.json
 
+      - name: Run canonical package audit
+        id: canonical_audit
+        run: |
+          set +e
+          PYTHONPATH=. python production/canonical_entrypoint.py \
+            --manifest "episodes/${EPISODE_ID}/production-record.json" \
+            --repo-root . \
+            --report "artifacts/runflow/canonical-entrypoint-report.json"
+          status=$?
+          set -e
+          cat "artifacts/runflow/canonical-entrypoint-report.json"
+          if [ "$RUNFLOW_MODE" = "final" ] && [ "$status" -ne 0 ]; then
+            echo "RUNFLOW_FINAL_BLOCKED: canonical package audit failed."
+            exit "$status"
+          fi
+
+      - name: Run V2.1 singleton guard
+        run: |
+          PYTHONPATH=. python production/v21_singleton_guard.py --repo-root . \
+            | tee artifacts/runflow/singleton-guard-report.json
+
       - name: Download approved narration and caption checkpoint
         uses: actions/download-artifact@v4
         with:
@@ -206,4 +227,6 @@ jobs:
             artifacts/video/${{ inputs.episode_id }}-runflow-report.json
             artifacts/video/RUNFLOW_DELIVERY_STATUS.json
             artifacts/runflow/runflow-plan.json
+            artifacts/runflow/canonical-entrypoint-report.json
+            artifacts/runflow/singleton-guard-report.json
           if-no-files-found: error

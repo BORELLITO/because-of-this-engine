@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 EPISODE_ID = re.compile(r"episode-[0-9]{3}")
+CANONICAL_REPOSITORY = "BORELLITO/because-of-this-engine"
 FORBIDDEN_SCOPE_MARKERS = (
     "verbo-no-chao",
     "verbo_no_chao",
@@ -52,7 +53,14 @@ def _scope_guard(repo_root: Path, request: dict[str, Any]) -> list[str]:
     for marker in FORBIDDEN_SCOPE_MARKERS:
         if marker in root_text or marker in request_text:
             failures.append(f"foreign project marker detected:{marker}")
-    if repo_root.name != "because-of-this-engine":
+    requested_repository = str(request.get("repository") or "").strip()
+    if requested_repository and requested_repository.lower() != CANONICAL_REPOSITORY.lower():
+        failures.append("Runflow repository is not the canonical BECAUSE OF THIS repository")
+    # GitHub's checkout directory is canonical, while local worktrees and
+    # temporary clones often have a suffix. Accept those only when the request
+    # still identifies the canonical repository; this keeps the guard useful in
+    # development without weakening project isolation.
+    if repo_root.name != "because-of-this-engine" and requested_repository.lower() != CANONICAL_REPOSITORY.lower():
         failures.append("Runflow must execute from the because-of-this-engine repository")
     return failures
 
