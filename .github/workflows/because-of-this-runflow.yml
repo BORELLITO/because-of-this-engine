@@ -1,0 +1,199 @@
+name: BECAUSE OF THIS — Runflow Mestre
+
+# The only normal operational entrypoint for a prepared V2.1 episode.
+# It consumes an already approved Charon/caption checkpoint, runs the canonical
+# visual/render/QA chain, and returns one downloadable video artifact. It does
+# not call TTS, publish to a platform, or touch another project's repository.
+on:
+  workflow_dispatch:
+    inputs:
+      episode_id:
+        description: "Technical episode ID, for example episode-005"
+        required: true
+        default: "episode-005"
+        type: string
+      source_run_id:
+        description: "GitHub Actions run containing narration.wav, narration.ass and voice-profile.json"
+        required: true
+        type: string
+      source_artifact_name:
+        description: "Captioned Charon checkpoint artifact name"
+        required: true
+        type: string
+      mode:
+        description: "preview returns a ready QA video artifact; final is fail-closed until every release gate is approved"
+        required: true
+        default: "preview"
+        type: choice
+        options:
+          - preview
+          - final
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: because-of-this-runflow-${{ inputs.episode_id }}
+  cancel-in-progress: false
+
+jobs:
+  runflow:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      EPISODE_ID: ${{ inputs.episode_id }}
+      SOURCE_RUN_ID: ${{ inputs.source_run_id }}
+      SOURCE_ARTIFACT_NAME: ${{ inputs.source_artifact_name }}
+      RUNFLOW_MODE: ${{ inputs.mode }}
+    steps:
+      - name: Checkout canonical BECAUSE OF THIS engine
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Install bounded render dependencies
+        run: |
+          python -m pip install --disable-pip-version-check --quiet Pillow==11.3.0
+          if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends ffmpeg
+          fi
+
+      - name: Build Runflow request and enforce project isolation
+        run: |
+          mkdir -p artifacts/runflow
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          payload = {
+              "episode_id": os.environ["EPISODE_ID"],
+              "source_run_id": os.environ["SOURCE_RUN_ID"],
+              "source_artifact_name": os.environ["SOURCE_ARTIFACT_NAME"],
+              "mode": os.environ["RUNFLOW_MODE"],
+              "project": "BECAUSE OF THIS",
+              "repository": "BORELLITO/because-of-this-engine",
+          }
+          Path("artifacts/runflow/request.json").write_text(json.dumps(payload, indent=2) + "\n")
+          PY
+          PYTHONPATH=. python production/runflow.py \
+            --request artifacts/runflow/request.json \
+            --repo-root . \
+            --report artifacts/runflow/runflow-plan.json
+
+      - name: Download approved narration and caption checkpoint
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.source_artifact_name }}
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.source_run_id }}
+          path: artifacts/charon
+
+      - name: Verify checkpoint identity and scope
+        run: |
+          python - <<'PY'
+          import hashlib, json, wave
+          from pathlib import Path
+          root = Path("artifacts/charon")
+          audio, captions, profile = root / "narration.wav", root / "narration.ass", root / "voice-profile.json"
+          assert audio.is_file() and captions.is_file() and profile.is_file()
+          data = json.loads(profile.read_text())
+          assert data["provider"] == "gemini_tts"
+          assert data["voice_name"] == "Charon"
+          assert data["model"] == "gemini-3.8-flash-tts"
+          assert data["identity_status"] == "APPROVED_REFERENCE_MATCH"
+          assert data["audio_sha256"] == hashlib.sha256(audio.read_bytes()).hexdigest()
+          with wave.open(str(audio), "rb") as stream:
+              duration = stream.getnframes() / stream.getframerate()
+          assert 60 <= duration <= 80, duration
+          print({"status": "CHARON_CHECKPOINT_PASS", "duration_seconds": round(duration, 3)})
+          PY
+
+      - name: Download and verify V2.1 visual candidates
+        run: |
+          mkdir -p "artifacts/visuals"
+          PYTHONPATH=. python production/fetch_v21_visuals.py \
+            --manifest "episodes/${EPISODE_ID}/visual/scene-asset-manifest.json" \
+            --output-root artifacts/visuals
+
+      - name: Apply canonical karaoke caption lock
+        run: |
+          PYTHONPATH=. python production/recolor_karaoke_ass.py \
+            --input artifacts/charon/narration.ass \
+            --output artifacts/charon/narration-preview.ass
+
+      - name: Build canonical outro card
+        run: |
+          mkdir -p artifacts/video
+          python production/generate_outro_card.py \
+            --background "episodes/${EPISODE_ID}/delivery/thumbnail/thumbnail_master_9x16.jpg" \
+            --logo brand/because-of-this-wordmark-transparent.png \
+            --output artifacts/video/outro-card.png
+
+      - name: Render canonical V2.1 video
+        if: ${{ inputs.mode == 'preview' }}
+        run: |
+          PYTHONPATH=. python production/render_v21_preview.py \
+            --scene-manifest "episodes/${EPISODE_ID}/visual/scene-asset-manifest.json" \
+            --story-architecture "episodes/${EPISODE_ID}/story-architecture.json" \
+            --asset-root artifacts/visuals \
+            --audio artifacts/charon/narration.wav \
+            --captions artifacts/charon/narration-preview.ass \
+            --logo brand/because-of-this-wordmark-transparent.png \
+            --outro-card artifacts/video/outro-card.png \
+            --voice-profile artifacts/charon/voice-profile.json \
+            --output artifacts/video/${EPISODE_ID}-runflow.mp4 \
+            --report artifacts/video/${EPISODE_ID}-runflow-report.json
+
+      - name: Refuse an unapproved final release
+        if: ${{ inputs.mode == 'final' }}
+        run: |
+          echo "RUNFLOW_FINAL_BLOCKED: the canonical V2.1 final route remains disabled by active_engine_policy.json."
+          echo "No MP4, Drive write or publication is produced in this mode."
+          exit 1
+
+      - name: Run technical QA and bind delivery report
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          root = Path("artifacts/video")
+          report = json.loads((root / f"{__import__('os').environ['EPISODE_ID']}-runflow-report.json").read_text())
+          assert report["status"] == "V21_CREATIVE_PREVIEW_RENDER_PASS", report
+          assert report["production_enablement"] is False
+          output = root / f"{__import__('os').environ['EPISODE_ID']}-runflow.mp4"
+          probe = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=codec_type,width,height,r_frame_rate,sample_rate:format=duration", "-of", "json", str(output)], check=True, capture_output=True, text=True)
+          data = json.loads(probe.stdout)
+          video = next(s for s in data["streams"] if s["codec_type"] == "video")
+          audio = next(s for s in data["streams"] if s["codec_type"] == "audio")
+          assert (int(video["width"]), int(video["height"])) == (1080, 1920)
+          assert video["r_frame_rate"] == "60/1"
+          assert audio["sample_rate"] == "48000"
+          assert 78 <= float(data["format"]["duration"]) <= 80
+          (root / "RUNFLOW_DELIVERY_STATUS.json").write_text(json.dumps({
+              "status": "VIDEO_ARTIFACT_READY",
+              "project": "BECAUSE OF THIS",
+              "episode_id": __import__('os').environ["EPISODE_ID"],
+              "mode": __import__('os').environ["RUNFLOW_MODE"],
+              "publication": "MANUAL_ONLY_NOT_RUN",
+              "drive_write": False,
+              "video": output.name,
+              "technical_qa": "PASS",
+          }, indent=2) + "\n")
+          print({"status": "VIDEO_ARTIFACT_READY", "path": str(output)})
+          PY
+
+      - name: Upload one Runflow delivery bundle
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: because-of-this-${{ inputs.episode_id }}-runflow
+          path: |
+            artifacts/video/${{ inputs.episode_id }}-runflow.mp4
+            artifacts/video/${{ inputs.episode_id }}-runflow-report.json
+            artifacts/video/RUNFLOW_DELIVERY_STATUS.json
+            artifacts/runflow/runflow-plan.json
+          if-no-files-found: error
