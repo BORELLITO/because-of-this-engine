@@ -8,6 +8,18 @@
 
 # BECAUSE OF THIS — Motor canônico V2.1 Gemini TTS/Charon
 
+## Operação única: Runflow Mestre
+
+Para uma produção preparada, use `.github/workflows/because-of-this-runflow.yml`.
+Ele recebe o episódio e o checkpoint Gemini/Charon com legendas, executa intake
+visual, lock de legenda, render V2.1 e QA, e entrega um único bundle de vídeo e
+relatórios. O contrato operacional está em `docs/RUNFLOW_OPERATING_CONTRACT.md`.
+
+O Runflow é exclusivo deste repositório. Não acessa, importa ou altera o
+VERBO NO CHÃO nem qualquer outro motor. A rota `preview` entrega o MP4 como
+artefato técnico; `final` continua bloqueado até os gates canônicos de produção
+serem aprovados de verdade. Publicação permanece manual.
+
 Este é o único motor ativo do canal. A política canônica é `production/active_engine_policy.json` e aponta para o runtime V2.1 factual, com Gemini TTS/Charon direto, renderizador V21 e publicação manual. Creative Claw, Piper, Edge, Google Cloud TTS e qualquer outro motor não fazem parte da execução normal.
 
 O motor permanece fail-closed: `production_enablement=false`, novos gastos e novas chamadas TTS não autorizadas ficam bloqueados, e nenhum preview ou relatório autoriza publicação automaticamente.
