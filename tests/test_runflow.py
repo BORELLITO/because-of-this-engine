@@ -46,6 +46,16 @@ class RunflowContractTests(unittest.TestCase):
         with self.assertRaises(RunflowError):
             load_request(request, repo_root=root)
 
+    def test_non_canonical_repository_is_rejected(self):
+        root = self.make_repo()
+        request = root / "request.json"
+        request.write_text(json.dumps({
+            "episode_id": "episode-005", "mode": "preview", "source_run_id": "123",
+            "source_artifact_name": "checkpoint", "repository": "OTHER/project",
+        }))
+        with self.assertRaises(RunflowError):
+            load_request(request, repo_root=root)
+
     def test_checkpoint_is_inferred_from_production_record(self):
         root = self.make_repo()
         record = json.loads((root / "episodes/episode-005/production-record.json").read_text())
