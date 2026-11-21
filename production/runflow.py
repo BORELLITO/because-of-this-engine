@@ -67,13 +67,18 @@ def load_request(path: Path, *, repo_root: Path) -> dict[str, Any]:
         raise RunflowError("mode must be preview or final")
     source_run_id = str(request.get("source_run_id") or "").strip()
     source_artifact_name = str(request.get("source_artifact_name") or "").strip()
-    if not source_run_id.isdigit():
-        raise RunflowError("source_run_id must be the numeric GitHub Actions run ID")
-    if not source_artifact_name:
-        raise RunflowError("source_artifact_name is required")
     failures = _scope_guard(repo_root, request)
     if failures:
         raise RunflowError("; ".join(failures))
+    if not source_run_id or not source_artifact_name:
+        evidence_path = repo_root / "episodes" / episode_id / "production-record.json"
+        evidence = _read_json(evidence_path).get("caption_artifact_evidence") or {}
+        source_run_id = source_run_id or str(evidence.get("workflow_run_id") or "").strip()
+        source_artifact_name = source_artifact_name or str(evidence.get("artifact_name") or "").strip()
+    if not source_run_id.isdigit():
+        raise RunflowError("source_run_id is missing and no approved caption checkpoint is recorded")
+    if not source_artifact_name:
+        raise RunflowError("source_artifact_name is missing and no approved caption checkpoint is recorded")
     request["episode_id"] = episode_id
     request["mode"] = mode
     request["source_run_id"] = source_run_id
