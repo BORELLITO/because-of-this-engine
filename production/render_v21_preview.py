@@ -116,20 +116,39 @@ def build_scene_plan(scene_manifest: dict[str, Any], story: dict[str, Any]) -> l
         for item in scene_manifest.get("assets", [])
         if isinstance(item, dict) and str(item.get("candidate_id", "")).strip()
     }
-    assignments: dict[str, str] = {}
+    assignments: dict[str, dict[str, Any]] = {}
     for item in scene_manifest.get("shot_assignments", []):
         if not isinstance(item, dict):
             continue
         assignment = item.get("assignment")
         if isinstance(assignment, dict):
-            assignments[str(item.get("shot_id"))] = str(assignment.get("candidate_id", ""))
+            assignments[str(item.get("shot_id"))] = item
     plan: list[dict[str, Any]] = []
     for shot in story.get("shot_plan", []):
         shot_id = str(shot.get("shot_id", "")).strip()
-        candidate_id = assignments.get(shot_id, "")
+        assignment_record = assignments.get(shot_id, {})
+        assignment = assignment_record.get("assignment")
+        assignment = assignment if isinstance(assignment, dict) else {}
+        candidate_id = str(assignment.get("candidate_id", ""))
         asset = assets.get(candidate_id)
         if not asset:
             raise PreviewRenderError(f"No approved manifest asset assignment for {shot_id}")
+        # Some historical manifest assets predate the continuity schema, while
+        # their approved shot assignments already carry the reviewed metadata.
+        # Hydrate only the missing asset field; never overwrite asset-level
+        # metadata or invent tags for a candidate without assignment evidence.
+        asset_for_scene = dict(asset)
+        if not asset_for_scene.get("continuity_tags") and isinstance(
+            (
+                assignment_record.get("continuity_tags")
+                or assignment.get("continuity_tags")
+            ),
+            dict,
+        ):
+            asset_for_scene["continuity_tags"] = (
+                assignment_record.get("continuity_tags")
+                or assignment.get("continuity_tags")
+            )
         start, end = parse_range(str(shot.get("range", "")))
         plan.append({
             "shot_id": shot_id,
@@ -137,7 +156,7 @@ def build_scene_plan(scene_manifest: dict[str, Any], story: dict[str, Any]) -> l
             "duration": end - start,
             "role": str(shot.get("role", "")),
             "scene": shot,
-            "asset": asset,
+            "asset": asset_for_scene,
         })
     if len(plan) != 16 or len({item["candidate_id"] for item in plan}) != 16:
         raise PreviewRenderError("Episode 005 preview requires 16 distinct assigned assets.")
