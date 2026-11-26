@@ -20,7 +20,7 @@ class PublicSecretGuardTests(unittest.TestCase):
             root = Path(temporary)
             candidate = root / "candidate.txt"
             candidate.write_text(
-                "-----BEGIN OPENSSH PRIVATE KEY-----\nsecret-material\n",
+                "-----BEGIN " + "OPENSSH PRIVATE KEY-----\nsecret-material\n",
                 encoding="utf-8",
             )
             report = scan_paths(root, [candidate])
@@ -32,7 +32,7 @@ class PublicSecretGuardTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             candidate = root / "candidate.txt"
-            candidate.write_text("ghp_123456789012345678901234567890\n", encoding="utf-8")
+            candidate.write_text("ghp_" + "123456789012345678901234567890\n", encoding="utf-8")
             report = scan_paths(root, [candidate])
             self.assertEqual(report["status"], "PUBLIC_SECRET_GUARD_BLOCKED")
             self.assertEqual(report["failures"][0]["rule"], "github-token")
