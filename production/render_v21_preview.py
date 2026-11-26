@@ -116,20 +116,39 @@ def build_scene_plan(scene_manifest: dict[str, Any], story: dict[str, Any]) -> l
         for item in scene_manifest.get("assets", [])
         if isinstance(item, dict) and str(item.get("candidate_id", "")).strip()
     }
-    assignments: dict[str, str] = {}
+    assignments: dict[str, dict[str, Any]] = {}
     for item in scene_manifest.get("shot_assignments", []):
         if not isinstance(item, dict):
             continue
         assignment = item.get("assignment")
         if isinstance(assignment, dict):
-            assignments[str(item.get("shot_id"))] = str(assignment.get("candidate_id", ""))
+            assignments[str(item.get("shot_id"))] = item
     plan: list[dict[str, Any]] = []
     for shot in story.get("shot_plan", []):
         shot_id = str(shot.get("shot_id", "")).strip()
-        candidate_id = assignments.get(shot_id, "")
+        assignment_record = assignments.get(shot_id, {})
+        assignment = assignment_record.get("assignment")
+        assignment = assignment if isinstance(assignment, dict) else {}
+        candidate_id = str(assignment.get("candidate_id", ""))
         asset = assets.get(candidate_id)
         if not asset:
             raise PreviewRenderError(f"No approved manifest asset assignment for {shot_id}")
+        # Some historical manifest assets predate the continuity schema, while
+        # their approved shot assignments already carry the reviewed metadata.
+        # Hydrate only the missing asset field; never overwrite asset-level
+        # metadata or invent tags for a candidate without assignment evidence.
+        asset_for_scene = dict(asset)
+        if not asset_for_scene.get("continuity_tags") and isinstance(
+            (
+                assignment_record.get("continuity_tags")
+                or assignment.get("continuity_tags")
+            ),
+            dict,
+        ):
+            asset_for_scene["continuity_tags"] = (
+                assignment_record.get("continuity_tags")
+                or assignment.get("continuity_tags")
+            )
         start, end = parse_range(str(shot.get("range", "")))
         plan.append({
             "shot_id": shot_id,
@@ -137,7 +156,7 @@ def build_scene_plan(scene_manifest: dict[str, Any], story: dict[str, Any]) -> l
             "duration": end - start,
             "role": str(shot.get("role", "")),
             "scene": shot,
-            "asset": asset,
+            "asset": asset_for_scene,
         })
     if len(plan) != 16 or len({item["candidate_id"] for item in plan}) != 16:
         raise PreviewRenderError("Episode 005 preview requires 16 distinct assigned assets.")
@@ -199,233 +218,3 @@ def render_scene(scene: dict[str, Any], asset_path: Path, output: Path, disclosu
         "unsharp=5:5:0.12:5:5:0.0,"
         "vignette=angle=PI/5.8:eval=frame,"
         f"fps={FPS},format=yuv420p,setsar=1,"
-        f"fade=t=in:st=0:d=0.16,fade=t=out:st={fade_out_start:.3f}:d=0.18"
-    )
-    if scene["candidate_id"] in {NASA_ID, ACTOR_ID}:
-        if disclosure is None:
-            raise PreviewRenderError("S01/S12 non-archival label and credit disclosure is mandatory.")
-        try:
-            overlay = (
-                ffmpeg_nasa_overlay(disclosure)
-                if scene["candidate_id"] == NASA_ID
-                else ffmpeg_actor_overlay(disclosure)
-            )
-        except ValueError as exc:
-            raise PreviewRenderError(str(exc)) from exc
-        anchor = f"fps={FPS},format=yuv420p,setsar=1,"
-        if anchor not in filters:
-            raise PreviewRenderError("V2.1 truth-label overlay anchor changed; block before rendering.")
-        filters = filters.replace(anchor, f"fps={FPS},format=yuv420p,setsar=1" + overlay + ",")
-
-    input_args = ["-stream_loop", str(loop_count)] if loop_count else []
-    run([
-        "ffmpeg", "-y", *input_args, "-i", str(asset_path), "-an",
-        "-vf", filters, "-t", f"{duration:.3f}", "-r", str(FPS),
-        "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
-        "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(output),
-    ])
-
-
-def render_preview(
-    scene_manifest_path: Path,
-    story_path: Path,
-    asset_root: Path,
-    audio_path: Path,
-    captions_path: Path,
-    music_path: Path | None,
-    logo_path: Path,
-    outro_card_path: Path,
-    voice_profile_path: Path,
-    output_path: Path,
-    report_path: Path,
-) -> dict[str, Any]:
-    scene_manifest = json.loads(scene_manifest_path.read_text(encoding="utf-8"))
-    active_source_gate = validate_scene_manifest(
-        scene_manifest,
-        scene_manifest_path,
-        expected_episode_id=str(scene_manifest.get("episode_id") or "episode-005"),
-    )
-    if active_source_gate["status"] != "PASS":
-        raise PreviewRenderError(
-            "Active V2.1 visual source gate blocked preview: "
-            + "; ".join(active_source_gate["failures"])
-        )
-    verified_disclosures = load_for_preview(scene_manifest_path, scene_manifest)
-    story = json.loads(story_path.read_text(encoding="utf-8"))
-    plan = build_scene_plan(scene_manifest, story)
-    continuity_profile = scene_manifest.get("visual_continuity_profile")
-    if continuity_profile:
-        continuity_gate = validate_sequence(
-            plan,
-            continuity_profile,
-            mode="preview",
-        )
-        if continuity_gate.get("status") != "PASS":
-            reasons = continuity_gate.get("blocking_reasons", []) or continuity_gate.get("review_reasons", [])
-            raise PreviewRenderError(
-                "Visual continuity gate blocked preview: " + "; ".join(reasons)
-            )
-    else:
-        # Legacy manifests remain renderable under their existing contracts;
-        # adopting continuity is opt-in until the profile is present.
-        continuity_gate = {
-            "status": "NOT_CONFIGURED",
-            "mode": "preview",
-            "strict_preview_block": False,
-        }
-    if not captions_path.is_file():
-        raise PreviewRenderError("Frozen narration.ass is required.")
-    if not logo_path.is_file():
-        raise PreviewRenderError("Canonical Because Of This logo is required.")
-    try:
-        validate_caption_ass(captions_path)
-        validate_logo_path(logo_path, sha256_file(logo_path))
-    except (OSError, ValueError) as exc:
-        raise PreviewRenderError(str(exc)) from exc
-    if not outro_card_path.is_file():
-        raise PreviewRenderError("Black stacked outro card is required.")
-    voice_profile = validate_voice_profile(voice_profile_path, audio_path)
-    audio_seconds = media_duration(audio_path)
-    if not 60.0 <= audio_seconds <= 80.0:
-        raise PreviewRenderError(
-            f"Creative narration duration must be between 60 and 80 seconds; got {audio_seconds:.3f}."
-        )
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix="because-of-this-v21-preview-") as raw:
-        work = Path(raw)
-        scene_files: list[Path] = []
-        for index, scene in enumerate(plan, start=1):
-            asset = scene["asset"]
-            candidate_id = scene["candidate_id"]
-            asset_path = asset_root / candidate_id / "candidate.mp4"
-            if not asset_path.is_file():
-                raise PreviewRenderError(f"Downloaded visual is missing: {asset_path}")
-            expected_sha = str(asset.get("sha256", "")).lower()
-            if sha256_file(asset_path).lower() != expected_sha:
-                raise PreviewRenderError(f"Visual SHA-256 mismatch: {candidate_id}")
-            scene_file = work / f"scene-{index:02d}.mp4"
-            render_scene(scene, asset_path, scene_file, disclosure=verified_disclosures.get(candidate_id))
-            scene_files.append(scene_file)
-
-        concat = work / "concat.txt"
-        concat.write_text(
-            "".join(
-                f"file '{path.as_posix().replace(chr(39), chr(39) + chr(92) + chr(39) + chr(39))}'\n"
-                for path in scene_files
-            ),
-            encoding="utf-8",
-        )
-        scene_seconds = sum(float(item["duration"]) for item in plan)
-        total_seconds = audio_seconds + OUTRO_SECONDS
-        tail = max(0.0, total_seconds - scene_seconds)
-        subtitle_path = escape_filter_path(captions_path.resolve())
-        filter_complex = ";".join([
-            f"[0:v]tpad=stop_mode=clone:stop_duration={tail:.3f},"
-            "format=yuv420p[base]",
-            f"[base]subtitles='{subtitle_path}'[captioned]",
-            f"[2:v]format=rgba,scale={IN_VIDEO_LOGO_WIDTH}:-1:flags=lanczos,"
-            f"colorchannelmixer=aa={IN_VIDEO_LOGO_OPACITY:.2f}[logo]",
-            f"[captioned][logo]overlay=x=(main_w-overlay_w)/2:y={IN_VIDEO_LOGO_Y}:"
-            f"enable='lt(t,{audio_seconds:.3f})':eof_action=repeat[branded]",
-            "[3:v]format=rgba,scale=1080:1920:flags=lanczos,"
-            "fade=t=in:st=0:d=0.80:color=black,"
-            f"fade=t=out:st={OUTRO_SECONDS - 1.2:.2f}:d=1.20:color=black,"
-            f"setpts=PTS-STARTPTS+{audio_seconds:.3f}/TB[outro]",
-            "[branded][outro]overlay=x=0:y=0:eof_action=repeat,format=yuv420p[v]",
-            "[1:a]aresample=48000,asetpts=PTS-STARTPTS,"
-            f"loudnorm=I=-16:TP=-1.0:LRA=7,alimiter=limit=0.95,"
-            f"apad=pad_dur={OUTRO_SECONDS:.3f},atrim=duration={total_seconds:.3f}[a]",
-        ])
-        run([
-            "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat),
-            "-i", str(audio_path),
-            "-loop", "1", "-framerate", "1", "-i", str(logo_path),
-            "-loop", "1", "-framerate", "1", "-i", str(outro_card_path),
-            "-filter_complex", filter_complex,
-            "-map", "[v]", "-map", "[a]", "-t", f"{total_seconds:.3f}",
-            "-r", str(FPS), "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
-            "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-ar", "48000",
-            "-ac", "2", "-movflags", "+faststart", str(output_path),
-        ], timeout=1800)
-
-    if not output_path.is_file() or output_path.stat().st_size <= 0:
-        raise PreviewRenderError(f"Preview output was not created: {output_path}")
-    report = {
-        "status": "V21_CREATIVE_PREVIEW_RENDER_PASS",
-        "mode": "preview",
-        "episode_id": "episode-005",
-        "creative_profile": CREATIVE_PROFILE,
-        "scene_count": len(plan),
-        "scene_duration_seconds": round(sum(float(item["duration"]) for item in plan), 3),
-        "audio_duration_seconds": round(audio_seconds, 3),
-        "total_duration_seconds": round(audio_seconds + OUTRO_SECONDS, 3),
-        "active_visual_source_gate": active_source_gate,
-        "visual_continuity_gate": continuity_gate,
-        "tail_extension_seconds": round(
-            max(0.0, audio_seconds + OUTRO_SECONDS - sum(float(item["duration"]) for item in plan)), 3
-        ),
-        "voice": voice_profile,
-        "music": {"status": "NOT_MIXED", "background_noise_removed": True, "sources": ["narration_only"]},
-        "branding": {
-            "logo_overlay": True,
-            "logo_asset": "transparent_wordmark",
-            "logo_anchor": "center_upper",
-            "logo_width": IN_VIDEO_LOGO_WIDTH,
-            "logo_y": IN_VIDEO_LOGO_Y,
-            "caption_margin_v": CAPTION_MARGIN_V,
-            "final_center_lockup": True,
-            "final_card": "brand_background_to_black",
-            "outro_seconds": OUTRO_SECONDS,
-            "narration_end_before_outro": True,
-            "outro_audio": "silence",
-            "active_word_color": ACTIVE_WORD_COLOR,
-        },
-        "output": str(output_path),
-        "output_sha256": sha256_file(output_path),
-        "production_enablement": False,
-        "publication": "MANUAL_ONLY_NOT_RUN",
-        "drive_written": False,
-        "global_catalog_updated": False,
-    }
-    report_path.parent.mkdir(parents=True, exist_ok=True)
-    report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps(report, ensure_ascii=False))
-    return report
-
-
-def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--scene-manifest", type=Path, required=True)
-    parser.add_argument("--story-architecture", type=Path, required=True)
-    parser.add_argument("--asset-root", type=Path, required=True)
-    parser.add_argument("--audio", type=Path, required=True)
-    parser.add_argument("--captions", type=Path, required=True)
-    parser.add_argument("--music", type=Path, default=None)
-    parser.add_argument("--logo", type=Path, required=True)
-    parser.add_argument("--outro-card", type=Path, required=True)
-    parser.add_argument("--voice-profile", type=Path, required=True)
-    parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--report", type=Path, required=True)
-    args = parser.parse_args()
-    try:
-        render_preview(
-            args.scene_manifest,
-            args.story_architecture,
-            args.asset_root,
-            args.audio,
-            args.captions,
-            args.music,
-            args.logo,
-            args.outro_card,
-            args.voice_profile,
-            args.output,
-            args.report,
-        )
-    except (OSError, ValueError, PreviewRenderError, json.JSONDecodeError) as exc:
-        print(json.dumps({"status": "V21_CREATIVE_PREVIEW_RENDER_BLOCKED", "failure": str(exc)}))
-        return 1
-    return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
