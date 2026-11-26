@@ -11,13 +11,70 @@
   "editorial_contract": {
     "channel": "BECAUSE OF THIS",
     "language": "en-US",
-    "promise": "REAL EVENTS. IMPOSSIBLE DANGER. ONE DECISION THAT CHANGED EVERYTHING.",
-    "mode": "factual_documentary",
+    "editorial_era": "BRAZIL_FILES",
+    "promise": "BRAZILIAN MYSTERIES. IMPOSSIBLE STORIES. THE EVIDENCE REMAINS.",
+    "mode": "supernatural_case_documentary",
     "allowed_pillars": [
-      "invisible_natural_dangers",
-      "human_or_system_failure",
-      "survival_against_impossible_conditions"
+      "documented_unexplained_cases",
+      "famous_brazilian_legends",
+      "disputed_or_explained_cases"
     ],
+    "case_lanes": [
+      "DOCUMENTED_UNEXPLAINED",
+      "FAMOUS_LEGEND",
+      "DISPUTED_OR_EXPLAINED"
+    ],
+    "narration_language": "en-US",
+    "story_orchestrator": "production/brazil_files_orchestrator.py",
+    "preparation_contract": "docs/BRAZIL_FILES_AGENT_ORCHESTRATOR.md",
+    "representation_mode": "BRAZIL_FIRST_RESPECTFUL_DOCUMENTARY",
+    "brazil_is_editorial_protagonist": true,
+    "retention_contract": {
+      "hook_window_seconds": [0, 3],
+      "required_beats": [
+        "specific_hook",
+        "brazilian_context",
+        "escalation",
+        "contradiction_or_reveal",
+        "emotional_payoff",
+        "single_cta"
+      ],
+      "cta_position": "after_payoff",
+      "unsupported_claims": "BLOCK",
+      "generic_brazil_stereotypes": "BLOCK"
+    },
+    "visual_clip_contract": {
+      "agent": "VISUAL_CLIP_DIRECTOR",
+      "semantic_match": "MANDATORY",
+      "brazilian_context": "MANDATORY_WHEN_NARRATIVELY_RELEVANT",
+      "temporal_continuity": "MANDATORY",
+      "geographic_continuity": "MANDATORY",
+      "lighting_and_mood_continuity": "MANDATORY",
+      "generic_filler_clips": "BLOCK",
+      "beautiful_but_semantically_wrong_clips": "BLOCK",
+      "source_asset_reuse": "BLOCK_GLOBAL",
+      "rights_and_provenance": "MANDATORY",
+      "dramatization_disclosure": "REQUIRED_WHEN_NEEDED"
+    },
+    "continuous_production_flow": {
+      "mode": "SEQUENTIAL_DOUBLE_VALIDATION",
+      "block_count": 11,
+      "analyst_and_reviewer_required": true,
+      "reviewer_independence_required": true,
+      "skip_blocks": false,
+      "blocked_status": "FAIL_CLOSED",
+      "runflow_handoff": "ONLY_AFTER_ALL_REVIEWERS_PASS"
+    },
+    "series_numbering": {
+      "series_id": "BRAZIL_FILES",
+      "reset_status": "APPROVED",
+      "next_editorial_episode_number": 1,
+      "display_number": "01",
+      "historical_episodes_excluded_from_new_count": true,
+      "legacy_technical_ids_immutable": true,
+      "new_episode_namespace": "episode-NNN",
+      "first_new_episode": "episode-001"
+    },
     "visual_direction": "INVESTIGATIVE FUNERAL HORROR"
   },
   "voice_provider": "gemini_tts",
