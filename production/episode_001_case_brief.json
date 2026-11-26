@@ -1,0 +1,54 @@
+{
+  "case_id": "BF-001-NOITE-OFICIAL-OVNIS-1986",
+  "working_title": "The Night Brazil's Air Force Chased the Unknown",
+  "episode_number": "001",
+  "lane": "DOCUMENTED_UNEXPLAINED",
+  "narration_language": "en-US",
+  "visual_profile": "cinematic_dread_v73",
+  "representation_mode": "BRAZIL_FIRST_RESPECTFUL_DOCUMENTARY",
+  "preserve_visual_motor": true,
+  "brazil_is_editorial_protagonist": true,
+  "premise": "On May 19, 1986, Brazilian air-defense operators and military pilots reported and pursued multiple unidentified objects over Brazil. The event is documented in Brazilian institutional records, but the nature of the objects remains unresolved.",
+  "brazilian_anchor": "CINDACTA, Brazilian air defense, Santa Cruz Air Base, Anapolis Air Base, and the national UFO archive.",
+  "cultural_value": "Presents Brazil as the investigator and narrative protagonist, using Brazilian institutional context without exotic stereotypes or unsupported supernatural certainty.",
+  "source_rights_status": "RESEARCH_LEAD_ONLY",
+  "source_urls": [
+    "https://www.gov.br/arquivonacional/pt-br/canais_atendimento/imprensa/noticias/conheca-o-fundo-sobre-ovnis-do-arquivo-nacional",
+    "https://www.gov.br/arquivonacional/pt-br/canais_atendimento/imprensa/copy_of_noticias/serie-relatos-extraterrestres",
+    "https://www.gov.br/imprensanacional/pt-br/centrais-de-conteudo/arquivos/revista_in_2017_03.pdf"
+  ],
+  "unknowns": [
+    "The exact nature and origin of the objects.",
+    "Whether every report described the same phenomenon.",
+    "Which visual and radar details can be tied to a specific primary record.",
+    "What archival media can be licensed for the final edit."
+  ],
+  "visual_anchors": [
+    "Archival Brazilian air-defense records and report pages.",
+    "Night sky over a geographically coherent Brazilian setting.",
+    "Faceless 1986-era pilot and control-room reenactments.",
+    "Brazilian air-base exterior and period-accurate aviation details.",
+    "Radar and communications imagery used only as labeled dramatization unless archival provenance is verified.",
+    "A restrained unresolved ending returning to the official record."
+  ],
+  "truth_boundary": {
+    "facts_allowed_after_dossier_verification": [
+      "The event date: May 19, 1986.",
+      "Institutional records and reports exist in the Brazilian UFO archive.",
+      "Brazilian air-defense structures and military pilots are part of the documented response."
+    ],
+    "claims_that_require_calibration": [
+      "Extraterrestrial origin.",
+      "Physical contact, landing, recovery, or crash.",
+      "A specific cover-up or hidden conclusion."
+    ]
+  },
+  "selection_rationale": {
+    "selected": "Official archive strength plus a complete visual and narrative arc for 16 beats.",
+    "deferred_operation_prato": "Strong case, but more fragmented and claim-sensitive for the first production.",
+    "deferred_varginha": "High fame, but greater risk of treating disputed popular versions as fact.",
+    "deferred_joelma": "Documented tragedy is strong, while the supernatural layer is secondary and requires heightened sensitivity."
+  },
+  "next_gate": "BUILD_16_BEAT_NARRATIVE_DOSSIER",
+  "runflow_release": "BLOCKED_UNTIL_ALL_EDITORIAL_AND_RIGHTS_GATES_PASS"
+}
