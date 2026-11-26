@@ -28,7 +28,7 @@ def main() -> int:
             fields = line.rstrip("\r\n").split(",")
             if len(fields) >= 3:
                 fields[-2] = str(CAPTION_MARGIN_V)
-                line = ",".join(fields) + ("\n" if line.endsWith("\n") else "")
+                line = ",".join(fields) + ("\n" if line.endswith("\n") else "")
         lines.append(line)
     recolored = "".join(lines)
     if ACTIVE_ASS_COLOR not in recolored:
