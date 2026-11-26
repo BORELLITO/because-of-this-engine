@@ -5,6 +5,7 @@ import json
 import unittest
 from pathlib import Path
 from production.visual_plan_contract import VisualPlanContractError,validate_visual_plan
+from production.fetch_v21_visuals import _download_urls
 ROOT=Path(__file__).resolve().parents[1]
 NEW_ID="pexels-8888977"
 S07_ID="archive-prelinger-onguard1956-s07"
@@ -31,6 +32,19 @@ class VisualIntakeIntegrityTests(unittest.TestCase):
         c["rights_status"]="CANDIDATE_DOWNLOADED_AWAITING_HUMAN_QA"
         with self.assertRaisesRegex(VisualPlanContractError,"manifest contains a candidate not approved"):
             validate_visual_plan(plan,man)
+
+    def test_archival_delivery_recovery_keeps_the_same_source_url(self):
+        urls = _download_urls("https://archive.org/download/OnGuard1956/file.mp4")
+        self.assertEqual(urls, [
+            "https://archive.org/download/OnGuard1956/file.mp4",
+            "https://archive.org/download/OnGuard1956/file.mp4?download=1",
+            "https://archive.org/download/OnGuard1956/file.mp4?cnt=0",
+        ])
+
+    def test_archival_delivery_recovery_preserves_existing_query(self):
+        urls = _download_urls("https://example.test/file.mp4?mirror=approved")
+        self.assertEqual(urls[-1], "https://example.test/file.mp4?mirror=approved&cnt=0")
+        self.assertEqual(len(urls), len(set(urls)))
     def test_tampered_sha_is_rejected(self):
         plan=copy.deepcopy(self.plan)
         man=copy.deepcopy(self.manifest)
