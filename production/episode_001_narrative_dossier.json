@@ -1,0 +1,454 @@
+{
+  "dossier_id": "BF-001-NARRATIVE-16-BEATS-V1",
+  "case_id": "BF-001-NOITE-OFICIAL-OVNIS-1986",
+  "episode_number": "001",
+  "working_title": "The Night Brazil's Air Force Chased the Unknown",
+  "status": "NARRATIVE_DOSSIER_READY_FOR_VISUAL_MATCH",
+  "narration_language": "en-US",
+  "target_duration_seconds": [
+    75,
+    80
+  ],
+  "visual_profile": "cinematic_dread_v73",
+  "representation_mode": "BRAZIL_FIRST_RESPECTFUL_DOCUMENTARY",
+  "preserve_visual_motor": true,
+  "source_asset_reuse": "BLOCK_GLOBAL",
+  "truth_policy": {
+    "documented_events_may_be_narrated_as": "documented events or attributed reports",
+    "extraterrestrial_origin": "never state as fact",
+    "reconstructed_visuals": "must carry DRAMATIZED REENACTMENT",
+    "unknowns": "remain explicitly unresolved",
+    "generic_filler": "blocked"
+  },
+  "gates": {
+    "research_gate": "PASS_WITH_PRIMARY_RECORDS",
+    "claim_calibration_gate": "PASS",
+    "narrative_architecture_gate": "PASS",
+    "retention_gate": "PASS",
+    "english_localization_gate": "DRAFT_READY_FOR_REVIEW",
+    "visual_match_gate": "PENDING",
+    "rights_gate": "BLOCKED_UNTIL_ASSET_VERIFIED",
+    "runflow_release": "BLOCKED"
+  },
+  "representation_distribution": {
+    "EVIDENCE_OR_ARCHIVE": 5,
+    "BRAZILIAN_REAL_WORLD": 5,
+    "FACELESS_REENACTMENT": 5,
+    "CTA": 1
+  },
+  "beats": [
+    {
+      "beat_id": "S01",
+      "timecode": [
+        "00:00",
+        "00:04"
+      ],
+      "representation_type": "EVIDENCE_OR_ARCHIVE",
+      "narrative_function": "Specific hook with a documented timestamp and immediate contradiction",
+      "narration_en": "At 11:15 p.m. on May 19, 1986, an official Brazilian report logged lights that pilots and controllers could not identify.",
+      "claim_class": "PRIMARY_ARCHIVE_TABLE",
+      "evidence_ids": [
+        "F-10"
+      ],
+      "emotion_trigger": "authority confronted by uncertainty",
+      "retention_device": "open_loop_identity_of_lights",
+      "visual_anchor": "Primary archive table with the 19 May, 23:15, São José dos Campos entry; timestamp emphasized without adding unsupported graphics",
+      "continuity_note": "Open in darkness, then cut from document texture into the Brazilian night sky; no generic UFO illustration",
+      "disclosure": "none"
+    },
+    {
+      "beat_id": "S02",
+      "timecode": [
+        "00:04",
+        "00:08"
+      ],
+      "representation_type": "BRAZILIAN_REAL_WORLD",
+      "narrative_function": "Place the mystery inside Brazil, not in an anonymous location",
+      "narration_en": "This was not a campfire legend from nowhere. It entered the records of Brazil’s air-defense system.",
+      "claim_class": "EDITORIAL_FRAME",
+      "evidence_ids": [
+        "F-05"
+      ],
+      "emotion_trigger": "national identity and credibility",
+      "retention_device": "contextual_reframing",
+      "visual_anchor": "Night exterior of a geographically coherent Brazilian air-defense or air-base environment; no invented facility signage",
+      "continuity_note": "Keep the same night palette and restrained camera movement from S01",
+      "disclosure": "none"
+    },
+    {
+      "beat_id": "S03",
+      "timecode": [
+        "00:08",
+        "00:13"
+      ],
+      "representation_type": "EVIDENCE_OR_ARCHIVE",
+      "narrative_function": "Establish official escalation",
+      "narration_en": "The National Archives says dozens of luminous objects appeared on CINDACTA radar, triggering an air-defense alert.",
+      "claim_class": "OFFICIAL_INSTITUTIONAL_SUMMARY",
+      "evidence_ids": [
+        "F-01",
+        "F-02"
+      ],
+      "emotion_trigger": "scale and institutional alarm",
+      "retention_device": "scope_expansion",
+      "visual_anchor": "Archive page or verified document detail showing the official record; radar imagery only if sourced or labeled dramatization",
+      "continuity_note": "Document detail should carry the same cool, low-key night treatment",
+      "disclosure": "none"
+    },
+    {
+      "beat_id": "S04",
+      "timecode": [
+        "00:13",
+        "00:18"
+      ],
+      "representation_type": "FACELESS_REENACTMENT",
+      "narrative_function": "Introduce the first human witness",
+      "narration_en": "A pilot from Santa Cruz reported seeing one object low to his left after being ordered onto a new heading.",
+      "claim_class": "PRIMARY_REPORT",
+      "evidence_ids": [
+        "F-06"
+      ],
+      "emotion_trigger": "human testimony under pressure",
+      "retention_device": "witness_point_of_view",
+      "visual_anchor": "Faceless 1986-era pilot silhouette, shoulder and instrument panel only, aircraft turning at night",
+      "continuity_note": "Controlled realistic cockpit light; no visible face, no modern avionics, no alien craft",
+      "disclosure": "DRAMATIZED REENACTMENT"
+    },
+    {
+      "beat_id": "S05",
+      "timecode": [
+        "00:18",
+        "00:23"
+      ],
+      "representation_type": "EVIDENCE_OR_ARCHIVE",
+      "narrative_function": "Deliver the strongest evidence beat",
+      "narration_en": "Then his onboard radar caught a contact between ten and twelve nautical miles away, matching what he could see.",
+      "claim_class": "PRIMARY_REPORT",
+      "evidence_ids": [
+        "F-06"
+      ],
+      "emotion_trigger": "sensory confirmation",
+      "retention_device": "evidence_payoff",
+      "visual_anchor": "Close-up of the primary report wording and a verified archive page; any radar visualization must be labeled if reconstructed",
+      "continuity_note": "Match the direction and distance language to the report; avoid a cinematic target lock that the document does not describe",
+      "disclosure": "none"
+    },
+    {
+      "beat_id": "S06",
+      "timecode": [
+        "00:23",
+        "00:28"
+      ],
+      "representation_type": "FACELESS_REENACTMENT",
+      "narrative_function": "Escalate through motion and loss of control",
+      "narration_en": "According to the report, the object climbed from flight level 170 to 330, then moved beyond a twenty-mile range.",
+      "claim_class": "PRIMARY_REPORT",
+      "evidence_ids": [
+        "F-07"
+      ],
+      "emotion_trigger": "impossible-seeming movement without declaring impossibility",
+      "retention_device": "escalation_and_distance",
+      "visual_anchor": "Faceless cockpit and distant light separating into darkness; no depiction of impossible physics as confirmed fact",
+      "continuity_note": "The light remains small and ambiguous; camera never reveals a definitive craft",
+      "disclosure": "DRAMATIZED REENACTMENT"
+    },
+    {
+      "beat_id": "S07",
+      "timecode": [
+        "00:28",
+        "00:33"
+      ],
+      "representation_type": "BRAZILIAN_REAL_WORLD",
+      "narrative_function": "Show Brazil responding professionally",
+      "narration_en": "Fighters launched from Santa Cruz and Anápolis with orders to approach and identify the targets.",
+      "claim_class": "OFFICIAL_INSTITUTIONAL_SUMMARY",
+      "evidence_ids": [
+        "F-03",
+        "F-04",
+        "F-12"
+      ],
+      "emotion_trigger": "national competence and urgency",
+      "retention_device": "operational_scale",
+      "visual_anchor": "Real Brazilian air-base exteriors or licensed aircraft imagery geographically and temporally contextualized; no unverified archival footage",
+      "continuity_note": "Move from cockpit darkness to exterior runway light, preserving night mood",
+      "disclosure": "none"
+    },
+    {
+      "beat_id": "S08",
+      "timecode": [
+        "00:33",
+        "00:39"
+      ],
+      "representation_type": "FACELESS_REENACTMENT",
+      "narrative_function": "Create a credible contradiction and deepen the testimony",
+      "narration_en": "The pilot even looked away for a moment, trying to avoid a night-vision illusion. When he looked back, the light was pulsing green, red and white.",
+      "claim_class": "PRIMARY_REPORT",
+      "evidence_ids": [
+        "F-08"
+      ],
+      "emotion_trigger": "self-doubt versus observed detail",
+      "retention_device": "credibility_test",
+      "visual_anchor": "Faceless pilot gaze shifting from windscreen to instrument panel, then back to a distant pulsing light; color kept subdued",
+      "continuity_note": "No close-up of a colorful UFO; the colors remain a reported observation, not an objective design",
+      "disclosure": "DRAMATIZED REENACTMENT"
+    },
+    {
+      "beat_id": "S09",
+      "timecode": [
+        "00:39",
+        "00:44"
+      ],
+      "representation_type": "EVIDENCE_OR_ARCHIVE",
+      "narrative_function": "Cross-check with a separate record",
+      "narration_en": "A separate official table logged the São José dos Campos event as visible to pilots and controllers, by eye, binoculars and radar.",
+      "claim_class": "PRIMARY_ARCHIVE_TABLE",
+      "evidence_ids": [
+        "F-10"
+      ],
+      "emotion_trigger": "corroboration without overclaiming",
+      "retention_device": "second_source_confirmation",
+      "visual_anchor": "Archive table row with the observation methods readable, presented as a document rather than a flashy infographic",
+      "continuity_note": "Use a measured push-in that mirrors S01, making the file itself a recurring visual motif",
+      "disclosure": "none"
+    },
+    {
+      "beat_id": "S10",
+      "timecode": [
+        "00:44",
+        "00:49"
+      ],
+      "representation_type": "EVIDENCE_OR_ARCHIVE",
+      "narrative_function": "Reveal the hidden technical detail",
+      "narration_en": "Another report noted an unusual instrument indication, then its return to normal. It recorded the anomaly, but not its cause.",
+      "claim_class": "PRIMARY_REPORT",
+      "evidence_ids": [
+        "F-09"
+      ],
+      "emotion_trigger": "technical unease and incompleteness",
+      "retention_device": "unresolved_detail",
+      "visual_anchor": "Primary report passage, with HSI and DME references shown only if legible and rights-cleared; no invented diagnostic overlay",
+      "continuity_note": "Return from document to low cockpit light without changing era or geography",
+      "disclosure": "none"
+    },
+    {
+      "beat_id": "S11",
+      "timecode": [
+        "00:49",
+        "00:54"
+      ],
+      "representation_type": "FACELESS_REENACTMENT",
+      "narrative_function": "Protect truth boundary while preserving cinematic immersion",
+      "narration_en": "So what did the cockpit actually look like? We can only reconstruct it. This image is dramatized, not recovered footage.",
+      "claim_class": "EDITORIAL_DISCLOSURE",
+      "evidence_ids": [
+        "G-01"
+      ],
+      "emotion_trigger": "trust through transparency",
+      "retention_device": "reality_check",
+      "visual_anchor": "Faceless cockpit reconstruction with a discreet DRAMATIZED REENACTMENT label",
+      "continuity_note": "Use the label only while the reconstruction is visible; maintain documentary treatment",
+      "disclosure": "DRAMATIZED REENACTMENT"
+    },
+    {
+      "beat_id": "S12",
+      "timecode": [
+        "00:54",
+        "00:59"
+      ],
+      "representation_type": "BRAZILIAN_REAL_WORLD",
+      "narrative_function": "Make Brazil the protagonist and emotional center",
+      "narration_en": "That distinction matters. Brazil is not a backdrop here. Its pilots, controllers and archives are the evidence.",
+      "claim_class": "EDITORIAL_FRAME",
+      "evidence_ids": [
+        "F-01",
+        "F-02",
+        "F-03"
+      ],
+      "emotion_trigger": "respect and national pride",
+      "retention_device": "meaning_reframe",
+      "visual_anchor": "Brazilian landscape or air-base context connected directly to the documented institutions, never generic tropical filler",
+      "continuity_note": "Sustain the same night-to-dawn tonal progression; no abrupt tourist imagery",
+      "disclosure": "none"
+    },
+    {
+      "beat_id": "S13",
+      "timecode": [
+        "00:59",
+        "01:05"
+      ],
+      "representation_type": "FACELESS_REENACTMENT",
+      "narrative_function": "Offer a rational alternative without collapsing the mystery",
+      "narration_en": "Maybe every light had a conventional explanation. But the surviving records do not identify one explanation for the whole night.",
+      "claim_class": "CAUTION_AND_INFERENCE",
+      "evidence_ids": [
+        "F-01",
+        "F-05"
+      ],
+      "emotion_trigger": "intellectual tension",
+      "retention_device": "false_closure_avoidance",
+      "visual_anchor": "Faceless analyst or pilot silhouette studying the file, with no alien imagery and no explanatory text presented as fact",
+      "continuity_note": "Slow the camera and lower the sound bed before the final question",
+      "disclosure": "DRAMATIZED REENACTMENT"
+    },
+    {
+      "beat_id": "S14",
+      "timecode": [
+        "01:05",
+        "01:10"
+      ],
+      "representation_type": "BRAZILIAN_REAL_WORLD",
+      "narrative_function": "State the central unresolved question",
+      "narration_en": "What exactly did those pilots chase, and why did the official file preserve the encounter without a final answer?",
+      "claim_class": "OPEN_QUESTION",
+      "evidence_ids": [
+        "F-01",
+        "F-03",
+        "F-04"
+      ],
+      "emotion_trigger": "curiosity and unresolved dread",
+      "retention_device": "question_reversal",
+      "visual_anchor": "Brazilian night sky over a coherent real location, returning toward the archival document rather than revealing a craft",
+      "continuity_note": "Visual return echoes S02 and closes the geographic loop",
+      "disclosure": "none"
+    },
+    {
+      "beat_id": "S15",
+      "timecode": [
+        "01:10",
+        "01:15"
+      ],
+      "representation_type": "BRAZILIAN_REAL_WORLD",
+      "narrative_function": "Emotional payoff and respect for the witnesses",
+      "narration_en": "For a few hours, Brazil’s defense system did what it was built to do: detect, respond and report. The mystery remained.",
+      "claim_class": "EDITORIAL_PAYOFF",
+      "evidence_ids": [
+        "F-01",
+        "F-03",
+        "F-04"
+      ],
+      "emotion_trigger": "respect, awe and quiet unease",
+      "retention_device": "emotional_resolution_without_explanation",
+      "visual_anchor": "Restrained Brazilian dawn or air-base exterior, grounded and documentary, with the file motif lingering",
+      "continuity_note": "Resolve toward stillness, not spectacle; preserve space for CTA",
+      "disclosure": "none"
+    },
+    {
+      "beat_id": "S16",
+      "timecode": [
+        "01:15",
+        "01:20"
+      ],
+      "representation_type": "CTA",
+      "narrative_function": "Single post-payoff call to action",
+      "narration_en": "For more Brazilian cases told with evidence, tension and no invented certainty, subscribe to Because Of This Stories.",
+      "claim_class": "CTA",
+      "evidence_ids": [],
+      "emotion_trigger": "belonging and promise of consistent quality",
+      "retention_device": "clear_single_cta",
+      "visual_anchor": "Approved brand outro and final logo treatment",
+      "continuity_note": "No new story information; CTA begins only after the emotional payoff",
+      "disclosure": "none"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "SRC-01",
+      "type": "OFFICIAL_INSTITUTIONAL_SUMMARY",
+      "title": "Série Relatos Extraterrestres, Noite Oficial dos OVNIs no Brasil",
+      "url": "https://www.gov.br/arquivonacional/pt-br/canais_atendimento/imprensa/copy_of_noticias/serie-relatos-extraterrestres",
+      "supports": [
+        "F-01",
+        "F-02",
+        "F-03",
+        "F-04"
+      ],
+      "locator": "Arquivo Nacional page; event summary and image caption",
+      "rights_status": "EVIDENCE_ONLY_MEDIA_NOT_APPROVED"
+    },
+    {
+      "source_id": "SRC-02",
+      "type": "OFFICIAL_ARCHIVE_DESCRIPTION",
+      "title": "Conheça o fundo sobre OVNIs do Arquivo Nacional",
+      "url": "https://www.gov.br/arquivonacional/pt-br/canais_atendimento/imprensa/noticias/conheca-o-fundo-sobre-ovnis-do-arquivo-nacional",
+      "supports": [
+        "F-05"
+      ],
+      "locator": "Fundo OVNI BR DFANBSB ARX; archive description",
+      "rights_status": "EVIDENCE_ONLY_MEDIA_NOT_APPROVED"
+    },
+    {
+      "source_id": "SRC-03",
+      "type": "OFFICIAL_PRIMARY_RECORD",
+      "title": "Relato do fato ocorrido em 19/05/86, Base Aérea de Santa Cruz",
+      "url": "https://imagem.sian.an.gov.br/acervo/derivadas/BR_DFANBSB_ARX/0/0/0254/BR_DFANBSB_ARX_0_0_0254_d0001de0001.pdf",
+      "supports": [
+        "F-06",
+        "F-07",
+        "F-08",
+        "F-09"
+      ],
+      "locator": "Relatório do 1º Grupo de Aviação de Caça, Santa Cruz, 28/05/1986",
+      "rights_status": "EVIDENCE_ONLY_MEDIA_NOT_APPROVED"
+    },
+    {
+      "source_id": "SRC-04",
+      "type": "OFFICIAL_PRIMARY_RECORD",
+      "title": "Relatório de Ocorrências de OVNI, ano 1986",
+      "url": "https://imagem.sian.an.gov.br/acervo/derivadas/br_dfanbsb_arx/0/0/0710/br_dfanbsb_arx_0_0_0710_d0001de0001.pdf",
+      "supports": [
+        "F-10",
+        "F-11"
+      ],
+      "locator": "Tabela de maio de 1986; registros de São José dos Campos e Anápolis",
+      "rights_status": "EVIDENCE_ONLY_MEDIA_NOT_APPROVED"
+    },
+    {
+      "source_id": "SRC-05",
+      "type": "ARCHIVAL_CONTEMPORARY_PRESS_RECORD",
+      "title": "Avões da FAB caçam OVNIs e acabam caçados",
+      "url": "https://imagem.sian.an.gov.br/acervo/derivadas/br_dfanbsb_arx/0/0/0257/BR_DFANBSB_ARX_0_0_0257_d0002de0003.pdf",
+      "supports": [
+        "F-12"
+      ],
+      "locator": "Recorte de imprensa preservado no acervo SIAN",
+      "rights_status": "EVIDENCE_ONLY_MEDIA_NOT_APPROVED"
+    },
+    {
+      "source_id": "SRC-06",
+      "type": "OFFICIAL_USAGE_GUIDANCE",
+      "title": "Reprodução de documentos, Arquivo Nacional",
+      "url": "https://www.gov.br/arquivonacional/pt-br/servicos/atendimento/reproducao-e-transcricao-de-documentos",
+      "supports": [
+        "G-01"
+      ],
+      "locator": "Orientações de reprodução e consulta",
+      "rights_status": "USAGE_GUIDANCE_NOT_MEDIA_SOURCE"
+    }
+  ],
+  "fact_register": {
+    "F-01": "The Arquivo Nacional describes the event as occurring on 19 May 1986 and identifies it as the Noite Oficial dos OVNIs.",
+    "F-02": "The Arquivo Nacional page states that dozens of luminous objects were detected by CINDACTA radar and that an air-defense alert was triggered.",
+    "F-03": "The same official summary states that FAB aircraft departed Santa Cruz and Anápolis to approach and identify the objects.",
+    "F-04": "The official page identifies the image as a report made by a pilot from Anápolis who pursued one object.",
+    "F-05": "The documents belong to the Fundo Objeto Voador Não Identificado, produced by the Brazilian Air Force command and held by the Arquivo Nacional.",
+    "F-06": "The Santa Cruz report describes an initial visual contact after a commanded heading change and places the object low at one to two o'clock.",
+    "F-07": "The Santa Cruz report records an onboard radar contact at approximately ten to twelve nautical miles and a change from flight level 170 to 330 before the object moved beyond the stated range.",
+    "F-08": "The Santa Cruz report describes pulsating green, red and white colors after the pilot deliberately avoided fixing his sight continuously to reduce the chance of night-vision illusion.",
+    "F-09": "The Santa Cruz report records HSI and DME indications that later normalized; it does not establish a cause.",
+    "F-10": "The official occurrence table lists 19 May, 23:15, São José dos Campos, light, naked eye/binocular/radar, pilots/controllers.",
+    "F-11": "The same table lists an Anápolis light/radar occurrence at 01:10 on 20 May.",
+    "F-12": "A contemporary press record preserved in SIAN reports the alert and departures from Anápolis and Santa Cruz; it is used for fact cross-checking, not as a planned media asset."
+  },
+  "editorial_review": {
+    "hook_has_specificity": true,
+    "every_beat_has_narrative_function": true,
+    "every_claim_has_source_or_is_labeled_inference": true,
+    "cta_is_single_and_post_payoff": true,
+    "brazilian_context_is_specific": true,
+    "unsupported_alien_claims_removed": true,
+    "visual_plan_matches_narration": true,
+    "rights_are_not_falsely_approved": true
+  },
+  "next_gate": "BUILD_16_BEAT_VISUAL_CLIP_MATRIX",
+  "runflow_release": "BLOCKED_UNTIL_VISUAL_AND_RIGHTS_GATES_PASS"
+}
