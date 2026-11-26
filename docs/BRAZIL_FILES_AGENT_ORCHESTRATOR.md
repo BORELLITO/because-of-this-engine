@@ -47,6 +47,29 @@ cada beat narrativo, ele precisa registrar:
 Ele bloqueia material genérico, bonito porém errado, fora de época, fora de
 localização, visualmente incoerente ou repetido em outro episódio.
 
+## Especificação operacional do dossiê de clipes
+
+O episódio usa 16 beats visuais: cinco de evidência/arquivo, cinco de locais ou
+objetos brasileiros reais, cinco de reconstituição cinematográfica sem rosto e
+um CTA final. Para cada beat não-CTA, o diretor deve comparar de três a cinco
+candidatos. O CTA pode usar o asset de marca aprovado diretamente.
+
+O dossiê só passa quando contém, para cada beat:
+
+- trecho exato do roteiro e função narrativa;
+- âncora visual direta, local e época;
+- câmera controlada e realista;
+- links de continuidade anterior e seguinte, luz e clima emocional;
+- candidatos selecionados e rejeitados, com motivo de cada rejeição;
+- URL, licença, fingerprint e `rights_status: VERIFIED` do candidato aprovado;
+- etiqueta `DRAMATIZED REENACTMENT` em toda reconstituição;
+- fingerprint único entre os 16 candidatos aprovados.
+
+O contrato é validado por `validate_clip_selection_dossier` em
+`production/brazil_files_orchestrator.py`. O status é fail-closed: ausência de
+campo, direitos desconhecidos, reutilização, distribuição incorreta,
+continuidade incompleta ou dramatização sem aviso bloqueia o hand-off.
+
 ## Contrato de saída
 
 O pacote mínimo precisa conter `case-dossier.json`, `claim-calibration.json`,

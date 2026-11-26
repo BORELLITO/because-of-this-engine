@@ -47,6 +47,55 @@ VISUAL_CLIP_CONTRACT = {
     "dramatization_disclosure": "REQUIRED_WHEN_NEEDED",
 }
 
+# Operationalized from the approved Brazil Files visual direction. This is a
+# selection contract, not a renderer contract: it prevents the editorial
+# pipeline from passing visually attractive but semantically wrong material to
+# Runflow.
+VISUAL_CLIP_BLOCK_SPEC = {
+    "doctrine": "HYBRID_DOCUMENTARY_DRAMATIZATION",
+    "dramatization_mode": "FACELESS_CINEMATIC_REENACTMENT",
+    "source_strategy": "VERIFIED_ARCHIVE_LICENSED_STOCK_TARGETED_GENERATION",
+    "rhythm": "PROGRESSIVE",
+    "shot_count": 16,
+    "distribution": {
+        "EVIDENCE_OR_ARCHIVE": 5,
+        "BRAZILIAN_REAL_WORLD": 5,
+        "FACELESS_REENACTMENT": 5,
+        "CTA": 1,
+    },
+    "treatment": "CINEMATIC_DOCUMENTARY",
+    "camera_language": "CONTROLLED_REALISTIC",
+    "continuity": "STRICT",
+    "transition_language": "NARRATIVE_MOTIVATED",
+    "disclosure_label": "DRAMATIZED REENACTMENT",
+    "candidate_range_per_beat": [3, 5],
+    "selection_priority": [
+        "DIRECT_SEMANTIC_MATCH",
+        "BRAZILIAN_CONTEXT",
+        "TEMPORAL_AND_GEOGRAPHIC_CONTINUITY",
+        "VERIFIED_RIGHTS",
+        "CINEMATIC_QUALITY",
+    ],
+    "approval_mode": "AUTOMATIC_FAIL_CLOSED",
+    "source_asset_reuse": "BLOCK_GLOBAL",
+}
+
+CLIP_REPRESENTATION_TYPES = frozenset(VISUAL_CLIP_BLOCK_SPEC["distribution"])
+CLIP_REQUIRED_FIELDS = (
+    "beat_id",
+    "script_excerpt",
+    "narrative_function",
+    "representation_type",
+    "visual_anchor",
+    "location",
+    "era",
+    "camera",
+    "continuity",
+    "candidates",
+    "selected_candidate",
+    "rejection_log",
+)
+
 CASE_LANES = {
     "DOCUMENTED_UNEXPLAINED",
     "FAMOUS_LEGEND",
@@ -164,6 +213,150 @@ def _text_list(value: Any) -> bool:
     return isinstance(value, list) and bool(value) and all(_text(item) for item in value)
 
 
+def _mapping(value: Any) -> bool:
+    return isinstance(value, Mapping)
+
+
+def _candidate_has_verified_rights(candidate: Mapping[str, Any]) -> bool:
+    return (
+        _text(candidate.get("candidate_id"))
+        and _text(candidate.get("source_url"))
+        and _text(candidate.get("license"))
+        and _text(candidate.get("fingerprint"))
+        and candidate.get("rights_status") == "VERIFIED"
+    )
+
+
+def validate_clip_selection_dossier(dossier: Mapping[str, Any]) -> dict[str, Any]:
+    """Validate the 16-beat visual hand-off before Runflow preparation.
+
+    The validator intentionally checks editorial evidence and provenance, not
+    whether a media file is playable. Media probing remains a later technical
+    gate. A dossier cannot pass by omitting rejected candidates or by treating
+    a beautiful but semantically wrong clip as an acceptable fallback.
+    """
+    errors: list[str] = []
+    if not isinstance(dossier, Mapping):
+        return {
+            "status": "BLOCKED",
+            "errors": ["clip selection dossier must be an object"],
+            "beat_count": 0,
+        }
+
+    beats = dossier.get("beats")
+    if not isinstance(beats, list):
+        errors.append("beats must be a list")
+        beats = []
+    if len(beats) != VISUAL_CLIP_BLOCK_SPEC["shot_count"]:
+        errors.append("dossier must contain exactly 16 beats")
+
+    seen_beats: set[str] = set()
+    seen_fingerprints: set[str] = set()
+    representation_counts = {kind: 0 for kind in CLIP_REPRESENTATION_TYPES}
+    for index, beat in enumerate(beats, start=1):
+        if not _mapping(beat):
+            errors.append(f"beat {index} must be an object")
+            continue
+        missing = [field for field in CLIP_REQUIRED_FIELDS if field not in beat]
+        if missing:
+            errors.append(f"beat {index} missing fields: {', '.join(missing)}")
+            continue
+
+        beat_id = str(beat.get("beat_id", "")).strip()
+        if not _text(beat_id) or beat_id in seen_beats:
+            errors.append(f"beat {index} has a missing or duplicate beat_id")
+        seen_beats.add(beat_id)
+        for field in ("script_excerpt", "narrative_function", "visual_anchor", "location", "era"):
+            if not _text(beat.get(field)):
+                errors.append(f"beat {beat_id or index} {field} must be non-empty text")
+
+        representation = beat.get("representation_type")
+        if representation not in CLIP_REPRESENTATION_TYPES:
+            errors.append(f"beat {beat_id or index} has an invalid representation_type")
+        else:
+            representation_counts[representation] += 1
+
+        camera = beat.get("camera")
+        continuity = beat.get("continuity")
+        if not _mapping(camera) or camera.get("language") != "CONTROLLED_REALISTIC":
+            errors.append(f"beat {beat_id or index} must use controlled realistic camera language")
+        if not _mapping(continuity):
+            errors.append(f"beat {beat_id or index} continuity must be an object")
+        else:
+            for field in ("previous_link", "next_link", "light", "mood"):
+                if not _text(continuity.get(field)):
+                    errors.append(f"beat {beat_id or index} continuity missing {field}")
+
+        candidates = beat.get("candidates")
+        if not isinstance(candidates, list):
+            errors.append(f"beat {beat_id or index} candidates must be a list")
+            candidates = []
+        minimum, maximum = VISUAL_CLIP_BLOCK_SPEC["candidate_range_per_beat"]
+        candidate_floor = 1 if representation == "CTA" else minimum
+        if not candidate_floor <= len(candidates) <= maximum:
+            errors.append(f"beat {beat_id or index} must contain {candidate_floor} to {maximum} candidates")
+
+        selected = beat.get("selected_candidate")
+        selected_id = selected.get("candidate_id") if _mapping(selected) else None
+        selected_count = 0
+        candidate_ids: set[str] = set()
+        for candidate in candidates:
+            if not _mapping(candidate):
+                errors.append(f"beat {beat_id or index} contains a non-object candidate")
+                continue
+            candidate_id = str(candidate.get("candidate_id", "")).strip()
+            if not candidate_id or candidate_id in candidate_ids:
+                errors.append(f"beat {beat_id or index} has a missing or duplicate candidate_id")
+            candidate_ids.add(candidate_id)
+            decision = candidate.get("decision")
+            if decision == "SELECTED":
+                selected_count += 1
+                if not _candidate_has_verified_rights(candidate) and representation != "CTA":
+                    errors.append(f"beat {beat_id or index} selected candidate lacks verified rights metadata")
+            elif decision != "REJECTED":
+                errors.append(f"beat {beat_id or index} candidate decision must be SELECTED or REJECTED")
+            if decision == "REJECTED" and not _text(candidate.get("rejection_reason")):
+                errors.append(f"beat {beat_id or index} rejected candidates need a rejection_reason")
+        if selected_count != 1 or not _mapping(selected) or selected_id not in candidate_ids:
+            errors.append(f"beat {beat_id or index} must have exactly one selected candidate")
+        if not isinstance(beat.get("rejection_log"), list):
+            errors.append(f"beat {beat_id or index} rejection_log must be a list")
+
+        if representation == "FACELESS_REENACTMENT":
+            if beat.get("disclosure_label") != VISUAL_CLIP_BLOCK_SPEC["disclosure_label"]:
+                errors.append(f"beat {beat_id or index} reenactment disclosure is required")
+        elif beat.get("disclosure_label") not in (None, ""):
+            errors.append(f"beat {beat_id or index} has an unexpected disclosure label")
+
+        if _mapping(selected):
+            fingerprint = str(selected.get("fingerprint", "")).strip()
+            if fingerprint and fingerprint in seen_fingerprints:
+                errors.append(f"selected asset is reused: {fingerprint}")
+            if fingerprint:
+                seen_fingerprints.add(fingerprint)
+
+    expected_distribution = VISUAL_CLIP_BLOCK_SPEC["distribution"]
+    if representation_counts != expected_distribution:
+        errors.append(
+            "representation distribution must be exactly "
+            + ", ".join(f"{key}={value}" for key, value in expected_distribution.items())
+        )
+    if dossier.get("approval_mode") != VISUAL_CLIP_BLOCK_SPEC["approval_mode"]:
+        errors.append("approval_mode must be AUTOMATIC_FAIL_CLOSED")
+    if dossier.get("semantic_match") != "DIRECT":
+        errors.append("semantic_match must be DIRECT")
+    if dossier.get("source_asset_reuse") != "BLOCK_GLOBAL":
+        errors.append("source_asset_reuse must be BLOCK_GLOBAL")
+
+    return {
+        "status": "PASS" if not errors else "BLOCKED",
+        "beat_count": len(beats),
+        "representation_counts": representation_counts,
+        "selected_asset_count": len(seen_fingerprints),
+        "errors": errors,
+    }
+
+
 def validate_case_brief(brief: Mapping[str, Any]) -> dict[str, Any]:
     """Validate the editorial hand-off without pretending research is complete."""
     if not isinstance(brief, Mapping):
@@ -236,6 +429,7 @@ def build_preparation_plan(brief: Mapping[str, Any]) -> dict[str, Any]:
         "preserve_visual_motor": True,
         "retention_framework": RETENTION_FRAMEWORK,
         "visual_clip_contract": VISUAL_CLIP_CONTRACT,
+        "visual_clip_block_spec": VISUAL_CLIP_BLOCK_SPEC,
         "flow_status": "PENDING_BLOCK_EXECUTION",
         "runflow_handoff": "BLOCKED_UNTIL_ALL_BLOCK_REVIEWERS_PASS",
         "blocks": [
@@ -256,6 +450,7 @@ def build_preparation_plan(brief: Mapping[str, Any]) -> dict[str, Any]:
             "claim-calibration.json",
             "script-en-US.txt",
             "visual-beat-map.json",
+            "clip-selection-dossier.json",
             "rights-and-citations.json",
             "brand-continuity.json",
             "script-qa.json",
