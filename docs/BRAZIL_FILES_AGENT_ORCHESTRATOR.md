@@ -56,3 +56,12 @@ O pacote mínimo precisa conter `case-dossier.json`, `claim-calibration.json`,
 Qualquer agente bloqueado mantém o pacote fora do Runflow. Não há fallback
 silencioso para roteiro sem fontes, visual genérico ou clipe sem proveniência.
 
+## Integração operacional
+
+O GitHub executa o preflight e as travas técnicas do pacote versionado. A
+criação e a lapidação do roteiro continuam no fluxo conversacional, onde o
+contexto editorial e as decisões de direção podem ser refinados com Borelli.
+O PR deve carregar a autorização e o relatório de transparência exigidos pelo
+`immutable-core-guard` sempre que a política ativa ou seus hashes de autoridade
+forem atualizados.
+
