@@ -17,7 +17,7 @@ VIDEO_FPS = 60
 
 # In-video watermark: the transparent original wordmark, not recreated text.
 LOGO_ASSET = "brand/because-of-this-wordmark-transparent.png"
-LOGO_SHA256 = "5c062475dd174b5b314f53ae9e9f7be64ad534ae529c791ea8668265cc5dc33b"
+LOGO_SHA256 = "5c062475dd174b5b314f53ea9e9f7be64ad534ae529c791ea8668265cc5dc33b"
 LOGO_ANCHOR = "center_upper"
 LOGO_WIDTH = 360
 LOGO_Y = 190
