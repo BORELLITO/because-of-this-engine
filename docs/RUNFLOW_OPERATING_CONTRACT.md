@@ -23,6 +23,15 @@ QA técnico. A chamada operacional passa a ser:
 O Runflow não cria um segundo motor. Ele chama os módulos canônicos existentes
 e mantém os gates especializados dentro deles.
 
+## Recuperação de entrega de fontes arquivais
+
+Fontes arquivais podem ser entregues por réplicas/CDNs com falha transitória
+mesmo quando a URL e o manifesto permanecem iguais. O intake pode tentar um
+conjunto limitado de variantes equivalentes da mesma URL e só promove o
+arquivo quando o SHA-256 aprovado no manifesto coincidir. Se nenhuma tentativa
+bater, o Runflow permanece fail-closed; ele nunca atualiza o hash aprovado
+automaticamente.
+
 ## Limites permanentes
 
 - somente `BORELLITO/because-of-this-engine`;

@@ -25,6 +25,38 @@ def download(url: str, target: Path) -> None:
     target.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run(["curl","--fail","--location","--retry","2","--retry-delay","2","--connect-timeout","20","--max-time","600","--max-filesize","200M",url,"--output",str(target)],check=True)
 
+def _download_urls(url: str) -> list[str]:
+    """Return bounded equivalent URLs for transient archival CDN drift.
+
+    The checksum remains the authority. Query variants only force a fresh
+    delivery path; they never change the approved source identity.
+    """
+    separator = "&" if "?" in url else "?"
+    candidates = [url, f"{url}{separator}download=1", f"{url}{separator}cnt=0"]
+    return list(dict.fromkeys(candidates))
+
+def download_verified(url: str, target: Path, expected: str, candidate_id: str) -> None:
+    """Download until the approved checksum matches, then promote atomically."""
+    failures: list[str] = []
+    for attempt, candidate_url in enumerate(_download_urls(url), start=1):
+        attempt_path = target.with_name(f".{target.name}.attempt-{attempt}")
+        attempt_path.unlink(missing_ok=True)
+        try:
+            download(candidate_url, attempt_path)
+            actual = sha256_file(attempt_path)
+            if actual == expected:
+                attempt_path.replace(target)
+                return
+            failures.append(f"attempt {attempt}: {actual}")
+        except (OSError, subprocess.CalledProcessError) as error:
+            failures.append(f"attempt {attempt}: {type(error).__name__}")
+        finally:
+            attempt_path.unlink(missing_ok=True)
+    detail = "; ".join(failures)
+    raise SystemExit(
+        f"SHA-256 mismatch for {candidate_id}: expected {expected}; {detail}"
+    )
+
 def trim_source(source: Path, target: Path, segment: dict[str, Any]) -> None:
     start=float(segment["start_seconds"]); end=float(segment["end_seconds"])
     if start < 0 or end <= start: raise SystemExit(f"Invalid source_segment: {segment}")
@@ -33,13 +65,18 @@ def trim_source(source: Path, target: Path, segment: dict[str, Any]) -> None:
 
 def prepare_asset(asset: dict[str, Any], target: Path) -> str:
     segment=asset.get("source_segment"); source_url=str(asset.get("media_url","")).strip()
+    candidate_id = str(asset.get("candidate_id", "")).strip()
+    expected_asset = str(asset.get("sha256", "")).strip().lower()
     if not segment:
-        download(source_url,target); return "downloaded"
+        download_verified(source_url, target, expected_asset, candidate_id)
+        return "downloaded"
     with tempfile.TemporaryDirectory(prefix="v21-source-") as temporary:
-        source=Path(temporary)/"source.mp4"; download(source_url,source)
+        source=Path(temporary)/"source.mp4"
         expected=str(asset.get("source_sha256","")).strip().lower()
-        actual=sha256_file(source)
-        if expected and actual != expected: raise SystemExit(f"Source SHA-256 mismatch for {asset.get('candidate_id')}: expected {expected}, got {actual}")
+        if expected:
+            download_verified(source_url, source, expected, f"{candidate_id} source")
+        else:
+            download(source_url, source)
         trim_source(source,target,segment)
     return "downloaded_segment"
 
