@@ -143,12 +143,36 @@ jobs:
           print({"status": "CHARON_CHECKPOINT_PASS", "duration_seconds": round(duration, 3)})
           PY
 
+      - name: Prepare pinned FFmpeg 7.1.5 media runtime
+        run: |
+          set -euo pipefail
+          runtime=because-of-this-v21-media-runtime
+          docker rm -f "$runtime" >/dev/null 2>&1 || true
+          docker run -d --name "$runtime" \
+            -v "${GITHUB_WORKSPACE}:/workspace" \
+            debian:trixie-slim sleep infinity
+          docker exec "$runtime" bash -euc '
+            apt-get update -qq
+            apt-get install -y --no-install-recommends \
+              ca-certificates curl ffmpeg=7:7.1.5-0+deb13u1 \
+              python3 python3-pip python3-venv
+            python3 -m venv /opt/v21-venv
+            /opt/v21-venv/bin/pip install --disable-pip-version-check --quiet Pillow==11.3.0
+            ffmpeg -version | head -1 | grep -F "ffmpeg version 7.1.5"
+          '
+
       - name: Download and verify V2.1 visual candidates
         run: |
-          mkdir -p "artifacts/visuals"
-          PYTHONPATH=. python production/fetch_v21_visuals.py \
-            --manifest "episodes/${EPISODE_ID}/visual/scene-asset-manifest.json" \
-            --output-root artifacts/visuals
+          docker exec \
+            --env EPISODE_ID="$EPISODE_ID" \
+            because-of-this-v21-media-runtime \
+            bash -euc '
+              cd /workspace
+              mkdir -p artifacts/visuals
+              PYTHONPATH=. /opt/v21-venv/bin/python production/fetch_v21_visuals.py \
+                --manifest "episodes/${EPISODE_ID}/visual/scene-asset-manifest.json" \
+                --output-root artifacts/visuals
+            '
 
       - name: Apply canonical karaoke caption lock
         run: |
@@ -167,17 +191,23 @@ jobs:
       - name: Render canonical V2.1 video
         if: ${{ inputs.mode == 'preview' }}
         run: |
-          PYTHONPATH=. python production/render_v21_preview.py \
-            --scene-manifest "episodes/${EPISODE_ID}/visual/scene-asset-manifest.json" \
-            --story-architecture "episodes/${EPISODE_ID}/story-architecture.json" \
-            --asset-root artifacts/visuals \
-            --audio artifacts/charon/narration.wav \
-            --captions artifacts/charon/narration-preview.ass \
-            --logo brand/because-of-this-wordmark-transparent.png \
-            --outro-card artifacts/video/outro-card.png \
-            --voice-profile artifacts/charon/voice-profile.json \
-            --output artifacts/video/${EPISODE_ID}-runflow.mp4 \
-            --report artifacts/video/${EPISODE_ID}-runflow-report.json
+          docker exec \
+            --env EPISODE_ID="$EPISODE_ID" \
+            because-of-this-v21-media-runtime \
+            bash -euc '
+              cd /workspace
+              PYTHONPATH=. /opt/v21-venv/bin/python production/render_v21_preview.py \
+                --scene-manifest "episodes/${EPISODE_ID}/visual/scene-asset-manifest.json" \
+                --story-architecture "episodes/${EPISODE_ID}/story-architecture.json" \
+                --asset-root artifacts/visuals \
+                --audio artifacts/charon/narration.wav \
+                --captions artifacts/charon/narration-preview.ass \
+                --logo brand/because-of-this-wordmark-transparent.png \
+                --outro-card artifacts/video/outro-card.png \
+                --voice-profile artifacts/charon/voice-profile.json \
+                --output artifacts/video/${EPISODE_ID}-runflow.mp4 \
+                --report artifacts/video/${EPISODE_ID}-runflow-report.json
+            '
 
       - name: Refuse an unapproved final release
         if: ${{ inputs.mode == 'final' }}
@@ -230,3 +260,7 @@ jobs:
             artifacts/runflow/canonical-entrypoint-report.json
             artifacts/runflow/singleton-guard-report.json
           if-no-files-found: error
+
+      - name: Clean pinned media runtime
+        if: always()
+        run: docker rm -f because-of-this-v21-media-runtime >/dev/null 2>&1 || true
