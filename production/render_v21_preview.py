@@ -298,7 +298,7 @@ def render_preview(
         raise PreviewRenderError("Canonical Because Of This logo is required.")
     try:
         validate_caption_ass(captions_path)
-        validate_logo_path(logo_path, sha256_file(logo_path))
+        validate_logo_path(logo_path, sha256=sha256_file(logo_path))
     except (OSError, ValueError) as exc:
         raise PreviewRenderError(str(exc)) from exc
     if not outro_card_path.is_file():
