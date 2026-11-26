@@ -49,6 +49,9 @@
     "deferred_varginha": "High fame, but greater risk of treating disputed popular versions as fact.",
     "deferred_joelma": "Documented tragedy is strong, while the supernatural layer is secondary and requires heightened sensitivity."
   },
-  "next_gate": "BUILD_16_BEAT_NARRATIVE_DOSSIER",
-  "runflow_release": "BLOCKED_UNTIL_ALL_EDITORIAL_AND_RIGHTS_GATES_PASS"
+  "next_gate": "BUILD_16_BEAT_VISUAL_CLIP_MATRIX",
+  "runflow_release": "BLOCKED_UNTIL_VISUAL_AND_RIGHTS_GATES_PASS",
+  "narrative_dossier_path": "production/episode_001_narrative_dossier.json",
+  "retention_map_path": "production/episode_001_retention_map.json",
+  "narrative_status": "READY_FOR_VISUAL_MATCH"
 }
