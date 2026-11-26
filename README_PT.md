@@ -6,7 +6,23 @@
 > Confira as configurações e aprovações atuais antes de qualquer operação.
 > Consulte `docs/QUALITY_SAFETY_HARDENING_20261107.md`.
 
-# BECAUSE OF THIS — Motor canônico V2.1 Gemini TTS/Charon
+# BECAUSE OF THIS — Brazil Files / Motor canônico V2.1 Gemini TTS/Charon
+
+## Nova linha editorial principal
+
+O canal agora é dedicado a casos sobrenaturais, lendas e mistérios brasileiros
+contados em inglês para audiência internacional. O contrato editorial está em
+`docs/BRAZIL_FILES_EDITORIAL_CONTRACT.md` e a preparação multiagente em
+`docs/BRAZIL_FILES_AGENT_ORCHESTRATOR.md`.
+
+Os episódios antigos permanecem preservados como histórico. Novos episódios
+devem passar pelo `production/brazil_files_orchestrator.py` antes de chegar ao
+Runflow. O motor visual, a voz Charon, o formato e as travas de direitos
+continuam preservados. O projeto VERBO NO CHÃO permanece fora do escopo.
+
+A numeração editorial foi reiniciada: o próximo vídeo brasileiro será o
+**Episódio 001**. IDs técnicos antigos permanecem congelados para auditoria e
+não entram na nova contagem.
 
 ## Operação única: Runflow Mestre
 
