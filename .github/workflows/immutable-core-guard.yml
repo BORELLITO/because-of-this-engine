@@ -26,6 +26,8 @@ jobs:
         run: python -m py_compile production/immutable_core_guard.py
       - name: Verify canonical contract and authority hashes
         run: PYTHONPATH=. python production/immutable_core_guard.py --repo-root .
+      - name: Scan tracked files for high-signal credentials
+        run: PYTHONPATH=. python production/public_secret_guard.py --repo-root .
       - name: Require explicit authorization for core changes
         run: |
           if [[ "$GITHUB_EVENT_NAME" != "pull_request" ]]; then exit 0; fi
