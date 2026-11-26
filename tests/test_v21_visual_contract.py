@@ -21,7 +21,7 @@ from production.v21_visual_contract import (
 class V21VisualContractTests(unittest.TestCase):
     def test_contract_uses_approved_layout(self):
         self.assertEqual(LOGO_ASSET, "brand/because-of-this-wordmark-transparent.png")
-        self.assertEqual(LOGO_SHA256, "5c062475dd174b5b314f53ae9e9f7be64ad534ae529c791ea8668265cc5dc33b")
+        self.assertEqual(LOGO_SHA256, "5c062475dd174b5b314f53ea9e9f7be64ad534ae529c791ea8668265cc5dc33b")
         self.assertEqual(IN_VIDEO_LOGO_WIDTH, 360)
         self.assertEqual(IN_VIDEO_LOGO_Y, 190)
         self.assertEqual(IN_VIDEO_LOGO_OPACITY, 0.90)
