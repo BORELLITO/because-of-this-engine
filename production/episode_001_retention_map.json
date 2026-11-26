@@ -1,0 +1,111 @@
+{
+  "retention_map_id": "BF-001-RETENTION-MAP-V1",
+  "case_id": "BF-001-NOITE-OFICIAL-OVNIS-1986",
+  "episode_number": "001",
+  "target_duration_seconds": [
+    75,
+    80
+  ],
+  "primary_promise": "A Brazilian military pursuit documented in official records, without pretending the unknown has been explained.",
+  "hook": {
+    "window_seconds": [
+      0,
+      4
+    ],
+    "line": "At 11:15 p.m. on May 19, 1986, an official Brazilian report logged lights that pilots and controllers could not identify.",
+    "mechanisms": [
+      "specific_timestamp",
+      "authority_source",
+      "immediate_mystery"
+    ],
+    "must_not_do": [
+      "say extraterrestrial",
+      "show generic flying saucer",
+      "use unsupported alarmist wording"
+    ]
+  },
+  "open_loops": [
+    {
+      "id": "L1",
+      "opened_at": "S01",
+      "question": "What were the lights?",
+      "payoff_or_evolution": "S05 confirms a reported radar contact, but does not identify origin."
+    },
+    {
+      "id": "L2",
+      "opened_at": "S04",
+      "question": "Was this only a visual illusion?",
+      "payoff_or_evolution": "S08 shows the pilot's attempt to avoid night-vision illusion, while preserving uncertainty."
+    },
+    {
+      "id": "L3",
+      "opened_at": "S07",
+      "question": "How seriously did Brazil respond?",
+      "payoff_or_evolution": "S09 cross-checks pilots/controllers, binoculars and radar in the official table."
+    },
+    {
+      "id": "L4",
+      "opened_at": "S10",
+      "question": "Did the instruments explain the event?",
+      "payoff_or_evolution": "S14 returns the question because the record notes the anomaly but not its cause."
+    }
+  ],
+  "emotional_curve": [
+    {
+      "beats": "S01-S03",
+      "state": "credibility_and_alarm",
+      "intensity": 3
+    },
+    {
+      "beats": "S04-S06",
+      "state": "personal_witness_and_escalation",
+      "intensity": 4
+    },
+    {
+      "beats": "S07-S10",
+      "state": "institutional_response_and_contradiction",
+      "intensity": 5
+    },
+    {
+      "beats": "S11-S13",
+      "state": "trust_boundary_and_intellectual_tension",
+      "intensity": 4
+    },
+    {
+      "beats": "S14-S15",
+      "state": "awe_and_unresolved_dread",
+      "intensity": 4
+    },
+    {
+      "beats": "S16",
+      "state": "belonging_and_next_story_promise",
+      "intensity": 2
+    }
+  ],
+  "trigger_policy": {
+    "curiosity": "specific records, a precise time and an unresolved technical detail",
+    "authority": "pilots, controllers, CINDACTA and the Arquivo Nacional",
+    "emotion": "respect for Brazilian professionals confronting uncertainty",
+    "suspense": "distance, altitude, disappearing contact and the missing final explanation",
+    "trust": "explicit separation between documented report and dramatized reconstruction",
+    "forbidden": "fabricated witness dialogue, alien certainty, tragedy exploitation, generic patriotism"
+  },
+  "pacing": {
+    "first_visual_change_max_seconds": 2,
+    "document_to_reenactment_changes": "motivated by a claim or evidence transition",
+    "peak": "S07-S10",
+    "breathing_space": "S13-S15",
+    "cta_position": "S16_only",
+    "caption_policy": "two lines maximum; preserve established channel placement and karaoke treatment"
+  },
+  "quality_checks": {
+    "hook_payoff_alignment": "PASS",
+    "open_loops_are_resolved_or_intentionally_open": "PASS",
+    "no_cta_before_payoff": "PASS",
+    "no_unverified_supernatural_claim": "PASS",
+    "brazilian_protagonist_preserved": "PASS",
+    "visual_distribution": "PASS_5_5_5_1",
+    "visual_and_rights_release": "BLOCKED"
+  },
+  "next_gate": "BUILD_16_BEAT_VISUAL_CLIP_MATRIX"
+}
