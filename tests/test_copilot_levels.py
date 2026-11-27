@@ -47,6 +47,19 @@ class CopilotLevelTests(unittest.TestCase):
             "secondary_engine": False,
             "terminal_agent": "delivery_agent",
         }
+        contract["runflow_handoff"] = {
+            "module": "production/copilot_runflow_handoff_v1.py",
+            "requires": [
+                "queue_engine_queue",
+                "eight_analysis_receipts_pass",
+                "brazil_files_crosswalk_pass",
+                "current_memory_and_policy",
+            ],
+            "dispatch": "MANUAL_OR_SEPARATE_AUTHORIZED_WORKFLOW",
+            "parallel": False,
+            "can_start_engine": False,
+            "production_enabled": False,
+        }
         contract["provider_readiness"] = {
             "module": "production/copilot_provider_readiness_v1.py",
             "metadata": "EXPLICIT_REGISTERED_PROVIDER",
