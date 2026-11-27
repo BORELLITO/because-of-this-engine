@@ -153,7 +153,7 @@ def validate_result(
     if result["status"] == "PASS" and blocking_reasons:
         raise AnalysisContractError("PASS result cannot contain blocking reasons")
     if result["status"] != "PASS" and not blocking_reasons:
-        raise AnalysisContractError("non-PASS result must explain why it is blocked or needs edits")
+        raise AnalysisContractError("non-PASS result must include blocking reasons")
     if not isinstance(result["next_gate"], str) or not result["next_gate"].strip():
         raise AnalysisContractError("next_gate is required")
     token_budget_used = result["token_budget_used"]
