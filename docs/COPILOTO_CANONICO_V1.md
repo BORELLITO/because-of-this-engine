@@ -86,7 +86,7 @@ O módulo `production/copilot_analysis_agents_v1.py` fornece os adaptadores exec
 
 
 Research, factual, editorial, direitos, continuidade visual e timeline/captions trabalham em sequência, cada um com escopo isolado e recibo próprio. Nenhum deles pode iniciar o motor ou aprovar outra área.
-
+\nA resolução operacional ocorre por `production/copilot_executor_registry_v1.py`: cada papel recebe um executor explicitamente registrado por `agent_id`. Executor ausente gera recibo `BLOCKED` e encerra a lane; não há executor implícito, fallback, rede ou paralelismo.\n
 ### Nível 2 — gate técnico consolidado
 
 Depois do Nível 1, o gate técnico único consolida:
@@ -122,3 +122,4 @@ A implementação ocorre em branch própria, com testes de contrato e sem ativar
 A governança do motor único deve ser efetivada antes da ativação do Copiloto. O PR que aplica a serialização global do Runflow é integrado primeiro; em seguida, o PR do Copiloto pode ser integrado porque mantém `production_activation.enabled=false`. A integração não autoriza Runflow, TTS, render, publicação ou gasto.
 A aprovação de cada etapa depende dos checks obrigatórios do próprio evento do PR; checks de um head anterior não substituem a validação do head atual.
 A revalidação de um PR após mudança da base deve usar o merge-ref e o corpo atuais; resultados de tentativas anteriores permanecem apenas como histórico.
+A proteção imutável também exige o marcador de autorização no título quando a mudança toca a superfície `production/`; isso é uma exigência de governança, não uma autorização para iniciar produção.

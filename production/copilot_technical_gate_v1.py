@@ -22,8 +22,10 @@ COPILOT_SCOPE_ALLOWLIST = frozenset(
         "production/copilot_contract_v1.json",
         "production/copilot_queue_v1.py",
         "production/copilot_analysis_agents_v1.py",
+        "production/copilot_executor_registry_v1.py",
         "production/copilot_technical_gate_v1.py",
         "tests/test_copilot_analysis_agents.py",
+        "tests/test_copilot_executor_registry.py",
         "tests/test_copilot_contract.py",
         "tests/test_copilot_levels.py",
         "tests/test_copilot_queue_v1.py",
@@ -62,6 +64,24 @@ def contract_failures(contract: dict[str, Any]) -> list[str]:
         failures.append("exactly eight canonical subagents are required")
     elif any(agent.get("can_start_engine") is not False for agent in agents if isinstance(agent, dict)):
         failures.append("a subagent can start the engine")
+    executor_layer = contract.get("executor_layer")
+    expected_executor_layer = {
+        "module": "production/copilot_executor_registry_v1.py",
+        "mode": "INJECTED_PROVIDER_REGISTRY",
+        "provider_resolution": "EXPLICIT_MAPPING_BY_AGENT_ID",
+        "missing_provider": "BLOCKED",
+        "parallel": False,
+        "network_allowed": False,
+        "can_start_engine": False,
+        "production_activation": "DISABLED",
+    }
+    if not isinstance(executor_layer, dict):
+        failures.append("executor layer contract is missing")
+    else:
+        for key, value in expected_executor_layer.items():
+            if executor_layer.get(key) != value:
+                failures.append(f"executor_layer.{key} drifted")
+
     levels = contract.get("levels")
     if not isinstance(levels, dict) or set(levels) != {"analysis", "technical_gate"}:
         failures.append("two-level copilot contract is missing")
