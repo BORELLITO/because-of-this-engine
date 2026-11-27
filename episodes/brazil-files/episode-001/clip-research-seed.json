@@ -107,6 +107,13 @@
           "description": "Aircraft preparing to take off",
           "decision": "REJECTED",
           "rejection_reason": "Result page states the free 720p item is under Mixkit Restricted License and personal use only."
+        },
+        {
+          "candidate_id": "B05-C03",
+          "source_id": "PEXELS",
+          "source_url": "https://www.pexels.com/video/footage-of-a-flying-airplane-at-night-6467678/",
+          "description": "Airplane takes off with navigation lights against a dark evening sky; landscape 16:9 candidate",
+          "decision": "HOLD"
         }
       ]
     },
