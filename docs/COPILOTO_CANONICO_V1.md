@@ -91,6 +91,8 @@ A resolução operacional ocorre por `production/copilot_executor_registry_v1.py
 
 A validação do recibo também reconcilia `input_revision`, artefatos/evidências, domínio de aprovação, hash, status, motivo de bloqueio e orçamento máximo de tokens antes de aceitar o próximo agente.
 
+Antes de qualquer executor ser chamado, `production/copilot_provider_readiness_v1.py` exige um manifesto explícito por `agent_id`. Cada registro precisa declarar provedor, modo sequencial, rede desativada, `can_start_engine=false` e custo incremental zero. Manifesto incompleto retorna `BLOCKED` sem chamar nenhum provedor; metadado inseguro falha fechado. Isso prepara a conexão futura de provedores reais sem criar fallback, paralelismo, gasto ou ativação de produção.
+
 ### Nível 2 — gate técnico consolidado
 
 Depois do Nível 1, o gate técnico único consolida:

@@ -38,6 +38,17 @@ class CopilotLevelTests(unittest.TestCase):
             "subagents": [{"can_start_engine": False}] * 8,
             "levels": {"analysis": {}, "technical_gate": {}},
         }
+        contract["provider_readiness"] = {
+            "module": "production/copilot_provider_readiness_v1.py",
+            "metadata": "EXPLICIT_REGISTERED_PROVIDER",
+            "preflight_before_dispatch": True,
+            "network_allowed": False,
+            "can_start_engine": False,
+            "parallel": False,
+            "estimated_cost_cents": 0,
+            "missing_provider": "BLOCKED",
+            "unsafe_manifest": "FAIL_CLOSED",
+        }
         self.assertEqual(contract_failures(contract), [])
 
 
