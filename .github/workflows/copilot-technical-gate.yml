@@ -9,6 +9,7 @@ on:
       - "ESTADO_ATUAL.md"
       - "episodes/brazil-files/episode-001/case-brief.json"
       - "docs/BRAZIL_FILES_CANONICAL_CROSSWALK_V1.md"
+      - "docs/BRAZIL_FILES_EPISODE_001_PREFLIGHT_V1.md"
       - "production/copilot_contract_v1.json"
       - "production/copilot_queue_v1.py"
       - "production/copilot_analysis_agents_v1.py"
