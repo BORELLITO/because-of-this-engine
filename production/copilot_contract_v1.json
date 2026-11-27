@@ -121,6 +121,16 @@
     "stale_context": "FAIL_CLOSED",
     "engine_activation": "DISABLED_IN_THIS_PR"
   },
+  "executor_layer": {
+    "module": "production/copilot_executor_registry_v1.py",
+    "mode": "INJECTED_PROVIDER_REGISTRY",
+    "provider_resolution": "EXPLICIT_MAPPING_BY_AGENT_ID",
+    "missing_provider": "BLOCKED",
+    "parallel": false,
+    "network_allowed": false,
+    "can_start_engine": false,
+    "production_activation": "DISABLED"
+  },
   "levels": {
     "analysis": {
       "level": 1,
