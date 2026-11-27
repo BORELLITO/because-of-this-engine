@@ -19,6 +19,7 @@ COPILOT_SCOPE_ALLOWLIST = frozenset(
     {
         ".github/workflows/copilot-technical-gate.yml",
         "docs/COPILOTO_CANONICO_V1.md",
+        "ESTADO_ATUAL.md",
         "docs/BRAZIL_FILES_CANONICAL_CROSSWALK_V1.md",
         "production/copilot_contract_v1.json",
         "production/copilot_queue_v1.py",
@@ -36,6 +37,7 @@ COPILOT_SCOPE_ALLOWLIST = frozenset(
         "tests/test_copilot_queue_v1.py",
         "tests/test_copilot_brazil_crosswalk.py",
         "tests/test_copilot_runflow_handoff.py",
+        "tests/test_copilot_state_memory.py",
     }
 )
 
