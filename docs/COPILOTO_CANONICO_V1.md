@@ -117,4 +117,6 @@ A implementação ocorre em branch própria, com testes de contrato e sem ativar
 - Guard: `production/v21_singleton_guard.py`.
 - Memória: `ESTADO_ATUAL.md`.
 - Este documento define o contrato do Copiloto, mas não autoriza produção por si só.
+## 11. Ordem de integração
 
+A governança do motor único deve ser efetivada antes da ativação do Copiloto. O PR que aplica a serialização global do Runflow é integrado primeiro; em seguida, o PR do Copiloto pode ser integrado porque mantém `production_activation.enabled=false`. A integração não autoriza Runflow, TTS, render, publicação ou gasto.
