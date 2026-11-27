@@ -128,6 +128,22 @@ Documento operacional: `docs/BRAZIL_FILES_CANONICAL_CROSSWALK_V1.md`.
 - A persistência é atômica e conserva pedidos enfileirados; o módulo não inicia o motor nem publica mídia.
 - Testes: `tests/test_copilot_queue_v1.py`.
 
+## 9.1 Handoff seguro para o Runflow
+
+A fila agora possui um adaptador explícito em
+`production/copilot_runflow_handoff_v1.py`. Ele só retorna
+`READY_FOR_RUNFLOW_PREPARATION_GATE` quando:
+
+- a fila está em `ENGINE_QUEUE`, sem execução ativa;
+- os oito recibos canônicos estão em `PASS`, na ordem oficial;
+- o crosswalk Brazil Files está aprovado;
+- memória e hash da política são atuais.
+
+O adaptador é somente leitura. Ele não reivindica a fila, não dispara o
+workflow, não inicia o motor, não chama TTS, não renderiza e não publica.
+O dispatch do Runflow continua manual ou em workflow separado e explicitamente
+autorizado. Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
+
 ## 10. Fonte de verdade
 
 - Política: `production/active_engine_policy.json`.

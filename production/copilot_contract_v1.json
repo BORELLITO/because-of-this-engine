@@ -150,7 +150,7 @@
         "delivery_agent"
       ],
       "required_status": "PASS",
-      "description": "Six domain analysts followed by independent release QA and delivery packaging; all eight tasks remain sequential and production-disabled."
+      "description": "Eight canonical tasks remain sequential: six domain roles followed by independent release QA and delivery packaging; all are production-disabled."
     },
     "technical_gate": {
       "level": 2,
@@ -193,5 +193,18 @@
     "parallel": false,
     "secondary_engine": false,
     "terminal_agent": "delivery_agent"
+  },
+  "runflow_handoff": {
+    "module": "production/copilot_runflow_handoff_v1.py",
+    "requires": [
+      "queue_engine_queue",
+      "eight_analysis_receipts_pass",
+      "brazil_files_crosswalk_pass",
+      "current_memory_and_policy"
+    ],
+    "dispatch": "MANUAL_OR_SEPARATE_AUTHORIZED_WORKFLOW",
+    "parallel": false,
+    "can_start_engine": false,
+    "production_enabled": false
   }
 }

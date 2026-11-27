@@ -27,6 +27,7 @@ COPILOT_SCOPE_ALLOWLIST = frozenset(
         "production/copilot_provider_readiness_v1.py",
         "production/copilot_technical_gate_v1.py",
         "production/brazil_files_canonical_crosswalk_v1.py",
+        "production/copilot_runflow_handoff_v1.py",
         "tests/test_copilot_analysis_agents.py",
         "tests/test_copilot_executor_registry.py",
         "tests/test_copilot_provider_readiness.py",
@@ -34,6 +35,7 @@ COPILOT_SCOPE_ALLOWLIST = frozenset(
         "tests/test_copilot_levels.py",
         "tests/test_copilot_queue_v1.py",
         "tests/test_copilot_brazil_crosswalk.py",
+        "tests/test_copilot_runflow_handoff.py",
     }
 )
 
@@ -125,6 +127,23 @@ def contract_failures(contract: dict[str, Any]) -> list[str]:
         for key, value in expected_crosswalk.items():
             if crosswalk.get(key) != value:
                 failures.append(f"brazil_files_crosswalk.{key} drifted")
+    handoff = contract.get("runflow_handoff")
+    expected_handoff = {
+        "module": "production/copilot_runflow_handoff_v1.py",
+        "dispatch": "MANUAL_OR_SEPARATE_AUTHORIZED_WORKFLOW",
+        "parallel": False,
+        "can_start_engine": False,
+        "production_enabled": False,
+    }
+    if not isinstance(handoff, dict):
+        failures.append("Runflow handoff contract is missing")
+    else:
+        for key, value in expected_handoff.items():
+            if handoff.get(key) != value:
+                failures.append(f"runflow_handoff.{key} drifted")
+        required = {"queue_engine_queue", "eight_analysis_receipts_pass", "brazil_files_crosswalk_pass", "current_memory_and_policy"}
+        if set(handoff.get("requires", [])) != required:
+            failures.append("runflow_handoff.requires drifted")
     return failures
 
 
