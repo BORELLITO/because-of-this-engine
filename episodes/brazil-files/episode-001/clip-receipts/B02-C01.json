@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "brazil-files-ep001-clip-receipt-b02-c01-v1",
+  "case_id": "official-ufo-night-1986",
+  "beat_id": "B02",
+  "candidate_id": "B02-C01",
+  "source_id": "PIXABAY",
+  "source_url": "https://pixabay.com/videos/brazil-brazil-map-brazil-flag-112034/",
+  "media_url": "https://cdn.pixabay.com/video/2022/03/27/112034-692839342_large.mp4",
+  "license_url": "https://pixabay.com/service/license-summary/",
+  "source_page_evidence": {
+    "title": "Brazil, brazil map, brazil flag free stock video. Free for use & download.",
+    "description": "Zoom into Brazil",
+    "license_claim": "Free for use under the Pixabay Content License",
+    "creator": "TrebbieGeo",
+    "asset_id": "112034",
+    "observed_on": "2026-11-27"
+  },
+  "download_evidence": {
+    "file_name": "112034-692839342_large.mp4",
+    "sha256": "f38cb9f05faaa06bbc95ddb868162b6c4b9279c4cc841facb74f568f5f0c544a",
+    "container": "MP4",
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "width": 3840,
+    "height": 2160,
+    "duration_seconds": 20.01,
+    "integrity_check": "sha256_verified_against_downloaded_bytes"
+  },
+  "rights_status": "VERIFIED",
+  "fingerprint_status": "VERIFIED",
+  "semantic_review": "PROVISIONAL_PASS",
+  "selected_for_production": false,
+  "production_started": false,
+  "runflow_handoff": "BLOCKED_UNTIL_FULL_DOSSIER_AND_ALL_RECEIPTS",
+  "reviewer_note": "Single-asset receipt captured for Brazilian geographic context. This does not select the clip or unlock production; all remaining beats, receipts, non-reuse, continuity, and final rights review remain required."
+}
