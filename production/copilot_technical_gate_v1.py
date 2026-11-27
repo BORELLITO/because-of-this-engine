@@ -81,7 +81,8 @@ def contract_failures(contract: dict[str, Any]) -> list[str]:
         for key, value in expected_executor_layer.items():
             if executor_layer.get(key) != value:
                 failures.append(f"executor_layer.{key} drifted")
-\n    levels = contract.get("levels")
+
+    levels = contract.get("levels")
     if not isinstance(levels, dict) or set(levels) != {"analysis", "technical_gate"}:
         failures.append("two-level copilot contract is missing")
     return failures
