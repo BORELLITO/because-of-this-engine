@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "brazil-files-ep001-clip-receipt-b04-c02-v1",
+  "case_id": "official-ufo-night-1986",
+  "beat_id": "B04",
+  "candidate_id": "B04-C02",
+  "source_id": "PEXELS",
+  "source_url": "https://www.pexels.com/video/person-turning-the-knobs-of-a-radio-10295575/",
+  "media_url": "https://videos.pexels.com/video-files/10295575/10295575-hd_2048_1080_25fps.mp4",
+  "license_url": "https://www.pexels.com/license/",
+  "source_page_evidence": {
+    "title": "Person Turning the Knobs of a Radio Free Stock Video Footage, Royalty-Free 4K & HD Video Clip",
+    "license_claim": "Free to use under the Pexels License",
+    "creator": "Ron Lach",
+    "asset_id": "10295575",
+    "description": "Close-up of hands tuning a vintage radio, evoking nostalgia and retro vibes.",
+    "observed_on": "2026-11-27"
+  },
+  "download_evidence": {
+    "file_name": "10295575-hd_2048_1080_25fps.mp4",
+    "sha256": "fae3cad9ba0e7965f5e4bfca5cd948c3958fe85a0f858d91d67e7fc557fa4285",
+    "container": "MP4",
+    "video_codec": "h264",
+    "audio_codec": null,
+    "width": 2048,
+    "height": 1080,
+    "duration_seconds": 31.52,
+    "integrity_check": "sha256_verified_against_downloaded_bytes"
+  },
+  "rights_status": "VERIFIED",
+  "fingerprint_status": "VERIFIED",
+  "semantic_review": "PROVISIONAL_PASS",
+  "selected_for_production": false,
+  "production_started": false,
+  "runflow_handoff": "BLOCKED_UNTIL_FULL_DOSSIER_AND_ALL_RECEIPTS",
+  "reviewer_note": "B04-C02 matches the operations-room radio anchor through a faceless close-up of hands tuning a radio. It is evidence for the candidate queue only; it does not select the clip or unlock production."
+}
