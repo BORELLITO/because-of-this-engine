@@ -23,9 +23,11 @@ COPILOT_SCOPE_ALLOWLIST = frozenset(
         "production/copilot_queue_v1.py",
         "production/copilot_analysis_agents_v1.py",
         "production/copilot_executor_registry_v1.py",
+        "production/copilot_provider_readiness_v1.py",
         "production/copilot_technical_gate_v1.py",
         "tests/test_copilot_analysis_agents.py",
         "tests/test_copilot_executor_registry.py",
+        "tests/test_copilot_provider_readiness.py",
         "tests/test_copilot_contract.py",
         "tests/test_copilot_levels.py",
         "tests/test_copilot_queue_v1.py",
@@ -81,6 +83,25 @@ def contract_failures(contract: dict[str, Any]) -> list[str]:
         for key, value in expected_executor_layer.items():
             if executor_layer.get(key) != value:
                 failures.append(f"executor_layer.{key} drifted")
+
+    provider_readiness = contract.get("provider_readiness")
+    expected_provider_readiness = {
+        "module": "production/copilot_provider_readiness_v1.py",
+        "metadata": "EXPLICIT_REGISTERED_PROVIDER",
+        "preflight_before_dispatch": True,
+        "network_allowed": False,
+        "can_start_engine": False,
+        "parallel": False,
+        "estimated_cost_cents": 0,
+        "missing_provider": "BLOCKED",
+        "unsafe_manifest": "FAIL_CLOSED",
+    }
+    if not isinstance(provider_readiness, dict):
+        failures.append("provider readiness contract is missing")
+    else:
+        for key, value in expected_provider_readiness.items():
+            if provider_readiness.get(key) != value:
+                failures.append(f"provider_readiness.{key} drifted")
 
     levels = contract.get("levels")
     if not isinstance(levels, dict) or set(levels) != {"analysis", "technical_gate"}:
