@@ -24,7 +24,7 @@ def result_for(task, status="PASS"):
         "source_artifacts": task["source_artifacts"],
         "evidence": task["evidence"],
         "status": status,
-        "blocking_reasons": [],
+        "blocking_reasons": [] if status == "PASS" else ["review required"],
         "output_artifact": output,
         "output_sha256": artifact_hash(output),
         "next_gate": "technical_gate" if status == "PASS" else "review",
@@ -61,6 +61,33 @@ class CopilotAnalysisAgentTests(unittest.TestCase):
         result = result_for(task)
         result["can_start_engine"] = True
         with self.assertRaises(AnalysisContractError):
+            validate_result(result, expected_agent_id=AGENT_ORDER[0])
+
+    def test_result_must_match_revision_and_source_context(self):
+        task = build_task(AGENT_ORDER[0], input_revision="r1", source_artifacts=["source-a"], evidence=["evidence-a"])
+        result = result_for(task)
+        result["input_revision"] = "stale"
+        with self.assertRaisesRegex(AnalysisContractError, "input revision"):
+            validate_result(result, expected_agent_id=AGENT_ORDER[0], expected_input_revision="r1")
+        result = result_for(task)
+        result["source_artifacts"] = ["other-source"]
+        with self.assertRaisesRegex(AnalysisContractError, "source_artifacts"):
+            validate_result(
+                result,
+                expected_agent_id=AGENT_ORDER[0],
+                expected_input_revision="r1",
+                expected_source_artifacts=["source-a"],
+            )
+
+    def test_budget_and_blocking_reason_limits_are_enforced(self):
+        task = build_task(AGENT_ORDER[0], input_revision="r1", source_artifacts=[], evidence=[])
+        result = result_for(task)
+        result["token_budget_used"] = task["token_budget"] + 1
+        with self.assertRaisesRegex(AnalysisContractError, "token budget"):
+            validate_result(result, expected_agent_id=AGENT_ORDER[0])
+        result = result_for(task, "BLOCKED")
+        result["blocking_reasons"] = []
+        with self.assertRaisesRegex(AnalysisContractError, "blocking reasons"):
             validate_result(result, expected_agent_id=AGENT_ORDER[0])
 
     def test_wrong_task_order_is_rejected(self):
