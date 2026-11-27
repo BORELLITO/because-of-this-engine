@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "brazil-files-ep001-clip-receipt-b10-c01-v1",
+  "case_id": "official-ufo-night-1986",
+  "beat_id": "B10",
+  "candidate_id": "B10-C01",
+  "source_id": "PEXELS",
+  "source_url": "https://www.pexels.com/video/a-person-checking-the-documents-8529094/",
+  "media_url": "https://videos.pexels.com/video-files/8529094/8529094-hd_2048_1080_25fps.mp4",
+  "license_url": "https://www.pexels.com/license/",
+  "source_page_evidence": {
+    "title": "A Person Checking the Documents Free Stock Video Footage, Royalty-Free 4K & HD Video Clip",
+    "license_claim": "Free to use under the Pexels License",
+    "creator": "kaboompics",
+    "asset_id": "8529094",
+    "description": "Close-up of hands organizing office documents and files on a shelf.",
+    "observed_on": "2026-11-27"
+  },
+  "download_evidence": {
+    "file_name": "8529094-hd_2048_1080_25fps.mp4",
+    "sha256": "1e825ddc82d919a9551bbe8d834a8f22aac6c6ca71c7bd29720751c2c665e136",
+    "container": "MP4",
+    "video_codec": "h264",
+    "audio_codec": null,
+    "width": 2048,
+    "height": 1080,
+    "duration_seconds": 18.12,
+    "integrity_check": "sha256_verified_against_downloaded_bytes"
+  },
+  "rights_status": "VERIFIED",
+  "fingerprint_status": "VERIFIED",
+  "semantic_review": "PROVISIONAL_PASS",
+  "selected_for_production": false,
+  "production_started": false,
+  "runflow_handoff": "BLOCKED_UNTIL_FULL_DOSSIER_AND_ALL_RECEIPTS",
+  "reviewer_note": "B10-C01 matches the definition-card/document typography anchor through faceless hands organizing files on a shelf in a landscape 16:9 frame with negative space for safe text placement. It is evidence for the candidate queue only; it does not select the clip or unlock production."
+}
