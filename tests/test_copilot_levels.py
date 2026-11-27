@@ -51,6 +51,20 @@ class CopilotLevelTests(unittest.TestCase):
         }
         self.assertEqual(contract_failures(contract), [])
 
+    def test_level_one_declares_all_eight_executable_roles(self):
+        contract = json.loads((ROOT / ".." / "production" / "copilot_contract_v1.json").read_text(encoding="utf-8"))
+        self.assertEqual(len(contract["levels"]["analysis"]["agents"]), 8)
+        self.assertEqual(contract["levels"]["analysis"]["agents"], [
+            "research_analyst",
+            "factual_reviewer",
+            "story_editorial_agent",
+            "rights_provenance_agent",
+            "visual_continuity_agent",
+            "timeline_caption_agent",
+            "qa_release_reviewer",
+            "delivery_agent",
+        ])
+
 
 if __name__ == "__main__":
     unittest.main()
