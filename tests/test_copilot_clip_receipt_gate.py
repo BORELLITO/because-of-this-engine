@@ -46,12 +46,12 @@ def _receipt(index: int, *, digest: str | None = None) -> dict:
 
 
 class ClipReceiptGateTests(unittest.TestCase):
-    def test_real_staged_inventory_is_blocked_with_twenty_missing(self):
+    def test_real_staged_inventory_is_blocked_with_eighteen_missing(self):
         report = evaluate_clip_receipt_gate(Path(__file__).resolve().parents[1])
         self.assertEqual(report["status"], "CLIP_RECEIPTS_BLOCKED")
-        self.assertEqual(report["receipt_file_count"], 3)
-        self.assertEqual(report["verified_receipt_count"], 3)
-        self.assertEqual(report["missing_receipts"], 19)
+        self.assertEqual(report["receipt_file_count"], 4)
+        self.assertEqual(report["verified_receipt_count"], 4)
+        self.assertEqual(report["missing_receipts"], 18)
         self.assertFalse(report["production_started"])
         self.assertEqual(report["runflow_handoff"], "BLOCKED")
 
