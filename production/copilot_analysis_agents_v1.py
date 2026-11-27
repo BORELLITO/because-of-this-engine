@@ -1,4 +1,4 @@
-"""Sequential, isolated adapters for the six Copilot analysis agents.
+"""Sequential, isolated adapters for the eight Copilot analysis and delivery agents.
 
 The adapters define the execution contract only. They do not call a model,
 start the canonical engine, write project memory, render media, or publish.
@@ -32,6 +32,8 @@ AGENT_ORDER = (
     "rights_provenance_agent",
     "visual_continuity_agent",
     "timeline_caption_agent",
+    "qa_release_reviewer",
+    "delivery_agent",
 )
 AGENT_ARTIFACTS = {
     "research_analyst": ("research_card", "sources"),
@@ -40,6 +42,8 @@ AGENT_ARTIFACTS = {
     "rights_provenance_agent": ("rights_ledger", "rights"),
     "visual_continuity_agent": ("visual_map", "continuity"),
     "timeline_caption_agent": ("timeline_preflight", "timeline"),
+    "qa_release_reviewer": ("qa_receipt", "release_qa"),
+    "delivery_agent": ("delivery_package", "delivery"),
 }
 TOKEN_BUDGETS = {
     "research_analyst": 1400,
@@ -48,6 +52,8 @@ TOKEN_BUDGETS = {
     "rights_provenance_agent": 1100,
     "visual_continuity_agent": 1100,
     "timeline_caption_agent": 1200,
+    "qa_release_reviewer": 1000,
+    "delivery_agent": 900,
 }
 
 
@@ -184,7 +190,7 @@ def dispatch_sequential(
     task_list = list(tasks)
     expected_ids = list(AGENT_ORDER)
     if [task.get("agent_id") for task in task_list] != expected_ids:
-        raise AnalysisContractError("analysis tasks must contain all six agents in canonical order")
+        raise AnalysisContractError("analysis tasks must contain all eight agents in canonical order")
     results: list[dict[str, Any]] = []
     for task in task_list:
         spec = agent_spec(task["agent_id"])
