@@ -42,6 +42,7 @@ class CopilotRunflowHandoffTests(unittest.TestCase):
         self.state["status"] = "ENGINE_RUNNING"
         self.state["active_run_id"] = "run-1"
         self.state["active_request_id"] = "req-1"
+        self.state["queued_request_ids"] = []
         report = validate_runflow_handoff(
             self.state,
             self.results,
