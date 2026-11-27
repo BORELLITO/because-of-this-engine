@@ -3,7 +3,8 @@
 **Data da verificação:** 2026-11-27  
 **Repositório canônico:** `BORELLITO/because-of-this-engine`  
 **Branch canônica:** `main`  
-**Commit verificado:** `01fa3db62e08ec17017317147c80919703fa4d4f`
+**Commit verificado:** `01fa3db62e08ec17017317147c80919703fa4d4f`  
+**Transparência:** mudanças relevantes exigem relatório completo no PR.
 
 ## Estado canônico
 
