@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "brazil-files-ep001-clip-receipt-b07-c01-v1",
+  "case_id": "official-ufo-night-1986",
+  "beat_id": "B07",
+  "candidate_id": "B07-C01",
+  "source_id": "PEXELS",
+  "source_url": "https://www.pexels.com/video/person-looking-at-files-inside-a-cardboard-box-8371852/",
+  "media_url": "https://videos.pexels.com/video-files/8371852/8371852-hd_2048_1080_25fps.mp4",
+  "license_url": "https://www.pexels.com/license/",
+  "source_page_evidence": {
+    "title": "Person Looking at Files Inside a Cardboard Box Free Stock Video Footage, Royalty-Free 4K & HD Video Clip",
+    "license_claim": "Free to use under the Pexels License",
+    "creator": "cottonbro studio",
+    "asset_id": "8371852",
+    "description": "Hands sorting through investigation documents in a cardboard box.",
+    "observed_on": "2026-11-27"
+  },
+  "download_evidence": {
+    "file_name": "8371852-hd_2048_1080_25fps.mp4",
+    "sha256": "d5247dbd8d710102a1a1bf19640e0d70ddc6f64ca8a1f43ee11bced51485f148",
+    "container": "MP4",
+    "video_codec": "h264",
+    "audio_codec": null,
+    "width": 2048,
+    "height": 1080,
+    "duration_seconds": 52.84,
+    "integrity_check": "sha256_verified_against_downloaded_bytes"
+  },
+  "rights_status": "VERIFIED",
+  "fingerprint_status": "VERIFIED",
+  "semantic_review": "PROVISIONAL_PASS",
+  "selected_for_production": false,
+  "production_started": false,
+  "runflow_handoff": "BLOCKED_UNTIL_FULL_DOSSIER_AND_ALL_RECEIPTS",
+  "reviewer_note": "B07-C01 matches the pilot-report/preserved-evidence anchor through faceless hands sorting tied investigation documents in a landscape 16:9 frame. It is evidence for the candidate queue only; it does not select the clip or unlock production."
+}
