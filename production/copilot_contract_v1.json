@@ -170,5 +170,16 @@
   "level_order": [
     "specialized_analysis",
     "copilot_technical_gate"
-  ]
+  ],
+  "provider_readiness": {
+    "module": "production/copilot_provider_readiness_v1.py",
+    "metadata": "EXPLICIT_REGISTERED_PROVIDER",
+    "preflight_before_dispatch": true,
+    "network_allowed": false,
+    "can_start_engine": false,
+    "parallel": false,
+    "estimated_cost_cents": 0,
+    "missing_provider": "BLOCKED",
+    "unsafe_manifest": "FAIL_CLOSED"
+  }
 }
