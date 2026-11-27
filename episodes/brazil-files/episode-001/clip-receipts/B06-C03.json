@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "brazil-files-ep001-clip-receipt-b06-c03-v1",
+  "case_id": "official-ufo-night-1986",
+  "beat_id": "B06",
+  "candidate_id": "B06-C03",
+  "source_id": "PIXABAY",
+  "source_url": "https://pixabay.com/videos/cockpit-plane-flying-aviation-83156/",
+  "media_url": "https://cdn.pixabay.com/video/2021/07/29/83156-581045414_large.mp4",
+  "license_url": "https://pixabay.com/service/license-summary/",
+  "source_page_evidence": {
+    "title": "Cockpit, Plane, Flying. Free Stock Video",
+    "license_claim": "Free for use under the Pixabay Content License",
+    "creator": "TPMotion",
+    "asset_id": "83156",
+    "description": "Cockpit, plane, flying free stock video.",
+    "observed_on": "2026-11-27"
+  },
+  "download_evidence": {
+    "file_name": "83156-581045414_large.mp4",
+    "sha256": "20533304a04467a0ff148b7c1b746581aaf44602f5482f3273107d3fcdffcad9",
+    "container": "MP4",
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "width": 3840,
+    "height": 2160,
+    "duration_seconds": 12.693333,
+    "integrity_check": "sha256_verified_against_downloaded_bytes"
+  },
+  "rights_status": "VERIFIED",
+  "fingerprint_status": "VERIFIED",
+  "semantic_review": "PROVISIONAL_PASS",
+  "selected_for_production": false,
+  "production_started": false,
+  "runflow_handoff": "BLOCKED_UNTIL_FULL_DOSSIER_AND_ALL_RECEIPTS",
+  "reviewer_note": "B06-C03 matches the faceless cockpit/identification anchor through an illuminated aircraft control panel in a landscape 16:9 frame. It is evidence for the candidate queue only; it does not select the clip or unlock production."
+}
