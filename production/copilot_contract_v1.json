@@ -184,5 +184,14 @@
     "estimated_cost_cents": 0,
     "missing_provider": "BLOCKED",
     "unsafe_manifest": "FAIL_CLOSED"
+  },
+  "brazil_files_crosswalk": {
+    "module": "production/brazil_files_canonical_crosswalk_v1.py",
+    "source_checkpoint_count": 22,
+    "canonical_agent_count": 8,
+    "execution_mode": "SEQUENTIAL_REUSE_CANONICAL_AGENT",
+    "parallel": false,
+    "secondary_engine": false,
+    "terminal_agent": "delivery_agent"
   }
 }

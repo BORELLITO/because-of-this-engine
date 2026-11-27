@@ -38,6 +38,15 @@ class CopilotLevelTests(unittest.TestCase):
             "subagents": [{"can_start_engine": False}] * 8,
             "levels": {"analysis": {}, "technical_gate": {}},
         }
+        contract["brazil_files_crosswalk"] = {
+            "module": "production/brazil_files_canonical_crosswalk_v1.py",
+            "source_checkpoint_count": 22,
+            "canonical_agent_count": 8,
+            "execution_mode": "SEQUENTIAL_REUSE_CANONICAL_AGENT",
+            "parallel": False,
+            "secondary_engine": False,
+            "terminal_agent": "delivery_agent",
+        }
         contract["provider_readiness"] = {
             "module": "production/copilot_provider_readiness_v1.py",
             "metadata": "EXPLICIT_REGISTERED_PROVIDER",

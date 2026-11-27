@@ -108,6 +108,18 @@ Implementação: `production/copilot_technical_gate_v1.py`. Workflow: `.github/w
 
 A implementação ocorre em branch própria, com testes de contrato e sem ativar produção. O motor canônico só pode ser chamado quando os dois níveis anteriores estiverem `PASS`.
 
+## 8.1 Reconciliacao Brazil Files → Copiloto Canonico
+
+Os 22 checkpoints editoriais do Brazil Files permanecem como fronteiras de
+analise e revisao, mas nao criam agentes ou motores adicionais. O crosswalk
+executavel em `production/brazil_files_canonical_crosswalk_v1.py` reutiliza
+as oito capacidades canonicas, sempre em ordem sequencial e com
+`parallel=false`. O `delivery_agent` so recebe o handoff terminal depois
+dos 22 recibos em `PASS`. O contrato e o gate bloqueiam qualquer drift,
+paralelismo ou engine secundario.
+
+Documento operacional: `docs/BRAZIL_FILES_CANONICAL_CROSSWALK_V1.md`.
+
 ## 9. Fila técnica implementada
 
 - Implementação isolada: `production/copilot_queue_v1.py`.

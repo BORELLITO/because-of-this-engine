@@ -19,18 +19,21 @@ COPILOT_SCOPE_ALLOWLIST = frozenset(
     {
         ".github/workflows/copilot-technical-gate.yml",
         "docs/COPILOTO_CANONICO_V1.md",
+        "docs/BRAZIL_FILES_CANONICAL_CROSSWALK_V1.md",
         "production/copilot_contract_v1.json",
         "production/copilot_queue_v1.py",
         "production/copilot_analysis_agents_v1.py",
         "production/copilot_executor_registry_v1.py",
         "production/copilot_provider_readiness_v1.py",
         "production/copilot_technical_gate_v1.py",
+        "production/brazil_files_canonical_crosswalk_v1.py",
         "tests/test_copilot_analysis_agents.py",
         "tests/test_copilot_executor_registry.py",
         "tests/test_copilot_provider_readiness.py",
         "tests/test_copilot_contract.py",
         "tests/test_copilot_levels.py",
         "tests/test_copilot_queue_v1.py",
+        "tests/test_copilot_brazil_crosswalk.py",
     }
 )
 
@@ -106,6 +109,22 @@ def contract_failures(contract: dict[str, Any]) -> list[str]:
     levels = contract.get("levels")
     if not isinstance(levels, dict) or set(levels) != {"analysis", "technical_gate"}:
         failures.append("two-level copilot contract is missing")
+    crosswalk = contract.get("brazil_files_crosswalk")
+    expected_crosswalk = {
+        "module": "production/brazil_files_canonical_crosswalk_v1.py",
+        "source_checkpoint_count": 22,
+        "canonical_agent_count": 8,
+        "execution_mode": "SEQUENTIAL_REUSE_CANONICAL_AGENT",
+        "parallel": False,
+        "secondary_engine": False,
+        "terminal_agent": "delivery_agent",
+    }
+    if not isinstance(crosswalk, dict):
+        failures.append("Brazil Files canonical crosswalk contract is missing")
+    else:
+        for key, value in expected_crosswalk.items():
+            if crosswalk.get(key) != value:
+                failures.append(f"brazil_files_crosswalk.{key} drifted")
     return failures
 
 
