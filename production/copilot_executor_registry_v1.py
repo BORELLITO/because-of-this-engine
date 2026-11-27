@@ -1,6 +1,6 @@
 """Specialized executor registry for the canonical Copilot analysis lane.
 
-This layer connects the six analysis adapters to real providers supplied by the
+This layer connects the eight analysis, QA and delivery adapters to real providers supplied by the
 caller. It never creates a provider, opens a network connection, starts the
 canonical engine, renders media, calls TTS, writes memory, or publishes.
 Missing providers fail closed with an explicit BLOCKED receipt.
@@ -34,6 +34,8 @@ SPECIALIZED_ROLE_PROMPTS: dict[str, str] = {
     "rights_provenance_agent": "Reconcile source URLs, license evidence, attribution, hashes, and reuse constraints.",
     "visual_continuity_agent": "Map each visual beat to the approved narrative, era, location, lighting, and motion continuity.",
     "timeline_caption_agent": "Validate duration, word timestamps, karaoke timing, safe-zone placement, and caption readability.",
+    "qa_release_reviewer": "Consolidate factual, editorial, rights, visual, timeline, privacy, cost and regression evidence before release readiness.",
+    "delivery_agent": "Assemble the verified delivery bundle, hashes and reports without publishing or writing remote storage.",
 }
 
 
@@ -48,7 +50,7 @@ def build_specialized_tasks(
     source_artifacts: Iterable[str],
     evidence: Iterable[str],
 ) -> list[dict[str, Any]]:
-    """Build the canonical six-task lane with role-specific instructions."""
+    """Build the canonical eight-task lane with role-specific instructions."""
     tasks: list[dict[str, Any]] = []
     for agent_id in AGENT_ORDER:
         task = build_task(
