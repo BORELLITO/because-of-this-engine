@@ -1,0 +1,124 @@
+{
+  "registry_version": "1.0",
+  "registry_id": "brazil-files-clip-source-registry-v1",
+  "status": "RESEARCH_SOURCE_REGISTRY_READY_ASSET_VERIFICATION_REQUIRED",
+  "verification_date": "2026-11-27",
+  "purpose": "Prioritized free-first source registry for EP001 clip research; not an asset approval list.",
+  "global_policy": {
+    "default_rights_status": "NOT_VERIFIED_PER_ASSET",
+    "selection_requires": [
+      "exact asset URL",
+      "license or terms page captured at research time",
+      "commercial-use compatibility checked",
+      "third-party people, logos and trademarks reviewed",
+      "unique fingerprint recorded after download",
+      "semantic and continuity review passed"
+    ],
+    "prohibited_shortcuts": [
+      "treating a platform license as proof for every asset",
+      "using sponsored or premium previews as free assets",
+      "using editorial-only or restricted-license assets for monetized YouTube",
+      "reusing a selected fingerprint globally"
+    ]
+  },
+  "sources": [
+    {
+      "source_id": "PEXELS",
+      "site_url": "https://www.pexels.com/videos/",
+      "license_url": "https://www.pexels.com/license/",
+      "license_class": "PLATFORM_FREE_COMMERCIAL_SUBJECT_TO_RESTRICTIONS",
+      "default_rights_status": "NOT_VERIFIED_PER_ASSET",
+      "attribution": "NOT_REQUIRED_BY_PLATFORM",
+      "search_priority": 1,
+      "selection_allowed": true,
+      "block_conditions": [
+        "identifiable people or brands require separate review",
+        "no unmodified redistribution"
+      ]
+    },
+    {
+      "source_id": "PIXABAY",
+      "site_url": "https://pixabay.com/videos/",
+      "license_url": "https://pixabay.com/service/license-summary/",
+      "license_class": "PIXABAY_FREE_COMMERCIAL_SUBJECT_TO_RESTRICTIONS",
+      "default_rights_status": "NOT_VERIFIED_PER_ASSET",
+      "attribution": "NOT_REQUIRED_BY_PLATFORM",
+      "search_priority": 2,
+      "selection_allowed": true,
+      "block_conditions": [
+        "recognizable trademarks, publicity or privacy rights require review",
+        "no standalone redistribution"
+      ]
+    },
+    {
+      "source_id": "MIXKIT",
+      "site_url": "https://mixkit.co/free-stock-video/",
+      "license_url": "https://mixkit.co/license/",
+      "license_class": "ITEM_SPECIFIC_FREE_OR_RESTRICTED",
+      "default_rights_status": "NOT_VERIFIED_PER_ASSET",
+      "attribution": "ITEM_SPECIFIC",
+      "search_priority": 3,
+      "selection_allowed": true,
+      "block_conditions": [
+        "restricted-license items are not eligible for monetized YouTube or commercial use",
+        "license badge must be captured"
+      ]
+    },
+    {
+      "source_id": "COVERR",
+      "site_url": "https://coverr.co/",
+      "license_url": "https://coverr.co/license",
+      "license_class": "FREE_COMMERCIAL_SUBJECT_TO_SOURCE_TYPE",
+      "default_rights_status": "NOT_VERIFIED_PER_ASSET",
+      "attribution": "NOT_REQUIRED_FOR_STOCK",
+      "search_priority": 4,
+      "selection_allowed": true,
+      "block_conditions": [
+        "sponsored Shutterstock, iStock or PremiumBeat items require separate licensing",
+        "premium previews and watermarked files are blocked"
+      ]
+    },
+    {
+      "source_id": "VIDEEZY",
+      "site_url": "https://www.videezy.com/",
+      "license_url": "https://support.videezy.com/en_us/videezy-standard-license-and-usage-HylDtxsDK",
+      "license_class": "FREE_STANDARD_REQUIRES_ATTRIBUTION",
+      "default_rights_status": "NOT_VERIFIED_PER_ASSET",
+      "attribution": "REQUIRED_UNLESS_SEPARATE_COMMERCIAL_LICENSE",
+      "search_priority": 5,
+      "selection_allowed": true,
+      "block_conditions": [
+        "editorial-only, noncommercial or incompatible license blocked",
+        "asset page license must be captured"
+      ]
+    },
+    {
+      "source_id": "DAREFUL",
+      "site_url": "https://dareful.com/",
+      "license_url": "https://dareful.com/about-dareful-completely-free-4k-stock-video/",
+      "license_class": "CC_BY_4_0",
+      "default_rights_status": "NOT_VERIFIED_PER_ASSET",
+      "attribution": "REQUIRED",
+      "search_priority": 6,
+      "selection_allowed": true,
+      "block_conditions": [
+        "credit and license link must be preserved",
+        "asset-level provenance still required"
+      ]
+    },
+    {
+      "source_id": "WIKIMEDIA_COMMONS",
+      "site_url": "https://commons.wikimedia.org/wiki/Category:Videos",
+      "license_url": "https://commons.wikimedia.org/wiki/Commons:Reusing_content_outside_Wikimedia/en",
+      "license_class": "FILE_SPECIFIC_FREE_LICENSE_OR_PUBLIC_DOMAIN",
+      "default_rights_status": "NOT_VERIFIED_PER_ASSET",
+      "attribution": "FILE_SPECIFIC",
+      "search_priority": 7,
+      "selection_allowed": true,
+      "block_conditions": [
+        "each file license and author must be checked",
+        "CC BY-SA or other share-alike obligations require editorial/legal review"
+      ]
+    }
+  ]
+}
