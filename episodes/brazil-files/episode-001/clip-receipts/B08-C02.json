@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "brazil-files-ep001-clip-receipt-b08-c02-v1",
+  "case_id": "official-ufo-night-1986",
+  "beat_id": "B08",
+  "candidate_id": "B08-C02",
+  "source_id": "PIXABAY",
+  "source_url": "https://pixabay.com/videos/file-documents-office-paperwork-87146/",
+  "media_url": "https://cdn.pixabay.com/video/2021/09/01/87146-601076915_large.mp4",
+  "license_url": "https://pixabay.com/service/license-summary/",
+  "source_page_evidence": {
+    "title": "File, Documents, Office. Free Stock Video",
+    "license_claim": "Free for use under the Pixabay Content License",
+    "creator": "tolomedia43",
+    "asset_id": "87146",
+    "description": "File, documents, office free stock video.",
+    "observed_on": "2026-11-27"
+  },
+  "download_evidence": {
+    "file_name": "87146-601076915_large.mp4",
+    "sha256": "a8a5a49ed2a02af6112e64cdf78ce3d298615d5a42f41f004361121f962ddf1b",
+    "container": "MP4",
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "width": 1920,
+    "height": 1080,
+    "duration_seconds": 5.951667,
+    "integrity_check": "sha256_verified_against_downloaded_bytes"
+  },
+  "rights_status": "VERIFIED",
+  "fingerprint_status": "VERIFIED",
+  "semantic_review": "PROVISIONAL_PASS",
+  "selected_for_production": false,
+  "production_started": false,
+  "runflow_handoff": "BLOCKED_UNTIL_FULL_DOSSIER_AND_ALL_RECEIPTS",
+  "reviewer_note": "B08-C02 matches the archive breadth anchor through a faceless close-up of organized document binders in a landscape 16:9 frame. It is evidence for the candidate queue only; it does not select the clip or unlock production."
+}
