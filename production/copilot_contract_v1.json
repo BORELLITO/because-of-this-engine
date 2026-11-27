@@ -145,9 +145,12 @@
         "story_editorial_agent",
         "rights_provenance_agent",
         "visual_continuity_agent",
-        "timeline_caption_agent"
+        "timeline_caption_agent",
+        "qa_release_reviewer",
+        "delivery_agent"
       ],
-      "required_status": "PASS"
+      "required_status": "PASS",
+      "description": "Six domain analysts followed by independent release QA and delivery packaging; all eight tasks remain sequential and production-disabled."
     },
     "technical_gate": {
       "level": 2,
