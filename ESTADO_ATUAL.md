@@ -3,7 +3,7 @@
 **Data da verificação:** 2026-11-27  
 **Repositório canônico:** `BORELLITO/because-of-this-engine`  
 **Branch canônica:** `main`  
-**Commit verificado:** `58d7b0d64b20f661ec243a3398fcd2e1bdf846bb`  
+**Commit verificado:** `4e802053480cc930e1804e86ca5e546457a1fb43`  
 **Transparência:** mudanças relevantes exigem relatório completo no PR.
 
 ## Estado canônico
@@ -70,6 +70,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - PR #219 — registro fail-closed de fontes gratuitas de clipes integrado ao gate; licenças continuam verificadas por asset.
 - PR #221 — semente de pesquisa com candidatos reais por beat, todos em HOLD, integrada ao gate sem liberar seleção.
 - PR #223 — lock de isolamento de namespace integrado; o pacote legado permanece preservado e não é sobrescrito.
+- PR #225 — primeiro recibo real de clipe (B03-C02) integrado com licença declarada, download, fingerprint SHA-256 e probe técnico; produção continua bloqueada.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
@@ -84,8 +85,9 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
    validado apenas prepara a autorização.
 3. Nenhum vídeo final foi produzido por estas mudanças.
 4. O preflight do EP001 reconhece o dossiê narrativo, o registro de fontes e a
-   semente de pesquisa e lock de namespace, mas permanece `BLOCKED` por falta do
-   dossiê de seleção de clipes, recibos dos 22 checkpoints e direitos/fingerprints.
+   semente de pesquisa e lock de namespace. Um recibo de clipe foi verificado
+   (B03-C02); permanecem 21 recibos de clipes e o dossiê completo de seleção,
+   além dos 22 checkpoints, continuidade e revisão final de direitos/fingerprints.
 5. Qualquer ativação de provedor, gasto, publicação ou dispatch de produção
    exige mudança separada e autorização específica.
 
