@@ -27,7 +27,15 @@ class CopilotContractTests(unittest.TestCase):
         self.assertEqual(len({agent["id"] for agent in agents}), 8)
         self.assertTrue(all(agent["can_start_engine"] is False for agent in agents))
 
-    def test_two_execution_levels_are_explicit_and_ordered(self):
+    def test_executor_layer_is_explicit_and_fail_closed(self):
+        executor = self.contract["executor_layer"]
+        self.assertEqual(executor["mode"], "INJECTED_PROVIDER_REGISTRY")
+        self.assertEqual(executor["provider_resolution"], "EXPLICIT_MAPPING_BY_AGENT_ID")
+        self.assertEqual(executor["missing_provider"], "BLOCKED")
+        self.assertFalse(executor["parallel"])
+        self.assertFalse(executor["network_allowed"])
+        self.assertFalse(executor["can_start_engine"])
+\n    def test_two_execution_levels_are_explicit_and_ordered(self):
         levels = self.contract["levels"]
         self.assertEqual(self.contract["level_order"], ["specialized_analysis", "copilot_technical_gate"])
         self.assertEqual(levels["analysis"]["level"], 1)
