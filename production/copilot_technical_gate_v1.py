@@ -22,6 +22,8 @@ COPILOT_SCOPE_ALLOWLIST = frozenset(
         "ESTADO_ATUAL.md",
         "episodes/brazil-files/episode-001/case-brief.json",
         "episodes/brazil-files/episode-001/narrative-beat-dossier.json",
+        "production/brazil_files_clip_source_registry_v1.json",
+        "docs/BRAZIL_FILES_CLIP_SOURCE_REGISTRY_V1.md",
         "docs/BRAZIL_FILES_CANONICAL_CROSSWALK_V1.md",
         "docs/BRAZIL_FILES_EPISODE_001_PREFLIGHT_V1.md",
         "production/copilot_contract_v1.json",
@@ -41,6 +43,7 @@ COPILOT_SCOPE_ALLOWLIST = frozenset(
         "tests/test_copilot_queue_v1.py",
         "tests/test_copilot_brazil_crosswalk.py",
         "tests/test_copilot_brazil_files_ep001_preflight.py",
+        "tests/test_copilot_clip_source_registry.py",
         "tests/test_copilot_runflow_handoff.py",
         "tests/test_copilot_state_memory.py",
     }
