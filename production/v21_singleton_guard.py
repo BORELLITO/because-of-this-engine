@@ -29,6 +29,15 @@ def audit(repo_root: Path) -> dict:
         failures.append("canonical_entrypoint mismatch")
     if policy.get("production_enablement") is not False:
         failures.append("production_enablement must remain false in candidate")
+    serialization = policy.get("execution_serialization") if isinstance(policy.get("execution_serialization"), dict) else {}
+    if serialization.get("mode") != "GLOBAL_SINGLE_CANONICAL_ENGINE":
+        failures.append("global single-engine serialization policy is missing")
+    if serialization.get("concurrency_group") != "because-of-this-canonical-engine":
+        failures.append("canonical concurrency group drifted")
+    if serialization.get("cancel_in_progress") is not False or serialization.get("parallel_engine_runs") is not False:
+        failures.append("parallel engine execution or cancellation is not explicitly disabled")
+    if serialization.get("memory_sync_required_before_and_after") is not True or serialization.get("canonical_state_file") != "ESTADO_ATUAL.md":
+        failures.append("canonical memory synchronization rule is missing")
     if policy.get("legacy_policy", {}).get("status") != "legacy_rollback_only":
         failures.append("legacy policy missing")
     # Caption layout and typography are part of the active V2.1 identity.
@@ -146,6 +155,15 @@ def audit(repo_root: Path) -> dict:
         failures.append("final render preflight lost soundtrack release truth gate")
     workflow_root = root / ".github" / "workflows"
     workflows = sorted(workflow_root.glob("*.yml")) if workflow_root.exists() else []
+    canonical_runflow = workflow_root / "because-of-this-runflow.yml"
+    if not canonical_runflow.is_file():
+        failures.append("canonical Runflow workflow is missing")
+    else:
+        runflow_text = canonical_runflow.read_text(encoding="utf-8", errors="replace")
+        if "group: because-of-this-canonical-engine" not in runflow_text:
+            failures.append("canonical Runflow does not use the global engine lock")
+        if "cancel-in-progress: false" not in runflow_text:
+            failures.append("canonical Runflow may cancel or overlap the active engine")
     for path in workflows:
         if path.name in EXEMPT_WORKFLOWS:
             continue
