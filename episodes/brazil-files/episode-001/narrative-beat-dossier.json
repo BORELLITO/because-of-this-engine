@@ -1,0 +1,311 @@
+{
+  "schema_version": "1.0",
+  "dossier_id": "brazil-files-ep001-narrative-beats-v1",
+  "case_id": "official-ufo-night-1986",
+  "title": "The Night Brazil's Air Force Chased the Unknown",
+  "status": "NARRATIVE_DOSSIER_READY_CLIP_RESEARCH_PENDING",
+  "language": "en-US",
+  "target_duration_seconds": [
+    60,
+    80
+  ],
+  "beat_count": 16,
+  "truth_policy": "FACTS_AND_EDITORIAL_LIMITS_EXPLICIT",
+  "clip_selection_status": "NOT_STARTED",
+  "rights_status": "NOT_STARTED",
+  "source_verification_date": "2026-11-27",
+  "sources": [
+    {
+      "id": "AN_SERIE_2017",
+      "url": "https://www.gov.br/arquivonacional/pt-br/canais_atendimento/imprensa/copy_of_noticias/serie-relatos-extraterrestres/",
+      "institution": "Arquivo Nacional",
+      "title": "Série Relatos Extraterrestres",
+      "verified_claims": [
+        "19 May 1986",
+        "objects detected by CINDACTA radars",
+        "air-defense alert",
+        "aircraft from Santa Cruz and Anápolis",
+        "pilot report in the archive"
+      ]
+    },
+    {
+      "id": "AN_FUNDO_2018",
+      "url": "https://www.gov.br/arquivonacional/pt-br/canais_atendimento/imprensa/noticias/conheca-o-fundo-sobre-ovnis-do-arquivo-nacional",
+      "institution": "Arquivo Nacional",
+      "title": "Conheça o fundo sobre OVNIs",
+      "verified_claims": [
+        "Air Force-produced collection under National Archive custody",
+        "records include reports, questionnaires, correspondence, photographs, drawings, videos and audio",
+        "unidentified does not mean extraterrestrial"
+      ]
+    },
+    {
+      "id": "AN_AUDIO_2019",
+      "url": "https://www.gov.br/arquivonacional/pt-br/canais_atendimento/imprensa/clipping/video-2013-19-de-maio-de-1986-a-noite-oficial-dos-ovnis",
+      "institution": "Arquivo Nacional",
+      "title": "VÍDEO — 19 de maio de 1986",
+      "verified_claims": [
+        "16 audios released from the UFO fund",
+        "eight recordings of conversations among pilots, controllers and the defense system"
+      ]
+    },
+    {
+      "id": "SIAN_REPORT_1986",
+      "url": "https://imagem.sian.an.gov.br/acervo/derivadas/br_dfanbsb_arx/0/0/0710/br_dfanbsb_arx_0_0_0710_d0001de0001.pdf",
+      "institution": "Arquivo Nacional / SIAN",
+      "title": "Relatório de Ocorrências de OVNI",
+      "verified_claims": [
+        "1986 May entries include Anápolis and São José dos Campos observations with pilots/controllers and radar references"
+      ]
+    },
+    {
+      "id": "SIAN_PRESS_1986",
+      "url": "https://imagem.sian.an.gov.br/acervo/derivadas/BR_DFANBSB_ARX/0/0/0257/BR_DFANBSB_ARX_0_0_0257_d0002de0003.pdf",
+      "institution": "Arquivo Nacional / SIAN",
+      "title": "Avões da FAB caçam OVNIs e acabam caçados",
+      "verified_claims": [
+        "contemporary newspaper record describes CINDACTA alarm and aircraft from Anápolis and Santa Cruz"
+      ]
+    }
+  ],
+  "beats": [
+    {
+      "beat_id": "B01",
+      "order": 1,
+      "role": "hook",
+      "truth_mode": "VERIFIED_FACT",
+      "script_intent": "Open on the verified date and the sudden activation of Brazil's air-defense response.",
+      "narrative_text": "On May 19, 1986, Brazil's air-defense network was drawn into a night of unidentified aerial reports.",
+      "visual_anchor": "Brazilian night sky; institutional map or restrained radar-room reenactment",
+      "representation_type": "EVIDENCE_OR_ARCHIVE",
+      "source_ids": [
+        "AN_SERIE_2017",
+        "SIAN_PRESS_1986"
+      ],
+      "disclosure_required": false
+    },
+    {
+      "beat_id": "B02",
+      "order": 2,
+      "role": "context",
+      "truth_mode": "VERIFIED_FACT",
+      "script_intent": "Place the event in Brazil, not in a generic UFO setting.",
+      "narrative_text": "The case unfolded over Brazilian skies, with the country's own defense and air-traffic institutions at the center.",
+      "visual_anchor": "Brazil map with restrained geographic locator; no decorative HUD",
+      "representation_type": "BRAZILIAN_REAL_WORLD",
+      "source_ids": [
+        "AN_SERIE_2017"
+      ],
+      "disclosure_required": false
+    },
+    {
+      "beat_id": "B03",
+      "order": 3,
+      "role": "inciting_event",
+      "truth_mode": "VERIFIED_FACT",
+      "script_intent": "Introduce the institutional detection.",
+      "narrative_text": "CINDACTA radar operators detected dozens of luminous objects and triggered an air-defense alert.",
+      "visual_anchor": "Archival-style radar documentation or controlled radar reenactment",
+      "representation_type": "EVIDENCE_OR_ARCHIVE",
+      "source_ids": [
+        "AN_SERIE_2017"
+      ],
+      "disclosure_required": false
+    },
+    {
+      "beat_id": "B04",
+      "order": 4,
+      "role": "escalation",
+      "truth_mode": "VERIFIED_FACT",
+      "script_intent": "Make the response concrete without adding unsupported tactical detail.",
+      "narrative_text": "The alert moved the report from an unexplained sighting into an official response.",
+      "visual_anchor": "Air-defense operations room; hands, paper and radio detail",
+      "representation_type": "FACELESS_REENACTMENT",
+      "source_ids": [
+        "AN_SERIE_2017",
+        "SIAN_PRESS_1986"
+      ],
+      "disclosure_required": true
+    },
+    {
+      "beat_id": "B05",
+      "order": 5,
+      "role": "escalation",
+      "truth_mode": "VERIFIED_FACT",
+      "script_intent": "Show the first documented military movement.",
+      "narrative_text": "Aircraft took off from the Santa Cruz and Anápolis air bases with orders to approach and identify the objects.",
+      "visual_anchor": "Faceless 1980s-era aircraft scramble reenactment; Brazilian location cue",
+      "representation_type": "BRAZILIAN_REAL_WORLD",
+      "source_ids": [
+        "AN_SERIE_2017",
+        "SIAN_PRESS_1986"
+      ],
+      "disclosure_required": false
+    },
+    {
+      "beat_id": "B06",
+      "order": 6,
+      "role": "escalation",
+      "truth_mode": "VERIFIED_FACT",
+      "script_intent": "Keep the focus on identification, not combat or alien claims.",
+      "narrative_text": "The documented mission was to identify what the operators and pilots were seeing.",
+      "visual_anchor": "Pilot checklist, runway lights and distant aircraft silhouette",
+      "representation_type": "FACELESS_REENACTMENT",
+      "source_ids": [
+        "AN_SERIE_2017"
+      ],
+      "disclosure_required": true
+    },
+    {
+      "beat_id": "B07",
+      "order": 7,
+      "role": "evidence",
+      "truth_mode": "VERIFIED_FACT",
+      "script_intent": "Transition from memory to preserved evidence.",
+      "narrative_text": "A pilot from Anápolis produced a report that is preserved in the National Archive's UFO fund.",
+      "visual_anchor": "Actual archival document only after rights and reproduction status are verified",
+      "representation_type": "EVIDENCE_OR_ARCHIVE",
+      "source_ids": [
+        "AN_SERIE_2017",
+        "AN_FUNDO_2018"
+      ],
+      "disclosure_required": false
+    },
+    {
+      "beat_id": "B08",
+      "order": 8,
+      "role": "evidence",
+      "truth_mode": "VERIFIED_FACT",
+      "script_intent": "Show that the archive is broader than one anecdote.",
+      "narrative_text": "The collection includes reports, questionnaires, photographs, drawings, videos and audio from the Air Force record system.",
+      "visual_anchor": "Archive boxes, document close-ups or verified archive interface",
+      "representation_type": "EVIDENCE_OR_ARCHIVE",
+      "source_ids": [
+        "AN_FUNDO_2018"
+      ],
+      "disclosure_required": false
+    },
+    {
+      "beat_id": "B09",
+      "order": 9,
+      "role": "evidence",
+      "truth_mode": "VERIFIED_FACT",
+      "script_intent": "Introduce the audio trail.",
+      "narrative_text": "The Archive says sixteen audios from the fund were released, including eight recordings of conversations among pilots, controllers and the defense system.",
+      "visual_anchor": "Audio waveform only as a literal archive representation; no fabricated transcript",
+      "representation_type": "EVIDENCE_OR_ARCHIVE",
+      "source_ids": [
+        "AN_AUDIO_2019"
+      ],
+      "disclosure_required": false
+    },
+    {
+      "beat_id": "B10",
+      "order": 10,
+      "role": "reveal",
+      "truth_mode": "VERIFIED_FACT",
+      "script_intent": "Clarify what the label means.",
+      "narrative_text": "In the archive's own explanation, an unidentified object is not automatically an extraterrestrial object.",
+      "visual_anchor": "Archival definition card or restrained document typography",
+      "representation_type": "EVIDENCE_OR_ARCHIVE",
+      "source_ids": [
+        "AN_FUNDO_2018"
+      ],
+      "disclosure_required": false
+    },
+    {
+      "beat_id": "B11",
+      "order": 11,
+      "role": "contradiction",
+      "truth_mode": "EDITORIAL_LIMIT",
+      "script_intent": "Separate the strength of the record from the weakness of the conclusion.",
+      "narrative_text": "The records can establish reports, detections and responses; they do not establish the objects' origin.",
+      "visual_anchor": "Split visual: document evidence on one side, dark unresolved sky on the other",
+      "representation_type": "FACELESS_REENACTMENT",
+      "source_ids": [
+        "AN_FUNDO_2018",
+        "AN_SERIE_2017"
+      ],
+      "disclosure_required": true
+    },
+    {
+      "beat_id": "B12",
+      "order": 12,
+      "role": "investigation",
+      "truth_mode": "VERIFIED_FACT",
+      "script_intent": "Anchor the chronology in a primary record.",
+      "narrative_text": "The SIAN occurrence report contains May 1986 entries involving Anápolis and São José dos Campos, with pilots/controllers and radar references.",
+      "visual_anchor": "Verified SIAN report page with source identifier visible",
+      "representation_type": "EVIDENCE_OR_ARCHIVE",
+      "source_ids": [
+        "SIAN_REPORT_1986"
+      ],
+      "disclosure_required": false
+    },
+    {
+      "beat_id": "B13",
+      "order": 13,
+      "role": "perspective",
+      "truth_mode": "EDITORIAL_LIMIT",
+      "script_intent": "Acknowledge uncertainty without turning it into a supernatural claim.",
+      "narrative_text": "That is the tension: the response is documented, while the phenomenon remains unresolved in this story's evidence boundary.",
+      "visual_anchor": "Empty horizon after aircraft lights fade; clearly dramatized",
+      "representation_type": "FACELESS_REENACTMENT",
+      "source_ids": [
+        "AN_SERIE_2017",
+        "AN_FUNDO_2018"
+      ],
+      "disclosure_required": true
+    },
+    {
+      "beat_id": "B14",
+      "order": 14,
+      "role": "payoff",
+      "truth_mode": "VERIFIED_FACT",
+      "script_intent": "Return to the archive as the durable object.",
+      "narrative_text": "The event survives not as proof of visitors, but as a Brazilian institutional record that can still be examined.",
+      "visual_anchor": "Archive shelf, document folder and SIAN identifier",
+      "representation_type": "BRAZILIAN_REAL_WORLD",
+      "source_ids": [
+        "AN_FUNDO_2018",
+        "AN_SERIE_2017"
+      ],
+      "disclosure_required": false
+    },
+    {
+      "beat_id": "B15",
+      "order": 15,
+      "role": "final_question",
+      "truth_mode": "EDITORIAL_LIMIT",
+      "script_intent": "End the narrative on a precise unanswered question.",
+      "narrative_text": "What exactly crossed those skies is still the question; what was recorded is not.",
+      "visual_anchor": "Night sky over a geographically coherent Brazilian landscape",
+      "representation_type": "BRAZILIAN_REAL_WORLD",
+      "source_ids": [
+        "AN_SERIE_2017",
+        "AN_FUNDO_2018"
+      ],
+      "disclosure_required": false
+    },
+    {
+      "beat_id": "B16",
+      "order": 16,
+      "role": "cta",
+      "truth_mode": "BRAND_CTA",
+      "script_intent": "Use one restrained CTA after the payoff.",
+      "narrative_text": "Follow Because Of This Stories for the next case where the evidence is stranger than the answer.",
+      "visual_anchor": "Approved brand outro only; no new factual claim",
+      "representation_type": "CTA",
+      "source_ids": [],
+      "disclosure_required": false
+    }
+  ],
+  "blocking_next_steps": [
+    "Create clip-selection-dossier.json with exactly 16 beats and candidate/rejection evidence.",
+    "Verify reproduction/use rights and fingerprints for every selected asset.",
+    "Generate and pass all 22 Brazil Files analyst/reviewer receipts.",
+    "Resolve legacy episodes/episode-001 namespace before any production package."
+  ],
+  "production_started": false,
+  "runflow_handoff": "BLOCKED"
+}

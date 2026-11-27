@@ -6,6 +6,7 @@ from pathlib import Path
 from production.brazil_files_ep001_preflight_v1 import (
     BRIEF_PATH,
     DOSSIER_PATH,
+    NARRATIVE_DOSSIER_PATH,
     LEGACY_NAMESPACE_ROOT,
     RECEIPTS_PATH,
     evaluate_preflight,
@@ -30,8 +31,20 @@ class BrazilFilesEpisode001PreflightTests(unittest.TestCase):
         self.assertFalse(report["production_started"])
         self.assertEqual(report["runflow_handoff"], "BLOCKED")
         self.assertTrue(report["namespace_collision"])
+        self.assertEqual(report["narrative"]["status"], "PASS")
         self.assertTrue(any(error.startswith("dossier:") for error in report["errors"]))
         self.assertTrue(any(error.startswith("receipts:") for error in report["errors"]))
+
+    def test_narrative_dossier_is_valid_but_not_clip_approval(self):
+        narrative = json.loads((ROOT / NARRATIVE_DOSSIER_PATH).read_text(encoding="utf-8"))
+        self.assertEqual(narrative["status"], "NARRATIVE_DOSSIER_READY_CLIP_RESEARCH_PENDING")
+        self.assertEqual(narrative["beat_count"], 16)
+        self.assertEqual(len(narrative["beats"]), 16)
+        self.assertEqual(narrative["clip_selection_status"], "NOT_STARTED")
+        self.assertEqual(narrative["rights_status"], "NOT_STARTED")
+        self.assertFalse(narrative["production_started"])
+        self.assertEqual(narrative["runflow_handoff"], "BLOCKED")
+        self.assertEqual(narrative["beats"][-1]["representation_type"], "CTA")
 
     def test_preflight_does_not_treat_partial_files_as_approval(self):
         with tempfile.TemporaryDirectory() as directory:
