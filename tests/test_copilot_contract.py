@@ -27,6 +27,16 @@ class CopilotContractTests(unittest.TestCase):
         self.assertEqual(len({agent["id"] for agent in agents}), 8)
         self.assertTrue(all(agent["can_start_engine"] is False for agent in agents))
 
+    def test_two_execution_levels_are_explicit_and_ordered(self):
+        levels = self.contract["levels"]
+        self.assertEqual(self.contract["level_order"], ["specialized_analysis", "copilot_technical_gate"])
+        self.assertEqual(levels["analysis"]["level"], 1)
+        self.assertFalse(levels["analysis"]["parallel"])
+        self.assertEqual(levels["technical_gate"]["level"], 2)
+        self.assertEqual(levels["technical_gate"]["workflow"], ".github/workflows/copilot-technical-gate.yml")
+        self.assertIn("privacy", levels["technical_gate"]["consolidates"])
+        self.assertFalse(levels["technical_gate"]["can_start_engine"])
+
     def test_output_contract_is_explicit(self):
         required = set(self.contract["required_output_fields"])
         self.assertTrue({"agent_id", "status", "evidence", "output_sha256", "next_gate"} <= required)
