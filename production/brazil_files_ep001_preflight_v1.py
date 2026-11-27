@@ -12,6 +12,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from production.brazil_files_clip_receipt_gate_v1 import evaluate_clip_receipt_gate
 from production.brazil_files_orchestrator import (
     BrazilFilesOrchestratorError,
     build_preparation_plan,
@@ -26,6 +27,7 @@ BRIEF_PATH = STAGING_CASE_ROOT / "case-brief.json"
 NARRATIVE_DOSSIER_PATH = STAGING_CASE_ROOT / "narrative-beat-dossier.json"
 DOSSIER_PATH = STAGING_CASE_ROOT / "clip-selection-dossier.json"
 RECEIPTS_PATH = STAGING_CASE_ROOT / "flow-receipts.json"
+CLIP_RECEIPTS_ROOT = STAGING_CASE_ROOT / "clip-receipts"
 NAMESPACE_LOCK_PATH = STAGING_CASE_ROOT / "namespace-lock.json"
 LEGACY_NAMESPACE_ROOT = Path("episodes/episode-001")
 
@@ -122,6 +124,7 @@ def evaluate_preflight(repo_root: Path = Path(".")) -> dict[str, Any]:
         "narrative_dossier_path": str(NARRATIVE_DOSSIER_PATH),
         "dossier_path": str(DOSSIER_PATH),
         "receipts_path": str(RECEIPTS_PATH),
+        "clip_receipts_path": str(CLIP_RECEIPTS_ROOT),
         "namespace_lock_path": str(NAMESPACE_LOCK_PATH),
         "legacy_namespace_path": str(LEGACY_NAMESPACE_ROOT),
     }
@@ -186,6 +189,10 @@ def evaluate_preflight(repo_root: Path = Path(".")) -> dict[str, Any]:
         }
         errors.extend(f"receipts:{block}" for block in receipts_report["failed_blocks"])
 
+    clip_receipts_report = evaluate_clip_receipt_gate(root)
+    if clip_receipts_report["status"] != "CLIP_RECEIPTS_PASS":
+        errors.extend(f"clip_receipts:{error}" for error in clip_receipts_report["errors"])
+
     namespace_lock_report = _validate_namespace_lock(root)
     if namespace_lock_report["status"] != "PASS":
         errors.extend(f"namespace:{error}" for error in namespace_lock_report["errors"])
@@ -206,6 +213,7 @@ def evaluate_preflight(repo_root: Path = Path(".")) -> dict[str, Any]:
         "narrative": narrative_report,
         "dossier": dossier_report,
         "receipts": receipts_report,
+        "clip_receipts": clip_receipts_report,
         "namespace": namespace_lock_report,
         "namespace_collision": namespace_collision,
         "namespace_protected": namespace_protected,
