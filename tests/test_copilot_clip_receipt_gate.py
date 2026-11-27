@@ -97,7 +97,7 @@ class ClipReceiptGateTests(unittest.TestCase):
             receipt = _receipt(1)
             del receipt["download_evidence"]["file_name"]
             (receipt_dir / "B01-C01.json").write_text(
-                json.dumps(receipt) + "\\n",
+                json.dumps(receipt) + "\n",
                 encoding="utf-8",
             )
             report = evaluate_clip_receipt_gate(root)
