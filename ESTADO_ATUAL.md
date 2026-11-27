@@ -3,7 +3,7 @@
 **Data da verificação:** 2026-11-27  
 **Repositório canônico:** `BORELLITO/because-of-this-engine`  
 **Branch canônica:** `main`  
-**Commit verificado:** `18435cd6eadfd760e21ad07ef7129e5824691254`  
+**Commit verificado:** `923cdc8acd31100e963124c49c2681639a7c4864`  
 **Transparência:** mudanças relevantes exigem relatório completo no PR.
 
 ## Estado canônico
@@ -72,7 +72,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - PR #223 — lock de isolamento de namespace integrado; o pacote legado permanece preservado e não é sobrescrito.
 - PR #225 — primeiro recibo real de clipe (B03-C02) integrado com licença declarada, download, fingerprint SHA-256 e probe técnico; produção continua bloqueada.
 - PR #227 — segundo recibo real de clipe (B02-C01, mapa do Brasil em 4K) integrado com licença declarada, download, fingerprint SHA-256 e probe técnico.
-- PR em andamento — trava fail-closed de inventário dos recibos de clipe integrada ao preflight; ela conta apenas JSONs válidos, rejeita duplicatas e não libera produção.
+- PR #229 — trava fail-closed de inventário dos recibos de clipe integrada ao preflight; conta apenas JSONs válidos, rejeita duplicatas e não libera produção.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
