@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "lock_id": "brazil-files-ep001-namespace-lock-v1",
+  "legacy_namespace": "episodes/episode-001",
+  "staging_namespace": "episodes/brazil-files/episode-001",
+  "legacy_preserved": true,
+  "staging_isolated": true,
+  "overwrite_legacy": false,
+  "migration_status": "PRESERVE_LEGACY_USE_STAGING",
+  "purpose": "Prove coexistence without destructive migration or namespace overwrite."
+}
