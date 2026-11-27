@@ -23,11 +23,27 @@ class V21SafetyHardeningTests(unittest.TestCase):
         (self.workflows / "v21-integration-readonly.yml").write_text(
             "name: canonical integration\n", encoding="utf-8"
         )
+        (self.workflows / "because-of-this-runflow.yml").write_text(
+            "name: canonical Runflow\\n"
+            "concurrency:\\n"
+            "  group: because-of-this-canonical-engine\\n"
+            "  cancel-in-progress: false\\n",
+            encoding="utf-8",
+        )
         (self.root / "production" / "active_engine_policy.json").write_text(
             json.dumps({
                 "active_engine_version": "2.1",
                 "canonical_entrypoint": "production/canonical_entrypoint.py",
                 "production_enablement": False,
+                "execution_serialization": {
+                    "mode": "GLOBAL_SINGLE_CANONICAL_ENGINE",
+                    "concurrency_group": "because-of-this-canonical-engine",
+                    "cancel_in_progress": False,
+                    "parallel_engine_runs": False,
+                    "memory_sync_required_before_and_after": True,
+                    "canonical_state_file": "ESTADO_ATUAL.md",
+                    "source_of_truth": "production/active_engine_policy.json",
+                },
                 "final_render_entrypoint": "production/render_v21_final.py",
                 "final_render_route": {
                     "status": "IMPLEMENTED_FAIL_CLOSED_NO_PRODUCTION_AUTHORIZATION",
