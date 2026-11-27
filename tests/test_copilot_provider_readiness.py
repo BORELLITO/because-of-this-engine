@@ -34,6 +34,14 @@ class ProviderReadinessTests(unittest.TestCase):
         self.assertEqual(report["status"], "BLOCKED")
         self.assertEqual(report["missing"], list(AGENT_ORDER[1:]))
 
+    def test_explicitly_disabled_provider_is_blocked(self):
+        manifest = {
+            AGENT_ORDER[0]: provider(AGENT_ORDER[0], configured=False)
+        }
+        report = validate_provider_manifest(manifest)
+        self.assertEqual(report["status"], "BLOCKED")
+        self.assertEqual(report["missing"], list(AGENT_ORDER))
+
     def test_network_engine_parallel_or_cost_flags_are_rejected(self):
         unsafe_cases = (
             {"network_allowed": True},
