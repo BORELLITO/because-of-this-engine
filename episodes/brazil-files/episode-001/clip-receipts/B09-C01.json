@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "brazil-files-ep001-clip-receipt-b09-c01-v1",
+  "case_id": "official-ufo-night-1986",
+  "beat_id": "B09",
+  "candidate_id": "B09-C01",
+  "source_id": "PIXABAY",
+  "source_url": "https://pixabay.com/videos/audio-wave-sound-audio-frequency-37169/",
+  "media_url": "https://cdn.pixabay.com/video/2020/04/25/37169-412292855_large.mp4",
+  "license_url": "https://pixabay.com/service/license-summary/",
+  "source_page_evidence": {
+    "title": "Audio Wave, Sound, Audio. Free Stock Video",
+    "license_claim": "Free for use under the Pixabay Content License",
+    "creator": "FindingFootage",
+    "asset_id": "37169",
+    "description": "Audio wave, sound and audio frequency waveform visual.",
+    "observed_on": "2026-11-27"
+  },
+  "download_evidence": {
+    "file_name": "37169-412292855_large.mp4",
+    "sha256": "43dbc27e4a1e2682d58f030699d816c34d102e9fed7b816622aa683f53d7f5f2",
+    "container": "MP4",
+    "video_codec": "h264",
+    "audio_codec": null,
+    "width": 3840,
+    "height": 2160,
+    "duration_seconds": 28.24,
+    "integrity_check": "sha256_verified_against_downloaded_bytes"
+  },
+  "rights_status": "VERIFIED",
+  "fingerprint_status": "VERIFIED",
+  "semantic_review": "PROVISIONAL_PASS",
+  "selected_for_production": false,
+  "production_started": false,
+  "runflow_handoff": "BLOCKED_UNTIL_FULL_DOSSIER_AND_ALL_RECEIPTS",
+  "reviewer_note": "B09-C01 matches the literal audio/waveform anchor with a landscape 16:9 waveform on black. It is evidence for the candidate queue only; it does not select the clip or unlock production."
+}
