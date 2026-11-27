@@ -72,6 +72,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - PR #223 — lock de isolamento de namespace integrado; o pacote legado permanece preservado e não é sobrescrito.
 - PR #225 — primeiro recibo real de clipe (B03-C02) integrado com licença declarada, download, fingerprint SHA-256 e probe técnico; produção continua bloqueada.
 - PR #227 — segundo recibo real de clipe (B02-C01, mapa do Brasil em 4K) integrado com licença declarada, download, fingerprint SHA-256 e probe técnico.
+- PR em andamento — trava fail-closed de inventário dos recibos de clipe integrada ao preflight; ela conta apenas JSONs válidos, rejeita duplicatas e não libera produção.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
@@ -85,10 +86,11 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 2. O Runflow ainda não é disparado automaticamente pelo Copiloto; o handoff
    validado apenas prepara a autorização.
 3. Nenhum vídeo final foi produzido por estas mudanças.
-4. O preflight do EP001 reconhece o dossiê narrativo, o registro de fontes e a
-   semente de pesquisa e lock de namespace. Dois recibos de clipe foram verificados
-   (B03-C02 e B02-C01); permanecem 20 recibos de clipes e o dossiê completo de seleção,
-   além dos 22 checkpoints, continuidade e revisão final de direitos/fingerprints.
+4. O preflight do EP001 reconhece o dossiê narrativo, o registro de fontes, a
+   semente de pesquisa e o lock de namespace. A trava de recibos contabiliza somente
+   evidências verificadas: há 2 recibos válidos (B03-C02 e B02-C01) e faltam 20 para
+   o mínimo de 22; o dossiê completo de seleção, os 22 checkpoints, continuidade e
+   revisão final de direitos/fingerprints continuam pendentes.
 5. Qualquer ativação de provedor, gasto, publicação ou dispatch de produção
    exige mudança separada e autorização específica.
 
