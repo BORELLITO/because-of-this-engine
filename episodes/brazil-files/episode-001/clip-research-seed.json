@@ -77,6 +77,14 @@
           "source_id": "PEXELS",
           "source_url": "https://www.pexels.com/video/man-using-walkie-talkie-in-bunker-11764431/",
           "description": "Notebook and radio in dim room",
+          "decision": "REJECTED",
+          "rejection_reason": "Visual review found an identifiable face; this conflicts with B04's FACELESS_REENACTMENT requirement."
+        },
+        {
+          "candidate_id": "B04-C02",
+          "source_id": "PEXELS",
+          "source_url": "https://www.pexels.com/video/person-turning-the-knobs-of-a-radio-10295575/",
+          "description": "Faceless close-up of hands tuning a vintage radio in a dark, cinematic setup",
           "decision": "HOLD"
         }
       ]
