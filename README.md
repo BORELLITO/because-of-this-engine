@@ -6,6 +6,14 @@
 
 Este repositório contém o único motor canônico do canal Because Of This. O estado ativo é o candidato V2.1 factual-documentary com Gemini TTS direto, voz Charon e publicação manual. Nenhum outro motor, prompt, workflow ou provedor pode ser selecionado silenciosamente.
 
+## Regra operacional permanente
+
+- Existe apenas um motor canônico ativo: `production/canonical_entrypoint.py`.
+- O Runflow usa a trava global `because-of-this-canonical-engine`; execuções de episódios diferentes não rodam em paralelo.
+- `cancel-in-progress: false`: uma nova solicitação aguarda a execução existente, sem cancelamento silencioso.
+- `ESTADO_ATUAL.md` deve ser atualizado antes e depois de mudanças relevantes; nenhum motor paralelo, prompt paralelo ou fallback silencioso pode alterar o estado.
+- Se a memória/estado canônico estiver desatualizado, a execução deve parar em modo fail-closed até a reconciliação.
+
 ## Contrato ativo
 
 - Idioma: inglês norte-americano (`en-US`).
