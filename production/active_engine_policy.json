@@ -104,6 +104,15 @@
     "duration_target_max_seconds": 75,
     "duration_exception_max_seconds": 80
   },
+  "execution_serialization": {
+    "mode": "GLOBAL_SINGLE_CANONICAL_ENGINE",
+    "concurrency_group": "because-of-this-canonical-engine",
+    "cancel_in_progress": false,
+    "parallel_engine_runs": false,
+    "memory_sync_required_before_and_after": true,
+    "canonical_state_file": "ESTADO_ATUAL.md",
+    "source_of_truth": "production/active_engine_policy.json"
+  },
   "missing_dependency_policy": "fail_closed",
   "production_enablement": false,
   "preview_enablement": true,
