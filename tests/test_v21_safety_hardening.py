@@ -111,7 +111,8 @@ class V21SafetyHardeningTests(unittest.TestCase):
             "name: Charon\nrun: python -m production.gemini_tts\n",
             encoding="utf-8",
         )
-        self.assertEqual(audit(self.root)["status"], "V21_SINGLETON_PASS")
+        result = audit(self.root)
+        self.assertEqual(result["status"], "V21_SINGLETON_PASS", result)
 
     def test_old_edge_workflow_name_is_rejected(self):
         (self.workflows / "edge-tts-episode005-preview.yml").write_text(
