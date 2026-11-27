@@ -19,6 +19,7 @@ on:
       - "episodes/brazil-files/episode-001/clip-receipts/B08-C02.json"
       - "episodes/brazil-files/episode-001/clip-receipts/B09-C01.json"
       - "episodes/brazil-files/episode-001/clip-receipts/B10-C01.json"
+      - "episodes/brazil-files/episode-001/clip-receipts/B11-C01.json"
       - "episodes/brazil-files/episode-001/namespace-lock.json"
       - "docs/BRAZIL_FILES_EPISODE_001_CLIP_RESEARCH_SEED_V1.md"
       - "docs/BRAZIL_FILES_CANONICAL_CROSSWALK_V1.md"
