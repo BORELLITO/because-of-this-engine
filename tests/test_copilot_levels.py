@@ -64,6 +64,8 @@ class CopilotLevelTests(unittest.TestCase):
             "qa_release_reviewer",
             "delivery_agent",
         ])
+        self.assertFalse(contract["levels"]["analysis"]["parallel"])
+        self.assertFalse(contract["levels"]["analysis"]["can_start_engine"])
 
 
 if __name__ == "__main__":
