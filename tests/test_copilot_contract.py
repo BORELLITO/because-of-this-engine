@@ -35,7 +35,8 @@ class CopilotContractTests(unittest.TestCase):
         self.assertFalse(executor["parallel"])
         self.assertFalse(executor["network_allowed"])
         self.assertFalse(executor["can_start_engine"])
-\n    def test_two_execution_levels_are_explicit_and_ordered(self):
+
+    def test_two_execution_levels_are_explicit_and_ordered(self):
         levels = self.contract["levels"]
         self.assertEqual(self.contract["level_order"], ["specialized_analysis", "copilot_technical_gate"])
         self.assertEqual(levels["analysis"]["level"], 1)
