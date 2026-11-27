@@ -21,6 +21,7 @@ COPILOT_SCOPE_ALLOWLIST = frozenset(
         "docs/COPILOTO_CANONICO_V1.md",
         "ESTADO_ATUAL.md",
         "episodes/brazil-files/episode-001/case-brief.json",
+        "episodes/brazil-files/episode-001/narrative-beat-dossier.json",
         "docs/BRAZIL_FILES_CANONICAL_CROSSWALK_V1.md",
         "docs/BRAZIL_FILES_EPISODE_001_PREFLIGHT_V1.md",
         "production/copilot_contract_v1.json",
