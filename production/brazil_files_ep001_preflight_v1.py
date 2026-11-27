@@ -26,6 +26,7 @@ BRIEF_PATH = STAGING_CASE_ROOT / "case-brief.json"
 NARRATIVE_DOSSIER_PATH = STAGING_CASE_ROOT / "narrative-beat-dossier.json"
 DOSSIER_PATH = STAGING_CASE_ROOT / "clip-selection-dossier.json"
 RECEIPTS_PATH = STAGING_CASE_ROOT / "flow-receipts.json"
+NAMESPACE_LOCK_PATH = STAGING_CASE_ROOT / "namespace-lock.json"
 LEGACY_NAMESPACE_ROOT = Path("episodes/episode-001")
 
 
@@ -79,6 +80,38 @@ def _validate_narrative_dossier(dossier: Any) -> dict[str, Any]:
     return {"status": "PASS" if not errors else "BLOCKED", "errors": errors}
 
 
+def _validate_namespace_lock(root: Path) -> dict[str, Any]:
+    """Prove legacy preservation and staging isolation without moving files."""
+
+    path = root / NAMESPACE_LOCK_PATH
+    if not path.is_file():
+        return {"status": "BLOCKED", "errors": ["namespace lock is missing"]}
+    try:
+        lock = _load_json(path)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        return {"status": "BLOCKED", "errors": [str(exc)]}
+
+    expected = {
+        "schema_version": "1.0",
+        "legacy_namespace": str(LEGACY_NAMESPACE_ROOT),
+        "staging_namespace": str(STAGING_CASE_ROOT),
+        "legacy_preserved": True,
+        "staging_isolated": True,
+        "overwrite_legacy": False,
+        "migration_status": "PRESERVE_LEGACY_USE_STAGING",
+    }
+    errors = [
+        f"{key} is invalid"
+        for key, value in expected.items()
+        if lock.get(key) != value
+    ]
+    if not (root / BRIEF_PATH).is_file():
+        errors.append("staging case brief is missing")
+    if not (root / LEGACY_NAMESPACE_ROOT / "manifest.json").is_file():
+        errors.append("preserved legacy manifest is missing")
+    return {"status": "PASS" if not errors else "BLOCKED", "errors": errors}
+
+
 def evaluate_preflight(repo_root: Path = Path(".")) -> dict[str, Any]:
     """Evaluate the real staged case without inventing missing evidence."""
 
@@ -89,6 +122,7 @@ def evaluate_preflight(repo_root: Path = Path(".")) -> dict[str, Any]:
         "narrative_dossier_path": str(NARRATIVE_DOSSIER_PATH),
         "dossier_path": str(DOSSIER_PATH),
         "receipts_path": str(RECEIPTS_PATH),
+        "namespace_lock_path": str(NAMESPACE_LOCK_PATH),
         "legacy_namespace_path": str(LEGACY_NAMESPACE_ROOT),
     }
 
@@ -152,11 +186,16 @@ def evaluate_preflight(repo_root: Path = Path(".")) -> dict[str, Any]:
         }
         errors.extend(f"receipts:{block}" for block in receipts_report["failed_blocks"])
 
+    namespace_lock_report = _validate_namespace_lock(root)
+    if namespace_lock_report["status"] != "PASS":
+        errors.extend(f"namespace:{error}" for error in namespace_lock_report["errors"])
+
     legacy_manifest = root / LEGACY_NAMESPACE_ROOT / "manifest.json"
     namespace_collision = legacy_manifest.is_file()
-    if namespace_collision:
+    namespace_protected = namespace_collision and namespace_lock_report["status"] == "PASS"
+    if namespace_collision and not namespace_protected:
         errors.append(
-            "namespace:episodes/episode-001 is occupied by the preserved legacy package; "
+            "namespace:episodes/episode-001 is occupied without a valid preservation lock; "
             "staging namespace must remain episodes/brazil-files/episode-001"
         )
 
@@ -167,7 +206,9 @@ def evaluate_preflight(repo_root: Path = Path(".")) -> dict[str, Any]:
         "narrative": narrative_report,
         "dossier": dossier_report,
         "receipts": receipts_report,
+        "namespace": namespace_lock_report,
         "namespace_collision": namespace_collision,
+        "namespace_protected": namespace_protected,
         "errors": errors,
         "evidence": evidence,
         "production_started": False,
