@@ -9,7 +9,6 @@ production handoff stays blocked until the complete dossier and later reviews.
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import re
 from pathlib import Path
@@ -98,6 +97,7 @@ def evaluate_clip_receipt_gate(repo_root: Path = Path(".")) -> dict[str, Any]:
     receipts_dir = root / RECEIPTS_ROOT
     errors: list[str] = []
     receipts: list[dict[str, Any]] = []
+    valid_receipts: list[dict[str, Any]] = []
     seen_candidates: set[str] = set()
     seen_fingerprints: set[str] = set()
 
@@ -113,25 +113,24 @@ def evaluate_clip_receipt_gate(repo_root: Path = Path(".")) -> dict[str, Any]:
         if receipt is None:
             continue
         receipts.append(receipt)
+        duplicate = False
         candidate_id = receipt.get("candidate_id")
         if candidate_id in seen_candidates:
             errors.append(_failure(path.name, f"duplicate candidate_id: {candidate_id}"))
+            duplicate = True
         elif isinstance(candidate_id, str):
             seen_candidates.add(candidate_id)
         download = receipt.get("download_evidence")
         fingerprint = download.get("sha256") if isinstance(download, dict) else None
         if fingerprint in seen_fingerprints:
             errors.append(_failure(path.name, f"duplicate sha256 fingerprint: {fingerprint}"))
+            duplicate = True
         elif isinstance(fingerprint, str):
             seen_fingerprints.add(fingerprint)
+        if not receipt_errors and not duplicate:
+            valid_receipts.append(receipt)
 
-    verified_receipt_count = len(receipts) if not errors else sum(
-        1 for receipt in receipts
-        if receipt.get("rights_status") == "VERIFIED"
-        and receipt.get("fingerprint_status") == "VERIFIED"
-        and receipt.get("production_started") is False
-        and receipt.get("selected_for_production") is False
-    )
+    verified_receipt_count = len(valid_receipts)
     missing_receipts = max(0, MIN_REQUIRED_RECEIPTS - verified_receipt_count)
     if verified_receipt_count < MIN_REQUIRED_RECEIPTS:
         errors.append(

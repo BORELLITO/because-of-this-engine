@@ -89,6 +89,22 @@ class ClipReceiptGateTests(unittest.TestCase):
             self.assertEqual(report["status"], "CLIP_RECEIPTS_BLOCKED")
             self.assertTrue(any("duplicate sha256 fingerprint" in error for error in report["errors"]))
 
+    def test_invalid_receipt_does_not_count_even_if_status_fields_look_verified(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            receipt_dir = root / RECEIPTS_ROOT
+            receipt_dir.mkdir(parents=True)
+            receipt = _receipt(1)
+            del receipt["download_evidence"]["file_name"]
+            (receipt_dir / "B01-C01.json").write_text(
+                json.dumps(receipt) + "\n",
+                encoding="utf-8",
+            )
+            report = evaluate_clip_receipt_gate(root)
+            self.assertEqual(report["status"], "CLIP_RECEIPTS_BLOCKED")
+            self.assertEqual(report["verified_receipt_count"], 0)
+            self.assertEqual(report["missing_receipts"], MIN_REQUIRED_RECEIPTS)
+
     def test_unverified_rights_never_count_as_a_valid_receipt(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
