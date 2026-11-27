@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "brazil-files-ep001-clip-receipt-b05-c03-v1",
+  "case_id": "official-ufo-night-1986",
+  "beat_id": "B05",
+  "candidate_id": "B05-C03",
+  "source_id": "PEXELS",
+  "source_url": "https://www.pexels.com/video/footage-of-a-flying-airplane-at-night-6467678/",
+  "media_url": "https://videos.pexels.com/video-files/6467678/6467678-hd_1920_1080_25fps.mp4",
+  "license_url": "https://www.pexels.com/license/",
+  "source_page_evidence": {
+    "title": "Footage of a Flying Airplane at Night Free Stock Video Footage, Royalty-Free 4K & HD Video Clip",
+    "license_claim": "Free to use under the Pexels License",
+    "creator": "Adrian Frentescu",
+    "asset_id": "6467678",
+    "description": "Airplane takes off with lights on against a dark evening sky.",
+    "observed_on": "2026-11-27"
+  },
+  "download_evidence": {
+    "file_name": "6467678-hd_1920_1080_25fps.mp4",
+    "sha256": "215b27c0a84a8a677d56a2b7717f9e148264de3cbce95dae992886d42bb83878",
+    "container": "MP4",
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "width": 1920,
+    "height": 1080,
+    "duration_seconds": 5.205,
+    "integrity_check": "sha256_verified_against_downloaded_bytes"
+  },
+  "rights_status": "VERIFIED",
+  "fingerprint_status": "VERIFIED",
+  "semantic_review": "PROVISIONAL_PASS",
+  "selected_for_production": false,
+  "production_started": false,
+  "runflow_handoff": "BLOCKED_UNTIL_FULL_DOSSIER_AND_ALL_RECEIPTS",
+  "reviewer_note": "B05-C03 matches the aircraft-movement anchor with a landscape 16:9 night takeoff and visible navigation lights. It is evidence for the candidate queue only; it does not select the clip or unlock production."
+}
