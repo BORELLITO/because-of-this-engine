@@ -86,7 +86,11 @@ O módulo `production/copilot_analysis_agents_v1.py` fornece os adaptadores exec
 
 
 Research, factual, editorial, direitos, continuidade visual e timeline/captions trabalham em sequência, cada um com escopo isolado e recibo próprio. Nenhum deles pode iniciar o motor ou aprovar outra área.
-\nA resolução operacional ocorre por `production/copilot_executor_registry_v1.py`: cada papel recebe um executor explicitamente registrado por `agent_id`. Executor ausente gera recibo `BLOCKED` e encerra a lane; não há executor implícito, fallback, rede ou paralelismo.\n
+
+A resolução operacional ocorre por `production/copilot_executor_registry_v1.py`: cada papel recebe um executor explicitamente registrado por `agent_id`. Executor ausente gera recibo `BLOCKED` e encerra a lane; não há executor implícito, fallback, rede ou paralelismo.
+
+A validação do recibo também reconcilia `input_revision`, artefatos/evidências, domínio de aprovação, hash, status, motivo de bloqueio e orçamento máximo de tokens antes de aceitar o próximo agente.
+
 ### Nível 2 — gate técnico consolidado
 
 Depois do Nível 1, o gate técnico único consolida:
