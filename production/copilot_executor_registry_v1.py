@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-from collections.abc import Callable, Iterable, Mapping
+from collections.abc import Iterable, Mapping
 from typing import Any
 
 from production.copilot_analysis_agents_v1 import (
@@ -18,9 +18,13 @@ from production.copilot_analysis_agents_v1 import (
     build_task,
     dispatch_sequential,
 )
+from production.copilot_provider_readiness_v1 import (
+    RegisteredProvider,
+    validate_provider_manifest,
+)
 
 
-Executor = Callable[[dict[str, Any]], dict[str, Any]]
+Executor = RegisteredProvider
 
 
 SPECIALIZED_ROLE_PROMPTS: dict[str, str] = {
@@ -66,17 +70,8 @@ def build_specialized_tasks(
 
 
 def registry_status(executors: Mapping[str, Executor]) -> dict[str, Any]:
-    """Return a non-sensitive readiness report for the six required roles."""
-    configured = sorted(agent_id for agent_id in AGENT_ORDER if callable(executors.get(agent_id)))
-    missing = [agent_id for agent_id in AGENT_ORDER if agent_id not in configured]
-    return {
-        "status": "READY" if not missing else "BLOCKED",
-        "configured": configured,
-        "missing": missing,
-        "parallel": False,
-        "can_start_engine": False,
-        "network_started": False,
-    }
+    """Return a non-sensitive, fail-closed provider readiness report."""
+    return validate_provider_manifest(executors)
 
 
 def _blocked_result(task: dict[str, Any], reason: str) -> dict[str, Any]:
@@ -106,24 +101,23 @@ def dispatch_registered(
     tasks: Iterable[dict[str, Any]],
     executors: Mapping[str, Executor],
 ) -> list[dict[str, Any]]:
-    """Dispatch registered providers strictly in order and fail closed.
+    """Dispatch only a fully preflighted provider manifest in canonical order.
 
-    The existing adapter remains the single sequencing authority. A provider
-    is invoked only for its current role; a missing role returns a BLOCKED
-    receipt and stops the lane. Provider output is validated by the adapter.
+    Missing providers return one BLOCKED receipt before any configured provider
+    is called. Unsafe metadata raises a contract error before dispatch.
     """
-    status = registry_status(executors)
     task_list = list(tasks)
     if [task.get("agent_id") for task in task_list] != list(AGENT_ORDER):
         raise AnalysisContractError("registered analysis tasks must use canonical order")
 
-    def invoke(task: dict[str, Any]) -> dict[str, Any]:
-        provider = executors.get(task["agent_id"])
-        if not callable(provider):
-            return _blocked_result(task, f"executor is not configured: {task['agent_id']}")
-        return provider(task)
+    status = registry_status(executors)
+    if status["status"] == "BLOCKED":
+        missing_agent = status["missing"][0]
+        missing_task = next(task for task in task_list if task["agent_id"] == missing_agent)
+        return [_blocked_result(missing_task, f"executor is not configured: {missing_agent}")]
 
-    results = dispatch_sequential(task_list, invoke)
-    if status["status"] == "BLOCKED" and results and results[-1]["status"] == "PASS":
-        raise AnalysisContractError("registry reported missing executors but lane passed")
-    return results
+    def invoke(task: dict[str, Any]) -> dict[str, Any]:
+        return executors[task["agent_id"]].execute(task)
+
+    return dispatch_sequential(task_list, invoke)
+
