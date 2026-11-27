@@ -81,17 +81,17 @@ O Copiloto só pode informar “vídeo pronto para entrega” quando:
 
 ## 8. Dois níveis integrados
 
-### Nível 1 — agentes especializados de análise
+### Nível 1 — agentes especializados de análise, QA e entrega
 O módulo `production/copilot_analysis_agents_v1.py` fornece os adaptadores executáveis do nível 1: ordem canônica, domínio de aprovação, hash do artefato, orçamento de tokens e `can_start_engine=false`. O executor é injetado; o adaptador não chama modelo, não grava memória, não inicia engine, não renderiza e não publica. Um resultado diferente de `PASS` interrompe a sequência.
 
 
-Research, factual, editorial, direitos, continuidade visual e timeline/captions trabalham em sequência, cada um com escopo isolado e recibo próprio. Nenhum deles pode iniciar o motor ou aprovar outra área.
+Research, factual, editorial, direitos, continuidade visual e timeline/captions trabalham em sequência, seguidos por QA de release e empacotamento de entrega. Cada função possui escopo isolado e recibo próprio. Nenhum deles pode iniciar o motor ou aprovar outra área.
 
 A resolução operacional ocorre por `production/copilot_executor_registry_v1.py`: cada papel recebe um executor explicitamente registrado por `agent_id`. Executor ausente gera recibo `BLOCKED` e encerra a lane; não há executor implícito, fallback, rede ou paralelismo.
 
 A validação do recibo também reconcilia `input_revision`, artefatos/evidências, domínio de aprovação, hash, status, motivo de bloqueio e orçamento máximo de tokens antes de aceitar o próximo agente.
 
-Antes de qualquer executor ser chamado, `production/copilot_provider_readiness_v1.py` exige um manifesto explícito por `agent_id`. Cada registro precisa declarar provedor, modo sequencial, rede desativada, `can_start_engine=false` e custo incremental zero. Manifesto incompleto retorna `BLOCKED` sem chamar nenhum provedor; metadado inseguro falha fechado. Isso prepara a conexão futura de provedores reais sem criar fallback, paralelismo, gasto ou ativação de produção.
+Os oito papéis executáveis são: `research_analyst`, `factual_reviewer`, `story_editorial_agent`, `rights_provenance_agent`, `visual_continuity_agent`, `timeline_caption_agent`, `qa_release_reviewer` e `delivery_agent`. Antes de qualquer executor ser chamado, `production/copilot_provider_readiness_v1.py` exige um manifesto explícito por `agent_id`. Cada registro precisa declarar provedor, modo sequencial, rede desativada, `can_start_engine=false` e custo incremental zero. Manifesto incompleto retorna `BLOCKED` sem chamar nenhum provedor; metadado inseguro falha fechado. Isso prepara a conexão futura de provedores reais sem criar fallback, paralelismo, gasto ou ativação de produção.
 
 ### Nível 2 — gate técnico consolidado
 
