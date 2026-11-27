@@ -122,3 +122,4 @@ A implementação ocorre em branch própria, com testes de contrato e sem ativar
 A governança do motor único deve ser efetivada antes da ativação do Copiloto. O PR que aplica a serialização global do Runflow é integrado primeiro; em seguida, o PR do Copiloto pode ser integrado porque mantém `production_activation.enabled=false`. A integração não autoriza Runflow, TTS, render, publicação ou gasto.
 A aprovação de cada etapa depende dos checks obrigatórios do próprio evento do PR; checks de um head anterior não substituem a validação do head atual.
 A revalidação de um PR após mudança da base deve usar o merge-ref e o corpo atuais; resultados de tentativas anteriores permanecem apenas como histórico.
+A proteção imutável também exige o marcador de autorização no título quando a mudança toca a superfície `production/`; isso é uma exigência de governança, não uma autorização para iniciar produção.
