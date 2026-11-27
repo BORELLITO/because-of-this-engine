@@ -79,9 +79,26 @@ O Copiloto só pode informar “vídeo pronto para entrega” quando:
 - o artefato final tiver hash e localização verificáveis;
 - publicação continuar manual, salvo autorização específica.
 
-## 8. Implementação segura
+## 8. Dois níveis integrados
 
-A implementação deve ocorrer em branch própria, com testes de contrato e sem ativar produção. O primeiro incremento recomendado é o contrato de estado e fila do Copiloto; depois entram os adaptadores dos subagentes. O motor canônico só pode ser chamado quando todos os gates anteriores estiverem `PASS`.
+### Nível 1 — agentes especializados de análise
+
+Research, factual, editorial, direitos, continuidade visual e timeline/captions trabalham em sequência, cada um com escopo isolado e recibo próprio. Nenhum deles pode iniciar o motor ou aprovar outra área.
+
+### Nível 2 — gate técnico consolidado
+
+Depois do Nível 1, o gate técnico único consolida:
+
+- testes do contrato e da fila;
+- privacidade e segredos acidentais;
+- escopo permitido do PR;
+- compilação dos módulos;
+- regressões do copiloto;
+- produção desativada e fallback proibido.
+
+Implementação: `production/copilot_technical_gate_v1.py`. Workflow: `.github/workflows/copilot-technical-gate.yml`. O gate é read-only, fail-closed e não inicia produção.
+
+A implementação ocorre em branch própria, com testes de contrato e sem ativar produção. O motor canônico só pode ser chamado quando os dois níveis anteriores estiverem `PASS`.
 
 ## 9. Fila técnica implementada
 
