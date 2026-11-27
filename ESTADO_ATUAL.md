@@ -69,6 +69,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - PR #217 — dossiê narrativo sourced de 16 beats integrado ao preflight e ao gate técnico; clip research permanece pendente.
 - PR #219 — registro fail-closed de fontes gratuitas de clipes integrado ao gate; licenças continuam verificadas por asset.
 - PR #221 — semente de pesquisa com candidatos reais por beat, todos em HOLD, integrada ao gate sem liberar seleção.
+- PR #223 — lock de isolamento de namespace integrado; o pacote legado permanece preservado e não é sobrescrito.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
@@ -83,8 +84,8 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
    validado apenas prepara a autorização.
 3. Nenhum vídeo final foi produzido por estas mudanças.
 4. O preflight do EP001 reconhece o dossiê narrativo, o registro de fontes e a
-   semente de pesquisa, mas permanece `BLOCKED` por falta do dossiê de seleção de clipes,
-   recibos dos 22 checkpoints, direitos/fingerprints e colisão com o namespace legado.
+   semente de pesquisa e lock de namespace, mas permanece `BLOCKED` por falta do
+   dossiê de seleção de clipes, recibos dos 22 checkpoints e direitos/fingerprints.
 5. Qualquer ativação de provedor, gasto, publicação ou dispatch de produção
    exige mudança separada e autorização específica.
 
