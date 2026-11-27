@@ -82,6 +82,8 @@ O Copiloto só pode informar “vídeo pronto para entrega” quando:
 ## 8. Dois níveis integrados
 
 ### Nível 1 — agentes especializados de análise
+O módulo `production/copilot_analysis_agents_v1.py` fornece os adaptadores executáveis do nível 1: ordem canônica, domínio de aprovação, hash do artefato, orçamento de tokens e `can_start_engine=false`. O executor é injetado; o adaptador não chama modelo, não grava memória, não inicia engine, não renderiza e não publica. Um resultado diferente de `PASS` interrompe a sequência.
+
 
 Research, factual, editorial, direitos, continuidade visual e timeline/captions trabalham em sequência, cada um com escopo isolado e recibo próprio. Nenhum deles pode iniciar o motor ou aprovar outra área.
 
