@@ -31,14 +31,62 @@
     "FAIL_CLOSED"
   ],
   "subagents": [
-    {"id": "research_analyst", "order": 1, "artifact": "research_card", "approval_domain": "sources", "can_start_engine": false},
-    {"id": "factual_reviewer", "order": 2, "artifact": "factual_receipt", "approval_domain": "factuality", "can_start_engine": false},
-    {"id": "story_editorial_agent", "order": 3, "artifact": "script_candidate", "approval_domain": "editorial", "can_start_engine": false},
-    {"id": "rights_provenance_agent", "order": 4, "artifact": "rights_ledger", "approval_domain": "rights", "can_start_engine": false},
-    {"id": "visual_continuity_agent", "order": 5, "artifact": "visual_map", "approval_domain": "continuity", "can_start_engine": false},
-    {"id": "timeline_caption_agent", "order": 6, "artifact": "timeline_preflight", "approval_domain": "timeline", "can_start_engine": false},
-    {"id": "qa_release_reviewer", "order": 7, "artifact": "qa_receipt", "approval_domain": "release_qa", "can_start_engine": false},
-    {"id": "delivery_agent", "order": 8, "artifact": "delivery_package", "approval_domain": "delivery", "can_start_engine": false}
+    {
+      "id": "research_analyst",
+      "order": 1,
+      "artifact": "research_card",
+      "approval_domain": "sources",
+      "can_start_engine": false
+    },
+    {
+      "id": "factual_reviewer",
+      "order": 2,
+      "artifact": "factual_receipt",
+      "approval_domain": "factuality",
+      "can_start_engine": false
+    },
+    {
+      "id": "story_editorial_agent",
+      "order": 3,
+      "artifact": "script_candidate",
+      "approval_domain": "editorial",
+      "can_start_engine": false
+    },
+    {
+      "id": "rights_provenance_agent",
+      "order": 4,
+      "artifact": "rights_ledger",
+      "approval_domain": "rights",
+      "can_start_engine": false
+    },
+    {
+      "id": "visual_continuity_agent",
+      "order": 5,
+      "artifact": "visual_map",
+      "approval_domain": "continuity",
+      "can_start_engine": false
+    },
+    {
+      "id": "timeline_caption_agent",
+      "order": 6,
+      "artifact": "timeline_preflight",
+      "approval_domain": "timeline",
+      "can_start_engine": false
+    },
+    {
+      "id": "qa_release_reviewer",
+      "order": 7,
+      "artifact": "qa_receipt",
+      "approval_domain": "release_qa",
+      "can_start_engine": false
+    },
+    {
+      "id": "delivery_agent",
+      "order": 8,
+      "artifact": "delivery_package",
+      "approval_domain": "delivery",
+      "can_start_engine": false
+    }
   ],
   "required_output_fields": [
     "agent_id",
@@ -52,12 +100,25 @@
     "next_gate",
     "token_budget_used"
   ],
-  "allowed_statuses": ["PASS", "EDIT", "BLOCKED", "FAIL"],
+  "allowed_statuses": [
+    "PASS",
+    "EDIT",
+    "BLOCKED",
+    "FAIL"
+  ],
   "production_activation": {
     "enabled": false,
     "requires_all_gates_pass": true,
     "requires_current_memory": true,
     "requires_human_approval_for_publication": true,
     "fallbacks_allowed": false
+  },
+  "queue_contract": {
+    "module": "production/copilot_queue_v1.py",
+    "state_file_role": "isolated_queue_snapshot",
+    "persistence": "atomic_replace_with_fsync",
+    "claim_policy": "EXACTLY_ONE_ACTIVE_RUN",
+    "stale_context": "FAIL_CLOSED",
+    "engine_activation": "DISABLED_IN_THIS_PR"
   }
 }
