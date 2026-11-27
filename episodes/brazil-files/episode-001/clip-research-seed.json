@@ -1,0 +1,291 @@
+{
+  "schema_version": "1.0",
+  "research_id": "brazil-files-ep001-clip-research-seed-v1",
+  "case_id": "official-ufo-night-1986",
+  "status": "RESEARCH_SEED_PARTIAL_SELECTION_NOT_STARTED",
+  "created_at": "2026-11-27",
+  "source_registry": "production/brazil_files_clip_source_registry_v1.json",
+  "policy": {
+    "default_decision": "HOLD",
+    "rights_status": "NOT_VERIFIED_PER_ASSET",
+    "fingerprint_status": "PENDING_DOWNLOAD",
+    "selected_count": 0,
+    "production_started": false,
+    "runflow_handoff": "BLOCKED",
+    "note": "This seed is a research queue, not clip-selection-dossier.json."
+  },
+  "beats": [
+    {
+      "beat_id": "B01",
+      "visual_anchor": "Brazilian night sky and first aerial movement",
+      "candidates": [
+        {
+          "candidate_id": "B01-C01",
+          "source_id": "PIXABAY",
+          "source_url": "https://pixabay.com/videos/moon-night-sky-airplane-flight-142476/",
+          "description": "Aircraft crossing the moon/night sky",
+          "decision": "HOLD"
+        },
+        {
+          "candidate_id": "B01-C02",
+          "source_id": "PEXELS",
+          "source_url": "https://www.pexels.com/video/airplane-taking-off-at-night-10003629/",
+          "description": "Night aircraft takeoff with runway lights",
+          "decision": "HOLD"
+        }
+      ]
+    },
+    {
+      "beat_id": "B02",
+      "visual_anchor": "Brazilian geographic context",
+      "candidates": [
+        {
+          "candidate_id": "B02-C01",
+          "source_id": "PIXABAY",
+          "source_url": "https://pixabay.com/videos/brazil-brazil-map-brazil-flag-112034/",
+          "description": "Brazil map zoom",
+          "decision": "HOLD"
+        }
+      ]
+    },
+    {
+      "beat_id": "B03",
+      "visual_anchor": "Radar detection",
+      "candidates": [
+        {
+          "candidate_id": "B03-C01",
+          "source_id": "PEXELS",
+          "source_url": "https://www.pexels.com/video/a-person-operating-a-radar-6442793/",
+          "description": "Hand operating vintage radar",
+          "decision": "HOLD"
+        },
+        {
+          "candidate_id": "B03-C02",
+          "source_id": "PIXABAY",
+          "source_url": "https://pixabay.com/videos/flight-mountains-radar-relief-dark-1221/",
+          "description": "Radar relief visualization",
+          "decision": "HOLD"
+        }
+      ]
+    },
+    {
+      "beat_id": "B04",
+      "visual_anchor": "Operations room, notes and radio",
+      "candidates": [
+        {
+          "candidate_id": "B04-C01",
+          "source_id": "PEXELS",
+          "source_url": "https://www.pexels.com/video/man-using-walkie-talkie-in-bunker-11764431/",
+          "description": "Notebook and radio in dim room",
+          "decision": "HOLD"
+        }
+      ]
+    },
+    {
+      "beat_id": "B05",
+      "visual_anchor": "Aircraft movement from an air base",
+      "candidates": [
+        {
+          "candidate_id": "B05-C01",
+          "source_id": "PEXELS",
+          "source_url": "https://www.pexels.com/video/airplane-taking-off-at-night-10003629/",
+          "description": "Night takeoff",
+          "decision": "HOLD"
+        },
+        {
+          "candidate_id": "B05-C02",
+          "source_id": "MIXKIT",
+          "source_url": "https://mixkit.co/free-stock-video/aircraft-preparing-to-take-off-at-night-27995/",
+          "description": "Aircraft preparing to take off",
+          "decision": "REJECTED",
+          "rejection_reason": "Result page states the free 720p item is under Mixkit Restricted License and personal use only."
+        }
+      ]
+    },
+    {
+      "beat_id": "B06",
+      "visual_anchor": "Faceless cockpit and identification mission",
+      "candidates": [
+        {
+          "candidate_id": "B06-C01",
+          "source_id": "PEXELS",
+          "source_url": "https://www.pexels.com/video/view-inside-of-airplane-cockpit-10419525/",
+          "description": "Night cockpit controls and avionics",
+          "decision": "HOLD"
+        },
+        {
+          "candidate_id": "B06-C02",
+          "source_id": "PEXELS",
+          "source_url": "https://www.pexels.com/video/nighttime-approach-from-airplane-cockpit-36675372/",
+          "description": "Night approach cockpit view",
+          "decision": "HOLD"
+        }
+      ]
+    },
+    {
+      "beat_id": "B07",
+      "visual_anchor": "Pilot report and preserved evidence",
+      "candidates": [
+        {
+          "candidate_id": "B07-C01",
+          "source_id": "PEXELS",
+          "source_url": "https://www.pexels.com/video/person-looking-at-files-inside-a-cardboard-box-8371852/",
+          "description": "Hands examining investigation files",
+          "decision": "HOLD"
+        }
+      ]
+    },
+    {
+      "beat_id": "B08",
+      "visual_anchor": "Archive boxes, documents and collection breadth",
+      "candidates": [
+        {
+          "candidate_id": "B08-C01",
+          "source_id": "PEXELS",
+          "source_url": "https://www.pexels.com/video/a-man-walking-in-the-office-8869995/",
+          "description": "Archive shelves and stacked records",
+          "decision": "HOLD"
+        },
+        {
+          "candidate_id": "B08-C02",
+          "source_id": "PIXABAY",
+          "source_url": "https://pixabay.com/videos/file-documents-office-paperwork-87146/",
+          "description": "Files and paperwork",
+          "decision": "HOLD"
+        }
+      ]
+    },
+    {
+      "beat_id": "B09",
+      "visual_anchor": "Literal audio waveform representation",
+      "candidates": [
+        {
+          "candidate_id": "B09-C01",
+          "source_id": "PIXABAY",
+          "source_url": "https://pixabay.com/videos/audio-wave-sound-audio-frequency-37169/",
+          "description": "Audio waveform and frequency",
+          "decision": "HOLD"
+        }
+      ]
+    },
+    {
+      "beat_id": "B10",
+      "visual_anchor": "Definition card and document typography",
+      "candidates": [
+        {
+          "candidate_id": "B10-C01",
+          "source_id": "PEXELS",
+          "source_url": "https://www.pexels.com/video/a-person-checking-the-documents-8529094/",
+          "description": "Hands organizing documents",
+          "decision": "HOLD"
+        },
+        {
+          "candidate_id": "B10-C02",
+          "source_id": "PIXABAY",
+          "source_url": "https://pixabay.com/videos/file-documents-office-paperwork-87146/",
+          "description": "Paperwork close-up",
+          "decision": "HOLD"
+        }
+      ]
+    },
+    {
+      "beat_id": "B11",
+      "visual_anchor": "Evidence versus unresolved sky",
+      "candidates": [
+        {
+          "candidate_id": "B11-C01",
+          "source_id": "PIXABAY",
+          "source_url": "https://pixabay.com/videos/clouds-stars-full-moon-night-sky-23567/",
+          "description": "Clouds, stars and full moon",
+          "decision": "HOLD"
+        }
+      ]
+    },
+    {
+      "beat_id": "B12",
+      "visual_anchor": "Primary report page and identifiers",
+      "candidates": [
+        {
+          "candidate_id": "B12-C01",
+          "source_id": "PEXELS",
+          "source_url": "https://www.pexels.com/video/person-looking-at-files-inside-a-cardboard-box-8371852/",
+          "description": "Investigation files and hands",
+          "decision": "HOLD"
+        }
+      ]
+    },
+    {
+      "beat_id": "B13",
+      "visual_anchor": "Empty unresolved horizon",
+      "candidates": [
+        {
+          "candidate_id": "B13-C01",
+          "source_id": "PIXABAY",
+          "source_url": "https://pixabay.com/videos/sunset-clouds-horizon-silhouette-232327/",
+          "description": "Horizon and silhouette",
+          "decision": "HOLD"
+        },
+        {
+          "candidate_id": "B13-C02",
+          "source_id": "PIXABAY",
+          "source_url": "https://pixabay.com/videos/moon-night-silhouette-forest-trees-302464/",
+          "description": "Moon and night silhouette",
+          "decision": "REJECTED",
+          "rejection_reason": "Result page marks the item as AI-generated; documentary evidence lane requires real-world or explicitly disclosed reenactment material."
+        }
+      ]
+    },
+    {
+      "beat_id": "B14",
+      "visual_anchor": "Brazilian archive as durable object",
+      "candidates": [
+        {
+          "candidate_id": "B14-C01",
+          "source_id": "PEXELS",
+          "source_url": "https://www.pexels.com/video/a-man-walking-in-the-office-8869995/",
+          "description": "Archive shelves and records",
+          "decision": "HOLD"
+        }
+      ]
+    },
+    {
+      "beat_id": "B15",
+      "visual_anchor": "Brazilian landscape after the event",
+      "candidates": [
+        {
+          "candidate_id": "B15-C01",
+          "source_id": "PIXABAY",
+          "source_url": "https://pixabay.com/videos/sao-paulo-brazil-city-at-night-387580/",
+          "description": "São Paulo at night",
+          "decision": "HOLD"
+        },
+        {
+          "candidate_id": "B15-C02",
+          "source_id": "PEXELS",
+          "source_url": "https://www.pexels.com/video/aerial-view-of-a-bustling-brazilian-city-at-twilight-36410112/",
+          "description": "Brazilian city aerial at twilight",
+          "decision": "HOLD"
+        }
+      ]
+    },
+    {
+      "beat_id": "B16",
+      "visual_anchor": "Approved Because Of This Stories outro",
+      "candidates": [
+        {
+          "candidate_id": "B16-C01",
+          "source_id": "INTERNAL_BRAND",
+          "source_url": "repo://approved-brand-outro",
+          "description": "Internal approved outro only",
+          "decision": "HOLD"
+        }
+      ]
+    }
+  ],
+  "blocking_next_steps": [
+    "Open each exact asset page and capture its current license/terms.",
+    "Download only after semantic and rights review; compute unique fingerprint.",
+    "Expand each non-CTA beat to 3-5 viable candidates before selection.",
+    "Do not promote any HOLD item to SELECTED in this seed."
+  ]
+}
