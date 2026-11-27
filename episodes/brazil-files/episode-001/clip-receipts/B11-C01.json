@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "brazil-files-ep001-clip-receipt-b11-c01-v1",
+  "case_id": "official-ufo-night-1986",
+  "beat_id": "B11",
+  "candidate_id": "B11-C01",
+  "source_id": "PIXABAY",
+  "source_url": "https://pixabay.com/videos/clouds-stars-full-moon-night-sky-23567/",
+  "media_url": "https://cdn.pixabay.com/video/2019/05/12/23567-335833141_large.mp4",
+  "license_url": "https://pixabay.com/service/license-summary/",
+  "source_page_evidence": {
+    "title": "Clouds, Stars, Full Moon. Free Stock Video",
+    "license_claim": "Free for use under the Pixabay Content License",
+    "creator": "adege",
+    "asset_id": "23567",
+    "description": "Clouds, stars and full moon over a night landscape.",
+    "observed_on": "2026-11-27"
+  },
+  "download_evidence": {
+    "file_name": "23567-335833141_large.mp4",
+    "sha256": "5b0547f7ce64955e04142866d6fd8591419f2179d3b7d88559357bbed1659c6e",
+    "container": "MP4",
+    "video_codec": "h264",
+    "audio_codec": null,
+    "width": 3840,
+    "height": 2160,
+    "duration_seconds": 22.458333,
+    "integrity_check": "sha256_verified_against_downloaded_bytes"
+  },
+  "rights_status": "VERIFIED",
+  "fingerprint_status": "VERIFIED",
+  "semantic_review": "PROVISIONAL_PASS",
+  "selected_for_production": false,
+  "production_started": false,
+  "runflow_handoff": "BLOCKED_UNTIL_FULL_DOSSIER_AND_ALL_RECEIPTS",
+  "reviewer_note": "B11-C01 matches the evidence-versus-unresolved-sky anchor with a natural night-sky timelapse, stars and mountain silhouette in landscape 16:9. The source description explicitly identifies real nature imagery and no AI montage. This is evidence for the candidate queue only; it does not select the clip or unlock production."
+}
