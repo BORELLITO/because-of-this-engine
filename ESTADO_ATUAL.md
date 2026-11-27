@@ -3,7 +3,7 @@
 **Data da verificação:** 2026-11-27  
 **Repositório canônico:** `BORELLITO/because-of-this-engine`  
 **Branch canônica:** `main`  
-**Commit verificado:** `9f7af0c52ff3341f7cd4b9df44d2b1820f33ac6f`  
+**Commit verificado:** `1452560ca7cc21d934b90b3f52f6674c294409b0`  
 **Transparência:** mudanças relevantes exigem relatório completo no PR.
 
 ## Estado canônico
@@ -46,7 +46,7 @@ sem criar agentes, motores ou filas paralelas.
 - Checkpoints: **22**
 - Capacidades: **8**
 - Modo: `SEQUENTIAL_REUSE_CANONICAL_AGENT`
-- Handoff terminal: `delivery_agent), somente após 22 recibos `PASS`
+- Handoff terminal: `delivery_agent`, somente após 22 recibos `PASS`
 
 ### Handoff para Runflow
 
@@ -75,6 +75,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - PR #229 — trava fail-closed de inventário dos recibos de clipe integrada ao preflight; conta apenas JSONs válidos, rejeita duplicatas e não libera produção.
 - PR #231 — contagem endurecida: recibos com erro local ou duplicatas não contribuem para os 22 válidos.
 - PR #233 — B04-C01 rejeitado por mostrar rosto; B04-C02 integrado com mãos ajustando rádio, licença, fingerprint e probe técnico verificados.
+- PR #235 — B05-C03 integrado como recibo HOLD: aeronave noturna em 16:9, licença, fingerprint e probe técnico verificados; seleção e produção continuam bloqueadas.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
@@ -90,7 +91,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 3. Nenhum vídeo final foi produzido por estas mudanças.
 4. O preflight do EP001 reconhece o dossiê narrativo, o registro de fontes, a
    semente de pesquisa e o lock de namespace. A trava de recibos contabiliza somente
-   evidências verificadas: há 3 recibos válidos (B03-C02, B02-C01 e B04-C02) e faltam 19 para
+   evidências verificadas: há 4 recibos válidos (B03-C02, B02-C01, B04-C02 e B05-C03) e faltam 18 para
    o mínimo de 22; B04-C01 foi rejeitado na revisão semântica por expor rosto. O dossiê
    completo de seleção, os 22 checkpoints, continuidade e
    revisão final de direitos/fingerprints continuam pendentes.
