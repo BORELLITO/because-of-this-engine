@@ -13,6 +13,7 @@ Este repositório contém o único motor canônico do canal Because Of This. O e
 - `cancel-in-progress: false`: uma nova solicitação aguarda a execução existente, sem cancelamento silencioso.
 - `ESTADO_ATUAL.md` deve ser atualizado antes e depois de mudanças relevantes; nenhum motor paralelo, prompt paralelo ou fallback silencioso pode alterar o estado.
 - Se a memória/estado canônico estiver desatualizado, a execução deve parar em modo fail-closed até a reconciliação.
+- Alterações em arquivos de autoridade exigem marcador explícito de autorização no PR e passam pelos checks imutáveis antes de qualquer merge.
 
 ## Contrato ativo
 
