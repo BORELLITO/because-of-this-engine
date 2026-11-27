@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "case_id": "official-ufo-night-1986",
+  "working_title": "The Night Brazil's Air Force Chased the Unknown",
+  "lane": "DOCUMENTED_UNEXPLAINED",
+  "premise": "On May 19, 1986, Brazilian air-defense operators and military pilots reported and pursued multiple unidentified objects over Brazil. The event is documented in Brazilian institutional records, but the nature of the objects remains unresolved.",
+  "source_urls": [
+    "https://www.gov.br/arquivonacional/pt-br/canais_atendimento/imprensa/noticias/conheca-o-fundo-sobre-ovnis-do-arquivo-nacional",
+    "https://www.gov.br/arquivonacional/pt-br/canais_atendimento/imprensa/copy_of_noticias/serie-relatos-extraterrestres",
+    "https://www.gov.br/imprensanacional/pt-br/centrais-de-conteudo/arquivos/revista_in_2017_03.pdf"
+  ],
+  "unknowns": [
+    "What were the reported objects?",
+    "What can the available institutional records establish, and what remains unresolved?",
+    "Which archival images or film materials are usable under verified rights?"
+  ],
+  "visual_anchors": [
+    "CINDACTA and Brazilian air-defense operations",
+    "Brazilian military pilot pursuit at night",
+    "Santa Cruz and Anapolis air bases",
+    "Brazilian night sky and geographically coherent landscapes",
+    "Arquivo Nacional UFO fund records and documents"
+  ],
+  "brazilian_anchor": "The story is rooted in Brazil's air-defense records, Brazilian pilots, CINDACTA and the institutional archive that preserves the event.",
+  "cultural_value": "Present a documented Brazilian historical case with respect, separate records from interpretation, avoid stereotypes and explain why the event matters in Brazil.",
+  "narration_language": "en-US",
+  "visual_profile": "cinematic_dread_v73",
+  "representation_mode": "BRAZIL_FIRST_RESPECTFUL_DOCUMENTARY",
+  "preserve_visual_motor": true,
+  "staging_namespace": "episodes/brazil-files/episode-001",
+  "truth_limits": {
+    "fact_mode": [
+      "date",
+      "institutional_records",
+      "reported detections",
+      "pilot response",
+      "archival existence"
+    ],
+    "hypothesis_mode": [
+      "extraterrestrial origin",
+      "contact",
+      "recovery",
+      "institutional cover-up"
+    ],
+    "reenactment_disclosure": "DRAMATIZED REENACTMENT"
+  }
+}
