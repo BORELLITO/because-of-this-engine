@@ -14,7 +14,7 @@
   "authority_files": [
     {
       "path": "production/active_engine_policy.json",
-      "git_blob_sha1": "5e4f700f4b53ec6d532c07336b46bcbd628d7bd1"
+      "git_blob_sha1": "9a63a32cfc90236dd0a10752e4fd3da61fdf0ac2"
     },
     {
       "path": "production/active_surface_lock_v21.py",

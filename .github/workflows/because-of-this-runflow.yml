@@ -34,7 +34,8 @@ permissions:
   contents: read
 
 concurrency:
-  group: because-of-this-runflow-${{ inputs.episode_id }}
+  # Global lock: every episode shares one canonical engine lane.
+  group: because-of-this-canonical-engine
   cancel-in-progress: false
 
 jobs:
