@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "brazil-files-ep001-clip-receipt-b03-c02-v1",
+  "case_id": "official-ufo-night-1986",
+  "beat_id": "B03",
+  "candidate_id": "B03-C02",
+  "source_id": "PIXABAY",
+  "source_url": "https://pixabay.com/videos/flight-mountains-radar-relief-dark-1221/",
+  "media_url": "https://cdn.pixabay.com/video/2015/10/30/1221-144176057_large.mp4",
+  "license_url": "https://pixabay.com/service/license-summary/",
+  "source_page_evidence": {
+    "title": "Flight, mountains, radar free stock video. Free for use & download.",
+    "license_claim": "Free for use under the Pixabay Content License",
+    "creator": "TBIT",
+    "asset_id": "1221",
+    "observed_on": "2026-11-27"
+  },
+  "download_evidence": {
+    "file_name": "1221-144176057_large.mp4",
+    "sha256": "547169390d82ec26f1f9b0b30a55f7e04749326372af20d4b718790944d747ad",
+    "container": "MP4",
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "width": 1920,
+    "height": 1080,
+    "duration_seconds": 30.1,
+    "integrity_check": "sha256_verified_against_downloaded_bytes"
+  },
+  "rights_status": "VERIFIED",
+  "fingerprint_status": "VERIFIED",
+  "semantic_review": "PROVISIONAL_PASS",
+  "selected_for_production": false,
+  "production_started": false,
+  "runflow_handoff": "BLOCKED_UNTIL_FULL_DOSSIER_AND_ALL_RECEIPTS",
+  "reviewer_note": "Single-asset receipt captured. This does not select the clip or unlock production; all 16 beats, 22 receipts, non-reuse, continuity, and final rights review remain required."
+}
