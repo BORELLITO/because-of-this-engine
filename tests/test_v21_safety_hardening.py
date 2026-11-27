@@ -24,10 +24,10 @@ class V21SafetyHardeningTests(unittest.TestCase):
             "name: canonical integration\n", encoding="utf-8"
         )
         (self.workflows / "because-of-this-runflow.yml").write_text(
-            "name: canonical Runflow\\n"
-            "concurrency:\\n"
-            "  group: because-of-this-canonical-engine\\n"
-            "  cancel-in-progress: false\\n",
+            "name: canonical Runflow\n"
+            "concurrency:\n"
+            "  group: because-of-this-canonical-engine\n"
+            "  cancel-in-progress: false\n",
             encoding="utf-8",
         )
         (self.root / "production" / "active_engine_policy.json").write_text(
