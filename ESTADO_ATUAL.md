@@ -76,6 +76,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - PR #231 — contagem endurecida: recibos com erro local ou duplicatas não contribuem para os 22 válidos.
 - PR #233 — B04-C01 rejeitado por mostrar rosto; B04-C02 integrado com mãos ajustando rádio, licença, fingerprint e probe técnico verificados.
 - PR #235 — B05-C03 integrado como recibo HOLD: aeronave noturna em 16:9, licença, fingerprint e probe técnico verificados; seleção e produção continuam bloqueadas.
+- PR #237 — B06-C03 integrado como recibo HOLD: cockpit faceless em 16:9, licença Pixabay, fingerprint e probe técnico verificados; seleção e produção continuam bloqueadas.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
@@ -91,7 +92,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 3. Nenhum vídeo final foi produzido por estas mudanças.
 4. O preflight do EP001 reconhece o dossiê narrativo, o registro de fontes, a
    semente de pesquisa e o lock de namespace. A trava de recibos contabiliza somente
-   evidências verificadas: há 4 recibos válidos (B03-C02, B02-C01, B04-C02 e B05-C03) e faltam 18 para
+   evidências verificadas: há 5 recibos válidos (B03-C02, B02-C01, B04-C02, B05-C03 e B06-C03) e faltam 17 para
    o mínimo de 22; B04-C01 foi rejeitado na revisão semântica por expor rosto. O dossiê
    completo de seleção, os 22 checkpoints, continuidade e
    revisão final de direitos/fingerprints continuam pendentes.
