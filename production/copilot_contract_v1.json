@@ -120,5 +120,44 @@
     "claim_policy": "EXACTLY_ONE_ACTIVE_RUN",
     "stale_context": "FAIL_CLOSED",
     "engine_activation": "DISABLED_IN_THIS_PR"
-  }
+  },
+  "levels": {
+    "analysis": {
+      "level": 1,
+      "id": "specialized_analysis",
+      "dispatch": "SEQUENTIAL_ISOLATED_ARTIFACT",
+      "parallel": false,
+      "can_start_engine": false,
+      "agents": [
+        "research_analyst",
+        "factual_reviewer",
+        "story_editorial_agent",
+        "rights_provenance_agent",
+        "visual_continuity_agent",
+        "timeline_caption_agent"
+      ],
+      "required_status": "PASS"
+    },
+    "technical_gate": {
+      "level": 2,
+      "id": "copilot_technical_gate",
+      "module": "production/copilot_technical_gate_v1.py",
+      "workflow": ".github/workflows/copilot-technical-gate.yml",
+      "requires_level": "analysis",
+      "consolidates": [
+        "tests",
+        "privacy",
+        "scope",
+        "compilation",
+        "regressions"
+      ],
+      "parallel": false,
+      "can_start_engine": false,
+      "required_status": "PASS"
+    }
+  },
+  "level_order": [
+    "specialized_analysis",
+    "copilot_technical_gate"
+  ]
 }
