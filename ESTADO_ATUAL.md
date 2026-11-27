@@ -3,7 +3,7 @@
 **Data da verificação:** 2026-11-27  
 **Repositório canônico:** `BORELLITO/because-of-this-engine`  
 **Branch canônica:** `main`  
-**Commit verificado:** `7db9f855a9ff35f040f51650f282f5528cb53fa8`  
+**Commit verificado:** `9f7af0c52ff3341f7cd4b9df44d2b1820f33ac6f`  
 **Transparência:** mudanças relevantes exigem relatório completo no PR.
 
 ## Estado canônico
@@ -74,6 +74,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - PR #227 — segundo recibo real de clipe (B02-C01, mapa do Brasil em 4K) integrado com licença declarada, download, fingerprint SHA-256 e probe técnico.
 - PR #229 — trava fail-closed de inventário dos recibos de clipe integrada ao preflight; conta apenas JSONs válidos, rejeita duplicatas e não libera produção.
 - PR #231 — contagem endurecida: recibos com erro local ou duplicatas não contribuem para os 22 válidos.
+- PR #233 — B04-C01 rejeitado por mostrar rosto; B04-C02 integrado com mãos ajustando rádio, licença, fingerprint e probe técnico verificados.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
@@ -89,8 +90,9 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 3. Nenhum vídeo final foi produzido por estas mudanças.
 4. O preflight do EP001 reconhece o dossiê narrativo, o registro de fontes, a
    semente de pesquisa e o lock de namespace. A trava de recibos contabiliza somente
-   evidências verificadas: há 2 recibos válidos (B03-C02 e B02-C01) e faltam 20 para
-   o mínimo de 22; o dossiê completo de seleção, os 22 checkpoints, continuidade e
+   evidências verificadas: há 3 recibos válidos (B03-C02, B02-C01 e B04-C02) e faltam 19 para
+   o mínimo de 22; B04-C01 foi rejeitado na revisão semântica por expor rosto. O dossiê
+   completo de seleção, os 22 checkpoints, continuidade e
    revisão final de direitos/fingerprints continuam pendentes.
 5. Qualquer ativação de provedor, gasto, publicação ou dispatch de produção
    exige mudança separada e autorização específica.
