@@ -126,6 +126,7 @@
       "level": 1,
       "id": "specialized_analysis",
       "dispatch": "SEQUENTIAL_ISOLATED_ARTIFACT",
+      "adapter": "production/copilot_analysis_agents_v1.py",
       "parallel": false,
       "can_start_engine": false,
       "agents": [
