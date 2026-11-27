@@ -1,0 +1,44 @@
+name: Because Of This Copilot technical gate
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/copilot-technical-gate.yml"
+      - "docs/COPILOTO_CANONICO_V1.md"
+      - "production/copilot_contract_v1.json"
+      - "production/copilot_queue_v1.py"
+      - "production/copilot_analysis_agents_v1.py"
+      - "production/copilot_technical_gate_v1.py"
+      - "tests/test_copilot_analysis_agents.py"
+      - "tests/test_copilot_contract.py"
+      - "tests/test_copilot_levels.py"
+      - "tests/test_copilot_queue_v1.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: because-of-this-copilot-technical-gate-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  copilot-technical-gate:
+    name: Consolidated copilot technical gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout with history
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Run consolidated scope, privacy, compilation and regression gate
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.ref || 'main' }}
+        run: PYTHONPATH=. python production/copilot_technical_gate_v1.py --repo-root . --base-ref "$BASE_REF"
+
