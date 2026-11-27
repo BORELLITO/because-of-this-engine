@@ -25,6 +25,16 @@ class CopilotLevelTests(unittest.TestCase):
                 "subagent_dispatch": "SEQUENTIAL_ISOLATED_ARTIFACT",
             },
             "production_activation": {"enabled": False, "fallbacks_allowed": False},
+            "executor_layer": {
+                "module": "production/copilot_executor_registry_v1.py",
+                "mode": "INJECTED_PROVIDER_REGISTRY",
+                "provider_resolution": "EXPLICIT_MAPPING_BY_AGENT_ID",
+                "missing_provider": "BLOCKED",
+                "parallel": False,
+                "network_allowed": False,
+                "can_start_engine": False,
+                "production_activation": "DISABLED",
+            },
             "subagents": [{"can_start_engine": False}] * 8,
             "levels": {"analysis": {}, "technical_gate": {}},
         }
