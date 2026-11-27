@@ -106,7 +106,20 @@ def _canonical_hash(value: Any) -> str:
     return hashlib.sha256(payload).hexdigest()
 
 
-def validate_result(result: dict[str, Any], *, expected_agent_id: str | None = None) -> None:
+def _non_empty_string_list(value: Any, field: str) -> list[str]:
+    if not isinstance(value, list) or any(not isinstance(item, str) or not item.strip() for item in value):
+        raise AnalysisContractError(f"{field} must be a list of non-empty strings")
+    return value
+
+
+def validate_result(
+    result: dict[str, Any],
+    *,
+    expected_agent_id: str | None = None,
+    expected_input_revision: str | None = None,
+    expected_source_artifacts: Iterable[str] | None = None,
+    expected_evidence: Iterable[str] | None = None,
+) -> None:
     if not isinstance(result, dict):
         raise AnalysisContractError("agent result must be an object")
     missing = sorted(REQUIRED_FIELDS - set(result))
@@ -116,14 +129,44 @@ def validate_result(result: dict[str, Any], *, expected_agent_id: str | None = N
     spec = agent_spec(agent_id)
     if expected_agent_id is not None and agent_id != expected_agent_id:
         raise AnalysisContractError("agent result does not match the dispatched task")
+    if expected_input_revision is not None and result.get("input_revision") != expected_input_revision:
+        raise AnalysisContractError("agent result input revision does not match the dispatched task")
+    if not isinstance(result.get("input_revision"), str) or not result["input_revision"].strip():
+        raise AnalysisContractError("agent result input_revision is required")
+    source_artifacts = _non_empty_string_list(result["source_artifacts"], "source_artifacts")
+    evidence = _non_empty_string_list(result["evidence"], "evidence")
+    if expected_source_artifacts is not None and source_artifacts != list(expected_source_artifacts):
+        raise AnalysisContractError("agent result source_artifacts drifted from the dispatched task")
+    if expected_evidence is not None:
+        expected_items = list(expected_evidence)
+        if any(item not in evidence for item in expected_items):
+            raise AnalysisContractError("agent result dropped dispatched evidence")
     if result["status"] not in ALLOWED_STATUSES:
         raise AnalysisContractError("unknown agent status")
     if result.get("approval_domain") not in (None, spec.approval_domain):
         raise AnalysisContractError("agent cannot approve another domain")
-    if result.get("can_start_engine") is True or result.get("engine_action"):
+    if result.get("can_start_engine") is not False or result.get("engine_action"):
         raise AnalysisContractError("analysis agent cannot start or control the engine")
+    blocking_reasons = result["blocking_reasons"]
+    if not isinstance(blocking_reasons, list) or any(not isinstance(reason, str) or not reason.strip() for reason in blocking_reasons):
+        raise AnalysisContractError("blocking_reasons must be a list of non-empty strings")
+    if result["status"] == "PASS" and blocking_reasons:
+        raise AnalysisContractError("PASS result cannot contain blocking reasons")
+    if result["status"] != "PASS" and not blocking_reasons:
+        raise AnalysisContractError("non-PASS result must include blocking reasons")
+    if not isinstance(result["next_gate"], str) or not result["next_gate"].strip():
+        raise AnalysisContractError("next_gate is required")
+    token_budget_used = result["token_budget_used"]
+    if isinstance(token_budget_used, bool) or not isinstance(token_budget_used, int) or token_budget_used < 0:
+        raise AnalysisContractError("token_budget_used must be a non-negative integer")
+    if token_budget_used > spec.token_budget:
+        raise AnalysisContractError("agent exceeded its token budget")
     artifact = result["output_artifact"]
-    if result["output_sha256"] != _canonical_hash(artifact):
+    try:
+        expected_hash = _canonical_hash(artifact)
+    except (TypeError, ValueError) as exc:
+        raise AnalysisContractError("output_artifact must be JSON-serializable") from exc
+    if result["output_sha256"] != expected_hash:
         raise AnalysisContractError("output artifact hash mismatch")
     if result["status"] == "PASS" and result["next_gate"] not in {spec.approval_domain, "technical_gate"}:
         raise AnalysisContractError("PASS result points to an invalid next gate")
@@ -148,7 +191,13 @@ def dispatch_sequential(
         if task.get("parallel") is not False or task.get("can_start_engine") is not False:
             raise AnalysisContractError("analysis task violates sequential production-disabled policy")
         result = executor(task)
-        validate_result(result, expected_agent_id=spec.agent_id)
+        validate_result(
+            result,
+            expected_agent_id=spec.agent_id,
+            expected_input_revision=task["input_revision"],
+            expected_source_artifacts=task["source_artifacts"],
+            expected_evidence=task["evidence"],
+        )
         results.append(result)
         if result["status"] != "PASS":
             break
