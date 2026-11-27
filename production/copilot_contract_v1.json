@@ -150,7 +150,7 @@
         "delivery_agent"
       ],
       "required_status": "PASS",
-      "description": "Six domain analysts followed by independent release QA and delivery packaging; all eight tasks remain sequential and production-disabled."
+      "description": "Eight canonical tasks remain sequential: six domain roles followed by independent release QA and delivery packaging; all are production-disabled."
     },
     "technical_gate": {
       "level": 2,
