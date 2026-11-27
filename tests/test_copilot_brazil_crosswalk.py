@@ -19,7 +19,7 @@ class BrazilFilesCanonicalCrosswalkTests(unittest.TestCase):
         self.assertFalse(report["parallel_allowed"])
         self.assertFalse(report["secondary_engine_allowed"])
 
-    def test_all_canonical_capabilities_are represented(self):
+    def test_all_canonical_capabilities_are_represented(self):
         mapped = {row["canonical_agent"] for row in BRAZIL_FILES_ROLE_CROSSWALK}
         self.assertEqual(mapped | {TERMINAL_HANDOFF["canonical_agent"]}, set(CANONICAL_AGENT_IDS))
         self.assertNotIn("delivery_agent", mapped)
