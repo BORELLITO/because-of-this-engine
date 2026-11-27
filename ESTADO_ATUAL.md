@@ -3,7 +3,7 @@
 **Data da verificação:** 2026-11-27  
 **Repositório canônico:** `BORELLITO/because-of-this-engine`  
 **Branch canônica:** `main`  
-**Commit verificado:** `01fa3db62e08ec17017317147c80919703fa4d4f`  
+**Commit verificado:** `99cef4c6dce4a95823a9bd15ce384332f19370c0`  
 **Transparência:** mudanças relevantes exigem relatório completo no PR.
 
 ## Estado canônico
@@ -65,6 +65,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - PR #211 — lane canônica de oito papéis integrada.
 - PR #212 — crosswalk Brazil Files 22→8 integrado.
 - PR #213 — handoff read-only Copiloto→Runflow integrado.
+- PR #215 — preflight real do Brazil Files EP001 integrado, mantendo o caso bloqueado.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
@@ -78,7 +79,10 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 2. O Runflow ainda não é disparado automaticamente pelo Copiloto; o handoff
    validado apenas prepara a autorização.
 3. Nenhum vídeo final foi produzido por estas mudanças.
-4. Qualquer ativação de provedor, gasto, publicação ou dispatch de produção
+4. O preflight do EP001 está integrado, mas permanece `BLOCKED` por falta do
+   dossiê visual, recibos dos 22 checkpoints, direitos/fingerprints e colisão
+   com o namespace legado.
+5. Qualquer ativação de provedor, gasto, publicação ou dispatch de produção
    exige mudança separada e autorização específica.
 
 ## Próxima ação prioritária
