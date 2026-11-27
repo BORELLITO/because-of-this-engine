@@ -60,3 +60,5 @@ O preview só pode existir quando os gates permitirem. A produção permanece de
 Implementações V7/Piper, Edge TTS, Creative Claw e outros experimentos permanecem somente como evidência histórica, rollback ou auditoria. Não são runbooks atuais, não são fallback e não podem ser escolhidos pelo runtime.
 
 A identidade visual canônica está registrada em `docs/CANONICAL_VISUAL_EDITORIAL_LOCK_20261112.md`. O estado editorial do EP005 e suas fontes são mantidos nos artefatos canônicos da Library; a falta de cobertura visual ou de evidência de áudio mantém o episódio bloqueado.
+
+Governança: este documento acompanha a política canônica e deve ser reconciliado com `ESTADO_ATUAL.md` em toda mudança estrutural.
