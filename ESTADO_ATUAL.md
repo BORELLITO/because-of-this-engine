@@ -3,7 +3,7 @@
 **Data da verificação:** 2026-11-27  
 **Repositório canônico:** `BORELLITO/because-of-this-engine`  
 **Branch canônica:** `main`  
-**Commit verificado:** `99cef4c6dce4a95823a9bd15ce384332f19370c0`  
+**Commit verificado:** `0844267447211cf29e51ed7ed1538e099f654c05`  
 **Transparência:** mudanças relevantes exigem relatório completo no PR.
 
 ## Estado canônico
@@ -66,6 +66,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - PR #212 — crosswalk Brazil Files 22→8 integrado.
 - PR #213 — handoff read-only Copiloto→Runflow integrado.
 - PR #215 — preflight real do Brazil Files EP001 integrado, mantendo o caso bloqueado.
+- PR #217 — dossiê narrativo sourced de 16 beats integrado ao preflight e ao gate técnico; clip research permanece pendente.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
@@ -79,9 +80,9 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 2. O Runflow ainda não é disparado automaticamente pelo Copiloto; o handoff
    validado apenas prepara a autorização.
 3. Nenhum vídeo final foi produzido por estas mudanças.
-4. O preflight do EP001 está integrado, mas permanece `BLOCKED` por falta do
-   dossiê visual, recibos dos 22 checkpoints, direitos/fingerprints e colisão
-   com o namespace legado.
+4. O preflight do EP001 está integrado e reconhece o dossiê narrativo de 16 beats
+   como válido, mas permanece `BLOCKED` por falta do dossiê de seleção de clipes,
+   recibos dos 22 checkpoints, direitos/fingerprints e colisão com o namespace legado.
 5. Qualquer ativação de provedor, gasto, publicação ou dispatch de produção
    exige mudança separada e autorização específica.
 
