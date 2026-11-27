@@ -9,6 +9,10 @@ from production.copilot_executor_registry_v1 import (
     dispatch_registered,
     registry_status,
 )
+from production.copilot_provider_readiness_v1 import (
+    ProviderDescriptor,
+    RegisteredProvider,
+)
 
 
 def artifact_hash(value):
@@ -34,6 +38,14 @@ def result_for(task):
     }
 
 
+def registered_provider(agent_id, execute):
+    descriptor = ProviderDescriptor(
+        agent_id=agent_id,
+        provider_id=f"test-{agent_id}",
+    )
+    return RegisteredProvider(descriptor, execute)
+
+
 class CopilotExecutorRegistryTests(unittest.TestCase):
     def setUp(self):
         self.tasks = build_specialized_tasks(
@@ -48,9 +60,15 @@ class CopilotExecutorRegistryTests(unittest.TestCase):
         self.assertTrue(all(task["network_allowed"] is False for task in self.tasks))
         self.assertTrue(all(task["context_policy"] == "MINIMAL_REFERENCES_ONLY" for task in self.tasks))
 
-    def test_missing_executor_fails_closed_without_calling_provider(self):
+    def test_missing_executor_blocks_before_calling_any_provider(self):
         calls = []
-        results = dispatch_registered(self.tasks, {})
+
+        def provider(task):
+            calls.append(task["agent_id"])
+            return result_for(task)
+
+        executors = {AGENT_ORDER[0]: registered_provider(AGENT_ORDER[0], provider)}
+        results = dispatch_registered(self.tasks, executors)
         self.assertEqual(calls, [])
         self.assertEqual(len(results), 1)
         self.assertEqual(results[0]["status"], "BLOCKED")
@@ -63,24 +81,44 @@ class CopilotExecutorRegistryTests(unittest.TestCase):
             calls.append(task["agent_id"])
             return result_for(task)
 
-        executors = {agent_id: provider for agent_id in AGENT_ORDER}
+        executors = {
+            agent_id: registered_provider(agent_id, provider)
+            for agent_id in AGENT_ORDER
+        }
         self.assertEqual(registry_status(executors)["status"], "READY")
         results = dispatch_registered(self.tasks, executors)
         self.assertEqual(calls, list(AGENT_ORDER))
         self.assertEqual(len(results), len(AGENT_ORDER))
         self.assertTrue(all(result["status"] == "PASS" for result in results))
 
-    def test_partial_registry_stops_at_first_unconfigured_role(self):
+    def test_unsafe_provider_metadata_is_rejected_before_call(self):
         calls = []
 
         def provider(task):
             calls.append(task["agent_id"])
             return result_for(task)
 
-        executors = {AGENT_ORDER[0]: provider, AGENT_ORDER[2]: provider}
-        results = dispatch_registered(self.tasks, executors)
-        self.assertEqual(calls, [AGENT_ORDER[0]])
-        self.assertEqual([result["status"] for result in results], ["PASS", "BLOCKED"])
+        executors = {
+            agent_id: registered_provider(agent_id, provider)
+            for agent_id in AGENT_ORDER
+        }
+        unsafe = ProviderDescriptor(
+            agent_id=AGENT_ORDER[2],
+            provider_id="unsafe",
+            network_allowed=True,
+        )
+        executors[AGENT_ORDER[2]] = RegisteredProvider(unsafe, provider)
+        with self.assertRaisesRegex(ValueError, "network"):
+            dispatch_registered(self.tasks, executors)
+        self.assertEqual(calls, [])
+
+    def test_wrong_task_order_is_rejected(self):
+        executors = {
+            agent_id: registered_provider(agent_id, lambda task: result_for(task))
+            for agent_id in AGENT_ORDER
+        }
+        with self.assertRaises(ValueError):
+            dispatch_registered(self.tasks[::-1], executors)
 
 
 if __name__ == "__main__":
