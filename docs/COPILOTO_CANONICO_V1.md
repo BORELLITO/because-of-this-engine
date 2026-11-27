@@ -83,7 +83,15 @@ O Copiloto só pode informar “vídeo pronto para entrega” quando:
 
 A implementação deve ocorrer em branch própria, com testes de contrato e sem ativar produção. O primeiro incremento recomendado é o contrato de estado e fila do Copiloto; depois entram os adaptadores dos subagentes. O motor canônico só pode ser chamado quando todos os gates anteriores estiverem `PASS`.
 
-## 9. Fonte de verdade
+## 9. Fila técnica implementada
+
+- Implementação isolada: `production/copilot_queue_v1.py`.
+- A fila valida revisão da memória e hash da política antes de qualquer transição.
+- `claim_next` permite somente uma reivindicação ativa; estado obsoleto, duplicidade, ownership incorreto ou falha registrada bloqueiam a próxima execução.
+- A persistência é atômica e conserva pedidos enfileirados; o módulo não inicia o motor nem publica mídia.
+- Testes: `tests/test_copilot_queue_v1.py`.
+
+## 10. Fonte de verdade
 
 - Política: `production/active_engine_policy.json`.
 - Entrypoint: `production/canonical_entrypoint.py`.
