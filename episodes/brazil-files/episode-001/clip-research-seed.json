@@ -134,6 +134,13 @@
           "source_url": "https://www.pexels.com/video/nighttime-approach-from-airplane-cockpit-36675372/",
           "description": "Night approach cockpit view",
           "decision": "HOLD"
+        },
+        {
+          "candidate_id": "B06-C03",
+          "source_id": "PIXABAY",
+          "source_url": "https://pixabay.com/videos/cockpit-plane-flying-aviation-83156/",
+          "description": "Illuminated faceless cockpit control panel in landscape 16:9",
+          "decision": "HOLD"
         }
       ]
     },
