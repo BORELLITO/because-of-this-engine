@@ -67,6 +67,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - PR #213 — handoff read-only Copiloto→Runflow integrado.
 - PR #215 — preflight real do Brazil Files EP001 integrado, mantendo o caso bloqueado.
 - PR #217 — dossiê narrativo sourced de 16 beats integrado ao preflight e ao gate técnico; clip research permanece pendente.
+- PR #219 — registro fail-closed de fontes gratuitas de clipes integrado ao gate; licenças continuam verificadas por asset.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
@@ -80,8 +81,8 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 2. O Runflow ainda não é disparado automaticamente pelo Copiloto; o handoff
    validado apenas prepara a autorização.
 3. Nenhum vídeo final foi produzido por estas mudanças.
-4. O preflight do EP001 está integrado e reconhece o dossiê narrativo de 16 beats
-   como válido, mas permanece `BLOCKED` por falta do dossiê de seleção de clipes,
+4. O preflight do EP001 reconhece o dossiê narrativo de 16 beats e o registro de
+   fontes, mas permanece `BLOCKED` por falta do dossiê de seleção de clipes,
    recibos dos 22 checkpoints, direitos/fingerprints e colisão com o namespace legado.
 5. Qualquer ativação de provedor, gasto, publicação ou dispatch de produção
    exige mudança separada e autorização específica.
