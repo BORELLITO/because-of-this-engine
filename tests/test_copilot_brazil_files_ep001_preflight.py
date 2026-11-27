@@ -7,6 +7,7 @@ from production.brazil_files_ep001_preflight_v1 import (
     BRIEF_PATH,
     DOSSIER_PATH,
     NARRATIVE_DOSSIER_PATH,
+    NAMESPACE_LOCK_PATH,
     LEGACY_NAMESPACE_ROOT,
     RECEIPTS_PATH,
     evaluate_preflight,
@@ -31,6 +32,8 @@ class BrazilFilesEpisode001PreflightTests(unittest.TestCase):
         self.assertFalse(report["production_started"])
         self.assertEqual(report["runflow_handoff"], "BLOCKED")
         self.assertTrue(report["namespace_collision"])
+        self.assertTrue(report["namespace_protected"])
+        self.assertFalse(any(error.startswith("namespace:episodes/episode-001") for error in report["errors"]))
         self.assertEqual(report["narrative"]["status"], "PASS")
         self.assertTrue(any(error.startswith("dossier:") for error in report["errors"]))
         self.assertTrue(any(error.startswith("receipts:") for error in report["errors"]))
@@ -58,6 +61,16 @@ class BrazilFilesEpisode001PreflightTests(unittest.TestCase):
                 json.dumps({"truth_mode": "DECLARED_FICTION"}) + "\n",
                 encoding="utf-8",
             )
+            (root / NAMESPACE_LOCK_PATH).parent.mkdir(parents=True, exist_ok=True)
+            (root / NAMESPACE_LOCK_PATH).write_text(json.dumps({
+                "schema_version": "1.0",
+                "legacy_namespace": str(LEGACY_NAMESPACE_ROOT),
+                "staging_namespace": str(Path("episodes/brazil-files/episode-001")),
+                "legacy_preserved": True,
+                "staging_isolated": True,
+                "overwrite_legacy": False,
+                "migration_status": "PRESERVE_LEGACY_USE_STAGING",
+            }) + "\n", encoding="utf-8")
             (root / DOSSIER_PATH).parent.mkdir(parents=True, exist_ok=True)
             (root / DOSSIER_PATH).write_text("{}\n", encoding="utf-8")
             (root / RECEIPTS_PATH).write_text("{}\n", encoding="utf-8")
