@@ -42,5 +42,18 @@
   "selected_for_production": false,
   "production_started": false,
   "runflow_handoff": "BLOCKED_UNTIL_FULL_DOSSIER_AND_ALL_RECEIPTS",
-  "reviewer_note": "B13-C01 matches the Empty unresolved horizon anchor through natural sunset, open sky and a distant dark horizon silhouette. The downloaded bytes are unique against the current 11-receipt inventory and the global asset-memory registry by source asset/page and SHA-256. No identifiable people, logos or trademarks were visible in the inspected sampled frames. The page player reported approximately 18.03 s while the downloaded source file probed at 27.894533 s; the downloaded-byte probe is authoritative for production planning, and the discrepancy must be rechecked before any future selection. This receipt records a verified queue candidate only; it does not select the clip or unlock production."
+  "reviewer_note": "B13-C01 matches the Empty unresolved horizon anchor through natural sunset, open sky and a distant dark horizon silhouette. The downloaded bytes are unique against the current 11-receipt inventory and the global asset-memory registry by source asset/page and SHA-256. No identifiable people, logos or trademarks were visible in the inspected sampled frames. The page player reported approximately 18.03 s while the downloaded source file probed at 27.894533 s; the downloaded-byte probe is authoritative for production planning, and the discrepancy must be rechecked before any future selection. This receipt records a verified queue candidate only; it does not select the clip or unlock production.",
+  "visual_fingerprint_evidence": {
+    "algorithm": "frame-sample-review-v1",
+    "sample_positions": [
+      0.1,
+      0.3,
+      0.5,
+      0.7,
+      0.9
+    ],
+    "source_bytes": "downloaded_media_url",
+    "exact_asset_non_reuse_check": "source_page_url, asset_id and SHA-256 compared against current 11 receipts and episodes/asset-memory-registry.json",
+    "sampled_frame_result": "consistent natural sunset, open sky and distant dark horizon silhouette; no identifiable people, logos or trademarks observed"
+  }
 }
