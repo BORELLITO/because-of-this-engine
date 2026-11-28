@@ -86,6 +86,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - PR #252 — B12-C02 integrado como recibo HOLD: páginas com caracteres impressos em reenactment documental Pexels, fingerprint e probe H.264 verificados; não é o relatório SIAN original e seleção/produção continuam bloqueadas.
 - PR #254 — B13-C01 integrado como recibo HOLD: pôr do sol, horizonte e silhueta natural do Pixabay, SHA-256/probe/fingerprint visual verificados; divergência de duração entre player e arquivo baixado registrada; seleção e produção continuam bloqueadas.
 - PR #258 — B14-C01 validado e rejeitado semanticamente: vídeo vertical genérico de arquivo, com pessoa identificável, sem sinal brasileiro, pasta documental ou identificador SIAN; não foi criado receipt.
+- B14-C02 — candidato Pexels em HOLD: estantes e pastas em 16:9, arquivo baixado e fingerprint verificados; ainda falta cue brasileiro e identificador SIAN documental claramente autorizado.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
@@ -110,4 +111,4 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 
 ## Próxima ação prioritária
 
-Antes de ativar qualquer produção, pesquisar e validar um substituto para B14-C01 que tenha arquivo brasileiro, pasta/documento e identificador SIAN verificável; manter o SIAN fora da produção até autorização adequada e concluir o caso editorial completo com os 22 checkpoints, recibos dos oito agentes, direitos, mapa visual, karaoke, safe zone e QA. Somente depois avaliar uma mudança separada para dispatch controlado do Runflow.
+Antes de ativar qualquer produção, resolver o gap de B14-C02 com cue brasileiro e identificador SIAN documental claramente autorizado, ou pesquisar um candidato oficial equivalente; manter o SIAN fora da produção até autorização adequada e concluir o caso editorial completo com os 22 checkpoints, recibos dos oito agentes, direitos, mapa visual, karaoke, safe zone e QA. Somente depois avaliar uma mudança separada para dispatch controlado do Runflow.
