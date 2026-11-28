@@ -232,7 +232,17 @@
           "source_id": "PEXELS",
           "source_url": "https://www.pexels.com/video/person-looking-at-files-inside-a-cardboard-box-8371852/",
           "description": "Investigation files and hands",
-          "decision": "HOLD"
+          "decision": "REJECTED",
+          "rejection_reason": "Reuses the same Pexels asset already assigned to B07-C01 and does not provide a distinct primary-report visual; non-reuse rule applies."
+        },
+        {
+          "candidate_id": "B12-C02",
+          "source_id": "PEXELS",
+          "source_url": "https://www.pexels.com/video/a-person-holding-a-notebook-with-stamp-message-9829558/",
+          "description": "Hands holding a red notebook and flipping pages with printed characters; 4096x2160, 16:9-compatible landscape candidate.",
+          "decision": "HOLD",
+          "research_note": "Distinct documentary reenactment candidate. It does not show the actual SIAN report or its identifier. The SIAN primary record remains a separate evidence source and requires rights/reproduction clearance before any archival frame is used.",
+          "rights_status": "NOT_VERIFIED_PER_ASSET"
         }
       ]
     },
@@ -308,6 +318,7 @@
     "Open each exact asset page and capture its current license/terms.",
     "Download only after semantic and rights review; compute unique fingerprint.",
     "Expand each non-CTA beat to 3-5 viable candidates before selection.",
+    "For B12, clear reproduction/use terms for the SIAN primary report before using an actual page; the Pexels candidate is reenactment only.",
     "Do not promote any HOLD item to SELECTED in this seed."
   ]
 }
