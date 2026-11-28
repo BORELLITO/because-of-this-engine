@@ -85,7 +85,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - PR #250 — B12-C01 rejeitado por reutilização do asset B07-C01; B12-C02 adicionado em HOLD como reenactment documental distinto, sem promover o candidato nem liberar produção; reprodução do relatório SIAN permanece condicionada a direitos específicos.
 - PR #252 — B12-C02 integrado como recibo HOLD: páginas com caracteres impressos em reenactment documental Pexels, fingerprint e probe H.264 verificados; não é o relatório SIAN original e seleção/produção continuam bloqueadas.
 - PR #254 — B13-C01 integrado como recibo HOLD: pôr do sol, horizonte e silhueta natural do Pixabay, SHA-256/probe/fingerprint visual verificados; divergência de duração entre player e arquivo baixado registrada; seleção e produção continuam bloqueadas.
-- B14-C01 — candidato Pexels validado e rejeitado semanticamente: vídeo vertical genérico de arquivo, com pessoa identificável, sem sinal brasileiro, pasta documental ou identificador SIAN; não foi criado receipt.
+- PR #258 — B14-C01 validado e rejeitado semanticamente: vídeo vertical genérico de arquivo, com pessoa identificável, sem sinal brasileiro, pasta documental ou identificador SIAN; não foi criado receipt.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
