@@ -33,7 +33,9 @@
     "duration_seconds": 11.3113,
     "frame_rate": "60000/1001",
     "integrity_check": "sha256_verified_against_downloaded_bytes",
-    "downloaded_media_url": "https://cdn.pixabay.com/video/2026/11/06/387580_large.mp4"
+    "downloaded_media_url": "https://cdn.pixabay.com/video/2026/11/06/387580_large.mp4",
+    "download_method": "direct_http_get_from_official_pixabay_cdn",
+    "observed_on": "2026-11-28"
   },
   "rights_status": "VERIFIED",
   "fingerprint_status": "VERIFIED",
