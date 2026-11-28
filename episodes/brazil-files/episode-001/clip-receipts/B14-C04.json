@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "brazil-files-ep001-clip-receipt-b14-c04-v1",
+  "case_id": "official-ufo-night-1986",
+  "beat_id": "B14",
+  "candidate_id": "B14-C04",
+  "source_id": "PIXABAY",
+  "source_url": "https://pixabay.com/videos/file-folder-document-cabinet-349087/",
+  "media_url": "https://cdn.pixabay.com/video/2026/04/26/349087_large.mp4",
+  "license_url": "https://pixabay.com/service/license-summary/",
+  "source_page_evidence": {
+    "title": "File, folder, document free stock video. Free for use & download.",
+    "license_claim": "Free for use under the Pixabay Content License",
+    "creator": "MuhammadAhmad10",
+    "asset_id": "349087",
+    "description": "Close-up of a hand consulting and organizing labeled paper files in a filing cabinet.",
+    "dimensions": "3840 x 2160",
+    "fps_displayed": 25,
+    "published_date": "2026-04-27",
+    "views": 6574,
+    "downloads": 7939,
+    "observed_on": "2026-11-28",
+    "ai_generation_label_observed": false
+  },
+  "download_evidence": {
+    "file_name": "349087_large.mp4",
+    "sha256": "8d55fd028fe70a75c08fadeb15f250fb17e025c3b07a8c8dd46a1ebf0ecead5d",
+    "container": "MP4",
+    "video_codec": "h264",
+    "audio_codec": null,
+    "width": 3840,
+    "height": 2160,
+    "duration_seconds": 17.8,
+    "frame_rate": "25/1",
+    "integrity_check": "sha256_verified_against_downloaded_bytes",
+    "downloaded_media_url": "https://cdn.pixabay.com/video/2026/04/26/349087_large.mp4"
+  },
+  "rights_status": "VERIFIED",
+  "fingerprint_status": "VERIFIED",
+  "semantic_review": "PROVISIONAL_PASS",
+  "selected_for_production": false,
+  "production_started": false,
+  "runflow_handoff": "BLOCKED_UNTIL_FULL_DOSSIER_AND_ALL_RECEIPTS",
+  "reviewer_note": "B14-C04 matches the durable-object visual anchor through a close-up of labeled paper files, folders and a hand consulting the cabinet in a landscape 16:9 frame. The sampled frames showed no identifiable face, logo or trademark. This is generic free-stock archival reenactment, not the primary SIAN report or proof of the Brazilian record; any final use must preserve that distinction. The downloaded bytes were unique against the current 12-receipt inventory and the global asset-memory registry by source page, asset ID and SHA-256. This receipt records a verified queue candidate only; it does not select the clip or unlock production.",
+  "visual_fingerprint_evidence": {
+    "algorithm": "frame-sample-review-v1",
+    "sample_positions": [
+      0.1,
+      0.3,
+      0.5,
+      0.7,
+      0.9
+    ],
+    "source_bytes": "downloaded_media_url",
+    "exact_asset_non_reuse_check": "source_page_url, asset_id and SHA-256 compared against current 12 receipts and episodes/asset-memory-registry.json",
+    "sampled_frame_result": "consistent close-up of labeled paper files and cabinet organization in landscape 16:9; no identifiable face, logo or trademark observed"
+  }
+}
