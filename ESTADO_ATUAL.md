@@ -3,7 +3,7 @@
 **Data da verificação:** 2026-11-28  
 **Repositório canônico:** `BORELLITO/because-of-this-engine`  
 **Branch canônica:** `main`  
-**Commit verificado:** `43b8a5da4f9549311493b91f1b23601f6e30be99`  
+**Commit verificado:** `136c9ed4757aec7aca7fc738b88bd87329eca589`  
 **Transparência:** mudanças relevantes exigem relatório completo no PR.
 
 ## Estado canônico
@@ -90,6 +90,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - PR #259 — B14-C02 registrado em HOLD após download, fingerprint, probe e revisão visual; não é receipt e não libera seleção ou produção.
 - PR #260 — memória reconciliada após a pesquisa B14; produção e Runflow continuam bloqueados.
 - B14-C03 — fonte oficial do Arquivo Nacional localizada para o relatório de 19/05/1986 (`BR_DFANBSB_ARX_256_p0005_0005`); permanece em HOLD porque o uso visual exige reconciliação de licença/Termo de Utilização.
+- PR #262 — candidato oficial B14-C03 registrado em HOLD; nenhum arquivo foi reproduzido e nenhum direito foi presumido.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
