@@ -24,7 +24,9 @@
           "source_id": "PIXABAY",
           "source_url": "https://pixabay.com/videos/moon-night-sky-airplane-flight-142476/",
           "description": "Aircraft crossing the moon/night sky",
-          "decision": "HOLD"
+          "decision": "HOLD",
+          "research_note": "Pixabay page and direct media download were verified on 2026-11-28. Source page reports Free for use under the Pixabay Content License, 3840 x 2160 and 25 FPS; downloaded MP4 probed at 3840 x 2160, H.264 video with AAC stereo audio, 25/1 fps, 16.361667 seconds, SHA-256 c6cf1bc63a0f24e7b73800cdcaa168b4a2facd76a7e35fa2f653c714a9f68a29. Visual review confirms a natural moon/night-sky sequence in landscape 16:9 and an aircraft crossing the moon in the targeted interval. It is atmospheric/contextual stock footage and does not establish the Brazilian location or prove the 1986 event; the receipt remains HOLD until final editorial selection.",
+          "rights_status": "NOT_VERIFIED_PER_ASSET"
         },
         {
           "candidate_id": "B01-C02",
