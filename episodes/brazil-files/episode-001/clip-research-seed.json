@@ -299,6 +299,15 @@
           "media_type": "DOCUMENTARY_STILL",
           "research_note": "Official Arquivo Nacional page identifies the image as a report prepared by a pilot from Anápolis for the 19 May 1986 case and displays the reference BR_DFANBSB_ARX_256_p0005_0005. No file was downloaded and no hash was generated. The page's site license and the Archive's reproduction/Termo de Utilização requirements must be reconciled before any visual use.",
           "rights_status": "NOT_VERIFIED_PER_ASSET"
+        },
+        {
+          "candidate_id": "B14-C04",
+          "source_id": "PIXABAY",
+          "source_url": "https://pixabay.com/videos/file-folder-document-cabinet-349087/",
+          "description": "Close-up of labeled files being consulted in a filing cabinet",
+          "decision": "HOLD",
+          "research_note": "Pixabay page and direct media download were verified on 2026-11-28. Source page reports Free for use under the Pixabay Content License, 3840 x 2160 and 25 FPS; downloaded MP4 probed at 3840 x 2160, H.264, 25/1 fps, 17.800000 seconds, SHA-256 8d55fd028fe70a75c08fadeb15f250fb17e025c3b07a8c8dd46a1ebf0ecead5d. Visual review shows labeled paper files and cabinet organization in landscape 16:9 without an identifiable face; it is generic archival reenactment and remains HOLD until final editorial selection.",
+          "rights_status": "NOT_VERIFIED_PER_ASSET"
         }
       ]
     },
