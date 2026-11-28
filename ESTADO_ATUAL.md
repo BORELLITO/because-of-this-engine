@@ -82,6 +82,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - PR #243 — B09-C01 integrado como recibo HOLD: waveform de áudio em 16:9, licença Pixabay, fingerprint e probe técnico verificados; seleção e produção continuam bloqueadas.
 - PR #245 — B10-C01 integrado como recibo HOLD: mãos sem rosto organizando arquivos em prateleira 16:9, licença Pexels, fingerprint e probe técnico verificados; seleção e produção continuam bloqueadas.
 - PR #247 — B11-C01 integrado como recibo HOLD: céu noturno natural com estrelas e silhueta montanhosa em 16:9, licença Pixabay, fingerprint e probe técnico verificados; seleção e produção continuam bloqueadas.
+- PR #250 — B12-C01 rejeitado por reutilização do asset B07-C01; B12-C02 adicionado em HOLD como reenactment documental distinto, sem promover o candidato nem liberar produção; reprodução do relatório SIAN permanece condicionada a direitos específicos.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
@@ -100,13 +101,10 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
    evidências verificadas: há 10 recibos válidos (B03-C02, B02-C01, B04-C02, B05-C03, B06-C03, B07-C01, B08-C02, B09-C01, B10-C01 e B11-C01) e faltam 12 para
    o mínimo de 22; B04-C01 foi rejeitado na revisão semântica por expor rosto. O dossiê
    completo de seleção, os 22 checkpoints, continuidade e
-   revisão final de direitos/fingerprints continuam pendentes.
+   revisão final de direitos/fingerprints continuam pendentes; B12 ainda exige validação do candidato distinto e clareza para eventual uso do documento SIAN.
 5. Qualquer ativação de provedor, gasto, publicação ou dispatch de produção
    exige mudança separada e autorização específica.
 
 ## Próxima ação prioritária
 
-Antes de ativar qualquer produção, validar um caso editorial completo com os
-22 checkpoints, recibos dos oito agentes, direitos, mapa visual, karaoke,
-safe zone e QA. Somente depois avaliar uma mudança separada para dispatch
-controlado do Runflow.
+Antes de ativar qualquer produção, validar B12-C02 por download, fingerprint e revisão semântica, resolver a permissão de reprodução do relatório SIAN e concluir o caso editorial completo com os 22 checkpoints, recibos dos oito agentes, direitos, mapa visual, karaoke, safe zone e QA. Somente depois avaliar uma mudança separada para dispatch controlado do Runflow.
