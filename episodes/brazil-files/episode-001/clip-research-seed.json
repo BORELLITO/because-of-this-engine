@@ -335,7 +335,9 @@
           "source_id": "PEXELS",
           "source_url": "https://www.pexels.com/video/aerial-view-of-a-bustling-brazilian-city-at-twilight-36410112/",
           "description": "Brazilian city aerial at twilight",
-          "decision": "HOLD"
+          "decision": "HOLD",
+          "research_note": "Pexels page and direct media download were verified on 2026-11-28. The official page identifies the clip as an aerial twilight view of a Brazilian city and presents it as free to use; the downloaded 4K MP4 was probed at 3840 x 2160, H.264 video without an audio stream, 60000/1001 fps, 29.512817 seconds, SHA-256 12a820e17fef119b992a3859c67eb95ca294417dbd905399fb479c813e863a46. Visual review confirms a broad cityscape, horizon and evening lights in 16:9. It is contextual stock footage and does not show a visible landmark or prove the 1986 event location; the receipt remains HOLD until final editorial selection.",
+          "rights_status": "NOT_VERIFIED_PER_ASSET"
         }
       ]
     },
