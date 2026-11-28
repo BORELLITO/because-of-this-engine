@@ -320,7 +320,9 @@
           "source_id": "PIXABAY",
           "source_url": "https://pixabay.com/videos/sao-paulo-brazil-city-at-night-387580/",
           "description": "São Paulo at night",
-          "decision": "HOLD"
+          "decision": "HOLD",
+          "research_note": "Pixabay page and direct media download were verified on 2026-11-28. Source page reports Free for use under the Pixabay Content License, 3840 x 2160 and 59 FPS; downloaded MP4 probed at 3840 x 2160, H.264, 60000/1001 fps, 11.311300 seconds, SHA-256 d38655ea285613c588cc92cb45eec8e64b65586d7b82c1709feff6fda31f1ec5. Visual review shows an aerial night panorama explicitly identified as São Paulo, Brazil, in landscape 16:9. It is contextual stock footage, not evidence of the 1986 event; the receipt remains HOLD until final editorial selection.",
+          "rights_status": "NOT_VERIFIED_PER_ASSET"
         },
         {
           "candidate_id": "B15-C02",
