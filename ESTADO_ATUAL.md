@@ -89,6 +89,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - B14-C02 — candidato Pexels em HOLD: estantes e pastas em 16:9, arquivo baixado e fingerprint verificados; ainda falta cue brasileiro e identificador SIAN documental claramente autorizado.
 - PR #259 — B14-C02 registrado em HOLD após download, fingerprint, probe e revisão visual; não é receipt e não libera seleção ou produção.
 - PR #260 — memória reconciliada após a pesquisa B14; produção e Runflow continuam bloqueados.
+- B14-C03 — fonte oficial do Arquivo Nacional localizada para o relatório de 19/05/1986 (`BR_DFANBSB_ARX_256_p0005_0005`); permanece em HOLD porque o uso visual exige reconciliação de licença/Termo de Utilização.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
@@ -113,4 +114,4 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 
 ## Próxima ação prioritária
 
-Antes de ativar qualquer produção, resolver o gap de B14-C02 com cue brasileiro e identificador SIAN documental claramente autorizado, ou pesquisar um candidato oficial equivalente; manter o SIAN fora da produção até autorização adequada e concluir o caso editorial completo com os 22 checkpoints, recibos dos oito agentes, direitos, mapa visual, karaoke, safe zone e QA. Somente depois avaliar uma mudança separada para dispatch controlado do Runflow.
+Antes de ativar qualquer produção, resolver a licença/Termo de Utilização do candidato oficial B14-C03 e sua forma de uso visual, ou manter B14-C02 apenas como apoio de reenactment; manter o SIAN fora da produção até autorização adequada e concluir o caso editorial completo com os 22 checkpoints, recibos dos oito agentes, direitos, mapa visual, karaoke, safe zone e QA. Somente depois avaliar uma mudança separada para dispatch controlado do Runflow.
