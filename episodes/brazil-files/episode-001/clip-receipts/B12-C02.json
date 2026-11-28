@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "brazil-files-ep001-clip-receipt-b12-c02-v1",
+  "case_id": "official-ufo-night-1986",
+  "beat_id": "B12",
+  "candidate_id": "B12-C02",
+  "source_id": "PEXELS",
+  "source_url": "https://www.pexels.com/video/a-person-holding-a-notebook-with-stamp-message-9829558/",
+  "media_url": "https://videos.pexels.com/video-files/9829558/9829558-uhd_4096_2160_25fps.mp4",
+  "license_url": "https://www.pexels.com/license/",
+  "source_page_evidence": {
+    "title": "A Person Holding a Notebook With Stamp Message",
+    "license_claim": "Free",
+    "creator": "Ron Lach",
+    "asset_id": "9829558",
+    "description": "Hands holding a red notebook, flipping through pages with printed characters.",
+    "dimensions": "4096 x 2160",
+    "aspect_ratio": "256:135",
+    "duration_seconds": 20,
+    "observed_on": "2026-11-28"
+  },
+  "download_evidence": {
+    "file_name": "9829558-uhd_4096_2160_25fps.mp4",
+    "sha256": "c65ca55a0f2e39d847bd20f6bd669df1e7e06ebc535e9237552bad303b94da08",
+    "container": "MP4",
+    "video_codec": "h264",
+    "audio_codec": null,
+    "width": 4096,
+    "height": 2160,
+    "duration_seconds": 20,
+    "integrity_check": "sha256_verified_against_downloaded_bytes"
+  },
+  "rights_status": "VERIFIED",
+  "fingerprint_status": "VERIFIED",
+  "semantic_review": "PROVISIONAL_PASS",
+  "selected_for_production": false,
+  "production_started": false,
+  "runflow_handoff": "BLOCKED_UNTIL_FULL_DOSSIER_AND_ALL_RECEIPTS",
+  "reviewer_note": "B12-C02 is a distinct faceless documentary reenactment of hands turning pages with printed characters. It is not the primary SIAN report and does not prove the report's contents; any archival SIAN frame or identifier requires separate reproduction/use clearance. This receipt only records a rights-verified candidate for the queue and does not select the clip or unlock production."
+}
