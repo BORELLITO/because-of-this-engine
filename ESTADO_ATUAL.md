@@ -3,7 +3,7 @@
 **Data da verificação:** 2026-11-28  
 **Repositório canônico:** `BORELLITO/because-of-this-engine`  
 **Branch canônica:** `main`  
-**Commit verificado:** `054af49a667b4bd615a08c9e7af1459b83cad5c8`  
+**Commit verificado:** `bdafa5571cb6c2a8645231c1dad2b3649e4275f9`  
 **Transparência:** mudanças relevantes exigem relatório completo no PR.
 
 ## Estado canônico
@@ -87,6 +87,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - PR #254 — B13-C01 integrado como recibo HOLD: pôr do sol, horizonte e silhueta natural do Pixabay, SHA-256/probe/fingerprint visual verificados; divergência de duração entre player e arquivo baixado registrada; seleção e produção continuam bloqueadas.
 - PR #258 — B14-C01 validado e rejeitado semanticamente: vídeo vertical genérico de arquivo, com pessoa identificável, sem sinal brasileiro, pasta documental ou identificador SIAN; não foi criado receipt.
 - B14-C02 — candidato Pexels em HOLD: estantes e pastas em 16:9, arquivo baixado e fingerprint verificados; ainda falta cue brasileiro e identificador SIAN documental claramente autorizado.
+- PR #259 — B14-C02 registrado em HOLD após download, fingerprint, probe e revisão visual; não é receipt e não libera seleção ou produção.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
