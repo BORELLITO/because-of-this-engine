@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "brazil-files-ep001-clip-receipt-b01-c02-v1",
+  "case_id": "official-ufo-night-1986",
+  "beat_id": "B01",
+  "candidate_id": "B01-C02",
+  "source_id": "PEXELS",
+  "source_url": "https://www.pexels.com/video/airplane-taking-off-at-night-10003629/",
+  "media_url": "https://videos.pexels.com/video-files/10003629/10003629-uhd_1440_2560_30fps.mp4",
+  "license_url": "https://www.pexels.com/license/",
+  "source_page_evidence": {
+    "title": "Dark sky airplane takeoff, illuminated by runway lights.",
+    "license_claim": "Free to use under the Pexels License",
+    "creator": "Ray Raimundo",
+    "asset_id": "10003629",
+    "description": "Vertical night footage of an aircraft taking off with illuminated runway lights against a dark sky.",
+    "dimensions": "1440 x 2560",
+    "fps_displayed": 30,
+    "observed_on": "2026-11-28",
+    "ai_generation_label_observed": false
+  },
+  "download_evidence": {
+    "file_name": "10003629-uhd_1440_2560_30fps.mp4",
+    "sha256": "098be1c95712dca0fd9a3dd0c8edc759cb06165f3722e8c8a87f863d677da0a1",
+    "container": "MP4",
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "width": 1440,
+    "height": 2560,
+    "duration_seconds": 21.993333,
+    "frame_rate": "30000/1001",
+    "audio_channels": 2,
+    "integrity_check": "sha256_verified_against_downloaded_bytes",
+    "download_method": "direct_http_get_from_official_pexels_cdn",
+    "downloaded_media_url": "https://videos.pexels.com/video-files/10003629/10003629-uhd_1440_2560_30fps.mp4"
+  },
+  "rights_status": "VERIFIED",
+  "fingerprint_status": "VERIFIED",
+  "semantic_review": "PROVISIONAL_PASS",
+  "selected_for_production": false,
+  "production_started": false,
+  "runflow_handoff": "BLOCKED_UNTIL_FULL_DOSSIER_AND_ALL_RECEIPTS",
+  "reviewer_note": "B01-C02 matches the opening visual anchor through literal aircraft takeoff at night with runway and navigation lights. The sampled frames show a vertical 9:16 composition suited to the short-form output, with the aircraft clearly visible and no identifiable face, logo or trademark observed. It is contextual stock footage and does not establish the Brazilian location or prove the 1986 event; this limitation must remain explicit in later editorial use. This receipt records a verified queue candidate only; it does not select the clip or unlock production.",
+  "visual_fingerprint_evidence": {
+    "algorithm": "frame-sample-review-v1",
+    "sample_positions": [
+      0.1,
+      0.3,
+      0.5,
+      0.7,
+      0.9
+    ],
+    "source_bytes": "downloaded_media_url",
+    "exact_asset_non_reuse_check": "source_page_url, asset_id and SHA-256 compared against current 15-receipt inventory and repository asset search",
+    "sampled_frame_result": "consistent vertical night takeoff sequence; aircraft and navigation/runway lights visible across the sampled frames; no identifiable face, logo or trademark observed"
+  }
+}

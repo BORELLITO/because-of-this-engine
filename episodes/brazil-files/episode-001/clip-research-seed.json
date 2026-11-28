@@ -33,7 +33,9 @@
           "source_id": "PEXELS",
           "source_url": "https://www.pexels.com/video/airplane-taking-off-at-night-10003629/",
           "description": "Night aircraft takeoff with runway lights",
-          "decision": "HOLD"
+          "decision": "HOLD",
+          "research_note": "Pexels page and direct media download were verified on 2026-11-28. The official page presents the clip as free to use; the downloaded vertical MP4 was probed at 1440 x 2560, H.264 video with AAC stereo audio, 30000/1001 fps, 21.993333 seconds, SHA-256 098be1c95712dca0fd9a3dd0c8edc759cb06165f3722e8c8a87f863d677da0a1. Visual review confirms a night takeoff with aircraft and runway/navigation lights in a 9:16 composition suited to the short-form output. It is contextual stock footage and does not establish the Brazilian location or prove the 1986 event; the receipt remains HOLD until final editorial selection.",
+          "rights_status": "NOT_VERIFIED_PER_ASSET"
         }
       ]
     },

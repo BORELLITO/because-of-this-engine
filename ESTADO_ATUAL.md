@@ -97,6 +97,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - PR #264 — B14-C04 mesclado após CI, gate técnico, integração canônica, superfície ativa e núcleo imutável aprovados.
 - PR #266 — B15-C01 mesclado após transparência formal, CI, gate técnico, integração canônica, superfície ativa e núcleo imutável aprovados; receipt permanece em HOLD.
 - PR #268 — B01-C01 mesclado após CI, gate técnico, integração canônica, superfície ativa e núcleo imutável aprovados; receipt permanece em HOLD.
+- B01-C02 — receipt Pexels integrado em HOLD: decolagem noturna vertical 9:16 com luzes de pista/navegação, SHA-256/probe/fingerprint verificados; é alternativa contextual, não evidência do evento de 1986.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
@@ -112,7 +113,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 3. Nenhum vídeo final foi produzido por estas mudanças.
 4. O preflight do EP001 reconhece o dossiê narrativo, o registro de fontes, a
    semente de pesquisa e o lock de namespace. A trava de recibos contabiliza somente
-   evidências verificadas: há 15 recibos válidos (B01-C01, B03-C02, B02-C01, B04-C02, B05-C03, B06-C03, B07-C01, B08-C02, B09-C01, B10-C01, B11-C01, B12-C02, B13-C01, B14-C04 e B15-C01) e faltam 7 para
+   evidências verificadas: há 16 recibos válidos (B01-C01, B01-C02, B03-C02, B02-C01, B04-C02, B05-C03, B06-C03, B07-C01, B08-C02, B09-C01, B10-C01, B11-C01, B12-C02, B13-C01, B14-C04 e B15-C01) e faltam 6 para
    o mínimo de 22; B04-C01 foi rejeitado na revisão semântica por expor rosto. O dossiê
    completo de seleção, os 22 checkpoints, continuidade e
    revisão final de direitos/fingerprints continuam pendentes; B12-C02 permanece como reenactment documental, B14-C01 foi rejeitado por desalinhamento semântico e qualquer frame ou identificador do relatório SIAN ainda exige clearance específico.
@@ -121,4 +122,4 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 
 ## Próxima ação prioritária
 
-Antes de ativar qualquer produção, resolver a dependência do background aprovado de B16-C01 ou manter o outro bloqueado, e continuar os receipts faltantes com o mesmo contrato fail-closed, mantendo B01-C01, B14-C04 e B15-C01 em HOLD e B14-C03 fora da produção até a licença/Termo de Utilização ser resolvido; depois concluir o caso editorial com os 22 checkpoints, direitos, mapa visual, karaoke, safe zone e QA. Somente então avaliar dispatch controlado do Runflow.
+Antes de ativar qualquer produção, resolver a dependência do background aprovado de B16-C01 ou manter o outro bloqueado, e continuar os receipts faltantes com o mesmo contrato fail-closed, mantendo B01-C01, B01-C02, B14-C04 e B15-C01 em HOLD e B14-C03 fora da produção até a licença/Termo de Utilização ser resolvido; depois concluir o caso editorial com os 22 checkpoints, direitos, mapa visual, karaoke, safe zone e QA. Somente então avaliar dispatch controlado do Runflow.
