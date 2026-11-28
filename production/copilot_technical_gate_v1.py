@@ -25,6 +25,7 @@ COPILOT_SCOPE_ALLOWLIST = frozenset(
         "production/brazil_files_clip_source_registry_v1.json",
         "docs/BRAZIL_FILES_CLIP_SOURCE_REGISTRY_V1.md",
         "episodes/brazil-files/episode-001/clip-research-seed.json",
+        "episodes/brazil-files/episode-001/clip-receipts/B01-C01.json",
         "episodes/brazil-files/episode-001/clip-receipts/B04-C02.json",
         "episodes/brazil-files/episode-001/clip-receipts/B05-C03.json",
         "episodes/brazil-files/episode-001/clip-receipts/B06-C03.json",
