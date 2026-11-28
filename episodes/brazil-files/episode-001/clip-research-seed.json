@@ -279,6 +279,15 @@
           "decision": "REJECTED",
           "rejection_reason": "Downloaded candidate is a 9:16 generic archive scene with an identifiable person; it does not provide a Brazilian cue, document folder or SIAN identifier required by B14's visual anchor.",
           "research_note": "Pexels page and direct media download were verified on 2026-11-28. Source page reports Free license, 2160 x 4096, 25 FPS and 12 seconds; downloaded MP4 probed at 2160 x 4096, H.264, 25/1 fps, 12.240000 seconds, SHA-256 3cbac774bee90c858ca186bbcafbc6e862cfeb5f149b2a23717a5fac13d6f3eb. No receipt was created because semantic requirements failed; production remains blocked."
+        },
+        {
+          "candidate_id": "B14-C02",
+          "source_id": "PEXELS",
+          "source_url": "https://www.pexels.com/video/a-woman-looking-at-folders-on-shelves-8061380/",
+          "description": "Person reaching for folders on an archive shelf",
+          "decision": "HOLD",
+          "research_note": "Pexels page and direct media download were verified on 2026-11-28. Source page reports Free license, 3840 x 2160, 25 FPS and 24 seconds; downloaded MP4 probed at 3840 x 2160, H.264, 25/1 fps, 24.040000 seconds, SHA-256 2746473e3450409f9d2fadfbdd630f9b878b999182b3a10f3c5f061fbc6ddeb5. Visual review shows shelves and folders in landscape 16:9 with the subject mostly in silhouette; it still lacks a Brazilian cue and SIAN identifier, so it remains HOLD and cannot become a receipt without a separately cleared documentary identifier treatment.",
+          "rights_status": "NOT_VERIFIED_PER_ASSET"
         }
       ]
     },
