@@ -3,7 +3,7 @@
 **Data da verificação:** 2026-11-28  
 **Repositório canônico:** `BORELLITO/because-of-this-engine`  
 **Branch canônica:** `main`  
-**Commit verificado:** `b4c7d71560377a438b8fc4f893c07541943c242e`  
+**Commit verificado:** `73aea94a80c168fe75d1f59673c0473c77960a0b`  
 **Transparência:** mudanças relevantes exigem relatório completo no PR.
 
 ## Estado canônico
@@ -96,6 +96,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - B16-C01 — bloqueado para receipt: o gerador canônico do outro existe, mas o background aprovado necessário não está presente na branch `main`; o wordmark horizontal isolado não comprova o card final preto empilhado de 5,5 s.
 - PR #264 — B14-C04 mesclado após CI, gate técnico, integração canônica, superfície ativa e núcleo imutável aprovados.
 - PR #266 — B15-C01 mesclado após transparência formal, CI, gate técnico, integração canônica, superfície ativa e núcleo imutável aprovados; receipt permanece em HOLD.
+- PR #268 — B01-C01 mesclado após CI, gate técnico, integração canônica, superfície ativa e núcleo imutável aprovados; receipt permanece em HOLD.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
