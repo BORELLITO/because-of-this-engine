@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "brazil-files-ep001-clip-receipt-b15-c01-v1",
+  "case_id": "official-ufo-night-1986",
+  "beat_id": "B15",
+  "candidate_id": "B15-C01",
+  "source_id": "PIXABAY",
+  "source_url": "https://pixabay.com/videos/sao-paulo-brazil-city-at-night-387580/",
+  "media_url": "https://cdn.pixabay.com/video/2026/11/06/387580_large.mp4",
+  "license_url": "https://pixabay.com/service/license-summary/",
+  "source_page_evidence": {
+    "title": "Sao Paulo, brazil, city at night free stock video. Free for use & download.",
+    "license_claim": "Free for use under the Pixabay Content License",
+    "creator": "JoshuaWoroniecki",
+    "asset_id": "387580",
+    "description": "Aerial night panorama of São Paulo with illuminated roads, buildings and skyline.",
+    "dimensions": "3840 x 2160",
+    "fps_displayed": 59,
+    "published_date": "2026-11-16",
+    "views": 95,
+    "downloads": 39,
+    "observed_on": "2026-11-28",
+    "ai_generation_label_observed": false
+  },
+  "download_evidence": {
+    "file_name": "387580_large.mp4",
+    "sha256": "d38655ea285613c588cc92cb45eec8e64b65586d7b82c1709feff6fda31f1ec5",
+    "container": "MP4",
+    "video_codec": "h264",
+    "audio_codec": null,
+    "width": 3840,
+    "height": 2160,
+    "duration_seconds": 11.3113,
+    "frame_rate": "60000/1001",
+    "integrity_check": "sha256_verified_against_downloaded_bytes",
+    "downloaded_media_url": "https://cdn.pixabay.com/video/2026/11/06/387580_large.mp4"
+  },
+  "rights_status": "VERIFIED",
+  "fingerprint_status": "VERIFIED",
+  "semantic_review": "PROVISIONAL_PASS",
+  "selected_for_production": false,
+  "production_started": false,
+  "runflow_handoff": "BLOCKED_UNTIL_FULL_DOSSIER_AND_ALL_RECEIPTS",
+  "reviewer_note": "B15-C01 matches the Brazilian-landscape visual anchor through a real-world aerial night view explicitly identified as São Paulo, Brazil. The sampled frames show a wide 16:9 city panorama with illuminated highways, buildings and skyline; no identifiable face, logo or trademark was observed. It is contextual stock footage, not evidence of the 1986 event and not a substitute for archival material. This receipt records a verified queue candidate only; it does not select the clip or unlock production.",
+  "visual_fingerprint_evidence": {
+    "algorithm": "frame-sample-review-v1",
+    "sample_positions": [
+      0.1,
+      0.3,
+      0.5,
+      0.7,
+      0.9
+    ],
+    "source_bytes": "downloaded_media_url",
+    "exact_asset_non_reuse_check": "source_page_url, asset_id and SHA-256 compared against current 13-receipt inventory and repository asset search",
+    "sampled_frame_result": "consistent aerial night panorama of São Paulo in landscape 16:9; no identifiable face, logo or trademark observed"
+  }
+}
