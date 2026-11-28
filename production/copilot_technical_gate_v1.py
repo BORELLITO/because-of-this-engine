@@ -36,6 +36,7 @@ COPILOT_SCOPE_ALLOWLIST = frozenset(
         "episodes/brazil-files/episode-001/clip-receipts/B12-C02.json",
         "episodes/brazil-files/episode-001/clip-receipts/B13-C01.json",
         "episodes/brazil-files/episode-001/clip-receipts/B14-C04.json",
+        "episodes/brazil-files/episode-001/clip-receipts/B15-C01.json",
         "episodes/brazil-files/episode-001/namespace-lock.json",
         "docs/BRAZIL_FILES_EPISODE_001_CLIP_RESEARCH_SEED_V1.md",
         "docs/BRAZIL_FILES_CANONICAL_CROSSWALK_V1.md",
