@@ -3,7 +3,7 @@
 **Data da verificação:** 2026-11-28  
 **Repositório canônico:** `BORELLITO/because-of-this-engine`  
 **Branch canônica:** `main`  
-**Commit verificado:** `93d55498f467a47314522c4b4d1bcc38b3463e20`  
+**Commit verificado:** `b4c7d71560377a438b8fc4f893c07541943c242e`  
 **Transparência:** mudanças relevantes exigem relatório completo no PR.
 
 ## Estado canônico
@@ -94,6 +94,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - B14-C04 — receipt Pixabay integrado em HOLD: close-up 4K de pastas/arquivos em 16:9, SHA-256/probe/fingerprint verificados; é reenactment genérico e não o documento SIAN primário.
 - B15-C01 — receipt Pixabay integrado em HOLD: panorama aéreo noturno explicitamente identificado como São Paulo, Brasil, em 4K/16:9, SHA-256/probe/fingerprint verificados; é contexto geográfico, não evidência do evento de 1986.
 - PR #264 — B14-C04 mesclado após CI, gate técnico, integração canônica, superfície ativa e núcleo imutável aprovados.
+- PR #266 — B15-C01 mesclado após transparência formal, CI, gate técnico, integração canônica, superfície ativa e núcleo imutável aprovados; receipt permanece em HOLD.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
