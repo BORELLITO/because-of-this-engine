@@ -276,7 +276,9 @@
           "source_id": "PEXELS",
           "source_url": "https://www.pexels.com/video/a-man-walking-in-the-office-8869995/",
           "description": "Archive shelves and records",
-          "decision": "HOLD"
+          "decision": "REJECTED",
+          "rejection_reason": "Downloaded candidate is a 9:16 generic archive scene with an identifiable person; it does not provide a Brazilian cue, document folder or SIAN identifier required by B14's visual anchor.",
+          "research_note": "Pexels page and direct media download were verified on 2026-11-28. Source page reports Free license, 2160 x 4096, 25 FPS and 12 seconds; downloaded MP4 probed at 2160 x 4096, H.264, 25/1 fps, 12.240000 seconds, SHA-256 3cbac774bee90c858ca186bbcafbc6e862cfeb5f149b2a23717a5fac13d6f3eb. No receipt was created because semantic requirements failed; production remains blocked."
         }
       ]
     },
