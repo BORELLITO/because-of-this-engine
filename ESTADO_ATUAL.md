@@ -3,7 +3,7 @@
 **Data da verificação:** 2026-11-28  
 **Repositório canônico:** `BORELLITO/because-of-this-engine`  
 **Branch canônica:** `main`  
-**Commit verificado:** `136c9ed4757aec7aca7fc738b88bd87329eca589`  
+**Commit verificado:** `25ebf6284b75825fe6f13d4d5cee1262e08e6cf7`  
 **Transparência:** mudanças relevantes exigem relatório completo no PR.
 
 ## Estado canônico
@@ -91,6 +91,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - PR #260 — memória reconciliada após a pesquisa B14; produção e Runflow continuam bloqueados.
 - B14-C03 — fonte oficial do Arquivo Nacional localizada para o relatório de 19/05/1986 (`BR_DFANBSB_ARX_256_p0005_0005`); permanece em HOLD porque o uso visual exige reconciliação de licença/Termo de Utilização.
 - PR #262 — candidato oficial B14-C03 registrado em HOLD; nenhum arquivo foi reproduzido e nenhum direito foi presumido.
+- B14-C04 — receipt Pixabay integrado em HOLD: close-up 4K de pastas/arquivos em 16:9, SHA-256/probe/fingerprint verificados; é reenactment genérico e não o documento SIAN primário.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
@@ -106,7 +107,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 3. Nenhum vídeo final foi produzido por estas mudanças.
 4. O preflight do EP001 reconhece o dossiê narrativo, o registro de fontes, a
    semente de pesquisa e o lock de namespace. A trava de recibos contabiliza somente
-   evidências verificadas: há 12 recibos válidos (B03-C02, B02-C01, B04-C02, B05-C03, B06-C03, B07-C01, B08-C02, B09-C01, B10-C01, B11-C01, B12-C02 e B13-C01) e faltam 10 para
+   evidências verificadas: há 13 recibos válidos (B03-C02, B02-C01, B04-C02, B05-C03, B06-C03, B07-C01, B08-C02, B09-C01, B10-C01, B11-C01, B12-C02, B13-C01 e B14-C04) e faltam 9 para
    o mínimo de 22; B04-C01 foi rejeitado na revisão semântica por expor rosto. O dossiê
    completo de seleção, os 22 checkpoints, continuidade e
    revisão final de direitos/fingerprints continuam pendentes; B12-C02 permanece como reenactment documental, B14-C01 foi rejeitado por desalinhamento semântico e qualquer frame ou identificador do relatório SIAN ainda exige clearance específico.
@@ -115,4 +116,4 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 
 ## Próxima ação prioritária
 
-Antes de ativar qualquer produção, resolver a licença/Termo de Utilização do candidato oficial B14-C03 e sua forma de uso visual, ou manter B14-C02 apenas como apoio de reenactment; manter o SIAN fora da produção até autorização adequada e concluir o caso editorial completo com os 22 checkpoints, recibos dos oito agentes, direitos, mapa visual, karaoke, safe zone e QA. Somente depois avaliar uma mudança separada para dispatch controlado do Runflow.
+Antes de ativar qualquer produção, validar B15-C01 com o mesmo contrato de fonte, licença, hash, probe e revisão semântica, mantendo B14-C04 como reenactment genérico em HOLD e B14-C03 fora da produção até a licença/Termo de Utilização ser resolvido; depois concluir o caso editorial com os 22 checkpoints, direitos, mapa visual, karaoke, safe zone e QA. Somente então avaliar dispatch controlado do Runflow.
