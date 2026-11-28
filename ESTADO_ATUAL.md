@@ -3,7 +3,7 @@
 **Data da verificação:** 2026-11-28  
 **Repositório canônico:** `BORELLITO/because-of-this-engine`  
 **Branch canônica:** `main`  
-**Commit verificado:** `a23eb1d2f9f998b086f70e3ec3e4e4db94f5c135`  
+**Commit verificado:** `dc714ba2caeed05ad0dbb9473540fc8d70f7d920`  
 **Transparência:** mudanças relevantes exigem relatório completo no PR.
 
 ## Estado canônico
@@ -98,7 +98,9 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - PR #266 — B15-C01 mesclado após transparência formal, CI, gate técnico, integração canônica, superfície ativa e núcleo imutável aprovados; receipt permanece em HOLD.
 - PR #268 — B01-C01 mesclado após CI, gate técnico, integração canônica, superfície ativa e núcleo imutável aprovados; receipt permanece em HOLD.
 - B01-C02 — receipt Pexels integrado em HOLD: decolagem noturna vertical 9:16 com luzes de pista/navegação, SHA-256/probe/fingerprint verificados; é alternativa contextual, não evidência do evento de 1986.
+- B03-C01 — receipt Pexels integrado em HOLD: operador sem rosto ajustando console/radar vintage em 16:9, SHA-256/probe/fingerprint verificados; é reconstituição contextual, não prova da operação brasileira de 1986.
 - PR #270 — B01-C02 mesclado após CI, gate técnico, integração canônica, superfície ativa e núcleo imutável aprovados; receipt permanece em HOLD.
+- PR #272 — B03-C01 mesclado após CI, gate técnico, integração canônica, superfície ativa e núcleo imutável aprovados; receipt permanece em HOLD.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
@@ -114,7 +116,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 3. Nenhum vídeo final foi produzido por estas mudanças.
 4. O preflight do EP001 reconhece o dossiê narrativo, o registro de fontes, a
    semente de pesquisa e o lock de namespace. A trava de recibos contabiliza somente
-   evidências verificadas: há 16 recibos válidos (B01-C01, B01-C02, B03-C02, B02-C01, B04-C02, B05-C03, B06-C03, B07-C01, B08-C02, B09-C01, B10-C01, B11-C01, B12-C02, B13-C01, B14-C04 e B15-C01) e faltam 6 para
+   evidências verificadas: há 17 recibos válidos (B01-C01, B01-C02, B03-C01, B03-C02, B02-C01, B04-C02, B05-C03, B06-C03, B07-C01, B08-C02, B09-C01, B10-C01, B11-C01, B12-C02, B13-C01, B14-C04 e B15-C01) e faltam 5 para
    o mínimo de 22; B04-C01 foi rejeitado na revisão semântica por expor rosto. O dossiê
    completo de seleção, os 22 checkpoints, continuidade e
    revisão final de direitos/fingerprints continuam pendentes; B12-C02 permanece como reenactment documental, B14-C01 foi rejeitado por desalinhamento semântico e qualquer frame ou identificador do relatório SIAN ainda exige clearance específico.
