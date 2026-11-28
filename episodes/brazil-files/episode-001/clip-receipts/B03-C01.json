@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "brazil-files-ep001-clip-receipt-b03-c01-v1",
+  "case_id": "official-ufo-night-1986",
+  "beat_id": "B03",
+  "candidate_id": "B03-C01",
+  "source_id": "PEXELS",
+  "source_url": "https://www.pexels.com/video/a-person-operating-a-radar-6442793/",
+  "media_url": "https://videos.pexels.com/video-files/6442793/6442793-hd_1920_1080_24fps.mp4",
+  "license_url": "https://www.pexels.com/license/",
+  "source_page_evidence": {
+    "title": "Hand operating vintage radar, showcasing unique tech indoors.",
+    "license_claim": "Free to use under the Pexels License",
+    "creator": "ArtHouse Studio",
+    "asset_id": "6442793",
+    "description": "Close-up of a hand operating a vintage radar/electronics console indoors.",
+    "dimensions": "1920 x 1080",
+    "fps_displayed": 24,
+    "observed_on": "2026-11-28",
+    "ai_generation_label_observed": false
+  },
+  "download_evidence": {
+    "file_name": "6442793-hd_1920_1080_24fps.mp4",
+    "sha256": "062be75f253bd3a9681c835c9a1f69e789357fc7b04562d98c64e66f9d82712a",
+    "container": "MP4",
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "width": 1920,
+    "height": 1080,
+    "duration_seconds": 8.255,
+    "frame_rate": "24/1",
+    "audio_channels": 2,
+    "integrity_check": "sha256_verified_against_downloaded_bytes",
+    "download_method": "direct_http_get_from_official_pexels_cdn",
+    "downloaded_media_url": "https://videos.pexels.com/video-files/6442793/6442793-hd_1920_1080_24fps.mp4"
+  },
+  "rights_status": "VERIFIED",
+  "fingerprint_status": "VERIFIED",
+  "semantic_review": "PROVISIONAL_PASS",
+  "selected_for_production": false,
+  "production_started": false,
+  "runflow_handoff": "BLOCKED_UNTIL_FULL_DOSSIER_AND_ALL_RECEIPTS",
+  "reviewer_note": "B03-C01 matches the radar-detection beat through a literal close-up of a hand operating a vintage radar/electronics console. The sampled frames show a faceless operator, a real-looking analog display and controls, and a landscape 16:9 composition that can be reframed for the short-form output. No identifiable face, channel branding or trademark was observed in the sampled frames. It is contextual reenactment stock footage and does not prove the Brazilian 1986 operation or the actual equipment used; this limitation must remain explicit in later editorial use. This receipt records a verified queue candidate only; it does not select the clip or unlock production.",
+  "visual_fingerprint_evidence": {
+    "algorithm": "frame-sample-review-v1",
+    "sample_positions": [
+      0.1,
+      0.3,
+      0.5,
+      0.7,
+      0.9
+    ],
+    "source_bytes": "downloaded_media_url",
+    "exact_asset_non_reuse_check": "source_page_url, asset_id and SHA-256 compared against current 16-receipt inventory and repository asset search",
+    "sampled_frame_result": "consistent close-up radar-operation sequence; hand, analog radar display and control panel visible across sampled frames; no identifiable face, channel branding or trademark observed"
+  }
+}
