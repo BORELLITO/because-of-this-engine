@@ -3,7 +3,7 @@
 **Data da verificação:** 2026-11-28  
 **Repositório canônico:** `BORELLITO/because-of-this-engine`  
 **Branch canônica:** `main`  
-**Commit verificado:** `73aea94a80c168fe75d1f59673c0473c77960a0b`  
+**Commit verificado:** `a23eb1d2f9f998b086f70e3ec3e4e4db94f5c135`  
 **Transparência:** mudanças relevantes exigem relatório completo no PR.
 
 ## Estado canônico
@@ -98,6 +98,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - PR #266 — B15-C01 mesclado após transparência formal, CI, gate técnico, integração canônica, superfície ativa e núcleo imutável aprovados; receipt permanece em HOLD.
 - PR #268 — B01-C01 mesclado após CI, gate técnico, integração canônica, superfície ativa e núcleo imutável aprovados; receipt permanece em HOLD.
 - B01-C02 — receipt Pexels integrado em HOLD: decolagem noturna vertical 9:16 com luzes de pista/navegação, SHA-256/probe/fingerprint verificados; é alternativa contextual, não evidência do evento de 1986.
+- PR #270 — B01-C02 mesclado após CI, gate técnico, integração canônica, superfície ativa e núcleo imutável aprovados; receipt permanece em HOLD.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
