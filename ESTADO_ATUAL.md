@@ -1,9 +1,9 @@
 # ESTADO_ATUAL.md — BECAUSE OF THIS
 
-**Data da verificação:** 2026-11-27  
+**Data da verificação:** 2026-11-28  
 **Repositório canônico:** `BORELLITO/because-of-this-engine`  
 **Branch canônica:** `main`  
-**Commit verificado:** `b2e3372cca63dd04d93043c18ec00f1efb194264`  
+**Commit verificado:** `054af49a667b4bd615a08c9e7af1459b83cad5c8`  
 **Transparência:** mudanças relevantes exigem relatório completo no PR.
 
 ## Estado canônico
@@ -84,6 +84,7 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 - PR #247 — B11-C01 integrado como recibo HOLD: céu noturno natural com estrelas e silhueta montanhosa em 16:9, licença Pixabay, fingerprint e probe técnico verificados; seleção e produção continuam bloqueadas.
 - PR #250 — B12-C01 rejeitado por reutilização do asset B07-C01; B12-C02 adicionado em HOLD como reenactment documental distinto, sem promover o candidato nem liberar produção; reprodução do relatório SIAN permanece condicionada a direitos específicos.
 - PR #252 — B12-C02 integrado como recibo HOLD: páginas com caracteres impressos em reenactment documental Pexels, fingerprint e probe H.264 verificados; não é o relatório SIAN original e seleção/produção continuam bloqueadas.
+- PR #254 — B13-C01 integrado como recibo HOLD: pôr do sol, horizonte e silhueta natural do Pixabay, SHA-256/probe/fingerprint visual verificados; divergência de duração entre player e arquivo baixado registrada; seleção e produção continuam bloqueadas.
 - Gate técnico do Copiloto: **PASS**.
 - Active surface: **PASS**.
 - Immutable core: **PASS**.
@@ -99,13 +100,13 @@ Qualquer divergência retorna `RUNFLOW_HANDOFF_BLOCKED`.
 3. Nenhum vídeo final foi produzido por estas mudanças.
 4. O preflight do EP001 reconhece o dossiê narrativo, o registro de fontes, a
    semente de pesquisa e o lock de namespace. A trava de recibos contabiliza somente
-   evidências verificadas: há 11 recibos válidos (B03-C02, B02-C01, B04-C02, B05-C03, B06-C03, B07-C01, B08-C02, B09-C01, B10-C01, B11-C01 e B12-C02) e faltam 11 para
+   evidências verificadas: há 12 recibos válidos (B03-C02, B02-C01, B04-C02, B05-C03, B06-C03, B07-C01, B08-C02, B09-C01, B10-C01, B11-C01, B12-C02 e B13-C01) e faltam 10 para
    o mínimo de 22; B04-C01 foi rejeitado na revisão semântica por expor rosto. O dossiê
    completo de seleção, os 22 checkpoints, continuidade e
-   revisão final de direitos/fingerprints continuam pendentes; B12 ainda exige validação do candidato distinto e clareza para eventual uso do documento SIAN.
+   revisão final de direitos/fingerprints continuam pendentes; B12-C02 permanece como reenactment documental e qualquer frame ou identificador do relatório SIAN ainda exige clearance específico.
 5. Qualquer ativação de provedor, gasto, publicação ou dispatch de produção
    exige mudança separada e autorização específica.
 
 ## Próxima ação prioritária
 
-Antes de ativar qualquer produção, validar B13 por download, fingerprint e revisão semântica, manter o SIAN fora da produção até autorização adequada e concluir o caso editorial completo com os 22 checkpoints, recibos dos oito agentes, direitos, mapa visual, karaoke, safe zone e QA. Somente depois avaliar uma mudança separada para dispatch controlado do Runflow.
+Antes de ativar qualquer produção, validar B14-C01 por download, fingerprint e revisão semântica, manter o SIAN fora da produção até autorização adequada e concluir o caso editorial completo com os 22 checkpoints, recibos dos oito agentes, direitos, mapa visual, karaoke, safe zone e QA. Somente depois avaliar uma mudança separada para dispatch controlado do Runflow.
