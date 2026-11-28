@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "brazil-files-ep001-clip-receipt-b01-c01-v1",
+  "case_id": "official-ufo-night-1986",
+  "beat_id": "B01",
+  "candidate_id": "B01-C01",
+  "source_id": "PIXABAY",
+  "source_url": "https://pixabay.com/videos/moon-night-sky-airplane-flight-142476/",
+  "media_url": "https://cdn.pixabay.com/video/2022/12/11/142476-780030694_large.mp4",
+  "license_url": "https://pixabay.com/service/license-summary/",
+  "source_page_evidence": {
+    "title": "Moon, night sky, airplane free stock video. Free for use & download.",
+    "license_claim": "Free for use under the Pixabay Content License",
+    "creator": "Kanenori",
+    "asset_id": "142476",
+    "description": "Night sky with a moving moon and a silhouetted aircraft crossing in front of it; the page describes the moon movement at 8x speed and aircraft movement near the ten-second mark.",
+    "dimensions": "3840 x 2160",
+    "fps_displayed": 25,
+    "published_date": "2022-12-11",
+    "views": 2253,
+    "downloads": 704,
+    "saves": 27,
+    "observed_on": "2026-11-28",
+    "ai_generation_label_observed": false
+  },
+  "download_evidence": {
+    "file_name": "142476-780030694_large.mp4",
+    "sha256": "c6cf1bc63a0f24e7b73800cdcaa168b4a2facd76a7e35fa2f653c714a9f68a29",
+    "container": "MP4",
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "width": 3840,
+    "height": 2160,
+    "duration_seconds": 16.361667,
+    "frame_rate": "25/1",
+    "audio_channels": 2,
+    "integrity_check": "sha256_verified_against_downloaded_bytes",
+    "download_method": "direct_http_get_from_official_pixabay_cdn",
+    "downloaded_media_url": "https://cdn.pixabay.com/video/2022/12/11/142476-780030694_large.mp4"
+  },
+  "rights_status": "VERIFIED",
+  "fingerprint_status": "VERIFIED",
+  "semantic_review": "PROVISIONAL_PASS",
+  "selected_for_production": false,
+  "production_started": false,
+  "runflow_handoff": "BLOCKED_UNTIL_FULL_DOSSIER_AND_ALL_RECEIPTS",
+  "reviewer_note": "B01-C01 matches the opening visual anchor through a literal night sky, moon movement and an aircraft crossing the moon. The sampled frames show a clean landscape 16:9 composition with no identifiable face, logo or trademark. This is atmospheric/contextual stock footage and does not establish the Brazilian location or prove the 1986 event; that limitation must remain explicit in any later editorial use. This receipt records a verified queue candidate only; it does not select the clip or unlock production.",
+  "visual_fingerprint_evidence": {
+    "algorithm": "frame-sample-review-v1",
+    "sample_positions": [
+      0.1,
+      0.3,
+      0.5,
+      0.7,
+      0.9
+    ],
+    "targeted_semantic_sample": "8.0-13.0 seconds sampled at 2 fps to verify the aircraft crossing the moon",
+    "source_bytes": "downloaded_media_url",
+    "exact_asset_non_reuse_check": "source_page_url, asset_id and SHA-256 compared against current 14-receipt inventory and repository asset search",
+    "sampled_frame_result": "consistent natural moon/night-sky sequence in landscape 16:9; aircraft silhouette visibly crosses the moon in the targeted interval; no identifiable face, logo or trademark observed"
+  }
+}
